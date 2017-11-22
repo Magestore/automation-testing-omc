@@ -6,7 +6,7 @@
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
-    <page name="SystemConfigEdit" area="Adminhtml" mca="admin/system_config/edit" module="Magento_Backend">
-        <block name="myBlock" class="Magento\Webpos\Test\Block\Adminhtml\SystemConfig\MyBlock" locator="#config-edit-form" strategy="css selector"/>
+    <page name="creditProductIndex" area="Adminhtml" mca="customercreditadmin/creditproduct/index/" module="Magento_Customercredit">
+        <block name="gridPageActions" class="Magento\Backend\Test\Block\GridPageActions" locator=".page-main-actions" strategy="css selector" />
     </page>
 </config>
