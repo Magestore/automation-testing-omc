@@ -9,7 +9,19 @@
 namespace Magento\Customercredit\Test\Block\CreditProduct;
 
 use Magento\Backend\Test\Block\GridPageActions;
+use Magento\Mtf\Client\Locator;
 
 class CreditProductGridPageActions extends GridPageActions
 {
+    protected $actionButton = './/button[span="%s"]';
+
+    public function clickActionButton($actionButton)
+    {
+        $button = $this->_rootElement->find(sprintf($this->actionButton, $actionButton), Locator::SELECTOR_XPATH);
+        if (!$button->isVisible()) {
+            throw new \Exception('Main menu item "' . $actionButton . '" is not visible.');
+        }
+        $button->click();
+        $this->waitForElementNotVisible(sprintf($this->actionButton, $actionButton), Locator::SELECTOR_XPATH);
+    }
 }

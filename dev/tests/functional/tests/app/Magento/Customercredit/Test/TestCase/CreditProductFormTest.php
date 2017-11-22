@@ -29,13 +29,13 @@ class CreditProductFormTest extends Injectable
     {
         $this->creditProductIndex = $creditProductIndex;
     }
+
     /**
-     * @param CreditProductIndex $creditProductIndex
-     * @param $button
+     * @param string $button
      */
-    public function test(CreditProductIndex $creditProductIndex, $button)
+    public function test($button)
     {
         $this->creditProductIndex->open();
-        $this->creditProductIndex->getGridPageActions()->addNew();
+        $this->creditProductIndex->getCreditProductGridPageActions()->clickActionButton($button);
     }
 }
