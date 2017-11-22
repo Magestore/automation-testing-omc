@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
+    <page name="StaffNews" area="Adminhtml" mca="webposadmin/staff_staff/new" module="Magento_Webpos">
+        <!-- For identifying a form block on the HTML page -->
+        <block name="staffsForm" class="Magento\Webpos\Test\Block\Adminhtml\Staff\Edit\StaffsForm" locator="[id='page:main-container']" strategy="css selector" />
+        <!-- this code for save action -->
+        <block name="formPageActions" class="Magento\Backend\Test\Block\FormPageActions" locator=".page-main-actions" strategy="css selector" />
+
+        <block name="messagesBlock" class="Magento\Backend\Test\Block\Messages" locator="#messages .messages" strategy="css selector"/>
+    </page>
+</config>

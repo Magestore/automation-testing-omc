@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\CustomerList\EditCustomerBlankAllFieldsTest" summary="Login" ticketId="MAGESTORE-1">
+        <variation name="EditCustomerBlankAllFieldsTestTestVariation1">
+            <data name="staff/data/username" xsi:type="string">magentoadmin</data>
+            <data name="staff/data/password" xsi:type="string">admin123</data>
+            <data name="emailInitial" xsi:type="string">12</data>
+            <data name="firstName" xsi:type="string"></data>
+            <data name="lastName" xsi:type="string"></data>
+            <data name="email" xsi:type="string"></data>
+            <data name="group" xsi:type="string">Choose...</data>
+
+            <constraint name="Magento\Webpos\Test\Constraint\CustomerList\AssertEditCustomerBlankAllFields" />
+        </variation>
+    </testCase>
+</config>

@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\Webpos\Test\Repository\WebposRole">
+        <dataset name="default">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">90</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+
+            <field name="all" xsi:type="string">1</field>
+
+            <!--<field name="role_staff" xsi:type="string">1</field>-->
+        </dataset>
+
+    </repository>
+</config>

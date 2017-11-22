@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture
+        name="staff"
+        module="Magento_Webpos"
+        type="flat"
+        collection="Magestore\Webpos\Model\ResourceModel\Staff\Staff\Collection"
+        repository_class="Magento\Webpos\Test\Repository\Staff"
+        handler_interface="Magento\Webpos\Test\Handler\Staff\StaffInterface"
+        class="Magento\Webpos\Test\Fixture\Staff"
+        entity_type="webpos_staff">
+        <field name="staff_id" is_required="1"/>
+        <field name="store_ids" is_required="0"/>
+        <field name="username" is_required="0"/>
+        <field name="password" is_required="0"/>
+        <field name="current_password" is_required="0"/>
+        <field name="new_password" is_required="0"/>
+        <field name="password_confirmation" is_required="0"/>
+        <field name="display_name" is_required="0"/>
+        <field name="email" is_required="0"/>
+        <field name="monthly_target" is_required="0"/>
+        <field name="customer_group" is_required="0"/>
+        <field name="location_id" is_required="0"/>
+        <field name="role_id" is_required="0"/>
+        <field name="status" is_required="0"/>
+        <field name="auto_logout" is_required="0"/>
+        <field name="can_use_sales_report" is_required="0"/>
+        <field name="pos_ids" is_required="0"/>
+        <field name="pin" is_required="0"/>
+    </fixture>
+</config>

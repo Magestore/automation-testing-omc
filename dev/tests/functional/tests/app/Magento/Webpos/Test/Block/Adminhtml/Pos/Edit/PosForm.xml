@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ * <input>Multiselect</input>
+ */
+-->
+<mapping strict="0">
+    <fields>
+        <pos_name>
+            <selector>[name='pos_name']</selector>
+        </pos_name>
+        <location_id>
+            <selector>[name='location_id']</selector>
+            <input>Select</input>
+        </location_id>
+        <store_id>
+            <selector>[name='store_id']</selector>
+            <input>Select</input>
+        </store_id>
+        <staff_id>
+            <selector>[name='staff_id']</selector>
+            <input>Select</input>
+        </staff_id>
+        <status>
+            <selector>[name='status']</selector>
+            <input>Select</input>
+        </status>
+        <auto_join>
+            <selector>[name='auto_join']</selector>
+            <input>Checkbox</input>
+        </auto_join>
+    </fields>
+</mapping>

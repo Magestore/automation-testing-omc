@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\Role\MassDeleteWebposRoleEntityTest" summary="Roles Mass Delete" ticketId="WEBPOS-1">
+		<variation name="MassDeleteWebposRoleEntityTestVariation1">
+			<data name="webposRole/dataset" xsi:type="string">default</data>
+			<data name="webposRoleQty" xsi:type="string">3</data>
+			<data name="webposRoleQtyToDelete" xsi:type="string">2</data>
+			<constraint name="Magento\Webpos\Test\Constraint\Role\AssertRoleMassDeleteSuccessMessage" />
+			<constraint name="Magento\Webpos\Test\Constraint\Role\AssertRoleMassDeleteNotInGrid" />
+			<constraint name="Magento\Webpos\Test\Constraint\Role\AssertRoleMassDeleteInGrid" />
+		</variation>
+	</testCase>
+</config>

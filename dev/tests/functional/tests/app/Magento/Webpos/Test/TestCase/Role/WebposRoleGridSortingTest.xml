@@ -1,0 +1,16 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\Role\WebposRoleGridSortingTest" summary="Grid UI Component Sorting" ticketId="WEBPOS-1">
+		<variation name="WebposRoleGridSortingTest">
+			<data name="description" xsi:type="string">Verify Role page grid sorting</data>
+			<data name="columnsForSorting" xsi:type="array">
+				<item name="role_id" xsi:type="string">ID</item>
+				<item name="display_name" xsi:type="string">Display Name</item>
+				<item name="description" xsi:type="string">Description</item>
+
+			</data>
+			<data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\WebposRoleIndex</data>
+			<data name="gridRetriever" xsi:type="string">getRoleGrid</data>
+			<constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+		</variation>
+	</testCase>
+</config>

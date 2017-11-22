@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
+    <page name="SaleByPaymentForLocation" area="Adminhtml" mca="webposadmin/report_salepaymentlocation/index" module="Magento_Webpos">
+        <block name="messagesBlock" class="Magento\Backend\Test\Block\Messages" locator="#messages .messages" strategy="css selector"/>
+
+        <block name="actionsBlock" class="Magento\Reports\Test\Block\Adminhtml\Viewed\Action" locator=".page-main-actions" strategy="css selector"/>
+
+        <block name="filterBlock" class="Magento\Webpos\Test\Block\Adminhtml\Report\Viewed\FilterSalesByLocationDaily" locator="#filter_form" strategy="css selector"/>
+    </page>
+</config>

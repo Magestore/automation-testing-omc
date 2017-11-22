@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Pos\CreatePosEntityTest" summary="Create Pos" ticketId="MAGETWO-1234">
+        <variation name="CreatePosEntityTestVariation1" summary="Create Pos Entity Test Variation">
+            <data name="pos/data/pos_name" xsi:type="string">Pos Test</data>
+            <data name="pos/data/location_id" xsi:type="string">Test Store Address</data>
+            <data name="pos/data/staff_id" xsi:type="string">magentoadmin magentoadmin</data>
+            <data name="pos/data/status" xsi:type="string">Disabled</data>
+
+            <constraint name="Magento\Webpos\Test\Constraint\Pos\AssertPosInGrid" />
+
+        </variation>
+        <variation name="CreatePosEntityTestVariation2"  summary="Create Pos Entity Test Variation">
+            <data name="pos/dataset" xsi:type="string">default</data>
+
+            <constraint name="Magento\Webpos\Test\Constraint\Pos\AssertPosInGrid" />
+
+        </variation>
+    </testCase>
+</config>

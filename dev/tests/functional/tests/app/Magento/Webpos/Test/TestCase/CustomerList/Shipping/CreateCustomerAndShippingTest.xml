@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\CustomerList\Shipping\CreateCustomerAndShippingTest" summary="Login" ticketId="MAGESTORE-1">
+        <variation name="CreateCustomerAndShippingTestVariation1">
+            <data name="staff/data/username" xsi:type="string">magentoadmin</data>
+            <data name="staff/data/password" xsi:type="string">admin123</data>
+            <data name="firstName" xsi:type="string">Thomas</data>
+            <data name="lastName" xsi:type="string">D</data>
+            <data name="email" xsi:type="string">thomas%isolation%@trueplus.vn</data>
+            <data name="group" xsi:type="string">Wholesale</data>
+            <data name="company" xsi:type="string">Trueplus Vietnam Joint Stock Company</data>
+            <data name="phone" xsi:type="string">+841692804009</data>
+            <data name="street1" xsi:type="string">170 De La Thanh Street</data>
+            <data name="street2" xsi:type="string">Giap Bat Bus Station</data>
+            <data name="city" xsi:type="string">Ha Noi</data>
+            <data name="zipCode" xsi:type="string">100000</data>
+            <data name="country" xsi:type="string">Vietnam</data>
+            <data name="province" xsi:type="string">Thanh Son commue, Thanh Ha Town, Hai Duong province</data>
+            <data name="vat" xsi:type="string">12091995</data>
+
+            <constraint name="Magento\Webpos\Test\Constraint\CustomerList\AssertCreateNewCustomerEntity" />
+        </variation>
+    </testCase>
+</config>

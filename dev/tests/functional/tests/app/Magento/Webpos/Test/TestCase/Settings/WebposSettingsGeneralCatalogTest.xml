@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\Settings\WebposSettingsGeneralCatalogTest" summary="Frontend Setting General Catalog Test" ticketId="WEBPOS-1">
+		<variation name="WebposSettingsGeneralCatalogTestVariation1">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="outstockDisplay" xsi:type="string">No</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\Settings\General\AssertProductIsNotDisplayedInGrid" />
+		</variation>
+		<variation name="WebposSettingsGeneralCatalogTestVariation2">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="outstockDisplay" xsi:type="string">No</data>
+			<data name="setInStock" xsi:type="boolean">true</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\Settings\General\AssertProductIsDisplayedInGrid" />
+		</variation>
+		<variation name="WebposSettingsGeneralCatalogTestVariation3">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="outstockDisplay" xsi:type="string">Yes</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\Settings\General\AssertProductIsDisplayedInGrid" />
+		</variation>
+	</testCase>
+</config>

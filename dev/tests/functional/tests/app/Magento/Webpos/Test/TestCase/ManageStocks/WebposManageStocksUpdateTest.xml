@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\ManageStocks\WebposManageStocksUpdateTest" summary="Manage Stocks Update" ticketId="WEBPOS-1">
+		<variation name="WebposManageStocksUpdateTestVariation1">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="qty" xsi:type="number">150</item>
+					<item name="isInStock" xsi:type="boolean">true</item>
+				</item>
+			</data>
+			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\AssertProductInfoInBackend" />
+		</variation>
+		<variation name="WebposManageStocksUpdateTestVariation3_out_of_stock">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="qty" xsi:type="number">0</item>
+					<item name="isInStock" xsi:type="boolean">false</item>
+				</item>
+			</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\AssertProductInfoInBackend" />
+			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\AssertProductOutOfStockFrontend" />
+		</variation>
+		<variation name="WebposManageStocksUpdateTestVariation2">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="qty" xsi:type="number">150</item>
+					<item name="isInStock" xsi:type="boolean">true</item>
+				</item>
+				<item name="1" xsi:type="array">
+					<item name="qty" xsi:type="number">160</item>
+					<item name="isInStock" xsi:type="boolean">true</item>
+				</item>
+				<item name="2" xsi:type="array">
+					<item name="qty" xsi:type="number">170</item>
+					<item name="isInStock" xsi:type="boolean">true</item>
+				</item>
+			</data>
+			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\AssertProductInfoInBackend" />
+		</variation>
+	</testCase>
+</config>

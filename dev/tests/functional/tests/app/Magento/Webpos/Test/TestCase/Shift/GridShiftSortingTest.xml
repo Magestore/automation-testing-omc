@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ * <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Shift\GridShiftSortingTest" summary="Grid UI Component Sorting" ticketId="MAGETWO-41328">
+        <variation name="GridShiftSortingTest1">
+            <data name="tag" xsi:type="string">to_maintain:yes</data>
+            <data name="description" xsi:type="string">Verify shift grid sorting</data>
+            <data name="itemsCount" xsi:type="string">2</data>
+            <data name="fixtureName" xsi:type="string">shift</data>
+            <data name="fixtureDataSet" xsi:type="string">default</data>
+            <data name="steps" xsi:type="array">
+                <item name="0" xsi:type="string">-</item>
+                <item name="1" xsi:type="string">-</item>
+            </data>
+            <data name="columnsForSorting" xsi:type="array">
+                <item name="entity_id" xsi:type="string">No</item>
+                <item name="shift_id" xsi:type="string">Shift ID</item>
+                <item name="staff_id" xsi:type="string">Staff</item>
+                <item name="opened_at" xsi:type="string">Open From</item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\ShiftIndex</data>
+            <data name="gridRetriever" xsi:type="string">getShiftGrid</data>
+        </variation>
+        <variation name="GridShiftSortingTest2">
+            <data name="description" xsi:type="string">Verify shift grid sorting</data>
+            <data name="itemsCount" xsi:type="string">2</data>
+            <data name="fixtureName" xsi:type="string">shift</data>
+            <data name="fixtureDataSet" xsi:type="string">default</data>
+            <data name="steps" xsi:type="array">
+                <item name="0" xsi:type="string">-</item>
+                <item name="1" xsi:type="string">-</item>
+            </data>
+            <data name="columnsForSorting" xsi:type="array">
+                <item name="closed_at" xsi:type="string">Closed At</item>
+                <item name="float_amount" xsi:type="string">Opening Amount</item>
+                <item name="closed_amount" xsi:type="string">Closed Amount</item>
+                <item name="cash_left" xsi:type="string">Cash Left</item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\ShiftIndex</data>
+            <data name="gridRetriever" xsi:type="string">getShiftGrid</data>
+        </variation>
+    </testCase>
+</config>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\OrderHistory\WebposOrderHistoryCancelTest" summary="Order History - Cancel Order Test" ticketId="WEBPOS-1">
+		<variation name="WebposOrderHistoryCancelTestVariation1">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="sku" xsi:type="string">24-MB02</item>
+				</item>
+				<item name="1" xsi:type="array">
+					<item name="sku" xsi:type="string">24-MB04</item>
+				</item>
+			</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="paid" xsi:type="boolean">false</data>
+			<data name="action" xsi:type="string">cancel</data>
+			<data name="expectStatus" xsi:type="string">Pending</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Cancel\AssertCancelOrderPopupClosed" />
+		</variation>
+		<variation name="WebposOrderHistoryCancelTestVariation2">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="sku" xsi:type="string">24-MB02</item>
+				</item>
+				<item name="1" xsi:type="array">
+					<item name="sku" xsi:type="string">24-MB04</item>
+				</item>
+			</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="paid" xsi:type="boolean">false</data>
+			<data name="action" xsi:type="string">save</data>
+			<data name="confirmAction" xsi:type="string">close</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Cancel\AssertConfirmPopupClosed" />
+		</variation>
+		<variation name="WebposOrderHistoryCancelTestVariation3">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="sku" xsi:type="string">24-MB02</item>
+				</item>
+				<item name="1" xsi:type="array">
+					<item name="sku" xsi:type="string">24-MB04</item>
+				</item>
+			</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="paid" xsi:type="boolean">false</data>
+			<data name="action" xsi:type="string">save</data>
+			<data name="confirmAction" xsi:type="string">cancel</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Cancel\AssertConfirmPopupClosed" />
+		</variation>
+		<variation name="WebposOrderHistoryCancelTestVariation4">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="sku" xsi:type="string">24-MB02</item>
+				</item>
+				<item name="1" xsi:type="array">
+					<item name="sku" xsi:type="string">24-MB04</item>
+				</item>
+			</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="paid" xsi:type="boolean">false</data>
+			<data name="comment" xsi:type="string">Cancel %isolation%</data>
+			<data name="action" xsi:type="string">save</data>
+			<data name="confirmAction" xsi:type="string">ok</data>
+			<data name="expectStatus" xsi:type="string">Cancelled</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Cancel\AssertCancelOrderSuccess" />
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Cancel\AssertCancelOrderInBackend" />
+		</variation>
+		<variation name="WebposOrderHistoryCancelTestVariation5">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="sku" xsi:type="string">24-MB02</item>
+				</item>
+				<item name="1" xsi:type="array">
+					<item name="sku" xsi:type="string">24-MB04</item>
+				</item>
+			</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="paid" xsi:type="boolean">false</data>
+			<data name="createShipment" xsi:type="boolean">true</data>
+			<data name="comment" xsi:type="string">Cancel %isolation%</data>
+			<data name="action" xsi:type="string">save</data>
+			<data name="confirmAction" xsi:type="string">ok</data>
+			<data name="expectStatus" xsi:type="string">Cancelled</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Cancel\AssertCancelOrderSuccess" />
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Cancel\AssertCancelOrderInBackend" />
+		</variation>
+	</testCase>
+</config>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Pos\GridPosFilteringTest" summary="Grid UI Component Filtering" ticketId="MAGETWO-41329">
+        <variation name="GridPosFilteringTest">
+            <data name="description" xsi:type="string">Verify pos grid filtering</data>
+            <data name="itemsCount" xsi:type="string">2</data>
+            <data name="fixtureName" xsi:type="string">pos</data>
+            <data name="fixtureDataSet" xsi:type="string">default</data>
+            <data name="filters" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="pos_name" xsi:type="string">:pos_name</item>
+                    <item name="pos_id[from]" xsi:type="string">2</item>
+                </item>
+                <item name="1" xsi:type="array">
+                    <item name="pos_id[to]" xsi:type="string">5</item>
+                </item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\PosIndex</data>
+            <data name="gridRetriever" xsi:type="string">getPosGrid</data>
+            <data name="idGetter" xsi:type="string">getPosId</data>
+        </variation>
+    </testCase>
+</config>

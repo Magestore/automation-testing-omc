@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\CustomerList\Address\AddCustomerAddressTest" summary="Login" ticketId="MAGESTORE-1">
+        <variation name="AddCustomerAddressTestVariation1">
+            <data name="staff/data/username" xsi:type="string">magentoadmin</data>
+            <data name="staff/data/password" xsi:type="string">admin123</data>
+            <data name="emailInitial" xsi:type="string">12</data>
+            <data name="company" xsi:type="string">Magestore Joint Stock And Technology Company</data>
+            <data name="phone" xsi:type="string">+841692804009</data>
+            <data name="street1" xsi:type="string">170 De La Thanh Street</data>
+            <data name="street2" xsi:type="string">Ben Xe Giap Bat</data>
+            <data name="city" xsi:type="string">Hanoi</data>
+            <data name="zipCode" xsi:type="string">10000</data>
+            <data name="country" xsi:type="string">Vietnam</data>
+            <data name="province" xsi:type="string">Hanoi</data>
+            <data name="vat" xsi:type="string">12091995</data>
+
+            <constraint name="Magento\Webpos\Test\Constraint\CustomerList\AssertAddCustomerAddress" />
+        </variation>
+    </testCase>
+</config>

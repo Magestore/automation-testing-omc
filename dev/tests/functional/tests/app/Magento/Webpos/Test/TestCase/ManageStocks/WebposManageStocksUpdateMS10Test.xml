@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\ManageStocks\WebposManageStocksUpdateMS10Test" summary="Manage Stocks Update MS10" ticketId="WEBPOS-1">
+		<variation name="WebposManageStocksUpdateMS10TestVariation1">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="product/data/name" xsi:type="string">Joust Duffle Bag %isolation%</data>
+			<data name="product/data/quantity_and_stock_status/qty" xsi:type="string">200</data>
+			<!--<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\AssertProductInfoInBackend" />-->
+		</variation>
+	</testCase>
+</config>

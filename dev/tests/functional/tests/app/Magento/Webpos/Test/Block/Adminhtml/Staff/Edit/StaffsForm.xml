@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<mapping strict="0">
+    <fields>
+        <username>
+            <selector>[name='username']</selector>
+        </username>
+        <password>
+            <selector>[name='password']</selector>
+        </password>
+        <password_confirmation>
+            <selector>[name='password_confirmation']</selector>
+        </password_confirmation>
+        <display_name>
+            <selector>[name='display_name']</selector>
+        </display_name>
+        <email>
+            <selector>[name='email']</selector>
+        </email>
+        <pin>
+            <selector>[name='pin']</selector>
+        </pin>
+    </fields>
+    <fields>
+        <customer_group>
+            <selector>[name='customer_group[]']</selector>
+            <input>Multiselect</input>
+        </customer_group>
+        <location_id>
+            <selector>[name='location_id']</selector>
+            <input>select</input>
+        </location_id>
+        <role_id>
+            <selector>[name='role_id']</selector>
+            <input>select</input>
+        </role_id>
+    </fields>
+</mapping>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\Settings\WebposSettingsGeneralCurrencyTest" summary="Frontend Setting General Currency Test" ticketId="WEBPOS-1">
+		<variation name="WebposSettingsGeneralCurrencyTestVariation1">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="configData" xsi:type="string">config_currency_symbols_usd_and_uah</data>
+			<data name="currency" xsi:type="string">UAH</data>
+			<data name="rate" xsi:type="number">2</data>
+			<data name="symbol" xsi:type="string">₴</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\Settings\General\AssertCurrencyInCheckoutPage" />
+		</variation>
+	</testCase>
+</config>

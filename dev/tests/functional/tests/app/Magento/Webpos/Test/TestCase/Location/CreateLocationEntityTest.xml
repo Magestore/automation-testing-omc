@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Location\CreateLocationEntityTest" summary="Create Location" ticketId="MAGETWO-1234">
+        <variation name="CreateLocationEntityTestVariation1" summary="Create Location Entity Test Variation">
+            <data name="location/data/display_name" xsi:type="string">Store Address 2</data>
+            <data name="location/data/address" xsi:type="string">Store Address 2</data>
+            <data name="location/data/description" xsi:type="string">Store Address 2</data>
+
+            <constraint name="Magento\Webpos\Test\Constraint\Location\AssertLocationInGrid" />
+
+        </variation>
+        <variation name="CreateLocationEntityTestVariation2"  summary="Create Location Entity Test Variation">
+            <data name="location/dataset" xsi:type="string">default</data>
+
+            <constraint name="Magento\Webpos\Test\Constraint\Location\AssertLocationInGrid" />
+
+        </variation>
+    </testCase>
+</config>

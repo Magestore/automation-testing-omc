@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\CustomerList\Address\BlankAllFieldsCustomerAddressTest" summary="Login" ticketId="MAGESTORE-1">
+        <variation name="BlankAllFieldsCustomerAddressTestVariation1">
+            <data name="staff/data/username" xsi:type="string">magentoadmin</data>
+            <data name="staff/data/password" xsi:type="string">admin123</data>
+            <data name="emailInitial" xsi:type="string">12</data>
+            <data name="company" xsi:type="string"></data>
+            <data name="phone" xsi:type="string"></data>
+            <data name="street1" xsi:type="string"></data>
+            <data name="street2" xsi:type="string"></data>
+            <data name="city" xsi:type="string"></data>
+            <data name="zipCode" xsi:type="string"></data>
+            <data name="country" xsi:type="string">Please choose country...</data>
+            <data name="province" xsi:type="string"></data>
+            <data name="vat" xsi:type="string"></data>
+
+            <constraint name="Magento\Webpos\Test\Constraint\CustomerList\AssertBlankAllFieldsCustomerAddress" />
+        </variation>
+    </testCase>
+</config>

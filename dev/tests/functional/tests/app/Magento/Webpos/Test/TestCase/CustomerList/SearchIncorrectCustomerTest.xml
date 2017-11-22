@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\CustomerList\SearchIncorrectCustomerTest" summary="Login" ticketId="MAGESTORE-1">
+        <variation name="SearchIncorrectCustomerTestVariation1">
+            <data name="staff/data/username" xsi:type="string">magentoadmin</data>
+            <data name="staff/data/password" xsi:type="string">admin123</data>
+            <data name="values" xsi:type="array">
+                <item name="0" xsi:type="string">notgmail.dhxd@gmail.com</item>
+                <item name="1" xsi:type="string">eden.dhxd@gmail.com</item>
+                <item name="2" xsi:type="string">thomas.trueplue@gmail.com</item>
+            </data>
+        </variation>
+    </testCase>
+</config>
