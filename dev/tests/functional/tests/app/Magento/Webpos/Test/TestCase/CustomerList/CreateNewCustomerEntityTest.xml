@@ -4,10 +4,10 @@
         <variation name="CreateNewCustomerEntityTestVariation1">
             <data name="staff/data/username" xsi:type="string">magentoadmin</data>
             <data name="staff/data/password" xsi:type="string">admin123</data>
-            <data name="firstName" xsi:type="string">Thomas</data>
-            <data name="lastName" xsi:type="string">D</data>
-            <data name="email" xsi:type="string">thomas%isolation%@trueplus.vn</data>
-            <data name="group" xsi:type="string">Wholesale</data>
+            <data name="staff/data/firstName" xsi:type="string">Thomas</data>
+            <data name="staff/data/lastName" xsi:type="string">D</data>
+            <data name="staff/data/email" xsi:type="string">thomas%isolation%@trueplus.vn</data>
+            <data name="staff/data/customer_group" xsi:type="string">Wholesale</data>
 
             <constraint name="Magento\Webpos\Test\Constraint\CustomerList\AssertCreateNewCustomerEntity" />
         </variation>
