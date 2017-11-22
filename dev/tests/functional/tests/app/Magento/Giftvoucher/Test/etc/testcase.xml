@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/TestCase/etc/testcase.xsd">
+    <scenario name="AddGiftcodeToCustomerListTest" firstStep="loginCustomerOnFrontend">
+        <step name="loginCustomerOnFrontend" module="Magento_Customer" next="openGiftCardFromMyAccount" />
+        <step name="openGiftCardFromMyAccount" module="Magento_Giftvoucher" next="addGiftcodeToList" />
+        <step name="addGiftcodeToList" module="Magento_Giftvoucher" />
+    </scenario>
+    <scenario name="AddExistedGiftcodeToCustomerListTest" firstStep="loginCustomerOnFrontend">
+        <step name="loginCustomerOnFrontend" module="Magento_Customer" next="openGiftCardFromMyAccount" />
+        <step name="openGiftCardFromMyAccount" module="Magento_Giftvoucher" next="addGiftcodeToList" />
+        <step name="addGiftcodeToList" module="Magento_Giftvoucher" next="addExistedGiftcodeToList" />
+        <step name="addExistedGiftcodeToList" alias="addGiftcodeToList" module="Magento_Giftvoucher" />
+    </scenario>
+    <scenario name="SearchGiftcodeOnCustomerListTest" firstStep="loginCustomerOnFrontend">
+        <step name="loginCustomerOnFrontend" module="Magento_Customer" next="openGiftCardFromMyAccount" />
+        <step name="openGiftCardFromMyAccount" module="Magento_Giftvoucher" />
+    </scenario>
+    <scenario name="PagingGiftcodeListTest" firstStep="loginCustomerOnFrontend">
+        <step name="loginCustomerOnFrontend" module="Magento_Customer" next="openGiftCardFromMyAccount" />
+        <step name="openGiftCardFromMyAccount" module="Magento_Giftvoucher" next="pagingGiftcodeList" />
+        <step name="pagingGiftcodeList" module="Magento_Giftvoucher" />
+    </scenario>
+    <scenario name="GiftvoucherProductCheckoutTest" firstStep="setupConfiguration">
+        <step name="setupConfiguration" module="Magento_Config" next="createProducts"/>
+        <step name="createProducts" module="Magento_Catalog" next="createTaxRule"/>
+        <step name="createTaxRule" module="Magento_Tax" next="addProductsToTheCart"/>
+        <step name="addProductsToTheCart" module="Magento_Giftvoucher" next="estimateShippingAndTax"/>
+        <step name="estimateShippingAndTax" module="Magento_Checkout" next="clickProceedToCheckout"/>
+        <step name="clickProceedToCheckout" module="Magento_Checkout" next="createCustomer"/>
+        <step name="createCustomer" module="Magento_Customer" next="selectCheckoutMethod"/>
+        <step name="selectCheckoutMethod" module="Magento_Checkout" next="selectPaymentMethod"/>
+        <!--<step name="fillShippingAddress" module="Magento_Checkout" next="fillShippingMethod"/>-->
+        <!--<step name="fillShippingMethod" module="Magento_Checkout" next="selectPaymentMethod"/>-->
+        <step name="selectPaymentMethod" module="Magento_Checkout" next="fillBillingInformation"/>
+        <step name="fillBillingInformation" module="Magento_Checkout" next="placeOrder"/>
+        <step name="placeOrder" module="Magento_Checkout"/>
+    </scenario>
+</config>

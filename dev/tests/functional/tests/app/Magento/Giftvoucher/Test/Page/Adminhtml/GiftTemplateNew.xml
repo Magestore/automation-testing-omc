@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
+    <page name="GiftTemplateNew" area="Adminhtml" mca="giftvoucheradmin/giftTemplate/new" module="Magento_Giftvoucher">
+        <block name="giftTemplateMainActions" class="Magento\Giftvoucher\Test\Block\Adminhtml\Block\GiftTemplate\FormPageActions" locator=".page-main-actions" strategy="css selector" />
+        <block name="form" class="Magento\Giftvoucher\Test\Block\Adminhtml\Block\GiftTemplate\Form" locator="[id='page:main-container']" strategy="css selector" />
+    </page>
+</config>

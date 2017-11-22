@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="giftcode" module="Magento_Giftvoucher" type="flat" collection="Magento\Giftvoucher\Model\ResourceModel\Giftvoucher\Collection" repository_class="Magento\Giftvoucher\Test\Repository\Giftcode" handler_interface="Magento\Giftvoucher\Test\Handler\Giftcode\GiftcodeInterface" class="Magento\Giftvoucher\Test\Fixture\Giftcode" entity_type="giftvoucher">
+        <field name="giftvoucher_id" is_required="1" group="null"/>
+        <field name="gift_code" is_required="0" group="general"/>
+        <field name="balance" is_required="0" group="general"/>
+        <field name="currency" is_required="0" group="general"/>
+        <field name="status" is_required="0" group="general"/>
+        <field name="expired_at" is_required="0" group="general"/>
+        <field name="customer_id" is_required="0"/>
+        <field name="customer_name" is_required="0" group="message_information"/>
+        <field name="customer_email" is_required="0" group="message_information"/>
+        <field name="recipient_name" is_required="0" group="message_information"/>
+        <field name="recipient_email" is_required="0" group="message_information"/>
+        <field name="recipient_address" is_required="0" group="message_information"/>
+        <field name="message" is_required="0" group="message_information"/>
+        <field name="store_id" is_required="0" group="general"/>
+        <field name="conditions_serialized" is_required="0" group="conditions"/>
+        <field name="day_to_send" is_required="0"/>
+        <field name="is_sent" is_required="0"/>
+        <field name="shipped_to_customer" is_required="0"/>
+        <field name="created_form" is_required="0"/>
+        <field name="template_id" is_required="0" group="general"/>
+        <field name="description" is_required="0" group="conditions"/>
+        <field name="giftvoucher_comments" is_required="0" group="general"/>
+        <field name="email_sender" is_required="0"/>
+        <field name="notify_success" is_required="0"/>
+        <field name="giftcard_custom_image" is_required="0"/>
+        <field name="giftcard_template_id" is_required="0"/>
+        <field name="giftcard_template_image" is_required="0"/>
+        <field name="actions_serialized" is_required="0" group="actions"/>
+        <field name="timezone_to_send" is_required="0"/>
+        <field name="day_store" is_required="0"/>
+        <field name="used" is_required="0"/>
+        <field name="set_id" is_required="0"/>
+    </fixture>
+</config>

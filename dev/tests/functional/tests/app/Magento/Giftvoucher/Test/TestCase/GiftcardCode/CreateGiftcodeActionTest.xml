@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Giftvoucher\Test\TestCase\GiftcardCode\CreateGiftcodeActionTest" summary="Create Gift Code">
+		<variation name="CreateGiftcodeActionTestVariation1" ticketId="MGC007">
+            <data name="giftcode/dataset" xsi:type="string">minimum</data>
+            <data name="giftcode/data/recipient_name" xsi:type="string">Jane</data>
+            <data name="giftcode/data/status" xsi:type="string">Active</data>
+            <data name="giftcode/data/recipient_email" xsi:type="string">jane@example.com</data>
+            <data name="actions/0" xsi:type="string">saveAndSendEmail</data>
+            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSuccessEmailMessage" />
+		</variation>
+        <variation name="CreateGiftcodeActionTestVariation2" ticketId="MGC008">
+            <data name="giftcode/dataset" xsi:type="string">minimum</data>
+            <data name="actions/0" xsi:type="string">saveAndContinue</data>
+            <data name="actions/1" xsi:type="string">clickPrint</data>
+            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSuccessSaveMessage" />
+            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertShowPrintPopup" />
+		</variation>
+	</testCase>
+</config>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Giftvoucher\Test\TestCase\GiftcardProduct\CreateGiftVoucherProductEntityTest" summary="Create Gift Card Product">
+        <variation name="CreateGiftVoucherProductEntityTestVariation1">
+            <data name="description" xsi:type="string">Create product with required fields</data>
+            <data name="product/data/gift_card_type" xsi:type="string">Physical</data>
+            <data name="product/data/url_key" xsi:type="string">giftcard-product-%isolation%</data>
+            <data name="product/data/name" xsi:type="string">Gift Card Product %isolation%</data>
+            <data name="product/data/sku" xsi:type="string">giftcard_sku_%isolation%</data>
+
+            <data name="product/data/giftcard_description" xsi:type="string">Apply for order with subtotal more than $200</data>
+            <data name="product/data/conditions_serialized" xsi:type="string">[Subtotal|equals or greater than|200]</data>
+            <data name="product/data/actions_serialized" xsi:type="string">[Quantity in cart|greater than|1]</data>
+
+            <data name="product/data/gift_type" xsi:type="string">1</data>
+            <data name="product/data/gift_value" xsi:type="string">200</data>
+            <data name="product/data/gift_price_type" xsi:type="string">1</data>
+
+            <constraint name="Magento\Catalog\Test\Constraint\AssertProductSaveMessage" />
+            <constraint name="Magento\Catalog\Test\Constraint\AssertProductInGrid" />
+        </variation>
+    </testCase>
+</config>

@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<mapping strict="0">
+    <fields>
+        <message>
+            <selector>[name="message"]</selector>
+            <input>textarea</input>
+        </message>
+        <notify_success>
+            <selector>[name="notify_success"]</selector>
+            <input>checkbox</input>
+        </notify_success>
+        <recipient_name>
+            <selector>[name="recipient_name"]</selector>
+            <input>text</input>
+        </recipient_name>
+        <recipient_email>
+            <selector>[name="recipient_email"]</selector>
+            <input>text</input>
+        </recipient_email>
+        <day_to_send>
+            <selector>[name="day_to_send"]</selector>
+            <input>text</input>
+        </day_to_send>
+        <timezone_to_send>
+            <selector>[name="timezone_to_send"]</selector>
+            <input>select</input>
+        </timezone_to_send>
+
+    </fields>
+</mapping>

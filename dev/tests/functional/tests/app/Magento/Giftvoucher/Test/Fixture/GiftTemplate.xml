@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="giftTemplate" module="Magento_Giftvoucher" type="flat" collection="Magento\Giftvoucher\Model\ResourceModel\GiftTemplate\Collection" repository_class="Magento\Giftvoucher\Test\Repository\GiftTemplate" handler_interface="Magento\Giftvoucher\Test\Handler\GiftTemplate\GiftTemplateInterface" class="Magento\Giftvoucher\Test\Fixture\GiftTemplate" entity_type="giftTemplate">
+        <field name="giftcard_template_id" is_required="1"/>
+        <field name="template_name" is_required="1"/>
+        <field name="text_color" is_required="1"/>
+        <field name="style_color" is_required="1"/>
+        <field name="status" is_required="0"/>
+        <field name="updated_at" is_required="0"/>
+    </fixture>
+</config>

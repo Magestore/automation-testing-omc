@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Giftvoucher\Test\TestCase\Account\AddGiftcodeToCustomerListTest" summary="Add Gift Code To Customer List">
+        <variation name="AddGiftcodeToCustomerListTestVariation1" ticketId="MA001,MA002,MA004,MA017">
+            <data name="customer/data/email" xsi:type="string">roni_cost@example.com</data>
+            <data name="customer/data/password" xsi:type="string">roni_cost3@example.com</data>
+            <data name="giftcode/dataset" xsi:type="string">default</data>
+            <constraint name="Magento\Giftvoucher\Test\Constraint\Account\AssertGiftcodeSuccessAddMessage" />
+            <constraint name="Magento\Giftvoucher\Test\Constraint\Account\AssertGiftcodeInGrid" />
+        </variation>
+        <variation name="AddGiftcodeToCustomerListTestVariation2" ticketId="MA003">
+            <data name="customer/data/email" xsi:type="string">roni_cost@example.com</data>
+            <data name="customer/data/password" xsi:type="string">roni_cost3@example.com</data>
+            <data name="giftcode/data/gift_code" xsi:type="string">111111</data>
+            <data name="code" xsi:type="string">111111</data>
+            <constraint name="Magento\Giftvoucher\Test\Constraint\Account\AssertGiftcodeInvalidMessage" />
+        </variation>
+        <variation name="AddGiftcodeToCustomerListTestVariation3" ticketId="MA010">
+            <data name="customer/data/email" xsi:type="string">roni_cost@example.com</data>
+            <data name="customer/data/password" xsi:type="string">roni_cost3@example.com</data>
+            <data name="giftcode/dataset" xsi:type="string">minimum</data>
+            <data name="giftcode/data/status" xsi:type="string">Disabled</data>
+            <constraint name="Magento\Giftvoucher\Test\Constraint\Account\AssertGiftcodeNotAvailableMessage" />
+        </variation>
+    </testCase>
+</config>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<tabs>
+    <general>
+        <class>\Magento\Backend\Test\Block\Widget\Tab</class>
+        <selector>[data-index="general"]</selector>
+        <strategy>css selector</strategy>
+        <fields>
+        	<template_name />
+                <!--
+        	<status>
+        		<input>select</input>
+        	</status>
+                -->
+                <notes>
+                    <input>textarea</input>
+                </notes>              
+        	<text_color />
+        	<style_color />
+        </fields>
+    </general>
+</tabs>

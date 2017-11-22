@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<tabs>
+    <general>
+        <class>\Magento\Backend\Test\Block\Widget\Tab</class>
+        <selector>[data-index="general"]</selector>
+        <strategy>css selector</strategy>
+        <fields>
+        	<template_name />
+            <pattern />
+        	<balance />
+        	<currency>
+        		<input>select</input>
+        	</currency>
+        	<expired_at />
+            <amount />
+            <day_to_send />
+        	<store_id>
+                <input>select</input>
+            </store_id>
+            <giftcard_template_id>
+            	<input>select</input>
+            </giftcard_template_id>
+        </fields>
+    </general>
+    <conditions>
+        <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+        <selector>[data-index="conditions"]</selector>
+        <strategy>css selector</strategy>
+        <fields>
+            <conditions_serialized>
+                <selector>#rule_conditions_fieldset</selector>
+                <input>conditions</input>
+            </conditions_serialized>
+        </fields>
+    </conditions>
+</tabs>

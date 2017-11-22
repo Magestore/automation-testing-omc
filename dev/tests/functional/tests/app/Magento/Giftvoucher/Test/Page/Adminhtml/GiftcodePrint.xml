@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
+    <page name="GiftcodePrint" area="Adminhtml" mca="giftvoucheradmin/giftvoucher/print" module="Magento_Giftvoucher">
+        <block name="printBlock" class="Magento\Giftvoucher\Test\Block\PrintBlock" locator=".giftcode-print-page" strategy="css selector" />
+    </page>
+</config>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Giftvoucher\Test\TestCase\GiftcardProduct\GiftvoucherGridFilteringTest" summary="Gift Voucher Product Grid UI Component Filtering">
+        <variation name="GiftvoucherGridFilteringTest">
+            <data name="description" xsi:type="string">Verify gift voucher product grid filtering</data>
+            <data name="itemsCount" xsi:type="string">1</data>
+            <data name="fixtureName" xsi:type="string">giftproduct</data>
+            <data name="fixtureDataSet" xsi:type="string">default</data>
+            <data name="filters" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="name" xsi:type="string">:name</item>
+                    <item name="sku" xsi:type="string">:sku</item>
+                    <!--<item name="qty" xsi:type="string">:qty</item>-->
+                    <!--<item name="visibility" xsi:type="string">:visibility</item>-->
+                    <!--<item name="status" xsi:type="string">:status</item>-->
+                    <!--<item name="websites" xsi:type="string">:websites</item>-->
+                    <!--<item name="gift_template_ids" xsi:type="string">:gift_template_ids</item>-->
+                </item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Giftvoucher\Test\Page\Adminhtml\GiftvoucherProductIndex</data>
+            <data name="gridRetriever" xsi:type="string">getProductGrid</data>
+            <data name="idGetter" xsi:type="string">getId</data>
+            <constraint name="\Magento\Ui\Test\Constraint\AssertGridFiltering"/>
+        </variation>
+    </testCase>
+</config>

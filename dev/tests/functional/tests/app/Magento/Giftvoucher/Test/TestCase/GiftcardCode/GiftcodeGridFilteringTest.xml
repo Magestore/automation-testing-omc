@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Giftvoucher\Test\TestCase\GiftcardCode\GiftcodeGridFilteringTest" summary="Giftcode Grid UI Component Filtering">
+        <variation name="GiftcodeGridFilteringTest" ticketId="MGC020,MGC021,MGC022,MGC023,MGC024,MGC025,MGC026,MGC027,MGC028,MGC029,MGC030,MGC031,MGC032">
+            <data name="description" xsi:type="string">Verify gift codes grid filtering</data>
+            <data name="itemsCount" xsi:type="string">1</data>
+            <data name="fixtureName" xsi:type="string">giftcode</data>
+            <data name="fixtureDataSet" xsi:type="string">default</data>
+            <data name="filters" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="giftvoucher_id_from" xsi:type="string">:giftvoucher_id</item>
+                    <item name="gift_code" xsi:type="string">:gift_code</item>
+                    <item name="history_amount_from" xsi:type="string">:history_amount</item>
+                    <item name="balance_from" xsi:type="string">:balance</item>
+                    <item name="status" xsi:type="string">:status</item>
+                    <item name="customer_name" xsi:type="string">:customer_name</item>
+                    <item name="order_increment_id" xsi:type="string">:order_increment_id</item>
+                    <item name="recipient_name" xsi:type="string">:recipient_name</item>
+                    <item name="created_at_from" xsi:type="string">:created_at</item>
+                    <item name="expired_at_from" xsi:type="string">:created_at</item>
+                    <item name="store_id" xsi:type="string">:store_id</item>
+                    <item name="is_sent" xsi:type="string">:is_sent</item>
+                    <item name="extra_content" xsi:type="string">:extra_content</item>
+                </item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Giftvoucher\Test\Page\Adminhtml\GiftcodeIndex</data>
+            <data name="gridRetriever" xsi:type="string">getGiftcodeGroupGrid</data>
+            <data name="idGetter" xsi:type="string">getGiftvoucherId</data>
+            <constraint name="\Magento\Ui\Test\Constraint\AssertGridFiltering"/>
+        </variation>
+    </testCase>
+</config>

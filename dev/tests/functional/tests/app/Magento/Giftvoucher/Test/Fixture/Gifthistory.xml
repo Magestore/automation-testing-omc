@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="gifthistory" module="Magento_Giftvoucher" type="flat" collection="Magento\Giftvoucher\Model\ResourceModel\History\Collection" repository_class="Magento\Giftvoucher\Test\Repository\Gifthistory" handler_interface="Magento\Giftvoucher\Test\Handler\Gifthistory\GifthistoryInterface" class="Magento\Giftvoucher\Test\Fixture\Gifthistory" entity_type="giftvoucher_history">
+        <field name="history_id" is_required="1"/>
+        <field name="giftvoucher_id" is_required="0"/>
+        <field name="action" is_required="0"/>
+        <field name="created_at" is_required="0"/>
+        <field name="amount" is_required="0"/>
+        <field name="currency" is_required="0"/>
+        <field name="status" is_required="0"/>
+        <field name="comments" is_required="0"/>
+        <field name="order_increment_id" is_required="0"/>
+        <field name="quote_item_id" is_required="0"/>
+        <field name="order_amount" is_required="0"/>
+        <field name="extra_content" is_required="0"/>
+        <field name="balance" is_required="0"/>
+        <field name="customer_id" is_required="0"/>
+        <field name="customer_email" is_required="0"/>
+    </fixture>
+</config>

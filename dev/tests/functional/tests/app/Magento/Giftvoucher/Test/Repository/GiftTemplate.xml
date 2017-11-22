@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\Giftvoucher\Test\Repository\GiftTemplate">
+        <dataset name="default">
+            <!--
+            <field name="giftcard_template_id" xsi:type="string">2</field>
+            -->
+            <field name="template_name" xsi:type="string">Default %isolation%</field>
+            <field name="status" xsi:type="string">Enable</field>
+            <field name="created_at" xsi:type="string">05/05/2017</field>
+        </dataset>
+    </repository>
+</config>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+~ Copyright © 2017 Magestore. All rights reserved.
+~ See COPYING.txt for license details.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Giftvoucher\Test\TestCase\GiftcardTemplate\CreateGiftcardTemplateEntityTest" summary="Create Gift card Template" ticketId="MGCT022,MGCT023">
+        <variation name="CreateGiftcardTemplateEntityTestVariation1">
+            <data name="fixtureType" xsi:type="string">giftTemplate</data>
+            <data name="saveAndContinue" xsi:type="boolean">false</data>
+            <data name="data/template_name" xsi:type="string">Default Template</data>
+            <data name="data/notes" xsi:type="string">Custom notes</data>
+            <data name="data/text_color" xsi:type="string">666666</data>
+            <data name="data/style_color" xsi:type="string">999999</data>
+            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftTemplate\AssertGiftTemplateSuccessSaveMessage" />
+            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftTemplate\AssertGiftTemplateInGrid" />
+        </variation>
+    </testCase>
+</config>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Giftvoucher\Test\TestCase\GiftcardProduct\GiftvoucherGridSortingTest" summary="Grid UI Component Sorting" ticketId="MAGETWO-41328">
+        <variation name="GiftvoucherGridSorting">
+            <data name="tag" xsi:type="string">to_maintain:yes</data>
+            <data name="description" xsi:type="string">Verify product grid sorting</data>
+            <data name="itemsCount" xsi:type="string">1</data>
+            <data name="fixtureName" xsi:type="string">giftvoucherProduct</data>
+            <data name="fixtureDataSet" xsi:type="string">default</data>
+            <data name="fixtureAddedDataSet" xsi:type="string">virtual_fixed_value_same</data>
+            <data name="steps" xsi:type="array">
+                <item name="0" xsi:type="string">-</item>
+                <item name="1" xsi:type="string">-</item>
+            </data>
+            <data name="columnsForSorting" xsi:type="array">
+                <item name="id" xsi:type="string">ID</item>
+                <item name="name" xsi:type="string">Name</item>
+                <!--<item name="gift_template_ids" xsi:type="string">Product Template</item>-->
+                <item name="sku" xsi:type="string">SKU</item>
+                <!--<item name="qty" xsi:type="string">Quantity</item>-->
+                <!--<item name="visibility" xsi:type="string">Visibility</item>-->
+                <!--<item name="status" xsi:type="string">Status</item>-->
+                <!--<item name="websites" xsi:type="string">Websites</item>-->
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Giftvoucher\Test\Page\Adminhtml\GiftvoucherProductIndex</data>
+            <data name="gridRetriever" xsi:type="string">getProductGrid</data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+        </variation>
+    </testCase>
+</config>

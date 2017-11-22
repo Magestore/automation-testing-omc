@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="giftpattern" module="Magento_Giftvoucher" type="flat" collection="Magento\Giftvoucher\Model\ResourceModel\GiftCodePattern\Collection" repository_class="Magento\Giftvoucher\Test\Repository\Giftpattern" handler_interface="Magento\Giftvoucher\Test\Handler\Giftpattern\GiftpatternInterface" class="Magento\Giftvoucher\Test\Fixture\Giftpattern" entity_type="giftvoucher_template">
+        <field name="template_id" is_required="1"/>
+        <field name="type" is_required="0"/>
+        <field name="template_name" is_required="0" group="general"/>
+        <field name="pattern" is_required="0" group="general"/>
+        <field name="balance" is_required="0" group="general"/>
+        <field name="currency" is_required="0" group="general"/>
+        <field name="expired_at" is_required="0" group="general"/>
+        <field name="amount" is_required="0" group="general"/>
+        <field name="day_to_send" is_required="0" group="general"/>
+        <field name="store_id" is_required="0" group="general"/>
+        <field name="conditions_serialized" is_required="0" group="conditions"/>
+        <field name="is_generated" is_required="0"/>
+        <field name="giftcard_template_id" is_required="0" group="general"/>
+        <field name="giftcard_template_image" is_required="0" group="general"/>
+    </fixture>
+</config>
