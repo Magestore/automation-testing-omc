@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\Synchronization\WebposSynchronizationShiftTest" summary="Synchronization - Shift Test" ticketId="WEBPOS-1">
+		<variation name="WebposSynchronizationShiftTestVariation1">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<!--Sang may khac thi phai vao repository sua lai staff_id thanh id cua staff o tren-->
+			<data name="shift/dataset" xsi:type="string">shift_staff_id_4</data>
+
+			<data name="editShift/data/opened_note" xsi:type="string">New Open Note %isolation%</data>
+			<data name="editShift/data/closed_note" xsi:type="string">New Close Note %isolation%</data>
+			<data name="editShift/data/total_sales" xsi:type="number">5000</data>
+		</variation>
+	</testCase>
+</config>

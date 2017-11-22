@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\OrderHistory\WebposOrderHistoryTakePaymentTest" summary="Order History - Take Payment Test" ticketId="WEBPOS-1">
+		<variation name="WebposOrderHistoryTakePaymentTestVariation1">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="product" xsi:type="array">
+				<item name="sku" xsi:type="string">24-MB01</item>
+			</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="paidAmount" xsi:type="number">10</data>
+			<data name="action" xsi:type="string">cancel</data>
+			<!--<data name="confirmAction" xsi:type="string">ok</data>-->
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\TakePayment\AssertTakePaymentPopupClosed" />
+		</variation>
+		<variation name="WebposOrderHistoryTakePaymentTestVariation2">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="product" xsi:type="array">
+				<item name="sku" xsi:type="string">24-MB01</item>
+			</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="paidAmount" xsi:type="number">10</data>
+			<data name="action" xsi:type="string">submit</data>
+			<data name="confirmAction" xsi:type="string">close</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\TakePayment\AssertTakePaymentConfirmPopupClosed" />
+		</variation>
+		<variation name="WebposOrderHistoryTakePaymentTestVariation3">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="product" xsi:type="array">
+				<item name="sku" xsi:type="string">24-MB01</item>
+			</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="paidAmount" xsi:type="number">10</data>
+			<data name="action" xsi:type="string">submit</data>
+			<data name="confirmAction" xsi:type="string">cancel</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\TakePayment\AssertTakePaymentConfirmPopupClosed" />
+		</variation>
+		<variation name="WebposOrderHistoryTakePaymentTestVariation4">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="product" xsi:type="array">
+				<item name="sku" xsi:type="string">24-MB01</item>
+			</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="paidAmount" xsi:type="number">10</data>
+			<data name="action" xsi:type="string">submit</data>
+			<data name="confirmAction" xsi:type="string">ok</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\TakePayment\AssertVariation4TakePaymentFailed" />
+		</variation>
+		<variation name="WebposOrderHistoryTakePaymentTestVariation5">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="product" xsi:type="array">
+				<item name="sku" xsi:type="string">24-MB01</item>
+			</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="paidAmount" xsi:type="number">10</data>
+			<data name="paymentMethod" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="name" xsi:type="string">Web POS - Cash In</item>
+					<!--<item name="amount" xsi:type="number">10</item>-->
+				</item>
+			</data>
+			<data name="action" xsi:type="string">submit</data>
+			<data name="confirmAction" xsi:type="string">ok</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\TakePayment\AssertCreatePaymentSuccess" />
+		</variation>
+		<variation name="WebposOrderHistoryTakePaymentTestVariation6">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="product" xsi:type="array">
+				<item name="sku" xsi:type="string">24-MB01</item>
+			</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="paidAmount" xsi:type="number">10</data>
+			<data name="paymentMethod" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="name" xsi:type="string">Web POS - Cash In</item>
+					<item name="amount" xsi:type="number">10</item>
+				</item>
+				<item name="1" xsi:type="array">
+					<item name="name" xsi:type="string">Web POS - Cash On Delivery</item>
+					<!--<item name="amount" xsi:type="number">14</item>-->
+				</item>
+			</data>
+			<data name="action" xsi:type="string">submit</data>
+			<data name="confirmAction" xsi:type="string">ok</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\TakePayment\AssertCreatePaymentSuccess" />
+		</variation>
+		<variation name="WebposOrderHistoryTakePaymentTestVariation7">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="product" xsi:type="array">
+				<item name="sku" xsi:type="string">24-MB01</item>
+			</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="placeOrderPayment" xsi:type="string">delivery</data>
+			<data name="paymentMethod" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="name" xsi:type="string">Web POS - Cash In</item>
+					<item name="amount" xsi:type="number">10</item>
+				</item>
+			</data>
+			<data name="action" xsi:type="string">submit</data>
+			<data name="confirmAction" xsi:type="string">ok</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\TakePayment\AssertTakePaymentPartialSuccess" />
+		</variation>
+		<variation name="WebposOrderHistoryTakePaymentTestVariation8">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="product" xsi:type="array">
+				<item name="sku" xsi:type="string">24-MB01</item>
+			</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="paidAmount" xsi:type="number">10</data>
+			<data name="paymentMethod" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="name" xsi:type="string">Web POS - Cash In</item>
+					<item name="amount" xsi:type="number">0</item>
+				</item>
+			</data>
+			<data name="action" xsi:type="string">submit</data>
+			<data name="confirmAction" xsi:type="string">ok</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\TakePayment\AssertTakePaymentPartialSuccess" />
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\TakePayment\AssertPaymentDisplayInPayLaterList" />
+		</variation>
+	</testCase>
+</config>

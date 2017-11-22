@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture
+        name="pos"
+        module="Magento_Webpos"
+        type="flat"
+        collection="Magestore\Webpos\Model\ResourceModel\Pos\Pos\Collection"
+        repository_class="Magento\Webpos\Test\Repository\Pos"
+        handler_interface="Magento\Webpos\Test\Handler\Pos\PosInterface"
+        class="Magento\Webpos\Test\Fixture\Pos"
+        entity_type="webpos_pos">
+        <field name="pos_id" is_required="1"/>
+        <field name="pos_name" is_required="0"/>
+        <field name="location_id" is_required="0"/>
+        <field name="store_id" is_required="0"/>
+        <field name="staff_id" is_required="0"/>
+        <field name="status" is_required="0"/>
+        <field name="auto_join" is_required="0"/>
+    </fixture>
+</config>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\OrderHistory\WebposOrderHistoryReOrderTest" summary="Order History - Re Order Test" ticketId="WEBPOS-1">
+		<variation name="WebposOrderHistoryReOrderTestVariation1">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="name" xsi:type="string">Strive Shoulder Pack</item>
+					<item name="qty" xsi:type="number">1</item>
+				</item>
+				<item name="1" xsi:type="array">
+					<item name="name" xsi:type="string">Fusion Backpack</item>
+					<item name="qty" xsi:type="number">2</item>
+				</item>
+				<item name="2" xsi:type="array">
+					<item name="name" xsi:type="string">Crown Summit Backpack</item>
+					<item name="qty" xsi:type="number">3</item>
+				</item>
+			</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\ReOrder\AssertReOrder" />
+		</variation>
+	</testCase>
+</config>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+<testCase name="Magento\Webpos\Test\TestCase\CustomerList\Complain\AddCustomerComplainEntityTest" summary="Login" ticketId="MAGESTORE-1">
+    <variation name="AddCustomerComplainEntityTestVariation1">
+        <data name="staff/data/username" xsi:type="string">magentoadmin</data>
+        <data name="staff/data/password" xsi:type="string">admin123</data>
+        <data name="emailInitial" xsi:type="string">12</data>
+        <data name="complain" xsi:type="string">I am Thomas. Firstly,I want to say congratulation. Welcome K62, welcome all of you to NUCE. Tonight, I want to talk to you about the university. How to become a good student, a good engineer and how to get experiences in work.</data>
+        <constraint name="Magento\Webpos\Test\Constraint\CustomerList\AssertAddCustomerComplain" />
+    </variation>
+</testCase>
+</config>

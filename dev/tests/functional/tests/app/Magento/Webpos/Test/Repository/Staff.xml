@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\Webpos\Test\Repository\Staff">
+        <dataset name="default">
+            <field name="username" xsi:type="string">Thomas%isolation%</field>
+            <field name="password" xsi:type="string">abc12091995</field>
+            <field name="password_confirmation" xsi:type="string">abc12091995</field>
+            <field name="display_name" xsi:type="string">Thomas D</field>
+            <field name="email" xsi:type="string">test@trueplus.vn</field>
+            <field name="pin" xsi:type="string">1209</field>
+            <field name="customer_group" xsi:type="string">All groups</field>
+            <field name="location_id" xsi:type="string">Store Address 2</field>
+            <field name="role_id" xsi:type="string">admin</field>
+        </dataset>
+        <dataset name="admin">
+            <field name="username" xsi:type="string">magentoadmin</field>
+            <field name="password" xsi:type="string">admin123</field>
+            <field name="current_password" xsi:type="string">admin123</field>
+            <field name="new_password" xsi:type="string">admin1234</field>
+            <field name="password_confirmation" xsi:type="string">admin1234</field>
+            <field name="email" xsi:type="string">thomas@trueplus.vn</field>
+        </dataset>
+    </repository>
+</config>

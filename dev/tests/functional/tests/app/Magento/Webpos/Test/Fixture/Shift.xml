@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture
+        name="shift"
+        module="Magento_Webpos"
+        type="flat"
+        collection="Magestore\Webpos\Model\ResourceModel\Shift\Shift\Collection"
+        repository_class="Magento\Webpos\Test\Repository\Shift"
+        handler_interface="Magento\Webpos\Test\Handler\Zreport\ZreportInterface"
+        class="Magento\Webpos\Test\Fixture\Shift"
+        entity_type="webpos_shift">
+        <field name="entity_id" is_required="1"/>
+        <field name="shift_id" is_required="0"/>
+        <field name="staff_id" is_required="0"/>
+        <field name="location_id" is_required="0"/>
+        <field name="float_amount" is_required="0"/>
+        <field name="base_float_amount" is_required="0"/>
+        <field name="closed_amount" is_required="0"/>
+        <field name="base_closed_amount" is_required="0"/>
+        <field name="cash_left" is_required="0"/>
+        <field name="base_cash_left" is_required="0"/>
+        <field name="total_sales" is_required="0"/>
+        <field name="base_total_sales" is_required="0"/>
+        <field name="base_balance" is_required="0"/>
+        <field name="balance" is_required="0"/>
+        <field name="cash_sale" is_required="0"/>
+        <field name="base_cash_sale" is_required="0"/>
+        <field name="cash_added" is_required="0"/>
+        <field name="base_cash_added" is_required="0"/>
+        <field name="cash_removed" is_required="0"/>
+        <field name="base_cash_removed" is_required="0"/>
+        <field name="opened_at" is_required="0"/>
+        <field name="closed_at" is_required="0"/>
+        <field name="opened_note" is_required="0"/>
+        <field name="closed_note" is_required="0"/>
+        <field name="status" is_required="0"/>
+        <field name="base_currency_code" is_required="0"/>
+        <field name="shift_currency_code" is_required="0"/>
+        <field name="indexeddb_id" is_required="0"/>
+        <field name="updated_at" is_required="0"/>
+        <field name="pos_id" is_required="0"/>
+    </fixture>
+</config>

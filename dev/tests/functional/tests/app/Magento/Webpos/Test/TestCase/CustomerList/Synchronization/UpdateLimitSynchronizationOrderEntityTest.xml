@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\CustomerList\Synchronization\UpdateLimitSynchronizationOrderEntityTest" summary="Login" ticketId="MAGESTORE-1">
+        <variation name="UpdateLimitSynchronizationOrderEntityTestVariation1">
+            <data name="dataConfig/dataset" xsi:type="string">magestore_webpos_synchronization</data>
+
+            <data name="staff/data/username" xsi:type="string">magentoadmin</data>
+            <data name="staff/data/password" xsi:type="string">admin123</data>
+            <data name="name" xsi:type="string">Configuration</data>
+            <data name="refund" xsi:type="string"></data>
+
+            <!--<constraint name="Magento\Webpos\Test\Constraint\CustomerList\AssertCreateNewCustomerEntity" />-->
+        </variation>
+    </testCase>
+</config>

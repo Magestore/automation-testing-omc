@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+
+<tabs>
+	<general>
+		<class>\Magento\Backend\Test\Block\Widget\Tab</class>
+		<selector>#webpos_tabs_webpos_form</selector>
+		<strategy>css selector</strategy>
+		<fields>
+			<display_name>
+				<selector>[name='display_name']</selector>
+			</display_name>
+			<maximum_discount_percent>
+				<selector>[name='maximum_discount_percent']</selector>
+			</maximum_discount_percent>
+			<description>
+				<selector>[name='description']</selector>
+			</description>
+		</fields>
+	</general>
+	<permission>
+		<class>\Magento\Backend\Test\Block\Widget\Tab</class>
+		<selector>#webpos_tabs_webpos_permission</selector>
+		<strategy>css selector</strategy>
+		<fields>
+			<all>
+				<selector>[name='all']</selector>
+				<input>select</input>
+			</all>
+			<resource>
+				<input>jquerytree</input>
+				<selector>[data-role="resource-tree"]</selector>
+				<strategy>css selector</strategy>
+			</resource>
+		</fields>
+	</permission>
+	<user_section>
+		<class>\Magento\Webpos\Test\Block\Adminhtml\Role\Edit\Tab\Role</class>
+		<selector>#webpos_tabs_user_section</selector>
+		<strategy>css selector</strategy>
+	</user_section>
+</tabs>

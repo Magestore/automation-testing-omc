@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\Synchronization\WebposSynchronizationShippingTest" summary="Synchronization - Shipping Test" ticketId="WEBPOS-1">
+		<variation name="WebposSynchronizationShippingTestVariation1">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+
+			<data name="configDataDataset" xsi:type="string">sale_shipping_method_webpos_shipping_change_method_title</data>
+			<data name="action" xsi:type="string">Reload</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\Synchronization\AssertItemUpdateSuccess" />
+			<constraint name="Magento\Webpos\Test\Constraint\Synchronization\Shipping\AssertShippingMethodTitleUpdated" />
+		</variation>
+
+		<variation name="WebposSynchronizationShippingTestVariation2">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+
+			<data name="configDataDataset" xsi:type="string">sale_shipping_method_webpos_shipping_change_price</data>
+			<data name="action" xsi:type="string">Update</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\Synchronization\AssertItemUpdateSuccess" />
+			<constraint name="Magento\Webpos\Test\Constraint\Synchronization\Shipping\AssertShippingMethodPriceUpdated" />
+		</variation>
+	</testCase>
+</config>

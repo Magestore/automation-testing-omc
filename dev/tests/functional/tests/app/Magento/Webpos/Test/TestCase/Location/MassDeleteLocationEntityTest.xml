@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Location\MassDeleteLocationEntityTest" summary="Mass Delete Location Term" ticketId="MAGETWO-26599">
+        <variation name="MassDeleteLocationEntityTestVariation1">
+            <data name="locationTerms" xsi:type="string">location::default</data>
+        </variation>
+    </testCase>
+</config>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\OrderHistory\WebposOrderHistoryInvoiceCreateOrderInBackendTest" summary="Order History - Invoice - Create Order in Backend" ticketId="WEBPOS-1">
+		<variation name="WebposOrderHistoryInvoiceCreateOrderInBackendTestVariation1">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+
+			<data name="order/dataset" xsi:type="string">two_simple_product</data>
+
+			<data name="takePayment" xsi:type="boolean">false</data>
+			<data name="comment" xsi:type="string">Comment %isolation%</data>
+			<data name="sendEmail" xsi:type="boolean">true</data>
+			<data name="canCreateInvoice" xsi:type="boolean">false</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertNotAllowToCreateInvoice" />
+		</variation>
+		<variation name="WebposOrderHistoryInvoiceCreateOrderInBackendTestVariation2">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+
+			<data name="order/dataset" xsi:type="string">two_simple_product</data>
+
+			<data name="takePayment" xsi:type="boolean">true</data>
+			<data name="comment" xsi:type="string">Comment %isolation%</data>
+			<data name="sendEmail" xsi:type="boolean">true</data>
+			<data name="canCreateInvoice" xsi:type="boolean">true</data>
+			<data name="action" xsi:type="string">submit</data>
+			<data name="confirmAction" xsi:type="string">ok</data>
+			<data name="expectStatus" xsi:type="string">Processing</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertCreateInvoiceSuccess" />
+		</variation>
+	</testCase>
+</config>

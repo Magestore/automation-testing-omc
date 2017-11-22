@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture
+        name="location"
+        module="Magento_Webpos"
+        type="flat"
+        collection="Magestore\Webpos\Model\ResourceModel\Location\Location\Collection"
+        repository_class="Magento\Webpos\Test\Repository\Location"
+        handler_interface="Magento\Webpos\Test\Handler\Location\LocationInterface"
+        class="Magento\Webpos\Test\Fixture\Location"
+        entity_type="webpos_staff_location">
+        <field name="location_id" is_required="1"/>
+        <field name="display_name" is_required="0"/>
+        <field name="address" is_required="0"/>
+        <field name="description" is_required="0"/>
+    </fixture>
+</config>

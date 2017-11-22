@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\OrderHistory\WebposOrderHistoryInvoiceTest" summary="Order History - Invoice Test" ticketId="WEBPOS-1">
+		<variation name="WebposOrderHistoryInvoiceTestVariation1">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="name" xsi:type="string">Joust Duffle Bag</item>
+					<item name="qty" xsi:type="number">1</item>
+				</item>
+				<item name="1" xsi:type="array">
+					<item name="name" xsi:type="string">Strive Shoulder Pack</item>
+					<item name="qty" xsi:type="number">1</item>
+				</item>
+			</data>
+			<data name="paidAmount" xsi:type="number">0</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="paid" xsi:type="boolean">false</data>
+			<data name="action" xsi:type="string">cancel</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoicePopupClosed" />
+		</variation>
+
+		<variation name="WebposOrderHistoryInvoiceTestVariation2">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="name" xsi:type="string">Joust Duffle Bag</item>
+					<item name="qty" xsi:type="number">1</item>
+				</item>
+				<item name="1" xsi:type="array">
+					<item name="name" xsi:type="string">Strive Shoulder Pack</item>
+					<item name="qty" xsi:type="number">1</item>
+				</item>
+			</data>
+			<data name="paidAmount" xsi:type="number">0</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="paid" xsi:type="boolean">false</data>
+			<data name="action" xsi:type="string">submit</data>
+			<data name="confirmAction" xsi:type="string">cancel</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoiceConfirmPopupClosed" />
+		</variation>
+		<variation name="WebposOrderHistoryInvoiceTestVariation3">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="name" xsi:type="string">Joust Duffle Bag</item>
+					<item name="qty" xsi:type="number">1</item>
+				</item>
+				<item name="1" xsi:type="array">
+					<item name="name" xsi:type="string">Strive Shoulder Pack</item>
+					<item name="qty" xsi:type="number">1</item>
+				</item>
+			</data>
+			<data name="paidAmount" xsi:type="number">0</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="paid" xsi:type="boolean">false</data>
+			<data name="action" xsi:type="string">submit</data>
+			<data name="confirmAction" xsi:type="string">close</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoiceConfirmPopupClosed" />
+		</variation>
+
+		<variation name="WebposOrderHistoryInvoiceTestVariation4">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="name" xsi:type="string">Joust Duffle Bag</item>
+					<item name="qty" xsi:type="number">1</item>
+				</item>
+				<item name="1" xsi:type="array">
+					<item name="name" xsi:type="string">Strive Shoulder Pack</item>
+					<item name="qty" xsi:type="number">1</item>
+				</item>
+			</data>
+			<data name="paidAmount" xsi:type="number">0</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="paid" xsi:type="boolean">false</data>
+			<data name="comment" xsi:type="string">Comment %isolation%</data>
+			<data name="sendEmail" xsi:type="boolean">true</data>
+			<data name="action" xsi:type="string">submit</data>
+			<data name="confirmAction" xsi:type="string">ok</data>
+			<data name="expectStatus" xsi:type="string">Processing</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertCreateInvoiceSuccess" />
+		</variation>
+
+		<!--Failed : Can't set value for Qty to Invoice-->
+
+		<!--<variation name="WebposOrderHistoryInvoiceTestVariation5">-->
+			<!--<data name="staff/data/username" xsi:type="string">magentoadmin</data>-->
+			<!--<data name="staff/data/password" xsi:type="string">admin123</data>-->
+			<!--<data name="products" xsi:type="array">-->
+				<!--<item name="0" xsi:type="array">-->
+					<!--<item name="name" xsi:type="string">Joust Duffle Bag</item>-->
+					<!--<item name="qty" xsi:type="number">1</item>-->
+					<!--<item name="invoice_qty" xsi:type="number">1</item>-->
+				<!--</item>-->
+				<!--<item name="1" xsi:type="array">-->
+					<!--<item name="name" xsi:type="string">Strive Shoulder Pack</item>-->
+					<!--<item name="qty" xsi:type="number">2</item>-->
+					<!--<item name="invoice_qty" xsi:type="number">1</item>-->
+				<!--</item>-->
+			<!--</data>-->
+			<!--<data name="paidAmount" xsi:type="number">0</data>-->
+			<!--<data name="shipped" xsi:type="boolean">false</data>-->
+			<!--<data name="paid" xsi:type="boolean">false</data>-->
+			<!--<data name="comment" xsi:type="string">Comment %isolation%</data>-->
+			<!--<data name="sendEmail" xsi:type="boolean">true</data>-->
+			<!--<data name="action" xsi:type="string">submit</data>-->
+			<!--<data name="confirmAction" xsi:type="string">ok</data>-->
+			<!--<data name="expectStatus" xsi:type="string">Processing</data>-->
+
+			<!--<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertCreateInvoiceSuccess" />-->
+		<!--</variation>-->
+
+		<variation name="WebposOrderHistoryInvoiceTestVariation6_add_discount_100">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="name" xsi:type="string">Joust Duffle Bag</item>
+					<item name="qty" xsi:type="number">1</item>
+				</item>
+				<item name="1" xsi:type="array">
+					<item name="name" xsi:type="string">Strive Shoulder Pack</item>
+					<item name="qty" xsi:type="number">1</item>
+				</item>
+			</data>
+			<data name="addDiscount100" xsi:type="boolean">true</data>
+			<data name="paidAmount" xsi:type="number">0</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="paid" xsi:type="boolean">false</data>
+			<data name="takePayment" xsi:type="boolean">false</data>
+			<data name="comment" xsi:type="string">Comment %isolation%</data>
+			<data name="sendEmail" xsi:type="boolean">true</data>
+			<data name="action" xsi:type="string">submit</data>
+			<data name="confirmAction" xsi:type="string">ok</data>
+			<data name="expectStatus" xsi:type="string">Processing</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertCreateInvoiceSuccess" />
+		</variation>
+
+		<variation name="WebposOrderHistoryInvoiceTestVariation7">
+			<data name="staff/data/username" xsi:type="string">magentoadmin</data>
+			<data name="staff/data/password" xsi:type="string">admin123</data>
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="name" xsi:type="string">Joust Duffle Bag</item>
+					<item name="qty" xsi:type="number">1</item>
+				</item>
+				<item name="1" xsi:type="array">
+					<item name="name" xsi:type="string">Strive Shoulder Pack</item>
+					<item name="qty" xsi:type="number">1</item>
+				</item>
+			</data>
+			<data name="paidAmount" xsi:type="number">0</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="paid" xsi:type="boolean">false</data>
+			<data name="createShipment" xsi:type="boolean">true</data>
+			<data name="takePayment" xsi:type="boolean">true</data>
+			<data name="comment" xsi:type="string">Comment %isolation%</data>
+			<data name="sendEmail" xsi:type="boolean">true</data>
+			<data name="action" xsi:type="string">submit</data>
+			<data name="confirmAction" xsi:type="string">ok</data>
+			<data name="expectStatus" xsi:type="string">Complete</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertCreateInvoiceSuccess" />
+		</variation>
+	</testCase>
+</config>

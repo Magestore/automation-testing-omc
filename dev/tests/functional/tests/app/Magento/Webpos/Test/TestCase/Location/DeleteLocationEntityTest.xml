@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Location\DeleteLocationEntityTest" summary="Delete Location Backend Entity" ticketId="MAGETWO-24764">
+        <variation name="DeleteLocationEntityTestVariation1" summary="Delete webpos location" ticketId="MAGETWO-43660">
+            <data name="location/dataset" xsi:type="string">default</data>
+            <data name="description" xsi:type="string">Delete Location Successfully</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Location\AssertLocationDeleteMessage" />
+        </variation>
+    </testCase>
+</config>

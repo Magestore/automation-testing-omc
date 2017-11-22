@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\Zreport\WebposZreportGridFilteringTest" summary="Grid UI Component Filtering" ticketId="WEBPOS-1">
+		<variation name="WebposZreportGridFiltering">
+			<data name="description" xsi:type="string">Verify Zreport page grid filtering</data>
+			<data name="itemsCount" xsi:type="string">2</data>
+			<data name="fixtureName" xsi:type="string">shift</data>
+			<data name="fixtureDataSet" xsi:type="string">default2</data>
+			<data name="filters" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="shift_id" xsi:type="string">:shift_id</item>
+				</item>
+				<item name="1" xsi:type="array">
+					<item name="entity_id[from]" xsi:type="string">:entity_id</item>
+				</item>
+			</data>
+			<data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\ShiftIndex</data>
+			<data name="gridRetriever" xsi:type="string">getShiftGrid</data>
+			<data name="idGetter" xsi:type="string">getEntityId</data>
+			<constraint name="\Magento\Ui\Test\Constraint\AssertGridFiltering"/>
+		</variation>
+	</testCase>
+</config>

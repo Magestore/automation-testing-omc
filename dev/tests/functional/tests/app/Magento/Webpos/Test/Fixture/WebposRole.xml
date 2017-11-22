@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="webposRole"
+             module="Magento_Webpos"
+             type="flat"
+             collection="Magestore\Webpos\Model\ResourceModel\Staff\Role\Collection"
+             repository_class="Magento\Webpos\Test\Repository\WebposRole"
+             handler_interface="Magento\Webpos\Test\Handler\Role\RoleInterface"
+             class="Magento\Webpos\Test\Fixture\WebposRole"
+             entity_type="webpos_authorization_role">
+        <field name="role_id" is_required="1"/>
+        <field name="display_name" is_required="0" group="general"/>
+        <field name="description" is_required="0" group="general"/>
+        <field name="maximum_discount_percent" is_required="0" group="general"/>
+
+        <field name="all" is_required="0" group="permission"/>
+        <field name="resource" is_required="0" group="permission"/>
+        <!--<field name="limit" is_required="0"/>-->
+        <!--<field name="page" is_required="0"/>-->
+        <!--<field name="in_staff" is_required="0" group="user_section"/>-->
+        <!--<field name="staff_id" is_required="0" group="user_section"/>-->
+        <!--<field name="username" is_required="0" group="user_section"/>-->
+        <!--<field name="user_display_name" is_required="0" group="user_section"/>-->
+        <!--<field name="email" is_required="0" group="user_section"/>-->
+        <!--<field name="status" is_required="0" group="user_section"/>-->
+        <field name="role_staff" is_required="0" group="user_section"/>
+
+        <field name="parent_id" is_required="0"/>
+        <field name="tree_level" is_required="0"/>
+        <field name="sort_order" is_required="0"/>
+        <field name="role_type" is_required="0"/>
+    </fixture>
+</config>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\RegisterShifts\CancelMakeAdjustmentRegisterShiftTest" summary="Login" ticketId="MAGESTORE-1">
+        <variation name="CancelMakeAdjustmentRegisterShiftTestVariation1">
+            <data name="staff/data/username" xsi:type="string">magentoadmin</data>
+            <data name="staff/data/password" xsi:type="string">admin123</data>
+        </variation>
+    </testCase>
+</config>
