@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<tabs>
+    <general>
+        <class>\Magento\Backend\Test\Block\Widget\Tab</class>
+        <selector>[data-index="general"]</selector>
+        <strategy>css selector</strategy>
+        <fields>
+        	<gift_code />
+        	<balance />
+        	<currency>
+        		<input>select</input>
+        	</currency>
+        	<status>
+        		<input>select</input>
+        	</status>
+        	<expired_at />
+        	<store_id>
+                <input>select</input>
+            </store_id>
+            <giftcard_template_id>
+                <input>select</input>
+            </giftcard_template_id>
+            <giftvoucher_comments>
+            	<input>textarea</input>
+            </giftvoucher_comments>
+        </fields>
+    </general>
+    <conditions>
+        <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+        <selector>[data-index="conditions"]</selector>
+        <strategy>css selector</strategy>
+        <fields>
+            <description>
+            	<input>textarea</input>
+            </description>
+            <conditions_serialized>
+                <selector>#rule_conditions_fieldset</selector>
+                <input>conditions</input>
+            </conditions_serialized>
+        </fields>
+    </conditions>
+    <actions>
+    	<class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+        <selector>[data-index="actions"]</selector>
+        <strategy>css selector</strategy>
+        <fields>
+            <actions_serialized>
+                <selector>#rule_actions_fieldset</selector>
+                <input>conditions</input>
+            </actions_serialized>
+        </fields>
+    </actions>
+    <message_information>
+        <class>\Magento\Backend\Test\Block\Widget\Tab</class>
+        <selector>[data-index="message_information"]</selector>
+        <strategy>css selector</strategy>
+        <fields>
+        	<customer_name />
+        	<customer_email />
+        	<recipient_name />
+        	<recipient_email />
+        	<recipient_address>
+        		<input>textarea</input>
+        	</recipient_address>
+        	<message>
+        		<input>textarea</input>
+        	</message>
+        </fields>
+    </message_information>
+</tabs>

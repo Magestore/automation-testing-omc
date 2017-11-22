@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/pages.xsd">
+    <page name="GiftvoucherIndexView" module="Magento_Giftvoucher" mca="giftvoucher/index/view">
+        <block name="messages" class="Magento\Backend\Test\Block\Messages" locator=".page.messages" strategy="css selector"/>
+        <block name="giftcodeInfo" class="Magento\Giftvoucher\Test\Block\Account\GiftcodeInfo" locator=".gift-code-basic" strategy="css selector" />
+        <block name="giftcodeHistory" class="Magento\Giftvoucher\Test\Block\Account\GiftcodeHistory" locator=".gift-code-history" strategy="css selector" />
+    </page>
+</config>

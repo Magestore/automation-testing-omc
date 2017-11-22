@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\Giftvoucher\Test\Repository\Gifthistory">
+        <dataset name="default">
+            <field name="gift_code" xsi:type="string">TEST-[A.4]-[AN.6]</field>
+            <field name="balance" xsi:type="number">80</field>
+        </dataset>
+    </repository>
+</config>

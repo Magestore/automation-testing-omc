@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Giftvoucher\Test\TestCase\GiftcardCode\GiftcodeFormButtonsTest" summary="Test Giftcode Form Buttons" ticketId="MGC002,MGC003,MGC004">
+		<variation name="GiftcodeFormButtonsTestVariation1">
+			<data name="fixtureType" xsi:type="string">giftcode</data>
+			<data name="data/gift_code" xsi:type="string">TEST-[A.4]-[AN.6]</data>
+			<data name="data/balance" xsi:type="number">150</data>
+			<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeFormButtons" />
+		</variation>
+	</testCase>
+</config>

@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2017 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Giftvoucher\Test\Handler\Giftcode\GiftcodeInterface" type="Magento\Giftvoucher\Test\Handler\Giftcode\Curl" />
+    <preference for="Magento\Giftvoucher\Test\Handler\GiftTemplate\GiftTemplateInterface" type="Magento\Giftvoucher\Test\Handler\GiftTemplate\Curl" />
+    <preference for="Magento\Giftvoucher\Test\Handler\GiftProduct\CatalogProductGiftVoucherInterface" type="Magento\Giftvoucher\Test\Handler\GiftProduct\Curl" />
+    <preference for="Magento\Giftvoucher\Test\Handler\Gifthistory\GifthistoryInterface" type="Magento\Giftvoucher\Test\Handler\Gifthistory\Curl" />
+</config>

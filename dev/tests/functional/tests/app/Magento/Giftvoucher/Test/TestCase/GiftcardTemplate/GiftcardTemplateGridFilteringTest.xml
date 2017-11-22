@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Giftvoucher\Test\TestCase\GiftcardTemplate\GiftcardTemplateGridFilteringTest" summary="Giftcard Template Grid UI Component Filtering">
+        <variation name="GiftcardTemplateGridFilteringTest" ticketId="MGC020,MGC021,MGC022,MGC023,MGC024,MGC025,MGC026,MGC027,MGC028,MGC029,MGC030,MGC031,MGC032">
+            <data name="description" xsi:type="string">Verify gift card template grid filtering</data>
+            <data name="itemsCount" xsi:type="string">1</data>
+            <data name="fixtureName" xsi:type="string">giftTemplate</data>
+            <data name="fixtureDataSet" xsi:type="string">default</data>
+            <data name="filters" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="giftcard_template_id_from" xsi:type="string">:giftcard_template_id</item>
+                    <item name="template_name" xsi:type="string">:template_name</item>
+                    <item name="status" xsi:type="string">:status</item>
+                    <item name="updated_at_from" xsi:type="string">:updated_at</item>
+                </item>          
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Giftvoucher\Test\Page\Adminhtml\GiftTemplateIndex</data>
+            <data name="gridRetriever" xsi:type="string">getGiftTemplateGroupGrid</data>
+            <data name="idGetter" xsi:type="string">getGiftcardTemplateId</data>
+            <constraint name="\Magento\Ui\Test\Constraint\AssertGridFiltering"/>
+        </variation>
+    </testCase>
+</config>

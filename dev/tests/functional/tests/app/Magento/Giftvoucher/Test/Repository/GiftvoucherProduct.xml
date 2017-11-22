@@ -1,0 +1,283 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\Giftvoucher\Test\Repository\GiftvoucherProduct">
+        <dataset name="default">
+            <field name="tax_class_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">taxable_goods</item>
+            </field>
+            <field name="status" xsi:type="string">Yes</field>
+            <field name="website_ids" xsi:type="array">
+                <item name="0" xsi:type="string">Main Website</item>
+            </field>
+            <field name="url_key" xsi:type="string">giftcard-product%isolation%</field>
+            <field name="visibility" xsi:type="string">Catalog, Search</field>
+            <field name="attribute_set_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">default</item>
+            </field>
+            <field name="gift_template_ids" xsi:type="string">1</field>
+            <field name="name" xsi:type="string">Gift Card product %isolation%</field>
+            <field name="sku" xsi:type="string">sku_giftcard_product_%isolation%</field>
+            <field name="quantity_and_stock_status" xsi:type="array">
+                <item name="qty" xsi:type="string">777</item>
+                <item name="is_in_stock" xsi:type="string">In Stock</item>
+            </field>
+            <field name="product_has_weight" xsi:type="string">This item has no weight</field>
+            <field name="gift_value" xsi:type="string">50</field>
+            <field name="gift_type" xsi:type="string">Fixed value</field>
+            <field name="gift_card_type" xsi:type="string">Physical</field>
+            <field name="gift_price_type" xsi:type="string">Same as Gift Card Value</field>
+        </dataset>
+        <dataset name="physical_fixed_value_same">
+            <field name="tax_class_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">taxable_goods</item>
+            </field>
+            <field name="status" xsi:type="string">Yes</field>
+            <field name="website_ids" xsi:type="array">
+                <item name="0" xsi:type="string">Main Website</item>
+            </field>
+            <field name="url_key" xsi:type="string">giftcard-product%isolation%</field>
+            <field name="visibility" xsi:type="string">Catalog, Search</field>
+            <field name="attribute_set_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">default</item>
+            </field>
+            <field name="gift_template_ids" xsi:type="string">1</field>
+            <field name="name" xsi:type="string">Gift Card product %isolation%</field>
+            <field name="sku" xsi:type="string">sku_giftcard_product_%isolation%</field>
+            <field name="quantity_and_stock_status" xsi:type="array">
+                <item name="qty" xsi:type="string">777</item>
+                <item name="is_in_stock" xsi:type="string">In Stock</item>
+            </field>
+            <field name="product_has_weight" xsi:type="string">This item has no weight</field>
+            <field name="gift_value" xsi:type="string">50</field>
+            <field name="gift_type" xsi:type="string">Fixed value</field>
+            <field name="gift_card_type" xsi:type="string">Physical</field>
+            <field name="gift_price_type" xsi:type="string">Same as Gift Card Value</field>
+            <field name="checkout_data" xsi:type="array">
+                <item name="dataset" xsi:type="string">giftvoucher_physical_fixed_value_same_option</item>
+            </field>            
+        </dataset>
+        <dataset name="virtual_fixed_value_same">
+            <field name="tax_class_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">taxable_goods</item>
+            </field>
+            <field name="status" xsi:type="string">Yes</field>
+            <field name="website_ids" xsi:type="array">
+                <item name="0" xsi:type="string">Main Website</item>
+            </field>
+            <field name="url_key" xsi:type="string">giftcard-product%isolation%</field>
+            <field name="visibility" xsi:type="string">Catalog, Search</field>
+            <field name="attribute_set_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">default</item>
+            </field>
+            <field name="gift_template_ids" xsi:type="string">1</field>
+            <field name="name" xsi:type="string">Gift Card product %isolation%</field>
+            <field name="sku" xsi:type="string">sku_giftcard_product_%isolation%</field>
+            <field name="quantity_and_stock_status" xsi:type="array">
+                <item name="qty" xsi:type="string">777</item>
+                <item name="is_in_stock" xsi:type="string">In Stock</item>
+            </field>
+            <field name="product_has_weight" xsi:type="string">This item has no weight</field>
+            <field name="gift_value" xsi:type="string">50</field>
+            <field name="gift_type" xsi:type="string">Fixed value</field>
+            <field name="gift_card_type" xsi:type="string">Virtual</field>
+            <field name="gift_price_type" xsi:type="string">Same as Gift Card Value</field>
+        </dataset>
+        <dataset name="combine_fixed_value_same">
+            <field name="tax_class_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">taxable_goods</item>
+            </field>
+            <field name="status" xsi:type="string">Yes</field>
+            <field name="website_ids" xsi:type="array">
+                <item name="0" xsi:type="string">Main Website</item>
+            </field>
+            <field name="url_key" xsi:type="string">giftcard-product%isolation%</field>
+            <field name="visibility" xsi:type="string">Catalog, Search</field>
+            <field name="attribute_set_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">default</item>
+            </field>
+            <field name="gift_template_ids" xsi:type="string">1</field>
+            <field name="name" xsi:type="string">Gift Card product %isolation%</field>
+            <field name="sku" xsi:type="string">sku_giftcard_product_%isolation%</field>
+            <field name="quantity_and_stock_status" xsi:type="array">
+                <item name="qty" xsi:type="string">777</item>
+                <item name="is_in_stock" xsi:type="string">In Stock</item>
+            </field>
+            <field name="product_has_weight" xsi:type="string">This item has no weight</field>
+            <field name="gift_value" xsi:type="string">50</field>
+            <field name="gift_type" xsi:type="string">Fixed value</field>
+            <field name="gift_card_type" xsi:type="string">Combine</field>
+            <field name="gift_price_type" xsi:type="string">Same as Gift Card Value</field>
+        </dataset>
+        <dataset name="physical_range_value_same">
+            <field name="tax_class_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">taxable_goods</item>
+            </field>
+            <field name="status" xsi:type="string">Yes</field>
+            <field name="website_ids" xsi:type="array">
+                <item name="0" xsi:type="string">Main Website</item>
+            </field>
+            <field name="url_key" xsi:type="string">giftcard-product%isolation%</field>
+            <field name="visibility" xsi:type="string">Catalog, Search</field>
+            <field name="attribute_set_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">default</item>
+            </field>
+            <field name="gift_template_ids" xsi:type="string">1</field>
+            <field name="name" xsi:type="string">Gift Card product %isolation%</field>
+            <field name="sku" xsi:type="string">sku_giftcard_product_%isolation%</field>
+            <field name="quantity_and_stock_status" xsi:type="array">
+                <item name="qty" xsi:type="string">777</item>
+                <item name="is_in_stock" xsi:type="string">In Stock</item>
+            </field>
+            <field name="product_has_weight" xsi:type="string">This item has no weight</field>
+            <field name="gift_value" xsi:type="string">50</field>
+            <field name="gift_type" xsi:type="string">Range of values</field>
+            <field name="gift_from" xsi:type="string">50</field>
+            <field name="gift_to" xsi:type="string">150</field>
+            <field name="gift_card_type" xsi:type="string">Physical</field>
+            <field name="gift_price_type" xsi:type="string">Same as Gift Card Value</field>
+        </dataset>
+        <dataset name="virtual_range_value_same">
+            <field name="tax_class_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">taxable_goods</item>
+            </field>
+            <field name="status" xsi:type="string">Yes</field>
+            <field name="website_ids" xsi:type="array">
+                <item name="0" xsi:type="string">Main Website</item>
+            </field>
+            <field name="url_key" xsi:type="string">giftcard-product%isolation%</field>
+            <field name="visibility" xsi:type="string">Catalog, Search</field>
+            <field name="attribute_set_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">default</item>
+            </field>
+            <field name="gift_template_ids" xsi:type="string">1</field>
+            <field name="name" xsi:type="string">Gift Card product %isolation%</field>
+            <field name="sku" xsi:type="string">sku_giftcard_product_%isolation%</field>
+            <field name="quantity_and_stock_status" xsi:type="array">
+                <item name="qty" xsi:type="string">777</item>
+                <item name="is_in_stock" xsi:type="string">In Stock</item>
+            </field>
+            <field name="product_has_weight" xsi:type="string">This item has no weight</field>
+            <field name="gift_value" xsi:type="string">50</field>
+            <field name="gift_type" xsi:type="string">Range of values</field>
+            <field name="gift_from" xsi:type="string">50</field>
+            <field name="gift_to" xsi:type="string">150</field>
+            <field name="gift_card_type" xsi:type="string">Virtual</field>
+            <field name="gift_price_type" xsi:type="string">Same as Gift Card Value</field>
+        </dataset>
+        <dataset name="combine_range_value_same">
+            <field name="tax_class_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">taxable_goods</item>
+            </field>
+            <field name="status" xsi:type="string">Yes</field>
+            <field name="website_ids" xsi:type="array">
+                <item name="0" xsi:type="string">Main Website</item>
+            </field>
+            <field name="url_key" xsi:type="string">giftcard-product%isolation%</field>
+            <field name="visibility" xsi:type="string">Catalog, Search</field>
+            <field name="attribute_set_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">default</item>
+            </field>
+            <field name="gift_template_ids" xsi:type="string">1</field>
+            <field name="name" xsi:type="string">Gift Card product %isolation%</field>
+            <field name="sku" xsi:type="string">sku_giftcard_product_%isolation%</field>
+            <field name="quantity_and_stock_status" xsi:type="array">
+                <item name="qty" xsi:type="string">777</item>
+                <item name="is_in_stock" xsi:type="string">In Stock</item>
+            </field>
+            <field name="product_has_weight" xsi:type="string">This item has no weight</field>
+            <field name="gift_value" xsi:type="string">50</field>
+            <field name="gift_type" xsi:type="string">Range of values</field>
+            <field name="gift_from" xsi:type="string">50</field>
+            <field name="gift_to" xsi:type="string">150</field>
+            <field name="gift_card_type" xsi:type="string">Combine</field>
+            <field name="gift_price_type" xsi:type="string">Same as Gift Card Value</field>
+        </dataset>
+        <dataset name="physical_dropdown_value_same">
+            <field name="tax_class_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">taxable_goods</item>
+            </field>
+            <field name="status" xsi:type="string">Yes</field>
+            <field name="website_ids" xsi:type="array">
+                <item name="0" xsi:type="string">Main Website</item>
+            </field>
+            <field name="url_key" xsi:type="string">giftcard-product%isolation%</field>
+            <field name="visibility" xsi:type="string">Catalog, Search</field>
+            <field name="attribute_set_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">default</item>
+            </field>
+            <field name="gift_template_ids" xsi:type="string">1</field>
+            <field name="name" xsi:type="string">Gift Card product %isolation%</field>
+            <field name="sku" xsi:type="string">sku_giftcard_product_%isolation%</field>
+            <field name="quantity_and_stock_status" xsi:type="array">
+                <item name="qty" xsi:type="string">777</item>
+                <item name="is_in_stock" xsi:type="string">In Stock</item>
+            </field>
+            <field name="product_has_weight" xsi:type="string">This item has no weight</field>
+            <field name="gift_value" xsi:type="string">50</field>
+            <field name="gift_type" xsi:type="string">Dropdown values</field>
+            <field name="gift_dropdown" xsi:type="string">10,20,30</field>
+            <field name="gift_card_type" xsi:type="string">Physical</field>
+            <field name="gift_price_type" xsi:type="string">Same as Gift Card Value</field>
+        </dataset>
+        <dataset name="virtual_dropdown_value_same">
+            <field name="tax_class_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">taxable_goods</item>
+            </field>
+            <field name="status" xsi:type="string">Yes</field>
+            <field name="website_ids" xsi:type="array">
+                <item name="0" xsi:type="string">Main Website</item>
+            </field>
+            <field name="url_key" xsi:type="string">giftcard-product%isolation%</field>
+            <field name="visibility" xsi:type="string">Catalog, Search</field>
+            <field name="attribute_set_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">default</item>
+            </field>
+            <field name="gift_template_ids" xsi:type="string">1</field>
+            <field name="name" xsi:type="string">Gift Card product %isolation%</field>
+            <field name="sku" xsi:type="string">sku_giftcard_product_%isolation%</field>
+            <field name="quantity_and_stock_status" xsi:type="array">
+                <item name="qty" xsi:type="string">777</item>
+                <item name="is_in_stock" xsi:type="string">In Stock</item>
+            </field>
+            <field name="product_has_weight" xsi:type="string">This item has no weight</field>
+            <field name="gift_value" xsi:type="string">50</field>
+            <field name="gift_type" xsi:type="string">Dropdown values</field>
+            <field name="gift_dropdown" xsi:type="string">10,20,30</field>
+            <field name="gift_card_type" xsi:type="string">Virtual</field>
+            <field name="gift_price_type" xsi:type="string">Same as Gift Card Value</field>
+        </dataset>
+        <dataset name="combine_dropdown_value_same">
+            <field name="tax_class_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">taxable_goods</item>
+            </field>
+            <field name="status" xsi:type="string">Yes</field>
+            <field name="website_ids" xsi:type="array">
+                <item name="0" xsi:type="string">Main Website</item>
+            </field>
+            <field name="url_key" xsi:type="string">giftcard-product%isolation%</field>
+            <field name="visibility" xsi:type="string">Catalog, Search</field>
+            <field name="attribute_set_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">default</item>
+            </field>
+            <field name="gift_template_ids" xsi:type="string">1</field>
+            <field name="name" xsi:type="string">Gift Card product %isolation%</field>
+            <field name="sku" xsi:type="string">sku_giftcard_product_%isolation%</field>
+            <field name="quantity_and_stock_status" xsi:type="array">
+                <item name="qty" xsi:type="string">777</item>
+                <item name="is_in_stock" xsi:type="string">In Stock</item>
+            </field>
+            <field name="product_has_weight" xsi:type="string">This item has no weight</field>
+            <field name="gift_value" xsi:type="string">50</field>
+            <field name="gift_type" xsi:type="string">Dropdown values</field>
+            <field name="gift_dropdown" xsi:type="string">10,20,30</field>
+            <field name="gift_card_type" xsi:type="string">Combine</field>
+            <field name="gift_price_type" xsi:type="string">Same as Gift Card Value</field>
+        </dataset>
+    </repository>
+</config>

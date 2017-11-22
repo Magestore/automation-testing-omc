@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Giftvoucher\Test\TestCase\GiftcardProduct\ShowGiftvoucherGridTest" summary="Show Gift Voucher Product Grid" ticketId="MGC001">
+        <variation name="ShowGiftvoucherGridTestVariation1" summary="Show Gift Voucher Grid">
+            <constraint name="Magento\Giftvoucher\Test\Constraint\AssertGiftvoucherGridColumns" />
+        </variation>
+    </testCase>
+</config>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Giftvoucher\Test\TestCase\GiftcardCode\ImportGiftcodeTest" summary="Test Import Giftcode" ticketId="MGC048,MGC049,MGC050,MGC051">
+		<variation name="ImportGiftcodeTestVariation1">
+			<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSuccessImportMessage" />
+		</variation>
+	</testCase>
+</config>

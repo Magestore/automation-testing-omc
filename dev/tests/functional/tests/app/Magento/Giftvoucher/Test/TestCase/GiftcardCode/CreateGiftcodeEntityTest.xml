@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Giftvoucher\Test\TestCase\GiftcardCode\CreateGiftcodeEntityTest" summary="Create Gift Code" ticketId="MGC005,MGC006">
+		<variation name="CreateGiftcodeEntityTestVariation1">
+			<data name="fixtureType" xsi:type="string">giftcode</data>
+			<data name="saveAndContinue" xsi:type="boolean">true</data>
+			<data name="data/gift_code" xsi:type="string">TEST-[A.4]-[AN.6]</data>
+			<data name="data/balance" xsi:type="number">150</data>
+			<data name="data/currency" xsi:type="string">US Dollar</data>
+			<data name="data/status" xsi:type="string">Active</data>
+			<data name="data/expired_at" xsi:type="string">05/30/2035</data>
+			<data name="data/store_id" xsi:type="string">Default Store View</data>
+			<data name="data/giftvoucher_comments" xsi:type="string">TEST CREATE GIFT CODE</data>
+			<data name="data/description" xsi:type="string">Apply for order with subtotal more than $200</data>
+			<data name="data/conditions_serialized" xsi:type="string">[Subtotal|equals or greater than|200]</data>
+			<data name="data/actions_serialized" xsi:type="string">[Quantity in cart|equals or greater than|3]</data>
+			<data name="data/customer_name" xsi:type="string">John</data>
+			<data name="data/customer_email" xsi:type="string">john@example.com</data>
+			<data name="data/recipient_name" xsi:type="string">Jane</data>
+			<data name="data/recipient_email" xsi:type="string">jane@example.com</data>
+			<data name="data/recipient_address" xsi:type="string">Landing</data>
+			<data name="data/message" xsi:type="string">Happy birthday!</data>
+			<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSuccessSaveMessage" />
+			<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeInGrid" />
+		</variation>
+	</testCase>
+</config>

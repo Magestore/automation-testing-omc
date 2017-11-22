@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Giftvoucher\Test\TestCase\GiftcardPattern\CreatePatternEntityTest" summary="Create Gift Code Pattern" ticketId="GGC005,GGC006">
+		<variation name="CreatePatternEntityTestVariation1">
+			<data name="fixtureType" xsi:type="string">giftpattern</data>
+			<data name="saveAndContinue" xsi:type="boolean">true</data>
+            <data name="data/template_name" xsi:type="string">Template %isolation%</data>
+			<data name="data/pattern" xsi:type="string">GEN-[A.4]-[AN.6]</data>
+			<data name="data/balance" xsi:type="number">150</data>
+			<data name="data/currency" xsi:type="string">US Dollar</data>
+			<data name="data/expired_at" xsi:type="string">05/30/2035</data>
+			<data name="data/store_id" xsi:type="string">Default Store View</data>
+            <data name="data/amount" xsi:type="number">3</data>
+			<data name="data/conditions_serialized" xsi:type="string">[Subtotal|equals or greater than|2000]</data>
+			<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardPattern\AssertPatternSuccessSaveMessage" />
+			<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardPattern\AssertPatternInGrid" />
+		</variation>
+	</testCase>
+</config>

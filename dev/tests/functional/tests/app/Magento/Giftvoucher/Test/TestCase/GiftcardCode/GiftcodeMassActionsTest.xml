@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Giftvoucher\Test\TestCase\GiftcardCode\GiftcodeMassActionsTest" summary="Test Giftcode Mass Actions">
+		<variation name="GiftcodeMassActionsTestVariation1" ticketId="MGC012">
+			<data name="giftcode/dataset" xsi:type="string">minimum</data>
+            <data name="action/Change Status" xsi:type="string">Disabled</data>
+			<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeStatusInGrid" />
+            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeMassStatusSuccessMessage" />
+		</variation>
+        <variation name="GiftcodeMassActionsTestVariation2" ticketId="MGC013">
+            <data name="giftcode/dataset" xsi:type="string">minimum</data>
+            <data name="count" xsi:type="number">2</data>
+            <data name="action/Change Status" xsi:type="string">Disabled</data>
+            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeStatusInGrid" />
+            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeMassStatusSuccessMessage" />
+        </variation>
+        <variation name="GiftcodeMassActionsTestVariation3" ticketId="MGC014">
+            <data name="giftcode/dataset" xsi:type="string">minimum</data>
+            <data name="action/Change Status" xsi:type="string">Active</data>
+            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeStatusInGrid" />
+            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeMassStatusSuccessMessage" />
+        </variation>
+        <variation name="GiftcodeMassActionsTestVariation4" ticketId="MGC015">
+            <data name="giftcode/dataset" xsi:type="string">minimum</data>
+            <data name="count" xsi:type="number">2</data>
+            <data name="action/Change Status" xsi:type="string">Active</data>
+            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeStatusInGrid" />
+            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeMassStatusSuccessMessage" />
+        </variation>
+        <variation name="GiftcodeMassActionsTestVariation5" ticketId="MGC016">
+            <data name="giftcode/dataset" xsi:type="string">minimum</data>
+            <data name="giftcode/data/status" xsi:type="string">Active</data>
+            <data name="giftcode/data/recipient_name" xsi:type="string">Jane</data>
+            <data name="giftcode/data/recipient_email" xsi:type="string">jane@example.com</data>
+            <data name="action" xsi:type="string">Send Email</data>
+            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSentInGrid" />
+            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeMassEmailSuccessMessage" />
+        </variation>
+        <variation name="GiftcodeMassActionsTestVariation6" ticketId="MGC017">
+            <data name="giftcode/dataset" xsi:type="string">minimum</data>
+            <data name="giftcode/data/status" xsi:type="string">Active</data>
+            <data name="giftcode/data/recipient_name" xsi:type="string">Jane</data>
+            <data name="giftcode/data/recipient_email" xsi:type="string">jane@example.com</data>
+            <data name="count" xsi:type="number">2</data>
+            <data name="action" xsi:type="string">Send Email</data>
+            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSentInGrid" />
+            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeMassEmailSuccessMessage" />
+        </variation>
+        <!-- Always be the last variation -->
+        <variation name="GiftcodeMassActionsTestVariation118" ticketId="MGC018">
+            <data name="giftcode/dataset" xsi:type="string">minimum</data>
+            <data name="action" xsi:type="string">Print Gift Code</data>
+            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertShowMassPrint" />
+        </variation>
+	</testCase>
+</config>

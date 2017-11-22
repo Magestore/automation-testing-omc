@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Giftvoucher\Test\TestCase\GiftcardTemplate\GiftcardTemplateGridSortingTest" summary="Grid UI Component Sorting" ticketId="MAGETWO-41328">
+        <variation name="GiftcardTemplateGridSorting">
+            <data name="tag" xsi:type="string">to_maintain:yes</data>
+            <data name="description" xsi:type="string">Verify gift card template grid sorting</data>
+            <data name="columnsForSorting" xsi:type="array">
+                <item name="giftcard_template_id" xsi:type="string">ID</item>
+                <item name="template_name" xsi:type="string">Name</item>
+                <item name="updated_at" xsi:type="string">Modified</item>
+                <!--<item name="status" xsi:type="string">Status</item>-->
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Giftvoucher\Test\Page\Adminhtml\GiftTemplateIndex</data>
+            <data name="gridRetriever" xsi:type="string">getGiftTemplateGroupGrid</data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+        </variation>
+    </testCase>
+</config>

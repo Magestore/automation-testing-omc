@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Giftvoucher\Test\TestCase\GiftcardCode\GiftcodeMassEmailTest" summary="Test Giftcode Mass Email">
+        <variation name="GiftcodeMassActionsTestVariation1" ticketId="MGC019">
+            <data name="giftcode/dataset" xsi:type="string">minimum</data>
+            <data name="count" xsi:type="number">2</data>
+            <data name="action" xsi:type="string">Print Gift Code</data>
+            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertShowMassPrint" />
+        </variation>
+	</testCase>
+</config>
