@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\PurchaseOrderSuccess\Test\TestCase\PurchaseOrderMenuTest" summary="Navigate through Purchase menu" ticketId="MAGESTORE-1">
+		<!--Purchase Order Management-->
+		<variation name="PurchaseOrderMenuTestVariation1">
+			<data name="menuItem" xsi:type="string">Purchase Management > Create Purchase Order</data>
+			<data name="pageTitle" xsi:type="string">New Purchase Order</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="PurchaseOrderMenuTestVariation2">
+			<data name="menuItem" xsi:type="string">Purchase Management > Purchase Orders</data>
+			<data name="pageTitle" xsi:type="string">Manage Purchase Orders</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+
+		<!--Quotation Management-->
+		<variation name="PurchaseOrderMenuTestVariation3">
+			<data name="menuItem" xsi:type="string">Purchase Management > Create Quotation</data>
+			<data name="pageTitle" xsi:type="string">New Quotation</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="PurchaseOrderMenuTestVariation4">
+			<data name="menuItem" xsi:type="string">Purchase Management > Quotations</data>
+			<data name="pageTitle" xsi:type="string">Manage Quotation</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+
+		<!--Return Request Management-->
+		<variation name="PurchaseOrderMenuTestVariation5">
+			<data name="menuItem" xsi:type="string">Purchase Management > Create Return Request</data>
+			<data name="pageTitle" xsi:type="string">New Return Request</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="PurchaseOrderMenuTestVariation6">
+			<data name="menuItem" xsi:type="string">Purchase Management > Return Requests</data>
+			<data name="pageTitle" xsi:type="string">Manage Return Request</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+
+		<!--Supplier-->
+		<variation name="PurchaseOrderMenuTestVariation7">
+			<data name="menuItem" xsi:type="string">Purchase Management > Manage Suppliers</data>
+			<data name="pageTitle" xsi:type="string">Manage Suppliers</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="PurchaseOrderMenuTestVariation8">
+			<data name="menuItem" xsi:type="string">Purchase Management > Manage Pricelist</data>
+			<data name="pageTitle" xsi:type="string">Manage Pricelist</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+
+		<!--Settings-->
+		<variation name="PurchaseOrderMenuTestVariation9">
+			<data name="menuItem" xsi:type="string">Purchase Management > Purchase Management</data>
+			<data name="pageTitle" xsi:type="string">Configuration</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="PurchaseOrderMenuTestVariation10">
+			<data name="menuItem" xsi:type="string">Purchase Management > Supplier Configuration</data>
+			<data name="pageTitle" xsi:type="string">Configuration</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+	</testCase>
+</config>

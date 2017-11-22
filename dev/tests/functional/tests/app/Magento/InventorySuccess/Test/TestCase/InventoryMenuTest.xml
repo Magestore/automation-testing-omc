@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\InventorySuccess\Test\TestCase\InventoryMenuTest" summary="Navigate through inventory menu" ticketId="MAGESTORE-1">
+		<!--Stock Listing-->
+		<variation name="InventoryMenuTest1">
+			<data name="menuItem" xsi:type="string">Inventory Management > Stocks in Warehouse</data>
+			<data name="pageTitle" xsi:type="string">Manage Stock</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="InventoryMenuTest2">
+			<data name="menuItem" xsi:type="string">Inventory Management > Non-Warehouse Products</data>
+			<data name="pageTitle" xsi:type="string">Non-Warehouse Products</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="InventoryMenuTest3">
+			<data name="menuItem" xsi:type="string">Inventory Management > Warehouses</data>
+			<data name="pageTitle" xsi:type="string">Manage Warehouses</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+
+		<!--Prediction-->
+		<variation name="InventoryMenuTest4">
+			<data name="menuItem" xsi:type="string">Inventory Management > Supply Needs</data>
+			<data name="pageTitle" xsi:type="string">Supply Needs</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="InventoryMenuTest5">
+			<data name="menuItem" xsi:type="string">Inventory Management > Low Stock Rules</data>
+			<data name="pageTitle" xsi:type="string">Manage Low Stock Notification Rules</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="InventoryMenuTest6">
+			<data name="menuItem" xsi:type="string">Inventory Management > Low Stock Notifications</data>
+			<data name="pageTitle" xsi:type="string">Notification log</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+
+		<!--Transfer Stock-->
+		<variation name="InventoryMenuTest7">
+			<data name="menuItem" xsi:type="string">Inventory Management > Send Stock</data>
+			<data name="pageTitle" xsi:type="string">Add a New Send Stock</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="InventoryMenuTest8">
+			<data name="menuItem" xsi:type="string">Inventory Management > Request Stock</data>
+			<data name="pageTitle" xsi:type="string">Add a New Request Stock</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="InventoryMenuTest9">
+			<data name="menuItem" xsi:type="string">Inventory Management > Transfer to External</data>
+			<data name="pageTitle" xsi:type="string">Transfer Stock to External Location</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="InventoryMenuTest10">
+			<data name="menuItem" xsi:type="string">Inventory Management > Transfer from External</data>
+			<data name="pageTitle" xsi:type="string">Transfer Stock from External Location</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+
+		<!--Transfer Stock History-->
+		<variation name="InventoryMenuTest11">
+			<data name="menuItem" xsi:type="string">Inventory Management > Send Stock History</data>
+			<data name="pageTitle" xsi:type="string">Send Stock History</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="InventoryMenuTest12">
+			<data name="menuItem" xsi:type="string">Inventory Management > Request Stock History</data>
+			<data name="pageTitle" xsi:type="string">Request Stock History</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="InventoryMenuTest13">
+			<data name="menuItem" xsi:type="string">Inventory Management > Transfer to External History</data>
+			<data name="pageTitle" xsi:type="string">Transfer Stock to External Location History</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="InventoryMenuTest14">
+			<data name="menuItem" xsi:type="string">Inventory Management > Transfer from External History</data>
+			<data name="pageTitle" xsi:type="string">Transfer Stock from External Location History</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+
+		<!--Stock Control-->
+		<variation name="InventoryMenuTest15">
+			<data name="menuItem" xsi:type="string">Inventory Management > New Stock Adjustment</data>
+			<data name="pageTitle" xsi:type="string">Add New Adjustment</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="InventoryMenuTest16">
+			<data name="menuItem" xsi:type="string">Inventory Management > New Stocktaking</data>
+			<data name="pageTitle" xsi:type="string">Add New Stocktaking</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="InventoryMenuTest17">
+			<data name="menuItem" xsi:type="string">Inventory Management > Adjust Stock History</data>
+			<data name="pageTitle" xsi:type="string">Manage Stock Adjustments</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="InventoryMenuTest18">
+			<data name="menuItem" xsi:type="string">Inventory Management > Stocktaking History</data>
+			<data name="pageTitle" xsi:type="string">Manage Stocktaking</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="InventoryMenuTest19">
+			<data name="menuItem" xsi:type="string">Inventory Management > Receipt/ Delivery History</data>
+			<data name="pageTitle" xsi:type="string">Receipt/ Delivery History</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+		<variation name="InventoryMenuTest20">
+			<data name="menuItem" xsi:type="string">Inventory Management > Stock Movement History</data>
+			<data name="pageTitle" xsi:type="string">Stock Movement</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+
+		<!--Settings-->
+		<variation name="InventoryMenuTest21">
+			<data name="menuItem" xsi:type="string">Inventory Management > Configuration</data>
+			<data name="pageTitle" xsi:type="string">Configuration</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+
+	</testCase>
+</config>

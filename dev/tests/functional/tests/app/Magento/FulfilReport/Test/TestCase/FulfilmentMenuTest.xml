@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\FulfilReport\Test\TestCase\FulfilmentMenuTest" summary="Navigate through admin menu" ticketId="MAGETWO-34874">
+        <variation name="FulfilmentMenuTest1">
+            <data name="menuItem" xsi:type="string">Fulfillment > Verify Orders</data>
+            <data name="pageTitle" xsi:type="string">Fulfillmentss - Verify Orders</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="FulfilmentMenuTest2">
+            <data name="menuItem" xsi:type="string">Fulfillment > Prepare Fulfil</data>
+            <data name="pageTitle" xsi:type="string">Fulfillmentss - Prepare Fulfil</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="FulfilmentMenuTest3">
+            <data name="menuItem" xsi:type="string">Fulfillment > Pick Items</data>
+            <data name="pageTitle" xsi:type="string">Fulfillmentss - Picking Items</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="FulfilmentMenuTest4">
+            <data name="menuItem" xsi:type="string">Fulfillment > Pack Items</data>
+            <data name="pageTitle" xsi:type="string">Fulfillmentss - Packing Requests</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="FulfilmentMenuTest5">
+            <data name="menuItem" xsi:type="string">Fulfillment > Delivery Packages</data>
+            <data name="pageTitle" xsi:type="string">Fulfillmentss - Delivery Packages</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="FulfilmentMenuTest6">
+            <data name="menuItem" xsi:type="string">Fulfillment > All Orders</data>
+            <data name="pageTitle" xsi:type="string">All Orders</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="FulfilmentMenuTest7">
+            <data name="menuItem" xsi:type="string">Fulfillment > Back Orders</data>
+            <data name="pageTitle" xsi:type="string">Back orders</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="FulfilmentMenuTest8">
+            <data name="menuItem" xsi:type="string">Fulfillment > On Hold Orders</data>
+            <data name="pageTitle" xsi:type="string">Hold orders</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="FulfilmentMenuTest9">
+            <data name="menuItem" xsi:type="string">Fulfillment > Pack Items</data>
+            <data name="pageTitle" xsi:type="string">Fulfillmentss - Packing Requests</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="FulfilmentMenuTest10">
+            <data name="menuItem" xsi:type="string">Fulfillment > Completed Orders</data>
+            <data name="pageTitle" xsi:type="string">Completed orders</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="FulfilmentMenuTest11">
+            <data name="menuItem" xsi:type="string">Fulfillment > Canceled Orders</data>
+            <data name="pageTitle" xsi:type="string">Canceled orders</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="FulfilmentMenuTest12">
+            <data name="menuItem" xsi:type="string">Fulfillment > Dropship Request</data>
+            <data name="pageTitle" xsi:type="string">Dropship</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="FulfilmentMenuTest13">
+            <data name="menuItem" xsi:type="string">Fulfillment > Dashboard</data>
+            <data name="pageTitle" xsi:type="string">Dashboard</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="FulfilmentMenuTest14">
+            <data name="menuItem" xsi:type="string">Fulfillment > Reports</data>
+            <data name="pageTitle" xsi:type="string">Fulfillmentss - Reports</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="FulfilmentMenuTest15">
+            <data name="menuItem" xsi:type="string">Fulfillment > Order Configuration</data>
+            <data name="pageTitle" xsi:type="string">Configuration</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="FulfilmentMenuTest16">
+            <data name="menuItem" xsi:type="string">Fulfillment > Fulfillment Configuration</data>
+            <data name="pageTitle" xsi:type="string">Configuration</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="FulfilmentMenuTest17">
+            <data name="menuItem" xsi:type="string">Fulfillment > Dropship Configuration</data>
+            <data name="pageTitle" xsi:type="string">Configuration</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+    </testCase>
+</config>
