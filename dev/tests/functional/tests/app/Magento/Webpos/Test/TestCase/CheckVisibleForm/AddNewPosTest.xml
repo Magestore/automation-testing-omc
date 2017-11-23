@@ -6,9 +6,9 @@
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Giftvoucher\Test\TestCase\CheckAddGiftCardProductTest" summary="Navigate through admin menu" ticketId="MAGETWO-34874">
-        <variation name="CheckAddGiftCardProductTest1">
-            <data name="pageTitle" xsi:type="string">New Product</data>
+    <testCase name="Magento\Webpos\Test\TestCase\CheckVisibleForm\AddNewPosTest" summary="Check Is Visible Add New Locations - Warehouses Test" ticketId="MAGETWO-34874">
+        <variation name="AddNewPosTestVariation1">
+            <data name="pageTitle" xsi:type="string">New Pos</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
         </variation>
     </testCase>

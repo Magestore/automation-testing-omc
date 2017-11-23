@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
+	<page name="TranferFromExternalHistory" area="Adminhtml" mca="inventorysuccess/transferstock_history/fromexternal" module="Magento_InventorySuccess">
+		<block name="pageActionsBlock" class="Magento\InventorySuccess\Test\Block\Adminhtml\TranferFromExternalHistory\GridPageActions" locator=".page-main-actions" strategy="css selector"/>
+		<block name="messagesBlock" class="Magento\Backend\Test\Block\Messages" locator="#messages .messages" strategy="css selector"/>
+	</page>
+</config>

@@ -6,9 +6,9 @@
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Giftvoucher\Test\TestCase\CheckAddGiftCardProductTest" summary="Navigate through admin menu" ticketId="MAGETWO-34874">
-        <variation name="CheckAddGiftCardProductTest1">
-            <data name="pageTitle" xsi:type="string">New Product</data>
+    <testCase name="Magento\BarcodeSuccess\Test\TestCase\OpenGenerateBarcodeEntityTest" summary="Navigate through Barcode menu then click button generate barcode" ticketId="MAGESTORE-1">
+        <variation name="GenerateBarcodeFromManageBarcodesTestVariation1">
+            <data name="pageTitle" xsi:type="string">Generate Barcode</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
         </variation>
     </testCase>

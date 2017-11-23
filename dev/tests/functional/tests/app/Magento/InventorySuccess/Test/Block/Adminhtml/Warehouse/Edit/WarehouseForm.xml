@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tabs>
+	<general>
+		<class>\Magento\Backend\Test\Block\Widget\Tab</class>
+		<selector>[data-index="general_information"]</selector>
+		<strategy>css selector</strategy>
+	</general>
+</tabs>

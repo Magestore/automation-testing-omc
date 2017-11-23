@@ -45,6 +45,5 @@ class CheckNewTemplateGiftvoucherTest extends Injectable
     {
         // Steps
         $this->giftTemplateIndex->open();
-        $this->giftTemplateIndex->getGridPageActions()->addNew();
-    }
+        $this->giftTemplateIndex->getGridPageActions()->addNew();}
 }

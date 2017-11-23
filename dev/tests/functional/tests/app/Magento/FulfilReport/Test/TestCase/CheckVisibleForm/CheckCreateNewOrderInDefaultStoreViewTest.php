@@ -27,7 +27,7 @@ class CheckCreateNewOrderInDefaultStoreViewTest extends Injectable
     /**
      * Injection data
      *
-     * @param AllOrderIndex $allOrderIndex
+     * @param OrderSuccessAllOrderIndex $allOrderIndex
      * @return void
      */
     public function __inject(
