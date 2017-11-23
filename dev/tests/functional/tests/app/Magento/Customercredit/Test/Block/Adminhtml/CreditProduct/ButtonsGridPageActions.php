@@ -15,6 +15,11 @@ class ButtonsGridPageActions extends GridPageActions
 {
     protected $actionButton = './/button[span="%s"]';
 
+    public function actionButtonIsVisible($button)
+    {
+        return $this->_rootElement->find(sprintf($this->actionButton, $button), Locator::SELECTOR_XPATH)->isVisible();
+    }
+
     public function clickActionButton($actionButton)
     {
         $button = $this->_rootElement->find(sprintf($this->actionButton, $actionButton), Locator::SELECTOR_XPATH);
