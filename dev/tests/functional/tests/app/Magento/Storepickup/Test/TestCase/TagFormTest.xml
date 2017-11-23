@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Storepickup\Test\TestCase\TagFormTest" summary="tag page test action buttons" ticketId="MAGETWO-12312">
+        <variation name="Add New Tag form test">
+            <data name="button" xsi:type="string">Add New Tag</data>
+            <data name="pageTitle" xsi:type="string">New Tag</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+    </testCase>
+</config>

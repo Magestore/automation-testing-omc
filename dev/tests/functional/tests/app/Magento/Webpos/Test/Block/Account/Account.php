@@ -8,9 +8,11 @@
 
 namespace Magento\Webpos\Test\Block\Account;
 
-
 use Magento\Mtf\Block\Block;
-
+/**
+ * Class Account
+ * @package Magento\Webpos\Test\Block\Account
+ */
 class Account extends Block
 {
 	public function getDisplayNameField()
