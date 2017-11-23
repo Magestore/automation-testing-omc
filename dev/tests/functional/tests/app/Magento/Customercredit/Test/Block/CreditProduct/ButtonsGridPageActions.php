@@ -11,7 +11,7 @@ namespace Magento\Customercredit\Test\Block\CreditProduct;
 use Magento\Backend\Test\Block\GridPageActions;
 use Magento\Mtf\Client\Locator;
 
-class CreditProductGridPageActions extends GridPageActions
+class ButtonsGridPageActions extends GridPageActions
 {
     protected $actionButton = './/button[span="%s"]';
 
