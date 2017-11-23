@@ -6,7 +6,7 @@
  * Time: 4:14 PM
  */
 
-namespace Magento\Customercredit\Test\Block\CreditProduct;
+namespace Magento\Customercredit\Test\Block\Adminhtml\CreditProduct;
 
 use Magento\Backend\Test\Block\GridPageActions;
 use Magento\Mtf\Client\Locator;
