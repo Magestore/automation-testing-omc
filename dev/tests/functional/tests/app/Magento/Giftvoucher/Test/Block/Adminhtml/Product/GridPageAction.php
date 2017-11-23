@@ -56,7 +56,12 @@ class GridPageAction extends ParentGridPageActions
         $this->_rootElement->find($this->addProductButton, Locator::SELECTOR_ID)->click();
     }
 
-    /**
+    public function getAddGiftCardProduct()
+    {
+        return $this->_rootElement->find($this->addProductButton, Locator::SELECTOR_ID);
+    }
+
+  /**
      * Get product list.
      *
      * @return array
