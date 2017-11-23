@@ -8,9 +8,12 @@
 
 namespace Magento\InventorySuccess\Test\TestCase;
 
-
 use Magento\Backend\Test\TestCase\NavigateMenuTest;
 
+/**
+ * Class InventoryMenuTest
+ * @package Magento\InventorySuccess\Test\TestCase
+ */
 class InventoryMenuTest extends NavigateMenuTest
 {
 

@@ -3,17 +3,20 @@
  * Created by PhpStorm.
  * User: thomas
  * Date: 22/11/2017
- * Time: 18:03
+ * Time: 17:03
  */
 
-namespace Magento\Giftvoucher\Test\TestCase\CheckVisibleForm;
+namespace Magento\Giftvoucher\Test\TestCase;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Giftvoucher\Test\Page\Adminhtml\GiftvoucherProductIndex;
 
+/**
+ * Class CheckAddGiftCardProductTest
+ * @package Magento\Giftvoucher\Test\TestCase
+ */
 class CheckAddGiftCardProductTest extends Injectable
 {
-
     /**
      * Product page with a grid
      *
@@ -22,25 +25,28 @@ class CheckAddGiftCardProductTest extends Injectable
     protected $productGrid;
 
     /**
+     * Run menu navigation test.
+     *
      * Injection data
      *
      * @param GiftvoucherProductIndex $productGrid
      * @return void
      */
-    public function __inject(GiftvoucherProductIndex $productGrid)
+    public function __inject
+    (
+        GiftvoucherProductIndex $productGrid
+    )
     {
         $this->productGrid = $productGrid;
     }
 
     /**
-     * Run check visible form Check Add Gift Code entity test
+     * Run create product virtual entity test
      *
      * @return void
      */
-    public function testCreate()
+    public function test()
     {
-        // Steps
         $this->productGrid->open();
-        $this->productGrid->getGridPageActionBlock()->getAddGiftCardProduct()->click();
-    }
+        $this->productGrid->getGridPageActionBlock()->getAddGiftCardProduct()->click();}
 }
