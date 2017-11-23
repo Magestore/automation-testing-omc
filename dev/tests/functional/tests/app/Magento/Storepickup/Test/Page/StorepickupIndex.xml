@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/pages.xsd">
+    <page name="StorepickupIndex" mca="storepickup/index/index/" module="Magento_Storepickup">
+        <block name="storepickupPageTitleBlock" class="Magento\Storepickup\Test\Block\StorepickupPageTitle" locator=".title-page" strategy="css selector" />
+    </page>
+</config>
