@@ -46,5 +46,9 @@ class CheckCreateNewOrderInDefaultStoreViewTest extends Injectable
         // Steps
         $this->orderSuccessAllOrderIndex->open();
         $this->orderSuccessAllOrderIndex->getOrderListingMainActions()->addNew();
+        sleep(1);
+        $this->orderSuccessAllOrderIndex->getPageWrapper()->waitForElementVisible($this->orderSuccessAllOrderIndex->getPageWrapper()->getAnchorContent());
+        sleep(1);
+        $this->orderSuccessAllOrderIndex->getPageWrapper()->waitForElementVisible($this->orderSuccessAllOrderIndex->getPageWrapper()->getMainContainer());
     }
 }
