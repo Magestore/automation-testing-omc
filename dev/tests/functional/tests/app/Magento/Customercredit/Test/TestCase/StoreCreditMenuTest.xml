@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Customercredit\Test\TestCase\StoreCreditMenuTest" summary="Navigate through admin menu" ticketId="MAGETWO-12312">
+        <variation name="Manage Credit Products">
+            <data name="menuItem" xsi:type="string">Store Credit > Manage Credit Products</data>
+            <data name="pageTitle" xsi:type="string">Credit products</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="Manage Customers Using Credit">
+            <data name="menuItem" xsi:type="string">Store Credit > Manage Customers Using Credit</data>
+            <data name="pageTitle" xsi:type="string">Manage Customers Using Credit</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="Manage Credit Transactions">
+            <data name="menuItem" xsi:type="string">Store Credit > Manage Credit Transactions</data>
+            <data name="pageTitle" xsi:type="string">Credit Transaction</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="Settings">
+            <data name="menuItem" xsi:type="string">Store Credit > Settings</data>
+            <data name="pageTitle" xsi:type="string">Configuration</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+    </testCase>
+</config>

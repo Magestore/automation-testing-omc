@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Rewardpoints\Test\TestCase\RewardPointsMenuTest" summary="Navigate through admin menu" ticketId="RewardPoints-001">
+        <variation name="RewardPointsMenuTest1">
+            <data name="menuItem" xsi:type="string">Reward Points > Earning Rates</data>
+            <data name="pageTitle" xsi:type="string">Earning Rates</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="RewardPointsMenuTest2">
+            <data name="menuItem" xsi:type="string">Reward Points > Spending Rates</data>
+            <data name="pageTitle" xsi:type="string">Spending Rates</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="RewardPointsMenuTest3">
+            <data name="menuItem" xsi:type="string">Reward Points > Manage Point Balances</data>
+            <data name="pageTitle" xsi:type="string">Reward Point Balances Information</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="RewardPointsMenuTest4">
+            <data name="menuItem" xsi:type="string">Reward Points > Transactions</data>
+            <data name="pageTitle" xsi:type="string">Transaction Manager</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="RewardPointsMenuTest5">
+            <data name="menuItem" xsi:type="string">Reward Points > Settings</data>
+            <data name="pageTitle" xsi:type="string">Configuration</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+
+    </testCase>
+</config>
