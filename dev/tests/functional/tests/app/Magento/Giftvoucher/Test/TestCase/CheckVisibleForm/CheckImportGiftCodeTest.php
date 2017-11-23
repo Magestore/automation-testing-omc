@@ -17,7 +17,6 @@ use Magento\Giftvoucher\Test\Page\Adminhtml\GiftcodeIndex;
  */
 class CheckImportGiftCodeTest extends Injectable
 {
-
     /**
      * Gift Code Grid Page
      *
@@ -46,6 +45,5 @@ class CheckImportGiftCodeTest extends Injectable
     {
         // Steps
         $this->giftcodeIndex->open();
-        $this->giftcodeIndex->getGridPageActions()->import();
-    }
+        $this->giftcodeIndex->getGridPageActions()->import();}
 }

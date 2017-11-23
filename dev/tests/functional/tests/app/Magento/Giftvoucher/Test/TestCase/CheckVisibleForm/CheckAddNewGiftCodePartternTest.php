@@ -55,6 +55,5 @@ class CheckAddNewGiftCodePartternTest extends Injectable
     {
         // Steps
         $this->patternIndex->open();
-        $this->giftcodeIndex->getGridPageActions()->addNew();
-    }
+        $this->giftcodeIndex->getGridPageActions()->addNew();}
 }
