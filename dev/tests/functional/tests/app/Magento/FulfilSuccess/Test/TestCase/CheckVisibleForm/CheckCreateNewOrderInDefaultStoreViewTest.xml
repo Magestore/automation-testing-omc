@@ -6,7 +6,7 @@
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\FulfilReport\Test\TestCase\CheckVisibleForm\CheckCreateNewOrderInDefaultStoreViewTest" summary="Check Is Visible New Template Gift voucherT est" ticketId="MAGETWO-34874">
+    <testCase name="Magento\FulfilSuccess\Test\TestCase\CheckVisibleForm\CheckCreateNewOrderInDefaultStoreViewTest" summary="Check Is Visible New Template Gift voucherT est" ticketId="MAGETWO-34874">
         <variation name="CheckCreateNewOrderInDefaultStoreViewTestVariation1">
             <data name="pageTitle" xsi:type="string">Create New Order in Default Store View</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />

@@ -12,7 +12,6 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 
 class AssertCheckoutOrderTest extends AbstractConstraint
 {
-
 	public function processAssert($result)
 	{
 		\PHPUnit_Framework_Assert::assertEquals(

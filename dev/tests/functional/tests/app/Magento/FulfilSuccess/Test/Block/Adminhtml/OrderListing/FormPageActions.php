@@ -6,12 +6,12 @@
  * Time: 08:49
  */
 
-namespace Magento\FulfilReport\Test\Block\Adminhtml\OrderListing;
+namespace Magento\FulfilSuccess\Test\Block\Adminhtml\OrderListing;
 
 use Magento\Backend\Test\Block\FormPageActions as ParentFormPageActions;
 /**
  * Class FormPageActions
- * @package Magento\FulfilReport\Test\Block\Adminhtml\OrderListing
+ * @package Magento\FulfilSuccess\Test\Block\Adminhtml\OrderListing
  */
 class FormPageActions extends ParentFormPageActions
 {
