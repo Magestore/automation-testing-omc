@@ -10,17 +10,25 @@
         <variation name="Manage Credit Products">
             <data name="menuItem" xsi:type="string">Store Credit > Manage Credit Products</data>
             <data name="pageTitle" xsi:type="string">Credit products</data>
+            <data name="buttons" xsi:type="string">Add Credit Product</data>
+            <data name="columns" xsi:type="string">ID,Name,SKU,Quantity,Visibility,Status,Websites,Action</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertPageActionButtonIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertDataGridIsAvailable" />
         </variation>
         <variation name="Manage Customers Using Credit">
             <data name="menuItem" xsi:type="string">Store Credit > Manage Customers Using Credit</data>
             <data name="pageTitle" xsi:type="string">Manage Customers Using Credit</data>
+            <data name="columns" xsi:type="string">ID, Name, Email, Credit Balance,Group, Telephone, ZIP, Country, State/Province, Customer Since, Website, Action</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertDataGridIsAvailable" />
         </variation>
         <variation name="Manage Credit Transactions">
             <data name="menuItem" xsi:type="string">Store Credit > Manage Credit Transactions</data>
             <data name="pageTitle" xsi:type="string">Credit Transaction</data>
+            <data name="columns" xsi:type="string">Transaction_Id,Transaction Type,Transaction Detail,Name,Email,Added/Deducted,Credit Balance,Transaction Time,Status</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertDataGridIsAvailable" />
         </variation>
         <variation name="Settings">
             <data name="menuItem" xsi:type="string">Store Credit > Settings</data>
