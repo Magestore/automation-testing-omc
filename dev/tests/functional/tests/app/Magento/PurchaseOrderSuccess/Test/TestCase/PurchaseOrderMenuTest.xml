@@ -11,47 +11,73 @@
 		<variation name="PurchaseOrderMenuTestVariation1">
 			<data name="menuItem" xsi:type="string">Purchase Management > Create Purchase Order</data>
 			<data name="pageTitle" xsi:type="string">New Purchase Order</data>
+			<data name="buttons" xsi:type="string">Back, Prepare Product List</data>
+
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
 		</variation>
 		<variation name="PurchaseOrderMenuTestVariation2">
 			<data name="menuItem" xsi:type="string">Purchase Management > Purchase Orders</data>
 			<data name="pageTitle" xsi:type="string">Manage Purchase Orders</data>
+			<data name="buttons" xsi:type="string">Create Purchase Order</data>
+
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridTableIsVisible" />
 		</variation>
 
 		<!--Quotation Management-->
 		<variation name="PurchaseOrderMenuTestVariation3">
 			<data name="menuItem" xsi:type="string">Purchase Management > Create Quotation</data>
 			<data name="pageTitle" xsi:type="string">New Quotation</data>
+			<data name="buttons" xsi:type="string">Back, Prepare Product List</data>
+
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
 		</variation>
 		<variation name="PurchaseOrderMenuTestVariation4">
 			<data name="menuItem" xsi:type="string">Purchase Management > Quotations</data>
 			<data name="pageTitle" xsi:type="string">Manage Quotation</data>
+			<data name="buttons" xsi:type="string">Create Quotation</data>
+
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridTableIsVisible" />
 		</variation>
 
 		<!--Return Request Management-->
 		<variation name="PurchaseOrderMenuTestVariation5">
 			<data name="menuItem" xsi:type="string">Purchase Management > Create Return Request</data>
 			<data name="pageTitle" xsi:type="string">New Return Request</data>
+			<data name="buttons" xsi:type="string">Back, Prepare Product List</data>
+
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
 		</variation>
 		<variation name="PurchaseOrderMenuTestVariation6">
 			<data name="menuItem" xsi:type="string">Purchase Management > Return Requests</data>
 			<data name="pageTitle" xsi:type="string">Manage Return Request</data>
+			<data name="buttons" xsi:type="string">Create Return Request</data>
+
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridTableIsVisible" />
 		</variation>
 
 		<!--Supplier-->
 		<variation name="PurchaseOrderMenuTestVariation7">
 			<data name="menuItem" xsi:type="string">Purchase Management > Manage Suppliers</data>
 			<data name="pageTitle" xsi:type="string">Manage Suppliers</data>
+			<data name="buttons" xsi:type="string">Add New Supplier</data>
+
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridTableIsVisible" />
 		</variation>
 		<variation name="PurchaseOrderMenuTestVariation8">
 			<data name="menuItem" xsi:type="string">Purchase Management > Manage Pricelist</data>
 			<data name="pageTitle" xsi:type="string">Manage Pricelist</data>
+
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
 		</variation>
 
