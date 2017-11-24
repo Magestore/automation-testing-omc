@@ -15,6 +15,6 @@ class Grid extends DataGrid
 {
 	public function TableIsVisible()
 	{
-		return $this->_rootElement->find('table.data-grid')->isVisible();
+		return $this->_rootElement->find('#container > div > div.admin__data-grid-wrap > table')->isVisible();
 	}
 }

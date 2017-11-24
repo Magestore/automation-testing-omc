@@ -16,6 +16,6 @@ class GridPageActionsBlock extends GridPageActions
 {
 	public function buttonIsVisible($text)
 	{
-		return $this->_rootElement->find('//div[2]/div/div/button/span[text()="'.$text.'"]/..', Locator::SELECTOR_XPATH)->isVisible();
+		return $this->_rootElement->find('//button/span[text()="'.$text.'"]/..', Locator::SELECTOR_XPATH)->isVisible();
 	}
 }
