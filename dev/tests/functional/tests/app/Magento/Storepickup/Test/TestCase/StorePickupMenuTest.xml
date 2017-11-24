@@ -7,37 +7,37 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Storepickup\Test\TestCase\StorePickupMenuTest" summary="Navigate through admin menu" ticketId="StorePickup-001">
-        <variation name="StorePickupMenuTest1">
+        <variation name="Manage Store Menu Test">
             <data name="menuItem" xsi:type="string">Store pickup > Manage Store</data>
             <data name="pageTitle" xsi:type="string">Manage Store</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
         </variation>
-        <variation name="StorePickupMenuTest2">
+        <variation name="Manage Tag Menu Test">
             <data name="menuItem" xsi:type="string">Store pickup > Manage Tag</data>
             <data name="pageTitle" xsi:type="string">Manage Tag</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
         </variation>
-        <variation name="StorePickupMenuTest3">
+        <variation name="Manage Schedule Menu Test">
             <data name="menuItem" xsi:type="string">Store pickup > Manage Schedule</data>
             <data name="pageTitle" xsi:type="string">Manage Schedule</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
         </variation>
-        <variation name="StorePickupMenuTest4">
+        <variation name="Manage Holiday Menu Test">
             <data name="menuItem" xsi:type="string">Store pickup > Manage Holiday</data>
             <data name="pageTitle" xsi:type="string">Manage Holiday</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
         </variation>
-        <variation name="StorePickupMenuTest5">
+        <variation name=" Manage Special day Menu Test">
             <data name="menuItem" xsi:type="string">Store pickup > Manage Special day</data>
             <data name="pageTitle" xsi:type="string">Manage Special day</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
         </variation>
-        <variation name="StorePickupMenuTest6">
+        <variation name="Guide Menu Test">
             <data name="menuItem" xsi:type="string">Store pickup > Guide</data>
             <data name="pageTitle" xsi:type="string">Store pickup Guide</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
         </variation>
-        <variation name="StorePickupMenuTest7">
+        <variation name="Settings Menu Test">
             <data name="menuItem" xsi:type="string">Store pickup > Settings</data>
             <data name="pageTitle" xsi:type="string">Configuration</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />

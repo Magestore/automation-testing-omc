@@ -7,27 +7,27 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Rewardpoints\Test\TestCase\RewardPointsMenuTest" summary="Navigate through admin menu" ticketId="RewardPoints-001">
-        <variation name="RewardPointsMenuTest1">
+        <variation name="Earning Rates Menu Test">
             <data name="menuItem" xsi:type="string">Reward Points > Earning Rates</data>
             <data name="pageTitle" xsi:type="string">Earning Rates</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
         </variation>
-        <variation name="RewardPointsMenuTest2">
+        <variation name="Spending Rates Menu Test">
             <data name="menuItem" xsi:type="string">Reward Points > Spending Rates</data>
             <data name="pageTitle" xsi:type="string">Spending Rates</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
         </variation>
-        <variation name="RewardPointsMenuTest3">
+        <variation name="Manage Point Balances Menu Test">
             <data name="menuItem" xsi:type="string">Reward Points > Manage Point Balances</data>
             <data name="pageTitle" xsi:type="string">Reward Point Balances Information</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
         </variation>
-        <variation name="RewardPointsMenuTest4">
+        <variation name="Transactions Menu Test">
             <data name="menuItem" xsi:type="string">Reward Points > Transactions</data>
             <data name="pageTitle" xsi:type="string">Transaction Manager</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
         </variation>
-        <variation name="RewardPointsMenuTest5">
+        <variation name="Settings Menu Test">
             <data name="menuItem" xsi:type="string">Reward Points > Settings</data>
             <data name="pageTitle" xsi:type="string">Configuration</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
