@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
+    <page name="specialdayIndex" area="Adminhtml" mca="storepickupadmin/specialday/index" module="Magento_Storepickup">
+        <block name="buttonsGridPageActions" class="Magento\Customercredit\Test\Block\Adminhtml\CreditProduct\ButtonsGridPageActions" locator=".page-main-actions" strategy="css selector" />
+        <block name="dataGridBlock" class="Magento\Customercredit\Test\Block\Adminhtml\CreditProduct\DataGrid" locator="[id='page:main-container']" strategy="css selector" />
+    </page>
+</config>

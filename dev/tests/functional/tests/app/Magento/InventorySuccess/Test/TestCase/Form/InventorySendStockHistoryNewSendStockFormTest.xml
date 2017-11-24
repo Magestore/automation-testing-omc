@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\InventorySuccess\Test\TestCase\Form\InventorySendStockHistoryNewSendStockFormTest" summary="Inventory - Send Stock History - Add new send stock form test" ticketId="MAGESTORE-1">
+		<variation name="InventorySendStockHistoryNewSendStockFormTestVariation1">
+			<data name="pageTitle" xsi:type="string">Add a New Send Stock</data>
+			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+		</variation>
+
+	</testCase>
+</config>
