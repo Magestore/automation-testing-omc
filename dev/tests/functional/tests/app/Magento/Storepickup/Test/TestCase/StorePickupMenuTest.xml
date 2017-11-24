@@ -10,27 +10,47 @@
         <variation name="Manage Store Menu Test">
             <data name="menuItem" xsi:type="string">Store pickup > Manage Store</data>
             <data name="pageTitle" xsi:type="string">Manage Store</data>
+            <data name="buttons" xsi:type="string">Import Store, Add New Store</data>
+            <data name="columns" xsi:type="string">	Store ID,Store Name,Address,City,State,Country,Zip Code,Base Image,Status,Action</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertPageActionButtonIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertDataGridIsAvailable" />
         </variation>
         <variation name="Manage Tag Menu Test">
             <data name="menuItem" xsi:type="string">Store pickup > Manage Tag</data>
             <data name="pageTitle" xsi:type="string">Manage Tag</data>
+            <data name="buttons" xsi:type="string">Add New Tag</data>
+            <data name="columns" xsi:type="string">Tag ID,Tag Name,Description,Icon,Action</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertPageActionButtonIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertDataGridIsAvailable" />
         </variation>
         <variation name="Manage Schedule Menu Test">
             <data name="menuItem" xsi:type="string">Store pickup > Manage Schedule</data>
             <data name="pageTitle" xsi:type="string">Manage Schedule</data>
+            <data name="buttons" xsi:type="string">Add New Schedule</data>
+            <data name="columns" xsi:type="string">Schedule ID,Schedule Name,Monday Status,Tuesday Status,Wednesday Status,Thursday Status,Friday Status,Saturday Status,Sunday Status,Action</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertPageActionButtonIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertDataGridIsAvailable" />
         </variation>
         <variation name="Manage Holiday Menu Test">
             <data name="menuItem" xsi:type="string">Store pickup > Manage Holiday</data>
             <data name="pageTitle" xsi:type="string">Manage Holiday</data>
+            <data name="buttons" xsi:type="string">Add New Holiday</data>
+            <data name="columns" xsi:type="string">Holiday ID,Holiday Name,Date Start,Date End,Comment,Action</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertPageActionButtonIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertDataGridIsAvailable" />
         </variation>
         <variation name=" Manage Special day Menu Test">
             <data name="menuItem" xsi:type="string">Store pickup > Manage Special day</data>
             <data name="pageTitle" xsi:type="string">Manage Special day</data>
+            <data name="buttons" xsi:type="string">Add New Special day</data>
+            <data name="columns" xsi:type="string">Special day ID,Special day Name,Date Start,Date End,Open Time,Close Time,Comment,Action</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertPageActionButtonIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertDataGridIsAvailable" />
         </variation>
         <variation name="Guide Menu Test">
             <data name="menuItem" xsi:type="string">Store pickup > Guide</data>
