@@ -26,6 +26,6 @@ class TagFormTest extends Injectable
     public function test($button)
     {
         $this->tagIndex->open();
-        $this->tagIndex->getButtonsGridPageActions()->clickActionButton($button);
+        $this->tagIndex->getTagGridPageActions()->clickActionButton($button);
     }
 }

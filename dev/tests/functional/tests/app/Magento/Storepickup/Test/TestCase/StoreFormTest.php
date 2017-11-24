@@ -26,6 +26,6 @@ class StoreFormTest extends Injectable
     public function test($button)
     {
         $this->storeIndex->open();
-        $this->storeIndex->getButtonsGridPageActions()->clickActionButton($button);
+        $this->storeIndex->getStoreGridPageActions()->clickActionButton($button);
     }
 }

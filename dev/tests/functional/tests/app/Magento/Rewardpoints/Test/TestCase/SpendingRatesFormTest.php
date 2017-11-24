@@ -26,6 +26,6 @@ class SpendingRatesFormTest extends Injectable
     public function test($button)
     {
         $this->spendingRatesIndex->open();
-        $this->spendingRatesIndex->getButtonsGridPageActions()->clickActionButton($button);
+        $this->spendingRatesIndex->getSpendingRatesGridPageActions()->clickActionButton($button);
     }
 }

@@ -26,6 +26,6 @@ class ManagePointBalancesFormTest extends Injectable
     public function test($button)
     {
         $this->managePointBalancesIndex->open();
-        $this->managePointBalancesIndex->getButtonsGridPageActions()->clickActionButton($button);
+        $this->managePointBalancesIndex->getManagePointBalancesGridPageActions()->clickActionButton($button);
     }
 }

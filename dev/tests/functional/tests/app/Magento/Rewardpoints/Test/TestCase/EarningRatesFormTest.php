@@ -33,6 +33,6 @@ class EarningRatesFormTest extends Injectable
     public function test($button)
     {
         $this->earningRatesIndex->open();
-        $this->earningRatesIndex->getButtonsGridPageActions()->clickActionButton($button);
+        $this->earningRatesIndex->getEarningRatesGridPageActions()->clickActionButton($button);
     }
 }

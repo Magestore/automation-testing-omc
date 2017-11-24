@@ -16,12 +16,12 @@ class AssertDataGridIsAvailable extends AbstractConstraint
 
     public function processAssert(CreditProductIndex $creditProductIndex, $columns = null)
     {
-        $creditProductIndex->getDataGridBlock()->waitingForGridVisible();
+        $creditProductIndex->getCreditProductGrid()->waitingForGridVisible();
         if ($columns !== null) {
             $columnArray = explode(",", $columns);
             foreach ($columnArray as $column) {
                 \PHPUnit_Framework_Assert::assertTrue(
-                    $creditProductIndex->getDataGridBlock()->columnIsVisible(trim($column)),
+                    $creditProductIndex->getCreditProductGrid()->columnIsVisible(trim($column)),
                     'Data column ' . $column . ' is not available.'
                 );
             }

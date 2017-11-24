@@ -26,6 +26,6 @@ class TransactionFormTest extends Injectable
     public function test($button)
     {
         $this->transactionIndex->open();
-        $this->transactionIndex->getButtonsGridPageActions()->clickActionButton($button);
+        $this->transactionIndex->getTransactionGridPageActions()->clickActionButton($button);
     }
 }

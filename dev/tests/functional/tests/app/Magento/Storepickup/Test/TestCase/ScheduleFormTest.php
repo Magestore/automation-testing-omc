@@ -29,7 +29,7 @@ class ScheduleFormTest extends Injectable
     public function test($button)
     {
         $this->scheduleIndex->open();
-        $this->scheduleIndex->getButtonsGridPageActions()->clickActionButton($button);
+        $this->scheduleIndex->getScheduleGridPageActions()->clickActionButton($button);
     }
 
 }
