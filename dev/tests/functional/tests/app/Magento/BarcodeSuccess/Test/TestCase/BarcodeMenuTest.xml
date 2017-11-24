@@ -10,17 +10,27 @@
 		<variation name="BarcodeMenuTestVariation1">
 			<data name="menuItem" xsi:type="string">Inventory Management > Barcode Listing</data>
 			<data name="pageTitle" xsi:type="string">Manage Barcodes</data>
+			<data name="buttons" xsi:type="string">Generate Barcode, Import Barcode</data>
+
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridTableIsVisible" />
 		</variation>
 		<variation name="BarcodeMenuTestVariation2">
 			<data name="menuItem" xsi:type="string">Inventory Management > Generate Barcodes</data>
 			<data name="pageTitle" xsi:type="string">Generate Barcode</data>
+			<data name="buttons" xsi:type="string">Back, Generate</data>
+
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
 		</variation>
 		<variation name="BarcodeMenuTestVariation3">
 			<data name="menuItem" xsi:type="string">Inventory Management > Import Barcodes</data>
 			<data name="pageTitle" xsi:type="string">Import Barcode</data>
+			<data name="buttons" xsi:type="string">Back</data>
+
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
 		</variation>
 		<variation name="BarcodeMenuTestVariation4">
 			<data name="menuItem" xsi:type="string">Inventory Management > Scan Barcode</data>
@@ -30,17 +40,26 @@
 		<variation name="BarcodeMenuTestVariation5">
 			<data name="menuItem" xsi:type="string">Inventory Management > Print Barcodes</data>
 			<data name="pageTitle" xsi:type="string">Barcode Printing Configuration</data>
+			<data name="buttons" xsi:type="string">Back, Print</data>
+
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
 		</variation>
 		<variation name="BarcodeMenuTestVariation6">
 			<data name="menuItem" xsi:type="string">Inventory Management > Barcode Generated History</data>
 			<data name="pageTitle" xsi:type="string">Barcode Created History</data>
+
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridTableIsVisible" />
 		</variation>
 		<variation name="BarcodeMenuTestVariation7">
 			<data name="menuItem" xsi:type="string">Inventory Management > Barcode Label Templates</data>
 			<data name="pageTitle" xsi:type="string">Manage Barcode Label Templates</data>
+			<data name="buttons" xsi:type="string">Add New Template</data>
+
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridTableIsVisible" />
 		</variation>
 		<variation name="BarcodeMenuTestVariation8">
 			<data name="menuItem" xsi:type="string">Inventory Management > Barcode Settings</data>

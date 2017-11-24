@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
+	<page name="ManageStockIndex" area="Adminhtml" mca="inventorysuccess/manageStock/index" module="Magento_InventorySuccess">
+		<block name="messagesBlock" class="Magento\Backend\Test\Block\Messages" locator="#messages .messages" strategy="css selector"/>
+		<block name="generalBlock" class="Magento\InventorySuccess\Test\Block\Adminhtml\ManageStockIndex\General" locator='[data-index="general"]' strategy="css selector" />
+		<block name="productGrid" class="Magento\InventorySuccess\Test\Block\Adminhtml\ManageStockIndex\ProductGrid" locator='[data-index="stock_on_hand"]' strategy="css selector" />
+	</page>
+</config>
