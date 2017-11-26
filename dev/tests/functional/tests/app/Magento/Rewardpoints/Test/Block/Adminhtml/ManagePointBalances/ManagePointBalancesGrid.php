@@ -8,9 +8,9 @@
 
 namespace Magento\Rewardpoints\Test\Block\Adminhtml\ManagePointBalances;
 
-use Magento\Rewardpoints\Test\Block\Adminhtml\DataGrid;
+use Magento\Rewardpoints\Test\Block\Adminhtml\RewardGrid;
 
-class ManagePointBalancesGrid extends DataGrid
+class ManagePointBalancesGrid extends RewardGrid
 {
 
 }

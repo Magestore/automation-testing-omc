@@ -3,15 +3,16 @@
  * Created by PhpStorm.
  * User: ADMIN
  * Date: 11/24/2017
- * Time: 2:51 PM
+ * Time: 3:40 PM
  */
 
-namespace Magento\Customercredit\Test\Block\Adminhtml;
+namespace Magento\Rewardpoints\Test\Block\Adminhtml;
 
 use Magento\Backend\Test\Block\Widget\Grid;
 use Magento\Mtf\Client\Locator;
+use Magento\Ui\Test\Block\Adminhtml\DataGrid;
 
-class DataGrid extends Grid
+class RewardGrid extends DataGrid
 {
     protected $col = './/th[span = "%s"]';
 

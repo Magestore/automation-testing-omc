@@ -8,9 +8,9 @@
 
 namespace Magento\Customercredit\Test\Block\Adminhtml\ReportTransaction;
 
-use Magento\Customercredit\Test\Block\Adminhtml\DataGrid;
+use Magento\Customercredit\Test\Block\Adminhtml\CreditDataGrid;
 
-class ReportTransactionGrid extends DataGrid
+class ReportTransactionGrid extends CreditDataGrid
 {
 
 }

@@ -8,9 +8,9 @@
 
 namespace Magento\Storepickup\Test\Block\Adminhtml\Schedule;
 
-use Magento\Storepickup\Test\Block\Adminhtml\DataGrid;
+use Magento\Storepickup\Test\Block\Adminhtml\StorepickupGrid;
 
-class ScheduleGrid extends DataGrid
+class ScheduleGrid extends StorepickupGrid
 {
 
 }

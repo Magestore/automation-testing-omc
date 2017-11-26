@@ -8,9 +8,9 @@
 
 namespace Magento\Rewardpoints\Test\Block\Adminhtml\EarningRates;
 
-use Magento\Rewardpoints\Test\Block\Adminhtml\DataGrid;
+use Magento\Rewardpoints\Test\Block\Adminhtml\RewardGrid;
 
-class EarningRatesGrid extends DataGrid
+class EarningRatesGrid extends RewardGrid
 {
 
 }

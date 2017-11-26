@@ -8,9 +8,9 @@
 
 namespace Magento\Rewardpoints\Test\Block\Adminhtml\Transaction;
 
-use Magento\Rewardpoints\Test\Block\Adminhtml\DataGrid;
+use Magento\Rewardpoints\Test\Block\Adminhtml\RewardGrid;
 
-class TransactionGrid extends DataGrid
+class TransactionGrid extends RewardGrid
 {
 
 }

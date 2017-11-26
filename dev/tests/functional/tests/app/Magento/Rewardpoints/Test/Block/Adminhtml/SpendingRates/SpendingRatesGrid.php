@@ -8,9 +8,9 @@
 
 namespace Magento\Rewardpoints\Test\Block\Adminhtml\SpendingRates;
 
-use Magento\Rewardpoints\Test\Block\Adminhtml\DataGrid;
+use Magento\Rewardpoints\Test\Block\Adminhtml\RewardGrid;
 
-class SpendingRatesGrid extends DataGrid
+class SpendingRatesGrid extends RewardGrid
 {
 
 }

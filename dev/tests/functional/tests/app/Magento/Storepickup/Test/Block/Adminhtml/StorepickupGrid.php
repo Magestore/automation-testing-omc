@@ -10,8 +10,9 @@ namespace Magento\Storepickup\Test\Block\Adminhtml;
 
 use Magento\Backend\Test\Block\Widget\Grid;
 use Magento\Mtf\Client\Locator;
+use Magento\Ui\Test\Block\Adminhtml\DataGrid;
 
-class DataGrid extends Grid
+class StorepickupGrid extends DataGrid
 {
     protected $col = './/th[span = "%s"]';
 
