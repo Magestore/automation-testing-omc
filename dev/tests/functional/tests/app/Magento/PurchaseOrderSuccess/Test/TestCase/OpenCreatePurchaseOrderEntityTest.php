@@ -29,7 +29,7 @@ class OpenCreatePurchaseOrderEntityTest extends Injectable
     public function test()
     {
         $this->purchaseOrderIndex->open();
-        $this->purchaseOrderIndex->getPurchaseOrder()->createPurchaseOrder();
+        $this->purchaseOrderIndex->getPageActionsBlock()->addNew();
         sleep(2);
     }
 }
