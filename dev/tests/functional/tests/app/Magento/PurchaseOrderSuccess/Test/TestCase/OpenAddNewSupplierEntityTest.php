@@ -30,7 +30,7 @@ class OpenAddNewSupplierEntityTest extends Injectable
     public function test()
     {
         $this->supplierIndex->open();
-        $this->supplierIndex->getSupplier()->createAddNewSupplier();
+        $this->supplierIndex->getPageActionsBlock()->addNew();
         sleep(2);
     }
 }

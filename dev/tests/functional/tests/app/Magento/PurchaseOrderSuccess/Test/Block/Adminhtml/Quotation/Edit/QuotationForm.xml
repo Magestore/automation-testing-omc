@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<sections>
+	<general_information>
+		<class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+		<selector>[data-index="general_information"]</selector>
+		<strategy>css selector</strategy>
+		<fields>
+			<purchased_at>
+				<selector>[name='purchased_at']</selector>
+				<input>datepicker</input>
+			</purchased_at>
+			<supplier_id>
+				<selector>[name='supplier_id']</selector>
+				<input>select</input>
+			</supplier_id>
+			<currency_code>
+				<selector>[name='currency_code']</selector>
+				<input>select</input>
+			</currency_code>
+			<currency_rate>
+				<selector>[name='currency_rate']</selector>
+			</currency_rate>
+			<comment>
+				<selector>[name='comment']</selector>
+				<input>textarea</input>
+			</comment>
+		</fields>
+	</general_information>
+</sections>

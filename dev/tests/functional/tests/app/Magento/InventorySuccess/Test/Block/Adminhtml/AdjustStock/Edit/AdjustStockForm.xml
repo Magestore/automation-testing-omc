@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<sections>
+	<general_information>
+		<class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+		<selector>[data-index="general_information"]</selector>
+		<strategy>css selector</strategy>
+		<fields>
+			<warehouse_id>
+				<selector>[name='warehouse_id']</selector>
+				<input>select</input>
+			</warehouse_id>
+			<adjuststock_code>
+				<selector>[name='adjuststock_code']</selector>
+			</adjuststock_code>
+			<reason>
+				<selector>[name='reason']</selector>
+				<input>textarea</input>
+			</reason>
+		</fields>
+	</general_information>
+</sections>

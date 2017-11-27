@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<sections>
+	<information>
+		<class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+		<selector>[data-index="information"]</selector>
+		<strategy>css selector</strategy>
+		<fields>
+			<supplier_code>
+				<selector>[name='supplier_code']</selector>
+			</supplier_code>
+			<supplier_name>
+				<selector>[name='supplier_name']</selector>
+			</supplier_name>
+			<contact_name>
+				<selector>[name='contact_name']</selector>
+			</contact_name>
+			<contact_email>
+				<selector>[name='contact_email']</selector>
+			</contact_email>
+			<description>
+				<selector>[name='description']</selector>
+				<input>textarea</input>
+			</description>
+			<status>
+				<selector>[name='status']</selector>
+				<input>select</input>
+			</status>
+		</fields>
+	</information>
+
+	<address>
+		<class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+		<selector>[data-index="address"]</selector>
+		<strategy>css selector</strategy>
+		<fields>
+			<telephone>
+				<selector>[name='telephone']</selector>
+			</telephone>
+			<fax>
+				<selector>[name='fax']</selector>
+			</fax>
+			<street>
+				<selector>[name='street']</selector>
+			</street>
+			<city>
+				<selector>[name='city']</selector>
+			</city>
+			<country_id>
+				<selector>[name='country_id']</selector>
+				<input>select</input>
+			</country_id>
+			<region>
+				<selector>[name='region']</selector>
+			</region>
+			<postcode>
+				<selector>[name='postcode']</selector>
+			</postcode>
+			<website>
+				<selector>[name='website']</selector>
+			</website>
+		</fields>
+	</address>
+
+	<password>
+		<class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+		<selector>[data-index="password"]</selector>
+		<strategy>css selector</strategy>
+		<fields>
+			<new_password>
+				<selector>[name='new_password']</selector>
+			</new_password>
+			<generated_password>
+				<selector>[name='generated_password']</selector>
+				<input>switcher</input>
+			</generated_password>
+			<send_pass_to_supplier>
+				<selector>[name='send_pass_to_supplier']</selector>
+				<input>switcher</input>
+			</send_pass_to_supplier>
+		</fields>
+	</password>
+</sections>

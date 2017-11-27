@@ -7,6 +7,7 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
     <page name="PurchaseOrderIndex" area="Adminhtml" mca="purchaseordersuccess/purchaseOrder" module="Magento_PurchaseOrderSuccess">
-        <block name="purchaseOrder" class="Magento\PurchaseOrderSuccess\Test\Block\PurchaseOrder" locator=".page-main-actions" strategy="css selector" />
+        <block name="pageActionsBlock" class="Magento\Backend\Test\Block\GridPageActions" locator=".page-main-actions" strategy="css selector"/>
+        <block name="messagesBlock" class="Magento\Backend\Test\Block\Messages" locator="#messages .messages" strategy="css selector"/>
     </page>
 </config>
