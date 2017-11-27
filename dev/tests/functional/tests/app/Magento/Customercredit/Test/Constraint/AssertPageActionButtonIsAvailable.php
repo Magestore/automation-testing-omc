@@ -17,12 +17,12 @@ class AssertPageActionButtonIsAvailable extends AbstractConstraint
 
     public function processAssert(CreditProductIndex $creditProductIndex, $buttons = null)
     {
-        $creditProductIndex->getDataGridBlock()->waitingForGridVisible();
+        $creditProductIndex->getCreditProductGrid()->waitingForGridVisible();
         if ($buttons !== null) {
             $buttonArray = explode(",", $buttons);
             foreach ($buttonArray as $button) {
                 \PHPUnit_Framework_Assert::assertTrue(
-                    $creditProductIndex->getButtonsGridPageActions()->actionButtonIsVisible(trim($button)),
+                    $creditProductIndex->getCreditProductGridPageActions()->actionButtonIsVisible(trim($button)),
                     'Action button ' . $button . ' is not available.'
                 );
             }

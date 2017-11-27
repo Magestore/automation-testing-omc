@@ -36,6 +36,6 @@ class CreditProductFormTest extends Injectable
     public function test($button)
     {
         $this->creditProductIndex->open();
-        $this->creditProductIndex->getButtonsGridPageActions()->clickActionButton($button);
+        $this->creditProductIndex->getCreditProductGridPageActions()->clickActionButton($button);
     }
 }

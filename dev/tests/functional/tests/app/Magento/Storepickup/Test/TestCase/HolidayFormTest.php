@@ -29,6 +29,6 @@ class HolidayFormTest extends Injectable
     public function test($button)
     {
         $this->holidayIndex->open();
-        $this->holidayIndex->getButtonsGridPageActions()->clickActionButton($button);
+        $this->holidayIndex->getHolidayGridPageActions()->clickActionButton($button);
     }
 }

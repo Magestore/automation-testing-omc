@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
+    <page name="NeedVerifyIndex" area="Adminhtml" mca="ordersuccess/needverify/index" module="Magento_FulfilSuccess">
+        <block name="pageMainAction" class="Magento\FulfilSuccess\Test\Block\Adminhtml\Grid\PageMainAction" locator=".page-main-actions" strategy="css selector"/>
+        <block name="gridHeader" class="Magento\FulfilSuccess\Test\Block\Adminhtml\Grid\GridHeader" locator=".admin__data-grid-header" strategy="css selector"/>
+        <block name="gridWrap" class="Magento\FulfilSuccess\Test\Block\Adminhtml\Grid\GridWrap" locator=".admin__data-grid-wrap" strategy="css selector"/>
+    </page>
+</config>

@@ -26,6 +26,6 @@ class SpecialdayFormTest extends Injectable
     public function test($button)
     {
         $this->specialdayIndex->open();
-        $this->specialdayIndex->getButtonsGridPageActions()->clickActionButton($button);
+        $this->specialdayIndex->getSpecialdayGridPageActions()->clickActionButton($button);
     }
 }
