@@ -4,5 +4,6 @@
         <block name="pageMainAction" class="Magento\FulfilSuccess\Test\Block\Adminhtml\Grid\PageMainAction" locator=".page-main-actions" strategy="css selector"/>
         <block name="gridHeader" class="Magento\FulfilSuccess\Test\Block\Adminhtml\Grid\GridHeader" locator=".admin__data-grid-header" strategy="css selector"/>
         <block name="gridWrap" class="Magento\FulfilSuccess\Test\Block\Adminhtml\Grid\GridWrap" locator=".admin__data-grid-wrap" strategy="css selector"/>
+        <block name="pageWrapper" class="Magento\FulfilSuccess\Test\Block\Adminhtml\PageWrapper" locator=".page-wrapper" strategy="css selector" />
     </page>
 </config>
