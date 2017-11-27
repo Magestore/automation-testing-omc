@@ -4,12 +4,18 @@
         <variation name="Add New Store form test">
             <data name="button" xsi:type="string">Add New Store</data>
             <data name="pageTitle" xsi:type="string">New Store</data>
+            <data name="buttons" xsi:type="string">Back,Reset,Save and Continue Edit,Save and New,Save Store</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreFormPageActionAvailable" />
+            <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreFormAvailable"/>
         </variation>
         <variation name="Import Store form test">
             <data name="button" xsi:type="string">Import Store</data>
             <data name="pageTitle" xsi:type="string">Import Stores</data>
+            <data name="buttons" xsi:type="string">Back,Import Stores</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreFormPageActionAvailable" />
+            <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreImportStoreFormAvailable"/>
         </variation>
     </testCase>
 </config>

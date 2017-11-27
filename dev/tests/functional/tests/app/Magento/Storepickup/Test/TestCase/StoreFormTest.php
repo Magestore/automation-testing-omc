@@ -27,5 +27,6 @@ class StoreFormTest extends Injectable
     {
         $this->storeIndex->open();
         $this->storeIndex->getStoreGridPageActions()->clickActionButton($button);
+        $this->storeIndex->getStoreGrid()->waitingForGridNotVisible();
     }
 }

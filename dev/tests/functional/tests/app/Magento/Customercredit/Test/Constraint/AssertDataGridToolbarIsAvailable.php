@@ -53,6 +53,6 @@ class AssertDataGridToolbarIsAvailable extends AbstractConstraint
      */
     public function toString()
     {
-        return 'Data grid header is available.';
+        return 'Data grid toolbar is available.';
     }
 }
