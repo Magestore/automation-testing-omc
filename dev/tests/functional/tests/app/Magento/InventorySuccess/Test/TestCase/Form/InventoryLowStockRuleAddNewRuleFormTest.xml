@@ -9,7 +9,11 @@
 	<testCase name="Magento\InventorySuccess\Test\TestCase\Form\InventoryLowStockRuleAddNewRuleFormTest" summary="Inventory - Low Stock Rule - Add new rule form test" ticketId="MAGESTORE-1">
 		<variation name="InventoryLowStockRuleAddNewRuleFormTestVariation1">
 			<data name="pageTitle" xsi:type="string">New Low Stock Notification Rule</data>
+			<data name="buttons" xsi:type="string">Back, Save and Apply, Save and Continue Edit, Save</data>
+
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Form\AssertLowStockRuleFormIsAvailable" />
 		</variation>
 
 	</testCase>

@@ -9,7 +9,11 @@
 	<testCase name="Magento\InventorySuccess\Test\TestCase\Form\InventoryRequestStockHistoryNewRequestStockFormTest" summary="Inventory - Request Stock History - Add new request stock form test" ticketId="MAGESTORE-1">
 		<variation name="InventoryRequestStockHistoryNewRequestStockFormTestVariation1">
 			<data name="pageTitle" xsi:type="string">Add a New Request Stock</data>
+			<data name="buttons" xsi:type="string">Prepare Product List</data>
+
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Form\AssertRequestStockFormIsAvailable" />
 		</variation>
 
 	</testCase>

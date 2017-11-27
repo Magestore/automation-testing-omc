@@ -9,9 +9,9 @@
 namespace Magento\InventorySuccess\Test\Block\Adminhtml\Warehouse\Edit;
 
 
-use Magento\Mtf\Block\Form;
+use Magento\InventorySuccess\Test\Block\Adminhtml\FormSection;
 
-class WarehouseForm extends Form
+class WarehouseForm extends FormSection
 {
 
 }

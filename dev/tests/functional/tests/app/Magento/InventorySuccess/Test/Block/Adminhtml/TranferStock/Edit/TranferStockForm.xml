@@ -14,14 +14,13 @@
 			<transferstock_code>
 				<selector>[name='transferstock_code']</selector>
 			</transferstock_code>
+			<external_location>
+				<selector>[name='external_location']</selector>
+			</external_location>
 			<source_warehouse_id>
 				<selector>[name='source_warehouse_id']</selector>
 				<input>select</input>
 			</source_warehouse_id>
-			<des_warehouse_id>
-				<selector>[name='des_warehouse_id']</selector>
-				<input>select</input>
-			</des_warehouse_id>
 			<notifier_emails>
 				<selector>[name='notifier_emails']</selector>
 			</notifier_emails>

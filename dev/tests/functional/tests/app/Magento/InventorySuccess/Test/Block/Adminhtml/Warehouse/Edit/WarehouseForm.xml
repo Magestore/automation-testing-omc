@@ -1,9 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<tabs>
-	<general>
-		<class>\Magento\Backend\Test\Block\Widget\Tab</class>
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<sections>
+	<general_information>
+		<class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
 		<selector>[data-index="general_information"]</selector>
 		<strategy>css selector</strategy>
-	</general>
-</tabs>
+		<fields>
+			<warehouse_name>
+				<selector>[name='warehouse_name']</selector>
+			</warehouse_name>
+			<warehouse_code>
+				<selector>[name='warehouse_code']</selector>
+			</warehouse_code>
+			<contact_email>
+				<selector>[name='contact_email']</selector>
+			</contact_email>
+			<telephone>
+				<selector>[name='telephone']</selector>
+			</telephone>
+			<street>
+				<selector>[name='street']</selector>
+			</street>
+			<city>
+				<selector>[name='city']</selector>
+			</city>
+			<country_id>
+				<selector>[name='country_id']</selector>
+				<input>select</input>
+			</country_id>
+			<region>
+				<selector>[name='region']</selector>
+			</region>
+			<postcode>
+				<selector>[name='postcode']</selector>
+			</postcode>
+			<location_id>
+				<selector>[name='location_id']</selector>
+				<input>select</input>
+			</location_id>
+		</fields>
+	</general_information>
+</sections>

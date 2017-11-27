@@ -11,20 +11,20 @@
 		<selector>[data-index="general_information"]</selector>
 		<strategy>css selector</strategy>
 		<fields>
-			<transferstock_code>
-				<selector>[name='transferstock_code']</selector>
-			</transferstock_code>
-			<source_warehouse_id>
-				<selector>[name='source_warehouse_id']</selector>
+			<warehouse_id>
+				<selector>[name='warehouse_id']</selector>
 				<input>select</input>
-			</source_warehouse_id>
-			<des_warehouse_id>
-				<selector>[name='des_warehouse_id']</selector>
-				<input>select</input>
-			</des_warehouse_id>
-			<notifier_emails>
-				<selector>[name='notifier_emails']</selector>
-			</notifier_emails>
+			</warehouse_id>
+			<stocktaking_code>
+				<selector>[name='stocktaking_code']</selector>
+			</stocktaking_code>
+			<participants>
+				<selector>[name='participants']</selector>
+			</participants>
+			<stocktake_at>
+				<selector>[name='stocktake_at']</selector>
+				<input>datepicker</input>
+			</stocktake_at>
 			<reason>
 				<selector>[name='reason']</selector>
 				<input>textarea</input>

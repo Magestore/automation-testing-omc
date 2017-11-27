@@ -6,7 +6,7 @@
  * Time: 10:15
  */
 
-namespace Magento\FulfilSuccess\Test\Block\Adminhtml;
+namespace Magento\FulfilSuccess\Test\Block\Adminhtml\ReportIndex;
 
 use Magento\Mtf\Block\Block;
 use Magento\Mtf\Client\Locator;
