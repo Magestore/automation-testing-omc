@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="36dacd54-29a4-4436-9a00-9dd95c6ffaee" name="magento2" url="http://localhost">
+        <fileTransfer port="0" mountedRoot="/var/www/html/magento2" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>

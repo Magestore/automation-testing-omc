@@ -10,7 +10,6 @@ namespace Magento\FulfilSuccess\Test\TestCase\CheckVisibleForm;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\FulfilSuccess\Test\Page\Adminhtml\OrderSuccessAllOrderIndex;
-
 /**
  * Class CheckCreateNewOrderInDefaultStoreViewTest
  * @package Magento\FulfilSuccess\Test\TestCase\CheckVisibleForm

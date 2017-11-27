@@ -36,16 +36,16 @@ class AssertBackendGridIsAvailable extends AbstractConstraint
             $needVerifyIndex->getGridHeader()->isVisible(),
             'On The Backend Page, the Grid Header Of the Extension was not visible.'
         );
-//        if (!empty($names)) {
-//            $names = explode(',', $names);
-//            foreach ($names as $name) {
-//                \PHPUnit_Framework_Assert::assertTrue(
-//                    $reportIndex->getPageMainContainer()->columnIsVisible($name)->isVisible(),
-//                    'On The Backend Page, the Grid Header Of the Extension was not visible.'
-//                );
-//                sleep(0.2);
-//            }
-//        }
+        if (!empty($names)) {
+            $names = explode(',', $names);
+            foreach ($names as $name) {
+                \PHPUnit_Framework_Assert::assertTrue(
+                    $reportIndex->getPageWrapper()->getColumnByName($name)->isVisible(),
+                    'On The Backend Page, the Grid Header Of the Extension was not visible.'
+                );
+                sleep(0.2);
+            }
+        }
     }
 
     /**
