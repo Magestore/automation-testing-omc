@@ -2,18 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: vinh
- * Date: 24/11/2017
- * Time: 16:04
+ * Date: 27/11/2017
+ * Time: 07:53
  */
 
-namespace Magento\InventorySuccess\Test\Block\Adminhtml\SendStock\Edit;
+namespace Magento\InventorySuccess\Test\Block\Adminhtml;
 
 
+use Magento\Ui\Test\Block\Adminhtml\FormSections;
 
-
-use Magento\InventorySuccess\Test\Block\Adminhtml\FormSection;
-
-class SendStockForm extends FormSection
+class FormSection extends FormSections
 {
 	protected $fieldSelector = '[name="%s"]';
 	public function getField($name)
