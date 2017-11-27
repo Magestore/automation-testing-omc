@@ -9,7 +9,11 @@
 	<testCase name="Magento\InventorySuccess\Test\TestCase\Form\InventoryWarehouseAddNewWarehouseFormTest" summary="Inventory - Warehouse - Add new warehouse form test" ticketId="MAGESTORE-1">
 		<variation name="InventoryWarehouseAddNewWarehouseFormTestVariation1">
 			<data name="pageTitle" xsi:type="string">Add a New Warehouse</data>
+			<data name="buttons" xsi:type="string">Back, Save</data>
+
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Form\AssertAddNewWarehouseFormIsAvailable" />
 		</variation>
 
 	</testCase>

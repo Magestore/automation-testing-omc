@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<sections>
+	<rule_information>
+		<class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+		<selector>[data-index="rule_information"]</selector>
+		<strategy>css selector</strategy>
+		<fields>
+			<rule_name>
+				<selector>[name='rule_name']</selector>
+			</rule_name>
+			<description>
+				<selector>[name='description']</selector>
+				<input>textarea</input>
+			</description>
+			<status>
+				<selector>[name='status']</selector>
+				<input>select</input>
+			</status>
+			<from_date>
+				<selector>[name='from_date']</selector>
+				<input>datepicker</input>
+			</from_date>
+			<to_date>
+				<selector>[name='to_date']</selector>
+				<input>datepicker</input>
+			</to_date>
+			<priority>
+				<selector>[name='priority']</selector>
+			</priority>
+			<update_time_type>
+				<selector>[name='update_time_type']</selector>
+				<input>select</input>
+			</update_time_type>
+			<specific_time>
+				<selector>[name='specific_time']</selector>
+				<input>multiselect</input>
+			</specific_time>
+		</fields>
+	</rule_information>
+	<conditions>
+		<class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+		<selector>[data-index="conditions"]</selector>
+		<strategy>css selector</strategy>
+		<fields>
+			<conditions_serialized>
+				<selector>#os_lowstock_notification_rule_formrule_conditions_fieldset_</selector>
+				<input>conditions</input>
+			</conditions_serialized>
+			<lowstock_threshold_type>
+				<selector>[name='lowstock_threshold_type']</selector>
+				<input>select</input>
+			</lowstock_threshold_type>
+			<lowstock_threshold>
+				<selector>[name='lowstock_threshold']</selector>
+			</lowstock_threshold>
+			<sales_period>
+				<selector>[name='sales_period']</selector>
+			</sales_period>
+			<update_type>
+				<selector>[name='update_type']</selector>
+				<input>select</input>
+			</update_type>
+			<warehouse_ids>
+				<selector>[name='warehouse_ids']</selector>
+				<input>multiselect</input>
+			</warehouse_ids>
+		</fields>
+	</conditions>
+	<actions>
+		<class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+		<selector>[data-index="actions"]</selector>
+		<strategy>css selector</strategy>
+		<fields>
+			<notifier_emails>
+				<selector>[name='notifier_emails']</selector>
+				<input>textarea</input>
+			</notifier_emails>
+			<warning_message>
+				<selector>[name='warning_message']</selector>
+				<input>textarea</input>
+			</warning_message>
+		</fields>
+	</actions>
+</sections>
