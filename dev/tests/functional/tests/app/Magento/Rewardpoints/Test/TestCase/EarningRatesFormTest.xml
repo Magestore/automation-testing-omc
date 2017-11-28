@@ -4,7 +4,10 @@
         <variation name="Add new earning rates form test">
             <data name="button" xsi:type="string">Add New Earning Rate</data>
             <data name="pageTitle" xsi:type="string">New Earning Rate</data>
+            <data name="buttons" xsi:type="string">Back,Reset,Save and Continue Edit,Save Earning Rate</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreFormPageActionAvailable" />
+            <constraint name="Magento\Rewardpoints\Test\Constraint\EarningRates\AssertEarningRatesFormAvailable" />
         </variation>
     </testCase>
 </config>

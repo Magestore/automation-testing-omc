@@ -1,6 +1,6 @@
 <?php
 
-namespace Magento\BarcodeSuccess\Test\TestCase;
+namespace Magento\BarcodeSuccess\Test\TestCase\Adminhtml;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeIndex;
 
