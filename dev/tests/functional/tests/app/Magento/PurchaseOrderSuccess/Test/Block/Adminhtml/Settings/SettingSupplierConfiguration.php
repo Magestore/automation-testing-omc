@@ -3,16 +3,15 @@
  * Created by PhpStorm.
  * User: gvt
  * Date: 28/11/2017
- * Time: 09:07
+ * Time: 10:30
  */
-
-namespace Magento\BarcodeSuccess\Test\Block\Adminhtml;
+namespace Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\Settings;
 use Magento\Mtf\Block\Block;
 
-class SettingBarcode extends Block
+class SettingSupplierConfiguration extends Block
 {
     protected   $idForm = '#config-edit-form';
-    protected $firstFieldForm = '#barcodesuccess_general_one_barcode_per_sku';
+    protected $firstFieldForm = '#suppliersuccess_pricelist_enable';
     public function isVisibleForm()
     {
         return $this->_rootElement->find($this->idForm)->isVisible();

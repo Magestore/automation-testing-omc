@@ -17,10 +17,27 @@ class AssertStorePickupPageIsAvailable extends AbstractConstraint
 
     public function processAssert(StorepickupIndex $storepickupIndex, $pageTitle)
     {
+        $storepickupIndex->getStorepickupOverlaybg()->waitForElementNotVisible('.overlay-bg');
         \PHPUnit_Framework_Assert::assertEquals(
             $pageTitle,
             $storepickupIndex->getStorepickupPageTitleBlock()->getStorepickupTitle(),
             'Invalid page title is displayed.'
+        );
+        \PHPUnit_Framework_Assert::assertTrue(
+            $storepickupIndex->getStorepickupSearchBoxBlock()->searchDistanceIsVisible(),
+            'Search distance button is not visible.'
+        );
+        \PHPUnit_Framework_Assert::assertTrue(
+            $storepickupIndex->getStorepickupSearchBoxBlock()->searchAreaIsVisible(),
+            'Search area button is not visible.'
+        );
+        \PHPUnit_Framework_Assert::assertTrue(
+            $storepickupIndex->getStorepickupStoreListBlock()->isVisible(),
+            'Store list is not visible.'
+        );
+        \PHPUnit_Framework_Assert::assertTrue(
+            $storepickupIndex->getStorepickupMapBlock()->isVisible(),
+            'Store map is not visible.'
         );
     }
 
@@ -31,6 +48,6 @@ class AssertStorePickupPageIsAvailable extends AbstractConstraint
      */
     public function toString()
     {
-        return 'Store pickup page has correct title.';
+        return 'Store pickup page is available';
     }
 }

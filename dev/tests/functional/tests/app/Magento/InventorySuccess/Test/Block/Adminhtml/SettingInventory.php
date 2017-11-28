@@ -6,13 +6,13 @@
  * Time: 09:07
  */
 
-namespace Magento\BarcodeSuccess\Test\Block\Adminhtml;
+namespace Magento\InventorySuccess\Test\Block\Adminhtml;
 use Magento\Mtf\Block\Block;
 
-class SettingBarcode extends Block
+class SettingInventory extends Block
 {
     protected   $idForm = '#config-edit-form';
-    protected $firstFieldForm = '#barcodesuccess_general_one_barcode_per_sku';
+    protected $firstFieldForm = '#inventorysuccess_stock_control_link_warehouse_store_view';
     public function isVisibleForm()
     {
         return $this->_rootElement->find($this->idForm)->isVisible();
