@@ -9,7 +9,11 @@
     <testCase name="Magento\PurchaseOrderSuccess\Test\TestCase\OpenCreatePurchaseOrderEntityTest" summary="open page create purchase order from page purchase order" ticketId="MAGESTORE-1">
         <variation name="OpenCreatePurchaseOrderEntityTestTestVariation1">
             <data name="pageTitle" xsi:type="string">New Purchase Order</data>
+            <data name="buttons" xsi:type="string">Back, Prepare Product List</data>
+
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
+            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Form\AssertAddNewPurchaseOrderFormIsAvailable" />
         </variation>
     </testCase>
 </config>

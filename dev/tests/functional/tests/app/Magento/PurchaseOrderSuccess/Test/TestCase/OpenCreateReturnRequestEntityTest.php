@@ -8,29 +8,25 @@
 
 namespace Magento\PurchaseOrderSuccess\Test\TestCase;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\ReturnRequestIndex;
+use Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\ReturnOrderIndex;
 
 class OpenCreateReturnRequestEntityTest extends Injectable
 {
-    /* tags */
-    const MVP = 'no';
-    const DOMAIN = 'PS';
-    /* end tags */
 
-    /**
-     * @var ReturnRequestIndex $returnRequestIndex
-     */
-    protected $returnRequestIndex;
+	/**
+	 * @var ReturnOrderIndex
+	 */
+	protected $returnOrderIndex;
 
     public function __inject(
-        ReturnRequestIndex $returnRequestIndex
+        ReturnOrderIndex $returnOrderIndex
     ) {
-        $this->returnRequestIndex = $returnRequestIndex;
+        $this->returnOrderIndex = $returnOrderIndex;
     }
     public function test()
     {
-        $this->returnRequestIndex->open();
-        $this->returnRequestIndex->getReturnRequest()->createReturnRequest();
+        $this->returnOrderIndex->open();
+        $this->returnOrderIndex->getPageActionsBlock()->addNew();
         sleep(2);
     }
 }

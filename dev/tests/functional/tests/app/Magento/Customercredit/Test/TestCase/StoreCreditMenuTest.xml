@@ -40,6 +40,7 @@
             <data name="menuItem" xsi:type="string">Store Credit > Customer Credit Report</data>
             <data name="pageTitle" xsi:type="string">Customer Credit Report</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\ReportTransactionDashboard\AssertReportTransactionDashboardAvailable"/>
         </variation>
         <variation name="Settings">
             <data name="menuItem" xsi:type="string">Store Credit > Settings</data>

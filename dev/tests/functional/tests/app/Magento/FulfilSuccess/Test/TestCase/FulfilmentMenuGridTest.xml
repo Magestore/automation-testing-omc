@@ -13,6 +13,7 @@
             <data name="names" xsi:type="string">ID,Age,Created on,Recepient,Total,Status,Batch#,Purchase Point,Note,Tag,View,Verify</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\FulfilSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\OrderFulfilment\AssertBackendButtonIsAvailable" />
         </variation>
         <variation name="FulfilmentMenuGridTest2">
             <data name="menuItem" xsi:type="string">Fulfillment > Prepare Fulfil</data>
@@ -20,6 +21,7 @@
             <data name="names" xsi:type="string">ID,Age,Purchase Point,Created on,Recepient,Qty,Total,Status,Batch#,Note,Tag,Action,Fulfill</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\FulfilSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\OrderFulfilment\AssertBackendButtonIsAvailable" />
         </variation>
         <variation name="FulfilmentMenuGridTest3">
             <data name="menuItem" xsi:type="string">Fulfillment > Pick Items</data>
@@ -27,6 +29,7 @@
             <data name="names" xsi:type="string">Pick #,Age,Order #,Batch #,Purchased Date,Ship-to Name,Email,Grand Total (Base),Total Items,Action</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\FulfilSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\OrderFulfilment\AssertBackendButtonIsAvailable" />
         </variation>
         <variation name="FulfilmentMenuGridTest4">
             <data name="menuItem" xsi:type="string">Fulfillment > Pack Items</data>
@@ -34,6 +37,7 @@
             <data name="names" xsi:type="string">Pack #,Age,Order #,Purchased Date,Ship-to Name,Email,Grand Total (Base),Total Items,Status,View,Pack</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\FulfilSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\OrderFulfilment\AssertBackendButtonIsAvailable" />
         </variation>
         <variation name="FulfilmentMenuGridTest5">
             <data name="menuItem" xsi:type="string">Fulfillment > Delivery Packages</data>
@@ -41,6 +45,7 @@
             <data name="names" xsi:type="string">Package #,Order #,Ship-to Name,Ship Date,Total Quantity,Shipping Address,Shipping Information,Tracking Number,Action</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\FulfilSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\OrderFulfilment\AssertBackendButtonIsAvailable" />
         </variation>
         <variation name="FulfilmentMenuGridTest6">
             <data name="menuItem" xsi:type="string">Fulfillment > All Orders</data>
@@ -48,6 +53,15 @@
             <data name="names" xsi:type="string">ID,Age,Purchase Point,Created on,Recepient,Total,Status,Batch#,Note,Tag,Action</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\FulfilSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\OrderListing\AssertBackendButtonIsAvailable" />
+        </variation>
+        <variation name="FulfilmentMenuGridTest6">
+            <data name="menuItem" xsi:type="string">Fulfillment > Awaiting Payment</data>
+            <data name="pageTitle" xsi:type="string">Awaiting payment orders</data>
+            <data name="names" xsi:type="string">ID,Age,Purchase Point,Created on,Recepient,Total,Status,Batch#,Note,Tag,Action</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\OrderListing\AssertBackendButtonIsAvailable" />
         </variation>
         <variation name="FulfilmentMenuGridTest7">
             <data name="menuItem" xsi:type="string">Fulfillment > Back Orders</data>
@@ -55,6 +69,7 @@
             <data name="names" xsi:type="string">ID,Age,Purchase Point,Created on,Recepient,Back Qty,Total,Status,Batch#,Note,Tag,Action</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\FulfilSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\OrderListing\AssertBackendButtonIsAvailable" />
         </variation>
         <variation name="FulfilmentMenuGridTest8">
             <data name="menuItem" xsi:type="string">Fulfillment > On Hold Orders</data>
@@ -62,6 +77,7 @@
             <data name="names" xsi:type="string">ID,Age,Purchase Point,Created on,Recepient,Total,Status,Batch#,Note,Tag,Action</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\FulfilSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\OrderListing\AssertBackendButtonIsAvailable" />
         </variation>
         <variation name="FulfilmentMenuGridTest9">
             <data name="menuItem" xsi:type="string">Fulfillment > Completed Orders</data>
@@ -69,6 +85,7 @@
             <data name="names" xsi:type="string">ID,Age,Purchase Point,Created on,Recepient,Total,Status,Batch#,Note,Tag,Action</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\FulfilSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\OrderListing\AssertBackendButtonIsAvailable" />
         </variation>
         <variation name="FulfilmentMenuGridTest10">
             <data name="menuItem" xsi:type="string">Fulfillment > Canceled Orders</data>
@@ -76,6 +93,7 @@
             <data name="names" xsi:type="string">ID,Age,Purchase Point,Created on,Recepient,Total,Status,Batch#,Note,Tag,Action</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\FulfilSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\OrderListing\AssertBackendButtonIsAvailable" />
         </variation>
         <variation name="FulfilmentMenuGridTest11">
             <data name="menuItem" xsi:type="string">Fulfillment > Dropship Request</data>
@@ -87,12 +105,27 @@
         <variation name="FulfilmentMenuGridTest12">
             <data name="menuItem" xsi:type="string">Fulfillment > Dashboard</data>
             <data name="pageTitle" xsi:type="string">Dashboard</data>
+            <data name="chartsTitleOrder" xsi:type="string">Report Sales By Status</data>
+            <data name="chartsTitlePerday" xsi:type="string">Report order by day</data>
+            <data name="chartsTitleCarrier" xsi:type="string">All carriers</data>
+            <data name="chartsTitleVerify" xsi:type="string">Report verified orders by day</data>
+            <data name="chartsTitlePick" xsi:type="string">Report pick requests by day</data>
+            <data name="chartsTitlePack" xsi:type="string">Report pack requests by day</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\Dashboard\ContainerOrder\AssertBackendButtonAndTitleIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\Dashboard\ContainerPerday\AssertBackendButtonAndTitleIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\Dashboard\ContainerCarrier\AssertBackendButtonAndTitleIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\Dashboard\ContainerVerify\AssertBackendButtonAndTitleIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\Dashboard\ContainerPick\AssertBackendButtonAndTitleIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\Dashboard\ContainerPack\AssertBackendButtonAndTitleIsAvailable" />
         </variation>
         <variation name="FulfilmentMenuGridTest13">
             <data name="menuItem" xsi:type="string">Fulfillment > Reports</data>
             <data name="pageTitle" xsi:type="string">Fulfillment - Reports</data>
+            <data name="titleStaffReport" xsi:type="string">STAFF REPORT</data>
+            <data name="titleWarehouseReport" xsi:type="string">WAREHOUSE REPORT</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\Report\AssertBackendButtonAndTitleIsAvailable" />
         </variation>
         <variation name="FulfilmentMenuGridTest14">
             <data name="menuItem" xsi:type="string">Fulfillment > Order Configuration</data>

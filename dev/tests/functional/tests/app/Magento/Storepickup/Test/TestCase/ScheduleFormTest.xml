@@ -4,7 +4,10 @@
         <variation name="Add New Schedule form test">
             <data name="button" xsi:type="string">Add New Schedule</data>
             <data name="pageTitle" xsi:type="string">New Schedule</data>
+            <data name="buttons" xsi:type="string">Back,Reset,Save and Continue Edit,Save and New,Save Schedule</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreFormPageActionAvailable" />
+            <constraint name="Magento\Storepickup\Test\Constraint\Schedule\AssertScheduleFormAvailable" />
         </variation>
     </testCase>
 </config>
