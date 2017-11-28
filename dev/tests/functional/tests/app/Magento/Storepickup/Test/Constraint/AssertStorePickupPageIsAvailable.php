@@ -17,6 +17,7 @@ class AssertStorePickupPageIsAvailable extends AbstractConstraint
 
     public function processAssert(StorepickupIndex $storepickupIndex, $pageTitle)
     {
+        $storepickupIndex->getStorepickupOverlaybg()->waitForElementNotVisible('.overlay-bg');
         \PHPUnit_Framework_Assert::assertEquals(
             $pageTitle,
             $storepickupIndex->getStorepickupPageTitleBlock()->getStorepickupTitle(),

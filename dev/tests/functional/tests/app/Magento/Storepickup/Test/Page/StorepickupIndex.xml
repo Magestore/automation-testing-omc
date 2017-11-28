@@ -5,5 +5,6 @@
         <block name="storepickupSearchBoxBlock" class="Magento\Storepickup\Test\Block\StorepickupSearchBox" locator=".search-box" strategy="css selector"/>
         <block name="storepickupStoreListBlock" class="Magento\Storepickup\Test\Block\StorepickupStoreList" locator=".list-store-box" strategy="css selector"/>
         <block name="storepickupMapBlock" class="Magento\Storepickup\Test\Block\StorepickupMap" locator=".map-box-container" strategy="css selector"/>
+        <block name="storepickupOverlaybg" class="Magento\Storepickup\Test\Block\StorepickupOverlaybg" locator=".overlay-bg" strategy="css selector"/>
     </page>
 </config>
