@@ -1,6 +1,6 @@
 <?php
 
-namespace Magento\BarcodeSuccess\Test\Block;
+namespace Magento\BarcodeSuccess\Test\Block\Adminhtml;
 
 use Magento\Mtf\Block\Block;
 

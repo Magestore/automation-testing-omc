@@ -6,7 +6,7 @@
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-	<testCase name="Magento\BarcodeSuccess\Test\TestCase\BarcodeMenuTest" summary="Navigate through Barcode menu" ticketId="MAGESTORE-1">
+	<testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeMenuTest" summary="Navigate through Barcode menu" ticketId="MAGESTORE-1">
 		<variation name="BarcodeMenuTestVariation1">
 			<data name="menuItem" xsi:type="string">Inventory Management > Barcode Listing</data>
 			<data name="pageTitle" xsi:type="string">Manage Barcodes</data>
