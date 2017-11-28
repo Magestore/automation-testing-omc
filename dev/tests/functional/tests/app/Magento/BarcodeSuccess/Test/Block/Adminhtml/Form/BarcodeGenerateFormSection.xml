@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<sections>
+    <os_barcode_generate_form_general>
+        <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+        <selector>[data-index="os_barcode_generate_form_general"]</selector>
+        <strategy>css selector</strategy>
+        <fields>
+            <reason>
+                <selector>[name='general_information[reason]']</selector>
+            </reason>
+        </fields>
+    </os_barcode_generate_form_general>
+</sections>

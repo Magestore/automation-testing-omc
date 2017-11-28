@@ -7,6 +7,6 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
     <page name="BarcodeIndex" area="Adminhtml" mca="barcodesuccess/index" module="Magento_BarcodeSuccess">
-        <block name="manageBarcodes" class="Magento\BarcodeSuccess\Test\Block\ManageBarcodes" locator=".page-main-actions" strategy="css selector" />
+        <block name="manageBarcodes" class="Magento\BarcodeSuccess\Test\Block\Adminhtml\ManageBarcodes" locator=".page-main-actions" strategy="css selector" />
     </page>
 </config>

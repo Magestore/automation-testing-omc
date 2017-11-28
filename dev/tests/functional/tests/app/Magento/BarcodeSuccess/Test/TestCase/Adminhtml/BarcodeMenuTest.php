@@ -6,7 +6,7 @@
  * Time: 15:34
  */
 
-namespace Magento\BarcodeSuccess\Test\TestCase;
+namespace Magento\BarcodeSuccess\Test\TestCase\Adminhtml;
 
 
 use Magento\Backend\Test\TestCase\NavigateMenuTest;
