@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
+    <page name="SettingSupplierConfigurationIndex" area="Adminhtml" mca="admin/system_config/edit/section/suppliersuccess" module="Magento_PurchaseOrderSuccess">
+        <block name="blockSettingSupplierConfiguration" class="Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\Settings\SettingSupplierConfiguration" locator="[id='page:main-container']" strategy="css selector"/>
+    </page>
+</config>

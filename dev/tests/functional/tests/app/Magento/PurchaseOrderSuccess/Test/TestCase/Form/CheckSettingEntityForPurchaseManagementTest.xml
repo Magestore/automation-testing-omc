@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\PurchaseOrderSuccess\Test\TestCase\Form\CheckSettingEntityForPurchaseManagementTest" summary="Check form, page left purchase setting" ticketId="MAGESTORE-1">
+        <variation name="CheckSettingEntityForPurchaseManagementTestVariation1">
+            <data name="pageTitle" xsi:type="string">Configuration</data>
+            <data name="button" xsi:type="string">Save Config</data>
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\AssertGridPageActionButtonImportIsVisible" />
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Form\AssertSettingPurchaseManagementFormIsAvailable" />
+        </variation>
+    </testCase>
+</config>
+
