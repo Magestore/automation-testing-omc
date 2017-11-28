@@ -4,7 +4,10 @@
         <variation name="Import points form test">
             <data name="button" xsi:type="string">Import Points</data>
             <data name="pageTitle" xsi:type="string">Import Points</data>
+            <data name="buttons" xsi:type="string">Back,Import</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreFormPageActionAvailable" />
+            <constraint name="Magento\Storepickup\Test\Constraint\ManagePointBalances\AssertImportPointsFormAvailable"/>
         </variation>
     </testCase>
 </config>

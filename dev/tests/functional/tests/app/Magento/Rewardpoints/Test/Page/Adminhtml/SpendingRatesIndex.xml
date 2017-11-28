@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
     <page name="spendingRatesIndex" area="Adminhtml" mca="rewardpoints/spendingrates/index" module="Magento_Rewardpoints">
-        <block name="SpendingRatesGridPageActions" class="Magento\Rewardpoints\Test\Block\Adminhtml\SpendingRates\SpendingRatesGridPageActions" locator=".page-main-actions" strategy="css selector" />
-        <block name="SpendingRatesGrid" class="Magento\Rewardpoints\Test\Block\Adminhtml\SpendingRates\SpendingRatesGrid" locator="[id='page:main-container']" strategy="css selector" />
+        <block name="spendingRatesGridPageActions" class="Magento\Rewardpoints\Test\Block\Adminhtml\SpendingRates\SpendingRatesGridPageActions" locator=".page-main-actions" strategy="css selector" />
+        <block name="spendingRatesGrid" class="Magento\Rewardpoints\Test\Block\Adminhtml\SpendingRates\SpendingRatesGrid" locator="[id='page:main-container']" strategy="css selector" />
     </page>
 </config>
