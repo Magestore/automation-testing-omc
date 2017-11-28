@@ -21,7 +21,7 @@ class TransactionForm extends FormTabs
         return $this->_rootElement->find($this->formTitle, Locator::SELECTOR_XPATH)->isVisible();
     }
 
-    public function moneySpentFieldIsVisible()
+    public function customerFieldIsVisible()
     {
         return $this->_rootElement->find($this->customerField, Locator::SELECTOR_CSS)->isVisible();
     }

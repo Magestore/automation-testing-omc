@@ -7,7 +7,7 @@
             <data name="buttons" xsi:type="string">Back,Import</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreFormPageActionAvailable" />
-            <constraint name="Magento\Storepickup\Test\Constraint\ManagePointBalances\AssertImportPointsFormAvailable"/>
+            <constraint name="Magento\Rewardpoints\Test\Constraint\ManagePointBalances\AssertImportPointsFormAvailable"/>
         </variation>
     </testCase>
 </config>

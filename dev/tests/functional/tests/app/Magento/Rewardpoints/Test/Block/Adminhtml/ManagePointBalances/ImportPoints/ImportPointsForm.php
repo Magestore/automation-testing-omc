@@ -6,7 +6,7 @@
  * Time: 1:10 PM
  */
 
-namespace Magento\Rewardpoints\Test\Block\Adminhtml\Store\ImportPoints;
+namespace Magento\Rewardpoints\Test\Block\Adminhtml\ManagePointBalances\ImportPoints;
 
 use Magento\Mtf\Block\Form;
 use Magento\Mtf\Client\Locator;

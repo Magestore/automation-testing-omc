@@ -6,7 +6,7 @@
  * Time: 9:18 AM
  */
 
-namespace Magento\Rewardpoints\Test\Constraint\Store;
+namespace Magento\Rewardpoints\Test\Constraint\ManagePointBalances;
 
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Rewardpoints\Test\Page\Adminhtml\ManagePointBalancesImportPoints;
@@ -17,15 +17,15 @@ class AssertImportPointsFormAvailable extends AbstractConstraint
     public function processAssert(ManagePointBalancesImportPoints $importPoints)
     {
         \PHPUnit_Framework_Assert::assertTrue(
-            $importPoints->getImportPoints()->isVisible(),
+            $importPoints->getImportPointsForm()->isVisible(),
             'Import Points form is not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
-            $importPoints->getImportPoints()->importPointsTitleIsVisible(),
+            $importPoints->getImportPointsForm()->importPointsTitleIsVisible(),
             'Import Points title is not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
-            $importPoints->getImportPoints()->importFileFieldIsVisible(),
+            $importPoints->getImportPointsForm()->importFileFieldIsVisible(),
             'Import Points file field is not visible.'
         );
     }
