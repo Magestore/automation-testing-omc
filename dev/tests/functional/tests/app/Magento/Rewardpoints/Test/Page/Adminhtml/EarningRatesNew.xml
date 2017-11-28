@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
+    <page name="EarningRatesNew" area="Adminhtml" mca="rewardpoints/earningrates/new/" module="Magento_Rewardpoints">
+        <block name="earningRatesFormPageActions" class="Magento\Rewardpoints\Test\Block\Adminhtml\EarningRates\Edit\EarningRatesFormPageActions" locator=".page-main-actions" strategy="css selector" />
+        <block name="earningRatesForm" class="Magento\Rewardpoints\Test\Block\Adminhtml\EarningRates\Edit\EarningRatesForm" locator="[id='page:main-container']" strategy="css selector" />
+    </page>
+</config>
