@@ -13,7 +13,7 @@ use Magento\Mtf\Client\Locator;
 
 class ModalAddPricelist extends Block
 {
-	protected $mainActionsButtonSelector = '//*[@id="html-body"]/div[6]/aside[3]/div[2]/header/div/div/div/button[span = "%s"]';
+	protected $mainActionsButtonSelector = '//aside[contains(@class, "os_supplier_pricinglist_form_os_supplier_pricinglist_form_supplier_pricinglist_listing_add")]/div[2]/header/div/div/div/button[span = "%s"]';
 
 	public function getTitle()
 	{
