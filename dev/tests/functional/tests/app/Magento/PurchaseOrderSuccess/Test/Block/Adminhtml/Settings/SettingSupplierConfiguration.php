@@ -24,4 +24,14 @@ class SettingSupplierConfiguration extends Block
         return $this->_rootElement->find('#system_config_tabs > div.config-nav-block.admin__page-nav._collapsed._show > ul > li.admin__page-nav-item.item.separator-top._active > a')->getText();
     }
 
+	public function getPricelistSection()
+	{
+		return $this->_rootElement->find('#suppliersuccess_pricelist');
+	}
+
+	public function openPricelistSection()
+	{
+		$this->_rootElement->find('#suppliersuccess_pricelist-head')->click();
+	}
+
 }

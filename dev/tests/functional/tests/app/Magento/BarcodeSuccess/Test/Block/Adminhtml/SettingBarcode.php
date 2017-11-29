@@ -25,4 +25,14 @@ class SettingBarcode extends Block
         return $this->_rootElement->find('#system_config_tabs > div.config-nav-block.admin__page-nav._collapsed._show > ul > li.admin__page-nav-item.item.separator-top._active > a')->getText();
     }
 
+	public function getGeneralSection()
+	{
+		return $this->_rootElement->find('#barcodesuccess_general');
+	}
+
+	public function openGeneralSection()
+	{
+		$this->_rootElement->find('#barcodesuccess_general-head')->click();
+	}
+
 }
