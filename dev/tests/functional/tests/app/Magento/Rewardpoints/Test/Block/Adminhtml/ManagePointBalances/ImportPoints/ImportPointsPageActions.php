@@ -6,7 +6,7 @@
  * Time: 12:21 PM
  */
 
-namespace Magento\Rewardpoints\Test\Block\Adminhtml\Store\ImportStore;
+namespace Magento\Rewardpoints\Test\Block\Adminhtml\ManagePointBalances\ImportPoints;
 
 
 use Magento\Backend\Test\Block\FormPageActions;
