@@ -10,6 +10,10 @@ namespace Magento\Rewardpoints\Test\Block\Adminhtml\Transaction\Edit;
 
 use Magento\Backend\Test\Block\FormPageActions;
 
+/**
+ * Class TransactionFormPageActions
+ * @package Magento\Rewardpoints\Test\Block\Adminhtml\Transaction\Edit
+ */
 class TransactionFormPageActions extends FormPageActions
 {
 

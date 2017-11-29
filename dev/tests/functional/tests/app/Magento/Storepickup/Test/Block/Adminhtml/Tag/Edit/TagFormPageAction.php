@@ -10,6 +10,10 @@ namespace Magento\Storepickup\Test\Block\Adminhtml\Tag\Edit;
 
 use Magento\Backend\Test\Block\FormPageActions;
 
+/**
+ * Class TagFormPageAction
+ * @package Magento\Storepickup\Test\Block\Adminhtml\Tag\Edit
+ */
 class TagFormPageAction extends FormPageActions
 {
 

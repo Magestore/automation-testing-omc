@@ -11,8 +11,15 @@ namespace Magento\Storepickup\Test\Constraint\Tag;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Storepickup\Test\Page\Adminhtml\TagNew;
 
+/**
+ * Class AssertTagFormAvailable
+ * @package Magento\Storepickup\Test\Constraint\Tag
+ */
 class AssertTagFormAvailable extends AbstractConstraint
 {
+    /**
+     * @param TagNew $tagNew
+     */
     public function processAssert(TagNew $tagNew)
     {
         \PHPUnit_Framework_Assert::assertTrue(

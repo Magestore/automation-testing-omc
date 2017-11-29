@@ -10,6 +10,10 @@ namespace Magento\Rewardpoints\Test\Block\Adminhtml\ManagePointBalances;
 
 use Magento\Rewardpoints\Test\Block\Adminhtml\GridPageActions;
 
+/**
+ * Class ManagePointBalancesGridPageActions
+ * @package Magento\Rewardpoints\Test\Block\Adminhtml\ManagePointBalances
+ */
 class ManagePointBalancesGridPageActions extends GridPageActions
 {
 

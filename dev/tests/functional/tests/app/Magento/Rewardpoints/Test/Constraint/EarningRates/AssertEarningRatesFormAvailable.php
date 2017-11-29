@@ -10,9 +10,16 @@ namespace Magento\Rewardpoints\Test\Constraint\EarningRates;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Rewardpoints\Test\Page\Adminhtml\EarningRatesNew;
 
+/**
+ * Class AssertEarningRatesFormAvailable
+ * @package Magento\Rewardpoints\Test\Constraint\EarningRates
+ */
 class AssertEarningRatesFormAvailable extends AbstractConstraint
 {
 
+    /**
+     * @param EarningRatesNew $earningRatesNew
+     */
     public function processAssert(EarningRatesNew $earningRatesNew)
     {
         \PHPUnit_Framework_Assert::assertTrue(

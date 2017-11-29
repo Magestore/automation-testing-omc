@@ -11,9 +11,16 @@ namespace Magento\Storepickup\Test\Constraint;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Storepickup\Test\Page\Adminhtml\StoreIndex;
 
+/**
+ * Class AssertDataGridToolbarAvailable
+ * @package Magento\Storepickup\Test\Constraint
+ */
 class AssertDataGridToolbarAvailable extends AbstractConstraint
 {
 
+    /**
+     * @param StoreIndex $storeIndex
+     */
     public function processAssert(StoreIndex $storeIndex)
     {
         $storeIndex->getStoreGrid()->waitingForGridVisible();

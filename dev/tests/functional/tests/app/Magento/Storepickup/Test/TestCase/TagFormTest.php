@@ -11,6 +11,10 @@ namespace Magento\Storepickup\Test\TestCase;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Storepickup\Test\Page\Adminhtml\TagIndex;
 
+/**
+ * Class TagFormTest
+ * @package Magento\Storepickup\Test\TestCase
+ */
 class TagFormTest extends Injectable
 {
     /**
@@ -18,11 +22,17 @@ class TagFormTest extends Injectable
      */
     protected $tagIndex;
 
+    /**
+     * @param TagIndex $tagIndex
+     */
     public function __inject(TagIndex $tagIndex)
     {
         $this->tagIndex = $tagIndex;
     }
 
+    /**
+     * @param $button
+     */
     public function test($button)
     {
         $this->tagIndex->open();

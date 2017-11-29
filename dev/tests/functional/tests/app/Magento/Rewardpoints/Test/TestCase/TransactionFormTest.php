@@ -11,6 +11,10 @@ namespace Magento\Rewardpoints\Test\TestCase;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Rewardpoints\Test\Page\Adminhtml\TransactionIndex;
 
+/**
+ * Class TransactionFormTest
+ * @package Magento\Rewardpoints\Test\TestCase
+ */
 class TransactionFormTest extends Injectable
 {
     /**
@@ -18,11 +22,17 @@ class TransactionFormTest extends Injectable
      */
     public $transactionIndex;
 
+    /**
+     * @param TransactionIndex $transactionIndex
+     */
     public function __inject(TransactionIndex $transactionIndex)
     {
         $this->transactionIndex = $transactionIndex;
     }
 
+    /**
+     * @param $button
+     */
     public function test($button)
     {
         $this->transactionIndex->open();

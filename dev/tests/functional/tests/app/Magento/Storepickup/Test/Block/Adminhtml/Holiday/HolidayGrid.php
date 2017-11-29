@@ -10,6 +10,10 @@ namespace Magento\Storepickup\Test\Block\Adminhtml\Holiday;
 
 use Magento\Storepickup\Test\Block\Adminhtml\StorepickupGrid;
 
+/**
+ * Class HolidayGrid
+ * @package Magento\Storepickup\Test\Block\Adminhtml\Holiday
+ */
 class HolidayGrid extends StorepickupGrid
 {
 

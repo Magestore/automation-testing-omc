@@ -10,8 +10,15 @@ namespace Magento\Storepickup\Test\Block;
 
 use Magento\Mtf\Block\Block;
 
+/**
+ * Class StorepickupPageTitle
+ * @package Magento\Storepickup\Test\Block
+ */
 class StorepickupPageTitle extends Block
 {
+    /**
+     * @return mixed
+     */
     public function getStorepickupTitle()
     {
         return $this->_rootElement->getText();

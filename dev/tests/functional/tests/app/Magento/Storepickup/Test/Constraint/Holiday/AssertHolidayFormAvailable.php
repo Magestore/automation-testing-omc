@@ -11,9 +11,16 @@ namespace Magento\Storepickup\Test\Constraint\Holiday;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Storepickup\Test\Page\Adminhtml\HolidayNew;
 
+/**
+ * Class AssertHolidayFormAvailable
+ * @package Magento\Storepickup\Test\Constraint\Holiday
+ */
 class AssertHolidayFormAvailable extends AbstractConstraint
 {
 
+    /**
+     * @param HolidayNew $holidayNew
+     */
     public function processAssert(HolidayNew $holidayNew)
     {
         \PHPUnit_Framework_Assert::assertTrue(

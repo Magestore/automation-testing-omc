@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
-    <page name="ManagePointBalancesImportPoints" area="Adminhtml" mca="rewardpoints/managepointbalances/import" module="Magento_Rewardpoints">
+    <page name="ManagePointBalancesImportPoints" area="Adminhtml" mca="rewardpoints/managepointbalances/import/" module="Magento_Rewardpoints">
         <block name="importPointsPageActions" class="Magento\Rewardpoints\Test\Block\Adminhtml\ManagePointBalances\ImportPoints\ImportPointsPageActions" locator=".page-main-actions" strategy="css selector" />
         <block name="importPointsForm" class="Magento\Rewardpoints\Test\Block\Adminhtml\ManagePointBalances\ImportPoints\ImportPointsForm" locator="[id='page:main-container']" strategy="css selector" />
     </page>
