@@ -30,6 +30,7 @@ class CheckSettingEntityForPurchaseManagementTest extends Injectable
     public function test()
     {
         $this->settingPurchaseManagementIndex->open();
+	    $this->settingPurchaseManagementIndex->getBlockSettingPurchaseManagementConfiguation()->getProductConfigSection()->click();
         sleep(2);
     }
 }
