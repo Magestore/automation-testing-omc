@@ -31,7 +31,7 @@ class StorepickupGrid extends DataGrid
 
     public function waitingForGridVisible()
     {
-        $this->waitLoader();
+//        $this->waitLoader();
         $this->waitForElementNotVisible($this->loadingMask, Locator::SELECTOR_CSS);
         $this->waitForElementVisible($this->gridTable, Locator::SELECTOR_CSS);
     }

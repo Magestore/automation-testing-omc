@@ -6,7 +6,7 @@
  * Time: 08:19
  */
 
-namespace Magento\Giftvoucher\Test\TestCase;
+namespace Magento\Giftvoucher\Test\TestCase\CheckVisibleForm;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Giftvoucher\Test\Page\Adminhtml\GiftcodeIndex;

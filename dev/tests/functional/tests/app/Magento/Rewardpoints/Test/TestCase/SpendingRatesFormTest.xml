@@ -4,7 +4,10 @@
         <variation name="Add new spending rate form test">
             <data name="button" xsi:type="string">Add New Spending Rate</data>
             <data name="pageTitle" xsi:type="string">New Spending Rate</data>
+            <data name="buttons" xsi:type="string">Back,Reset,Save and Continue Edit,Save Spending Rate</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreFormPageActionAvailable" />
+            <constraint name="Magento\Rewardpoints\Test\Constraint\SpendingRates\AssertSpendingRatesFormAvailable" />
         </variation>
     </testCase>
 </config>

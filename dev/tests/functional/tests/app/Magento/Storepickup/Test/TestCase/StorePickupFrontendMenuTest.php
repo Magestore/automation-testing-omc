@@ -25,7 +25,6 @@ class StorePickupFrontendMenuTest extends Injectable
     public function __inject(CmsIndex $cmsIndex)
     {
         $this->cmsIndex = $cmsIndex;
-        $this->cmsPage = $cmsIndex;
     }
 
     public function test()

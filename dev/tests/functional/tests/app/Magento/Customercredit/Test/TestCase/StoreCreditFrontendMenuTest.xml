@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Customercredit\Test\TestCase\StoreCreditFrontendMenuTest" summary="Store Credit Frontend Menu Test" ticketId="StoreCredit-001">
+        <variation name="StoreCreditFrontendMenuTest">
+            <data name="pageTitle" xsi:type="string">Credit Products</data>
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertStoreCreditListProductPageAvailable" />
+        </variation>
+    </testCase>
+</config>
