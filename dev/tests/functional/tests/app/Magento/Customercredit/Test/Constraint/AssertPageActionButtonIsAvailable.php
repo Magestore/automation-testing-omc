@@ -12,9 +12,16 @@ use Magento\Customercredit\Test\Page\Adminhtml\CreditProductIndex;
 use Magento\Customercredit\Test\Page\Adminhtml\CustomercreditIndex;
 use Magento\Mtf\Constraint\AbstractConstraint;
 
+/**
+ * Class AssertPageActionButtonIsAvailable
+ * @package Magento\Customercredit\Test\Constraint
+ */
 class AssertPageActionButtonIsAvailable extends AbstractConstraint
 {
-
+    /**
+     * @param CreditProductIndex $creditProductIndex
+     * @param null $buttons
+     */
     public function processAssert(CreditProductIndex $creditProductIndex, $buttons = null)
     {
         $creditProductIndex->getCreditProductGrid()->waitingForGridVisible();

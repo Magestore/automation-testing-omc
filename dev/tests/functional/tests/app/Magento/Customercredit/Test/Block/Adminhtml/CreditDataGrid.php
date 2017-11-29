@@ -11,6 +11,10 @@ namespace Magento\Customercredit\Test\Block\Adminhtml;
 use Magento\Mtf\Client\Locator;
 use Magento\Ui\Test\Block\Adminhtml\DataGrid;
 
+/**
+ * Class CreditDataGrid
+ * @package Magento\Customercredit\Test\Block\Adminhtml
+ */
 class CreditDataGrid extends DataGrid
 {
     protected $col = './/th[span = "%s"]';
@@ -27,6 +31,10 @@ class CreditDataGrid extends DataGrid
 
     protected $dataGridFilters = './/thead/tr[@class="data-grid-filters"]';
 
+    /**
+     * @param $column
+     * @return bool
+     */
     public function columnIsVisible($column)
     {
         return $this->_rootElement->find(sprintf($this->col, $column), Locator::SELECTOR_XPATH)->isVisible();

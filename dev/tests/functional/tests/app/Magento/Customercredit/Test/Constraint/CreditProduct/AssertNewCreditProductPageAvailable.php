@@ -12,8 +12,16 @@ use Magento\Catalog\Test\Page\Adminhtml\CatalogProductNew;
 use Magento\Customercredit\Test\Page\Adminhtml\CreditProductNew;
 use Magento\Mtf\Constraint\AbstractConstraint;
 
+/**
+ * Class AssertNewCreditProductPageAvailable
+ * @package Magento\Customercredit\Test\Constraint\CreditProduct
+ */
 class AssertNewCreditProductPageAvailable extends AbstractConstraint
 {
+    /**
+     * @param CreditProductNew $creditProductNew
+     * @param null $buttons
+     */
     public function processAssert(CreditProductNew $creditProductNew, $buttons = null)
     {
         $creditProductNew->getCreditProductForm()->waitForElementNotVisible('[data-role="spinner"]');

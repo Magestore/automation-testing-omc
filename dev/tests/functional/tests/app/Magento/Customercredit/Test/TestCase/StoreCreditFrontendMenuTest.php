@@ -11,6 +11,10 @@ namespace Magento\Customercredit\Test\TestCase;
 use Magento\Cms\Test\Page\CmsIndex;
 use Magento\Mtf\TestCase\Injectable;
 
+/**
+ * Class StoreCreditFrontendMenuTest
+ * @package Magento\Customercredit\Test\TestCase
+ */
 class StoreCreditFrontendMenuTest extends Injectable
 {
     /**

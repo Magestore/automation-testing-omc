@@ -10,6 +10,10 @@ namespace Magento\Customercredit\Test\Block\Adminhtml\CreditProduct;
 
 use Magento\Customercredit\Test\Block\Adminhtml\CreditDataGrid;
 
+/**
+ * Class CreditProductGrid
+ * @package Magento\Customercredit\Test\Block\Adminhtml\CreditProduct
+ */
 class CreditProductGrid extends CreditDataGrid
 {
 

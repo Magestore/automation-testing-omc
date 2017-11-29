@@ -11,9 +11,16 @@ namespace Magento\Customercredit\Test\Constraint\ReportTransactionDashboard;
 use Magento\Customercredit\Test\Page\Adminhtml\ReportTransactionDashboard;
 use Magento\Mtf\Constraint\AbstractConstraint;
 
+/**
+ * Class AssertReportTransactionDashboardAvailable
+ * @package Magento\Customercredit\Test\Constraint\ReportTransactionDashboard
+ */
 class AssertReportTransactionDashboardAvailable extends AbstractConstraint
 {
 
+    /**
+     * @param ReportTransactionDashboard $reportTransactionDashboard
+     */
     public function processAssert(ReportTransactionDashboard $reportTransactionDashboard)
     {
         \PHPUnit_Framework_Assert::assertTrue(
