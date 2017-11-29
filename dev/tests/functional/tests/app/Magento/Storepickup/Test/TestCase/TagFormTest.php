@@ -27,5 +27,6 @@ class TagFormTest extends Injectable
     {
         $this->tagIndex->open();
         $this->tagIndex->getTagGridPageActions()->clickActionButton($button);
+        $this->tagIndex->getTagGrid()->waitingForGridNotVisible();
     }
 }

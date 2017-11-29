@@ -6,6 +6,7 @@
  * Time: 14:18
  */
 namespace Magento\PurchaseOrderSuccess\Test\TestCase;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\QuotationIndex;
 
@@ -24,12 +25,12 @@ class OpenCreateQuotationEntityTest extends Injectable
     public function __inject(
         QuotationIndex $quotationIndex
     ) {
-        $this->quotation = $quotationIndex;
+        $this->quotationIndex = $quotationIndex;
     }
     public function test()
     {
         $this->quotationIndex->open();
-        $this->quotationIndex->getQuotation()->createQuotationOrder();
+        $this->quotationIndex->getPageActionsBlock()->addNew();
         sleep(2);
     }
 }

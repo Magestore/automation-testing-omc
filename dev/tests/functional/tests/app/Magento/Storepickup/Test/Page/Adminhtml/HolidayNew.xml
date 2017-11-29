@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
+    <page name="HolidayNew" area="Adminhtml" mca="storepickupadmin/holiday/new" module="Magento_Storepickup">
+        <block name="holidayFormPageActions" class="Magento\Storepickup\Test\Block\Adminhtml\Holiday\Edit\HolidayFormPageActions" locator=".page-main-actions" strategy="css selector" />
+        <block name="holidayForm" class="Magento\Storepickup\Test\Block\Adminhtml\Holiday\Edit\HolidayForm" locator="[id='page:main-container']" strategy="css selector" />
+    </page>
+</config>

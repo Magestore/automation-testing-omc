@@ -16,16 +16,23 @@ class AssertSendStockFormIsAvailable extends AbstractConstraint
 {
 	public function processAssert(SendStockEdit $sendStockEdit)
 	{
-		$sectionName = 'general_information';
-		$fieldName = 'transferstock_code';
-		\PHPUnit_Framework_Assert::assertTrue(
-			$sendStockEdit->getSendStockForm()->getSection('general_information')->isVisible(),
-			'Section '.$sectionName.' is not shown'
-		);
-		\PHPUnit_Framework_Assert::assertTrue(
-			$sendStockEdit->getSendStockForm()->getField($fieldName)->isVisible(),
-			'Field "'.$fieldName.'" is not shown'
-		);
+		$sectionList = [
+			[
+				'sectionName' => 'general_information',
+				'fieldName' => 'transferstock_code'
+			],
+		];
+		foreach ($sectionList as $section) {
+			$sendStockEdit->getSendStockForm()->openSection($section['sectionName']);
+			\PHPUnit_Framework_Assert::assertTrue(
+				$sendStockEdit->getSendStockForm()->getSection($section['sectionName'])->isVisible(),
+				'Section '.$section['sectionName'].' is not shown'
+			);
+			\PHPUnit_Framework_Assert::assertTrue(
+				$sendStockEdit->getSendStockForm()->getField($section['fieldName'])->isVisible(),
+				'Field "'.$section['fieldName'].'" is not shown'
+			);
+		}
 	}
 
 	/**

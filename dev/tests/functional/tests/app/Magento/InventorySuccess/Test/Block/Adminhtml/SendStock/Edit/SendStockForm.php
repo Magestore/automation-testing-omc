@@ -15,9 +15,5 @@ use Magento\InventorySuccess\Test\Block\Adminhtml\FormSection;
 
 class SendStockForm extends FormSection
 {
-	protected $fieldSelector = '[name="%s"]';
-	public function getField($name)
-	{
-		return $this->_rootElement->find(sprintf($this->fieldSelector, $name));
-	}
+
 }

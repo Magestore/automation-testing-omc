@@ -18,6 +18,10 @@ class AssertNewCreditProductPageAvailable extends AbstractConstraint
     {
         $creditProductNew->getCreditProductForm()->waitForElementNotVisible('[data-role="spinner"]');
         \PHPUnit_Framework_Assert::assertTrue(
+            $creditProductNew->getCreditProductForm()->isVisible(),
+            'Credit product new form is not visible.'
+        );
+        \PHPUnit_Framework_Assert::assertTrue(
             $creditProductNew->getCreditProductForm()->storeCreditTypeIsVisible(),
             'Type of Store Credit Value is not visible.'
         );

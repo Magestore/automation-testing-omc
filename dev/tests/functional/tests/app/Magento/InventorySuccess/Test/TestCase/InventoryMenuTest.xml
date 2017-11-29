@@ -74,6 +74,8 @@
 
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
 			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Form\AssertRequestStockFormIsAvailable" />
+
 		</variation>
 		<variation name="InventoryMenuTest9">
 			<data name="menuItem" xsi:type="string">Inventory Management > Transfer to External</data>
@@ -82,6 +84,8 @@
 
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
 			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Form\AssertTranferStockToExternalFormIsAvailable" />
+
 		</variation>
 		<variation name="InventoryMenuTest10">
 			<data name="menuItem" xsi:type="string">Inventory Management > Transfer from External</data>
@@ -90,6 +94,8 @@
 
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
 			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Form\AssertTranferStockFromExternalFormIsAvailable" />
+
 		</variation>
 
 		<!--Transfer Stock History-->
@@ -138,6 +144,7 @@
 
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
 			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Form\AssertAdjustStockFormIsAvailable" />
 		</variation>
 		<variation name="InventoryMenuTest16">
 			<data name="menuItem" xsi:type="string">Inventory Management > New Stocktaking</data>
@@ -146,6 +153,8 @@
 
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
 			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
+			<constraint name="Magento\InventorySuccess\Test\Constraint\Form\AssertStocktakingFormIsAvailable" />
+
 		</variation>
 		<variation name="InventoryMenuTest17">
 			<data name="menuItem" xsi:type="string">Inventory Management > Adjust Stock History</data>
