@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\WebposMenuTest" summary="Navigate through admin menu" ticketId="MAGETWO-34874">
+        <variation name="WebposMenuTest1">
+            <data name="menuItem" xsi:type="string">Sales > Manage Locations</data>
+            <data name="pageTitle" xsi:type="string">Location</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="WebposMenuTest2">
+            <data name="menuItem" xsi:type="string">Sales > Manage Staffs</data>
+            <data name="pageTitle" xsi:type="string">Staff</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="WebposMenuTest3">
+            <data name="menuItem" xsi:type="string">Sales > Manage Roles</data>
+            <data name="pageTitle" xsi:type="string">Role</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="WebposMenuTest4">
+            <data name="menuItem" xsi:type="string">Sales > Z-Reports</data>
+            <data name="pageTitle" xsi:type="string">Z-Report</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="WebposMenuTest5">
+            <data name="menuItem" xsi:type="string">Sales > Sales Order Reports</data>
+            <data name="pageTitle" xsi:type="string">Reports</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="WebposMenuTest6">
+            <data name="menuItem" xsi:type="string">Sales > Manage POS</data>
+            <data name="pageTitle" xsi:type="string">POS</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="WebposMenuTest7">
+            <data name="menuItem" xsi:type="string">Manage Cash Denomination</data>
+            <data name="pageTitle" xsi:type="string">Denomination</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+    </testCase>
+</config>

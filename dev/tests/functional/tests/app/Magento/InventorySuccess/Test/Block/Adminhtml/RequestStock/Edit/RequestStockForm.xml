@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<sections>
+	<general_information>
+		<class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+		<selector>[data-index="general_information"]</selector>
+		<strategy>css selector</strategy>
+		<fields>
+			<transferstock_code>
+				<selector>[name='transferstock_code']</selector>
+			</transferstock_code>
+			<source_warehouse_id>
+				<selector>[name='source_warehouse_id']</selector>
+				<input>select</input>
+			</source_warehouse_id>
+			<des_warehouse_id>
+				<selector>[name='des_warehouse_id']</selector>
+				<input>select</input>
+			</des_warehouse_id>
+			<notifier_emails>
+				<selector>[name='notifier_emails']</selector>
+			</notifier_emails>
+			<reason>
+				<selector>[name='reason']</selector>
+				<input>textarea</input>
+			</reason>
+		</fields>
+	</general_information>
+</sections>

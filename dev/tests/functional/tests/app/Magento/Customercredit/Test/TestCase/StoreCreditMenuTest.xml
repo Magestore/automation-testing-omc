@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Customercredit\Test\TestCase\StoreCreditMenuTest" summary="Navigate through admin menu" ticketId="MAGETWO-12312">
+        <variation name="Manage Credit Products">
+            <data name="menuItem" xsi:type="string">Store Credit > Manage Credit Products</data>
+            <data name="pageTitle" xsi:type="string">Credit products</data>
+            <data name="buttons" xsi:type="string">Add Credit Product</data>
+            <data name="columns" xsi:type="string">ID,Name,SKU,Quantity,Visibility,Status,Websites,Action</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertPageActionButtonIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertDataGridIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertDataGridToolbarIsAvailable"/>
+        </variation>
+        <variation name="Manage Customers Using Credit">
+            <data name="menuItem" xsi:type="string">Store Credit > Manage Customers Using Credit</data>
+            <data name="pageTitle" xsi:type="string">Manage Customers Using Credit</data>
+            <data name="columns" xsi:type="string">ID, Name, Email, Credit Balance,Group, Telephone, ZIP, Country, State/Province, Customer Since, Website, Action</data>
+            <data name="gridMassaction" xsi:type="boolean">false</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertDataGridIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertDataGridToolbarIsAvailable"/>
+        </variation>
+        <variation name="Manage Credit Transactions">
+            <data name="menuItem" xsi:type="string">Store Credit > Manage Credit Transactions</data>
+            <data name="pageTitle" xsi:type="string">Credit Transaction</data>
+            <data name="columns" xsi:type="string">Transaction_Id,Transaction Type,Transaction Detail,Name,Email,Added/Deducted,Credit Balance,Transaction Time,Status</data>
+            <data name="gridMassaction" xsi:type="boolean">false</data>
+            <data name="exportData" xsi:type="boolean">false</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertDataGridIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\AssertDataGridToolbarIsAvailable"/>
+        </variation>
+        <variation name="Customer Credit Report">
+            <data name="menuItem" xsi:type="string">Store Credit > Customer Credit Report</data>
+            <data name="pageTitle" xsi:type="string">Customer Credit Report</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\ReportTransactionDashboard\AssertReportTransactionDashboardAvailable"/>
+        </variation>
+        <variation name="Settings">
+            <data name="menuItem" xsi:type="string">Store Credit > Settings</data>
+            <data name="pageTitle" xsi:type="string">Configuration</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+    </testCase>
+</config>

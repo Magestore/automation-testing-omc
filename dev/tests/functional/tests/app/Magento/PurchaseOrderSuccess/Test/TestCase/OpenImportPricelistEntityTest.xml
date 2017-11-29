@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\PurchaseOrderSuccess\Test\TestCase\OpenImportPricelistEntityTest" summary="open modal-slide for import pricelist" ticketId="MAGESTORE-1">
+        <variation name="OpenImportPricelistEntityTestVariation1">
+            <data name="pageTitle" xsi:type="string">Import products</data>
+            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Form\AssertImportPricelistFormIsAvailable" />
+        </variation>
+    </testCase>
+</config>
