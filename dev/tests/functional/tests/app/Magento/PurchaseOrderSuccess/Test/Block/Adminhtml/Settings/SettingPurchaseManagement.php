@@ -30,7 +30,12 @@ class SettingPurchaseManagement extends Block
 
 	public function getProductConfigSection()
 	{
-		return $this->_rootElement->find('#purchaseordersuccess_product_config-head');
+		return $this->_rootElement->find('#purchaseordersuccess_product_config');
+	}
+
+	public function openProductConfigSection()
+	{
+		$this->_rootElement->find('#purchaseordersuccess_product_config-head')->click();
 	}
 
 }
