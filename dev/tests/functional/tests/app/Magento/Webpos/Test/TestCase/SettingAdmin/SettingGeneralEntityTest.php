@@ -12,7 +12,7 @@
 namespace Magento\Webpos\Test\TestCase\SettingAdmin;
 
 use Magento\Backend\Test\Page\Adminhtml\SystemConfigEdit;
-use Magento\Webpos\Test\Fixture\ConfigData;
+use Magento\Config\Test\Fixture\ConfigData;
 use Magento\Mtf\TestCase\Injectable;
 
 class SettingGeneralEntityTest extends Injectable
