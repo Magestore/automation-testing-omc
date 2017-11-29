@@ -10,6 +10,10 @@ namespace Magento\Storepickup\Test\Block\Adminhtml\Store;
 
 use Magento\Storepickup\Test\Block\Adminhtml\StorepickupGrid;
 
+/**
+ * Class StoreGrid
+ * @package Magento\Storepickup\Test\Block\Adminhtml\Store
+ */
 class StoreGrid extends StorepickupGrid
 {
 

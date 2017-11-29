@@ -10,6 +10,10 @@ namespace Magento\Rewardpoints\Test\Block\Adminhtml\Transaction;
 
 use Magento\Rewardpoints\Test\Block\Adminhtml\GridPageActions;
 
+/**
+ * Class TransactionGridPageActions
+ * @package Magento\Rewardpoints\Test\Block\Adminhtml\Transaction
+ */
 class TransactionGridPageActions extends GridPageActions
 {
 

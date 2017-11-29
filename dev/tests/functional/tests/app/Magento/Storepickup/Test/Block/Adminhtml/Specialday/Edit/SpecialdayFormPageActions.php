@@ -10,6 +10,10 @@ namespace Magento\Storepickup\Test\Block\Adminhtml\Specialday\Edit;
 
 use Magento\Backend\Test\Block\FormPageActions;
 
+/**
+ * Class SpecialdayFormPageActions
+ * @package Magento\Storepickup\Test\Block\Adminhtml\Specialday\Edit
+ */
 class SpecialdayFormPageActions extends FormPageActions
 {
 

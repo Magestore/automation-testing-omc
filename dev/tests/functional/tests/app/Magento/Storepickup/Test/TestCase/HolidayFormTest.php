@@ -11,6 +11,10 @@ namespace Magento\Storepickup\Test\TestCase;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Storepickup\Test\Page\Adminhtml\HolidayIndex;
 
+/**
+ * Class HolidayFormTest
+ * @package Magento\Storepickup\Test\TestCase
+ */
 class HolidayFormTest extends Injectable
 {
     /**
@@ -26,6 +30,9 @@ class HolidayFormTest extends Injectable
         $this->holidayIndex = $holidayIndex;
     }
 
+    /**
+     * @param $button
+     */
     public function test($button)
     {
         $this->holidayIndex->open();

@@ -11,8 +11,15 @@ namespace Magento\Storepickup\Test\Block;
 use Magento\Mtf\Block\Block;
 use Magento\Mtf\Client\Locator;
 
+/**
+ * Class StorepickupOverlaybg
+ * @package Magento\Storepickup\Test\Block
+ */
 class StorepickupOverlaybg extends Block
 {
+    /**
+     *
+     */
     public function waitingForNotVisible()
     {
         $this->waitForElementNotVisible('.overlay-bg', Locator::SELECTOR_CSS);

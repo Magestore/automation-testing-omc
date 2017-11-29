@@ -11,9 +11,16 @@ namespace Magento\Rewardpoints\Test\Constraint\ManagePointBalances;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Rewardpoints\Test\Page\Adminhtml\ManagePointBalancesImportPoints;
 
+/**
+ * Class AssertImportPointsFormAvailable
+ * @package Magento\Rewardpoints\Test\Constraint\ManagePointBalances
+ */
 class AssertImportPointsFormAvailable extends AbstractConstraint
 {
 
+    /**
+     * @param ManagePointBalancesImportPoints $importPoints
+     */
     public function processAssert(ManagePointBalancesImportPoints $importPoints)
     {
         \PHPUnit_Framework_Assert::assertTrue(

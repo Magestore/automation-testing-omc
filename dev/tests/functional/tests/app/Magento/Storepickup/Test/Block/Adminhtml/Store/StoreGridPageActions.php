@@ -10,6 +10,10 @@ namespace Magento\Storepickup\Test\Block\Adminhtml\Store;
 
 use Magento\Storepickup\Test\Block\Adminhtml\GridPageActions;
 
+/**
+ * Class StoreGridPageActions
+ * @package Magento\Storepickup\Test\Block\Adminhtml\Store
+ */
 class StoreGridPageActions extends GridPageActions
 {
 

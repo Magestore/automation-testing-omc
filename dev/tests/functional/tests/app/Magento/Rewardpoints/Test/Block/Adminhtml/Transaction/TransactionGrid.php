@@ -10,6 +10,10 @@ namespace Magento\Rewardpoints\Test\Block\Adminhtml\Transaction;
 
 use Magento\Rewardpoints\Test\Block\Adminhtml\RewardGrid;
 
+/**
+ * Class TransactionGrid
+ * @package Magento\Rewardpoints\Test\Block\Adminhtml\Transaction
+ */
 class TransactionGrid extends RewardGrid
 {
 

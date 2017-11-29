@@ -10,6 +10,10 @@ namespace Magento\Storepickup\Test\Block\Adminhtml\Specialday;
 
 use Magento\Storepickup\Test\Block\Adminhtml\StorepickupGrid;
 
+/**
+ * Class SpecialdayGrid
+ * @package Magento\Storepickup\Test\Block\Adminhtml\Specialday
+ */
 class SpecialdayGrid extends StorepickupGrid
 {
 

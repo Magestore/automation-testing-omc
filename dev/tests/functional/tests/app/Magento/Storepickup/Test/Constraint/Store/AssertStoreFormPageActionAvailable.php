@@ -11,9 +11,17 @@ namespace Magento\Storepickup\Test\Constraint\Store;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Storepickup\Test\Page\Adminhtml\StoreNew;
 
+/**
+ * Class AssertStoreFormPageActionAvailable
+ * @package Magento\Storepickup\Test\Constraint\Store
+ */
 class AssertStoreFormPageActionAvailable extends AbstractConstraint
 {
 
+    /**
+     * @param StoreNew $storeNew
+     * @param $buttons
+     */
     public function processAssert(StoreNew $storeNew, $buttons)
     {
         if ($buttons !== null) {

@@ -10,6 +10,10 @@ namespace Magento\Storepickup\Test\Block\Adminhtml\Schedule\Edit;
 
 use Magento\Backend\Test\Block\FormPageActions;
 
+/**
+ * Class ScheduleFormPageActions
+ * @package Magento\Storepickup\Test\Block\Adminhtml\Schedule\Edit
+ */
 class ScheduleFormPageActions extends FormPageActions
 {
 

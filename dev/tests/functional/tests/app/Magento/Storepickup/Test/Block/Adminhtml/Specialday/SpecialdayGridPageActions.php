@@ -10,6 +10,10 @@ namespace Magento\Storepickup\Test\Block\Adminhtml\Specialday;
 
 use Magento\Storepickup\Test\Block\Adminhtml\GridPageActions;
 
+/**
+ * Class SpecialdayGridPageActions
+ * @package Magento\Storepickup\Test\Block\Adminhtml\Specialday
+ */
 class SpecialdayGridPageActions extends GridPageActions
 {
 

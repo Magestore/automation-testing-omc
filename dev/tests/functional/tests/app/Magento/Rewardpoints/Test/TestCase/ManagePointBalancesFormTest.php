@@ -11,6 +11,10 @@ namespace Magento\Rewardpoints\Test\TestCase;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Rewardpoints\Test\Page\Adminhtml\ManagePointBalancesIndex;
 
+/**
+ * Class ManagePointBalancesFormTest
+ * @package Magento\Rewardpoints\Test\TestCase
+ */
 class ManagePointBalancesFormTest extends Injectable
 {
     /**
@@ -18,11 +22,17 @@ class ManagePointBalancesFormTest extends Injectable
      */
     protected $managePointBalancesIndex;
 
+    /**
+     * @param ManagePointBalancesIndex $managePointBalancesIndex
+     */
     public function __inject(ManagePointBalancesIndex $managePointBalancesIndex)
     {
         $this->managePointBalancesIndex = $managePointBalancesIndex;
     }
 
+    /**
+     * @param $button
+     */
     public function test($button)
     {
         $this->managePointBalancesIndex->open();

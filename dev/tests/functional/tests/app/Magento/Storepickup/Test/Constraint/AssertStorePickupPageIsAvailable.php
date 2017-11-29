@@ -12,9 +12,17 @@ use Magento\Cms\Test\Page\CmsPage;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Storepickup\Test\Page\StorepickupIndex;
 
+/**
+ * Class AssertStorePickupPageIsAvailable
+ * @package Magento\Storepickup\Test\Constraint
+ */
 class AssertStorePickupPageIsAvailable extends AbstractConstraint
 {
 
+    /**
+     * @param StorepickupIndex $storepickupIndex
+     * @param $pageTitle
+     */
     public function processAssert(StorepickupIndex $storepickupIndex, $pageTitle)
     {
         $storepickupIndex->getStorepickupOverlaybg()->waitForElementNotVisible('.overlay-bg');

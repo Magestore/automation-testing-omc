@@ -10,9 +10,16 @@ namespace Magento\Rewardpoints\Test\Constraint\Transaction;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Rewardpoints\Test\Page\Adminhtml\TransactionNew;
 
+/**
+ * Class AssertTransactionFormAvailable
+ * @package Magento\Rewardpoints\Test\Constraint\Transaction
+ */
 class AssertTransactionFormAvailable extends AbstractConstraint
 {
 
+    /**
+     * @param TransactionNew $transactionNew
+     */
     public function processAssert(TransactionNew $transactionNew)
     {
         \PHPUnit_Framework_Assert::assertTrue(
