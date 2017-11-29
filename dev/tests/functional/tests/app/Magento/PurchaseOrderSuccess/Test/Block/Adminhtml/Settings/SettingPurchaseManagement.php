@@ -13,16 +13,29 @@ class SettingPurchaseManagement extends Block
 {
     protected   $idForm = '#config-edit-form';
     protected $firstFieldForm = '#purchaseordersuccess_product_config_products_from';
+
     public function isVisibleForm()
     {
         return $this->_rootElement->find($this->idForm)->isVisible();
     }
+
     public function isFirstFieldFormVisible()
     {
         return $this->_rootElement->find($this->firstFieldForm)->isVisible();
     }
+
     public function getNameConfigurationBarcode(){
         return $this->_rootElement->find('#system_config_tabs > div.config-nav-block.admin__page-nav._collapsed._show > ul > li.admin__page-nav-item.item.separator-top._active > a')->getText();
     }
+
+	public function getProductConfigSection()
+	{
+		return $this->_rootElement->find('#purchaseordersuccess_product_config');
+	}
+
+	public function openProductConfigSection()
+	{
+		$this->_rootElement->find('#purchaseordersuccess_product_config-head')->click();
+	}
 
 }
