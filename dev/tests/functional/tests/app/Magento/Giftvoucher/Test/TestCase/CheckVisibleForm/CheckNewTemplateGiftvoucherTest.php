@@ -10,7 +10,6 @@ namespace Magento\Giftvoucher\Test\TestCase\CheckVisibleForm;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Giftvoucher\Test\Page\Adminhtml\GiftTemplateIndex;
-
 /**
  * Class CheckNewTemplateGiftvoucherTest
  * @package Magento\Giftvoucher\Test\TestCase

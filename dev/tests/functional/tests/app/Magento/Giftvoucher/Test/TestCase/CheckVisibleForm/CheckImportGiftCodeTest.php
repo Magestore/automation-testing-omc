@@ -10,7 +10,6 @@ namespace Magento\Giftvoucher\Test\TestCase\CheckVisibleForm;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Giftvoucher\Test\Page\Adminhtml\GiftcodeIndex;
-
 /**
  * Class CheckImportGiftCodeTest
  * @package Magento\Giftvoucher\Test\TestCase

@@ -2,17 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: ADMIN
- * Date: 11/23/2017
- * Time: 2:42 PM
+ * Date: 11/28/2017
+ * Time: 3:19 PM
  */
 
-namespace Magento\Storepickup\Test\TestCase;
+namespace Magento\Customercredit\Test\TestCase;
 
 use Magento\Cms\Test\Page\CmsIndex;
-use Magento\Cms\Test\Page\CmsPage;
 use Magento\Mtf\TestCase\Injectable;
 
-class StorePickupFrontendMenuTest extends Injectable
+class StoreCreditFrontendMenuTest extends Injectable
 {
     /**
      * @var CmsIndex
@@ -30,7 +29,7 @@ class StorePickupFrontendMenuTest extends Injectable
     public function test()
     {
         $this->cmsIndex->open();
-        $this->cmsIndex->getLinksBlock()->openLink('Store pickup');
+        $this->cmsIndex->getLinksBlock()->openLink('Buy Store Credit');
         $this->cmsIndex->getCmsPageBlock()->waitPageInit();
     }
 }
