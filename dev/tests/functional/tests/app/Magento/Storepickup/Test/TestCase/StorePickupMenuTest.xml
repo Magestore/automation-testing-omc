@@ -59,7 +59,10 @@
         <variation name="Settings Menu Test">
             <data name="menuItem" xsi:type="string">Store pickup > Settings</data>
             <data name="pageTitle" xsi:type="string">Configuration</data>
+            <data name="configItem" xsi:type="string">Store pickup</data>
+            <data name="sectionNames" xsi:type="string">General,Service API,Store Search</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\Settings\AssertSettingsPageAvailable"/>
         </variation>
     </testCase>
 </config>

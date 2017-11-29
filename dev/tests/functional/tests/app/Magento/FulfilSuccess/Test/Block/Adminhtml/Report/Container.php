@@ -41,4 +41,28 @@ class Container extends Block
     {
         return $this->_rootElement->find('.icon-icon-Back-end-fulfilwarehousedaily');
     }
+    public function getTitleOrderSection()
+    {
+        return $this->_rootElement->find('#ordersuccess_order-head');
+    }
+    public function getFirstFieldOrder()
+    {
+        return $this->_rootElement->find('#ordersuccess_order_verify');
+    }
+    public function getTitleFulfillmentSection()
+    {
+        return $this->_rootElement->find('#fulfilsuccess_scanning-head');
+    }
+    public function getFirstFieldFulfillment()
+    {
+        return $this->_rootElement->find('#fulfilsuccess_scanning_barcode');
+    }
+    public function getTitleDropshipSection()
+    {
+        return $this->_rootElement->find('#dropshipsuccess_general-head');
+    }
+    public function getFirstFieldDropship()
+    {
+        return $this->_rootElement->find('#dropshipsuccess_general_submit_request_to_supplier');
+    }
 }

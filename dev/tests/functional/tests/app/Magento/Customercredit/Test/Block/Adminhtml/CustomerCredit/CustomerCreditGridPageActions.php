@@ -10,6 +10,10 @@ namespace Magento\Customercredit\Test\Block\Adminhtml\CustomerCredit;
 
 use Magento\Customercredit\Test\Block\Adminhtml\GridPageActions;
 
+/**
+ * Class CustomerCreditGridPageActions
+ * @package Magento\Customercredit\Test\Block\Adminhtml\CustomerCredit
+ */
 class CustomerCreditGridPageActions extends GridPageActions
 {
 
