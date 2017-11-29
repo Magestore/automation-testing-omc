@@ -6,7 +6,7 @@
  * Time: 17:03
  */
 
-namespace Magento\Giftvoucher\Test\TestCase;
+namespace Magento\Giftvoucher\Test\TestCase\CheckVisibleForm;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Giftvoucher\Test\Page\Adminhtml\GiftvoucherProductIndex;
@@ -48,5 +48,6 @@ class CheckAddGiftCardProductTest extends Injectable
     public function test()
     {
         $this->productGrid->open();
-        $this->productGrid->getGridPageActionBlock()->getAddGiftCardProduct()->click();}
+        $this->productGrid->getGridPageActionBlock()->getAddGiftCardProduct()->click();
+    }
 }
