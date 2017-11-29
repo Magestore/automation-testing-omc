@@ -130,17 +130,23 @@
         <variation name="FulfilmentMenuGridTest14">
             <data name="menuItem" xsi:type="string">Fulfillment > Order Configuration</data>
             <data name="pageTitle" xsi:type="string">Configuration</data>
+            <data name="titleOrderSection" xsi:type="string">Order Configuration</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\Setting\AssertSettingOrderFieldAndTitleIsAvailable" />
         </variation>
         <variation name="FulfilmentMenuGridTest15">
             <data name="menuItem" xsi:type="string">Fulfillment > Fulfillment Configuration</data>
             <data name="pageTitle" xsi:type="string">Configuration</data>
+            <data name="titleFulfillmentSection" xsi:type="string">Barcode Attribute</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\Setting\AssertSettingFulfillmentFieldAndTitleIsAvailable" />
         </variation>
         <variation name="FulfilmentMenuGridTest16">
             <data name="menuItem" xsi:type="string">Fulfillment > Dropship Configuration</data>
             <data name="pageTitle" xsi:type="string">Configuration</data>
+            <data name="titleDropshipSection" xsi:type="string">General</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\Setting\AssertSettingDropshipFieldAndTitleIsAvailable" />
         </variation>
     </testCase>
 </config>
