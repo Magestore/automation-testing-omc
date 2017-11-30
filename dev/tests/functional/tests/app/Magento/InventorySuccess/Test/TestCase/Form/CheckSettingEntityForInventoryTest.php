@@ -30,6 +30,9 @@ class CheckSettingEntityForInventoryTest extends Injectable
     public function test()
     {
         $this->settingInventoryIndex->open();
+	    if (!$this->settingInventoryIndex->getBlockSettingConfiguation()->getStockControlSection()->isVisible()) {
+	    	$this->settingInventoryIndex->getBlockSettingConfiguation()->openStockControlSection();
+	    }
         sleep(2);
     }
 }

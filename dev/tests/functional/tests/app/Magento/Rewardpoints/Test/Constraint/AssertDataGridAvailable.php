@@ -12,9 +12,17 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Rewardpoints\Test\Page\Adminhtml\EarningRatesIndex;
 use Magento\Storepickup\Test\Page\Adminhtml\StoreIndex;
 
+/**
+ * Class AssertDataGridAvailable
+ * @package Magento\Rewardpoints\Test\Constraint
+ */
 class AssertDataGridAvailable extends AbstractConstraint
 {
 
+    /**
+     * @param EarningRatesIndex $earningRatesIndex
+     * @param null $columns
+     */
     public function processAssert(EarningRatesIndex $earningRatesIndex, $columns = null)
     {
         $earningRatesIndex->getEarningRatesGrid()->waitingForGridVisible();

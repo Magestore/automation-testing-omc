@@ -10,6 +10,10 @@ namespace Magento\Storepickup\Test\Block\Adminhtml\Tag;
 
 use Magento\Storepickup\Test\Block\Adminhtml\StorepickupGrid;
 
+/**
+ * Class TagGrid
+ * @package Magento\Storepickup\Test\Block\Adminhtml\Tag
+ */
 class TagGrid extends StorepickupGrid
 {
 

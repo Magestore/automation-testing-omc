@@ -10,6 +10,10 @@ namespace Magento\Rewardpoints\Test\Block\Adminhtml\ManagePointBalances;
 
 use Magento\Rewardpoints\Test\Block\Adminhtml\RewardGrid;
 
+/**
+ * Class ManagePointBalancesGrid
+ * @package Magento\Rewardpoints\Test\Block\Adminhtml\ManagePointBalances
+ */
 class ManagePointBalancesGrid extends RewardGrid
 {
 

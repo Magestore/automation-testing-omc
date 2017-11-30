@@ -11,9 +11,17 @@ namespace Magento\Customercredit\Test\Constraint;
 use Magento\Customercredit\Test\Page\Adminhtml\CreditProductIndex;
 use Magento\Mtf\Constraint\AbstractConstraint;
 
+/**
+ * Class AssertDataGridToolbarIsAvailable
+ * @package Magento\Customercredit\Test\Constraint
+ */
 class AssertDataGridToolbarIsAvailable extends AbstractConstraint
 {
-
+    /**
+     * @param CreditProductIndex $creditProductIndex
+     * @param bool $gridMassaction
+     * @param bool $exportData
+     */
     public function processAssert(CreditProductIndex $creditProductIndex, $gridMassaction = true, $exportData = true)
     {
         $creditProductIndex->getCreditProductGrid()->waitingForGridVisible();

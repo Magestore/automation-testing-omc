@@ -10,6 +10,10 @@ namespace Magento\Storepickup\Test\TestCase;
 
 use Magento\Backend\Test\TestCase\NavigateMenuTest;
 
+/**
+ * Class StorePickupMenuTest
+ * @package Magento\Storepickup\Test\TestCase
+ */
 class StorePickupMenuTest extends NavigateMenuTest
 {
 

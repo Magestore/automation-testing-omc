@@ -45,7 +45,10 @@
         <variation name="Settings">
             <data name="menuItem" xsi:type="string">Store Credit > Settings</data>
             <data name="pageTitle" xsi:type="string">Configuration</data>
+            <data name="configItem" xsi:type="string">Store Credit</data>
+            <data name="sectionNames" xsi:type="string">General Configuration,Spend Credit On,Email Configuration,Adjust time for Customer Credit reports on total used and total received credit,Style Configuration</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\Settings\AssertSettingsPageAvailable"/>
         </variation>
     </testCase>
 </config>

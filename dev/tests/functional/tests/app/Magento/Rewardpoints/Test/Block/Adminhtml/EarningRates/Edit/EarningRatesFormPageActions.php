@@ -10,6 +10,10 @@ namespace Magento\Rewardpoints\Test\Block\Adminhtml\EarningRates\Edit;
 
 use Magento\Backend\Test\Block\FormPageActions;
 
+/**
+ * Class EarningRatesFormPageActions
+ * @package Magento\Rewardpoints\Test\Block\Adminhtml\EarningRates\Edit
+ */
 class EarningRatesFormPageActions extends FormPageActions
 {
 

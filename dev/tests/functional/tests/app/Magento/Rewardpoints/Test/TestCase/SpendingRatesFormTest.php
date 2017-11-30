@@ -11,6 +11,10 @@ namespace Magento\Rewardpoints\Test\TestCase;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Rewardpoints\Test\Page\Adminhtml\SpendingRatesIndex;
 
+/**
+ * Class SpendingRatesFormTest
+ * @package Magento\Rewardpoints\Test\TestCase
+ */
 class SpendingRatesFormTest extends Injectable
 {
     /**
@@ -18,11 +22,17 @@ class SpendingRatesFormTest extends Injectable
      */
     protected $spendingRatesIndex;
 
+    /**
+     * @param SpendingRatesIndex $spendingRatesIndex
+     */
     public function __inject(SpendingRatesIndex $spendingRatesIndex)
     {
         $this->spendingRatesIndex = $spendingRatesIndex;
     }
 
+    /**
+     * @param $button
+     */
     public function test($button)
     {
         $this->spendingRatesIndex->open();

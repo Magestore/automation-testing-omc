@@ -30,6 +30,9 @@ class EarningRatesFormTest extends Injectable
         $this->earningRatesIndex = $earningRatesIndex;
     }
 
+    /**
+     * @param $button
+     */
     public function test($button)
     {
         $this->earningRatesIndex->open();

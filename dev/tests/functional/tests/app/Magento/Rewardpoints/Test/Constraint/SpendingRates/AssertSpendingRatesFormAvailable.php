@@ -10,9 +10,16 @@ namespace Magento\Rewardpoints\Test\Constraint\SpendingRates;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Rewardpoints\Test\Page\Adminhtml\SpendingRatesNew;
 
+/**
+ * Class AssertSpendingRatesFormAvailable
+ * @package Magento\Rewardpoints\Test\Constraint\SpendingRates
+ */
 class AssertSpendingRatesFormAvailable extends AbstractConstraint
 {
 
+    /**
+     * @param SpendingRatesNew $spendingRatesNew
+     */
     public function processAssert(SpendingRatesNew $spendingRatesNew)
     {
         \PHPUnit_Framework_Assert::assertTrue(

@@ -11,9 +11,17 @@ namespace Magento\Rewardpoints\Test\Constraint;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Rewardpoints\Test\Page\Adminhtml\EarningRatesIndex;
 
+/**
+ * Class AssertPageActionButtonAvailable
+ * @package Magento\Rewardpoints\Test\Constraint
+ */
 class AssertPageActionButtonAvailable extends AbstractConstraint
 {
 
+    /**
+     * @param EarningRatesIndex $earningRatesIndex
+     * @param null $buttons
+     */
     public function processAssert(EarningRatesIndex $earningRatesIndex, $buttons = null)
     {
         $earningRatesIndex->getEarningRatesGrid()->waitingForGridVisible();

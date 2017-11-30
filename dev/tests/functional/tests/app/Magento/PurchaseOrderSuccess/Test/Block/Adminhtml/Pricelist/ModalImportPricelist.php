@@ -12,7 +12,7 @@ use Magento\Mtf\Client\Locator;
 
 class ModalImportPricelist extends Block
 {
-	protected $mainActionsButtonSelector = '//*[@id="html-body"]/div[6]/aside[1]/div[2]/header/div/div/div/button[span = "%s"]';
+	protected $mainActionsButtonSelector = '//aside[contains(@class, "mage-new-video-dialog")]/div[2]/header/div/div/div/button[span = "%s"]';
 
 	public function getTitle()
 	{
@@ -22,15 +22,15 @@ class ModalImportPricelist extends Block
 	public function getCancelButton()
 	{
 		$text = 'Cancel';
-//		return $this->_rootElement->find(sprintf($this->mainActionsButtonSelector, $text), Locator::SELECTOR_XPATH);
-		return $this->_rootElement->find('#html-body > div.modals-wrapper > aside.modal-slide.mage-new-video-dialog.form-inline._show > div.modal-inner-wrap > header > div > div > div > button:nth-child(1)');
+		return $this->_rootElement->find(sprintf($this->mainActionsButtonSelector, $text), Locator::SELECTOR_XPATH);
+//		return $this->_rootElement->find('#html-body > div.modals-wrapper > aside.modal-slide.mage-new-video-dialog.form-inline._show > div.modal-inner-wrap > header > div > div > div > button:nth-child(1)');
 	}
 
 	public function getImportButton()
 	{
 		$text = 'Import';
-//		return $this->_rootElement->find(sprintf($this->mainActionsButtonSelector, $text), Locator::SELECTOR_XPATH);
-		return $this->_rootElement->find('#html-body > div.modals-wrapper > aside.modal-slide.mage-new-video-dialog.form-inline._show > div.modal-inner-wrap > header > div > div > div > button.action-primary');
+		return $this->_rootElement->find(sprintf($this->mainActionsButtonSelector, $text), Locator::SELECTOR_XPATH);
+//		return $this->_rootElement->find('#html-body > div.modals-wrapper > aside.modal-slide.mage-new-video-dialog.form-inline._show > div.modal-inner-wrap > header > div > div > div > button.action-primary');
 
 	}
 

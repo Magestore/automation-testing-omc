@@ -11,9 +11,16 @@ namespace Magento\Storepickup\Test\Constraint\Specialday;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Storepickup\Test\Page\Adminhtml\SpecialdayNew;
 
+/**
+ * Class AssertSpecialdayFormAvailable
+ * @package Magento\Storepickup\Test\Constraint\Specialday
+ */
 class AssertSpecialdayFormAvailable extends AbstractConstraint
 {
 
+    /**
+     * @param SpecialdayNew $specialdayNew
+     */
     public function processAssert(SpecialdayNew $specialdayNew)
     {
         \PHPUnit_Framework_Assert::assertTrue(

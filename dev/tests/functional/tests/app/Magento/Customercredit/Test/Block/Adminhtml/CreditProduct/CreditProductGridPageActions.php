@@ -11,6 +11,10 @@ namespace Magento\Customercredit\Test\Block\Adminhtml\CreditProduct;
 use Magento\Customercredit\Test\Block\Adminhtml\GridPageActions;
 use Magento\Mtf\Client\Locator;
 
+/**
+ * Class CreditProductGridPageActions
+ * @package Magento\Customercredit\Test\Block\Adminhtml\CreditProduct
+ */
 class CreditProductGridPageActions extends GridPageActions
 {
 

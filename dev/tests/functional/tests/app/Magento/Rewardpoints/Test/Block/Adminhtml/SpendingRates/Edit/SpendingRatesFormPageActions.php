@@ -9,6 +9,10 @@ namespace Magento\Rewardpoints\Test\Block\Adminhtml\SpendingRates\Edit;
 
 use Magento\Backend\Test\Block\FormPageActions;
 
+/**
+ * Class SpendingRatesFormPageActions
+ * @package Magento\Rewardpoints\Test\Block\Adminhtml\SpendingRates\Edit
+ */
 class SpendingRatesFormPageActions extends FormPageActions
 {
 

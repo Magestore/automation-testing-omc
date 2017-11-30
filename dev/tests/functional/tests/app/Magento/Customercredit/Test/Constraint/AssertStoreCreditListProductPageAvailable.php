@@ -11,9 +11,16 @@ namespace Magento\Customercredit\Test\Constraint;
 use Magento\Customercredit\Test\Page\CustomercreditListProduct;
 use Magento\Mtf\Constraint\AbstractConstraint;
 
+/**
+ * Class AssertStoreCreditListProductPageAvailable
+ * @package Magento\Customercredit\Test\Constraint
+ */
 class AssertStoreCreditListProductPageAvailable extends AbstractConstraint
 {
-
+    /**
+     * @param CustomercreditListProduct $customercreditListProduct
+     * @param $pageTitle
+     */
     public function processAssert(CustomercreditListProduct $customercreditListProduct, $pageTitle)
     {
         \PHPUnit_Framework_Assert::assertEquals(
