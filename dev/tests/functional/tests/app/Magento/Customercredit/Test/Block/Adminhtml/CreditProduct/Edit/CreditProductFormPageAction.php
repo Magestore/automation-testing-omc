@@ -20,7 +20,7 @@ class CreditProductFormPageAction extends FormPageActions
     /**
      * @var string
      */
-    protected $actionButton = './/button[span="%s"]';
+    protected $actionButton = './/button[@id="%s"]';
 
     /**
      * @param $button

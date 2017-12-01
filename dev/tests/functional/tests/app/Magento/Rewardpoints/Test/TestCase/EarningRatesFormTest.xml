@@ -2,9 +2,9 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Rewardpoints\Test\TestCase\EarningRatesFormTest" summary="earning rates page test action buttons" ticketId="MAGETWO-12312">
         <variation name="Add new earning rates form test">
-            <data name="button" xsi:type="string">Add New Earning Rate</data>
+            <data name="button" xsi:type="string">add</data>
             <data name="pageTitle" xsi:type="string">New Earning Rate</data>
-            <data name="buttons" xsi:type="string">Back,Reset,Save and Continue Edit,Save Earning Rate</data>
+            <data name="buttons" xsi:type="string">back,reset,save_and_continue,save</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreFormPageActionAvailable" />
             <constraint name="Magento\Rewardpoints\Test\Constraint\EarningRates\AssertEarningRatesFormAvailable" />
