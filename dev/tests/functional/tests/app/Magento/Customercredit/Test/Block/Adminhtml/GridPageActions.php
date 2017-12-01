@@ -20,7 +20,7 @@ class GridPageActions extends PageActions
     /**
      * @var string
      */
-    protected $actionButton = './/button[span="%s"]';
+    protected $actionButton = './/button[@id="%s"]';
 
     /**
      * @param $button

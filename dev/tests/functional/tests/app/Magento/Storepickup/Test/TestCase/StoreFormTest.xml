@@ -2,17 +2,17 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Storepickup\Test\TestCase\StoreFormTest" summary="store page test action buttons" ticketId="MAGETWO-12312">
         <variation name="Add New Store form test">
-            <data name="button" xsi:type="string">Add New Store</data>
+            <data name="button" xsi:type="string">add</data>
             <data name="pageTitle" xsi:type="string">New Store</data>
-            <data name="buttons" xsi:type="string">Back,Reset,Save and Continue Edit,Save and New,Save Store</data>
+            <data name="buttons" xsi:type="string">back,reset,saveandcontinue,new-button,save</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreFormPageActionAvailable" />
             <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreFormAvailable"/>
         </variation>
         <variation name="Import Store form test">
-            <data name="button" xsi:type="string">Import Store</data>
+            <data name="button" xsi:type="string">importstore</data>
             <data name="pageTitle" xsi:type="string">Import Stores</data>
-            <data name="buttons" xsi:type="string">Back,Import Stores</data>
+            <data name="buttons" xsi:type="string">back,save</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreFormPageActionAvailable" />
             <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreImportStoreFormAvailable"/>
