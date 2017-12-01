@@ -24,11 +24,11 @@ class AssertSettingFulfillmentFieldAndTitleIsAvailable extends AbstractConstrain
         \PHPUnit_Framework_Assert::assertEquals(
             $titleFulfillmentSection,
             $reportIndex->getContainer()->getTitleFulfillmentSection()->getText(),
-            'Title Fulfillment Setting Section Is not visible.'
+            'Title Order Section on the FULFILMENT CONFIGURATION fulfilment was not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $reportIndex->getContainer()->getFirstFieldFulfillment()->isVisible(),
-            'On The Backend Page, the Field Section Verify Fulfillment Setting Of the Extension was not visible.'
+            'On The Backend Page, the Field Section FULFILMENT CONFIGURATION Setting Of the Extension was not visible.'
         );
     }
 
@@ -37,6 +37,6 @@ class AssertSettingFulfillmentFieldAndTitleIsAvailable extends AbstractConstrain
      */
     public function toString()
     {
-        return 'On The Backend Page, all the elements Button in the Grid Header Page Of the Extension Fulfilment was visible successfully.';
+        return 'On The Backend Page, all the elements include: fields and titles in the FULFILMENT CONFIGURATION Of the Fulfilment Extension Fulfilment was visible successfully.';
     }
 }
