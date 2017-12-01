@@ -6,8 +6,10 @@
  * Time: 10:02
  */
 namespace Magento\BarcodeSuccess\Test\Block\Adminhtml\Form;
-use Magento\Ui\Test\Block\Adminhtml\FormSections;
-class BarcodeGenerateFormSection extends FormSections
+
+use Magento\InventorySuccess\Test\Block\Adminhtml\FormSection;
+
+class BarcodeGenerateFormSection extends FormSection
 {
     /**
      * @var $reason

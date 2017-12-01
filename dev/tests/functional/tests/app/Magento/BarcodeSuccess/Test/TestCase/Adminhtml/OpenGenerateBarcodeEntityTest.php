@@ -25,6 +25,5 @@ class OpenGenerateBarcodeEntityTest extends Injectable
     {
         $this->barcodeIndex->open();
         $this->barcodeIndex->getManageBarcodes()->generateBarcode();
-        sleep(2);
     }
 }

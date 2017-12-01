@@ -16,9 +16,7 @@ class AssertOpenImportBarcodeFormIsAvailable extends AbstractConstraint
 {
 	public function processAssert(BarcodeImportIndex $barcodeImportIndex)
 	{
-        /**
-         *  $barcodeImportIndex
-         */
+		$barcodeImportIndex->getFormBarcodeImport()->waitPageToLoad();
         \PHPUnit_Framework_Assert::assertTrue(
             $barcodeImportIndex->getFormBarcodeImport()->getForm()->isVisible(),
             'Form is not exist'

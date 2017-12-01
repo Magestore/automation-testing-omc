@@ -15,9 +15,6 @@ class AssertOpenScanBarcodeFormIsAvailable extends AbstractConstraint
 {
     public function processAssert(BarcodeScanIndex $barcodeScanIndex)
     {
-        /**
-         *  $barcodeScanIndex
-         */
         \PHPUnit_Framework_Assert::assertTrue(
             $barcodeScanIndex->getBlockSearchBarcodeScanIndex()->inputIsVisible(),
             'Block input scan search is not shown'

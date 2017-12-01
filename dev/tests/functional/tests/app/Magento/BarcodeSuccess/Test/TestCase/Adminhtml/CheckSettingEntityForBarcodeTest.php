@@ -33,6 +33,5 @@ class CheckSettingEntityForBarcodeTest extends Injectable
 	    if (!$this->barcodeSettingsIndex->getBlockSettingConfiguation()->getGeneralSection()->isVisible()) {
 		    $this->barcodeSettingsIndex->getBlockSettingConfiguation()->openGeneralSection();
 	    }
-        sleep(2);
     }
 }

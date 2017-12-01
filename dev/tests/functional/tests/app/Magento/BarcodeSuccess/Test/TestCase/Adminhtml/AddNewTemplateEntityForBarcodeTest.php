@@ -25,6 +25,5 @@ class AddNewTemplateEntityForBarcodeTest extends Injectable
     {
         $this->barcodeTemplateIndex->open();
         $this->barcodeTemplateIndex->getAddNewTemplate()->addNewTemplate();
-        sleep(2);
     }
 }

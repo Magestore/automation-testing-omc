@@ -24,6 +24,6 @@ class CheckPrintSectionEntityForBarcodeTest extends Injectable
     public function test()
     {
         $this->barcodePrintIndex->open();
-        sleep(2);
+        $this->barcodePrintIndex->getFormBarcodePrintIndex()->waitPageToLoad();
     }
 }

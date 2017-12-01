@@ -15,6 +15,7 @@ class AssertOpenPrintBarcodeFormIsAvailable extends AbstractConstraint
 {
     public function processAssert(BarcodePrintIndex $barcodePrintIndex)
     {
+    	$barcodePrintIndex->getFormBarcodePrintIndex()->waitPageToLoad();
         \PHPUnit_Framework_Assert::assertTrue(
             $barcodePrintIndex->getFormBarcodePrintIndex()->getSection('barcode_template_information')->isVisible(),
             'Section barcode_template_information is not shown'

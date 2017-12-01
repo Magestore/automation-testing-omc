@@ -29,6 +29,5 @@ class ViewNewTemplateEntityForBarcodeTest extends Injectable
     public function test()
     {
         $this->barcodeViewTemplateIndex->open();
-        sleep(2);
     }
 }

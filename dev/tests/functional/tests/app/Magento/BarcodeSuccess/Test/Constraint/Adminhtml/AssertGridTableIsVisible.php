@@ -16,7 +16,7 @@ class AssertGridTableIsVisible extends AbstractConstraint
 {
 	public function processAssert(BarcodePrintIndex $barcodePrintIndex)
 	{
-		sleep(1);
+		$barcodePrintIndex->getFormBarcodePrintIndex()->waitPageToLoad();
 		\PHPUnit_Framework_Assert::assertTrue(
             $barcodePrintIndex->getPrintBarcodeGrid()->TableIsVisible(),
 			'Grid Table is not shown'

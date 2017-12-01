@@ -29,6 +29,5 @@ class CheckInputScanEntityForBarcodeTest extends Injectable
     public function test()
     {
         $this->barcodeScanIndex->open();
-        sleep(2);
     }
 }

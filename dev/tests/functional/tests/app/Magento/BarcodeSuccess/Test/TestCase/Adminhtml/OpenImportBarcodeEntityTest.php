@@ -25,6 +25,5 @@ class OpenImportBarcodeEntityTest extends Injectable
     {
         $this->barcodeIndex->open();
         $this->barcodeIndex->getManageBarcodes()->importBarcode();
-        sleep(2);
     }
 }

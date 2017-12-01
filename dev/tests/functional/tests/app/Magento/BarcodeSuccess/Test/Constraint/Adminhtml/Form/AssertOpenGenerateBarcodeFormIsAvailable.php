@@ -15,9 +15,8 @@ class AssertOpenGenerateBarcodeFormIsAvailable extends AbstractConstraint
 {
     public function processAssert(BarcodeGenerateIndex $barcodeGenerateIndex)
     {
-        /**
-         *  $barcodeImportIndex
-         */
+
+    	$barcodeGenerateIndex->getFormBarcodeGenerate()->waitPageToLoad();
         \PHPUnit_Framework_Assert::assertTrue(
             $barcodeGenerateIndex->getFormBarcodeGenerate()->getSection('os_barcode_generate_form_general')->isVisible(),
             'Section os_barcode_generate_form_general is not shown'
