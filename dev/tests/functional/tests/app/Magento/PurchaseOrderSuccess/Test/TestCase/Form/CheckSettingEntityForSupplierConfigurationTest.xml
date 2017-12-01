@@ -3,9 +3,9 @@
     <testCase name="Magento\PurchaseOrderSuccess\Test\TestCase\Form\CheckSettingEntityForSupplierConfigurationTest" summary="Check form, page left supplier setting" ticketId="MAGESTORE-1">
         <variation name="CheckSettingEntityForSupplierConfigurationTestVariation1">
             <data name="pageTitle" xsi:type="string">Configuration</data>
-            <data name="button" xsi:type="string">Save Config</data>
-            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\AssertGridPageActionButtonImportIsVisible" />
+            <data name="buttons" xsi:type="string">save</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
             <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Form\AssertSettingSupplierConfigurationFormIsAvailable" />
         </variation>
     </testCase>

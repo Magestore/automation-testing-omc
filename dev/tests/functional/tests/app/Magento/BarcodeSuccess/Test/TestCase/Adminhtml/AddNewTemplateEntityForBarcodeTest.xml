@@ -9,7 +9,10 @@
     <testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\AddNewTemplateEntityForBarcodeTest" summary="Navigate through Barcode menu then add new template" ticketId="MAGESTORE-1">
         <variation name="AddNewTemplateForBarcodeTestVariation1">
             <data name="pageTitle" xsi:type="string">Add a New Barcode Template</data>
+            <data name="buttons" xsi:type="string">back, save</data>
+
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
         </variation>
     </testCase>
 </config>

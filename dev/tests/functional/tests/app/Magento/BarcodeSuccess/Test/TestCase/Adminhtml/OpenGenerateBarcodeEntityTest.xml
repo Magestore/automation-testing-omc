@@ -9,7 +9,7 @@
     <testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\OpenGenerateBarcodeEntityTest" summary="Navigate through Barcode menu then click button generate barcode" ticketId="MAGESTORE-1">
         <variation name="GenerateBarcodeFromManageBarcodesTestVariation1">
             <data name="pageTitle" xsi:type="string">Generate Barcode</data>
-            <data name="buttons" xsi:type="string">Back, Generate</data>
+            <data name="buttons" xsi:type="string">back, save</data>
 
             <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\Form\AssertOpenGenerateBarcodeFormIsAvailable" />
             <constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />

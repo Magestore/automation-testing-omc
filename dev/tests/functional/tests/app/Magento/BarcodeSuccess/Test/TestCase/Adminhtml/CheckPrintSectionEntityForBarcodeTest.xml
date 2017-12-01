@@ -3,7 +3,7 @@
     <testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\CheckPrintSectionEntityForBarcodeTest" summary="Navigate through Barcode menu then click button generate barcode" ticketId="MAGESTORE-1">
         <variation name="CheckPrintSectionEntityForBarcodeTestVariation1">
             <data name="pageTitle" xsi:type="string">Barcode Printing Configuration</data>
-            <data name="buttons" xsi:type="string">Back, Print</data>
+            <data name="buttons" xsi:type="string">back, print</data>
 
             <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\Form\AssertOpenPrintBarcodeFormIsAvailable" />
             <constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />

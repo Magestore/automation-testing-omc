@@ -9,7 +9,7 @@
 	<testCase name="Magento\InventorySuccess\Test\TestCase\Form\InventoryStocktakingAddStocktakingFormTest" summary="Inventory - Stocktaking - Add stocktaking form test" ticketId="MAGESTORE-1">
 		<variation name="InventoryStocktakingAddStocktakingFormTestVariation1">
 			<data name="pageTitle" xsi:type="string">Add New Stocktaking</data>
-			<data name="buttons" xsi:type="string">Prepare Product List, Start stocktake</data>
+			<data name="buttons" xsi:type="string">verify, start</data>
 
 			<constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
 			<constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
