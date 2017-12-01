@@ -23,6 +23,7 @@ class AssertAdjustStockFormIsAvailable extends AbstractConstraint
 				'fieldName' => 'warehouse_id'
 			],
 		];
+		$adjustStockNew->getAdjustStockForm()->waitPageToLoad();
 		foreach ($sectionList as $section) {
 			$adjustStockNew->getAdjustStockForm()->openSection($section['sectionName']);
 			\PHPUnit_Framework_Assert::assertTrue(
