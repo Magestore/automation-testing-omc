@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
+    <page name="SpecialdayNew" area="Adminhtml" mca="storepickupadmin/specialday/new" module="Magento_Storepickup">
+        <block name="specialdayFormPageActions" class="Magento\Storepickup\Test\Block\Adminhtml\Specialday\Edit\SpecialdayFormPageActions" locator=".page-main-actions" strategy="css selector" />
+        <block name="specialdayForm" class="Magento\Storepickup\Test\Block\Adminhtml\Specialday\Edit\SpecialdayForm" locator="[id='page:main-container']" strategy="css selector" />
+    </page>
+</config>

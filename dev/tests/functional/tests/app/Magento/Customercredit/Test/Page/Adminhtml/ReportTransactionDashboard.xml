@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
+    <page name="ReportTransactionDashboard" area="Adminhtml" mca="reporttransaction/dashboard" module="Magento_Customercredit">
+        <block name="dashboardBlock" class="Magento\Customercredit\Test\Block\Adminhtml\ReportTransactionDashboard\Dashboard" locator="[id='page:main-container']" strategy="css selector"/>
+    </page>
+</config>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/pages.xsd">
+    <page name="StorepickupIndex" mca="storepickup/index/index/" module="Magento_Storepickup">
+        <block name="storepickupPageTitleBlock" class="Magento\Storepickup\Test\Block\StorepickupPageTitle" locator=".title-page" strategy="css selector" />
+        <block name="storepickupSearchBoxBlock" class="Magento\Storepickup\Test\Block\StorepickupSearchBox" locator=".search-box" strategy="css selector"/>
+        <block name="storepickupStoreListBlock" class="Magento\Storepickup\Test\Block\StorepickupStoreList" locator=".list-store-box" strategy="css selector"/>
+        <block name="storepickupMapBlock" class="Magento\Storepickup\Test\Block\StorepickupMap" locator=".map-box-container" strategy="css selector"/>
+        <block name="storepickupOverlaybg" class="Magento\Storepickup\Test\Block\StorepickupOverlaybg" locator=".overlay-bg" strategy="css selector"/>
+    </page>
+</config>

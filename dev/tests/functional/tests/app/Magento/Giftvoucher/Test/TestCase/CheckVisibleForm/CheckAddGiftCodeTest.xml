@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Giftvoucher\Test\TestCase\CheckVisibleForm\CheckAddGiftCodeTest" summary="Navigate through admin menu" ticketId="MAGETWO-34874">
+        <variation name="CheckAddGiftCodeTestVariation1">
+            <data name="pageTitle" xsi:type="string">New Gift Code</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+    </testCase>
+</config>

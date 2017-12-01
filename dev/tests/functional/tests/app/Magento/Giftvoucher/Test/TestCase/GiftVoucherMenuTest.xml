@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Giftvoucher\Test\TestCase\GiftVoucherMenuTest" summary="Navigate through admin menu" ticketId="MAGETWO-34874">
+        <variation name="GiftVoucherMenuTest1">
+            <data name="menuItem" xsi:type="string">Marketing > Manage Gift Card Products</data>
+            <data name="pageTitle" xsi:type="string">Gift Card Product Manager</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="GiftVoucherMenuTest2">
+            <data name="menuItem" xsi:type="string">Marketing > Manage Gift Codes</data>
+            <data name="pageTitle" xsi:type="string">Manage Gift Codes</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="GiftVoucherMenuTest3">
+            <data name="menuItem" xsi:type="string">Marketing > Generate Gift Codes</data>
+            <data name="pageTitle" xsi:type="string">Gift Code Pattern</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="GiftVoucherMenuTest4">
+            <data name="menuItem" xsi:type="string">Marketing > Gift code History</data>
+            <data name="pageTitle" xsi:type="string">Manage History</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="GiftVoucherMenuTest5">
+            <data name="menuItem" xsi:type="string">Marketing > Manage Templates</data>
+            <data name="pageTitle" xsi:type="string">Manage Gift Card Template</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+        <variation name="GiftVoucherMenuTest6">
+            <data name="menuItem" xsi:type="string">Marketing > Settings</data>
+            <data name="pageTitle" xsi:type="string">Configuration</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+    </testCase>
+</config>

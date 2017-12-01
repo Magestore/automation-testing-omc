@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
+    <page name="SystemConfig" area="Adminhtml" mca="system_config/edit" module="Magento_Customercredit">
+        <block name="systemConfigTabs" class="Magento\Customercredit\Test\Block\Adminhtml\Settings\SystemConfigTabs" locator="[id='page:left']" strategy="css selector" />
+        <block name="systemConfigForm" class="Magento\Customercredit\Test\Block\Adminhtml\Settings\SystemConfigForm" locator="[id='config-edit-form']" strategy="css selector" />
+    </page>
+</config>

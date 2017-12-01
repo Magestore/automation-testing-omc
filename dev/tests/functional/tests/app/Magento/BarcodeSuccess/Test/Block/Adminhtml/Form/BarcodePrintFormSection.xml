@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<sections>
+    <barcode_template_information>
+        <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+        <selector>[data-index="barcode_template_information"]</selector>
+        <strategy>css selector</strategy>
+        <fields>
+            <template>
+                <selector>[name="type"]</selector>
+            </template>
+        </fields>
+    </barcode_template_information>
+</sections>

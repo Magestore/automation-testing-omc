@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\OpenImportBarcodeEntityTest" summary="Navigate through Barcode menu then click button import barcode" ticketId="MAGESTORE-1">
+        <variation name="ImportBarcodeFromManageBarcodesTestVariation1">
+            <data name="pageTitle" xsi:type="string">Import Barcode</data>
+            <!--<data name="button" xsi:type="string">Import</data>-->
+            <data name="buttons" xsi:type="string">back, save</data>
+
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\Form\AssertOpenImportBarcodeFormIsAvailable" />
+        </variation>
+    </testCase>
+</config>
