@@ -11,24 +11,5 @@ use Magento\Sales\Test\Fixture\OrderInjectable;
 
 class CancelGiftCardOrderTest extends CancelCreatedOrderTest
 {
-    /**
-     * Cancel created order.
-     *
-     * @param OrderInjectable $order
-     * @return array
-     */
-    public function test(OrderInjectable $order)
-    {
-        // Preconditions
-        $order->persist();
-
-        // Steps
-        $this->orderIndex->open();
-        $this->orderIndex->getSalesOrderGrid()->searchAndOpen(['id' => $order->getIncrementId()]);
-        $this->salesOrderView->getPageActions()->cancel();
-
-        return [
-            'customer' => $order->getDataFieldConfig('customer_id')['source']->getCustomer(),
-        ];
-    }    
+    
 }
