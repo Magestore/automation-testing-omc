@@ -30,6 +30,7 @@ class AssertLowStockRuleFormIsAvailable extends AbstractConstraint
 				'fieldName' => 'notifier_emails'
 			],
 		];
+		$lowStockRuleNew->getLowStockRuleForm()->waitPageToLoad();
 		foreach ($sectionList as $section) {
 			$lowStockRuleNew->getLowStockRuleForm()->openSection($section['sectionName']);
 			\PHPUnit_Framework_Assert::assertTrue(

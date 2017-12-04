@@ -22,6 +22,7 @@ class AssertAddNewPurchaseOrderFormIsAvailable extends AbstractConstraint
 				'fieldName' => 'purchased_at'
 			],
 		];
+		$purchaseOrderNew->getPurchaseOrderForm()->waitPageToLoad();
 		foreach ($sectionList as $section) {
 			$purchaseOrderNew->getPurchaseOrderForm()->openSection($section['sectionName']);
 			\PHPUnit_Framework_Assert::assertTrue(

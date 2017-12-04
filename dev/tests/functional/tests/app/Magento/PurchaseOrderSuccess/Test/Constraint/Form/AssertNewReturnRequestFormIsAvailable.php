@@ -22,6 +22,7 @@ class AssertNewReturnRequestFormIsAvailable extends AbstractConstraint
 				'fieldName' => 'returned_at'
 			],
 		];
+		$returnOrderNew->getReturnOrderForm()->waitPageToLoad();
 		foreach ($sectionList as $section) {
 			$returnOrderNew->getReturnOrderForm()->openSection($section['sectionName']);
 			\PHPUnit_Framework_Assert::assertTrue(

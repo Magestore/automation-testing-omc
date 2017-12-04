@@ -16,7 +16,7 @@ class AssertGridTableIsVisible extends AbstractConstraint
 {
 	public function processAssert(Dashboard $dashboard)
 	{
-		sleep(1);
+		$dashboard->getGridBlock()->waitPageToLoad();
 		\PHPUnit_Framework_Assert::assertTrue(
 			$dashboard->getGridBlock()->TableIsVisible(),
 			'Grid Table is not shown'

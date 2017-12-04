@@ -9,16 +9,15 @@
 namespace Magento\BarcodeSuccess\Test\Constraint\Adminhtml;
 
 
-use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodePrintIndex;
+use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodePrint\BarcodePrintIndex;
 use Magento\Mtf\Constraint\AbstractConstraint;
 
 class AssertGridTableIsVisible extends AbstractConstraint
 {
-	public function processAssert(BarcodePrintIndex $barcodePrintIndex)
+	public function processAssert(BarcodePrintIndex $barcodePrintIndex, $tableGrid)
 	{
-		sleep(1);
 		\PHPUnit_Framework_Assert::assertTrue(
-            $barcodePrintIndex->getPrintBarcodeGrid()->TableIsVisible(),
+            $barcodePrintIndex->getPrintBarcodeGrid()->tableIsVisible($tableGrid),
 			'Grid Table is not shown'
 		);
 	}

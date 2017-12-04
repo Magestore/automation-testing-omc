@@ -22,6 +22,7 @@ class AssertAddNewWarehouseFormIsAvailable extends AbstractConstraint
 				'fieldName' => 'warehouse_name'
 			],
 		];
+		$warehouseNew->getWarehouseForm()->waitPageToLoad();
 		foreach ($sectionList as $section) {
 			$warehouseNew->getWarehouseForm()->openSection($section['sectionName']);
 			\PHPUnit_Framework_Assert::assertTrue(

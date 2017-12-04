@@ -22,6 +22,7 @@ class AssertAddNewQuotationFormIsAvailable extends AbstractConstraint
 				'fieldName' => 'purchased_at'
 			],
 		];
+		$quotationNew->getQuotationForm()->waitPageToLoad();
 		foreach ($sectionList as $section) {
 			$quotationNew->getQuotationForm()->openSection($section['sectionName']);
 			\PHPUnit_Framework_Assert::assertTrue(

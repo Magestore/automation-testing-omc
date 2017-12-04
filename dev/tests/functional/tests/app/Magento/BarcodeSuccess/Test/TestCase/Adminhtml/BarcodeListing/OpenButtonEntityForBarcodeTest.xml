@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */            <data name="section" xsi:type="string">os_barcode_generate_form_general</data>
+
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeListing\OpenButtonEntityForBarcodeTest" summary="Test button generate vs button import" ticketId="MAGESTORE-1">
+        <variation name="OpenButtonEntityForBarcodeTestVariation1">
+            <data name="id" xsi:type="string">generate</data>
+            <data name="pageTitle" xsi:type="string">Generate Barcode</data>
+            <data name="buttons" xsi:type="string">back, save</data>
+            <data name="firstFieldGeneral" xsi:type="string">[name="general_information[reason]"]</data>
+            <data name="sectionGeneral" xsi:type="string">os_barcode_generate_form_general</data>
+            <data name="firstFieldProduct" xsi:type="string">container > div > div.entry-edit.form-inline > div:nth-child(2) > div.fieldset-wrapper-title > strong</data>
+            <data name="sectionProduct" xsi:type="string">os_generate_barcode</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeListing\Form\AssertOpenGenerateBarcodeFormIsAvailable" />
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\AssertGridPageActionButtonsIsVisible" />
+        </variation>
+        <variation name="OpenButtonEntityForBarcodeTestVariation2">
+            <data name="id" xsi:type="string">import</data>
+            <data name="pageTitle" xsi:type="string">Import Barcode</data>
+            <data name="button" xsi:type="string">save</data>
+            <data name="buttons" xsi:type="string">back</data>
+            <data name="firstField" xsi:type="string">[id="reason"]</data>
+            <data name="form" xsi:type="string">[id="edit_form"]</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeListing\Form\AssertOpenImportBarcodeFormIsAvailable" />
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeListing\AssertGridPageActionButtonImportIsVisible" />
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\AssertGridPageActionButtonsIsVisible" />
+        </variation>
+    </testCase>
+</config>

@@ -20,7 +20,7 @@ class StoreFormPageAction extends FormPageActions
     /**
      * @var string
      */
-    protected $actionButton = './/button[@title="%s"]';
+    protected $actionButton = './/button[@id="%s"]';
 
     /**
      * @return mixed
