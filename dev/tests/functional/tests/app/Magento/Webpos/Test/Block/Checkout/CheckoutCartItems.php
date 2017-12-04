@@ -15,5 +15,25 @@ use Magento\Mtf\Block\Block;
  */
 class CheckoutCartItems extends Block
 {
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getCartItem($name)
+    {
+//        return $this
+    }
+    public function getProductImage()
+    {
+        return $this->_rootElement->find('li:nth-child(1) > div > div > div.product-img');
+    }
 
+    public function getProductPrice()
+    {
+        return $this->_rootElement->find('.product-item .price');
+    }
+
+    public function getIconDeleteItem()
+    {
+        return $this->_rootElement->find('.product-item .icon-iconPOS-delete');
+    }
 }
