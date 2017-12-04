@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\Catalog\Test\Repository\CatalogProductSimple">
+        <dataset name="product1">
+            <field name="sku" xsi:type="string">24-MB01</field>
+            <field name="name" xsi:type="string">Joust Duffle Bag</field>
+            <field name="quantity_and_stock_status" xsi:type="array">
+                <item name="qty" xsi:type="number">1</item>
+                <item name="is_in_stock" xsi:type="string">In Stock</item>
+            </field>
+            <field name="price" xsi:type="array">
+                <item name="value" xsi:type="string">34</item>
+            </field>
+        </dataset>
+        <dataset name="product2">
+            <field name="sku" xsi:type="string">24-MB02</field>
+            <field name="name" xsi:type="string">Fusion Backpack</field>
+            <field name="quantity_and_stock_status" xsi:type="array">
+                <item name="qty" xsi:type="number">1</item>
+                <item name="is_in_stock" xsi:type="string">In Stock</item>
+            </field>
+            <field name="price" xsi:type="array">
+                <item name="value" xsi:type="string">59</item>
+            </field>
+        </dataset>
+        <dataset name="product3">
+            <field name="sku" xsi:type="string">24-MB03</field>
+            <field name="name" xsi:type="string">Crown Summit Backpack</field>
+            <field name="quantity_and_stock_status" xsi:type="array">
+                <item name="qty" xsi:type="number">1</item>
+                <item name="is_in_stock" xsi:type="string">In Stock</item>
+            </field>
+            <field name="price" xsi:type="array">
+                <item name="value" xsi:type="string">38</item>
+            </field>
+        </dataset>
+        <dataset name="product4">
+            <field name="sku" xsi:type="string">24-MB04</field>
+            <field name="name" xsi:type="string">Strive Shoulder Pack</field>
+            <field name="quantity_and_stock_status" xsi:type="array">
+                <item name="qty" xsi:type="number">1</item>
+                <item name="is_in_stock" xsi:type="string">In Stock</item>
+            </field>
+            <field name="price" xsi:type="array">
+                <item name="value" xsi:type="string">32</item>
+            </field>
+        </dataset>
+    </repository>
+</config>
