@@ -18,6 +18,7 @@ class AssertGridPageActionButtonsIsVisible extends AbstractConstraint
 	{
 		$buttonLabels = explode(', ', $buttons);
 
+		$dashboard->getGridBlock()->waitPageToLoad();
 		foreach ($buttonLabels as $label) {
 			\PHPUnit_Framework_Assert::assertTrue(
 				$dashboard->getPageActionsBlock()->buttonIsVisible($label),

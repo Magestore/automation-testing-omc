@@ -7,7 +7,7 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
-    <repository class="Magento\Webpos\Test\Repository\ConfigData">
+    <repository class="Magento\Config\Test\Repository\ConfigData">
         <!-- Magestore Webpos Config Color and delivery Settings-->
         <dataset name="webpos_synchronization_configcolor">
             <field name="webpos/general/webpos_color" xsi:type="array">

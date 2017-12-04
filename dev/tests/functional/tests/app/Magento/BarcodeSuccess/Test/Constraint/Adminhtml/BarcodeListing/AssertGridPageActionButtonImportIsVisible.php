@@ -13,6 +13,7 @@ class AssertGridPageActionButtonImportIsVisible extends AbstractConstraint
 {
     public function processAssert(Dashboard $dashboard, $button='')
     {
+    	$dashboard->getGridBlock()->waitPageToLoad();
         \PHPUnit_Framework_Assert::assertTrue(
                 $dashboard->getActionImportBlock()->buttonIsVisible($button),
                 'Button "'.$button.'" is not shown'

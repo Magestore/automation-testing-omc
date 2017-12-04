@@ -11,9 +11,16 @@ namespace Magento\Storepickup\Test\Constraint\Schedule;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Storepickup\Test\Page\Adminhtml\ScheduleNew;
 
+/**
+ * Class AssertScheduleFormAvailable
+ * @package Magento\Storepickup\Test\Constraint\Schedule
+ */
 class AssertScheduleFormAvailable extends AbstractConstraint
 {
 
+    /**
+     * @param ScheduleNew $scheduleNew
+     */
     public function processAssert(ScheduleNew $scheduleNew)
     {
         \PHPUnit_Framework_Assert::assertTrue(

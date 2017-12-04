@@ -10,7 +10,7 @@
 namespace Magento\Webpos\Test\TestCase\CustomerList\Synchronization;
 
 use Magento\Backend\Test\Page\Adminhtml\SystemConfigEdit;
-use Magento\Webpos\Test\Fixture\ConfigData;
+use Magento\Config\Test\Fixture\ConfigData;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;

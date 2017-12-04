@@ -11,6 +11,10 @@ namespace Magento\Storepickup\Test\TestCase;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Storepickup\Test\Page\Adminhtml\ScheduleIndex;
 
+/**
+ * Class ScheduleFormTest
+ * @package Magento\Storepickup\Test\TestCase
+ */
 class ScheduleFormTest extends Injectable
 {
     /**
@@ -26,6 +30,9 @@ class ScheduleFormTest extends Injectable
         $this->scheduleIndex = $scheduleIndex;
     }
 
+    /**
+     * @param $button
+     */
     public function test($button)
     {
         $this->scheduleIndex->open();

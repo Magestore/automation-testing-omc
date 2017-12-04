@@ -29,6 +29,9 @@ class CheckSettingEntityForSupplierConfigurationTest extends Injectable
     public function test()
     {
         $this->settingSupplierConfigurationIndex->open();
+	    if (!$this->settingSupplierConfigurationIndex->getBlockSettingSupplierConfiguration()->getPricelistSection()->isVisible()) {
+		    $this->settingSupplierConfigurationIndex->getBlockSettingSupplierConfiguration()->openPricelistSection();
+	    }
         sleep(2);
     }
 }

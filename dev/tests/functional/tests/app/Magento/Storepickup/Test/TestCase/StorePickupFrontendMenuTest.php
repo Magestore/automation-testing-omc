@@ -12,6 +12,10 @@ use Magento\Cms\Test\Page\CmsIndex;
 use Magento\Cms\Test\Page\CmsPage;
 use Magento\Mtf\TestCase\Injectable;
 
+/**
+ * Class StorePickupFrontendMenuTest
+ * @package Magento\Storepickup\Test\TestCase
+ */
 class StorePickupFrontendMenuTest extends Injectable
 {
     /**
@@ -25,9 +29,11 @@ class StorePickupFrontendMenuTest extends Injectable
     public function __inject(CmsIndex $cmsIndex)
     {
         $this->cmsIndex = $cmsIndex;
-        $this->cmsPage = $cmsIndex;
     }
 
+    /**
+     *
+     */
     public function test()
     {
         $this->cmsIndex->open();

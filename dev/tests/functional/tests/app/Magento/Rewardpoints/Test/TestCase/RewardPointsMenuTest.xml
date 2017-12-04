@@ -10,7 +10,7 @@
         <variation name="Earning Rates Menu Test">
             <data name="menuItem" xsi:type="string">Reward Points > Earning Rates</data>
             <data name="pageTitle" xsi:type="string">Earning Rates</data>
-            <data name="buttons" xsi:type="string">Add New Earning Rate</data>
+            <data name="buttons" xsi:type="string">add</data>
             <data name="columns" xsi:type="string">ID,Website,Customer Groups,Earning Point(s),Money spent,Priority,Status,Action</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\Rewardpoints\Test\Constraint\AssertPageActionButtonAvailable" />
@@ -20,7 +20,7 @@
         <variation name="Spending Rates Menu Test">
             <data name="menuItem" xsi:type="string">Reward Points > Spending Rates</data>
             <data name="pageTitle" xsi:type="string">Spending Rates</data>
-            <data name="buttons" xsi:type="string">Add New Spending Rate</data>
+            <data name="buttons" xsi:type="string">add</data>
             <data name="columns" xsi:type="string">	ID,Website,Customer Groups,Spending Point(s),Discount received,Priority,Status,Action</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\Rewardpoints\Test\Constraint\AssertPageActionButtonAvailable" />
@@ -30,7 +30,7 @@
         <variation name="Manage Point Balances Menu Test">
             <data name="menuItem" xsi:type="string">Reward Points > Manage Point Balances</data>
             <data name="pageTitle" xsi:type="string">Reward Point Balances Information</data>
-            <data name="buttons" xsi:type="string">Import Points</data>
+            <data name="buttons" xsi:type="string">add</data>
             <data name="columns" xsi:type="string">ID,Name,Email,Point Balance,Group,WebSite,Action</data>
             <data name="search" xsi:type="boolean">true</data>
             <data name="actionButton" xsi:type="boolean">false</data>
@@ -42,7 +42,7 @@
         <variation name="Transactions Menu Test">
             <data name="menuItem" xsi:type="string">Reward Points > Transactions</data>
             <data name="pageTitle" xsi:type="string">Transaction Manager</data>
-            <data name="buttons" xsi:type="string">Add New Transaction</data>
+            <data name="buttons" xsi:type="string">add</data>
             <data name="columns" xsi:type="string">ID,Title,Customer,Action,Point,Points Used,Created On,Expires On,Status,Store View,View</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\Rewardpoints\Test\Constraint\AssertPageActionButtonAvailable" />
@@ -52,7 +52,10 @@
         <variation name="Settings Menu Test">
             <data name="menuItem" xsi:type="string">Reward Points > Settings</data>
             <data name="pageTitle" xsi:type="string">Configuration</data>
+            <data name="configItem" xsi:type="string">Reward Points</data>
+            <data name="sectionNames" xsi:type="string">General Configuration,Earning Points Configuration,Spending Points Configuration,Display Configuration,Email Configuration</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Customercredit\Test\Constraint\Settings\AssertSettingsPageAvailable"/>
         </variation>
 
     </testCase>

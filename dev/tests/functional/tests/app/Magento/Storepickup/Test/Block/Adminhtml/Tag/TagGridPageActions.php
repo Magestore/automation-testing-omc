@@ -10,6 +10,10 @@ namespace Magento\Storepickup\Test\Block\Adminhtml\Tag;
 
 use Magento\Storepickup\Test\Block\Adminhtml\GridPageActions;
 
+/**
+ * Class TagGridPageActions
+ * @package Magento\Storepickup\Test\Block\Adminhtml\Tag
+ */
 class TagGridPageActions extends GridPageActions
 {
 

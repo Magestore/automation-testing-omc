@@ -8,9 +8,9 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Customercredit\Test\TestCase\CreditProductFormTest" summary="Add credit product form test" ticketId="MAGETWO-12312">
         <variation name="Add credit product form test">
-            <data name="button" xsi:type="string">Add Credit Product</data>
+            <data name="button" xsi:type="string">add</data>
             <data name="pageTitle" xsi:type="string">New Product</data>
-            <data name="buttons" xsi:type="string">Back,Add Attribute,Save</data>
+            <data name="buttons" xsi:type="string">back,addAttribute,save-button</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\Customercredit\Test\Constraint\CreditProduct\AssertNewCreditProductPageAvailable"/>
         </variation>

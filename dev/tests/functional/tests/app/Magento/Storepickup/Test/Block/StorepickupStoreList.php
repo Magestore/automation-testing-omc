@@ -10,6 +10,10 @@ namespace Magento\Storepickup\Test\Block;
 
 use Magento\Mtf\Block\Block;
 
+/**
+ * Class StorepickupStoreList
+ * @package Magento\Storepickup\Test\Block
+ */
 class StorepickupStoreList extends Block
 {
 

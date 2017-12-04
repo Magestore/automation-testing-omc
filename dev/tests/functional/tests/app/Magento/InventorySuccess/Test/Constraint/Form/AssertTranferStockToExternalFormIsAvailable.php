@@ -22,6 +22,7 @@ class AssertTranferStockToExternalFormIsAvailable extends AbstractConstraint
 				'fieldName' => 'transferstock_code'
 			],
 		];
+		$tranferStockToExternalNew->getTranferStockForm()->waitPageToLoad();
 		foreach ($sectionList as $section) {
 			$tranferStockToExternalNew->getTranferStockForm()->openSection($section['sectionName']);
 			\PHPUnit_Framework_Assert::assertTrue(

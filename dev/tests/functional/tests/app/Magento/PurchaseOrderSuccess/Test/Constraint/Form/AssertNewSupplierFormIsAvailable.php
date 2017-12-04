@@ -30,6 +30,7 @@ class AssertNewSupplierFormIsAvailable extends AbstractConstraint
 				'fieldName' => 'new_password'
 			],
 		];
+		$supplierNew->getSupplierForm()->waitPageToLoad();
 		foreach ($sectionList as $section) {
 			$supplierNew->getSupplierForm()->openSection($section['sectionName']);
 			\PHPUnit_Framework_Assert::assertTrue(

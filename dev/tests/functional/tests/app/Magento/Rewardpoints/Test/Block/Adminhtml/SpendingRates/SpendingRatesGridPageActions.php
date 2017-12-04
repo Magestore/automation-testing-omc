@@ -10,6 +10,10 @@ namespace Magento\Rewardpoints\Test\Block\Adminhtml\SpendingRates;
 
 use Magento\Rewardpoints\Test\Block\Adminhtml\GridPageActions;
 
+/**
+ * Class SpendingRatesGridPageActions
+ * @package Magento\Rewardpoints\Test\Block\Adminhtml\SpendingRates
+ */
 class SpendingRatesGridPageActions extends GridPageActions
 {
 

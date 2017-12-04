@@ -12,11 +12,23 @@ use Magento\Catalog\Test\Page\Adminhtml\CatalogProductNew;
 use Magento\Customercredit\Test\Page\Adminhtml\CreditProductNew;
 use Magento\Mtf\Constraint\AbstractConstraint;
 
+/**
+ * Class AssertNewCreditProductPageAvailable
+ * @package Magento\Customercredit\Test\Constraint\CreditProduct
+ */
 class AssertNewCreditProductPageAvailable extends AbstractConstraint
 {
+    /**
+     * @param CreditProductNew $creditProductNew
+     * @param null $buttons
+     */
     public function processAssert(CreditProductNew $creditProductNew, $buttons = null)
     {
         $creditProductNew->getCreditProductForm()->waitForElementNotVisible('[data-role="spinner"]');
+        \PHPUnit_Framework_Assert::assertTrue(
+            $creditProductNew->getCreditProductForm()->isVisible(),
+            'Credit product new form is not visible.'
+        );
         \PHPUnit_Framework_Assert::assertTrue(
             $creditProductNew->getCreditProductForm()->storeCreditTypeIsVisible(),
             'Type of Store Credit Value is not visible.'

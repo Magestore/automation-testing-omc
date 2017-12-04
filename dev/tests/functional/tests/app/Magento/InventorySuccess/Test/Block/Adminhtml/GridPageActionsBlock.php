@@ -14,8 +14,9 @@ use Magento\Mtf\Client\Locator;
 
 class GridPageActionsBlock extends GridPageActions
 {
-	public function buttonIsVisible($text)
+	protected $buttonSelector = '//button[@id="%s"]';
+	public function buttonIsVisible($id)
 	{
-		return $this->_rootElement->find('//button/span[text()="'.$text.'"]/..', Locator::SELECTOR_XPATH)->isVisible();
+		return $this->_rootElement->find(sprintf($this->buttonSelector, $id), Locator::SELECTOR_XPATH)->isVisible();
 	}
 }

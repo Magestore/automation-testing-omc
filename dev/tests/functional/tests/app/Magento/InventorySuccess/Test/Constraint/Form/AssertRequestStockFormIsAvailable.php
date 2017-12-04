@@ -22,6 +22,7 @@ class AssertRequestStockFormIsAvailable extends AbstractConstraint
 				'fieldName' => 'transferstock_code'
 			],
 		];
+		$requestStockNew->getRequestStockForm()->waitPageToLoad();
 		foreach ($sectionList as $section) {
 			$requestStockNew->getRequestStockForm()->openSection($section['sectionName']);
 			\PHPUnit_Framework_Assert::assertTrue(

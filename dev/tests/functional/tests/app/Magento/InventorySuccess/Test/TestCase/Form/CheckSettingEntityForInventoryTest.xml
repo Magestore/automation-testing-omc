@@ -3,9 +3,10 @@
     <testCase name="Magento\InventorySuccess\Test\TestCase\Form\CheckSettingEntityForInventoryTest" summary="Check form, page left configua inventory setting" ticketId="MAGESTORE-1">
         <variation name="CheckSettingEntityForInventoryTestVariation1">
             <data name="pageTitle" xsi:type="string">Configuration</data>
-            <data name="button" xsi:type="string">Save Config</data>
-            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\AssertGridPageActionButtonImportIsVisible" />
+            <data name="buttons" xsi:type="string">save</data>
+
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
             <constraint name="Magento\InventorySuccess\Test\Constraint\Form\AssertSettingInventoryFormIsAvailable" />
         </variation>
     </testCase>

@@ -10,6 +10,10 @@ namespace Magento\Rewardpoints\Test\Block\Adminhtml\EarningRates;
 
 use Magento\Rewardpoints\Test\Block\Adminhtml\RewardGrid;
 
+/**
+ * Class EarningRatesGrid
+ * @package Magento\Rewardpoints\Test\Block\Adminhtml\EarningRates
+ */
 class EarningRatesGrid extends RewardGrid
 {
 

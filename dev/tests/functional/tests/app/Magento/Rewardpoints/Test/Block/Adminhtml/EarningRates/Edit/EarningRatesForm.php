@@ -10,17 +10,33 @@ namespace Magento\Rewardpoints\Test\Block\Adminhtml\EarningRates\Edit;
 use Magento\Backend\Test\Block\Widget\FormTabs;
 use Magento\Mtf\Client\Locator;
 
+/**
+ * Class EarningRatesForm
+ * @package Magento\Rewardpoints\Test\Block\Adminhtml\EarningRates\Edit
+ */
 class EarningRatesForm extends FormTabs
 {
+    /**
+     * @var string
+     */
     protected $formTitle = './/span[text()="Earning Rate Information"]';
 
+    /**
+     * @var string
+     */
     protected $moneySpentField = '[data-index="money"]';
 
+    /**
+     * @return mixed
+     */
     public function formTitleIsVisible()
     {
         return $this->_rootElement->find($this->formTitle, Locator::SELECTOR_XPATH)->isVisible();
     }
 
+    /**
+     * @return mixed
+     */
     public function moneySpentFieldIsVisible()
     {
         return $this->_rootElement->find($this->moneySpentField, Locator::SELECTOR_CSS)->isVisible();

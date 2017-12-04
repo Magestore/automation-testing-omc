@@ -11,9 +11,18 @@ namespace Magento\Rewardpoints\Test\Constraint;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Rewardpoints\Test\Page\Adminhtml\EarningRatesIndex;
 
+/**
+ * Class AssertDataGridToolbarAvailable
+ * @package Magento\Rewardpoints\Test\Constraint
+ */
 class AssertDataGridToolbarAvailable extends AbstractConstraint
 {
 
+    /**
+     * @param EarningRatesIndex $earningRatesIndex
+     * @param bool $search
+     * @param bool $actionButton
+     */
     public function processAssert(EarningRatesIndex $earningRatesIndex, $search = false, $actionButton = true)
     {
         $earningRatesIndex->getEarningRatesGrid()->waitingForGridVisible();

@@ -2,12 +2,12 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Rewardpoints\Test\TestCase\ManagePointBalancesFormTest" summary="Manage Point Balances page test action buttons" ticketId="MAGETWO-12312">
         <variation name="Import points form test">
-            <data name="button" xsi:type="string">Import Points</data>
+            <data name="button" xsi:type="string">add</data>
             <data name="pageTitle" xsi:type="string">Import Points</data>
-            <data name="buttons" xsi:type="string">Back,Import</data>
+            <data name="buttons" xsi:type="string">back,save</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreFormPageActionAvailable" />
-            <constraint name="Magento\Storepickup\Test\Constraint\ManagePointBalances\AssertImportPointsFormAvailable"/>
+            <constraint name="Magento\Rewardpoints\Test\Constraint\ManagePointBalances\AssertImportPointsFormAvailable"/>
         </variation>
     </testCase>
 </config>

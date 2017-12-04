@@ -10,6 +10,10 @@ namespace Magento\Rewardpoints\Test\TestCase;
 
 use Magento\Backend\Test\TestCase\NavigateMenuTest;
 
+/**
+ * Class RewardPointsMenuTest
+ * @package Magento\Rewardpoints\Test\TestCase
+ */
 class RewardPointsMenuTest extends NavigateMenuTest
 {
 

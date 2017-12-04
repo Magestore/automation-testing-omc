@@ -10,6 +10,10 @@ namespace Magento\Customercredit\Test\Block\Adminhtml\ReportTransaction;
 
 use Magento\Customercredit\Test\Block\Adminhtml\CreditDataGrid;
 
+/**
+ * Class ReportTransactionGrid
+ * @package Magento\Customercredit\Test\Block\Adminhtml\ReportTransaction
+ */
 class ReportTransactionGrid extends CreditDataGrid
 {
 
