@@ -10,10 +10,11 @@
         <block name="notification" class="Magento\Webpos\Test\Block\Notification" locator="#webpos-notification" strategy="css selector"/>
         <!--Checkout Page-->
         <block name="checkoutProductList" class="Magento\Webpos\Test\Block\Checkout\CheckoutProductList" locator="#product-list-wrapper" strategy="css selector"/>
+        <block name="checkoutProductDetail" class="Magento\Webpos\Test\Block\Checkout\CheckoutProductDetail" locator="#popup-product-detail" strategy="css selector"/>
         <block name="checkoutCartHeader" class="Magento\Webpos\Test\Block\Checkout\CheckoutCartHeader" locator="#webpos_cart > header" strategy="css selector"/>
         <block name="checkoutCartItems" class="Magento\Webpos\Test\Block\Checkout\CheckoutCartItems" locator="#order-items" strategy="css selector"/>
+        <block name="checkoutProductEdit" class="Magento\Webpos\Test\Block\Checkout\CheckoutProductEdit" locator="#popup-edit-product" strategy="css selector"/>
         <block name="checkoutCartFooter" class="Magento\Webpos\Test\Block\Checkout\CheckoutCartFooter" locator=".grand-total-footer" strategy="css selector"/>
-        <block name="checkoutProductDetail" class="Magento\Webpos\Test\Block\Checkout\CheckoutProductDetail" locator="#popup-product-detail" strategy="css selector"/>
         <block name="checkoutCustomSale" class="Magento\Webpos\Test\Block\Checkout\CheckoutCustomSale" locator="#popup-custom-sale" strategy="css selector"/>
         <block name="checkoutPlaceOrder" class="Magento\Webpos\Test\Block\Checkout\CheckoutPlaceOrder" locator="#webpos_checkout" strategy="css selector"/>
         <block name="checkoutShippingMethod" class="Magento\Webpos\Test\Block\Checkout\CheckoutShippingMethod" locator="#shipping-method" strategy="css selector"/>
