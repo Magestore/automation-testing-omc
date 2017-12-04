@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeSettings\CheckSettingEntityForBarcodeTest" summary="Check form, page left configua barcode setting" ticketId="MAGESTORE-1">
+        <variation name="CheckSettingEntityForBarcodeTestVariation1">
+            <data name="pageTitle" xsi:type="string">Configuration</data>
+            <data name="buttons" xsi:type="string">save</data>
+            <data name="idForm" xsi:type="string">config-edit-form</data>
+            <data name="idFirstField" xsi:type="string">barcodesuccess_general_one_barcode_per_sku</data>
+            <data name="pathNameConfiguration" xsi:type="string">#system_config_tabs > div.config-nav-block.admin__page-nav._collapsed._show > ul > li.admin__page-nav-item.item.separator-top._active > a</data>
+            <data name="idGeneralSection" xsi:type="string">barcodesuccess_general</data>
+            <data name="idHeadOpen" xsi:type="string">barcodesuccess_general-head</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\AssertGridPageActionButtonsIsVisible" />
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeSettings\Form\AssertSettingBarcodeFormIsAvailable" />
+        </variation>
+    </testCase>
+</config>
+
