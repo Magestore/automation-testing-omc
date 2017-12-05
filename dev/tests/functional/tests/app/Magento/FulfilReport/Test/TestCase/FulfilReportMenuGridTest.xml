@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\FulfilReport\Test\TestCase\FulfilReportMenuGridTest" summary="Navigate through admin menu" ticketId="MAGETWO-34874">
+        <variation name="FulfilReportMenuGrid-Fulfillment-Dashboard-Test1">
+            <data name="menuItem" xsi:type="string">Fulfillment > Dashboard</data>
+            <data name="pageTitle" xsi:type="string">Dashboard</data>
+            <data name="chartsTitleOrder" xsi:type="string">Report Sales By Status</data>
+            <data name="chartsTitlePerday" xsi:type="string">Report order by day</data>
+            <data name="chartsTitleCarrier" xsi:type="string">All carriers</data>
+            <data name="chartsTitleVerify" xsi:type="string">Report verified orders by day</data>
+            <data name="chartsTitlePick" xsi:type="string">Report pick requests by day</data>
+            <data name="chartsTitlePack" xsi:type="string">Report pack requests by day</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\FulfilReport\Test\Constraint\Dashboard\ContainerOrder\AssertBackendButtonAndTitleIsAvailable" />
+            <constraint name="Magento\FulfilReport\Test\Constraint\Dashboard\ContainerPerday\AssertBackendButtonAndTitleIsAvailable" />
+            <constraint name="Magento\FulfilReport\Test\Constraint\Dashboard\ContainerCarrier\AssertBackendButtonAndTitleIsAvailable" />
+            <constraint name="Magento\FulfilReport\Test\Constraint\Dashboard\ContainerVerify\AssertBackendButtonAndTitleIsAvailable" />
+            <constraint name="Magento\FulfilReport\Test\Constraint\Dashboard\ContainerPick\AssertBackendButtonAndTitleIsAvailable" />
+            <constraint name="Magento\FulfilReport\Test\Constraint\Dashboard\ContainerPack\AssertBackendButtonAndTitleIsAvailable" />
+        </variation>
+        <variation name="FulfilReportMenuGrid-Fulfillment-Reports-Test2">
+            <data name="menuItem" xsi:type="string">Fulfillment > Reports</data>
+            <data name="pageTitle" xsi:type="string">Fulfillment - Reports</data>
+            <data name="titleStaffReport" xsi:type="string">STAFF REPORT</data>
+            <data name="titleWarehouseReport" xsi:type="string">WAREHOUSE REPORT</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\FulfilReport\Test\Constraint\Report\AssertBackendButtonAndTitleIsAvailable" />
+        </variation>
+    </testCase>
+</config>

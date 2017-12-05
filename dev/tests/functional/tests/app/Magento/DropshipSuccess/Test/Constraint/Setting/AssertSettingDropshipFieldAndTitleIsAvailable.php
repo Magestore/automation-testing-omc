@@ -8,7 +8,7 @@
 
 namespace Magento\DropshipSuccess\Test\Constraint\Setting;
 
-use Magento\FulfilSuccess\Test\Page\Adminhtml\ReportIndex;
+use Magento\FulfilReport\Test\Page\Adminhtml\ReportIndex;
 use Magento\Mtf\Constraint\AbstractConstraint;
 /**
  * Class AssertSettingDropshipFieldAndTitleIsAvailable
