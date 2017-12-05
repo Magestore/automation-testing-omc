@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodePrint\CheckPrintSectionEntityForBarcodeTest" summary="Navigate through Barcode menu then click button generate barcode" ticketId="MAGESTORE-1">
+        <variation name="CheckPrintSectionEntityForBarcodeTestVariation1">
+            <data name="pageTitle" xsi:type="string">Barcode Printing Configuration</data>
+            <data name="buttons" xsi:type="string">back, print</data>
+            <data name="section" xsi:type="string">barcode_template_information</data>
+            <data name="firstField" xsi:type="string">type</data>
+            <data name="tableGrid" xsi:type="string">#container > div > div.entry-edit.form-inline > div.admin__scope-old.os_barcode_print_form_os_barcode_print_form_barcode_print_listing > div > div.admin__data-grid-wrap > table</data>
+
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\AssertGridPageActionButtonsIsVisible" />
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodePrint\Form\AssertOpenPrintBarcodeFormIsAvailable" />
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\AssertGridTableIsVisible" />
+        </variation>
+    </testCase>
+</config>
+

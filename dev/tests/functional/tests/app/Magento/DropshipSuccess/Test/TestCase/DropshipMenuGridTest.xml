@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\DropshipSuccess\Test\TestCase\DropshipMenuGridTest" summary="Navigate through admin menu" ticketId="MAGETWO-34874">
+        <variation name="DropshipMenuGrid-Fulfillment-DropshipRequest-VariationTest1">
+            <data name="menuItem" xsi:type="string">Fulfillment > Dropship Request</data>
+            <data name="pageTitle" xsi:type="string">Dropship</data>
+            <data name="names" xsi:type="string">ID,Order id,Purchase Date,Ship-to Name,Total Item Requested,Email,Supplier,Status,Action</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\DropshipSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
+        </variation>
+        <variation name="DropshipMenuGrid-Fulfillment-DropshipConfiguration-VariationTest2">
+            <data name="menuItem" xsi:type="string">Fulfillment > Dropship Configuration</data>
+            <data name="pageTitle" xsi:type="string">Configuration</data>
+            <data name="titleDropshipSection" xsi:type="string">General</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\DropshipSuccess\Test\Constraint\Setting\AssertSettingDropshipFieldAndTitleIsAvailable" />
+        </variation>
+    </testCase>
+</config>

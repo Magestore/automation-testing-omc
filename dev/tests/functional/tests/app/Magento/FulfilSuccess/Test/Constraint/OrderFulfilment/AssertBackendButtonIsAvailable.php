@@ -23,23 +23,23 @@ class AssertBackendButtonIsAvailable extends AbstractConstraint
     {
         \PHPUnit_Framework_Assert::assertTrue(
             $reportIndex->getPageWrapper()->getVerifyButton()->isVisible(),
-            'On The Backend Page, the Grid Header Button All Order Of the Extension was visible.'
+            'On The Backend Page, the Grid Header Button Verify Order Of the Fulfilment Fulfilment Extension was not  not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $reportIndex->getPageWrapper()->getPrepareButton()->isVisible(),
-            'On The Backend Page, the Grid Header Button Awaiting Payment Of the Extension was visible.'
+            'On The Backend Page, the Grid Header Button Prepare Of the Fulfilment Extension was not  visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $reportIndex->getPageWrapper()->getPickItemButton()->isVisible(),
-            'On The Backend Page, the Grid Header Button Back Order Of the Extension was visible.'
+            'On The Backend Page, the Grid Header Button Pick Item Of the Fulfilment Extension was not  visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $reportIndex->getPageWrapper()->getPackItemButton()->isVisible(),
-            'On The Backend Page, the Grid Header Button Hold Order Of the Extension was visible.'
+            'On The Backend Page, the Grid Header Button Pack Item Of the Fulfilment Extension was not  visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $reportIndex->getPageWrapper()->getDeliveryPackageButton()->isVisible(),
-            'On The Backend Page, the Grid Header Button Completed Order Of the Extension was visible.'
+            'On The Backend Page, the Grid Header Button Delivery Package Order Of the Fulfilment Extension was not  visible.'
         );
     }
 

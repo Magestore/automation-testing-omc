@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CheckGUI\WebposCheckoutCartPageWhenAddProductVisibleTest" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
+        <variation name="WebposCheckoutCartPageWhenAddProductVisibleTestVariation1_CP02">
+            <data name="staff/data/username" xsi:type="string">magentoadmin</data>
+            <data name="staff/data/password" xsi:type="string">admin123</data>
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">Luma Analog Watch</item>
+                <item name="1" xsi:type="string">Aim Analog Watch</item>
+            </data>
+            <data name="labels" xsi:type="string">Subtotal,Total</data>
+            <data name="defaultValue" xsi:type="string">0.00</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutCartPageWhenAddProductVisible" />
+        </variation>
+    </testCase>
+</config>
