@@ -95,14 +95,7 @@
             <constraint name="Magento\FulfilSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
             <constraint name="Magento\FulfilSuccess\Test\Constraint\OrderListing\AssertBackendButtonIsAvailable" />
         </variation>
-        <variation name="FulfilmentMenuGrid-Fulfillment-DropshipRequest-Test11">
-            <data name="menuItem" xsi:type="string">Fulfillment > Dropship Request</data>
-            <data name="pageTitle" xsi:type="string">Dropship</data>
-            <data name="names" xsi:type="string">ID,Order id,Purchase Date,Ship-to Name,Total Item Requested,Email,Supplier,Status,Action</data>
-            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
-            <constraint name="Magento\FulfilSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
-        </variation>
-        <variation name="FulfilmentMenuGrid-Fulfillment-Dashboard-Test12">
+        <variation name="FulfilmentMenuGrid-Fulfillment-Dashboard-Test11">
             <data name="menuItem" xsi:type="string">Fulfillment > Dashboard</data>
             <data name="pageTitle" xsi:type="string">Dashboard</data>
             <data name="chartsTitleOrder" xsi:type="string">Report Sales By Status</data>
@@ -119,7 +112,7 @@
             <constraint name="Magento\FulfilSuccess\Test\Constraint\Dashboard\ContainerPick\AssertBackendButtonAndTitleIsAvailable" />
             <constraint name="Magento\FulfilSuccess\Test\Constraint\Dashboard\ContainerPack\AssertBackendButtonAndTitleIsAvailable" />
         </variation>
-        <variation name="FulfilmentMenuGrid-Fulfillment-Reports-Test13">
+        <variation name="FulfilmentMenuGrid-Fulfillment-Reports-Test12">
             <data name="menuItem" xsi:type="string">Fulfillment > Reports</data>
             <data name="pageTitle" xsi:type="string">Fulfillment - Reports</data>
             <data name="titleStaffReport" xsi:type="string">STAFF REPORT</data>
@@ -127,26 +120,19 @@
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\FulfilSuccess\Test\Constraint\Report\AssertBackendButtonAndTitleIsAvailable" />
         </variation>
-        <variation name="FulfilmentMenuGrid-Fulfillment-OrderConfiguration-Test14">
+        <variation name="FulfilmentMenuGrid-Fulfillment-OrderConfiguration-Test13">
             <data name="menuItem" xsi:type="string">Fulfillment > Order Configuration</data>
             <data name="pageTitle" xsi:type="string">Configuration</data>
             <data name="titleOrderSection" xsi:type="string">Order Configuration</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\FulfilSuccess\Test\Constraint\Setting\AssertSettingOrderFieldAndTitleIsAvailable" />
         </variation>
-        <variation name="FulfilmentMenuGrid-Fulfillment-FulfillmentConfiguration-Test15">
+        <variation name="FulfilmentMenuGrid-Fulfillment-FulfillmentConfiguration-Test14">
             <data name="menuItem" xsi:type="string">Fulfillment > Fulfillment Configuration</data>
             <data name="pageTitle" xsi:type="string">Configuration</data>
             <data name="titleFulfillmentSection" xsi:type="string">Barcode Attribute</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\FulfilSuccess\Test\Constraint\Setting\AssertSettingFulfillmentFieldAndTitleIsAvailable" />
-        </variation>
-        <variation name="FulfilmentMenuGrid-Fulfillment-DropshipConfiguration-Test16">
-            <data name="menuItem" xsi:type="string">Fulfillment > Dropship Configuration</data>
-            <data name="pageTitle" xsi:type="string">Configuration</data>
-            <data name="titleDropshipSection" xsi:type="string">General</data>
-            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
-            <constraint name="Magento\FulfilSuccess\Test\Constraint\Setting\AssertSettingDropshipFieldAndTitleIsAvailable" />
         </variation>
     </testCase>
 </config>

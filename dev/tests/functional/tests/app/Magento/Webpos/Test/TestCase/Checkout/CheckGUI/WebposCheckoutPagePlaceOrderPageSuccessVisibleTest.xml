@@ -6,8 +6,8 @@
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CheckGUI\WebposCheckoutPageVisibleTest" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
-        <variation name="WebposCheckoutPageVisibleTestVariation1_CP03">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CheckGUI\WebposCheckoutPagePlaceOrderPageSuccessVisibleTest" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
+        <variation name="WebposCheckoutPagePlaceOrderPageSuccessVisibleTestVariation1_CP04">
             <data name="staff/dataset" xsi:type="string">magentoadmin</data>
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="string">product1</item>
@@ -17,7 +17,7 @@
             </data>
             <data name="labels" xsi:type="string">Subtotal,Total</data>
             <data name="defaultValue" xsi:type="string">0.00</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPageVisible" />
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible" />
         </variation>
     </testCase>
 </config>

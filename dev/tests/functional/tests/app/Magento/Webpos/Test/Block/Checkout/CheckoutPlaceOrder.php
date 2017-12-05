@@ -15,9 +15,21 @@ use Magento\Mtf\Block\Block;
  */
 class CheckoutPlaceOrder extends Block
 {
+    /**
+     * @return bool|null
+     */
+    public function waitShippingSection()
+    {
+        $this->waitForElementVisible('#checkout-method > div:nth-child(1)');
+    }
+    public function waitPaymentSection()
+    {
+        $this->waitForElementVisible('#checkout-method > div:nth-child(2)');
+    }
+
     public function waitCartLoader()
     {
-        return $this->waitForElementNotVisible('.indicator');
+        $this->waitForElementNotVisible('.indicator');
     }
 
     public function getTopTotalPrice()

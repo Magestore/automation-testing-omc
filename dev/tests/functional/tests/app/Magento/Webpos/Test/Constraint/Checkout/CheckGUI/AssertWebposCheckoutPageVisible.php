@@ -23,14 +23,6 @@ class AssertWebposCheckoutPageVisible extends AbstractConstraint
             'On the Frontend Page - The Top Total Price at the web POS Cart was not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getCheckoutShippingMethod()->isVisible(),
-            'On the Frontend Page - The Checkout SHIPPING Method at the web POS Cart was not visible.'
-        );
-        \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getCheckoutPaymentMethod()->isVisible(),
-            'On the Frontend Page - The Checkout PAYMENT Method at the web POS Cart was not visible.'
-        );
-        \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutPlaceOrder()->getRemainMoney()->isVisible(),
             'On the Frontend Page - The Remain money at the web POS Cart was not visible.'
         );

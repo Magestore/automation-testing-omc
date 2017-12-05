@@ -15,5 +15,5 @@ use Magento\Mtf\Block\Block;
  */
 class CheckoutShippingMethod extends Block
 {
-
+    
 }
