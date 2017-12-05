@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="denomination"
+             module="Magento_Webpos"
+             type="flat"
+             collection="Magestore\Webpos\Model\ResourceModel\Denomination\Denomination\Collection"
+             repository_class="Magento\Webpos\Test\Repository\Denomination" handler_interface="Magento\Webpos\Test\Handler\Denomination\DenominationInterface"
+             class="Magento\Webpos\Test\Fixture\Denomination"
+             entity_type="webpos_cash_denomination">
+        <field name="denomination_id" is_required="1"/>
+        <field name="denomination_name" is_required="0"/>
+        <field name="denomination_value" is_required="0"/>
+        <field name="pos_ids" is_required="0"/>
+        <field name="sort_order" is_required="0"/>
+    </fixture>
+</config>

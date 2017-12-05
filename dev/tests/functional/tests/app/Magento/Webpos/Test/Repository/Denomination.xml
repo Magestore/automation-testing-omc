@@ -10,7 +10,7 @@
         <dataset name="default">
             <field name="denomination_name" xsi:type="string">Test Denomination Name %isolation%</field>
             <field name="denomination_value" xsi:type="string">$10</field>
-            <field name="sort_order" xsi:type="string">Test Denomination Sort Order %isolation%</field>
+            <field name="sort_order" xsi:type="string">%isolation%</field>
         </dataset>
     </repository>
 </config>
