@@ -36,4 +36,9 @@ class CheckoutCartItems extends Block
     {
         return $this->_rootElement->find('.product-item .icon-iconPOS-delete');
     }
+
+	public function getFirstCartItem()
+	{
+		return $this->_rootElement->find('.product-item');
+	}
 }

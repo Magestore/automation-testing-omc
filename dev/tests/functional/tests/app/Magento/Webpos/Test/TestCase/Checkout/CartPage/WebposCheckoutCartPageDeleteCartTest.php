@@ -22,18 +22,6 @@ class WebposCheckoutCartPageDeleteCartTest extends Injectable
 	 */
 	protected $webposIndex;
 
-	public function __prepare(FixtureFactory $fixtureFactory)
-	{
-		$product = $fixtureFactory->createByCode(
-			'catalogProductSimple',
-			['dataset' => 'product_100_dollar']
-		);
-		$product->persist();
-		return [
-			'product' => $product,
-		];
-	}
-
 	public function __inject(
 		WebposIndex $webposIndex
 	)
@@ -46,6 +34,7 @@ class WebposCheckoutCartPageDeleteCartTest extends Injectable
 		CatalogProductSimple $product,
 		$addProduct = true,
 		$customSale = false,
+		$customProduct = null,
 		$addDiscount = false,
 		$discountAmount = null
 	)
@@ -60,13 +49,28 @@ class WebposCheckoutCartPageDeleteCartTest extends Injectable
 		}
 
 		$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+
 		if ($addProduct) {
 			if (!$customSale) {
 				$this->webposIndex->getCheckoutProductList()->search($product->getName());
+				$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+			} else {
+				$random = mt_rand(1, 999999);
+				$customProduct['name'] = str_replace('%isolation%', $random, $customProduct['name']);
+				$customProduct['description'] = str_replace('%isolation%', $random, $customProduct['description']);
+
+				$this->webposIndex->getCheckoutProductList()->getCustomSaleButton()->click();
+
+				$this->webposIndex->getCheckoutCustomSale()->getProductNameInput()->setValue($customProduct['name']);
+				$this->webposIndex->getCheckoutCustomSale()->getDescriptionInput()->setValue($customProduct['description']);
+				$this->webposIndex->getCheckoutCustomSale()->getProductPriceInput()->setValue($customProduct['price']);
+				$this->webposIndex->getCheckoutCustomSale()->getShipAbleCheckbox()->click();
+
+				$this->webposIndex->getCheckoutCustomSale()->getAddToCartButton()->click();
 			}
 		}
 
-
-
+		sleep(2);
+		$this->webposIndex->getCheckoutCartHeader()->getIconDeleteCart()->click();
 	}
 }
