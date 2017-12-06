@@ -18,13 +18,9 @@ class CheckoutCartItems extends Block
     /**
      * @return \Magento\Mtf\Client\ElementInterface
      */
-    public function getCartItem($name)
-    {
-//        return $this
-    }
     public function getProductImage()
     {
-        return $this->_rootElement->find('li:nth-child(1) > div > div > div.product-img');
+        return $this->_rootElement->find('.product-item .product-img');
     }
 
     public function getProductPrice()
@@ -34,7 +30,7 @@ class CheckoutCartItems extends Block
 
     public function getIconDeleteItem()
     {
-        return $this->_rootElement->find('.product-item .icon-iconPOS-delete');
+        return $this->_rootElement->find('.product-item .remove-icon');
     }
 
 	public function getFirstCartItem()

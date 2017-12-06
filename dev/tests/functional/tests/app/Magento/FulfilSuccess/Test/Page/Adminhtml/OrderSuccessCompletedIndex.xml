@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
-    <page name="OrderSuccessCompletedIndex" area="Adminhtml" mca="ordersuccess/completed/index" module="Magento_FulfilSuccess">
-        <block name="pageWrapper" class="Magento\FulfilSuccess\Test\Block\Adminhtml\PageWrapper" locator=".page-wrapper" strategy="css selector" />
-    </page>
-</config>

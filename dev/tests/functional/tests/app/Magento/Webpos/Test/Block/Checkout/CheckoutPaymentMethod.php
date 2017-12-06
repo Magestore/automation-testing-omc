@@ -15,5 +15,15 @@ use Magento\Mtf\Block\Block;
  */
 class CheckoutPaymentMethod extends Block
 {
-
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getCashInMethod()
+    {
+        return $this->_rootElement->find('.icon-iconPOS-payment-cashforpos');
+    }
+    public function getCashOnDeliveryMethod()
+    {
+        return $this->_rootElement->find('.icon-iconPOS-payment-codforpos');
+    }
 }

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\OrderSuccess\Test\TestCase\OrderSuccessMenuGridTest" summary="Navigate through admin menu" ticketId="MAGETWO-34874">
+        <variation name="OrderSuccessMenuGrid-Fulfillment-AllOrders-VariationTest1">
+            <data name="menuItem" xsi:type="string">Fulfillment > All Orders</data>
+            <data name="pageTitle" xsi:type="string">All Orders</data>
+            <data name="names" xsi:type="string">ID,Age,Purchase Point,Created on,Recepient,Total,Status,Batch#,Note,Tag,Action</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
+            <constraint name="Magento\OrderSuccess\Test\Constraint\OrderListing\AssertBackendButtonIsAvailable" />
+        </variation>
+        <variation name="OrderSuccessMenuGrid-Fulfillment-AwaitingPayment-VariationTest2">
+            <data name="menuItem" xsi:type="string">Fulfillment > Awaiting Payment</data>
+            <data name="pageTitle" xsi:type="string">Awaiting payment orders</data>
+            <data name="names" xsi:type="string">ID,Age,Purchase Point,Created on,Recepient,Total,Status,Batch#,Note,Tag,Action</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
+            <constraint name="Magento\OrderSuccess\Test\Constraint\OrderListing\AssertBackendButtonIsAvailable" />
+        </variation>
+        <variation name="OrderSuccessMenuGrid-Fulfillment-BackOrders-VariationTest3">
+            <data name="menuItem" xsi:type="string">Fulfillment > Back Orders</data>
+            <data name="pageTitle" xsi:type="string">Back orders</data>
+            <data name="names" xsi:type="string">ID,Age,Purchase Point,Created on,Recepient,Back Qty,Total,Status,Batch#,Note,Tag,Action</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
+            <constraint name="Magento\OrderSuccess\Test\Constraint\OrderListing\AssertBackendButtonIsAvailable" />
+        </variation>
+        <variation name="OrderSuccessMenuGrid-Fulfillment-OnHoldOrders-VariationTest4">
+            <data name="menuItem" xsi:type="string">Fulfillment > On Hold Orders</data>
+            <data name="pageTitle" xsi:type="string">Hold orders</data>
+            <data name="names" xsi:type="string">ID,Age,Purchase Point,Created on,Recepient,Total,Status,Batch#,Note,Tag,Action</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
+            <constraint name="Magento\OrderSuccess\Test\Constraint\OrderListing\AssertBackendButtonIsAvailable" />
+        </variation>
+        <variation name="OrderSuccessMenuGrid-Fulfillment-CompletedOrders-VariationTest5">
+            <data name="menuItem" xsi:type="string">Fulfillment > Completed Orders</data>
+            <data name="pageTitle" xsi:type="string">Completed orders</data>
+            <data name="names" xsi:type="string">ID,Age,Purchase Point,Created on,Recepient,Total,Status,Batch#,Note,Tag,Action</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
+            <constraint name="Magento\OrderSuccess\Test\Constraint\OrderListing\AssertBackendButtonIsAvailable" />
+        </variation>
+        <variation name="OrderSuccessMenuGrid-Fulfillment-CanceledOrders-VariationTest6">
+            <data name="menuItem" xsi:type="string">Fulfillment > Canceled Orders</data>
+            <data name="pageTitle" xsi:type="string">Canceled orders</data>
+            <data name="names" xsi:type="string">ID,Age,Purchase Point,Created on,Recepient,Total,Status,Batch#,Note,Tag,Action</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\AssertBackendGridIsAvailable" />
+            <constraint name="Magento\OrderSuccess\Test\Constraint\OrderListing\AssertBackendButtonIsAvailable" />
+        </variation>
+        <variation name="FulfilmentMenuGrid-Fulfillment-OrderConfiguration-Test13">
+            <data name="menuItem" xsi:type="string">Fulfillment > Order Configuration</data>
+            <data name="pageTitle" xsi:type="string">Configuration</data>
+            <data name="titleOrderSection" xsi:type="string">Order Configuration</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\FulfilSuccess\Test\Constraint\Setting\AssertSettingOrderFieldAndTitleIsAvailable" />
+        </variation>
+    </testCase>
+</config>

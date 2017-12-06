@@ -5,4 +5,7 @@
         <step name="LoginWebpos" module="Magento_Webpos" next="CreateCustomer" />
         <step name="CreateCustomer" module="Magento_Webpos" />
     </scenario>
+    <scenario name="WebposCheckoutCartPageVisibleTest" firstStep="LoginWebpos">
+        <step name="LoginWebpos" module="Magento_Webpos"/>
+    </scenario>
 </config>
