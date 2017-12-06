@@ -15,7 +15,7 @@ use Magento\Mtf\Client\Element\SimpleElement;
  * Class DenominationGrid
  * @package Magento\Webpos\Test\Block\Adminhtml\Denomination
  */
-class DenominationGrid extends DataGrid
+class DenominationsGrid extends DataGrid
 {
     /**
      * @var string

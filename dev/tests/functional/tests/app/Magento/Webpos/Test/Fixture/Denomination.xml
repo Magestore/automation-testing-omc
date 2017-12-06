@@ -10,7 +10,8 @@
              module="Magento_Webpos"
              type="flat"
              collection="Magestore\Webpos\Model\ResourceModel\Denomination\Denomination\Collection"
-             repository_class="Magento\Webpos\Test\Repository\Denomination" handler_interface="Magento\Webpos\Test\Handler\Denomination\DenominationInterface"
+             repository_class="Magento\Webpos\Test\Repository\Denomination"
+             handler_interface="Magento\Webpos\Test\Handler\Denomination\DenominationInterface"
              class="Magento\Webpos\Test\Fixture\Denomination"
              entity_type="webpos_cash_denomination">
         <field name="denomination_id" is_required="1"/>
