@@ -24,11 +24,11 @@ class AssertEarningRatesFormAvailable extends AbstractConstraint
     {
         \PHPUnit_Framework_Assert::assertTrue(
             $earningRatesNew->getEarningRatesForm()->isVisible(),
-            'Earning Rates form is not visible.'
+            'EarningRates form is not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $earningRatesNew->getEarningRatesForm()->formTitleIsVisible(),
-            'Earning Rates form title is not visible.'
+            'EarningRates form title is not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $earningRatesNew->getEarningRatesForm()->moneySpentFieldIsVisible(),
@@ -42,6 +42,6 @@ class AssertEarningRatesFormAvailable extends AbstractConstraint
      */
     public function toString()
     {
-        return 'Earning Rates form is available.';
+        return 'EarningRates form is available.';
     }
 }
