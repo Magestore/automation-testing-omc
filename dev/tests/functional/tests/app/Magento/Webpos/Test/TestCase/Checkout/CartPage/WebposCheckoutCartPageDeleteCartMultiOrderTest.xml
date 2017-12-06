@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\WebposCheckoutCartPageDeleteCartMultiOrderTest" summary="Checkout - Cart Page - Delete Cart with multi order Test" ticketId="WEBPOS-1">
+		<variation name="WebposCheckoutCartPageDeleteCartMultiOrderTestVariation1_CP05">
+			<data name="staff/dataset" xsi:type="string">magentoadmin</data>
+
+			<data name="product/dataset" xsi:type="string">product1</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\AssertCartPageIsDefault"/>
+			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\DeleteCart\AssertFirstCartIsRemains"/>
+		</variation>
+	</testCase>
+</config>

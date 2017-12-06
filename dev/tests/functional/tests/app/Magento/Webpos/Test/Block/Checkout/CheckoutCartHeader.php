@@ -9,6 +9,8 @@
 namespace Magento\Webpos\Test\Block\Checkout;
 
 use Magento\Mtf\Block\Block;
+use Magento\Mtf\Client\Locator;
+
 /**
  * Class CheckoutCartHeader
  * @package Magento\Webpos\Test\Block\Checkout
@@ -33,10 +35,15 @@ class CheckoutCartHeader extends Block
     }
     public function getAddMultiOrder()
     {
-        return $this->_rootElement->find('.pull-right');
+        return $this->_rootElement->find('span.order-button.pull-right');
     }
     public function getCustomerTitleDefault()
     {
         return $this->_rootElement->find('.add-customer > .title-header-page');
     }
+
+	public function getMultiOrderItem($number)
+	{
+		return $this->_rootElement->find('//div[contains(@class, "order-selector")]/span/span/span[text()= "'.$number.'"]/..', Locator::SELECTOR_XPATH);
+	}
 }

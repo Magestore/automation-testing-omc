@@ -67,10 +67,27 @@ class WebposCheckoutCartPageDeleteCartTest extends Injectable
 				$this->webposIndex->getCheckoutCustomSale()->getShipAbleCheckbox()->click();
 
 				$this->webposIndex->getCheckoutCustomSale()->getAddToCartButton()->click();
+				$this->webposIndex->getMsWebpos()->waitCartLoader();
+				$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 			}
 		}
 
-		sleep(2);
+		if ($addDiscount) {
+			$this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
+			sleep(1);
+			self::assertTrue(
+				$this->webposIndex->getCheckoutDiscount()->isVisible(),
+				'Checkout - Cart page - Delete Cart - Add discount popup is not shown'
+			);
+			$this->webposIndex->getCheckoutDiscount()->setDiscountPercent($discountAmount);
+			$this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
+			$this->webposIndex->getMsWebpos()->waitCartLoader();
+			$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+		}
+
+		sleep(1);
 		$this->webposIndex->getCheckoutCartHeader()->getIconDeleteCart()->click();
+		$this->webposIndex->getMsWebpos()->waitCartLoader();
+		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 	}
 }
