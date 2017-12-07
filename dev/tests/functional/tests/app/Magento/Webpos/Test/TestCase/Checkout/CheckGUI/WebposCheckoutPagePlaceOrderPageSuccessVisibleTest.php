@@ -43,7 +43,7 @@ class WebposCheckoutPagePlaceOrderPageSuccessVisibleTest extends Injectable
      * @param FixtureFactory $fixtureFactory
      * @return void
      */
-    public function test(Staff $staff, FixtureFactory $fixtureFactory, $products, $labels, $defaultValue)
+    public function test(Staff $staff, $testCaseId, $labels, FixtureFactory $fixtureFactory, $products, $defaultValue)
     {
         $this->webposIndex->open();
         if ($this->webposIndex->getLoginForm()->isVisible()) {
@@ -54,7 +54,16 @@ class WebposCheckoutPagePlaceOrderPageSuccessVisibleTest extends Injectable
             }
             sleep(2);
         }
-        $labels = explode(',', $labels);
+        if ($testCaseId == 'CP02') {
+            $labels = explode(',', $labels);
+            foreach ($labels as $label) {
+                \PHPUnit_Framework_Assert::assertEquals(
+                    $defaultValue,
+                    str_replace('$', '', $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice($label)->getText()),
+                    'On the Frontend Page - The Default ' .$label. ' at the Webpos Cart was not equal to zero.'
+                );
+            }
+        }
         $i = 0;
         foreach ($products as $product) {
             $products[$i] = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);
@@ -62,13 +71,17 @@ class WebposCheckoutPagePlaceOrderPageSuccessVisibleTest extends Injectable
             $this->webposIndex->getCheckoutProductList()->search($products[$i]->getSku());
             $i++;
         }
-        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-        $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
-        $this->webposIndex->getCheckoutPlaceOrder()->waitShippingSection();
-        $this->webposIndex->getCheckoutPlaceOrder()->waitPaymentSection();
-        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-        $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
-        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
-        $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+        if ($testCaseId == 'CP03' || $testCaseId == 'CP04') {
+            $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
+            $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+            $this->webposIndex->getCheckoutPlaceOrder()->waitShippingSection();
+            $this->webposIndex->getCheckoutPlaceOrder()->waitPaymentSection();
+        }
+        if ($testCaseId == 'CP04') {
+            $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+            $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+            $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+            $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+        }
     }
 }

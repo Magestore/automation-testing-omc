@@ -8,4 +8,22 @@
     <scenario name="WebposCheckoutCartPageVisibleTest" firstStep="LoginWebpos">
         <step name="LoginWebpos" module="Magento_Webpos"/>
     </scenario>
+    <scenario name="WebposCheckActionMenuTopRightScreenTest" firstStep="LoginWebpos">
+        <step name="LoginWebpos" module="Magento_Webpos"/>
+    </scenario>
+    <scenario name="WebposCheckoutAddOrderNoteTest" firstStep="LoginWebpos">
+        <step name="LoginWebpos" module="Magento_Webpos"/>
+    </scenario>
+    <scenario name="WebposClosePopupOrderNoteTest" firstStep="LoginWebpos">
+        <step name="LoginWebpos" module="Magento_Webpos"/>
+    </scenario>
+    <scenario name="WebposClickSaveAndClosePopupOrderNoteTest" firstStep="LoginWebpos">
+        <step name="LoginWebpos" module="Magento_Webpos"/>
+    </scenario>
+    <scenario name="WebposEnterFullScreenTest" firstStep="LoginWebpos">
+        <step name="LoginWebpos" module="Magento_Webpos"/>
+    </scenario>
+    <scenario name="WebposExitFullScreenTest" firstStep="LoginWebpos">
+        <step name="LoginWebpos" module="Magento_Webpos"/>
+    </scenario>
 </config>

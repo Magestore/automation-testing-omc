@@ -12,7 +12,10 @@
 namespace Magento\Webpos\Test\Block;
 
 use Magento\Mtf\Block\Block;
-
+/**
+ * Class MsWebpos
+ * @package Magento\Webpos\Test\Block
+ */
 class MsWebpos extends Block
 {
 	public function clickCMenuButton()

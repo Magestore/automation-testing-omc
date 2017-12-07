@@ -12,6 +12,9 @@
         <!--Checkout Page-->
         <block name="checkoutProductList" class="Magento\Webpos\Test\Block\Checkout\CheckoutProductList" locator="#product-list-wrapper" strategy="css selector"/>
         <block name="checkoutProductDetail" class="Magento\Webpos\Test\Block\Checkout\CheckoutProductDetail" locator="#popup-product-detail" strategy="css selector"/>
+        <block name="checkoutFormAddNote" class="Magento\Webpos\Test\Block\Checkout\CheckoutFormAddNote" locator="#form-add-note" strategy="css selector"/>
+        <block name="checkoutNoteOrder" class="Magento\Webpos\Test\Block\Checkout\CheckoutNoteOrder" locator="#form-note-order" strategy="css selector"/>
+        <block name="checkoutWebposCart" class="Magento\Webpos\Test\Block\Checkout\CheckoutWebposCart" locator="#webpos_cart" strategy="css selector"/>
         <block name="checkoutCartHeader" class="Magento\Webpos\Test\Block\Checkout\CheckoutCartHeader" locator="#webpos_cart > header" strategy="css selector"/>
         <block name="checkoutCartItems" class="Magento\Webpos\Test\Block\Checkout\CheckoutCartItems" locator="#order-items" strategy="css selector"/>
         <block name="checkoutProductEdit" class="Magento\Webpos\Test\Block\Checkout\CheckoutProductEdit" locator="#popup-edit-product" strategy="css selector"/>
@@ -23,5 +26,20 @@
         <block name="checkoutPaymentMethod" class="Magento\Webpos\Test\Block\Checkout\CheckoutPaymentMethod" locator="#payment-method" strategy="css selector"/>
         <block name="checkoutSuccess" class="Magento\Webpos\Test\Block\Checkout\CheckoutSuccess" locator="#success_container" strategy="css selector"/>
         <!--End Checkout Page-->
+        <block name="oWrapper" class="Magento\Webpos\Test\Block\OWrapper" locator="#o-wrapper" strategy="css selector"/>
+        <!--Begin Order History-->
+        <block name="orderHistoryContainer" class="Magento\Webpos\Test\Block\Order\OrderHistoryContainer" locator="#orders_history_container" strategy="css selector"/>
+        <block name="orderHistoryOrderList" class="Magento\Webpos\Test\Block\Order\OrderHistoryOrderList" locator="#webpos_order_list" strategy="css selector"/>
+        <block name="orderHistoryOrderViewHeader" class="Magento\Webpos\Test\Block\Order\OrderHistoryOrderViewHeader" locator="#webpos_order_view_container header" strategy="css selector"/>
+        <block name="orderHistoryOrderViewContent" class="Magento\Webpos\Test\Block\Order\OrderHistoryOrderViewContent" locator="#webpos_order_view_container .main-content" strategy="css selector"/>
+        <block name="orderHistoryOrderViewFooter" class="Magento\Webpos\Test\Block\Order\OrderHistoryOrderViewFooter" locator="#webpos_order_view_container .footer-order" strategy="css selector"/>
+        <block name="orderHistoryAddOrderNote" class="Magento\Webpos\Test\Block\Order\OrderHistoryAddOrderNote" locator="#form-add-note-order" strategy="css selector"/>
+        <block name="orderHistoryPayment" class="Magento\Webpos\Test\Block\Order\OrderHistoryPayment" locator="#payment-popup" strategy="css selector"/>
+        <block name="orderHistoryInvoice" class="Magento\Webpos\Test\Block\Order\OrderHistoryInvoice" locator="#invoice-popup" strategy="css selector"/>
+        <block name="orderHistoryShipment" class="Magento\Webpos\Test\Block\Order\OrderHistoryShipment" locator="#shipment-popup" strategy="css selector"/>
+        <block name="orderHistoryRefund" class="Magento\Webpos\Test\Block\Order\OrderHistoryRefund" locator="#refund-popup" strategy="css selector"/>
+        <block name="orderHistoryAddComment" class="Magento\Webpos\Test\Block\Order\OrderHistoryAddComment" locator="#add-comment-order" strategy="css selector"/>
+        <block name="orderHistoryAddCancelComment" class="Magento\Webpos\Test\Block\Order\OrderHistoryAddCancelComment" locator="#add-cancel-comment-order" strategy="css selector"/>
+        <!--Begin Order History-->
     </page>
 </config>
