@@ -15,8 +15,20 @@
             <field name="city" xsi:type="string">Guest City</field>
             <field name="region_id" xsi:type="string">California</field>
             <field name="postcode" xsi:type="string">90034</field>
-            <field name="country_id" xsi:type="string">United States</field>
+            <field name="country_id" xsi:type="string">US</field>
             <field name="telephone" xsi:type="string">12345678</field>
+        </dataset>
+
+        <dataset name="default_webpos_guest_address_edit">
+            <field name="firstname" xsi:type="string">Guest2</field>
+            <field name="lastname" xsi:type="string">POS2</field>
+            <field name="email" xsi:type="string">guest@example.com</field>
+            <field name="street" xsi:type="string">Street2</field>
+            <field name="city" xsi:type="string">Guest City2</field>
+            <field name="region_id" xsi:type="string">California</field>
+            <field name="postcode" xsi:type="string">90034</field>
+            <field name="country_id" xsi:type="string">US</field>
+            <field name="telephone" xsi:type="string">0192104914</field>
         </dataset>
     </repository>
 </config>

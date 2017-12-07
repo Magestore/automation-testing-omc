@@ -15,5 +15,18 @@ use Magento\Mtf\Block\Block;
  */
 class OrderHistoryOrderList extends Block
 {
+	public function search($string)
+	{
+		$this->_rootElement->find('#search-header-order')->setValue($string);
+	}
 
+	public function getFirstOrder()
+	{
+		return $this->_rootElement->find('.list-orders .order-item');
+	}
+
+	public function waitLoader()
+	{
+		$this->waitForElementNotVisible('.wrap-item-order .indicator');
+	}
 }
