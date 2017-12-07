@@ -29,6 +29,17 @@
         <block name="oWrapper" class="Magento\Webpos\Test\Block\OWrapper" locator="#o-wrapper" strategy="css selector"/>
         <!--Begin Order History-->
         <block name="orderHistoryContainer" class="Magento\Webpos\Test\Block\Order\OrderHistoryContainer" locator="#orders_history_container" strategy="css selector"/>
+        <block name="orderHistoryOrderList" class="Magento\Webpos\Test\Block\Order\OrderHistoryOrderList" locator="#webpos_order_list" strategy="css selector"/>
+        <block name="orderHistoryOrderViewHeader" class="Magento\Webpos\Test\Block\Order\OrderHistoryOrderViewHeader" locator="#webpos_order_view_container header" strategy="css selector"/>
+        <block name="orderHistoryOrderViewContent" class="Magento\Webpos\Test\Block\Order\OrderHistoryOrderViewContent" locator="#webpos_order_view_container .main-content" strategy="css selector"/>
+        <block name="orderHistoryOrderViewFooter" class="Magento\Webpos\Test\Block\Order\OrderHistoryOrderViewFooter" locator="#webpos_order_view_container .footer-order" strategy="css selector"/>
+        <block name="orderHistoryAddOrderNote" class="Magento\Webpos\Test\Block\Order\OrderHistoryAddOrderNote" locator="#form-add-note-order" strategy="css selector"/>
+        <block name="orderHistoryPayment" class="Magento\Webpos\Test\Block\Order\OrderHistoryPayment" locator="#payment-popup" strategy="css selector"/>
+        <block name="orderHistoryInvoice" class="Magento\Webpos\Test\Block\Order\OrderHistoryInvoice" locator="#invoice-popup" strategy="css selector"/>
+        <block name="orderHistoryShipment" class="Magento\Webpos\Test\Block\Order\OrderHistoryShipment" locator="#shipment-popup" strategy="css selector"/>
+        <block name="orderHistoryRefund" class="Magento\Webpos\Test\Block\Order\OrderHistoryRefund" locator="#refund-popup" strategy="css selector"/>
+        <block name="orderHistoryAddComment" class="Magento\Webpos\Test\Block\Order\OrderHistoryAddComment" locator="#add-comment-order" strategy="css selector"/>
+        <block name="orderHistoryAddCancelComment" class="Magento\Webpos\Test\Block\Order\OrderHistoryAddCancelComment" locator="#add-cancel-comment-order" strategy="css selector"/>
         <!--Begin Order History-->
     </page>
 </config>
