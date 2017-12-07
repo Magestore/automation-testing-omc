@@ -6,8 +6,8 @@
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CheckGUI\WebposCheckoutPageVisibleTest" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
-        <variation name="WebposCheckoutPageVisibleTestVariation1_CP03">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPageActionMenu\WebposPlaceOrderWithOrderNoteTest" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
+        <variation name="WebposPlaceOrderWithOrderNoteTestVariation1_CP14">
             <data name="staff/dataset" xsi:type="string">magentoadmin</data>
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="string">product1</item>
@@ -15,9 +15,8 @@
                 <item name="2" xsi:type="string">product3</item>
                 <item name="3" xsi:type="string">product4</item>
             </data>
-            <data name="labels" xsi:type="string">Subtotal,Total</data>
-            <data name="defaultValue" xsi:type="string">0.00</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPageVisible" />
+            <data name="textNote" xsi:type="string">This is a order note.</data>
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPageActionMenu\AssertWebposCheckoutAddOrderNote" />-->
         </variation>
     </testCase>
 </config>
