@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="storepickupStore"
+             module="Magento_Storepickup"
+             type="flat"
+             collection="Magento\Storepickup\Model\ResourceModel\Store\Collection"
+             repository_class="Magento\Storepickup\Test\Repository\StorepickupStore"
+             handler_interface="Magento\Storepickup\Test\Handler\StorepickupStore\StorepickupStoreInterface"
+             class="Magento\Storepickup\Test\Fixture\StorepickupStore"
+             entity_type="magestore_storepickup_store">
+        <field name="storepickup_id" is_required="1"/>
+        <field name="address" is_required="0"/>
+        <field name="baseimage_id" is_required="0"/>
+        <field name="city" is_required="0"/>
+        <field name="country_id" is_required="0"/>
+        <field name="description" is_required="0"/>
+        <field name="email" is_required="0"/>
+        <field name="fax" is_required="0"/>
+        <field name="link" is_required="0"/>
+        <field name="latitude" is_required="0"/>
+        <field name="longitude" is_required="0"/>
+        <field name="marker_icon" is_required="0"/>
+        <field name="meta_description" is_required="0"/>
+        <field name="meta_keywords" is_required="0"/>
+        <field name="meta_title" is_required="0"/>
+        <field name="phone" is_required="0"/>
+        <field name="rewrite_request_path" is_required="0"/>
+        <field name="schedule_id" is_required="0"/>
+        <field name="sort_order" is_required="0"/>
+        <field name="state" is_required="0"/>
+        <field name="status" is_required="0"/>
+        <field name="store_name" is_required="0"/>
+        <field name="zipcode" is_required="0"/>
+        <field name="zoom_level" is_required="0"/>
+        <field name="owner_name" is_required="0"/>
+        <field name="owner_email" is_required="0"/>
+        <field name="owner_phone" is_required="0"/>
+        <field name="warehouse_id" is_required="0"/>
+    </fixture>
+</config>

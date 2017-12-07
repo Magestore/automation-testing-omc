@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="storepickupSchedule" module="Magento_Storepickup" type="flat" collection="Magento\Storepickup\Model\ResourceModel\Schedule\Collection" repository_class="Magento\Storepickup\Test\Repository\StorepickupSchedule" handler_interface="Magento\Storepickup\Test\Handler\StorepickupSchedule\StorepickupScheduleInterface" class="Magento\Storepickup\Test\Fixture\StorepickupSchedule" entity_type="magestore_storepickup_schedule">
+        <field name="schedule_id" is_required="1"/>
+        <field name="schedule_name" is_required="0"/>
+        <field name="time_interval" is_required="0"/>
+        <field name="monday_status" is_required="0"/>
+        <field name="tuesday_status" is_required="0"/>
+        <field name="wednesday_status" is_required="0"/>
+        <field name="thursday_status" is_required="0"/>
+        <field name="friday_status" is_required="0"/>
+        <field name="saturday_status" is_required="0"/>
+        <field name="sunday_status" is_required="0"/>
+        <field name="monday_open" is_required="0"/>
+        <field name="tuesday_open" is_required="0"/>
+        <field name="wednesday_open" is_required="0"/>
+        <field name="thursday_open" is_required="0"/>
+        <field name="friday_open" is_required="0"/>
+        <field name="saturday_open" is_required="0"/>
+        <field name="sunday_open" is_required="0"/>
+        <field name="monday_open_break" is_required="0"/>
+        <field name="tuesday_open_break" is_required="0"/>
+        <field name="wednesday_open_break" is_required="0"/>
+        <field name="thursday_open_break" is_required="0"/>
+        <field name="friday_open_break" is_required="0"/>
+        <field name="saturday_open_break" is_required="0"/>
+        <field name="sunday_open_break" is_required="0"/>
+        <field name="monday_close_break" is_required="0"/>
+        <field name="tuesday_close_break" is_required="0"/>
+        <field name="wednesday_close_break" is_required="0"/>
+        <field name="thursday_close_break" is_required="0"/>
+        <field name="friday_close_break" is_required="0"/>
+        <field name="saturday_close_break" is_required="0"/>
+        <field name="sunday_close_break" is_required="0"/>
+        <field name="monday_close" is_required="0"/>
+        <field name="tuesday_close" is_required="0"/>
+        <field name="wednesday_close" is_required="0"/>
+        <field name="thursday_close" is_required="0"/>
+        <field name="friday_close" is_required="0"/>
+        <field name="saturday_close" is_required="0"/>
+        <field name="sunday_close" is_required="0"/>
+        <field name="storepickup_stores" is_required="0"/>
+    </fixture>
+</config>

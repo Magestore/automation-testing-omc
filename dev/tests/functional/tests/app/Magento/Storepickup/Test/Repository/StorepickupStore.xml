@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\Storepickup\Test\Repository\StorepickupStore">
+        <dataset name="default">
+            <field name="store_name" xsi:type="string">Magestore %isolation%</field>
+            <field name="address" xsi:type="string">magestore %isolation%</field>
+            <field name="city" xsi:type="string">magestore %isolation%</field>
+            <field name="zipcode" xsi:type="string">12345</field>
+            <field name="latitude" xsi:type="string">0</field>
+            <field name="longitude" xsi:type="string">0</field>
+            <field name="zoom_level" xsi:type="string">4</field>
+        </dataset>
+    </repository>
+</config>

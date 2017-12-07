@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="storepickupTag" module="Magento_Storepickup" type="flat" collection="Magento\Storepickup\Model\ResourceModel\Tag\Collection" repository_class="Magento\Storepickup\Test\Repository\StorepickupTag" handler_interface="Magento\Storepickup\Test\Handler\StorepickupTag\StorepickupTagInterface" class="Magento\Storepickup\Test\Fixture\StorepickupTag" entity_type="magestore_storepickup_tag">
+        <field name="tag_id" group="null" is_required="1"/>
+        <field name="tag_name" group="general-information" is_required="0"/>
+        <field name="tag_description" group="general-information" is_required="0"/>
+        <field name="tag_icon" group="general-information" is_required="0"/>
+        <field name="storepickup_stores" group="stores" is_required="0" source="Magento\Storepickup\Test\Fixture\Tag\Stores"/>
+    </fixture>
+</config>
