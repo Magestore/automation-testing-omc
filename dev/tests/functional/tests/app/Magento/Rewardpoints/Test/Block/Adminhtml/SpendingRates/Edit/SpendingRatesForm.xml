@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<tabs>
+    <spending_rate_information>
+        <class>\Magento\Backend\Test\Block\Widget\Tab</class>
+        <selector>#tab_rewardpoints_spendingrates</selector>
+        <strategy>css selector</strategy>
+        <fields>
+            <points>
+                <selector>[name='rewardpoints_spendingrates[points]']</selector>
+            </points>
+            <money>
+                <selector>[name='rewardpoints_spendingrates[money]']</selector>
+            </money>
+            <status>
+                <selector>[name='rewardpoints_spendingrates[status]']</selector>
+                <input>select</input>
+            </status>
+            <max_price_spended_type>
+                <selector>[name='rewardpoints_spendingrates[max_price_spended_type]']</selector>
+                <input>select</input>
+            </max_price_spended_type>
+            <max_price_spended_value>
+                <selector>[name='rewardpoints_spendingrates[max_price_spended_value]']</selector>
+                <input>select</input>
+            </max_price_spended_value>
+            <website_ids>
+                <selector>[name='rewardpoints_spendingrates[website_ids]']</selector>
+                <input>multiselect</input>
+            </website_ids>
+            <customer_group_ids>
+                <selector>[name='rewardpoints_spendingrates[customer_group_ids]']</selector>
+                <input>multiselect</input>
+            </customer_group_ids>
+            <sort_order>
+                <selector>[name='rewardpoints_spendingrates[sort_order]']</selector>
+            </sort_order>
+        </fields>
+    </spending_rate_information>
+</tabs>
+

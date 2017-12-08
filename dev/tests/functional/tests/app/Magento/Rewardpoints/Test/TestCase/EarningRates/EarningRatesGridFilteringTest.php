@@ -6,7 +6,7 @@
  * Time: 9:46 AM
  */
 
-namespace Magento\Rewardpoints\Test\TestCase;
+namespace Magento\Rewardpoints\Test\TestCase\EarningRates;
 
 use Magento\Ui\Test\TestCase\GridFilteringTest;
 

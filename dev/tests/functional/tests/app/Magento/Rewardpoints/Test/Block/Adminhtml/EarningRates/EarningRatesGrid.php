@@ -51,6 +51,9 @@ class EarningRatesGrid extends RewardGrid
         'sort_order[from]' => [
             'selector' => '.admin__data-grid-filters input[name="sort_order[from]"]',
         ],
+        'sort_order[to]' => [
+            'selector' => '.admin__data-grid-filters input[name="sort_order[to]"]',
+        ],
         'website_ids' => [
             'selector' => '.admin__data-grid-filters input[name="website_ids"]',
             'input'    => 'Select',
@@ -64,4 +67,16 @@ class EarningRatesGrid extends RewardGrid
             'input'    => 'Select',
         ]
     ];
+
+//    /**
+//     * Click on "Edit" link.
+//     *
+//     * @param SimpleElement $rowItem
+//     * @return void
+//     */
+//    protected function clickEditLink(SimpleElement $rowItem)
+//    {
+//        $rowItem->find($this->selectAction)->click();
+//        $rowItem->find($this->editLink)->click();
+//    }
 }
