@@ -14,6 +14,7 @@ class Toaster extends Block
 {
     public function getWarningMessage()
     {
+	    $this->waitForElementVisible('.message');
         return $this->_rootElement->find('.message');
     }
 }

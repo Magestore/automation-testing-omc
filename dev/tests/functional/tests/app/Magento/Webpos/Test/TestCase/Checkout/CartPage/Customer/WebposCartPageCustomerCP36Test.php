@@ -10,6 +10,7 @@ namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
 
 
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
+use Magento\Customer\Test\Fixture\Address;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
@@ -40,19 +41,16 @@ class WebposCartPageCustomerCP36Test extends Injectable
 	public function test(
 		Staff $staff,
 		CatalogProductSimple $product,
-		Customer $customer
+		Customer $customer,
+		Address $address
 	)
 	{
 		$customer->persist();
 
-		$this->webposIndex->open();
-		if ($this->webposIndex->getLoginForm()->isVisible()) {
-			$this->webposIndex->getLoginForm()->fill($staff);
-			$this->webposIndex->getLoginForm()->clickLoginButton();
-			sleep(5);
-			while ($this->webposIndex->getFirstScreen()->isVisible()) {}
-			sleep(2);
-		}
+		$this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\LoginWebposStep',
+			['staff' => $staff]
+		)->run();
 
 		$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 
@@ -94,5 +92,14 @@ class WebposCartPageCustomerCP36Test extends Injectable
 
 		$this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
+
+		$name = $address->getFirstname().' '.$address->getLastname();
+		$addressText = $address->getCity().', '.$address->getRegionId().', '.$address->getPostcode().', ';
+		$phone = $address->getTelephone();
+		return [
+			'name' => $name,
+			'address' => $addressText,
+			'phone' => $phone
+		];
 	}
 }

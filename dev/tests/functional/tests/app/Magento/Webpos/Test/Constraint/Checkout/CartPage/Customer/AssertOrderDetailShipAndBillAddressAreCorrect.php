@@ -15,7 +15,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 class AssertOrderDetailShipAndBillAddressAreCorrect extends AbstractConstraint
 {
-	public function processAssert(WebposIndex $webposIndex, Address $address)
+	public function processAssert(WebposIndex $webposIndex, $name, $address, $phone)
 	{
 
 		$webposIndex->getMsWebpos()->clickCMenuButton();
@@ -24,8 +24,10 @@ class AssertOrderDetailShipAndBillAddressAreCorrect extends AbstractConstraint
 		$webposIndex->getOrderHistoryOrderList()->waitLoader();
 
 		$webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-		$name = $address->getFirstname().' '.$address->getLastname();
-		$addressText = $address->getCity().', '.$address->getRegionId().', '.$address->getPostcode().', '.$address->getCountryId();
+//		$name = $address->getFirstname().' '.$address->getLastname();
+//		$addressText = $address->getCity().', '.$address->getRegionId().', '.$address->getPostcode().', ';
+
+		// Billing
 		\PHPUnit_Framework_Assert::assertEquals(
 			$name,
 			$webposIndex->getOrderHistoryOrderViewContent()->getBillingName(),
@@ -34,41 +36,38 @@ class AssertOrderDetailShipAndBillAddressAreCorrect extends AbstractConstraint
 			. "\nActual: " . $webposIndex->getOrderHistoryOrderViewContent()->getBillingName()
 		);
 
-		\PHPUnit_Framework_Assert::assertEquals(
-			$addressText,
+		\PHPUnit_Framework_Assert::assertContains(
+			$address,
 			$webposIndex->getOrderHistoryOrderViewContent()->getBillingAddress(),
-			'Order Detail - Billing address is wrong'
-			. "\nExpected: " . $addressText
-			. "\nActual: " . $webposIndex->getOrderHistoryOrderViewContent()->getBillingAddress()
+			'Order Detail - Billing address is wrong (Not check country)'
 		);
 		\PHPUnit_Framework_Assert::assertEquals(
-			$address->getTelephone(),
+			$phone,
 			$webposIndex->getOrderHistoryOrderViewContent()->getBillingPhone(),
-			'Order Detail - Billing address is wrong'
-			. "\nExpected: " . $address->getTelephone()
+			'Order Detail - Billing phone is wrong'
+			. "\nExpected: " . $phone
 			. "\nActual: " . $webposIndex->getOrderHistoryOrderViewContent()->getBillingPhone()
 		);
 
+		//Shipping
 		\PHPUnit_Framework_Assert::assertEquals(
 			$name,
 			$webposIndex->getOrderHistoryOrderViewContent()->getShippingName(),
-			'Order Detail - Billing name is wrong'
+			'Order Detail - Shipping name is wrong'
 			. "\nExpected: " . $name
 			. "\nActual: " . $webposIndex->getOrderHistoryOrderViewContent()->getShippingName()
 		);
 
-		\PHPUnit_Framework_Assert::assertEquals(
-			$addressText,
+		\PHPUnit_Framework_Assert::assertContains(
+			$address,
 			$webposIndex->getOrderHistoryOrderViewContent()->getShippingAddress(),
-			'Order Detail - Billing address is wrong'
-			. "\nExpected: " . $addressText
-			. "\nActual: " . $webposIndex->getOrderHistoryOrderViewContent()->getShippingAddress()
+			'Order Detail - Shipping address is wrong (Not check country)'
 		);
 		\PHPUnit_Framework_Assert::assertEquals(
-			$address->getTelephone(),
+			$phone,
 			$webposIndex->getOrderHistoryOrderViewContent()->getShippingPhone(),
-			'Order Detail - Billing address is wrong'
-			. "\nExpected: " . $address->getTelephone()
+			'Order Detail - Shipping phone is wrong'
+			. "\nExpected: " . $phone
 			. "\nActual: " . $webposIndex->getOrderHistoryOrderViewContent()->getShippingPhone()
 		);
 
