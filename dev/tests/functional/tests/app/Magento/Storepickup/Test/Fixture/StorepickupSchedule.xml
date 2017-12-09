@@ -6,45 +6,80 @@
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
-    <fixture name="storepickupSchedule" module="Magento_Storepickup" type="flat" collection="Magento\Storepickup\Model\ResourceModel\Schedule\Collection" repository_class="Magento\Storepickup\Test\Repository\StorepickupSchedule" handler_interface="Magento\Storepickup\Test\Handler\StorepickupSchedule\StorepickupScheduleInterface" class="Magento\Storepickup\Test\Fixture\StorepickupSchedule" entity_type="magestore_storepickup_schedule">
+    <fixture name="storepickupSchedule"
+             module="Magento_Storepickup"
+             type="flat"
+             collection="Magento\Storepickup\Model\ResourceModel\Schedule\Collection"
+             repository_class="Magento\Storepickup\Test\Repository\StorepickupSchedule"
+             handler_interface="Magento\Storepickup\Test\Handler\StorepickupSchedule\StorepickupScheduleInterface"
+             class="Magento\Storepickup\Test\Fixture\StorepickupSchedule"
+             entity_type="magestore_storepickup_schedule">
         <field name="schedule_id" is_required="1"/>
-        <field name="schedule_name" is_required="0"/>
+        <field name="schedule_name" group="general-information" is_required="0"/>
         <field name="time_interval" is_required="0"/>
-        <field name="monday_status" is_required="0"/>
-        <field name="tuesday_status" is_required="0"/>
-        <field name="wednesday_status" is_required="0"/>
-        <field name="thursday_status" is_required="0"/>
-        <field name="friday_status" is_required="0"/>
-        <field name="saturday_status" is_required="0"/>
-        <field name="sunday_status" is_required="0"/>
-        <field name="monday_open" is_required="0"/>
-        <field name="tuesday_open" is_required="0"/>
-        <field name="wednesday_open" is_required="0"/>
-        <field name="thursday_open" is_required="0"/>
-        <field name="friday_open" is_required="0"/>
-        <field name="saturday_open" is_required="0"/>
-        <field name="sunday_open" is_required="0"/>
-        <field name="monday_open_break" is_required="0"/>
-        <field name="tuesday_open_break" is_required="0"/>
-        <field name="wednesday_open_break" is_required="0"/>
-        <field name="thursday_open_break" is_required="0"/>
-        <field name="friday_open_break" is_required="0"/>
-        <field name="saturday_open_break" is_required="0"/>
-        <field name="sunday_open_break" is_required="0"/>
-        <field name="monday_close_break" is_required="0"/>
-        <field name="tuesday_close_break" is_required="0"/>
-        <field name="wednesday_close_break" is_required="0"/>
-        <field name="thursday_close_break" is_required="0"/>
-        <field name="friday_close_break" is_required="0"/>
-        <field name="saturday_close_break" is_required="0"/>
-        <field name="sunday_close_break" is_required="0"/>
-        <field name="monday_close" is_required="0"/>
-        <field name="tuesday_close" is_required="0"/>
-        <field name="wednesday_close" is_required="0"/>
-        <field name="thursday_close" is_required="0"/>
-        <field name="friday_close" is_required="0"/>
-        <field name="saturday_close" is_required="0"/>
-        <field name="sunday_close" is_required="0"/>
-        <field name="storepickup_stores" is_required="0"/>
+        <field name="monday_status" group="monday" is_required="0"/>
+        <field name="tuesday_status" group="tuesday" is_required="0"/>
+        <field name="wednesday_status" group="wednesday" is_required="0"/>
+        <field name="thursday_status" group="thursday" is_required="0"/>
+        <field name="friday_status" group="friday" is_required="0"/>
+        <field name="saturday_status" group="saturday" is_required="0"/>
+        <field name="sunday_status" group="sunday" is_required="0"/>
+        <field name="monday_open_hour" group="monday" is_required="0"/>
+        <field name="monday_open_minute" group="monday" is_required="0"/>
+        <field name="tuesday_open_hour" group="tuesday" is_required="0"/>
+        <field name="tuesday_open_minute" group="tuesday" is_required="0"/>
+        <field name="wednesday_open_hour" group="wednesday" is_required="0"/>
+        <field name="wednesday_open_minute" group="wednesday" is_required="0"/>
+        <field name="thursday_open_hour" group="thursday" is_required="0"/>
+        <field name="thursday_open_minute" group="thursday" is_required="0"/>
+        <field name="friday_open_hour" group="friday" is_required="0"/>
+        <field name="friday_open_minute" group="friday" is_required="0"/>
+        <field name="saturday_open_hour" group="saturday" is_required="0"/>
+        <field name="saturday_open_minute" group="saturday" is_required="0"/>
+        <field name="sunday_open_hour" group="sunday" is_required="0"/>
+        <field name="sunday_open_minute" group="sunday" is_required="0"/>
+        <field name="monday_open_break_hour" group="monday" is_required="0"/>
+        <field name="monday_open_break_minute" group="monday" is_required="0"/>
+        <field name="tuesday_open_break_hour" group="tuesday" is_required="0"/>
+        <field name="tuesday_open_break_minute" group="tuesday" is_required="0"/>
+        <field name="wednesday_open_break_hour" group="wednesday" is_required="0"/>
+        <field name="wednesday_open_break_minute" group="wednesday" is_required="0"/>
+        <field name="thursday_open_break_hour" group="thursday" is_required="0"/>
+        <field name="thursday_open_break_minute" group="thursday" is_required="0"/>
+        <field name="friday_open_break_hour" group="friday" is_required="0"/>
+        <field name="friday_open_break_minute" group="friday" is_required="0"/>
+        <field name="saturday_open_break_hour" group="saturday" is_required="0"/>
+        <field name="saturday_open_break_minute" group="saturday" is_required="0"/>
+        <field name="sunday_open_break_hour" group="sunday" is_required="0"/>
+        <field name="sunday_open_break_minute" group="sunday" is_required="0"/>
+        <field name="monday_close_break_hour" group="monday" is_required="0"/>
+        <field name="monday_close_break_minute" group="monday" is_required="0"/>
+        <field name="tuesday_close_break_hour" group="tuesday" is_required="0"/>
+        <field name="tuesday_close_break_minute" group="tuesday" is_required="0"/>
+        <field name="wednesday_close_break_hour" group="wednesday" is_required="0"/>
+        <field name="wednesday_close_break_minute" group="wednesday" is_required="0"/>
+        <field name="thursday_close_break_hour" group="thursday" is_required="0"/>
+        <field name="thursday_close_break_minute" group="thursday" is_required="0"/>
+        <field name="friday_close_break_hour" group="friday" is_required="0"/>
+        <field name="friday_close_break_minute" group="friday" is_required="0"/>
+        <field name="saturday_close_break_hour" group="saturday" is_required="0"/>
+        <field name="saturday_close_break_minute" group="saturday" is_required="0"/>
+        <field name="sunday_close_break_hour" group="sunday" is_required="0"/>
+        <field name="sunday_close_break_minute" group="sunday" is_required="0"/>
+        <field name="monday_close_hour" group="monday" is_required="0"/>
+        <field name="monday_close_minute" group="monday" is_required="0"/>
+        <field name="tuesday_close_hour" group="tuesday" is_required="0"/>
+        <field name="tuesday_close_minute" group="tuesday" is_required="0"/>
+        <field name="wednesday_close_hour" group="wednesday" is_required="0"/>
+        <field name="wednesday_close_minute" group="wednesday" is_required="0"/>
+        <field name="thursday_close_hour" group="thursday" is_required="0"/>
+        <field name="thursday_close_minute" group="thursday" is_required="0"/>
+        <field name="friday_close_hour" group="friday" is_required="0"/>
+        <field name="friday_close_minute" group="friday" is_required="0"/>
+        <field name="saturday_close_hour" group="saturday" is_required="0"/>
+        <field name="saturday_close_minute" group="saturday" is_required="0"/>
+        <field name="sunday_close_hour" group="sunday" is_required="0"/>
+        <field name="sunday_close_minute" group="sunday" is_required="0"/>
+        <field name="storepickup_stores" group="stores" is_required="0" source="Magento\Storepickup\Test\Fixture\Tag\Stores"/>
     </fixture>
 </config>

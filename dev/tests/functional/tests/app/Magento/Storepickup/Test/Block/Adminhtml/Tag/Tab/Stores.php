@@ -19,7 +19,7 @@ class Stores extends Tab
             ? $fields['storepickup_stores']['value']
             : [$fields['storepickup_stores']['value']];
         foreach ($stores as $store) {
-            $this->getStoresGrid()->searchAndSelect(['store_name' => $store]);
+            $this->getStoresGrid()->searchAndSelect(['store_name' => $store['name']]);
         }
     }
 

@@ -2,18 +2,18 @@
 /**
  * Created by PhpStorm.
  * User: ADMIN
- * Date: 12/6/2017
- * Time: 4:01 PM
+ * Date: 12/8/2017
+ * Time: 9:36 PM
  */
 
-namespace Magento\Storepickup\Test\Fixture\Tag;
+namespace Magento\Storepickup\Test\Fixture\Store;
 
 use Magento\Mtf\Fixture\DataSource;
 use Magento\Mtf\Fixture\FixtureFactory;
 
-class Stores extends DataSource
+class TagIds extends DataSource
 {
-    protected $stores = [];
+    protected $tags = [];
 
     public function __construct(
         FixtureFactory $fixtureFactory,
@@ -24,14 +24,13 @@ class Stores extends DataSource
         if (isset($data['dataset']) && $data['dataset'] !== '-') {
             $datasets = explode(',', $data['dataset']);
             foreach ($datasets as $dataset) {
-                $store = $fixtureFactory->createByCode('storepickupStore', ['dataset' => trim($dataset)]);
-                if (!$store->hasData('storepickup_id')) {
-                    $store->persist();
+                $tag = $fixtureFactory->createByCode('storepickupTag', ['dataset' => trim($dataset)]);
+                if (!$tag->hasData('tag_id')) {
+                    $tag->persist();
                 }
-                $this->stores[] = $store;
+                $this->tags[] = $tag;
                 $this->data[] = [
-                    'id' => $store->getStorepickupId(),
-                    'name' => $store->getStoreName()
+                    'name' => $tag->getTagName()
                 ];
             }
         }
@@ -42,8 +41,8 @@ class Stores extends DataSource
      *
      * @return array
      */
-    public function getStores()
+    public function getTags()
     {
-        return $this->stores;
+        return $this->tags;
     }
 }

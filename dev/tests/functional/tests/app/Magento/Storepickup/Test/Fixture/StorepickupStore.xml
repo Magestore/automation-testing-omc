@@ -15,32 +15,34 @@
              class="Magento\Storepickup\Test\Fixture\StorepickupStore"
              entity_type="magestore_storepickup_store">
         <field name="storepickup_id" is_required="1"/>
-        <field name="address" is_required="0"/>
+        <field name="store_name" group="general-information" is_required="0"/>
+        <field name="description" group="general-information" is_required="0"/>
+        <field name="warehouse_id" group="general-information" is_required="0"/>
+        <field name="status" group="general-information" is_required="0"/>
+        <field name="link" group="general-information" is_required="0"/>
+        <field name="sort_order" group="general-information" is_required="0"/>
+        <field name="phone" group="general-information" is_required="0"/>
+        <field name="email" group="general-information" is_required="0"/>
+        <field name="fax" group="general-information" is_required="0"/>
+        <field name="owner_name" group="general-information" is_required="0"/>
+        <field name="owner_email" group="general-information" is_required="0"/>
+        <field name="owner_phone" group="general-information" is_required="0"/>
+        <field name="rewrite_request_path" group="general-information" is_required="0"/>
+        <field name="meta_title" group="general-information" is_required="0"/>
+        <field name="meta_keywords" group="general-information" is_required="0"/>
+        <field name="meta_description" group="general-information" is_required="0"/>
+        <field name="address" group="google-map" is_required="0"/>
+        <field name="city" group="google-map" is_required="0"/>
+        <field name="zipcode" group="google-map" is_required="0"/>
+        <field name="country_id" group="google-map" is_required="0"/>
+        <field name="state" group="google-map" is_required="0"/>
+        <field name="latitude" group="google-map" is_required="0"/>
+        <field name="longitude" group="google-map" is_required="0"/>
+        <field name="zoom_level" group="google-map" is_required="0"/>
+        <field name="marker_icon" group="google-map" is_required="0"/>
         <field name="baseimage_id" is_required="0"/>
-        <field name="city" is_required="0"/>
-        <field name="country_id" is_required="0"/>
-        <field name="description" is_required="0"/>
-        <field name="email" is_required="0"/>
-        <field name="fax" is_required="0"/>
-        <field name="link" is_required="0"/>
-        <field name="latitude" is_required="0"/>
-        <field name="longitude" is_required="0"/>
-        <field name="marker_icon" is_required="0"/>
-        <field name="meta_description" is_required="0"/>
-        <field name="meta_keywords" is_required="0"/>
-        <field name="meta_title" is_required="0"/>
-        <field name="phone" is_required="0"/>
-        <field name="rewrite_request_path" is_required="0"/>
-        <field name="schedule_id" is_required="0"/>
-        <field name="sort_order" is_required="0"/>
-        <field name="state" is_required="0"/>
-        <field name="status" is_required="0"/>
-        <field name="store_name" is_required="0"/>
-        <field name="zipcode" is_required="0"/>
-        <field name="zoom_level" is_required="0"/>
-        <field name="owner_name" is_required="0"/>
-        <field name="owner_email" is_required="0"/>
-        <field name="owner_phone" is_required="0"/>
-        <field name="warehouse_id" is_required="0"/>
+        <field name="schedule_id" group="store-schedule" is_required="0" source="Magento\Storepickup\Test\Fixture\Store\ScheduleId"/>
+        <field name="tag_ids" group="store-tags" is_required="0" source="Magento\Storepickup\Test\Fixture\Store\TagIds"/>
+        <field name="holiday_ids" group="store-holidays" is_required="0" source="Magento\Storepickup\Test\Fixture\Store\HolidayIds"/>
     </fixture>
 </config>

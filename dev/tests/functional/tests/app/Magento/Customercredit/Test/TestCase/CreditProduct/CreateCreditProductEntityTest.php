@@ -42,7 +42,7 @@ class CreateCreditProductEntityTest extends Injectable
 
     public function testCreate(
         CreditProduct $product,
-        Category $category,
+//        Category $category,
         CreditProductIndex $productGrid,
         CreditProductNew $newProductPage
     ) {

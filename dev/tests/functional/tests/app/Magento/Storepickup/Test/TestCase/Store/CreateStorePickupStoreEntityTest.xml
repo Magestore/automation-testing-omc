@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Storepickup\Test\TestCase\Store\CreateStorePickupStoreEntityTest" summary="Create store" ticketId="MAGETWO-25699">
+        <variation name="CreateStorePickupStoreEntityTest">
+            <data name="storepickupStore/data/store_name" xsi:type="string">magestore_%isolation%</data>
+            <data name="storepickupStore/data/address" xsi:type="string">magestore_address_%isolation%</data>
+            <data name="storepickupStore/data/city" xsi:type="string">magestore_city_%isolation%</data>
+            <data name="storepickupStore/data/zipcode" xsi:type="string">12345</data>
+            <data name="storepickupStore/data/schedule_id/dataset" xsi:type="string">default1</data>
+            <data name="storepickupStore/data/tag_ids/dataset" xsi:type="string">default1</data>
+            <data name="storepickupStore/data/holiday_ids/dataset" xsi:type="string">default1</data>
+        </variation>
+    </testCase>
+</config>

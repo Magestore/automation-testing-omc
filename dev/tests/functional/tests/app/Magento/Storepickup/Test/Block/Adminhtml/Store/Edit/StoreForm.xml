@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<tabs>
+    <general-information>
+        <class>\Magento\Backend\Test\Block\Widget\Tab</class>
+        <selector>#store_tabs_general_section</selector>
+        <strategy>css selector</strategy>
+        <fields>
+            <store_name/>
+            <description/>
+            <warehouse_id>
+                <input>select</input>
+            </warehouse_id>
+            <status>
+                <input>select</input>
+            </status>
+            <link/>
+            <sort_order/>
+            <phone/>
+            <email/>
+            <fax/>
+            <owner_name/>
+            <owner_email/>
+            <owner_phone/>
+            <rewrite_request_path/>
+            <meta_title/>
+            <meta_keywords/>
+            <meta_description/>
+        </fields>
+    </general-information>
+    <google-map>
+        <class>\Magento\Backend\Test\Block\Widget\Tab</class>
+        <selector>#store_tabs_gmap_section</selector>
+        <strategy>css selector</strategy>
+        <fields>
+            <address/>
+            <city/>
+            <zipcode/>
+            <country_id>
+                <input>select</input>
+            </country_id>
+            <state/>
+            <marker_icon>
+                <input>upload</input>
+            </marker_icon>
+        </fields>
+    </google-map>
+    <store-schedule>
+        <class>\Magento\Backend\Test\Block\Widget\Tab</class>
+        <selector>#store_tabs_schedule_section</selector>
+        <strategy>css selector</strategy>
+        <fields>
+            <schedule_id>
+                <input>select</input>
+            </schedule_id>
+        </fields>
+    </store-schedule>
+    <store-tags>
+        <class>\Magento\Storepickup\Test\Block\Adminhtml\Store\Edit\Tab\Tags</class>
+        <selector>#store_tabs_tag_section</selector>
+        <strategy>css selector</strategy>
+    </store-tags>
+    <store-holidays>
+        <class>\Magento\Storepickup\Test\Block\Adminhtml\Store\Edit\Tab\Holidays</class>
+        <selector>#store_tabs_holiday_section</selector>
+        <strategy>css selector</strategy>
+    </store-holidays>
+</tabs>

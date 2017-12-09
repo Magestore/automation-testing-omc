@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Storepickup\Test\TestCase\Schedule\CreateStorePickupScheduleEntityTest" summary="Create schedule" ticketId="MAGETWO-25699">
+        <variation name="storepickupSchedule/data/CreateStorePickupScheduleEntityTest">
+            <data name="storepickupSchedule/data/schedule_name" xsi:type="string">magestore_schedule_%isolation%</data>
+            <data name="storepickupSchedule/data/monday_status" xsi:type="string">Open</data>
+            <data name="storepickupSchedule/data/tuesday_status" xsi:type="string">Open</data>
+            <data name="storepickupSchedule/data/wednesday_status" xsi:type="string">Open</data>
+            <data name="storepickupSchedule/data/thursday_status" xsi:type="string">Open</data>
+            <data name="storepickupSchedule/data/friday_status" xsi:type="string">Open</data>
+            <data name="storepickupSchedule/data/saturday_status" xsi:type="string">Open</data>
+            <data name="storepickupSchedule/data/sunday_status" xsi:type="string">Open</data>
+            <data name="storepickupSchedule/data/monday_open_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/monday_open_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/tuesday_open_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/tuesday_open_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/wednesday_open_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/wednesday_open_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/thursday_open_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/thursday_open_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/friday_open_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/friday_open_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/saturday_open_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/saturday_open_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/sunday_open_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/sunday_open_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/monday_open_break_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/monday_open_break_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/tuesday_open_break_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/tuesday_open_break_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/wednesday_open_break_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/wednesday_open_break_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/thursday_open_break_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/thursday_open_break_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/friday_open_break_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/friday_open_break_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/saturday_open_break_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/saturday_open_break_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/sunday_open_break_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/sunday_open_break_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/monday_close_break_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/monday_close_break_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/tuesday_close_break_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/tuesday_close_break_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/wednesday_close_break_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/wednesday_close_break_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/thursday_close_break_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/thursday_close_break_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/friday_close_break_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/friday_close_break_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/saturday_close_break_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/saturday_close_break_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/sunday_close_break_hour" xsi:type="string">05</data>
+            <data name="storepickupSchedule/data/sunday_close_break_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/monday_close_hour" xsi:type="string">10</data>
+            <data name="storepickupSchedule/data/monday_close_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/tuesday_close_hour" xsi:type="string">10</data>
+            <data name="storepickupSchedule/data/tuesday_close_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/wednesday_close_hour" xsi:type="string">10</data>
+            <data name="storepickupSchedule/data/wednesday_close_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/thursday_close_hour" xsi:type="string">10</data>
+            <data name="storepickupSchedule/data/thursday_close_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/friday_close_hour" xsi:type="string">10</data>
+            <data name="storepickupSchedule/data/friday_close_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/saturday_close_hour" xsi:type="string">10</data>
+            <data name="storepickupSchedule/data/saturday_close_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/sunday_close_hour" xsi:type="string">10</data>
+            <data name="storepickupSchedule/data/sunday_close_minute" xsi:type="string">00</data>
+            <data name="storepickupSchedule/data/storepickup_stores/dataset" xsi:type="string">default, default</data>
+        </variation>
+    </testCase>
+</config>

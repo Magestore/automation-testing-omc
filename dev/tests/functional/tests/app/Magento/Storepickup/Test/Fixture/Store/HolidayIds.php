@@ -2,18 +2,18 @@
 /**
  * Created by PhpStorm.
  * User: ADMIN
- * Date: 12/6/2017
- * Time: 4:01 PM
+ * Date: 12/8/2017
+ * Time: 9:43 PM
  */
 
-namespace Magento\Storepickup\Test\Fixture\Tag;
+namespace Magento\Storepickup\Test\Fixture\Store;
 
 use Magento\Mtf\Fixture\DataSource;
 use Magento\Mtf\Fixture\FixtureFactory;
 
-class Stores extends DataSource
+class HolidayIds extends DataSource
 {
-    protected $stores = [];
+    protected $holidays = [];
 
     public function __construct(
         FixtureFactory $fixtureFactory,
@@ -24,14 +24,13 @@ class Stores extends DataSource
         if (isset($data['dataset']) && $data['dataset'] !== '-') {
             $datasets = explode(',', $data['dataset']);
             foreach ($datasets as $dataset) {
-                $store = $fixtureFactory->createByCode('storepickupStore', ['dataset' => trim($dataset)]);
-                if (!$store->hasData('storepickup_id')) {
-                    $store->persist();
+                $holiday = $fixtureFactory->createByCode('storepickupHoliday', ['dataset' => trim($dataset)]);
+                if (!$holiday->hasData('holiday_id')) {
+                    $holiday->persist();
                 }
-                $this->stores[] = $store;
+                $this->holidays[] = $holiday;
                 $this->data[] = [
-                    'id' => $store->getStorepickupId(),
-                    'name' => $store->getStoreName()
+                    'name' => $holiday->getHolidayName()
                 ];
             }
         }
@@ -42,8 +41,8 @@ class Stores extends DataSource
      *
      * @return array
      */
-    public function getStores()
+    public function getHolidays()
     {
-        return $this->stores;
+        return $this->holidays;
     }
 }
