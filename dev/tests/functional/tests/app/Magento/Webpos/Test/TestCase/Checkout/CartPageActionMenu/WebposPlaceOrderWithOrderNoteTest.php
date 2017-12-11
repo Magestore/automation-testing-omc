@@ -72,11 +72,14 @@ class WebposPlaceOrderWithOrderNoteTest extends Injectable
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
+	    sleep(1);
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryContainer()->getSearchOrderInput()->setValue($result['orderId']);
+	    $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         self::assertEquals(
             $textNote,
             $this->webposIndex->getOrderHistoryContainer()->getOrderNote()->getText(),
-            'abc'
+            'Order Note is wrong'
         );
     }
 }

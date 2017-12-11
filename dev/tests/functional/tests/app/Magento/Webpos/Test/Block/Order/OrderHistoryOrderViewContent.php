@@ -15,5 +15,34 @@ use Magento\Mtf\Block\Block;
  */
 class OrderHistoryOrderViewContent extends Block
 {
+	public function getBillingName()
+	{
+		return $this->_rootElement->find('label[data-bind="text: $parent.getCustomerName(\'billing\')"]')->getText();
+	}
+
+	public function getBillingAddress()
+	{
+		return $this->_rootElement->find('span[data-bind="text: $parent.getAddress(\'billing\')"]')->getText();
+	}
+
+	public function getBillingPhone()
+	{
+		return $this->_rootElement->find('span[data-bind="text: $parent.getAddressType(\'billing\').telephone"]')->getText();
+	}
+
+	public function getShippingName()
+	{
+		return $this->_rootElement->find('label[data-bind="text: $parent.getCustomerName(\'shipping\')"]')->getText();
+	}
+
+	public function getShippingAddress()
+	{
+		return $this->_rootElement->find('span[data-bind="text: $parent.getAddress(\'shipping\')"]')->getText();
+	}
+
+	public function getShippingPhone()
+	{
+		return $this->_rootElement->find('span[data-bind="text: $parent.getAddressType(\'shipping\').telephone"]')->getText();
+	}
 
 }

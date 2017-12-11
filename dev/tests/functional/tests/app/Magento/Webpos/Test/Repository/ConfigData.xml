@@ -574,5 +574,103 @@
                 <item name="value" xsi:type="number">0</item>
             </field>
         </dataset>
+
+        <dataset name="webpos_default_guest_checkout_rollback">
+            <field name="webpos/guest_checkout/first_name" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">Guest</item>
+            </field>
+            <field name="webpos/guest_checkout/last_name" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">POS</item>
+            </field>
+            <field name="webpos/guest_checkout/street" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">Street</item>
+            </field>
+            <field name="webpos/guest_checkout/country_id" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">US</item>
+            </field>
+            <field name="webpos/guest_checkout/region_id" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="label" xsi:type="string">California</item>
+                <item name="value" xsi:type="string">12</item>
+            </field>
+            <field name="webpos/guest_checkout/city" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">Guest City</item>
+            </field>
+            <field name="webpos/guest_checkout/zip" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="number">90034</item>
+            </field>
+            <field name="webpos/guest_checkout/telephone" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="number">12345678</item>
+            </field>
+            <field name="webpos/guest_checkout/email" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">guest@example.com</item>
+            </field>
+        </dataset>
+
+        <dataset name="webpos_default_guest_checkout_edit">
+            <field name="webpos/guest_checkout/first_name" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">Guest2</item>
+            </field>
+            <field name="webpos/guest_checkout/last_name" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">POS2</item>
+            </field>
+            <field name="webpos/guest_checkout/street" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">Street2</item>
+            </field>
+            <field name="webpos/guest_checkout/country_id" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">US</item>
+            </field>
+            <field name="webpos/guest_checkout/region_id" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="label" xsi:type="string">California</item>
+                <item name="value" xsi:type="string">12</item>
+            </field>
+            <field name="webpos/guest_checkout/city" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">Guest City2</item>
+            </field>
+            <field name="webpos/guest_checkout/zip" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="number">90034</item>
+            </field>
+            <field name="webpos/guest_checkout/telephone" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="number">0192104914</item>
+            </field>
+            <field name="webpos/guest_checkout/email" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">guest@example.com</item>
+            </field>
+        </dataset>
     </repository>
 </config>

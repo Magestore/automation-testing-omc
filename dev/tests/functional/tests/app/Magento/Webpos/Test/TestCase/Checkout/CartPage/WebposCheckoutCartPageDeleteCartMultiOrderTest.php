@@ -33,14 +33,10 @@ class WebposCheckoutCartPageDeleteCartMultiOrderTest extends Injectable
 		CatalogProductSimple $product
 	)
 	{
-		$this->webposIndex->open();
-		if ($this->webposIndex->getLoginForm()->isVisible()) {
-			$this->webposIndex->getLoginForm()->fill($staff);
-			$this->webposIndex->getLoginForm()->clickLoginButton();
-			sleep(5);
-			while ($this->webposIndex->getFirstScreen()->isVisible()) {}
-			sleep(2);
-		}
+		$this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\LoginWebposStep',
+			['staff' => $staff]
+		)->run();
 
 		$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 
