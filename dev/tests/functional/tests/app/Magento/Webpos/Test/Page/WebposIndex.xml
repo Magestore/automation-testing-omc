@@ -19,6 +19,8 @@
         <block name="checkoutCartItems" class="Magento\Webpos\Test\Block\Checkout\CheckoutCartItems" locator="#order-items" strategy="css selector"/>
         <block name="checkoutChangeCustomer" class="Magento\Webpos\Test\Block\Checkout\CheckoutChangeCustomer" locator="#popup-change-customer" strategy="css selector"/>
         <block name="checkoutEditCustomer" class="Magento\Webpos\Test\Block\Checkout\CheckoutEditCustomer" locator="#form-edit-customer" strategy="css selector"/>
+        <block name="checkoutAddCustomer" class="Magento\Webpos\Test\Block\Checkout\CheckoutAddCustomer" locator="#form-customer-add-customer-checkout" strategy="css selector"/>
+        <block name="checkoutAddShippingAddress" class="Magento\Webpos\Test\Block\Checkout\CheckoutAddShippingAddress" locator="#form-customer-add-shipping-address-checkout" strategy="css selector"/>
         <block name="checkoutEditAddress" class="Magento\Webpos\Test\Block\Checkout\CheckoutEditAddress" locator="#form-customer-add-address-checkout" strategy="css selector"/>
         <block name="checkoutProductEdit" class="Magento\Webpos\Test\Block\Checkout\CheckoutProductEdit" locator="#popup-edit-product" strategy="css selector"/>
         <block name="checkoutDiscount" class="Magento\Webpos\Test\Block\Checkout\CheckoutDiscount" locator="#webpos_cart_discountpopup" strategy="css selector"/>

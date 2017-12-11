@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer\WebposCartPageCustomerCheckoutByExistingCustomerCP41Test" summary="Checkout - Cart Page - Customer - Checkout by existing customer - Change customer - CP41 test" ticketId="WEBPOS-1">
+		<variation name="WebposCartPageCustomerCheckoutByExistingCustomerCP41TestVariation1_CP41">
+			<data name="staff/dataset" xsi:type="string">magentoadmin</data>
+
+			<data name="product/dataset" xsi:type="string">product1</data>
+			<data name="customer1/dataset" xsi:type="string">johndoe_unique</data>
+			<data name="customer2/dataset" xsi:type="string">johndoe_unique</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertCartPageCustomerNameIsCorrect"/>
+		</variation>
+	</testCase>
+</config>

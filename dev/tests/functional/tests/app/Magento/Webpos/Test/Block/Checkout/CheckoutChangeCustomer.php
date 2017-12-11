@@ -28,7 +28,7 @@ class CheckoutChangeCustomer extends Block
 		$this->waitForCustomerList();
 		$this->_rootElement->find('#search-customer')->setValue($text);
 		$this->waitForCustomerList();
-		sleep(2);
+		sleep(1);
 	}
 
 	public function getFirstCustomer()
