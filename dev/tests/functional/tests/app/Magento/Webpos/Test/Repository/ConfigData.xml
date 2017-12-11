@@ -8,6 +8,25 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
     <repository class="Magento\Config\Test\Repository\ConfigData">
+        <!-- Webpos need to create session before working-->
+        <dataset name="create_session_before_working">
+            <field name="webpos/general/enable_session" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+                <item name="inherit" xsi:type="number">1</item>
+            </field>
+        </dataset>
+        <dataset name="setup_session_before_working_to_no">
+            <field name="webpos/general/enable_session" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+                <item name="inherit" xsi:type="number">1</item>
+            </field>
+        </dataset>
         <!-- Magestore Webpos Config Color and delivery Settings-->
         <dataset name="webpos_synchronization_configcolor">
             <field name="webpos/general/webpos_color" xsi:type="array">
@@ -27,13 +46,13 @@
         </dataset>
         <!-- Magestore Webpos General Settings-->
         <dataset name="magestore_webpos_general">
-            <field name="webpos/general/webpos_logo" xsi:type="array">
-                <item name="scope" xsi:type="string">default</item>
-                <item name="scope_id" xsi:type="number">0</item>
-                <item name="label" xsi:type="string">http://127.0.0.1/magento2/pub/media/webpos/logo/default/logo.png</item>
-                <item name="value" xsi:type="string">http://127.0.0.1/magento2/pub/media/webpos/logo/default/logo.png</item>
-                <item name="inherit" xsi:type="number">1</item>
-            </field>
+            <!--<field name="webpos/general/webpos_logo" xsi:type="array">-->
+                <!--<item name="scope" xsi:type="string">default</item>-->
+                <!--<item name="scope_id" xsi:type="number">0</item>-->
+                <!--<item name="label" xsi:type="string">http://127.0.0.1/magento2/pub/media/webpos/logo/default/logo.png</item>-->
+                <!--<item name="value" xsi:type="string">http://127.0.0.1/magento2/pub/media/webpos/logo/default/logo.png</item>-->
+                <!--<item name="inherit" xsi:type="number">1</item>-->
+            <!--</field>-->
             <field name="webpos/general/webpos_color" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>

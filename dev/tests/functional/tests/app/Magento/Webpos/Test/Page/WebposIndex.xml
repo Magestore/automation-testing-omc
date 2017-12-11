@@ -40,6 +40,15 @@
         <block name="orderHistoryRefund" class="Magento\Webpos\Test\Block\Order\OrderHistoryRefund" locator="#refund-popup" strategy="css selector"/>
         <block name="orderHistoryAddComment" class="Magento\Webpos\Test\Block\Order\OrderHistoryAddComment" locator="#add-comment-order" strategy="css selector"/>
         <block name="orderHistoryAddCancelComment" class="Magento\Webpos\Test\Block\Order\OrderHistoryAddCancelComment" locator="#add-cancel-comment-order" strategy="css selector"/>
-        <!--Begin Order History-->
+        <!--End Order History-->
+        <!--Begin Session management-->
+        <block name="registerShiftContainer" class="Magento\Webpos\Test\Block\SessionManagement\RegisterShiftContainer" locator="#register_shift_container" strategy="css selector"/>
+        <block name="shiftContainer" class="Magento\Webpos\Test\Block\SessionManagement\ShiftContainer" locator="#shift_container" strategy="css selector"/>
+        <block name="paypalIntegrationContainer" class="Magento\Webpos\Test\Block\SessionManagement\PaypalIntegrationContainer" locator="#webpos_paypal_integration_container" strategy="css selector"/>
+        <block name="paypalIntegrationOverlay" class="Magento\Webpos\Test\Block\SessionManagement\PaypalIntegrationOverlay" locator="#webpos_paypal_integration_overlay" strategy="css selector"/>
+        <block name="installContainer" class="Magento\Webpos\Test\Block\SessionManagement\InstallContainer" locator="#install_container" strategy="css selector"/>
+        <block name="closeShiftContainer" class="Magento\Webpos\Test\Block\SessionManagement\CloseShiftContainer" locator="#close-shift-container" strategy="css selector"/>
+        <block name="setClosingBalanceReason" class="Magento\Webpos\Test\Block\SessionManagement\SetClosingBalanceReason" locator="#set-closing-balance-reason" strategy="css selector"/>
+        <!--End Session management-->
     </page>
 </config>

@@ -45,15 +45,10 @@ class WebposCheckoutPagePlaceOrderPageSuccessVisibleTest extends Injectable
      */
     public function test(Staff $staff, $testCaseId, $labels, FixtureFactory $fixtureFactory, $products, $defaultValue)
     {
-        $this->webposIndex->open();
-        if ($this->webposIndex->getLoginForm()->isVisible()) {
-            $this->webposIndex->getLoginForm()->fill($staff);
-            $this->webposIndex->getLoginForm()->clickLoginButton();
-            sleep(5);
-            while ($this->webposIndex->getFirstScreen()->isVisible()) {
-            }
-            sleep(2);
-        }
+        $this->objectManager->create(
+            '\Magento\Webpos\Test\TestStep\LoginWebposStep',
+            ['staff' => $staff]
+        )->run();
         if ($testCaseId == 'CP02') {
             $labels = explode(',', $labels);
             foreach ($labels as $label) {

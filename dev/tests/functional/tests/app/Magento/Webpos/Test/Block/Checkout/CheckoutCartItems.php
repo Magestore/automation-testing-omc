@@ -9,6 +9,7 @@
 namespace Magento\Webpos\Test\Block\Checkout;
 
 use Magento\Mtf\Block\Block;
+use Magento\Mtf\Client\Locator;
 /**
  * Class CheckoutCartItems
  * @package Magento\Webpos\Test\Block\Checkout
@@ -37,4 +38,25 @@ class CheckoutCartItems extends Block
 	{
 		return $this->_rootElement->find('.product-item');
 	}
+
+    public function getCartItem($name)
+    {
+        return $this->_rootElement->find('//li/div/div/div[2]/h4[text()="'.$name.'"]/../../../..', Locator::SELECTOR_XPATH);
+    }
+
+    public function getCartItemName($name)
+    {
+        return $this->getCartItem($name)->find('.product-name')->getText();
+    }
+
+    public function getCartItemQty($name)
+    {
+        return $this->getCartItem($name)->find('.number');
+    }
+
+    public function getCartItemPrice($name)
+    {
+        $price = $this->getCartItem($name)->find('.price')->getText();
+        return substr($price, 1);
+    }
 }

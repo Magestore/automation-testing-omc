@@ -45,15 +45,10 @@ class WebposPlaceOrderWithOrderNoteTest extends Injectable
      */
     public function test(Staff $staff, FixtureFactory $fixtureFactory, $products, $textNote)
     {
-        $this->webposIndex->open();
-        if ($this->webposIndex->getLoginForm()->isVisible()) {
-            $this->webposIndex->getLoginForm()->fill($staff);
-            $this->webposIndex->getLoginForm()->clickLoginButton();
-            sleep(5);
-            while ($this->webposIndex->getFirstScreen()->isVisible()) {
-            }
-            sleep(2);
-        }
+        $this->objectManager->create(
+            '\Magento\Webpos\Test\TestStep\LoginWebposStep',
+            ['staff' => $staff]
+        )->run();
         $i = 0;
         foreach ($products as $product) {
             $products[$i] = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);

@@ -15,6 +15,9 @@ use Magento\Mtf\Block\Block;
  */
 class OrderHistoryContainer extends Block
 {
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
     public function getSearchOrderInput()
     {
         return $this->_rootElement->find('#search-header-order');

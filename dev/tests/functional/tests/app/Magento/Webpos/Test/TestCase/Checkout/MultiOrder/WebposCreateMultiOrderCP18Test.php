@@ -6,14 +6,14 @@
  * Time: 10:49
  */
 
-namespace Magento\Webpos\Test\TestCase\Checkout\CartPageActionMenu;
+namespace Magento\Webpos\Test\TestCase\Checkout\MultiOrder;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposCreateMultiOrderCP18Test
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPageActionMenu
+ * @package Magento\Webpos\Test\TestCase\Checkout\MultiOrder
  */
 class WebposCreateMultiOrderCP18Test extends Injectable
 {
@@ -43,22 +43,18 @@ class WebposCreateMultiOrderCP18Test extends Injectable
      */
     public function test(Staff $staff, $orderNumber)
     {
-        $this->webposIndex->open();
-        if ($this->webposIndex->getLoginForm()->isVisible()) {
-            $this->webposIndex->getLoginForm()->fill($staff);
-            $this->webposIndex->getLoginForm()->clickLoginButton();
-            sleep(5);
-            while ($this->webposIndex->getFirstScreen()->isVisible()) {
-            }
-            sleep(2);
-        }
+        $this->objectManager->create(
+            '\Magento\Webpos\Test\TestStep\LoginWebposStep',
+            ['staff' => $staff]
+        )->run();
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         self::assertTrue(
             $this->webposIndex->getCheckoutCartHeader()->getAnyOrderItem()->isVisible(),
             'At the web pos Cart On the right screen. The time and number order was not visible.'
         );
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
-        $this->webposIndex->getCheckoutWebposCart()->getOrderSequence($orderNumber)->click();
+        $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($orderNumber)->click();
+        $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         self::assertTrue(
             $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->isVisible(),
             'At the web pos Cart On the right screen. The Button Add Multi Order was not visible.'

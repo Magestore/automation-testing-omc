@@ -41,6 +41,11 @@ class CheckoutProductList extends Block
         return $this->_rootElement->find('#block-product-list');
     }
 
+    public function waitProductList()
+    {
+        $this->waitForElementVisible('#block-product-list');
+    }
+
     public function getCustomSaleButton()
     {
         return $this->_rootElement->find('.custom-sale');

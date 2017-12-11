@@ -9,6 +9,7 @@
 namespace Magento\Webpos\Test\Block\Login;
 
 use Magento\Mtf\Block\Form;
+use Magento\Mtf\Client\Locator;
 
 class LoginForm extends Form
 {
@@ -20,7 +21,6 @@ class LoginForm extends Form
 	{
 		return $this->_rootElement->find('#pwd');
 	}
-
 
 	public function clickLoginButton()
 	{
@@ -42,4 +42,31 @@ class LoginForm extends Form
 	{
 		return $this->_rootElement->find('#pwd-error');
 	}
+
+	public function getLocationID()
+    {
+	    return $this->_rootElement->find('//*[@id="location"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function selectLocation($name)
+    {
+        $this->getLocationID()->click();
+        return $this->_rootElement->find('//*[@id="location"]/option[text()="'.$name.'"]', Locator::SELECTOR_XPATH);
+    }
+
+	public function getPosID()
+    {
+	    return $this->_rootElement->find('//*[@id="pos"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function selectPos($name)
+    {
+        $this->getPosID()->click();
+        return $this->_rootElement->find('//*[@id="pos"]/option[text()="'.$name.'"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getEnterToPos()
+    {
+        return $this->_rootElement->find('button[data-bind="click: ajaxChangeLocation"]');
+    }
 }

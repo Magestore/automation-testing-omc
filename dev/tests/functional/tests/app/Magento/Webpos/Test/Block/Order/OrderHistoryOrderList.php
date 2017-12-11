@@ -15,5 +15,11 @@ use Magento\Mtf\Block\Block;
  */
 class OrderHistoryOrderList extends Block
 {
-
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getSearchOrderInput()
+    {
+        return $this->_rootElement->find('#search-header-order');
+    }
 }
