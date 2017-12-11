@@ -44,15 +44,15 @@
             </marker_icon>
         </fields>
     </google-map>
+    <image-gallery>
+        <class>\Magento\Storepickup\Test\Block\Adminhtml\Store\Edit\Tab\ImageGallery</class>
+        <selector>[id="store_tabs_imagegallery_section"]</selector>
+        <strategy>css selector</strategy>
+    </image-gallery>
     <store-schedule>
-        <class>\Magento\Backend\Test\Block\Widget\Tab</class>
+        <class>\Magento\Storepickup\Test\Block\Adminhtml\Store\Edit\Tab\Schedule\ScheduleId</class>
         <selector>#store_tabs_schedule_section</selector>
         <strategy>css selector</strategy>
-        <fields>
-            <schedule_id>
-                <input>select</input>
-            </schedule_id>
-        </fields>
     </store-schedule>
     <store-tags>
         <class>\Magento\Storepickup\Test\Block\Adminhtml\Store\Edit\Tab\Tags</class>

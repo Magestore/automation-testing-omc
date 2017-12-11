@@ -42,4 +42,24 @@ class StoreForm extends FormTabs
     {
         return $this->_rootElement->find($this->storeNameField, Locator::SELECTOR_CSS)->isVisible();
     }
+
+    public function storeNameRequireErrorIsVisible()
+    {
+        return $this->_rootElement->find('#store_store_name-error')->isVisible();
+    }
+
+    public function addressRequireErrorIsVisible()
+    {
+        return $this->_rootElement->find('#store_address-error')->isVisible();
+    }
+
+    public function cityRequireErrorIsVisible()
+    {
+        return $this->_rootElement->find('#store_city-error')->isVisible();
+    }
+
+    public function zipcodeRequireErrorIsVisible()
+    {
+        return $this->_rootElement->find('#store_zipcode-error')->isVisible();
+    }
 }

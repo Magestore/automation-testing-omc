@@ -168,8 +168,8 @@
         </fields>
     </attributes>
     <gallery>
-        <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
-        <selector>[data-index='block_gallery']</selector>
+        <class>\Magento\Catalog\Test\Block\Adminhtml\Product\Edit\Section\BlockGallery</class>
+        <selector>[data-index='gallery']</selector>
         <strategy>css selector</strategy>
     </gallery>
     <search-engine-optimization>

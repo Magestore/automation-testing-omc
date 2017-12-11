@@ -17,7 +17,7 @@
         <field name="tag_id" group="null" is_required="1"/>
         <field name="tag_name" group="general-information" is_required="0"/>
         <field name="tag_description" group="general-information" is_required="0"/>
-        <field name="tag_icon" group="general-information" is_required="0"/>
+        <field name="tag_icon" group="general-information" is_required="0" source="Magento\Storepickup\Test\Fixture\Tag\TagIcon"/>
         <field name="storepickup_stores" group="stores" is_required="0" source="Magento\Storepickup\Test\Fixture\Tag\Stores"/>
     </fixture>
 </config>
