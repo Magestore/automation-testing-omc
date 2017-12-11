@@ -10,10 +10,10 @@ namespace Magento\Webpos\Test\Block\SessionManagement;
 
 use Magento\Mtf\Block\Block;
 /**
- * Class PaypalIntegrationContainer
+ * Class SessionPaypal
  * @package Magento\Webpos\Test\Block\SessionManagement
  */
-class PaypalIntegrationContainer extends Block
+class SessionPaypal extends Block
 {
 
 }

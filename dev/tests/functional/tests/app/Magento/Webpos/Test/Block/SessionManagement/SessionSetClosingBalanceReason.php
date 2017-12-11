@@ -10,10 +10,10 @@ namespace Magento\Webpos\Test\Block\SessionManagement;
 
 use Magento\Mtf\Block\Block;
 /**
- * Class SetClosingBalanceReason
+ * Class SessionSetClosingBalanceReason
  * @package Magento\Webpos\Test\Block\SessionManagement
  */
-class SetClosingBalanceReason extends Block
+class SessionSetClosingBalanceReason extends Block
 {
     public function getButtonBtnDone()
     {

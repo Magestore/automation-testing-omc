@@ -10,10 +10,10 @@ namespace Magento\Webpos\Test\Block\SessionManagement;
 
 use Magento\Mtf\Block\Block;
 /**
- * Class PaypalIntegrationOverlay
+ * Class SessionPaypalOverLay
  * @package Magento\Webpos\Test\Block\SessionManagement
  */
-class PaypalIntegrationOverlay extends Block
+class SessionPaypalOverLay extends Block
 {
 
 }

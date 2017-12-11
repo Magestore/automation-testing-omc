@@ -10,10 +10,10 @@ namespace Magento\Webpos\Test\Block\SessionManagement;
 
 use Magento\Mtf\Block\Block;
 /**
- * Class CloseShiftContainer
+ * Class SessionCloseShift
  * @package Magento\Webpos\Test\Block\SessionManagement
  */
-class CloseShiftContainer extends Block
+class SessionCloseShift extends Block
 {
     public function getConfirmSession()
     {

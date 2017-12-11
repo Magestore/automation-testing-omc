@@ -10,14 +10,10 @@ namespace Magento\Webpos\Test\Block\SessionManagement;
 
 use Magento\Mtf\Block\Block;
 /**
- * Class ShiftContainer
+ * Class SessionRegisterShift
  * @package Magento\Webpos\Test\Block\SessionManagement
  */
-class ShiftContainer extends Block
+class SessionRegisterShift extends Block
 {
-    public function getButtonEndSession()
-    {
-        return $this->_rootElement->find('.btn-close-shift');
-    }
 
 }

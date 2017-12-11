@@ -67,6 +67,6 @@ class LoginForm extends Form
 
     public function getEnterToPos()
     {
-        return $this->_rootElement->find('button[data-bind="click: ajaxChangeLocation"]');
+        return $this->_rootElement->find('button.btn-default');
     }
 }
