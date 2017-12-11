@@ -3,5 +3,6 @@
     <page name="transactionIndex" area="Adminhtml" mca="rewardpoints/transaction/index" module="Magento_Rewardpoints">
         <block name="transactionGridPageActions" class="Magento\Rewardpoints\Test\Block\Adminhtml\Transaction\TransactionGridPageActions" locator=".page-main-actions" strategy="css selector" />
         <block name="transactionGrid" class="Magento\Rewardpoints\Test\Block\Adminhtml\Transaction\TransactionGrid" locator="[id='page:main-container']" strategy="css selector" />
+        <block name="messagesBlock" class="Magento\Backend\Test\Block\Messages" locator="#messages .messages" strategy="css selector"/>
     </page>
 </config>

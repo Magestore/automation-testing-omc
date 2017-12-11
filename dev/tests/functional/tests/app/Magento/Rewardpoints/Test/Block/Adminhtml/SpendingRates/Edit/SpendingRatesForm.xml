@@ -21,7 +21,6 @@
             </max_price_spended_type>
             <max_price_spended_value>
                 <selector>[name='rewardpoints_spendingrates[max_price_spended_value]']</selector>
-                <input>select</input>
             </max_price_spended_value>
             <website_ids>
                 <selector>[name='rewardpoints_spendingrates[website_ids]']</selector>
