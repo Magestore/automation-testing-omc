@@ -9,11 +9,11 @@
 namespace Magento\DropshipSuccess\Test\Constraint;
 
 use Magento\FulfilSuccess\Test\Page\Adminhtml\NeedVerifyIndex;
-use Magento\FulfilSuccess\Test\Page\Adminhtml\ReportIndex;
+use Magento\FulfilReport\Test\Page\Adminhtml\ReportIndex;
 use Magento\Mtf\Constraint\AbstractConstraint;
 /**
  * Class AssertBackendGridIsAvailable
- * @package Magento\FulfilSuccess\Test\Constraint
+ * @package Magento\DropshipSuccess\Test\Constraint
  */
 class AssertBackendGridIsAvailable extends AbstractConstraint
 {

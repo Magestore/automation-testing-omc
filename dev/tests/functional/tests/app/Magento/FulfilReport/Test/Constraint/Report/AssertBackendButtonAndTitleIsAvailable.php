@@ -6,7 +6,7 @@
  * Time: 15:39
  */
 
-namespace Magento\FulfilSuccess\Test\Constraint\Report;
+namespace Magento\FulfilReport\Test\Constraint\Report;
 
 use Magento\FulfilReport\Test\Page\Adminhtml\ReportIndex;
 use Magento\Mtf\Constraint\AbstractConstraint;

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
+    <page name="ReportDashboard" area="Adminhtml" mca="fulfilreport/report/dashboard" module="Magento_FulfilReport">
+        <block name="pageWrapper" class="Magento\FulfilReport\Test\Block\Adminhtml\Dashboard\Container" locator="#container" strategy="css selector" />
+        <block name="containerOrder" class="Magento\FulfilReport\Test\Block\Adminhtml\Dashboard\ContainerOrder" locator="#container-order" strategy="css selector" />
+        <block name="containerPerday" class="Magento\FulfilReport\Test\Block\Adminhtml\Dashboard\ContainerPerday" locator="#container-perday" strategy="css selector" />
+        <block name="containerCarrier" class="Magento\FulfilReport\Test\Block\Adminhtml\Dashboard\ContainerCarrier" locator="#container-carrier" strategy="css selector" />
+        <block name="containerVerify" class="Magento\FulfilReport\Test\Block\Adminhtml\Dashboard\ContainerVerify" locator="#container-verify" strategy="css selector" />
+        <block name="containerPick" class="Magento\FulfilReport\Test\Block\Adminhtml\Dashboard\ContainerPick" locator="#container-pick" strategy="css selector" />
+        <block name="containerPack" class="Magento\FulfilReport\Test\Block\Adminhtml\Dashboard\ContainerPack" locator="#container-pack" strategy="css selector" />
+    </page>
+</config>

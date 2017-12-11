@@ -5,7 +5,7 @@
  * Date: 27/11/2017
  * Time: 14:19
  */
-namespace Magento\FulfilSuccess\Test\Block\Adminhtml\Report;
+namespace Magento\FulfilReport\Test\Block\Adminhtml\Report;
 
 use Magento\Mtf\Block\Block;
 /**

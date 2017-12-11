@@ -6,13 +6,13 @@
  * Time: 10:15
  */
 
-namespace Magento\FulfilSuccess\Test\Block\Adminhtml\ReportIndex;
+namespace Magento\FulfilReport\Test\Block\Adminhtml\ReportIndex;
 
 use Magento\Mtf\Block\Block;
 use Magento\Mtf\Client\Locator;
 /**
  * Class PageMainContainer
- * @package Magento\FulfilSuccess\Test\Block\Adminhtml\ReportIndex
+ * @package Magento\FulfilReport\Test\Block\Adminhtml\ReportIndex
  */
 class PageMainContainer extends Block
 {
