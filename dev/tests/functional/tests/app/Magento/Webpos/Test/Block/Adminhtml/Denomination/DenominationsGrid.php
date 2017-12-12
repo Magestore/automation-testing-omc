@@ -42,4 +42,15 @@ class DenominationsGrid extends DataGrid
             'selector' => '.admin__data-grid-filters input[name="sort_order"]',
         ]
     ];
+
+    /**
+     * Click on "Edit" link.
+     *
+     * @param SimpleElement $rowItem
+     * @return void
+     */
+    protected function clickEditLink(SimpleElement $rowItem)
+    {
+        $rowItem->find($this->selectAction)->click();
+    }
 }
