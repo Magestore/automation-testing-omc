@@ -18,9 +18,6 @@ class AssertWebposEnterFullScreen extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex)
     {
-        $webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
-        $webposIndex->getCheckoutFormAddNote()->waitFullScreenMode();
-        $webposIndex->getCheckoutFormAddNote()->getFullScreenMode()->click();
     }
 
     /**

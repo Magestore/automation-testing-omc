@@ -7,9 +7,10 @@
  */
 namespace  Magento\Webpos\Test\TestStep;
 
-use Magento\Webpos\Test\Fixture\Staff;
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\TestStep\TestStepInterface;
+use Magento\Mtf\Config\DataInterface;
 
 /**
  * Class LoginWebposStep
@@ -18,39 +19,55 @@ use Magento\Mtf\TestStep\TestStepInterface;
 class LoginWebposStep implements TestStepInterface
 {
     /**
+     * System config.
+     *
+     * @var DataInterface
+     */
+    protected $configuration;
+
+    /**
      * Webpos Index page.
      * @var WebposIndex
      */
     protected $webposIndex;
 
+
     /**
-     * Webpos Index page.
-     *
-     * @var Staff
+     * @var FixtureFactory
      */
-    protected $staff;
+    protected $fixtureFactory;
 
     /**
      * @param WebposIndex $webposIndex
      */
     public function __construct(
         WebposIndex $webposIndex,
-        Staff $staff
+        DataInterface $configuration,
+        FixtureFactory $fixtureFactory
     ) {
         $this->webposIndex = $webposIndex;
-        $this->staff = $staff;
+        $this->configuration = $configuration;
+        $this->fixtureFactory = $fixtureFactory;
     }
-
 
     public function run()
     {
+        $username = $this->configuration->get('application/0/backendLogin/0/value');
+        $password = $this->configuration->get('application/0/backendPassword/0/value');
         $this->webposIndex->open();
         if ($this->webposIndex->getLoginForm()->isVisible()) {
-	        $this->webposIndex->getLoginForm()->fill($this->staff);
+            $this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
+            $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
             $this->webposIndex->getLoginForm()->clickLoginButton();
             sleep(3);
             while ($this->webposIndex->getFirstScreen()->isVisible()) {}
             sleep(2);
         }
+
+        $data = [
+            'username' => $username,
+            'password' => $password
+        ];
+        return $this->fixtureFactory->createByCode('staff' , ['data' => $data]);
     }
 }

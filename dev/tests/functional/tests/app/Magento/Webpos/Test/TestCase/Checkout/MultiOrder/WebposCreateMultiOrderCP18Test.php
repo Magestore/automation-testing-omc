@@ -9,7 +9,6 @@
 namespace Magento\Webpos\Test\TestCase\Checkout\MultiOrder;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposCreateMultiOrderCP18Test
@@ -38,15 +37,14 @@ class WebposCreateMultiOrderCP18Test extends Injectable
     /**
      * Login Webpos group test.
      *
-     * @param Staff $staff
      * @return void
      */
-    public function test(Staff $staff, $orderNumber)
+    public function test($orderNumber)
     {
-        $this->objectManager->create(
-            '\Magento\Webpos\Test\TestStep\LoginWebposStep',
-            ['staff' => $staff]
+        $staff = $this->objectManager->create(
+            '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
+
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         self::assertTrue(
             $this->webposIndex->getCheckoutCartHeader()->getAnyOrderItem()->isVisible(),

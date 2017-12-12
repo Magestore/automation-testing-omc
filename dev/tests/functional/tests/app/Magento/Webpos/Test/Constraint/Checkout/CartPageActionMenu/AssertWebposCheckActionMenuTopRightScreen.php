@@ -18,7 +18,6 @@ class AssertWebposCheckActionMenuTopRightScreen extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex)
     {
-        $webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->isVisible(),
             'On the Products List Page - The action ADD ORDER NOTE on the top right of the web POS Cart was not visible.'

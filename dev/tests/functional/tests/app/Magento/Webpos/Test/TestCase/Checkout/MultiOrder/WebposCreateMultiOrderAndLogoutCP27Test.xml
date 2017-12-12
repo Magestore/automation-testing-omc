@@ -6,9 +6,9 @@
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\MultiOrder\WebposCreateMultiOrderCP18Test" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
-        <variation name="WebposCreateMultiOrderCP18TestVariation1_CP18">
-            <data name="orderNumber" xsi:type="string">2</data>
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\MultiOrder\WebposCreateMultiOrderAndLogoutCP27Test" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
+        <variation name="WebposCreateMultiOrderAndLogoutCP27TestVariation1_CP27">
+            <data name="createStaff/dataset" xsi:type="string">default</data>
         </variation>
     </testCase>
 </config>
