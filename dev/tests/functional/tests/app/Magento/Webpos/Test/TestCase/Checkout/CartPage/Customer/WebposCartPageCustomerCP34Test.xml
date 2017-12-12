@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer\WebposCartPageCustomerCP34Test" summary="Checkout - Cart Page - Customer - Checkout with Guest test" ticketId="WEBPOS-1">
+		<variation name="WebposCartPageCustomerCP34TestVariation1_CP34">
+			<data name="staff/dataset" xsi:type="string">magentoadmin</data>
+
+			<data name="product/dataset" xsi:type="string">product1</data>
+			<data name="address/dataset" xsi:type="string">default_webpos_guest_address</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>
+		</variation>
+	</testCase>
+</config>

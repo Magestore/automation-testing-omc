@@ -6,24 +6,54 @@
         <block name="toaster" class="Magento\Webpos\Test\Block\Toaster" locator="#toaster" strategy="css selector"/>
         <block name="firstScreen" class="Magento\Webpos\Test\Block\Login\FirstScreen" locator=".first-screen" strategy="css selector"/>
         <block name="cMenu" class="Magento\Webpos\Test\Block\Cmenu" locator="#c-menu--push-left" strategy="css selector"/>
-        <block name="ordersHistory" class="Magento\Webpos\Test\Block\OrdersHistory\OrdersHistory" locator="#orders_history_container" strategy="css selector"/>
-        <block name="checkoutPage" class="Magento\Webpos\Test\Block\Checkout\CheckoutPage" locator="#checkout_container" strategy="css selector"/>
         <block name="modal" class="Magento\Webpos\Test\Block\Modal" locator=".modals-wrapper" strategy="css selector"/>
         <block name="notification" class="Magento\Webpos\Test\Block\Notification" locator="#webpos-notification" strategy="css selector"/>
-        <block name="accountStaffOnWebpos" class="Magento\Webpos\Test\Block\Account\AccountStaffOnWebpos" locator="#account_container" strategy="css selector"/>
-        <block name="customerListContainer" class="Magento\Webpos\Test\Block\Customer\CustomerListContainer" locator="#customer_list_container" strategy="css selector"/>
-        <block name="registerShift" class="Magento\Webpos\Test\Block\RegisterShift\RegisterShift" locator="#register_shift_container" strategy="css selector"/>
-        <block name="staffSettingsForm" class="Magento\Webpos\Test\Block\Staff\SettingForm" locator="#staff-settings-form" strategy="css selector"/>
-        <block name="orderList" class="Magento\Webpos\Test\Block\Order\OrderList" locator="#webpos_order_list" strategy="css selector"/>
-        <block name="pageLayoutWebpos" class="Magento\Webpos\Test\Block\PageLayoutWebpos" locator=".page-layout-webpos" strategy="css selector"/>
-        <block name="onHoldOrder" class="Magento\Webpos\Test\Block\OnHoldOrder\OnHoldOrder" locator="#on_hold_orders_container" strategy="css selector"/>
-        <block name="manageStocks" class="Magento\Webpos\Test\Block\ManageStocks\ManageStocks" locator="#manage_stock_container" strategy="css selector"/>
-        <block name="synchronization" class="Magento\Webpos\Test\Block\Synchronization\Synchronization" locator="#synchronization_container" strategy="css selector"/>
-        <block name="account" class="Magento\Webpos\Test\Block\Account\Account" locator="#account_container" strategy="css selector"/>
-        <block name="general" class="Magento\Webpos\Test\Block\General\General" locator="#general_container" strategy="css selector"/>
-        <block name="webposCart" class="Magento\Webpos\Test\Block\WebposCart" locator="#webpos_cart" strategy="css selector"/>
-        <block name="addCustomerOnCheckout" class="Magento\Webpos\Test\Block\AddCustomerOnCheckout" locator="#form-customer-add-customer-checkout" strategy="css selector"/>
-        <block name="popupChangeCustomer" class="Magento\Webpos\Test\Block\PopupChangeCustomer" locator="#popup-change-customer" strategy="css selector"/>
-        <block name="hidePopUp" class="Magento\Webpos\Test\Block\HidePopUp" locator=".hide-popup" strategy="css selector"/>
+
+        <!--Checkout Page-->
+        <block name="checkoutProductList" class="Magento\Webpos\Test\Block\Checkout\CheckoutProductList" locator="#product-list-wrapper" strategy="css selector"/>
+        <block name="checkoutProductDetail" class="Magento\Webpos\Test\Block\Checkout\CheckoutProductDetail" locator="#popup-product-detail" strategy="css selector"/>
+        <block name="checkoutFormAddNote" class="Magento\Webpos\Test\Block\Checkout\CheckoutFormAddNote" locator="#form-add-note" strategy="css selector"/>
+        <block name="checkoutNoteOrder" class="Magento\Webpos\Test\Block\Checkout\CheckoutNoteOrder" locator="#form-note-order" strategy="css selector"/>
+        <block name="checkoutWebposCart" class="Magento\Webpos\Test\Block\Checkout\CheckoutWebposCart" locator="#webpos_cart" strategy="css selector"/>
+        <block name="checkoutCartHeader" class="Magento\Webpos\Test\Block\Checkout\CheckoutCartHeader" locator="#webpos_cart > header" strategy="css selector"/>
+        <block name="checkoutCartItems" class="Magento\Webpos\Test\Block\Checkout\CheckoutCartItems" locator="#order-items" strategy="css selector"/>
+        <block name="checkoutChangeCustomer" class="Magento\Webpos\Test\Block\Checkout\CheckoutChangeCustomer" locator="#popup-change-customer" strategy="css selector"/>
+        <block name="checkoutEditCustomer" class="Magento\Webpos\Test\Block\Checkout\CheckoutEditCustomer" locator="#form-edit-customer" strategy="css selector"/>
+        <block name="checkoutAddCustomer" class="Magento\Webpos\Test\Block\Checkout\CheckoutAddCustomer" locator="#form-customer-add-customer-checkout" strategy="css selector"/>
+        <block name="checkoutAddShippingAddress" class="Magento\Webpos\Test\Block\Checkout\CheckoutAddShippingAddress" locator="#form-customer-add-shipping-address-checkout" strategy="css selector"/>
+        <block name="checkoutEditAddress" class="Magento\Webpos\Test\Block\Checkout\CheckoutEditAddress" locator="#form-customer-add-address-checkout" strategy="css selector"/>
+        <block name="checkoutProductEdit" class="Magento\Webpos\Test\Block\Checkout\CheckoutProductEdit" locator="#popup-edit-product" strategy="css selector"/>
+        <block name="checkoutDiscount" class="Magento\Webpos\Test\Block\Checkout\CheckoutDiscount" locator="#webpos_cart_discountpopup" strategy="css selector"/>
+        <block name="checkoutCartFooter" class="Magento\Webpos\Test\Block\Checkout\CheckoutCartFooter" locator=".grand-total-footer" strategy="css selector"/>
+        <block name="checkoutCustomSale" class="Magento\Webpos\Test\Block\Checkout\CheckoutCustomSale" locator="#popup-custom-sale" strategy="css selector"/>
+        <block name="checkoutPlaceOrder" class="Magento\Webpos\Test\Block\Checkout\CheckoutPlaceOrder" locator="#webpos_checkout" strategy="css selector"/>
+        <block name="checkoutShippingMethod" class="Magento\Webpos\Test\Block\Checkout\CheckoutShippingMethod" locator="#shipping-method" strategy="css selector"/>
+        <block name="checkoutPaymentMethod" class="Magento\Webpos\Test\Block\Checkout\CheckoutPaymentMethod" locator="#payment-method" strategy="css selector"/>
+        <block name="checkoutSuccess" class="Magento\Webpos\Test\Block\Checkout\CheckoutSuccess" locator="#success_container" strategy="css selector"/>
+        <!--End Checkout Page-->
+        <block name="oWrapper" class="Magento\Webpos\Test\Block\OWrapper" locator="#o-wrapper" strategy="css selector"/>
+        <!--Begin Order History-->
+        <block name="orderHistoryContainer" class="Magento\Webpos\Test\Block\Order\OrderHistoryContainer" locator="#orders_history_container" strategy="css selector"/>
+        <block name="orderHistoryOrderList" class="Magento\Webpos\Test\Block\Order\OrderHistoryOrderList" locator="#webpos_order_list" strategy="css selector"/>
+        <block name="orderHistoryOrderViewHeader" class="Magento\Webpos\Test\Block\Order\OrderHistoryOrderViewHeader" locator="#webpos_order_view_container header" strategy="css selector"/>
+        <block name="orderHistoryOrderViewContent" class="Magento\Webpos\Test\Block\Order\OrderHistoryOrderViewContent" locator="#webpos_order_view_container .main-content" strategy="css selector"/>
+        <block name="orderHistoryOrderViewFooter" class="Magento\Webpos\Test\Block\Order\OrderHistoryOrderViewFooter" locator="#webpos_order_view_container .footer-order" strategy="css selector"/>
+        <block name="orderHistoryAddOrderNote" class="Magento\Webpos\Test\Block\Order\OrderHistoryAddOrderNote" locator="#form-add-note-order" strategy="css selector"/>
+        <block name="orderHistoryPayment" class="Magento\Webpos\Test\Block\Order\OrderHistoryPayment" locator="#payment-popup" strategy="css selector"/>
+        <block name="orderHistoryInvoice" class="Magento\Webpos\Test\Block\Order\OrderHistoryInvoice" locator="#invoice-popup" strategy="css selector"/>
+        <block name="orderHistoryShipment" class="Magento\Webpos\Test\Block\Order\OrderHistoryShipment" locator="#shipment-popup" strategy="css selector"/>
+        <block name="orderHistoryRefund" class="Magento\Webpos\Test\Block\Order\OrderHistoryRefund" locator="#refund-popup" strategy="css selector"/>
+        <block name="orderHistoryAddComment" class="Magento\Webpos\Test\Block\Order\OrderHistoryAddComment" locator="#add-comment-order" strategy="css selector"/>
+        <block name="orderHistoryAddCancelComment" class="Magento\Webpos\Test\Block\Order\OrderHistoryAddCancelComment" locator="#add-cancel-comment-order" strategy="css selector"/>
+        <!--End Order History-->
+        <!--Begin Session management-->
+        <block name="sessionRegisterShift" class="Magento\Webpos\Test\Block\SessionManagement\SessionRegisterShift" locator="#register_shift_container" strategy="css selector"/>
+        <block name="sessionShift" class="Magento\Webpos\Test\Block\SessionManagement\SessionShift" locator="#shift_container" strategy="css selector"/>
+        <block name="sessionPaypal" class="Magento\Webpos\Test\Block\SessionManagement\SessionPaypal" locator="#webpos_paypal_integration_container" strategy="css selector"/>
+        <block name="sessionPaypalOverLay" class="Magento\Webpos\Test\Block\SessionManagement\SessionPaypalOverLay" locator="#webpos_paypal_integration_overlay" strategy="css selector"/>
+        <block name="sessionInstall" class="Magento\Webpos\Test\Block\SessionManagement\SessionInstall" locator="#install_container" strategy="css selector"/>
+        <block name="sessionCloseShift" class="Magento\Webpos\Test\Block\SessionManagement\SessionCloseShift" locator="#close-shift-container" strategy="css selector"/>
+        <block name="sessionSetClosingBalanceReason" class="Magento\Webpos\Test\Block\SessionManagement\SessionSetClosingBalanceReason" locator="#set-closing-balance-reason" strategy="css selector"/>
+        <!--End Session management-->
     </page>
 </config>
