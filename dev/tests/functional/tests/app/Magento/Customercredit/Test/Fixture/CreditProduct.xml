@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="creditProduct"
+             module="Magento_Customercredit"
+             type="eav"
+             product_type="customercredit"
+             entity_type="catalog_product"
+             collection="Magento\Customercredit\Model\ResourceModel\Customercredit\Collection"
+             identifier="sku"
+             repository_class="Magento\Customercredit\Test\Repository\CreditProduct"
+             handler_interface="Magento\Customercredit\Test\Handler\CreditProduct\CreditProductInterface"
+             class="Magento\Customercredit\Test\Fixture\CreditProduct">
+        <data_config>
+            <item name="type_id" xsi:type="string">customercredit</item>
+            <item name="create_url_params" xsi:type="array">
+                <item name="type" xsi:type="string">customercredit</item>
+                <item name="set" xsi:type="string">4</item>
+            </item>
+            <item name="input_prefix" xsi:type="string">product</item>
+        </data_config>
+        <field name="status" is_required="0" group="product-details" />
+        <field name="attribute_set_id" group="product-details" source="Magento\Catalog\Test\Fixture\Product\AttributeSetId" />
+        <field name="name" is_required="1" group="product-details" />
+        <field name="sku" is_required="1" group="product-details" />
+        <!--<field name="price" is_required="1" group="product-details" source="Magento\Catalog\Test\Fixture\Product\Price" repository="Magento\Catalog\Test\Repository\CatalogProductSimple\Price" />-->
+        <field name="quantity_and_stock_status" is_required="0" group="product-details" />
+        <field name="stock_data" group="advanced-inventory" />
+        <field name="visibility" is_required="0" group="product-details" />
+        <field name="category_ids" is_required="0" group="product-details" source="Magento\Catalog\Test\Fixture\Product\CategoryIds" />
+        <field name="news_from_date" is_required="0" group="product-details" source="Magento\Backend\Test\Fixture\Source\Date" />
+        <field name="news_to_date" is_required="0" group="product-details" source="Magento\Backend\Test\Fixture\Source\Date" />
+        <field name="webpos_visible" is_required="0" group="product-details"/>
+        <field name="storecredit_type" group="credit-prices" is_required="0"/>
+        <field name="storecredit_dropdown" group="credit-prices" is_required="0"/>
+        <field name="storecredit_from" group="credit-prices" is_required="0"/>
+        <field name="storecredit_rate" group="credit-prices" is_required="0"/>
+        <field name="storecredit_to" group="credit-prices" is_required="0"/>
+        <field name="storecredit_value" group="credit-prices" is_required="0"/>
+        <field name="description" is_required="0" group="content" />
+        <field name="short_description" is_required="0" group="content" />
+        <field name="gallery" is_required="0" />
+        <field name="image" is_required="0" group="gallery" source="Magento\Catalog\Test\Fixture\Product\Image" />
+        <field name="url_key" is_required="0" group="search-engine-optimization" />
+        <field name="meta_title" is_required="0" group="search-engine-optimization" />
+        <field name="meta_keyword" is_required="0" group="search-engine-optimization" />
+        <field name="meta_description" is_required="0" group="search-engine-optimization" />
+        <field name="related_products" group="related" source="Magento\Catalog\Test\Fixture\Product\RelatedProducts" />
+        <field name="up_sell_products" group="related" source="Magento\Catalog\Test\Fixture\Product\RelatedProducts" />
+        <field name="cross_sell_products" group="related" source="Magento\Catalog\Test\Fixture\Product\RelatedProducts" />
+        <field name="custom_options" is_required="0" group="customer-options" source="Magento\Catalog\Test\Fixture\Product\CustomOptions" repository="Magento\Catalog\Test\Repository\Product\CustomOptions" />
+        <field name="website_ids" group="websites"  source="Magento\Catalog\Test\Fixture\Product\WebsiteIds" />
+        <field name="page_layout" group="design" is_required="0" />
+        <field name="options_container" group="design" is_required="0" />
+        <field name="custom_layout_update" group="design" is_required="0" />
+        <field name="custom_design_from" group="schedule-design-update" is_required="0" />
+        <field name="custom_design_to" group="schedule-design-update" is_required="0" />
+        <field name="custom_design" group="schedule-design-update" is_required="0" />
+        <field name="custom_layout" group="schedule-design-update" is_required="0" />
+        <field name="use_config_gift_message_available" group="gift-options" is_required="0" />
+        <field name="gift_message_available" group="gift-options" is_required="0" />
+        <field name="os_barcode" group="barcode" is_required="0"/>
+        <field name="os_barcode_template" group="barcode" is_required="0"/>
+        <field name="suppliers" group="suppliers" is_required="0"/>
+        <field name="id" group="null" />
+
+        <!--<field name="color" is_required="0" />-->
+        <!--<field name="country_of_manufacture" is_required="0" />-->
+        <!--<field name="created_at" is_required="1" />-->
+        <!--<field name="has_options" is_required="0" />-->
+        <!--<field name="image" is_required="0" />-->
+        <!--<field name="image_label" is_required="0" />-->
+        <!--<field name="manufacturer" is_required="0" />-->
+        <!--<field name="media_gallery" is_required="0" />-->
+        <!--<field name="minimal_price" is_required="0" />-->
+        <!--<field name="msrp" is_required="0" />-->
+        <!--<field name="msrp_display_actual_price_type" is_required="0" />-->
+        <!--<field name="use_default_name" group="product-details" />-->
+        <!--<field name="old_id" is_required="0" />-->
+        <!--<field name="required_options" is_required="0" />-->
+        <!--<field name="small_image" is_required="0" />-->
+        <!--<field name="small_image_label" is_required="0" />-->
+        <!--<field name="special_from_date" is_required="0" />-->
+        <!--<field name="special_price" is_required="0" group="advanced-pricing" />-->
+        <!--<field name="special_to_date" is_required="0" />-->
+        <!--<field name="tax_class_id" is_required="0" group="product-details" source="Magento\Catalog\Test\Fixture\Product\TaxClass" />-->
+        <!--<field name="thumbnail" is_required="0" />-->
+        <!--<field name="thumbnail_label" is_required="0" />-->
+        <!--<field name="tier_price" is_required="0" group="advanced-pricing" source="Magento\Catalog\Test\Fixture\Product\TierPrice" repository="Magento\Catalog\Test\Repository\Product\TierPrice" />-->
+        <!--<field name="updated_at" is_required="1" />-->
+        <!--<field name="url_path" is_required="0" />-->
+        <!--<field name="weight" is_required="0" group="product-details" />-->
+        <!--<field name="type_id" />-->
+        <!--<field name="custom_attribute" source="Magento\Catalog\Test\Fixture\CatalogProductSimple\CustomAttribute" />-->
+        <!--<field name="is_returnable" is_required="0" group="product-details" />-->
+        <!--<field name="checkout_data" group="null" repository="Magento\Catalog\Test\Repository\CatalogProductSimple\CheckoutData" />-->
+        <!--<field name="product_has_weight" group="product-details" />-->
+        <!--<field name="attributes" />-->
+        <!--<field name="fpt" is_required="0" group="product-details" repository="Magento\Catalog\Test\Repository\Product\Fpt" />-->
+        <!--<field name="store_code" is_required="0" />-->
+    </fixture>
+</config>

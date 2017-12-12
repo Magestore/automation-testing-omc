@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<tabs>
+    <general-information>
+        <class>\Magento\Backend\Test\Block\Widget\Tab</class>
+        <selector>#general_tabs_general_section</selector>
+        <strategy>css selector</strategy>
+        <fields>
+            <holiday_name />
+            <date_from>
+                <input>datepicker</input>
+            </date_from>
+            <date_to>
+                <input>datepicker</input>
+            </date_to>
+            <holiday_comment />
+        </fields>
+    </general-information>
+    <stores>
+        <class>\Magento\Storepickup\Test\Block\Adminhtml\Tag\Tab\Stores</class>
+        <selector>#general_tabs_stores_section</selector>
+        <strategy>css selector</strategy>
+    </stores>
+</tabs>
