@@ -12,7 +12,10 @@
 namespace Magento\Webpos\Test\Block;
 
 use Magento\Mtf\Block\Block;
-
+/**
+ * Class MsWebpos
+ * @package Magento\Webpos\Test\Block
+ */
 class MsWebpos extends Block
 {
 	public function clickCMenuButton()
@@ -29,4 +32,14 @@ class MsWebpos extends Block
     {
         return $this->_rootElement->find('#c-mask');
     }
+
+	public function waitCartLoader()
+	{
+		$this->waitForElementNotVisible('#webpos_cart > div.indicator');
+	}
+
+	public function waitCheckoutLoader()
+	{
+		$this->waitForElementNotVisible('#webpos_checkout > div.indicator');
+	}
 }

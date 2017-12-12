@@ -41,21 +41,16 @@ class LoginWebposStep implements TestStepInterface
         $this->staff = $staff;
     }
 
-    /**
-     * Update checkout agreement.
-     *
-     * @return array
-     */
+
     public function run()
     {
-	    $this->webposIndex->open();
-	    if ($this->webposIndex->getLoginForm()->isVisible()) {
-		    $this->webposIndex->getLoginForm()->fill($staff);
-		    $this->webposIndex->getLoginForm()->clickLoginButton();
-		    sleep(5);
-		    while ($this->webposIndex->getFirstScreen()->isVisible()) {
-		    }
-		    sleep(2);
-	    }
+        $this->webposIndex->open();
+        if ($this->webposIndex->getLoginForm()->isVisible()) {
+	        $this->webposIndex->getLoginForm()->fill($this->staff);
+            $this->webposIndex->getLoginForm()->clickLoginButton();
+            sleep(3);
+            while ($this->webposIndex->getFirstScreen()->isVisible()) {}
+            sleep(2);
+        }
     }
 }

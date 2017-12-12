@@ -26,5 +26,10 @@
             <field name="password_confirmation" xsi:type="string">admin1234</field>
             <field name="email" xsi:type="string">thomas@trueplus.vn</field>
         </dataset>
+
+        <dataset name="magentoadmin">
+            <field name="username" xsi:type="string">magentoadmin</field>
+            <field name="password" xsi:type="string">admin123</field>
+        </dataset>
     </repository>
 </config>
