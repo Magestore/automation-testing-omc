@@ -63,12 +63,6 @@ class Curl extends AbstractCurl implements StaffInterface
         return ['staff_id' => $data['staff_id']];
     }
 
-    /**
-     * Get staff id by username
-     *
-     * @param string $username
-     * @return int|null
-     */
     protected function getStaffId($username)
     {
         $url = $_ENV['app_backend_url'] . 'mui/index/render/';

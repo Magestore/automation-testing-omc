@@ -2,8 +2,6 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
 	<testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer\WebposCartPageCustomerCheckoutByExistingCustomerCP42Test" summary="Checkout - Cart Page - Customer - Checkout by existing customer - Customer show on checkout page - CP42 test" ticketId="WEBPOS-1">
 		<variation name="WebposCartPageCustomerCheckoutByExistingCustomerCP42TestVariation1_CP42">
-			<data name="staff/dataset" xsi:type="string">magentoadmin</data>
-
 			<data name="product/dataset" xsi:type="string">product1</data>
 			<data name="customer/dataset" xsi:type="string">johndoe_unique</data>
 

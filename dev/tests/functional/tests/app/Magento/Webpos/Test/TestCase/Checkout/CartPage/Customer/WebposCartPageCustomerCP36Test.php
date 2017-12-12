@@ -39,7 +39,6 @@ class WebposCartPageCustomerCP36Test extends Injectable
 	}
 
 	public function test(
-		Staff $staff,
 		CatalogProductSimple $product,
 		Customer $customer,
 		Address $address
@@ -47,9 +46,9 @@ class WebposCartPageCustomerCP36Test extends Injectable
 	{
 		$customer->persist();
 
-		$this->objectManager->getInstance()->create(
-			'Magento\Webpos\Test\TestStep\LoginWebposStep',
-			['staff' => $staff]
+		// Login webpos
+		$staff = $this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();
 
 		$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
