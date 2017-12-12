@@ -9,7 +9,6 @@
 namespace Magento\Webpos\Test\TestCase\Checkout\MultiOrder;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 /**
@@ -40,15 +39,15 @@ class WebposAddProductTo2CartsCP20Test extends Injectable
     /**
      * Login Webpos group test.
      *
-     * @param Staff $staff
+     * @param FixtureFactory $fixtureFactory
      * @return void
      */
-    public function test(Staff $staff, $products, FixtureFactory $fixtureFactory, $orderNumber)
+    public function test($products, FixtureFactory $fixtureFactory, $orderNumber)
     {
-        $this->objectManager->create(
-            '\Magento\Webpos\Test\TestStep\LoginWebposStep',
-            ['staff' => $staff]
+        $staff = $this->objectManager->create(
+            '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
+
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         $j = 0;
@@ -75,6 +74,7 @@ class WebposAddProductTo2CartsCP20Test extends Injectable
                     $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
                     $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
                 }
+                sleep(3);
             }
             sleep(5);
         }

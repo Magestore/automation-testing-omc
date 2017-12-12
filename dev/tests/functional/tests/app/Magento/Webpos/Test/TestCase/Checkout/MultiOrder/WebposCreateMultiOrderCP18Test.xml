@@ -8,7 +8,6 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Webpos\Test\TestCase\Checkout\MultiOrder\WebposCreateMultiOrderCP18Test" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
         <variation name="WebposCreateMultiOrderCP18TestVariation1_CP18">
-            <data name="staff/dataset" xsi:type="string">magentoadmin</data>
             <data name="orderNumber" xsi:type="string">2</data>
         </variation>
     </testCase>

@@ -47,13 +47,13 @@
         <block name="orderHistoryAddCancelComment" class="Magento\Webpos\Test\Block\Order\OrderHistoryAddCancelComment" locator="#add-cancel-comment-order" strategy="css selector"/>
         <!--End Order History-->
         <!--Begin Session management-->
-        <block name="registerShiftContainer" class="Magento\Webpos\Test\Block\SessionManagement\RegisterShiftContainer" locator="#register_shift_container" strategy="css selector"/>
-        <block name="shiftContainer" class="Magento\Webpos\Test\Block\SessionManagement\ShiftContainer" locator="#shift_container" strategy="css selector"/>
-        <block name="paypalIntegrationContainer" class="Magento\Webpos\Test\Block\SessionManagement\PaypalIntegrationContainer" locator="#webpos_paypal_integration_container" strategy="css selector"/>
-        <block name="paypalIntegrationOverlay" class="Magento\Webpos\Test\Block\SessionManagement\PaypalIntegrationOverlay" locator="#webpos_paypal_integration_overlay" strategy="css selector"/>
-        <block name="installContainer" class="Magento\Webpos\Test\Block\SessionManagement\InstallContainer" locator="#install_container" strategy="css selector"/>
-        <block name="closeShiftContainer" class="Magento\Webpos\Test\Block\SessionManagement\CloseShiftContainer" locator="#close-shift-container" strategy="css selector"/>
-        <block name="setClosingBalanceReason" class="Magento\Webpos\Test\Block\SessionManagement\SetClosingBalanceReason" locator="#set-closing-balance-reason" strategy="css selector"/>
+        <block name="sessionRegisterShift" class="Magento\Webpos\Test\Block\SessionManagement\SessionRegisterShift" locator="#register_shift_container" strategy="css selector"/>
+        <block name="sessionShift" class="Magento\Webpos\Test\Block\SessionManagement\SessionShift" locator="#shift_container" strategy="css selector"/>
+        <block name="sessionPaypal" class="Magento\Webpos\Test\Block\SessionManagement\SessionPaypal" locator="#webpos_paypal_integration_container" strategy="css selector"/>
+        <block name="sessionPaypalOverLay" class="Magento\Webpos\Test\Block\SessionManagement\SessionPaypalOverLay" locator="#webpos_paypal_integration_overlay" strategy="css selector"/>
+        <block name="sessionInstall" class="Magento\Webpos\Test\Block\SessionManagement\SessionInstall" locator="#install_container" strategy="css selector"/>
+        <block name="sessionCloseShift" class="Magento\Webpos\Test\Block\SessionManagement\SessionCloseShift" locator="#close-shift-container" strategy="css selector"/>
+        <block name="sessionSetClosingBalanceReason" class="Magento\Webpos\Test\Block\SessionManagement\SessionSetClosingBalanceReason" locator="#set-closing-balance-reason" strategy="css selector"/>
         <!--End Session management-->
     </page>
 </config>

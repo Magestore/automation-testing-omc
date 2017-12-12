@@ -9,7 +9,6 @@
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPageActionMenu;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 /**
@@ -39,16 +38,15 @@ class WebposPlaceOrderWithOrderNoteTest extends Injectable
     /**
      * Login Webpos group test.
      *
-     * @param Staff $staff
      * @param FixtureFactory $fixtureFactory
      * @return void
      */
-    public function test(Staff $staff, FixtureFactory $fixtureFactory, $products, $textNote)
+    public function test(FixtureFactory $fixtureFactory, $products, $textNote)
     {
-        $this->objectManager->create(
-            '\Magento\Webpos\Test\TestStep\LoginWebposStep',
-            ['staff' => $staff]
+        $staff = $this->objectManager->create(
+            '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
+
         $i = 0;
         foreach ($products as $product) {
             $products[$i] = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);

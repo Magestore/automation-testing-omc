@@ -8,6 +8,7 @@
 
 namespace Magento\Customercredit\Test\Block\Adminhtml;
 
+use Magento\Backend\Test\Block\Widget\Grid;
 use Magento\Mtf\Client\Locator;
 use Magento\Ui\Test\Block\Adminhtml\DataGrid;
 
@@ -15,7 +16,7 @@ use Magento\Ui\Test\Block\Adminhtml\DataGrid;
  * Class CreditDataGrid
  * @package Magento\Customercredit\Test\Block\Adminhtml
  */
-class CreditDataGrid extends DataGrid
+class CreditDataGrid extends Grid
 {
     protected $col = './/th[span = "%s"]';
 
