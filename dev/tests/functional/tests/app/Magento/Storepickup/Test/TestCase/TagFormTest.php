@@ -36,10 +36,10 @@ class TagFormTest extends Injectable
         $this->tagIndex = $tagIndex;
     }
 
-    public function __prepare(StorepickupHoliday $storepickupTag)
-    {
-        $storepickupTag->persist();
-    }
+//    public function __prepare(StorepickupHoliday $storepickupTag)
+//    {
+//        $storepickupTag->persist();
+//    }
 
     /**
      * @param $button
