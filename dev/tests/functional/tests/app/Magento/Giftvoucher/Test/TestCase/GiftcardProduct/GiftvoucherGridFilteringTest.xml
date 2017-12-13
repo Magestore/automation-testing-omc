@@ -8,7 +8,7 @@
         <variation name="GiftvoucherGridFilteringTest">
             <data name="description" xsi:type="string">Verify gift voucher product grid filtering</data>
             <data name="itemsCount" xsi:type="string">1</data>
-            <data name="fixtureName" xsi:type="string">giftproduct</data>
+            <data name="fixtureName" xsi:type="string">giftvoucherProduct</data>
             <data name="fixtureDataSet" xsi:type="string">default</data>
             <data name="filters" xsi:type="array">
                 <item name="0" xsi:type="array">

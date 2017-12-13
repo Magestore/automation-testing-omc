@@ -6,7 +6,7 @@
  * Time: 15:01
  */
 
-namespace Magento\Webpos\Test\TestCase\Checkout\CartPage;
+namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\DeleteCart;
 
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\TestCase\Injectable;

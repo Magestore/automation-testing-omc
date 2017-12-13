@@ -8,6 +8,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Giftvoucher\Test\TestCase\Sales\CancelGiftCardOrderTest" summary="Cancel Giftcard Order for Offline Payment Methods" ticketId="MAGETWO-28191">
         <variation name="CancelGiftCardOrderTestVariation1">
+            <data name="configData" xsi:type="string">banktransfer</data>
             <data name="description" xsi:type="string">cancel order and check status on storefront</data>
             <data name="order/dataset" xsi:type="string">default</data>
             <data name="order/data/entity_id/products" xsi:type="string">catalogProductSimple::default,giftvoucherProduct::physical_fixed_value_same</data>      
