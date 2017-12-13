@@ -43,6 +43,11 @@ class WebposCartPageCustomerCheckoutByExistingCustomerTest extends Injectable
 
 	public function __prepare(FixtureFactory $fixtureFactory)
 	{
+		$this->objectManager->getInstance()->create(
+			'Magento\Config\Test\TestStep\SetupConfigurationStep',
+			['configData' => 'webpos_default_guest_checkout_rollback']
+		)->run();
+
 		$this->fixtureFactory = $fixtureFactory;
 		$customer = $fixtureFactory->createByCode(
 			'customer',

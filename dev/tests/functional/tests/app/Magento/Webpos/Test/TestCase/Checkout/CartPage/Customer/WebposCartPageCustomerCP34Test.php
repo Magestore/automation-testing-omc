@@ -28,6 +28,14 @@ class WebposCartPageCustomerCP34Test extends Injectable
 	 */
 	protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
+	public function __prepare()
+	{
+		$this->objectManager->getInstance()->create(
+			'Magento\Config\Test\TestStep\SetupConfigurationStep',
+			['configData' => 'webpos_default_guest_checkout_rollback']
+		)->run();
+	}
+
 	public function __inject(
 		WebposIndex $webposIndex,
 		AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
