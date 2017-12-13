@@ -18,7 +18,7 @@ use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
 use Magento\Webpos\Test\Page\Adminhtml\StaffEdit;
 /**
  * Class WebposCreateMultiOrderAndLogoutCP27Test
- * @package Magento\Webpos\Test\TestCase\Checkout\MultiOrder
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\Checkout\MultiOrder
  */
 class WebposCreateMultiOrderAndLogoutCP27Test extends Injectable
 {
@@ -27,7 +27,7 @@ class WebposCreateMultiOrderAndLogoutCP27Test extends Injectable
     const DOMAIN = 'CS';
     /* end tags */
     /**
-     * Webpos Staff Index page.
+     * AssertWebposCheckGUICustomerPriceCP54 Staff Index page.
      *
      * @var StaffIndex
      */
@@ -39,7 +39,7 @@ class WebposCreateMultiOrderAndLogoutCP27Test extends Injectable
      */
     private $staffsNew;
     /**
-     * Webpos Index page.
+     * AssertWebposCheckGUICustomerPriceCP54 Index page.
      *
      * @var WebposIndex
      */
@@ -70,7 +70,7 @@ class WebposCreateMultiOrderAndLogoutCP27Test extends Injectable
     }
 
     /**
-     * Login Webpos group test.
+     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
      *
      * @param Staff $staff
      * @param Staff ConfigData
@@ -121,7 +121,7 @@ class WebposCreateMultiOrderAndLogoutCP27Test extends Injectable
         for ($i=1; $i<=2; $i++) {
             self::assertFalse(
                 $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($i)->isVisible(),
-                'On the Webpos Cart, The multi order item '.$i.' were visible successfully.'
+                'On the AssertWebposCheckGUICustomerPriceCP54 Cart, The multi order item '.$i.' were visible successfully.'
             );
         }
         // Begin delete new Staff on magento backend

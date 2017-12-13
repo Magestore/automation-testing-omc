@@ -13,12 +13,12 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 /**
  * Class WebposPlaceOrderWithOrderNoteTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPageActionMenu
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\Checkout\CartPageActionMenu
  */
 class WebposPlaceOrderWithOrderNoteTest extends Injectable
 {
     /**
-     * Webpos Index page.
+     * AssertWebposCheckGUICustomerPriceCP54 Index page.
      *
      * @var WebposIndex
      */
@@ -36,7 +36,7 @@ class WebposPlaceOrderWithOrderNoteTest extends Injectable
     }
 
     /**
-     * Login Webpos group test.
+     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
      *
      * @param FixtureFactory $fixtureFactory
      * @return void

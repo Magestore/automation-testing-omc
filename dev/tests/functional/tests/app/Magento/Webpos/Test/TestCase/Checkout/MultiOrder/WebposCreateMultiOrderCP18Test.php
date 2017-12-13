@@ -12,12 +12,12 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposCreateMultiOrderCP18Test
- * @package Magento\Webpos\Test\TestCase\Checkout\MultiOrder
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\Checkout\MultiOrder
  */
 class WebposCreateMultiOrderCP18Test extends Injectable
 {
     /**
-     * Webpos Index page.
+     * AssertWebposCheckGUICustomerPriceCP54 Index page.
      *
      * @var WebposIndex
      */
@@ -35,7 +35,7 @@ class WebposCreateMultiOrderCP18Test extends Injectable
     }
 
     /**
-     * Login Webpos group test.
+     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
      *
      * @return void
      */

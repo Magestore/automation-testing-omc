@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\EditQty\WebposCheckoutCartEditQtyChangeProductQtyByManualTest" summary="Checkout - Cart Page - Edit Qty Product - Change product qty by manual test" ticketId="WEBPOS-1">
+		<variation name="WebposCheckoutCartEditQtyChangeProductQtyByManualTestVariation_CP50">
+			<data name="product/dataset" xsi:type="string">product1</data>
+			<data name="qty" xsi:type="number">1</data>
+			<data name="qtyInput" xsi:type="string">0</data>
+			<data name="expectQty" xsi:type="number">1</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\EditQty\AssertValueOfQtyTextboxIsCorrect"/>
+		</variation>
+
+		<variation name="WebposCheckoutCartEditQtyChangeProductQtyByManualTestVariation_CP51">
+			<data name="product/dataset" xsi:type="string">product1</data>
+			<data name="qty" xsi:type="number">1</data>
+			<data name="qtyInput" xsi:type="string">-5</data>
+			<data name="expectQty" xsi:type="number">1</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\EditQty\AssertValueOfQtyTextboxIsCorrect"/>
+		</variation>
+
+		<variation name="WebposCheckoutCartEditQtyChangeProductQtyByManualTestVariation_CP52">
+			<data name="product/dataset" xsi:type="string">product1</data>
+			<data name="qty" xsi:type="number">1</data>
+			<data name="qtyInput" xsi:type="string">abc</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\EditQty\AssertMinimumQtyAllowWarningMessageIsCorrect"/>
+		</variation>
+	</testCase>
+</config>

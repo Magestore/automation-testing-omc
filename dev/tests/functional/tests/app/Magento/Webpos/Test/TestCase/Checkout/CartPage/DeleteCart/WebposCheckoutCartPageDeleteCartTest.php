@@ -6,7 +6,7 @@
  * Time: 13:25
  */
 
-namespace Magento\Webpos\Test\TestCase\Checkout\CartPage;
+namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\DeleteCart;
 
 
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;

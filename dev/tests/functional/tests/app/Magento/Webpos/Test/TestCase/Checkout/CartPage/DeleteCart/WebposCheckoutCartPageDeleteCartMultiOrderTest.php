@@ -6,12 +6,10 @@
  * Time: 15:01
  */
 
-namespace Magento\Webpos\Test\TestCase\Checkout\CartPage;
-
+namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\DeleteCart;
 
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 class WebposCheckoutCartPageDeleteCartMultiOrderTest extends Injectable

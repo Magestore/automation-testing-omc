@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertWebposMultiOrderAddProductAndCustomer
- * @package Magento\Webpos\Test\Constraint\Checkout\MultiOrder
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Constraint\Checkout\MultiOrder
  */
 class AssertWebposMultiOrderAddProductAndCustomer extends AbstractConstraint
 {
@@ -21,7 +21,7 @@ class AssertWebposMultiOrderAddProductAndCustomer extends AbstractConstraint
         foreach ($products as $product) {
             \PHPUnit_Framework_Assert::assertTrue(
                 $webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->isVisible(),
-                'On the Webpos Cart - The cart item with name\'s'.$product->getName().' was not visible.'
+                'On the AssertWebposCheckGUICustomerPriceCP54 Cart - The cart item with name\'s'.$product->getName().' was not visible.'
             );
         }
     }
@@ -33,6 +33,6 @@ class AssertWebposMultiOrderAddProductAndCustomer extends AbstractConstraint
      */
     public function toString()
     {
-        return 'On the Webpos Cart - The cart item were visible successfully.';
+        return 'On the AssertWebposCheckGUICustomerPriceCP54 Cart - The cart item were visible successfully.';
     }
 }

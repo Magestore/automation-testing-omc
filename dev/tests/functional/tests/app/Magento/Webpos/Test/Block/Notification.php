@@ -12,7 +12,7 @@ use Magento\Mtf\Block\Block;
 
 /**
  * Class Notification
- * @package Magento\Webpos\Test\Block
+ * @package Magento\WebposCheckGUICustomerPriceCP54EntityTest\Test\Block
  */
 class Notification extends Block
 {

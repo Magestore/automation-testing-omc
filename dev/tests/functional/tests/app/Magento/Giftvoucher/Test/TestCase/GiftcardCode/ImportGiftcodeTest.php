@@ -39,7 +39,7 @@ class ImportGiftcodeTest extends Injectable
      */
     public function test()
     {
-        $csvFile = 'giftvoucher.csv';
+        $csvFile = 'import_giftcode_sample.csv';
 
         // MGC048
         $this->giftcodeIndex->open();

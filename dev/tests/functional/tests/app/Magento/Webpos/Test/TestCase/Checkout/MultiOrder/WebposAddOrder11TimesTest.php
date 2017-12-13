@@ -12,12 +12,12 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposAddOrder11TimesTest
- * @package Magento\Webpos\Test\TestCase\Checkout\MultiOrder
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\Checkout\MultiOrder
  */
 class WebposAddOrder11TimesTest extends Injectable
 {
     /**
-     * Webpos Index page.
+     * AssertWebposCheckGUICustomerPriceCP54 Index page.
      *
      * @var WebposIndex
      */
@@ -35,7 +35,7 @@ class WebposAddOrder11TimesTest extends Injectable
     }
 
     /**
-     * Login Webpos group test.
+     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
      *
      * @return void
      */
@@ -50,7 +50,7 @@ class WebposAddOrder11TimesTest extends Injectable
             $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
             self::assertTrue(
                 $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($i)->isVisible(),
-                'On the Webpos Cart, The multi order item '.$i.' were not visible successfully.'
+                'On the AssertWebposCheckGUICustomerPriceCP54 Cart, The multi order item '.$i.' were not visible successfully.'
             );
         }
     }

@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\Constraint\Checkout\CartPage;
 
-
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 

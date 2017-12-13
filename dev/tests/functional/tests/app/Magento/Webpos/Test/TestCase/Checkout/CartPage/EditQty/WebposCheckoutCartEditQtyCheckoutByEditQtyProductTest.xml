@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\EditQty\WebposCheckoutCartEditQtyCheckoutByEditQtyProductTest" summary="Checkout - Cart Page - Edit Qty Product - Checkout by edit qty product test" ticketId="WEBPOS-1">
+		<variation name="WebposCheckoutCartEditQtyCheckoutByEditQtyProductTestVariation_CP53">
+			<data name="product/dataset" xsi:type="string">product1</data>
+			<data name="qty" xsi:type="number">1</data>
+			<data name="qtyInput" xsi:type="string">2</data>
+			<data name="expectQty" xsi:type="number">2</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\EditQty\AssertProductQtyOnCartIsCorrect"/>
+			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible"/>
+		</variation>
+	</testCase>
+</config>

@@ -59,8 +59,7 @@ class LoginWebposStep implements TestStepInterface
 			$this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
 			$this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
 			$this->webposIndex->getLoginForm()->clickLoginButton();
-			sleep(3);
-			while ($this->webposIndex->getFirstScreen()->isVisible()) {}
+			$this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
 			sleep(2);
 		}
 
