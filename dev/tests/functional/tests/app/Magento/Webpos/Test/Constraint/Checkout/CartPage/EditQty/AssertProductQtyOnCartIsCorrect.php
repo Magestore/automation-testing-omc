@@ -20,9 +20,8 @@ class AssertProductQtyOnCartIsCorrect extends AbstractConstraint
 		$webposIndex->getMsWebpos()->clickOutsidePopup();
 		sleep(1);
 		if ($expectQty == 1) {
-			\PHPUnit_Framework_Assert::assertStringMatchesFormat(
-				"%s\n%s",
-				$webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->getText(),
+			\PHPUnit_Framework_Assert::assertFalse(
+				$webposIndex->getCheckoutCartItems()->getCartItemQty($product->getName())->isVisible(),
 				"Checkout - Cart - Product - Qty number is not hide"
 			);
 		} else {
