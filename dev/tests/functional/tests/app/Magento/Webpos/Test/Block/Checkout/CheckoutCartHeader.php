@@ -13,7 +13,7 @@ use Magento\Mtf\Client\Locator;
 
 /**
  * Class CheckoutCartHeader
- * @package Magento\Webpos\Test\Block\Checkout
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Block\Checkout
  */
 class CheckoutCartHeader extends Block
 {

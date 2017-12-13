@@ -18,8 +18,6 @@ class AssertWebposCheckoutAddOrderNote extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex)
     {
-        $webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
-        $webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->click();
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutNoteOrder()->getCloseOrderNoteButton()->isVisible(),
             'On the Products List Page - The action CLOSE ORDER NOTE on the popup add order note of the web POS Cart was not visible.'

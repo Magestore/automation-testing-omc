@@ -8,9 +8,11 @@
 
 namespace Magento\Webpos\Test\Block\Checkout;
 
-
 use Magento\Mtf\Block\Block;
-
+/**
+ * Class CheckoutChangeCustomer
+ * @package Magento\Webpos\Test\Block\Checkout
+ */
 class CheckoutChangeCustomer extends Block
 {
 	public function getAddNewCustomerButton()
@@ -36,8 +38,18 @@ class CheckoutChangeCustomer extends Block
 		return $this->_rootElement->find('ul.list-customer-old > li:nth-child(1)');
 	}
 
+	public function getFirstCustomerName()
+    {
+        return $this->getFirstCustomer()->find('a');
+    }
+
 	public function waitForCustomerList()
 	{
 		$this->waitForElementVisible('.list-customer-old');
 	}
+
+    public function getCustomerResult()
+    {
+        return $this->_rootElement->find('.list-customer-old a');
+    }
 }

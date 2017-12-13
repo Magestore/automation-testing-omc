@@ -6,11 +6,10 @@
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\MultiOrder\WebposCreateMultiOrderAndThenLogInByOtherStaffCP28Test" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
-        <variation name="WebposCreateMultiOrderAndThenLogInByOtherStaffCP28TestVariation1_CP20">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\MultiOrder\WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
+        <variation name="WebposCreateMultiOrderAndThenLogInBySameStaffCP28Variation1_CP28">
             <data name="dataConfig/dataset" xsi:type="string">create_session_before_working</data>
             <data name="dataConfigToNo/dataset" xsi:type="string">setup_session_before_working_to_no</data>
-            <data name="staff/dataset" xsi:type="string">magentoadmin</data>
         </variation>
     </testCase>
 </config>

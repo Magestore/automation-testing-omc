@@ -8,13 +8,32 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPageActionMenu;
 
-use Magento\Mtf\TestCase\Scenario;
+use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposCheckActionMenuTopRightScreenTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPageActionMenu
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\Checkout\CartPageActionMenu
  */
-class WebposCheckActionMenuTopRightScreenTest extends Scenario
+class WebposCheckActionMenuTopRightScreenTest extends Injectable
 {
+    /**
+     * AssertWebposCheckGUICustomerPriceCP54 Index page.
+     *
+     * @var WebposIndex
+     */
+    protected $webposIndex;
+
+    /**
+     * @param WebposIndex $webposIndex
+     * @return void
+     */
+    public function __inject(
+        WebposIndex $webposIndex
+    )
+    {
+        $this->webposIndex = $webposIndex;
+    }
+
     /**
      * Runs the scenario test case
      *
@@ -22,6 +41,10 @@ class WebposCheckActionMenuTopRightScreenTest extends Scenario
      */
     public function test()
     {
-        $this->executeScenario();
+        $staff = $this->objectManager->create(
+            '\Magento\Webpos\Test\TestStep\LoginWebposStep'
+        )->run();
+
+        $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
     }
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\EditQty\WebposCheckoutCartEditQtyCheckEditProductFormTest" summary="Checkout - Cart Page - Edit Qty Product - Check edit product form on cart test" ticketId="WEBPOS-1">
+		<variation name="WebposCheckoutCartEditQtyCheckEditProductFormTestVariation1_CP45_CP46">
+			<data name="product/dataset" xsi:type="string">product1</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\EditQty\AssertEditProductPopupIsClosed"/>
+		</variation>
+	</testCase>
+</config>

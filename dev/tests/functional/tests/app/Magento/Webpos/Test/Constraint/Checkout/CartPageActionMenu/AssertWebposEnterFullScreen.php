@@ -12,15 +12,12 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertWebposEnterFullScreen
- * @package Magento\Webpos\Test\Constraint\Checkout\CartPageActionMenu
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Constraint\Checkout\CartPageActionMenu
  */
 class AssertWebposEnterFullScreen extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex)
     {
-        $webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
-        $webposIndex->getCheckoutFormAddNote()->waitFullScreenMode();
-        $webposIndex->getCheckoutFormAddNote()->getFullScreenMode()->click();
     }
 
     /**

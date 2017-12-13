@@ -49,7 +49,6 @@ class WebposCartPageCustomerCheckoutByNewCustomerTest extends Injectable
 	}
 
 	public function test(
-		Staff $staff,
 		CatalogProductSimple $product,
 		Customer $customer,
 		Address $guestAddress = null,
@@ -57,9 +56,8 @@ class WebposCartPageCustomerCheckoutByNewCustomerTest extends Injectable
 	)
 	{
 		// Login webpos
-		$this->objectManager->getInstance()->create(
-			'Magento\Webpos\Test\TestStep\LoginWebposStep',
-			['staff' => $staff]
+		$staff = $this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();
 
 		$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();

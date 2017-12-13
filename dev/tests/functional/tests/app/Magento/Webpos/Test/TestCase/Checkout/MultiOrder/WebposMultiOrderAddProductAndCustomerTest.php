@@ -9,17 +9,16 @@
 namespace Magento\Webpos\Test\TestCase\Checkout\MultiOrder;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 /**
  * Class WebposMultiOrderAddProductAndCustomerTest
- * @package Magento\Webpos\Test\TestCase\Checkout\MultiOrder
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\Checkout\MultiOrder
  */
 class WebposMultiOrderAddProductAndCustomerTest extends Injectable
 {
     /**
-     * Webpos Index page.
+     * AssertWebposCheckGUICustomerPriceCP54 Index page.
      *
      * @var WebposIndex
      */
@@ -38,16 +37,14 @@ class WebposMultiOrderAddProductAndCustomerTest extends Injectable
     }
 
     /**
-     * Login Webpos group test.
+     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
      *
-     * @param Staff $staff
      * @return void
      */
-    public function test(Staff $staff, $products, FixtureFactory $fixtureFactory, $orderNumber)
+    public function test($products, FixtureFactory $fixtureFactory, $orderNumber)
     {
-        $this->objectManager->create(
-            '\Magento\Webpos\Test\TestStep\LoginWebposStep',
-            ['staff' => $staff]
+        $staff = $this->objectManager->create(
+            '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
         $i = 0;
         foreach ($products as $product) {
@@ -57,6 +54,10 @@ class WebposMultiOrderAddProductAndCustomerTest extends Injectable
             $i++;
         }
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+
+        $this->webposIndex->getCheckoutWebposCart()->getIconChangeCustomer()->click();
+        $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
+
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($orderNumber)->click();

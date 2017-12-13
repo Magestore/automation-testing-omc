@@ -29,6 +29,14 @@ class WebposCartPageCustomerCP36Test extends Injectable
 	 */
 	protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
+	public function __prepare()
+	{
+		$this->objectManager->getInstance()->create(
+			'Magento\Config\Test\TestStep\SetupConfigurationStep',
+			['configData' => 'webpos_default_guest_checkout_rollback']
+		)->run();
+	}
+
 	public function __inject(
 		WebposIndex $webposIndex,
 		AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
@@ -39,7 +47,6 @@ class WebposCartPageCustomerCP36Test extends Injectable
 	}
 
 	public function test(
-		Staff $staff,
 		CatalogProductSimple $product,
 		Customer $customer,
 		Address $address
@@ -47,9 +54,9 @@ class WebposCartPageCustomerCP36Test extends Injectable
 	{
 		$customer->persist();
 
-		$this->objectManager->getInstance()->create(
-			'Magento\Webpos\Test\TestStep\LoginWebposStep',
-			['staff' => $staff]
+		// Login webpos
+		$staff = $this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();
 
 		$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();

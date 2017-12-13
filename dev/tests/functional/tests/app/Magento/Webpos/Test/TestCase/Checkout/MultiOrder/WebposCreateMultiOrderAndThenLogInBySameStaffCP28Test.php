@@ -9,22 +9,22 @@
 namespace Magento\Webpos\Test\TestCase\Checkout\MultiOrder;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Config\Test\Fixture\ConfigData;
 /**
- * Class WebposCreateMultiOrderAndThenLogInByOtherStaffCP28Test
- * @package Magento\Webpos\Test\TestCase\Checkout\MultiOrder
+ * Class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\Checkout\MultiOrder
  */
-class WebposCreateMultiOrderAndThenLogInByOtherStaffCP28Test extends Injectable
+class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
 {
     /**
-     * Webpos Index page.
+     * AssertWebposCheckGUICustomerPriceCP54 Index page.
      *
      * @var WebposIndex
      */
     protected $webposIndex;
+    protected $dataConfigToNo;
 
     /**
      * @param WebposIndex $webposIndex
@@ -39,28 +39,31 @@ class WebposCreateMultiOrderAndThenLogInByOtherStaffCP28Test extends Injectable
     }
 
     /**
-     * Login Webpos group test.
+     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
      *
-     * @param Staff $staff
-     * @param Staff ConfigData
+     * @param ConfigData $dataConfig
+     * @param ConfigData $dataConfigToNo
      * @return void
      */
-    public function test(Staff $staff, ConfigData $dataConfig, ConfigData $dataConfigToNo)
+    public function test(ConfigData $dataConfig, ConfigData $dataConfigToNo)
     {
+        $this->dataConfigToNo = $dataConfigToNo;
         $this->objectManager->create(
             'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
             ['dataConfig' => $dataConfig]
         )->run();
-        $this->objectManager->create(
-            '\Magento\Webpos\Test\TestStep\LoginWebposStep',
-            ['staff' => $staff]
+
+        $staff = $this->objectManager->create(
+            '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
+
         $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
         $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
         $this->webposIndex->getLoginForm()->getEnterToPos()->click();
         sleep(3);
         while ($this->webposIndex->getFirstScreen()->isVisible()) {}
         sleep(2);
+
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
@@ -75,15 +78,16 @@ class WebposCreateMultiOrderAndThenLogInByOtherStaffCP28Test extends Injectable
         sleep(1);
         $this->webposIndex->getSessionSetClosingBalanceReason()->getButtonBtnDone()->click();
         sleep(1);
+
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         sleep(1);
         $this->webposIndex->getCMenu()->logout();
         sleep(1);
         $this->webposIndex->getModal()->getOkButton()->click();
+
         //Login webpos by the same staff
         $this->objectManager->create(
-            '\Magento\Webpos\Test\TestStep\LoginWebposStep',
-            ['staff' => $staff]
+            '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
         $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
         sleep(1);
@@ -95,12 +99,16 @@ class WebposCreateMultiOrderAndThenLogInByOtherStaffCP28Test extends Injectable
         for ($i=1; $i<=2; $i++) {
             self::assertFalse(
                 $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($i)->isVisible(),
-                'On the Webpos Cart, the cart order item was visible successfully.'
+                'On the AssertWebposCheckGUICustomerPriceCP54 Cart, the cart order item was visible successfully.'
             );
         }
+    }
+
+    public function tearDown()
+    {
         $this->objectManager->create(
             'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
-            ['dataConfig' => $dataConfigToNo]
+            ['dataConfig' => $this->dataConfigToNo]
         )->run();
     }
 }

@@ -12,15 +12,12 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertWebposClickSaveAndClosePopupOrderNote
- * @package Magento\Webpos\Test\Constraint\Checkout\CartPageActionMenu
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Constraint\Checkout\CartPageActionMenu
  */
 class AssertWebposClickSaveAndClosePopupOrderNote extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex)
     {
-        $webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
-        $webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->click();
-        $webposIndex->getCheckoutNoteOrder()->getSaveOrderNoteButon()->click();
         \PHPUnit_Framework_Assert::assertFalse(
             $webposIndex->getCheckoutNoteOrder()->getPopUpOrderNoteClose()->isVisible(),
             'On the Products List Page - The action CLOSE ORDER NOTE on the popup add order note of the web POS Cart was visible. It might be disable.'

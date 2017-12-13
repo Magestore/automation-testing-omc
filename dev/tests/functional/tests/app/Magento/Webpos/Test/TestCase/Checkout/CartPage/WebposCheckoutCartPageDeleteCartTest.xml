@@ -2,24 +2,18 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
 	<testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\WebposCheckoutCartPageDeleteCartTest" summary="Checkout - Cart Page - Delete Cart Test" ticketId="WEBPOS-1">
 		<variation name="WebposCheckoutCartPageDeleteCartTestVariation1_CP05">
-			<data name="staff/dataset" xsi:type="string">magentoadmin</data>
-
 			<data name="addProduct" xsi:type="boolean">false</data>
 
 			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\AssertCartPageIsDefault"/>
 		</variation>
 
 		<variation name="WebposCheckoutCartPageDeleteCartTestVariation2_CP06">
-			<data name="staff/dataset" xsi:type="string">magentoadmin</data>
-
 			<data name="product/dataset" xsi:type="string">product1</data>
 
 			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\AssertCartPageIsDefault"/>
 		</variation>
 
 		<variation name="WebposCheckoutCartPageDeleteCartTestVariation3_CP07">
-			<data name="staff/dataset" xsi:type="string">magentoadmin</data>
-
 			<data name="customSale" xsi:type="boolean">true</data>
 			<data name="customProduct" xsi:type="array">
 				<item name="name" xsi:type="string">custom product %isolation%</item>
@@ -31,8 +25,6 @@
 		</variation>
 
 		<variation name="WebposCheckoutCartPageDeleteCartTestVariation4_CP08">
-			<data name="staff/dataset" xsi:type="string">magentoadmin</data>
-
 			<data name="product/dataset" xsi:type="string">product1</data>
 			<data name="addDiscount" xsi:type="boolean">true</data>
 			<data name="discountAmount" xsi:type="string">50.00</data>

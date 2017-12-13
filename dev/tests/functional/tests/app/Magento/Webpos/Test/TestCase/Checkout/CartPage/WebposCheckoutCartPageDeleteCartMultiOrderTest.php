@@ -8,10 +8,8 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage;
 
-
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 class WebposCheckoutCartPageDeleteCartMultiOrderTest extends Injectable
@@ -29,13 +27,12 @@ class WebposCheckoutCartPageDeleteCartMultiOrderTest extends Injectable
 	}
 
 	public function test(
-		Staff $staff,
 		CatalogProductSimple $product
 	)
 	{
-		$this->objectManager->getInstance()->create(
-			'Magento\Webpos\Test\TestStep\LoginWebposStep',
-			['staff' => $staff]
+		// Login webpos
+		$staff = $this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();
 
 		$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
