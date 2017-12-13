@@ -3,20 +3,20 @@
  * Created by PhpStorm.
  * User: thomas
  * Date: 13/12/2017
- * Time: 13:31
+ * Time: 14:48
  */
 
-namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomerPrice;
+namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomPrice;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 /**
- * Class WebposPlaceOrderWithCustomerPriceCP58Test
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomerPrice
+ * Class WebposPlaceOrderWithCustomerPercentCP61Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomPrice
  */
-class WebposPlaceOrderWithCustomerPriceCP58Test extends Injectable
+class WebposPlaceOrderWithCustomerPercentCP61Test extends Injectable
 {
     /**
      * AssertWebposCheckGUICustomerPriceCP54 Index page.
@@ -61,6 +61,7 @@ class WebposPlaceOrderWithCustomerPriceCP58Test extends Injectable
 
         $this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
         $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
+        $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
         sleep(1);
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomerPrice\WebposPlaceOrderWithCustomerPriceCP58Test" summary="Checkout - Cart Page - Webpos Check GUI Customer Price CP54" ticketId="WEBPOS-1">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomPrice\WebposPlaceOrderWithCustomerPriceCP58Test" summary="Checkout - Cart Page - Webpos Check GUI Customer Price CP54" ticketId="WEBPOS-1">
         <variation name="WebposPlaceOrderWithCustomerPriceCP58TestVariation1_CP58">
             <data name="product/dataset" xsi:type="string">product1</data>
             <data name="amountValue" xsi:type="string">15</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomerPrice\AssertWebposPlaceOrderWithCustomerPriceCP58"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomPrice\AssertWebposPlaceOrderWithCustomPriceCP58"/>
         </variation>
     </testCase>
 </config>

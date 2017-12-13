@@ -3,19 +3,19 @@
  * Created by PhpStorm.
  * User: thomas
  * Date: 13/12/2017
- * Time: 14:24
+ * Time: 09:35
  */
 
-namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomerPrice;
+namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomPrice;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 /**
- * Class WebposCustomerPriceWithMore100PercentCP59Test
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomerPrice
+ * Class AssertWebposCheckGUICustomerPriceCP54
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomPrice
  */
-class WebposCustomerPriceWithMore100PercentCP59Test extends Injectable
+class WebposCheckGUICustomerPriceCP54EntityTest extends Injectable
 {
     /**
      * AssertWebposCheckGUICustomerPriceCP54 Index page.
@@ -40,7 +40,7 @@ class WebposCustomerPriceWithMore100PercentCP59Test extends Injectable
      *
      * @return void
      */
-    public function test(CatalogProductSimple $product, $amountValue)
+    public function test(CatalogProductSimple $product)
     {
         $staff = $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
@@ -49,13 +49,7 @@ class WebposCustomerPriceWithMore100PercentCP59Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->search($product->getSku());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $price = $this->webposIndex->getCheckoutCartItems()->getValueItemPrice($product->getName());
-
         $this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
         $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
-        //we need to set sleep($second) in this case.
-        sleep(2);
     }
 }

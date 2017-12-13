@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomerPrice\WebposCheckGUICustomerPriceCP54EntityTest" summary="Checkout - Cart Page - Webpos Check GUI Customer Price CP54" ticketId="WEBPOS-1">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomPrice\WebposCheckGUICustomerPriceCP54EntityTest" summary="Checkout - Cart Page - Webpos Check GUI Customer Price CP54" ticketId="WEBPOS-1">
         <variation name="WebposCheckGUICustomerPriceCP54EntityTestVariation1_CP54">
             <data name="product/dataset" xsi:type="string">product1</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomerPrice\AssertWebposCheckGUICustomerPriceCP54"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomPrice\AssertWebposCheckGUICustomPriceCP54"/>
         </variation>
     </testCase>
 </config>

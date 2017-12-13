@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomerPrice\WebposCheckGUICustomerPriceInsertNegativePriceCP55EntityTest" summary="Checkout - Cart Page - Webpos Check GUI Customer Price CP54" ticketId="WEBPOS-1">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomPrice\WebposCheckGUICustomerPriceInsertNegativePriceCP55EntityTest" summary="Checkout - Cart Page - Webpos Check GUI Customer Price CP54" ticketId="WEBPOS-1">
         <variation name="WebposCheckGUICustomerPriceInsertNegativePriceCP55EntityTestVariation1_CP5">
             <data name="product/dataset" xsi:type="string">product1</data>
             <data name="negativeValue" xsi:type="string">-12</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomerPrice\AssertWebposCheckGUICustomerPriceInsertNegativePriceCP55"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomPrice\AssertWebposCheckGUICustomPriceInsertNegativePriceCP55"/>
         </variation>
     </testCase>
 </config>

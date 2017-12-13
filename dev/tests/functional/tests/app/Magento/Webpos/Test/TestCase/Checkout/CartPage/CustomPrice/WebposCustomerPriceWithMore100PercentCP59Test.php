@@ -3,19 +3,19 @@
  * Created by PhpStorm.
  * User: thomas
  * Date: 13/12/2017
- * Time: 14:35
+ * Time: 14:24
  */
 
-namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomerPrice;
+namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomPrice;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 /**
- * Class WebposCustomerPriceWithValidValueCP60Test
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomerPrice
+ * Class WebposCustomerPriceWithMore100PercentCP59Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomPrice
  */
-class WebposCustomerPriceWithValidValueCP60Test extends Injectable
+class WebposCustomerPriceWithMore100PercentCP59Test extends Injectable
 {
     /**
      * AssertWebposCheckGUICustomerPriceCP54 Index page.
@@ -56,10 +56,6 @@ class WebposCustomerPriceWithValidValueCP60Test extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
         //we need to set sleep($second) in this case.
-        sleep(1);
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-        return
-            ['product' => $product,
-            'price' => $price];
+        sleep(2);
     }
 }

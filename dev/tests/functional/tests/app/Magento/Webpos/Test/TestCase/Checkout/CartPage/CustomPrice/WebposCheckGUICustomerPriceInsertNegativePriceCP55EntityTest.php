@@ -3,19 +3,19 @@
  * Created by PhpStorm.
  * User: thomas
  * Date: 13/12/2017
- * Time: 10:58
+ * Time: 10:28
  */
 
-namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomerPrice;
+namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomPrice;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 /**
- * Class WebposCheckGUICustomerPriceTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomerPrice
+ * Class WebposCheckGUICustomerPriceInsertNegativePriceCP55EntityTest
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomPrice
  */
-class WebposCheckGUICustomerPriceTest extends Injectable
+class WebposCheckGUICustomerPriceInsertNegativePriceCP55EntityTest extends Injectable
 {
     /**
      * AssertWebposCheckGUICustomerPriceCP54 Index page.
@@ -40,7 +40,7 @@ class WebposCheckGUICustomerPriceTest extends Injectable
      *
      * @return void
      */
-    public function test(CatalogProductSimple $product, $amountValue)
+    public function test(CatalogProductSimple $product, $negativeValue)
     {
         $staff = $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
@@ -49,14 +49,10 @@ class WebposCheckGUICustomerPriceTest extends Injectable
         $this->webposIndex->getCheckoutProductList()->search($product->getSku());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $price = $this->webposIndex->getCheckoutCartItems()->getValueItemPrice($product->getName());
-
         $this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
         $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
+        $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($negativeValue);
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-        return [
-            'product' => $product,
-            'price' => $price];
+        return ['product' => $product];
     }
 }
