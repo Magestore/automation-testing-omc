@@ -14,12 +14,12 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Config\Test\Fixture\ConfigData;
 /**
  * Class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test
- * @package Magento\Webpos\Test\TestCase\Checkout\MultiOrder
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\Checkout\MultiOrder
  */
 class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
 {
     /**
-     * Webpos Index page.
+     * AssertWebposCheckGUICustomerPriceCP54 Index page.
      *
      * @var WebposIndex
      */
@@ -39,7 +39,7 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
     }
 
     /**
-     * Login Webpos group test.
+     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
      *
      * @param ConfigData $dataConfig
      * @param ConfigData $dataConfigToNo
@@ -99,7 +99,7 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
         for ($i=1; $i<=2; $i++) {
             self::assertFalse(
                 $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($i)->isVisible(),
-                'On the Webpos Cart, the cart order item was visible successfully.'
+                'On the AssertWebposCheckGUICustomerPriceCP54 Cart, the cart order item was visible successfully.'
             );
         }
     }

@@ -11,7 +11,7 @@ namespace Magento\Webpos\Test\Block\Checkout;
 use Magento\Mtf\Block\Block;
 /**
  * Class CheckoutFormAddNote
- * @package Magento\Webpos\Test\Block\Checkout
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Block\Checkout
  */
 class CheckoutFormAddNote extends Block
 {

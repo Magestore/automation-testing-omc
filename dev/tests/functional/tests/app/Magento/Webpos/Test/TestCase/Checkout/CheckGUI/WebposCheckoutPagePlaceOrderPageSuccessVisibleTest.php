@@ -14,12 +14,12 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 /**
  * Class WebposCheckoutPagePlaceOrderPageSuccessVisibleTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CheckGUI
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\Checkout\CheckGUI
  */
 class WebposCheckoutPagePlaceOrderPageSuccessVisibleTest extends Injectable
 {
     /**
-     * Webpos Index page.
+     * AssertWebposCheckGUICustomerPriceCP54 Index page.
      *
      * @var WebposIndex
      */
@@ -37,7 +37,7 @@ class WebposCheckoutPagePlaceOrderPageSuccessVisibleTest extends Injectable
     }
 
     /**
-     * Login Webpos group test.
+     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
      *
      * @param Staff $staff
      * @param FixtureFactory $fixtureFactory
@@ -55,7 +55,7 @@ class WebposCheckoutPagePlaceOrderPageSuccessVisibleTest extends Injectable
                 \PHPUnit_Framework_Assert::assertEquals(
                     $defaultValue,
                     str_replace('$', '', $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice($label)->getText()),
-                    'On the Frontend Page - The Default ' .$label. ' at the Webpos Cart was not equal to zero.'
+                    'On the Frontend Page - The Default ' .$label. ' at the AssertWebposCheckGUICustomerPriceCP54 Cart was not equal to zero.'
                 );
             }
         }

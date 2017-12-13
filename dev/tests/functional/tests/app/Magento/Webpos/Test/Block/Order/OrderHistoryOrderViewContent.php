@@ -9,6 +9,8 @@
 namespace Magento\Webpos\Test\Block\Order;
 
 use Magento\Mtf\Block\Block;
+use Magento\Mtf\Client\Locator;
+
 /**
  * Class OrderHistoryOrderViewContent
  * @package Magento\Webpos\Test\Block\Order
@@ -45,4 +47,13 @@ class OrderHistoryOrderViewContent extends Block
 		return $this->_rootElement->find('span[data-bind="text: $parent.getAddressType(\'shipping\').telephone"]')->getText();
 	}
 
+	public function getProductRow($name)
+    {
+        return $this->_rootElement->find('//table/tbody/tr/td/h4[text()="'.$name.'"]/../..', Locator::SELECTOR_XPATH);
+    }
+
+    public function getPriceOfProduct($name)
+    {
+        return $this->getProductRow($name)->find('td[data-bind="text: $parents[1].getItemPriceFormated(item)"]');
+    }
 }

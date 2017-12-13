@@ -14,12 +14,12 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 /**
  * Class WebposMultiOrderCheckoutOn2ndCartTest
- * @package Magento\Webpos\Test\TestCase\Checkout\MultiOrder
+ * @package Magento\WebposCheckGUICustomerPriceCP54EntityTest\Test\TestCase\Checkout\MultiOrder
  */
 class WebposMultiOrderCheckoutOn2ndCartTest extends Injectable
 {
     /**
-     * Webpos Index page.
+     * WebposCheckGUICustomerPriceCP54EntityTest Index page.
      *
      * @var WebposIndex
      */
@@ -44,7 +44,7 @@ class WebposMultiOrderCheckoutOn2ndCartTest extends Injectable
     }
 
     /**
-     * Login Webpos group test.
+     * Login WebposCheckGUICustomerPriceCP54EntityTest group test.
      *
      * @return void
      */
