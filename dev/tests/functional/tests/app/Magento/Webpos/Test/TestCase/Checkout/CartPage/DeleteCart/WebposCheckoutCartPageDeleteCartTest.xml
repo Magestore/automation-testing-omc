@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-	<testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\WebposCheckoutCartPageDeleteCartTest" summary="Checkout - Cart Page - Delete Cart Test" ticketId="WEBPOS-1">
+	<testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\DeleteCart\WebposCheckoutCartPageDeleteCartTest" summary="Checkout - Cart Page - Delete Cart Test" ticketId="WEBPOS-1">
 		<variation name="WebposCheckoutCartPageDeleteCartTestVariation1_CP05">
 			<data name="addProduct" xsi:type="boolean">false</data>
 
