@@ -49,4 +49,10 @@ class MsWebpos extends Block
 	{
 		$this->_rootElement->click();
 	}
+
+	public function waitForSyncDataAfterLogin()
+	{
+		$this->waitForElementVisible('.first-screen');
+		$this->waitForElementNotVisible('.first-screen');
+	}
 }
