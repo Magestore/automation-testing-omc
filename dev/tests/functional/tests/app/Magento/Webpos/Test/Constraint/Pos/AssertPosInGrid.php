@@ -41,7 +41,7 @@ class AssertPosInGrid extends AbstractConstraint
         $posIndex->open();
         \PHPUnit_Framework_Assert::assertTrue(
             $posIndex->getPosGrid()->isRowVisible($filter),
-            'Webpos Pos with Pos Name \'' . $pos->getPosName() . '\' is absent in Webpos Pos grid.'
+            'AssertWebposCheckGUICustomerPriceCP54 Pos with Pos Name \'' . $pos->getPosName() . '\' is absent in AssertWebposCheckGUICustomerPriceCP54 Pos grid.'
         );
     }
 
@@ -52,6 +52,6 @@ class AssertPosInGrid extends AbstractConstraint
      */
     public function toString()
     {
-        return 'Webpos Pos is present in Webpos Pos timezone_location_get() grid.';
+        return 'AssertWebposCheckGUICustomerPriceCP54 Pos is present in AssertWebposCheckGUICustomerPriceCP54 Pos timezone_location_get() grid.';
     }
 }

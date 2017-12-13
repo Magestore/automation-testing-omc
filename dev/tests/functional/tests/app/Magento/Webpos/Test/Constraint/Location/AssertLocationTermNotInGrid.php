@@ -40,7 +40,7 @@ class AssertLocationTermNotInGrid extends AbstractConstraint
         unset($filters['store_id']);
         \PHPUnit_Framework_Assert::assertFalse(
             $grid->isRowVisible($filters, false),
-            'Webpos Staff Location "' . $locationText . '" was found in grid.'
+            'AssertWebposCheckGUICustomerPriceCP54 Staff Location "' . $locationText . '" was found in grid.'
         );
     }
 
@@ -51,6 +51,6 @@ class AssertLocationTermNotInGrid extends AbstractConstraint
      */
     public function toString()
     {
-        return 'Webpos Staff Location was not found in grid.';
+        return 'AssertWebposCheckGUICustomerPriceCP54 Staff Location was not found in grid.';
     }
 }

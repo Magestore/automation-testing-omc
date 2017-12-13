@@ -8,10 +8,8 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage;
 
-
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 class WebposCheckoutCartPageDeleteCartMultiOrderTest extends Injectable

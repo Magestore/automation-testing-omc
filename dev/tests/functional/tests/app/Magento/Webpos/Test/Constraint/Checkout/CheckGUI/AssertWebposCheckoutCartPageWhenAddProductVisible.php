@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertWebposCheckoutCartPageWhenAddProductVisible
- * @package Magento\Webpos\Test\Constraint\Checkout\CheckGUI
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Constraint\Checkout\CheckGUI
  */
 class AssertWebposCheckoutCartPageWhenAddProductVisible extends AbstractConstraint
 {
@@ -35,7 +35,7 @@ class AssertWebposCheckoutCartPageWhenAddProductVisible extends AbstractConstrai
             \PHPUnit_Framework_Assert::assertNotEquals(
                 $defaultValue,
                 str_replace('$', '', $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice($label)->getText()),
-                'On the Frontend Page - The New ' .$label. ' at the Webpos Cart was not updated.'
+                'On the Frontend Page - The New ' .$label. ' at the AssertWebposCheckGUICustomerPriceCP54 Cart was not updated.'
             );
         }
     }

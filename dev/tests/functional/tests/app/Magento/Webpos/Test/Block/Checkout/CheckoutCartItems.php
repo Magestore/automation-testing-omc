@@ -12,7 +12,7 @@ use Magento\Mtf\Block\Block;
 use Magento\Mtf\Client\Locator;
 /**
  * Class CheckoutCartItems
- * @package Magento\Webpos\Test\Block\Checkout
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Block\Checkout
  */
 class CheckoutCartItems extends Block
 {
@@ -56,7 +56,23 @@ class CheckoutCartItems extends Block
 
     public function getCartItemPrice($name)
     {
-        $price = $this->getCartItem($name)->find('.price')->getText();
+        return $this->getCartItem($name)->find('.price');
+    }
+
+    public function getValueItemPrice($name)
+    {
+        $price = $this->getCartItemPrice($name)->getText();
         return substr($price, 1);
+    }
+
+    public function getCartOriginalItemPrice($name)
+    {
+        return $this->getCartItem($name)->find('.original-price');
+    }
+
+    public function getValueOriginalItemPrice($name)
+    {
+        $value = $this->getCartOriginalItemPrice($name)->getText();
+        return substr($value, 6);
     }
 }

@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertWebposClickSaveAndClosePopupOrderNote
- * @package Magento\Webpos\Test\Constraint\Checkout\CartPageActionMenu
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Constraint\Checkout\CartPageActionMenu
  */
 class AssertWebposClickSaveAndClosePopupOrderNote extends AbstractConstraint
 {

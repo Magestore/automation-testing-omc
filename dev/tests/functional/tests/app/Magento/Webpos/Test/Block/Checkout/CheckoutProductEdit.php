@@ -11,7 +11,7 @@ namespace Magento\Webpos\Test\Block\Checkout;
 use Magento\Mtf\Block\Block;
 /**
  * Class CheckoutProductEdit
- * @package Magento\Webpos\Test\Block\Checkout
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Block\Checkout
  */
 class CheckoutProductEdit extends Block
 {
@@ -54,6 +54,10 @@ class CheckoutProductEdit extends Block
 	{
 		return $this->_rootElement->find('div.price-box > input');
 	}
+
+	public function getActiveButton() {
+	    return $this->_rootElement->find('div.price-box .btn-cl-cfg-active');
+    }
 
 	public function getDollarButton()
 	{
