@@ -32,12 +32,20 @@
             <input>Multiselect</input>
         </customer_group>
         <location_id>
-            <selector>[name='location_id']</selector>
-            <input>select</input>
+            <selector>[name='location_id[]']</selector>
+            <input>Select</input>
         </location_id>
         <role_id>
             <selector>[name='role_id']</selector>
-            <input>select</input>
+            <input>Select</input>
         </role_id>
+        <status>
+            <selector>[name='status']</selector>
+            <input>Select</input>
+        </status>
+        <pos_ids>
+            <selector>[name='pos_ids[]']</selector>
+            <input>Select</input>
+        </pos_ids>
     </fields>
 </mapping>

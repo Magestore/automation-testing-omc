@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<tabs>
+    <general-information>
+        <class>\Magento\Backend\Test\Block\Widget\Tab</class>
+        <selector>#specialday_tabs_general_section</selector>
+        <strategy>css selector</strategy>
+        <fields>
+            <specialday_name/>
+            <date_from>
+                <input>datepicker</input>
+            </date_from>
+            <date_to>
+                <input>datepicker</input>
+            </date_to>
+            <time_open_hour>
+                <selector>[id="specialday_time_open_hour"]</selector>
+                <strategy>css selector</strategy>
+                <input>select</input>
+            </time_open_hour>
+            <time_open_minute>
+                <selector>[id="specialday_time_open_minute"]</selector>
+                <strategy>css selector</strategy>
+                <input>select</input>
+            </time_open_minute>
+            <time_close_hour>
+                <selector>[id="specialday_time_close_hour"]</selector>
+                <strategy>css selector</strategy>
+                <input>select</input>
+            </time_close_hour>
+            <time_close_minute>
+                <selector>[id="specialday_time_close_minute"]</selector>
+                <strategy>css selector</strategy>
+                <input>select</input>
+            </time_close_minute>
+        </fields>
+    </general-information>
+    <stores>
+        <class>\Magento\Storepickup\Test\Block\Adminhtml\Tag\Tab\Stores</class>
+        <selector>#specialday_tabs_stores_section</selector>
+        <strategy>css selector</strategy>
+    </stores>
+</tabs>

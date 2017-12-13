@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\Customercredit\Test\Repository\CreditProduct">
+        <dataset name="default">
+            <field name="name" xsi:type="string">Credit Product %isolation%</field>
+            <field name="sku" xsi:type="string">sku_credit_product_%isolation%</field>
+            <field name="quantity_and_stock_status" xsi:type="array">
+                <item name="qty" xsi:type="string">25</item>
+                <item name="is_in_stock" xsi:type="string">In Stock</item>
+            </field>
+            <field name="storecredit_type" xsi:type="string">Fixed value</field>
+            <field name="storecredit_rate" xsi:type="string">2</field>
+            <field name="storecredit_value" xsi:type="string">100</field>
+        </dataset>
+        <dataset name="default1">
+            <field name="name" xsi:type="string">Credit Product %isolation%</field>
+            <field name="sku" xsi:type="string">sku_credit_product_%isolation%</field>
+            <field name="quantity_and_stock_status" xsi:type="array">
+                <item name="qty" xsi:type="string">50</item>
+                <item name="is_in_stock" xsi:type="string">In Stock</item>
+            </field>
+            <field name="storecredit_type" xsi:type="string">Fixed value</field>
+            <field name="storecredit_rate" xsi:type="string">2</field>
+            <field name="storecredit_value" xsi:type="string">100</field>
+            <field name="visibility" xsi:type="string">Not Visible Individually</field>
+            <field name="status" xsi:type="string">No</field>
+        </dataset>
+    </repository>
+</config>

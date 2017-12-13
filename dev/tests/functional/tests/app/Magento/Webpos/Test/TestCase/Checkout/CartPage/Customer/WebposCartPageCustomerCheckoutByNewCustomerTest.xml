@@ -2,8 +2,6 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
 	<testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer\WebposCartPageCustomerCheckoutByNewCustomerTest" summary="Checkout - Cart Page - Customer - Checkout by new customer test" ticketId="WEBPOS-1">
 		<variation name="WebposCartPageCustomerCheckoutByNewCustomerTestVariation1_CP43">
-			<data name="staff/dataset" xsi:type="string">magentoadmin</data>
-
 			<data name="product/dataset" xsi:type="string">product1</data>
 			<data name="customer/dataset" xsi:type="string">johndoe_unique</data>
 			<data name="guestAddress/dataset" xsi:type="string">default_webpos_guest_address</data>
@@ -12,8 +10,6 @@
 		</variation>
 
 		<variation name="WebposCartPageCustomerCheckoutByNewCustomerTestVariation2_CP44">
-			<data name="staff/dataset" xsi:type="string">magentoadmin</data>
-
 			<data name="product/dataset" xsi:type="string">product1</data>
 			<data name="customer/dataset" xsi:type="string">johndoe_unique</data>
 			<data name="addAddress" xsi:type="boolean">true</data>

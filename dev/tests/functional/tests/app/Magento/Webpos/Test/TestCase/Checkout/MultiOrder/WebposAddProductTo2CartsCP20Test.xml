@@ -8,7 +8,6 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Webpos\Test\TestCase\Checkout\MultiOrder\WebposAddProductTo2CartsCP20Test" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
         <variation name="WebposAddProductTo2CartsCP20TestVariation1_CP20">
-            <data name="staff/dataset" xsi:type="string">magentoadmin</data>
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="string">product1</item>
                 <item name="1" xsi:type="string">product2</item>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="storepickupHoliday"
+             module="Magento_Storepickup"
+             type="flat"
+             collection="Magento\Storepickup\Model\ResourceModel\Holiday\Collection"
+             repository_class="Magento\Storepickup\Test\Repository\StorepickupHoliday"
+             handler_interface="Magento\Storepickup\Test\Handler\StorepickupHoliday\StorepickupHolidayInterface"
+             class="Magento\Storepickup\Test\Fixture\StorepickupHoliday"
+             entity_type="magestore_storepickup_holiday">
+        <field name="holiday_id" group="null" is_required="1"/>
+        <field name="holiday_name" group="general-information" is_required="0"/>
+        <field name="date_from" group="general-information" is_required="0"/>
+        <field name="date_to" group="general-information" is_required="0"/>
+        <field name="holiday_comment" group="general-information" is_required="0"/>
+        <field name="storepickup_stores" group="stores" is_required="0" source="Magento\Storepickup\Test\Fixture\Tag\Stores"/>
+    </fixture>
+</config>

@@ -12,6 +12,8 @@
 namespace Magento\Webpos\Test\Block;
 
 use Magento\Mtf\Block\Block;
+use Magento\Mtf\Client\Locator;
+
 /**
  * Class MsWebpos
  * @package Magento\Webpos\Test\Block
@@ -41,5 +43,10 @@ class MsWebpos extends Block
 	public function waitCheckoutLoader()
 	{
 		$this->waitForElementNotVisible('#webpos_checkout > div.indicator');
+	}
+
+	public function clickOutsidePopup()
+	{
+		$this->_rootElement->click();
 	}
 }

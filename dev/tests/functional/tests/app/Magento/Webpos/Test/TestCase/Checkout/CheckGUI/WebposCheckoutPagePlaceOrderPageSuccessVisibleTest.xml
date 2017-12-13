@@ -8,7 +8,6 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Webpos\Test\TestCase\Checkout\CheckGUI\WebposCheckoutPagePlaceOrderPageSuccessVisibleTest" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
         <variation name="WebposCheckoutCartPageWhenAddProductVisibleTestVariation1_CP02">
-            <data name="staff/dataset" xsi:type="string">magentoadmin</data>
             <data name="testCaseId" xsi:type="string">CP02</data>
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="string">product1</item>
