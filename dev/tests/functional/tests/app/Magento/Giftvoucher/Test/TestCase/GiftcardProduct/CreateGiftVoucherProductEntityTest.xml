@@ -18,12 +18,12 @@
             <data name="product/data/conditions_serialized" xsi:type="string">[Subtotal|equals or greater than|200]</data>
             <data name="product/data/actions_serialized" xsi:type="string">[Quantity in cart|greater than|1]</data>
 
-            <data name="product/data/gift_type" xsi:type="string">1</data>
+            <data name="product/data/gift_type" xsi:type="string">Fixed value</data>
             <data name="product/data/gift_value" xsi:type="string">200</data>
-            <data name="product/data/gift_price_type" xsi:type="string">1</data>
+            <data name="product/data/gift_price_type" xsi:type="string">Same as Gift Card Value</data>
 
             <constraint name="Magento\Catalog\Test\Constraint\AssertProductSaveMessage" />
-            <constraint name="Magento\Catalog\Test\Constraint\AssertProductInGrid" />
+            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftProduct\AssertGiftProductInGrid" />
         </variation>
     </testCase>
 </config>

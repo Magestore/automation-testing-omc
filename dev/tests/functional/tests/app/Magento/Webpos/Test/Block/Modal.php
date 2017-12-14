@@ -30,7 +30,7 @@ class Modal extends Block
 
 	public function getOkButton()
 	{
-		return $this->_rootElement->find('aside > div.modal-inner-wrap > footer > button.action-primary.action-accept');
+		return $this->_rootElement->find('.action-accept');
 	}
 
 	public function getCloseButton()

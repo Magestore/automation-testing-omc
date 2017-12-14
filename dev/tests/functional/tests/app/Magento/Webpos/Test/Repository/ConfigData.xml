@@ -8,7 +8,26 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
     <repository class="Magento\Config\Test\Repository\ConfigData">
-        <!-- Magestore Webpos Config Color and delivery Settings-->
+        <!-- AssertWebposCheckGUICustomerPriceCP54 need to create session before working-->
+        <dataset name="create_session_before_working">
+            <field name="webpos/general/enable_session" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+                <item name="inherit" xsi:type="number">1</item>
+            </field>
+        </dataset>
+        <dataset name="setup_session_before_working_to_no">
+            <field name="webpos/general/enable_session" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+                <item name="inherit" xsi:type="number">1</item>
+            </field>
+        </dataset>
+        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 Config Color and delivery Settings-->
         <dataset name="webpos_synchronization_configcolor">
             <field name="webpos/general/webpos_color" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -25,15 +44,15 @@
                 <item name="inherit" xsi:type="number">1</item>
             </field>
         </dataset>
-        <!-- Magestore Webpos General Settings-->
+        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 General Settings-->
         <dataset name="magestore_webpos_general">
-            <field name="webpos/general/webpos_logo" xsi:type="array">
-                <item name="scope" xsi:type="string">default</item>
-                <item name="scope_id" xsi:type="number">0</item>
-                <item name="label" xsi:type="string">http://127.0.0.1/magento2/pub/media/webpos/logo/default/logo.png</item>
-                <item name="value" xsi:type="string">http://127.0.0.1/magento2/pub/media/webpos/logo/default/logo.png</item>
-                <item name="inherit" xsi:type="number">1</item>
-            </field>
+            <!--<field name="webpos/general/webpos_logo" xsi:type="array">-->
+                <!--<item name="scope" xsi:type="string">default</item>-->
+                <!--<item name="scope_id" xsi:type="number">0</item>-->
+                <!--<item name="label" xsi:type="string">http://127.0.0.1/magento2/pub/media/webpos/logo/default/logo.png</item>-->
+                <!--<item name="value" xsi:type="string">http://127.0.0.1/magento2/pub/media/webpos/logo/default/logo.png</item>-->
+                <!--<item name="inherit" xsi:type="number">1</item>-->
+            <!--</field>-->
             <field name="webpos/general/webpos_color" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
@@ -99,7 +118,7 @@
             </field>
         </dataset>
         <!-- Ta co the test cho tat ca cac settings can thiet vao mot dataset sau do nhap field vao. -->
-        <!-- Magestore Webpos Shipping Settings-->
+        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 Shipping Settings-->
         <dataset name="magestore_webpos_shipping">
             <field name="webpos/shipping/allowspecific_shipping" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -143,7 +162,7 @@
                 </item>
             </field>
         </dataset>
-        <!-- Magestore Webpos Synchronization Default Payment-->
+        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 Synchronization Default Payment-->
         <dataset name="magestore_webpos_default_payment">
             <field name="webpos/payment/defaultpayment" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -153,7 +172,7 @@
                 <item name="inherit" xsi:type="number">1</item>
             </field>
         </dataset>
-        <!-- Magestore Webpos Payment Settings-->
+        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 Payment Settings-->
         <dataset name="magestore_webpos_payment_setting">
             <field name="webpos/payment/authorizenet_enable" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -338,7 +357,7 @@
                 <item name="inherit" xsi:type="number">1</item>
             </field>
         </dataset>
-        <!-- Magestore Webpos Product Search Settings-->
+        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 Product Search Settings-->
         <dataset name="magestore_webpos_product_search">
             <field name="webpos/product/search_product_attribute" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -348,7 +367,7 @@
                 <item name="inherit" xsi:type="number">1</item>
             </field>
         </dataset>
-        <!-- Magestore Webpos Synchronization Settings-->
+        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 Synchronization Settings-->
         <dataset name="magestore_webpos_synchronization">
             <field name="webpos/offline/product_time" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -386,7 +405,7 @@
                 <item name="inherit" xsi:type="number">1</item>
             </field>
         </dataset>
-        <!-- Magestore Webpos Online Mode Configuration Settings-->
+        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 Online Mode Configuration Settings-->
         <dataset name="magestore_webpos_online_mode_configuration">
             <field name="webpos/online/use_custom_order_id" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -396,7 +415,7 @@
                 <item name="inherit" xsi:type="number">1</item>
             </field>
         </dataset>
-        <!-- Magestore Webpos Default Guest Checkout Settings-->
+        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 Default Guest Checkout Settings-->
         <dataset name="magestore_webpos_default_guest_checkout">
             <field name="webpos/guest_checkout/first_name" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -553,6 +572,104 @@
                 <item name="scope" xsi:type="string">carriers</item>
                 <item name="scope_id" xsi:type="number">1</item>
                 <item name="value" xsi:type="number">0</item>
+            </field>
+        </dataset>
+
+        <dataset name="webpos_default_guest_checkout_rollback">
+            <field name="webpos/guest_checkout/first_name" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">Guest</item>
+            </field>
+            <field name="webpos/guest_checkout/last_name" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">POS</item>
+            </field>
+            <field name="webpos/guest_checkout/street" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">Street</item>
+            </field>
+            <field name="webpos/guest_checkout/country_id" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">US</item>
+            </field>
+            <field name="webpos/guest_checkout/region_id" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="label" xsi:type="string">California</item>
+                <item name="value" xsi:type="string">12</item>
+            </field>
+            <field name="webpos/guest_checkout/city" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">Guest City</item>
+            </field>
+            <field name="webpos/guest_checkout/zip" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="number">90034</item>
+            </field>
+            <field name="webpos/guest_checkout/telephone" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="number">12345678</item>
+            </field>
+            <field name="webpos/guest_checkout/email" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">guest@example.com</item>
+            </field>
+        </dataset>
+
+        <dataset name="webpos_default_guest_checkout_edit">
+            <field name="webpos/guest_checkout/first_name" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">Guest2</item>
+            </field>
+            <field name="webpos/guest_checkout/last_name" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">POS2</item>
+            </field>
+            <field name="webpos/guest_checkout/street" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">Street2</item>
+            </field>
+            <field name="webpos/guest_checkout/country_id" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">US</item>
+            </field>
+            <field name="webpos/guest_checkout/region_id" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="label" xsi:type="string">California</item>
+                <item name="value" xsi:type="string">12</item>
+            </field>
+            <field name="webpos/guest_checkout/city" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">Guest City2</item>
+            </field>
+            <field name="webpos/guest_checkout/zip" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="number">90034</item>
+            </field>
+            <field name="webpos/guest_checkout/telephone" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="number">0192104914</item>
+            </field>
+            <field name="webpos/guest_checkout/email" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="string">guest@example.com</item>
             </field>
         </dataset>
     </repository>

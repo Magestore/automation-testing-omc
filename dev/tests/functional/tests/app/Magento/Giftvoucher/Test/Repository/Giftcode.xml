@@ -15,6 +15,8 @@
 			<field name="recipient_email" xsi:type="string">jane@example.com</field>
 			<field name="recipient_address" xsi:type="string">Landing</field>
 			<field name="message" xsi:type="string">Happy birthday!</field>
+			<field name="is_sent" xsi:type="string">Not Send</field>
+
         </dataset>
         <dataset name="minimum">
         	<field name="gift_code" xsi:type="string">TEST-[A.4]-[AN.6]</field>

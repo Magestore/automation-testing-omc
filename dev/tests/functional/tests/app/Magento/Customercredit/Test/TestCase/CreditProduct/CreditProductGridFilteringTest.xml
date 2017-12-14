@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Customercredit\Test\TestCase\CreditProduct\CreditProductGridFilteringTest" summary="Credit Product Grid UI Component Filtering">
+        <variation name="CreditProductGridFilteringTest">
+            <data name="itemsCount" xsi:type="string">1</data>
+            <data name="fixtureName" xsi:type="string">creditProduct</data>
+            <data name="fixtureDataSet" xsi:type="string">default</data>
+            <data name="filters" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="id_from" xsi:type="string">:id</item>
+                    <item name="id_to" xsi:type="string">:id</item>
+                    <item name="name" xsi:type="string">:name</item>
+                    <item name="sku" xsi:type="string">:sku</item>
+                    <item name="qty_from" xsi:type="string">:quantity_and_stock_status/qty</item>
+                    <item name="qty_to" xsi:type="string">:quantity_and_stock_status/qty</item>
+                    <item name="visibility" xsi:type="string">Catalog, Search</item>
+                    <item name="status" xsi:type="string">Enable</item>
+                    <item name="website_ids" xsi:type="string">Main Website</item>
+                </item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Customercredit\Test\Page\Adminhtml\CreditProductIndex</data>
+            <data name="gridRetriever" xsi:type="string">getCreditProductGrid</data>
+            <data name="idGetter" xsi:type="string">getId</data>
+            <constraint name="\Magento\Ui\Test\Constraint\AssertGridFiltering"/>
+        </variation>
+    </testCase>
+</config>

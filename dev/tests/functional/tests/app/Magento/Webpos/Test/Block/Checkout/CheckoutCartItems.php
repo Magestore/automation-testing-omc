@@ -9,9 +9,10 @@
 namespace Magento\Webpos\Test\Block\Checkout;
 
 use Magento\Mtf\Block\Block;
+use Magento\Mtf\Client\Locator;
 /**
  * Class CheckoutCartItems
- * @package Magento\Webpos\Test\Block\Checkout
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Block\Checkout
  */
 class CheckoutCartItems extends Block
 {
@@ -31,5 +32,47 @@ class CheckoutCartItems extends Block
     public function getIconDeleteItem()
     {
         return $this->_rootElement->find('.product-item .remove-icon');
+    }
+
+	public function getFirstCartItem()
+	{
+		return $this->_rootElement->find('.product-item');
+	}
+
+    public function getCartItem($name)
+    {
+        return $this->_rootElement->find('//li/div/div/div[2]/h4[text()="'.$name.'"]/../../../..', Locator::SELECTOR_XPATH);
+    }
+
+    public function getCartItemName($name)
+    {
+        return $this->getCartItem($name)->find('.product-name')->getText();
+    }
+
+    public function getCartItemQty($name)
+    {
+        return $this->getCartItem($name)->find('.number');
+    }
+
+    public function getCartItemPrice($name)
+    {
+        return $this->getCartItem($name)->find('.price');
+    }
+
+    public function getValueItemPrice($name)
+    {
+        $price = $this->getCartItemPrice($name)->getText();
+        return substr($price, 1);
+    }
+
+    public function getCartOriginalItemPrice($name)
+    {
+        return $this->getCartItem($name)->find('.original-price');
+    }
+
+    public function getValueOriginalItemPrice($name)
+    {
+        $value = $this->getCartOriginalItemPrice($name)->getText();
+        return substr($value, 6);
     }
 }

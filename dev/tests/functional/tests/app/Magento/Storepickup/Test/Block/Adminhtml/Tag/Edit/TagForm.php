@@ -42,4 +42,9 @@ class TagForm extends FormTabs
     {
         return $this->_rootElement->find($this->tagNameField, Locator::SELECTOR_CSS)->isVisible();
     }
+
+    public function tagNameRequireErrorIsVisible()
+    {
+        return $this->_rootElement->find('#tag_tag_name-error')->isVisible();
+    }
 }

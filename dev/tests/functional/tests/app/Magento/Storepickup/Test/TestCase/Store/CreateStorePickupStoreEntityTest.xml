@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Storepickup\Test\TestCase\Store\CreateStorePickupStoreEntityTest" summary="Create store" ticketId="MAGETWO-25699">
+        <variation name="Create store pickup store entity test with all fields data">
+            <data name="storepickupStore/data/store_name" xsi:type="string">magestore_%isolation%</data>
+            <data name="storepickupStore/data/description" xsi:type="string">magestore_description_%isolation%</data>
+            <data name="storepickupStore/data/warehouse_id" xsi:type="string">Primary Warehouse(primary)</data>
+            <data name="storepickupStore/data/status" xsi:type="string">Enabled</data>
+            <data name="storepickupStore/data/link" xsi:type="string">magestore-link-%isolation%</data>
+            <data name="storepickupStore/data/sort_order" xsi:type="string">0</data>
+            <data name="storepickupStore/data/phone" xsi:type="string">555-55-555-55</data>
+            <data name="storepickupStore/data/email" xsi:type="string">magestore_%isolation%@example.com</data>
+            <data name="storepickupStore/data/fax" xsi:type="string">+44-208-1234567</data>
+            <data name="storepickupStore/data/owner_name" xsi:type="string">John Doe</data>
+            <data name="storepickupStore/data/owner_email" xsi:type="string">John.Doe%isolation%@example.com</data>
+            <data name="storepickupStore/data/owner_phone" xsi:type="string">512-691-4400</data>
+            <data name="storepickupStore/data/rewrite_request_path" xsi:type="string">magestore-url-%isolation%</data>
+            <data name="storepickupStore/data/meta_title" xsi:type="string">meta_title_%isolation%</data>
+            <data name="storepickupStore/data/meta_keywords" xsi:type="string">magestore_%isolation%</data>
+            <data name="storepickupStore/data/meta_description" xsi:type="string">magestore_description_%isolation%</data>
+            <data name="storepickupStore/data/address" xsi:type="string">magestore_address_%isolation%</data>
+            <data name="storepickupStore/data/city" xsi:type="string">magestore_city_%isolation%</data>
+            <data name="storepickupStore/data/zipcode" xsi:type="string">12345</data>
+            <data name="storepickupStore/data/country_id" xsi:type="string">Vietnam</data>
+            <data name="storepickupStore/data/state" xsi:type="string">Ha Noi</data>
+            <data name="storepickupStore/data/baseimage_id" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="file" xsi:type="string">magestore.png</item>
+                </item>
+            </data>
+            <data name="storepickupStore/data/schedule_id/dataset" xsi:type="string">default1</data>
+            <data name="storepickupStore/data/tag_ids/dataset" xsi:type="string">default1</data>
+            <data name="storepickupStore/data/holiday_ids/dataset" xsi:type="string">default1</data>
+            <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreSuccessSaveMessage"/>
+            <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreInGrid"/>
+        </variation>
+        <variation name="Create store pickup store entity test with require fields data">
+            <data name="storepickupStore/data/store_name" xsi:type="string">magestore_%isolation%</data>
+            <data name="storepickupStore/data/address" xsi:type="string">magestore_address_%isolation%</data>
+            <data name="storepickupStore/data/city" xsi:type="string">magestore_city_%isolation%</data>
+            <data name="storepickupStore/data/zipcode" xsi:type="string">12345</data>
+            <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreSuccessSaveMessage"/>
+            <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreInGrid"/>
+        </variation>
+        <variation name="Create store pickup store entity test with blank fields data">
+            <data name="storepickupStore/data/store_name" xsi:type="string"/>
+            <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreFormRequireFieldVisible"/>
+        </variation>
+    </testCase>
+</config>

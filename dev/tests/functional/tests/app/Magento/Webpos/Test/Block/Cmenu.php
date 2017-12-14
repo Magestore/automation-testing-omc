@@ -35,6 +35,11 @@ class Cmenu extends Block
         $this->_rootElement->find('#on_hold_orders')->click();
     }
 
+    public function getSessionManagement()
+    {
+        $this->_rootElement->find('#item_register_shift')->click();
+    }
+
     public function manageStocks()
     {
         $this->_rootElement->find('#manage_stock')->click();

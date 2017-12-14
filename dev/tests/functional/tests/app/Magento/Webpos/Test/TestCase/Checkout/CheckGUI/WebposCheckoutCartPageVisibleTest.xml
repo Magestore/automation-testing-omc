@@ -8,7 +8,6 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Webpos\Test\TestCase\Checkout\CheckGUI\WebposCheckoutCartPageVisibleTest" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
         <variation name="WebposCheckoutCartPageVisibleTestVariation1_CP01">
-            <data name="staff/dataset" xsi:type="string">magentoadmin</data>
             <data name="subtotal" xsi:type="number">0</data>
             <data name="tax" xsi:type="number">0</data>
             <data name="totalDefault" xsi:type="number">0</data>
