@@ -36,15 +36,15 @@ class Curl extends AbstractCurl implements RateInterface
         'website_ids'  => [
             'Main Website' => '1',
         ],
-        'customer_group'  => [
-            'All groups' => 'all',
+        'customer_group_ids'  => [
+            'NOT LOGGED IN' => '0',
             'General'    => '1',
             'Wholesale'  => '2',
             'Retailer'   => '3'
         ],
         'status'  => [
-            'Enabled'       => '1',
-            'Disabled'      => '2'
+            'Active'       => '1',
+            'Inactive'      => '2'
         ]
     ];
 

@@ -16,5 +16,5 @@ use Magento\Mtf\Handler\HandlerInterface;
  */
 interface RateInterface extends HandlerInterface
 {
-
+    //
 }
