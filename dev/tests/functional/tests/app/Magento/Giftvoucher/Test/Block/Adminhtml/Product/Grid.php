@@ -95,4 +95,13 @@ class Grid extends DataGrid
     {
         return $this->_rootElement;//->getAttribute('class');
     }
+
+    public function resetFilter()
+    {
+        $clear = $this->_rootElement->find('[data-action="grid-filter-reset"]');
+        if ($clear->isVisible()) {
+            $clear->click();
+        }
+        parent::resetFilter();
+    }
 }
