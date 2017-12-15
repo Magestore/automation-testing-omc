@@ -6,7 +6,7 @@
  * Time: 10:45
  */
 
-namespace Magento\BarcodeSuccess\Test\Block\Adminhtml\BarcodeListing;
+namespace Magento\BarcodeSuccess\Test\Block\Adminhtml\BarcodeListing\Import;
 
 
 use Magento\Backend\Test\Block\GridPageActions;

@@ -16,4 +16,9 @@
             </reason>
         </fields>
     </os_barcode_generate_form_general>
+    <os_generate_barcode>
+        <class>\Magento\BarcodeSuccess\Test\Block\Adminhtml\BarcodeListing\Generate\Form\Section\ProductsToGenerate</class>
+        <selector>[data-index="os_generate_barcode"]</selector>
+        <strategy>css selector</strategy>
+    </os_generate_barcode>
 </sections>
