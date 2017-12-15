@@ -96,6 +96,9 @@ class GroupGrid extends DataGrid
         $item = $selectmenu->find('.//button[@class="selectmenu-item-action" and text()="' . $pageSize . '"]', Locator::SELECTOR_XPATH);
         if ($item->isVisible()) {
             $item->click();
+            if ($this->_rootElement->find('.selectmenu-items._active')->isVisible()) {
+                $selectmenu->find('.selectmenu-toggle._active')->click();
+            }
         }
 
         $this->waitLoader();
@@ -130,5 +133,14 @@ class GroupGrid extends DataGrid
         $selector .= '//div';
 
         return $this->_rootElement->find($selector, Locator::SELECTOR_XPATH)->getText();
+    }
+
+    public function resetFilter()
+    {
+        $clear = $this->_rootElement->find('[data-action="grid-filter-reset"]');
+        if ($clear->isVisible()) {
+            $clear->click();
+        }
+        parent::resetFilter();
     }
 }
