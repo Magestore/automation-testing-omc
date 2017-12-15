@@ -7,7 +7,7 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Webpos\Test\TestCase\CheckVisibleForm\AddNewStaffTest" summary="Check Is Visible Add New Locations - Warehouses Test" ticketId="MAGETWO-34874">
-        <variation name="AddNewStaffTestVariation1">
+        <variation name="AddNewStaff-Staff-AddNew-Test1">
             <data name="pageTitle" xsi:type="string">New Staff</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
         </variation>
