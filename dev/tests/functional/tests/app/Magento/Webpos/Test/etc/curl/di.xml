@@ -7,6 +7,9 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference
+            for="Magento\Webpos\Test\Handler\Denomination\DenominationInterface"
+            type="Magento\Webpos\Test\Handler\Denomination\Curl" />
+    <preference
         for="Magento\Webpos\Test\Handler\Location\LocationInterface"
         type="Magento\Webpos\Test\Handler\Location\Curl" />
     <preference

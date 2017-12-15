@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Denomination\CreateDenominationEntityTest" summary="Create Denomination" ticketId="MAGETWO-1234">
+        <variation name="CreateDenominationEntityTest-Denomination-Create-Test1" summary="Create Denomination Entity Test Variation">
+            <data name="denomination/dataset" xsi:type="string">default</data>
+            <data name="titleAddDenomination" xsi:type="string">New Denomination</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Denomination\AssertDenominationInGrid" />
+        </variation>
+        <variation name="CreateDenominationEntityTest-Denomination-Create-Test2" summary="Create Denomination Entity Test Variation">
+            <data name="denomination/dataset" xsi:type="string">default_null</data>
+            <data name="denomination/data/denomination_name" xsi:type="string" />
+            <data name="denomination/data/denomination_value" xsi:type="string" />
+            <data name="denomination/data/sort_order" xsi:type="string" />
+            <data name="titleAddDenomination" xsi:type="string">New Denomination</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Denomination\AssertDenominationNewVisibleForm" />
+        </variation>
+    </testCase>
+</config>

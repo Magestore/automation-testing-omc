@@ -71,23 +71,23 @@ class CheckoutEditAddress extends Block
 
 	public function clickCountrySelect()
 	{
-		$this->_rootElement->find('#country_id')->click();
+		$this->_rootElement->find('select[name="country_id"]')->click();
 		sleep(1);
 	}
 
 	public function getCountryItem($name)
 	{
-		return $this->_rootElement->find('//*[@id="country_id"]/option[text()="' . $name . '"]', Locator::SELECTOR_XPATH);
+		return $this->_rootElement->find('//select[@name="country_id"]/option[text()="' . $name . '"]', Locator::SELECTOR_XPATH);
 	}
 
 	public function clickRegionSelect()
 	{
-		$this->_rootElement->find('#region_id')->click();
+		$this->_rootElement->find('select[name="region_id"]')->click();
 		sleep(1);
 	}
 
 	public function getRegionItem($name)
 	{
-		return $this->_rootElement->find('//*[@id="region_id"]/option[text()="' . $name . '"]', Locator::SELECTOR_XPATH);
+		return $this->_rootElement->find('//select[@name="region_id"]/option[text()="' . $name . '"]', Locator::SELECTOR_XPATH);
 	}
 }

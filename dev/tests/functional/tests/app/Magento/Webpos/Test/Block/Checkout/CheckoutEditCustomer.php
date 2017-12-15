@@ -26,17 +26,17 @@ class CheckoutEditCustomer extends Block
 
 	public function getFirstNameInput()
 	{
-		return $this->_rootElement->find('#first_name_input');
+		return $this->_rootElement->find('input[name="first-name"]');
 	}
 
 	public function getLastNameInput()
 	{
-		return $this->_rootElement->find('#last_name_input');
+		return $this->_rootElement->find('input[name="last-name"]');
 	}
 
 	public function getEmailInput()
 	{
-		return $this->_rootElement->find('#customer_email_input');
+		return $this->_rootElement->find('input[name="email"]');
 	}
 
 	public function getEditShippingAddressIcon()
