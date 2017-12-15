@@ -11,8 +11,8 @@
             <data name="columnsForSorting" xsi:type="array">
                 <item name="id" xsi:type="string">ID</item>
                 <item name="created_at" xsi:type="string">Created at</item>
-                <item name="action" xsi:type="string">Action</item>
-                <item name="amount" xsi:type="string">Value</item>
+                <!--<item name="action" xsi:type="string">Action</item>-->
+                <!--<item name="amount" xsi:type="string">Value</item>-->
                 <!-- <item name="order_increment_id" xsi:type="string">Order</item>
                 <item name="status" xsi:type="string">Status</item>
                 <item name="extra_content" xsi:type="string">Action Created by</item>

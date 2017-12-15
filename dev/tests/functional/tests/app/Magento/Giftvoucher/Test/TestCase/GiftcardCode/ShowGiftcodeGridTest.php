@@ -39,21 +39,18 @@ class ShowGiftcodeGridTest extends Injectable
 		$this->giftcodeIndex = $giftcodeIndex;
 	}
 
-    public function test(Giftcode $giftcode) {
+    public function test($pageSizes) {
         // MGC001
         $this->giftcodeIndex->open();
         
         // MGC033
         $result = [];
-        
         $grid = $this->giftcodeIndex->getGiftcodeGroupGrid();
         $grid->resetFilter();
-        $grid->changePerPage(20);
-        $result[20] = $grid->getCountRows();
-        
-        $grid->changePerPage(30);
-        $result[30] = $grid->getCountRows();
-        
+        foreach ($pageSizes as $pageSize) {
+            $grid->changePerPage($pageSize);
+            $result[$pageSize] = $grid->getCountRows();
+        }
         return ['result' => $result];
     }
 }
