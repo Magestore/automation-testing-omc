@@ -71,7 +71,7 @@ class CheckoutAddShippingAddress extends Block
 
 	public function clickCountrySelect()
 	{
-		$this->_rootElement->find('#country_id')->click();
+		$this->_rootElement->find('select[name="country_id"]')->click();
 		sleep(1);
 	}
 
@@ -82,7 +82,7 @@ class CheckoutAddShippingAddress extends Block
 
 	public function clickRegionSelect()
 	{
-		$this->_rootElement->find('#region_id')->click();
+		$this->_rootElement->find('select[name="region_id"]')->click();
 		sleep(1);
 	}
 

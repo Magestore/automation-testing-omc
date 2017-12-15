@@ -96,7 +96,6 @@ class WebposCartPageCustomerCheckoutByExistingCustomerTest extends Injectable
 			'Checkout - Cart Page - Change customer popup is not shown'
 		);
 		$this->webposIndex->getCheckoutChangeCustomer()->search($customer->getEmail());
-		sleep(1);
 		$this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
 		sleep(1);
 
