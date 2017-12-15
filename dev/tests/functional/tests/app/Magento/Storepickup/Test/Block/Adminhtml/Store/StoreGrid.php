@@ -16,5 +16,30 @@ use Magento\Storepickup\Test\Block\Adminhtml\StorepickupGrid;
  */
 class StoreGrid extends StorepickupGrid
 {
-
+    protected $filters = [
+        'id' => [
+            'selector' => '[name="storepickup_id[]"]',
+        ],
+        'name' => [
+            'selector' => '[name="store_name"]'
+        ],
+        'address' => [
+            'selector' => '[name="address"]'
+        ],
+        'city' => [
+            'selector' => '[name="city"]'
+        ],
+        'state' => [
+            'selector' => '[name="state"]'
+        ],
+        'country' => [
+            'selector' => '[name="country_id"]'
+        ],
+        'zipcode' => [
+            'selector' => '[name="zipcode"]'
+        ],
+        'status' => [
+            'selector' => '[name="status"]'
+        ]
+    ];
 }

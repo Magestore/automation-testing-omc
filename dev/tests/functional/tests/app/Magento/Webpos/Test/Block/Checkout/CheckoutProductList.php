@@ -11,7 +11,7 @@ namespace Magento\Webpos\Test\Block\Checkout;
 use Magento\Mtf\Block\Block;
 /**
  * Class CheckoutProductList
- * @package Magento\Webpos\Test\Block\Checkout
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Block\Checkout
  */
 class CheckoutProductList extends Block
 {
@@ -39,6 +39,11 @@ class CheckoutProductList extends Block
     public function getProductList()
     {
         return $this->_rootElement->find('#block-product-list');
+    }
+
+    public function waitProductList()
+    {
+        $this->waitForElementVisible('#block-product-list');
     }
 
     public function getCustomSaleButton()

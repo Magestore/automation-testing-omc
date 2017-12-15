@@ -135,6 +135,7 @@
         <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
         <selector>[data-index='giftvoucher_fieldset']</selector>
         <strategy>css selector</strategy>
+        <wrapper>product</wrapper>
         <fields>
             <gift_type>
                 <input>select</input>

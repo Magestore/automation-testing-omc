@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<tabs>
+    <earning_rate_information>
+        <class>\Magento\Backend\Test\Block\Widget\Tab</class>
+        <selector>#tab_rewardpoints_earningrates</selector>
+        <strategy>css selector</strategy>
+        <fields>
+            <money>
+                <selector>[name='rewardpoints_earningrates[money]']</selector>
+            </money>
+            <points>
+                <selector>[name='rewardpoints_earningrates[points]']</selector>
+            </points>
+            <status>
+                <selector>[name='rewardpoints_earningrates[status]']</selector>
+                <input>select</input>
+            </status>
+            <website_ids>
+                <selector>[name='rewardpoints_earningrates[website_ids]']</selector>
+                <input>multiselect</input>
+            </website_ids>
+            <customer_group_ids>
+                <selector>[name='rewardpoints_earningrates[customer_group_ids]']</selector>
+                <input>multiselect</input>
+            </customer_group_ids>
+            <sort_order>
+                <selector>[name='rewardpoints_earningrates[sort_order]']</selector>
+            </sort_order>
+        </fields>
+    </earning_rate_information>
+</tabs>
+

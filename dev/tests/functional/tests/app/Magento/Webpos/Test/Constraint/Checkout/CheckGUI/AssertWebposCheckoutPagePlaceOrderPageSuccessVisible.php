@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
- * @package Magento\Webpos\Test\Constraint\Checkout\CheckGUI
+ * @package Magento\WebposCheckGUICustomerPriceCP54EntityTest\Test\Constraint\Checkout\CheckGUI
  */
 class AssertWebposCheckoutPagePlaceOrderPageSuccessVisible extends AbstractConstraint
 {

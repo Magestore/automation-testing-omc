@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Storepickup\Test\Handler\StorepickupStore\StorepickupStoreInterface" type="Magento\Storepickup\Test\Handler\StorepickupStore\Curl" />
+    <preference for="Magento\Storepickup\Test\Handler\StorepickupTag\StorepickupTagInterface" type="Magento\Storepickup\Test\Handler\StorepickupTag\Curl" />
+    <preference for="Magento\Storepickup\Test\Handler\StorepickupSchedule\StorepickupScheduleInterface" type="Magento\Storepickup\Test\Handler\StorepickupSchedule\Curl" />
+    <preference for="Magento\Storepickup\Test\Handler\StorepickupHoliday\StorepickupHolidayInterface" type="Magento\Storepickup\Test\Handler\StorepickupHoliday\Curl" />
+</config>

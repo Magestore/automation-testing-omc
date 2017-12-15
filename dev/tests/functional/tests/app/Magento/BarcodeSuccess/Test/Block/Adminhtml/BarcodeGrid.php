@@ -1,7 +1,5 @@
 <?php
 namespace Magento\BarcodeSuccess\Test\Block\Adminhtml;
-
-use Magento\Backend\Test\Block\Widget\Grid;
 use Magento\Mtf\Client\Locator;
 use Magento\Ui\Test\Block\Adminhtml\DataGrid;
 
@@ -17,6 +15,10 @@ class BarcodeGrid extends DataGrid
      */
     protected $loadingMask = '.admin__data-grid-loading-mask';
 
+    /**
+     * @var string
+     */
+    protected $loadingMaskForm = '.admin__form-loading-mask';
     /**
      * @var string
      */
@@ -50,10 +52,16 @@ class BarcodeGrid extends DataGrid
         $this->waitForElementNotVisible($this->loadingMask, Locator::SELECTOR_CSS);
         $this->waitForElementVisible($this->gridTable, Locator::SELECTOR_CSS);
     }
+
     public function waitingForLoadingMaskNotVisible()
     {
 //        $this->waitLoader();
         $this->waitForElementNotVisible($this->loadingMask, Locator::SELECTOR_CSS);
+    }
+    public function waitingForLoadingMaskFormNotVisible()
+    {
+//        $this->waitLoader();
+        $this->waitForElementNotVisible($this->loadingMaskForm, Locator::SELECTOR_CSS);
     }
 
     /**
@@ -103,4 +111,6 @@ class BarcodeGrid extends DataGrid
     {
         return $this->_rootElement->find($this->dataGridPager, Locator::SELECTOR_CSS)->isVisible();
     }
+
+
 }

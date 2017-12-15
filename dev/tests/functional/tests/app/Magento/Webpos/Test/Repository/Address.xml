@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\Customer\Test\Repository\Address">
+        <dataset name="default_webpos_guest_address">
+            <field name="firstname" xsi:type="string">Guest</field>
+            <field name="lastname" xsi:type="string">POS</field>
+            <field name="email" xsi:type="string">guest@example.com</field>
+            <field name="street" xsi:type="string">Street</field>
+            <field name="city" xsi:type="string">Guest City</field>
+            <field name="region_id" xsi:type="string">California</field>
+            <field name="postcode" xsi:type="string">90034</field>
+            <field name="country_id" xsi:type="string">US</field>
+            <field name="telephone" xsi:type="string">12345678</field>
+        </dataset>
+
+        <dataset name="default_webpos_guest_address_edit">
+            <field name="firstname" xsi:type="string">Guest2</field>
+            <field name="lastname" xsi:type="string">POS2</field>
+            <field name="email" xsi:type="string">guest@example.com</field>
+            <field name="street" xsi:type="string">Street2</field>
+            <field name="city" xsi:type="string">Guest City2</field>
+            <field name="region_id" xsi:type="string">California</field>
+            <field name="postcode" xsi:type="string">90034</field>
+            <field name="country_id" xsi:type="string">US</field>
+            <field name="telephone" xsi:type="string">0192104914</field>
+        </dataset>
+
+        <dataset name="US_address_edit">
+            <field name="firstname" xsi:type="string">John</field>
+            <field name="lastname" xsi:type="string">Doe</field>
+            <field name="company" xsi:type="string">Magento %isolation%</field>
+            <field name="street" xsi:type="string">6161 West Centinela Avenue Edited</field>
+            <field name="city" xsi:type="string">Culver City Edited</field>
+            <field name="region_id" xsi:type="string">California</field>
+            <field name="postcode" xsi:type="string">90230</field>
+            <field name="country_id" xsi:type="string">United States</field>
+            <field name="telephone" xsi:type="string">11641418756</field>
+            <field name="default_billing" xsi:type="string">Yes</field>
+            <field name="default_shipping" xsi:type="string">Yes</field>
+        </dataset>
+    </repository>
+</config>

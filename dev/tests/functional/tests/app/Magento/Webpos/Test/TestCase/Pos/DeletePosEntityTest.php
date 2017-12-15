@@ -18,11 +18,11 @@ use Magento\Mtf\TestCase\Injectable;
 
 /**
  * Preconditions:
- * 1. Create Webpos Pos.
+ * 1. Create AssertWebposCheckGUICustomerPriceCP54 Pos.
  *
  * Steps:
  * 1. Login to backend.
- * 2. Open Sales -> Webpos -> Manage Pos.
+ * 2. Open Sales -> AssertWebposCheckGUICustomerPriceCP54 -> Manage Pos.
  * 3. Open Pos from preconditions.
  * 4. Delete.
  * 5. Perform all asserts.
