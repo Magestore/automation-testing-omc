@@ -3,8 +3,7 @@
     <testCase name="Magento\Rewardpoints\Test\TestCase\Transactions\CreateTransactionsEntityTest"  summary="Create Transactions" ticketId="MAGETWO-1234">
         <variation name="Create Transactions width full fields">
             <data name="button" xsi:type="string">add</data>
-            <!--<data name="customer/dataset" xsi:type="string">default</data>-->
-            <data name="rate/dataset" xsi:type="string">earningrates_full_field</data>
+            <!--<data name="rate/dataset" xsi:type="string">earningrates_full_field</data>-->
 
             <!--<data name="rate/dataset" xsi:type="string">Transactions_full_field</data>-->
             <!--<constraint name="Magento\Rewardpoints\Test\Constraint\Transactions\AssertTransactionsSuccessSaveMessage" />-->

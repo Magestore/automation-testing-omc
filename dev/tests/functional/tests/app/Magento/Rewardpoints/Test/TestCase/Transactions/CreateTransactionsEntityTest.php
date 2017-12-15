@@ -13,6 +13,7 @@ use Magento\Rewardpoints\Test\Page\Adminhtml\TransactionIndex;
 use Magento\Rewardpoints\Test\Page\Adminhtml\TransactionNew;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Rewardpoints\Test\Fixture\Rate;
+use Magento\Rewardpoints\Test\Fixture\Transaction;
 
 
 class CreateTransactionsEntityTest extends Injectable
@@ -32,15 +33,14 @@ class CreateTransactionsEntityTest extends Injectable
     }
 
 
-    public function test($button, Customer $customer, Rate $rate)
+    public function test($button, Customer $customer)
     {
-        $rate->persist();
-//        $customer->persist();
+//        $rate->persist();
+        $customer->persist();
 
-//        $this->transactionIndex->open();
-//        $this->transactionIndex->getTransactionGridPageActions()->clickActionButton($button);
-//        $this->transactionNew->getSpendingRatesForm()->fill($rate);
-//        $this->transactionNew->getSpendingRatesFormPageActions()->save();
-//        return ['rate' => $rate];
+        $this->transactionIndex->open();
+        $this->transactionIndex->getTransactionGridPageActions()->clickActionButton($button);
+        $this->transactionNew->getTransactionForm()->selectedCustomer($customer);
+//        $this->transactionNew->getTransactionFormPageActions()->save();
     }
 }
