@@ -2,6 +2,10 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Giftvoucher\Test\TestCase\GiftcardCode\ShowGiftcodeGridTest" summary="Show Gift Code Grid" ticketId="MGC001">
         <variation name="ShowGiftcodeGridTestVariation1" summary="Show Gift Code Grid">
+            <data name="pageSizes" xsi:type="array">
+                <item name="0" xsi:type="string">20</item>
+                <item name="1" xsi:type="string">30</item>
+            </data>
             <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeGridColums" />
         </variation>
     </testCase>

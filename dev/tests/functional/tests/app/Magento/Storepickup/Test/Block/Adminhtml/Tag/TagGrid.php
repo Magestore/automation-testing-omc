@@ -16,5 +16,15 @@ use Magento\Storepickup\Test\Block\Adminhtml\StorepickupGrid;
  */
 class TagGrid extends StorepickupGrid
 {
-
+    protected $filters = [
+        'id' => [
+            'selector' => '[name="tag_id[]"]',
+        ],
+        'name' => [
+            'selector' => '[name="tag_name"]',
+        ],
+        'description' => [
+            'selector' => '[name="tag_description"]',
+        ],
+    ];
 }

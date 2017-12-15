@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\Storepickup\Test\Repository\StorepickupHoliday">
+        <dataset name="default">
+            <field name="holiday_name" xsi:type="string">magestore_holiday %isolation%</field>
+            <field name="date_from" xsi:type="string">12/15/2017</field>
+            <field name="date_to" xsi:type="string">12/20/2017</field>
+            <field name="holiday_comment" xsi:type="string">magestore_holiday_comment %isolation%</field>
+            <field name="storepickup_stores" xsi:type="array">
+                <item name="dataset" xsi:type="string">default, default</item>
+            </field>
+        </dataset>
+        <dataset name="default1">
+            <field name="holiday_name" xsi:type="string">magestore_holiday %isolation%</field>
+            <field name="date_from" xsi:type="string">12/15/2017</field>
+            <field name="date_to" xsi:type="string">12/20/2017</field>
+            <field name="holiday_comment" xsi:type="string">magestore_holiday_comment %isolation%</field>
+        </dataset>
+    </repository>
+</config>

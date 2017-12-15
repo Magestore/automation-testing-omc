@@ -1,0 +1,373 @@
+<?xml version="1.0" ?>
+<sections>
+            <general-information>
+                <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+                <selector>#schedule_tabs_general_section_content</selector>
+                <strategy>css selector</strategy>
+                <fields>
+                    <schedule_name>
+                        <selector>[name="schedule_name"]</selector>
+                        <strategy>css selector</strategy>
+                    </schedule_name>
+                </fields>
+            </general-information>
+            <monday>
+                <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+                <selector>[id="schedule_monday_fieldset-wrapper"]</selector>
+                <strategy>css selector</strategy>
+                <fields>
+                    <monday_status>
+                        <input>select</input>
+                    </monday_status>
+                    <monday_open_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_monday_open_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </monday_open_hour>
+                    <monday_open_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_monday_open_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </monday_open_minute>
+                    <monday_open_break_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_monday_open_break_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </monday_open_break_hour>
+                    <monday_open_break_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_monday_open_break_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </monday_open_break_minute>
+                    <monday_close_break_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_monday_close_break_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </monday_close_break_hour>
+                    <monday_close_break_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_monday_close_break_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </monday_close_break_minute>
+                    <monday_close_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_monday_close_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </monday_close_hour>
+                    <monday_close_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_monday_close_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </monday_close_minute>
+                </fields>
+            </monday>
+
+            <tuesday>
+                <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+                <selector>[id="schedule_tuesday_fieldset-wrapper"]</selector>
+                <strategy>css selector</strategy>
+                <fields>
+                    <tuesday_status>
+                        <input>select</input>
+                    </tuesday_status>
+                    <tuesday_open_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_tuesday_open_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </tuesday_open_hour>
+                    <tuesday_open_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_tuesday_open_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </tuesday_open_minute>
+                    <tuesday_open_break_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_tuesday_open_break_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </tuesday_open_break_hour>
+                    <tuesday_open_break_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_tuesday_open_break_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </tuesday_open_break_minute>
+                    <tuesday_close_break_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_tuesday_close_break_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </tuesday_close_break_hour>
+                    <tuesday_close_break_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_tuesday_close_break_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </tuesday_close_break_minute>
+                    <tuesday_close_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_tuesday_close_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </tuesday_close_hour>
+                    <tuesday_close_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_tuesday_close_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </tuesday_close_minute>
+                </fields>
+            </tuesday>
+            <wednesday>
+                <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+                <selector>[id="schedule_wednesday_fieldset-wrapper"]</selector>
+                <strategy>css selector</strategy>
+                <fields>
+                    <wednesday_status>
+                        <input>select</input>
+                    </wednesday_status>
+                    <wednesday_open_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_wednesday_open_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </wednesday_open_hour>
+                    <wednesday_open_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_wednesday_open_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </wednesday_open_minute>
+                    <wednesday_open_break_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_wednesday_open_break_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </wednesday_open_break_hour>
+                    <wednesday_open_break_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_wednesday_open_break_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </wednesday_open_break_minute>
+                    <wednesday_close_break_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_wednesday_close_break_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </wednesday_close_break_hour>
+                    <wednesday_close_break_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_wednesday_close_break_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </wednesday_close_break_minute>
+                    <wednesday_close_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_wednesday_close_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </wednesday_close_hour>
+                    <wednesday_close_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_wednesday_close_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </wednesday_close_minute>
+                </fields>
+            </wednesday>
+            <thursday>
+                <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+                <selector>[id="schedule_thursday_fieldset-wrapper"]</selector>
+                <strategy>css selector</strategy>
+                <fields>
+                    <thursday_status>
+                        <input>select</input>
+                    </thursday_status>
+                    <thursday_open_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_thursday_open_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </thursday_open_hour>
+                    <thursday_open_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_thursday_open_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </thursday_open_minute>
+                    <thursday_open_break_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_thursday_open_break_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </thursday_open_break_hour>
+                    <thursday_open_break_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_thursday_open_break_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </thursday_open_break_minute>
+                    <thursday_close_break_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_thursday_close_break_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </thursday_close_break_hour>
+                    <thursday_close_break_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_thursday_close_break_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </thursday_close_break_minute>
+                    <thursday_close_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_thursday_close_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </thursday_close_hour>
+                    <thursday_close_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_thursday_close_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </thursday_close_minute>
+                </fields>
+            </thursday>
+            <friday>
+                <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+                <selector>[id="schedule_friday_fieldset-wrapper"]</selector>
+                <strategy>css selector</strategy>
+                <fields>
+                    <friday_status>
+                        <input>select</input>
+                    </friday_status>
+                    <friday_open_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_friday_open_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </friday_open_hour>
+                    <friday_open_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_friday_open_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </friday_open_minute>
+                    <friday_open_break_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_friday_open_break_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </friday_open_break_hour>
+                    <friday_open_break_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_friday_open_break_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </friday_open_break_minute>
+                    <friday_close_break_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_friday_close_break_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </friday_close_break_hour>
+                    <friday_close_break_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_friday_close_break_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </friday_close_break_minute>
+                    <friday_close_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_friday_close_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </friday_close_hour>
+                    <friday_close_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_friday_close_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </friday_close_minute>
+                </fields>
+            </friday>
+            <saturday>
+                <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+                <selector>[id="schedule_saturday_fieldset-wrapper"]</selector>
+                <strategy>css selector</strategy>
+                <fields>
+                    <saturday_status>
+                        <input>select</input>
+                    </saturday_status>
+                    <saturday_open_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_saturday_open_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </saturday_open_hour>
+                    <saturday_open_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_saturday_open_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </saturday_open_minute>
+                    <saturday_open_break_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_saturday_open_break_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </saturday_open_break_hour>
+                    <saturday_open_break_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_saturday_open_break_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </saturday_open_break_minute>
+                    <saturday_close_break_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_saturday_close_break_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </saturday_close_break_hour>
+                    <saturday_close_break_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_saturday_close_break_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </saturday_close_break_minute>
+                    <saturday_close_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_saturday_close_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </saturday_close_hour>
+                    <saturday_close_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_saturday_close_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </saturday_close_minute>
+                </fields>
+            </saturday>
+            <sunday>
+                <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+                <selector>[id="schedule_sunday_fieldset-wrapper"]</selector>
+                <strategy>css selector</strategy>
+                <fields>
+                    <sunday_status>
+                        <input>select</input>
+                    </sunday_status>
+                    <sunday_open_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_sunday_open_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </sunday_open_hour>
+                    <sunday_open_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_sunday_open_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </sunday_open_minute>
+                    <sunday_open_break_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_sunday_open_break_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </sunday_open_break_hour>
+                    <sunday_open_break_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_sunday_open_break_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </sunday_open_break_minute>
+                    <sunday_close_break_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_sunday_close_break_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </sunday_close_break_hour>
+                    <sunday_close_break_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_sunday_close_break_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </sunday_close_break_minute>
+                    <sunday_close_hour>
+                        <input>select</input>
+                        <selector>[id="schedule_sunday_close_hour"]</selector>
+                        <strategy>css selector</strategy>
+                    </sunday_close_hour>
+                    <sunday_close_minute>
+                        <input>select</input>
+                        <selector>[id="schedule_sunday_close_minute"]</selector>
+                        <strategy>css selector</strategy>
+                    </sunday_close_minute>
+                </fields>
+            </sunday>
+        <stores>
+            <class>\Magento\Storepickup\Test\Block\Adminhtml\Tag\Tab\Stores</class>
+            <selector>#schedule_tabs_stores_section</selector>
+            <strategy>css selector</strategy>
+        </stores>
+</sections>
+
+
+

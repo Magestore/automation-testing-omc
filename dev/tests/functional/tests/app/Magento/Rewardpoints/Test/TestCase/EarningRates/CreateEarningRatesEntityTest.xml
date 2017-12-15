@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Rewardpoints\Test\TestCase\EarningRates\CreateEarningRatesEntityTest" summary="Create Earning Rates" ticketId="MAGETWO-1234">
+        <variation name="Create Earning Rates width full fields">
+            <data name="button" xsi:type="string">add</data>
+            <data name="rate/dataset" xsi:type="string">earningrates_full_field</data>
+
+            <!--<data name="rate/data/money" xsi:type="string">100</data>-->
+            <!--<data name="rate/data/points" xsi:type="string">10</data>-->
+            <!--<data name="rate/data/status" xsi:type="string">Active</data>-->
+            <!--<data name="rate/data/website_ids/0" xsi:type="string">Main Website</data>-->
+            <!--<data name="rate/data/customer_group_ids/0" xsi:type="string">NOT LOGGED IN</data>-->
+            <!--<data name="rate/data/customer_group_ids/1" xsi:type="string">General</data>-->
+            <constraint name="Magento\Rewardpoints\Test\Constraint\EarningRates\AssertEarningRatesSuccessSaveMessage" />
+            <constraint name="Magento\Rewardpoints\Test\Constraint\EarningRates\AssertEarningRatesInGrid" />
+        </variation>
+        <variation name="Create Earning Rates width full require fields">
+            <data name="button" xsi:type="string">add</data>
+            <data name="rate/dataset" xsi:type="string">earningrates_full_required_field</data>
+            <constraint name="Magento\Rewardpoints\Test\Constraint\EarningRates\AssertEarningRatesSuccessSaveMessage" />
+            <constraint name="Magento\Rewardpoints\Test\Constraint\EarningRates\AssertEarningRatesInGrid" />
+        </variation>
+        <variation name="Create Earning Rates width empty fields">
+            <data name="button" xsi:type="string">add</data>
+            <data name="rate/dataset" xsi:type="string">empty_field</data>
+            <constraint name="Magento\Rewardpoints\Test\Constraint\EarningRates\AssertEarningRatesRequiredForm" />
+        </variation>
+    </testCase>
+</config>

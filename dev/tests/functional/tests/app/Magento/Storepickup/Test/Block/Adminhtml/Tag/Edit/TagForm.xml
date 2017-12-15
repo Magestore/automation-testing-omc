@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<tabs>
+    <general-information>
+        <class>\Magento\Backend\Test\Block\Widget\Tab</class>
+        <selector>#tag_tabs_general_section</selector>
+        <strategy>css selector</strategy>
+        <fields>
+            <tag_name />
+            <tag_description />
+            <tag_icon>
+                <selector>[name="tag_icon"]</selector>
+                <strategy>css selector</strategy>
+                <input>upload</input>
+            </tag_icon>
+        </fields>
+    </general-information>
+    <stores>
+        <class>\Magento\Storepickup\Test\Block\Adminhtml\Tag\Tab\Stores</class>
+        <selector>#tag_tabs_stores_section</selector>
+        <strategy>css selector</strategy>
+    </stores>
+</tabs>

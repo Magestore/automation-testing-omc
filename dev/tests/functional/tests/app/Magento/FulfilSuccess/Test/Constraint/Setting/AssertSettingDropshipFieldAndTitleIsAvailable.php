@@ -8,7 +8,7 @@
 
 namespace Magento\FulfilSuccess\Test\Constraint\Setting;
 
-use Magento\FulfilSuccess\Test\Page\Adminhtml\ReportIndex;
+use Magento\FulfilReport\Test\Page\Adminhtml\ReportIndex;
 use Magento\Mtf\Constraint\AbstractConstraint;
 /**
  * Class AssertSettingDropshipFieldAndTitleIsAvailable
@@ -24,11 +24,11 @@ class AssertSettingDropshipFieldAndTitleIsAvailable extends AbstractConstraint
         \PHPUnit_Framework_Assert::assertEquals(
             $titleDropshipSection,
             $reportIndex->getContainer()->getTitleDropshipSection()->getText(),
-            'Title Dropship Setting Section Is not visible.'
+            'Title Order Section on the DROP SHIP CONFIGURATION fulfilment was not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $reportIndex->getContainer()->getFirstFieldDropship()->isVisible(),
-            'On The Backend Page, the Field Section Verify Dropship Setting Of the Extension was not visible.'
+            'On The Backend Page, the Field Section DROP SHIP CONFIGURATION Of the Extension was not visible.'
         );
     }
 
@@ -37,6 +37,6 @@ class AssertSettingDropshipFieldAndTitleIsAvailable extends AbstractConstraint
      */
     public function toString()
     {
-        return 'On The Backend Page, all the elements Button in the Grid Header Page Of the Extension Fulfilment was visible successfully.';
+        return 'On The Backend Page, all the elements include: fields and titles in the DROPSHIP configuration Of the Fulfilment Extension Fulfilment was visible successfully.';
     }
 }
