@@ -3,22 +3,22 @@
     <testCase name="Magento\Rewardpoints\Test\TestCase\Transactions\CreateTransactionsEntityTest"  summary="Create Transactions" ticketId="MAGETWO-1234">
         <variation name="Create Transactions width full fields">
             <data name="button" xsi:type="string">add</data>
-            <!--<data name="rate/dataset" xsi:type="string">earningrates_full_field</data>-->
-
-            <!--<data name="rate/dataset" xsi:type="string">Transactions_full_field</data>-->
-            <!--<constraint name="Magento\Rewardpoints\Test\Constraint\Transactions\AssertTransactionsSuccessSaveMessage" />-->
-            <!--<constraint name="Magento\Rewardpoints\Test\Constraint\Transactions\AssertTransactionsInGrid" />-->
+            <data name="transaction/data/point_amount" xsi:type="string">%isolation%</data>
+            <data name="transaction/data/title" xsi:type="string">abc%isolation%</data>
+            <data name="transaction/data/expiration_day" xsi:type="string">365</data>
+            <constraint name="Magento\Rewardpoints\Test\Constraint\Transaction\AssertTransactionSuccessSaveMessage" />
+            <constraint name="Magento\Rewardpoints\Test\Constraint\Transaction\AssertTransactionInGrid" />
         </variation>
-        <!--<variation name="Create Transactions width full require fields">-->
-            <!--<data name="button" xsi:type="string">add</data>-->
-            <!--<data name="rate/dataset" xsi:type="string">Transactions_full_required_field</data>-->
-            <!--<constraint name="Magento\Rewardpoints\Test\Constraint\Transactions\AssertTransactionsSuccessSaveMessage" />-->
-            <!--<constraint name="Magento\Rewardpoints\Test\Constraint\Transactions\AssertTransactionsInGrid" />-->
-        <!--</variation>-->
-        <!--<variation name="Create Transactions width empty fields">-->
-            <!--<data name="button" xsi:type="string">add</data>-->
-            <!--<data name="rate/dataset" xsi:type="string">empty_field</data>-->
-            <!--<constraint name="Magento\Rewardpoints\Test\Constraint\EarningRates\AssertEarningRatesRequiredForm" />-->
-        <!--</variation>-->
+        <variation name="Create Transactions width full require fields">
+            <data name="button" xsi:type="string">add</data>
+            <data name="transaction/data/point_amount" xsi:type="string">%isolation%</data>
+            <constraint name="Magento\Rewardpoints\Test\Constraint\Transaction\AssertTransactionSuccessSaveMessage" />
+            <constraint name="Magento\Rewardpoints\Test\Constraint\Transaction\AssertTransactionInGrid" />
+        </variation>
+        <variation name="Create Transactions width empty fields">
+            <data name="button" xsi:type="string">add</data>
+            <data name="transaction/data/point_amount" xsi:type="string"></data>
+            <constraint name="Magento\Rewardpoints\Test\Constraint\Transaction\AssertTransactionRequiredForm" />
+        </variation>
     </testCase>
 </config>
