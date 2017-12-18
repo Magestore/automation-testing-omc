@@ -9,14 +9,8 @@
 namespace Magento\Storepickup\Test\TestCase;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Storepickup\Test\Fixture\StorepickupHoliday;
-use Magento\Storepickup\Test\Fixture\StorepickupSchedule;
-use Magento\Storepickup\Test\Fixture\StorepickupStore;
-use Magento\Storepickup\Test\Fixture\StorepickupTag;
 use Magento\Storepickup\Test\Page\Adminhtml\TagIndex;
-use Magento\Search\Test\Fixture\SynonymGroup;
-use Magento\User\Test\Fixture\User;
-use Magento\Widget\Test\Fixture\Widget;
+use Magento\InventorySuccess\Test\Fixture\Warehouse;
 /**
  * Class TagFormTest
  * @package Magento\Storepickup\Test\TestCase
@@ -36,10 +30,10 @@ class TagFormTest extends Injectable
         $this->tagIndex = $tagIndex;
     }
 
-    public function __prepare(StorepickupHoliday $storepickupTag)
-    {
-        $storepickupTag->persist();
-    }
+//    public function __prepare(Warehouse $warehouse)
+//    {
+//        $warehouse->persist();
+//    }
 
     /**
      * @param $button

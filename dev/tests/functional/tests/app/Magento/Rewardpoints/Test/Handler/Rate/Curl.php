@@ -60,14 +60,14 @@ class Curl extends AbstractCurl implements RateInterface
         $curl->write($url, $data);
         $response = $curl->read();
         $curl->close();
-//        if (!strpos($response, 'data-ui-id="messages-message-success"')) {
-//            throw new \Exception(
-//                "Location entity creation by curl handler was not successful! Response: $response"
-//            );
-//        }
-
-        $data['rate_id'] = $fixture->getRateId();
-        return ['rate_id' => $data['rate_id']];
+        if (!strpos($response, 'data-ui-id="messages-message-success"')) {
+            throw new \Exception(
+                "Location entity creation by curl handler was not successful! Response: $response"
+            );
+        }
+//
+//        $data['rate_id'] = $fixture->getRateId();
+//        return ['rate_id' => $data['rate_id']];
     }
 
 
