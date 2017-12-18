@@ -64,4 +64,9 @@
         <selector>#store_tabs_holiday_section</selector>
         <strategy>css selector</strategy>
     </store-holidays>
+    <store-orders>
+        <class>\Magento\Backend\Test\Block\Widget\Tab</class>
+        <selector>#store_tabs_specialday_section</selector>
+        <strategy>css selector</strategy>
+    </store-orders>
 </tabs>

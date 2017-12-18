@@ -42,4 +42,9 @@ class ScheduleForm extends FormTabs
     {
         return $this->_rootElement->find($this->scheduleNameField, Locator::SELECTOR_CSS)->isVisible();
     }
+
+    public function scheduleNameRequireErrorIsVisible()
+    {
+        return $this->_rootElement->find('[id="schedule_schedule_name-error"]')->isVisible();
+    }
 }

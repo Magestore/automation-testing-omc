@@ -32,7 +32,21 @@ class AssertTagFormAvailable extends AbstractConstraint
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $tagNew->getTagForm()->tagNameFieldIsVisible(),
-            'Tag name field is not visible.'
+            'Tag Name field is not visible.'
+        );
+        \PHPUnit_Framework_Assert::assertTrue(
+            $tagNew->getTagForm()->descriptionFieldIsVisible(),
+            'Description field is not visible.'
+        );
+        \PHPUnit_Framework_Assert::assertTrue(
+            $tagNew->getTagForm()->iconFieldIsVisible(),
+            'Icon field is not visible.'
+        );
+        $tagNew->getTagForm()->openTab('stores');
+        $tagNew->getTagForm()->waitOpenStoresTab();
+        \PHPUnit_Framework_Assert::assertTrue(
+            $tagNew->getTagForm()->storesGridIsVisible(),
+            'Store grid is not visible.'
         );
     }
     /**

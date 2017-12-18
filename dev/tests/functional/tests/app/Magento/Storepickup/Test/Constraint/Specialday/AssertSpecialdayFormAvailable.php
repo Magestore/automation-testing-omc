@@ -35,6 +35,33 @@ class AssertSpecialdayFormAvailable extends AbstractConstraint
             $specialdayNew->getSpecialdayForm()->specialDayNameFieldIsVisible(),
             'Special day name field is not visible.'
         );
+        \PHPUnit_Framework_Assert::assertTrue(
+            $specialdayNew->getSpecialdayForm()->dateStartFieldIsVisible(),
+            'Date start field is not visible.'
+        );
+        \PHPUnit_Framework_Assert::assertTrue(
+            $specialdayNew->getSpecialdayForm()->dateEndFieldIsVisible(),
+            'Date end field is not visible.'
+        );
+        \PHPUnit_Framework_Assert::assertTrue(
+            $specialdayNew->getSpecialdayForm()->openTimeFieldIsVisible(),
+            'Open Time field is not visible.'
+        );
+        \PHPUnit_Framework_Assert::assertTrue(
+            $specialdayNew->getSpecialdayForm()->closeTimeFieldIsVisible(),
+            'Close Time field is not visible.'
+        );
+        \PHPUnit_Framework_Assert::assertTrue(
+            $specialdayNew->getSpecialdayForm()->commentFieldIsVisible(),
+            'Comment field is not visible.'
+        );
+        $specialdayNew->getSpecialdayForm()->openTab('stores');
+        $specialdayNew->getSpecialdayForm()->waitOpenStoresTab();
+        \PHPUnit_Framework_Assert::assertTrue(
+            $specialdayNew->getSpecialdayForm()->storesGridIsVisible(),
+            'Store grid is not visible.'
+        );
+
     }
     /**
      * Returns a string representation of the object.

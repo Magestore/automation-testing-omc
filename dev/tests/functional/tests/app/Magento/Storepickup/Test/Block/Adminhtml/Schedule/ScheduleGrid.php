@@ -16,5 +16,9 @@ use Magento\Storepickup\Test\Block\Adminhtml\StorepickupGrid;
  */
 class ScheduleGrid extends StorepickupGrid
 {
-
+    protected $filters = [
+        'name' => [
+            'selector' => '[name="schedule_name"]'
+        ]
+    ];
 }
