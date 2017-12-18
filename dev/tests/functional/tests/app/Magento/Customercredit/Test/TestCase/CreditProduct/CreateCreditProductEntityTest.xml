@@ -30,8 +30,8 @@
             <data name="product/data/website_ids/dataset" xsi:type="string">default</data>
             <data name="product/data/use_config_gift_message_available" xsi:type="string">No</data>
             <data name="product/data/gift_message_available" xsi:type="string">No</data>
-            <data name="product/data/os_barcode" xsi:type="string">credit-test-%isolation%</data>
-            <data name="product/data/os_barcode_template" xsi:type="string">A4</data>
+            <!--<data name="product/data/os_barcode" xsi:type="string">credit-test-%isolation%</data>-->
+            <!--<data name="product/data/os_barcode_template" xsi:type="string">A4</data>-->
             <constraint name="Magento\Catalog\Test\Constraint\AssertProductSaveMessage" />
             <constraint name="Magento\Customercredit\Test\Constraint\CreditProduct\AssertCreditProductInGrid" />
             <constraint name="Magento\Customercredit\Test\Constraint\CreditProduct\AssertCreditProductInCategory" />
@@ -67,8 +67,8 @@
             <data name="product/data/website_ids/dataset" xsi:type="string">default</data>
             <data name="product/data/use_config_gift_message_available" xsi:type="string">No</data>
             <data name="product/data/gift_message_available" xsi:type="string">No</data>
-            <data name="product/data/os_barcode" xsi:type="string">credit-test-%isolation%</data>
-            <data name="product/data/os_barcode_template" xsi:type="string">A4</data>
+            <!--<data name="product/data/os_barcode" xsi:type="string">credit-test-%isolation%</data>-->
+            <!--<data name="product/data/os_barcode_template" xsi:type="string">A4</data>-->
             <constraint name="Magento\Catalog\Test\Constraint\AssertProductSaveMessage" />
             <constraint name="Magento\Customercredit\Test\Constraint\CreditProduct\AssertCreditProductInGrid" />
             <constraint name="Magento\Catalog\Test\Constraint\AssertProductPage" />
@@ -102,8 +102,8 @@
             <data name="product/data/website_ids/dataset" xsi:type="string">default</data>
             <data name="product/data/use_config_gift_message_available" xsi:type="string">No</data>
             <data name="product/data/gift_message_available" xsi:type="string">No</data>
-            <data name="product/data/os_barcode" xsi:type="string">credit-test-%isolation%</data>
-            <data name="product/data/os_barcode_template" xsi:type="string">A4</data>
+            <!--<data name="product/data/os_barcode" xsi:type="string">credit-test-%isolation%</data>-->
+            <!--<data name="product/data/os_barcode_template" xsi:type="string">A4</data>-->
             <constraint name="Magento\Catalog\Test\Constraint\AssertProductSaveMessage" />
             <constraint name="Magento\Customercredit\Test\Constraint\CreditProduct\AssertCreditProductInGrid" />
             <constraint name="Magento\Catalog\Test\Constraint\AssertProductPage" />
