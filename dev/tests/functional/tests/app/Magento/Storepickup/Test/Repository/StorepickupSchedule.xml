@@ -136,5 +136,15 @@
             <field name="sunday_close_hour" xsi:type="string">10</field>
             <field name="sunday_close_minute" xsi:type="string">00</field>
         </dataset>
+        <dataset name="scheduleclose">
+            <field name="schedule_name" xsi:type="string">magestore_schedule_%isolation%</field>
+            <field name="monday_status" xsi:type="string">Close</field>
+            <field name="tuesday_status" xsi:type="string">Close</field>
+            <field name="wednesday_status" xsi:type="string">Close</field>
+            <field name="thursday_status" xsi:type="string">Close</field>
+            <field name="friday_status" xsi:type="string">Close</field>
+            <field name="saturday_status" xsi:type="string">Close</field>
+            <field name="sunday_status" xsi:type="string">Close</field>
+        </dataset>
     </repository>
 </config>

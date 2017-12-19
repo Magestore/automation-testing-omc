@@ -31,7 +31,12 @@ class Curl extends AbstractCurl implements StorepickupStoreInterface
         'status' => [
             'Enabled' => '1',
             'Disabled' => '2'
-        ]
+        ],
+        'country_id' => [
+            'United States' => 'US',
+            'United Kingdom' => 'GB',
+            'Germany' => 'DE'
+        ],
     ];
 
     /**

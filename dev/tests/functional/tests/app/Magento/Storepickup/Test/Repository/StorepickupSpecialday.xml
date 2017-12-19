@@ -24,5 +24,15 @@
             <field name="time_close_minute" xsi:type="string">59</field>
             <field name="specialday_comment" xsi:type="string">magestore_specialday_comment_%isolation%</field>
         </dataset>
+        <dataset name="specialday1">
+            <field name="specialday_name" xsi:type="string">magestore_specialday_%isolation%</field>
+            <field name="date_from" xsi:type="string">12/18/2017</field>
+            <field name="date_to" xsi:type="string">12/25/2017</field>
+            <field name="time_open_hour" xsi:type="string">06</field>
+            <field name="time_open_minute" xsi:type="string">30</field>
+            <field name="time_close_hour" xsi:type="string">11</field>
+            <field name="time_close_minute" xsi:type="string">00</field>
+            <field name="specialday_comment" xsi:type="string">magestore_specialday_comment_%isolation%</field>
+        </dataset>
     </repository>
 </config>

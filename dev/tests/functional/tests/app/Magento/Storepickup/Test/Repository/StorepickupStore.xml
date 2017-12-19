@@ -36,5 +36,29 @@
             <field name="zoom_level" xsi:type="string">4</field>
             <field name="status" xsi:type="string">Enabled</field>
         </dataset>
+        <dataset name="store1">
+            <field name="store_name" xsi:type="string">Magestore %isolation%</field>
+            <field name="address" xsi:type="string">magestore_%isolation%</field>
+            <field name="city" xsi:type="string">Culver City</field>
+            <field name="state" xsi:type="string">California</field>
+            <field name="zipcode" xsi:type="string">90230</field>
+            <field name="country_id" xsi:type="string">United States</field>
+            <field name="latitude" xsi:type="string">0.00000000</field>
+            <field name="longitude" xsi:type="string">0.00000000</field>
+            <field name="zoom_level" xsi:type="string">4</field>
+            <field name="status" xsi:type="string">Enabled</field>
+        </dataset>
+        <dataset name="store2">
+            <field name="store_name" xsi:type="string">Magestore %isolation%</field>
+            <field name="address" xsi:type="string">magestore_%isolation%</field>
+            <field name="city" xsi:type="string">London</field>
+            <field name="state" xsi:type="string">London</field>
+            <field name="zipcode" xsi:type="string">SE1 7RW</field>
+            <field name="country_id" xsi:type="string">United Kingdom</field>
+            <field name="latitude" xsi:type="string">0.00000000</field>
+            <field name="longitude" xsi:type="string">0.00000000</field>
+            <field name="zoom_level" xsi:type="string">4</field>
+            <field name="status" xsi:type="string">Disabled</field>
+        </dataset>
     </repository>
 </config>
