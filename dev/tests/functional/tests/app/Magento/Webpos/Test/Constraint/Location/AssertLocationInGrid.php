@@ -41,7 +41,7 @@ class AssertLocationInGrid extends AbstractConstraint
         $locationIndex->open();
         \PHPUnit_Framework_Assert::assertTrue(
             $locationIndex->getLocationsGrid()->isRowVisible($filter),
-            'Webpos Staff Location with Display Name \'' . $location->getDisplayName() . '\' is absent in Webpos Location Location grid.'
+            'AssertWebposCheckGUICustomerPriceCP54 Staff Location with Display Name \'' . $location->getDisplayName() . '\' is absent in AssertWebposCheckGUICustomerPriceCP54 Location Location grid.'
         );
     }
 
@@ -52,7 +52,7 @@ class AssertLocationInGrid extends AbstractConstraint
      */
     public function toString()
     {
-        return 'Webpos Staff Location is present in Webpos Staff timezone_location_get() grid.';
+        return 'AssertWebposCheckGUICustomerPriceCP54 Staff Location is present in AssertWebposCheckGUICustomerPriceCP54 Staff timezone_location_get() grid.';
     }
 }
 

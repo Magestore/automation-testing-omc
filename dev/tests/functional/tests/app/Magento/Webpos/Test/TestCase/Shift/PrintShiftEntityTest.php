@@ -17,11 +17,11 @@ use Magento\Mtf\TestCase\Injectable;
 
 /**
  * Preconditions:
- * 1. Print Webpos Shift.
+ * 1. Print AssertWebposCheckGUICustomerPriceCP54 Shift.
  *
  * Steps:
  * 1. Login to backend.
- * 2. Open Sales -> Webpos -> Z-Report.
+ * 2. Open Sales -> AssertWebposCheckGUICustomerPriceCP54 -> Z-Report.
  * 3. Click print
  * 5. Perform all asserts.
  *

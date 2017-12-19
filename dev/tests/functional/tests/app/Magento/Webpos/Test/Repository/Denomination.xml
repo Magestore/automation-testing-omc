@@ -9,8 +9,14 @@
     <repository class="Magento\Webpos\Test\Repository\Denomination">
         <dataset name="default">
             <field name="denomination_name" xsi:type="string">Test Denomination Name %isolation%</field>
-            <field name="denomination_value" xsi:type="string">$10</field>
-            <field name="sort_order" xsi:type="string">Test Denomination Sort Order %isolation%</field>
+            <field name="denomination_value" xsi:type="string">10</field>
+            <field name="sort_order" xsi:type="string">%isolation%</field>
+        </dataset>
+
+        <dataset name="default_null">
+            <field name="denomination_name" xsi:type="string" />
+            <field name="denomination_value" xsi:type="string" />
+            <field name="sort_order" xsi:type="string" />
         </dataset>
     </repository>
 </config>

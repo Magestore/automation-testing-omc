@@ -11,16 +11,18 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 
 class AssertViewTemplateBarcodeFormIsAvailable extends AbstractConstraint
 {
-    public function processAssert(BarcodeViewTemplateIndex $barcodeViewTemplateIndex, $section, $firstField)
+    public function processAssert(BarcodeViewTemplateIndex $barcodeViewTemplateIndex, $section, $fields)
     {
-        $barcodeViewTemplateIndex->getBarcodeGrid()->waitingForLoadingMaskNotVisible();
+        $barcodeViewTemplateIndex->getTemplateGrid()->waitingForLoadingMaskNotVisible();
         \PHPUnit_Framework_Assert::assertTrue(
             $barcodeViewTemplateIndex->getBlockViewTemplate()->getSection($section)->isVisible(),
             'Section '.$section.' is not shown'
         );
+        $nameFields = explode(', ', $fields);
+        foreach($nameFields as $field)
         \PHPUnit_Framework_Assert::assertTrue(
-            $barcodeViewTemplateIndex->getBlockViewTemplate()->getFirstField($firstField)->isVisible(),
-            'Field '.$firstField.' is not shown'
+            $barcodeViewTemplateIndex->getBlockViewTemplate()->getField($field)->isVisible(),
+            'Field '.$field.' is not shown'
         );
     }
 

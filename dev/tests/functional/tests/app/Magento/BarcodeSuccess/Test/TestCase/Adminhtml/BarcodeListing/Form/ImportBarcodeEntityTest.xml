@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */            <data name="section" xsi:type="string">os_barcode_generate_form_general</data>
+
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeListing\Form\ImportBarcodeEntityTest" summary="Import file barcode" ticketId="MAGESTORE-1">
+        <variation name="ImportBarcodeEntityTestVariation1">
+            <data name="formFields/reason" xsi:type="string">Reason barcode import_%isolation%</data>
+            <data name="idRequireds" xsi:type="string">[id="file_csv-error"]</data>
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeListing\Form\AssertImportErrorSaveMessage" />
+        </variation>
+        <variation name="ImportBarcodeEntityTestVariation2">
+            <data name="idRequireds" xsi:type="string">[id="reason-error"], [id="file_csv-error"]</data>
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeListing\Form\AssertImportErrorSaveMessage" />
+        </variation>
+    </testCase>
+</config>

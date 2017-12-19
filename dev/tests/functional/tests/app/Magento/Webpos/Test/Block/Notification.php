@@ -8,9 +8,12 @@
 
 namespace Magento\Webpos\Test\Block;
 
-
 use Magento\Mtf\Block\Block;
 
+/**
+ * Class Notification
+ * @package Magento\WebposCheckGUICustomerPriceCP54EntityTest\Test\Block
+ */
 class Notification extends Block
 {
 	public function getNotificationBell()

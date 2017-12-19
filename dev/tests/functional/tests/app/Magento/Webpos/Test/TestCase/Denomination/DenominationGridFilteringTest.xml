@@ -1,22 +1,22 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Webpos\Test\TestCase\Denomination\DenominationGridFilteringTest" summary="Grid UI Component Filtering" ticketId="MAGETWO-41329">
-        <variation name="DenominationGridFilteringTest">
+        <variation name="DenominationGridFiltering-Denomination-Filtering-Test1">
             <data name="description" xsi:type="string">Verify location grid filtering</data>
-            <data name="itemsCount" xsi:type="string">2</data>
+            <data name="itemsCount" xsi:type="string">1</data>
             <data name="fixtureName" xsi:type="string">denomination</data>
             <data name="fixtureDataSet" xsi:type="string">default</data>
             <data name="filters" xsi:type="array">
                 <item name="0" xsi:type="array">
-                    <item name="description" xsi:type="string">:description</item>
-                    <item name="display_name" xsi:type="string">:display_name</item>
-                </item>
-                <item name="1" xsi:type="array">
-                    <item name="address" xsi:type="string">:address</item>
+                    <item name="denomination_id[from]" xsi:type="string">:denomination_id</item>
+                    <!--<item name="denomination_id[to]" xsi:type="string">5</item>-->
+                    <item name="denomination_name" xsi:type="string">:denomination_name</item>
+                    <!--<item name="denomination_value" xsi:type="string">:denomination_value</item>-->
+                    <item name="sort_order" xsi:type="string">:sort_order</item>
                 </item>
             </data>
-            <data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\LocationIndex</data>
-            <data name="gridRetriever" xsi:type="string">getLocationsGrid</data>
-            <data name="idGetter" xsi:type="string">getLocationId</data>
+            <data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\DenominationIndex</data>
+            <data name="gridRetriever" xsi:type="string">getDenominationsGrid</data>
+            <data name="idGetter" xsi:type="string">getDenominationId</data>
             <constraint name="\Magento\Ui\Test\Constraint\AssertGridFiltering"/>
         </variation>
     </testCase>

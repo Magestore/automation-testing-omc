@@ -8,7 +8,7 @@
 
 namespace Magento\FulfilSuccess\Test\Constraint\Report;
 
-use Magento\FulfilSuccess\Test\Page\Adminhtml\ReportIndex;
+use Magento\FulfilReport\Test\Page\Adminhtml\ReportIndex;
 use Magento\Mtf\Constraint\AbstractConstraint;
 /**
  * Class AssertBackendButtonAndTitleIsAvailable
@@ -23,28 +23,28 @@ class AssertBackendButtonAndTitleIsAvailable extends AbstractConstraint
         \PHPUnit_Framework_Assert::assertEquals(
             $titleStaffReport,
             $reportIndex->getContainer()->getTitleStaffReport()->getText(),
-            'Create Customer Address successfully.'
+            'The title of staff report was not visible correctly.'
         );
         \PHPUnit_Framework_Assert::assertEquals(
             $titleWarehouseReport,
             $reportIndex->getContainer()->getTitleWarehouseReport()->getText(),
-            'Create Customer Address successfully.'
+            'The title of warehouse report was not visible correctly.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $reportIndex->getContainer()->getIconBackendFulfilStaff()->isVisible(),
-            'On The Backend Page, the Grid Header Button Verify Order Of the Extension was visible.'
+            'On The Backend Page, the icon of backend fulfil staff at the place that click to FULFILMENT->REPORT was not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $reportIndex->getContainer()->getIconBackendFulfilStaffDaily()->isVisible(),
-            'On The Backend Page, the Grid Header Button Verify Order Of the Extension was visible.'
+            'On The Backend Page, the icon of backend fulfil staff daily at the place that click to FULFILMENT->REPORT was notvisible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $reportIndex->getContainer()->getIconFulfilWarehouse()->isVisible(),
-            'On The Backend Page, the Grid Header Button Verify Order Of the Extension was visible.'
+            'On The Backend Page, the icon of backend fulfil warehouse at the place that click to FULFILMENT->REPORT was notvisible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $reportIndex->getContainer()->getIconFulfilWarehouseDaily()->isVisible(),
-            'On The Backend Page, the Grid Header Button Verify Order Of the Extension was visible.'
+            'On The Backend Page, the icon of backend fulfil warehouse daily at the place that click to FULFILMENT->REPORT was notvisible.'
         );
     }
 

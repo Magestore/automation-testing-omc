@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\Customer\Test\Repository\Customer">
+
+        <dataset name="default_webpos_guest">
+            <field name="firstname" xsi:type="string">Guest</field>
+            <field name="lastname" xsi:type="string">POS</field>
+            <field name="email" xsi:type="string">guest@example.com</field>
+            <field name="address" xsi:type="array">
+                <item name="dataset" xsi:type="string">default_webpos_guest_address</item>
+            </field>
+        </dataset>
+    </repository>
+</config>

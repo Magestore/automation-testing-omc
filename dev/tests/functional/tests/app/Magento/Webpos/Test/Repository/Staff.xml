@@ -12,11 +12,13 @@
             <field name="password" xsi:type="string">abc12091995</field>
             <field name="password_confirmation" xsi:type="string">abc12091995</field>
             <field name="display_name" xsi:type="string">Thomas D</field>
-            <field name="email" xsi:type="string">test@trueplus.vn</field>
+            <field name="email" xsi:type="string">test%isolation%@trueplus.vn</field>
             <field name="pin" xsi:type="string">1209</field>
             <field name="customer_group" xsi:type="string">All groups</field>
-            <field name="location_id" xsi:type="string">Store Address 2</field>
+            <field name="location_id" xsi:type="string">Store Address</field>
             <field name="role_id" xsi:type="string">admin</field>
+            <field name="status" xsi:type="string">Enabled</field>
+            <field name="pos_ids" xsi:type="string">Store POS</field>
         </dataset>
         <dataset name="admin">
             <field name="username" xsi:type="string">magentoadmin</field>

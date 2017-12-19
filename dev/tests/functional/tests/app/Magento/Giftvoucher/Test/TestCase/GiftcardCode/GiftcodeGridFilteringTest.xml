@@ -14,17 +14,15 @@
                 <item name="0" xsi:type="array">
                     <item name="giftvoucher_id_from" xsi:type="string">:giftvoucher_id</item>
                     <item name="gift_code" xsi:type="string">:gift_code</item>
-                    <item name="history_amount_from" xsi:type="string">:history_amount</item>
-                    <item name="balance_from" xsi:type="string">:balance</item>
-                    <item name="status" xsi:type="string">:status</item>
+                    <!--<item name="history_amount_from" xsi:type="string">:balance</item>-->
+                    <!--<item name="balance_from" xsi:type="string">:balance</item>-->
+                    <!--<item name="status" xsi:type="string">:status</item>-->
                     <item name="customer_name" xsi:type="string">:customer_name</item>
-                    <item name="order_increment_id" xsi:type="string">:order_increment_id</item>
                     <item name="recipient_name" xsi:type="string">:recipient_name</item>
-                    <item name="created_at_from" xsi:type="string">:created_at</item>
-                    <item name="expired_at_from" xsi:type="string">:created_at</item>
-                    <item name="store_id" xsi:type="string">:store_id</item>
-                    <item name="is_sent" xsi:type="string">:is_sent</item>
-                    <item name="extra_content" xsi:type="string">:extra_content</item>
+                    <!--<item name="expired_at_from" xsi:type="string">:expired_at</item>-->
+                    <!--<item name="store_id" xsi:type="string">:store_id</item>-->
+                    <!--<item name="is_sent" xsi:type="string">:is_sent</item>-->
+                    <!--<item name="extra_content" xsi:type="string">:extra_content</item>-->
                 </item>
             </data>
             <data name="pageClass" xsi:type="string">Magento\Giftvoucher\Test\Page\Adminhtml\GiftcodeIndex</data>

@@ -9,7 +9,7 @@
 namespace Magento\FulfilSuccess\Test\Constraint\Setting;
 
 
-use Magento\FulfilSuccess\Test\Page\Adminhtml\ReportIndex;
+use Magento\FulfilReport\Test\Page\Adminhtml\ReportIndex;
 use Magento\Mtf\Constraint\AbstractConstraint;
 /**
  * Class AssertBackendFieldAndTitleIsAvailable
@@ -25,11 +25,11 @@ class AssertSettingOrderFieldAndTitleIsAvailable extends AbstractConstraint
         \PHPUnit_Framework_Assert::assertEquals(
             $titleOrderSection,
             $reportIndex->getContainer()->getTitleOrderSection()->getText(),
-            'Title Order Section Is not visible.'
+            'Title Order Section on the ORDER CONFIGURATION fulfilment was not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $reportIndex->getContainer()->getFirstFieldOrder()->isVisible(),
-            'On The Backend Page, the Field Section Verify Order Of the Extension was not visible.'
+            'On The Backend Page, the Field Section Verify ORDER CONFIGURATION Setting Of the Extension was not visible.'
         );
     }
 
@@ -38,6 +38,6 @@ class AssertSettingOrderFieldAndTitleIsAvailable extends AbstractConstraint
      */
     public function toString()
     {
-        return 'On The Backend Page, all the elements Button in the Grid Header Page Of the Extension Fulfilment was visible successfully.';
+        return 'On The Backend Page, all the elements include: fields and titles in the ORDER configuration Of the Fulfilment Extension Fulfilment was visible successfully.';
     }
 }
