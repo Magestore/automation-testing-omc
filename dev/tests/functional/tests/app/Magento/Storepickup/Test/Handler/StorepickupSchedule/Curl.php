@@ -59,7 +59,6 @@ class Curl extends AbstractCurl implements StorepickupScheduleInterface
     ];
 
     /**
-     * POST request for creating Synonym Group.
      *
      * @param FixtureInterface|null $fixture [optional]
      * @return array

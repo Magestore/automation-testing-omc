@@ -27,10 +27,14 @@ class Curl extends AbstractCurl implements StorepickupStoreInterface
      *
      * @var array
      */
-    protected $mappingData = [];
+    protected $mappingData = [
+        'status' => [
+            'Enabled' => '1',
+            'Disabled' => '2'
+        ]
+    ];
 
     /**
-     * POST request for creating Synonym Group.
      *
      * @param FixtureInterface|null $fixture [optional]
      * @return array

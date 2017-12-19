@@ -30,7 +30,6 @@ class Curl extends AbstractCurl implements StorepickupHolidayInterface
     protected $mappingData = [];
 
     /**
-     * POST request for creating Synonym Group.
      *
      * @param FixtureInterface|null $fixture [optional]
      * @return array

@@ -39,7 +39,8 @@ class StoreGrid extends StorepickupGrid
             'selector' => '[name="zipcode"]'
         ],
         'status' => [
-            'selector' => '[name="status"]'
+            'selector' => '[name="status"]',
+            'input' => 'select'
         ]
     ];
 }

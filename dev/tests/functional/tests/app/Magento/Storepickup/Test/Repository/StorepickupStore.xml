@@ -12,9 +12,29 @@
             <field name="address" xsi:type="string">magestore %isolation%</field>
             <field name="city" xsi:type="string">magestore %isolation%</field>
             <field name="zipcode" xsi:type="string">12345</field>
-            <field name="latitude" xsi:type="string">0</field>
-            <field name="longitude" xsi:type="string">0</field>
+            <field name="latitude" xsi:type="string">0.00000000</field>
+            <field name="longitude" xsi:type="string">0.00000000</field>
             <field name="zoom_level" xsi:type="string">4</field>
+        </dataset>
+        <dataset name="store disable">
+            <field name="store_name" xsi:type="string">Magestore %isolation%</field>
+            <field name="address" xsi:type="string">magestore %isolation%</field>
+            <field name="city" xsi:type="string">magestore %isolation%</field>
+            <field name="zipcode" xsi:type="string">12345</field>
+            <field name="latitude" xsi:type="string">0.00000000</field>
+            <field name="longitude" xsi:type="string">0.00000000</field>
+            <field name="zoom_level" xsi:type="string">4</field>
+            <field name="status" xsi:type="string">Disabled</field>
+        </dataset>
+        <dataset name="store enable">
+            <field name="store_name" xsi:type="string">Magestore %isolation%</field>
+            <field name="address" xsi:type="string">magestore %isolation%</field>
+            <field name="city" xsi:type="string">magestore %isolation%</field>
+            <field name="zipcode" xsi:type="string">12345</field>
+            <field name="latitude" xsi:type="string">0.00000000</field>
+            <field name="longitude" xsi:type="string">0.00000000</field>
+            <field name="zoom_level" xsi:type="string">4</field>
+            <field name="status" xsi:type="string">Enabled</field>
         </dataset>
     </repository>
 </config>
