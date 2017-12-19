@@ -10,7 +10,7 @@
         <field name="transaction_id" is_required="1"/>
         <field name="reward_id" is_required="0"/>
         <field name="customer_id" is_required="0"/>
-        <field name="customer_email" is_required="0"/>
+        <field name="customer_email" is_required="0" source="Magento\Rewardpoints\Test\Fixture\Transaction\Customer"/>
         <field name="title" is_required="0"/>
         <field name="action" is_required="0"/>
         <field name="action_type" is_required="0"/>
@@ -30,5 +30,6 @@
         <field name="base_discount" is_required="0"/>
         <field name="discount" is_required="0"/>
         <field name="extra_content" is_required="0"/>
+        <field name="expiration_day" is_required="0"/>
     </fixture>
 </config>

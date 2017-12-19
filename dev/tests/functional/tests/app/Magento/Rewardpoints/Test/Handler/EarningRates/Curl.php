@@ -6,7 +6,7 @@
  * Time: 7:54 AM
  */
 
-namespace Magento\Rewardpoints\Test\Handler\Rate;
+namespace Magento\Rewardpoints\Test\Handler\EarningRates;
 
 use Magento\Mtf\Fixture\FixtureInterface;
 use Magento\Mtf\Handler\Curl as AbstractCurl;
@@ -16,9 +16,9 @@ use Magento\Mtf\Util\Protocol\CurlTransport\BackendDecorator;
 
 /**
  * Class Curl
- * @package Magento\Rewardpoints\Test\Handler\Rate
+ * @package Magento\Rewardpoints\Test\Handler\EarningRates
  */
-class Curl extends AbstractCurl implements RateInterface
+class Curl extends AbstractCurl implements EarningRatesInterface
 {
     /**
      * Url for saving data.
@@ -80,7 +80,7 @@ class Curl extends AbstractCurl implements RateInterface
         $curl->close();
         if (!strpos($response, 'data-ui-id="messages-message-success"')) {
             throw new \Exception(
-                "Location entity creation by curl handler was not successful! Response: $response"
+                "Earning Rates entity creation by curl handler was not successful! Response: $response"
             );
         }
 

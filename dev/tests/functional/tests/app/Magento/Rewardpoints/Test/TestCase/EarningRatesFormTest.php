@@ -10,6 +10,8 @@ namespace Magento\Rewardpoints\Test\TestCase;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Rewardpoints\Test\Page\Adminhtml\EarningRatesIndex;
+use Magento\Rewardpoints\Test\Fixture\Rate;
+
 
 /**
  * Class EarningRatesFormTest
