@@ -17,6 +17,14 @@ use Magento\Storepickup\Test\Block\Adminhtml\StorepickupGrid;
 class HolidayGrid extends StorepickupGrid
 {
     protected $filters = [
-        'name' => ['selector' => '[name="holiday_name"]']
+        'id' => [
+            'selector' => '[name="holiday_id[from]"]'
+        ],
+        'name' => [
+            'selector' => '[name="holiday_name"]'
+        ],
+        'comment' => [
+            'selector' => '[name="holiday_comment"]'
+        ]
     ];
 }

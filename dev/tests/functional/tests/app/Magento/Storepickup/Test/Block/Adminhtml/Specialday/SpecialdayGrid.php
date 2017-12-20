@@ -17,6 +17,14 @@ use Magento\Storepickup\Test\Block\Adminhtml\StorepickupGrid;
 class SpecialdayGrid extends StorepickupGrid
 {
     protected $filters = [
-        'name' => ['selector' => '[name="specialday_name"]']
+        'id' => [
+          'selector' => '[name="specialday_id[from]"]'
+        ],
+        'name' => [
+            'selector' => '[name="specialday_name"]'
+        ],
+        'comment' => [
+            'selector' => '[name="specialday_comment"]'
+        ]
     ];
 }

@@ -18,7 +18,7 @@ class TagGrid extends StorepickupGrid
 {
     protected $filters = [
         'id' => [
-            'selector' => '[name="tag_id[]"]',
+            'selector' => '[name="tag_id[from]"]',
         ],
         'name' => [
             'selector' => '[name="tag_name"]',

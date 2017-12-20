@@ -18,7 +18,7 @@ class StoreGrid extends StorepickupGrid
 {
     protected $filters = [
         'id' => [
-            'selector' => '[name="storepickup_id[]"]',
+            'selector' => '[name="storepickup_id[from]"]',
         ],
         'name' => [
             'selector' => '[name="store_name"]'
