@@ -10,8 +10,10 @@ namespace Magento\Storepickup\Test\Handler\StorepickupSchedule;
 
 use Magento\Mtf\Fixture\FixtureInterface;
 use Magento\Mtf\Handler\Curl as AbstractCurl;
+use Magento\Mtf\Util\Protocol\CurlInterface;
 use Magento\Mtf\Util\Protocol\CurlTransport;
 use Magento\Mtf\Util\Protocol\CurlTransport\BackendDecorator;
+use Magento\Setup\Exception;
 
 class Curl extends AbstractCurl implements StorepickupScheduleInterface
 {
@@ -91,9 +93,28 @@ class Curl extends AbstractCurl implements StorepickupScheduleInterface
             );
         }
 
-        preg_match_all('/\"schedule_id\":\"(\d+)\"/', $response, $matches);
-        $id = $matches[1][count($matches[1]) - 1];
-        return ['schedule_id' => $id];
+        $data['schedule_id'] = $this->getScheduleId($fixture->getScheduleName());
+        return ['schedule_id' => $data['schedule_id']];
+    }
+
+    protected function getScheduleId($scheduleName)
+    {
+        $url = $_ENV['app_backend_url'] . 'mui/index/render/';
+        $data = [
+            'namespace' => 'storepickup_schedule_listing',
+            'filters' => [
+                'placeholder' => true,
+                'schedule_name' => $scheduleName
+            ],
+            'isAjax' => true
+        ];
+        $curl = new BackendDecorator(new CurlTransport(), $this->_configuration);
+
+        $curl->write($url, $data, CurlInterface::POST);
+        $response = $curl->read();
+        $curl->close();
+        preg_match('/storepickup_schedule_listing_data_source.+items.+"schedule_id":"(\d+)"/', $response, $match);
+        return empty($match[1]) ? null : $match[1];
     }
 
     public function prepareScheduleData($data)

@@ -10,8 +10,10 @@ namespace Magento\Storepickup\Test\Handler\StorepickupSpecialday;
 
 use Magento\Mtf\Fixture\FixtureInterface;
 use Magento\Mtf\Handler\Curl as AbstractCurl;
+use Magento\Mtf\Util\Protocol\CurlInterface;
 use Magento\Mtf\Util\Protocol\CurlTransport;
 use Magento\Mtf\Util\Protocol\CurlTransport\BackendDecorator;
+use Magento\Setup\Exception;
 
 class Curl extends AbstractCurl implements StorepickupSpecialdayInterface
 {
@@ -62,10 +64,28 @@ class Curl extends AbstractCurl implements StorepickupSpecialdayInterface
                 "Store Specialday entity creation by curl handler was not successful! Response: $response"
             );
         }
+        $data['specialday_id'] = $this->getSpecialdayId($fixture->getSpecialdayName());
+        return ['specialday_id' =>  $data['specialday_id']];
+    }
 
-        preg_match_all('/\"specialday_id\":\"(\d+)\"/', $response, $matches);
-        $id = $matches[1][count($matches[1]) - 1];
-        return ['specialday_id' => $id];
+    protected function getSpecialdayId($specialdayName)
+    {
+        $url = $_ENV['app_backend_url'] . 'mui/index/render/';
+        $data = [
+            'namespace' => 'storepickup_specialday_listing',
+            'filters' => [
+                'placeholder' => true,
+                'specialday_name' => $specialdayName
+            ],
+            'isAjax' => true
+        ];
+        $curl = new BackendDecorator(new CurlTransport(), $this->_configuration);
+
+        $curl->write($url, $data, CurlInterface::POST);
+        $response = $curl->read();
+        $curl->close();
+        preg_match('/storepickup_specialday_listing_data_source.+items.+"specialday_id":"(\d+)"/', $response, $match);
+        return empty($match[1]) ? null : $match[1];
     }
 
     public function prepareSpecialdayData($data)
