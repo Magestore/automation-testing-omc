@@ -34,6 +34,8 @@ class MassDeleteSpecialdayBackendEntityTest extends Injectable
     ){
         $this->fixtureFactory = $fixtureFactory;
         $this->specialdayIndex = $specialdayIndex;
+        $specialdayIndex->open();
+        $specialdayIndex->getSpecialdayGrid()->massaction([], 'Delete', true, 'Select All');
     }
 
     public function test($specialdaysQty, $specialdaysQtyToDelete)

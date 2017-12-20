@@ -34,6 +34,8 @@ class MassDeleteHolidayBackendEntityTest extends Injectable
     ){
         $this->fixtureFactory = $fixtureFactory;
         $this->holidayIndex = $holidayIndex;
+        $holidayIndex->open();
+        $holidayIndex->getHolidayGrid()->massaction([], 'Delete', true, 'Select All');
     }
 
     public function test($holidaysQty, $holidaysQtyToDelete)

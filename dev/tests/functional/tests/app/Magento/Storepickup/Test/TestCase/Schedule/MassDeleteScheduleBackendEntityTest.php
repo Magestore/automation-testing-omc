@@ -34,6 +34,8 @@ class MassDeleteScheduleBackendEntityTest extends Injectable
     ){
         $this->fixtureFactory = $fixtureFactory;
         $this->scheduleIndex = $scheduleIndex;
+        $scheduleIndex->open();
+        $scheduleIndex->getScheduleGrid()->massaction([], 'Delete', true, 'Select All');
     }
 
     public function test($schedulesQty, $schedulesQtyToDelete)

@@ -43,6 +43,8 @@ class MassActionStoreBackendEntityTest extends Injectable
         $this->fixtureFactory = $fixtureFactory;
         $this->storeIndex = $storeIndex;
         $this->storeNew = $storeNew;
+        $storeIndex->open();
+        $storeIndex->getStoreGrid()->massaction([], 'Delete', true, 'Select All');
     }
 
     public function test($storesQty, $storeDataSet, $storeMassAction, $acceptAlert = false)

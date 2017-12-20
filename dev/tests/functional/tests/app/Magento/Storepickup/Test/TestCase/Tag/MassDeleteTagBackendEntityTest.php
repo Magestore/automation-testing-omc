@@ -34,6 +34,8 @@ class MassDeleteTagBackendEntityTest extends Injectable
     ){
         $this->fixtureFactory = $fixtureFactory;
         $this->tagIndex = $tagIndex;
+        $tagIndex->open();
+        $tagIndex->getTagGrid()->massaction([], 'Delete', true, 'Select All');
     }
 
     public function test($tagsQty, $tagsQtyToDelete)
