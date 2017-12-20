@@ -84,7 +84,6 @@ class Curl extends  AbstractCurl implements StorepickupTagInterface
         $response = $curl->read();
         $curl->close();
         preg_match('/storepickup_tag_listing_data_source.+items.+"tag_id":"(\d+)"/', $response, $match);
-        throw new Exception(var_dump($match[1]));
         return empty($match[1]) ? null : $match[1];
     }
 }
