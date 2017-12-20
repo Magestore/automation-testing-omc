@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeTemplate\Grid\FilterGridEntityForTemplateTest" summary="Filter" ticketId="MAGESTORE-1">
+        <variation name="VariationFilter">
+            <data name="template/dataset" xsi:type="string">template1</data>
+            <!--<constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeTemplate\AssertTemplateSuccessSaveMessage" />-->
+        </variation>
+    </testCase>
+</config>

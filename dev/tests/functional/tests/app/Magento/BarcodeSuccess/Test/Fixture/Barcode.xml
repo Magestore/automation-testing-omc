@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="barcode"
+             module="Magento_BarcodeSuccess"
+             type="flat"
+             collection="Magento\BarcodeSuccess\Model\ResourceModel\Barcode\Collection"
+             repository_class="Magento\BarcodeSuccess\Test\Repository\Barcode"
+             handler_interface="Magento\BarcodeSuccess\Test\Handler\Barcode\BarcodeInterface"
+             class="Magento\BarcodeSuccess\Test\Fixture\Barcode"
+             entity_type="os_barcode">
+        <field name="id" is_required="1"/>
+        <field name="barcode" is_required="0"/>
+        <field name="qty" is_required="0"/>
+        <field name="product_id" is_required="0"/>
+        <field name="product_sku" is_required="0"/>
+        <field name="supplier_id" is_required="0"/>
+        <field name="supplier_code" is_required="0"/>
+        <field name="purchased_id" is_required="0"/>
+        <field name="purchased_time" is_required="0"/>
+        <field name="history_id" is_required="0"/>
+        <field name="created_at" is_required="0"/>
+    </fixture>
+</config>

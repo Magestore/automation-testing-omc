@@ -10,8 +10,5 @@
         <reason>
             <selector>[name='reason']</selector>
         </reason>
-        <file_csv>
-            <selector>[name='file_csv']</selector>
-        </file_csv>
     </fields>
 </mapping>
