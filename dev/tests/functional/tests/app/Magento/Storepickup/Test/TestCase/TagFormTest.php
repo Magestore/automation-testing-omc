@@ -8,7 +8,10 @@
 
 namespace Magento\Storepickup\Test\TestCase;
 
+use Magento\Customercredit\Test\Fixture\CustomerUseCredit;
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Setup\Exception;
 use Magento\Storepickup\Test\Fixture\StorepickupHoliday;
 use Magento\Storepickup\Test\Fixture\StorepickupSchedule;
 use Magento\Storepickup\Test\Fixture\StorepickupSpecialday;
@@ -34,9 +37,10 @@ class TagFormTest extends Injectable
         $this->tagIndex = $tagIndex;
     }
 
-//    public function __prepare(StorepickupTag $store)
+//    public function __prepare(CustomerUseCredit $customerUseCredit)
 //    {
-//        $store->persist();
+////        throw new Exception(var_dump($customerUseCredit->getData()));
+//        $customerUseCredit->persist();
 //    }
 
     /**
