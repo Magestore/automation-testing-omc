@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Storepickup\Test\TestCase\Store\MassActionStoreBackendEntityTest" summary="Store MassAction Test" ticketId="MAGETWO-25699">
+        <variation name="Enable massaction test">
+            <data name="storesQty" xsi:type="string">2</data>
+            <data name="storeDataSet" xsi:type="string">store disable</data>
+            <data name="storeMassAction" xsi:type="string">Enable</data>
+            <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreMassEnableSuccessMessage"/>
+            <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreMassEnableInGrid"/>
+        </variation>
+        <variation name="Disable massaction test">
+            <data name="storesQty" xsi:type="string">2</data>
+            <data name="storeDataSet" xsi:type="string">store enable</data>
+            <data name="storeMassAction" xsi:type="string">Disable</data>
+            <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreMassDisableSuccessMessage"/>
+            <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreMassDisableInGrid"/>
+        </variation>
+        <variation name="Delete massaction test">
+            <data name="storesQty" xsi:type="string">2</data>
+            <data name="storeDataSet" xsi:type="string">default1</data>
+            <data name="storeMassAction" xsi:type="string">Delete</data>
+            <data name="acceptAlert" xsi:type="boolean">true</data>
+            <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreMassDeleteSuccessMessage"/>
+            <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreMassDeleteNotInGrid"/>
+        </variation>
+    </testCase>
+</config>

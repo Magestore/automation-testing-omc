@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="warehouse"
+             module="Magento_InventorySuccess"
+             type="flat"
+             collection="Magento\InventorySuccess\Model\ResourceModelWarehouse\Collection"
+             repository_class="Magento\InventorySuccess\Test\Repository\Warehouse"
+             handler_interface="Magento\InventorySuccess\Test\Handler\Warehouse\WarehouseInterface"
+             class="Magento\InventorySuccess\Test\Fixture\Warehouse"
+             entity_type="os_warehouse">
+        <field name="warehouse_id" is_required="1"/>
+        <field name="warehouse_name" is_required="0"/>
+        <field name="warehouse_code" is_required="0"/>
+        <field name="contact_email" is_required="0"/>
+        <field name="telephone" is_required="0"/>
+        <field name="street" is_required="0"/>
+        <field name="city" is_required="0"/>
+        <field name="country_id" is_required="0"/>
+        <field name="region" is_required="0"/>
+        <field name="region_id" is_required="0"/>
+        <field name="postcode" is_required="0"/>
+        <field name="is_primary" is_required="0"/>
+        <field name="created_at" is_required="0"/>
+        <field name="updated_at" is_required="0"/>
+        <field name="store_id" is_required="0"/>
+    </fixture>
+</config>

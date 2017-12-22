@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Storepickup\Test\TestCase\Holiday\HolidayGridFilteringTest" summary="Grid UI Component Filtering" ticketId="MAGETWO-41329">
+        <variation name="HolidayGridFilteringTest">
+            <data name="itemsCount" xsi:type="string">1</data>
+            <data name="fixtureName" xsi:type="string">storepickupHoliday</data>
+            <data name="fixtureDataSet" xsi:type="string">default1</data>
+            <data name="filters" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="id" xsi:type="string">:holiday_id</item>
+                    <item name="name" xsi:type="string">:holiday_name</item>
+                    <item name="comment" xsi:type="string">:holiday_comment</item>
+                </item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Storepickup\Test\Page\Adminhtml\HolidayIndex</data>
+            <data name="gridRetriever" xsi:type="string">getHolidayGrid</data>
+            <data name="idGetter" xsi:type="string">getHolidayId</data>
+            <constraint name="\Magento\Ui\Test\Constraint\AssertGridFiltering"/>
+        </variation>
+    </testCase>
+</config>

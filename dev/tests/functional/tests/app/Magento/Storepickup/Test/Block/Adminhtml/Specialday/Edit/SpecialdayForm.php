@@ -25,7 +25,7 @@ class SpecialdayForm extends FormTabs
     /**
      * @var string
      */
-    protected $specialDayNameField = '[data-ui-id="specialday-edit-tab-general-fieldset-element-form-field-specialday-name"]';
+    protected $specialDayNameField = '[name="specialday_name"]';
 
     /**
      * @return mixed
@@ -41,5 +41,57 @@ class SpecialdayForm extends FormTabs
     public function specialDayNameFieldIsVisible()
     {
         return $this->_rootElement->find($this->specialDayNameField, Locator::SELECTOR_CSS)->isVisible();
+    }
+
+    public function dateStartFieldIsVisible()
+    {
+        return $this->_rootElement->find('[name="date_from"]')->isVisible();
+    }
+
+    public function dateEndFieldIsVisible()
+    {
+        return $this->_rootElement->find('[name="date_to"]')->isVisible();
+    }
+
+    public function openTimeFieldIsVisible()
+    {
+        return $this->_rootElement->find('[id="specialday_time_open_hour"]')->isVisible()
+            && $this->_rootElement->find('[id="specialday_time_open_minute"]')->isVisible();
+    }
+
+    public function closeTimeFieldIsVisible()
+    {
+        return $this->_rootElement->find('[id="specialday_time_close_hour"]')->isVisible()
+            && $this->_rootElement->find('[id="specialday_time_close_minute"]')->isVisible();
+    }
+
+    public function commentFieldIsVisible()
+    {
+        return $this->_rootElement->find('[name="specialday_comment"]')->isVisible();
+    }
+
+    public function specialdayNameFieldRequireErrorIsVisible()
+    {
+        return $this->_rootElement->find('[id="specialday_specialday_name-error"]')->isVisible();
+    }
+
+    public function dateStartFieldRequireErrorIsVisible()
+    {
+        return $this->_rootElement->find('[id="specialday_date_from-error"]')->isVisible();
+    }
+
+    public function dateEndFieldRequireErrorIsVisible()
+    {
+        return $this->_rootElement->find('[id="specialday_date_to-error"]')->isVisible();
+    }
+
+    public function waitOpenStoresTab()
+    {
+        $spinner = './/*[@id="specialday_tabs_stores_section"]/span/span/span[@class="spinner"]';
+        $this->waitForElementNotVisible($spinner, Locator::SELECTOR_XPATH);
+    }
+    public function storesGridIsVisible()
+    {
+        return $this->_rootElement->find('[id="storepickupadmin_store_grid"]')->isVisible();
     }
 }

@@ -79,6 +79,8 @@ class CreditProductGrid extends CreditDataGrid
         ]
     ];
 
+    protected $massactionStatus = '[data-ui-id="widget-grid-massaction-item-additional-defaultadditional-0-element-select-status"]';
+
     /**
      * Return row with given catalog price rule name.
      *
@@ -149,5 +151,32 @@ class CreditProductGrid extends CreditDataGrid
         $this->waitLoader();
         $this->getTemplateBlock()->waitForElementNotVisible($this->loader);
         return $this->_rootElement->find($this->selectItem)->getValue();
+    }
+
+    public function massaction(array $items, $action, $acceptAlert = false, $massActionSelection = '', $status = '')
+    {
+        if ($this->_rootElement->find($this->noRecords)->isVisible()) {
+            return;
+        }
+        if (!is_array($action)) {
+            $action = [$action => '-'];
+        }
+        foreach ($items as $item) {
+            $this->searchAndSelect($item);
+        }
+        if ($massActionSelection) {
+            $this->_rootElement->find($this->massactionAction, Locator::SELECTOR_CSS, 'select')
+                ->setValue($massActionSelection);
+        }
+        $actionType = key($action);
+        $this->_rootElement->find($this->massactionSelect, Locator::SELECTOR_CSS, 'select')->setValue($actionType);
+        if (isset($action[$actionType]) && $action[$actionType] != '-') {
+            $this->_rootElement->find($this->option, Locator::SELECTOR_CSS, 'select')->setValue($action[$actionType]);
+        }
+        if ($status) {
+            $this->_rootElement->find($this->massactionStatus, Locator::SELECTOR_CSS, 'select')
+                ->setValue($status);
+        }
+        $this->massActionSubmit($acceptAlert);
     }
 }

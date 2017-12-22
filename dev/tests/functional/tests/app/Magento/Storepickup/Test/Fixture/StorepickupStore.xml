@@ -17,7 +17,7 @@
         <field name="storepickup_id" is_required="1"/>
         <field name="store_name" group="general-information" is_required="0"/>
         <field name="description" group="general-information" is_required="0"/>
-        <field name="warehouse_id" group="general-information" is_required="0"/>
+        <field name="warehouse_id" group="general-information" is_required="0" source="Magento\Storepickup\Test\Fixture\Store\WarehouseId"/>
         <field name="status" group="general-information" is_required="0"/>
         <field name="link" group="general-information" is_required="0"/>
         <field name="sort_order" group="general-information" is_required="0"/>

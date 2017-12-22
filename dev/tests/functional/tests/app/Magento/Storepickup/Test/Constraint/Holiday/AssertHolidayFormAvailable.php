@@ -33,7 +33,25 @@ class AssertHolidayFormAvailable extends AbstractConstraint
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $holidayNew->getHolidayForm()->holidayNameFieldIsVisible(),
-            'Holiday name field is not visible.'
+            'Holiday Name field is not visible.'
+        );
+        \PHPUnit_Framework_Assert::assertTrue(
+            $holidayNew->getHolidayForm()->dateStartFieldIsVisible(),
+            'Date Start field is not visible.'
+        );
+        \PHPUnit_Framework_Assert::assertTrue(
+            $holidayNew->getHolidayForm()->dateEndFieldIsVisible(),
+            'Date End field is not visible.'
+        );
+        \PHPUnit_Framework_Assert::assertTrue(
+            $holidayNew->getHolidayForm()->commentFieldIsVisible(),
+            'Comment field is not visible.'
+        );
+        $holidayNew->getHolidayForm()->openTab('stores');
+        $holidayNew->getHolidayForm()->waitOpenStoresTab();
+        \PHPUnit_Framework_Assert::assertTrue(
+            $holidayNew->getHolidayForm()->storesGridIsVisible(),
+            'Stores grid is not visible.'
         );
     }
     /**
