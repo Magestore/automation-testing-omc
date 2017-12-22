@@ -44,4 +44,12 @@ class RoleGrid extends DataGrid
 	{
 		$rowItem->find($this->editLink)->click();
 	}
+    /**
+     * Fix core
+     */
+    public function resetFilter()
+    {
+        $this->waitLoader();
+        parent::resetFilter();
+    }
 }
