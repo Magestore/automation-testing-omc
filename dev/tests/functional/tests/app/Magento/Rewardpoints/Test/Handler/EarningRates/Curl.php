@@ -13,6 +13,7 @@ use Magento\Mtf\Handler\Curl as AbstractCurl;
 use Magento\Mtf\Util\Protocol\CurlTransport;
 use Magento\Mtf\Util\Protocol\CurlInterface;
 use Magento\Mtf\Util\Protocol\CurlTransport\BackendDecorator;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * Class Curl
@@ -83,9 +84,12 @@ class Curl extends AbstractCurl implements EarningRatesInterface
                 "Earning Rates entity creation by curl handler was not successful! Response: $response"
             );
         }
+        preg_match_all("/rate_id\":\"(\d*?)\"/", $response, $matches);
+
+        $id = isset($matches[1]) ? $matches[1][count($matches[1])-1] : null;
 
 //        $data['rate_id'] = $fixture->getRateId();
-//        return ['rate_id' => $data['rate_id']];
+        return ['rate_id' => $id];
     }
 
 
