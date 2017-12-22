@@ -4,4 +4,5 @@
     <preference for="Magento\Storepickup\Test\Handler\StorepickupTag\StorepickupTagInterface" type="Magento\Storepickup\Test\Handler\StorepickupTag\Curl" />
     <preference for="Magento\Storepickup\Test\Handler\StorepickupSchedule\StorepickupScheduleInterface" type="Magento\Storepickup\Test\Handler\StorepickupSchedule\Curl" />
     <preference for="Magento\Storepickup\Test\Handler\StorepickupHoliday\StorepickupHolidayInterface" type="Magento\Storepickup\Test\Handler\StorepickupHoliday\Curl" />
+    <preference for="Magento\Storepickup\Test\Handler\StorepickupSpecialday\StorepickupSpecialdayInterface" type="Magento\Storepickup\Test\Handler\StorepickupSpecialday\Curl" />
 </config>

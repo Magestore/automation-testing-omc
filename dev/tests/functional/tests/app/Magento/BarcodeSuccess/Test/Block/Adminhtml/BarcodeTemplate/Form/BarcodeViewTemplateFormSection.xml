@@ -6,14 +6,64 @@
  */
 -->
 <sections>
-    <barcode_template_information>
+    <barcode_template_information strict="1">
         <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
         <selector>[data-index="barcode_template_information"]</selector>
         <strategy>css selector</strategy>
         <fields>
-            <select_format>
+            <type>
+                <input>select</input>
                 <selector>[name="type"]</selector>
-            </select_format>
+            </type>
+            <name>
+                <selector>[name="name"]</selector>
+            </name>
+            <status>
+                <input>select</input>
+                <selector>[name="status"]</selector>
+            </status>
+            <symbology>
+                <input>select</input>
+                <selector>[name="symbology"]</selector>
+            </symbology>
+            <measurement_unit>
+                <input>select</input>
+                <selector>[name="measurement_unit"]</selector>
+            </measurement_unit>
+            <label_per_row>
+                <selector>[name="label_per_row"]</selector>
+            </label_per_row>
+            <paper_width>
+                <selector>[name="paper_width"]</selector>
+            </paper_width>
+            <paper_height>
+                <selector>[name="paper_height"]</selector>
+            </paper_height>
+            <label_width>
+                <selector>[name="label_width"]</selector>
+            </label_width>
+            <label_height>
+                <selector>[name="label_height"]</selector>
+            </label_height>
+            <font_size>
+                <selector>[name="font_size"]</selector>
+            </font_size>
+            <top_margin>
+                <selector>[name="top_margin"]</selector>
+            </top_margin>
+            <left_margin>
+                <selector>[name="left_margin"]</selector>
+            </left_margin>
+            <bottom_margin>
+                <selector>[name="bottom_margin"]</selector>
+            </bottom_margin>
+            <product_attribute_show_on_barcode>
+                <input>multiselect</input>
+                <selector>[name="product_attribute_show_on_barcode"]</selector>
+            </product_attribute_show_on_barcode>
+            <right_margin>
+                <selector>[name="right_margin"]</selector>
+            </right_margin>
         </fields>
     </barcode_template_information>
 </sections>

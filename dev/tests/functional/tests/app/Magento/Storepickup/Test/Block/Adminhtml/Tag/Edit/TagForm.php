@@ -43,6 +43,27 @@ class TagForm extends FormTabs
         return $this->_rootElement->find($this->tagNameField, Locator::SELECTOR_CSS)->isVisible();
     }
 
+    public function descriptionFieldIsVisible()
+    {
+        return $this->_rootElement->find('[name="tag_description"]')->isVisible();
+    }
+
+    public function iconFieldIsVisible()
+    {
+        return $this->_rootElement->find('[name="tag_icon"]')->isVisible();
+    }
+
+    public function waitOpenStoresTab()
+    {
+        $spinner = './/*[@id="tag_tabs_stores_section"]/span/span/span[@class="spinner"]';
+        $this->waitForElementNotVisible($spinner, Locator::SELECTOR_XPATH);
+    }
+
+    public function storesGridIsVisible()
+    {
+        return $this->_rootElement->find('[id="storepickupadmin_store_grid"]')->isVisible();
+    }
+
     public function tagNameRequireErrorIsVisible()
     {
         return $this->_rootElement->find('#tag_tag_name-error')->isVisible();

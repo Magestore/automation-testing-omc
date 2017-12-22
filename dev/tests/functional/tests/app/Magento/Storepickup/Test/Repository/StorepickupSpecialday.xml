@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\Storepickup\Test\Repository\StorepickupSpecialday">
+        <dataset name="default">
+            <field name="specialday_name" xsi:type="string">magestore_specialday_%isolation%</field>
+            <field name="date_from" xsi:type="string">12/15/2017</field>
+            <field name="date_to" xsi:type="string">12/20/2017</field>
+            <field name="time_open_hour" xsi:type="string">05</field>
+            <field name="time_open_minute" xsi:type="string">30</field>
+            <field name="time_close_hour" xsi:type="string">10</field>
+            <field name="time_close_minute" xsi:type="string">59</field>
+            <field name="specialday_comment" xsi:type="string">magestore_specialday_comment_%isolation%</field>
+            <field name="storepickup_stores" xsi:type="array">
+                <item name="dataset" xsi:type="string">default, default</item>
+            </field>
+        </dataset>
+        <dataset name="default1">
+            <field name="specialday_name" xsi:type="string">magestore_specialday_%isolation%</field>
+            <field name="date_from" xsi:type="string">12/15/2017</field>
+            <field name="date_to" xsi:type="string">12/20/2017</field>
+            <field name="time_open_hour" xsi:type="string">05</field>
+            <field name="time_open_minute" xsi:type="string">30</field>
+            <field name="time_close_hour" xsi:type="string">10</field>
+            <field name="time_close_minute" xsi:type="string">59</field>
+            <field name="specialday_comment" xsi:type="string">magestore_specialday_comment_%isolation%</field>
+        </dataset>
+        <dataset name="specialday1">
+            <field name="specialday_name" xsi:type="string">magestore_specialday_%isolation%</field>
+            <field name="date_from" xsi:type="string">12/18/2017</field>
+            <field name="date_to" xsi:type="string">12/25/2017</field>
+            <field name="time_open_hour" xsi:type="string">06</field>
+            <field name="time_open_minute" xsi:type="string">30</field>
+            <field name="time_close_hour" xsi:type="string">11</field>
+            <field name="time_close_minute" xsi:type="string">00</field>
+            <field name="specialday_comment" xsi:type="string">magestore_specialday_comment_%isolation%</field>
+        </dataset>
+    </repository>
+</config>

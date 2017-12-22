@@ -3,16 +3,16 @@
     <repository class="Magento\Giftvoucher\Test\Repository\Giftcode">
         <dataset name="default">
             <field name="gift_code" xsi:type="string">TEST-[A.4]-[AN.6]</field>
-            <field name="balance" xsi:type="number">100</field>
+            <field name="balance" xsi:type="number">200</field>
 			<field name="currency" xsi:type="string">US Dollar</field>
 			<field name="status" xsi:type="string">Active</field>
 			<field name="expired_at" xsi:type="string">05/30/2035</field>
 			<field name="store_id" xsi:type="string">All Store Views</field>
 			<field name="giftvoucher_comments" xsi:type="string">TEST CREATE GIFT CODE</field>
-			<field name="customer_name" xsi:type="string">John</field>
-			<field name="customer_email" xsi:type="string">john@example.com</field>
-			<field name="recipient_name" xsi:type="string">Jane</field>
-			<field name="recipient_email" xsi:type="string">jane@example.com</field>
+			<field name="customer_name" xsi:type="string">John_%isolation%</field>
+			<field name="customer_email" xsi:type="string">john_%isolation%@example.com</field>
+			<field name="recipient_name" xsi:type="string">Jane_%isolation%</field>
+			<field name="recipient_email" xsi:type="string">jane_%isolation%@example.com</field>
 			<field name="recipient_address" xsi:type="string">Landing</field>
 			<field name="message" xsi:type="string">Happy birthday!</field>
 			<field name="is_sent" xsi:type="string">Not Send</field>

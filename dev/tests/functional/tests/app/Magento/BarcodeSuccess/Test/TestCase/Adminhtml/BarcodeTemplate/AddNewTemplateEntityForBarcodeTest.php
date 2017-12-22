@@ -24,7 +24,7 @@ class AddNewTemplateEntityForBarcodeTest extends Injectable
     public function test($addNewButton)
     {
         $this->barcodeTemplateIndex->open();
-        $this->barcodeTemplateIndex->getBarcodeGrid()->waitingForLoadingMaskNotVisible();
+        $this->barcodeTemplateIndex->getTemplateGrid()->waitingForLoadingMaskNotVisible();
         $this->barcodeTemplateIndex->getAddNewTemplate()->addNewTemplate($addNewButton);
     }
 }

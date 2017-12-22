@@ -24,8 +24,8 @@
                 <item name="customer_name" xsi:type="string">Customer</item>
                 <!-- <item name="order_increment_id" xsi:type="string">Order</item> --><!-- MySQL Empty Field Sorting -->
                 <item name="recipient_name" xsi:type="string">Recipient</item>
-                <item name="created_at" xsi:type="string">Created at</item>
-                <item name="expired_at" xsi:type="string">Expired at</item>
+                <!--<item name="created_at" xsi:type="string">Created at</item>-->
+                <!--<item name="expired_at" xsi:type="string">Expired at</item>-->
                 <!-- <item name="is_sent" xsi:type="string">Send To Customer</item>
                 <item name="extra_content" xsi:type="string">Action Created by</item> -->
                 <item name="id" xsi:type="string">ID</item><!-- Last Sorting -->
