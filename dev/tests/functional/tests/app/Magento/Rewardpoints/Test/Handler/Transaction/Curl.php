@@ -52,9 +52,12 @@ class Curl extends AbstractCurl implements TransactionInterface
                 "Location entity creation by curl handler was not successful! Response: $response"
             );
         }
+        preg_match_all("/transaction_id\":\"(\d*?)\"/", $response, $matches);
+
+        $id = isset($matches[1]) ? $matches[1][count($matches[1])-1] : null;
 
 //        $data['rate_id'] = $fixture->getRateId();
-//        return ['rate_id' => $data['rate_id']];
+        return ['transaction_id' => $id];
     }
 
 
