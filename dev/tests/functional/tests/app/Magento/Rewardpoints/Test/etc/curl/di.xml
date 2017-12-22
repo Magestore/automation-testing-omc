@@ -1,4 +1,6 @@
 <?xml version="1.0" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="Magento\Rewardpoints\Test\Handler\Rate\RateInterface" type="\Magento\Rewardpoints\Test\Handler\Rate\Curl" />
+    <preference for="Magento\Rewardpoints\Test\Handler\EarningRates\EarningRatesInterface" type="\Magento\Rewardpoints\Test\Handler\EarningRates\Curl" />
+    <preference for="Magento\Rewardpoints\Test\Handler\SpendingRates\SpendingRatesInterface" type="\Magento\Rewardpoints\Test\Handler\SpendingRates\Curl" />
+    <preference for="Magento\Rewardpoints\Test\Handler\Transaction\TransactionInterface" type="\Magento\Rewardpoints\Test\Handler\Transaction\Curl" />
 </config>
