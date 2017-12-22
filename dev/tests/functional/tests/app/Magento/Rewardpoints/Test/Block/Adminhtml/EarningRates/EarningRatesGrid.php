@@ -23,7 +23,7 @@ class EarningRatesGrid extends RewardGrid
      */
     // protected $option = '[name="title"]';
     protected $selectAction = '.action-menu-item';
-
+    protected $option = '[name="group"]';
     /**
      * Filters array mapping.
      *

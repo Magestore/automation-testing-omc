@@ -6,19 +6,20 @@
  * Time: 7:54 AM
  */
 
-namespace Magento\Rewardpoints\Test\Handler\Rate;
+namespace Magento\Rewardpoints\Test\Handler\EarningRates;
 
 use Magento\Mtf\Fixture\FixtureInterface;
 use Magento\Mtf\Handler\Curl as AbstractCurl;
 use Magento\Mtf\Util\Protocol\CurlTransport;
 use Magento\Mtf\Util\Protocol\CurlInterface;
 use Magento\Mtf\Util\Protocol\CurlTransport\BackendDecorator;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * Class Curl
- * @package Magento\Rewardpoints\Test\Handler\Rate
+ * @package Magento\Rewardpoints\Test\Handler\EarningRates
  */
-class Curl extends AbstractCurl implements RateInterface
+class Curl extends AbstractCurl implements EarningRatesInterface
 {
     /**
      * Url for saving data.
@@ -80,12 +81,15 @@ class Curl extends AbstractCurl implements RateInterface
         $curl->close();
         if (!strpos($response, 'data-ui-id="messages-message-success"')) {
             throw new \Exception(
-                "Location entity creation by curl handler was not successful! Response: $response"
+                "Earning Rates entity creation by curl handler was not successful! Response: $response"
             );
         }
+        preg_match_all("/rate_id\":\"(\d*?)\"/", $response, $matches);
+
+        $id = isset($matches[1]) ? $matches[1][count($matches[1])-1] : null;
 
 //        $data['rate_id'] = $fixture->getRateId();
-//        return ['rate_id' => $data['rate_id']];
+        return ['rate_id' => $id];
     }
 
 

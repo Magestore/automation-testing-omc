@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="spendingRates" module="Magento_Rewardpoints" type="flat" collection="Magento\Rewardpoints\Model\ResourceModel\Rate\Collection" repository_class="Magento\Rewardpoints\Test\Repository\SpendingRates" handler_interface="Magento\Rewardpoints\Test\Handler\SpendingRates\SpendingRatesInterface" class="Magento\Rewardpoints\Test\Fixture\SpendingRates" entity_type="rewardpoints_rate">
+        <field name="rate_id" is_required="1"/>
+        <field name="website_ids" is_required="0"/>
+        <field name="customer_group_ids" is_required="0"/>
+        <field name="direction" is_required="0"/>
+        <field name="points" is_required="0"/>
+        <field name="money" is_required="0"/>
+        <field name="max_price_spended_type" is_required="0"/>
+        <field name="max_price_spended_value" is_required="0"/>
+        <field name="status" is_required="0"/>
+        <field name="sort_order" is_required="0"/>
+    </fixture>
+</config>

@@ -6,7 +6,7 @@
  * Time: 7:54 AM
  */
 
-namespace Magento\Rewardpoints\Test\Handler\Rate;
+namespace Magento\Rewardpoints\Test\Handler\SpendingRates;
 
 use Magento\Mtf\Fixture\FixtureInterface;
 use Magento\Mtf\Handler\Curl as AbstractCurl;
@@ -16,16 +16,16 @@ use Magento\Mtf\Util\Protocol\CurlTransport\BackendDecorator;
 
 /**
  * Class Curl
- * @package Magento\Rewardpoints\Test\Handler\Rate
+ * @package Magento\Rewardpoints\Test\Handler\SpendingRates
  */
-class Curl extends AbstractCurl implements RateInterface
+class Curl extends AbstractCurl implements SpendingRatesInterface
 {
     /**
      * Url for saving data.
      *
      * @var string
      */
-    protected $saveUrl = 'rewardpoints/earningrates/save/';
+    protected $saveUrl = 'rewardpoints/spendingrates/save/';
 
     /**
      * Mapping values for data.
@@ -80,7 +80,7 @@ class Curl extends AbstractCurl implements RateInterface
         $curl->close();
         if (!strpos($response, 'data-ui-id="messages-message-success"')) {
             throw new \Exception(
-                "Location entity creation by curl handler was not successful! Response: $response"
+                "Spending Rates entity creation by curl handler was not successful! Response: $response"
             );
         }
 
@@ -92,13 +92,13 @@ class Curl extends AbstractCurl implements RateInterface
     protected function prepareData($rate)
     {
         $data = $this->replaceMappingData($rate->getData());
-        $data['rewardpoints_earningrates'] = $data;
+        $data['rewardpoints_spendingrates'] = $data;
         if (isset($data['website_ids'])) {
             $websiteIds = [];
             foreach ($data['website_ids'] as $websiteId) {
                 $websiteIds[] = isset($this->websiteIds[$websiteId]) ? $this->websiteIds[$websiteId] : $websiteId;
             }
-            $data['rewardpoints_earningrates']['website_ids'] = $websiteIds;
+            $data['rewardpoints_spendingrates']['website_ids'] = $websiteIds;
         }
         if (isset($data['customer_group_ids'])) {
             $customerGroupIds = [];
@@ -107,7 +107,7 @@ class Curl extends AbstractCurl implements RateInterface
                     ? $this->customerGroupIds[$customerGroupId]
                     : $customerGroupId;
             }
-            $data['rewardpoints_earningrates']['customer_group_ids'] = $customerGroupIds;
+            $data['rewardpoints_spendingrates']['customer_group_ids'] = $customerGroupIds;
         }
         return $data;
     }
