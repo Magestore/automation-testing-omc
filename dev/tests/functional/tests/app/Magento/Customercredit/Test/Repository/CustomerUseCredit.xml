@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\Customercredit\Test\Repository\CustomerUseCredit">
+        <dataset name="default">
+            <field name="customer" xsi:type="array">
+                <item name="dataset" xsi:type="string">customer_US</item>
+            </field>
+            <field name="credit_value" xsi:type="string" >20</field>
+            <field name="description" xsi:type="string" >add $20</field>
+            <field name="send_mail" xsi:type="string" >1</field>
+        </dataset>
+        <dataset name="default1">
+            <field name="customer" xsi:type="array">
+                <item name="dataset" xsi:type="string">customer_US</item>
+            </field>
+            <field name="credit_value" xsi:type="string" >50</field>
+            <field name="description" xsi:type="string" >add $50</field>
+            <field name="send_mail" xsi:type="string" >1</field>
+        </dataset>
+    </repository>
+</config>

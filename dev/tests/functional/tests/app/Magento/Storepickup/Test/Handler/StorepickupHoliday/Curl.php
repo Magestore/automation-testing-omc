@@ -8,8 +8,10 @@
 
 namespace Magento\Storepickup\Test\Handler\StorepickupHoliday;
 
+use Magento\Framework\Webapi\Exception;
 use Magento\Mtf\Fixture\FixtureInterface;
 use Magento\Mtf\Handler\Curl as AbstractCurl;
+use Magento\Mtf\Util\Protocol\CurlInterface;
 use Magento\Mtf\Util\Protocol\CurlTransport;
 use Magento\Mtf\Util\Protocol\CurlTransport\BackendDecorator;
 
@@ -30,7 +32,6 @@ class Curl extends AbstractCurl implements StorepickupHolidayInterface
     protected $mappingData = [];
 
     /**
-     * POST request for creating Synonym Group.
      *
      * @param FixtureInterface|null $fixture [optional]
      * @return array
@@ -62,9 +63,27 @@ class Curl extends AbstractCurl implements StorepickupHolidayInterface
                 "Store Holiday entity creation by curl handler was not successful! Response: $response"
             );
         }
+        $data['holiday_id'] = $this->getHolidayId($fixture->getHolidayName());
+        return ['holiday_id' =>  $data['holiday_id']];
+    }
 
-        preg_match_all('/\"holiday_id\":\"(\d+)\"/', $response, $matches);
-        $id = $matches[1][count($matches[1]) - 1];
-        return ['holiday_id' => $id];
+    protected function getHolidayId($holidayName)
+    {
+        $url = $_ENV['app_backend_url'] . 'mui/index/render/';
+        $data = [
+            'namespace' => 'storepickup_holiday_listing',
+            'filters' => [
+                'placeholder' => true,
+                'holiday_name' => $holidayName
+            ],
+            'isAjax' => true
+        ];
+        $curl = new BackendDecorator(new CurlTransport(), $this->_configuration);
+
+        $curl->write($url, $data, CurlInterface::POST);
+        $response = $curl->read();
+        $curl->close();
+        preg_match('/storepickup_holiday_listing_data_source.+items.+"holiday_id":"(\d+)"/', $response, $match);
+        return empty($match[1]) ? null : $match[1];
     }
 }

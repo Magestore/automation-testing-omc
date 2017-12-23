@@ -7,7 +7,7 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Storepickup\Test\TestCase\Schedule\CreateStorePickupScheduleEntityTest" summary="Create schedule" ticketId="MAGETWO-25699">
-        <variation name="storepickupSchedule/data/CreateStorePickupScheduleEntityTest">
+        <variation name="Create Store Pickup Schedule Entity Test with all fields data">
             <data name="storepickupSchedule/data/schedule_name" xsi:type="string">magestore_schedule_%isolation%</data>
             <data name="storepickupSchedule/data/monday_status" xsi:type="string">Open</data>
             <data name="storepickupSchedule/data/tuesday_status" xsi:type="string">Open</data>
@@ -73,6 +73,17 @@
             <data name="storepickupSchedule/data/sunday_close_hour" xsi:type="string">10</data>
             <data name="storepickupSchedule/data/sunday_close_minute" xsi:type="string">00</data>
             <data name="storepickupSchedule/data/storepickup_stores/dataset" xsi:type="string">default, default</data>
+            <constraint name="Magento\Storepickup\Test\Constraint\Schedule\AssertScheduleSuccessSaveMessage"/>
+            <constraint name="Magento\Storepickup\Test\Constraint\Schedule\AssertScheduleInGrid"/>
+        </variation>
+        <variation name="Create Store Pickup Schedule Entity Test with require fields data">
+            <data name="storepickupSchedule/data/schedule_name" xsi:type="string">magestore_schedule_%isolation%</data>
+            <constraint name="Magento\Storepickup\Test\Constraint\Schedule\AssertScheduleSuccessSaveMessage"/>
+            <constraint name="Magento\Storepickup\Test\Constraint\Schedule\AssertScheduleInGrid"/>
+        </variation>
+        <variation name="Create Store Pickup Schedule Entity Test with blank all fields">
+            <data name="storepickupSchedule/data/schedule_name" xsi:type="string"/>
+            <constraint name="Magento\Storepickup\Test\Constraint\Schedule\AssertScheduleFormRequireFieldsVisible"/>
         </variation>
     </testCase>
 </config>

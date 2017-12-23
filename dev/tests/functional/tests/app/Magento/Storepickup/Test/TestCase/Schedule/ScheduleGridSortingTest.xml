@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Storepickup\Test\TestCase\Schedule\ScheduleGridSortingTest" summary="Grid UI Component Sorting" ticketId="MAGETWO-4122017">
+        <variation name="ScheduleGridSortingTest">
+            <data name="itemsCount" xsi:type="string">1</data>
+            <data name="fixtureName" xsi:type="string">storepickupSchedule</data>
+            <data name="fixtureDataSet" xsi:type="string">default1</data>
+            <data name="steps" xsi:type="array">
+                <item name="0" xsi:type="string">-</item>
+            </data>
+            <data name="columnsForSorting" xsi:type="array">
+                <item name="id" xsi:type="string">Schedule ID</item>
+                <item name="name" xsi:type="string">Schedule Name</item>
+                <item name="monday_status" xsi:type="string">Monday Status</item>
+                <item name="tuesday_status" xsi:type="string">Tuesday Status</item>
+                <item name="wednesday_status" xsi:type="string">Wednesday Status</item>
+                <item name="thursday_status" xsi:type="string">Thursday Status</item>
+                <item name="friday_status" xsi:type="string">Friday Status</item>
+                <item name="saturday_status" xsi:type="string">Saturday Status</item>
+                <item name="sunday_status" xsi:type="string">Sunday Status</item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Storepickup\Test\Page\Adminhtml\ScheduleIndex</data>
+            <data name="gridRetriever" xsi:type="string">getScheduleGrid</data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+        </variation>
+    </testCase>
+</config>

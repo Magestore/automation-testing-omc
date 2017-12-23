@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Storepickup\Test\TestCase\Holiday\MassDeleteHolidayBackendEntityTest" summary="Holiday Mass Delete" ticketId="MAGETWO-26848">
+        <variation name="MassDeleteHolidayBackendEntityTestVariation1">
+            <data name="holidaysQty" xsi:type="string">3</data>
+            <data name="holidaysQtyToDelete" xsi:type="string">2</data>
+            <constraint name="Magento\Storepickup\Test\Constraint\Holiday\AssertHolidayMassDeleteSuccessMessage" />
+            <constraint name="Magento\Storepickup\Test\Constraint\Holiday\AssertHolidayMassDeleteNotInGrid" />
+            <constraint name="Magento\Storepickup\Test\Constraint\Holiday\AssertHolidayMassDeleteInGrid" />
+        </variation>
+    </testCase>
+</config>

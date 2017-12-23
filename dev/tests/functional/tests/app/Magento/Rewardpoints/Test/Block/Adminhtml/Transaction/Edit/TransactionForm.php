@@ -28,20 +28,27 @@ class TransactionForm extends FormTabs
      */
     protected $customerField = '[data-ui-id="admin-block-rewardpoints-form-container-form-fieldset-element-form-field-featured-customers"]';
 
+    /**
+     * @var string
+     */
     protected $selectCustomer = ".addafter";
+
+    /**
+     * @var string
+     */
     protected $tableCustomer = "#tinycontentCustomer";
-    protected $buttonSearch = '[data-ui-id="widget-button-4"]';
-    protected $callColumSelect = './/input[@value,"%s"]';
-    protected $idSearchField = '[data-ui-id="widget-grid-column-filter-text-3-filter-email"]';
 
+    /**
+     * @return mixed
+     */
+    protected $errorField = '.mage-error';
 
-    public function selectedCustomer(Customer $customer){
+    /**
+     *
+     */
+    public function clickSelectCustomer(){
         $this->_rootElement->find($this->selectCustomer, Locator::SELECTOR_CSS)->click();
         $this->waitForElementVisible($this->tableCustomer);
-
-        $this->_rootElement->find($this->idSearchField, Locator::SELECTOR_CSS)->setvalue($customer->getEmail());
-        $this->_rootElement->find($this->buttonSearch, Locator::SELECTOR_CSS)->click();
-        $this->_rootElement->find(sprintf($this->callColumSelect,$customer->getId()), Locator::SELECTOR_XPATH)->click();
     }
 
     /**
@@ -58,5 +65,12 @@ class TransactionForm extends FormTabs
     public function customerFieldIsVisible()
     {
         return $this->_rootElement->find($this->customerField, Locator::SELECTOR_CSS)->isVisible();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function fieldErrorIsVisible(){
+        return $this->_rootElement->find($this->errorField, Locator::SELECTOR_CSS)->isVisible();
     }
 }

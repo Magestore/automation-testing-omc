@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Customercredit\Test\TestCase\CreditProduct\MassChangeStatusCreditProductBackendEntityTest" summary="Product MassAction Change Status Test" ticketId="MAGETWO-25699">
+        <variation name="Enable massaction test">
+            <data name="productsQty" xsi:type="string">2</data>
+            <data name="productDataSet" xsi:type="string">productdisabled</data>
+            <data name="status" xsi:type="string">Enabled</data>
+            <constraint name="Magento\Customercredit\Test\Constraint\CreditProduct\AssertCreditProductMassChangeStatusSuccessMessage"/>
+            <constraint name="Magento\Customercredit\Test\Constraint\CreditProduct\AssertCreditProductMassChangeStatusInGrid"/>
+        </variation>
+        <variation name="Disable massaction test">
+            <data name="productsQty" xsi:type="string">2</data>
+            <data name="productDataSet" xsi:type="string">default</data>
+            <data name="status" xsi:type="string">Disabled</data>
+            <constraint name="Magento\Customercredit\Test\Constraint\CreditProduct\AssertCreditProductMassChangeStatusSuccessMessage"/>
+            <constraint name="Magento\Customercredit\Test\Constraint\CreditProduct\AssertCreditProductMassChangeStatusInGrid"/>
+        </variation>
+    </testCase>
+</config>

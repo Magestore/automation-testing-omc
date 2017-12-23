@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\InventorySuccess\Test\Repository\Warehouse">
+        <dataset name="default">
+            <field name="warehouse_name" xsi:type="string">magestore_warehouse_%isolation%</field>
+            <field name="warehouse_code" xsi:type="string">magestore_%isolation%_%isolation%</field>
+        </dataset>
+    </repository>
+</config>

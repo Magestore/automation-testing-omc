@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\Rewardpoints\Test\Repository\Transaction">
+        <dataset name="default">
+            <!--<field name="customer_email/dataset" xsi:type="string">default</field>-->
+            <field name="customer_email" xsi:type="array">
+                <item name="dataset" xsi:type="string">default</item>
+            </field>
+            <field name="point_amount" xsi:type="string">%isolation%</field>
+            <field name="title" xsi:type="string">abc%isolation%</field>
+            <field name="expiration_day" xsi:type="string">365</field>
+        </dataset>
+    </repository>
+</config>
