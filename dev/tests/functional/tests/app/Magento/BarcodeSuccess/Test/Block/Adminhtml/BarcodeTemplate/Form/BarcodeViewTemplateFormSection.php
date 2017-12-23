@@ -32,4 +32,13 @@ class BarcodeViewTemplateFormSection extends FormSections
         $wrap ='[data-index='.$wrap.']';
         return $this->_rootElement->find($wrap);
     }
+    public function openSection($sectionName)
+    {
+        $section = $this->getContainerElement($sectionName)->find($this->collapsedSection);
+        if ($section->isVisible()) {
+            $section->click();
+        }
+
+        return $this;
+    }
 }

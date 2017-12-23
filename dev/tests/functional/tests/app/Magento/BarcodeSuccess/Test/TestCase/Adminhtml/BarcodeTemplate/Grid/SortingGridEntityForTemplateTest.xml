@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeTemplate\Grid\SortingGridEntityForTemplateTest" summary="Sorting" ticketId="MAGESTORE-1">
+        <variation name="VariationSorting1">
+            <data name="pageClass" xsi:type="string">Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeTemplate\BarcodeTemplateIndex</data>
+            <data name="gridRetriever" xsi:type="string">getTemplateGrid</data>
+            <data name="fixtureName" xsi:type="string">templateBarcode</data>
+            <data name="fixtureDataSet" xsi:type="string">template1</data>
+            <data name="itemsCount" xsi:type="string">1</data>
+            <data name="idGetter" xsi:type="string">getTemplateId</data>
+            <data name="steps" xsi:type="array">
+                <item name="0" xsi:type="string">-</item>
+            </data>
+            <data name="columnsForSorting" xsi:type="array">
+                <item name="id" xsi:type="string">ID</item>
+                <item name="name" xsi:type="string">Name</item>
+                <item name="type" xsi:type="string">Type</item>
+                <item name="status" xsi:type="string">Status</item>
+            </data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting" />
+        </variation>
+    </testCase>
+
+</config>

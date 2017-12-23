@@ -14,76 +14,89 @@ use Magento\Mtf\System\Event\EventManagerInterface;
 use Magento\Mtf\Util\Protocol\CurlInterface;
 use Magento\Mtf\Util\Protocol\CurlTransport;
 use Magento\Mtf\Util\Protocol\CurlTransport\BackendDecorator;
-
-/**
- * Curl handler for creating templateInstance/backendApp.
- */
 class Curl extends AbstractCurl
 {
-    /**
-     * Mapping values for data.
-     *
-     * @var array
-     */
-//    protected $mappingData = [
-//        'code' => [
-//            'CMS Page Link' => 'cms_page_link',
-//        ],
-//        'block' => [
-//            'Main Content Area' => 'content',
-//            'Sidebar Additional' => 'sidebar.additional',
-//            'Sidebar Main' => 'sidebar.main',
-//        ]
-//    ];
 
-    /**
-     * Post request for creating widget instance.
-     *
-     * @param FixtureInterface $fixture [optional]
-     * @throws \Exception
-     * @return null|array instance id
-     */
+    protected $mappingData = [
+        'status'  => [
+            'Active' => '1',
+            'Inactive' => '2'
+        ],
+        'type'  => [
+            'Standard Barcode' => 'standard',
+            'A4 Barcode' => 'a4',
+            'Jewelry Barcode' => 'jewelry'
+        ],
+        'symbology'  => [
+            'Code-128' => 'code128',
+            'Code-25' => 'code25',
+            'Interleaved 2 of 5' => 'code25interleaved',
+            'Code-39' => 'code39',
+            'Ean-13' => 'ean13',
+            'Identcode' => 'identcode',
+            'Itf14' => 'itf14',
+            'Leitcode' => 'leitcode',
+            'Royalmail' => 'royalmail'
+        ],
+        'measurement_unit' => [
+            'mm' => 'mm',
+            'cm' => 'cn',
+            'in' => 'in',
+            'px' => 'px',
+            '%' => '%'
+        ],
+        'product_attribute_show_on_barcode' => [
+            'SKU' => 'sku',
+            'Product Name' => 'name',
+            'Price' => 'price',
+            'Credit Rate' => 'storecredit_rate',
+            'Store Credit value' => 'storecredit_value',
+            'Minimum Store Credit value' => 'storecredit_from',
+            'Maximum Store Credit value' => 'storecredit_to',
+            'Store Credit values' => 'storecredit_dropdown'
+        ]
+    ];
+
     public function persist(FixtureInterface $fixture = null)
     {
-        // Prepare data to send it using cURL.
-//        $data = $this->prepareData($fixture);
-        // Build url to send post request to create widget.
         $data = $this->replaceMappingData($fixture->getData());
-        $data['form_key'] = 'fasdfadsfsad';
-        $url = $_ENV['app_backend_url'] . 'admin/barcodesuccess/template/save/';
-        // Create CurlTransport instance to operate with cURL. BackendDecorator is used to log in to Magento backend.
+//        throw new \Exception(var_dump($data));
+        $url = $_ENV['app_backend_url'] . 'barcodesuccess/template/save/';
         $curl = new BackendDecorator(new CurlTransport(), $this->_configuration);
-        // Send request to url with prepared data.
         $curl->write($url, $data);
-        // Read response.
         $response = $curl->read();
-        // Close connection to server.
         $curl->close();
-        // Verify whether request has been successful (check if success message is present).
+
         if (!strpos($response, 'data-ui-id="messages-message-success"')) {
             throw new \Exception("The template has been saved successfully! Response: $response");
         }
-//        // Get id of created widget in order to use in other tests.
-//        $id = null;
-//        if (preg_match_all('/\/widget_instance\/edit\/instance_id\/(\d+)/', $response, $matches)) {
-//            $id = $matches[1][count($matches[1]) - 1];
-//        }
-//        return ['id' => $id];
+//
+//        preg_match_all('/\"template_id\":\"(\d+)\"/', $response, $matches);
+//        $id = $matches[1][count($matches[1]) - 1];
+        $id = $this->getTemplateId($fixture->getName());
+//        throw new \Exception(var_dump($id));
+        return ['template_id' => $id];
     }
 
-    /**
-     * Prepare data to create template.
-     *
-     * @param FixtureInterface $template
-     * @return array
-     */
-//    protected function prepareData(FixtureInterface $template)
-//    {
-//        // Replace UI fixture values with values that are applicable for cURL. Property $mappingData is used.
-//        $data = $this->replaceMappingData($template->getData());
-//        // Perform data manipulations to prepare the cURL request based on input data.
-//        ...
-//        return $data;
-//    }
-    // Additional methods.
+    protected function getTemplateId($name)
+    {
+        $url = $_ENV['app_backend_url'] . 'mui/index/render/';
+        $data = [
+            'namespace' => 'os_barcode_template_listing',
+            'filters' => [
+                'placeholder' => true,
+                'name' => $name
+            ],
+            'isAjax' => true
+        ];
+        $curl = new BackendDecorator(new CurlTransport(), $this->_configuration);
+
+        $curl->write($url, $data, CurlInterface::POST);
+        $response = $curl->read();
+        $curl->close();
+
+        preg_match('/os_barcode_template_listing.+items.+"template_id":"(\d+)"/', $response, $match);
+        return empty($match[1]) ? null : $match[1];
+    }
+
 }

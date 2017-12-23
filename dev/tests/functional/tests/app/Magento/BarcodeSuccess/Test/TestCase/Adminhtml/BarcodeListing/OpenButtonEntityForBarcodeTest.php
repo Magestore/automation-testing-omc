@@ -23,13 +23,11 @@ class OpenButtonEntityForBarcodeTest extends Injectable
     }
     public function test($id)
     {
-        $id = '#'.$id;
+
         $this->barcodeIndex->open();
         $this->barcodeIndex->getBarcodeGrid()->waitingForLoadingMaskNotVisible();
         $this->barcodeIndex->getManageBarcodes()->clickButton($id);
-        if($id = '#generate')
-            $this->barcodeIndex->getBarcodeGrid()->waitingForLoadingMaskNotVisible();
-        else
-            sleep(1);
+        $this->barcodeIndex->getBarcodeGrid()->waitingForLoadingMaskNotVisible();
+        sleep(1);
     }
 }

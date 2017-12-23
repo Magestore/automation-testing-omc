@@ -2,14 +2,12 @@
 /**
  * Created by PhpStorm.
  * User: gvt
- * Date: 11/12/2017
- * Time: 23:05
+ * Date: 23/12/2017
+ * Time: 13:52
  */
-namespace Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeTemplate\Grid;
+namespace Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeListing\Grid;
 use Magento\Ui\Test\TestCase\GridFilteringTest;
-class FilterGridEntityForTemplateTest extends GridFilteringTest
-{
-    protected $gridBlock;
+class FilterBarcodeGenerateEntityTest extends GridFilteringTest{
     public function test(
         $pageClass,
         $gridRetriever,
@@ -21,24 +19,34 @@ class FilterGridEntityForTemplateTest extends GridFilteringTest
         $fixtureDataSet = null,
         $idColumn = null
     ) {
+        $productdatasets = explode(',', $fixtureDataSet)[1];
+        $fixtureDataSet = explode(',', $fixtureDataSet)[0];
+        $productdatasets = explode(',', $productdatasets);
+        foreach ($productdatasets as &$productdataset) {
+            $product = $this->fixtureFactory->createByCode(
+                'catalogProductSimple',
+                [
+                    'dataset' => $productdataset,
+                ]
+            );
+            $product->persist();
+        }
+
+
         $items = $this->createItems($itemsCount, $fixtureName, $fixtureDataSet, $steps);
         $page = $this->pageFactory->create($pageClass);
+
         // Steps
         $page->open();
         /** @var DataGrid $gridBlock */
         $gridBlock = $page->$gridRetriever();
-        $this->gridBlock = $gridBlock;
         $gridBlock->resetFilter();
 
         $filterResults = [];
         foreach ($filters as $index => $itemFilters) {
             foreach ($itemFilters as $itemFiltersName => $itemFilterValue) {
                 if (substr($itemFilterValue, 0, 1) === ':') {
-
                     $value = $items[$index]->getData(substr($itemFilterValue, 1));
-                    if ($itemFiltersName == "type") {
-                        $value = explode(' ', $value)[0];
-                    }
                 } else {
                     $value = $itemFilterValue;
                 }
@@ -55,12 +63,7 @@ class FilterGridEntityForTemplateTest extends GridFilteringTest
                 $filterResults[$items[$index]->$idGetter()][$itemFiltersName] = $filteredIds;
             }
         }
-        $gridBlock->resetFilter();
 
         return ['filterResults' => $filterResults];
-    }
-    public function tearDown()
-    {
-        $this->gridBlock->massaction([], 'Delete', true, 'Select All');
     }
 }

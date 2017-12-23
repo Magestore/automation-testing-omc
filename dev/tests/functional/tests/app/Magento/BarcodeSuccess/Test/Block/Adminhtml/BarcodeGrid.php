@@ -5,6 +5,17 @@ use Magento\Ui\Test\Block\Adminhtml\DataGrid;
 
 class BarcodeGrid extends DataGrid
 {
+    protected $filters = [
+        'barcode' => [
+            'selector' => '[name="barcode"]',
+        ],
+        'product_sku' => [
+            'selector' => '[name="product_sku"]',
+        ],
+        'supplier_code' => [
+            'selector' => '[name="supplier_code"]',
+        ],
+    ];
     /**
      * @var string
      */
@@ -34,6 +45,8 @@ class BarcodeGrid extends DataGrid
      */
     protected $dataGridPager = '.admin__data-grid-pager-wrap';
 
+
+    protected $loadingMaskPopUp = '.loading-mask';
     /**
      * @param $column
      * @return mixed
@@ -57,6 +70,11 @@ class BarcodeGrid extends DataGrid
     {
 //        $this->waitLoader();
         $this->waitForElementNotVisible($this->loadingMask, Locator::SELECTOR_CSS);
+    }
+    public function waitingForLoadingMaskPopUpNotVisible()
+    {
+//        $this->waitLoader();
+        $this->waitForElementNotVisible($this->loadingMaskPopUp, Locator::SELECTOR_CSS);
     }
     public function waitingForLoadingMaskFormNotVisible()
     {
@@ -112,5 +130,8 @@ class BarcodeGrid extends DataGrid
         return $this->_rootElement->find($this->dataGridPager, Locator::SELECTOR_CSS)->isVisible();
     }
 
-
+    public function tableIsVisible()
+    {
+        return $this->_rootElement->find('#container > div > div.admin__data-grid-wrap > table')->isVisible();
+    }
 }

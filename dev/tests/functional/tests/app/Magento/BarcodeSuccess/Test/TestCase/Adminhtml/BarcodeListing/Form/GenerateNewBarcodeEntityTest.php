@@ -8,6 +8,8 @@
 namespace Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeListing\Form;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeListing\BarcodeGenerateIndex;
+use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\TestFramework\Inspection\Exception;
 
 class GenerateNewBarcodeEntityTest extends Injectable
 {
@@ -26,15 +28,44 @@ class GenerateNewBarcodeEntityTest extends Injectable
     ) {
         $this->barcodeGenerateIndex = $barcodeGenerateIndex;
     }
-    public function test(array $products = null, $fields = null)
+    public function test($productdatasets = null, $fields = null, FixtureFactory $fixtureFactory)
     {
+        /**
+         * @param string $products
+         * @param FixtureFactory $fixtureFactory
+         */
+        //Steps
         $this->barcodeGenerateIndex->open();
         $this->barcodeGenerateIndex->getBarcodeGrid()->waitingForLoadingMaskFormNotVisible();
+        if ($productdatasets != null) {
+            $productdatasets = explode(',', $productdatasets);
+            $products = [];
+            foreach ($productdatasets as &$productdataset) {
+                $product = $fixtureFactory->createByCode(
+                    'catalogProductSimple',
+                    [
+                        'dataset' => $productdataset,
+                    ]
+                );
+                $product->persist();
+                $products[] = $product;
+            }
+            $produs = [];
+            foreach ($products as $product)
+            {
+                $produ = [
+                    'sku' => $product->getSku()
+                ];
+                $produs[] = $produ;
+            }
+            $this->barcodeGenerateIndex->getFormBarcodeGenerate()->clickSelectProducts();
+            $this->barcodeGenerateIndex->getProductsBlock()->setFieldsData($produs);
+
+        }
+
+//
         if($fields != null)
             $this->barcodeGenerateIndex->getFormBarcodeGenerate()->getSection('os_barcode_generate_form_general')->setFieldsData($fields);
-        if($products != null){
-            $this->barcodeGenerateIndex->getFormBarcodeGenerate()->getSection('os_generate_barcode')->setFieldsData($products);
-        }
         $this->barcodeGenerateIndex->getPageActionsBlock()->save();
 
     }

@@ -12,11 +12,11 @@
             <data name="template/dataset" xsi:type="string">template1</data>
             <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeTemplate\AssertTemplateSuccessSaveMessage" />
         </variation>
-        <variation name="SaveNewTemplateEntityForBarcodeTestVariation2">
-            <data name="addNewButton" xsi:type="string">new</data>
-            <data name="template/dataset" xsi:type="string">template2</data>
-            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeTemplate\AssertTemplateSuccessSaveMessage" />
-        </variation>
+        <!--<variation name="SaveNewTemplateEntityForBarcodeTestVariation2">-->
+            <!--<data name="addNewButton" xsi:type="string">new</data>-->
+            <!--<data name="template/dataset" xsi:type="string">template2</data>-->
+            <!--<constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeTemplate\AssertTemplateSuccessSaveMessage" />-->
+        <!--</variation>-->
         <variation name="SaveNewTemplateEntityForBarcodeTestVariation3">
             <data name="addNewButton" xsi:type="string">new</data>
             <data name="template/dataset" xsi:type="string">template3</data>

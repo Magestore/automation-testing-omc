@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodePrint\Grid\FilterPrintBarcodeEntityTest" summary="Filter" ticketId="MAGESTORE-1">
+        <variation name="VariationFilter1">
+            <data name="itemsCount" xsi:type="string">1</data>
+            <data name="fixtureName" xsi:type="string">barcode</data>
+            <data name="fixtureDataSet" xsi:type="string">barcodePrint1,productForBarcodePrint1</data>
+            <data name="filters" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="barcode" xsi:type="string">:barcode</item>
+                    <item name="product_sku" xsi:type="string">:product_sku</item>
+                    <item name="supplier_code" xsi:type="string">:supplier_code</item>
+                </item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodePrint\BarcodePrintIndex</data>
+            <data name="gridRetriever" xsi:type="string">getBarcodeGrid</data>
+            <data name="idGetter" xsi:type="string">getId</data>
+            <data name="idColumn" xsi:type="string"></data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridFiltering" />
+        </variation>
+    </testCase>
+
+</config>
