@@ -23,7 +23,7 @@ class EarningRatesGrid extends RewardGrid
      */
     // protected $option = '[name="title"]';
     protected $selectAction = '.action-menu-item';
-
+    protected $option = '[name="group"]';
     /**
      * Filters array mapping.
      *
@@ -56,15 +56,15 @@ class EarningRatesGrid extends RewardGrid
         ],
         'website_ids' => [
             'selector' => '.admin__data-grid-filters input[name="website_ids"]',
-            'input'    => 'Select',
+            'input'    => 'select',
         ],
         'customer_group_ids' => [
             'selector' => '.admin__data-grid-filters input[name="customer_group_ids"]',
-            'input'    => 'Select',
+            'input'    => 'select',
         ],
         'status' => [
-            'selector' => '.admin__data-grid-filters input[name="status"]',
-            'input'    => 'Select',
+            'selector' => '[name="status"]',
+            'input'    => 'select',
         ]
     ];
 
@@ -79,4 +79,12 @@ class EarningRatesGrid extends RewardGrid
 //        $rowItem->find($this->selectAction)->click();
 //        $rowItem->find($this->editLink)->click();
 //    }
+    /**
+     * Fix core
+     */
+    public function resetFilter()
+    {
+        $this->waitLoader();
+        parent::resetFilter();
+    }
 }

@@ -12,8 +12,12 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Storepickup\Test\Page\Adminhtml\ScheduleIndex;
 
 /**
- * Class ScheduleFormTest
- * @package Magento\Storepickup\Test\TestCase
+ * Steps:
+ * 1. Login to the backend.
+ * 2. Navigate to Store Pickup > Manage Schedule.
+ * 3. Click to Add New Schedule.
+ * 4. Perform appropriate assertions.
+ *
  */
 class ScheduleFormTest extends Injectable
 {

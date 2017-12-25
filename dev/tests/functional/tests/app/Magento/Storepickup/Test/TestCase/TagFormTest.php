@@ -8,18 +8,24 @@
 
 namespace Magento\Storepickup\Test\TestCase;
 
+use Magento\Customercredit\Test\Fixture\CustomerUseCredit;
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Setup\Exception;
 use Magento\Storepickup\Test\Fixture\StorepickupHoliday;
 use Magento\Storepickup\Test\Fixture\StorepickupSchedule;
+use Magento\Storepickup\Test\Fixture\StorepickupSpecialday;
 use Magento\Storepickup\Test\Fixture\StorepickupStore;
 use Magento\Storepickup\Test\Fixture\StorepickupTag;
 use Magento\Storepickup\Test\Page\Adminhtml\TagIndex;
-use Magento\Search\Test\Fixture\SynonymGroup;
-use Magento\User\Test\Fixture\User;
-use Magento\Widget\Test\Fixture\Widget;
+
 /**
- * Class TagFormTest
- * @package Magento\Storepickup\Test\TestCase
+ * Steps:
+ * 1. Login to the backend.
+ * 2. Navigate to Store Pickup > Manage Tag.
+ * 3. Click to Add New Tag.
+ * 4. Perform appropriate assertions.
+ *
  */
 class TagFormTest extends Injectable
 {
@@ -36,10 +42,11 @@ class TagFormTest extends Injectable
         $this->tagIndex = $tagIndex;
     }
 
-    public function __prepare(StorepickupHoliday $storepickupTag)
-    {
-        $storepickupTag->persist();
-    }
+//    public function __prepare(CustomerUseCredit $customerUseCredit)
+//    {
+////        throw new Exception(var_dump($customerUseCredit->getData()));
+//        $customerUseCredit->persist();
+//    }
 
     /**
      * @param $button

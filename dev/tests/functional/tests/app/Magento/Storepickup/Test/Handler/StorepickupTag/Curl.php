@@ -10,8 +10,10 @@ namespace Magento\Storepickup\Test\Handler\StorepickupTag;
 
 use Magento\Mtf\Fixture\FixtureInterface;
 use Magento\Mtf\Handler\Curl as AbstractCurl;
+use Magento\Mtf\Util\Protocol\CurlInterface;
 use Magento\Mtf\Util\Protocol\CurlTransport;
 use Magento\Mtf\Util\Protocol\CurlTransport\BackendDecorator;
+use Magento\Setup\Exception;
 
 class Curl extends  AbstractCurl implements StorepickupTagInterface
 {
@@ -30,7 +32,6 @@ class Curl extends  AbstractCurl implements StorepickupTagInterface
     protected $mappingData = [];
 
     /**
-     * POST request for creating Synonym Group.
      *
      * @param FixtureInterface|null $fixture [optional]
      * @return array
@@ -62,9 +63,27 @@ class Curl extends  AbstractCurl implements StorepickupTagInterface
                 "Store Tag entity creation by curl handler was not successful! Response: $response"
             );
         }
+        $data['tag_id'] = $this->getTagId($fixture->getTagName());
+        return ['tag_id' => $data['tag_id']];
+    }
 
-        preg_match_all('/\"tag_id\":\"(\d+)\"/', $response, $matches);
-        $id = $matches[1][count($matches[1]) - 1];
-        return ['tag_id' => $id];
+    protected function getTagId($tagName)
+    {
+        $url = $_ENV['app_backend_url'] . 'mui/index/render/';
+        $data = [
+            'namespace' => 'storepickup_tag_listing',
+            'filters' => [
+                'placeholder' => true,
+                'tag_name' => $tagName
+            ],
+            'isAjax' => true
+        ];
+        $curl = new BackendDecorator(new CurlTransport(), $this->_configuration);
+
+        $curl->write($url, $data, CurlInterface::POST);
+        $response = $curl->read();
+        $curl->close();
+        preg_match('/storepickup_tag_listing_data_source.+items.+"tag_id":"(\d+)"/', $response, $match);
+        return empty($match[1]) ? null : $match[1];
     }
 }

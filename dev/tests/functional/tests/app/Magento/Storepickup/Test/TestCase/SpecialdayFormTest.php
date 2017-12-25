@@ -12,8 +12,12 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Storepickup\Test\Page\Adminhtml\SpecialdayIndex;
 
 /**
- * Class SpecialdayFormTest
- * @package Magento\Storepickup\Test\TestCase
+ * Steps:
+ * 1. Login to the backend.
+ * 2. Navigate to Store Pickup > Manage Special day.
+ * 3. Click to Add New Schedule.
+ * 4. Perform appropriate assertions.
+ *
  */
 class SpecialdayFormTest extends Injectable
 {

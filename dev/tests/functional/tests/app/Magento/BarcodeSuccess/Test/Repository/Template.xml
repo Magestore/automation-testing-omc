@@ -12,6 +12,28 @@
             <field name="type" xsi:type="string">A4 Barcode</field>
             <field name="name" xsi:type="string">template_label%isolation%</field>
             <field name="status" xsi:type="string">Inactive</field>
+            <field name="symbology" xsi:type="string">Code-128</field>
+            <field name="measurement_unit" xsi:type="string">mm</field>
+            <field name="label_per_row" xsi:type="string">%isolation%</field>
+            <field name="paper_width" xsi:type="string">%isolation%</field>
+            <field name="paper_height" xsi:type="string">%isolation%</field>
+            <field name="label_width" xsi:type="string">%isolation%</field>
+            <field name="label_height" xsi:type="string">%isolation%</field>
+            <field name="font_size" xsi:type="string">%isolation%</field>
+            <field name="top_margin" xsi:type="string">%isolation%</field>
+            <field name="left_margin" xsi:type="string">%isolation%</field>
+            <field name="right_margin" xsi:type="string">%isolation%</field>
+            <field name="bottom_margin" xsi:type="string">%isolation%</field>
+            <field name="product_attribute_show_on_barcode" xsi:type="array">
+                    <item name="1" xsi:type="string">SKU</item>
+                    <!--<item name="2" xsi:type="string">Credit Rate</item>-->
+            </field>
+        </dataset>
+        <dataset name="template2">
+            <!--<field name="template_id" xsi:type="number">11</field>-->
+            <field name="type" xsi:type="string">Jewelry Barcode</field>
+            <field name="name" xsi:type="string">template_label%isolation%</field>
+            <field name="status" xsi:type="string">Active</field>
             <field name="symbology" xsi:type="string">Interleaved 2 of 5</field>
             <field name="measurement_unit" xsi:type="string">px</field>
             <field name="label_per_row" xsi:type="string">%isolation%</field>
@@ -25,27 +47,9 @@
             <field name="right_margin" xsi:type="string">%isolation%</field>
             <field name="bottom_margin" xsi:type="string">%isolation%</field>
             <field name="product_attribute_show_on_barcode" xsi:type="array">
-                    <item name="1" xsi:type="string">Price</item>
-                    <item name="2" xsi:type="string">Credit Rate</item>
+                <item name="1" xsi:type="string">SKU</item>
+                <item name="2" xsi:type="string">Credit Rate</item>
             </field>
-        </dataset>
-        <dataset name="template2">
-            <!--<field name="template_id" xsi:type="number">11</field>-->
-            <field name="type" xsi:type="string">A4 Barcode</field>
-            <field name="name" xsi:type="string">template_label%isolation%</field>
-            <field name="status" xsi:type="string">Inactive</field>
-            <field name="symbology" xsi:type="string">Interleaved 2 of 5</field>
-            <field name="measurement_unit" xsi:type="string">px</field>
-            <field name="label_per_row" xsi:type="string">%isolation%</field>
-            <field name="paper_width" xsi:type="string">%isolation%</field>
-            <field name="paper_height" xsi:type="string">%isolation%</field>
-            <field name="label_width" xsi:type="string">%isolation%</field>
-            <field name="label_height" xsi:type="string">%isolation%</field>
-            <field name="font_size" xsi:type="string">%isolation%</field>
-            <field name="top_margin" xsi:type="string">%isolation%</field>
-            <field name="left_margin" xsi:type="string">%isolation%</field>
-            <field name="right_margin" xsi:type="string">%isolation%</field>
-            <field name="bottom_margin" xsi:type="string">%isolation%</field>
         </dataset>
         <dataset name="template3">
             <!--<field name="template_id" xsi:type="number">11</field>-->

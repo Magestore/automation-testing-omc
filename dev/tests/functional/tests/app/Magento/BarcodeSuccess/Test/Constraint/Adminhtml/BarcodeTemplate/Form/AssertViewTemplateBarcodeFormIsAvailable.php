@@ -13,7 +13,6 @@ class AssertViewTemplateBarcodeFormIsAvailable extends AbstractConstraint
 {
     public function processAssert(BarcodeViewTemplateIndex $barcodeViewTemplateIndex, $section, $fields)
     {
-        $barcodeViewTemplateIndex->getTemplateGrid()->waitingForLoadingMaskNotVisible();
         \PHPUnit_Framework_Assert::assertTrue(
             $barcodeViewTemplateIndex->getBlockViewTemplate()->getSection($section)->isVisible(),
             'Section '.$section.' is not shown'

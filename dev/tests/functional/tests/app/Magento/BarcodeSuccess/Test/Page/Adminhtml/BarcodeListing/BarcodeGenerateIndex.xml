@@ -11,5 +11,6 @@
         <block name="barcodeGrid" class="Magento\BarcodeSuccess\Test\Block\Adminhtml\BarcodeGrid" locator="[id='page:main-container']" strategy="css selector" />
         <block name="messagesBlock" class="Magento\Backend\Test\Block\Messages" locator="#messages" strategy="css selector" />
         <block name="pageActionsBlock" class="Magento\Backend\Test\Block\FormPageActions" locator=".page-main-actions" strategy="css selector" />
+        <block name="productsBlock" class="Magento\BarcodeSuccess\Test\Block\Adminhtml\BarcodeListing\Generate\Form\Section\ProductsToGenerate" locator=".modal-inner-wrap" strategy="css selector"/>
     </page>
 </config>

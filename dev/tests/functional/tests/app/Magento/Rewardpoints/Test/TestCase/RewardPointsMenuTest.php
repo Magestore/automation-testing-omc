@@ -11,6 +11,15 @@ namespace Magento\Rewardpoints\Test\TestCase;
 use Magento\Backend\Test\TestCase\NavigateMenuTest;
 
 /**
+ *
+ * Test Flow:
+ * 1. Login as admin
+ * 2. Navigate through menu to page
+ * 3. Verify menu
+ *
+ */
+
+/**
  * Class RewardPointsMenuTest
  * @package Magento\Rewardpoints\Test\TestCase
  */

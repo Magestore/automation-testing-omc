@@ -16,5 +16,11 @@
             <field name="date_to" xsi:type="string">12/20/2017</field>
             <field name="holiday_comment" xsi:type="string">magestore_holiday_comment %isolation%</field>
         </dataset>
+        <dataset name="holiday1">
+            <field name="holiday_name" xsi:type="string">magestore_holiday %isolation%</field>
+            <field name="date_from" xsi:type="string">12/25/2017</field>
+            <field name="date_to" xsi:type="string">12/30/2017</field>
+            <field name="holiday_comment" xsi:type="string">magestore_holiday_comment %isolation%</field>
+        </dataset>
     </repository>
 </config>

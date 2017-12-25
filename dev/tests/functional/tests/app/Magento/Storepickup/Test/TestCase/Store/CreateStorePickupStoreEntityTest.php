@@ -13,6 +13,16 @@ use Magento\Storepickup\Test\Fixture\StorepickupStore;
 use Magento\Storepickup\Test\Page\Adminhtml\StoreIndex;
 use Magento\Storepickup\Test\Page\Adminhtml\StoreNew;
 
+/**
+ * Steps:
+ * 1. Login to the backend.
+ * 2. Navigate to Store Pickup > Manage Store.
+ * 3. Start to Add New Store .
+ * 4. Fill in data according to data set.
+ * 5. Save Store.
+ * 6. Perform appropriate assertions.
+ *
+ */
 class CreateStorePickupStoreEntityTest extends Injectable
 {
     /**

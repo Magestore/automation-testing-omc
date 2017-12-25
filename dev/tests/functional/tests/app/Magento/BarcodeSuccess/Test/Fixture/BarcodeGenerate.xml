@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="barcodeGenerate"
+             module="Magento_BarcodeSuccess"
+             type="flat"
+             collection="Magento\BarcodeSuccess\Model\ResourceModel\Barcode\Collection"
+             repository_class="Magento\BarcodeSuccess\Test\Repository\BarcodeGenerate"
+             handler_interface="Magento\BarcodeSuccess\Test\Handler\Generate\BarcodeInterface"
+             class="Magento\BarcodeSuccess\Test\Fixture\BarcodeGenerate">
+
+        <field name="products" group="stores" is_required="0" source="Magento\BarcodeSuccess\Test\Fixture\Generate\Products"/>
+        <field name="reason" is_required="0"/>
+        <field name="id" is_required="0"/>
+    </fixture>
+</config>

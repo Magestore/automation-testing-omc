@@ -10,6 +10,17 @@ namespace Magento\Rewardpoints\Test\TestCase;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Rewardpoints\Test\Page\Adminhtml\EarningRatesIndex;
+use Magento\Rewardpoints\Test\Fixture\EarningRates;
+
+/**
+ *
+ * Test Flow:
+ * 1. Login as admin
+ * 2. Navigate to the Reward points>Earning rates
+ * 3. Click on 'Add New Earning Rate' button
+ * 4. Verify form add new
+ *
+ */
 
 /**
  * Class EarningRatesFormTest

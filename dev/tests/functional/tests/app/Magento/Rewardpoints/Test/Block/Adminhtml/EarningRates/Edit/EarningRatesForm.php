@@ -29,7 +29,6 @@ class EarningRatesForm extends FormTabs
     /**
      * @return mixed
      */
-
     protected $errorField = '.admin__field-error';
 
     /**
