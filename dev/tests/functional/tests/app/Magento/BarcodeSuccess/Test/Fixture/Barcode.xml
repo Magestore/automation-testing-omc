@@ -11,10 +11,10 @@
              type="flat"
              collection="Magento\BarcodeSuccess\Model\ResourceModel\Barcode\Collection"
              repository_class="Magento\BarcodeSuccess\Test\Repository\Barcode"
-             handler_interface="Magento\BarcodeSuccess\Test\Handler\Barcode\BarcodeInterface"
+             handler_interface="Magento\BarcodeSuccess\Test\Handler\Generate\BarcodeInterface"
              class="Magento\BarcodeSuccess\Test\Fixture\Barcode"
              entity_type="os_barcode">
-        <field name="id" is_required="1"/>
+        <field name="id" is_required="0"/>
         <field name="barcode" is_required="0"/>
         <field name="qty" is_required="0"/>
         <field name="product_id" is_required="0"/>
@@ -25,5 +25,7 @@
         <field name="purchased_time" is_required="0"/>
         <field name="history_id" is_required="0"/>
         <field name="created_at" is_required="0"/>
+        <field name="username" is_required="0"/>
+        <field name="type" is_required="0"/>
     </fixture>
 </config>

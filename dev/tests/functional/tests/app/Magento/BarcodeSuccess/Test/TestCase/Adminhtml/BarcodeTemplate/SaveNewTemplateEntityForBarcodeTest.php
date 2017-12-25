@@ -9,7 +9,7 @@ namespace Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeTemplate;
 use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeTemplate\BarcodeTemplateIndex;
 use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeTemplate\BarcodeViewTemplateIndex;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\BarcodeSuccess\Test\Fixture\Template;
+use Magento\BarcodeSuccess\Test\Fixture\TemplateBarcode;
 
 
 class SaveNewTemplateEntityForBarcodeTest extends Injectable
@@ -30,7 +30,7 @@ class SaveNewTemplateEntityForBarcodeTest extends Injectable
     protected $barcodeViewTemplateIndex;
 
     /**
-     * @var Template
+     * @var TemplateBarcode
      */
     protected $template;
 
@@ -42,10 +42,11 @@ class SaveNewTemplateEntityForBarcodeTest extends Injectable
         $this->barcodeViewTemplateIndex = $barcodeViewTemplateIndex;
     }
 
-    public function test($addNewButton,Template $template)
+    public function test($addNewButton,TemplateBarcode $template)
     {
         $this->barcodeTemplateIndex->open();
         $this->barcodeTemplateIndex->getTemplateGrid()->waitingForLoadingMaskNotVisible();
+        $this->barcodeTemplateIndex->getTemplateGrid()->waitingForLoadingMaskFormNotVisible();
         $this->barcodeTemplateIndex->getAddNewTemplate()->addNewTemplate($addNewButton);
         $this->barcodeViewTemplateIndex->getBlockViewTemplate()->fill($template);
         $this->barcodeViewTemplateIndex->getPageActionsBlock()->save();

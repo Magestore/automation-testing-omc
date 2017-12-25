@@ -8,15 +8,22 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeSettings\Form\SaveFormEntityForBarcodeTest" summary="Save config barcode settings" ticketId="MAGESTORE-1">
-        <!--<variation name="SaveFormEntityForBarcodeTestVariation1">-->
-            <!--<data name="formFields/barcodesuccess_general_one_barcode_per_sku" xsi:type="string">No</data>-->
-            <!--<data name="formFields/barcodesuccess_general_barcode_pattern" xsi:type="string">paterm barcode %isolation%</data>-->
-            <!--<data name="formFields/barcodesuccess_general_default_barcode_template" xsi:type="string">A4</data>-->
-            <!--<data name="idGeneralSection" xsi:type="string">barcodesuccess_general</data>-->
-            <!--<constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeSettings\AssertSettingBarcodeSuccessSaveMessage" />-->
-        <!--</variation>-->
-        <variation name="SaveFormEntityForBarcodeTestVariation3">
-          <data name="idGeneralSection" xsi:type="string">barcodesuccess_general</data>
+        <variation name="SetFullField">
+            <data name="formFields/barcodesuccess_general_one_barcode_per_sku" xsi:type="string">No</data>
+            <data name="formFields/barcodesuccess_general_barcode_pattern" xsi:type="string">paterm barcode %isolation%</data>
+            <data name="formFields/barcodesuccess_general_default_barcode_template" xsi:type="string">-- Select Template --</data>
+            <data name="idGeneralSection" xsi:type="string">barcodesuccess_general</data>
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeSettings\AssertSettingBarcodeSuccessSaveMessage" />
+        </variation>
+        <variation name="OnlySaveWithoutSetFiled">
+            <data name="idGeneralSection" xsi:type="string">barcodesuccess_general</data>
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeSettings\AssertSettingBarcodeSuccessSaveMessage" />
+        </variation>
+        <variation name="returnDefault">
+            <data name="formFields/barcodesuccess_general_one_barcode_per_sku" xsi:type="string">Yes</data>
+            <data name="formFields/barcodesuccess_general_barcode_pattern" xsi:type="string">[N.9]</data>
+            <data name="formFields/barcodesuccess_general_default_barcode_template" xsi:type="string">-- Select Template --</data>
+            <data name="idGeneralSection" xsi:type="string">barcodesuccess_general</data>
             <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeSettings\AssertSettingBarcodeSuccessSaveMessage" />
         </variation>
     </testCase>

@@ -29,6 +29,7 @@ class CheckInputScanEntityForBarcodeTest extends Injectable
     public function test()
     {
         $this->barcodeScanIndex->open();
-        sleep(1);
+        $this->barcodeScanIndex->getBarcodeGrid()->waitingForLoadingMaskPopUpNotVisible();
+        $this->barcodeScanIndex->getBarcodeGrid()->waitingForLoadingMaskNotVisible();
     }
 }

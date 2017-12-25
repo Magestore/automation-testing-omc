@@ -16,7 +16,7 @@ class TemplateGrid extends BarcodeGrid
             'selector' => '[name="name"]',
         ],
         'type' => [
-            'selector' => '[name="type_id"]',
+            'selector' => '[name="type"]',
             'input' => 'select',
         ],
         'status' => [

@@ -63,10 +63,19 @@ class PosGrid  extends DataGrid
      * @param SimpleElement $rowItem
      * @return void
      */
-        protected function clickEditLink(SimpleElement $rowItem)
+     protected function clickEditLink(SimpleElement $rowItem)
         {
             $rowItem->find($this->selectAction)->click();
             // Neu nhu co 2 action. Vi du: delete va edit thi moi them lenh duoi day de lua chon.
             // $rowItem->find($this->editLink)->click();
         }
+
+    /**
+     * Fix core
+     */
+    public function resetFilter()
+    {
+        $this->waitLoader();
+        parent::resetFilter();
+    }
 }

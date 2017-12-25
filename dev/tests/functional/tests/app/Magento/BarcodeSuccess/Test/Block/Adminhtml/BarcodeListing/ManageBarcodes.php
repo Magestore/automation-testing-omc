@@ -14,6 +14,7 @@ class ManageBarcodes extends Block
 
     public function clickButton($id)
     {
+        $id = '#'.$id;
         $this->_rootElement->find($id)->click();
     }
 
