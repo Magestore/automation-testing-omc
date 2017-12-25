@@ -39,7 +39,7 @@ class SelectCustomerForm extends FormTabs
     public function selectedCustomer(Customer $customer){
         $this->_rootElement->find($this->emailSearchField, Locator::SELECTOR_CSS)->setvalue($customer->getEmail());
         $this->_rootElement->find($this->buttonSearch, Locator::SELECTOR_CSS)->click();
-        $this->waitForElementVisible('[data-role="loader"]');
+        $this->waitForElementNotVisible('[data-role="loader"]');
         $this->_rootElement->find(sprintf($this->callColumSelect,$customer->getId()), Locator::SELECTOR_XPATH)->click();
     }
 

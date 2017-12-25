@@ -15,6 +15,23 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Rewardpoints\Test\Fixture\Transaction;
 
 /**
+ *  * Preconditions:
+ * 1. Create customer
+ *
+ * Test Flow:
+ * 1. Login as admin
+ * 2. Navigate to the Reward points>Earning Rates
+ * 3. Click on 'Add New Earning Rate' button
+ * 4. Click on 'Select' button
+ * 5. Filter email customer
+ * 6. Click on customer
+ * 7. Fill out all data
+ * 8. Save
+ * 9. Verify created
+ *
+ */
+
+/**
  * Class CreateTransactionsEntityTest
  * @package Magento\Rewardpoints\Test\TestCase\Transactions
  */

@@ -8,7 +8,7 @@
 
 namespace Magento\Rewardpoints\Test\Constraint\SpendingRates;
 
-use Magento\Rewardpoints\Test\Fixture\Rate;
+use Magento\Rewardpoints\Test\Fixture\SpendingRates;
 use Magento\Rewardpoints\Test\Page\Adminhtml\SpendingRatesIndex;
 use Magento\Mtf\Constraint\AbstractConstraint;
 

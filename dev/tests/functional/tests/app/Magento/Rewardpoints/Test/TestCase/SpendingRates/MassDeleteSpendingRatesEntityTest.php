@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 12/22/2017
- * Time: 3:32 PM
+ * Date: 12/19/2017
+ * Time: 9:32 AM
  */
 
 namespace Magento\Rewardpoints\Test\TestCase\SpendingRates;
@@ -13,19 +13,21 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 
 /**
+ *
+ * Test Flow:
  * Preconditions:
- * 1. Create spending rates according to data set.
+ * 1. Create X Earning Rates
  *
  * Steps:
- * 1. Login to backend.
- * 2. Navigate Reward points > Spending Rates
- * 3. Select spending rates created in preconditions.
- * 4. Select Change status action from mass-action.
- * 5. Select Inactive
- * 6. Perform asserts.
+ * 1. Open backend
+ * 2. Go to Reward points > Spending Rates
+ * 3. Select N Spending Rates from preconditions
+ * 4. Select in dropdown "Delete"
+ * 5. Click Submit button
+ * 6. Perform all assertions according to dataset
  *
  */
-class MassSpendingRatesChangeStatusTest extends Injectable
+class MassDeleteSpendingRatesEntityTest extends Injectable
 {
     /* tags */
     const MVP = 'yes';
@@ -33,7 +35,7 @@ class MassSpendingRatesChangeStatusTest extends Injectable
 
     private $spendingRatesIndex;
 
-    private $changeStatusSpendingRates = 'Change status';
+    private $spendingRatesGridAction = 'Delete';
 
     private $fixtureFactory;
 
@@ -43,26 +45,26 @@ class MassSpendingRatesChangeStatusTest extends Injectable
     ) {
         $this->spendingRatesIndex = $spendingRatesIndex;
         $this->fixtureFactory = $fixtureFactory;
+        $this->spendingRatesIndex->open();
+        $this->spendingRatesIndex->getSpendingRatesGrid()->massaction([], 'Delete', true, 'Select All');
     }
 
     public function test(
-        $gridStatus,
         array $initialSpendingRates,
         FixtureFactory $fixtureFactory
     ) {
         // Preconditions
-        $changeStatusSpendingRates = [];
+        $deleteSpendingRates = [];
         foreach ($initialSpendingRates as $spendingRates) {
             list($fixture, $dataset) = explode('::', $spendingRates);
             $spendingRates = $fixtureFactory->createByCode($fixture, ['dataset' => $dataset]);
             $spendingRates->persist();
-            $changeStatusSpendingRates[] = ['rate_id' => $spendingRates->getRateId()];
+            $deleteSpendingRates[] = ['rate_id' => $spendingRates->getRateId()];
         }
 
         // Steps
         $this->spendingRatesIndex->open();
-        $this->spendingRatesIndex->getSpendingRatesGrid()
-            ->massaction($changeStatusSpendingRates, [$this->changeStatusSpendingRates => $gridStatus]);
-        return $changeStatusSpendingRates;
+        $this->spendingRatesIndex->getSpendingRatesGrid()->massaction($deleteSpendingRates, 'Delete', true);
+        return $deleteSpendingRates;
     }
 }

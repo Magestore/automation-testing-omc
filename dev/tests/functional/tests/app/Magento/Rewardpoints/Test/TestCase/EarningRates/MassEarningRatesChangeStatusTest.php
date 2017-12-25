@@ -12,6 +12,19 @@ use Magento\Rewardpoints\Test\Page\Adminhtml\EarningRatesIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 
+/**
+ * Preconditions:
+ * 1. Create earning rates according to data set.
+ *
+ * Steps:
+ * 1. Login to backend.
+ * 2. Navigate Reward points > Earning Rates
+ * 3. Select earning rates created in preconditions.
+ * 4. Select Change status action from mass-action.
+ * 5. Select Inactive
+ * 6. Perform asserts.
+ *
+ */
 class MassEarningRatesChangeStatusTest extends Injectable
 {
     /* tags */

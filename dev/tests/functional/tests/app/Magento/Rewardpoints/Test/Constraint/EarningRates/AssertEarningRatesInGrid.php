@@ -8,7 +8,7 @@
 
 namespace Magento\Rewardpoints\Test\Constraint\EarningRates;
 
-use Magento\Rewardpoints\Test\Fixture\Rate;
+use Magento\Rewardpoints\Test\Fixture\EarningRates;
 use Magento\Rewardpoints\Test\Page\Adminhtml\EarningRatesIndex;
 use Magento\Mtf\Constraint\AbstractConstraint;
 

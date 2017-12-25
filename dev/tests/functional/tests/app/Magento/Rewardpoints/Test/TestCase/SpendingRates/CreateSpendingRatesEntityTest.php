@@ -11,7 +11,19 @@ namespace Magento\Rewardpoints\Test\TestCase\SpendingRates;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Rewardpoints\Test\Page\Adminhtml\SpendingRatesIndex;
 use Magento\Rewardpoints\Test\Page\Adminhtml\SpendingRatesNew;
-use Magento\Rewardpoints\Test\Fixture\Rate;
+use Magento\Rewardpoints\Test\Fixture\SpendingRates;
+
+/**
+ *
+ * Test Flow:
+ * 1. Login as admin
+ * 2. Navigate to the Reward points>Spending Rates
+ * 3. Click on 'Add New Spending Rate' button
+ * 4. Fill out all data according to data set
+ * 5. Save
+ * 6. Verify created
+ *
+ */
 
 /**
  * Class CreateSpendingRatesEntityTest
