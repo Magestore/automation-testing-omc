@@ -54,15 +54,15 @@ class CreateEarningRatesEntityTest extends Injectable
 
     /**
      * @param $button
-     * @param Rate $rate
+     * @param EarningRates $earningRates
      * @return array
      */
-    public function test($button, Rate $rate)
+    public function test($button, EarningRates $earningRates)
     {
         $this->earningRatesIndex->open();
         $this->earningRatesIndex->getEarningRatesGridPageActions()->clickActionButton($button);
-        $this->earningRatesNew->getEarningRatesForm()->fill($rate);
+        $this->earningRatesNew->getEarningRatesForm()->fill($earningRates);
         $this->earningRatesNew->getEarningRatesFormPageActions()->save();
-        return ['rate' => $rate];
+        return ['earning_rates' => $earningRates];
     }
 }

@@ -52,17 +52,18 @@ class CreateSpendingRatesEntityTest extends Injectable
         $this->spendingRatesNew = $spendingRatesNew;
     }
 
+
     /**
      * @param $button
-     * @param Rate $rate
+     * @param SpendingRates $spendingRates
      * @return array
      */
-    public function test($button, Rate $rate)
+    public function test($button, SpendingRates $spendingRates)
     {
         $this->spendingRatesIndex->open();
         $this->spendingRatesIndex->getSpendingRatesGridPageActions()->clickActionButton($button);
-        $this->spendingRatesNew->getSpendingRatesForm()->fill($rate);
+        $this->spendingRatesNew->getSpendingRatesForm()->fill($spendingRates);
         $this->spendingRatesNew->getSpendingRatesFormPageActions()->save();
-        return ['rate' => $rate];
+        return ['spending_rate' => $spendingRates];
     }
 }

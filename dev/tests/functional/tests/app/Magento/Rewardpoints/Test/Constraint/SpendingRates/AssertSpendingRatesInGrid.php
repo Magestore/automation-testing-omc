@@ -23,12 +23,12 @@ class AssertSpendingRatesInGrid extends AbstractConstraint
      * @param Rate $rate
      * @param SpendingRatesIndex $spendingRatesIndex
      */
-    public function processAssert(Rate $rate, SpendingRatesIndex $spendingRatesIndex)
+    public function processAssert(SpendingRates $spendingRates, SpendingRatesIndex $spendingRatesIndex)
     {
         $spendingRatesIndex->open();
         $filter = [
-            'points[from]' => $rate->getData('points'),
-            'points[to]' => $rate->getData('points'),
+            'points[from]' => $spendingRates->getData('points'),
+            'points[to]' => $spendingRates->getData('points'),
 //            'money[from]' => $rate->getData('money'),
 //            'money[to]' => $rate->getData('money'),
         ];

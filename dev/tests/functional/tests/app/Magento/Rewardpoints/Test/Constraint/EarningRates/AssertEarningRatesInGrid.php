@@ -19,17 +19,18 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 class AssertEarningRatesInGrid extends AbstractConstraint
 {
 
+
     /**
-     * @param Rate $rate
+     * @param EarningRates $earningRates
      * @param EarningRatesIndex $earningRatesIndex
      */
-    public function processAssert(Rate $rate, EarningRatesIndex $earningRatesIndex)
+    public function processAssert(EarningRates $earningRates, EarningRatesIndex $earningRatesIndex)
     {
         $earningRatesIndex->open();
         $filter = [
 //            'rate_id[from]' => $rate->getRateId(),
-            'points[from]' => $rate->getData('points'),
-            'points[to]' => $rate->getData('points'),
+            'points[from]' => $earningRates->getData('points'),
+            'points[to]' => $earningRates->getData('points'),
 //            'money[from]' => $rate->getData('money'),
 //            'money[to]' => $rate->getData('money'),
 //            'sort_order[from]' => $rate->getSortOrder(),
