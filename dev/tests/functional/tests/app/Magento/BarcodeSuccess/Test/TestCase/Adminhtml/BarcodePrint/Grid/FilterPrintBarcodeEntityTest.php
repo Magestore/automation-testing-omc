@@ -19,20 +19,6 @@ class FilterPrintBarcodeEntityTest extends GridFilteringTest{
         $fixtureDataSet = null,
         $idColumn = null
     ) {
-        $productdatasets = explode(',', $fixtureDataSet)[1];
-        $fixtureDataSet = explode(',', $fixtureDataSet)[0];
-        $productdatasets = explode(',', $productdatasets);
-        foreach ($productdatasets as &$productdataset) {
-            $product = $this->fixtureFactory->createByCode(
-                'catalogProductSimple',
-                [
-                    'dataset' => $productdataset,
-                ]
-            );
-            $product->persist();
-        }
-
-
         $items = $this->createItems($itemsCount, $fixtureName, $fixtureDataSet, $steps);
         $page = $this->pageFactory->create($pageClass);
 

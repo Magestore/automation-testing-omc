@@ -9,8 +9,8 @@
     <testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeListing\Grid\FilterBarcodeGenerateEntityTest" summary="Filter" ticketId="MAGESTORE-1">
         <variation name="VariationFilter1">
             <data name="itemsCount" xsi:type="string">1</data>
-            <data name="fixtureName" xsi:type="string">barcode</data>
-            <data name="fixtureDataSet" xsi:type="string">barcode1,productForBarcode1</data>
+            <data name="fixtureName" xsi:type="string">barcodeGenerate</data>
+            <data name="fixtureDataSet" xsi:type="string">barcode1</data>
             <data name="filters" xsi:type="array">
                 <item name="0" xsi:type="array">
                     <item name="barcode" xsi:type="string">:barcode</item>

@@ -28,12 +28,14 @@ class Grid extends DataGrid
     public function searchAndSelect(array $filter)
     {
         $this->waitLoader();
+
+        $this->waitForElementNotVisible('[data-component="os_barcode_product_listing.os_barcode_product_listing.product_columns"]');
         $this->waitForElementNotVisible('.admin__data-grid-loading-mask');
         $this->waitForElementNotVisible('.admin__form-loading-mask');
         $this->search($filter);
+        $this->waitForElementNotVisible('[data-component="os_barcode_product_listing.os_barcode_product_listing.product_columns"]');
         $rowItem = $this->getRow($filter);
         if ($rowItem->isVisible()) {
-            sleep(3);
             $rowItem->find($this->selectItem)->click();
         } else {
             throw new \Exception("Searched item was not found by filter\n" . print_r($filter, true));
