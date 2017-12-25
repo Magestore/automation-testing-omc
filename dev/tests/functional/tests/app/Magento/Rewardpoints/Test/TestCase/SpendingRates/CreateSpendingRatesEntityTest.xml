@@ -9,13 +9,13 @@
         </variation>
         <variation name="Create Spending Rates width full require fields">
             <data name="button" xsi:type="string">add</data>
-            <data name="rate/dataset" xsi:type="string">spendingrates_full_required_field</data>
+            <data name="spendingRates/dataset" xsi:type="string">spendingrates_full_required_field</data>
             <constraint name="Magento\Rewardpoints\Test\Constraint\SpendingRates\AssertSpendingRatesSuccessSaveMessage" />
             <constraint name="Magento\Rewardpoints\Test\Constraint\SpendingRates\AssertSpendingRatesInGrid" />
         </variation>
         <variation name="Create Spending Rates width empty fields">
             <data name="button" xsi:type="string">add</data>
-            <data name="rate/dataset" xsi:type="string">empty_field</data>
+            <data name="spendingRates/dataset" xsi:type="string">empty_field</data>
             <constraint name="Magento\Rewardpoints\Test\Constraint\EarningRates\AssertEarningRatesRequiredForm" />
         </variation>
     </testCase>
