@@ -12,8 +12,12 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Storepickup\Test\Page\Adminhtml\HolidayIndex;
 
 /**
- * Class HolidayFormTest
- * @package Magento\Storepickup\Test\TestCase
+ * Steps:
+ * 1. Login to the backend.
+ * 2. Navigate to Store Pickup > Manage Holiday.
+ * 3. Click to Add New Holiday.
+ * 4. Perform appropriate assertions.
+ *
  */
 class HolidayFormTest extends Injectable
 {

@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 12/19/2017
- * Time: 9:32 AM
+ * Date: 12/22/2017
+ * Time: 2:30 PM
  */
 
 namespace Magento\Rewardpoints\Test\TestCase\EarningRates;
@@ -13,21 +13,19 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 
 /**
- *
- * Test Flow:
  * Preconditions:
- * 1. Create X Earning Rates
+ * 1. Create earning rates according to data set.
  *
  * Steps:
- * 1. Open backend
- * 2. Go to Reward points > Earning Rates
- * 3. Select N Earning Rates from preconditions
- * 4. Select in dropdown "Delete"
- * 5. Click Submit button
- * 6. Perform all assertions according to dataset
+ * 1. Login to backend.
+ * 2. Navigate Reward points > Earning Rates
+ * 3. Select earning rates created in preconditions.
+ * 4. Select Change status action from mass-action.
+ * 5. Select Inactive
+ * 6. Perform asserts.
  *
  */
-class MassDeleteEarningRatesEntityTest extends Injectable
+class MassEarningRatesChangeStatusTest extends Injectable
 {
     /* tags */
     const MVP = 'yes';
@@ -35,7 +33,7 @@ class MassDeleteEarningRatesEntityTest extends Injectable
 
     private $earningRatesIndex;
 
-    private $earningRatesGridAction = 'Delete';
+    private $changeStatusEarningRates = 'Change status';
 
     private $fixtureFactory;
 
@@ -45,26 +43,26 @@ class MassDeleteEarningRatesEntityTest extends Injectable
     ) {
         $this->earningRatesIndex = $earningRatesIndex;
         $this->fixtureFactory = $fixtureFactory;
-        $this->earningRatesIndex->open();
-        $this->earningRatesIndex->getEarningRatesGrid()->massaction([], 'Delete', true, 'Select All');
     }
 
     public function test(
+        $gridStatus,
         array $initialEarningRates,
         FixtureFactory $fixtureFactory
     ) {
         // Preconditions
-        $deleteEarningRates = [];
+        $changeStatusEarningRates = [];
         foreach ($initialEarningRates as $earningRates) {
             list($fixture, $dataset) = explode('::', $earningRates);
             $earningRates = $fixtureFactory->createByCode($fixture, ['dataset' => $dataset]);
             $earningRates->persist();
-            $deleteEarningRates[] = ['rate_id' => $earningRates->getRateId()];
+            $changeStatusEarningRates[] = ['rate_id' => $earningRates->getRateId()];
         }
 
         // Steps
         $this->earningRatesIndex->open();
-        $this->earningRatesIndex->getEarningRatesGrid()->massaction($deleteEarningRates, 'Delete', true);
-        return $deleteEarningRates;
+        $this->earningRatesIndex->getEarningRatesGrid()
+            ->massaction($changeStatusEarningRates, [$this->changeStatusEarningRates => $gridStatus]);
+        return $changeStatusEarningRates;
     }
 }

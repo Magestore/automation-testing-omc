@@ -12,6 +12,21 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Storepickup\Test\Page\Adminhtml\TagIndex;
 
+/**
+ *
+ * Test Flow:
+ * Preconditions:
+ * 1. Create X tags
+ *
+ * Steps:
+ * 1. Open backend
+ * 2. Go to  Store Pickup > Manage Tag
+ * 3. Select N tags from preconditions
+ * 4. Select in dropdown "Delete"
+ * 5. Accept alert
+ * 6. Perform all assertions according to dataset
+ *
+ */
 class MassDeleteTagBackendEntityTest extends Injectable
 {
     /**
