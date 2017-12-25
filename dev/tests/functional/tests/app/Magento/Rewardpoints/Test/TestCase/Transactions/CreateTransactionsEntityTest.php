@@ -50,6 +50,7 @@ class CreateTransactionsEntityTest extends Injectable
         $this->transactionIndex->getTransactionGridPageActions()->clickActionButton($button);
         $this->transactionNew->getTransactionForm()->clickSelectCustomer();
         $this->transactionNew->getSelectCustomerForm()->selectedCustomer($customer);
+
         $this->transactionNew->getTransactionForm()->fill($transaction);
         $this->transactionNew->getTransactionFormPageActions()->save();
     }

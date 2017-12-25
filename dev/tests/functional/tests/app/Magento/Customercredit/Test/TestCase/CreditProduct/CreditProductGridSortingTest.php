@@ -10,7 +10,17 @@ namespace Magento\Customercredit\Test\TestCase\CreditProduct;
 
 use Magento\Ui\Test\TestCase\GridSortingTest;
 use Magento\Mtf\Fixture\FixtureInterface;
-
+/**
+ * Precondition:
+ * 1. Create items
+ *
+ * Steps:
+ * 1. Navigate to backend.
+ * 2. Go to grid page
+ * 3. Sort grid using provided columns
+ * 5. Perform Asserts
+ *
+ */
 class CreditProductGridSortingTest extends GridSortingTest
 {
     protected function processSteps(FixtureInterface $item, $steps)

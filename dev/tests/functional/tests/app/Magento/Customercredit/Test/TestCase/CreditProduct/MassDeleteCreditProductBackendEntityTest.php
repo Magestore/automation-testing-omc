@@ -13,6 +13,21 @@ use Magento\Customercredit\Test\Page\Adminhtml\CreditProductIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 
+/**
+ *
+ * Test Flow:
+ * Preconditions:
+ * 1. Create X products
+ *
+ * Steps:
+ * 1. Open backend
+ * 2. Go to  Store Credit > Manage Credit Products
+ * 3. Select N products from preconditions
+ * 4. Select in dropdown "Delete"
+ * 5. Click Submit button
+ * 6. Perform all assertions according to dataset
+ *
+ */
 class MassDeleteCreditProductBackendEntityTest extends Injectable
 {
     /**
