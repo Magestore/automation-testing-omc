@@ -57,4 +57,12 @@ class LocationsGrid  extends DataGrid
     {
         $rowItem->find($this->selectAction)->click();
     }
+    /**
+     * Fix core
+     */
+    public function resetFilter()
+    {
+        $this->waitLoader();
+        parent::resetFilter();
+    }
 }

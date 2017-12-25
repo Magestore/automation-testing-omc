@@ -40,4 +40,9 @@ class BarcodeGenerateFormSection extends FormSections
         $this->waitForElementNotVisible($this->loadingMask, Locator::SELECTOR_CSS);
         $this->waitForElementVisible($this->gridTable, Locator::SELECTOR_CSS);
     }
+    public function clickSelectProducts()
+    {
+        $this->_rootElement->find('[data-index="grouped_products_button"]')->click();
+
+    }
 }

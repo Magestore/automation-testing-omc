@@ -12,8 +12,12 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Customercredit\Test\Page\Adminhtml\CreditProductIndex;
 
 /**
- * Class CreditProductFormTest
- * @package Magento\Customercredit\Test\TestCase
+ * Steps:
+ * 1. Login to the backend.
+ * 2. Navigate to Store Credit > Manage Credit Products.
+ * 3. Click to Add Credit Product.
+ * 4. Perform appropriate assertions.
+ *
  */
 class CreditProductFormTest extends Injectable
 {

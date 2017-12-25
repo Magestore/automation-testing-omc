@@ -7,58 +7,46 @@
  */
 namespace Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeListing\Grid;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeListing\BarcodeGenerateIndex;
 use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeListing\BarcodeIndex;
-use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeListing\BarcodeHistoryIndex;
-
+use Magento\Mtf\Fixture\FixtureFactory;
 class MassActionEntityForBarcodeListingTest extends Injectable
 {
     /* tags */
     const MVP = 'no';
     const DOMAIN = 'PS';
     /* end tags */
-
-    /**
-     * @var BarcodeGenerateIndex
-     */
-    protected $barcodeGenerateIndex;
     /**
      * @var BarcodeIndex
      */
     protected $barcodeIndex;
-    /**
-     * @var BarcodeHistoryIndex
-     */
-    protected $barcodeHistoryIndex;
-
     public function __inject(
-        BarcodeGenerateIndex $barcodeGenerateIndex,
-        BarcodeIndex $barcodeIndex,
-        BarcodeHistoryIndex $barcodeHistoryIndex
-
+        BarcodeIndex $barcodeIndex
     ) {
-        $this->barcodeGenerateIndex = $barcodeGenerateIndex;
         $this->barcodeIndex = $barcodeIndex;
-        $this->barcodeHistoryIndex = $barcodeHistoryIndex;
-
     }
-    public function test(array $products = null, $action, $fields)
+    public function test($productdatasets, $barcodedataset = null, FixtureFactory $fixtureFactory)
     {
-        //createBarcode
-        $this->barcodeGenerateIndex->open();
-        $this->barcodeGenerateIndex->getBarcodeGrid()->waitingForLoadingMaskFormNotVisible();
-        $this->barcodeGenerateIndex->getFormBarcodeGenerate()->getSection('os_barcode_generate_form_general')->setFieldsData($fields);
-        $this->barcodeGenerateIndex->getFormBarcodeGenerate()->getSection('os_generate_barcode')->setFieldsData($products);
-        $this->barcodeGenerateIndex->getPageActionsBlock()->save();
-
-//        $this->barcodeHistoryIndex->getHistoryGrid()->waitingForGridVisible();
-//        $ids = $this->barcodeHistoryIndex->getHistoryGrid()->getAllIds();
-//        $code = $this->barcodeHistoryIndex->getHistoryGrid()->getColumnValue($ids[0], 'Barcode');
+//        $productdatasets = explode(',', $productdatasets);
+//        $products = [];
+//        foreach ($productdatasets as &$productdataset) {
+//            $product = $fixtureFactory->createByCode(
+//                'catalogProductSimple',
+//                [
+//                    'dataset' => $productdataset,
+//                ]
+//            );
+//            $product->persist();
+//            $products[] = $product->getData();
+//        }
 //
-//        $this->barcodeIndex->open();
-//        $this->barcodeIndex->getBarcodeGrid()->searchAndSelect(['Barcode' => $code]);
-//        $this->barcodeIndex->getBarcodeGrid()->selectAction($action);
-//        sleep(3);
-
+//        $barcode = $fixtureFactory->createByCode(
+//            'barcode',
+//            [
+//                'dataset' => $barcodedataset,
+//            ]
+//        );
+//        $barcode->persist();
+        $this->barcodeIndex->open();
+        $this->barcodeIndex->getBarcodeGrid()->massaction([], 'Print Barcode', false, 'Select All');
     }
 }

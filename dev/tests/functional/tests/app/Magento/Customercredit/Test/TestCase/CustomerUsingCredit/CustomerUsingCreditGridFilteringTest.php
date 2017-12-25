@@ -11,6 +11,16 @@ namespace Magento\Customercredit\Test\TestCase\CustomerUsingCredit;
 use Magento\Ui\Test\Block\Adminhtml\DataGrid;
 use Magento\Ui\Test\TestCase\GridFilteringTest;
 
+/**
+ * Precondition:
+ * 1. Create item
+ *
+ * Steps:
+ * 1. Navigate to backend Store Credit > Manage Customers Using Credit.
+ * 2. Filter grid using provided columns
+ * 3. Perform Asserts
+ *
+ */
 class CustomerUsingCreditGridFilteringTest extends GridFilteringTest
 {
     public function test(

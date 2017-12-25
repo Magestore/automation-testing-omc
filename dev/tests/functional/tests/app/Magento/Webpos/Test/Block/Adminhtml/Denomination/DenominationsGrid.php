@@ -53,4 +53,13 @@ class DenominationsGrid extends DataGrid
     {
         $rowItem->find($this->selectAction)->click();
     }
+
+    /**
+     * Fix core
+     */
+    public function resetFilter()
+    {
+        $this->waitLoader();
+        parent::resetFilter();
+    }
 }

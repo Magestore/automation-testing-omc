@@ -8,52 +8,19 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeListing\Form\GenerateNewBarcodeEntityTest" summary="Create barcode" ticketId="MAGESTORE-1">
-        <variation name="GenerateNewBarcodeEntityTestVariation1">
-            <data name="products" xsi:type="array">
-                <item name="product01" xsi:type="array">
-                    <item name="name" xsi:type="string">Strive Shoulder Pack</item>
-                    <item name="sku" xsi:type="string">24-MB04</item>
-                    <item name="type" xsi:type="string">Simple Product</item>
-                </item>
-                <item name="product02" xsi:type="array">
-                    <item name="name" xsi:type="string">Joust Duffle Bag</item>
-                    <item name="sku" xsi:type="string">24-MB01</item>
-                    <item name="type" xsi:type="string">Simple Product	</item>
-                </item>
-                <item name="product03" xsi:type="array">
-                    <item name="name" xsi:type="string">Crown Summit Backpack</item>
-                    <item name="sku" xsi:type="string">24-MB03</item>
-                    <item name="type" xsi:type="string">Simple Product</item>
-                </item>
-                <item name="product04" xsi:type="array">
-                    <item name="name" xsi:type="string">Wayfarer Messenger Bag	</item>
-                    <item name="sku" xsi:type="string">24-MB05</item>
-                    <item name="type" xsi:type="string">Simple Product</item>
-                </item>
-            </data>
-            <data name="of_product" xsi:type="string">4</data>
-            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeListing\AssertBarcodeSuccessSaveMessage" />
-        </variation>
-        <variation name="GenerateNewBarcodeEntityTestVariation2">
-            <data name="products" xsi:type="array">
-                <item name="product01" xsi:type="array">
-                    <item name="name" xsi:type="string">Fusion Backpack</item>
-                    <item name="sku" xsi:type="string">24-MB02</item>
-                    <item name="type" xsi:type="string">Simple Product</item>
-                </item>
-                <item name="product02" xsi:type="array">
-                    <item name="name" xsi:type="string">24-MB06</item>
-                    <item name="sku" xsi:type="string">24-MB06</item>
-                    <item name="type" xsi:type="string">Simple Product</item>
-                </item>
-            </data>
-            <data name="fields" xsi:type="array">
-                <item name="reason" xsi:type="string">Reason %isolation%</item>
-            </data>
-            <data name="of_product" xsi:type="string">2</data>
-            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeListing\AssertBarcodeSuccessSaveMessage" />
-        </variation>
-        <variation name="GenerateNewBarcodeEntityTestVariation3">
+        <!--<variation name="GenerateVariation1">-->
+            <!--<data name="productdatasets" xsi:type="string">productForBarcodeGenerate2</data>-->
+            <!--<data name="fields" xsi:type="string"></data>-->
+            <!--<constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeListing\AssertBarcodeSuccessSaveMessage" />-->
+        <!--</variation>-->
+        <!--<variation name="GenerateVariation2">-->
+            <!--<data name="productdatasets" xsi:type="string">productForBarcodeGenerate2</data>-->
+            <!--<data name="fields/reason" xsi:type="string">fadsfsaf</data>-->
+            <!--<constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeListing\AssertBarcodeSuccessSaveMessage" />-->
+        <!--</variation>-->
+        <variation name="GenerateVariation3">
+            <data name="productdatasets" xsi:type="string"></data>
+            <data name="fields" xsi:type="string"></data>
             <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeListing\Form\AssertGenerateErrorSaveMessage" />
         </variation>
     </testCase>

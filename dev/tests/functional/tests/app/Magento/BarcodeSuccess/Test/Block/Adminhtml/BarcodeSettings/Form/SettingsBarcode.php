@@ -8,6 +8,8 @@
 
 namespace Magento\BarcodeSuccess\Test\Block\Adminhtml\BarcodeSettings\Form;
 use Magento\Mtf\Block\Form;
+use Magento\Mtf\Client\Locator;
+use Magento\TestFramework\Inspection\Exception;
 
 class SettingsBarcode extends Form
 {
@@ -65,6 +67,11 @@ class SettingsBarcode extends Form
     public function fillNotFixture(array $formFields){
         $mapping = $this->dataMapping($formFields);
         $this->_fill($mapping);
+        return $this;
+    }
+    public function setFieldConfig($field){
+        $element = $this->_rootElement->find('//*[@id="barcodesuccess_general_one_barcode_per_sku"]', Locator::SELECTOR_XPATH, 'select');
+        $element->setValue($field);
         return $this;
     }
 

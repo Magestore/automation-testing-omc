@@ -18,9 +18,14 @@ use Magento\Storepickup\Test\Fixture\StorepickupSpecialday;
 use Magento\Storepickup\Test\Fixture\StorepickupStore;
 use Magento\Storepickup\Test\Fixture\StorepickupTag;
 use Magento\Storepickup\Test\Page\Adminhtml\TagIndex;
+
 /**
- * Class TagFormTest
- * @package Magento\Storepickup\Test\TestCase
+ * Steps:
+ * 1. Login to the backend.
+ * 2. Navigate to Store Pickup > Manage Tag.
+ * 3. Click to Add New Tag.
+ * 4. Perform appropriate assertions.
+ *
  */
 class TagFormTest extends Injectable
 {

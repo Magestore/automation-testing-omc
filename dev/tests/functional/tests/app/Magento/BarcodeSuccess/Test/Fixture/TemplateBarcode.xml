@@ -6,15 +6,14 @@
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
-    <fixture name="template"
+    <fixture name="templateBarcode"
              module="Magento_BarcodeSuccess"
              type="flat"
              collection="Magento\BarcodeSuccess\Model\ResourceModel\Template\Collection"
              repository_class="Magento\BarcodeSuccess\Test\Repository\Template"
-             class="Magento\BarcodeSuccess\Test\Fixture\Template"
+             handler_interface="Magento\BarcodeSuccess\Test\Handler\Template\TemplateInterface"
+             class="Magento\BarcodeSuccess\Test\Fixture\TemplateBarcode"
              entity_type="os_barcode_template">
-        <!--handler_interface="Magento\BarcodeSuccess\Test\Handler\Template\TemplateInterface"-->
-
         <field name="template_id" is_required="0"/>
         <field name="type" is_required="0" group="barcode_template_information"/>
         <field name="name" is_required="0"/>
