@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\PurchaseOrderSuccess\Test\Repository\Supplier">
+        <dataset name="default">
+            <field name="supplier_code" xsi:type="string">magestore-code-%isolation%</field>
+            <field name="supplier_name" xsi:type="string">magestore-%isolation%</field>
+            <field name="contact_name" xsi:type="string">Magestore</field>
+            <field name="contact_email" xsi:type="string">magestore%isolation%@magestore.com</field>
+            <field name="description" xsi:type="string">description_%isolation%</field>
+            <field name="status" xsi:type="string">Enable</field>
+            <field name="telephone" xsi:type="string">555-55-555-55</field>
+            <field name="fax" xsi:type="string">+44-208-1234567</field>
+            <field name="street" xsi:type="string">6161 West Centinela Avenue</field>
+            <field name="city" xsi:type="string">Culver City</field>
+            <field name="country_id" xsi:type="string">United States</field>
+            <field name="region_id" xsi:type="string">California</field>
+            <field name="postcode" xsi:type="string">90230</field>
+            <field name="website" xsi:type="string">magestore%isolation%.com</field>
+            <field name="password" xsi:type="string">12345a</field>
+            <field name="generated_password" xsi:type="string">No</field>
+            <field name="send_pass_to_supplier" xsi:type="string">No</field>
+        </dataset>
+    </repository>
+</config>

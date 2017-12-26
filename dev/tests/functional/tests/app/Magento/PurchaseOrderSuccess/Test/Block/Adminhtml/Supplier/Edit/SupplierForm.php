@@ -13,5 +13,4 @@ use Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\FormSection;
 
 class SupplierForm extends FormSection
 {
-
 }
