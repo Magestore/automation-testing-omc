@@ -29,11 +29,11 @@ class AssertBarcodeSuccessSaveMessage extends AbstractConstraint
      * @param BarcodeHistoryIndex
      * @return void
      */
-    public function processAssert(BarcodeHistoryIndex $barcodeHistoryIndex)
+    public function processAssert(BarcodeHistoryIndex $barcodeHistoryIndex, $of_products)
     {
         $actualMessage = $barcodeHistoryIndex->getMessagesBlock()->getSuccessMessage();
         \PHPUnit_Framework_Assert::assertEquals(
-            '1'.self::SUCCESS_MESSAGE,
+            $of_products.self::SUCCESS_MESSAGE,
             $actualMessage,
             'Wrong success message is displayed.'
         );

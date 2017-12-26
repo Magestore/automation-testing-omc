@@ -8,19 +8,22 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeListing\Form\GenerateNewBarcodeEntityTest" summary="Create barcode" ticketId="MAGESTORE-1">
-        <!--<variation name="GenerateVariation1">-->
-            <!--<data name="productdatasets" xsi:type="string">productForBarcodeGenerate2</data>-->
-            <!--<data name="fields" xsi:type="string"></data>-->
-            <!--<constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeListing\AssertBarcodeSuccessSaveMessage" />-->
-        <!--</variation>-->
-        <!--<variation name="GenerateVariation2">-->
-            <!--<data name="productdatasets" xsi:type="string">productForBarcodeGenerate2</data>-->
-            <!--<data name="fields/reason" xsi:type="string">fadsfsaf</data>-->
-            <!--<constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeListing\AssertBarcodeSuccessSaveMessage" />-->
-        <!--</variation>-->
+        <variation name="GenerateVariation1">
+            <data name="barcodeGenerate/dataset" xsi:type="string">barcode</data>
+            <data name="fields/reason" xsi:type="string">reason%isolation%</data>
+            <data name="tag" xsi:type="string">1</data>
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeListing\AssertBarcodeSuccessSaveMessage" />
+        </variation>
+        <variation name="GenerateVariation2">
+            <data name="barcodeGenerate/dataset" xsi:type="string">barcode</data>
+            <data name="fields/reason" xsi:type="string"></data>
+            <data name="tag" xsi:type="string">1</data>
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeListing\AssertBarcodeSuccessSaveMessage" />
+        </variation>
         <variation name="GenerateVariation3">
-            <data name="productdatasets" xsi:type="string"></data>
-            <data name="fields" xsi:type="string"></data>
+            <data name="barcodeGenerate/dataset" xsi:type="string">barcode</data>
+            <data name="fields/reason" xsi:type="string"></data>
+            <data name="tag" xsi:type="string">0</data>
             <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeListing\Form\AssertGenerateErrorSaveMessage" />
         </variation>
     </testCase>

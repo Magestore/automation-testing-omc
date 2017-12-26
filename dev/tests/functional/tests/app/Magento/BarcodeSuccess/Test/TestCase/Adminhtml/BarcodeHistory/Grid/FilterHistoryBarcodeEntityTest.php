@@ -19,26 +19,6 @@ class FilterHistoryBarcodeEntityTest extends GridFilteringTest{
         $fixtureDataSet = null,
         $idColumn = null
     ) {
-        $pageSetting = $this->pageFactory->create('Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeSettings\BarcodeSettingsIndex');
-        $pageSetting->open();
-        $field = $productdatasets = explode(',', $fixtureDataSet)[2];
-        $pageSetting->getBlockSettingConfiguation()->setFieldConfig($field);
-        $pageSetting->getPageActionsBlock()->save();
-
-        $productdatasets = explode(',', $fixtureDataSet)[1];
-        $fixtureDataSet = explode(',', $fixtureDataSet)[0];
-        $productdatasets = explode(',', $productdatasets);
-        foreach ($productdatasets as &$productdataset) {
-            $product = $this->fixtureFactory->createByCode(
-                'catalogProductSimple',
-                [
-                    'dataset' => $productdataset,
-                ]
-            );
-            $product->persist();
-        }
-
-
         $items = $this->createItems($itemsCount, $fixtureName, $fixtureDataSet, $steps);
         $page = $this->pageFactory->create($pageClass);
 

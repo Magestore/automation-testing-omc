@@ -14,17 +14,10 @@ class SortingPrintBarcodeEntityTest extends GridSortingTest
     protected $gridBlock;
     public function __prepare(FixtureFactory $fixtureFactory)
     {
-        $product = $fixtureFactory->createByCode(
-            'catalogProductSimple',
-            [
-                'dataset' => 'productForBarcodePrint2',
-            ]
-        );
-        $product->persist();
         $barcode = $fixtureFactory->createByCode(
-            'barcode',
+            'barcodeGenerate',
             [
-                'dataset' => 'barcodePrint2',
+                'dataset' => 'barcode1',
             ]
         );
         $barcode->persist();
@@ -40,18 +33,6 @@ class SortingPrintBarcodeEntityTest extends GridSortingTest
         $itemsCount = null,
         array $steps = []
     ) {
-        $productdatasets = explode(',', $fixtureDataSet)[1];
-        $fixtureDataSet = explode(',', $fixtureDataSet)[0];
-        $productdatasets = explode(',', $productdatasets);
-        foreach ($productdatasets as &$productdataset) {
-            $product = $this->fixtureFactory->createByCode(
-                'catalogProductSimple',
-                [
-                    'dataset' => $productdataset,
-                ]
-            );
-            $product->persist();
-        }
         // Fill grid before sorting if needed
         if ($fixtureName && $fixtureDataSet && $itemsCount && $steps) {
             $this->createItems($itemsCount, $fixtureName, $fixtureDataSet, $steps);

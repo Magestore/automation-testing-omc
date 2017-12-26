@@ -9,8 +9,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeListing\Grid\MassActionEntityForBarcodeListingTest" summary="Check mass action" ticketId="MAGESTORE-1">
         <variation name="PrintVariation">
-            <data name="productdatasets" xsi:type="string">productForBarcode4</data>
-            <data name="barcodedataset" xsi:type="string">barcode4</data>
+            <data name="barcodeGenerate/dataset" xsi:type="string">barcode</data>
             <data name="pageTitle" xsi:type="string">Barcode Printing Configuration</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
         </variation>

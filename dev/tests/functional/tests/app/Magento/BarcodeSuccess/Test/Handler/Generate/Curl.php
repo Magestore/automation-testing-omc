@@ -21,40 +21,27 @@ class Curl extends AbstractCurl
 {
     public function persist(FixtureInterface $fixture = null)
     {
-        $dataProduct = $this->getDataProduct($fixture->getProductSku());
-        $dataProducts = [];
-//        for($i = 0; $i < count($products); ++$i) {
-//            $dataProducts[$i] = [
-//                "id" => $products[$i]["id"],
-//                "name" => $products[$i]["name"],
-//                "sku" => $products[$i]["sku"],
-//                "price" => $products[$i]["price"],
-//                "status" => "Enabled" ,
-//                "attribute_set" => $products[$i]["attribute_set_id"],
-//                "thumbnail" => "",
-//                "position" => $i,
-//                "supplier" => "",
-//                "record_id" => $products[$i]["id"]
-//            ];
-//        }
-        $dataProducts[0] = [
-                "id" => $dataProduct['id'],
-                "name" => "",
-                "sku" => $fixture->getProductSku(),
-                "price" => "",
+        $products = $fixture->getDataFieldConfig('products')['source']->getDataProducts();
+        for($i = 0; $i < count($products); ++$i) {
+            $dataProducts[$i] = [
+                "id" => $products[$i]["id"],
+                "name" => $products[$i]["name"],
+                "sku" => $products[$i]["sku"],
+                "price" => $products[$i]["price"],
                 "status" => "Enabled" ,
-                "attribute_set" => "",
+                "attribute_set" => $products[$i]["attribute_set_id"],
                 "thumbnail" => "",
-                "position" => "",
-                "supplier" => $fixture->getSupplierCode(),
-                "record_id" => ""
+                "position" => $i,
+                "supplier" => $products[$i]["sku"],
+                "record_id" => $products[$i]["id"]
             ];
+        }
         $data = [
             "links" => [
                 "selected_products" => $dataProducts
             ],
             "general_information" => [
-                "reason" => "Test"
+                "reason" => $fixture->getReason()
             ],
 
         ];
@@ -68,38 +55,15 @@ class Curl extends AbstractCurl
         if (!strpos($response, 'data-ui-id="messages-message-success"')) {
             throw new \Exception("The barcode has been saved successfully! Response: $response");
         }
-        $barcode = $this->getBarcodeId($fixture->getProductSku())['barcode'];
-        $id = $this->getBarcodeId($fixture->getProductSku())['id'];
-        return ['product_sku' => $fixture->getProductSku(),
+        $barcode = $this->getBarcodeId($products[0]["sku"])['barcode'];
+        $id = $this->getBarcodeId($products[0]["sku"])['id'];
+        return ['product_sku' => $products[0]["sku"],
                 'barcode' => $barcode,
-                'supplier_code' => $fixture->getSupplierCode(),
+                'supplier_code' => $products[0]["sku"],
                 'id' => $id,
                 'username' => 'admin',
                 'type' => 'Generated'
                 ];
-    }
-
-    protected function getDataProduct($sku)
-    {
-        $url = $_ENV['app_backend_url'] . 'mui/index/render/';
-        $data = [
-            'namespace' => 'product_listing',
-            'filters' => [
-                'placeholder' => true,
-                'sku' => $sku
-            ],
-            'isAjax' => true
-        ];
-        $curl = new BackendDecorator(new CurlTransport(), $this->_configuration);
-
-        $curl->write($url, $data, CurlInterface::POST);
-        $response = $curl->read();
-        $curl->close();
-        preg_match('/product_listing.+items.+"entity_id":"(\d+)"/', $response, $matchId);
-        return [
-            "id" => empty($matchId[1]) ? null : $matchId[1],
-            "sku" => "abc123defghj"
-        ];
     }
     protected function getBarcodeId($sku)
     {
