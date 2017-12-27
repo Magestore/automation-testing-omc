@@ -74,6 +74,46 @@ class Curl extends AbstractCurl implements SupplierInterface
         }
         preg_match('/supplier_id":"(\d+)"/', $response, $match);
         $data['supplier_id'] = $match[1];
+        if ($fixture->hasData('products')) {
+            $products = $fixture->getDataFieldConfig('products')['source']->getProducts();
+            $supplier_products = [];
+            foreach ($products as $product) {
+                $supplier_products[] = $product->getId();
+            }
+            $this->updateSupplierProducts($data['supplier_id'] ,$supplier_products);
+        }
         return ['supplier_id' =>  $data['supplier_id']];
+    }
+
+    public function updateSupplierProducts($supplier_id, $productIds)
+    {
+        $saveProductUrl = 'suppliersuccess/supplier_product/save/';
+        $data = [
+            'namespace' => 'os_supplier_product_modal_add_listing',
+            'supplier_id' => $supplier_id,
+//            'sorting' => [
+//                'field' => 'entity_id',
+//                'direction' => 'desc'
+//            ],
+//            'filters' => [
+//                'placeholder' => 'true'
+//            ],
+//            'paging' => [
+//                'pageSize' => '20',
+//                'current' => '1'
+//            ],
+//            'isAjax' => 'true',
+            'selected' => $productIds,
+        ];
+        $url = $_ENV['app_backend_url'] . $saveProductUrl;
+        $curl = new BackendDecorator(new CurlTransport(), $this->_configuration);
+        $curl->write($url, $data);
+        $response = $curl->read();
+        $curl->close();
+//        if (!strpos($response, 'data-ui-id="messages-message-success"')) {
+//            throw new \Exception(
+//                "Supplier products creation by curl handler was not successful! Response: $response"
+//            );
+//        }
     }
 }

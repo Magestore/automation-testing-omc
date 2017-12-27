@@ -35,6 +35,6 @@
         <field name="send_pass_to_supplier" is_required="0" group="password"/>
         <field name="created_at" is_required="0"/>
         <field name="updated_at" is_required="0"/>
-        <field name="supplier_products" is_required="0" group="products" source="Magento\PurchaseOrderSuccess\Test\Fixture\Supplier\Products"/>
+        <field name="products" is_required="0" group="products" source="Magento\PurchaseOrderSuccess\Test\Fixture\Supplier\Products"/>
     </fixture>
 </config>
