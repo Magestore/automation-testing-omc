@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */            <data name="section" xsi:type="string">os_barcode_generate_form_general</data>
+
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeListing\Grid\MassActionEntityForBarcodeListingTest" summary="Check mass action" ticketId="MAGESTORE-1">
+        <variation name="PrintVariation">
+            <data name="barcodeGenerate/dataset" xsi:type="string">barcode</data>
+            <data name="pageTitle" xsi:type="string">Barcode Printing Configuration</data>
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+        </variation>
+    </testCase>
+</config>

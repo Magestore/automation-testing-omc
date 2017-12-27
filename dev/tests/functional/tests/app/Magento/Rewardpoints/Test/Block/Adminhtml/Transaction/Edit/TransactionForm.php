@@ -9,6 +9,8 @@ namespace Magento\Rewardpoints\Test\Block\Adminhtml\Transaction\Edit;
 
 use Magento\Backend\Test\Block\Widget\FormTabs;
 use Magento\Mtf\Client\Locator;
+use Magento\Customer\Test\Fixture\Customer;
+
 
 /**
  * Class TransactionForm
@@ -27,6 +29,29 @@ class TransactionForm extends FormTabs
     protected $customerField = '[data-ui-id="admin-block-rewardpoints-form-container-form-fieldset-element-form-field-featured-customers"]';
 
     /**
+     * @var string
+     */
+    protected $selectCustomer = ".addafter";
+
+    /**
+     * @var string
+     */
+    protected $tableCustomer = "#tinycontentCustomer";
+
+    /**
+     * @return mixed
+     */
+    protected $errorField = '.mage-error';
+
+    /**
+     *
+     */
+    public function clickSelectCustomer(){
+        $this->_rootElement->find($this->selectCustomer, Locator::SELECTOR_CSS)->click();
+        $this->waitForElementVisible($this->tableCustomer);
+    }
+
+    /**
      * @return mixed
      */
     public function formTitleIsVisible()
@@ -40,5 +65,12 @@ class TransactionForm extends FormTabs
     public function customerFieldIsVisible()
     {
         return $this->_rootElement->find($this->customerField, Locator::SELECTOR_CSS)->isVisible();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function fieldErrorIsVisible(){
+        return $this->_rootElement->find($this->errorField, Locator::SELECTOR_CSS)->isVisible();
     }
 }

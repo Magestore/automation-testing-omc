@@ -15,9 +15,30 @@ class BarcodeViewTemplateFormSection extends FormSections
      * @method getReasonElement
      */
 
-    public function getFirstField($firstField)
+    public function getField($field)
     {
-        $firstField ='[name='.$firstField.']';
-        return $this->_rootElement->find($firstField);
+        $field ='[name='.$field.']';
+        return $this->_rootElement->find($field);
+    }
+
+    public function getMessageRequired($wrap, $class)
+    {
+        $class = '[class=' . $class . ']';
+        return $this->getElementWarpField($wrap)->find($class);
+    }
+
+    public function getElementWarpField($wrap)
+    {
+        $wrap ='[data-index='.$wrap.']';
+        return $this->_rootElement->find($wrap);
+    }
+    public function openSection($sectionName)
+    {
+        $section = $this->getContainerElement($sectionName)->find($this->collapsedSection);
+        if ($section->isVisible()) {
+            $section->click();
+        }
+
+        return $this;
     }
 }

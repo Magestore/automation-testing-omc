@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeTemplate\SaveNewTemplateEntityForBarcodeTest" summary="Create Template Barcode" ticketId="MAGESTORE-1">
+        <variation name="SaveNewTemplateEntityForBarcodeTestVariation1">
+            <data name="addNewButton" xsi:type="string">new</data>
+            <data name="template/dataset" xsi:type="string">template1</data>
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeTemplate\AssertTemplateSuccessSaveMessage" />
+        </variation>
+        <!--<variation name="SaveNewTemplateEntityForBarcodeTestVariation2">-->
+            <!--<data name="addNewButton" xsi:type="string">new</data>-->
+            <!--<data name="template/dataset" xsi:type="string">template2</data>-->
+            <!--<constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeTemplate\AssertTemplateSuccessSaveMessage" />-->
+        <!--</variation>-->
+        <variation name="SaveNewTemplateEntityForBarcodeTestVariation3">
+            <data name="addNewButton" xsi:type="string">new</data>
+            <data name="template/dataset" xsi:type="string">template3</data>
+            <data name="fields" xsi:type="string">type, name, status, symbology, measurement_unit, label_per_row, paper_width, paper_height, label_width, label_height, font_size, top_margin, left_margin, right_margin, bottom_margin, product_attribute_show_on_barcode</data>
+            <data name="section" xsi:type="string">barcode_template_information</data>
+            <data name="classRequired" xsi:type="string">admin__field-error</data>
+            <data name="fieldRequireds" xsi:type="string">name, label_per_row, paper_width, paper_height, label_width, label_height, font_size, top_margin, left_margin, right_margin, bottom_margin</data>
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeTemplate\Form\AssertViewTemplateBarcodeFormIsAvailable" />
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeTemplate\Form\AssertTemplateErrorSaveMessage" />
+        </variation>
+    </testCase>
+</config>

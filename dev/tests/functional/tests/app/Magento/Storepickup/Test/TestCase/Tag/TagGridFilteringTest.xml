@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Storepickup\Test\TestCase\Tag\TagGridFilteringTest" summary="Grid UI Component Filtering" ticketId="MAGETWO-41329">
+        <variation name="TagGridFilteringTest">
+            <data name="itemsCount" xsi:type="string">1</data>
+            <data name="fixtureName" xsi:type="string">storepickupTag</data>
+            <data name="fixtureDataSet" xsi:type="string">default1</data>
+            <data name="filters" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="id" xsi:type="string">:tag_id</item>
+                    <item name="name" xsi:type="string">:tag_name</item>
+                    <item name="description" xsi:type="string">:tag_description</item>
+                </item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Storepickup\Test\Page\Adminhtml\TagIndex</data>
+            <data name="gridRetriever" xsi:type="string">getTagGrid</data>
+            <data name="idGetter" xsi:type="string">getTagId</data>
+            <constraint name="\Magento\Ui\Test\Constraint\AssertGridFiltering"/>
+        </variation>
+    </testCase>
+</config>

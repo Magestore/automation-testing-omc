@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<tabs>
+    <transaction_information>
+        <class>\Magento\Backend\Test\Block\Widget\Tab</class>
+        <selector>#general_tabs_general_tabs</selector>
+        <strategy>css selector</strategy>
+        <fields>
+            <!--<customer_id>-->
+                <!--<selector>[name="featured_customers"]</selector>-->
+            <!--</customer_id>-->
+            <point_amount>
+                <selector>[name='point_amount']</selector>
+            </point_amount>
+            <title>
+                <selector>[name='title']</selector>
+            </title>
+            <expiration_day>
+                <selector>[name='expiration_day']</selector>
+            </expiration_day>
+        </fields>
+    </transaction_information>
+</tabs>
+

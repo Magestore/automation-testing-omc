@@ -6,7 +6,13 @@
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
-    <fixture name="storepickupSpecialday" module="Magento_Storepickup" type="flat" collection="Magento\Storepickup\Model\ResourceModelSpecialday\Collection" repository_class="Magento\Storepickup\Test\Repository\StorepickupSpecialday" handler_interface="Magento\Storepickup\Test\Handler\StorepickupSpecialday\StorepickupSpecialdayInterface" class="Magento\Storepickup\Test\Fixture\StorepickupSpecialday" entity_type="magestore_storepickup_specialday">
+    <fixture name="storepickupSpecialday"
+             module="Magento_Storepickup"
+             type="flat"
+             collection="Magento\Storepickup\Model\ResourceModelSpecialday\Collection"
+             repository_class="Magento\Storepickup\Test\Repository\StorepickupSpecialday"
+             handler_interface="Magento\Storepickup\Test\Handler\StorepickupSpecialday\StorepickupSpecialdayInterface"
+             class="Magento\Storepickup\Test\Fixture\StorepickupSpecialday" entity_type="magestore_storepickup_specialday">
         <field name="specialday_id" group="null" is_required="1"/>
         <field name="specialday_name" group="general-information" is_required="0"/>
         <field name="specialday_comment" group="general-information" is_required="0"/>

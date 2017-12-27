@@ -12,6 +12,16 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Rewardpoints\Test\Page\Adminhtml\ManagePointBalancesIndex;
 
 /**
+ *
+ * Test Flow:
+ * 1. Login as admin
+ * 2. Navigate to the Reward points>Manage Point Balances
+ * 3. Click on 'Import Points' button
+ * 4. Verify form
+ *
+ */
+
+/**
  * Class ManagePointBalancesFormTest
  * @package Magento\Rewardpoints\Test\TestCase
  */

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Customercredit\Test\TestCase\CustomerUsingCredit\CustomerUsingCreditGridFilteringTest" summary="Customer using Credit Product Grid UI Component Filtering">
+        <variation name="CustomerUsingCreditGridFilteringTest">
+            <data name="itemsCount" xsi:type="string">1</data>
+            <data name="fixtureName" xsi:type="string">customerUseCredit</data>
+            <data name="fixtureDataSet" xsi:type="string">default</data>
+            <data name="filters" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="id_from" xsi:type="string">:entity_id</item>
+                    <item name="name" xsi:type="string">:lastname</item>
+                    <item name="email" xsi:type="string">:email</item>
+                </item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Customercredit\Test\Page\Adminhtml\CustomercreditIndex</data>
+            <data name="gridRetriever" xsi:type="string">getCustomerCreditGrid</data>
+            <data name="idGetter" xsi:type="string">getId</data>
+            <constraint name="\Magento\Ui\Test\Constraint\AssertGridFiltering"/>
+        </variation>
+    </testCase>
+</config>

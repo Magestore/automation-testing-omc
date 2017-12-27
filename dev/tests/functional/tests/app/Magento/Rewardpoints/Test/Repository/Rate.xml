@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\Rewardpoints\Test\Repository\Rate">
+        <dataset name="default">
+            <field name="money" xsi:type="string">%isolation%</field>
+            <field name="points" xsi:type="string">%isolation%</field>
+            <field name="status" xsi:type="string">Active</field>
+            <field name="website_ids" xsi:type="array">
+                <item name="0" xsi:type="string">Main Website</item>
+            </field>
+            <field name="customer_group_ids" xsi:type="array">
+                <item name="0" xsi:type="string">NOT LOGGED IN</item>
+                <item name="1" xsi:type="string">General</item>
+                <item name="2" xsi:type="string">Wholesale</item>
+                <item name="3" xsi:type="string">Retailer</item>
+            </field>
+            <field name="sort_order" xsi:type="string">%isolation%</field>
+        </dataset>
+        <dataset name="earningrates_full_field">
+            <field name="money" xsi:type="string">%isolation%</field>
+            <field name="points" xsi:type="string">%isolation%</field>
+            <field name="status" xsi:type="string">Active</field>
+            <field name="website_ids" xsi:type="array">
+                <item name="0" xsi:type="string">Main Website</item>
+            </field>
+            <field name="customer_group_ids" xsi:type="array">
+                <item name="0" xsi:type="string">NOT LOGGED IN</item>
+                <item name="1" xsi:type="string">General</item>
+                <item name="2" xsi:type="string">Wholesale</item>
+                <item name="3" xsi:type="string">Retailer</item>
+            </field>
+            <field name="sort_order" xsi:type="string">%isolation%</field>
+        </dataset>
+        <dataset name="earningrates_full_required_field">
+            <field name="money" xsi:type="string">%isolation%</field>
+            <field name="points" xsi:type="string">%isolation%</field>
+            <field name="status" xsi:type="string">Active</field>
+            <field name="website_ids" xsi:type="array">
+                <item name="0" xsi:type="string">Main Website</item>
+            </field>
+            <field name="customer_group_ids" xsi:type="array">
+                <item name="1" xsi:type="string">General</item>
+                <item name="3" xsi:type="string">Retailer</item>
+            </field>
+        </dataset>
+        <dataset name="empty_field">
+            <field name="money" xsi:type="string"></field>
+        </dataset>
+        <dataset name="spendingrates_full_field">
+            <field name="points" xsi:type="string">%isolation%</field>
+            <field name="money" xsi:type="string">50</field>
+            <field name="status" xsi:type="string">Inactive</field>
+            <field name="max_price_spended_type" xsi:type="string">A percentage of Total Order Value</field>
+            <field name="max_price_spended_value" xsi:type="string">100</field>
+            <field name="website_ids" xsi:type="array">
+                <item name="0" xsi:type="string">Main Website</item>
+            </field>
+            <field name="customer_group_ids" xsi:type="array">
+                <item name="0" xsi:type="string">NOT LOGGED IN</item>
+                <item name="1" xsi:type="string">General</item>
+                <item name="2" xsi:type="string">Wholesale</item>
+                <item name="3" xsi:type="string">Retailer</item>
+            </field>
+            <field name="sort_order" xsi:type="string">%isolation%</field>
+        </dataset>
+        <dataset name="spendingrates_full_required_field">
+            <field name="points" xsi:type="string">%isolation%</field>
+            <field name="money" xsi:type="string">%isolation%</field>
+            <field name="status" xsi:type="string">Active</field>
+            <field name="website_ids" xsi:type="array">
+                <item name="0" xsi:type="string">Main Website</item>
+            </field>
+            <field name="customer_group_ids" xsi:type="array">
+                <item name="0" xsi:type="string">NOT LOGGED IN</item>
+            </field>
+        </dataset>
+    </repository>
+</config>

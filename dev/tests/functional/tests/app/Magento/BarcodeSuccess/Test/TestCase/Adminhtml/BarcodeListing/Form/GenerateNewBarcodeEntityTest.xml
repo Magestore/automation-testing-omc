@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */            <data name="section" xsi:type="string">os_barcode_generate_form_general</data>
+
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeListing\Form\GenerateNewBarcodeEntityTest" summary="Create barcode" ticketId="MAGESTORE-1">
+        <variation name="GenerateVariation1">
+            <data name="barcodeGenerate/dataset" xsi:type="string">barcode</data>
+            <data name="fields/reason" xsi:type="string">reason%isolation%</data>
+            <data name="tag" xsi:type="string">1</data>
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeListing\AssertBarcodeSuccessSaveMessage" />
+        </variation>
+        <variation name="GenerateVariation2">
+            <data name="barcodeGenerate/dataset" xsi:type="string">barcode</data>
+            <data name="fields/reason" xsi:type="string"></data>
+            <data name="tag" xsi:type="string">1</data>
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeListing\AssertBarcodeSuccessSaveMessage" />
+        </variation>
+        <variation name="GenerateVariation3">
+            <data name="barcodeGenerate/dataset" xsi:type="string">barcode</data>
+            <data name="fields/reason" xsi:type="string"></data>
+            <data name="tag" xsi:type="string">0</data>
+            <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\BarcodeListing\Form\AssertGenerateErrorSaveMessage" />
+        </variation>
+    </testCase>
+</config>

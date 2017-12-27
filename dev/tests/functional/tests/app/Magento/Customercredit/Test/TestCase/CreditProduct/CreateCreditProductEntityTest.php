@@ -14,6 +14,16 @@ use Magento\Customercredit\Test\Page\Adminhtml\CreditProductNew;
 use Magento\Catalog\Test\Fixture\Category;
 use Magento\Mtf\TestCase\Injectable;
 
+/**
+ * Steps:
+ * 1. Login to the backend.
+ * 2. Navigate to Store Credit > Manage Credit Products.
+ * 3. Start to create credit product.
+ * 4. Fill in data according to data set.
+ * 5. Save Product.
+ * 6. Perform appropriate assertions.
+ *
+ */
 class CreateCreditProductEntityTest extends Injectable
 {
     /**
@@ -26,23 +36,8 @@ class CreateCreditProductEntityTest extends Injectable
      */
     protected $creditProductNew;
 
-//    public function __prepare(Category $category)
-//    {
-//        $category->persist();
-//
-//        return [
-//            'category' => $category
-//        ];
-//    }
-
-//    public function __prepare(CreditProduct $creditProduct)
-//    {
-//        $creditProduct->persist();
-//    }
-
     public function testCreate(
         CreditProduct $product,
-//        Category $category,
         CreditProductIndex $productGrid,
         CreditProductNew $newProductPage
     ) {

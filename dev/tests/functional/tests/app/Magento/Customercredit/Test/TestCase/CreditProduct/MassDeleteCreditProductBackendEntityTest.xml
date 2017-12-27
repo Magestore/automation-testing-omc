@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Customercredit\Test\TestCase\CreditProduct\MassDeleteCreditProductBackendEntityTest" summary="Credit Product Mass Delete" ticketId="MAGETWO-26848">
+        <variation name="MassDeleteCreditProductBackendEntityTest">
+            <data name="productQty" xsi:type="string">3</data>
+            <data name="productQtyToDelete" xsi:type="string">2</data>
+            <constraint name="Magento\Customercredit\Test\Constraint\CreditProduct\AssertCreditProductMassDeleteSuccessMessage" />
+            <constraint name="Magento\Customercredit\Test\Constraint\CreditProduct\AssertCreditProductMassDeleteNotInGrid" />
+            <constraint name="Magento\Customercredit\Test\Constraint\CreditProduct\AssertCreditProductMassDeleteInGrid" />
+        </variation>
+    </testCase>
+</config>

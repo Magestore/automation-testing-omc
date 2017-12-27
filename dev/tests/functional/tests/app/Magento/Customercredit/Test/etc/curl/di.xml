@@ -1,4 +1,5 @@
 <?xml version="1.0" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Magento\Customercredit\Test\Handler\CreditProduct\CreditProductInterface" type="Magento\Customercredit\Test\Handler\CreditProduct\Curl" />
+    <preference for="Magento\Customercredit\Test\Handler\CustomerUseCredit\CustomerUseCreditInterface" type="Magento\Customercredit\Test\Handler\CustomerUseCredit\Curl" />
 </config>

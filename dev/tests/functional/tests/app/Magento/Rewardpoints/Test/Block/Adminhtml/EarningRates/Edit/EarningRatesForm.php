@@ -29,6 +29,11 @@ class EarningRatesForm extends FormTabs
     /**
      * @return mixed
      */
+    protected $errorField = '.admin__field-error';
+
+    /**
+     * @return mixed
+     */
     public function formTitleIsVisible()
     {
         return $this->_rootElement->find($this->formTitle, Locator::SELECTOR_XPATH)->isVisible();
@@ -40,5 +45,12 @@ class EarningRatesForm extends FormTabs
     public function moneySpentFieldIsVisible()
     {
         return $this->_rootElement->find($this->moneySpentField, Locator::SELECTOR_CSS)->isVisible();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function fieldErrorIsVisible(){
+        return $this->_rootElement->find($this->errorField, Locator::SELECTOR_CSS)->isVisible();
     }
 }

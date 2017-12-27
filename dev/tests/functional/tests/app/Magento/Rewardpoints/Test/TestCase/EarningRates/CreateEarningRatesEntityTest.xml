@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Rewardpoints\Test\TestCase\EarningRates\CreateEarningRatesEntityTest" summary="Create Earning Rates" ticketId="MAGETWO-1234">
+        <variation name="Create Earning Rates width full fields">
+            <data name="button" xsi:type="string">add</data>
+            <data name="earningRates/dataset" xsi:type="string">earningrates_full_field</data>
+            <constraint name="Magento\Rewardpoints\Test\Constraint\EarningRates\AssertEarningRatesSuccessSaveMessage" />
+            <constraint name="Magento\Rewardpoints\Test\Constraint\EarningRates\AssertEarningRatesInGrid" />
+        </variation>
+        <variation name="Create Earning Rates width full require fields">
+            <data name="button" xsi:type="string">add</data>
+            <data name="earningRates/dataset" xsi:type="string">earningrates_full_required_field</data>
+            <constraint name="Magento\Rewardpoints\Test\Constraint\EarningRates\AssertEarningRatesSuccessSaveMessage" />
+            <constraint name="Magento\Rewardpoints\Test\Constraint\EarningRates\AssertEarningRatesInGrid" />
+        </variation>
+        <variation name="Create Earning Rates width empty fields">
+            <data name="button" xsi:type="string">add</data>
+            <data name="earningRates/dataset" xsi:type="string">empty_field</data>
+            <constraint name="Magento\Rewardpoints\Test\Constraint\EarningRates\AssertEarningRatesRequiredForm" />
+        </variation>
+    </testCase>
+</config>

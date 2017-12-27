@@ -9,9 +9,8 @@
 namespace Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\Supplier\Edit;
 
 
-use Magento\InventorySuccess\Test\Block\Adminhtml\FormSection;
+use Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\FormSection;
 
 class SupplierForm extends FormSection
 {
-
 }

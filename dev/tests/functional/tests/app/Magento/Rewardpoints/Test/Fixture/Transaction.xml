@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="transaction" module="Magento_Rewardpoints" type="flat" collection="Magento\Rewardpoints\Model\ResourceModel\Transaction\Collection" repository_class="Magento\Rewardpoints\Test\Repository\Transaction" handler_interface="Magento\Rewardpoints\Test\Handler\Transaction\TransactionInterface" class="Magento\Rewardpoints\Test\Fixture\Transaction" entity_type="rewardpoints_transaction">
+        <field name="transaction_id" is_required="1"/>
+        <field name="reward_id" is_required="0"/>
+        <field name="customer_id" is_required="0"/>
+        <field name="customer_email" is_required="0" source="Magento\Rewardpoints\Test\Fixture\Transaction\Customer"/>
+        <field name="title" is_required="0"/>
+        <field name="action" is_required="0"/>
+        <field name="action_type" is_required="0"/>
+        <field name="store_id" is_required="0"/>
+        <field name="point_amount" is_required="0"/>
+        <field name="point_used" is_required="0"/>
+        <field name="real_point" is_required="0"/>
+        <field name="status" is_required="0"/>
+        <field name="created_time" is_required="0"/>
+        <field name="updated_time" is_required="0"/>
+        <field name="expiration_date" is_required="0"/>
+        <field name="expire_email" is_required="0"/>
+        <field name="order_id" is_required="0"/>
+        <field name="order_increment_id" is_required="0"/>
+        <field name="order_base_amount" is_required="0"/>
+        <field name="order_amount" is_required="0"/>
+        <field name="base_discount" is_required="0"/>
+        <field name="discount" is_required="0"/>
+        <field name="extra_content" is_required="0"/>
+        <field name="expiration_day" is_required="0"/>
+    </fixture>
+</config>

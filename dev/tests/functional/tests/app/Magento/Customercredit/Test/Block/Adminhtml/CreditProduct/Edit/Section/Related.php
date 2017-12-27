@@ -42,7 +42,6 @@ class Related extends Section
             if (isset($data[$relatedTypeUnderscore . '_products']['value'])) {
                 $context = $this->browser->find('.product_form_product_form_related_' . $relatedType . '_modal');
                 $relatedBlock = $this->getRelatedGrid($context);
-                sleep(3);
                 foreach ($data[$relatedTypeUnderscore . '_products']['value'] as $product) {
                     $relatedBlock->searchAndSelect(['sku' => $product['sku']]);
                 }
@@ -88,7 +87,7 @@ class Related extends Section
     {
         $element = $element ?: $this->_rootElement;
         return $this->blockFactory->create(
-            '\Magento\Catalog\Test\Block\Adminhtml\Product\Edit\Section\Related\Grid',
+            '\Magento\Customercredit\Test\Block\Adminhtml\CreditProduct\Edit\Section\Related\Grid',
             ['element' => $element]
         );
     }

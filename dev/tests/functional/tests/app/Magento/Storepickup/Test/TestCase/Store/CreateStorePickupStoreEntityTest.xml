@@ -10,7 +10,7 @@
         <variation name="Create store pickup store entity test with all fields data">
             <data name="storepickupStore/data/store_name" xsi:type="string">magestore_%isolation%</data>
             <data name="storepickupStore/data/description" xsi:type="string">magestore_description_%isolation%</data>
-            <data name="storepickupStore/data/warehouse_id" xsi:type="string">Primary Warehouse(primary)</data>
+            <data name="storepickupStore/data/warehouse_id/dataset" xsi:type="string">default</data>
             <data name="storepickupStore/data/status" xsi:type="string">Enabled</data>
             <data name="storepickupStore/data/link" xsi:type="string">magestore-link-%isolation%</data>
             <data name="storepickupStore/data/sort_order" xsi:type="string">0</data>

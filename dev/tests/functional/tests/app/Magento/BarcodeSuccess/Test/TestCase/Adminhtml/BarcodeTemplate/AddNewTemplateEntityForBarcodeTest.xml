@@ -11,7 +11,7 @@
             <data name="pageTitle" xsi:type="string">Add a New Barcode Template</data>
             <data name="buttons" xsi:type="string">back, save</data>
             <data name="section" xsi:type="string">barcode_template_information</data>
-            <data name="firstField" xsi:type="string">type</data>
+            <data name="fields" xsi:type="string">type</data>
             <data name="addNewButton" xsi:type="string">new</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\BarcodeSuccess\Test\Constraint\Adminhtml\AssertGridPageActionButtonsIsVisible" />
