@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Storepickup\Test\TestCase\Store\StoreGridSortingTest" summary="Grid UI Component Sorting" ticketId="MAGETWO-4122017">
+        <variation name="StoreGridSortingTest">
+            <data name="itemsCount" xsi:type="string">1</data>
+            <data name="fixtureName" xsi:type="string">storepickupStore</data>
+            <data name="fixtureDataSet" xsi:type="string">store1</data>
+            <data name="steps" xsi:type="array">
+                <item name="0" xsi:type="string">-</item>
+            </data>
+            <data name="columnsForSorting" xsi:type="array">
+                <item name="id" xsi:type="string">Store ID</item>
+                <item name="name" xsi:type="string">Store Name</item>
+                <item name="address" xsi:type="string">Address</item>
+                <item name="city" xsi:type="string">City</item>
+                <item name="state" xsi:type="string">State</item>
+                <item name="country" xsi:type="string">Country</item>
+                <item name="zipcode" xsi:type="string">Zip Code</item>
+                <item name="status" xsi:type="string">Status</item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Storepickup\Test\Page\Adminhtml\StoreIndex</data>
+            <data name="gridRetriever" xsi:type="string">getStoreGrid</data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+        </variation>
+    </testCase>
+</config>

@@ -34,7 +34,7 @@ class Curl extends AbstractCurl implements RateInterface
      */
     protected $mappingData = [
         'website_ids'  => [
-            'Main Website' => '1',
+            'Main Website' =>'1'
         ],
         'customer_group_ids'  => [
             'NOT LOGGED IN' => '0',
@@ -48,40 +48,67 @@ class Curl extends AbstractCurl implements RateInterface
         ]
     ];
 
+
     /**
-     * @param FixtureInterface|null $fixture
-     * @return array
+     * Mapping values for Websites
+     *
+     * @var array
      */
+    protected $websiteIds = [
+        'Main Website' => 1,
+    ];
+
+    /**
+     * Mapping values for Customer Groups
+     *
+     * @var array
+     */
+    protected $customerGroupIds = [
+        'NOT LOGGED IN' => 0,
+        'General' => 1,
+        'Wholesale' => 2,
+        'Retailer' => 3,
+    ];
+
     public function persist(FixtureInterface $fixture = null)
     {
-        $data = $this->replaceMappingData($fixture->getData());
+        $data = $this->prepareData($fixture);
         $url = $_ENV['app_backend_url'] . $this->saveUrl;
         $curl = new BackendDecorator(new CurlTransport(), $this->_configuration);
         $curl->write($url, $data);
         $response = $curl->read();
         $curl->close();
-//        if (!strpos($response, 'data-ui-id="messages-message-success"')) {
-//            throw new \Exception(
-//                "Location entity creation by curl handler was not successful! Response: $response"
-//            );
-//        }
+        if (!strpos($response, 'data-ui-id="messages-message-success"')) {
+            throw new \Exception(
+                "Location entity creation by curl handler was not successful! Response: $response"
+            );
+        }
 
-        $data['rate_id'] = $fixture->getRateId();
-        return ['rate_id' => $data['rate_id']];
+//        $data['rate_id'] = $fixture->getRateId();
+//        return ['rate_id' => $data['rate_id']];
     }
 
 
-    /**
-     * @param FixtureInterface $rate
-     * @return mixed
-     */
-    protected function prepareData(FixtureInterface $rate)
+    protected function prepareData($rate)
     {
-        // Replace UI fixture values with values that are applicable for cURL. Property $mappingData is used.
         $data = $this->replaceMappingData($rate->getData());
-        // Perform data manipulations to prepare the cURL request based on input data.
-
+        $data['rewardpoints_earningrates'] = $data;
+        if (isset($data['website_ids'])) {
+            $websiteIds = [];
+            foreach ($data['website_ids'] as $websiteId) {
+                $websiteIds[] = isset($this->websiteIds[$websiteId]) ? $this->websiteIds[$websiteId] : $websiteId;
+            }
+            $data['rewardpoints_earningrates']['website_ids'] = $websiteIds;
+        }
+        if (isset($data['customer_group_ids'])) {
+            $customerGroupIds = [];
+            foreach ($data['customer_group_ids'] as $customerGroupId) {
+                $customerGroupIds[] = isset($this->customerGroupIds[$customerGroupId])
+                    ? $this->customerGroupIds[$customerGroupId]
+                    : $customerGroupId;
+            }
+            $data['rewardpoints_earningrates']['customer_group_ids'] = $customerGroupIds;
+        }
         return $data;
     }
-    // Additional methods.
 }

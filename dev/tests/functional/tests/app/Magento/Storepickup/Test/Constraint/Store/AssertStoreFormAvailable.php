@@ -29,11 +29,63 @@ class AssertStoreFormAvailable extends AbstractConstraint
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $storeNew->getStoreForm()->generalTitleIsVisible(),
-            'General title is not visible.'
+            'General Information title is not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
-            $storeNew->getStoreForm()->storeNameFieldIsVisible(),
-            'Store name field is not visible.'
+            $storeNew->getStoreForm()->contactTitleIsVisible(),
+            'Contact Information title is not visible.'
+        );
+        \PHPUnit_Framework_Assert::assertTrue(
+            $storeNew->getStoreForm()->ownerInformationTitleIsVisible(),
+            'Owner Information title is not visible.'
+        );
+        \PHPUnit_Framework_Assert::assertTrue(
+            $storeNew->getStoreForm()->metaInformationTitleIsVisible(),
+            'Meta Information title is not visible.'
+        );
+        $generalInformationFields = $storeNew->getStoreForm()->getGeneralInformationFields();
+        foreach ($generalInformationFields as $fieldName => $selector) {
+            \PHPUnit_Framework_Assert::assertTrue(
+                $storeNew->getStoreForm()->fieldIsVisible($selector),
+                $fieldName . ' field is not visible.'
+            );
+        }
+        $storeNew->getStoreForm()->openTab('google-map');
+        $googleMapFields = $storeNew->getStoreForm()->getGoogleMapFields();
+        foreach ($googleMapFields as $fieldName => $selector) {
+            \PHPUnit_Framework_Assert::assertTrue(
+                $storeNew->getStoreForm()->fieldIsVisible($selector),
+                $fieldName . ' field is not visible.'
+            );
+        }
+        $storeNew->getStoreForm()->openTab('image-gallery');
+        \PHPUnit_Framework_Assert::assertTrue(
+            $storeNew->getStoreForm()->imageGaleryFieldIsVisible(),
+            'Image Galery field is not visible.'
+        );
+        $storeNew->getStoreForm()->openTab('store-schedule');
+        \PHPUnit_Framework_Assert::assertTrue(
+            $storeNew->getStoreForm()->scheduleFieldIsVisible(),
+            'Schedule field is not visible.'
+        );
+        $storeNew->getStoreForm()->openTab('store-tags');
+        sleep(1);
+        $storeNew->getStoreForm()->waitOpenTagTab();
+        \PHPUnit_Framework_Assert::assertTrue(
+            $storeNew->getStoreForm()->fieldIsVisible('[id="storepickupadmin_tag_grid"]'),
+            'Store Tag grid is not visible.'
+        );
+        $storeNew->getStoreForm()->openTab('store-holidays');
+        $storeNew->getStoreForm()->waitOpenHolidayTab();
+        \PHPUnit_Framework_Assert::assertTrue(
+            $storeNew->getStoreForm()->fieldIsVisible('[id="storepickupadmin_holiday_grid"]'),
+            'Store Holiday grid is not visible.'
+        );
+        $storeNew->getStoreForm()->openTab('store-orders');
+        $storeNew->getStoreForm()->waitOpenOrderTab();
+        \PHPUnit_Framework_Assert::assertTrue(
+            $storeNew->getStoreForm()->fieldIsVisible('[id="storepickupadmin_orders_grid"]'),
+            'Store Holiday grid is not visible.'
         );
     }
     /**

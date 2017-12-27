@@ -10,10 +10,10 @@ class AssertGridPageActionButtonsIsVisible extends AbstractConstraint
 	{
 		$buttonId = explode(', ', $buttons);
 
-		$dashboard->getGridBlock()->waitPageToLoad();
+		$dashboard->getGridBarcodeBlock()->waitingForLoadingMaskNotVisible();
 		foreach ($buttonId as $id) {
 			\PHPUnit_Framework_Assert::assertTrue(
-				$dashboard->getPageActionsBlock()->buttonIsVisible($id),
+				$dashboard->getPageActionsBarcodeBlock()->buttonIsVisible($id),
 				'Button "'.$id.'" is not shown'
 			);
 		}

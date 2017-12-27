@@ -6,6 +6,11 @@
  */
 -->
 <sections>
+	<products>
+		<class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+		<selector>[data-index="product_listing"]</selector>
+		<strategy>css selector</strategy>
+	</products>
 	<information>
 		<class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
 		<selector>[data-index="information"]</selector>
@@ -33,7 +38,6 @@
 			</status>
 		</fields>
 	</information>
-
 	<address>
 		<class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
 		<selector>[data-index="address"]</selector>
@@ -58,6 +62,10 @@
 			<region>
 				<selector>[name='region']</selector>
 			</region>
+			<region_id>
+				<selector>[name='region_id']</selector>
+				<input>select</input>
+			</region_id>
 			<postcode>
 				<selector>[name='postcode']</selector>
 			</postcode>
@@ -66,15 +74,14 @@
 			</website>
 		</fields>
 	</address>
-
 	<password>
 		<class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
 		<selector>[data-index="password"]</selector>
 		<strategy>css selector</strategy>
 		<fields>
-			<new_password>
+			<password>
 				<selector>[name='new_password']</selector>
-			</new_password>
+			</password>
 			<generated_password>
 				<selector>[name='generated_password']</selector>
 				<input>switcher</input>

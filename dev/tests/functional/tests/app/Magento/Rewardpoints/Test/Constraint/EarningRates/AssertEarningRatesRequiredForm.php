@@ -23,7 +23,7 @@ class AssertEarningRatesRequiredForm extends AbstractConstraint
     {
         \PHPUnit_Framework_Assert::assertTrue(
             $earningRatesNew->getEarningRatesForm()->fieldErrorIsVisible(),
-            'EarningRates form is not required field visible.'
+            'EarningRates required field form is not visible.'
         );
     }
     /**

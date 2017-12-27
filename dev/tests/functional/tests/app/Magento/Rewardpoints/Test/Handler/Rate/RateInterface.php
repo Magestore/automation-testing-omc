@@ -11,7 +11,7 @@ namespace Magento\Rewardpoints\Test\Handler\Rate;
 use Magento\Mtf\Handler\HandlerInterface;
 
 /**
- * Interface RateInterface
+ * Interface EarningRatesInterface
  * @package Magento\Rewardpoints\Test\Handler\Rate
  */
 interface RateInterface extends HandlerInterface

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Rewardpoints\Test\TestCase\Transactions\MassTransactionsChangeStatusTest" summary="Change status Transactions Mass Actions" ticketId="MAGETWO-60847">
+        <variation name="MassTransactionsChangeStatusTest0">
+            <data name="initialTransactions" xsi:type="array">
+                <item name ="0" xsi:type="string">transaction::default</item>
+                <item name ="1" xsi:type="string">transaction::default</item>
+            </data>
+            <data name="gridStatus" xsi:type="string">Canceled</data>
+            <data name="transaction/data/status" xsi:type="string">No</data>
+            <constraint name="Magento\Rewardpoints\Test\Constraint\Transaction\AssertChangeTransactionStatusInGrid" />
+        </variation>
+    </testCase>
+</config>

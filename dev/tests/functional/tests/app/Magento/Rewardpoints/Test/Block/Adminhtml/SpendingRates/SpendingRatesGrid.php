@@ -56,16 +56,23 @@ class SpendingRatesGrid extends RewardGrid
         ],
         'website_ids' => [
             'selector' => '.admin__data-grid-filters input[name="website_ids"]',
-            'input'    => 'Select',
+            'input'    => 'select',
         ],
         'customer_group_ids' => [
             'selector' => '.admin__data-grid-filters input[name="customer_group_ids"]',
-            'input'    => 'Select',
+            'input'    => 'select',
         ],
         'status' => [
-            'selector' => '.admin__data-grid-filters input[name="status"]',
-            'input'    => 'Select',
+            'selector' => '[name="status"]',
+            'input'    => 'select',
         ]
     ];
-
+    /**
+     * Fix core
+     */
+    public function resetFilter()
+    {
+        $this->waitLoader();
+        parent::resetFilter();
+    }
 }

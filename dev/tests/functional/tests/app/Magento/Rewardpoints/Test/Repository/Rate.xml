@@ -14,6 +14,7 @@
                 <item name="2" xsi:type="string">Wholesale</item>
                 <item name="3" xsi:type="string">Retailer</item>
             </field>
+            <field name="sort_order" xsi:type="string">%isolation%</field>
         </dataset>
         <dataset name="earningrates_full_field">
             <field name="money" xsi:type="string">%isolation%</field>

@@ -35,7 +35,57 @@ class AssertScheduleFormAvailable extends AbstractConstraint
             $scheduleNew->getScheduleForm()->scheduleNameFieldIsVisible(),
             'Schedule name field is not visible.'
         );
+        $scheduleTime = $scheduleNew->getScheduleForm()->getScheduleTime();
+        foreach ($scheduleTime as $field => $selector) {
+            \PHPUnit_Framework_Assert::assertTrue(
+                $scheduleNew->getScheduleForm()->scheduleFieldIsVisible('monday', $selector),
+                sprintf($field, 'monday') . ' field is not visible.'
+            );
+        }
+        foreach ($scheduleTime as $field => $selector) {
+            \PHPUnit_Framework_Assert::assertTrue(
+                $scheduleNew->getScheduleForm()->scheduleFieldIsVisible('tuesday', $selector),
+                sprintf($field, 'tuesday') . ' field is not visible.'
+            );
+        }
+        foreach ($scheduleTime as $field => $selector) {
+            \PHPUnit_Framework_Assert::assertTrue(
+                $scheduleNew->getScheduleForm()->scheduleFieldIsVisible('wednesday', $selector),
+                sprintf($field, 'wednesday') . ' field is not visible.'
+            );
+        }
+        foreach ($scheduleTime as $field => $selector) {
+            \PHPUnit_Framework_Assert::assertTrue(
+                $scheduleNew->getScheduleForm()->scheduleFieldIsVisible('thursday', $selector),
+                sprintf($field, 'thursday') . ' field is not visible.'
+            );
+        }
+        foreach ($scheduleTime as $field => $selector) {
+            \PHPUnit_Framework_Assert::assertTrue(
+                $scheduleNew->getScheduleForm()->scheduleFieldIsVisible('friday', $selector),
+                sprintf($field, 'friday') . ' field is not visible.'
+            );
+        }
+        foreach ($scheduleTime as $field => $selector) {
+            \PHPUnit_Framework_Assert::assertTrue(
+                $scheduleNew->getScheduleForm()->scheduleFieldIsVisible('saturday', $selector),
+                sprintf($field, 'saturday') . ' field is not visible.'
+            );
+        }
+        foreach ($scheduleTime as $field => $selector) {
+            \PHPUnit_Framework_Assert::assertTrue(
+                $scheduleNew->getScheduleForm()->scheduleFieldIsVisible('sunday', $selector),
+                sprintf($field, 'sunday') . ' field is not visible.'
+            );
+        }
+        $scheduleNew->getScheduleForm()->openTab('stores');
+        $scheduleNew->getScheduleForm()->waitOpenStoresTab();
+        \PHPUnit_Framework_Assert::assertTrue(
+            $scheduleNew->getScheduleForm()->storesGridIsVisisble(),
+            'Stores grid is not visible.'
+        );
     }
+
     /**
      * Returns a string representation of the object.
      *

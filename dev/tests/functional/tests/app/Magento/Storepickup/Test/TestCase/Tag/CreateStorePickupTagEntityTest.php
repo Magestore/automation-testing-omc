@@ -14,6 +14,16 @@ use Magento\Storepickup\Test\Fixture\StorepickupTag;
 use Magento\Storepickup\Test\Page\Adminhtml\TagIndex;
 use Magento\Storepickup\Test\Page\Adminhtml\TagNew;
 
+/**
+ * Steps:
+ * 1. Login to the backend.
+ * 2. Navigate to Store Pickup > Manage Tag.
+ * 3. Start to Add New Tag .
+ * 4. Fill in data according to data set.
+ * 5. Save Tag.
+ * 6. Perform appropriate assertions.
+ *
+ */
 class CreateStorePickupTagEntityTest extends Injectable
 {
     /**

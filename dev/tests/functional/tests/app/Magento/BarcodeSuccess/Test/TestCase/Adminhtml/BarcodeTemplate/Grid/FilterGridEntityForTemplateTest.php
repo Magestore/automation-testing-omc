@@ -6,59 +6,61 @@
  * Time: 23:05
  */
 namespace Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeTemplate\Grid;
-use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeTemplate\BarcodeTemplateIndex;
-use Magento\Mtf\TestCase\Injectable;
-use Magento\BarcodeSuccess\Test\Fixture\Template;
-use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeTemplate\BarcodeViewTemplateIndex;
-
-class FilterGridEntityForTemplateTest extends Injectable
+use Magento\Ui\Test\TestCase\GridFilteringTest;
+class FilterGridEntityForTemplateTest extends GridFilteringTest
 {
-    /* tags */
-    const MVP = 'no';
-    const DOMAIN = 'PS';
-    /* end tags */
-
-    /**
-     * @var BarcodeTemplateIndex $barcodeTemplateIndex
-     */
-
-    protected $barcodeTemplateIndex;
-    /**
-     * @var BarcodeViewTemplateIndex $barcodeViewTemplateIndex
-     */
-    protected $barcodeViewTemplateIndex;
-
-    protected $nameTemplate;
-
-    public function __inject(
-        BarcodeTemplateIndex $barcodeTemplateIndex,
-        BarcodeViewTemplateIndex $barcodeViewTemplateIndex
+    protected $gridBlock;
+    public function test(
+        $pageClass,
+        $gridRetriever,
+        $idGetter,
+        array $filters,
+        $fixtureName,
+        $itemsCount,
+        array $steps = [],
+        $fixtureDataSet = null,
+        $idColumn = null
     ) {
-        $this->barcodeTemplateIndex = $barcodeTemplateIndex;
-        $this->barcodeViewTemplateIndex = $barcodeViewTemplateIndex;
-    }
+        $items = $this->createItems($itemsCount, $fixtureName, $fixtureDataSet, $steps);
+        $page = $this->pageFactory->create($pageClass);
+        // Steps
+        $page->open();
+        /** @var DataGrid $gridBlock */
+        $gridBlock = $page->$gridRetriever();
+        $this->gridBlock = $gridBlock;
+        $gridBlock->resetFilter();
 
-    public function test(Template $template)
-    {
-        $this->nameTemplate = $template->getName();
-        //persis
-        $this->barcodeTemplateIndex->open();
-        $this->barcodeTemplateIndex->getTemplateGrid()->waitingForLoadingMaskNotVisible();
-        $this->barcodeTemplateIndex->getAddNewTemplate()->addNewTemplate('new');
-        $this->barcodeViewTemplateIndex->getBlockViewTemplate()->fill($template);
-        $this->barcodeViewTemplateIndex->getPageActionsBlock()->save();
-        //MassAction
-        $this->barcodeTemplateIndex->getTemplateGrid()->search(['name' => $template->getName()]);
-        $this->barcodeTemplateIndex->getTemplateGrid()->waitingForLoadingMaskNotVisible();
-        $idsInGrid = $this->barcodeTemplateIndex->getTemplateGrid()->getAllIds();
+        $filterResults = [];
+        foreach ($filters as $index => $itemFilters) {
+            foreach ($itemFilters as $itemFiltersName => $itemFilterValue) {
+                if (substr($itemFilterValue, 0, 1) === ':') {
 
-        sleep(5);
+                    $value = $items[$index]->getData(substr($itemFilterValue, 1));
+                    if ($itemFiltersName == "type") {
+                        $value = explode(' ', $value)[0];
+                    }
+                } else {
+                    $value = $itemFilterValue;
+                }
+                $gridBlock->search([$itemFiltersName => $value]);
+                $idsInGrid = $gridBlock->getAllIds();
+                if ($idColumn) {
+                    $filteredTargetIds = [];
+                    foreach ($idsInGrid as $filteredId) {
+                        $filteredTargetIds[] = $gridBlock->getColumnValue($filteredId, $idColumn);
+                    }
+                    $idsInGrid = $filteredTargetIds;
+                }
+                $filteredIds = $this->getActualIds($idsInGrid, $items, $idGetter);
+                $filterResults[$items[$index]->$idGetter()][$itemFiltersName] = $filteredIds;
+            }
+        }
+        $gridBlock->resetFilter();
+
+        return ['filterResults' => $filterResults];
     }
     public function tearDown()
     {
-        $this->barcodeTemplateIndex->open();
-        $this->barcodeTemplateIndex->getTemplateGrid()->searchAndSelect(['name' => $this->nameTemplate]);
-        $this->barcodeTemplateIndex->getTemplateGrid()->selectActionWithAlert('Delete');
-        $this->barcodeTemplateIndex->getTemplateGrid()->waitingForLoadingMaskNotVisible();
+        $this->gridBlock->massaction([], 'Delete', true, 'Select All');
     }
 }

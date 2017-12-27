@@ -12,8 +12,12 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Storepickup\Test\Page\Adminhtml\StoreIndex;
 
 /**
- * Class StoreFormTest
- * @package Magento\Storepickup\Test\TestCase
+ * Steps:
+ * 1. Login to the backend.
+ * 2. Navigate to Store Pickup > Manage Store.
+ * 3. Click to Add New Store.
+ * 4. Perform appropriate assertions.
+ *
  */
 class StoreFormTest extends Injectable
 {
