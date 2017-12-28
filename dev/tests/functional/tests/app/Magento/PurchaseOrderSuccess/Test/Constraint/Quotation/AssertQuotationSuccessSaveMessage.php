@@ -8,14 +8,23 @@
 
 namespace Magento\PurchaseOrderSuccess\Test\Constraint\Quotation;
 
-
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\QuotationView;
 
+/**
+ * Class AssertQuotationSuccessSaveMessage
+ * @package Magento\PurchaseOrderSuccess\Test\Constraint\Quotation
+ */
 class AssertQuotationSuccessSaveMessage extends AbstractConstraint
 {
+    /**
+     *
+     */
     const SUCCESS_SAVE_MESSAGE = 'Quotation has been saved.';
 
+    /**
+     * @param QuotationView $quotationView
+     */
     public function processAssert(QuotationView $quotationView)
     {
         $quotationView->getQuotationForm()->waitPageToLoad();

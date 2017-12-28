@@ -43,9 +43,7 @@ class Curl extends AbstractCurl implements QuotationInterface
 
     public function persist(FixtureInterface $fixture = null)
     {
-//        $data = $this->prepareData($fixture);
         $data = $this->replaceMappingData($fixture->getData());
-//        throw new Exception(var_dump($fixture->getData()));
         $supplier = $fixture->getDataFieldConfig('supplier_id')['source']->getSupplier();
         $data['supplier_id'] = $supplier->getSupplierId();
 //        $data['purchased_at'] = $supplier->getCreatedAt();
