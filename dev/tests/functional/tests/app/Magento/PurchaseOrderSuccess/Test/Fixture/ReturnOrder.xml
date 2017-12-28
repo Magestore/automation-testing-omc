@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="returnOrder" module="Magento_PurchaseOrderSuccess" type="flat" collection="Magento\PurchaseOrderSuccess\Model\ResourceModel\ReturnOrder\Collection" repository_class="Magento\PurchaseOrderSuccess\Test\Repository\ReturnOrder" handler_interface="Magento\PurchaseOrderSuccess\Test\Handler\ReturnOrder\ReturnOrderInterface" class="Magento\PurchaseOrderSuccess\Test\Fixture\ReturnOrder" entity_type="os_return_order">
+        <field name="return_id" is_required="1"/>
+        <field name="return_code" is_required="0"/>
+        <field name="warehouse_id" is_required="0"/>
+        <field name="supplier_id" is_required="0" source="Magento\PurchaseOrderSuccess\Test\Fixture\ReturnOrder\SupplierId"/>
+        <field name="type" is_required="0"/>
+        <field name="status" is_required="0"/>
+        <field name="reason" is_required="0"/>
+        <field name="created_by" is_required="0"/>
+        <field name="user_id" is_required="0"/>
+        <field name="total_qty_returned" is_required="0"/>
+        <field name="total_qty_transferred" is_required="0"/>
+        <field name="returned_at" is_required="0"/>
+        <field name="canceled_at" is_required="0"/>
+        <field name="created_at" is_required="0"/>
+        <field name="updated_at" is_required="0"/>
+    </fixture>
+</config>
