@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\PurchaseOrderSuccess\Test\Repository\Quotation">
+        <dataset name="default">
+            <field name="supplier_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">default</item>
+            </field>
+            <field name="currency_code" xsi:type="string">US Dollar</field>
+            <field name="currency_rate" xsi:type="string">1</field>
+            <field name="comment" xsi:type="string">magestore%isolation%@magestore.com</field>
+        </dataset>
+        <dataset name="quotation_VND">
+            <field name="purchased_at" xsi:type="string">12/23/2017</field>
+            <field name="supplier_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">default</item>
+            </field>
+            <field name="currency_code" xsi:type="string">Vietnamese Dong</field>
+            <field name="currency_rate" xsi:type="string">23000</field>
+            <field name="comment" xsi:type="string">magestore%isolation%@magestore.com</field>
+        </dataset>
+    </repository>
+</config>
