@@ -4,9 +4,9 @@
         <variation name="MassActionDeleteSupplierEntityTestVariation1">
             <data name="suppliersQty" xsi:type="string">3</data>
             <data name="suppliersQtyToDelete" xsi:type="string">2</data>
-            <!--<constraint name="Magento\Storepickup\Test\Constraint\Tag\AssertTagMassDeleteSuccessMessage" />-->
-            <!--<constraint name="Magento\Storepickup\Test\Constraint\Tag\AssertTagMassDeleteNotInGrid" />-->
-            <!--<constraint name="Magento\Storepickup\Test\Constraint\Tag\AssertTagMassDeleteInGrid" />-->
+            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Supplier\AssertSupplierMassDeteteSuccessMessage" />
+            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Supplier\AssertSupplierMassDeleteNotInGrid" />
+            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Supplier\AssertSupplierMassDeleteInGrid" />
         </variation>
     </testCase>
 </config>
