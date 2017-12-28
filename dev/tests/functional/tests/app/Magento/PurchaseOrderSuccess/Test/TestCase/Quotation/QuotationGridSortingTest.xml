@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\PurchaseOrderSuccess\Test\TestCase\Quotation\QuotationGridSortingTest" summary="Grid UI Component Sorting" ticketId="MAGETWO-4122017">
+        <variation name="Quotation grid sorting test">
+            <data name="itemsCount" xsi:type="string">2</data>
+            <data name="fixtureName" xsi:type="string">quotation</data>
+            <data name="fixtureDataSet" xsi:type="string">default</data>
+            <data name="steps" xsi:type="array">
+                <item name="0" xsi:type="string">-</item>
+                <item name="1" xsi:type="string">-</item>
+            </data>
+            <data name="columnsForSorting" xsi:type="array">
+                <item name="purchase_code" xsi:type="string">Quotation Number</item>
+                <!--<item name="purchased_at" xsi:type="string">Create At</item>-->
+                <item name="supplier_id" xsi:type="string">Supplier</item>
+                <!--<item name="total_qty_orderred" xsi:type="string">Requested Qty</item>-->
+                <!--<item name="grand_total_incl_tax" xsi:type="string">Grand Total (Incl. Tax)</item>-->
+                <!--<item name="status" xsi:type="string">Status</item>-->
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\QuotationIndex</data>
+            <data name="gridRetriever" xsi:type="string">getQuotationGrid</data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+        </variation>
+    </testCase>
+</config>

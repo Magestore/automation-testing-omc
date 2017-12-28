@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<sections>
+    <summary_information>
+        <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+        <selector>[data-index="purchase_sumary"]</selector>
+        <strategy>css selector</strategy>
+    </summary_information>
+    <shipping_payment>
+        <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+        <selector>[data-index="shipping_payment"]</selector>
+        <strategy>css selector</strategy>
+        <fields>
+            <shipping_address>
+                <selector>[name='shipping_address']</selector>
+                <input>textarea</input>
+            </shipping_address>
+            <shipping_method>
+                <selector>[name='shipping_method']</selector>
+                <input>select</input>
+            </shipping_method>
+            <shipping_cost>
+                <selector>[name='shipping_cost']</selector>
+                <input>select</input>
+            </shipping_cost>
+            <started_at>
+                <selector>[name='started_at']</selector>
+                <input>datepicker</input>
+            </started_at>
+            <expected_at>
+                <selector>[name='expected_at']</selector>
+                <input>datepicker</input>
+            </expected_at>
+            <payment_term>
+                <selector>[name='payment_term']</selector>
+                <input>select</input>
+            </payment_term>
+            <placed_via>
+                <selector>[name='placed_via']</selector>
+                <input>select</input>
+            </placed_via>
+        </fields>
+    </shipping_payment>
+    <general_information>
+        <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+        <selector>[data-index="general_information"]</selector>
+        <strategy>css selector</strategy>
+        <fields>
+            <purchased_at>
+                <selector>[name='purchased_at']</selector>
+                <input>datepicker</input>
+            </purchased_at>
+            <!--<supplier_id>-->
+                <!--<selector>[name='supplier_id']</selector>-->
+                <!--<input>select</input>-->
+            <!--</supplier_id>-->
+            <!--<currency_code>-->
+                <!--<selector>[name='currency_code']</selector>-->
+                <!--<input>select</input>-->
+            <!--</currency_code>-->
+            <!--<currency_rate>-->
+                <!--<selector>[name='currency_rate']</selector>-->
+            <!--</currency_rate>-->
+            <comment>
+                <selector>[name='comment']</selector>
+                <input>textarea</input>
+            </comment>
+        </fields>
+    </general_information>
+</sections>
