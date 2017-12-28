@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="quotation" module="Magento_PurchaseOrderSuccess" type="flat" collection="Magento\PurchaseOrderSuccess\Model\ResourceModel\PurchaseOrder\Collection" repository_class="Magento\PurchaseOrderSuccess\Test\Repository\Quotation" handler_interface="Magento\PurchaseOrderSuccess\Test\Handler\Quotation\QuotationInterface" class="Magento\PurchaseOrderSuccess\Test\Fixture\Quotation" entity_type="os_purchase_order">
+        <field name="purchase_order_id" is_required="1"/>
+        <field name="purchase_code" is_required="0"/>
+        <field name="supplier_id" is_required="0" source="Magento\PurchaseOrderSuccess\Test\Fixture\Quotation\Supplier"/>
+        <field name="type" is_required="0"/>
+        <field name="status" is_required="0"/>
+        <field name="send_email" is_required="0"/>
+        <field name="is_sent" is_required="0"/>
+        <field name="comment" is_required="0"/>
+        <field name="shipping_address" is_required="0"/>
+        <field name="shipping_method" is_required="0"/>
+        <field name="shipping_cost" is_required="0"/>
+        <field name="payment_term" is_required="0"/>
+        <field name="placed_via" is_required="0"/>
+        <field name="created_by" is_required="0"/>
+        <field name="user_id" is_required="0"/>
+        <field name="total_qty_orderred" is_required="0"/>
+        <field name="total_qty_received" is_required="0"/>
+        <field name="total_qty_transferred" is_required="0"/>
+        <field name="total_qty_returned" is_required="0"/>
+        <field name="total_qty_billed" is_required="0"/>
+        <field name="subtotal" is_required="0"/>
+        <field name="total_tax" is_required="0"/>
+        <field name="total_discount" is_required="0"/>
+        <field name="grand_total_excl_tax" is_required="0"/>
+        <field name="grand_total_incl_tax" is_required="0"/>
+        <field name="total_billed" is_required="0"/>
+        <field name="total_due" is_required="0"/>
+        <field name="currency_code" is_required="0"/>
+        <field name="currency_rate" is_required="0"/>
+        <field name="purchased_at" is_required="0"/>
+        <field name="started_at" is_required="0"/>
+        <field name="expected_at" is_required="0"/>
+        <field name="canceled_at" is_required="0"/>
+        <field name="created_at" is_required="0"/>
+        <field name="updated_at" is_required="0"/>
+        <field name="purchase_key" is_required="0"/>
+    </fixture>
+</config>
