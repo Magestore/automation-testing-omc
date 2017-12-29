@@ -13,28 +13,31 @@ use Magento\Mtf\Fixture\FixtureFactory;
 
 class SupplierId extends DataSource
 {
+    /**
+     * @var $supplier
+     */
     protected $supplier;
-    protected $data;
 
-    public function __construct(FixtureFactory $fixtureFactory,array $params,$data )
+    /**
+     * SupplierId constructor.
+     * @param FixtureFactory $fixtureFactory
+     * @param array $params
+     * @param $data
+     */
+    public function __construct(FixtureFactory $fixtureFactory, array $params, array $data = [] )
     {
         $this->params = $params;
-
-        if ( isset($data['dataset']) )
-        {
-                $supplier = $fixtureFactory->createByCode('supplier', ['dataset' => $data['dataset']]);
-
-                if (!$supplier->hasData('supplier_id'))
-                {
-                    $supplier->persist();
-                }
-                $this->supplier = $supplier;
-
-                $this->data = $supplier->getSupplierName();
+        if (isset($data['dataset'])) {
+            $supplier = $fixtureFactory->createByCode('supplier', ['dataset' => $data['dataset']]);
+            $supplier->persist();
+            $this->data = $supplier->getSupplierName();
+            $this->supplier = $supplier;
         }
     }
 
-
+    /**
+    * @return mixed
+    */
     public function getSupplier()
     {
         return $this->supplier;

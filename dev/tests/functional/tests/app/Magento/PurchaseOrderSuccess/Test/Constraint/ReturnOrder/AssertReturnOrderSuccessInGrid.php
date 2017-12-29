@@ -29,11 +29,11 @@ class AssertReturnOrderSuccessInGrid extends AbstractConstraint
      */
     public function processAssert(ReturnOrder $returnOrder, ReturnOrderIndex $returnOrderIndex)
     {
-        $filter = ['denomination_name' => $returnOrder->getDenominationName()];
+        $filter = ['return_code' => $returnOrder->getReturnCode()];
         $returnOrderIndex->open();
         \PHPUnit_Framework_Assert::assertTrue(
-            $returnOrderIndex->getDenominationsGrid()->isRowVisible($filter),
-            'PurchaseOrderSuccess ReturnOrder with ReturnOrder Name \'' . $returnOrder->getDenominationName() . '\' is absent in PurchaseOrderSuccess ReturnOrder grid.'
+            $returnOrderIndex->getReturnOrdersGrid()->isRowVisible($filter),
+            'PurchaseOrderSuccess ReturnOrder with ReturnOrder Name \'' . $returnOrder->getReturnCode() . '\' is absent in PurchaseOrderSuccess ReturnOrder grid.'
         );
     }
 
