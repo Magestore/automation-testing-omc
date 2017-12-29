@@ -17,6 +17,21 @@ use Magento\Mtf\TestCase\Injectable;
  * Class DenominationMassDeleteTest
  * @package Magento\Webpos\Test\TestCase\Denomination
  */
+/**
+ *
+ * Test Flow:
+ * Preconditions:
+ * 1. Create item X
+ *
+ * Steps:
+ * 1. Open backend
+ * 2. Go to  Sales > Webpos Cash Denomination
+ * 3. Select item X from preconditions
+ * 4. Select in dropdown "Delete"
+ * 5. Accept alert
+ * 6. Perform all assertions according to dataset
+ *
+ */
 class DenominationMassDeleteTest extends Injectable
 {
     /* tags */

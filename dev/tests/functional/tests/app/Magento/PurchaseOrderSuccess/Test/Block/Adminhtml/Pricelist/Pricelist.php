@@ -10,8 +10,9 @@ namespace Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\Pricelist;
 
 use Magento\Mtf\Block\Block;
 use Magento\Mtf\Client\Locator;
+use Magento\Ui\Test\Block\Adminhtml\DataGrid;
 
-class Pricelist extends Block
+class Pricelist extends DataGrid
 {
 //    /**
 //     * "click add Price List" button

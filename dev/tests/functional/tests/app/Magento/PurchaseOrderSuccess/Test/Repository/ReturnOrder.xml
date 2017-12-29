@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\PurchaseOrderSuccess\Test\Repository\ReturnOrder">
+        <dataset name="default">
+            <field name="returned_at" xsi:type="string">2017/12/07</field>
+            <field name="supplier_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">default</item>
+            </field>
+            <field name="warehouse_id" xsi:type="string">Primary Warehouse(primary)</field>
+            <field name="reason" xsi:type="string">reason-%isolation%</field>
+        </dataset>
+    </repository>
+</config>
