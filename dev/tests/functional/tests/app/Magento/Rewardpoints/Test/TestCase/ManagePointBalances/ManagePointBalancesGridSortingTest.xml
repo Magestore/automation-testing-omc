@@ -5,7 +5,7 @@
             <data name="tag" xsi:type="string">to_maintain:yes</data>
             <data name="description" xsi:type="string">Verify manage points balances grid sorting</data>
             <data name="itemsCount" xsi:type="string">2</data>
-            <data name="fixtureName" xsi:type="string">earningRates</data>
+            <data name="fixtureName" xsi:type="string">transaction</data>
             <data name="fixtureDataSet" xsi:type="string">default</data>
             <data name="steps" xsi:type="array">
                 <item name="0" xsi:type="string">-</item>
