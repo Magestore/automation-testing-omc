@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\PurchaseOrderSuccess\Test\TestCase\Supplier\MassChangeStatusSupplierEntityTest" summary="Supplier Mass Change Status" ticketId="MAGESTORE-28122017">
+        <variation name="MassActionEnableSupplierEntityTestVariation1">
+            <data name="suppliersQty" xsi:type="string">2</data>
+            <data name="supplierDataSet" xsi:type="string">default</data>
+            <data name="status" xsi:type="string">Enable</data>
+            <!--<constraint name="Magento\Storepickup\Test\Constraint\Tag\AssertTagMassDeleteSuccessMessage" />-->
+            <!--<constraint name="Magento\Storepickup\Test\Constraint\Tag\AssertTagMassDeleteInGrid" />-->
+        </variation>
+        <variation name="MassActionDisableSupplierEntityTestVariation2">
+            <data name="suppliersQty" xsi:type="string">2</data>
+            <data name="supplierDataSet" xsi:type="string">default</data>
+            <data name="status" xsi:type="string">Disable</data>
+            <!--<constraint name="Magento\Storepickup\Test\Constraint\Tag\AssertTagMassDeleteSuccessMessage" />-->
+            <!--<constraint name="Magento\Storepickup\Test\Constraint\Tag\AssertTagMassDeleteInGrid" />-->
+        </variation>
+    </testCase>
+</config>

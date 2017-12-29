@@ -10,10 +10,9 @@
         <variation name="OpenAddNewSupplierEntityTestVariation1">
             <data name="pageTitle" xsi:type="string">New Supplier</data>
             <data name="buttons" xsi:type="string">back, save</data>
-
+            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Form\AssertNewSupplierFormIsAvailable" />
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
             <constraint name="Magento\InventorySuccess\Test\Constraint\Menu\AssertGridPageActionButtonsIsVisible" />
-            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Form\AssertNewSupplierFormIsAvailable" />
         </variation>
     </testCase>
 </config>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\PurchaseOrderSuccess\Test\TestCase\Supplier\CreateSupplierEntityTest" summary="Create supplier" ticketId="MAGESTORE-122517">
+        <variation name="CreateSupplierEntityTestVariation1-AllFieldsData">
+            <data name="supplier/data/supplier_code" xsi:type="string">magestore-%isolation%</data>
+            <data name="supplier/data/supplier_name" xsi:type="string">magestore-%isolation%</data>
+            <data name="supplier/data/contact_name" xsi:type="string">Bang</data>
+            <data name="supplier/data/contact_email" xsi:type="string">bang_%isolation%@trueplus.vn</data>
+            <data name="supplier/data/description" xsi:type="string">description_%isolation%</data>
+            <data name="supplier/data/status" xsi:type="string">Enable</data>
+            <data name="supplier/data/telephone" xsi:type="string">555-55-555-55</data>
+            <data name="supplier/data/fax" xsi:type="string">+44-208-1234567</data>
+            <data name="supplier/data/street" xsi:type="string">6161 West Centinela Avenue</data>
+            <data name="supplier/data/city" xsi:type="string">Culver City</data>
+            <data name="supplier/data/country_id" xsi:type="string">United States</data>
+            <data name="supplier/data/region_id" xsi:type="string">California</data>
+            <data name="supplier/data/postcode" xsi:type="string">90230</data>
+            <data name="supplier/data/website" xsi:type="string">magestore%isolation%.com</data>
+            <data name="supplier/data/new_password" xsi:type="string">12345a</data>
+            <data name="supplier/data/generated_password" xsi:type="string">Yes</data>
+            <data name="supplier/data/send_pass_to_supplier" xsi:type="string">Yes</data>
+            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Supplier\AssertSupplierSuccessSaveMessage"/>
+            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Supplier\AssertSupplierInGrid"/>
+        </variation>
+        <variation name="CreateSupplierEntityTestVariation1-RequireFieldsData">
+            <data name="supplier/data/supplier_code" xsi:type="string">magestore-%isolation%</data>
+            <data name="supplier/data/supplier_name" xsi:type="string">magestore-%isolation%</data>
+            <data name="supplier/data/contact_name" xsi:type="string">Bang</data>
+            <data name="supplier/data/contact_email" xsi:type="string">bang_%isolation%@trueplus.vn</data>
+            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Supplier\AssertSupplierSuccessSaveMessage"/>
+            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Supplier\AssertSupplierInGrid"/>
+        </variation>
+        <variation name="CreateSupplierEntityTestVariation1-BlankAllFields">
+            <data name="supplier/data/supplier_code" xsi:type="string"/>
+            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Supplier\AssertRequireMessagesVisible"/>
+        </variation>
+    </testCase>
+</config>
