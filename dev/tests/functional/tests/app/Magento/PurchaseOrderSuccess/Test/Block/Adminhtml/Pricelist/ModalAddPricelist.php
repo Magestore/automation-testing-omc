@@ -15,6 +15,10 @@ class ModalAddPricelist extends Block
 {
 	protected $mainActionsButtonSelector = '//aside[contains(@class, "os_supplier_pricinglist_form_os_supplier_pricinglist_form_supplier_pricinglist_listing_add")]/div[2]/header/div/div/div/button[span = "%s"]';
 
+	protected $priceListFormAction = '.page-main-actions';
+
+	protected $priceListForm = '[class="admin__scope-old os_supplier_pricinglist_form_os_supplier_pricinglist_form_supplier_pricinglist_listing_add_os_supplier_pricinglist_modal_add_listing"]';
+
 	public function getTitle()
 	{
 		return $this->_rootElement->find('div.modal-inner-wrap > header > h1')->getText();
@@ -41,4 +45,20 @@ class ModalAddPricelist extends Block
 	{
 		return $this->_rootElement->find('button[data-index="select_product_button"]');
 	}
+
+	public function getPriceListFormAction()
+    {
+        return $this->blockFactory->create(
+            '\Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\Pricelist\Modal\PriceList\PriceListFormAction',
+            ['element' => $this->browser->find($this->priceListFormAction)]
+        );
+    }
+
+    public function getPriceListForm()
+    {
+        return $this->blockFactory->create(
+            '\Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\Pricelist\Modal\PriceList\PriceListForm',
+            ['element' => $this->browser->find($this->priceListForm)]
+        );
+    }
 }

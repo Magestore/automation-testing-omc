@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: vong
  * Date: 12/28/2017
- * Time: 8:33 AM
+ * Time: 10:29 PM
  */
 
 namespace Magento\PurchaseOrderSuccess\Test\Constraint\Supplier;
@@ -11,26 +11,26 @@ namespace Magento\PurchaseOrderSuccess\Test\Constraint\Supplier;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\SupplierIndex;
 
-class AssertSupplierMassDeteteSuccessMessage extends AbstractConstraint
+class AssertSupplierMassChangeStatusSuccessMessage extends AbstractConstraint
 {
     /**
-     * Message that appears after deletion via mass actions
+     * Message that appears after change status via mass actions
      */
-    const SUCCESS_DELETE_MESSAGE = '%d record(s) have been deleted.';
+    const SUCCESS_CHANGE_STATUS_MESSAGE = '%d record(s) have been %s' . 'd.';
 
     /**
-     * Assert that message "A total of "x" record(s) were deleted."
+     * Assert that message "%d record(s) have been %s."
      *
-     * @param $suppliersQtyToDelete
+     * @param $suppliersQty
      * @param SupplierIndex $supplierIndex
      * @return void
      */
-    public function processAssert($suppliersQtyToDelete, SupplierIndex $supplierIndex)
+    public function processAssert($suppliersQty, $status, SupplierIndex $supplierIndex)
     {
         \PHPUnit_Framework_Assert::assertEquals(
-            sprintf(self::SUCCESS_DELETE_MESSAGE, $suppliersQtyToDelete),
+            sprintf(self::SUCCESS_CHANGE_STATUS_MESSAGE, $suppliersQty, strtolower($status)),
             $supplierIndex->getMessagesBlock()->getSuccessMessage(),
-            'Wrong supplier delete message is displayed.'
+            'Wrong ' . $status . ' message is displayed.'
         );
     }
 
@@ -41,6 +41,6 @@ class AssertSupplierMassDeteteSuccessMessage extends AbstractConstraint
      */
     public function toString()
     {
-        return 'Mass delete supplier message is displayed.';
+        return 'Mass change status supplier message is displayed.';
     }
 }
