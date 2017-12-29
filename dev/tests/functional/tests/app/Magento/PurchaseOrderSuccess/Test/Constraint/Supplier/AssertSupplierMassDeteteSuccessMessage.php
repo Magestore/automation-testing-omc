@@ -16,7 +16,7 @@ class AssertSupplierMassDeteteSuccessMessage extends AbstractConstraint
     /**
      * Message that appears after deletion via mass actions
      */
-    const SUCCESS_DELETE_MESSAGE = 'A total of %d record(s) have been deleted.';
+    const SUCCESS_DELETE_MESSAGE = '%d record(s) have been deleted.';
 
     /**
      * Assert that message "A total of "x" record(s) were deleted."

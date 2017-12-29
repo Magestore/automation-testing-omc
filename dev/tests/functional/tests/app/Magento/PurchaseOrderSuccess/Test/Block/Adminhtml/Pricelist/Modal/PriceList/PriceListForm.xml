@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<sections>
+    <supplier>
+        <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
+        <selector>[data-index="general_information"]</selector>
+        <strategy>css selector</strategy>
+        <fields>
+            <supplier_id>
+                <selector>[name="supplier_id"]</selector>
+                <input>select</input>
+            </supplier_id>
+        </fields>
+    </supplier>
+    <pricelist>
+        <class>\Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\Pricelist\Modal\PriceList\Section\SupplierProducts</class>
+        <selector>[data-index="pricing_list"]</selector>
+        <strategy>css selector</strategy>
+    </pricelist>
+</sections>
+

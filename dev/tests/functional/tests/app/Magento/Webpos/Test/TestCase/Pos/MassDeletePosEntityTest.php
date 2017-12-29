@@ -14,7 +14,21 @@ namespace Magento\Webpos\Test\TestCase\Pos;
 use Magento\Webpos\Test\Page\Adminhtml\PosIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-
+/**
+ *
+ * Test Flow:
+ * Preconditions:
+ * 1. Create item X
+ *
+ * Steps:
+ * 1. Open backend
+ * 2. Go to  Sales > Webpos Pos
+ * 3. Select item X from preconditions
+ * 4. Select in dropdown "Delete"
+ * 5. Accept alert
+ * 6. Perform all assertions according to dataset
+ *
+ */
 class MassDeletePosEntityTest extends Injectable
 {
     /* tags */

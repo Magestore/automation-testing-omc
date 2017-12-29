@@ -35,6 +35,8 @@ class MassChangeStatusSupplierEntityTest extends Injectable
     ){
         $this->fixtureFactory = $fixtureFactory;
         $this->supplierIndex = $supplierIndex;
+        $supplierIndex->open();
+        $supplierIndex->getSupplierGridBlock()->massaction([], 'Delete', true, 'Select All');
     }
 
     public function test($suppliersQty, $supplierDataSet, $status)

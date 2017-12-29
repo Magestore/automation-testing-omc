@@ -10,7 +10,17 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Pos;
-
+/**
+ * Precondition:
+ * 1. Create items
+ *
+ * Steps:
+ * 1. Navigate to backend.
+ * 2. Go to grid page Sales > Webpos Pos
+ * 3. Sorting grid using provided columns
+ * 5. Perform Asserts
+ *
+ */
 class GridPosSortingTest extends \Magento\Ui\Test\TestCase\GridSortingTest
 {
 

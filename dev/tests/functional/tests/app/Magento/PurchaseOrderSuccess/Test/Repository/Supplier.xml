@@ -67,7 +67,7 @@
             <field name="generated_password" xsi:type="string">No</field>
             <field name="send_pass_to_supplier" xsi:type="string">No</field>
             <field name="products" xsi:type="array">
-                <item name="dataset" xsi:type="string">catalogProductSimple::default, catalogProductVirtual::default</item>
+                <item name="dataset" xsi:type="string">catalogProductSimple::default, catalogProductSimple::default</item>
             </field>
         </dataset>
     </repository>

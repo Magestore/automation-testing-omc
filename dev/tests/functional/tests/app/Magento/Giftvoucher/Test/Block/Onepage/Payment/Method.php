@@ -10,7 +10,7 @@ use Magento\Mtf\Block\Block;
 use Magento\Mtf\Client\Locator;
 use Magento\Checkout\Test\Block\Onepage\Payment\Method as CheckoutMethod;
 /**
- * Checkout payment method block.
+ * CategoryRepository payment method block.
  */
 class Method extends CheckoutMethod
 {
