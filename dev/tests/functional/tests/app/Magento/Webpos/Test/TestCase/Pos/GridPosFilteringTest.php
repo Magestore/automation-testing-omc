@@ -10,7 +10,17 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Pos;
-
+/**
+ * Precondition:
+ * 1. Create items
+ *
+ * Steps:
+ * 1. Navigate to backend.
+ * 2. Go to grid page Sales > Webpos Pos
+ * 3. Filter grid using provided columns
+ * 4. Perform Asserts
+ *
+ */
 class GridPosFilteringTest extends \Magento\Ui\Test\TestCase\GridFilteringTest
 {
 

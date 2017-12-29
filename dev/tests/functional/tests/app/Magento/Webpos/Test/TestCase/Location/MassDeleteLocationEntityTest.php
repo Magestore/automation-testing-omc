@@ -15,7 +15,21 @@ use Magento\Webpos\Test\Fixture\Location;
 use Magento\Webpos\Test\Page\Adminhtml\LocationIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-
+/**
+ *
+ * Test Flow:
+ * Preconditions:
+ * 1. Create item X
+ *
+ * Steps:
+ * 1. Open backend
+ * 2. Go to  Sales > Webpos Location
+ * 3. Select item X from preconditions
+ * 4. Select in dropdown "Delete"
+ * 5. Accept alert
+ * 6. Perform all assertions according to dataset
+ *
+ */
 class MassDeleteLocationEntityTest extends Injectable
 {
     /* tags */
