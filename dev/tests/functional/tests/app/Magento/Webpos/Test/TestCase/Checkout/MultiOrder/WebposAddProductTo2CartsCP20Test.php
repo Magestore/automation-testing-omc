@@ -13,7 +13,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 /**
  * Class WebposAddProductTo2CartsCP20Test
- * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\Checkout\MultiOrder
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\MultiOrder
  */
 class WebposAddProductTo2CartsCP20Test extends Injectable
 {

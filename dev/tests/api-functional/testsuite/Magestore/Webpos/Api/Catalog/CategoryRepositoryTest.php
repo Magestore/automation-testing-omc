@@ -8,6 +8,7 @@
 
 namespace Magestore\Webpos\Api\Catalog;
 
+use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 use Magento\Framework\Webapi\Rest\Request as RestRequest;
 /**
@@ -17,6 +18,16 @@ use Magento\Framework\Webapi\Rest\Request as RestRequest;
 class CategoryRepositoryTest extends WebapiAbstract
 {
     const RESOURCE_PATH = '/V1/webpos/categories/';
+
+    /**
+     * @var \Magestore\Webpos\Api\Catalog\Constraint\CategoryRepository
+     */
+    protected $categoryRepository;
+
+    protected function setUp()
+    {
+        $this->categoryRepository = Bootstrap::getObjectManager()->get('\Magestore\Webpos\Api\Catalog\Constraint\CategoryRepository');
+    }
 
     /**
      * Get List Categories
@@ -48,21 +59,9 @@ class CategoryRepositoryTest extends WebapiAbstract
             $results['total_count'],
             "Result doesn't have any item (total_count < 1)"
         );
-        $keys = [
-            'items' => [
-                '0' => [
-                    'id',
-                    'name',
-                    'children',
-                    'image',
-                    'position',
-                    'level',
-                    'first_category',
-                    'parent_id',
-                    'path'
-                ]
-            ]
-        ];
+        // Get the key constraint for API testGetList. Call From Folder Constraint
+        $keys = $this->categoryRepository->GetListCategories();
+
         foreach ($keys['items'][0] as $key) {
             self::assertContains(
                 $key,

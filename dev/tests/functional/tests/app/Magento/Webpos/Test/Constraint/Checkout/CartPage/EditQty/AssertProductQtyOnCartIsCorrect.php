@@ -22,13 +22,13 @@ class AssertProductQtyOnCartIsCorrect extends AbstractConstraint
 		if ($expectQty == 1) {
 			\PHPUnit_Framework_Assert::assertFalse(
 				$webposIndex->getCheckoutCartItems()->getCartItemQty($product->getName())->isVisible(),
-				"Checkout - Cart - Product - Qty number is not hide"
+				"CategoryRepository - TaxClass - Product - Qty number is not hide"
 			);
 		} else {
 			\PHPUnit_Framework_Assert::assertEquals(
 				$expectQty,
 				$webposIndex->getCheckoutCartItems()->getCartItemQty($product->getName())->getText(),
-				"Checkout - Cart - Qty of product on cart is wrong"
+				"CategoryRepository - TaxClass - Qty of product on cart is wrong"
 				. "\nExpected: " . $expectQty
 				. "\nActual: " . $webposIndex->getCheckoutCartItems()->getCartItemQty($product->getName())->getText()
 			);
@@ -42,6 +42,6 @@ class AssertProductQtyOnCartIsCorrect extends AbstractConstraint
 	 */
 	public function toString()
 	{
-		return "Checkout - Cart - Qty of product on cart is correct";
+		return "CategoryRepository - TaxClass - Qty of product on cart is correct";
 	}
 }

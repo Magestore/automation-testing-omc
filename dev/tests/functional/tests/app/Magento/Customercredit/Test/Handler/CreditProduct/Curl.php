@@ -112,7 +112,7 @@ class Curl extends AbstractCurl implements CreditProductInterface
         'msrp_display_actual_price_type' => [
             'Use config' => 0,
             'On Gesture' => 1,
-            'In Cart' => 2,
+            'In TaxClass' => 2,
             'Before Order Confirmation' => 3
         ],
         'enable_qty_increments' => [

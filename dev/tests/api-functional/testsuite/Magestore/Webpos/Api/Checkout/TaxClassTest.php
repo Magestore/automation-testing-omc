@@ -12,7 +12,7 @@ use Magento\TestFramework\TestCase\WebapiAbstract;
 use \Magento\Framework\Webapi\Rest\Request as RestRequest;
 /**
  * Class TaxClassTest
- * @package Magestore\Webpos\Api\Checkout
+ * @package Magestore\Webpos\Api\CategoryRepository
  */
 class TaxClassTest extends WebapiAbstract
 {

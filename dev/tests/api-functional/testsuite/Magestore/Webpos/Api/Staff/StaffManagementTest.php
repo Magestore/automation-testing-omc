@@ -27,6 +27,7 @@ class StaffManagementTest extends WebapiAbstract
     {
         $this->currentSession = Bootstrap::getObjectManager()->get('\Magestore\Webpos\Api\CurrentSessionId\CurrentSessionIdTest');
     }
+
 	public function testStaffLogin()
 	{
 		$result = $this->currentSession->getCurrentSessionId();

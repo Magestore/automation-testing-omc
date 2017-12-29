@@ -10,7 +10,7 @@ namespace Magestore\Webpos\Api\Pos;
 
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
-
+use Magento\Framework\Webapi\Rest\Request as RestRequest;
 /**
  * Class PosRepositoryTest
  * @package Magestore\Webpos\Api\Pos
@@ -25,9 +25,15 @@ class PosRepositoryTest extends WebapiAbstract
      */
     protected $currentSession;
 
+    /**
+     * @var \Magestore\Webpos\Api\Pos\Constraint\PosRepository
+     */
+    protected $posRepository;
+
     protected function setUp()
     {
         $this->currentSession = Bootstrap::getObjectManager()->get('\Magestore\Webpos\Api\CurrentSessionId\CurrentSessionIdTest');
+        $this->posRepository = Bootstrap::getObjectManager()->get('\Magestore\Webpos\Api\Pos\Constraint\PosRepository');
     }
 
 	/**
@@ -62,7 +68,7 @@ class PosRepositoryTest extends WebapiAbstract
 		$serviceInfo = [
 			'rest' => [
 				'resourcePath' => self::POS_LIST_RESOURCE_PATH . '?' . http_build_query($searchCriteria),
-				'httpMethod' => \Magento\Framework\Webapi\Rest\Request::HTTP_METHOD_GET,
+				'httpMethod' => RestRequest::HTTP_METHOD_GET,
 			],
 		];
 
@@ -78,23 +84,11 @@ class PosRepositoryTest extends WebapiAbstract
 			$result['items'][0]['staff_id'],
 			'staff_id is wrong'
 		);
-		$keys = [
-			'pos_name',
-			'location_id',
-			'staff_id',
-			'store_id',
-			'status',
-			'denomination_ids',
-			'denominations'
-		];
-		$denominationKeys = [
-			'denomination_id',
-			'denomination_name',
-			'denomination_value',
-			'pos_ids',
-			'sort_order'
-		];
-		foreach ($keys as $key) {
+        // Get the key constraint for API Get list POS. Call From Folder Constraint
+		$keys = $this->posRepository->GetList();
+
+        $key1 = $keys['key1'];
+		foreach ($key1 as $key) {
 			self::assertContains(
 				$key,
 				array_keys($result['items'][0]),
@@ -102,6 +96,7 @@ class PosRepositoryTest extends WebapiAbstract
 			);
 		}
 
+        $denominationKeys = $keys['denominationKey'];
 		foreach ($denominationKeys as $denominationKey) {
 			self::assertContains(
 				$denominationKey,
@@ -119,7 +114,7 @@ class PosRepositoryTest extends WebapiAbstract
 		$serviceInfo = [
 			'rest' => [
 				'resourcePath' => self::ASSIGN_STAFF_RESOURCE_PATH,
-				'httpMethod' => \Magento\Framework\Webapi\Rest\Request::HTTP_METHOD_POST,
+				'httpMethod' => RestRequest::HTTP_METHOD_POST,
 			],
 		];
 

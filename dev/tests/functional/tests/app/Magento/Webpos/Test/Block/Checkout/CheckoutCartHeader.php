@@ -13,13 +13,13 @@ use Magento\Mtf\Client\Locator;
 
 /**
  * Class CheckoutCartHeader
- * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Block\Checkout
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Block\CategoryRepository
  */
 class CheckoutCartHeader extends Block
 {
     /**
      * @return \Magento\Mtf\Client\ElementInterface
-     * get Icon Delete Cart
+     * get Icon Delete TaxClass
      */
     public function getIconDeleteCart()
     {

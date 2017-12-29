@@ -19,7 +19,7 @@ class AssertEditProductPopupIsClosed extends AbstractConstraint
 	{
 		\PHPUnit_Framework_Assert::assertFalse(
 			$webposIndex->getCheckoutProductEdit()->isVisible(),
-			'Checkout - Cart Page - Product edit popup is not closed'
+			'CategoryRepository - TaxClass Page - Product edit popup is not closed'
 		);
 	}
 	/**
@@ -29,6 +29,6 @@ class AssertEditProductPopupIsClosed extends AbstractConstraint
 	 */
 	public function toString()
 	{
-		return "Checkout - Cart Page - Product edit popup is closed";
+		return "CategoryRepository - TaxClass Page - Product edit popup is closed";
 	}
 }

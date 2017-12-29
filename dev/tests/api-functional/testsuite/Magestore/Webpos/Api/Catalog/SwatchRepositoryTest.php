@@ -8,6 +8,7 @@
 
 namespace Magestore\Webpos\Api\Catalog;
 
+use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 use Magento\Framework\Webapi\Rest\Request as RestRequest;
 /**
@@ -17,6 +18,16 @@ use Magento\Framework\Webapi\Rest\Request as RestRequest;
 class SwatchRepositoryTest extends WebapiAbstract
 {
     const RESOURCE_PATH = '/V1/webpos/products/';
+
+    /**
+     * @var \Magestore\Webpos\Api\Catalog\Constraint\SwatchRepository
+     */
+    protected $swatchRepository;
+
+    protected function setUp()
+    {
+        $this->swatchRepository = Bootstrap::getObjectManager()->get('\Magestore\Webpos\Api\Catalog\Constraint\SwatchRepository');
+    }
 
     /**
      * GET ColorSwatch
@@ -48,17 +59,10 @@ class SwatchRepositoryTest extends WebapiAbstract
             $results['total_count'],
             "Result doesn't have any item (total_count < 1)"
         );
-        $key1 = [
-            'items' => [
-                '0' => [
-                    'attribute_id',
-                    'attribute_code',
-                    'attribute_label',
-                    'attribute_label',
-                    'swatches',
-                ]
-            ]
-        ];
+        // Get the key constraint for API GetList. Call From Folder Constraint
+        $keys = $this->swatchRepository->GetList();
+
+        $key1 = $keys['key1'];
         foreach ($key1['items'][0] as $key) {
             self::assertContains(
                 $key,
@@ -66,21 +70,8 @@ class SwatchRepositoryTest extends WebapiAbstract
                 $key . " key is not in found in results['items'][0]'s keys"
             );
         }
-        $key2 = [
-            'items' => [
-                '0' => [
-                    'swatches' => [
-                        '49' => [
-                            'swatch_id',
-                            'option_id',
-                            'store_id',
-                            'type',
-                            'value',
-                        ]
-                    ],
-                ]
-            ]
-        ];
+
+        $key2 = $keys['key2'];
         foreach ($key2['items'][0]['swatches'][49] as $key) {
             self::assertContains(
                 $key,

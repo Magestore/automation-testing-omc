@@ -9,7 +9,7 @@
     <testCase name="Magento\Webpos\Test\TestCase\Checkout\MultiOrder\WebposAddOrder11TimesTest" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
         <variation name="WebposAddOrder11TimesTestVariation1_CP21">
             <data name="staff" xsi:type="null"></data>
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\MultiOrder\AssertWebposAddOrder11Times" />-->
+            <!--<constraint name="Magento\Webpos\Test\Constraint\CategoryRepository\MultiOrder\AssertWebposAddOrder11Times" />-->
         </variation>
     </testCase>
 </config>

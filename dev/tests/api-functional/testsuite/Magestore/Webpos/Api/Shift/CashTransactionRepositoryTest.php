@@ -8,6 +8,7 @@
 
 namespace Magestore\Webpos\Api\Shift;
 
+use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 use Magento\Framework\Webapi\Rest\Request as RestRequest;
 /**
@@ -19,11 +20,27 @@ class CashTransactionRepositoryTest extends WebapiAbstract
     const RESOURCE_PATH = '/V1/webpos/cash_transaction/';
 
     /**
+     * @var \Magestore\Webpos\Api\Shift\ShiftRepositoryTest
+     */
+    protected $openSession;
+
+    /**
+     * @var \Magestore\Webpos\Api\Shift\Constraint\CashTransactionRepository
+     */
+    protected $cashTransactionRepository;
+
+    protected function setUp()
+    {
+        $this->openSession = Bootstrap::getObjectManager()->get('\Magestore\Webpos\Api\Shift\ShiftRepositoryTest');
+        $this->cashTransactionRepository = Bootstrap::getObjectManager()->get('\Magestore\Webpos\Api\Shift\Constraint\CashTransactionRepository');
+    }
+    /**
      * Need a API web to create a new shift to get the valid shift_id
      * Make Adjustment Session
      */
     public function testSave()
     {
+        $session = $this->openSession->openSession();
         $serviceInfo = [
             'rest' => [
                 'resourcePath' => self::RESOURCE_PATH . 'save?',
@@ -33,7 +50,7 @@ class CashTransactionRepositoryTest extends WebapiAbstract
 
         $requestData = [
             'cashTransaction' => [
-                'shift_id' => 'session_1514250244118',
+                'shift_id' => $session[0]['shift_id'],
                 'transaction_currency_code' => 'USD',
                 'note' => '',
                 'base_value' => 50,
@@ -46,97 +63,19 @@ class CashTransactionRepositoryTest extends WebapiAbstract
         ];
 
         $results = $this->_webApiCall($serviceInfo, $requestData);
-        \Zend_Debug::dump($results);
+
+        // Dump the result to check "How does it look like?"
+        // \Zend_Debug::dump($results);
+
         $this->assertNotNull($results);
-        $key1 = [
-            'entity_id',
-            'shift_id',
-            'staff_id',
-            'location_id',
-            'float_amount',
-            'base_float_amount',
-            'closed_amount',
-            'base_closed_amount',
-            'cash_left',
-            'base_cash_left',
-            'total_sales',
-            'base_total_sales',
-            'base_balance',
-            'balance',
-            'cash_sale',
-            'base_cash_sale',
-            'cash_added',
-            'base_cash_added',
-            'cash_removed',
-            'base_cash_removed',
-            'opened_at',
-            'closed_at',
-            'opened_note',
-            'closed_note',
-            'status',
-            'base_currency_code',
-            'shift_currency_code',
-            'indexeddb_id',
-            'updated_at',
-            'pos_id',
-            'profit_loss_reason',
-            'sale_summary',
-            'cash_transaction',
-            'zreport_sales_summary',
-            'pos_name',
-        ];
-        foreach ($key1 as $key) {
+        // Get the key constraint for API Make Adjustment Session. Call From Folder Constraint
+        $keys = $this->cashTransactionRepository->Save();
+
+        foreach ($keys as $key) {
             self::assertContains(
                 $key,
                 array_keys($results),
                 $key . " key is not in found in results's keys"
-            );
-        }
-        $key2 = [
-            '0' => [
-                'sale_summary' => [
-                    '0' => [
-                        'payment_method',
-                        'payment_amount',
-                        'base_payment_amount',
-                        'method_title',
-                    ]
-                ],
-                'cash_transaction' => [
-                    '0' => [
-                        'transaction_id',
-                        'shift_id',
-                        'location_id',
-                        'order_id',
-                        'value',
-                        'base_value',
-                        'balance',
-                        'base_balance',
-                        'created_at',
-                        'note',
-                        'type',
-                        'base_currency_code',
-                        'transaction_currency_code',
-                        'indexeddb_id',
-                        'updated_at',
-                        'staff_id',
-                        'staff_name',
-                    ]
-                ]
-            ]
-        ];
-        foreach ($key2[0]['sale_summary'][0] as $key) {
-            self::assertContains(
-                $key,
-                array_keys($results[0]['sale_summary'][0]),
-                $key . " key is not in found in results['sale_summary'][0]'s keys"
-            );
-        }
-        foreach ($key2[0]['cash_transaction'][0] as $key) {
-            self::assertContains(
-                $key,
-                array_keys($results[0]['cash_transaction'][0]),
-                $key . " key is not in found in results['cash_transaction'][0]'s keys"
             );
         }
     }

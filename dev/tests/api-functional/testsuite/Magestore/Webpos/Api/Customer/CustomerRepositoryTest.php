@@ -8,6 +8,7 @@
 
 namespace Magestore\Webpos\Api\Customer;
 
+use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 use Magento\Framework\Webapi\Rest\Request as RestRequest;
 /**
@@ -17,6 +18,16 @@ use Magento\Framework\Webapi\Rest\Request as RestRequest;
 class CustomerRepositoryTest extends WebapiAbstract
 {
     const RESOURCE_PATH = '/V1/webpos/customers/';
+
+    /**
+     * @var \Magestore\Webpos\Api\Customer\Constraint\CustomerRepository
+     */
+    protected $customerRepository;
+
+    protected function setUp()
+    {
+        $this->customerRepository = Bootstrap::getObjectManager()->get('\Magestore\Webpos\Api\Customer\Constraint\CustomerRepository');
+    }
 
     /**
      * Get Customer List
@@ -54,23 +65,9 @@ class CustomerRepositoryTest extends WebapiAbstract
             $results['total_count'],
             "The result doesn't have any item (total_count < 1)"
         );
-        $keys = [
-            'telephone',
-            'subscriber_status',
-            'full_name',
-            'additional_attributes',
-            'id',
-            'group_id',
-            'created_at',
-            'updated_at',
-            'email',
-            'firstname',
-            'lastname',
-            'store_id',
-            'website_id',
-            'addresses',
-            'disable_auto_group_change',
-        ];
+        // Get the key constraint for API GetList. Call From Folder Constraint
+        $keys = $this->customerRepository->GetList();
+
         foreach ($keys as $key) {
             self::assertContains(
                 $key,
@@ -105,23 +102,13 @@ class CustomerRepositoryTest extends WebapiAbstract
 
         $results = $this->_webApiCall($serviceInfo, $requestData);
         \Zend_Debug::dump($results);
-        $this->assertNotNull($results);
-        $keys = [
-            'telephone',
-            'subscriber_status',
-            'full_name',
-            'additional_attributes',
-            'id',
-            'group_id',
-            'updated_at',
-            'email',
-            'firstname',
-            'lastname',
-            'store_id',
-            'website_id',
-            'addresses',
-            'disable_auto_group_change',
-        ];
+
+        // Dump the result to check "How does it look like?"
+        // $this->assertNotNull($results);
+
+        // Get the key constraint for API Create Customer. Call From Folder Constraint
+        $keys = $this->customerRepository->CreateCustomer();
+
         foreach ($keys as $key) {
             self::assertContains(
                 $key,

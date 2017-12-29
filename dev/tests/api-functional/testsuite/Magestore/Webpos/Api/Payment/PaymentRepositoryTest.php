@@ -8,6 +8,7 @@
 
 namespace Magestore\Webpos\Api\Payment;
 
+use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 use Magento\Framework\Webapi\Rest\Request as RestRequest;
 /**
@@ -19,7 +20,17 @@ class PaymentRepositoryTest extends WebapiAbstract
     const RESOURCE_PATH = '/V1/webpos/payments';
 
     /**
-     * Get Payment to Take payment
+     * @var \Magestore\Webpos\Api\Payment\Constraint\PaymentRepository
+     */
+    protected $paymentRepository;
+
+    protected function setUp()
+    {
+        $this->paymentRepository = Bootstrap::getObjectManager()->get('\Magestore\Webpos\Api\Payment\Constraint\PaymentRepository');
+    }
+
+    /**
+     * API: Get Payment to Take payment
      */
     public function testGetList()
     {
@@ -32,7 +43,8 @@ class PaymentRepositoryTest extends WebapiAbstract
 
         $results = $this->_webApiCall($serviceInfo);
 
-        \Zend_Debug::dump($results);
+        // Dump the result to check "How does it look like?"
+        // \Zend_Debug::dump($results);
 
         $this->assertNotNull($results);
         self::assertGreaterThanOrEqual(
@@ -40,19 +52,9 @@ class PaymentRepositoryTest extends WebapiAbstract
             $results['total_count'],
             "The result doesn't have any item (total_count < 1)"
         );
-        $keys = [
-            'items' => [
-                '0' => [
-                    'code',
-                    'title',
-                    'information',
-                    'type',
-                    'is_default',
-                    'is_reference_number',
-                    'is_pay_later',
-                ]
-            ]
-        ];
+        // Get the key constraint for API Get Payment to Take payment. Call From Folder Constraint
+        $keys = $this->paymentRepository->GetList();
+
         foreach ($keys['items'][0] as $key) {
             self::assertContains(
                 $key,

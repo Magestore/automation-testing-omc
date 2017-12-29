@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertWebposExitFullScreen
- * @package Magento\Webpos\Test\Constraint\Checkout\CartPageActionMenu
+ * @package Magento\Webpos\Test\Constraint\CategoryRepository\CartPageActionMenu
  */
 class AssertWebposExitFullScreen extends AbstractConstraint
 {
@@ -27,6 +27,6 @@ class AssertWebposExitFullScreen extends AbstractConstraint
      */
     public function toString()
     {
-        return "On the Checkout Page - Products List Page - All the action CLOSE ORDER NOTE And SAVE ORDER NOTE, TEXTAREA at the web POS Cart were visible successfully.";
+        return "On the CategoryRepository Page - Products List Page - All the action CLOSE ORDER NOTE And SAVE ORDER NOTE, TEXTAREA at the web POS TaxClass were visible successfully.";
     }
 }

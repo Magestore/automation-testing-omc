@@ -69,7 +69,7 @@ class WebposCartPageCustomerCP36Test extends Injectable
 		$this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
 		self::assertTrue(
 			$this->webposIndex->getCheckoutChangeCustomer()->isVisible(),
-			'Checkout - Cart Page - Checkout by guest - Change customer popup is nt shown'
+			'CategoryRepository - TaxClass Page - CategoryRepository by guest - Change customer popup is nt shown'
 		);
 		$this->webposIndex->getCheckoutChangeCustomer()->search($customer->getEmail());
 		sleep(1);
@@ -80,7 +80,7 @@ class WebposCartPageCustomerCP36Test extends Injectable
 		$this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
 		self::assertTrue(
 			$this->webposIndex->getCheckoutChangeCustomer()->isVisible(),
-			'Checkout - Cart Page - Checkout by guest - Change customer popup is nt shown'
+			'CategoryRepository - TaxClass Page - CategoryRepository by guest - Change customer popup is nt shown'
 		);
 		$this->webposIndex->getCheckoutChangeCustomer()->getUseGuestButton()->click();
 		sleep(1);

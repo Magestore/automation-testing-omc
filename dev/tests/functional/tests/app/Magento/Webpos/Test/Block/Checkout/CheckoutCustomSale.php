@@ -13,7 +13,7 @@ use Magento\Mtf\Client\Locator;
 
 /**
  * Class CheckoutCustomSale
- * @package Magento\Webpos\Test\Block\Checkout
+ * @package Magento\Webpos\Test\Block\CategoryRepository
  */
 class CheckoutCustomSale extends Block
 {

@@ -8,6 +8,7 @@
 
 namespace Magestore\Webpos\Api\Sales;
 
+use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 use Magento\Framework\Webapi\Rest\Request as RestRequest;
 /**
@@ -18,8 +19,19 @@ class InvoiceRepositoryTest extends WebapiAbstract
 {
     const RESOURCE_PATH = '/V1/webpos/invoices/';
 
+
     /**
-     * Update Qty before invoice
+     * @var \Magestore\Webpos\Api\CurrentSessionId\CurrentSessionIdTest
+     */
+    protected $currentSession;
+
+    protected function setUp()
+    {
+        $this->currentSession = Bootstrap::getObjectManager()->get('\Magestore\Webpos\Api\CurrentSessionId\CurrentSessionIdTest');
+    }
+
+    /**
+     * API Name: Update Qty before invoice
      */
     public function testUpdateQty() {
         $requestData = [
@@ -62,9 +74,11 @@ class InvoiceRepositoryTest extends WebapiAbstract
     }
 
     /**
-     * Invoice Order
+     * API Name: Invoice Order
      */
     public function testSaveInvoice() {
+        $session = $this->currentSession->getCurrentSessionId();
+
         $requestData = [
             "entity" => [
                 "baseCurrencyCode" => "USD",
@@ -86,67 +100,53 @@ class InvoiceRepositoryTest extends WebapiAbstract
                 "globalCurrencyCode" => 'USD',
                 "grandTotal" => '66',
                 "items" => [
-                    '0' => [
-                        "baseDiscountAmount" => 0,
+                    [
+                        "rowTotal" => "34",
+                        "orderItemId" => 46,
+                        "qty" => 1,
+                        "sku" => "24-MB01",
+                        "price" => "34",
+                        "taxAmount" => "0",
+                        "rowTotalInclTax" => "34",
                         "basePrice" => 34,
-                        "basePriceInclTax" => 34,
-                        "baseRowTotal" => 34,
-                        "baseRowTotalInclTax" => 34,
-                        "baseTaxAmount" => 0,
                         "discountAmount" => 0,
                         "name" => "Joust Duffle Bag",
-                        "orderItemId" => 46,
-                        "price" => "34",
-                        "priceInclTax" => "34",
-                        "productId" => "1",
-                        "qty" => 1,
-                        "rowTotal" => "34",
-                        "rowTotalInclTax" => "34",
-                        "sku" => "24-MB01",
-                        "taxAmount" => "0",
                     ],
-                    '1' => [
-                        "baseDiscountAmount" => 0,
+                    [
+                        "rowTotal" => 32,
+                        "orderItemId" => 47,
+                        "qty" => 1,
+                        "sku" => "24-MB04",
+                        "price" => 32,
+                        "taxAmount" => 0,
+                        "rowTotalInclTax" => 32,
                         "basePrice" => 32,
-                        "basePriceInclTax" => 32,
-                        "baseRowTotal" => 32,
-                        "baseRowTotalInclTax" => 32,
-                        "baseTaxAmount" => 0,
                         "discountAmount" => 0,
                         "name" => "Strive Shoulder Pack",
-                        "orderItemId" => 47,
-                        "price" => 32,
-                        "priceInclTax" => 32,
-                        "productId" => 2,
-                        "qty" => 1,
-                        "rowTotal" => 32,
-                        "rowTotalInclTax" => 32,
-                        "sku" => "24-MB04",
-                        "taxAmount" => 0
-                    ],
-                    "orderCurrencyCode" => "USD",
-                    "orderId" => 35,
-                    "shippingAddressId" => 58,
-                    "shippingAmount" => 0,
-                    "shippingInclTax" => 0,
-                    "shippingTaxAmount" => 0,
-                    "state" => 2,
-                    "storeCurrencyCode" => "USD",
-                    "storeId" => 1,
-                    "storeToBaseRate" => 0,
-                    "storeToOrderRate" => 0,
-                    "subtotal" => 66,
-                    "subtotalInclTax" => 66,
-                    "taxAmount" => 0,
-                    "totalQty" => 2,
-                    "updatedAt" => "2017-12-25 09:25:17.945"
-                ]
+                    ]
+                ],
+                "orderCurrencyCode" => "USD",
+                "orderId" => 35,
+                "shippingAddressId" => 58,
+                "shippingAmount" => 0,
+                "shippingInclTax" => 0,
+                "shippingTaxAmount" => 0,
+                "state" => 2,
+                "storeCurrencyCode" => "USD",
+                "storeId" => 1,
+                "storeToBaseRate" => 0,
+                "storeToOrderRate" => 0,
+                "subtotal" => 66,
+                "subtotalInclTax" => 66,
+                "taxAmount" => 0,
+                "totalQty" => 2,
+                "updatedAt" => "2017-12-25 09:25:17.945"
             ]
         ];
 
         $serviceInfo = [
             'rest' => [
-                'resourcePath' => self::RESOURCE_PATH . 'create?',
+                'resourcePath' => self::RESOURCE_PATH . 'create?session='.$session.'',
                 'httpMethod' => RestRequest::HTTP_METHOD_POST,
             ]
         ];

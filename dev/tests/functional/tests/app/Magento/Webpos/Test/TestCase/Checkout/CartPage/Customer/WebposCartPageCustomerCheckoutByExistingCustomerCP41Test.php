@@ -8,13 +8,14 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
 
-
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposCartPageCustomerCheckoutByExistingCustomerCP41Test
+ * @package Magento\Webpos\Test\TestCase\CategoryRepository\CartPage\Customer
+ */
 class WebposCartPageCustomerCheckoutByExistingCustomerCP41Test extends Injectable
 {
 	/**
@@ -54,7 +55,7 @@ class WebposCartPageCustomerCheckoutByExistingCustomerCP41Test extends Injectabl
 		$this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
 		self::assertTrue(
 			$this->webposIndex->getCheckoutChangeCustomer()->isVisible(),
-			'Checkout - Cart Page - Change customer popup is not shown'
+			'CategoryRepository - TaxClass Page - Change customer popup is not shown'
 		);
 		$this->webposIndex->getCheckoutChangeCustomer()->search($customer1->getEmail());
 		sleep(1);
@@ -65,7 +66,7 @@ class WebposCartPageCustomerCheckoutByExistingCustomerCP41Test extends Injectabl
 		$this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
 		self::assertTrue(
 			$this->webposIndex->getCheckoutChangeCustomer()->isVisible(),
-			'Checkout - Cart Page - Change customer popup is not shown'
+			'CategoryRepository - TaxClass Page - Change customer popup is not shown'
 		);
 		$this->webposIndex->getCheckoutChangeCustomer()->search($customer2->getEmail());
 		sleep(1);

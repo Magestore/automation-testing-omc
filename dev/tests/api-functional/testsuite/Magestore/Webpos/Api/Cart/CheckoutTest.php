@@ -13,7 +13,7 @@ use Magento\TestFramework\TestCase\WebapiAbstract;
 use Magento\Framework\Webapi\Rest\Request as RestRequest;
 /**
  * Class CheckoutTest
- * @package Magestore\Webpos\Api\Cart
+ * @package Magestore\Webpos\Api\TaxClass
  */
 class CheckoutTest extends WebapiAbstract
 {
@@ -27,6 +27,11 @@ class CheckoutTest extends WebapiAbstract
     protected $objectManager;
 
     /**
+     * @var \Magestore\Webpos\Api\Cart\Constraint\Checkout
+     */
+    protected $checkout;
+
+    /**
      * @var \Magestore\Webpos\Api\CurrentSessionId\CurrentSessionIdTest
      */
     protected $currentSession;
@@ -34,11 +39,12 @@ class CheckoutTest extends WebapiAbstract
     protected function setUp()
     {
         $this->objectManager = Bootstrap::getObjectManager();
-        $this->currentSession = Bootstrap::getObjectManager()->get('\Magestore\Webpos\Api\CurrentSessionId\CurrentSessionIdTest');
+        $this->currentSession = $this->objectManager->get('\Magestore\Webpos\Api\CurrentSessionId\CurrentSessionIdTest');
+        $this->checkout = $this->objectManager->get('\Magestore\Webpos\Api\Cart\Constraint\Checkout');
     }
 
     /**
-     * Call to API Save Cart To get quote_id
+     * Call to API Save TaxClass To get quote_id
      */
     protected function callAPISaveCart()
     {
@@ -280,60 +286,14 @@ class CheckoutTest extends WebapiAbstract
     }
 
     /**
-     * Save Cart
+     * API: Save TaxClass
      */
     public function testSaveCart() {
         $results = $this->callAPISaveCart();
         $this->assertNotNull($results);
-        $keys = [
-            'items' => [
-                '0' => [
-                    'store_id',
-                    'product_id',
-                    'product_type',
-                    'sku',
-                    'name',
-                    'weight',
-                    'tax_class_id',
-                    'base_cost',
-                    'is_qty_decimal',
-                    'quote_id',
-                ]
-            ],
-            'shipping' => [
-                '0' => [
-                    'code',
-                    'title',
-                    'description',
-                    'error_message',
-                    'price_type',
-                ]
-            ],
-            'payment' => [
-                '0' => [
-                    'code',
-                    'icon_class',
-                    'title',
-                    'information',
-                    'type',
-                ]
-            ],
-            'quote_init' => [
-                'quote_id',
-                'customer_id',
-                'currency_id',
-                'till_id',
-                'store_id',
-            ],
-            'totals' => [
-                '0' => [
-                    'code',
-                    'title',
-                    'value',
-                    'address',
-                ]
-            ],
-        ];
+        // Get the key constraint for API testSaveCart. Call From Folder Constraint
+        $keys = $this->checkout->SaveCart();
+
         foreach ($keys['items'][0] as $key) {
             self::assertContains(
                 $key,
@@ -372,7 +332,7 @@ class CheckoutTest extends WebapiAbstract
     }
 
     /**
-     * Save Quote Data
+     * API: Save Quote Data
      */
     public function testSaveQuoteData()
     {
@@ -404,58 +364,9 @@ class CheckoutTest extends WebapiAbstract
         // \Zend_Debug::dump($results);
 
         $this->assertNotNull($results);$this->assertNotNull($results);
-        $keys = [
-            'items' => [
-                '0' => [
-                    'item_id',
-                    'quote_id',
-                    'created_at',
-                    'updated_at',
-                    'product_id',
-                    'store_id',
-                    'parent_item_id',
-                    'is_virtual',
-                    'sku',
-                    'name',
-                    'description',
-                    'applied_rule_ids',
-                    'additional_data',
-                ]
-            ],
-            'shipping' => [
-                '0' => [
-                    'code',
-                    'title',
-                    'description',
-                    'error_message',
-                    'price_type',
-                ]
-            ],
-            'payment' => [
-                '0' => [
-                    'code',
-                    'icon_class',
-                    'title',
-                    'information',
-                    'type',
-                ]
-            ],
-            'quote_init' => [
-                'quote_id',
-                'customer_id',
-                'currency_id',
-                'till_id',
-                'store_id',
-            ],
-            'totals' => [
-                '0' => [
-                    'code',
-                    'title',
-                    'value',
-                    'address',
-                ]
-            ],
-        ];
+        // Get the key constraint for API testSaveQuoteData. Call From Folder Constraint
+        $keys = $this->checkout->SaveQuoteData();
+
         foreach ($keys['items'][0] as $key) {
             self::assertContains(
                 $key,
@@ -518,57 +429,9 @@ class CheckoutTest extends WebapiAbstract
         // \Zend_Debug::dump($results);
 
         $this->assertNotNull($results);$this->assertNotNull($results);
-        $keys = [
-            'items' => [
-                '0' => [
-                    'item_id',
-                    'quote_id',
-                    'created_at',
-                    'updated_at',
-                    'product_id',
-                    'store_id',
-                    'parent_item_id',
-                    'is_virtual',
-                    'sku',
-                    'name',
-                    'description',
-                    'applied_rule_ids',
-                    'additional_data',
-                    'is_qty_decimal',
-                    'no_discount',
-                    'weight',
-                    'qty',
-                    'price',
-                    'base_price',
-                    'custom_price',
-                ]
-            ],
-            'shipping' => [],
-            'payment' => [
-                '0' => [
-                    'code',
-                    'icon_class',
-                    'title',
-                    'information',
-                    'type',
-                ]
-            ],
-            'quote_init' => [
-                'quote_id',
-                'customer_id',
-                'currency_id',
-                'till_id',
-                'store_id',
-            ],
-            'totals' => [
-                '0' => [
-                    'code',
-                    'title',
-                    'value',
-                    'address',
-                ]
-            ],
-        ];
+        // Get the key constraint for API testSaveShippingMethod. Call From Folder Constraint
+        $keys = $this->checkout->SaveShippingMethod();
+
         foreach ($keys['items'][0] as $key) {
             self::assertContains(
                 $key,
@@ -678,148 +541,10 @@ class CheckoutTest extends WebapiAbstract
         // \Zend_Debug::dump($results);
 
         $this->assertNotNull($results);
-        $key1 = [
-            'rewardpoints_earn',
-            'rewardpoints_spent',
-            'rewardpoints_discount',
-            'rewardpoints_base_discount',
-            'rewardpoints_refunded',
-            'gift_voucher_discount',
-            'base_gift_voucher_discount',
-            'base_customercredit_discount',
-            'customercredit_discount',
-            'webpos_base_change',
-            'webpos_change',
-            'webpos_staff_id',
-            'webpos_staff_name',
-            'fulfill_online',
-            'location_id',
-            'webpos_order_payments',
-            'items_info_buy',
-            'items',
-            'webpos_paypal_invoice_id',
-            'webpos_init_data',
-            'webpos_shift_id',
-            'applied_rule_ids',
-            'base_currency_code',
-            'base_discount_amount',
-            'base_discount_invoiced',
-            'base_grand_total',
-            'base_discount_tax_compensation_amount',
-            'base_discount_tax_compensation_invoiced',
-            'base_shipping_amount',
-            'base_shipping_discount_amount',
-            'base_subtotal',
-            'store_id',
-            'store_name',
-            'billing_address',
-            'payment',
-            'status_histories',
-            'extension_attributes',
-        ];
-        $key2 = [
-            'webpos_order_payments' => [
-                '0' => [
-                    'payment_id',
-                    'order_id',
-                    'base_payment_amount',
-                    'payment_amount',
-                    'base_display_amount',
-                    'display_amount',
-                    'method',
-                    'method_title',
-                    'shift_id',
-                    'reference_number',
-                ]
-            ],
-            'items_info_buy' => [
-                'items' => [
-                    '0' => [
-                        'id',
-                        'child_id',
-                        'qty',
-                        'super_attribute',
-                        'super_group',
-                        'options',
-                        'bundle_option',
-                        'bundle_option_qty',
-                        'unit_price',
-                        'base_unit_price',
-                    ]
-                ]
-            ],
-            'items' => [
-                '0' => [
-                    'rewardpoints_earn',
-                    'rewardpoints_spent',
-                    'rewardpoints_discount',
-                    'rewardpoints_base_discount',
-                    'gift_voucher_discount',
-                    'base_gift_voucher_discount',
-                    'amount_refunded',
-                    'applied_rule_ids',
-                    'base_amount_refunded',
-                    'base_discount_amount',
-                ]
-            ],
-            'billing_address' => [
-                'address_type',
-                'city',
-                'country_id',
-                'email',
-                'entity_id',
-                'firstname',
-                'lastname',
-                'parent_id',
-                'postcode',
-                'region',
-                'region_code',
-                'region_id',
-                'street',
-                'telephone',
-            ],
-            'payment' => [
-                'account_status',
-                'additional_information',
-                'amount_ordered',
-                'amount_paid',
-                'base_amount_ordered',
-                'base_amount_paid',
-                'base_shipping_amount',
-                'base_shipping_captured',
-                'entity_id',
-                'method',
-                'parent_id',
-                'shipping_amount',
-            ],
-            'status_histories' => [
-                '0' => [
-                    'comment',
-                    'created_at',
-                    'entity_id',
-                    'entity_name',
-                    'is_customer_notified',
-                ]
-            ],
-            'extension_attributes' => [
-                'shipping_assignments' => [
-                    '0' => [
-                        'shipping' => [
-                            'address' => [
-                                'address_type',
-                                'city',
-                                'country_id',
-                                'email',
-                                'entity_id',
-                                'firstname',
-                                'lastname',
-                                'parent_id',
-                            ]
-                        ],
-                    ]
-                ]
-            ],
-        ];
+        // Get the key constraint for API testPlaceOrder. Call From Folder Constraint
+        $keys = $this->checkout->PlaceOrder();
+
+        $key1 = $keys['key1'];
         foreach ($key1 as $key) {
             self::assertContains(
                 $key,
@@ -827,6 +552,8 @@ class CheckoutTest extends WebapiAbstract
                 $key . " key is not in found in results's keys"
             );
         }
+
+        $key2 = $keys['key2'];
         foreach ($key2['webpos_order_payments'][0] as $key) {
             self::assertContains(
                 $key,
@@ -879,9 +606,7 @@ class CheckoutTest extends WebapiAbstract
     }
 
     /**
-     * Phải hỏi lại phần này tiền điều kiện để làm là gì
-     * Muốn chạy nó trước tiên phải làm gì cần có những tham số nào
-     * Vì nó luôn bảo thiếu cartId
+     * We need an API Create Giftcard before do this API
      * Apply Giftcard
      */
     public function testApplyGiftcard()
@@ -935,87 +660,10 @@ class CheckoutTest extends WebapiAbstract
         // \Zend_Debug::dump($results);
 
         $this->assertNotNull($results);
-        $key1 = [
-            'items',
-            'shipping',
-            'payment',
-            'quote_init',
-            'totals',
-            'giftcard',
-            'rewardpoints',
-            'storecredit',
-        ];
-        $keys = [
-            'items' => [
-                '0' => [
-                    'item_id',
-                    'quote_id',
-                    'created_at',
-                    'updated_at',
-                    'store_id',
-                    'parent_item_id',
-                    'is_virtual',
-                    'sku',
-                    'name',
-                    'description',
-                    'applied_rule_ids',
-                    'additional_data',
-                    'is_qty_decimal',
-                    'no_discount',
-                    'weight',
-                    'qty',
-                    'price',
-                    'base_price',
-                ],
-            ],
-            'shipping' => [
-                '0' => [
-                    'code',
-                    'title',
-                    'description',
-                    'error_message',
-                    'price_type',
-                    'price',
-                ]
-            ],
-            'payment' => [
-                '0' => [
-                    'code',
-                    'icon_class',
-                    'title',
-                    'information',
-                    'type',
-                    'type_id',
-                    'is_default',
-                    'is_reference_number',
-                    'is_pay_later',
-                ]
-            ],
-            'quote_init' => [
-                'quote_id',
-                'customer_id',
-                'currency_id',
-                'till_id',
-                'store_id',
-            ],
-            'totals' => [
-                '0' => [
-                    'code',
-                    'title',
-                    'value',
-                    'address',
-                ]
-            ],
-            'giftcard' => [
-                'existed_codes',
-                'used_codes',
-            ],
-            'rewardpoints' => [
-                'used_point',
-                'balance',
-                'max_points',
-            ],
-        ];
+        // Get the key constraint for API testSpendPoint. Call From Folder Constraint
+        $keys = $this->checkout->SpendPoint();
+
+        $key1 = $keys['key1'];
         foreach ($key1 as $key) {
             self::assertContains(
                 $key,
@@ -1023,39 +671,55 @@ class CheckoutTest extends WebapiAbstract
                 $key . " key is not in found in results's keys"
             );
         }
-        foreach ($keys['items'][0] as $key) {
+
+        $key2 = $keys['key2'];
+        foreach ($key2['items'][0] as $key) {
             self::assertContains(
                 $key,
                 array_keys($results['items'][0]),
                 $key . " key is not in found in results['items'][0]'s keys"
             );
         }
-        foreach ($keys['shipping'][0] as $key) {
+        foreach ($key2['shipping'][0] as $key) {
             self::assertContains(
                 $key,
                 array_keys($results['shipping'][0]),
                 $key . " key is not in found in results['shipping'][0]'s keys"
             );
         }
-        foreach ($keys['payment'][0] as $key) {
+        foreach ($key2['payment'][0] as $key) {
             self::assertContains(
                 $key,
                 array_keys($results['payment'][0]),
                 $key . " key is not in found in results['payment'][0]'s keys"
             );
         }
-        foreach ($keys['quote_init'] as $key) {
+        foreach ($key2['quote_init'] as $key) {
             self::assertContains(
                 $key,
                 array_keys($results['quote_init']),
                 $key . " key is not in found in results['payment'][0]'s keys"
             );
         }
-        foreach ($keys['totals'] as $key) {
+        foreach ($key2['totals'][0] as $key) {
             self::assertContains(
                 $key,
-                array_keys($results['quote_init']),
-                $key . " key is not in found in results['payment'][0]'s keys"
+                array_keys($results['totals'][0]),
+                $key . " key is not in found in results['totals'][0]'s keys"
+            );
+        }
+        foreach ($key2['giftcard'] as $key) {
+            self::assertContains(
+                $key,
+                array_keys($results['giftcard']),
+                $key . " key is not in found in results['giftcard']'s keys"
+            );
+        }
+        foreach ($key2['rewardpoints'] as $key) {
+            self::assertContains(
+                $key,
+                array_keys($results['rewardpoints']),
+                $key . " key is not in found in results['rewardpoints']'s keys"
             );
         }
     }

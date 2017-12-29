@@ -8,6 +8,7 @@
 
 namespace Magestore\Webpos\Api\Catalog;
 
+use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 use Magento\Framework\Webapi\Rest\Request as RestRequest;
 /**
@@ -18,6 +19,16 @@ class ProductRepositoryTest extends WebapiAbstract
 {
     const RESOURCE_PATH = '/V1/webpos/productlist/';
     const GET_OPTIONS_RESOURCE_PATH = '/V1/webpos/products/';
+
+    /**
+     * @var \Magestore\Webpos\Api\Catalog\Constraint\ProductRepository
+     */
+    protected $productRepository;
+
+    protected function setUp()
+    {
+        $this->productRepository = Bootstrap::getObjectManager()->get('\Magestore\Webpos\Api\Catalog\Constraint\ProductRepository');
+    }
 
     /**
      * Get Product List
@@ -57,52 +68,9 @@ class ProductRepositoryTest extends WebapiAbstract
             $results['total_count'],
             "Result doesn't have any item (total_count < 1)"
         );
-        $keys = [
-            'items' => [
-                '0' => [
-                    'id',
-                    'type_id',
-                    'sku',
-                    'name',
-                    'price',
-                    'final_price',
-                    'description',
-                    'status',
-                    'updated_at',
-                    'extension_attributes',
-                    'category_ids',
-                    'qty_increment',
-                    'image',
-                    'images',
-                    'stock',
-                    'tier_prices',
-                    'tax_class_id',
-                    'options',
-                    'search_string',
-                    'barcode_string',
-                    'is_virtual',
-                    'customercredit_value',
-                    'storecredit_type',
-                    'giftvoucher_value',
-                    'giftvoucher_select_price_type',
-                    'giftvoucher_price',
-                    'giftvoucher_from',
-                    'giftvoucher_to',
-                    'giftvoucher_dropdown',
-                    'giftvoucher_price_type',
-                    'giftvoucher_template',
-                    'giftvoucher_type',
-                    'is_in_stock',
-                    'minimum_qty',
-                    'maximum_qty',
-                    'qty',
-                    'is_salable',
-                    'qty_increments',
-                    'enable_qty_increments',
-                    'is_qty_decimal',
-                ]
-            ]
-        ];
+        // Get the key constraint for API testGetList. Call From Folder Constraint
+        $keys = $this->productRepository->GetProductList();
+
         foreach ($keys['items'][0] as $key) {
             self::assertContains(
                 $key,
@@ -113,6 +81,7 @@ class ProductRepositoryTest extends WebapiAbstract
     }
 
     /**
+     * We need product has options like clothes: color, size etc.
      * Get Product Options
      */
     public function testGetOptions()

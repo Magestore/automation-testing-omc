@@ -10,6 +10,8 @@ namespace Magestore\Webpos\Api\Shift;
 
 use Magento\TestFramework\TestCase\WebapiAbstract;
 use Magento\Framework\Webapi\Rest\Request as RestRequest;
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\Store\Model\ScopeInterface;
 /**
  * Class ShiftRepositoryTest
  * @package Magestore\Webpos\Api\Shift
@@ -19,7 +21,30 @@ class ShiftRepositoryTest extends WebapiAbstract
     const RESOURCE_PATH = '/V1/webpos/shifts/';
 
     /**
-     * Get List Session
+     * @var \Magestore\Webpos\Api\Shift\Constraint\ShiftRepository
+     */
+    protected $shiftRepository;
+
+    /**
+     * Configuration: Sales -> Web POS -> Settings ->
+     * -> General Configuration -> Need to create session before working to Yes
+     */
+    protected function setUp()
+    {
+        $objectManager = Bootstrap::getObjectManager();
+        $this->shiftRepository = $objectManager->get('\Magestore\Webpos\Api\Shift\Constraint\ShiftRepository');
+
+        $configResource = $objectManager->get(\Magento\Config\Model\ResourceModel\Config::class);
+        $configResource->saveConfig(
+            'webpos/general/enable_session',
+            '1',
+            ScopeInterface::SCOPE_DEFAULT,
+            0
+        );
+    }
+
+    /**
+     * API Name: Get List Session
      */
     public function testGetList()
     {
@@ -55,49 +80,19 @@ class ShiftRepositoryTest extends WebapiAbstract
         ];
 
         $results = $this->_webApiCall($serviceInfo, $requestData);
-        \Zend_Debug::dump($results);
+
+        // Dump the result to check "How does it look like?"
+        // \Zend_Debug::dump($results);
+
         $this->assertNotNull($results);
         self::assertGreaterThanOrEqual(
             1,
             $results['total_count'],
             "Result doesn't have any item (total_count < 1)"
         );
-        $keys = [
-            'entity_id',
-            'shift_id',
-            'staff_id',
-            'location_id',
-            'opened_at',
-            'updated_at',
-            'closed_at',
-            'float_amount',
-            'base_float_amount',
-            'closed_amount',
-            'base_closed_amount',
-            'status',
-            'cash_left',
-            'base_cash_left',
-            'closed_note',
-            'opened_note',
-            'total_sales',
-            'base_total_sales',
-            'balance',
-            'base_balance',
-            'cash_sale',
-            'base_cash_sale',
-            'cash_added',
-            'base_cash_added',
-            'cash_removed',
-            'base_cash_removed',
-            'session',
-            'base_currency_code',
-            'shift_currency_code',
-            'store_id',
-            'pos_name',
-            'pos_id',
-            'sale_summary',
-            'cash_transaction',
-        ];
+        // Get the key constraint for API Get List Session. Call From Folder Constraint
+        $keys = $this->shiftRepository->GetList();
+
         foreach ($keys as $key) {
             self::assertContains(
                 $key,
@@ -112,6 +107,7 @@ class ShiftRepositoryTest extends WebapiAbstract
      */
     public function closeSession()
     {
+        $session = $this->openSession();
         $serviceInfo = [
             'rest' => [
                 'resourcePath' => self::RESOURCE_PATH . 'save?',
@@ -143,7 +139,7 @@ class ShiftRepositoryTest extends WebapiAbstract
                 'cash_removed' => 20,
                 'closed_amount' => 198.87,
                 'base_cash_added' => 50,
-                'shift_id' => 'session_1514250244118',
+                'shift_id' => $session[0]['shift_id'],
                 'base_balance' => 198.87,
                 'shift_currency_code' => 'USD',
                 'base_currency_code' => 'USD'
@@ -154,6 +150,7 @@ class ShiftRepositoryTest extends WebapiAbstract
 
         // Dump the result to check "How does it look like?"
         // \Zend_Debug::dump($results);
+
         return $results;
     }
 
@@ -165,43 +162,10 @@ class ShiftRepositoryTest extends WebapiAbstract
         $results = $this->closeSession();
 
         $this->assertNotNull($results);
-        $key1 = [
-            'entity_id',
-            'shift_id',
-            'staff_id',
-            'location_id',
-            'float_amount',
-            'base_float_amount',
-            'closed_amount',
-            'base_closed_amount',
-            'cash_left',
-            'base_cash_left',
-            'total_sales',
-            'base_total_sales',
-            'base_balance',
-            'balance',
-            'cash_sale',
-            'base_cash_sale',
-            'cash_added',
-            'base_cash_added',
-            'cash_removed',
-            'base_cash_removed',
-            'opened_at',
-            'closed_at',
-            'opened_note',
-            'closed_note',
-            'status',
-            'base_currency_code',
-            'shift_currency_code',
-            'indexeddb_id',
-            'updated_at',
-            'pos_id',
-            'profit_loss_reason',
-            'sale_summary',
-            'cash_transaction',
-            'zreport_sales_summary',
-            'pos_name',
-        ];
+        // Get the key constraint for API Close Session. Call From Folder Constraint
+        $keys = $this->shiftRepository->Save();
+
+        $key1 = $keys['key1'];
         foreach ($key1 as $key) {
             self::assertContains(
                 $key,
@@ -209,60 +173,8 @@ class ShiftRepositoryTest extends WebapiAbstract
                 $key . " key is not in found in result['items'][0]'s keys"
             );
         }
-        $key2 = [
-            '0' => [
-                'sale_summary' => [
-                    '0' => [
-                        'payment_method',
-                        'payment_amount',
-                        'base_payment_amount',
-                        'method_title',
-                    ]
-                ],
-                'cash_transaction' => [
-                    '0' => [
-                        'transaction_id',
-                        'shift_id',
-                        'location_id',
-                        'order_id',
-                        'value',
-                        'base_value',
-                        'balance',
-                        'base_balance',
-                        'created_at',
-                        'note',
-                        'type',
-                        'base_currency_code',
-                        'transaction_currency_code',
-                        'indexeddb_id',
-                        'updated_at',
-                        'staff_id',
-                        'staff_name',
-                    ]
-                ],
-                'zreport_sales_summary' => [
-                    'grand_total',
-                    'discount_amount',
-                    'total_refunded',
-                    'giftvoucher_discount',
-                    'rewardpoints_discount',
-                ],
-            ]
-        ];
-        foreach ($key2['0']['cash_transaction']['0'] as $key) {
-            self::assertContains(
-                $key,
-                array_keys($results['0']['cash_transaction']['0']),
-                $key . " key is not in found in results['0']['cash_transaction']['0']'s keys"
-            );
-        }
-        foreach ($key2['0']['sale_summary']['0'] as $key) {
-            self::assertContains(
-                $key,
-                array_keys($results['0']['sale_summary']['0']),
-                $key . " key is not in found in results['0']['sale_summary']['0']'s keys"
-            );
-        }
+
+        $key2 = $keys['key2'];
         foreach ($key2['0']['zreport_sales_summary'] as $key) {
             self::assertContains(
                 $key,
@@ -279,6 +191,8 @@ class ShiftRepositoryTest extends WebapiAbstract
      */
     public function testValidateSession()
     {
+        $session = $this->openSession();
+
         $serviceInfo = [
             'rest' => [
                 'resourcePath' => self::RESOURCE_PATH . 'save?',
@@ -286,7 +200,6 @@ class ShiftRepositoryTest extends WebapiAbstract
             ]
         ];
 
-        $values = $this->closeSession();
         $requestData = [
             'shift' => [
                 'cash_added' => 50,
@@ -311,8 +224,8 @@ class ShiftRepositoryTest extends WebapiAbstract
                 'cash_removed' => 20,
                 'closed_amount' => 198.87,
                 'base_cash_added' => 50,
-                'pos_id' => $values[0]['pos_id'],
-                'shift_id' => 'session_1514250244118',
+                'pos_id' => $session[0]['pos_id'],
+                'shift_id' => $session[0]['shift_id'],
                 'base_balance' => 0,
                 'shift_currency_code' => 'USD',
                 'base_currency_code' => 'USD'
@@ -320,45 +233,15 @@ class ShiftRepositoryTest extends WebapiAbstract
         ];
 
         $results = $this->_webApiCall($serviceInfo, $requestData);
-        \Zend_Debug::dump($results);
+
+        // Dump the result to check "How does it look like?"
+        // \Zend_Debug::dump($results);
+
         $this->assertNotNull($results);
-        $key1 = [
-            'entity_id',
-            'shift_id',
-            'staff_id',
-            'location_id',
-            'float_amount',
-            'base_float_amount',
-            'closed_amount',
-            'base_closed_amount',
-            'cash_left',
-            'base_cash_left',
-            'total_sales',
-            'base_total_sales',
-            'base_balance',
-            'balance',
-            'cash_sale',
-            'base_cash_sale',
-            'cash_added',
-            'base_cash_added',
-            'cash_removed',
-            'base_cash_removed',
-            'opened_at',
-            'closed_at',
-            'opened_note',
-            'closed_note',
-            'status',
-            'base_currency_code',
-            'shift_currency_code',
-            'indexeddb_id',
-            'updated_at',
-            'pos_id',
-            'profit_loss_reason',
-            'sale_summary',
-            'cash_transaction',
-            'zreport_sales_summary',
-            'pos_name',
-        ];
+        // Get the key constraint for API Close Session. Call From Folder Constraint
+        $keys = $this->shiftRepository->ValidateSession();
+
+        $key1 = $keys['key1'];
         foreach ($key1 as $key) {
             self::assertContains(
                 $key,
@@ -366,59 +249,8 @@ class ShiftRepositoryTest extends WebapiAbstract
                 $key . " key is not in found in result['items'][0]'s keys"
             );
         }
-        $key2 = [
-            '0' => [
-                'sale_summary' => [
-                    '0' => [
-                        'payment_method',
-                        'payment_amount',
-                        'base_payment_amount',
-                        'method_title',
-                    ]
-                ],
-                'cash_transaction' => [
-                    '0' => [
-                        'transaction_id',
-                        'shift_id',
-                        'location_id',
-                        'order_id',
-                        'value',
-                        'base_value',
-                        'balance',
-                        'base_balance',
-                        'created_at',
-                        'note',
-                        'base_currency_code',
-                        'transaction_currency_code',
-                        'indexeddb_id',
-                        'updated_at',
-                        'staff_id',
-                        'staff_name',
-                    ]
-                ],
-                'zreport_sales_summary' => [
-                    'grand_total',
-                    'discount_amount',
-                    'total_refunded',
-                    'giftvoucher_discount',
-                    'rewardpoints_discount',
-                ],
-            ]
-        ];
-        foreach ($key2[0]['sale_summary'][0] as $key) {
-            self::assertContains(
-                $key,
-                array_keys($results[0]['sale_summary'][0]),
-                $key . " key is not in found in results[0]['sale_summary'][0]'s keys"
-            );
-        }
-        foreach ($key2[0]['cash_transaction'][0] as $key) {
-            self::assertContains(
-                $key,
-                array_keys($results[0]['cash_transaction'][0]),
-                $key . " key is not in found in results[0]['cash_transaction'][0]'s keys"
-            );
-        }
+
+        $key2 = $keys['key2'];
         foreach ($key2[0]['zreport_sales_summary'] as $key) {
             self::assertContains(
                 $key,
@@ -433,8 +265,9 @@ class ShiftRepositoryTest extends WebapiAbstract
      * Login to open session' for creating the session
      * Open Session
      */
-    public function testOpenSession()
+    public function openSession()
     {
+        $shift_id = mt_rand(1000000000000,10000000000000);
         $serviceInfo = [
             'rest' => [
                 'resourcePath' => self::RESOURCE_PATH . 'save?',
@@ -466,7 +299,7 @@ class ShiftRepositoryTest extends WebapiAbstract
                 'closed_amount' => 0,
                 'base_cash_added' => 150,
                 'pos_id' => '1',
-                'shift_id' => 'session_1514250244118',
+                'shift_id' => 'session_'.$shift_id.'',
                 'base_balance' => 150,
                 'shift_currency_code' => 'USD',
                 'cash_added' => 150
@@ -474,45 +307,26 @@ class ShiftRepositoryTest extends WebapiAbstract
         ];
 
         $results = $this->_webApiCall($serviceInfo, $requestData);
-        \Zend_Debug::dump($results);
+
+        // Dump the result to check "How does it look like?"
+        // \Zend_Debug::dump($results);
+
+        return $results;
+    }
+
+    /**
+     * We need to setup the 'Create session before working in Store->Configuration and
+     * Login to open session' for creating the session
+     * Open Session
+     */
+    public function testOpenSession()
+    {
+        $results = $this->openSession();
         $this->assertNotNull($results);
-        $key1 = [
-            'entity_id',
-            'shift_id',
-            'staff_id',
-            'location_id',
-            'float_amount',
-            'base_float_amount',
-            'closed_amount',
-            'base_closed_amount',
-            'cash_left',
-            'base_cash_left',
-            'total_sales',
-            'base_total_sales',
-            'base_balance',
-            'balance',
-            'cash_sale',
-            'base_cash_sale',
-            'cash_added',
-            'base_cash_added',
-            'cash_removed',
-            'base_cash_removed',
-            'opened_at',
-            'closed_at',
-            'opened_note',
-            'closed_note',
-            'status',
-            'base_currency_code',
-            'shift_currency_code',
-            'indexeddb_id',
-            'updated_at',
-            'pos_id',
-            'profit_loss_reason',
-            'sale_summary',
-            'cash_transaction',
-            'zreport_sales_summary',
-            'pos_name',
-        ];
+        // Get the key constraint for API Close Session. Call From Folder Constraint
+        $keys = $this->shiftRepository->OpenSession();
+
+        $key1 = $keys['key1'];
         foreach ($key1 as $key) {
             self::assertContains(
                 $key,
@@ -520,60 +334,8 @@ class ShiftRepositoryTest extends WebapiAbstract
                 $key . " key is not in found in result['items'][0]'s keys"
             );
         }
-        $key2 = [
-            '0' => [
-                'sale_summary' => [
-                    '0' => [
-                        'payment_method',
-                        'payment_amount',
-                        'base_payment_amount',
-                        'method_title',
-                    ],
-                ],
-                'cash_transaction' => [
-                    '0' => [
-                        'transaction_id',
-                        'shift_id',
-                        'location_id',
-                        'order_id',
-                        'value',
-                        'base_value',
-                        'balance',
-                        'base_balance',
-                        'created_at',
-                        'note',
-                        'type',
-                        'base_currency_code',
-                        'transaction_currency_code',
-                        'indexeddb_id',
-                        'updated_at',
-                        'staff_id',
-                        'staff_name',
-                    ],
-                ],
-                'zreport_sales_summary' => [
-                    'grand_total',
-                    'discount_amount',
-                    'total_refunded',
-                    'giftvoucher_discount',
-                    'rewardpoints_discount',
-                ],
-            ]
-        ];
-        foreach ($key2[0]['sale_summary'][0] as $key) {
-            self::assertContains(
-                $key,
-                array_keys($results[0]['sale_summary'][0]),
-                $key . " key is not in found in results[0]['sale_summary'][0]'s keys"
-            );
-        }
-        foreach ($key2[0]['cash_transaction'][0] as $key) {
-            self::assertContains(
-                $key,
-                array_keys($results[0]['cash_transaction'][0]),
-                $key . " key is not in found in results[0]['cash_transaction'][0]'s keys"
-            );
-        }
+
+        $key2 = $keys['key2'];
         foreach ($key2[0]['zreport_sales_summary'] as $key) {
             self::assertContains(
                 $key,
@@ -581,5 +343,21 @@ class ShiftRepositoryTest extends WebapiAbstract
                 $key . " key is not in found in results[0]['sale_summary'][0]'s keys"
             );
         }
+    }
+
+    /**
+     * Configuration: Sales -> Web POS -> Settings ->
+     * -> General Configuration -> Need to create session before working to No
+     */
+    public function tearDown()
+    {
+        $objectManager = Bootstrap::getObjectManager();
+        $configResource = $objectManager->get(\Magento\Config\Model\ResourceModel\Config::class);
+        $configResource->saveConfig(
+            'webpos/general/enable_session',
+            '0',
+            ScopeInterface::SCOPE_DEFAULT,
+            0
+        );
     }
 }
