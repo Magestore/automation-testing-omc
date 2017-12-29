@@ -13,7 +13,23 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\PurchaseOrderSuccess\Test\Fixture\ReturnOrder;
 use Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\ReturnOrderIndex;
 use Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\ReturnOrderNew;
-
+/**
+ *  * Preconditions:
+ * 1. Create supplier
+ *
+ * Test Flow:
+ * 1. Login as admin
+ * 2. Navigate to the Purchase Management > Return Order
+ * 3. Click the "Create Return Request" button.
+ * 4. Fill to data
+ * 5. Click "Prepare Product List"
+ * 5. Verify created
+ *
+ */
+/**
+ * Class CreateReturnOrderEntityTest
+ * @package Magento\PurchaseOrderSuccess\Test\TestCase\ReturnOrder
+ */
 class CreateReturnOrderEntityTest extends Injectable
 {
     /**
