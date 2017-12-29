@@ -12,7 +12,7 @@ use Magento\Mtf\Block\Block;
 use Magento\Mtf\Client\Locator;
 /**
  * Class CheckoutWebposCart
- * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Block\Checkout
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Block\CategoryRepository
  */
 class CheckoutWebposCart extends Block
 {

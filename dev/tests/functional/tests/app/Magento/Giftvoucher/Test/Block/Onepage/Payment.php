@@ -10,7 +10,7 @@ use Magento\Mtf\Block\Block;
 use Magento\Payment\Test\Fixture\CreditCard;
 use Magento\Checkout\Test\Block\Onepage\Payment as CheckoutPayment;
 /**
- * Checkout payment block.
+ * CategoryRepository payment block.
  */
 class Payment extends CheckoutPayment
 {

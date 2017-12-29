@@ -93,7 +93,7 @@ class WebposCartPageCustomerCheckoutByExistingCustomerTest extends Injectable
 		$this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
 		self::assertTrue(
 			$this->webposIndex->getCheckoutChangeCustomer()->isVisible(),
-			'Checkout - Cart Page - Change customer popup is not shown'
+			'CategoryRepository - TaxClass Page - Change customer popup is not shown'
 		);
 		$this->webposIndex->getCheckoutChangeCustomer()->search($customer->getEmail());
 		$this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
@@ -108,7 +108,7 @@ class WebposCartPageCustomerCheckoutByExistingCustomerTest extends Injectable
 			$this->webposIndex->getCheckoutCartHeader()->getCustomerTitleDefault()->click();
 			self::assertTrue(
 				$this->webposIndex->getCheckoutEditCustomer()->isVisible(),
-				'Checkout - Cart Page - Click Edit Customer- Edit customer popup is not shown'
+				'CategoryRepository - TaxClass Page - Click Edit Customer- Edit customer popup is not shown'
 			);
 			if ($useStoreAddress) {
 				$storeAddressText = 'Use Store Address';
@@ -120,7 +120,7 @@ class WebposCartPageCustomerCheckoutByExistingCustomerTest extends Injectable
 				$this->webposIndex->getCheckoutEditCustomer()->getEditShippingAddressIcon()->click();
 				self::assertTrue(
 					$this->webposIndex->getCheckoutEditAddress()->isVisible(),
-					'Checkout - Cart Page - Click Edit Address- Edit Address popup is not shown'
+					'CategoryRepository - TaxClass Page - Click Edit Address- Edit Address popup is not shown'
 				);
 				$this->webposIndex->getCheckoutEditAddress()->getPhoneInput()->setValue($editAddress->getTelephone());
 				$this->webposIndex->getCheckoutEditAddress()->getStreet1Input()->setValue($editAddress->getStreet());
@@ -140,7 +140,7 @@ class WebposCartPageCustomerCheckoutByExistingCustomerTest extends Injectable
 			self::assertEquals(
 				'The customer is saved successfully.',
 				$this->webposIndex->getToaster()->getWarningMessage()->getText(),
-				'Checkout - Cart Page - Edit Customer - save message is wrong'
+				'CategoryRepository - TaxClass Page - Edit Customer - save message is wrong'
 			);
 		}
 

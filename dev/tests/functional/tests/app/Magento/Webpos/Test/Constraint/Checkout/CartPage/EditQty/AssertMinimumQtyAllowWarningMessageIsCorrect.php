@@ -21,7 +21,7 @@ class AssertMinimumQtyAllowWarningMessageIsCorrect extends AbstractConstraint
 		\PHPUnit_Framework_Assert::assertEquals(
 			sprintf($message, $product->getName()),
 			$webposIndex->getToaster()->getWarningMessage()->getText(),
-			'Checkout - Cart - Edit Product Qty - Minimum qty allow warning message is wrong'
+			'CategoryRepository - TaxClass - Edit Product Qty - Minimum qty allow warning message is wrong'
 			. "\nExpected: " . sprintf($message, $product->getName())
 			. "\nActual: " . $webposIndex->getToaster()->getWarningMessage()->getText()
 		);
@@ -34,6 +34,6 @@ class AssertMinimumQtyAllowWarningMessageIsCorrect extends AbstractConstraint
 	 */
 	public function toString()
 	{
-		return "Checkout - Cart - Edit Product Qty - Minimum qty allow warning message is correct";
+		return "CategoryRepository - TaxClass - Edit Product Qty - Minimum qty allow warning message is correct";
 	}
 }

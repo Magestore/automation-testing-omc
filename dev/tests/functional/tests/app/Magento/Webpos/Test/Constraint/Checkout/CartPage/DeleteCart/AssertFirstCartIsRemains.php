@@ -24,19 +24,19 @@ class AssertFirstCartIsRemains extends AbstractConstraint
 
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getCheckoutCartItems()->getFirstCartItem()->isVisible(),
-			'First Cart is empty'
+			'First TaxClass is empty'
 		);
 
 		\PHPUnit_Framework_Assert::assertEquals(
 			(float) $product->getPrice(),
 			(float) substr($webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Subtotal')->getText(), 1),
-			"Checkout - Cart Page - First cart's Subtotal is wrong"
+			"CategoryRepository - TaxClass Page - First cart's Subtotal is wrong"
 		);
 
 		\PHPUnit_Framework_Assert::assertEquals(
 			(float) $product->getPrice(),
 			(float) substr($webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText(), 1),
-			"Checkout - Cart Page - First cart's Total is wrong"
+			"CategoryRepository - TaxClass Page - First cart's Total is wrong"
 		);
 	}
 
@@ -47,6 +47,6 @@ class AssertFirstCartIsRemains extends AbstractConstraint
 	 */
 	public function toString()
 	{
-		return "Checkout - Cart Page - First cart is remains";
+		return "CategoryRepository - TaxClass Page - First cart is remains";
 	}
 }

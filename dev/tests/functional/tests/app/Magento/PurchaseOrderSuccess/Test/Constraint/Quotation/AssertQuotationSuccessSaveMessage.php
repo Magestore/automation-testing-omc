@@ -27,7 +27,7 @@ class AssertQuotationSuccessSaveMessage extends AbstractConstraint
      */
     public function processAssert(QuotationView $quotationView)
     {
-        $quotationView->getQuotationForm()->waitPageToLoad();
+        $quotationView->getQuotationViewForm()->waitPageToLoad();
         $actualMessage = $quotationView->getMessagesBlock()->getSuccessMessage();
         \PHPUnit_Framework_Assert::assertEquals(
             self::SUCCESS_SAVE_MESSAGE,

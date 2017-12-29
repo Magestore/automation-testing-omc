@@ -13,7 +13,7 @@ use Magento\Mtf\Block\Block;
 use Magento\Mtf\Client\Locator;
 /**
  * Class CheckoutCartFooter
- * @package Magento\Webpos\Test\Block\Checkout
+ * @package Magento\Webpos\Test\Block\CategoryRepository
  */
 class CheckoutCartFooter extends Block
 {

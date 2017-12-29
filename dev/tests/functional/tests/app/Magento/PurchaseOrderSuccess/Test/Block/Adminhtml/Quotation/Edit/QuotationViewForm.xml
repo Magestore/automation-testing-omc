@@ -1,10 +1,4 @@
 <?xml version="1.0" ?>
-<!--
-/**
- * Copyright © 2013-2017 Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
--->
 <sections>
     <summary_information>
         <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>
@@ -17,31 +11,36 @@
         <strategy>css selector</strategy>
         <fields>
             <shipping_address>
-                <selector>[name='shipping_address']</selector>
+                <selector>[name="shipping_address"]</selector>
                 <input>textarea</input>
             </shipping_address>
             <shipping_method>
-                <selector>[name='shipping_method']</selector>
+                <selector>[name="shipping_method"]</selector>
                 <input>select</input>
             </shipping_method>
+            <new_shipping_method>
+                <selector>[name="new_shipping_method"]</selector>
+            </new_shipping_method>
             <shipping_cost>
-                <selector>[name='shipping_cost']</selector>
-                <input>select</input>
+                <selector>[name="shipping_cost"]</selector>
             </shipping_cost>
             <started_at>
-                <selector>[name='started_at']</selector>
+                <selector>[name="started_at"]</selector>
                 <input>datepicker</input>
             </started_at>
             <expected_at>
-                <selector>[name='expected_at']</selector>
+                <selector>[name="expected_at"]</selector>
                 <input>datepicker</input>
             </expected_at>
             <payment_term>
-                <selector>[name='payment_term']</selector>
+                <selector>[name="payment_term"]</selector>
                 <input>select</input>
             </payment_term>
+            <new_payment_term>
+                <selector>[name="new_payment_term"]</selector>
+            </new_payment_term>
             <placed_via>
-                <selector>[name='placed_via']</selector>
+                <selector>[name="placed_via"]</selector>
                 <input>select</input>
             </placed_via>
         </fields>
@@ -52,22 +51,22 @@
         <strategy>css selector</strategy>
         <fields>
             <purchased_at>
-                <selector>[name='purchased_at']</selector>
+                <selector>[name="purchased_at"]</selector>
                 <input>datepicker</input>
             </purchased_at>
             <!--<supplier_id>-->
-                <!--<selector>[name='supplier_id']</selector>-->
+                <!--<selector>[name="supplier_id"]</selector>-->
                 <!--<input>select</input>-->
             <!--</supplier_id>-->
             <!--<currency_code>-->
-                <!--<selector>[name='currency_code']</selector>-->
+                <!--<selector>[name="currency_code"]</selector>-->
                 <!--<input>select</input>-->
             <!--</currency_code>-->
             <!--<currency_rate>-->
-                <!--<selector>[name='currency_rate']</selector>-->
+                <!--<selector>[name="currency_rate"]</selector>-->
             <!--</currency_rate>-->
             <comment>
-                <selector>[name='comment']</selector>
+                <selector>[name="comment"]</selector>
                 <input>textarea</input>
             </comment>
         </fields>

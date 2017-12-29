@@ -23,7 +23,7 @@ use Magento\Mtf\TestCase\Scenario;
  * 4. In 'Estimate Shipping and Tax' section specify destination using values from Test Data
  * 5. Click the 'Get a Quote' button
  * 6. In the section appeared select Shipping method, click the 'Update Total' button
- * 7. Click the 'Proceed to Checkout' button.
+ * 7. Click the 'Proceed to CategoryRepository' button.
  * 8. Select checkout method according to dataset.
  * 9. Fill billing information and select the 'Ship to this address' option.
  * 10. Select shipping method.

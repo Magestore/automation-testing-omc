@@ -8,30 +8,34 @@
 
 namespace Magestore\Webpos\Api\Staff;
 
-
 use Magento\TestFramework\TestCase\WebapiAbstract;
-
+use Magento\TestFramework\Helper\Bootstrap;
+/**
+ * Class StaffManagementTest
+ * @package Magestore\Webpos\Api\Staff
+ */
 class StaffManagementTest extends WebapiAbstract
 {
 	const RESOURCE_PATH = '/V1/webpos/staff/login';
 
+    /**
+     * @var \Magestore\Webpos\Api\CurrentSessionId\CurrentSessionIdTest
+     */
+    protected $currentSession;
+
+    protected function setUp()
+    {
+        $this->currentSession = Bootstrap::getObjectManager()->get('\Magestore\Webpos\Api\CurrentSessionId\CurrentSessionIdTest');
+    }
+
 	public function testStaffLogin()
 	{
-		$serviceInfo = [
-			'rest' => [
-				'resourcePath' => self::RESOURCE_PATH,
-				'httpMethod' => \Magento\Framework\Webapi\Rest\Request::HTTP_METHOD_POST,
-			],
-		];
+		$result = $this->currentSession->getCurrentSessionId();
 
-		$requestData = [
-			'staff' => [
-				'username' => 'admin',
-				'password' => 'admin123'
-			],
-		];
-		$result = $this->_webApiCall($serviceInfo, $requestData);
 		$this->assertNotNull($result);
-
+		$this->assertTrue(
+            is_string($result),
+            'Login failed'
+        );
 	}
 }

@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertWebposMultiOrderBackCheckoutOn1ndCartAndPlaceOrderOn2ndCartCP33
- * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Constraint\Checkout\MultiOrder
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Constraint\CategoryRepository\MultiOrder
  */
 class AssertWebposMultiOrderBackCheckoutOn1ndCartAndPlaceOrderOn2ndCartCP33 extends AbstractConstraint
 {
@@ -21,19 +21,19 @@ class AssertWebposMultiOrderBackCheckoutOn1ndCartAndPlaceOrderOn2ndCartCP33 exte
         foreach ($products as $product) {
             \PHPUnit_Framework_Assert::assertTrue(
                 $webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->isVisible(),
-                'On the AssertWebposCheckGUICustomerPriceCP54 Cart - The cart item with product name\'s'.$product->getName().' was not visible.'
+                'On the AssertWebposCheckGUICustomerPriceCP54 TaxClass - The cart item with product name\'s'.$product->getName().' was not visible.'
             );
             break;
         }
 
         \PHPUnit_Framework_Assert::assertFalse(
             $webposIndex->getCheckoutCartHeader()->getMultiOrderItem($secondOrder)->isVisible(),
-            'On the AssertWebposCheckGUICustomerPriceCP54 Cart - The cart item with name\'s'.$secondOrder.' was visible. Because We just using cart 2nd to checkout so the cart we have it is cart 1nd.'
+            'On the AssertWebposCheckGUICustomerPriceCP54 TaxClass - The cart item with name\'s'.$secondOrder.' was visible. Because We just using cart 2nd to checkout so the cart we have it is cart 1nd.'
         );
 
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutCartHeader()->getMultiOrderItem($firstOrder)->isVisible(),
-            'On the AssertWebposCheckGUICustomerPriceCP54 Cart - The cart item with name\'s'.$firstOrder.' was not visible.'
+            'On the AssertWebposCheckGUICustomerPriceCP54 TaxClass - The cart item with name\'s'.$firstOrder.' was not visible.'
         );
     }
 
@@ -44,6 +44,6 @@ class AssertWebposMultiOrderBackCheckoutOn1ndCartAndPlaceOrderOn2ndCartCP33 exte
      */
     public function toString()
     {
-        return 'On the AssertWebposCheckGUICustomerPriceCP54 Cart - AssertWebposCheckGUICustomerPriceCP54 MultiOrder Back Checkout On 1nd Cart And Place Order On 2nd Cart were worked correctly.';
+        return 'On the AssertWebposCheckGUICustomerPriceCP54 TaxClass - AssertWebposCheckGUICustomerPriceCP54 MultiOrder Back CategoryRepository On 1nd TaxClass And Place Order On 2nd TaxClass were worked correctly.';
     }
 }

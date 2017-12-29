@@ -12,7 +12,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposCreateMultiOrderCP18Test
- * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\Checkout\MultiOrder
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\MultiOrder
  */
 class WebposCreateMultiOrderCP18Test extends Injectable
 {
@@ -48,14 +48,14 @@ class WebposCreateMultiOrderCP18Test extends Injectable
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         self::assertTrue(
             $this->webposIndex->getCheckoutCartHeader()->getAnyOrderItem()->isVisible(),
-            'At the web pos Cart On the right screen. The time and number order was not visible.'
+            'At the web pos TaxClass On the right screen. The time and number order was not visible.'
         );
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($orderNumber)->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         self::assertTrue(
             $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->isVisible(),
-            'At the web pos Cart On the right screen. The Button Add Multi Order was not visible.'
+            'At the web pos TaxClass On the right screen. The Button Add Multi Order was not visible.'
         );
     }
 }

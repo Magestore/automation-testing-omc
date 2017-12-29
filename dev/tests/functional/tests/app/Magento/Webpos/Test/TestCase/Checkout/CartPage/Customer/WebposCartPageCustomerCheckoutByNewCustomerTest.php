@@ -70,12 +70,12 @@ class WebposCartPageCustomerCheckoutByNewCustomerTest extends Injectable
 		$this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
 		self::assertTrue(
 			$this->webposIndex->getCheckoutChangeCustomer()->isVisible(),
-			'Checkout - Cart Page - Change customer popup is not shown'
+			'CategoryRepository - TaxClass Page - Change customer popup is not shown'
 		);
 		$this->webposIndex->getCheckoutChangeCustomer()->getAddNewCustomerButton()->click();
 		self::assertTrue(
 			$this->webposIndex->getCheckoutAddCustomer()->isVisible(),
-			'Checkout - Cart Page - Add customer popup is not shown'
+			'CategoryRepository - TaxClass Page - Add customer popup is not shown'
 		);
 		$this->webposIndex->getCheckoutAddCustomer()->getFirstNameInput()->setValue($customer->getFirstname());
 		$this->webposIndex->getCheckoutAddCustomer()->getLastNameInput()->setValue($customer->getLastname());
@@ -87,7 +87,7 @@ class WebposCartPageCustomerCheckoutByNewCustomerTest extends Injectable
 			$this->webposIndex->getCheckoutAddCustomer()->getAddShippingAddressIcon()->click();
 			self::assertTrue(
 				$this->webposIndex->getCheckoutAddShippingAddress()->isVisible(),
-				'Checkout - Cart Page - Add shipping address popup is not shown'
+				'CategoryRepository - TaxClass Page - Add shipping address popup is not shown'
 			);
 			$this->webposIndex->getCheckoutAddShippingAddress()->getFirstNameInput()->setValue($customer->getFirstname());
 			$this->webposIndex->getCheckoutAddShippingAddress()->getLastNameInput()->setValue($customer->getLastname());
@@ -110,7 +110,7 @@ class WebposCartPageCustomerCheckoutByNewCustomerTest extends Injectable
 		self::assertEquals(
 			'The customer is saved successfully.',
 			$this->webposIndex->getToaster()->getWarningMessage()->getText(),
-			'Checkout - Cart Page - Add new customer - save message is wrong'
+			'CategoryRepository - TaxClass Page - Add new customer - save message is wrong'
 		);
 
 

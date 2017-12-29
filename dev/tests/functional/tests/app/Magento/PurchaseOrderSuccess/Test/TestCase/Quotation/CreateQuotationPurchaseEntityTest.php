@@ -10,10 +10,8 @@ namespace Magento\PurchaseOrderSuccess\Test\TestCase\Quotation;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\PurchaseOrderSuccess\Test\Fixture\Quotation;
-use Magento\PurchaseOrderSuccess\Test\Fixture\Supplier;
 use Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\QuotationIndex;
 use Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\QuotationNew;
-use Magento\Setup\Exception;
 
 /**
  *  * Preconditions:
@@ -64,9 +62,7 @@ class CreateQuotationPurchaseEntityTest extends Injectable
         $this->quotationIndex->open();
         $this->quotationIndex->getPageActionsBlock()->addNew();
         $this->quotationNew->getQuotationForm()->waitPageToLoad();
-//        $this->quotationNew->getQuotationForm()->;
         $this->quotationNew->getQuotationForm()->fill($quotation);
         $this->quotationNew->getFormPageActions()->prepareProductList();
-        sleep(3);
     }
 }

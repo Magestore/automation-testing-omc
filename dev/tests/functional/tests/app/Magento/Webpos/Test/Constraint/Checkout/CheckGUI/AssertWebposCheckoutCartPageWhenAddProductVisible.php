@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertWebposCheckoutCartPageWhenAddProductVisible
- * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Constraint\Checkout\CheckGUI
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Constraint\CategoryRepository\CheckGUI
  */
 class AssertWebposCheckoutCartPageWhenAddProductVisible extends AbstractConstraint
 {
@@ -20,22 +20,22 @@ class AssertWebposCheckoutCartPageWhenAddProductVisible extends AbstractConstrai
     {
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutCartItems()->getProductImage()->isVisible(),
-            'On the Frontend Page - The PRODUCT THUMBNAIL IMAGE at the web POS Cart was not visible.'
+            'On the Frontend Page - The PRODUCT THUMBNAIL IMAGE at the web POS TaxClass was not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutCartItems()->getProductPrice()->isVisible(),
-            'On the Frontend Page - The PRODUCT PRICE at the web POS Cart was not visible.'
+            'On the Frontend Page - The PRODUCT PRICE at the web POS TaxClass was not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutCartItems()->getIconDeleteItem()->isVisible(),
-            'On the Frontend Page - The icon DELETE CART ITEM at the web POS Cart was not visible.'
+            'On the Frontend Page - The icon DELETE CART ITEM at the web POS TaxClass was not visible.'
         );
         $labels = explode(',', $labels);
         foreach ($labels as $label) {
             \PHPUnit_Framework_Assert::assertNotEquals(
                 $defaultValue,
                 str_replace('$', '', $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice($label)->getText()),
-                'On the Frontend Page - The New ' .$label. ' at the AssertWebposCheckGUICustomerPriceCP54 Cart was not updated.'
+                'On the Frontend Page - The New ' .$label. ' at the AssertWebposCheckGUICustomerPriceCP54 TaxClass was not updated.'
             );
         }
     }
@@ -47,6 +47,6 @@ class AssertWebposCheckoutCartPageWhenAddProductVisible extends AbstractConstrai
      */
     public function toString()
     {
-        return "On the Frontend Page - All the Button, Icon at the web POS Cart were visible and the value was uodated  successfully.";
+        return "On the Frontend Page - All the Button, Icon at the web POS TaxClass were visible and the value was uodated  successfully.";
     }
 }

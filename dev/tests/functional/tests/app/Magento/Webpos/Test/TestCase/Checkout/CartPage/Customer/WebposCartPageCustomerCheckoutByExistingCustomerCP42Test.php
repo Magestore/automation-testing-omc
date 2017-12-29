@@ -52,7 +52,7 @@ class WebposCartPageCustomerCheckoutByExistingCustomerCP42Test extends Injectabl
 		$this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
 		self::assertTrue(
 			$this->webposIndex->getCheckoutChangeCustomer()->isVisible(),
-			'Checkout - Cart Page - Change customer popup is not shown'
+			'CategoryRepository - TaxClass Page - Change customer popup is not shown'
 		);
 		$this->webposIndex->getCheckoutChangeCustomer()->search($customer->getEmail());
 		sleep(1);
