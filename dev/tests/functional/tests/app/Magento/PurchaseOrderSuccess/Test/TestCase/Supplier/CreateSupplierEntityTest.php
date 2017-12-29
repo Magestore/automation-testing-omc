@@ -13,6 +13,16 @@ use Magento\PurchaseOrderSuccess\Test\Fixture\Supplier;
 use Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\SupplierIndex;
 use Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\SupplierNew;
 
+/**
+ * Steps:
+ * 1. Login to the backend.
+ * 2. Navigate to Purchase Management > Manage Suppliers.
+ * 3. Start to Add New Supplier.
+ * 4. Fill in data according to data set.
+ * 5. Save Supplier.
+ * 6. Perform appropriate assertions.
+ *
+ */
 class CreateSupplierEntityTest extends Injectable
 {
     /**

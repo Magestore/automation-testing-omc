@@ -9,6 +9,7 @@
 namespace Magento\PurchaseOrderSuccess\Test\TestCase;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\SupplierIndex;
+use Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\SupplierNew;
 
 class OpenAddNewSupplierEntityTest extends Injectable
 {
@@ -22,15 +23,23 @@ class OpenAddNewSupplierEntityTest extends Injectable
      */
     protected $supplierIndex;
 
+    /**
+     * @var SupplierNew
+     */
+    protected $supplierNew;
+
     public function __inject(
-        SupplierIndex $supplierIndex
+        SupplierIndex $supplierIndex,
+        SupplierNew $supplierNew
     ) {
         $this->supplierIndex = $supplierIndex;
+        $this->supplierNew = $supplierNew;
     }
+
     public function test()
     {
         $this->supplierIndex->open();
         $this->supplierIndex->getPageActionsBlock()->addNew();
-        sleep(2);
+        $this->supplierNew->getSupplierForm()->waitPageToLoad();
     }
 }
