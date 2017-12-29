@@ -8,9 +8,12 @@
 
 namespace Magestore\Webpos\Api\Checkout;
 
-
 use Magento\TestFramework\TestCase\WebapiAbstract;
-
+use \Magento\Framework\Webapi\Rest\Request as RestRequest;
+/**
+ * Class TaxClassTest
+ * @package Magestore\Webpos\Api\CategoryRepository
+ */
 class TaxClassTest extends WebapiAbstract
 {
 	const RESOURCE_PATH = '/V1/webpos/taxclass/list';
@@ -30,23 +33,26 @@ class TaxClassTest extends WebapiAbstract
 		$serviceInfo = [
 			'rest' => [
 				'resourcePath' => self::RESOURCE_PATH . '?' . http_build_query($searchCriteria),
-				'httpMethod' => \Magento\Framework\Webapi\Rest\Request::HTTP_METHOD_GET,
+				'httpMethod' => RestRequest::HTTP_METHOD_GET,
 			],
 		];
 
+		$results = $this->_webApiCall($serviceInfo, $searchCriteria);
 
-		$result = $this->_webApiCall($serviceInfo, $searchCriteria);
-		$this->assertNotNull($result);
+        // Dump the result to check "How does it look like?"
+        // \Zend_Debug::dump($results);
+
+        $this->assertNotNull($results);
 		self::assertGreaterThanOrEqual(
 			1,
-			$result['total_count'],
+			$results['total_count'],
 			"Result doesn't have any item (total_count < 1)"
 		);
 		$keys = ['class_id', 'class_name', 'class_type'];
 		foreach ($keys as $key) {
 			self::assertContains(
 				$key,
-				array_keys($result['items'][0]),
+				array_keys($results['items'][0]),
 				$key . " key is not in found in result['items'][0]'s keys"
 			);
 		}

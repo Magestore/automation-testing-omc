@@ -15,7 +15,7 @@
                 <item name="3" xsi:type="string">product4</item>
             </data>
             <data name="textNote" xsi:type="string">This is a order note.</data>
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPageActionMenu\AssertWebposCheckoutAddOrderNote" />-->
+            <!--<constraint name="Magento\Webpos\Test\Constraint\CategoryRepository\CartPageActionMenu\AssertWebposCheckoutAddOrderNote" />-->
         </variation>
     </testCase>
 </config>

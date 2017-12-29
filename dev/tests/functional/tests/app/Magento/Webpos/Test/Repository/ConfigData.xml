@@ -415,7 +415,7 @@
                 <item name="inherit" xsi:type="number">1</item>
             </field>
         </dataset>
-        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 Default Guest Checkout Settings-->
+        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 Default Guest CategoryRepository Settings-->
         <dataset name="magestore_webpos_default_guest_checkout">
             <field name="webpos/guest_checkout/first_name" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>

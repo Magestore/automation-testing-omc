@@ -18,6 +18,13 @@ use Magento\Ui\Test\Block\Adminhtml\DataGrid;
 class QuotationGrid extends DataGrid
 {
     /**
+     * Locator value for "View" link inside action column.
+     *
+     * @var string
+     */
+    protected $editLink = '.action-menu-item[href*="view"]';
+
+    /**
      * @var string
      */
     protected $gridTable = '.data-grid';

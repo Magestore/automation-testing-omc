@@ -21,7 +21,7 @@ class AssertCartPageCustomerNameIsCorrect extends AbstractConstraint
 		\PHPUnit_Framework_Assert::assertEquals(
 			$fullName,
 			$webposIndex->getCheckoutCartHeader()->getCustomerTitleDefault()->getText(),
-			"Checkout - Cart - Customer's name is wrong"
+			"CategoryRepository - TaxClass - Customer's name is wrong"
 			. "\nExpected: " . $fullName
 			. "\nActual: " . $webposIndex->getCheckoutCartHeader()->getCustomerTitleDefault()->getText()
 		);
@@ -34,6 +34,6 @@ class AssertCartPageCustomerNameIsCorrect extends AbstractConstraint
 	 */
 	public function toString()
 	{
-		return "Checkout - Cart - Customer's name is correct";
+		return "CategoryRepository - TaxClass - Customer's name is correct";
 	}
 }

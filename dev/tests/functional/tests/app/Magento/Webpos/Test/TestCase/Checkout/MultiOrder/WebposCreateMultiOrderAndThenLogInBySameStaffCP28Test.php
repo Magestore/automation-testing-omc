@@ -12,9 +12,10 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Config\Test\Fixture\ConfigData;
+use Magento\Mtf\Config\DataInterface;
 /**
  * Class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test
- * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\Checkout\MultiOrder
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\MultiOrder
  */
 class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
 {
@@ -25,6 +26,7 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
      */
     protected $webposIndex;
     protected $dataConfigToNo;
+    protected $configuration;
 
     /**
      * @param WebposIndex $webposIndex
@@ -32,10 +34,12 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
      * @return void
      */
     public function __inject(
+        DataInterface $configuration,
         WebposIndex $webposIndex
     )
     {
         $this->webposIndex = $webposIndex;
+        $this->configuration = $configuration;
     }
 
     /**
@@ -53,15 +57,20 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
             ['dataConfig' => $dataConfig]
         )->run();
 
-        $staff = $this->objectManager->create(
-            '\Magento\Webpos\Test\TestStep\LoginWebposStep'
-        )->run();
+        $username = $this->configuration->get('application/0/backendLogin/0/value');
+        $password = $this->configuration->get('application/0/backendPassword/0/value');
+        $this->webposIndex->open();
+        if ($this->webposIndex->getLoginForm()->isVisible()) {
+            $this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
+            $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
+            $this->webposIndex->getLoginForm()->clickLoginButton();
+            sleep(2);
+        }
 
         $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
         $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
         $this->webposIndex->getLoginForm()->getEnterToPos()->click();
-        sleep(3);
-        while ($this->webposIndex->getFirstScreen()->isVisible()) {}
+        $this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
         sleep(2);
 
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
@@ -99,7 +108,7 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
         for ($i=1; $i<=2; $i++) {
             self::assertFalse(
                 $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($i)->isVisible(),
-                'On the AssertWebposCheckGUICustomerPriceCP54 Cart, the cart order item was visible successfully.'
+                'On the AssertWebposCheckGUICustomerPriceCP54 TaxClass, the cart order item was visible successfully.'
             );
         }
     }

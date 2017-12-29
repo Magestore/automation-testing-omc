@@ -12,7 +12,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposCheckActionMenuTopRightScreenTest
- * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\Checkout\CartPageActionMenu
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\CartPageActionMenu
  */
 class WebposCheckActionMenuTopRightScreenTest extends Injectable
 {

@@ -25,12 +25,23 @@ class AssertQuotationInGrid extends AbstractConstraint
      */
     public function processAssert(Quotation $quotation, QuotationIndex $quotationIndex)
     {
-        $quotationIndex->open();
+        $quotationData = $quotation->getData();
         $filter = [
             'supplier_id' => $quotation->getData('supplier_id'),
+            'purchased_at[from]' => $quotation->getData('purchased_at'),
+            'purchased_at[to]' => $quotation->getData('purchased_at'),
         ];
-        $errorMessage = implode(', ', $filter);
+        if ($quotation->hasData('total_qty_orderred')) {
+            $filter['total_qty_orderred[from]'] = $quotation->getData('total_qty_orderred');
+            $filter['total_qty_orderred[to]'] = $quotation->getData('total_qty_orderred');
+        }
+        if ($quotation->hasData('grand_total_incl_tax')) {
+            $filter['grand_total_incl_tax[from]'] = $quotation->getData('grand_total_incl_tax');
+            $filter['grand_total_incl_tax[to]'] = $quotation->getData('grand_total_incl_tax');
+        }
+        $quotationIndex->open();
         $quotationIndex->getQuotationGrid()->search($filter);
+        $errorMessage = implode(', ', $filter);
         \PHPUnit_Framework_Assert::assertTrue(
             $quotationIndex->getQuotationGrid()->isRowVisible($filter, false, false),
             'Quotation with '

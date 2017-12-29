@@ -12,7 +12,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposClosePopupOrderNoteTest
- * @package Magento\WebposCheckGUICustomerPriceCP54EntityTest\Test\TestCase\Checkout\CartPageActionMenu
+ * @package Magento\WebposCheckGUICustomerPriceCP54EntityTest\Test\TestCase\CategoryRepository\CartPageActionMenu
  */
 class WebposClosePopupOrderNoteTest extends Injectable
 {

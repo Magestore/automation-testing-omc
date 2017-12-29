@@ -14,7 +14,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 /**
  * Class WebposCheckoutPagePlaceOrderPageSuccessVisibleTest
- * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\Checkout\CheckGUI
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\CheckGUI
  */
 class WebposCheckoutPagePlaceOrderPageSuccessVisibleTest extends Injectable
 {
@@ -55,7 +55,7 @@ class WebposCheckoutPagePlaceOrderPageSuccessVisibleTest extends Injectable
                 \PHPUnit_Framework_Assert::assertEquals(
                     $defaultValue,
                     str_replace('$', '', $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice($label)->getText()),
-                    'On the Frontend Page - The Default ' .$label. ' at the AssertWebposCheckGUICustomerPriceCP54 Cart was not equal to zero.'
+                    'On the Frontend Page - The Default ' .$label. ' at the AssertWebposCheckGUICustomerPriceCP54 TaxClass was not equal to zero.'
                 );
             }
         }
