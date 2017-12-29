@@ -34,8 +34,8 @@ class MassActionDeleteSupplierEntityTest extends Injectable
     ){
         $this->fixtureFactory = $fixtureFactory;
         $this->supplierIndex = $supplierIndex;
-//        $supplierIndex->open();
-//        $supplierIndex->getSupplierGridBlock()->massaction([], 'Delete', true, 'Select All');
+        $supplierIndex->open();
+        $supplierIndex->getSupplierGridBlock()->massaction([], 'Delete', true, 'Select All');
     }
 
     public function test($suppliersQty, $suppliersQtyToDelete)
@@ -46,8 +46,6 @@ class MassActionDeleteSupplierEntityTest extends Injectable
             $deleteSuppliers[] = ['supplier_code' => $suppliers[$i]->getSupplierCode()];
         }
         $this->supplierIndex->open();
-//        $this->supplierIndex->getSupplierGridBlock()->sortByColumn('Supplier Code');
-//        $this->supplierIndex->getSupplierGridBlock()->clickAction();
         $this->supplierIndex->getSupplierGridBlock()->massaction($deleteSuppliers, 'Delete', true);
 
         return ['suppliers' => $suppliers];
