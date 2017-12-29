@@ -12,7 +12,7 @@
         <dataset name="quotation_VND">
             <field name="purchased_at" xsi:type="string">12/23/2017</field>
             <field name="supplier_id" xsi:type="array">
-                <item name="dataset" xsi:type="string">default</item>
+                <item name="dataset" xsi:type="string">supplier_with_products</item>
             </field>
             <field name="currency_code" xsi:type="string">Vietnamese Dong</field>
             <field name="currency_rate" xsi:type="string">23000</field>
@@ -21,14 +21,23 @@
         <dataset name="quotation_required_field">
             <field name="purchased_at" xsi:type="string">11/26/2017</field>
             <field name="supplier_id" xsi:type="array">
-                <item name="dataset" xsi:type="string">default</item>
+                <item name="dataset" xsi:type="string">supplier_with_products</item>
             </field>
             <field name="currency_code" xsi:type="string">Vietnamese Dong</field>
             <field name="currency_rate" xsi:type="string">25000</field>
         </dataset>
         <dataset name="empty_field">
-            <field name="currency_rate" xsi:type="string"></field>
-            <field name="comment" xsi:type="string"></field>
+            <field name="currency_rate" xsi:type="string"/>
+            <field name="comment" xsi:type="string"/>
+        </dataset>
+        <dataset name="quotation_with_supplier">
+            <field name="purchased_at" xsi:type="string">12/24/2017</field>
+            <field name="supplier_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">supplier_with_products</item>
+            </field>
+            <field name="currency_code" xsi:type="string">Vietnamese Dong</field>
+            <field name="currency_rate" xsi:type="string">23000</field>
+            <field name="comment" xsi:type="string">magestore%isolation%@magestore.com</field>
         </dataset>
     </repository>
 </config>
