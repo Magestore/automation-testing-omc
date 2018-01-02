@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
     <repository class="Magento\Storepickup\Test\Repository\StorepickupSchedule">
         <dataset name="default">
-            <field name="schedule_name" xsi:type="string">magestore_schedule_%isolation%</field>
+            <field name="schedule_name" xsi:type="string">Magestore_schedule_%isolation%</field>
             <field name="monday_status" xsi:type="string">Open</field>
             <field name="tuesday_status" xsi:type="string">Open</field>
             <field name="wednesday_status" xsi:type="string">Open</field>
@@ -71,7 +71,7 @@
             </field>
         </dataset>
         <dataset name="default1">
-            <field name="schedule_name" xsi:type="string">magestore_schedule_%isolation%</field>
+            <field name="schedule_name" xsi:type="string">Magestore_schedule_%isolation%</field>
             <field name="monday_status" xsi:type="string">Open</field>
             <field name="tuesday_status" xsi:type="string">Open</field>
             <field name="wednesday_status" xsi:type="string">Open</field>
@@ -137,7 +137,7 @@
             <field name="sunday_close_minute" xsi:type="string">00</field>
         </dataset>
         <dataset name="scheduleclose">
-            <field name="schedule_name" xsi:type="string">magestore_schedule_%isolation%</field>
+            <field name="schedule_name" xsi:type="string">Magestore_schedule_%isolation%</field>
             <field name="monday_status" xsi:type="string">Close</field>
             <field name="tuesday_status" xsi:type="string">Close</field>
             <field name="wednesday_status" xsi:type="string">Close</field>

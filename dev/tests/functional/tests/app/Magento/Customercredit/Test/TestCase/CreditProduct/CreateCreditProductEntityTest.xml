@@ -19,11 +19,11 @@
             <data name="product/data/storecredit_value" xsi:type="string">20</data>
             <data name="product/data/description" xsi:type="string">Create credit product with all fields and fixed value type</data>
             <data name="product/data/short_description" xsi:type="string">Create credit product with all fields and fixed value type</data>
-            <data name="product/data/image" xsi:type="array">
-                <item name="0" xsi:type="array">
-                    <item name="file" xsi:type="string">magestore.png</item>
-                </item>
-            </data>
+            <!--<data name="product/data/image" xsi:type="array">-->
+                <!--<item name="0" xsi:type="array">-->
+                    <!--<item name="file" xsi:type="string">magestore.png</item>-->
+                <!--</item>-->
+            <!--</data>-->
             <data name="product/data/url_key" xsi:type="string">credit-product-%isolation%</data>
             <data name="product/data/meta_title" xsi:type="string">Credit Product %isolation%</data>
             <data name="product/data/meta_keyword" xsi:type="string">Credit Product %isolation%</data>
