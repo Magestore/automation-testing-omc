@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\PurchaseOrderSuccess\Test\TestCase\Quotation\UpdateQuotationPurchaseEntityTest" summary="Grid UI Component Sorting" ticketId="MAGETWO-4122017">
+        <!--<variation name="Update Information Quotation Test">-->
+            <!--<data name="description" xsi:type="string">Update Info to Quotation</data>-->
+            <!--<data name="initialQuotation/dataset" xsi:type="string">quotation_with_supplier</data>-->
+            <!--<data name="quotation/data/shipping_address" xsi:type="string">%isolation% West Centinela Avenue, Culver City, United States</data>-->
+            <!--<data name="quotation/data/shipping_cost" xsi:type="string">12.5000</data>-->
+            <!--<data name="quotation/data/shipping_method" xsi:type="string">Select a shipping method</data>-->
+            <!--<data name="quotation/data/started_at" xsi:type="string">12/30/2017</data>-->
+            <!--<data name="quotation/data/expected_at" xsi:type="string">12/31/2017</data>-->
+            <!--<data name="quotation/data/payment_term" xsi:type="string">Select a payment term</data>-->
+            <!--<data name="quotation/data/placed_via" xsi:type="string">Phone</data>-->
+            <!--<data name="quotation/data/purchased_at" xsi:type="string">12/29/2017</data>-->
+            <!--<data name="quotation/data/comment" xsi:type="string">Abc %isolation%</data>-->
+            <!--&lt;!&ndash;<constraint name="Magento\Catalog\Test\Constraint\AssertQuotationSaveMessage" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<constraint name="Magento\Catalog\Test\Constraint\AssertQuotationForm" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<constraint name="Magento\Catalog\Test\Constraint\AssertQuotationInStock" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<constraint name="Magento\Catalog\Test\Constraint\AssertQuotationVisibleInCategory" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<constraint name="Magento\Catalog\Test\Constraint\AssertQuotationPage" />&ndash;&gt;-->
+        <!--</variation>-->
+        <variation name="Update Full Field Information Quotation Test">
+            <data name="description" xsi:type="string">Update Info to Quotation</data>
+            <data name="initialQuotation/dataset" xsi:type="string">quotation_with_supplier</data>
+            <!--<data name="quotation/data/supplier_id/dataset" xsi:type="string">quotation_with_supplier</data>-->
+            <data name="quotation/data/shipping_address" xsi:type="string">Test simple quotation %isolation%</data>
+            <data name="quotation/data/shipping_method" xsi:type="string">New shipping method</data>
+            <data name="quotation/data/new_shipping_method" xsi:type="string">New shipping %isolation%</data>
+            <data name="quotation/data/shipping_cost" xsi:type="string">12.5000</data>
+            <data name="quotation/data/started_at" xsi:type="string">12/30/2017</data>
+            <data name="quotation/data/expected_at" xsi:type="string">12/31/2017</data>
+            <data name="quotation/data/payment_term" xsi:type="string">New payment term</data>
+            <data name="quotation/data/new_payment_term" xsi:type="string">New payment %isolation%</data>
+            <data name="quotation/data/placed_via" xsi:type="string">Phone</data>
+            <data name="quotation/data/purchased_at" xsi:type="string">12/29/2017</data>
+            <data name="quotation/data/comment" xsi:type="string">Abc %isolation%</data>
+            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Quotation\AssertQuotationSuccessSaveMessage"/>
+            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Quotation\AssertQuotationInGrid"/>
+        </variation>
+    </testCase>
+</config>

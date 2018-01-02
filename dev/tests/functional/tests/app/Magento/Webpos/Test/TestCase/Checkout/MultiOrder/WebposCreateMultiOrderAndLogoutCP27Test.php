@@ -18,7 +18,7 @@ use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
 use Magento\Webpos\Test\Page\Adminhtml\StaffEdit;
 /**
  * Class WebposCreateMultiOrderAndLogoutCP27Test
- * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\Checkout\MultiOrder
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\MultiOrder
  */
 class WebposCreateMultiOrderAndLogoutCP27Test extends Injectable
 {
@@ -121,7 +121,7 @@ class WebposCreateMultiOrderAndLogoutCP27Test extends Injectable
         for ($i=1; $i<=2; $i++) {
             self::assertFalse(
                 $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($i)->isVisible(),
-                'On the AssertWebposCheckGUICustomerPriceCP54 Cart, The multi order item '.$i.' were visible successfully.'
+                'On the AssertWebposCheckGUICustomerPriceCP54 TaxClass, The multi order item '.$i.' were visible successfully.'
             );
         }
         // Begin delete new Staff on magento backend

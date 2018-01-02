@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertWebposMultiOrderCheckoutOn1ndCart
- * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Constraint\Checkout\MultiOrder
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Constraint\CategoryRepository\MultiOrder
  */
 class AssertWebposMultiOrderCheckoutOn1ndCart extends AbstractConstraint
 {
@@ -20,11 +20,11 @@ class AssertWebposMultiOrderCheckoutOn1ndCart extends AbstractConstraint
     {
         \PHPUnit_Framework_Assert::assertFalse(
             $webposIndex->getCheckoutCartHeader()->getMultiOrderItem($orderNumber)->isVisible(),
-            'On the AssertWebposCheckGUICustomerPriceCP54 Cart Header - The cart item with name\'s'.$orderNumber.' was visible.'
+            'On the AssertWebposCheckGUICustomerPriceCP54 TaxClass Header - The cart item with name\'s'.$orderNumber.' was visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutCartHeader()->getMultiOrderItem($restCart)->isVisible(),
-            'On the AssertWebposCheckGUICustomerPriceCP54 Cart Header - The cart item with name\'s'.$restCart.' was visible.'
+            'On the AssertWebposCheckGUICustomerPriceCP54 TaxClass Header - The cart item with name\'s'.$restCart.' was visible.'
         );
     }
 
@@ -35,6 +35,6 @@ class AssertWebposMultiOrderCheckoutOn1ndCart extends AbstractConstraint
      */
     public function toString()
     {
-        return "On the AssertWebposCheckGUICustomerPriceCP54 Cart Header - The cart item were visible correctly.";
+        return "On the AssertWebposCheckGUICustomerPriceCP54 TaxClass Header - The cart item were visible correctly.";
     }
 }

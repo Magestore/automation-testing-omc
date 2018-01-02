@@ -12,7 +12,7 @@ use Magento\Mtf\Block\Block;
 
 /**
  * Class CheckoutNoteOrder
- * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Block\Checkout
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Block\CategoryRepository
  */
 class CheckoutNoteOrder extends Block
 {

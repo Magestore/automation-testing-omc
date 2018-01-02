@@ -14,7 +14,7 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 /**
  * Class WebposPlaceOrderWithCustomerPercentCP61Test
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomPrice
+ * @package Magento\Webpos\Test\TestCase\CategoryRepository\CartPage\CustomPrice
  */
 class WebposPlaceOrderWithCustomerPercentCP61Test extends Injectable
 {
@@ -65,7 +65,7 @@ class WebposPlaceOrderWithCustomerPercentCP61Test extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
         sleep(1);
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-        //Checkout
+        //CategoryRepository
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

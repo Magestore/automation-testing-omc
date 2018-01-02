@@ -72,7 +72,7 @@ class WebposCheckoutCartPageDeleteCartTest extends Injectable
 			sleep(1);
 			self::assertTrue(
 				$this->webposIndex->getCheckoutDiscount()->isVisible(),
-				'Checkout - Cart page - Delete Cart - Add discount popup is not shown'
+				'CategoryRepository - TaxClass page - Delete TaxClass - Add discount popup is not shown'
 			);
 			$this->webposIndex->getCheckoutDiscount()->setDiscountPercent($discountAmount);
 			$this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="supplierPricing" module="Magento_PurchaseOrderSuccess" type="flat" collection="Magento\PurchaseOrderSuccess\Model\ResourceModel\Supplier\PricingList\Collection" repository_class="Magento\PurchaseOrderSuccess\Test\Repository\SupplierPricing" handler_interface="Magento\PurchaseOrderSuccess\Test\Handler\SupplierPricing\SupplierPricingInterface" class="Magento\PurchaseOrderSuccess\Test\Fixture\SupplierPricing" entity_type="os_supplier_pricinglist">
+        <field name="supplier_pricinglist_id" is_required="1"/>
+        <field name="supplier_id" is_required="0"/>
+        <field name="product_id" is_required="0"/>
+        <field name="product_sku" is_required="0"/>
+        <field name="product_name" is_required="0"/>
+        <field name="product_supplier_sku" is_required="0"/>
+        <field name="minimal_qty" is_required="0"/>
+        <field name="cost" is_required="0"/>
+        <field name="start_date" is_required="0"/>
+        <field name="end_date" is_required="0"/>
+        <field name="created_at" is_required="0"/>
+        <field name="updated_at" is_required="0"/>
+    </fixture>
+</config>

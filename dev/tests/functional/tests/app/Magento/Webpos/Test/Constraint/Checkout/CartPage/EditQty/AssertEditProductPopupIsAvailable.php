@@ -18,31 +18,31 @@ class AssertEditProductPopupIsAvailable extends AbstractConstraint
 	{
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getCheckoutProductEdit()->isVisible(),
-			'Checkout - Cart - Edit product popup is not shown'
+			'CategoryRepository - TaxClass - Edit product popup is not shown'
 		);
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getCheckoutProductEdit()->getProductImage()->isVisible(),
-			'Checkout - Cart - Edit product popup - Product Image is not shown'
+			'CategoryRepository - TaxClass - Edit product popup - Product Image is not shown'
 		);
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getCheckoutProductEdit()->getQtyInput()->isVisible(),
-			'Checkout - Cart - Edit product popup - Qty textbox is not shown'
+			'CategoryRepository - TaxClass - Edit product popup - Qty textbox is not shown'
 		);
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getCheckoutProductEdit()->getDescQtyButton()->isVisible(),
-			'Checkout - Cart - Edit product popup - Desc qty button is not shown'
+			'CategoryRepository - TaxClass - Edit product popup - Desc qty button is not shown'
 		);
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getCheckoutProductEdit()->getIncQtyButton()->isVisible(),
-			'Checkout - Cart - Edit product popup - Inc qty button is not shown'
+			'CategoryRepository - TaxClass - Edit product popup - Inc qty button is not shown'
 		);
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->isVisible(),
-			'Checkout - Cart - Edit product popup - Custom price button is not shown'
+			'CategoryRepository - TaxClass - Edit product popup - Custom price button is not shown'
 		);
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->isVisible(),
-			'Checkout - Cart - Edit product popup - Discount button is not shown'
+			'CategoryRepository - TaxClass - Edit product popup - Discount button is not shown'
 		);
 	}
 
@@ -53,6 +53,6 @@ class AssertEditProductPopupIsAvailable extends AbstractConstraint
 	 */
 	public function toString()
 	{
-		return "Checkout - Cart - Edit product popup is avalable";
+		return "CategoryRepository - TaxClass - Edit product popup is avalable";
 	}
 }

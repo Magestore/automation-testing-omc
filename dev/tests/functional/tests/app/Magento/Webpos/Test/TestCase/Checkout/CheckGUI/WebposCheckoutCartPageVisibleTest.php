@@ -11,7 +11,7 @@ namespace Magento\Webpos\Test\TestCase\Checkout\CheckGUI;
 use Magento\Mtf\TestCase\Scenario;
 /**
  * Class WebposCheckoutCartPageVisibleTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CheckGUI
+ * @package Magento\Webpos\Test\TestCase\CategoryRepository\CheckGUI
  */
 class WebposCheckoutCartPageVisibleTest extends Scenario
 {

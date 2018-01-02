@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\PurchaseOrderSuccess\Test\TestCase\ReturnOrder\CreateReturnOrderEntityTest" summary="Create ReturnOrder" ticketId="MAGESTORE-122517">
+        <variation name="CreateReturnOrder-PurchaseOrderSuccess-ReturnOrder-EntityTestVariation1">
+            <data name="returnOrder/data/returned_at" xsi:type="string">m/d/Y +1 day</data>
+            <data name="returnOrder/data/warehouse_id" xsi:type="string">Primary Warehouse(primary)</data>
+            <data name="returnOrder/data/supplier_id/dataset" xsi:type="string">default</data>
+            <data name="returnOrder/data/reason" xsi:type="string">reason-%isolation%</data>
+
+            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\ReturnOrder\AssertReturnOrderSuccessSaveMessage"/>
+            <!--<constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\ReturnOrder\AssertReturnOrderSuccessInGrid"/>-->
+        </variation>
+    </testCase>
+</config>

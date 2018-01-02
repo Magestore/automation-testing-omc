@@ -9,5 +9,6 @@
     <page name="ReturnOrderIndex" area="Adminhtml" mca="purchaseordersuccess/returnOrder/index" module="Magento_PurchaseOrderSuccess">
         <block name="pageActionsBlock" class="Magento\Backend\Test\Block\GridPageActions" locator=".page-main-actions" strategy="css selector"/>
         <block name="messagesBlock" class="Magento\Backend\Test\Block\Messages" locator="#messages .messages" strategy="css selector"/>
+        <block name="returnOrdersGrid" class="Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\ReturnOrder\ReturnOrderGrid" locator="[id='page:main-container']" strategy="css selector" />
     </page>
 </config>

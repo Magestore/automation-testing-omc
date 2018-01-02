@@ -19,7 +19,7 @@ class AssertValueOfQtyTextboxIsCorrect extends AbstractConstraint
 		\PHPUnit_Framework_Assert::assertEquals(
 			$expectQty,
 			$webposIndex->getCheckoutProductEdit()->getQtyInput()->getValue(),
-			"Checkout - Cart - Product Edit popup - Value of Qty Textbox is wrong"
+			"CategoryRepository - TaxClass - Product Edit popup - Value of Qty Textbox is wrong"
 			. "\nExpected: " . $expectQty
 			. "\nActual: " . $webposIndex->getCheckoutProductEdit()->getQtyInput()->getValue()
 		);
@@ -32,6 +32,6 @@ class AssertValueOfQtyTextboxIsCorrect extends AbstractConstraint
 	 */
 	public function toString()
 	{
-		return "Checkout - Cart - Product Edit popup - Value of Qty Textbox is correct";
+		return "CategoryRepository - TaxClass - Product Edit popup - Value of Qty Textbox is correct";
 	}
 }

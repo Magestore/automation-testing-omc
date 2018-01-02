@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\PurchaseOrderSuccess\Test\TestCase\ReturnOrder\ReturnOrderGridSortingTest" summary="Grid UI Component Sorting" ticketId="MAGETWO-4122017">
+        <variation name="ReturnOrderGridSorting-PurchaseOrderSuccess-ReturnOrder-Sorting-Test1">
+            <data name="itemsCount" xsi:type="string">2</data>
+            <data name="fixtureName" xsi:type="string">returnOrder</data>
+            <data name="fixtureDataSet" xsi:type="string">default</data>
+            <data name="steps" xsi:type="array">
+                <item name="0" xsi:type="string">-</item>
+                <item name="1" xsi:type="string">-</item>
+            </data>
+            <data name="columnsForSorting" xsi:type="array">
+                <item name="return_code" xsi:type="string">Return Number</item>
+                <item name="supplier_id" xsi:type="string">Supplier</item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\ReturnOrderIndex</data>
+            <data name="gridRetriever" xsi:type="string">getReturnOrdersGrid</data>
+            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\ReturnOrder\AssertReturnOrderSuccessInGrid"/>
+        </variation>
+    </testCase>
+</config>
