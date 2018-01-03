@@ -51,11 +51,6 @@ class ChangeCustomerOnCartStep implements TestStepInterface
 		// Select an existing customer
 		$this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
 
-		assertTrue(
-			$this->webposIndex->getCheckoutChangeCustomer()->isVisible(),
-			'CategoryRepository - TaxClass Page - Change customer popup is not shown'
-		);
-
 		$this->webposIndex->getCheckoutChangeCustomer()->search($this->customer->getEmail());
 		sleep(1);
 		$this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
