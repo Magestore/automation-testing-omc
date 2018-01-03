@@ -2,14 +2,14 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
     <repository class="Magento\Storepickup\Test\Repository\StorepickupTag">
         <dataset name="default">
-            <field name="tag_name" xsi:type="string">magestore_tag_%isolation%</field>
+            <field name="tag_name" xsi:type="string">Magestore_tag_%isolation%</field>
             <field name="tag_description" xsi:type="string">magestore_description_%isolation%</field>
             <field name="storepickup_stores" xsi:type="array">
                 <item name="dataset" xsi:type="string">default, default</item>
             </field>
         </dataset>
         <dataset name="default1">
-            <field name="tag_name" xsi:type="string">magestore_tag_%isolation%</field>
+            <field name="tag_name" xsi:type="string">Magestore_tag_%isolation%</field>
             <field name="tag_description" xsi:type="string">magestore_description_%isolation%</field>
         </dataset>
     </repository>

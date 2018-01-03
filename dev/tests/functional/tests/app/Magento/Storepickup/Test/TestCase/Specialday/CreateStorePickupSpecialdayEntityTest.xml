@@ -8,7 +8,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Storepickup\Test\TestCase\Specialday\CreateStorePickupSpecialdayEntityTest" summary="Create specialday" ticketId="MAGETWO-25699">
         <variation name="Create Store Pickup Specialday Entity Test with all fields data">
-            <data name="storepickupSpecialday/data/specialday_name" xsi:type="string">magestore_specialday %isolation%</data>
+            <data name="storepickupSpecialday/data/specialday_name" xsi:type="string">magestore_specialday_test_%isolation%</data>
             <data name="storepickupSpecialday/data/specialday_comment" xsi:type="string">magestore_specialday_comment %isolation%</data>
             <data name="storepickupSpecialday/data/date_from" xsi:type="string">12/12/2017</data>
             <data name="storepickupSpecialday/data/date_to" xsi:type="string">12/15/2017</data>
@@ -21,7 +21,7 @@
             <constraint name="Magento\Storepickup\Test\Constraint\Specialday\AssertSpecialdayInGrid"/>
         </variation>
         <variation name="Create Store Pickup Specialday Entity Test with require fields data">
-            <data name="storepickupSpecialday/data/specialday_name" xsi:type="string">magestore_specialday %isolation%</data>
+            <data name="storepickupSpecialday/data/specialday_name" xsi:type="string">magestore_specialday_test_%isolation%</data>
             <data name="storepickupSpecialday/data/date_from" xsi:type="string">12/12/2017</data>
             <data name="storepickupSpecialday/data/date_to" xsi:type="string">12/15/2017</data>
             <constraint name="Magento\Storepickup\Test\Constraint\Specialday\AssertSpecialdaySuccessSaveMessage"/>

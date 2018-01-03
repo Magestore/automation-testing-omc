@@ -8,7 +8,7 @@
             <data name="returnOrder/data/reason" xsi:type="string">reason-%isolation%</data>
 
             <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\ReturnOrder\AssertReturnOrderSuccessSaveMessage"/>
-            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\ReturnOrder\AssertReturnOrderSuccessInGrid"/>
+            <!--<constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\ReturnOrder\AssertReturnOrderSuccessInGrid"/>-->
         </variation>
     </testCase>
 </config>

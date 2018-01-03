@@ -47,6 +47,5 @@ class CreateStorePickupStoreEntityTest extends Injectable
         $this->storeIndex->getStoreGridPageActions()->clickActionButton('add');
         $this->storeNew->getStoreForm()->fill($storepickupStore);
         $this->storeNew->getStoreFormPageActions()->save();
-        return ['storepickupStore' => $storepickupStore];
     }
 }
