@@ -48,7 +48,7 @@
             <data name="shipping/shipping_service" xsi:type="string">Flat Rate</data>
             <data name="shipping/shipping_method" xsi:type="string">Fixed</data>
             <data name="prices" xsi:type="array">
-                <item name="grandTotal" xsi:type="string">55.00</item>
+                <item name="grandTotal" xsi:type="string">50.00</item>
             </data>
             <data name="payment/method" xsi:type="string">banktransfer</data>
             <data name="billingAddress/dataset" xsi:type="string">US_address_1_without_email</data>

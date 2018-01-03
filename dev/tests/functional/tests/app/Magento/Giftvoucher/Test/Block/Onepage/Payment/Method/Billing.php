@@ -22,4 +22,14 @@ class Billing extends CheckoutBilling
             $this->_rootElement->find('.action.action-edit-address')->click();
         }
     }
+
+    /**
+     * Unset "Same as shipping" checkbox value.
+     *
+     * @return void
+     */
+    public function unsetSameAsShippingCheckboxValue()
+    {
+        $this->_rootElement->find($this->sameAsShippingCheckbox, Locator::SELECTOR_CSS, 'checkbox')->setValue('No');
+    }
 }
