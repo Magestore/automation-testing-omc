@@ -41,7 +41,7 @@
             <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreInGrid"/>
         </variation>
         <variation name="Create store pickup store entity test with require fields data">
-            <data name="storepickupStore/data/store_name" xsi:type="string">magestore_test_%isolation%</data>
+            <data name="storepickupStore/data/store_name" xsi:type="string">magestore_test_require_%isolation%</data>
             <data name="storepickupStore/data/address" xsi:type="string">magestore_address_%isolation%</data>
             <data name="storepickupStore/data/city" xsi:type="string">magestore_city_%isolation%</data>
             <data name="storepickupStore/data/zipcode" xsi:type="string">12345</data>

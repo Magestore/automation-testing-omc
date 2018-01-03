@@ -77,7 +77,7 @@
             <constraint name="Magento\Storepickup\Test\Constraint\Schedule\AssertScheduleInGrid"/>
         </variation>
         <variation name="Create Store Pickup Schedule Entity Test with require fields data">
-            <data name="storepickupSchedule/data/schedule_name" xsi:type="string">magestore_schedule_test_%isolation%</data>
+            <data name="storepickupSchedule/data/schedule_name" xsi:type="string">magestore_schedule_require_test_%isolation%</data>
             <constraint name="Magento\Storepickup\Test\Constraint\Schedule\AssertScheduleSuccessSaveMessage"/>
             <constraint name="Magento\Storepickup\Test\Constraint\Schedule\AssertScheduleInGrid"/>
         </variation>

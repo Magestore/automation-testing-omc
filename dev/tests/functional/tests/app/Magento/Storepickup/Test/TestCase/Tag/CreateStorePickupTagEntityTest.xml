@@ -16,7 +16,7 @@
             <constraint name="Magento\Storepickup\Test\Constraint\Tag\AssertTagInGrid"/>
         </variation>
         <variation name="Create store pickup Tag entity test with require fields">
-            <data name="storepickupTag/data/tag_name" xsi:type="string">magestore_tag_test_%isolation%</data>
+            <data name="storepickupTag/data/tag_name" xsi:type="string">magestore_tag_require_test_%isolation%</data>
             <constraint name="Magento\Storepickup\Test\Constraint\Tag\AssertTagSuccessSaveMessage"/>
             <constraint name="Magento\Storepickup\Test\Constraint\Tag\AssertTagInGrid"/>
         </variation>

@@ -21,7 +21,7 @@
             <constraint name="Magento\Storepickup\Test\Constraint\Specialday\AssertSpecialdayInGrid"/>
         </variation>
         <variation name="Create Store Pickup Specialday Entity Test with require fields data">
-            <data name="storepickupSpecialday/data/specialday_name" xsi:type="string">magestore_specialday_test_%isolation%</data>
+            <data name="storepickupSpecialday/data/specialday_name" xsi:type="string">magestore_specialday_require_test_%isolation%</data>
             <data name="storepickupSpecialday/data/date_from" xsi:type="string">12/12/2017</data>
             <data name="storepickupSpecialday/data/date_to" xsi:type="string">12/15/2017</data>
             <constraint name="Magento\Storepickup\Test\Constraint\Specialday\AssertSpecialdaySuccessSaveMessage"/>
