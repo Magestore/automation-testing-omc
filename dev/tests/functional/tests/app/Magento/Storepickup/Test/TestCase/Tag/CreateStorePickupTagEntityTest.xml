@@ -8,7 +8,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Storepickup\Test\TestCase\Tag\CreateStorePickupTagEntityTest" summary="Create tag" ticketId="MAGETWO-25699">
         <variation name="Create store pickup Tag entity test with all fields data">
-            <data name="storepickupTag/data/tag_name" xsi:type="string">magestore_tag_%isolation%</data>
+            <data name="storepickupTag/data/tag_name" xsi:type="string">magestore_tag_test_%isolation%</data>
             <data name="storepickupTag/data/tag_description" xsi:type="string">magestore_tag_description_%isolation%</data>
             <data name="storepickupTag/data/tag_icon" xsi:type="string">maptag.png</data>
             <data name="storepickupTag/data/storepickup_stores/dataset" xsi:type="string">default1, default1</data>
@@ -16,7 +16,7 @@
             <constraint name="Magento\Storepickup\Test\Constraint\Tag\AssertTagInGrid"/>
         </variation>
         <variation name="Create store pickup Tag entity test with require fields">
-            <data name="storepickupTag/data/tag_name" xsi:type="string">magestore_tag_%isolation%</data>
+            <data name="storepickupTag/data/tag_name" xsi:type="string">magestore_tag_test_%isolation%</data>
             <constraint name="Magento\Storepickup\Test\Constraint\Tag\AssertTagSuccessSaveMessage"/>
             <constraint name="Magento\Storepickup\Test\Constraint\Tag\AssertTagInGrid"/>
         </variation>

@@ -8,7 +8,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Storepickup\Test\TestCase\Store\CreateStorePickupStoreEntityTest" summary="Create store" ticketId="MAGETWO-25699">
         <variation name="Create store pickup store entity test with all fields data">
-            <data name="storepickupStore/data/store_name" xsi:type="string">magestore_%isolation%</data>
+            <data name="storepickupStore/data/store_name" xsi:type="string">magestore_test_%isolation%</data>
             <data name="storepickupStore/data/description" xsi:type="string">magestore_description_%isolation%</data>
             <data name="storepickupStore/data/warehouse_id/dataset" xsi:type="string">default</data>
             <data name="storepickupStore/data/status" xsi:type="string">Enabled</data>
@@ -41,7 +41,7 @@
             <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreInGrid"/>
         </variation>
         <variation name="Create store pickup store entity test with require fields data">
-            <data name="storepickupStore/data/store_name" xsi:type="string">magestore_%isolation%</data>
+            <data name="storepickupStore/data/store_name" xsi:type="string">magestore_test_%isolation%</data>
             <data name="storepickupStore/data/address" xsi:type="string">magestore_address_%isolation%</data>
             <data name="storepickupStore/data/city" xsi:type="string">magestore_city_%isolation%</data>
             <data name="storepickupStore/data/zipcode" xsi:type="string">12345</data>
