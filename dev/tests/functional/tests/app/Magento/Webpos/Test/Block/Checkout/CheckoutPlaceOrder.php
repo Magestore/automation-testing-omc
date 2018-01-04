@@ -9,6 +9,8 @@
 namespace Magento\Webpos\Test\Block\Checkout;
 
 use Magento\Mtf\Block\Block;
+use Magento\Mtf\Client\ElementInterface;
+
 /**
  * Class CheckoutPlaceOrder
  * @package Magento\Webpos\Test\Block\CategoryRepository
@@ -51,4 +53,24 @@ class CheckoutPlaceOrder extends Block
     {
         return $this->_rootElement->find('#checkout_button');
     }
+
+	/**
+	 * @param ElementInterface $divCheckbox
+	 * @return bool|int
+	 */
+	public function isCheckboxChecked($divCheckbox)
+	{
+		$class = $divCheckbox->find('div')->getAttribute('class');
+		return strpos($class, 'checked');
+	}
+
+	public function getCreateInvoiceCheckbox()
+	{
+		return $this->_rootElement->find('#can_paid');
+	}
+
+	public function getShippingCheckbox()
+	{
+		return $this->_rootElement->find('#can_ship');
+	}
 }
