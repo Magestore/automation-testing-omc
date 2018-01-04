@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\TestStep;
 
-
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\TestStep\TestStepInterface;
 use Magento\Webpos\Test\Page\WebposIndex;
@@ -29,7 +28,6 @@ class ChangeCustomerOnCartStep implements TestStepInterface
 	/**
 	 * AddProductToCartStep constructor.
 	 * @param WebposIndex $webposIndex
-	 * @param $products
 	 */
 	public function __construct(
 		WebposIndex $webposIndex,
