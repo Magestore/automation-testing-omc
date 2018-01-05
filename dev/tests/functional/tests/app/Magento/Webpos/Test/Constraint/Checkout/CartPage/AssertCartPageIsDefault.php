@@ -17,18 +17,18 @@ class AssertCartPageIsDefault extends AbstractConstraint
 	{
 		\PHPUnit_Framework_Assert::assertFalse(
 			$webposIndex->getCheckoutCartItems()->getFirstCartItem()->isVisible(),
-			'Cart page - Order Item is not empty'
+			'TaxClass page - Order Item is not empty'
 		);
 
 		\PHPUnit_Framework_Assert::assertEquals(
 			(float) 0,
 			(float) substr($webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Subtotal')->getText(),1),
-			"Cart Page - SubTotal != 0"
+			"TaxClass Page - SubTotal != 0"
 		);
 		\PHPUnit_Framework_Assert::assertEquals(
 			(float) 0,
 			(float) substr($webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText(),1),
-			"Cart Page - Total != 0"
+			"TaxClass Page - Total != 0"
 		);
 	}
 
@@ -39,6 +39,6 @@ class AssertCartPageIsDefault extends AbstractConstraint
 	 */
 	public function toString()
 	{
-		return "Cart page is default";
+		return "TaxClass page is default";
 	}
 }

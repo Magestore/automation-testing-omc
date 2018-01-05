@@ -12,6 +12,16 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Rewardpoints\Test\Page\Adminhtml\SpendingRatesIndex;
 
 /**
+ *
+ * Test Flow:
+ * 1. Login as admin
+ * 2. Navigate to the Reward points>Spending rates
+ * 3. Click on 'Add New Spending Rate' button
+ * 4. Verify form add new
+ *
+ */
+
+/**
  * Class SpendingRatesFormTest
  * @package Magento\Rewardpoints\Test\TestCase
  */

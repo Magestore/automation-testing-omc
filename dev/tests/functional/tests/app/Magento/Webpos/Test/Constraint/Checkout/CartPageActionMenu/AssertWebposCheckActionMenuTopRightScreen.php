@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertWebposCheckActionMenuTopRightScreen
- * @package Magento\Webpos\Test\Constraint\Checkout\CartPageActionMenu
+ * @package Magento\Webpos\Test\Constraint\CategoryRepository\CartPageActionMenu
  */
 class AssertWebposCheckActionMenuTopRightScreen extends AbstractConstraint
 {
@@ -20,11 +20,11 @@ class AssertWebposCheckActionMenuTopRightScreen extends AbstractConstraint
     {
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->isVisible(),
-            'On the Products List Page - The action ADD ORDER NOTE on the top right of the web POS Cart was not visible.'
+            'On the Products List Page - The action ADD ORDER NOTE on the top right of the web POS TaxClass was not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutFormAddNote()->getFullScreenMode()->isVisible(),
-            'On the Products List Page - The action FULL SCREEN MODE on the top right of the web POS Cart was not visible.'
+            'On the Products List Page - The action FULL SCREEN MODE on the top right of the web POS TaxClass was not visible.'
         );
     }
 
@@ -35,6 +35,6 @@ class AssertWebposCheckActionMenuTopRightScreen extends AbstractConstraint
      */
     public function toString()
     {
-        return "On the Checkout Page - Products List Page - All the action ADD ORDER NOTE And FULL SCREEN MODE at the web POS Cart were visible successfully.";
+        return "On the CategoryRepository Page - Products List Page - All the action ADD ORDER NOTE And FULL SCREEN MODE at the web POS TaxClass were visible successfully.";
     }
 }

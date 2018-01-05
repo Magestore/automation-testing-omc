@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertWebposEnterFullScreen
- * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Constraint\Checkout\CartPageActionMenu
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Constraint\CategoryRepository\CartPageActionMenu
  */
 class AssertWebposEnterFullScreen extends AbstractConstraint
 {
@@ -27,6 +27,6 @@ class AssertWebposEnterFullScreen extends AbstractConstraint
      */
     public function toString()
     {
-        return "On the Checkout Page - Products List Page - All the action CLOSE ORDER NOTE And SAVE ORDER NOTE, TEXTAREA at the web POS Cart were visible successfully.";
+        return "On the CategoryRepository Page - Products List Page - All the action CLOSE ORDER NOTE And SAVE ORDER NOTE, TEXTAREA at the web POS TaxClass were visible successfully.";
     }
 }

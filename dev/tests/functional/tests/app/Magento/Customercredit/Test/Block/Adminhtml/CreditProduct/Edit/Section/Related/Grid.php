@@ -9,6 +9,7 @@
 namespace Magento\Customercredit\Test\Block\Adminhtml\CreditProduct\Edit\Section\Related;
 
 use Magento\Catalog\Test\Block\Adminhtml\Product\Edit\Section\Related\Grid as RelatedGrid;
+
 class Grid extends RelatedGrid
 {
     public function searchAndSelect(array $filter)

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/fixture.xsd">
+    <fixture name="supplier"
+             module="Magento_PurchaseOrderSuccess"
+             type="flat"
+             collection="Magento\PurchaseOrderSuccess\Model\ResourceModel\Supplier\Collection"
+             repository_class="Magento\PurchaseOrderSuccess\Test\Repository\Supplier"
+             handler_interface="Magento\PurchaseOrderSuccess\Test\Handler\Supplier\SupplierInterface"
+             class="Magento\PurchaseOrderSuccess\Test\Fixture\Supplier"
+             entity_type="os_supplier">
+        <field name="supplier_id" is_required="1" group="information"/>
+        <field name="supplier_code" is_required="0" group="information"/>
+        <field name="supplier_name" is_required="0" group="information"/>
+        <field name="contact_name" is_required="0" group="information"/>
+        <field name="contact_email" is_required="0" group="information"/>
+        <field name="description" is_required="0" group="information"/>
+        <field name="status" is_required="0" group="information"/>
+        <field name="telephone" is_required="0" group="address"/>
+        <field name="fax" is_required="0" group="address"/>
+        <field name="street" is_required="0" group="address"/>
+        <field name="city" is_required="0" group="address"/>
+        <field name="country_id" is_required="0" group="address"/>
+        <field name="region_id" is_required="0" group="address"/>
+        <field name="region" is_required="0" group="address"/>
+        <field name="postcode" is_required="0" group="address"/>
+        <field name="website" is_required="0" group="address"/>
+        <field name="new_password" is_required="0" group="password"/>
+        <field name="generated_password" is_required="0" group="password"/>
+        <field name="send_pass_to_supplier" is_required="0" group="password"/>
+        <field name="created_at" is_required="0"/>
+        <field name="updated_at" is_required="0"/>
+        <field name="products" is_required="0" group="products" source="Magento\PurchaseOrderSuccess\Test\Fixture\Supplier\Products"/>
+    </fixture>
+</config>

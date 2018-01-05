@@ -38,7 +38,7 @@ class AssertHolidayInGrid extends AbstractConstraint
         \PHPUnit_Framework_Assert::assertEquals(
             count($holidayIndex->getHolidayGrid()->getAllIds()),
             1,
-            'There is more than one tag founded'
+            'There is more than one holiday founded'
         );
     }
 

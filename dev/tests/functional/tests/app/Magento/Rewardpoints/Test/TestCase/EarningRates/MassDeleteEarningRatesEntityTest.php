@@ -12,7 +12,21 @@ use Magento\Rewardpoints\Test\Page\Adminhtml\EarningRatesIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 
-
+/**
+ *
+ * Test Flow:
+ * Preconditions:
+ * 1. Create X Earning Rates
+ *
+ * Steps:
+ * 1. Open backend
+ * 2. Go to Reward points > Earning Rates
+ * 3. Select N Earning Rates from preconditions
+ * 4. Select in dropdown "Delete"
+ * 5. Click Submit button
+ * 6. Perform all assertions according to dataset
+ *
+ */
 class MassDeleteEarningRatesEntityTest extends Injectable
 {
     /* tags */
@@ -31,6 +45,8 @@ class MassDeleteEarningRatesEntityTest extends Injectable
     ) {
         $this->earningRatesIndex = $earningRatesIndex;
         $this->fixtureFactory = $fixtureFactory;
+        $this->earningRatesIndex->open();
+        $this->earningRatesIndex->getEarningRatesGrid()->massaction([], 'Delete', true, 'Select All');
     }
 
     public function test(

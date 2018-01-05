@@ -12,6 +12,16 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Storepickup\Test\Page\Adminhtml\StoreImportStore;
 use Magento\Storepickup\Test\Page\Adminhtml\StoreIndex;
 
+/**
+ * Steps:
+ * 1. Login to the backend.
+ * 2. Navigate to Store Pickup > Manage Store.
+ * 3. Start to Import Store.
+ * 4. Fill in data according to data set.
+ * 5. Import Stores.
+ * 6. Perform appropriate assertions.
+ *
+ */
 class ImportStorePickupStoreTest extends Injectable
 {
     /**

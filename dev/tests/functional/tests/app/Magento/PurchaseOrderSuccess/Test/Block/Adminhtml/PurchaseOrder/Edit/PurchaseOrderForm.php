@@ -9,7 +9,7 @@
 namespace Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\PurchaseOrder\Edit;
 
 
-use Magento\InventorySuccess\Test\Block\Adminhtml\FormSection;
+use Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\FormSection;
 
 class PurchaseOrderForm extends FormSection
 {

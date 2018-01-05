@@ -11,8 +11,11 @@ namespace Magento\Storepickup\Test\TestCase;
 use Magento\Backend\Test\TestCase\NavigateMenuTest;
 
 /**
- * Class StorePickupMenuTest
- * @package Magento\Storepickup\Test\TestCase
+ * Steps:
+ * 1. Log in to backend.
+ * 2. Navigate through menu to the page.
+ * 3. Perform asserts.
+ *
  */
 class StorePickupMenuTest extends NavigateMenuTest
 {

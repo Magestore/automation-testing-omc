@@ -13,6 +13,20 @@ use Magento\Customercredit\Test\Page\Adminhtml\CreditProductIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 
+/**
+ * Test Flow:
+ * Preconditions:
+ * 1. Create 2 credit products enable or disable
+ *
+ * Steps:
+ * 1. Open backend
+ * 2. Go to  Store Credit > Manage Credit Products
+ * 3. Select 2 products from preconditions
+ * 4. Select in dropdown "Change Status" and choose status "Enable" or "Disable"
+ * 5. Click Submit button
+ * 6. Perform all assertions according to dataset
+ *
+ */
 class MassChangeStatusCreditProductBackendEntityTest extends Injectable
 {
     /**

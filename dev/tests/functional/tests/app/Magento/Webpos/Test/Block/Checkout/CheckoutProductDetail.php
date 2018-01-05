@@ -11,7 +11,7 @@ namespace Magento\Webpos\Test\Block\Checkout;
 use Magento\Mtf\Block\Block;
 /**
  * Class CheckoutProductDetail
- * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Block\Checkout
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Block\CategoryRepository
  */
 class CheckoutProductDetail extends Block
 {

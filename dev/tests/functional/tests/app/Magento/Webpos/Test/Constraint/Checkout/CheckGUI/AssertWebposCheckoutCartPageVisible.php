@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertWebposCheckoutCartPageVisible
- * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Constraint\Checkout\CheckGUI
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Constraint\CategoryRepository\CheckGUI
  */
 class AssertWebposCheckoutCartPageVisible extends AbstractConstraint
 {
@@ -20,34 +20,34 @@ class AssertWebposCheckoutCartPageVisible extends AbstractConstraint
     {
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutCartHeader()->getIconDeleteCart()->isVisible(),
-            'On the Frontend Page - The Icon DELETE CART at the web POS Cart was not visible.'
+            'On the Frontend Page - The Icon DELETE CART at the web POS TaxClass was not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->isVisible(),
-            'On the Frontend Page - The Icon ADD CUSTOMER at the web POS Cart was not visible.'
+            'On the Frontend Page - The Icon ADD CUSTOMER at the web POS TaxClass was not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutCartHeader()->getIconActionMenu()->isVisible(),
-            'On the Frontend Page - The Icon ACTION MENU at the web POS Cart was not visible.'
+            'On the Frontend Page - The Icon ACTION MENU at the web POS TaxClass was not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->isVisible(),
-            'On the Frontend Page - The Icon MULTI ORDER at the web POS Cart was not visible.'
+            'On the Frontend Page - The Icon MULTI ORDER at the web POS TaxClass was not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutCartFooter()->getButtonHold()->isVisible(),
-            'On the Frontend Page - The button HOLD at the web POS Cart was not visible.'
+            'On the Frontend Page - The button HOLD at the web POS TaxClass was not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutCartFooter()->getButtonCheckout()->isVisible(),
-            'On the Frontend Page - The button CHECKOUT at the web POS Cart was not visible.'
+            'On the Frontend Page - The button CHECKOUT at the web POS TaxClass was not visible.'
         );
         $labels = explode(',', $labels);
         foreach ($labels as $label) {
             \PHPUnit_Framework_Assert::assertEquals(
                 $defaultValue,
                 str_replace('$', '', $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice($label)->getText()),
-                'On the Frontend Page - The Default ' .$label. ' at the AssertWebposCheckGUICustomerPriceCP54 Cart was not equal to zero.'
+                'On the Frontend Page - The Default ' .$label. ' at the AssertWebposCheckGUICustomerPriceCP54 TaxClass was not equal to zero.'
             );
         }
     }
@@ -59,6 +59,6 @@ class AssertWebposCheckoutCartPageVisible extends AbstractConstraint
      */
     public function toString()
     {
-        return "On the Frontend Page - All the Button And Icon at the web POS Cart were visible successfully.";
+        return "On the Frontend Page - All the Button And Icon at the web POS TaxClass were visible successfully.";
     }
 }

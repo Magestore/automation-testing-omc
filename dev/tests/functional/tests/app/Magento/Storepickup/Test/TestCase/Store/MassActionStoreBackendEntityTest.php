@@ -13,6 +13,20 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Storepickup\Test\Page\Adminhtml\StoreIndex;
 use Magento\Storepickup\Test\Page\Adminhtml\StoreNew;
 
+/**
+ * Test Flow:
+ * Preconditions:
+ * 1. Create 2 credit stores enable or disable
+ *
+ * Steps:
+ * 1. Open backend
+ * 2. Go to  Store Credit > Manage Store
+ * 3. Select 2 stores from preconditions
+ * 4. Select in dropdown choose action
+ * 5. Accept alert
+ * 6. Perform all assertions according to dataset
+ *
+ */
 class MassActionStoreBackendEntityTest extends Injectable
 {
     /**

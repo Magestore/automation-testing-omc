@@ -9,9 +9,19 @@
 namespace Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\Quotation\Edit;
 
 
-use Magento\InventorySuccess\Test\Block\Adminhtml\FormSection;
+use Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\FormSection;
 
 class QuotationForm extends FormSection
 {
+    /**
+     * @return mixed
+     */
+    protected $errorField = '.admin__field-error';
 
+    /**
+     * @return mixed
+     */
+    public function fieldErrorIsVisible(){
+        return $this->_rootElement->find($this->errorField, Locator::SELECTOR_CSS)->isVisible();
+    }
 }

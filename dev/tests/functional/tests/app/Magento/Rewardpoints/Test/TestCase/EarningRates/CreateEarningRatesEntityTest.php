@@ -11,8 +11,19 @@ namespace Magento\Rewardpoints\Test\TestCase\EarningRates;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Rewardpoints\Test\Page\Adminhtml\EarningRatesIndex;
 use Magento\Rewardpoints\Test\Page\Adminhtml\EarningRatesNew;
-use Magento\Rewardpoints\Test\Fixture\Rate;
+use Magento\Rewardpoints\Test\Fixture\EarningRates;
 
+/**
+ *
+ * Test Flow:
+ * 1. Login as admin
+ * 2. Navigate to the Reward points>Earning Rates
+ * 3. Click on 'Add New Earning Rate' button
+ * 4. Fill out all data according to data set
+ * 5. Save
+ * 6. Verify created
+ *
+ */
 
 /**
  * Class CreateEarningRatesEntityTest
@@ -43,15 +54,15 @@ class CreateEarningRatesEntityTest extends Injectable
 
     /**
      * @param $button
-     * @param Rate $rate
+     * @param EarningRates $earningRates
      * @return array
      */
-    public function test($button, Rate $rate)
+    public function test($button, EarningRates $earningRates)
     {
         $this->earningRatesIndex->open();
         $this->earningRatesIndex->getEarningRatesGridPageActions()->clickActionButton($button);
-        $this->earningRatesNew->getEarningRatesForm()->fill($rate);
+        $this->earningRatesNew->getEarningRatesForm()->fill($earningRates);
         $this->earningRatesNew->getEarningRatesFormPageActions()->save();
-        return ['rate' => $rate];
+        return ['earning_rates' => $earningRates];
     }
 }

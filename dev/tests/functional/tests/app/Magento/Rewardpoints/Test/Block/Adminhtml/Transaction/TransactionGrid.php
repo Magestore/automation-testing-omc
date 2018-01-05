@@ -71,15 +71,15 @@ class TransactionGrid extends RewardGrid
         ],
         'action' => [
             'selector' => '.admin__data-grid-filters input[name="action"]',
-            'input'    => 'Select',
+            'input'    => 'select',
         ],
         'store_id' => [
             'selector' => '.admin__data-grid-filters input[name="store_id"]',
-            'input'    => 'Select',
+            'input'    => 'select',
         ],
         'status' => [
-            'selector' => '.admin__data-grid-filters input[name="status"]',
-            'input'    => 'Select',
+            'selector' => '[name="status"]',
+            'input'    => 'select',
         ]
     ];
 
@@ -94,4 +94,12 @@ class TransactionGrid extends RewardGrid
 //        $rowItem->find($this->selectAction)->click();
 //        $rowItem->find($this->editLink)->click();
 //    }
+    /**
+     * Fix core
+     */
+    public function resetFilter()
+    {
+        $this->waitLoader();
+        parent::resetFilter();
+    }
 }

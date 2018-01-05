@@ -13,6 +13,16 @@ use Magento\Storepickup\Test\Fixture\StorepickupSchedule;
 use Magento\Storepickup\Test\Page\Adminhtml\ScheduleIndex;
 use Magento\Storepickup\Test\Page\Adminhtml\ScheduleNew;
 
+/**
+ * Steps:
+ * 1. Login to the backend.
+ * 2. Navigate to Store Pickup > Manage Schedule.
+ * 3. Start to Add New Schedule .
+ * 4. Fill in data according to data set.
+ * 5. Save Schedule.
+ * 6. Perform appropriate assertions.
+ *
+ */
 class CreateStorePickupScheduleEntityTest extends Injectable
 {
     /**

@@ -168,9 +168,9 @@
         </fields>
     </attributes>
     <gallery>
-        <class>\Magento\Catalog\Test\Block\Adminhtml\Product\Edit\Section\BlockGallery</class>
-        <selector>[data-index='gallery']</selector>
-        <strategy>css selector</strategy>
+        <class>\Magento\Customercredit\Test\Block\Adminhtml\CreditProduct\Edit\Section\BlockGallery</class>
+        <selector>.//*[contains(@data-index,'gallery')]</selector>
+        <strategy>xpath</strategy>
     </gallery>
     <search-engine-optimization>
         <class>\Magento\Ui\Test\Block\Adminhtml\Section</class>

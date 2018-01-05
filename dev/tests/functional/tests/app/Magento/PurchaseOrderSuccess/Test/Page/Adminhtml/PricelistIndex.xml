@@ -7,8 +7,8 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
     <page name="PricelistIndex" area="Adminhtml" mca="suppliersuccess/supplier_pricinglist/index" module="Magento_PurchaseOrderSuccess">
-        <block name="pricelist" class="Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\Pricelist\Pricelist" locator=".page-wrapper" strategy="css selector" />
-        <block name="modalAddPricelist" class="Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\Pricelist\ModalAddPricelist" locator="#html-body > div.modals-wrapper > aside.modal-slide.undefined.os_supplier_pricinglist_form_os_supplier_pricinglist_form_supplier_pricinglist_listing_add._show" strategy="css selector" />
-        <block name="modalImportPricelist" class="Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\Pricelist\ModalImportPricelist" locator="#html-body > div.modals-wrapper > aside.modal-slide.mage-new-video-dialog.form-inline._show" strategy="css selector" />
+        <block name="pricelist" class="Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\Pricelist\Pricelist" locator="[id='page:main-container']" strategy="css selector" />
+        <block name="modalAddPricelist" class="Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\Pricelist\ModalAddPricelist" locator=".modal-slide.os_supplier_pricinglist_form_os_supplier_pricinglist_form_supplier_pricinglist_listing_add._show" strategy="css selector" />
+        <block name="modalImportPricelist" class="Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\Pricelist\ModalImportPricelist" locator=".modal-slide.mage-new-video-dialog.form-inline._show" strategy="css selector" />
     </page>
 </config>

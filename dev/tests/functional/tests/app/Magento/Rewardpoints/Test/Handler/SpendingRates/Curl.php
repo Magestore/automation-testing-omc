@@ -83,9 +83,12 @@ class Curl extends AbstractCurl implements SpendingRatesInterface
                 "Spending Rates entity creation by curl handler was not successful! Response: $response"
             );
         }
+        preg_match_all("/rate_id\":\"(\d*?)\"/", $response, $matches);
+
+        $id = isset($matches[1]) ? $matches[1][count($matches[1])-1] : null;
 
 //        $data['rate_id'] = $fixture->getRateId();
-//        return ['rate_id' => $data['rate_id']];
+        return ['rate_id' => $id];
     }
 
 

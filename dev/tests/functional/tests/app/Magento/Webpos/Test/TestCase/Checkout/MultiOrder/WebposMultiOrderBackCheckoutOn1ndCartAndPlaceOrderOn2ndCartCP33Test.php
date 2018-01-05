@@ -15,7 +15,7 @@ use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePla
 
 /**
  * Class WebposMultiOrderBackCheckoutOn1ndCartAndPlaceOrderOn2ndCartCP33Test
- * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\Checkout\MultiOrder
+ * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\MultiOrder
  */
 class WebposMultiOrderBackCheckoutOn1ndCartAndPlaceOrderOn2ndCartCP33Test extends Injectable
 {
@@ -60,7 +60,7 @@ class WebposMultiOrderBackCheckoutOn1ndCartAndPlaceOrderOn2ndCartCP33Test extend
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($firstOrder)->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
-        //Checkout On 1nd Cart. Add a product to 1nd cart
+        //CategoryRepository On 1nd TaxClass. Add a product to 1nd cart
         $i = 0;
         foreach ($products as $product) {
             $products[$i] = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);

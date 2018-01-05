@@ -10,6 +10,17 @@ namespace Magento\Storepickup\Test\TestCase\Holiday;
 
 use Magento\Ui\Test\TestCase\GridFilteringTest;
 
+/**
+ * Precondition:
+ * 1. Create items
+ *
+ * Steps:
+ * 1. Navigate to backend.
+ * 2. Go to grid page Store Pickup > Manage Holiday
+ * 3. Filter grid using provided columns
+ * 5. Perform Asserts
+ *
+ */
 class HolidayGridFilteringTest extends GridFilteringTest
 {
     //
