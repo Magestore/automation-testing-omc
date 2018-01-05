@@ -9,6 +9,21 @@ namespace Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeListing\Grid;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeListing\BarcodeIndex;
 use Magento\BarcodeSuccess\Test\Fixture\BarcodeGenerate;
+/**
+ *
+ * Test Flow:
+ * Preconditions:
+ * 1. Create barcode
+ *
+ * Steps:
+ * 1. Open backend
+ * 2. Go to  page BarcodeListing grid
+ * 3. Select template from preconditions
+ * 4. Select in MassAction ("Print")
+ * 5. Accept alert
+ * 6. Perform all assertions according to dataset
+ *
+ */
 class MassActionEntityForBarcodeListingTest extends Injectable
 {
     /* tags */
