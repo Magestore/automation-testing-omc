@@ -22,7 +22,7 @@
             <data name="gridRetriever" xsi:type="string">getBarcodeGrid</data>
             <data name="idGetter" xsi:type="string">getId</data>
             <data name="idColumn" xsi:type="string"></data>
-            <constraint name="Magento\Ui\Test\Constraint\AssertGridFiltering" />
+            <!--<constraint name="Magento\Ui\Test\Constraint\AssertGridFiltering" />-->
         </variation>
     </testCase>
 

@@ -9,7 +9,14 @@
 namespace Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeSettings;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeSettings\BarcodeSettingsIndex;
-
+/**
+ *
+ * Steps:
+ * 1. Open backend
+ * 2. Go to  page BarcodeSetting
+ * 3. Perform Asserts for form section
+ *
+ */
 class CheckSettingEntityForBarcodeTest extends Injectable
 {
     /* tags */

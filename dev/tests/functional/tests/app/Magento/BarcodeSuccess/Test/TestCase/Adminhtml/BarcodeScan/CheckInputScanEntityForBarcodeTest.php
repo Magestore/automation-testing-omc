@@ -8,7 +8,14 @@
 namespace Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeScan;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeScan\BarcodeScanIndex;
-
+/**
+ *
+ * Steps:
+ * 1. Open backend
+ * 2. Go to  page BarcodeScan
+ * 3. Perform Asserts for section
+ *
+ */
 class CheckInputScanEntityForBarcodeTest extends Injectable
 {
     /* tags */

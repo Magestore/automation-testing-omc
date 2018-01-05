@@ -2,29 +2,36 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 12/28/2017
- * Time: 10:39 AM
+ * Date: 12/29/2017
+ * Time: 4:58 PM
  */
 
 namespace Magento\PurchaseOrderSuccess\Test\Constraint\Quotation;
 
 use Magento\PurchaseOrderSuccess\Test\Fixture\Quotation;
 use Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\QuotationIndex;
-use Magento\Mtf\Constraint\AbstractConstraint;
+use Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\QuotationView;
+use Magento\Mtf\Constraint\AbstractAssertForm;
+
+
 
 /**
- * Class AssertQuotationInGrid
+ * Class AssertQuotationForm
  * @package Magento\PurchaseOrderSuccess\Test\Constraint\Quotation
  */
-class AssertQuotationInGrid extends AbstractConstraint
+class AssertQuotationForm extends AbstractAssertForm
 {
 
     /**
      * @param Quotation $quotation
      * @param QuotationIndex $quotationIndex
+     * @param QuotationView $quotationView
      */
-    public function processAssert(Quotation $quotation, QuotationIndex $quotationIndex)
+    public function processAssert(Quotation $quotation, QuotationIndex $quotationIndex, QuotationView $quotationView)
     {
+        $data = [];
+
+        $data['quotation'] = $quotation->getData();
         $filter = [
             'supplier_id' => $quotation->getData('supplier_id'),
             'purchased_at[from]' => $quotation->getData('purchased_at'),
@@ -39,14 +46,12 @@ class AssertQuotationInGrid extends AbstractConstraint
             $filter['grand_total_incl_tax[to]'] = $quotation->getData('grand_total_incl_tax');
         }
         $quotationIndex->open();
-        $quotationIndex->getQuotationGrid()->search($filter);
-        $errorMessage = implode(', ', $filter);
-        \PHPUnit_Framework_Assert::assertTrue(
-            $quotationIndex->getQuotationGrid()->isRowVisible($filter, false, false),
-            'Quotation with '
-            . $errorMessage
-            . 'is absent in Quotation grid.'
-        );
+        $quotationIndex->getQuotationGrid()->searchAndOpen($filter);
+        $fixtureData = $quotation->getData();
+        // continue
+        $dataForm = $quotationView->getQuotationViewForm()->getDataQuotation($quotation);
+        $error = $this->verifyData($fixtureData, $dataForm);
+        \PHPUnit_Framework_Assert::assertTrue(empty($error), $error);
     }
 
     /**

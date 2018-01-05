@@ -8,7 +8,6 @@
 
 namespace Magento\PurchaseOrderSuccess\Test\TestCase\Quotation;
 
-
 use Magento\PurchaseOrderSuccess\Test\Fixture\Quotation;
 use Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\QuotationView;
 use Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\QuotationIndex;
@@ -50,7 +49,11 @@ class UpdateQuotationPurchaseEntityTest extends Injectable
         $this->viewQuotationPage = $quotationView;
     }
 
-
+    /**
+     * @param Quotation $initialQuotation
+     * @param Quotation $quotation
+     * @return array
+     */
     public function test(
         Quotation $initialQuotation,
         Quotation $quotation
@@ -62,19 +65,11 @@ class UpdateQuotationPurchaseEntityTest extends Injectable
         $filter = ['supplier_id' => $initialQuotation->getData('supplier_id')];
 
         $this->quotationIndex->open();
-
-//        $this->quotationIndex->getQuotationGrid()->search($filter);
-//
         $this->quotationIndex->getQuotationGrid()->searchAndOpen($filter);
-
         $this->viewQuotationPage->getQuotationViewForm()->fill($quotation);
         $this->viewQuotationPage->getFormPageActions()->save();
-//
-//        return [
-//            'category' => $category,
-//            'stores' => isset($store) ? [$store] : [],
-//            'quotationNames' => isset($quotationName) ? $quotationName : [],
-//        ];
+
+        return ['supplier_id' => $initialQuotation->getSupplierId()];
     }
 
 }

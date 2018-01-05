@@ -3,7 +3,15 @@
 namespace Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeListing;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeListing\BarcodeIndex;
-
+/**
+ *
+ * Steps:
+ * 1. Open backend
+ * 2. Go to  page BarcodeListing
+ * 3. Click button ("Generate" or "Import")
+ * 4. Perform Asserts
+ *
+ */
 class OpenButtonEntityForBarcodeTest extends Injectable
 {
     /* tags */
