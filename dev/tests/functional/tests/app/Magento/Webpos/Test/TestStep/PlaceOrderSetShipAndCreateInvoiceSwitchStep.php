@@ -20,18 +20,19 @@ class PlaceOrderSetShipAndCreateInvoiceSwitchStep implements TestStepInterface
 	 */
 	protected $webposIndex;
 
-	protected $createInvoice = true;
-	protected $shipped = false;
+	protected $createInvoice;
+	protected $shipped;
 
 	/**
-	 * AddProductToCartStep constructor.
+	 * PlaceOrderSetShipAndCreateInvoiceSwitchStep constructor.
 	 * @param WebposIndex $webposIndex
-	 * @param $products
+	 * @param bool $createInvoice
+	 * @param bool $shipped
 	 */
 	public function __construct(
 		WebposIndex $webposIndex,
-		$createInvoice,
-		$shipped
+		$createInvoice = true,
+		$shipped = false
 	)
 	{
 		$this->webposIndex = $webposIndex;

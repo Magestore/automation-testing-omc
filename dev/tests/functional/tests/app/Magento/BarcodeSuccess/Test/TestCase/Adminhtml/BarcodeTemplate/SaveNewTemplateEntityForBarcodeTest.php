@@ -10,8 +10,16 @@ use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeTemplate\BarcodeTemplateIn
 use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeTemplate\BarcodeViewTemplateIndex;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\BarcodeSuccess\Test\Fixture\TemplateBarcode;
-
-
+/**
+ * Steps:
+ * 1. Login to the backend.
+ * 2. Navigate to BarcodeTemplate.
+ * 3. Click to Add New Template .
+ * 4. Fill in data according to data set.
+ * 5. Save Template.
+ * 6. Perform appropriate assertions.
+ *
+ */
 class SaveNewTemplateEntityForBarcodeTest extends Injectable
 {
     /* tags */
