@@ -1,27 +1,40 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: gvt
+ * User: bang
  * Date: 08/01/2018
- * Time: 08:36
+ * Time: 14:18
  */
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Customer\Test\Fixture\Customer;
 
-class WebposCartPageCustomerCP175Test extends Injectable
+class WebposCartPageCustomerCP177Test extends Injectable
 {
     /**
      * @var WebposIndex
      */
     protected $webposIndex;
 
-    public function __prepare()
+    /**
+     * Prepare data.
+     *
+     * @param FixtureFactory $fixtureFactory
+     * @return array
+     */
+    public function __prepare(FixtureFactory $fixtureFactory)
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'webpos_default_guest_checkout_rollback']
         )->run();
+
+        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'webpos_guest_pi']);
+        $customer->persist();
+
+        return ['customer' => $customer];
     }
 
     public function __inject(
@@ -31,9 +44,8 @@ class WebposCartPageCustomerCP175Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test($products)
+    public function test(Customer $customer, $products)
     {
-
         // Create product
         $product = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
@@ -44,8 +56,13 @@ class WebposCartPageCustomerCP175Test extends Injectable
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
+        $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
 
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getCheckoutChangeCustomer()->search($customer->getFirstname());
+        sleep(1);
+        $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
+        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
 
         $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
@@ -55,9 +72,10 @@ class WebposCartPageCustomerCP175Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-        $this->webposIndex->getCheckoutCartHeader()->getIconBackToCart()->click();
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        sleep(3);
+        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        sleep(1);
+        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+        sleep(2);
 
     }
 }

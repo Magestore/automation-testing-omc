@@ -60,5 +60,20 @@
             <field name="default_billing" xsi:type="string">Yes</field>
             <field name="default_shipping" xsi:type="string">Yes</field>
         </dataset>
+        <dataset name="address_pi">
+            <field name="firstname" xsi:type="string">John_%isolation%</field>
+            <field name="lastname" xsi:type="string">Doe_%isolation%</field>
+            <field name="email" xsi:type="string">John.Doe%isolation%@example.com</field>
+            <field name="company" xsi:type="string">Magento %isolation%</field>
+            <field name="street" xsi:type="string">6188 Honey Bluff Parkway</field>
+            <field name="city" xsi:type="string">Calder</field>
+            <field name="region_id" xsi:type="string">33</field>
+            <field name="region" xsi:type="string">Michigan</field>
+            <field name="postcode" xsi:type="string">49628</field>
+            <field name="country_id" xsi:type="string">United States</field>
+            <field name="telephone" xsi:type="string">01012031411</field>
+            <field name="default_billing" xsi:type="string">Yes</field>
+            <field name="default_shipping" xsi:type="string">Yes</field>
+        </dataset>
     </repository>
 </config>

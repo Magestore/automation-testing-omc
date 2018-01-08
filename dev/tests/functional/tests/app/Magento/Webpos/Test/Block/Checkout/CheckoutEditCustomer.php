@@ -70,4 +70,13 @@ class CheckoutEditCustomer extends Block
 	{
 		return $this->_rootElement->find('//*[@id="billing-checkout"]/option[text()="'.$text.'"]', Locator::SELECTOR_XPATH);
 	}
+
+	public function selectShippingAdress($text)
+	{
+	    $this->_rootElement->find('#shipping-checkout', Locator::SELECTOR_CSS,'select')->setValue($text);
+	}
+	public function selectBillingAdress($text)
+	{
+	    $this->_rootElement->find('#billing-checkout', Locator::SELECTOR_CSS,'select')->setValue($text);
+	}
 }
