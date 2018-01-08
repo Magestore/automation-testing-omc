@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 1/3/2018
- * Time: 4:44 PM
+ * Date: 1/5/2018
+ * Time: 8:52 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -12,9 +12,11 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Swatches\Test\Fixture\ConfigurableProduct;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOnHoldOrderPage;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 
 /**
  *  * Preconditions:
@@ -24,19 +26,18 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * Test Flow:
  * 1. Login Web POS as staff
  * 2. Add some taxable products
- * 3. Select a customer to be unsatisfied about tax condition
- * 4. Click "CHECKOUT" in cart page
- * 5. Choose Payment Method
- * 6. Click Place Order
- * 7. Verify created and check tax amount on cart page and checkout page
+ * 3. Select a customer to meet tax condition
+ * 4. Click "Hold" in cart page
+ * 5. Go to On-hold orders page
+ * 6. Check tax amount
  *
  */
 
 /**
- * Class WebposTaxTAX01Test
+ * Class WebposTaxTAX03Test
  * @package Magento\Webpos\Test\TestCase\Tax
  */
-class WebposTaxTAX01Test extends Injectable
+class WebposTaxTAX03Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -47,6 +48,11 @@ class WebposTaxTAX01Test extends Injectable
      * @var FixtureFactory
      */
     protected $fixtureFactory;
+
+    /**
+     * @var AssertTaxAmountOnOnHoldOrderPage
+     */
+    protected $assertTaxAmountOnOnHoldOrderPage;
 
     /**
      * @var AssertTaxAmountOnCartPageAndCheckoutPage
@@ -66,30 +72,35 @@ class WebposTaxTAX01Test extends Injectable
      */
     public function __prepare(FixtureFactory $fixtureFactory)
     {
-        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_UK']);
+        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
         $customer->persist();
 
         return ['customer' => $customer];
     }
 
+
     /**
      * @param WebposIndex $webposIndex
      * @param FixtureFactory $fixtureFactory
+     * @param AssertTaxAmountOnOnHoldOrderPage $assertTaxAmountOnOnHoldOrderPage
      * @param AssertTaxAmountOnCartPageAndCheckoutPage $assertTaxAmountOnCartPageAndCheckoutPage
      * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
+        AssertTaxAmountOnOnHoldOrderPage $assertTaxAmountOnOnHoldOrderPage,
         AssertTaxAmountOnCartPageAndCheckoutPage $assertTaxAmountOnCartPageAndCheckoutPage,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
     )
     {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
+        $this->assertTaxAmountOnOnHoldOrderPage = $assertTaxAmountOnOnHoldOrderPage;
         $this->assertTaxAmountOnCartPageAndCheckoutPage = $assertTaxAmountOnCartPageAndCheckoutPage;
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
+
 
     /**
      * @param Customer $customer
@@ -98,6 +109,7 @@ class WebposTaxTAX01Test extends Injectable
      * @param $taxRate
      * @param bool $createInvoice
      * @param bool $shipped
+     * @return array
      */
     public function test(
         Customer $customer,
@@ -131,54 +143,29 @@ class WebposTaxTAX01Test extends Injectable
             ['products' => $products]
         )->run();
 
-        // change customer
+        // Change customer in cart
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
             ['customer' => $customer]
         )->run();
 
-        //Assert Tax Amount on Cart Page
-        $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
-
-        // Place Order
-        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-        //Assert Tax Amount on Checkout Page
-        $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
-        // End Assert Tax Amount on Checkout Page
-
-        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
-            [
-                'createInvoice' => $createInvoice,
-                'shipped' => $shipped
-            ]
-        )->run();
-
-        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        // End Place Order
-
-        //Assert Place Order Success
-        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-
-        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
-
-        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
+        // Hold
+        $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->ordersHistory();
+        $this->webposIndex->getCMenu()->onHoldOrders();
 
-        sleep(2);
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
+        $this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder();
 
-        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+//        $taxRate = 8.25;
 
+        //Assert tax amount in On-Hold Order
+        $this->assertTaxAmountOnOnHoldOrderPage->processAssert($taxRate, $products, $this->webposIndex);
+
+        return [
+            'products' => $products
+        ];
     }
 }
