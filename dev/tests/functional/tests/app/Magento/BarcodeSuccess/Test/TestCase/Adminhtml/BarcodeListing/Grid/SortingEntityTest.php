@@ -8,6 +8,16 @@
 namespace Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeListing\Grid;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Ui\Test\TestCase\GridSortingTest;
+/**
+ * Precondition:
+ * 1. Create barcode
+ *
+ * Steps:
+ * 1. Go to grid page Barcode Listing
+ * 2. Sort grid using provided columns
+ * 3. Perform Asserts
+ *
+ */
 class SortingEntityTest extends GridSortingTest
 {
 

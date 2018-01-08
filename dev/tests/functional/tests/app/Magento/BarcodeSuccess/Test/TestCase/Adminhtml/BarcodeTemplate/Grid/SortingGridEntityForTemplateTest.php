@@ -9,6 +9,16 @@ namespace Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeTemplate\Grid;
 use Magento\BarcodeSuccess\Test\Fixture\TemplateBarcode;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Ui\Test\TestCase\GridSortingTest;
+/**
+ * Precondition:
+ * 1. Create template
+ *
+ * Steps:
+ * 1. Go to grid page Barcode Template
+ * 2. Sort grid using provided columns
+ * 3. Perform Asserts
+ *
+ */
 class SortingGridEntityForTemplateTest extends GridSortingTest
 {
 

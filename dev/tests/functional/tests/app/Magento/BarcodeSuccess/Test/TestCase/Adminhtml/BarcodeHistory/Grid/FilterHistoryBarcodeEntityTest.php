@@ -7,6 +7,16 @@
  */
 namespace Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeHistory\Grid;
 use Magento\Ui\Test\TestCase\GridFilteringTest;
+/**
+ * Precondition:
+ * 1. Create barcode
+ *
+ * Steps:
+ * 1. Go to grid page Barcode History
+ * 2. Filter grid using provided columns
+ * 3. Perform Asserts
+ *
+ */
 class FilterHistoryBarcodeEntityTest extends GridFilteringTest{
     public function test(
         $pageClass,
