@@ -109,6 +109,7 @@ class WebposTaxTAX17Test extends Injectable
         sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        return ['products' => $products];
     }
 
     public function tearDown()
