@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: vong
  * Date: 1/9/2018
- * Time: 10:55 AM
+ * Time: 2:18 PM
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -13,8 +13,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
-
-class WebposTaxTAX17Test extends Injectable
+class WebposTaxTAX18Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -34,7 +33,7 @@ class WebposTaxTAX17Test extends Injectable
      */
     public function __prepare(FixtureFactory $fixtureFactory)
     {
-        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'johndoe_MI_unique_first_name']);
+        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'johndoe_MI']);
         $customer->persist();
 
         return ['customer' => $customer];
@@ -53,7 +52,8 @@ class WebposTaxTAX17Test extends Injectable
         $configData,
         $products,
         $customer,
-        $taxRate
+        $createInvoice = true,
+        $shipped = false
     ){
         // Config
         $this->objectManager->getInstance()->create(
@@ -96,6 +96,13 @@ class WebposTaxTAX17Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
+            [
+                'createInvoice' => $createInvoice,
+                'shipped' => $shipped
+            ]
+        )->run();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Assert Place Order Success
@@ -108,6 +115,14 @@ class WebposTaxTAX17Test extends Injectable
         sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        self::assertEquals(
+            $orderId,
+            $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
+            "Order Content - Order Id is wrong"
+            . "\nExpected: " . $orderId
+            . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
+        );
         return ['products' => $products];
     }
 
