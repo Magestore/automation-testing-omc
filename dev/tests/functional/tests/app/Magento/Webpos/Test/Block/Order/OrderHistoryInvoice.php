@@ -51,4 +51,49 @@ class OrderHistoryInvoice extends Block
 	{
 		return $this->getItemRow($name)->find('.input-qty');
 	}
+
+    /**
+     * @param $productName
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getSubtotalOfProduct($productName)
+    {
+        return $this->_rootElement->find('//*[@id="invoice-popup-form"]/div[2]/div[2]/table/tbody/tr/td[1]/h4[text()="'.$productName.'"]/../../td[5]', Locator::SELECTOR_XPATH);
+    }
+
+    /**
+     * @param $productName
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getTaxAmountOfProduct($productName)
+    {
+        return $this->_rootElement->find('//*[@id="invoice-popup-form"]/div[2]/div[2]/table/tbody/tr/td[1]/h4[text()="'.$productName.'"]/../../td[6]', Locator::SELECTOR_XPATH);
+    }
+
+    /**
+     * @param $productName
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getDiscountAmountOfProduct($productName)
+    {
+        return $this->_rootElement->find('//*[@id="invoice-popup-form"]/div[2]/div[2]/table/tbody/tr/td[1]/h4[text()="'.$productName.'"]/../../td[7]', Locator::SELECTOR_XPATH);
+    }
+
+    /**
+     * @param $productName
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getRowTotalOfProduct($productName)
+    {
+        return $this->_rootElement->find('//*[@id="invoice-popup-form"]/div[2]/div[2]/table/tbody/tr/td[1]/h4[text()="'.$productName.'"]/../../td[8]', Locator::SELECTOR_XPATH);
+    }
+
+    /**
+     * @param $label
+     * @return array|string
+     */
+    public function getRowValue($label)
+    {
+        return $this->_rootElement->find('//*[@id="invoice-popup-form"]/div[2]/div[3]/div[2]/div/div/label[text()="'.$label.'"]/../span', Locator::SELECTOR_XPATH)->getText();
+    }
 }

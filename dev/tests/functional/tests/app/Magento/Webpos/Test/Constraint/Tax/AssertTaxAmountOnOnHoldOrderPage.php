@@ -33,16 +33,17 @@ class AssertTaxAmountOnOnHoldOrderPage extends AbstractConstraint
         $grandTotalWholeCart = 0;
 
         foreach ($products as $item) {
-            $subtotalOfProduct = $webposIndex->getOnHoldOrderOrderViewContent()->getSubtotalOfProduct($item['product']->getName())->getText();
+            $productName = $item['product']->getName();
+            $subtotalOfProduct = $webposIndex->getOnHoldOrderOrderViewContent()->getSubtotalOfProduct($productName)->getText();
             $subtotalOfProduct = (float)substr($subtotalOfProduct,1);
 
-            $taxAmountOfProduct = $webposIndex->getOnHoldOrderOrderViewContent()->getTaxAmountOfProduct($item['product']->getName())->getText();
+            $taxAmountOfProduct = $webposIndex->getOnHoldOrderOrderViewContent()->getTaxAmountOfProduct($productName)->getText();
             $taxAmountOfProduct = (float)substr($taxAmountOfProduct,1);
 
-            $discountAmountOfProduct = $webposIndex->getOnHoldOrderOrderViewContent()->getDiscountAmountOfProduct($item['product']->getName())->getText();
+            $discountAmountOfProduct = $webposIndex->getOnHoldOrderOrderViewContent()->getDiscountAmountOfProduct($productName)->getText();
             $discountAmountOfProduct = (float)substr($discountAmountOfProduct,1);
 
-            $rowTotalOfProduct = $webposIndex->getOnHoldOrderOrderViewContent()->getRowTotalOfProduct($item['product']->getName())->getText();
+            $rowTotalOfProduct = $webposIndex->getOnHoldOrderOrderViewContent()->getRowTotalOfProduct($productName)->getText();
             $rowTotalOfProduct = (float)substr($rowTotalOfProduct,1);
 
             $taxAmount = $subtotalOfProduct * $taxRate;
@@ -55,15 +56,14 @@ class AssertTaxAmountOnOnHoldOrderPage extends AbstractConstraint
             \PHPUnit_Framework_Assert::assertEquals(
                 $taxAmount,
                 $taxAmountOfProduct,
-                'On the On-Hold Orders - The Tax Amount was not correctly at product'.$item['product']->getName()
+                'On the On-Hold Orders - The Tax Amount was not correctly at '.$productName
             );
             \PHPUnit_Framework_Assert::assertEquals(
                 $rowTotal,
                 $rowTotalOfProduct,
-                'On the On-Hold Orders - The Row Total was not correctly at product'.$item['product']->getName()
+                'On the On-Hold Orders - The Row Total was not correctly at '.$productName
             );
         }
-//        $taxAmountWholeCartOnPage = '$0';
 
         $subtotalWholeCartOnPage = $webposIndex->getOnHoldOrderOrderViewFooter()->getRowValue('Subtotal');
         $subtotalWholeCartOnPage = (float)substr($subtotalWholeCartOnPage,1);
