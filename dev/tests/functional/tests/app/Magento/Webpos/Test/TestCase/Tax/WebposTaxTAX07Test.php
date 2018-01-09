@@ -31,8 +31,9 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 5. Go to On-hold orders page
  * 6. Check tax amount and click "Checkout"
  * 7. Place order
- * 8. Check tax amount on Order detail
- *
+ * 8. Go to Order detail
+ * 9. Click on [Invoice] button
+ * 10. Check tax amount
  */
 
 /**
@@ -203,11 +204,6 @@ class WebposTaxTAX07Test extends Injectable
             . "\nExpected: " . $orderId
             . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
         );
-        $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
-        $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
-
-        //Assert Tax Amount in Order History Invoice
-        $this->assertTaxAmountOnOrderHistoryInvoice->processAssert($taxRate, $products, $this->webposIndex);
 
         return [
             'products' => $products

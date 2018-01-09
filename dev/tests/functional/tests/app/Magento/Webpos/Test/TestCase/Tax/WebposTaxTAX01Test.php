@@ -188,6 +188,8 @@ class WebposTaxTAX01Test extends Injectable
             . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
         );
 
-        $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
+        return [
+            'products' => $products
+        ];
     }
 }

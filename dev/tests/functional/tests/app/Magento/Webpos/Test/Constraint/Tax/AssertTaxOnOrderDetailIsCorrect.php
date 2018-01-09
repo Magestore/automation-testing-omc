@@ -19,7 +19,8 @@ class AssertTaxOnOrderDetailIsCorrect extends AbstractAssertForm
 		$taxRate = (float) $taxRate/100;
 		$wholeTax = 0;
 		$wholeSubTotal = 0;
-		foreach ($products as $item) {
+        $discountAmountWholeCart = 0;
+        foreach ($products as $item) {
 			$productName = $item['product']->getName();
 			$subTotal = (float) substr($webposIndex->getOrderHistoryOrderViewContent()->getSubTotalOfProduct($productName),1);
 			$taxAmount = (float) substr($webposIndex->getOrderHistoryOrderViewContent()->getTaxAmountOfProduct($productName),1);
@@ -38,18 +39,26 @@ class AssertTaxOnOrderDetailIsCorrect extends AbstractAssertForm
 			);
 			$wholeTax += $taxAmount;
 			$wholeSubTotal += $subTotal;
-		}
+            $discountAmountWholeCart += $discountAmount;
+
+        }
 
 		$subTotal = (float) substr($webposIndex->getOrderHistoryOrderViewFooter()->getSubtotal(),1);
 		$shipping = (float) substr($webposIndex->getOrderHistoryOrderViewFooter()->getShipping(),1);
-		$tax = (float) substr($webposIndex->getOrderHistoryOrderViewFooter()->getTax(),1);
-		$discount = (float) substr($webposIndex->getOrderHistoryOrderViewFooter()->getDiscount(),2);
+		$tax = 0;
+		$discount = 0;
 		$grandTotal = (float) substr($webposIndex->getOrderHistoryOrderViewFooter()->getGrandTotal(),1);
-		\PHPUnit_Framework_Assert::assertEquals(
-			$wholeTax,
-			$tax,
-			"Whole Tax is wrong"
-		);
+		if($wholeTax != 0){
+		    $tax = (float) substr($webposIndex->getOrderHistoryOrderViewFooter()->getTax(),1);
+            \PHPUnit_Framework_Assert::assertEquals(
+                $wholeTax,
+                $tax,
+                "Whole Tax is wrong"
+            );
+        }
+        if($discountAmountWholeCart != 0){
+            $discount = (float) substr($webposIndex->getOrderHistoryOrderViewFooter()->getDiscount(),2);
+        }
 
 		\PHPUnit_Framework_Assert::assertEquals(
 			$wholeSubTotal,
