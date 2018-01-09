@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: vong
- * Date: 1/8/2018
- * Time: 9:21 AM
+ * Date: 1/9/2018
+ * Time: 10:55 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -12,8 +12,10 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
+use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
-class WebposTaxTAX15Test extends Injectable
+
+class WebposTaxTAX17Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -21,9 +23,9 @@ class WebposTaxTAX15Test extends Injectable
     protected $webposIndex;
 
     /**
-     * @var AssertTaxAmountOnCartPageAndCheckoutPage
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
-    protected $assertTaxAmountOnCartPageAndCheckoutPage;
+    protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
      * Prepare data.
@@ -41,10 +43,11 @@ class WebposTaxTAX15Test extends Injectable
 
     public function __inject(
         WebposIndex $webposIndex,
-        AssertTaxAmountOnCartPageAndCheckoutPage $assertTaxAmountOnCartPageAndCheckoutPage
+        AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
     ){
         $this->webposIndex = $webposIndex;
-        $this->assertTaxAmountOnCartPageAndCheckoutPage = $assertTaxAmountOnCartPageAndCheckoutPage;
+        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+
     }
 
     public function test(
@@ -92,15 +95,20 @@ class WebposTaxTAX15Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->webposIndex->getCheckoutWebposCart()->getIconPrevious()->click();
-        $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
+        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        //Assert Place Order Success
+        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
+        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->onHoldOrders();
-        $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
+        $this->webposIndex->getCMenu()->ordersHistory();
+        sleep(2);
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
     }
 
     public function tearDown()
