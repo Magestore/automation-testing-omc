@@ -26,20 +26,76 @@ class AssertTaxAmountOnOnHoldOrderPage extends AbstractConstraint
     public function processAssert($taxRate, $products, WebposIndex $webposIndex)
     {
         $taxRate = (float) $taxRate / 100;
+        $subtotalWholeCart = 0;
+        $shippingWholeCart = 0;
+        $taxAmountWholeCart = 0;
+        $discountAmountWholeCart = 0;
+        $grandTotalWholeCart = 0;
 
         foreach ($products as $item) {
-            $subtotal = $webposIndex->getOnHoldOrderOrderViewContent()->getSubtotalOfProduct($item['product']->getName())->getText();
-            $subtotal = (float)substr($subtotal,1);
-            $taxAmount = $subtotal * $taxRate;
-            $taxAmountOnPage = $webposIndex->getOnHoldOrderOrderViewContent()->getTaxAmountOfProduct($item['product']->getName())->getText();
-            $taxAmountOnPage = (float)substr($taxAmountOnPage,1);
+            $subtotalOfProduct = $webposIndex->getOnHoldOrderOrderViewContent()->getSubtotalOfProduct($item['product']->getName())->getText();
+            $subtotalOfProduct = (float)substr($subtotalOfProduct,1);
+
+            $taxAmountOfProduct = $webposIndex->getOnHoldOrderOrderViewContent()->getTaxAmountOfProduct($item['product']->getName())->getText();
+            $taxAmountOfProduct = (float)substr($taxAmountOfProduct,1);
+
+            $discountAmountOfProduct = $webposIndex->getOnHoldOrderOrderViewContent()->getDiscountAmountOfProduct($item['product']->getName())->getText();
+            $discountAmountOfProduct = (float)substr($discountAmountOfProduct,1);
+
+            $rowTotalOfProduct = $webposIndex->getOnHoldOrderOrderViewContent()->getRowTotalOfProduct($item['product']->getName())->getText();
+            $rowTotalOfProduct = (float)substr($rowTotalOfProduct,1);
+
+            $taxAmount = $subtotalOfProduct * $taxRate;
+            $rowTotal = $subtotalOfProduct + $taxAmountOfProduct - $discountAmountOfProduct;
+
+            $subtotalWholeCart += $subtotalOfProduct;
+            $taxAmountWholeCart += $taxAmountOfProduct;
+            $discountAmountWholeCart += $discountAmountOfProduct;
 
             \PHPUnit_Framework_Assert::assertEquals(
                 $taxAmount,
-                $taxAmountOnPage,
+                $taxAmountOfProduct,
                 'On the On-Hold Orders - The Tax Amount was not correctly at product'.$item['product']->getName()
             );
+            \PHPUnit_Framework_Assert::assertEquals(
+                $rowTotal,
+                $rowTotalOfProduct,
+                'On the On-Hold Orders - The Row Total was not correctly at product'.$item['product']->getName()
+            );
         }
+//        $taxAmountWholeCartOnPage = '$0';
+
+        $subtotalWholeCartOnPage = $webposIndex->getOnHoldOrderOrderViewFooter()->getRowValue('Subtotal');
+        $subtotalWholeCartOnPage = (float)substr($subtotalWholeCartOnPage,1);
+
+        $shippingWholeCartOnPage = $webposIndex->getOnHoldOrderOrderViewFooter()->getRowValue('Shipping');
+        $shippingWholeCartOnPage = (float)substr($shippingWholeCartOnPage,1);
+
+        if($taxAmountWholeCart != 0){
+            $taxAmountWholeCartOnPage = $webposIndex->getOnHoldOrderOrderViewFooter()->getRowValue('Tax');
+            $taxAmountWholeCartOnPage = (float)substr($taxAmountWholeCartOnPage,1);
+            \PHPUnit_Framework_Assert::assertEquals(
+                $taxAmountWholeCart,
+                $taxAmountWholeCartOnPage,
+                'On the On-Hold Orders - The Tax Amount whole cart was not correctly'
+            );
+        }
+
+        $grandTotalWholeCartOnPage = $webposIndex->getOnHoldOrderOrderViewFooter()->getRowValue('Grand Total');
+        $grandTotalWholeCartOnPage = (float)substr($grandTotalWholeCartOnPage,1);
+
+        $grandTotalWholeCart = $subtotalWholeCart + $shippingWholeCartOnPage + $taxAmountWholeCart - $discountAmountWholeCart;
+
+        \PHPUnit_Framework_Assert::assertEquals(
+            $subtotalWholeCart,
+            $subtotalWholeCartOnPage,
+            'On the On-Hold Orders - The Subtotal whole cart was not correctly'
+        );
+        \PHPUnit_Framework_Assert::assertEquals(
+            $grandTotalWholeCart,
+            $grandTotalWholeCartOnPage,
+            'On the On-Hold Orders - The Grand Total whole cart was not correctly'
+        );
     }
 
     /**

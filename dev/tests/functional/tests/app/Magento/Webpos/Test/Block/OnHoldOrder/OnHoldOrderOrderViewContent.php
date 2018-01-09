@@ -100,4 +100,22 @@ class OnHoldOrderOrderViewContent extends Block
     {
         return $this->getProductRow($productName)->find('td[data-bind="text: $parents[1].convertAndFormatPrice(item.base_tax_amount)"]');
     }
+
+    /**
+     * @param $productName
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getDiscountAmountOfProduct($productName)
+    {
+        return $this->_rootElement->find('//table/tbody/tr/td/h4[text()="'.$productName.'"]/../../td[7]', Locator::SELECTOR_XPATH);
+    }
+
+    /**
+     * @param $productName
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getRowTotalOfProduct($productName)
+    {
+        return $this->_rootElement->find('//table/tbody/tr/td/h4[text()="'.$productName.'"]/../../td[8]', Locator::SELECTOR_XPATH);
+    }
 }

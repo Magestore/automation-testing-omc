@@ -23,7 +23,14 @@ class AssertTaxAmountOnCartPageAndCheckoutPage extends AbstractConstraint
         $taxRate = (float) $taxRate / 100;
         $subtotalOnPage = $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice("Subtotal")->getText();
         $subtotalOnPage = (float)substr($subtotalOnPage,1);
-        $taxAmount = $subtotalOnPage * $taxRate;
+        if($webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice("Discount")->isVisible()){
+            $discountOnPage = $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice("Discount")->getText();
+            $discountOnPage = (float)substr($discountOnPage,2);
+        }else{
+            $discountOnPage = 0;
+        }
+
+        $taxAmount = ($subtotalOnPage - $discountOnPage) * $taxRate;
         $taxAmountOnPage = $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice("Tax")->getText();
         $taxAmountOnPage = (float)substr($taxAmountOnPage,1);
 

@@ -148,37 +148,5 @@ class WebposTaxTAX02Test extends Injectable
         //Assert Tax Amount on Checkout Page
         $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
         // End Assert Tax Amount on Checkout Page
-
-        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
-            [
-                'createInvoice' => $createInvoice,
-                'shipped' => $shipped
-            ]
-        )->run();
-
-        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        // End Place Order
-
-        //Assert Place Order Success
-        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-
-        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
-
-        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->ordersHistory();
-
-        sleep(2);
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-
-        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-
     }
 }
