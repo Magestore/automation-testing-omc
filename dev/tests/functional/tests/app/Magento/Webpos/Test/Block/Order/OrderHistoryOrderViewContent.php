@@ -69,7 +69,7 @@ class OrderHistoryOrderViewContent extends Block
 
 	public function getDiscountAmountOfProduct($name)
 	{
-		return $this->getProductRow($name)->find('//td[7]', Locator::SELECTOR_XPATH)->getText();
+		return$this->_rootElement->find('//table/tbody/tr/td/h4[text()="'.$name.'"]/../../td[7]', Locator::SELECTOR_XPATH)->getText();
 	}
 
 	public function getRowTotalOfProduct($name)

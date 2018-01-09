@@ -11,7 +11,7 @@
                 </item>
                 <item name="1" xsi:type="array">
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
-                    <item name="orderQty" xsi:type="number">2</item>
+                    <item name="orderQty" xsi:type="number">1</item>
                     <item name="invoiceQty" xsi:type="number">1</item>
                 </item>
             </data>
