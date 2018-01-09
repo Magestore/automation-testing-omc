@@ -68,4 +68,9 @@ class CheckoutProductEdit extends Block
 	{
 		return $this->_rootElement->find('#btn-percent');
 	}
+
+    public function getOriginalPrice()
+    {
+        return $this->_rootElement->find('.original-price');
+    }
 }

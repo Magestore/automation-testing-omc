@@ -12,6 +12,10 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 
+/**
+ * Class WebposValidateDiscountCP63EntityTest
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct
+ */
 class WebposValidateDiscountCP63EntityTest extends Injectable
 {
     /**
@@ -47,14 +51,14 @@ class WebposValidateDiscountCP63EntityTest extends Injectable
         $price = $this->webposIndex->getCheckoutCartItems()->getValueItemPrice($product->getName());
 
         $this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
-        $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
+        $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($price+10);
         //we need to set sleep($second) in this case.
         sleep(1);
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-        return
-            ['product' => $product,
-                'price' => $price];
+        return [
+            'product' => $product,
+            'price' => $price
+        ];
     }
 }

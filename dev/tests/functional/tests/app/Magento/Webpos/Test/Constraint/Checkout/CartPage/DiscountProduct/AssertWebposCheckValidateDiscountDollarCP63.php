@@ -12,18 +12,26 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class AssertWebposCheckValidateDiscountDollarCP63
+ * @package Magento\Webpos\Test\Constraint\Checkout\CartPage\DiscountProduct
+ */
 class AssertWebposCheckValidateDiscountDollarCP63 extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex, CatalogProductSimple $product)
     {
-        $message = "Warning: You are able to apply discount under 100% only";
+        $message = "You are able to apply discount under 100% only";
         \PHPUnit_Framework_Assert::assertEquals(
-            sprintf($message),
+            $message,
             $webposIndex->getToaster()->getWarningMessage()->getText(),
-            'CategoryRepository - TaxClass - Edit Product Qty - Minimum qty allow warning message is wrong'
-            . "\nExpected: " . sprintf($message, $product->getName())
-            . "\nActual: " . $webposIndex->getToaster()->getWarningMessage()->getText()
+            'CategoryRepository - TaxClass - Discount Product - You are able to apply discount under 100% only'
         );
+//        $message_reg = "Reg. $%s";
+//        \PHPUnit_Framework_Assert::assertEquals(
+//            sprintf($message_reg, $webposIndex->getCheckoutCartItems()->getValueItemPrice($product->getName())),
+//            (string) $webposIndex->getCheckoutProductEdit()->getOriginalPrice()->getText(),
+//            'CategoryRepository - TaxClass - Discount Product -  Amount field is filled automatically with amount equal price product'
+//        );
     }
 
     /**
