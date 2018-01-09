@@ -31,13 +31,14 @@ class WebposCartPageCustomerCP180Test extends Injectable
             ['configData' => 'webpos_default_guest_checkout_rollback']
         )->run();
 
+        //Create customer
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'webpos_guest_pi']);
         $customer->persist();
-
         return ['customer' => $customer];
     }
 
-    public function __inject(
+    public function __inject
+    (
         WebposIndex $webposIndex
     )
     {
@@ -46,37 +47,42 @@ class WebposCartPageCustomerCP180Test extends Injectable
 
     public function test(Customer $customer, $products, FixtureFactory $fixtureFactory)
     {
-        // Create product
+        //Create product
         $product = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run()[0]['product'];
 
-        // Login webpos
+        //Login webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-        $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
 
+        //Click icon addCutomer > Search name > click customer
+        $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
         $this->webposIndex->getCheckoutChangeCustomer()->search($customer->getFirstname());
         sleep(1);
         $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
         sleep(1);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
+        //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
+        //Checkout
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
-        $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
+        //Create customer 2
         $customer2 = $fixtureFactory->createByCode('customer', ['dataset' => 'webpos_guest_pi']);
         $customer2->persist();
 
+        //Change customer
+        $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
         $this->webposIndex->getCheckoutChangeCustomer()->search($customer2->getFirstname());
         sleep(1);
         $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();

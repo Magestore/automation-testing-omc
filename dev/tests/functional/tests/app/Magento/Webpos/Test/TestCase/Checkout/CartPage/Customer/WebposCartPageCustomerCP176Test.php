@@ -31,13 +31,14 @@ class WebposCartPageCustomerCP176Test extends Injectable
             ['configData' => 'webpos_default_guest_checkout_rollback']
         )->run();
 
+        //Create customer
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'webpos_guest_pi']);
         $customer->persist();
-
         return ['customer' => $customer];
     }
 
-    public function __inject(
+    public function __inject
+    (
         WebposIndex $webposIndex
     )
     {
@@ -46,12 +47,13 @@ class WebposCartPageCustomerCP176Test extends Injectable
 
     public function test(Customer $customer)
     {
-        // Login webpos
+        //Login webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-        $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
 
+        //Click icon addCutomer > Search name > click customer
+        $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
         $this->webposIndex->getCheckoutChangeCustomer()->search($customer->getFirstname());
         sleep(1);
         $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();

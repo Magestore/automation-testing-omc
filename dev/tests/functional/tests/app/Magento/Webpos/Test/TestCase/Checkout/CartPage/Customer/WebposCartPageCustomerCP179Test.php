@@ -30,13 +30,14 @@ class WebposCartPageCustomerCP179Test extends Injectable
             ['configData' => 'webpos_default_guest_checkout_rollback']
         )->run();
 
+        //Create customer
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'webpos_guest_pi']);
         $customer->persist();
-
         return ['customer' => $customer];
     }
 
-    public function __inject(
+    public function __inject
+    (
         WebposIndex $webposIndex
     )
     {
@@ -45,24 +46,26 @@ class WebposCartPageCustomerCP179Test extends Injectable
 
     public function test(Customer $customer, $products)
     {
-        // Create product
+        //Create product
         $product = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run()[0]['product'];
 
-        // Login webpos
+        //Login webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-        $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
 
+        //Click icon addCutomer > Search name > click customer
+        $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
         $this->webposIndex->getCheckoutChangeCustomer()->search($customer->getFirstname());
         sleep(1);
         $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
         sleep(1);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
+        //Edit useStoreAdress for shipping and billing
         $this->webposIndex->getCheckoutCartHeader()->getIconEditCustomer()->click();
         $this->webposIndex->getCheckoutEditCustomer()->selectShippingAdress('Use Store Address');
         $this->webposIndex->getCheckoutEditCustomer()->selectBillingAdress('Use Store Address');
@@ -71,14 +74,17 @@ class WebposCartPageCustomerCP179Test extends Injectable
         $this->webposIndex->getCheckoutSuccess()->waitForLoadingIndicator();
         sleep(1);
 
+        //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
+        //Checkout
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
+        //PlaceOrder
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         sleep(1);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();

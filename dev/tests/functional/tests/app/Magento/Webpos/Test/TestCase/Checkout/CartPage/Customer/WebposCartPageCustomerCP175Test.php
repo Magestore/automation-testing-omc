@@ -24,7 +24,8 @@ class WebposCartPageCustomerCP175Test extends Injectable
         )->run();
     }
 
-    public function __inject(
+    public function __inject
+    (
         WebposIndex $webposIndex
     )
     {
@@ -34,27 +35,29 @@ class WebposCartPageCustomerCP175Test extends Injectable
     public function test($products)
     {
 
-        // Create product
+        //Create product
         $product = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run()[0]['product'];
 
-        // Login webpos
+        //Login webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
+        //Add product to cart
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-
         $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
+        //Checkout
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
+        //Click icon < (Back to cart)
         $this->webposIndex->getCheckoutCartHeader()->getIconBackToCart()->click();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         sleep(3);

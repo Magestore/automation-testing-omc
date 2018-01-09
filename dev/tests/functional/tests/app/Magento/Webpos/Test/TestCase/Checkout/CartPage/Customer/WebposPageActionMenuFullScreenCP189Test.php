@@ -2,29 +2,20 @@
 /**
  * Created by PhpStorm.
  * User: bang
- * Date: 08/01/2018
- * Time: 16:24
+ * Date: 09/01/2018
+ * Time: 10:01
  */
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Customer\Test\Fixture\Customer;
-
-class WebposCartPageCustomerCP181Test extends Injectable
+class WebposPageActionMenuFullScreenCP189Test extends Injectable
 {
     /**
      * @var WebposIndex
      */
     protected $webposIndex;
 
-    /**
-     * Prepare data.
-     *
-     * @param FixtureFactory $fixtureFactory
-     * @return array
-     */
-    public function __prepare(FixtureFactory $fixtureFactory)
+    public function __prepare()
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
@@ -40,8 +31,9 @@ class WebposCartPageCustomerCP181Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test(Customer $customer, $products)
+    public function test($products)
     {
+
         //Create product
         $product = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
@@ -53,13 +45,8 @@ class WebposCartPageCustomerCP181Test extends Injectable
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
-        // fill info cutermer
-        $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
-        $this->webposIndex->getCheckoutChangeCustomer()->getAddNewCustomerButton()->click();
-        $this->webposIndex->getCheckoutAddCustomer()->setFieldWithoutShippingAndBilling($customer->getData());
-        $this->webposIndex->getCheckoutAddCustomer()->getSaveButton()->click();
-        sleep(2);
         //Add product to cart
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -69,13 +56,10 @@ class WebposCartPageCustomerCP181Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-        //PlaceOrder
-        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        //Click ... Menu
+        $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
         sleep(1);
-        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
-        sleep(2);
-
-
+        $this->webposIndex->getCheckoutFormAddNote()->getFullScreenMode()->click();
+        sleep(1);
     }
-
 }

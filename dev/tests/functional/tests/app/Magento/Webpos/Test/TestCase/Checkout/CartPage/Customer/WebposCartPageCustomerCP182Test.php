@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: bang
- * Date: 08/01/2018
- * Time: 16:24
+ * Date: 09/01/2018
+ * Time: 07:28
  */
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
 use Magento\Mtf\TestCase\Injectable;
@@ -11,7 +11,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Customer\Test\Fixture\Customer;
 
-class WebposCartPageCustomerCP181Test extends Injectable
+class WebposCartPageCustomerCP182Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -52,7 +52,6 @@ class WebposCartPageCustomerCP181Test extends Injectable
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-
         // fill info cutermer
         $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
         $this->webposIndex->getCheckoutChangeCustomer()->getAddNewCustomerButton()->click();

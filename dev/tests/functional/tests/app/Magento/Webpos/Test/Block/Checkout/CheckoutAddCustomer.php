@@ -58,13 +58,25 @@ class CheckoutAddCustomer extends Block
 
 	public function setFieldWithoutShippingAndBilling($customer)
     {
-        foreach ($customer['data'] as $item => $value){
-            if($item != 'customer_group')
+        foreach ($customer as $item => $value){
+            switch ($item)
             {
-                $this->_rootElement->find('input[name='.$item.']')->setValue($value);
-            } else
-            {
-                $this->_rootElement->find('#'.$item, Locator::SELECTOR_CSS, 'select')->setValue($value);
+                case 'firstname' :
+                    $this->_rootElement->find('input[name="first-name"]')->setValue($value);
+                    break;
+
+                case 'lastname' :
+                    $this->_rootElement->find('input[name="last-name"]')->setValue($value);
+                    break;
+
+                case 'email' :
+                    $this->_rootElement->find('input[name="email"]')->setValue($value);
+                    break;
+
+                case 'group_id' :
+                    $this->_rootElement->find('#customer_group', Locator::SELECTOR_CSS, 'select')->setValue($value);
+                    break;
+
             }
         }
     }

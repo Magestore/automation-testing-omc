@@ -9,6 +9,8 @@
 namespace Magento\Webpos\Test\Block\Order;
 
 use Magento\Mtf\Block\Block;
+use Magento\Mtf\Client\Locator;
+
 /**
  * Class OrderHistoryAddOrderNote
  * @package Magento\Webpos\Test\Block\Order
