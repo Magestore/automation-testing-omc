@@ -23,15 +23,15 @@ class AssertWebposCheckValidateDiscountDollarCP63 extends AbstractConstraint
         $message = "You are able to apply discount under 100% only";
         \PHPUnit_Framework_Assert::assertEquals(
             $message,
-            $webposIndex->getToaster()->getWarningMessage()->getText(),
+            (string) $webposIndex->getToaster()->getWarningMessage()->getText(),
             'CategoryRepository - TaxClass - Discount Product - You are able to apply discount under 100% only'
         );
-//        $message_reg = "Reg. $%s";
-//        \PHPUnit_Framework_Assert::assertEquals(
-//            sprintf($message_reg, $webposIndex->getCheckoutCartItems()->getValueItemPrice($product->getName())),
-//            (string) $webposIndex->getCheckoutProductEdit()->getOriginalPrice()->getText(),
-//            'CategoryRepository - TaxClass - Discount Product -  Amount field is filled automatically with amount equal price product'
-//        );
+        $message_reg = "%s";
+        \PHPUnit_Framework_Assert::assertEquals(
+            sprintf($message_reg, $webposIndex->getCheckoutCartItems()->getCartOriginalItemPrice($product->getName())->getText()),
+            (string) $webposIndex->getCheckoutCartItems()->getCartOriginalItemPrice($product->getName())->getText(),
+            'CategoryRepository - TaxClass - Discount Product -  Amount field is filled automatically with amount equal price product'
+        );
     }
 
     /**
