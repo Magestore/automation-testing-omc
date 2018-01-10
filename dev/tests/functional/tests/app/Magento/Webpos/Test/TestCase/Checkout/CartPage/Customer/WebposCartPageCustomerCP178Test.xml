@@ -8,7 +8,7 @@
                 </item>
             </data>
             <data name="address/dataset" xsi:type="string">US_address_1</data>
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>-->
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>
         </variation>
     </testCase>
 </config>

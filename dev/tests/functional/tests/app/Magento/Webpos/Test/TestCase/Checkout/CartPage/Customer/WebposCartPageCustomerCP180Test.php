@@ -90,6 +90,7 @@ class WebposCartPageCustomerCP180Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
 
+        return ['customer' => $customer2];
     }
 
 }

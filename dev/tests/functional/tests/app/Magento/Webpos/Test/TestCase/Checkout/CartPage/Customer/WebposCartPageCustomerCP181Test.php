@@ -10,6 +10,8 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Customer\Test\Fixture\Customer;
+use Magento\Config\Test\Fixture\ConfigData;
+
 
 class WebposCartPageCustomerCP181Test extends Injectable
 {
@@ -40,7 +42,7 @@ class WebposCartPageCustomerCP181Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test(Customer $customer, $products)
+    public function test(Customer $customer, $products, ConfigData $configData)
     {
         //Create product
         $product = $this->objectManager->getInstance()->create(
@@ -75,7 +77,19 @@ class WebposCartPageCustomerCP181Test extends Injectable
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         sleep(2);
 
+        //Get orderId
+        $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
+        $orderId= ltrim ($orderId,'#');
+        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
 
+        $configData = $configData->getData()['section'];
+        return [
+            'name' => $customer->getFirstname().' '.$customer->getLastname(),
+            'address' => $configData['webpos/guest_checkout/city']['value'].', '.$configData['webpos/guest_checkout/region_id']['label'].
+                ', '.$configData['webpos/guest_checkout/zip']['value'].', US',
+            'phone' =>  $configData['webpos/guest_checkout/telephone']['value'],
+            'orderId' => $orderId
+        ];
     }
 
 }

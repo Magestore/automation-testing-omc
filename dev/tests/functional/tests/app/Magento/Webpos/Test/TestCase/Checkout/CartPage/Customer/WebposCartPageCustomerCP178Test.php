@@ -92,5 +92,16 @@ class WebposCartPageCustomerCP178Test extends Injectable
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         sleep(1);
 
+        //Get orderId
+        $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
+        $orderId= ltrim ($orderId,'#');
+        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
+
+        return [
+            'name' => $address->getFirstname().' '.$address->getLastname(),
+            'address' => $address->getCity().', '.$address->getRegionId().', '.$address->getPostcode().', US',
+            'phone' =>  $address->getTelephone(),
+            'orderId' => $orderId
+        ];
     }
 }
