@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: PhucDo
  * Date: 1/10/2018
- * Time: 9:08 AM
+ * Time: 11:00 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -27,20 +27,19 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 2. Add some taxable products
  * 3. Select a customer to meet tax condition
  * 4. Add discount for whole cart
- * 5. Click "Checkout" and select a shipping method with fee
- * 6. Back to checkout home page
- * 7. Click "Hold" in cart page
- * 8. Go to On-hold orders page
- * 9. Check tax amount and click "Checkout"
- * 10. Check tax amount on checkout page
+ * 5. Click "Hold" in cart page
+ * 6. Go to On-hold orders page
+ * 7. Check tax amount and click "Checkout"
+ * 8. Place order
+ * 9. Check tax amount on Order detail
  *
  */
 
 /**
- * Class WebposTaxTAX26Test
+ * Class WebposTaxTAX28Test
  * @package Magento\Webpos\Test\TestCase\Tax
  */
-class WebposTaxTAX26Test extends Injectable
+class WebposTaxTAX28Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -133,7 +132,7 @@ class WebposTaxTAX26Test extends Injectable
             ['products' => $products]
         )->run();
 
-        // Config shipping
+        // Config
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => $configData]
@@ -170,54 +169,52 @@ class WebposTaxTAX26Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }
 
-        // Check out
+        // Place Order
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-        // Select Shipping Method
-        $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-        // Select Payment Method
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-        // Back to Checkout Home
-        $this->webposIndex->getCheckoutWebposCart()->getIconPrevious()->click();
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
+            [
+                'createInvoice' => $createInvoice,
+                'shipped' => $shipped
+            ]
+        )->run();
 
-        // Hold
-        $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
+        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        // End Place Order
+
+        //Assert Place Order Success
+        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
+
+        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+
+        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->onHoldOrders();
+        $this->webposIndex->getCMenu()->ordersHistory();
 
-        $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
-        $this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder();
+        sleep(2);
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
 
-        // Check out on On-Hold Orders Page
-        $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-        //Assert Tax Amount on Checkout Page
-        $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
-        //End Assert Tax Amount on Checkout Page
+        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        self::assertEquals(
+            $orderId,
+            $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
+            "Order Content - Order Id is wrong"
+            . "\nExpected: " . $orderId
+            . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
+        );
 
         return [
             'products' => $products
         ];
-    }
-
-    /**
-     *
-     */
-    public function tearDown()
-    {
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'all_allow_shipping_for_POS_rollback']
-        )->run();
     }
 }

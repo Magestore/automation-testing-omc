@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: PhucDo
  * Date: 1/10/2018
- * Time: 9:08 AM
+ * Time: 11:11 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -14,6 +14,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Swatches\Test\Fixture\ConfigurableProduct;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOnHoldOrderPage;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderHistoryInvoice;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
 
@@ -27,20 +28,18 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 2. Add some taxable products
  * 3. Select a customer to meet tax condition
  * 4. Add discount for whole cart
- * 5. Click "Checkout" and select a shipping method with fee
- * 6. Back to checkout home page
- * 7. Click "Hold" in cart page
- * 8. Go to On-hold orders page
- * 9. Check tax amount and click "Checkout"
- * 10. Check tax amount on checkout page
- *
+ * 5. Click "Checkout"
+ * 6. Place order with: [Create invoice]: off
+ * 7. Go to Order detail
+ * 8. Click on [Invoice] button
+ * 9. Check tax amount
  */
 
 /**
- * Class WebposTaxTAX26Test
+ * Class WebposTaxTAX29Test
  * @package Magento\Webpos\Test\TestCase\Tax
  */
-class WebposTaxTAX26Test extends Injectable
+class WebposTaxTAX29Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -61,6 +60,11 @@ class WebposTaxTAX26Test extends Injectable
      * @var AssertTaxAmountOnCartPageAndCheckoutPage
      */
     protected $assertTaxAmountOnCartPageAndCheckoutPage;
+
+    /**
+     * @var AssertTaxAmountOnOrderHistoryInvoice
+     */
+    protected $assertTaxAmountOnOrderHistoryInvoice;
 
     /**
      * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
@@ -87,6 +91,7 @@ class WebposTaxTAX26Test extends Injectable
      * @param FixtureFactory $fixtureFactory
      * @param AssertTaxAmountOnOnHoldOrderPage $assertTaxAmountOnOnHoldOrderPage
      * @param AssertTaxAmountOnCartPageAndCheckoutPage $assertTaxAmountOnCartPageAndCheckoutPage
+     * @param AssertTaxAmountOnOrderHistoryInvoice $assertTaxAmountOnOrderHistoryInvoice
      * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     public function __inject(
@@ -94,6 +99,7 @@ class WebposTaxTAX26Test extends Injectable
         FixtureFactory $fixtureFactory,
         AssertTaxAmountOnOnHoldOrderPage $assertTaxAmountOnOnHoldOrderPage,
         AssertTaxAmountOnCartPageAndCheckoutPage $assertTaxAmountOnCartPageAndCheckoutPage,
+        AssertTaxAmountOnOrderHistoryInvoice $assertTaxAmountOnOrderHistoryInvoice,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
     )
     {
@@ -101,9 +107,9 @@ class WebposTaxTAX26Test extends Injectable
         $this->fixtureFactory = $fixtureFactory;
         $this->assertTaxAmountOnOnHoldOrderPage = $assertTaxAmountOnOnHoldOrderPage;
         $this->assertTaxAmountOnCartPageAndCheckoutPage = $assertTaxAmountOnCartPageAndCheckoutPage;
+        $this->assertTaxAmountOnOrderHistoryInvoice = $assertTaxAmountOnOrderHistoryInvoice;
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
-
 
     /**
      * @param Customer $customer
@@ -133,7 +139,7 @@ class WebposTaxTAX26Test extends Injectable
             ['products' => $products]
         )->run();
 
-        // Config shipping
+        // Config
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => $configData]
@@ -170,54 +176,59 @@ class WebposTaxTAX26Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }
 
-        // Check out
+        // Place Order
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-        // Select Shipping Method
-        $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-        // Select Payment Method
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-        // Back to Checkout Home
-        $this->webposIndex->getCheckoutWebposCart()->getIconPrevious()->click();
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
+            [
+                'createInvoice' => $createInvoice,
+                'shipped' => $shipped
+            ]
+        )->run();
 
-        // Hold
-        $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
+        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        // End Place Order
+
+        //Assert Place Order Success
+        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
+        //End Assert Place Order Success
+
+        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+
+        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->onHoldOrders();
+        $this->webposIndex->getCMenu()->ordersHistory();
 
-        $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
-        $this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder();
+        sleep(2);
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
 
-        // Check out on On-Hold Orders Page
-        $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        self::assertEquals(
+            $orderId,
+            $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
+            "Order Content - Order Id is wrong"
+            . "\nExpected: " . $orderId
+            . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
+        );
 
-        //Assert Tax Amount on Checkout Page
-        $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
-        //End Assert Tax Amount on Checkout Page
+        $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
+        $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
+
+        //Assert Tax Amount in Order History Invoice
+        $this->assertTaxAmountOnOrderHistoryInvoice->processAssert($taxRate, $products, $this->webposIndex);
 
         return [
             'products' => $products
         ];
-    }
-
-    /**
-     *
-     */
-    public function tearDown()
-    {
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'all_allow_shipping_for_POS_rollback']
-        )->run();
     }
 }
