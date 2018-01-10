@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Tax\WebposTaxTAX18Test" summary="Tax" ticketId="WEBPOSTAX-18">
-        <variation name="WebposTaxTAX18TestVariation_TAX18">
+    <testCase name="Magento\Webpos\Test\TestCase\Tax\WebposTaxTAX19Test" summary="Tax" ticketId="WEBPOSTAX-19">
+        <variation name="WebposTaxTAX19TestVariation_TAX19">
             <data name="configData" xsi:type="string">default_tax_configuration_use_system_value</data>
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">

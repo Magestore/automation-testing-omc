@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: vong
  * Date: 1/9/2018
- * Time: 2:18 PM
+ * Time: 3:26 PM
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -14,7 +14,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderHistoryInvoice;
 
-class WebposTaxTAX18Test extends Injectable
+class WebposTaxTAX19Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -133,6 +133,10 @@ class WebposTaxTAX18Test extends Injectable
         );
         $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
         $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
+        foreach ($products as $item) {
+            $productName = $item['product']->getName();
+            $this->webposIndex->getOrderHistoryInvoice()->getItemQtyToInvoiceInput($productName)->setValue($item['invoiceQty']);
+        }
 
         //Assert Tax Amount in Order History Invoice
         $this->assertTaxAmountOnOrderHistoryInvoice->processAssert($taxRate, $products, $this->webposIndex);

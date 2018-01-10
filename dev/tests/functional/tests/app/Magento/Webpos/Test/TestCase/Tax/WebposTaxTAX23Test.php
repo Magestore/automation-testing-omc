@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: vong
- * Date: 1/9/2018
- * Time: 2:18 PM
+ * Date: 1/10/2018
+ * Time: 9:15 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -14,7 +14,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderHistoryInvoice;
 
-class WebposTaxTAX18Test extends Injectable
+class WebposTaxTAX23Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -59,9 +59,7 @@ class WebposTaxTAX18Test extends Injectable
         $configData,
         $products,
         $customer,
-        $taxRate,
-        $createInvoice = true,
-        $shipped = false
+        $taxRate
     ){
         // Config
         $this->objectManager->getInstance()->create(
@@ -104,13 +102,6 @@ class WebposTaxTAX18Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
-            [
-                'createInvoice' => $createInvoice,
-                'shipped' => $shipped
-            ]
-        )->run();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Assert Place Order Success
@@ -131,11 +122,10 @@ class WebposTaxTAX18Test extends Injectable
             . "\nExpected: " . $orderId
             . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
         );
-        $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
-        $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
-
+        $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
+        $this->webposIndex->getOrderHistoryAddOrderNote()->openRefundPopup();
         //Assert Tax Amount in Order History Invoice
-        $this->assertTaxAmountOnOrderHistoryInvoice->processAssert($taxRate, $products, $this->webposIndex);
+//        $this->assertTaxAmountOnOrderHistoryInvoice->processAssert($taxRate, $products, $this->webposIndex);
         return ['products' => $products];
     }
 
