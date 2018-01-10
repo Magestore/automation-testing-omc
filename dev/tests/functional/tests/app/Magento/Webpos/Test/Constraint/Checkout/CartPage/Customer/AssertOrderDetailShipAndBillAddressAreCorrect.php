@@ -15,14 +15,14 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 class AssertOrderDetailShipAndBillAddressAreCorrect extends AbstractConstraint
 {
-	public function processAssert(WebposIndex $webposIndex, $name, $address, $phone)
+	public function processAssert(WebposIndex $webposIndex, $name, $address, $phone, $orderId)
 	{
-
 		$webposIndex->getMsWebpos()->clickCMenuButton();
 		$webposIndex->getCMenu()->ordersHistory();
 		sleep(2);
 		$webposIndex->getOrderHistoryOrderList()->waitLoader();
 
+		$webposIndex->getOrderHistoryOrderList()->search($orderId);
 		$webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 //		$name = $address->getFirstname().' '.$address->getLastname();
 //		$addressText = $address->getCity().', '.$address->getRegionId().', '.$address->getPostcode().', ';

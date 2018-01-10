@@ -27,6 +27,11 @@ class OrderHistoryOrderViewHeader extends Block
 		return $this->_rootElement->find('.status')->getText();
 	}
 
+	public function openAddOrderNote()
+    {
+        $this->_rootElement->find('.more-info')->click();
+    }
+
 	// More info - Actions box
 	public function getMoreInfoButton()
 	{

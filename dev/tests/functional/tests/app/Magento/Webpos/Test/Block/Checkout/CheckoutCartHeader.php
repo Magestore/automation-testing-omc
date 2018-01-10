@@ -54,4 +54,8 @@ class CheckoutCartHeader extends Block
 	{
 		return $this->_rootElement->find('//div[contains(@class, "order-selector")]/span/span/span[text()= "'.$number.'"]/..', Locator::SELECTOR_XPATH);
 	}
+	public function getIconBackToCart()
+	{
+        return $this->_rootElement->find('#back_to_cart');
+	}
 }

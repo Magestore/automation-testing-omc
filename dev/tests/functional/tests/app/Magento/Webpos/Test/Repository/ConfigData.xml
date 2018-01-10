@@ -575,6 +575,24 @@
             </field>
         </dataset>
 
+        <dataset name="all_allow_shipping_for_POS">
+            <field name="webpos/shipping/allowspecific_shipping" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="label" xsi:type="string">All Allowed Shipping</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+
+        <dataset name="all_allow_shipping_for_POS_rollback">
+            <field name="webpos/shipping/allowspecific_shipping" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="label" xsi:type="string">Specific Shipping</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+        </dataset>
+
         <dataset name="webpos_default_guest_checkout_rollback">
             <field name="webpos/guest_checkout/first_name" xsi:type="array">
                 <item name="scope" xsi:type="string">webpos</item>
