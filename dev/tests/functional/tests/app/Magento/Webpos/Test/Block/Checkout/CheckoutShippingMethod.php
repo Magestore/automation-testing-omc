@@ -15,5 +15,9 @@ use Magento\Mtf\Block\Block;
  */
 class CheckoutShippingMethod extends Block
 {
-    
+    public function clickFlatRateFixedMethod()
+    {
+        $this->_rootElement->click();
+        $this->_rootElement->find('[id="flatrate_flatrate"]')->click();
+    }
 }
