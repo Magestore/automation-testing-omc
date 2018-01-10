@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 1/8/2018
- * Time: 4:21 PM
+ * Date: 1/5/2018
+ * Time: 8:52 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -17,6 +17,7 @@ use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+
 /**
  *  * Preconditions:
  * 1. Create customer
@@ -26,18 +27,18 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 1. Login Web POS as staff
  * 2. Add some taxable products
  * 3. Select a customer to meet tax condition
- * 4. Click "Hold" in cart page
- * 5. Go to On-hold orders page
- * 6. Check tax amount and click "Checkout"
- * 7. Check tax amount on checkout page
+ * 4. Add discount for whole cart
+ * 5. Click "Hold" in cart page
+ * 6. Go to On-hold orders page
+ * 7. Check tax amount
  *
  */
 
 /**
- * Class WebposTaxTAX04Test
+ * Class WebposTaxTAX25Test
  * @package Magento\Webpos\Test\TestCase\Tax
  */
-class WebposTaxTAX04Test extends Injectable
+class WebposTaxTAX25Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -107,13 +108,17 @@ class WebposTaxTAX04Test extends Injectable
      * @param $products
      * @param $configData
      * @param $taxRate
+     * @param bool $addDiscount
+     * @param null $discountAmount
      * @return array
      */
     public function test(
         Customer $customer,
         $products,
         $configData,
-        $taxRate
+        $taxRate,
+        $addDiscount = false,
+        $discountAmount = null
     )
     {
         // Create products
@@ -145,6 +150,20 @@ class WebposTaxTAX04Test extends Injectable
             ['customer' => $customer]
         )->run();
 
+        // Add Discount
+        if ($addDiscount) {
+            $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
+            sleep(1);
+            self::assertTrue(
+                $this->webposIndex->getCheckoutDiscount()->isVisible(),
+                'CategoryRepository - TaxClass page - Delete TaxClass - Add discount popup is not shown'
+            );
+            $this->webposIndex->getCheckoutDiscount()->setDiscountPercent($discountAmount);
+            $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
+            $this->webposIndex->getMsWebpos()->waitCartLoader();
+            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        }
+
         // Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -155,18 +174,8 @@ class WebposTaxTAX04Test extends Injectable
         $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
         $this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder();
 
-        //Assert tax amount in On-Hold Order
+        // Assert tax amount in On-Hold Order
         $this->assertTaxAmountOnOnHoldOrderPage->processAssert($taxRate, $products, $this->webposIndex);
-        //End Assert Tax Amount on Checkout Page
-
-        // Check out
-        $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-        //Assert Tax Amount on Checkout Page
-        $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
-        //End Assert Tax Amount on Checkout Page
 
         return [
             'products' => $products

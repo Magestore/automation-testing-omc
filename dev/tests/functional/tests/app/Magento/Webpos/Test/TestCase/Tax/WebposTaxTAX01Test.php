@@ -91,6 +91,7 @@ class WebposTaxTAX01Test extends Injectable
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
 
+
     /**
      * @param Customer $customer
      * @param $products
@@ -98,6 +99,7 @@ class WebposTaxTAX01Test extends Injectable
      * @param $taxRate
      * @param bool $createInvoice
      * @param bool $shipped
+     * @return array
      */
     public function test(
         Customer $customer,

@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 1/8/2018
- * Time: 4:21 PM
+ * Date: 1/10/2018
+ * Time: 9:08 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -26,18 +26,20 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 1. Login Web POS as staff
  * 2. Add some taxable products
  * 3. Select a customer to meet tax condition
- * 4. Click "Hold" in cart page
- * 5. Go to On-hold orders page
- * 6. Check tax amount and click "Checkout"
- * 7. Check tax amount on checkout page
+ * 4. Click "Checkout" and select a shipping method with fee
+ * 5. Back to checkout home page
+ * 6. Click "Hold" in cart page
+ * 7. Go to On-hold orders page
+ * 8. Check tax amount and click "Checkout"
+ * 9. Check tax amount on checkout page
  *
  */
 
 /**
- * Class WebposTaxTAX04Test
+ * Class WebposTaxTAX26Test
  * @package Magento\Webpos\Test\TestCase\Tax
  */
-class WebposTaxTAX04Test extends Injectable
+class WebposTaxTAX26Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -107,13 +109,17 @@ class WebposTaxTAX04Test extends Injectable
      * @param $products
      * @param $configData
      * @param $taxRate
+     * @param bool $createInvoice
+     * @param bool $shipped
      * @return array
      */
     public function test(
         Customer $customer,
         $products,
         $configData,
-        $taxRate
+        $taxRate,
+        $createInvoice = true,
+        $shipped = false
     )
     {
         // Create products
@@ -144,6 +150,16 @@ class WebposTaxTAX04Test extends Injectable
             'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
             ['customer' => $customer]
         )->run();
+
+        // Check out
+        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+
+//        $this->webposIndex->getCheckoutShippingMethod()->get
+
+        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         // Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
