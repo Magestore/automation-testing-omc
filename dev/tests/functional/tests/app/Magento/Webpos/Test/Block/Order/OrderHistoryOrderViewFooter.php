@@ -68,4 +68,9 @@ class OrderHistoryOrderViewFooter extends Block
 		return $this->getRowValue($label);
 	}
 
+	public function getTotalRefunded()
+	{
+		$label = 'Total Refunded';
+		return $this->getRowValue($label);
+	}
 }

@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: vinh
- * Date: 03/01/2018
- * Time: 09:02
+ * Date: 10/01/2018
+ * Time: 10:40
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -12,13 +12,11 @@ namespace Magento\Webpos\Test\TestCase\Tax;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Swatches\Test\Fixture\ConfigurableProduct;
-use Magento\Tax\Test\Fixture\TaxRate;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-use Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertCreateInvoiceSuccess;
+use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposTaxTAX08Test extends Injectable
+class WebposTaxTAX12Test extends Injectable
 {
 	/**
 	 * @var WebposIndex
@@ -36,9 +34,9 @@ class WebposTaxTAX08Test extends Injectable
 	protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
 	/**
-	 * @var AssertCreateInvoiceSuccess
+	 * @var AssertRefundSuccess
 	 */
-	protected $assertCreateInvoiceSuccess;
+	protected $assertRefundSuccess;
 
 	/**
 	 * Prepare data.
@@ -67,13 +65,13 @@ class WebposTaxTAX08Test extends Injectable
 		WebposIndex $webposIndex,
 		FixtureFactory $fixtureFactory,
 		AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
-		AssertCreateInvoiceSuccess $assertCreateInvoiceSuccess
+		AssertRefundSuccess $assertRefundSuccess
 	)
 	{
 		$this->webposIndex = $webposIndex;
 		$this->fixtureFactory = $fixtureFactory;
 		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-		$this->assertCreateInvoiceSuccess = $assertCreateInvoiceSuccess;
+		$this->assertRefundSuccess = $assertRefundSuccess;
 	}
 
 	public function test(
@@ -157,18 +155,34 @@ class WebposTaxTAX08Test extends Injectable
 			. "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
 		);
 
-		$this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
-
-		// Create Invoice
+		// Create Refund Partial
 		$this->objectManager->getInstance()->create(
-			'Magento\Webpos\Test\TestStep\CreateInvoiceInOrderHistoryStep',
+			'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
 			[
 				'products' => $products
 			]
 		)->run();
 
-		$expectStatus = 'Processing';
-		$this->assertCreateInvoiceSuccess->processAssert($this->webposIndex, $expectStatus);
+		$expectStatus = 'Complete';
+		$totalPaid = (float) substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
+		$totalRefunded = $totalPaid/2;
+		$this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
+
+		// Refund Extant Items
+		foreach ($products as $key => $item) {
+			unset($products[$key]['refundQty']);
+		}
+
+		$this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
+			[
+				'products' => $products
+			]
+		)->run();
+
+		$expectStatus = 'Closed';
+		$totalRefunded = $totalPaid;
+		$this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
 
 		return [
 			'products' => $products
