@@ -15,5 +15,18 @@ use Magento\Mtf\Block\Block;
  */
 class OrderHistoryOrderViewHeader extends Block
 {
+	public function getOrderId()
+	{
+		return $this->_rootElement->find('div.id-order > label > span')->getText();
+	}
 
+	public function getStatus()
+	{
+		return $this->_rootElement->find('.status')->getText();
+	}
+
+	public function openAddOrderNote()
+    {
+        $this->_rootElement->find('.more-info')->click();
+    }
 }

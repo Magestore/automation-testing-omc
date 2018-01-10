@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Tax\WebposTaxTAX01Test" summary="Tax - Checkout without tax" ticketId="WEBPOS-1">
-        <variation name="WebposTaxTAX01TestVariation_TAX01">
+    <testCase name="Magento\Webpos\Test\TestCase\Tax\WebposTaxTAX23Test" summary="Tax" ticketId="WEBPOSTAX-23">
+        <variation name="WebposTaxTAX23TestVariation_TAX23">
             <data name="configData" xsi:type="string">default_tax_configuration_use_system_value</data>
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">
@@ -15,9 +15,7 @@
                     <item name="invoiceQty" xsi:type="number">1</item>
                 </item>
             </data>
-            <data name="createInvoice" xsi:type="boolean">false</data>
-            <data name="taxRate" xsi:type="string">0.00</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Tax\AssertTaxOnOrderDetailIsCorrect"/>
+            <data name="taxRate" xsi:type="number">8.25</data>
         </variation>
     </testCase>
 </config>

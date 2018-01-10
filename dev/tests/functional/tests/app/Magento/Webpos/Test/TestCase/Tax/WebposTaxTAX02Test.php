@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 1/3/2018
- * Time: 4:44 PM
+ * Date: 1/5/2018
+ * Time: 8:08 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -24,7 +24,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * Test Flow:
  * 1. Login Web POS as staff
  * 2. Add some taxable products
- * 3. Select a customer to be unsatisfied about tax condition
+ * 3. Select a customer to meet tax condition
  * 4. Click "CHECKOUT" in cart page
  * 5. Choose Payment Method
  * 6. Click Place Order
@@ -33,10 +33,10 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 
 /**
- * Class WebposTaxTAX01Test
+ * Class WebposTaxTAX02Test
  * @package Magento\Webpos\Test\TestCase\Tax
  */
-class WebposTaxTAX01Test extends Injectable
+class WebposTaxTAX02Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -66,7 +66,7 @@ class WebposTaxTAX01Test extends Injectable
      */
     public function __prepare(FixtureFactory $fixtureFactory)
     {
-        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_UK']);
+        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
         $customer->persist();
 
         return ['customer' => $customer];
@@ -148,48 +148,5 @@ class WebposTaxTAX01Test extends Injectable
         //Assert Tax Amount on Checkout Page
         $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
         // End Assert Tax Amount on Checkout Page
-
-        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
-            [
-                'createInvoice' => $createInvoice,
-                'shipped' => $shipped
-            ]
-        )->run();
-
-        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        // End Place Order
-
-        //Assert Place Order Success
-        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-
-        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
-
-        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->ordersHistory();
-
-        sleep(2);
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-
-        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
-        self::assertEquals(
-            $orderId,
-            $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
-            "Order Content - Order Id is wrong"
-            . "\nExpected: " . $orderId
-            . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
-        );
-
-        return [
-            'products' => $products
-        ];
     }
 }

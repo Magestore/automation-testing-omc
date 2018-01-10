@@ -1,42 +1,20 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: PhucDo
- * Date: 1/3/2018
- * Time: 4:44 PM
+ * User: vong
+ * Date: 1/9/2018
+ * Time: 2:18 PM
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
 
-use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Swatches\Test\Fixture\ConfigurableProduct;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
-use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
+use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderHistoryInvoice;
 
-/**
- *  * Preconditions:
- * 1. Create customer
- * 2. Create products
- *
- * Test Flow:
- * 1. Login Web POS as staff
- * 2. Add some taxable products
- * 3. Select a customer to be unsatisfied about tax condition
- * 4. Click "CHECKOUT" in cart page
- * 5. Choose Payment Method
- * 6. Click Place Order
- * 7. Verify created and check tax amount on cart page and checkout page
- *
- */
-
-/**
- * Class WebposTaxTAX01Test
- * @package Magento\Webpos\Test\TestCase\Tax
- */
-class WebposTaxTAX01Test extends Injectable
+class WebposTaxTAX18Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -44,19 +22,14 @@ class WebposTaxTAX01Test extends Injectable
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
-     */
-    protected $fixtureFactory;
-
-    /**
-     * @var AssertTaxAmountOnCartPageAndCheckoutPage
-     */
-    protected $assertTaxAmountOnCartPageAndCheckoutPage;
-
-    /**
      * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+
+    /**
+     * @var AssertTaxAmountOnOrderHistoryInvoice
+     */
+    protected $assertTaxAmountOnOrderHistoryInvoice;
 
     /**
      * Prepare data.
@@ -66,58 +39,45 @@ class WebposTaxTAX01Test extends Injectable
      */
     public function __prepare(FixtureFactory $fixtureFactory)
     {
-        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_UK']);
+        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'johndoe_MI']);
         $customer->persist();
 
         return ['customer' => $customer];
     }
 
-    /**
-     * @param WebposIndex $webposIndex
-     * @param FixtureFactory $fixtureFactory
-     * @param AssertTaxAmountOnCartPageAndCheckoutPage $assertTaxAmountOnCartPageAndCheckoutPage
-     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
-     */
     public function __inject(
         WebposIndex $webposIndex,
-        FixtureFactory $fixtureFactory,
-        AssertTaxAmountOnCartPageAndCheckoutPage $assertTaxAmountOnCartPageAndCheckoutPage,
-        AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
-    )
-    {
+        AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
+        AssertTaxAmountOnOrderHistoryInvoice $assertTaxAmountOnOrderHistoryInvoice
+    ){
         $this->webposIndex = $webposIndex;
-        $this->fixtureFactory = $fixtureFactory;
-        $this->assertTaxAmountOnCartPageAndCheckoutPage = $assertTaxAmountOnCartPageAndCheckoutPage;
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+        $this->assertTaxAmountOnOrderHistoryInvoice = $assertTaxAmountOnOrderHistoryInvoice;
     }
 
-    /**
-     * @param Customer $customer
-     * @param $products
-     * @param $configData
-     * @param $taxRate
-     * @param bool $createInvoice
-     * @param bool $shipped
-     */
     public function test(
-        Customer $customer,
-        $products,
         $configData,
+        $products,
+        $customer,
         $taxRate,
         $createInvoice = true,
         $shipped = false
-    )
-    {
-        // Create products
-        $products = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
-            ['products' => $products]
-        )->run();
-
+    ){
         // Config
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => $configData]
+        )->run();
+
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'all_allow_shipping_for_POS']
+        )->run();
+
+        // Create products
+        $products = $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
+            ['products' => $products]
         )->run();
 
         // Login webpos
@@ -137,21 +97,13 @@ class WebposTaxTAX01Test extends Injectable
             ['customer' => $customer]
         )->run();
 
-        //Assert Tax Amount on Cart Page
-        $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
-
-        // Place Order
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-        //Assert Tax Amount on Checkout Page
-        $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
-        // End Assert Tax Amount on Checkout Page
-
+        $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
             [
@@ -159,25 +111,17 @@ class WebposTaxTAX01Test extends Injectable
                 'shipped' => $shipped
             ]
         )->run();
-
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        // End Place Order
-
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-
-        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
-
+        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-
         sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
         self::assertEquals(
@@ -187,9 +131,19 @@ class WebposTaxTAX01Test extends Injectable
             . "\nExpected: " . $orderId
             . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
         );
+        $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
+        $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
 
-        return [
-            'products' => $products
-        ];
+        //Assert Tax Amount in Order History Invoice
+        $this->assertTaxAmountOnOrderHistoryInvoice->processAssert($taxRate, $products, $this->webposIndex);
+        return ['products' => $products];
+    }
+
+    public function tearDown()
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'all_allow_shipping_for_POS_rollback']
+        )->run();
     }
 }
