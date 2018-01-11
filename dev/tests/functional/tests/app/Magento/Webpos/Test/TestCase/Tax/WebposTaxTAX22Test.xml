@@ -15,7 +15,7 @@
                     <item name="invoiceQty" xsi:type="number">1</item>
                 </item>
             </data>
-            <data name="taxRate" xsi:type="number">8.25</data>
+            <data name="taxRate" xsi:type="number">8.5</data>
         </variation>
     </testCase>
 </config>

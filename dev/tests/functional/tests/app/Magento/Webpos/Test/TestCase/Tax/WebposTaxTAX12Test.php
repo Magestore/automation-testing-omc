@@ -50,10 +50,7 @@ class WebposTaxTAX12Test extends Injectable
 		$customer->persist();
 
 		$taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
-		$this->objectManager->getInstance()->create(
-			'Magento\Webpos\Test\TestStep\EditTaxRateInBackendStep',
-			['taxRate' => $taxRate]
-		)->run();
+		$this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
 		return [
 			'customer' => $customer,

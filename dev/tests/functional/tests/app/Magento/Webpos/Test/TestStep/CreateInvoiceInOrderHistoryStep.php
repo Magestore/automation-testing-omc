@@ -59,6 +59,7 @@ class CreateInvoiceInOrderHistoryStep implements TestStepInterface
 	{
 		if (!$this->webposIndex->getOrderHistoryInvoice()->isVisible()) {
 			$this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
+			$this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
 		}
 
 		foreach ($this->products as $item) {
