@@ -36,7 +36,8 @@ class AssertRefundSuccess extends AbstractConstraint
 			"Success message's Content is Wrong"
 		);
 
-		sleep(10);
+		$webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
+//		sleep(10);
 
 		\PHPUnit_Framework_Assert::assertEquals(
 			$expectStatus,

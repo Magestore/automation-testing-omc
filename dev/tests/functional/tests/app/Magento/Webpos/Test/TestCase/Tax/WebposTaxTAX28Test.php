@@ -74,12 +74,19 @@ class WebposTaxTAX28Test extends Injectable
      */
     public function __prepare(FixtureFactory $fixtureFactory)
     {
+        // Change TaxRate
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
+
+        // Add Customer
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
         $customer->persist();
 
-        return ['customer' => $customer];
+        return [
+            'customer' => $customer,
+            'taxRate' => $taxRate->getRate()
+        ];
     }
-
 
     /**
      * @param WebposIndex $webposIndex
@@ -214,7 +221,8 @@ class WebposTaxTAX28Test extends Injectable
         );
 
         return [
-            'products' => $products
+            'products' => $products,
+            'taxRate' => $taxRate
         ];
     }
 }

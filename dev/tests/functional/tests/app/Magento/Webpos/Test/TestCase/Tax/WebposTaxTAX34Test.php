@@ -8,13 +8,27 @@
 
 namespace Magento\Webpos\Test\TestCase\Tax;
 
-
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
+
+/**
+ *  * Preconditions:
+ * 1. Create customer
+ * 2. Create products
+ *
+ * Test Flow:
+ * 1. Login webpos as a staff
+ * 2. Add some taxable products and select a customer to meet tax condition
+ * 3. Add discount for whole cart
+ * 4. Place order successfully with completed status
+ * 5. Go to Order detail > click to refund
+ * 6. On refund pupup, create a partial refund
+ * 7. Create refund extant items
+ */
 
 /**
  * Class WebposTaxTAX34Test
@@ -50,14 +64,13 @@ class WebposTaxTAX34Test extends Injectable
      */
     public function __prepare(FixtureFactory $fixtureFactory)
     {
-        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'johndoe_MI']);
-        $customer->persist();
+        // Change TaxRate
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
-        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\EditTaxRateInBackendStep',
-            ['taxRate' => $taxRate]
-        )->run();
+        // Add Customer
+        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
+        $customer->persist();
 
         return [
             'customer' => $customer,
@@ -222,7 +235,8 @@ class WebposTaxTAX34Test extends Injectable
         $this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
 
         return [
-            'products' => $products
+            'products' => $products,
+            'taxRate' => $taxRate
         ];
     }
 }
