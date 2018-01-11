@@ -25,10 +25,9 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 1. Login Web POS as staff
  * 2. Add some taxable products
  * 3. Select a customer to meet tax condition
- * 4. Click "CHECKOUT" in cart page
- * 5. Choose Payment Method
- * 6. Click Place Order
- * 7. Verify created and check tax amount on cart page and checkout page
+ * 4. Add discount for whole cart
+ * 5. Click "CHECKOUT" in cart page
+ * 6. Check tax amount on cart page and checkout page
  *
  */
 
@@ -96,16 +95,17 @@ class WebposTaxTAX24Test extends Injectable
      * @param $products
      * @param $configData
      * @param $taxRate
-     * @param bool $createInvoice
-     * @param bool $shipped
+     * @param bool $addDiscount
+     * @param null $discountAmount
+     * @return array
      */
     public function test(
         Customer $customer,
         $products,
         $configData,
         $taxRate,
-        $createInvoice = true,
-        $shipped = false
+        $addDiscount = false,
+        $discountAmount = null
     )
     {
         // Create products
@@ -137,16 +137,35 @@ class WebposTaxTAX24Test extends Injectable
             ['customer' => $customer]
         )->run();
 
+        // Add Discount
+        if ($addDiscount) {
+            $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
+            sleep(1);
+            self::assertTrue(
+                $this->webposIndex->getCheckoutDiscount()->isVisible(),
+                'CategoryRepository - TaxClass page - Delete TaxClass - Add discount popup is not shown'
+            );
+            $this->webposIndex->getCheckoutDiscount()->setDiscountPercent($discountAmount);
+            $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
+            $this->webposIndex->getMsWebpos()->waitCartLoader();
+            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        }
+
         //Assert Tax Amount on Cart Page
         $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
+        //End Assert Tax Amount on Checkout Page
 
-        // Place Order
+        // Check out
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         //Assert Tax Amount on Checkout Page
         $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
-        // End Assert Tax Amount on Checkout Page
+        //End Assert Tax Amount on Checkout Page
+
+        return [
+            'products' => $products
+        ];
     }
 }

@@ -80,7 +80,8 @@ class OnHoldOrderOrderViewContent extends Block
      */
     public function getPriceOfProduct($productName)
     {
-        return $this->getProductRow($productName)->find('td[data-bind="text: $parents[1].getItemPriceFormated(item)"]');
+        return $this->_rootElement->find('//table/tbody/tr/td/h4[text()="'.$productName.'"]/../../td[3]', Locator::SELECTOR_XPATH);
+
     }
 
     /**
@@ -89,7 +90,7 @@ class OnHoldOrderOrderViewContent extends Block
      */
     public function getSubtotalOfProduct($productName)
     {
-        return $this->getProductRow($productName)->find('td[data-bind="text: $parents[1].convertAndFormatPrice(item.base_row_total)"]');
+        return $this->_rootElement->find('//table/tbody/tr/td/h4[text()="'.$productName.'"]/../../td[5]', Locator::SELECTOR_XPATH);
     }
 
     /**
@@ -98,7 +99,8 @@ class OnHoldOrderOrderViewContent extends Block
      */
     public function getTaxAmountOfProduct($productName)
     {
-        return $this->getProductRow($productName)->find('td[data-bind="text: $parents[1].convertAndFormatPrice(item.base_tax_amount)"]');
+        return $this->_rootElement->find('//table/tbody/tr/td/h4[text()="'.$productName.'"]/../../td[6]', Locator::SELECTOR_XPATH);
+
     }
 
     /**

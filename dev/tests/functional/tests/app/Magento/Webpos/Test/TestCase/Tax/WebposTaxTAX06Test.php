@@ -107,7 +107,6 @@ class WebposTaxTAX06Test extends Injectable
      * @param Customer $customer
      * @param $products
      * @param $configData
-     * @param $taxRate
      * @param bool $createInvoice
      * @param bool $shipped
      * @return array
@@ -116,7 +115,6 @@ class WebposTaxTAX06Test extends Injectable
         Customer $customer,
         $products,
         $configData,
-        $taxRate,
         $createInvoice = true,
         $shipped = false
     )

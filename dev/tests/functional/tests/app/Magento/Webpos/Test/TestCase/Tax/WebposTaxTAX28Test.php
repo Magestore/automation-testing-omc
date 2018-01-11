@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 1/8/2018
- * Time: 4:21 PM
+ * Date: 1/10/2018
+ * Time: 11:00 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -26,18 +26,20 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 1. Login Web POS as staff
  * 2. Add some taxable products
  * 3. Select a customer to meet tax condition
- * 4. Click "Hold" in cart page
- * 5. Go to On-hold orders page
- * 6. Check tax amount and click "Checkout"
- * 7. Check tax amount on checkout page
+ * 4. Add discount for whole cart
+ * 5. Click "Hold" in cart page
+ * 6. Go to On-hold orders page
+ * 7. Check tax amount and click "Checkout"
+ * 8. Place order
+ * 9. Check tax amount on Order detail
  *
  */
 
 /**
- * Class WebposTaxTAX04Test
+ * Class WebposTaxTAX28Test
  * @package Magento\Webpos\Test\TestCase\Tax
  */
-class WebposTaxTAX04Test extends Injectable
+class WebposTaxTAX28Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -107,13 +109,21 @@ class WebposTaxTAX04Test extends Injectable
      * @param $products
      * @param $configData
      * @param $taxRate
+     * @param bool $addDiscount
+     * @param null $discountAmount
+     * @param bool $createInvoice
+     * @param bool $shipped
      * @return array
      */
     public function test(
         Customer $customer,
         $products,
         $configData,
-        $taxRate
+        $taxRate,
+        $addDiscount = false,
+        $discountAmount = null,
+        $createInvoice = true,
+        $shipped = false
     )
     {
         // Create products
@@ -145,28 +155,63 @@ class WebposTaxTAX04Test extends Injectable
             ['customer' => $customer]
         )->run();
 
-        // Hold
-        $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        // Add Discount
+        if ($addDiscount) {
+            $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
+            sleep(1);
+            self::assertTrue(
+                $this->webposIndex->getCheckoutDiscount()->isVisible(),
+                'CategoryRepository - TaxClass page - Delete TaxClass - Add discount popup is not shown'
+            );
+            $this->webposIndex->getCheckoutDiscount()->setDiscountPercent($discountAmount);
+            $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
+            $this->webposIndex->getMsWebpos()->waitCartLoader();
+            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        }
 
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->onHoldOrders();
-
-        $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
-        $this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder();
-
-        //Assert tax amount in On-Hold Order
-        $this->assertTaxAmountOnOnHoldOrderPage->processAssert($taxRate, $products, $this->webposIndex);
-        //End Assert Tax Amount on Checkout Page
-
-        // Check out
-        $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();
+        // Place Order
+        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-        //Assert Tax Amount on Checkout Page
-        $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
-        //End Assert Tax Amount on Checkout Page
+        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
+            [
+                'createInvoice' => $createInvoice,
+                'shipped' => $shipped
+            ]
+        )->run();
+
+        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        // End Place Order
+
+        //Assert Place Order Success
+        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
+
+        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+
+        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getCMenu()->ordersHistory();
+
+        sleep(2);
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+
+        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        self::assertEquals(
+            $orderId,
+            $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
+            "Order Content - Order Id is wrong"
+            . "\nExpected: " . $orderId
+            . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
+        );
 
         return [
             'products' => $products
