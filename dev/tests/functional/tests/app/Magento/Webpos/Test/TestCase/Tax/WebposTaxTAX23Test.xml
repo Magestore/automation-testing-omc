@@ -17,7 +17,7 @@
             </data>
             <data name="createInvoice" xsi:type="boolean">true</data>
             <data name="shipped" xsi:type="boolean">true</data>
-            <data name="taxRate" xsi:type="number">8.25</data>
+            <data name="taxRate" xsi:type="number">8.5</data>
             <constraint name="Magento\Webpos\Test\Constraint\Tax\AssertTaxOnOrderDetailIsCorrect"/>
         </variation>
     </testCase>
