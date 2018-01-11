@@ -49,6 +49,10 @@ class WebposTaxTAX23Test extends Injectable
     {
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'johndoe_MI']);
         $customer->persist();
+        //change taxRate
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
+
         return [
             'customer' => $customer
         ];
