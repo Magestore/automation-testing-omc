@@ -84,7 +84,7 @@ class WebposTaxTAX29Test extends Injectable
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
         // Add Customer
-        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_UK']);
+        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
         $customer->persist();
 
         return [
