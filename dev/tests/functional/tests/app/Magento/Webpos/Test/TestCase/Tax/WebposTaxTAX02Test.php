@@ -26,9 +26,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 2. Add some taxable products
  * 3. Select a customer to meet tax condition
  * 4. Click "CHECKOUT" in cart page
- * 5. Choose Payment Method
- * 6. Click Place Order
- * 7. Verify created and check tax amount on cart page and checkout page
+ * 5. Check tax amount on cart page and checkout page
  *
  */
 
@@ -96,16 +94,13 @@ class WebposTaxTAX02Test extends Injectable
      * @param $products
      * @param $configData
      * @param $taxRate
-     * @param bool $createInvoice
-     * @param bool $shipped
+     * @return array
      */
     public function test(
         Customer $customer,
         $products,
         $configData,
-        $taxRate,
-        $createInvoice = true,
-        $shipped = false
+        $taxRate
     )
     {
         // Create products
@@ -139,14 +134,19 @@ class WebposTaxTAX02Test extends Injectable
 
         //Assert Tax Amount on Cart Page
         $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
+        //End Assert Tax Amount on Cart Page
 
-        // Place Order
+        // Check out
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         //Assert Tax Amount on Checkout Page
         $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
-        // End Assert Tax Amount on Checkout Page
+        //End Assert Tax Amount on Checkout Page
+
+        return [
+            'products' => $products
+        ];
     }
 }

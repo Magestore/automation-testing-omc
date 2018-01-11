@@ -27,13 +27,11 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 1. Login Web POS as staff
  * 2. Add some taxable products
  * 3. Select a customer to meet tax condition
- * 4. Click "Hold" in cart page
- * 5. Go to On-hold orders page
- * 6. Check tax amount and click "Checkout"
- * 7. Place order
- * 8. Go to Order detail
- * 9. Click on [Invoice] button
- * 10. Check tax amount
+ * 4. Click "Checkout"
+ * 5. Place order with: [Create invoice]: off
+ * 6. Go to Order detail
+ * 7. Click on [Invoice] button
+ * 8. Check tax amount
  */
 
 /**

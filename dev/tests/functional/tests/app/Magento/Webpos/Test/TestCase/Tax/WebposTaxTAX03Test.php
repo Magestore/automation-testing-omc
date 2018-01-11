@@ -107,17 +107,13 @@ class WebposTaxTAX03Test extends Injectable
      * @param $products
      * @param $configData
      * @param $taxRate
-     * @param bool $createInvoice
-     * @param bool $shipped
      * @return array
      */
     public function test(
         Customer $customer,
         $products,
         $configData,
-        $taxRate,
-        $createInvoice = true,
-        $shipped = false
+        $taxRate
     )
     {
         // Create products
@@ -159,9 +155,7 @@ class WebposTaxTAX03Test extends Injectable
         $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
         $this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder();
 
-//        $taxRate = 8.25;
-
-        //Assert tax amount in On-Hold Order
+        // Assert tax amount in On-Hold Order
         $this->assertTaxAmountOnOnHoldOrderPage->processAssert($taxRate, $products, $this->webposIndex);
 
         return [

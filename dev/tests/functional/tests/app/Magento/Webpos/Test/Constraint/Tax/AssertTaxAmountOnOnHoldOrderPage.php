@@ -46,7 +46,7 @@ class AssertTaxAmountOnOnHoldOrderPage extends AbstractConstraint
             $rowTotalOfProduct = $webposIndex->getOnHoldOrderOrderViewContent()->getRowTotalOfProduct($productName)->getText();
             $rowTotalOfProduct = (float)substr($rowTotalOfProduct,1);
 
-            $taxAmount = $subtotalOfProduct * $taxRate;
+            $taxAmount = ($subtotalOfProduct - $discountAmountOfProduct) * $taxRate;
             $rowTotal = $subtotalOfProduct + $taxAmountOfProduct - $discountAmountOfProduct;
 
             $subtotalWholeCart += $subtotalOfProduct;
