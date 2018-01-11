@@ -7,15 +7,18 @@
                 <item name="0" xsi:type="array">
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
                     <item name="orderQty" xsi:type="number">2</item>
-                    <item name="invoiceQty" xsi:type="number">1</item>
+                    <item name="refundQty" xsi:type="number">1</item>
                 </item>
                 <item name="1" xsi:type="array">
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
-                    <item name="orderQty" xsi:type="number">1</item>
-                    <item name="invoiceQty" xsi:type="number">1</item>
+                    <item name="orderQty" xsi:type="number">2</item>
+                    <item name="refundQty" xsi:type="number">1</item>
                 </item>
             </data>
+            <data name="createInvoice" xsi:type="boolean">true</data>
+            <data name="shipped" xsi:type="boolean">true</data>
             <data name="taxRate" xsi:type="number">8.25</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Tax\AssertTaxOnOrderDetailIsCorrect"/>
         </variation>
     </testCase>
 </config>
