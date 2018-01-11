@@ -37,7 +37,9 @@ class AssertRefundSuccess extends AbstractConstraint
 		);
 
 		$webposIndex->getOrderHistoryOrderViewFooter()->waitForTotalRefundedVisible();
-//		sleep(10);
+        if ($expectStatus == 'Closed') {
+            $webposIndex->getOrderHistoryOrderViewHeader()->waitForClosedStatusVisisble();
+        }
 
 		\PHPUnit_Framework_Assert::assertEquals(
 			$expectStatus,
