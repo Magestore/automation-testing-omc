@@ -12,7 +12,7 @@
                 </item>
             </data>
             <data name="createInvoice" xsi:type="boolean">false</data>
-            <data name="taxRate" xsi:type="string">8.25</data>
+            <data name="taxRate" xsi:type="string">8.5</data>
         </variation>
     </testCase>
 </config>
