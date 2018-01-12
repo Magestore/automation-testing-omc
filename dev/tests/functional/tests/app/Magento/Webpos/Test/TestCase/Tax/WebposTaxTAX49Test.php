@@ -11,7 +11,7 @@ namespace Magento\Webpos\Test\TestCase\Tax;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderPageWithShippingFee;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderPageWithShippingMethod;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
@@ -31,7 +31,7 @@ class WebposTaxTAX49Test extends Injectable
     protected $fixtureFactory;
 
     /**
-     * @var AssertTaxAmountOnOrderPageWithShippingFee
+     * @var AssertTaxAmountOnOrderPageWithShippingMethod
      */
     protected $assertTaxAmountOnOrderPageWithShippingMethod;
 
@@ -66,12 +66,12 @@ class WebposTaxTAX49Test extends Injectable
     /**
      * @param WebposIndex $webposIndex
      * @param FixtureFactory $fixtureFactory
-     * @param AssertTaxAmountOnOrderPageWithShippingFee $assertTaxAmountOnOrderPageWithShippingMethod
+     * @param AssertTaxAmountOnOrderPageWithShippingMethod $assertTaxAmountOnOrderPageWithShippingMethod
      */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
-        AssertTaxAmountOnOrderPageWithShippingFee $assertTaxAmountOnOrderPageWithShippingMethod
+        AssertTaxAmountOnOrderPageWithShippingMethod $assertTaxAmountOnOrderPageWithShippingMethod
     )
     {
         $this->webposIndex = $webposIndex;
