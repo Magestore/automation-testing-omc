@@ -13,6 +13,7 @@
             <data name="customer/data/group_id" xsi:type="array">
                 <item name="dataset" xsi:type="string">General</item>
             </data>
+            <data name="address/dataset" xsi:type="string">address_pi</data>
             <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>
         </variation>
     </testCase>

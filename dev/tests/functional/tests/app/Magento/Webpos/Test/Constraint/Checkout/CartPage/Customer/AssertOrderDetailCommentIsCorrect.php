@@ -6,7 +6,6 @@
  * Time: 16:24
  */
 namespace Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer;
-use Magento\Customer\Test\Fixture\Address;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 

@@ -58,4 +58,9 @@ class CheckoutCustomSale extends Block
 	{
 		return $this->_rootElement->find('//*[@id="popup-custom-sale"]/div[2]/div/div[1]/div[3]/div/select/option[text()="'.$name.'"]', Locator::SELECTOR_XPATH);
 	}
+
+	public function getNumberField($number)
+    {
+        return $this->_rootElement->find('.//button[@name="'. $number . '"]', Locator::SELECTOR_XPATH);
+    }
 }

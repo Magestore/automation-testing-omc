@@ -66,7 +66,8 @@ class WebposSaveOrderNoteCP187Test extends Injectable
         if($comment != null)
             $this->webposIndex->getCheckoutNoteOrder()->getTextArea()->setValue($comment);
         $this->webposIndex->getCheckoutNoteOrder()->getSaveOrderNoteButon()->click();
-        $this->webposIndex->getCheckoutWebposCart()->waitForCartLoad();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
         //PlaceOrder
