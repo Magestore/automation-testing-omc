@@ -9,7 +9,7 @@
             </data>
             <data name="comment" xsi:type="string">asdfiofukldassdf</data>
             <data name="commentEdit" xsi:type="string">milelwklsa;jhasdfl;ifas</data>
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>-->
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailCommentIsCorrect"/>
         </variation>
     </testCase>
 </config>

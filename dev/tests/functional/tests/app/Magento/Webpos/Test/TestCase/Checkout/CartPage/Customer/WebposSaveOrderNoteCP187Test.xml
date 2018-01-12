@@ -8,7 +8,9 @@
                 </item>
             </data>
             <data name="comment" xsi:type="string">12%isolation%ad</data>
+            <data name="menuItem" xsi:type="string">Sales > Barcode Listing</data>
             <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailCommentIsCorrect"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailCommentIsCorrectBackAnd"/>
         </variation>
     </testCase>
 </config>

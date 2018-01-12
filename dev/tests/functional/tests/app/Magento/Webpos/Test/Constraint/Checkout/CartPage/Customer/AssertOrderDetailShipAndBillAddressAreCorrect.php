@@ -23,7 +23,8 @@ class AssertOrderDetailShipAndBillAddressAreCorrect extends AbstractConstraint
 		$webposIndex->getOrderHistoryOrderList()->waitLoader();
 
 		$webposIndex->getOrderHistoryOrderList()->search($orderId);
-		$webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        $webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 //		$name = $address->getFirstname().' '.$address->getLastname();
 //		$addressText = $address->getCity().', '.$address->getRegionId().', '.$address->getPostcode().', ';
 

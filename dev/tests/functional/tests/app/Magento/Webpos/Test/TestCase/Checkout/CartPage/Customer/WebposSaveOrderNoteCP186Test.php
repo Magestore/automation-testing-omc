@@ -60,12 +60,15 @@ class WebposSaveOrderNoteCP186Test extends Injectable
         $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
         sleep(1);
         $this->webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
         //Click save button
         if($comment != null)
             $this->webposIndex->getCheckoutNoteOrder()->getTextArea()->setValue($comment);
         $this->webposIndex->getCheckoutNoteOrder()->getSaveOrderNoteButon()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
     }
 }
