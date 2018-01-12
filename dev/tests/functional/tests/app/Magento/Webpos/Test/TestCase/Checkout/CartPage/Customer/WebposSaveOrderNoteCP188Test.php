@@ -63,8 +63,10 @@ class WebposSaveOrderNoteCP188Test extends Injectable
         sleep(1);
 
         //Click save button
-        $this->webposIndex->getCheckoutNoteOrder()->getTextArea()->setValue($comment);
+        $this->webposIndex->getCheckoutNoteOrder()->getTextArea()->setValue($commentEdit);
         $this->webposIndex->getCheckoutNoteOrder()->getSaveOrderNoteButon()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
         //Edit order not and save
@@ -72,8 +74,25 @@ class WebposSaveOrderNoteCP188Test extends Injectable
         sleep(1);
         $this->webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->click();
         sleep(1);
-        $this->webposIndex->getCheckoutNoteOrder()->getTextArea()->setValue($commentEdit);
+        $this->webposIndex->getCheckoutNoteOrder()->getTextArea()->setValue($comment);
         $this->webposIndex->getCheckoutNoteOrder()->getSaveOrderNoteButon()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
+
+        //PlaceOrder
+        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        sleep(1);
+        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+        $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+        sleep(1);
+
+        //Get orderId
+        $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
+        $orderId= ltrim ($orderId,'#');
+        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
+        return [
+            'orderId' => $orderId
+        ];
     }
 }

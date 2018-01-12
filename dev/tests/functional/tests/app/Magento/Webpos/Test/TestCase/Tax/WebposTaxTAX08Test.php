@@ -48,7 +48,7 @@ class WebposTaxTAX08Test extends Injectable
 	 */
 	public function __prepare(FixtureFactory $fixtureFactory)
 	{
-		$customer = $fixtureFactory->createByCode('customer', ['dataset' => 'johndoe_MI']);
+		$customer = $fixtureFactory->createByCode('customer', ['dataset' => 'johndoe_MI_unique_first_name']);
 		$customer->persist();
 
 		//change tax rate

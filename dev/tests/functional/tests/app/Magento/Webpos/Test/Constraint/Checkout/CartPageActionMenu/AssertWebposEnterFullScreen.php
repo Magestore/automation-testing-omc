@@ -16,8 +16,15 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 class AssertWebposEnterFullScreen extends AbstractConstraint
 {
-    public function processAssert(WebposIndex $webposIndex)
+    public function processAssert(WebposIndex $webposIndex, $minHeightBefore)
     {
+        $minHeightAfter = $webposIndex->getBody()->getPageStyleMinHeight();
+        if($minHeightAfter > $minHeightBefore)
+            $tag = 'Full';
+        else
+            $tag = 'None';
+        \PHPUnit_Framework_Assert::assertEquals('Full',$tag,
+            'Khong thanh cong');
     }
 
     /**

@@ -56,11 +56,16 @@ class WebposCartPageCustomerCP175Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $styleLeftBefore = $this->webposIndex->getCheckoutContainer()->getStyleLeft();
 
         //Click icon < (Back to cart)
         $this->webposIndex->getCheckoutCartHeader()->getIconBackToCart()->click();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         sleep(3);
+        $styleLeftAfter = $this->webposIndex->getCheckoutContainer()->getStyleLeft();
 
+        return ['styleLeftBefore' => $styleLeftBefore,
+            'styleLeftAfter' => $styleLeftAfter
+        ];
     }
 }
