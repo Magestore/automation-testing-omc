@@ -12,8 +12,19 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomSale\AssertWebposCustomSaleShippingMethodSectionHidden;
+/**
+ *  * Preconditions:
+ * 1. Login webpos by a  staff
+ * 2. Add custom product to cart with shippable: off
+ *
+ * Step:
+ * 1. Place order as manual product
+ */
 
-
+/**
+ * Class WebposCustomSaleShippableOffCP81EntityTest
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale
+ */
 class WebposCustomSaleShippableOffCP81EntityTest extends Injectable
 {
     /**

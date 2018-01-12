@@ -11,7 +11,15 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-
+/**
+ *  * Preconditions:
+ * 1. Login webpos by a  staff
+ * 2. Add a product to cart
+ * 3. Edit Discount product (type:$)
+ *
+ * Step:
+ * 1. Place Order
+ */
 /**
  * Class WebposCheckoutWithDiscountProductDollarCP65EntityTest
  * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct

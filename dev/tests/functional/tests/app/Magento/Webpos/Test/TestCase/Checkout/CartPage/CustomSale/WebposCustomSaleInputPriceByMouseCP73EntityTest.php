@@ -9,6 +9,17 @@
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+/**
+ *  * Preconditions:
+ * 1. Login webpos by a  staff
+ * 2. Click on [Custom sale]
+ *
+ * Step:
+ * 1. Input into [Product name], [Product description]
+ * 2. Input valid value to [Price] field by mouse
+ * 3. Click on [Add to cart] button
+ *
+ */
 
 /**
  * Class WebposCustomSaleInputPriceByMouseCP73EntityTest

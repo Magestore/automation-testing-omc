@@ -10,7 +10,15 @@ namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\DeleteProduct;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-
+/**
+ *  * Preconditions:
+ * 1. Login webpos by a  staff
+ * 2. Add a product to cart
+ *
+ * Step:
+ * 1. Click on delete product icon (x icon)
+ *
+ */
 /**
  * Class WebposDeleteProductOnCartPageCP68EntityTest
  * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct

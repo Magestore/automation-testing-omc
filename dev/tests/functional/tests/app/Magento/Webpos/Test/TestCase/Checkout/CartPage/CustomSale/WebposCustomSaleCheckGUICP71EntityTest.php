@@ -8,7 +8,14 @@
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ *  * Preconditions:
+ * 1. Login webpos by a  staff
+ *
+ * Step:
+ * 1. Click on [Custom sale]
+ *
+ */
 /**
  * Class WebposCustomSaleCheckGUICP71EntityTest
  * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct

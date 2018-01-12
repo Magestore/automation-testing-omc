@@ -1,83 +1,83 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Bang
- * Date: 1/10/2018
- * Time: 4:08 PM
+ * User: ducvu
+ * Date: 1/12/2018
+ * Time: 8:29 AM
  */
 
-namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct;
+namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomSale\AssertWebposCustomSaleShippingMethodSectionShow;
 /**
  *  * Preconditions:
  * 1. Login webpos by a  staff
- * 2. Add a product to cart
- * 3. Edit Discount product (type:%)
+ * 2. Add custom product to cart with shippable: on
  *
  * Step:
- * 1. Place Order
+ * 1. Place order as manual product
  */
-
 /**
- * Class WebposCheckoutWithDiscountProductPercentCP65EntityTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct
+ * Class WebposCustomSaleShippableOnCP82EntityTest
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale
  */
-class WebposCheckoutWithDiscountProductPercentCP67EntityTest extends Injectable
+class WebposCustomSaleShippableOnCP82EntityTest  extends Injectable
 {
     /**
-     * AssertWebposCheckGUICustomerPriceCP54 Index page.
-     *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
-
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+    /**
+     * @var
+     */
+    protected  $assertWebposCustomSaleShippingMethodSectionShow;
 
     /**
      * @param WebposIndex $webposIndex
-     * @return void
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @param AssertWebposCustomSaleShippingMethodSectionShow $assertWebposCustomSaleShippingMethodSectionShow
      */
     public function __inject(
         WebposIndex $webposIndex,
-        AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+        AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
+        AssertWebposCustomSaleShippingMethodSectionShow $assertWebposCustomSaleShippingMethodSectionShow
     )
     {
         $this->webposIndex = $webposIndex;
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+        $this->assertWebposCustomSaleShippingMethodSectionShow = $assertWebposCustomSaleShippingMethodSectionShow;
     }
 
     /**
-     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
-     *
-     * @return void
+     * @param $productName
+     * @param $productDescription
      */
-    public function test(CatalogProductSimple $product, $amountValue)
+    public function test($productName, $price)
     {
         $staff = $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
-        $this->webposIndex->getCheckoutProductList()->search($product->getSku());
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $price = $this->webposIndex->getCheckoutCartItems()->getValueItemPrice($product->getName());
-
-        $this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
-        $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
-        sleep(1);
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutProductList()->getCustomSaleButton()->click();
+        $this->webposIndex->getCheckoutCustomSale()->getProductNameInput()->setValue($productName);
+        // number field price keyboard
+        $this->webposIndex->getCheckoutCustomSale()->getProductPriceInput()->setValue($price);
+        $this->webposIndex->getCheckoutCustomSale()->clickSelectTaxClass();
+        $this->webposIndex->getCheckoutCustomSale()->getAddToCartButton()->click();
         //CategoryRepository
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        // assert shippable
+        $this->assertWebposCustomSaleShippingMethodSectionShow->processAssert($this->webposIndex);
+
         //Select cash and place order
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -96,9 +96,5 @@ class WebposCheckoutWithDiscountProductPercentCP67EntityTest extends Injectable
         sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-
-        return [
-            'product' => $product,
-            'price' => $price];
     }
 }

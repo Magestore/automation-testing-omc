@@ -12,7 +12,15 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
-
+/**
+ *  * Preconditions:
+ * 1. Login webpos by a  staff
+ * 2. Add some product to cart
+ *
+ * Step:
+ * 1. Click on delete product icon (x icon) of first product
+ *
+ */
 /**
  * Class WebposDeleteProductOnCartPageCP69EntityTest
  * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\DeleteProduct

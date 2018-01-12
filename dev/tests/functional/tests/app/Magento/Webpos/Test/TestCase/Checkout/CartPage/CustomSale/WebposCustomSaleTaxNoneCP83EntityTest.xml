@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale\WebposCustomSaleShippableOnCP82EntityTest" summary="Checkout - Cart Page - Webpos Check GUI CustomSale CP82" ticketId="WEBPOS-1">
+        <variation name="Webpos_CustomSale_CustomSaleShippableOn_CP82_Test1_CP82">
+            <data name="productName" xsi:type="string">Custom Product</data>
+            <data name="price" xsi:type="string">50.00</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomSale\AssertCustomSaleCheckTaxNone"/>
+        </variation>
+    </testCase>
+</config>

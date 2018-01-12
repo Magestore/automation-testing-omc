@@ -11,7 +11,20 @@ namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-
+/**
+ *  * Preconditions:
+ * 1. Login webpos by a  staff
+ * 2. Add a product to cart
+ * 3. Edit Discount product (type:$)
+ *
+ * Step:
+ * 1. Click on [Discount] tab
+ * 2. Input valid value to [Amount] field (type: $)
+ */
+/**
+ * Class WebposInputValidValueToDiscountDollarCP64EntityTest
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct
+ */
 class WebposInputValidValueToDiscountDollarCP64EntityTest extends Injectable
 {
     /**

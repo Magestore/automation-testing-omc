@@ -1,30 +1,31 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Bang
- * Date: 1/11/2018
- * Time: 2:31 PM
+ * User: ducvu
+ * Date: 1/12/2018
+ * Time: 9:15 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+use Magento\Catalog\Test\Fixture\CatalogProductSimple;
+use Magento\Customer\Test\Fixture\Customer;
+use Magento\Mtf\Fixture\FixtureFactory;
 /**
  *  * Preconditions:
  * 1. Login webpos by a  staff
- * 2. Click on [Custom sale]
  *
  * Step:
- * 1. Input into [Product name]
- * 2. Input invalid value to [Price] field (Ex: abc)
- * 3. Click on [Add to cart] button
- *
+ * 1. Add custom product to cart with Tax: Taxable goods
+ * 2. Add a customer who satify tax
  */
 /**
- * Class WebposCustomSaleInputInvalidToPriceCP75EntityTest
+ * Class WebposCustomSaleTaxableGoodCP84EntityTest
  * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale
  */
-class WebposCustomSaleInputInvalidToPriceCP75EntityTest extends  Injectable
+
+class WebposCustomSaleTaxableGoodCP84EntityTest extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex
@@ -32,8 +33,19 @@ class WebposCustomSaleInputInvalidToPriceCP75EntityTest extends  Injectable
     protected $webposIndex;
 
     /**
+     * @param FixtureFactory $fixtureFactory
+     * @return array
+     */
+    public function __prepare(FixtureFactory $fixtureFactory)
+    {
+        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
+        $customer->persist();
+
+        return ['customer' => $customer];
+    }
+
+    /**
      * @param WebposIndex $webposIndex
-     * @return void
      */
     public function __inject(
         WebposIndex $webposIndex
@@ -46,7 +58,7 @@ class WebposCustomSaleInputInvalidToPriceCP75EntityTest extends  Injectable
      * @param $productName
      * @param $productDescription
      */
-    public function test($productName, $price)
+    public function test( Customer $customer, $productName, $price, $tax)
     {
         $staff = $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
@@ -56,7 +68,15 @@ class WebposCustomSaleInputInvalidToPriceCP75EntityTest extends  Injectable
         $this->webposIndex->getCheckoutCustomSale()->getProductNameInput()->setValue($productName);
         // number field price keyboard
         $this->webposIndex->getCheckoutCustomSale()->getProductPriceInput()->setValue($price);
-        sleep(2);
+        $this->webposIndex->getCheckoutCustomSale()->getTaxClassItem($tax)->click();
+
+        // Change customer in cart
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
+            ['customer' => $customer]
+        )->run();
+
         $this->webposIndex->getCheckoutCustomSale()->getAddToCartButton()->click();
+        //CategoryRepository
     }
 }

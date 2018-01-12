@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Bang
- * Date: 1/11/2018
- * Time: 3:45 PM
+ * User: ducvu
+ * Date: 1/12/2018
+ * Time: 8:58 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale;
@@ -11,23 +11,17 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomSale\AssertWebposCustomSaleShippingMethodSectionHidden;
 /**
  *  * Preconditions:
  * 1. Login webpos by a  staff
- * 2. Add custom product to cart
- * 3. Add some products  to cart
- * 4. Add discount or coupon code
+ * 2. Add custom product to cart with tax: none
  *
  * Step:
- * 1. Place Order
- *
- */
-/**
- * Class WebposCustomSaleCustomProductPlaceOrderCP79EntityTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale
+ * 1. Add custom product to cart with Tax: None
  */
 
-class WebposCustomSaleCustomProductPlaceOrderCP79EntityTest extends Injectable
+class WebposCustomSaleTaxNoneCP83EntityTest extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex
@@ -37,11 +31,12 @@ class WebposCustomSaleCustomProductPlaceOrderCP79EntityTest extends Injectable
      * @var
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+
     /**
      * @param WebposIndex $webposIndex
-     * @return void
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @param AssertWebposCustomSaleShippingMethodSectionHidden $assertWebposCustomSaleShippingMethodSectionHidden
      */
-
     public function __inject(
         WebposIndex $webposIndex,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
@@ -65,29 +60,9 @@ class WebposCustomSaleCustomProductPlaceOrderCP79EntityTest extends Injectable
         $this->webposIndex->getCheckoutCustomSale()->getProductNameInput()->setValue($productName);
         // number field price keyboard
         $this->webposIndex->getCheckoutCustomSale()->getProductPriceInput()->setValue($price);
-        sleep(2);
+//        $this->webposIndex->getCheckoutCustomSale()->getTaxClassItem($tax)->click();
+
         $this->webposIndex->getCheckoutCustomSale()->getAddToCartButton()->click();
         //CategoryRepository
-        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        //Select cash and place order
-        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-        //Assert Place Order Success
-        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-
-        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-
-        //Click Order History
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(2);
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
     }
 }
