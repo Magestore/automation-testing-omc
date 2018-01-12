@@ -1,40 +1,26 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: bang
- * Date: 08/01/2018
- * Time: 14:18
+ * User: gvt
+ * Date: 11/01/2018
+ * Time: 16:18
  */
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Customer\Test\Fixture\Customer;
-
-class WebposCartPageCustomerCP177Test extends Injectable
+class WebposSaveOrderNoteCP187Test extends Injectable
 {
     /**
      * @var WebposIndex
      */
     protected $webposIndex;
 
-    /**
-     * Prepare data.
-     *
-     * @param FixtureFactory $fixtureFactory
-     * @return array
-     */
-    public function __prepare(FixtureFactory $fixtureFactory)
+    public function __prepare()
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'webpos_default_guest_checkout_rollback']
         )->run();
-
-        //Create customer
-        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'webpos_guest_pi']);
-        $customer->persist();
-        return ['customer' => $customer];
     }
 
     public function __inject
@@ -45,8 +31,9 @@ class WebposCartPageCustomerCP177Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test(Customer $customer, $products)
+    public function test($products, $comment)
     {
+
         //Create product
         $product = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
@@ -58,15 +45,8 @@ class WebposCartPageCustomerCP177Test extends Injectable
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
-        //Click icon addCutomer > Search name > click customer
-        $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
-        $this->webposIndex->getCheckoutChangeCustomer()->search($customer->getFirstname());
-        sleep(1);
-        $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
-        sleep(1);
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-
-        //Add products to cart
+        //Add product to cart
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -75,6 +55,19 @@ class WebposCartPageCustomerCP177Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+
+        //Click ... Menu > click Add order note
+        $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
+        sleep(1);
+        $this->webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->click();
+        sleep(1);
+
+        //Click save button
+        if($comment != null)
+            $this->webposIndex->getCheckoutNoteOrder()->getTextArea()->setValue($comment);
+        $this->webposIndex->getCheckoutNoteOrder()->getSaveOrderNoteButon()->click();
+        $this->webposIndex->getCheckoutWebposCart()->waitForCartLoad();
+        sleep(1);
 
         //PlaceOrder
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
@@ -89,10 +82,7 @@ class WebposCartPageCustomerCP177Test extends Injectable
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
 
         return [
-            'name' => $customer->getAddress()[0]['firstname'].' '.$customer->getAddress()[0]['lastname'],
-            'address' => $customer->getAddress()[0]['city'].', '.$customer->getAddress()[0]['region'].', '.$customer->getAddress()[0]['postcode'].', US',
-            'phone' =>  $customer->getAddress()[0]['telephone'],
-            'orderId' => $orderId
+           'orderId' => $orderId
         ];
     }
 }

@@ -59,11 +59,20 @@ class WebposPageActionMenuFullScreenCP191Test extends Injectable
         //Click ... Menu > click Enter/full screen
         $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
         sleep(1);
+        $minHeightBeforeFull = $this->webposIndex->getBody()->getPageStyleMinHeight();
+
         $this->webposIndex->getCheckoutFormAddNote()->getFullScreenMode()->click();
         sleep(1);
+        $this->webposIndex->getCheckoutFormAddNote()->waitFullScreenMode();
+        $minHeightAfterFull = $this->webposIndex->getBody()->getPageStyleMinHeight();
 
         //Click again Enter/full screen
         $this->webposIndex->getCheckoutFormAddNote()->getFullScreenMode()->click();
         sleep(1);
+        $minHeightAfterAgain = $this->webposIndex->getBody()->getPageStyleMinHeight();
+
+        return ['minHeightBeforeFull' => $minHeightBeforeFull,
+            'minHeightAfterFull' => $minHeightAfterFull,
+            'minHeightAfterAgain' => $minHeightAfterAgain];
     }
 }

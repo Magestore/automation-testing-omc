@@ -8,6 +8,8 @@
         <block name="cMenu" class="Magento\Webpos\Test\Block\Cmenu" locator="#c-menu--push-left" strategy="css selector"/>
         <block name="modal" class="Magento\Webpos\Test\Block\Modal" locator=".modals-wrapper" strategy="css selector"/>
         <block name="notification" class="Magento\Webpos\Test\Block\Notification" locator="#webpos-notification" strategy="css selector"/>
+        <block name="body" class="Magento\Webpos\Test\Block\Body" locator="body" strategy="css selector"/>
+        <block name="checkoutContainer" class="Magento\Webpos\Test\Block\CheckoutContainer" locator="#checkout_container" strategy="css selector"/>
 
         <!--CategoryRepository Page-->
         <block name="checkoutProductList" class="Magento\Webpos\Test\Block\Checkout\CheckoutProductList" locator="#product-list-wrapper" strategy="css selector"/>

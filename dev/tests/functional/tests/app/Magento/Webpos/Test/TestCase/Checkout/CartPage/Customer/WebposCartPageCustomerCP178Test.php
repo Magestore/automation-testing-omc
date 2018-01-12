@@ -90,6 +90,7 @@ class WebposCartPageCustomerCP178Test extends Injectable
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         sleep(1);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+        $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         sleep(1);
 
         //Get orderId

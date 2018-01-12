@@ -56,4 +56,9 @@ class OrderHistoryOrderViewContent extends Block
     {
         return $this->getProductRow($name)->find('td[data-bind="text: $parents[1].getItemPriceFormated(item)"]');
     }
+
+    public function getValueComment()
+    {
+        return $this->_rootElement->find('main > div > div:nth-child(4) > div > div > div.panel-body > div > table > tbody > tr > td:nth-child(2)')->getText();
+    }
 }
