@@ -13,6 +13,7 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Swatches\Test\Fixture\ConfigurableProduct;
+use Magento\Tax\Test\Fixture\TaxRate;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertCreateInvoiceSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
@@ -47,10 +48,17 @@ class WebposTaxTAX08Test extends Injectable
 	 */
 	public function __prepare(FixtureFactory $fixtureFactory)
 	{
-		$customer = $fixtureFactory->createByCode('customer', ['dataset' => 'johndoe_MI']);
+		$customer = $fixtureFactory->createByCode('customer', ['dataset' => 'johndoe_MI_unique_first_name']);
 		$customer->persist();
 
-		return ['customer' => $customer];
+		//change tax rate
+		$taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
+		$this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
+
+		return [
+			'customer' => $customer,
+			'taxRate' => $taxRate->getRate()
+		];
 	}
 
 	public function __inject(
@@ -68,6 +76,7 @@ class WebposTaxTAX08Test extends Injectable
 
 	public function test(
 		Customer $customer,
+		$taxRate,
 		$products,
 		$configData,
 		$createInvoice = true,
@@ -80,7 +89,7 @@ class WebposTaxTAX08Test extends Injectable
 			['products' => $products]
 		)->run();
 
-		// Config
+		// Config: use system value for all field in Tax Config
 		$this->objectManager->getInstance()->create(
 			'Magento\Config\Test\TestStep\SetupConfigurationStep',
 			['configData' => $configData]

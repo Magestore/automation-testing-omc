@@ -66,10 +66,17 @@ class WebposTaxTAX01Test extends Injectable
      */
     public function __prepare(FixtureFactory $fixtureFactory)
     {
+        // Change TaxRate
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
+
+        // Add Customer
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_UK']);
         $customer->persist();
 
-        return ['customer' => $customer];
+        return [
+            'customer' => $customer
+        ];
     }
 
     /**
@@ -91,6 +98,7 @@ class WebposTaxTAX01Test extends Injectable
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
 
+
     /**
      * @param Customer $customer
      * @param $products
@@ -98,6 +106,7 @@ class WebposTaxTAX01Test extends Injectable
      * @param $taxRate
      * @param bool $createInvoice
      * @param bool $shipped
+     * @return array
      */
     public function test(
         Customer $customer,
@@ -188,6 +197,9 @@ class WebposTaxTAX01Test extends Injectable
             . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
         );
 
-        $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
+        return [
+            'products' => $products,
+            'taxRate' => $taxRate
+        ];
     }
 }

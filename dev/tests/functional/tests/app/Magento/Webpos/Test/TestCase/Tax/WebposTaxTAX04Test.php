@@ -72,10 +72,18 @@ class WebposTaxTAX04Test extends Injectable
      */
     public function __prepare(FixtureFactory $fixtureFactory)
     {
+        // Change TaxRate
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
+
+        // Add Customer
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
         $customer->persist();
 
-        return ['customer' => $customer];
+        return [
+            'customer' => $customer,
+            'taxRate' => $taxRate->getRate()
+        ];
     }
 
 
@@ -107,17 +115,13 @@ class WebposTaxTAX04Test extends Injectable
      * @param $products
      * @param $configData
      * @param $taxRate
-     * @param bool $createInvoice
-     * @param bool $shipped
      * @return array
      */
     public function test(
         Customer $customer,
         $products,
         $configData,
-        $taxRate,
-        $createInvoice = true,
-        $shipped = false
+        $taxRate
     )
     {
         // Create products
@@ -161,17 +165,20 @@ class WebposTaxTAX04Test extends Injectable
 
         //Assert tax amount in On-Hold Order
         $this->assertTaxAmountOnOnHoldOrderPage->processAssert($taxRate, $products, $this->webposIndex);
+        //End Assert Tax Amount on Checkout Page
 
+        // Check out
         $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         //Assert Tax Amount on Checkout Page
         $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
-        // End Assert Tax Amount on Checkout Page
+        //End Assert Tax Amount on Checkout Page
 
         return [
-            'products' => $products
+            'products' => $products,
+            'taxRate' => $taxRate
         ];
     }
 }

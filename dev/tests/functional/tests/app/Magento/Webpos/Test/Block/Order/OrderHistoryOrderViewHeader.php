@@ -9,6 +9,8 @@
 namespace Magento\Webpos\Test\Block\Order;
 
 use Magento\Mtf\Block\Block;
+use Magento\Mtf\Client\Locator;
+
 /**
  * Class OrderHistoryOrderViewHeader
  * @package Magento\Webpos\Test\Block\Order
@@ -24,4 +26,25 @@ class OrderHistoryOrderViewHeader extends Block
 	{
 		return $this->_rootElement->find('.status')->getText();
 	}
+
+	public function openAddOrderNote()
+    {
+        $this->_rootElement->find('.more-info')->click();
+    }
+
+	// More info - Actions box
+	public function getMoreInfoButton()
+	{
+		return $this->_rootElement->find('nav > div.more-info > a');
+	}
+
+	public function getAction($text)
+	{
+		return $this->_rootElement->find('//*[@id="form-add-note-order"]/ul/li/a[text()="' . $text . '"]', Locator::SELECTOR_XPATH);
+	}
+
+	public function waitForClosedStatusVisisble()
+    {
+        return $this->waitForElementVisible('.status.closed');
+    }
 }
