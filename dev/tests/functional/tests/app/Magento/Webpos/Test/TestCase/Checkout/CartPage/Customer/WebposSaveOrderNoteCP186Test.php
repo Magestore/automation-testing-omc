@@ -8,7 +8,7 @@
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-class WebposSaveOrderNoteCP186AndCP187Test extends Injectable
+class WebposSaveOrderNoteCP186Test extends Injectable
 {
     /**
      * @var WebposIndex

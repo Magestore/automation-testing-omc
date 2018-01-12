@@ -42,5 +42,9 @@ class OrderHistoryOrderViewHeader extends Block
 	{
 		return $this->_rootElement->find('//*[@id="form-add-note-order"]/ul/li/a[text()="' . $text . '"]', Locator::SELECTOR_XPATH);
 	}
-	////////////////
+
+	public function waitForClosedStatusVisisble()
+    {
+        return $this->waitForElementVisible('.status.closed');
+    }
 }

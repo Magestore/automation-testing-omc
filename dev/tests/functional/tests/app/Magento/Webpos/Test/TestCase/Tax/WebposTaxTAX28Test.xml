@@ -15,8 +15,6 @@
                     <item name="invoiceQty" xsi:type="number">1</item>
                 </item>
             </data>
-            <!--<data name="createInvoice" xsi:type="boolean">false</data>-->
-            <data name="taxRate" xsi:type="number">8.25</data>
             <data name="addDiscount" xsi:type="boolean">true</data>
             <data name="discountAmount" xsi:type="string">60.00</data>
             <constraint name="Magento\Webpos\Test\Constraint\Tax\AssertTaxOnOrderDetailIsCorrect"/>

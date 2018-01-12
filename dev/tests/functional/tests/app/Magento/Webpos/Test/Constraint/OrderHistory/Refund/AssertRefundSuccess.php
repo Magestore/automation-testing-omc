@@ -36,7 +36,10 @@ class AssertRefundSuccess extends AbstractConstraint
 			"Success message's Content is Wrong"
 		);
 
-		sleep(10);
+		$webposIndex->getOrderHistoryOrderViewFooter()->waitForTotalRefundedVisible();
+        if ($expectStatus == 'Closed') {
+            $webposIndex->getOrderHistoryOrderViewHeader()->waitForClosedStatusVisisble();
+        }
 
 		\PHPUnit_Framework_Assert::assertEquals(
 			$expectStatus,
