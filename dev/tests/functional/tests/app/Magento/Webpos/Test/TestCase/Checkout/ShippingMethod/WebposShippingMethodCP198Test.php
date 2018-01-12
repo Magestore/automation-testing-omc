@@ -1,15 +1,14 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: gvt
- * Date: 08/01/2018
- * Time: 08:36
+ * User: bang
+ * Date: 12/01/2018
+ * Time: 16:25
  */
-namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
+namespace Magento\Webpos\Test\TestCase\Checkout\ShippingMethod;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-
-class WebposCartPageCustomerCP175Test extends Injectable
+class WebposShippingMethodCP198Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -20,7 +19,7 @@ class WebposCartPageCustomerCP175Test extends Injectable
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'webpos_default_guest_checkout_rollback']
+            ['configData' => 'have_shipping_method_on_webpos_CP197']
         )->run();
     }
 
@@ -40,6 +39,10 @@ class WebposCartPageCustomerCP175Test extends Injectable
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run()[0]['product'];
+        $productMore = $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
+            ['products' => $products]
+        )->run()[0]['product'];
 
         //Login webpos
         $staff = $this->objectManager->getInstance()->create(
@@ -56,16 +59,27 @@ class WebposCartPageCustomerCP175Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $styleLeftBefore = $this->webposIndex->getCheckoutContainer()->getStyleLeft();
 
-        //Click icon < (Back to cart)
+        //Choose a method shipping
+        $this->webposIndex->getCheckoutShippingMethod()->clickPOSShipping();
+        $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+        sleep(1);
+
+        // //Click icon < (Back to cart)
         $this->webposIndex->getCheckoutCartHeader()->getIconBackToCart()->click();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         sleep(1);
-        $styleLeftAfter = $this->webposIndex->getCheckoutContainer()->getStyleLeft();
 
-        return ['styleLeftBefore' => $styleLeftBefore,
-            'styleLeftAfter' => $styleLeftAfter
-        ];
+        //Add more product to cart
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getCheckoutProductList()->search($productMore->getName());
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+
+        //Checkout again
+        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(4);
     }
 }
