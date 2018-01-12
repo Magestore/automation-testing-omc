@@ -17,5 +17,8 @@ use Magento\Mtf\Client\Locator;
  */
 class OrderHistoryAddOrderNote extends Block
 {
-
+    public function openRefundPopup()
+    {
+        $this->_rootElement->find('.//a[text()="Refund"]', Locator::SELECTOR_XPATH)->click();
+    }
 }

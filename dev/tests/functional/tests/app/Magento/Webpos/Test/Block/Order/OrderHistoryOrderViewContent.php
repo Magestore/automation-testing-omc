@@ -61,4 +61,24 @@ class OrderHistoryOrderViewContent extends Block
     {
         return $this->_rootElement->find('main > div > div:nth-child(4) > div > div > div.panel-body > div > table > tbody > tr > td:nth-child(2)')->getText();
     }
+
+	public function getSubTotalOfProduct($name)
+	{
+		return $this->getProductRow($name)->find('td[data-bind="text: $parents[1].convertAndFormatPrice(item.base_row_total)"]')->getText();
+	}
+
+	public function getTaxAmountOfProduct($name)
+	{
+		return $this->getProductRow($name)->find('td[data-bind="text: $parents[1].convertAndFormatPrice(item.base_tax_amount)"]')->getText();
+	}
+
+	public function getDiscountAmountOfProduct($name)
+	{
+		return$this->_rootElement->find('//table/tbody/tr/td/h4[text()="'.$name.'"]/../../td[7]', Locator::SELECTOR_XPATH)->getText();
+	}
+
+	public function getRowTotalOfProduct($name)
+	{
+		return $this->getProductRow($name)->find('td[data-bind="text: $parents[1].getItemRowTotalFormated(item)"]')->getText();
+	}
 }

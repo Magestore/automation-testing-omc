@@ -23,8 +23,24 @@ class OrderHistoryContainer extends Block
         return $this->_rootElement->find('#search-header-order');
     }
 
-	public function getOrderNote()
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getOrderNote()
 	{
 		return $this->_rootElement->find('div.order-comment-list > table > tbody > tr > td:nth-child(2)');
+	}
+
+    /**
+     * @return bool|null
+     */
+    public function waitOrderHistoryInvoiceIsVisible()
+    {
+        return $this->waitForElementVisible('#invoice-popup');
+    }
+
+	public function getActionsBox()
+	{
+		return $this->_rootElement->find('#form-add-note-order');
 	}
 }

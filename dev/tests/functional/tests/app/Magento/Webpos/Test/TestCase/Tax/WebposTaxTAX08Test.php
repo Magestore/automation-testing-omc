@@ -13,7 +13,9 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Swatches\Test\Fixture\ConfigurableProduct;
+use Magento\Tax\Test\Fixture\TaxRate;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertCreateInvoiceSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 class WebposTaxTAX08Test extends Injectable
@@ -34,6 +36,11 @@ class WebposTaxTAX08Test extends Injectable
 	protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
 	/**
+	 * @var AssertCreateInvoiceSuccess
+	 */
+	protected $assertCreateInvoiceSuccess;
+
+	/**
 	 * Prepare data.
 	 *
 	 * @param FixtureFactory $fixtureFactory
@@ -44,22 +51,32 @@ class WebposTaxTAX08Test extends Injectable
 		$customer = $fixtureFactory->createByCode('customer', ['dataset' => 'johndoe_MI']);
 		$customer->persist();
 
-		return ['customer' => $customer];
+		//change tax rate
+		$taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
+		$this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
+
+		return [
+			'customer' => $customer,
+			'taxRate' => $taxRate->getRate()
+		];
 	}
 
 	public function __inject(
 		WebposIndex $webposIndex,
 		FixtureFactory $fixtureFactory,
-		AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+		AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
+		AssertCreateInvoiceSuccess $assertCreateInvoiceSuccess
 	)
 	{
 		$this->webposIndex = $webposIndex;
 		$this->fixtureFactory = $fixtureFactory;
 		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+		$this->assertCreateInvoiceSuccess = $assertCreateInvoiceSuccess;
 	}
 
 	public function test(
 		Customer $customer,
+		$taxRate,
 		$products,
 		$configData,
 		$createInvoice = true,
@@ -72,7 +89,7 @@ class WebposTaxTAX08Test extends Injectable
 			['products' => $products]
 		)->run();
 
-		// Config
+		// Config: use system value for all field in Tax Config
 		$this->objectManager->getInstance()->create(
 			'Magento\Config\Test\TestStep\SetupConfigurationStep',
 			['configData' => $configData]
@@ -129,6 +146,30 @@ class WebposTaxTAX08Test extends Injectable
 		$this->webposIndex->getOrderHistoryOrderList()->waitLoader();
 
 		$this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+		while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+		self::assertEquals(
+			$orderId,
+			$this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
+			"Order Content - Order Id is wrong"
+			. "\nExpected: " . $orderId
+			. "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
+		);
 
+		$this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
+
+		// Create Invoice
+		$this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\CreateInvoiceInOrderHistoryStep',
+			[
+				'products' => $products
+			]
+		)->run();
+
+		$expectStatus = 'Processing';
+		$this->assertCreateInvoiceSuccess->processAssert($this->webposIndex, $expectStatus);
+
+		return [
+			'products' => $products
+		];
 	}
 }
