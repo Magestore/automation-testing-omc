@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: vinh
  * Date: 11/01/2018
- * Time: 13:20
+ * Time: 16:13
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -14,7 +14,7 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposTaxTAX14Test extends Injectable
+class WebposTaxTAX12_1Test extends Injectable
 {
 	/**
 	 * @var WebposIndex
@@ -57,6 +57,7 @@ class WebposTaxTAX14Test extends Injectable
 
 	public function test(
 		Customer $customer,
+		Customer $customer2,
 		$taxRate,
 		$products,
 		$configData
@@ -78,6 +79,9 @@ class WebposTaxTAX14Test extends Injectable
 			'Magento\Config\Test\TestStep\SetupConfigurationStep',
 			['configData' => 'all_allow_shipping_for_POS']
 		)->run();
+
+		// Create Customer 2 (doesn't meet tax conditon)
+		$customer2->persist();
 
 		// Login webpos
 		$staff = $this->objectManager->getInstance()->create(
@@ -101,20 +105,12 @@ class WebposTaxTAX14Test extends Injectable
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-		$this->webposIndex->getCheckoutShippingMethod()->clickShipPanel();
-		$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
-		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-		$this->webposIndex->getCheckoutWebposCart()->getIconPrevious()->click();
-		sleep(2);
-		$this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
-		$this->webposIndex->getMsWebpos()->waitCartLoader();
-
-		$this->webposIndex->getMsWebpos()->clickCMenuButton();
-		$this->webposIndex->getCMenu()->onHoldOrders();
-		$this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
-		$this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder()->click();
-
+		// change to another customer that doesn't meet tax conditon
+		$this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
+			['customer' => $customer2]
+		)->run();
+		sleep(10);
 
 		return [
 			'products' => $products

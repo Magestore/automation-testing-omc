@@ -53,6 +53,7 @@ class ChangeCustomerOnCartStep implements TestStepInterface
         $this->webposIndex->getCheckoutChangeCustomer()->waitForCustomerList();
 		$this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
 		sleep(1);
+		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 
 	}
