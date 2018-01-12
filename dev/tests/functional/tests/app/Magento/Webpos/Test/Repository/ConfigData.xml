@@ -877,7 +877,59 @@
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="inherit" xsi:type="number">1</item>
             </field>
+            <!--Default Shipping Origin-->
+            <field name="shipping/origin/country_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="inherit" xsi:type="number">1</item>
+            </field>
+            <field name="shipping/origin/region_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="inherit" xsi:type="number">1</item>
+            </field>
         </dataset>
         <!--End Tax Config-->
+        <!--Setting [Shipping price] = Taxable goods and Shipping including tax-->
+        <dataset name="taxable_good_shipping_including_tax_TAX47">
+            <!--Tax Classes-->
+            <field name="tax/classes/shipping_tax_class" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Taxable Goods</item>
+                <item name="value" xsi:type="string">2</item>
+            </field>
+
+            <!--Calculation Settings-->
+            <field name="tax/calculation/shipping_includes_tax" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Including Tax</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+
+            <!--Shipping Settings-->
+            <field name="shipping/origin/country_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">United States</item>
+                <item name="value" xsi:type="string">US</item>
+            </field>
+            <field name="shipping/origin/region_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Michigan</item>
+                <item name="value" xsi:type="string">33</item>
+            </field>
+
+            <!--Allow shipping fee-->
+            <field name="webpos/shipping/allowspecific_shipping" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="label" xsi:type="string">All Allowed Shipping</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <!--End Setting [Shipping price] = Taxable goods and Shipping including tax-->
     </repository>
 </config>
