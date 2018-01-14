@@ -22,7 +22,7 @@ class AssertCustomSaleTaxableGood extends AbstractConstraint
     {
         \PHPUnit_Framework_Assert::assertEquals(
             (float) $taxRate,
-            (float) $webposIndex->getCheckoutCartItems()->getGrandTotalItemPrice("Tax")->getText(),
+            (float) $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice("Tax")->getText(),
             'TaxClass page - CategoryRepository Product Edit. On Tab Customer Sale. Tax None'
         );
     }

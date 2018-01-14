@@ -45,4 +45,9 @@ class CheckoutShippingMethod extends Block
 	{
 		return $this->_rootElement->find('#webpos_shipping_storepickup');
 	}
+
+	public function getShippingMethod()
+    {
+        return $this->_rootElement->find('#shipping-method');
+    }
 }
