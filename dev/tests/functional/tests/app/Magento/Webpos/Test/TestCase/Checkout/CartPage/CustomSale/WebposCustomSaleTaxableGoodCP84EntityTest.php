@@ -73,14 +73,13 @@ class WebposCustomSaleTaxableGoodCP84EntityTest extends Injectable
 
         $this->webposIndex->getCheckoutCustomSale()->getAddToCartButton()->click();
         //CategoryRepository
-        sleep(3);
+//        sleep(3);
         // Change customer in cart
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
             ['customer' => $customer]
         )->run();
 
-        \Zend_Debug::dump(111);
         sleep(3);
     }
 }
