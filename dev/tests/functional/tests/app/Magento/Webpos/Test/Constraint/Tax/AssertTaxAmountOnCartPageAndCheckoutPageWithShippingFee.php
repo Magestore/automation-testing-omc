@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 1/4/2018
- * Time: 9:17 AM
+ * Date: 1/12/2018
+ * Time: 10:57 AM
  */
 
 namespace Magento\Webpos\Test\Constraint\Tax;
@@ -12,13 +12,13 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class AssertTaxAmountOnCartPageAndCheckoutPage
+ * Class AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee
  * @package Magento\Webpos\Test\Constraint\Tax
  */
-class AssertTaxAmountOnCartPageAndCheckoutPage extends AbstractConstraint
+class AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee extends AbstractConstraint
 {
 
-    public function processAssert($taxRate, WebposIndex $webposIndex, $addShipFee = false)
+    public function processAssert($taxRate, $shippingMethod, WebposIndex $webposIndex)
     {
         $taxRate = (float) $taxRate / 100;
         $subtotalOnPage = $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice("Subtotal")->getText();
@@ -29,14 +29,18 @@ class AssertTaxAmountOnCartPageAndCheckoutPage extends AbstractConstraint
         }else{
             $discountOnPage = 0;
         }
-		$shippingFee = 0;
-	    if ($addShipFee) {
-			$shippingFee = $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Shipping')->getText();
-		    $shippingFee = (float)substr($shippingFee, 1);
-	    }
 
-        $taxAmount = ($subtotalOnPage + $shippingFee - $discountOnPage) * $taxRate;
-	    $taxAmount = round($taxAmount, 2);
+        $shippingFee = $webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice($shippingMethod)->getText();
+        $shippingFee = (float)substr($shippingFee,1);
+
+        $shippingFeeOnPage = $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice("Shipping")->getText();
+        $shippingFeeOnPage = (float)substr($shippingFeeOnPage,1);
+        $shippingFeeOnCart = $shippingFee / (1 + $taxRate);
+        $shippingFeeOnCart = round($shippingFeeOnCart, 2);
+
+
+        $taxAmount = (float) ($subtotalOnPage - $discountOnPage) * $taxRate + ($shippingFee * ($taxRate / (1 + $taxRate)));
+        $taxAmount = round($taxAmount, 2);
         $taxAmountOnPage = $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice("Tax")->getText();
         $taxAmountOnPage = (float)substr($taxAmountOnPage,1);
 
@@ -44,6 +48,12 @@ class AssertTaxAmountOnCartPageAndCheckoutPage extends AbstractConstraint
             $taxAmount,
             $taxAmountOnPage,
             'On the Cart - The Tax at the web POS was not correctly.'
+        );
+
+        \PHPUnit_Framework_Assert::assertEquals(
+            $shippingFeeOnCart,
+            $shippingFeeOnPage,
+            'On the Cart - The Shipping at the web POS was not correctly.'
         );
     }
 
@@ -54,6 +64,6 @@ class AssertTaxAmountOnCartPageAndCheckoutPage extends AbstractConstraint
      */
     public function toString()
     {
-        return "The Tax at the web POS was correctly.";
+        return "The Tax and The Shipping at the web POS was correctly.";
     }
 }

@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: vinh
- * Date: 11/01/2018
- * Time: 13:20
+ * Date: 12/01/2018
+ * Time: 09:33
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -14,7 +14,7 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposTaxTAX14Test extends Injectable
+class WebposTaxTAX36Test extends Injectable
 {
 	/**
 	 * @var WebposIndex
@@ -39,6 +39,17 @@ class WebposTaxTAX14Test extends Injectable
 
 		$taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
 		$this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
+
+		// Config: use system value for all field in Tax Config
+		$this->objectManager->getInstance()->create(
+			'Magento\Config\Test\TestStep\SetupConfigurationStep',
+			['configData' => 'default_tax_configuration_use_system_value']
+		)->run();
+
+		$this->objectManager->getInstance()->create(
+			'Magento\Config\Test\TestStep\SetupConfigurationStep',
+			['configData' => 'all_allow_shipping_for_POS']
+		)->run();
 
 		return [
 			'customer' => $customer,
@@ -68,15 +79,10 @@ class WebposTaxTAX14Test extends Injectable
 			['products' => $products]
 		)->run();
 
-		// Config: use system value for all field in Tax Config
+		// Config
 		$this->objectManager->getInstance()->create(
 			'Magento\Config\Test\TestStep\SetupConfigurationStep',
 			['configData' => $configData]
-		)->run();
-
-		$this->objectManager->getInstance()->create(
-			'Magento\Config\Test\TestStep\SetupConfigurationStep',
-			['configData' => 'all_allow_shipping_for_POS']
 		)->run();
 
 		// Login webpos
@@ -105,20 +111,19 @@ class WebposTaxTAX14Test extends Injectable
 		$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-		$this->webposIndex->getCheckoutWebposCart()->getIconPrevious()->click();
-
-		$this->webposIndex->getCheckoutCartFooter()->waitButtonHoldVisible();
-		$this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
-		$this->webposIndex->getMsWebpos()->waitCartLoader();
-
-		$this->webposIndex->getMsWebpos()->clickCMenuButton();
-		$this->webposIndex->getCMenu()->onHoldOrders();
-		$this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
-		$this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder()->click();
-
+		$this->webposIndex->getCheckoutShippingMethod()->getBestWayTableRate()->click();
+		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
 		return [
 			'products' => $products
 		];
+	}
+
+	public function tearDown()
+	{
+		$this->objectManager->getInstance()->create(
+			'Magento\Config\Test\TestStep\SetupConfigurationStep',
+			['configData' => 'default_tax_configuration_use_system_value']
+		)->run();
 	}
 }
