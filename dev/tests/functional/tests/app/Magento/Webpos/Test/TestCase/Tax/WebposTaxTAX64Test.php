@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: vong
- * Date: 1/15/2018
- * Time: 8:51 AM
+ * Date: 1/16/2018
+ * Time: 9:42 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -12,10 +12,12 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Tax\Test\Fixture\TaxRule;
+use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInCludeTaxAndDisableCrossBorderTrade;
 use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposTaxTAX57Test extends Injectable
+class WebposTaxTAX64Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -33,9 +35,14 @@ class WebposTaxTAX57Test extends Injectable
     protected $caTaxRule;
 
     /**
-     * @var AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
-    protected $assertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade;
+    protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+
+    /**
+     * @var AssertProductPriceWithCatalogPriceInCludeTaxAndDisableCrossBorderTrade
+     */
+    protected $assertProductPriceWithCatalogPriceInCludeTaxAndDisableCrossBorderTrade;
 
     /**
      * Prepare data.
@@ -61,7 +68,7 @@ class WebposTaxTAX57Test extends Injectable
         $this->caTaxRule = $taxRule;
 
         // Add Customer
-        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_CA']);
+        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
         $customer->persist();
 
         return [
@@ -73,17 +80,19 @@ class WebposTaxTAX57Test extends Injectable
     /**
      * @param WebposIndex $webposIndex
      * @param FixtureFactory $fixtureFactory
-     * @param AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade $assertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade
      */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
-        AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade $assertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade
+        AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
+        AssertProductPriceWithCatalogPriceInCludeTaxAndDisableCrossBorderTrade $assertProductPriceWithCatalogPriceInCludeTaxAndDisableCrossBorderTrade
     )
     {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
-        $this->assertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade = $assertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade;
+        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+        $this->assertProductPriceWithCatalogPriceInCludeTaxAndDisableCrossBorderTrade = $assertProductPriceWithCatalogPriceInCludeTaxAndDisableCrossBorderTrade;
+
     }
 
     /**
@@ -104,10 +113,10 @@ class WebposTaxTAX57Test extends Injectable
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run();
-        // Config [Catalog Prices] = Including tax & [Enable Cross Border Trade] = Yes
+        // Config [Catalog Prices] = Including tax & [Enable Cross Border Trade] = No
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'including_tax_and_enable_cross_border_trade']
+            ['configData' => 'including_tax_and_disable_cross_border_trade']
         )->run();
         // Config Default Tax Destination Calculation California
         $this->objectManager->getInstance()->create(
@@ -123,40 +132,51 @@ class WebposTaxTAX57Test extends Injectable
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',
             ['products' => $products]
         )->run();
-        // Change customer in cart meet California Tax
+        // Change customer in cart meet Michigan Tax
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
             ['customer' => $customer]
         )->run();
-        //Process assert product price and tax amount with default tax rate
-        $actualPriceExcludeTax = $this->webposIndex->getCheckoutCartItems()->getCartItemPrice($products[0]['product']->getName())->getText();
-        $actualPriceExcludeTax = substr($actualPriceExcludeTax, 1);
-        $actualTaxAmount = $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText();
-        $actualTaxAmount = substr($actualTaxAmount, 1);
-        $this->assertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade->processAssert(
-            $this->webposIndex, $defaultTaxRate, $products[0]['product'], $actualPriceExcludeTax, $actualTaxAmount);
-        //Change customer address to Michigan
-        $this->webposIndex->getCheckoutCartHeader()->getCustomerTitleDefault()->click();
-        $this->webposIndex->getCheckoutEditCustomer()->getEditShippingAddressIcon()->click();
-        $this->webposIndex->getCheckoutEditAddress()->getRegionId()->setValue('Michigan');
-        $this->webposIndex->getCheckoutEditAddress()->getSaveButton()->click();
-        $this->webposIndex->getCheckoutEditCustomer()->getSaveButton()->click();
-        $this->webposIndex->getToaster()->getWarningMessage();
-        $actualPriceExcludeTax = $this->webposIndex->getCheckoutCartItems()->getCartItemPrice($products[0]['product']->getName())->getText();
-        $actualPriceExcludeTax = substr($actualPriceExcludeTax, 1);
-        $actualTaxAmount = $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText();
-        $actualTaxAmount = substr($actualTaxAmount, 1);
-        $this->assertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade->processAssert(
-            $this->webposIndex, $defaultTaxRate, $products[0]['product'], $actualPriceExcludeTax, $actualTaxAmount);
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $actualPriceExcludeTax = $this->webposIndex->getCheckoutCartItems()->getCartItemPrice($products[0]['product']->getName())->getText();
+        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
+            [
+                'createInvoice' => false,
+                'shipped' => false
+            ]
+        )->run();
+        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        //Assert Place Order Success
+        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
+        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getCMenu()->ordersHistory();
+        sleep(2);
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        self::assertEquals(
+            $orderId,
+            $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
+            "Order Content - Order Id is wrong"
+            . "\nExpected: " . $orderId
+            . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
+        );
+        $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
+        $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
+        $actualPriceExcludeTax = $this->webposIndex->getOrderHistoryInvoice()->getProductPrice($products[0]['product']->getName());
         $actualPriceExcludeTax = substr($actualPriceExcludeTax, 1);
-        $actualTaxAmount = $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText();
+        $actualTaxAmount = $this->webposIndex->getOrderHistoryInvoice()->getTaxAmountOfProduct($products[0]['product']->getName())->getText();
         $actualTaxAmount = substr($actualTaxAmount, 1);
-        $this->assertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade->processAssert(
-            $this->webposIndex, $currentTaxRate, $products[0]['product'], $actualPriceExcludeTax, $actualTaxAmount);
+        $this->assertProductPriceWithCatalogPriceInCludeTaxAndDisableCrossBorderTrade->processAssert(
+            $this->webposIndex, $defaultTaxRate, $currentTaxRate,$products[0]['product'], $actualPriceExcludeTax, $actualTaxAmount);
     }
 
     public function tearDown()
