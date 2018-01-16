@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Tax\WebposTaxTAX51Test" summary="Tax - Check Tax amount when creating a partial invoice" ticketId="WEBPOS-1">
-        <variation name="WebposTaxTAX51TestVariation_TAX51">
-            <data name="configData" xsi:type="string">taxable_good_shipping_including_tax_TAX47</data>
+    <testCase name="Magento\Webpos\Test\TestCase\Tax\WebposTaxTAX55Test" summary="Tax - Check Tax amount when changing customer" ticketId="WEBPOS-1">
+        <variation name="WebposTaxTAX55TestVariation_TAX55">
+            <data name="configData" xsi:type="string">taxable_good_shipping_including_tax_TAX55</data>
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
                     <item name="orderQty" xsi:type="number">2</item>
-                    <item name="refundQty" xsi:type="number">1</item>
                 </item>
                 <item name="1" xsi:type="array">
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
                     <item name="orderQty" xsi:type="number">2</item>
-                    <item name="refundQty" xsi:type="number">1</item>
                 </item>
             </data>
             <data name="createInvoice" xsi:type="boolean">true</data>

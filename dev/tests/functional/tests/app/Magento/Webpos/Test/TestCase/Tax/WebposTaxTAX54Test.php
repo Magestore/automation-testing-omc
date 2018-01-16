@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: PhucDo
  * Date: 1/15/2018
- * Time: 8:25 AM
+ * Time: 10:38 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -18,10 +18,10 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 
 /**
- * Class WebposTaxTAX51Test
+ * Class WebposTaxTAX54Test
  * @package Magento\Webpos\Test\TestCase\Tax
  */
-class WebposTaxTAX51Test extends Injectable
+class WebposTaxTAX54Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -63,7 +63,7 @@ class WebposTaxTAX51Test extends Injectable
         )->run();
 
         // Change TaxRate
-        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
         // Add Customer
@@ -155,7 +155,7 @@ class WebposTaxTAX51Test extends Injectable
         $this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Flat Rate - Fixed")->getText();
-        $shippingFee = (float)substr($shippingFee,1);
+        $shippingFee = (float)substr($shippingFee, 1);
 
         // Select Payment Method
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
@@ -176,7 +176,7 @@ class WebposTaxTAX51Test extends Injectable
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
         //End Assert Place Order Success
 
-        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
 
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -188,7 +188,8 @@ class WebposTaxTAX51Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
 
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
@@ -201,8 +202,8 @@ class WebposTaxTAX51Test extends Injectable
         $totalOrderQty = 0;
         // Count
         foreach ($products as $key => $item) {
-            $totalRefundQty += (int) $item['refundQty'];
-            $totalOrderQty += (int) $item['orderQty'];
+            $totalRefundQty += (int)$item['refundQty'];
+            $totalOrderQty += (int)$item['orderQty'];
         }
 
         // Create Refund Partial
@@ -214,10 +215,26 @@ class WebposTaxTAX51Test extends Injectable
         )->run();
 
         $expectStatus = 'Complete';
-        $totalPaid = (float) substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
-        $totalRefunded = $totalPaid / 2 + $shippingFee/$totalOrderQty * ($totalOrderQty - $totalRefundQty);
+        $totalPaid = (float)substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
+        $totalRefunded = $totalPaid / 2 + $shippingFee / $totalOrderQty * ($totalOrderQty - $totalRefundQty);
 
         // Assert Total Refunded
+        $this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
+
+        // Refund Extant Items
+        foreach ($products as $key => $item) {
+            unset($products[$key]['refundQty']);
+        }
+
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
+            [
+                'products' => $products
+            ]
+        )->run();
+
+        $expectStatus = 'Closed';
+        $totalRefunded = $totalPaid;
         $this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
 
         // Assert Tax Amount in Order Page
