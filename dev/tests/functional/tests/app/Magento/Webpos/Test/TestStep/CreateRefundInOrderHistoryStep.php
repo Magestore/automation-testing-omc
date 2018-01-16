@@ -21,6 +21,7 @@ class CreateRefundInOrderHistoryStep implements TestStepInterface
 	protected $webposIndex;
 	protected $products;
 	protected $adjustRefund;
+	protected $refundShipping;
 	protected $adjustFee;
 	protected $comment;
 	protected $sendEmail;
@@ -43,6 +44,7 @@ class CreateRefundInOrderHistoryStep implements TestStepInterface
 		WebposIndex $webposIndex,
 		$products,
 		$adjustRefund = null,
+		$refundShipping = null,
 		$adjustFee = null,
 		$comment = null,
 		$sendEmail = false,
@@ -53,6 +55,7 @@ class CreateRefundInOrderHistoryStep implements TestStepInterface
 		$this->webposIndex = $webposIndex;
 		$this->products = $products;
 		$this->adjustRefund = $adjustRefund;
+		$this->refundShipping = $refundShipping;
 		$this->adjustFee = $adjustFee;
 		$this->comment = $comment;
 		$this->sendEmail = $sendEmail;
@@ -105,6 +108,12 @@ class CreateRefundInOrderHistoryStep implements TestStepInterface
 
 		if (isset($this->adjustRefund)) {
 			$this->webposIndex->getOrderHistoryRefund()->getAdjustRefundBox()->setValue($this->adjustRefund);
+		}
+
+		if (isset($this->refundShipping)) {
+			if ($this->webposIndex->getOrderHistoryRefund()->getRefundShipping()->isVisible()) {
+				$this->webposIndex->getOrderHistoryRefund()->getRefundShipping()->setValue($this->refundShipping);
+			}
 		}
 
 		if (isset($this->adjustFee)) {
