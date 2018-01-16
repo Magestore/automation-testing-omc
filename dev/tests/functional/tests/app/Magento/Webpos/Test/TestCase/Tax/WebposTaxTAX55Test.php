@@ -11,7 +11,7 @@ namespace Magento\Webpos\Test\TestCase\Tax;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 
@@ -32,9 +32,9 @@ class WebposTaxTAX55Test extends Injectable
     protected $fixtureFactory;
 
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee
      */
-    protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+    protected $assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee;
 
     /**
      * Prepare data.
@@ -76,17 +76,17 @@ class WebposTaxTAX55Test extends Injectable
     /**
      * @param WebposIndex $webposIndex
      * @param FixtureFactory $fixtureFactory
-     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @param AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee $assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee
      */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
-        AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+        AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee $assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee
     )
     {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
-        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+        $this->assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee = $assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee;
     }
 
     /**
@@ -148,8 +148,27 @@ class WebposTaxTAX55Test extends Injectable
         $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Flat Rate - Fixed")->getText();
         $shippingFee = (float)substr($shippingFee, 1);
 
-        // Assert Tax Amount in Order Page
-//        $this->assertTaxAmountOnOrderPageWithShippingFee->processAssert($taxRates['taxRateMI'], $shippingFee, $products, $this->webposIndex);
+        //Assert Tax Amount on Checkout Page
+        $this->assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee->processAssert($taxRates['taxRateMI']->getRate(), $shippingFee, $this->webposIndex);
+        //End Assert Tax Amount on Checkout Page
+
+        //Change customer address to California
+        $this->webposIndex->getCheckoutCartHeader()->getCustomerTitleDefault()->click();
+        $this->webposIndex->getCheckoutEditCustomer()->getEditShippingAddressIcon()->click();
+        $this->webposIndex->getCheckoutEditAddress()->getRegionId()->setValue('California');
+        $this->webposIndex->getCheckoutEditAddress()->getSaveButton()->click();
+        $this->webposIndex->getCheckoutEditCustomer()->getSaveButton()->click();
+        $this->webposIndex->getToaster()->getWarningMessage();
+
+        sleep(3);
+        // bug
+        $this->webposIndex->getCheckoutEditCustomer()->getCancelButton()->click();
+
+        sleep(3);
+
+        //Assert Tax Amount on Checkout Page
+        $this->assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee->processAssert($taxRates['taxRateCA']->getRate(), $shippingFee, $this->webposIndex);
+        //End Assert Tax Amount on Checkout Page
 
         return [
             'products' => $products,
@@ -157,15 +176,15 @@ class WebposTaxTAX55Test extends Injectable
         ];
     }
 
-//    /**
-//     *
-//     */
-//    public function tearDown()
-//    {
-//        // Config system value
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => 'default_tax_configuration_use_system_value']
-//        )->run();
-//    }
+    /**
+     *
+     */
+    public function tearDown()
+    {
+        // Config system value
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'default_tax_configuration_use_system_value']
+        )->run();
+    }
 }

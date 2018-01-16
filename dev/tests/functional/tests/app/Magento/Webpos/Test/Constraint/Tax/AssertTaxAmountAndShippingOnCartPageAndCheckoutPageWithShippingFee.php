@@ -11,13 +11,19 @@ namespace Magento\Webpos\Test\Constraint\Tax;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+
 /**
- * Class AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee
+ * Class AssertTaxAmountAndShippingOnCartPageAndCheckoutPageWithShippingFee
  * @package Magento\Webpos\Test\Constraint\Tax
  */
-class AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee extends AbstractConstraint
+class AssertTaxAmountAndShippingOnCartPageAndCheckoutPageWithShippingFee extends AbstractConstraint
 {
 
+    /**
+     * @param $taxRate
+     * @param $shippingFee
+     * @param WebposIndex $webposIndex
+     */
     public function processAssert($taxRate, $shippingFee, WebposIndex $webposIndex)
     {
         $taxRate = (float) $taxRate / 100;
@@ -30,6 +36,12 @@ class AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee extends AbstractCo
             $discountOnPage = 0;
         }
 
+        $shippingFeeOnPage = $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice("Shipping")->getText();
+        $shippingFeeOnPage = (float)substr($shippingFeeOnPage,1);
+        $shippingFeeOnCart = $shippingFee / (1 + $taxRate);
+        $shippingFeeOnCart = round($shippingFeeOnCart, 2);
+
+
         $taxAmount = (float) ($subtotalOnPage - $discountOnPage) * $taxRate + ($shippingFee * ($taxRate / (1 + $taxRate)));
         $taxAmount = round($taxAmount, 2);
         $taxAmountOnPage = $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice("Tax")->getText();
@@ -41,6 +53,11 @@ class AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee extends AbstractCo
             'On the Cart - The Tax at the web POS was not correctly.'
         );
 
+        \PHPUnit_Framework_Assert::assertEquals(
+            $shippingFeeOnCart,
+            $shippingFeeOnPage,
+            'On the Cart - The Shipping at the web POS was not correctly.'
+        );
     }
 
     /**
@@ -50,6 +67,6 @@ class AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee extends AbstractCo
      */
     public function toString()
     {
-        return "The Tax at the web POS was correctly.";
+        return "The Tax and The Shipping at the web POS was correctly.";
     }
 }

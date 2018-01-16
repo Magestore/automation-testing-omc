@@ -1010,8 +1010,8 @@
             <field name="tax/calculation/cross_border_trade_enabled" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="label" xsi:type="string">No</item>
-                <item name="value" xsi:type="string">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
             </field>
 
             <!--Shipping Settings-->
