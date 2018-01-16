@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: PhucDo
- * Date: 1/5/2018
- * Time: 4:47 PM
- */
 
 namespace Magento\Webpos\Test\Constraint\Tax;
 

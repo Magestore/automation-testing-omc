@@ -1037,5 +1037,39 @@
             </field>
         </dataset>
         <!--End TAX - Enable Cross Border Trade-->
+
+        <!--Setting [Catalog Prices] = Including tax & [Enable Cross Border Trade] = Yes-->
+        <dataset name="including_tax_and_enable_cross_border_trade">
+            <field name="tax/calculation/price_includes_tax" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Including Tax</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="tax/calculation/cross_border_trade_enabled" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+        </dataset>
+        <!--End Setting [Catalog Prices] = Including tax & [Enable Cross Border Trade] = Yes-->
+
+        <!--Setting Default Tax Destination Calculation California-->
+        <dataset name="california_default_tax_destination">
+            <field name="tax/defaults/country" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">United States</item>
+                <item name="value" xsi:type="string">US</item>
+            </field>
+            <field name="tax/defaults/region" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">California</item>
+                <item name="value" xsi:type="string">12</item>
+            </field>
+        </dataset>
+        <!--End Setting Default Tax Destination Calculation California-->
     </repository>
 </config>
