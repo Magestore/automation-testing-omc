@@ -50,7 +50,7 @@ class AssertRefundSuccess extends AbstractConstraint
 		if (isset($totalRefunded)) {
 			$expectTotalRefunded = $totalRefunded;
 		} else {
-			$expectTotalRefunded = $webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid();
+			$expectTotalRefunded = substr($webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
 		}
 		$actualTotalRefunded = (float) substr($webposIndex->getOrderHistoryOrderViewFooter()->getTotalRefunded(), 1);
 		\PHPUnit_Framework_Assert::assertEquals(

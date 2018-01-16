@@ -12,17 +12,17 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade extends AbstractConstraint
+class AssertProductPriceWithCatalogPriceInCludeTaxAndDisableCrossBorderTrade extends AbstractConstraint
 {
     /**
      * @param WebposIndex $webposIndex
      * @param $taxRate float
      * @param $product CatalogProductSimple
      */
-    public function processAssert(WebposIndex $webposIndex, $taxRate, $product, $actualPriceExcludeTax, $actualTaxAmount)
+    public function processAssert(WebposIndex $webposIndex, $defaultTaxRate, $currentTaxRate, $product, $actualPriceExcludeTax, $actualTaxAmount)
     {
         $priceIncludeTax = $product->getPrice();
-        $priceExcludeTax = round($priceIncludeTax / (1 + $taxRate / 100), 2);
+        $priceExcludeTax = round($priceIncludeTax / (1 + $defaultTaxRate / 100), 2);
 //        $actualPriceExcludeTax = $webposIndex->getCheckoutCartItems()->getCartItemPrice($product->getName())->getText();
 //        $actualPriceExcludeTax = substr($actualPriceExcludeTax, 1);
         \PHPUnit_Framework_Assert::assertEquals(
@@ -32,7 +32,7 @@ class AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade exte
             . "\nExpected: " . $priceExcludeTax
             . "\nActual: " . $actualPriceExcludeTax
         );
-        $taxAmount = round($priceExcludeTax * $taxRate / 100, 2);
+        $taxAmount = round($priceExcludeTax * $currentTaxRate / 100, 2);
 //        $actualTaxAmount = $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText();
 //        $actualTaxAmount = substr($actualTaxAmount, 1);
         \PHPUnit_Framework_Assert::assertEquals(
