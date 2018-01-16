@@ -48,6 +48,7 @@ class AssertTaxAmountOnOrderPageWithShippingFee extends AbstractAssertForm
             $rowTotalOfProduct = (float)substr($rowTotalOfProduct,1);
 
             $taxAmount = ($subtotalOfProduct - $discountAmountOfProduct) * $taxRate;
+	        $taxAmount = round($taxAmount, 2);
             $rowTotal = $subtotalOfProduct + $taxAmountOfProduct - $discountAmountOfProduct;
 
             $subtotalWholeCart += $subtotalOfProduct;

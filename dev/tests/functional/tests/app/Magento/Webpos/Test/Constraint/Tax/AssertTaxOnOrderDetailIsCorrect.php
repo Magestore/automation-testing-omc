@@ -28,7 +28,7 @@ class AssertTaxOnOrderDetailIsCorrect extends AbstractAssertForm
             $rowTotal = (float) substr($webposIndex->getOrderHistoryOrderViewContent()->getRowTotalOfProduct($productName),1);
 
 			\PHPUnit_Framework_Assert::assertEquals(
-				($subTotal - $discountAmount) * $taxRate,
+				round(($subTotal - $discountAmount) * $taxRate, 2),
 				$taxAmount,
 				"Tax amount of product '".$productName."' is wrong"
 			);

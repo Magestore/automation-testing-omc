@@ -43,6 +43,7 @@ class AssertTaxAmountOnOrderHistoryInvoiceWithShipExcludeTax extends AbstractCon
 			$rowTotalOfProduct = (float)substr($rowTotalOfProduct,1);
 
 			$taxAmount = ($subtotalOfProduct - $discountAmountOfProduct) * $taxRate;
+			$taxAmount = round($taxAmount, 2);
 			$rowTotal = $subtotalOfProduct + $taxAmountOfProduct - $discountAmountOfProduct;
 
 			$subtotalWholeCart += $subtotalOfProduct;
@@ -68,6 +69,7 @@ class AssertTaxAmountOnOrderHistoryInvoiceWithShipExcludeTax extends AbstractCon
 		$shippingWholeCartOnPage = (float)substr($shippingWholeCartOnPage,1);
 
 		$taxAmountWholeCart = ($subtotalWholeCartOnPage + $shippingWholeCartOnPage - $discountAmountWholeCart) * $taxRate;
+		$taxAmountWholeCart = round($taxAmountWholeCart, 2);
 
 		if($taxAmountWholeCart != 0){
 			$taxAmountWholeCartOnPage = $webposIndex->getOrderHistoryInvoice()->getRowValue('Tax');
