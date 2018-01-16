@@ -18,10 +18,10 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 
 /**
- * Class WebposTaxTAX52Test
+ * Class WebposTaxTAX54Test
  * @package Magento\Webpos\Test\TestCase\Tax
  */
-class WebposTaxTAX52Test extends Injectable
+class WebposTaxTAX54Test extends Injectable
 {
     /**
      * @var WebposIndex
