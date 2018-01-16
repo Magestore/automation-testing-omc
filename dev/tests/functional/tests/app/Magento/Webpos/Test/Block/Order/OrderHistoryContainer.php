@@ -43,4 +43,12 @@ class OrderHistoryContainer extends Block
 	{
 		return $this->_rootElement->find('#form-add-note-order');
 	}
+
+	/**
+	 * @return bool|null
+	 */
+	public function waitForRefundPopupIsVisible()
+	{
+		return $this->waitForElementVisible('#refund-popup');
+	}
 }

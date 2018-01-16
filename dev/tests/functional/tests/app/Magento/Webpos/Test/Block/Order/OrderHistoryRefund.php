@@ -83,7 +83,12 @@ class OrderHistoryRefund extends Block
 	}
 
 	public function getItemPrice($name)
-    {
-        return $this->getItemRow($name)->find('[data-bind="text: $parent.convertAndFormatPrice(item.base_price_incl_tax)"]');
-    }
+	{
+		return $this->getItemRow($name)->find('td[data-bind="text: $parent.convertAndFormatPrice(item.base_price_incl_tax)"]')->getText();
+	}
+
+	public function getRefundShipping()
+	{
+		return $this->_rootElement->find('input[name="shipping_amount"]');
+	}
 }
