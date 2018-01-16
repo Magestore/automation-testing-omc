@@ -22,8 +22,8 @@ class AssertCustomSaleCheckTaxNone extends AbstractConstraint
     {
         \PHPUnit_Framework_Assert::assertEquals(
             (float) 0.00,
-            (float) $webposIndex->getCheckoutCartItems()->getGrandTotalItemPrice("Tax")->getText(),
-            'TaxClass page - CategoryRepository Product Edit. On Tab Customer Sale. Tax None'
+            (float) $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice("Tax")->getText(),
+            'TaxClass page - CategosryRepository Product Edit. On Tab Customer Sale. Tax None'
         );
     }
 
