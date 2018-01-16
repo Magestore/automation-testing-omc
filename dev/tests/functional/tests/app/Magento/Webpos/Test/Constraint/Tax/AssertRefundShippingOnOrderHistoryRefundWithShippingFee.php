@@ -31,8 +31,7 @@ class AssertRefundShippingOnOrderHistoryRefundWithShippingFee extends AbstractAs
         $refundShipping = $shippingFee / (1 + $taxRate);
         $refundShipping = round($refundShipping, 2);
 
-        $refundShippingOnPage = $webposIndex->getOrderHistoryRefund()->getItemRow();
-        $refundShippingOnPage = (float) $refundShippingOnPage;
+        $refundShippingOnPage = (float) $webposIndex->getOrderHistoryRefund()->getRefundShipping()->getValue();
 
         \PHPUnit_Framework_Assert::assertEquals(
             $refundShipping,
