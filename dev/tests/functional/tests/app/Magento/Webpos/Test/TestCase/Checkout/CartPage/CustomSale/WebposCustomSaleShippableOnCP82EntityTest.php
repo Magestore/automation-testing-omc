@@ -69,7 +69,7 @@ class WebposCustomSaleShippableOnCP82EntityTest  extends Injectable
         $this->webposIndex->getCheckoutCustomSale()->getProductNameInput()->setValue($productName);
         // number field price keyboard
         $this->webposIndex->getCheckoutCustomSale()->getProductPriceInput()->setValue($price);
-        $this->webposIndex->getCheckoutCustomSale()->clickSelectTaxClass();
+        $this->webposIndex->getCheckoutCustomSale()->getShipAbleCheckbox()->click();
         $this->webposIndex->getCheckoutCustomSale()->getAddToCartButton()->click();
         //CategoryRepository
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
@@ -93,7 +93,6 @@ class WebposCustomSaleShippableOnCP82EntityTest  extends Injectable
         //Click Order History
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
     }

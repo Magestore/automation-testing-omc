@@ -198,4 +198,15 @@ class WebposTaxTAX50Test extends Injectable
             'taxRate' => $taxRate
         ];
     }
+    /**
+     *
+     */
+    public function tearDown()
+    {
+        // Config system value
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'default_tax_configuration_use_system_value']
+        )->run();
+    }
 }

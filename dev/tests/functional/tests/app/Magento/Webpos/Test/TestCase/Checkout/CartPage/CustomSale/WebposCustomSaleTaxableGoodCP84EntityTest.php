@@ -58,7 +58,7 @@ class WebposCustomSaleTaxableGoodCP84EntityTest extends Injectable
      * @param $productName
      * @param $productDescription
      */
-    public function test( Customer $customer, $productName, $price, $tax)
+    public function test($customer, $productName, $price, $tax)
     {
         $staff = $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
@@ -70,13 +70,16 @@ class WebposCustomSaleTaxableGoodCP84EntityTest extends Injectable
         $this->webposIndex->getCheckoutCustomSale()->getProductPriceInput()->setValue($price);
         $this->webposIndex->getCheckoutCustomSale()->getTaxClassItem($tax)->click();
 
+
+        $this->webposIndex->getCheckoutCustomSale()->getAddToCartButton()->click();
+        //CategoryRepository
+//        sleep(3);
         // Change customer in cart
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
             ['customer' => $customer]
         )->run();
 
-        $this->webposIndex->getCheckoutCustomSale()->getAddToCartButton()->click();
-        //CategoryRepository
+        sleep(3);
     }
 }
