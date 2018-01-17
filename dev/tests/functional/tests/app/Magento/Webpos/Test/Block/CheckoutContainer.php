@@ -17,4 +17,9 @@ class CheckoutContainer extends Block
         $styleLeft = (float)str_replace('px;', '', $styleLeft);
         return $styleLeft;
     }
+
+	public function waitForProductEditPopop()
+	{
+		$this->waitForElementVisible('#popup-edit-product');
+	}
 }
