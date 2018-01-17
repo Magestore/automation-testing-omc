@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: vinh
  * Date: 17/01/2018
- * Time: 10:14
+ * Time: 10:45
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -13,9 +13,10 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderHistoryInvoice;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposTaxTAX94Test extends Injectable
+class WebposTaxTAX95Test extends Injectable
 {
 	/**
 	 * @var WebposIndex
@@ -31,6 +32,11 @@ class WebposTaxTAX94Test extends Injectable
 	 * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
 	 */
 	protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+
+	/**
+	 * @var AssertTaxAmountOnOrderHistoryInvoice
+	 */
+	protected $assertTaxAmountOnOrderHistoryInvoice;
 
 	/**
 	 * Prepare data.
@@ -61,12 +67,14 @@ class WebposTaxTAX94Test extends Injectable
 	public function __inject(
 		WebposIndex $webposIndex,
 		FixtureFactory $fixtureFactory,
-		AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+		AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
+		AssertTaxAmountOnOrderHistoryInvoice $assertTaxAmountOnOrderHistoryInvoice
 	)
 	{
 		$this->webposIndex = $webposIndex;
 		$this->fixtureFactory = $fixtureFactory;
 		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+		$this->assertTaxAmountOnOrderHistoryInvoice = $assertTaxAmountOnOrderHistoryInvoice;
 	}
 
 	public function test(
@@ -183,6 +191,15 @@ class WebposTaxTAX94Test extends Injectable
 			. "\nExpected: " . $subTotal
 			. "\nActual: " . $subTotalOnPage
 		);
+
+		$this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
+		$this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
+
+		// Assert Tax amount on Invoice popup
+		$this->assertTaxAmountOnOrderHistoryInvoice->processAssert($taxRate, $products, $this->webposIndex);
+
+		$this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
+		$this->webposIndex->getModal()->getOkButton()->click();
 
 		return [
 			'products' => $products
