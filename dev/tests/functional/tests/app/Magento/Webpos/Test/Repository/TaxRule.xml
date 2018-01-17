@@ -17,5 +17,16 @@
             <field name="priority" xsi:type="string">0</field>
             <field name="position" xsi:type="string">0</field>
         </dataset>
+
+        <dataset name="MI_rule">
+            <field name="code" xsi:type="string">Tax Rule %isolation%</field>
+            <field name="tax_rate" xsi:type="array">
+                <item name="dataset" xsi:type="array">
+                    <item name="0" xsi:type="string">US-MI-Rate_1</item>
+                </item>
+            </field>
+            <field name="priority" xsi:type="string">0</field>
+            <field name="position" xsi:type="string">0</field>
+        </dataset>
     </repository>
 </config>

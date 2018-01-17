@@ -877,6 +877,7 @@
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="inherit" xsi:type="number">1</item>
             </field>
+
             <!--Default Shipping Origin-->
             <field name="shipping/origin/country_id" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -990,6 +991,7 @@
             </field>
         </dataset>
         <!--End TAX - Disable Cross Border Trade-->
+
         <!--Setting TAX - Enable Cross Border Trade-->
         <dataset name="taxable_good_shipping_including_tax_TAX56">
             <!--Tax Classes-->
@@ -1037,6 +1039,47 @@
             </field>
         </dataset>
         <!--End TAX - Enable Cross Border Trade-->
+
+        <!--Setting: [Tax Calculation Based On] = Shipping Origin-->
+        <dataset name="taxable_good_shipping_including_tax_TAX71">
+            <!--Calculation Settings-->
+            <field name="tax/calculation/based_on" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Shipping Origin</item>
+                <item name="value" xsi:type="string">origin</item>
+            </field>
+
+            <!--Shipping Settings-->
+            <field name="shipping/origin/country_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">United States</item>
+                <item name="value" xsi:type="string">US</item>
+            </field>
+
+            <field name="shipping/origin/region_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">California</item>
+                <item name="value" xsi:type="string">12</item>
+            </field>
+
+            <!--Default Guest Checkout-->
+            <field name="webpos/guest_checkout/country_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">United States</item>
+                <item name="value" xsi:type="string">US</item>
+            </field>
+            <field name="webpos/guest_checkout/region_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">California</item>
+                <item name="value" xsi:type="string">12</item>
+            </field>
+        </dataset>
+        <!--End Setting: [Tax Calculation Based On] = Shipping Origin-->
 
         <!--Setting [Catalog Prices] = Including tax & [Enable Cross Border Trade] = Yes-->
         <dataset name="including_tax_and_enable_cross_border_trade">
@@ -1110,6 +1153,17 @@
             </field>
         </dataset>
         <!--End Setting [Tax Calculation Based On] = Billing address-->
+
+        <!--Setting: [Apply Tax On] = Original price only-->
+        <dataset name="tax_calculation_apply_tax_on_original_price_only">
+            <field name="tax/calculation/apply_tax_on" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Original price only</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+        </dataset>
+        <!--End Setting: [Apply Tax On] = Original price only-->
 
         <!--Setting [Apply Discount On Prices] = Excluding tax-->
         <dataset name="apply_discount_on_prices_excluding_tax">
