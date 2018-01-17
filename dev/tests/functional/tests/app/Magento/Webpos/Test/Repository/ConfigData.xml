@@ -1165,5 +1165,16 @@
             </field>
         </dataset>
         <!--End Setting [Tax Calculation Based On] = Billing address-->
+
+        <!--Setting: [Apply Tax On] = Original price only-->
+        <dataset name="tax_calculation_apply_tax_on_original_price_only">
+            <field name="tax/calculation/apply_tax_on" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Original price only</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+        </dataset>
+        <!--End Setting: [Apply Tax On] = Original price only-->
     </repository>
 </config>
