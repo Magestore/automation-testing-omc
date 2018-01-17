@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 1/15/2018
- * Time: 10:38 AM
+ * Date: 1/17/2018
+ * Time: 8:33 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -12,15 +12,15 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Tax\Test\Fixture\TaxRule;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee;
+use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceOnOrderHistoryRefund;
+use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-
 /**
- * Class WebposTaxTAX56Test
+ * Class WebposTaxTAX75Test
  * @package Magento\Webpos\Test\TestCase\Tax
  */
-class WebposTaxTAX56Test extends Injectable
+class WebposTaxTAX75Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -38,9 +38,14 @@ class WebposTaxTAX56Test extends Injectable
     protected $taxRuleCA;
 
     /**
-     * @var AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee
+     * @var AssertProductPriceOnOrderHistoryRefund
      */
-    protected $assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee;
+    protected $assertProductPriceOnOrderHistoryRefund;
+
+    /**
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
+    protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
      * Prepare data.
@@ -57,12 +62,11 @@ class WebposTaxTAX56Test extends Injectable
         )->run();
 
         // Change TaxRate
-        $taxRateMI = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
-        $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRateMI);
-
-        // Change TaxRate
         $taxRateCA = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-CA-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRateCA);
+
+        $taxRateMI = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
+        $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRateMI);
 
         $taxRates = [
             'taxRateMI' => $taxRateMI,
@@ -87,18 +91,22 @@ class WebposTaxTAX56Test extends Injectable
     /**
      * @param WebposIndex $webposIndex
      * @param FixtureFactory $fixtureFactory
-     * @param AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee $assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee
+     * @param AssertProductPriceOnOrderHistoryRefund $assertProductPriceOnOrderHistoryRefund
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
-        AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee $assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee
+        AssertProductPriceOnOrderHistoryRefund $assertProductPriceOnOrderHistoryRefund,
+        AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
     )
     {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
-        $this->assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee = $assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee;
+        $this->assertProductPriceOnOrderHistoryRefund = $assertProductPriceOnOrderHistoryRefund;
+        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
+
 
     /**
      * @param Customer $customer
@@ -141,44 +149,65 @@ class WebposTaxTAX56Test extends Injectable
             ['products' => $products]
         )->run();
 
-        // Change customer in cart
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
-            ['customer' => $customer]
-        )->run();
-
-        // Check out
+        // Place Order
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-        // Select Shipping Method
-        $this->webposIndex->getCheckoutShippingMethod()->openCheckoutShippingMethod();
-        $this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
+        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Flat Rate - Fixed")->getText();
-        $shippingFee = (float)substr($shippingFee, 1);
 
-        //Assert Tax Amount on Checkout Page
-        $this->assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee->processAssert($taxRates['taxRateMI']->getRate(), $shippingFee, $this->webposIndex);
-        //End Assert Tax Amount on Checkout Page
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
+            [
+                'createInvoice' => $createInvoice,
+                'shipped' => $shipped
+            ]
+        )->run();
 
-        //Change customer address to California
-        $this->webposIndex->getCheckoutCartHeader()->getCustomerTitleDefault()->click();
-        $this->webposIndex->getCheckoutEditCustomer()->getEditShippingAddressIcon()->click();
-        $this->webposIndex->getCheckoutEditAddress()->getRegionId()->setValue('California');
-        $this->webposIndex->getCheckoutEditAddress()->getSaveButton()->click();
-        $this->webposIndex->getCheckoutEditCustomer()->getSaveButton()->click();
-        $this->webposIndex->getToaster()->getWarningMessage();
+        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        // End Place Order
 
-        sleep(1);
-        //Assert Tax Amount on Checkout Page
-        $this->assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee->processAssert($taxRates['taxRateCA']->getRate(), $shippingFee, $this->webposIndex);
-        //End Assert Tax Amount on Checkout Page
+        //Assert Place Order Success
+        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
+        //End Assert Place Order Success
+
+        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+
+        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getCMenu()->ordersHistory();
+
+        sleep(2);
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+
+        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        self::assertEquals(
+            $orderId,
+            $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
+            "Order Content - Order Id is wrong"
+            . "\nExpected: " . $orderId
+            . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
+        );
+
+        // Refund
+        $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
+        $this->webposIndex->getOrderHistoryAddOrderNote()->openRefundPopup();
+
+        //Assert Tax Amount in Order History Invoice
+        $this->assertProductPriceOnOrderHistoryRefund->processAssert($taxRates['taxRateCA']->getRate(), $products, $this->webposIndex);
+
+        // Refund successfully
+        $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
+        $this->webposIndex->getModal()->getOkButton()->click();
 
         return [
             'products' => $products,
-            'taxRates' => $taxRates
+            'taxRate' => $taxRates['taxRateCA']->getRate()
         ];
     }
 

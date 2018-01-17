@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 1/15/2018
- * Time: 10:38 AM
+ * Date: 1/17/2018
+ * Time: 9:05 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -11,16 +11,15 @@ namespace Magento\Webpos\Test\TestCase\Tax;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Tax\Test\Fixture\TaxRule;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageBeforeDiscount;
+use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-
 /**
- * Class WebposTaxTAX56Test
+ * Class WebposTaxTAX76Test
  * @package Magento\Webpos\Test\TestCase\Tax
  */
-class WebposTaxTAX56Test extends Injectable
+class WebposTaxTAX76Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -33,14 +32,14 @@ class WebposTaxTAX56Test extends Injectable
     protected $fixtureFactory;
 
     /**
-     * @var TaxRule $taxRuleCA
+     * @var AssertTaxAmountOnCartPageAndCheckoutPageBeforeDiscount
      */
-    protected $taxRuleCA;
+    protected $assertTaxAmountOnCartPageAndCheckoutPageBeforeDiscount;
 
     /**
-     * @var AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
-    protected $assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee;
+    protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
      * Prepare data.
@@ -57,22 +56,8 @@ class WebposTaxTAX56Test extends Injectable
         )->run();
 
         // Change TaxRate
-        $taxRateMI = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
-        $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRateMI);
-
-        // Change TaxRate
-        $taxRateCA = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-CA-Rate_1']);
-        $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRateCA);
-
-        $taxRates = [
-            'taxRateMI' => $taxRateMI,
-            'taxRateCA' => $taxRateCA
-        ];
-
-        // Create CA Tax Rule
-        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset'=> 'CA_rule']);
-        $taxRule->persist();
-        $this->taxRuleCA = $taxRule;
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
         // Add Customer
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
@@ -80,42 +65,46 @@ class WebposTaxTAX56Test extends Injectable
 
         return [
             'customer' => $customer,
-            'taxRates' => $taxRates
+            'taxRate' => $taxRate->getRate()
         ];
     }
 
     /**
      * @param WebposIndex $webposIndex
      * @param FixtureFactory $fixtureFactory
-     * @param AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee $assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee
+     * @param AssertTaxAmountOnCartPageAndCheckoutPageBeforeDiscount $assertTaxAmountOnCartPageAndCheckoutPageBeforeDiscount
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
-        AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee $assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee
+        AssertTaxAmountOnCartPageAndCheckoutPageBeforeDiscount $assertTaxAmountOnCartPageAndCheckoutPageBeforeDiscount,
+        AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
     )
     {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
-        $this->assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee = $assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee;
+        $this->assertTaxAmountOnCartPageAndCheckoutPageBeforeDiscount = $assertTaxAmountOnCartPageAndCheckoutPageBeforeDiscount;
+        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
+
 
     /**
      * @param Customer $customer
      * @param $products
      * @param $configData
-     * @param $taxRates
-     * @param bool $createInvoice
-     * @param bool $shipped
+     * @param $taxRate
+     * @param bool $addDiscount
+     * @param null $discountAmount
      * @return array
      */
     public function test(
         Customer $customer,
         $products,
         $configData,
-        $taxRates,
-        $createInvoice = true,
-        $shipped = false
+        $taxRate,
+        $addDiscount = false,
+        $discountAmount = null
     )
     {
         // Create products
@@ -147,43 +136,41 @@ class WebposTaxTAX56Test extends Injectable
             ['customer' => $customer]
         )->run();
 
+        // Add Discount
+        if ($addDiscount) {
+            $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
+            sleep(1);
+            self::assertTrue(
+                $this->webposIndex->getCheckoutDiscount()->isVisible(),
+                'CategoryRepository - TaxClass page - Delete TaxClass - Add discount popup is not shown'
+            );
+            $this->webposIndex->getCheckoutDiscount()->setDiscountPercent($discountAmount);
+            $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
+            $this->webposIndex->getMsWebpos()->waitCartLoader();
+            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        }
+
+        //Assert Tax Amount on Cart Page
+        $this->assertTaxAmountOnCartPageAndCheckoutPageBeforeDiscount->processAssert($taxRate, $this->webposIndex);
+        //End Assert Tax Amount on Cart Page
+
         // Check out
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-        // Select Shipping Method
-        $this->webposIndex->getCheckoutShippingMethod()->openCheckoutShippingMethod();
-        $this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Flat Rate - Fixed")->getText();
-        $shippingFee = (float)substr($shippingFee, 1);
-
         //Assert Tax Amount on Checkout Page
-        $this->assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee->processAssert($taxRates['taxRateMI']->getRate(), $shippingFee, $this->webposIndex);
-        //End Assert Tax Amount on Checkout Page
-
-        //Change customer address to California
-        $this->webposIndex->getCheckoutCartHeader()->getCustomerTitleDefault()->click();
-        $this->webposIndex->getCheckoutEditCustomer()->getEditShippingAddressIcon()->click();
-        $this->webposIndex->getCheckoutEditAddress()->getRegionId()->setValue('California');
-        $this->webposIndex->getCheckoutEditAddress()->getSaveButton()->click();
-        $this->webposIndex->getCheckoutEditCustomer()->getSaveButton()->click();
-        $this->webposIndex->getToaster()->getWarningMessage();
-
-        sleep(1);
-        //Assert Tax Amount on Checkout Page
-        $this->assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee->processAssert($taxRates['taxRateCA']->getRate(), $shippingFee, $this->webposIndex);
+        $this->assertTaxAmountOnCartPageAndCheckoutPageBeforeDiscount->processAssert($taxRate, $this->webposIndex);
         //End Assert Tax Amount on Checkout Page
 
         return [
             'products' => $products,
-            'taxRates' => $taxRates
+            'taxRate' => $taxRate
         ];
     }
 
     /**
-     *
+     * After Test
      */
     public function tearDown()
     {
@@ -192,8 +179,5 @@ class WebposTaxTAX56Test extends Injectable
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'default_tax_configuration_use_system_value']
         )->run();
-
-        // Delete Rax Rule
-        $this->objectManager->create('Magento\Webpos\Test\Handler\TaxRule\Curl')->persist($this->taxRuleCA);
     }
 }
