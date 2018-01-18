@@ -22,7 +22,7 @@ use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountWithApplyTaxOnCustomPrice;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountWithIncludeFptInSubtotal;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposTaxTAX107Test extends Injectable
+class WebposTaxTAX109Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -130,19 +130,9 @@ class WebposTaxTAX107Test extends Injectable
             'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
             ['customer' => $customer]
         )->run();
-        $actualTaxAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText(), 1);
-        $actualSubtotal = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Subtotal')->getText(), 1);
-        $actualGrandtotal = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText(), 1);
-        $this->assertTaxAmountWithIncludeFptInSubtotal
-            ->processAssert($products[0]['product']->getPrice(), $taxRate, $products[0]['product']->getFpt()[0]['price'], $actualTaxAmount, $actualSubtotal, $actualGrandtotal);
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $actualTaxAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText(), 1);
-        $actualSubtotal = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Subtotal')->getText(), 1);
-        $actualGrandtotal = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText(), 1);
-        $this->assertTaxAmountWithIncludeFptInSubtotal
-            ->processAssert($products[0]['product']->getPrice(), $taxRate, $products[0]['product']->getFpt()[0]['price'], $actualTaxAmount, $actualSubtotal, $actualGrandtotal);
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->objectManager->getInstance()->create(
@@ -156,6 +146,27 @@ class WebposTaxTAX107Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
+        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getCMenu()->ordersHistory();
+        sleep(2);
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        self::assertEquals(
+            $orderId,
+            $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
+            "Order Content - Order Id is wrong"
+            . "\nExpected: " . $orderId
+            . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
+        );
+        $actualTaxAmount = substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTax(), 1);
+        $actualSubtotal = substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getSubtotal(), 1);
+        $actualGrandtotal = substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getGrandTotal(),1);
+        $this->assertTaxAmountWithIncludeFptInSubtotal
+            ->processAssert($products[0]['product']->getPrice(), $taxRate, $products[0]['product']->getFpt()[0]['price'], $actualTaxAmount, $actualSubtotal, $actualGrandtotal);
 
     }
 

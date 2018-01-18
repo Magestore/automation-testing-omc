@@ -111,4 +111,9 @@ class OrderHistoryInvoice extends Block
     {
         return $this->_rootElement->find('[data-bind="text: convertAndFormatPrice(taxAmount())"]')->getText();
     }
+
+    public function getGrandtotal()
+    {
+        return $this->_rootElement->find('[id="invoice_grandtotal"]')->getText();
+    }
 }
