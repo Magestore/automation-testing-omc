@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: vinh
- * Date: 15/01/2018
- * Time: 10:01
+ * Date: 18/01/2018
+ * Time: 09:19
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -12,11 +12,10 @@ namespace Magento\Webpos\Test\TestCase\Tax;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderHistoryInvoiceWithShipExcludeTax;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithTaxApplyToFPT;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposTaxTAX41Test extends Injectable
+class WebposTaxTAX97Test extends Injectable
 {
 	/**
 	 * @var WebposIndex
@@ -29,14 +28,9 @@ class WebposTaxTAX41Test extends Injectable
 	protected $fixtureFactory;
 
 	/**
-	 * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+	 * @var AssertTaxAmountOnCartPageAndCheckoutPageWithTaxApplyToFPT
 	 */
-	protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-
-	/**
-	 * @var AssertTaxAmountOnOrderHistoryInvoiceWithShipExcludeTax
-	 */
-	protected $assertTaxAmountOnOrderHistoryInvoiceWithShipExcludeTax;
+	protected $assertTaxAmountOnCartPageAndCheckoutPageWithTaxApplyToFPT;
 
 	/**
 	 * Prepare data.
@@ -58,11 +52,6 @@ class WebposTaxTAX41Test extends Injectable
 			['configData' => 'default_tax_configuration_use_system_value']
 		)->run();
 
-		$this->objectManager->getInstance()->create(
-			'Magento\Config\Test\TestStep\SetupConfigurationStep',
-			['configData' => 'all_allow_shipping_for_POS']
-		)->run();
-
 		return [
 			'customer' => $customer,
 			'taxRate' => $taxRate->getRate()
@@ -72,14 +61,12 @@ class WebposTaxTAX41Test extends Injectable
 	public function __inject(
 		WebposIndex $webposIndex,
 		FixtureFactory $fixtureFactory,
-		AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
-		AssertTaxAmountOnOrderHistoryInvoiceWithShipExcludeTax $assertTaxAmountOnOrderHistoryInvoiceWithShipExcludeTax
+		AssertTaxAmountOnCartPageAndCheckoutPageWithTaxApplyToFPT $assertTaxAmountOnCartPageAndCheckoutPageWithTaxApplyToFPT
 	)
 	{
 		$this->webposIndex = $webposIndex;
 		$this->fixtureFactory = $fixtureFactory;
-		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-		$this->assertTaxAmountOnOrderHistoryInvoiceWithShipExcludeTax = $assertTaxAmountOnOrderHistoryInvoiceWithShipExcludeTax;
+		$this->assertTaxAmountOnCartPageAndCheckoutPageWithTaxApplyToFPT = $assertTaxAmountOnCartPageAndCheckoutPageWithTaxApplyToFPT;
 	}
 
 	public function test(
@@ -120,10 +107,16 @@ class WebposTaxTAX41Test extends Injectable
 			['customer' => $customer]
 		)->run();
 
+		// Assert Tax on Cart
+		$this->assertTaxAmountOnCartPageAndCheckoutPageWithTaxApplyToFPT->processAssert($taxRate, $products, $this->webposIndex);
+
 		// Place Order
 		$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+
+		// Assert Tax on Cart
+		$this->assertTaxAmountOnCartPageAndCheckoutPageWithTaxApplyToFPT->processAssert($taxRate, $products, $this->webposIndex);
 
 		$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -138,39 +131,6 @@ class WebposTaxTAX41Test extends Injectable
 
 		$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-		//Assert Place Order Success
-		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-
-		$orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
-
-		$this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
-		$this->webposIndex->getMsWebpos()->waitCartLoader();
-
-		$this->webposIndex->getMsWebpos()->clickCMenuButton();
-		$this->webposIndex->getCMenu()->ordersHistory();
-
-		sleep(2);
-		$this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-
-		$this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-		while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
-		self::assertEquals(
-			$orderId,
-			$this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
-			"Order Content - Order Id is wrong"
-			. "\nExpected: " . $orderId
-			. "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
-		);
-
-		$this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
-		$this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
-
-		// Assert Tax amount on Invoice popup
-		$this->assertTaxAmountOnOrderHistoryInvoiceWithShipExcludeTax->processAssert($taxRate, $products, $this->webposIndex);
-
-		$this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
-		$this->webposIndex->getModal()->getOkButton()->click();
 
 		return [
 			'products' => $products

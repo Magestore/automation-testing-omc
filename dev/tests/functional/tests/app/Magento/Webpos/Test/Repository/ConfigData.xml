@@ -1244,6 +1244,23 @@
         </dataset>
         <!--End Setting [Include FPT In Subtotal] = Yes and [Enable FPT] = Yes-->
 
+        <!--Setting   [Apply Tax To FPT] = Yes and [Enable FPT] = Yes-->
+        <dataset name="enable_fpt_and_apply_tax_to_fpt_yes">
+            <field name="tax/weee/enable" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="tax/weee/apply_vat" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+        </dataset>
+        <!--End Setting   [Apply Tax To FPT] = Yes and [Enable FPT] = Yes-->
+
 
         <!--Shipping Config-->
         <dataset name="no_shipping_method_on_webpos_CP193">
