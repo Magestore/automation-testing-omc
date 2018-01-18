@@ -942,5 +942,68 @@
             </field>
         </dataset>
         <!--End Setting [Shipping price] = Taxable goods and Shipping including tax-->
+        <!--Checkout Payment method-->
+        <dataset name="default_payment_method">
+            <field name="webpos/payment/allowspecific_payment" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Specific Payments</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+
+            <field name="webpos/payment/specificpayment" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Web POS - Cash In</item>
+                <item name="value" xsi:type="string">cashforpos</item>
+            </field>
+        </dataset>
+
+        <!--Checkout Payment method no payment-->
+        <dataset name="default_payment_method_no_payment">
+            <field name="webpos/payment/allowspecific_payment" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Specific Payments</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+
+            <field name="webpos/payment/specificpayment" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <!--Checkout Payment method all payment-->
+        <dataset name="default_payment_method_all_payment">
+            <field name="webpos/payment/allowspecific_payment" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">All Allowed Payments</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+
+            <field name="webpos/payment/specificpayment" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <!--Checkout Payment method all payment select cashin-->
+        <dataset name="default_payment_method_all_payment_select_cashin">
+            <field name="webpos/payment/allowspecific_payment" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">All Allowed Payments</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+
+            <field name="webpos/payment/specificpayment" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Web POS - Cash In</item>
+                <item name="value" xsi:type="string">cashforpos</item>
+            </field>
+        </dataset>
     </repository>
 </config>

@@ -32,6 +32,7 @@
         <block name="checkoutShippingMethod" class="Magento\Webpos\Test\Block\Checkout\CheckoutShippingMethod" locator="[data-bind='visible:shipAble']" strategy="css selector"/>
         <block name="checkoutPaymentMethod" class="Magento\Webpos\Test\Block\Checkout\CheckoutPaymentMethod" locator="#payment-method" strategy="css selector"/>
         <block name="checkoutSuccess" class="Magento\Webpos\Test\Block\Checkout\CheckoutSuccess" locator="#success_container" strategy="css selector"/>
+        <block name="checkoutAddMorePayment" class="Magento\Webpos\Test\Block\Checkout\CheckoutAddMorePayment" locator="#add-more-payment" strategy="css selector"/>
         <!--End CategoryRepository Page-->
         <block name="oWrapper" class="Magento\Webpos\Test\Block\OWrapper" locator="#o-wrapper" strategy="css selector"/>
         <!--Begin Order History-->

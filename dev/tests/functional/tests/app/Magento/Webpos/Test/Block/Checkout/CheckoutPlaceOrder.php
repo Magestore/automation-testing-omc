@@ -10,6 +10,7 @@ namespace Magento\Webpos\Test\Block\Checkout;
 
 use Magento\Mtf\Block\Block;
 use Magento\Mtf\Client\ElementInterface;
+use Magento\Mtf\Client\Locator;
 
 /**
  * Class CheckoutPlaceOrder
@@ -73,4 +74,28 @@ class CheckoutPlaceOrder extends Block
 	{
 		return $this->_rootElement->find('#can_ship');
 	}
+	public function getMessageAddMorePayment()
+    {
+        return $this->_rootElement->find('.//div[data-bind="visible: checkPaymentCollection()"] > span ');
+    }
+
+    public function getAddPaymentDisable()
+    {
+        return $this->_rootElement->find('button[id="add_payment_button"][disabled]');
+    }
+
+    public function getHeaderAmount()
+    {
+        return $this->_rootElement->find('.//*[@id="webpos_checkout"]//span[@class="price"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getRemainMoneyPrice()
+    {
+        return $this->_rootElement->find('.remain-money > span');
+    }
+
+    public function getInvoiceBox()
+    {
+        return $this->_rootElement->find('.invoice-box');
+    }
 }
