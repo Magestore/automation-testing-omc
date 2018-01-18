@@ -106,7 +106,8 @@ class WebposTaxTAX14Test extends Injectable
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
 		$this->webposIndex->getCheckoutWebposCart()->getIconPrevious()->click();
-		sleep(2);
+
+		$this->webposIndex->getCheckoutCartFooter()->waitButtonHoldVisible();
 		$this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 

@@ -70,12 +70,19 @@ class WebposTaxTAX01Test extends Injectable
         $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
+        // Config system value
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'default_tax_configuration_use_system_value']
+        )->run();
+
         // Add Customer
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_UK']);
         $customer->persist();
 
         return [
-            'customer' => $customer
+            'customer' => $customer,
+            'taxRate' => 0.00
         ];
     }
 

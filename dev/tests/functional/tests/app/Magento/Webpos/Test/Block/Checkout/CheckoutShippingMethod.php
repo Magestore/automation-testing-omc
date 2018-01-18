@@ -9,6 +9,8 @@
 namespace Magento\Webpos\Test\Block\Checkout;
 
 use Magento\Mtf\Block\Block;
+use Magento\Mtf\Client\Locator;
+
 /**
  * Class CheckoutShippingMethod
  * @package Magento\Webpos\Test\Block\CategoryRepository
@@ -60,4 +62,18 @@ class CheckoutShippingMethod extends Block
 	{
 		return $this->_rootElement->find('#webpos_shipping_storepickup');
 	}
+
+	public function getShippingMethod()
+    {
+        return $this->_rootElement->find('#shipping-method');
+    }
+
+	public function openCheckoutShippingMethod(){
+        $this->_rootElement->click();
+    }
+
+    public function getShippingMethodPrice($label)
+    {
+        return $this->_rootElement->find('//*[@id="shipping-method"]/div/form/div/label/span/em[text()="'.$label.'"]/../em[2]', Locator::SELECTOR_XPATH);
+    }
 }

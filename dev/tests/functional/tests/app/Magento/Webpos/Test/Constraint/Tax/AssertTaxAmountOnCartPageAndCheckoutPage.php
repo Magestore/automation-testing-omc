@@ -18,7 +18,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class AssertTaxAmountOnCartPageAndCheckoutPage extends AbstractConstraint
 {
 
-    public function processAssert($taxRate, WebposIndex $webposIndex)
+    public function processAssert($taxRate, WebposIndex $webposIndex, $addShipFee = false)
     {
         $taxRate = (float) $taxRate / 100;
         $subtotalOnPage = $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice("Subtotal")->getText();
@@ -29,8 +29,14 @@ class AssertTaxAmountOnCartPageAndCheckoutPage extends AbstractConstraint
         }else{
             $discountOnPage = 0;
         }
+		$shippingFee = 0;
+	    if ($addShipFee) {
+			$shippingFee = $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Shipping')->getText();
+		    $shippingFee = (float)substr($shippingFee, 1);
+	    }
 
-        $taxAmount = ($subtotalOnPage - $discountOnPage) * $taxRate;
+        $taxAmount = ($subtotalOnPage + $shippingFee - $discountOnPage) * $taxRate;
+	    $taxAmount = round($taxAmount, 2);
         $taxAmountOnPage = $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice("Tax")->getText();
         $taxAmountOnPage = (float)substr($taxAmountOnPage,1);
 
