@@ -11,6 +11,7 @@ namespace Magento\Webpos\Test\TestCase\Tax;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee;
 use Magento\Webpos\Test\Page\WebposIndex;
 
@@ -30,6 +31,11 @@ class WebposTaxTAX55Test extends Injectable
      * @var FixtureFactory
      */
     protected $fixtureFactory;
+
+    /**
+     * @var TaxRule $taxRuleCA
+     */
+    protected $taxRuleCA;
 
     /**
      * @var AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee
@@ -62,6 +68,11 @@ class WebposTaxTAX55Test extends Injectable
           'taxRateMI' => $taxRateMI,
           'taxRateCA' => $taxRateCA
         ];
+
+        // Create CA Tax Rule
+        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset'=> 'CA_rule']);
+        $taxRule->persist();
+        $this->taxRuleCA = $taxRule;
 
         // Add Customer
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
@@ -160,12 +171,7 @@ class WebposTaxTAX55Test extends Injectable
         $this->webposIndex->getCheckoutEditCustomer()->getSaveButton()->click();
         $this->webposIndex->getToaster()->getWarningMessage();
 
-        sleep(3);
-        // bug
-        $this->webposIndex->getCheckoutEditCustomer()->getCancelButton()->click();
-
-        sleep(3);
-
+        sleep(1);
         //Assert Tax Amount on Checkout Page
         $this->assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee->processAssert($taxRates['taxRateCA']->getRate(), $shippingFee, $this->webposIndex);
         //End Assert Tax Amount on Checkout Page
@@ -186,5 +192,8 @@ class WebposTaxTAX55Test extends Injectable
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'default_tax_configuration_use_system_value']
         )->run();
+
+        // Delete Rax Rule
+        $this->objectManager->create('Magento\Webpos\Test\Handler\TaxRule\Curl')->persist($this->taxRuleCA);
     }
 }

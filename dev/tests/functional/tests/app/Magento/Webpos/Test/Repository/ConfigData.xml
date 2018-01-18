@@ -1081,6 +1081,18 @@
         </dataset>
         <!--End Setting: [Tax Calculation Based On] = Shipping Origin-->
 
+        <!--Setting: [Apply Customer Tax] = Before discount-->
+        <dataset name="tax_calculation_apply_customer_tax_before_discount_TAX76">
+            <!--Calculation Settings-->
+            <field name="tax/calculation/apply_after_discount" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Before Discount</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <!--End Setting: [Apply Customer Tax] = Before discount-->
+
         <!--Setting [Catalog Prices] = Including tax & [Enable Cross Border Trade] = Yes-->
         <dataset name="including_tax_and_enable_cross_border_trade">
             <field name="tax/calculation/price_includes_tax" xsi:type="array">
