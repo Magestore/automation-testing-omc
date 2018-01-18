@@ -1,15 +1,14 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: gvt
- * Date: 08/01/2018
- * Time: 08:36
+ * User: bang
+ * Date: 12/01/2018
+ * Time: 15:27
  */
-namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
+namespace Magento\Webpos\Test\TestCase\Checkout\ShippingMethod;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-
-class WebposCartPageCustomerCP175Test extends Injectable
+class WebposShippingMethodCP195Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -20,7 +19,7 @@ class WebposCartPageCustomerCP175Test extends Injectable
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'webpos_default_guest_checkout_rollback']
+            ['configData' => 'have_shipping_method_on_webpos_CP195']
         )->run();
     }
 
@@ -56,16 +55,13 @@ class WebposCartPageCustomerCP175Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $styleLeftBefore = $this->webposIndex->getCheckoutContainer()->getStyleLeft();
-
-        //Click icon < (Back to cart)
-        $this->webposIndex->getCheckoutCartHeader()->getIconBackToCart()->click();
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getCheckoutPlaceOrder()->getShippingCollapse()->click();
         sleep(1);
-        $styleLeftAfter = $this->webposIndex->getCheckoutContainer()->getStyleLeft();
 
-        return ['styleLeftBefore' => $styleLeftBefore,
-            'styleLeftAfter' => $styleLeftAfter
-        ];
+        return ['titleExpected' => 'Shipping: Flat Rate - Fixed',
+            'idSelected' => 'flatrate_flatrate',
+            'panelExpected' => true];
+
+
     }
 }

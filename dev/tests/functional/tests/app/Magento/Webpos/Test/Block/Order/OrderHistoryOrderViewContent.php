@@ -36,6 +36,10 @@ class OrderHistoryOrderViewContent extends Block
 	{
 		return $this->_rootElement->find('label[data-bind="text: $parent.getCustomerName(\'shipping\')"]')->getText();
 	}
+	public function getShippingDescription()
+	{
+		return $this->_rootElement->find('div > div:nth-child(2) > div:nth-child(2) > div > div.panel-body > div > label')->getText();
+	}
 
 	public function getShippingAddress()
 	{
@@ -80,5 +84,13 @@ class OrderHistoryOrderViewContent extends Block
 	public function getRowTotalOfProduct($name)
 	{
 		return $this->getProductRow($name)->find('td[data-bind="text: $parents[1].getItemRowTotalFormated(item)"]')->getText();
+	}
+	public function getSubTotal()
+	{
+		return str_replace('$','', $this->_rootElement->find('#webpos_order_view_container > footer > div.col-sm-offset-6 > table > tbody > tr:nth-child(1) > td.a-right')->getText());
+	}
+	public function getTotal()
+	{
+        return str_replace('$','', $this->_rootElement->find('#webpos_order_view_container > footer > div.col-sm-offset-6 > table > tbody > tr:nth-child(4) > td.a-right')->getText());
 	}
 }
