@@ -191,9 +191,6 @@ class WebposTaxTAX46Test extends Injectable
 		$totalRefunded += $shippingFee * (1+$taxRate);
 
 		$expectStatus = 'Complete';
-//		$totalPaid = (float) substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
-//		// chỉ đúng cho trường hợp order 2 product, qty của mỗi product = 2 và refund mỗi product 1 sản phẩm
-//		$totalRefunded = $totalPaid / 2 + (($shippingFee / $totalOrderQty) * $totalRefundQty)*(1+$taxRate);
 
 		$this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
 

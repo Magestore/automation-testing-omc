@@ -2,14 +2,13 @@
 /**
  * Created by PhpStorm.
  * User: gvt
- * Date: 08/01/2018
- * Time: 08:36
+ * Date: 18/01/2018
+ * Time: 10:25
  */
-namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
+namespace Magento\Webpos\Test\TestCase\Checkout\ShippingMethod;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-
-class WebposCartPageCustomerCP175Test extends Injectable
+class WebposShippingMethodCP201Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -20,7 +19,7 @@ class WebposCartPageCustomerCP175Test extends Injectable
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'webpos_default_guest_checkout_rollback']
+            ['configData' => 'have_shipping_method_on_webpos_CP197']
         )->run();
     }
 
@@ -34,7 +33,6 @@ class WebposCartPageCustomerCP175Test extends Injectable
 
     public function test($products)
     {
-
         //Create product
         $product = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
@@ -56,16 +54,22 @@ class WebposCartPageCustomerCP175Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $styleLeftBefore = $this->webposIndex->getCheckoutContainer()->getStyleLeft();
 
-        //Click icon < (Back to cart)
-        $this->webposIndex->getCheckoutCartHeader()->getIconBackToCart()->click();
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        //PlaceOrder
+        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         sleep(1);
-        $styleLeftAfter = $this->webposIndex->getCheckoutContainer()->getStyleLeft();
+        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+        $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+        sleep(1);
 
-        return ['styleLeftBefore' => $styleLeftBefore,
-            'styleLeftAfter' => $styleLeftAfter
+        //Get orderId
+        $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
+        $orderId= ltrim ($orderId,'#');
+        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
+
+        return [
+            'orderId' => $orderId,
+            'shippingDescription' => 'Flat Rate - Fixed'
         ];
     }
 }

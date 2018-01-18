@@ -210,7 +210,6 @@ class WebposTaxTAX80Test extends Injectable
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
         $this->webposIndex->getModal()->getOkButton()->click();
 
-
         return [
             'products' => $products,
             'taxRate' => $taxRate

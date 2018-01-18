@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 1/12/2018
- * Time: 3:25 PM
+ * Date: 1/18/2018
+ * Time: 3:15 PM
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -11,12 +11,16 @@ namespace Magento\Webpos\Test\TestCase\Tax;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderHistoryInvoiceWithShippingFee;
+use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceOnOrderHistoryRefund;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-
-class WebposTaxTAX50Test extends Injectable
+/**
+ * Class WebposTaxTAX33Test
+ * @package Magento\Webpos\Test\TestCase\Tax
+ */
+class WebposTaxTAX33Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -29,14 +33,20 @@ class WebposTaxTAX50Test extends Injectable
     protected $fixtureFactory;
 
     /**
-     * @var AssertTaxAmountOnOrderHistoryInvoiceWithShippingFee
+     * @var AssertProductPriceOnOrderHistoryRefund
      */
-    protected $assertTaxAmountOnOrderHistoryInvoiceWithShippingFee;
+    protected $assertProductPriceOnOrderHistoryRefund;
+
 
     /**
      * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+
+    /**
+     * @var AssertRefundSuccess
+     */
+    protected $assertRefundSuccess;
 
     /**
      * Prepare data.
@@ -46,12 +56,6 @@ class WebposTaxTAX50Test extends Injectable
      */
     public function __prepare(FixtureFactory $fixtureFactory)
     {
-        // Config system value
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'default_tax_configuration_use_system_value']
-        )->run();
-
         // Change TaxRate
         $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
@@ -66,32 +70,35 @@ class WebposTaxTAX50Test extends Injectable
         ];
     }
 
-
     /**
      * @param WebposIndex $webposIndex
      * @param FixtureFactory $fixtureFactory
-     * @param AssertTaxAmountOnOrderHistoryInvoiceWithShippingFee $assertTaxAmountOnOrderHistoryInvoiceWithShippingFee
+     * @param AssertProductPriceOnOrderHistoryRefund $assertProductPriceOnOrderHistoryRefund
      * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @param AssertRefundSuccess $assertRefundSuccess
      */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
-        AssertTaxAmountOnOrderHistoryInvoiceWithShippingFee $assertTaxAmountOnOrderHistoryInvoiceWithShippingFee,
-        AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+        AssertProductPriceOnOrderHistoryRefund $assertProductPriceOnOrderHistoryRefund,
+        AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
+        AssertRefundSuccess $assertRefundSuccess
     )
     {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
-        $this->assertTaxAmountOnOrderHistoryInvoiceWithShippingFee = $assertTaxAmountOnOrderHistoryInvoiceWithShippingFee;
+        $this->assertProductPriceOnOrderHistoryRefund = $assertProductPriceOnOrderHistoryRefund;
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+        $this->assertRefundSuccess = $assertRefundSuccess;
     }
-
 
     /**
      * @param Customer $customer
      * @param $products
      * @param $configData
      * @param $taxRate
+     * @param bool $addDiscount
+     * @param null $discountAmount
      * @param bool $createInvoice
      * @param bool $shipped
      * @return array
@@ -101,6 +108,8 @@ class WebposTaxTAX50Test extends Injectable
         $products,
         $configData,
         $taxRate,
+        $addDiscount = false,
+        $discountAmount = null,
         $createInvoice = true,
         $shipped = false
     )
@@ -134,19 +143,25 @@ class WebposTaxTAX50Test extends Injectable
             ['customer' => $customer]
         )->run();
 
-        // Check out
+        // Add Discount
+        if ($addDiscount) {
+            $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
+            sleep(1);
+            self::assertTrue(
+                $this->webposIndex->getCheckoutDiscount()->isVisible(),
+                'CategoryRepository - TaxClass page - Delete TaxClass - Add discount popup is not shown'
+            );
+            $this->webposIndex->getCheckoutDiscount()->setDiscountPercent($discountAmount);
+            $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
+            $this->webposIndex->getMsWebpos()->waitCartLoader();
+            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        }
+
+        // Place Order
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-        // Select Shipping Method
-        $this->webposIndex->getCheckoutShippingMethod()->openCheckoutShippingMethod();
-        $this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Flat Rate - Fixed")->getText();
-        $shippingFee = (float)substr($shippingFee,1);
-
-        // Select Payment Method
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
@@ -160,11 +175,9 @@ class WebposTaxTAX50Test extends Injectable
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        // End Place Order
 
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-        //End Assert Place Order Success
 
         $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
 
@@ -187,30 +200,25 @@ class WebposTaxTAX50Test extends Injectable
             . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
         );
 
-        $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
-        $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
+        // Refund
+        $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
+        $this->webposIndex->getOrderHistoryAddOrderNote()->openRefundPopup();
 
-        //Assert Tax Amount in Order History Invoice
-        $this->assertTaxAmountOnOrderHistoryInvoiceWithShippingFee->processAssert($taxRate, $shippingFee, $products, $this->webposIndex);
+        // Assert Tax Amount in Order History Invoice
+        $this->assertProductPriceOnOrderHistoryRefund->processAssert($taxRate, $products, $this->webposIndex);
 
-        // Invoice order successfully
-        $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
+        // Refund successfully
+        $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
         $this->webposIndex->getModal()->getOkButton()->click();
+
+        $expectStatus = 'Closed';
+        $totalPaid = (float) substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
+        $totalRefunded = $totalPaid;
+        $this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
 
         return [
             'products' => $products,
             'taxRate' => $taxRate
         ];
-    }
-    /**
-     *
-     */
-    public function tearDown()
-    {
-        // Config system value
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'default_tax_configuration_use_system_value']
-        )->run();
     }
 }

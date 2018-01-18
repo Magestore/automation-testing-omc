@@ -16,6 +16,7 @@
                 </item>
             </data>
             <data name="createInvoice" xsi:type="boolean">false</data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoiceSuccess"/>
         </variation>
     </testCase>
 </config>

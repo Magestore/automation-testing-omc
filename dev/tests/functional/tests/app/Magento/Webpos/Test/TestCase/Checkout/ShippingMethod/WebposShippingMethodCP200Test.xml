@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\ShippingMethod\WebposShippingMethodCP200Test" summary="Checkout with custom sale (shippable: off)" ticketId="WEBPOS-1">
+        <variation name="WebposShippingMethodCP200TestVariation">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                </item>
+            </data>
+            <data name="productCustom/name" xsi:type="string">jfkasdljfasld;</data>
+            <data name="productCustom/price" xsi:type="string">15</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\ShippingMethod\AssertCheckDisplayPanel" />
+        </variation>
+    </testCase>
+</config>
