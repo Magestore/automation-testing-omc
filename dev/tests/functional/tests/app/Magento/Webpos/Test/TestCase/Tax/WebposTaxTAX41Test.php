@@ -13,6 +13,7 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderHistoryInvoiceWithShipExcludeTax;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 class WebposTaxTAX41Test extends Injectable
@@ -31,6 +32,11 @@ class WebposTaxTAX41Test extends Injectable
 	 * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
 	 */
 	protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+
+	/**
+	 * @var AssertTaxAmountOnOrderHistoryInvoiceWithShipExcludeTax
+	 */
+	protected $assertTaxAmountOnOrderHistoryInvoiceWithShipExcludeTax;
 
 	/**
 	 * Prepare data.
@@ -66,12 +72,14 @@ class WebposTaxTAX41Test extends Injectable
 	public function __inject(
 		WebposIndex $webposIndex,
 		FixtureFactory $fixtureFactory,
-		AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+		AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
+		AssertTaxAmountOnOrderHistoryInvoiceWithShipExcludeTax $assertTaxAmountOnOrderHistoryInvoiceWithShipExcludeTax
 	)
 	{
 		$this->webposIndex = $webposIndex;
 		$this->fixtureFactory = $fixtureFactory;
 		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+		$this->assertTaxAmountOnOrderHistoryInvoiceWithShipExcludeTax = $assertTaxAmountOnOrderHistoryInvoiceWithShipExcludeTax;
 	}
 
 	public function test(
@@ -157,6 +165,12 @@ class WebposTaxTAX41Test extends Injectable
 
 		$this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
 		$this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
+
+		// Assert Tax amount on Invoice popup
+		$this->assertTaxAmountOnOrderHistoryInvoiceWithShipExcludeTax->processAssert($taxRate, $products, $this->webposIndex);
+
+		$this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
+		$this->webposIndex->getModal()->getOkButton()->click();
 
 		return [
 			'products' => $products
