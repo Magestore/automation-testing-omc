@@ -7,7 +7,7 @@
  */
 
 namespace Magento\Webpos\Test\Block\Checkout;
-
+use Magento\Mtf\Client\Locator;
 use Magento\Mtf\Block\Block;
 /**
  * Class CheckoutProductDetail
@@ -16,4 +16,11 @@ use Magento\Mtf\Block\Block;
 class CheckoutProductDetail extends Block
 {
 
+    public function selectedOneAttribute($attribute){
+        $this->_rootElement->find('[class="super-attribute-select"]',Locator::SELECTOR_CSS,'select')->setValue($attribute);
+    }
+
+    public function getButtonAddToCart(){
+        return $this->_rootElement->find('#popup-product-detail > div > div > div > div.modal-body > div > div > div > div.ms-actions > button');
+    }
 }
