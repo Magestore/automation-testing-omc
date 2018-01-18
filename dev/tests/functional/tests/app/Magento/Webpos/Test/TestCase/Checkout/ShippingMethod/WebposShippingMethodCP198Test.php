@@ -80,6 +80,10 @@ class WebposShippingMethodCP198Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(4);
+        sleep(1);
+
+        return ['titleExpected' => 'Shipping: POS Shipping - Store Pickup',
+                'idSelected' => 'webpos_shipping_storepickup',
+                'panelExpected' => true];
     }
 }

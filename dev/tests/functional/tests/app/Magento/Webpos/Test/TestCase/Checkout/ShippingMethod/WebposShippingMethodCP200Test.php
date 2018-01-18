@@ -8,18 +8,26 @@
 namespace Magento\Webpos\Test\TestCase\Checkout\ShippingMethod;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+use Magento\Webpos\Test\Constraint\Checkout\ShippingMethod\AssertCheckDisplayPanel;
 class WebposShippingMethodCP200Test extends Injectable
 {
     /**
      * @var WebposIndex
      */
     protected $webposIndex;
+    //
+    /**
+     * @var AssertCheckDisplayPanel
+     */
+    protected $assertCheckDisplayPanel;
     public function __inject
     (
-        WebposIndex $webposIndex
+        WebposIndex $webposIndex,
+        AssertCheckDisplayPanel $assertCheckDisplayPanel
     )
     {
         $this->webposIndex = $webposIndex;
+        $this->assertCheckDisplayPanel = $assertCheckDisplayPanel;
     }
 
     public function test($products,$productCustom)
@@ -47,6 +55,7 @@ class WebposShippingMethodCP200Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
+        $this->assertCheckDisplayPanel->processAssert($this->webposIndex, false);
 
         // //Click icon < (Back to cart)
         $this->webposIndex->getCheckoutCartHeader()->getIconBackToCart()->click();
@@ -64,5 +73,7 @@ class WebposShippingMethodCP200Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
+
+        return ['panelExpected' => true];
     }
 }

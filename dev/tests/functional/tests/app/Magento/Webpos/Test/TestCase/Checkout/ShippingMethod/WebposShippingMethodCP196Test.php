@@ -56,8 +56,21 @@ class WebposShippingMethodCP196Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
+        //Choose a shipping method
+        $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
+        $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+        $this->webposIndex->getCheckoutPlaceOrder()->getShippingCollapse()->click();
+        sleep(1);
+        $shippingMethodBefore = [$this->webposIndex->getCheckoutWebposCart()->getPriceShipping(), $this->webposIndex->getCheckoutPlaceOrder()->getTitleShippingSection()];
+
+        //Choose another shipping method
         $this->webposIndex->getCheckoutShippingMethod()->clickFreeShipping();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         sleep(1);
+        $shippingMethodAfter = [$this->webposIndex->getCheckoutWebposCart()->getPriceShipping(), $this->webposIndex->getCheckoutPlaceOrder()->getTitleShippingSection()];
+
+        return ['shippingMethodBefore' => $shippingMethodBefore,
+            'shippingMethodAfter' => $shippingMethodAfter
+        ];
     }
 }

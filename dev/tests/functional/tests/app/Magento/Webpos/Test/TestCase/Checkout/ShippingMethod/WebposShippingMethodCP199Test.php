@@ -41,5 +41,9 @@ class WebposShippingMethodCP199Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
+
+        return ['titleExpected' => null,
+                'idSelected' => null,
+                'panelExpected' => false];
     }
 }

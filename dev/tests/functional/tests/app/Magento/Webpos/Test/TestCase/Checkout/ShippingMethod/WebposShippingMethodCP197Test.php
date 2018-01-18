@@ -56,8 +56,18 @@ class WebposShippingMethodCP197Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
+        //Choose PoS shipping method
         $this->webposIndex->getCheckoutShippingMethod()->clickPOSShipping();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
-        sleep(8);
+        sleep(1);
+
+        //BackToCart
+        $this->webposIndex->getCheckoutWebposCart()->getIconPrevious()->click();
+        sleep(1);
+
+        return [
+            'total' =>$this->webposIndex->getCheckoutWebposCart()->getTotal(),
+            'subtotal' =>$this->webposIndex->getCheckoutWebposCart()->getSubtotal()
+        ];
     }
 }

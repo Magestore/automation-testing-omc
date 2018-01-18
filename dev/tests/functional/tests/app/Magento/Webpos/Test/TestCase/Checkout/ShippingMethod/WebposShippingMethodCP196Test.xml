@@ -7,7 +7,15 @@
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
                 </item>
             </data>
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPageActionMenu\AssertWebposEnterFullScreenAgain" />-->
+            <data name="shippingMethodBeforeActual" xsi:type="array">
+                <item name="0" xsi:type="string">5.00</item>
+                <item name="1" xsi:type="string">Shipping: Flat Rate - Fixed</item>
+            </data>
+            <data name="shippingMethodAfterActual" xsi:type="array">
+                <item name="0" xsi:type="string">0.00</item>
+                <item name="1" xsi:type="string">Shipping: Free Shipping - Free</item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\ShippingMethod\AssertChangeMethod" />
         </variation>
     </testCase>
 </config>

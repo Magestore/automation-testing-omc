@@ -4,7 +4,9 @@
         <variation name="WebposShippingMethodCP199TestVariation">
             <data name="productCustom/name" xsi:type="string">jfkasdljfasld;</data>
             <data name="productCustom/price" xsi:type="string">15</data>
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPageActionMenu\AssertWebposEnterFullScreenAgain" />-->
+            <data name="tagExpected" xsi:type="boolean">false</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\ShippingMethod\AssertCheckDisplayPanel" />
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\ShippingMethod\AssertCheckSection" />
         </variation>
     </testCase>
 </config>

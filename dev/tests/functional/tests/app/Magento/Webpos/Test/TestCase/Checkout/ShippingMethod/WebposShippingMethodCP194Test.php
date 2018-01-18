@@ -55,8 +55,11 @@ class WebposShippingMethodCP194Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getCheckoutPlaceOrder()->getShippingCollapse()->click();
+        sleep(1);
 
-        //Click ... Menu > click Enter/full screen
-        sleep(10);
+        return ['titleExpected' => 'Shipping: Flat Rate - Fixed',
+            'idSelected' => 'flatrate_flatrate',
+            'panelExpected' => true];
     }
 }
