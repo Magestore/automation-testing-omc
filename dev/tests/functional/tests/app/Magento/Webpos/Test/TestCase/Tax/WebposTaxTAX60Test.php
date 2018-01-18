@@ -103,7 +103,6 @@ class WebposTaxTAX60Test extends Injectable
     public function test(
         Customer $customer,
         $products,
-        $defaultTaxRate,
         $currentTaxRate
     )
     {
@@ -117,11 +116,6 @@ class WebposTaxTAX60Test extends Injectable
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'including_tax_and_enable_cross_border_trade']
         )->run();
-        // Config Default Tax Destination Calculation California
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'california_default_tax_destination']
-        )->run();
         // Login webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
@@ -131,7 +125,7 @@ class WebposTaxTAX60Test extends Injectable
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',
             ['products' => $products]
         )->run();
-        // Change customer in cart meet California Tax
+        // Change customer in cart meet Michigan Tax
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
             ['customer' => $customer]

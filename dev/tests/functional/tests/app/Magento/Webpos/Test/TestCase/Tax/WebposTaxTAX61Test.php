@@ -110,11 +110,6 @@ class WebposTaxTAX61Test extends Injectable
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'including_tax_and_disable_cross_border_trade']
         )->run();
-        // Config Default Tax Destination Calculation California
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'california_default_tax_destination']
-        )->run();
         // Login webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'

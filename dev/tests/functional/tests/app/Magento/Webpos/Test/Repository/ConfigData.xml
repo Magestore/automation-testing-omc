@@ -1176,5 +1176,73 @@
             </field>
         </dataset>
         <!--End Setting: [Apply Tax On] = Original price only-->
+
+        <!--Setting [Apply Discount On Prices] = Excluding tax-->
+        <dataset name="apply_discount_on_prices_excluding_tax">
+            <field name="tax/calculation/discount_tax" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Excluding Tax</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <!--End Setting [Apply Discount On Prices] = Excluding tax-->
+
+        <!--Setting [Apply Discount On Prices] = Including tax-->
+        <dataset name="apply_discount_on_prices_including_tax">
+            <field name="tax/calculation/discount_tax" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Including Tax</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+        </dataset>
+        <!--End Setting [Apply Discount On Prices] = Including tax-->
+
+        <!--Setting  [Apply Tax On] = Custome price if available-->
+        <dataset name="tax_calculation_apply_tax_on_custom_price_if_available">
+            <field name="tax/calculation/apply_tax_on" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Custom price if available</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <!--End Setting  [Apply Tax On] = Custome price if available-->
+
+        <!--Setting   [Apply Tax To FPT] = No and [Enable FPT] = Yes-->
+        <dataset name="disable_tax_calculation_apply_tax_to_fpt_and_enable_fpt">
+            <field name="tax/weee/enable" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="tax/weee/apply_vat" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <!--End Setting   [Apply Tax To FPT] = No-->
+
+        <!--Setting [Include FPT In Subtotal] = Yes and [Enable FPT] = Yes-->
+        <dataset name="include_FPT_in_subtotal_and_enable_fpt">
+            <field name="tax/weee/enable" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="tax/weee/include_in_subtotal" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+        </dataset>
+        <!--End Setting [Include FPT In Subtotal] = Yes and [Enable FPT] = Yes-->
+
     </repository>
 </config>
