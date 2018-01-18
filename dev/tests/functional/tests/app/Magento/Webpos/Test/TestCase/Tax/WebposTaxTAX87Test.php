@@ -17,6 +17,7 @@ use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInClude
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceExcludingTax;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountWithApplyTaxOnCustomPrice;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 class WebposTaxTAX87Test extends Injectable
@@ -37,9 +38,9 @@ class WebposTaxTAX87Test extends Injectable
     protected $caTaxRule;
 
     /**
-     * @var AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax
+     * @var AssertTaxAmountWithApplyTaxOnCustomPrice
      */
-    protected $assertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax;
+    protected $assertTaxAmountWithApplyTaxOnCustomPrice;
 
     /**
      * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
@@ -82,13 +83,13 @@ class WebposTaxTAX87Test extends Injectable
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
-        AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax $assertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax,
+        AssertTaxAmountWithApplyTaxOnCustomPrice $assertTaxAmountWithApplyTaxOnCustomPrice,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
     )
     {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
-        $this->assertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax = $assertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax;
+        $this->assertTaxAmountWithApplyTaxOnCustomPrice = $assertTaxAmountWithApplyTaxOnCustomPrice;
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
 
@@ -100,8 +101,7 @@ class WebposTaxTAX87Test extends Injectable
     public function test(
         Customer $customer,
         $products,
-        $taxRate,
-        $customPriceValue
+        $taxRate
     )
     {
         // Create products
@@ -129,18 +129,20 @@ class WebposTaxTAX87Test extends Injectable
             ['customer' => $customer]
         )->run();
         // Edit custom price
-        $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($customPriceValue);
-
-
-        $this->assertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax
-            ->processAssert($this->webposIndex, $products, $taxRate, $discountAmount);
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\EditCustomPriceOfProductOnCartStep',
+            ['products' => $products]
+        )->run();
+        $customPrice = $products[0]['customPrice'];
+        $actualTaxAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText(), 1);
+        $this->assertTaxAmountWithApplyTaxOnCustomPrice
+            ->processAssert($customPrice, $actualTaxAmount, $taxRate);
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->assertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax
-            ->processAssert($this->webposIndex, $products, $taxRate, $discountAmount);
+        $actualTaxAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText(), 1);
+        $this->assertTaxAmountWithApplyTaxOnCustomPrice
+            ->processAssert($customPrice, $actualTaxAmount, $taxRate);
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->objectManager->getInstance()->create(

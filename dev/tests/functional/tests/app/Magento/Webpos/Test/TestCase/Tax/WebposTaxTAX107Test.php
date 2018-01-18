@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: vong
  * Date: 1/16/2018
- * Time: 9:00 AM
+ * Time: 1:09 PM
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -13,11 +13,15 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInCludeTaxAndDisableCrossBorderTrade;
 use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountNoApplyTaxToFpt;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceExcludingTax;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountWithApplyTaxOnCustomPrice;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposTaxTAX63Test extends Injectable
+class WebposTaxTAX107Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -35,14 +39,14 @@ class WebposTaxTAX63Test extends Injectable
     protected $caTaxRule;
 
     /**
+     * @var AssertTaxAmountNoApplyTaxToFpt
+     */
+    protected $assertTaxAmountNoApplyTaxToFpt;
+
+    /**
      * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-
-    /**
-     * @var AssertProductPriceWithCatalogPriceInCludeTaxAndDisableCrossBorderTrade
-     */
-    protected $assertProductPriceWithCatalogPriceInCludeTaxAndDisableCrossBorderTrade;
 
     /**
      * Prepare data.
@@ -59,20 +63,16 @@ class WebposTaxTAX63Test extends Injectable
         )->run();
 
         // Change TaxRate
-        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
-        $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
-
-        // Create CA Tax Rule
-        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset'=> 'CA_rule']);
-        $taxRule->persist();
-        $this->caTaxRule = $taxRule;
+        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($miTaxRate);
 
         // Add Customer
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
         $customer->persist();
 
         return [
-            'customer' => $customer
+            'customer' => $customer,
+            'taxRate' => $miTaxRate->getRate()
         ];
     }
 
@@ -84,28 +84,25 @@ class WebposTaxTAX63Test extends Injectable
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
-        AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
-        AssertProductPriceWithCatalogPriceInCludeTaxAndDisableCrossBorderTrade $assertProductPriceWithCatalogPriceInCludeTaxAndDisableCrossBorderTrade
+        AssertTaxAmountNoApplyTaxToFpt $assertTaxAmountNoApplyTaxToFpt,
+        AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
     )
     {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
+        $this->assertTaxAmountNoApplyTaxToFpt = $assertTaxAmountNoApplyTaxToFpt;
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-        $this->assertProductPriceWithCatalogPriceInCludeTaxAndDisableCrossBorderTrade = $assertProductPriceWithCatalogPriceInCludeTaxAndDisableCrossBorderTrade;
-
     }
 
     /**
      * @param Customer $customer
      * @param $products
-     * @param $defaultTaxRate float
-     * @param $currentTaxRate float
+     * @param $shippingTaxRate
      */
     public function test(
         Customer $customer,
         $products,
-        $defaultTaxRate,
-        $currentTaxRate
+        $taxRate
     )
     {
         // Create products
@@ -113,10 +110,10 @@ class WebposTaxTAX63Test extends Injectable
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run();
-        // Config [Catalog Prices] = Including tax & [Enable Cross Border Trade] = No
+        // Config [Include FPT In Subtotal] = Yes and [Enable FPT] = Yes
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'including_tax_and_disable_cross_border_trade']
+            ['configData' => 'include_FPT_in_subtotal_and_enable_fpt']
         )->run();
         // Login webpos
         $staff = $this->objectManager->getInstance()->create(
@@ -127,7 +124,7 @@ class WebposTaxTAX63Test extends Injectable
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',
             ['products' => $products]
         )->run();
-        // Change customer in cart meet Michigan Tax
+        // Change customer in cart meet Michigan Tax and FPT tax
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
             ['customer' => $customer]
@@ -137,6 +134,13 @@ class WebposTaxTAX63Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
+            [
+                'createInvoice' => false,
+                'shipped' => false
+            ]
+        )->run();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Assert Place Order Success
@@ -157,17 +161,14 @@ class WebposTaxTAX63Test extends Injectable
             . "\nExpected: " . $orderId
             . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
         );
-        $actualPriceExcludeTax = $this->webposIndex->getOrderHistoryOrderViewContent()->getPriceOfProduct($products[0]['product']->getName())->getText();
-        $actualPriceExcludeTax = substr($actualPriceExcludeTax, 1);
-        $actualTaxAmount = $this->webposIndex->getOrderHistoryOrderViewContent()->getTaxAmountOfProduct($products[0]['product']->getName());
-        $actualTaxAmount = substr($actualTaxAmount, 1);
-        $this->assertProductPriceWithCatalogPriceInCludeTaxAndDisableCrossBorderTrade->processAssert(
-            $this->webposIndex, $defaultTaxRate, $currentTaxRate,$products[0]['product'], $actualPriceExcludeTax, $actualTaxAmount);
+        $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
+        $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
+        $actualTaxAmount = substr($this->webposIndex->getOrderHistoryInvoice()->getTaxAmountOfProduct($products[0]['product']->getName())->getText(), 1);
+        $this->assertTaxAmountNoApplyTaxToFpt->processAssert($products[0]['product']->getPrice(), $actualTaxAmount, $taxRate);
     }
 
     public function tearDown()
     {
-        $this->objectManager->create('Magento\Webpos\Test\Handler\TaxRule\Curl')->persist($this->caTaxRule);
         // Config system value
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
