@@ -18,6 +18,7 @@
             <data name="createInvoice" xsi:type="boolean">false</data>
             <data name="addDiscount" xsi:type="boolean">true</data>
             <data name="discountAmount" xsi:type="string">60.00</data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoiceSuccess"/>
         </variation>
     </testCase>
 </config>

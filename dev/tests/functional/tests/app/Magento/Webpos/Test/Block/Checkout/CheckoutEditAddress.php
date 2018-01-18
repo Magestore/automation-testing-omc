@@ -90,4 +90,9 @@ class CheckoutEditAddress extends Block
 	{
 		return $this->_rootElement->find('//select[@name="region_id"]/option[text()="' . $name . '"]', Locator::SELECTOR_XPATH);
 	}
+
+	public function getRegionId()
+    {
+        return $this->_rootElement->find('[name="region_id"]', Locator::SELECTOR_CSS, 'select');
+    }
 }

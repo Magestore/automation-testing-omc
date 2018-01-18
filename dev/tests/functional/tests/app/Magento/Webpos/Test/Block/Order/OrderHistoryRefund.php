@@ -81,4 +81,14 @@ class OrderHistoryRefund extends Block
 	{
 		return $this->getItemRow($name)->find('input[data-bind="attr: {name: \'items[\'+item.item_id+\'][back_to_stock]\'}"]');
 	}
+
+	public function getItemPrice($name)
+	{
+		return $this->getItemRow($name)->find('td[data-bind="text: $parent.convertAndFormatPrice(item.base_price_incl_tax)"]')->getText();
+	}
+
+	public function getRefundShipping()
+	{
+		return $this->_rootElement->find('input[name="shipping_amount"]');
+	}
 }

@@ -18,7 +18,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee extends AbstractConstraint
 {
 
-    public function processAssert($taxRate, $shippingMethod, WebposIndex $webposIndex)
+    public function processAssert($taxRate, $shippingFee, WebposIndex $webposIndex)
     {
         $taxRate = (float) $taxRate / 100;
         $subtotalOnPage = $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice("Subtotal")->getText();
@@ -29,15 +29,6 @@ class AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee extends AbstractCo
         }else{
             $discountOnPage = 0;
         }
-
-        $shippingFee = $webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice($shippingMethod)->getText();
-        $shippingFee = (float)substr($shippingFee,1);
-
-        $shippingFeeOnPage = $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice("Shipping")->getText();
-        $shippingFeeOnPage = (float)substr($shippingFeeOnPage,1);
-        $shippingFeeOnCart = $shippingFee / (1 + $taxRate);
-        $shippingFeeOnCart = round($shippingFeeOnCart, 2);
-
 
         $taxAmount = (float) ($subtotalOnPage - $discountOnPage) * $taxRate + ($shippingFee * ($taxRate / (1 + $taxRate)));
         $taxAmount = round($taxAmount, 2);
@@ -50,11 +41,6 @@ class AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee extends AbstractCo
             'On the Cart - The Tax at the web POS was not correctly.'
         );
 
-        \PHPUnit_Framework_Assert::assertEquals(
-            $shippingFeeOnCart,
-            $shippingFeeOnPage,
-            'On the Cart - The Shipping at the web POS was not correctly.'
-        );
     }
 
     /**
@@ -64,6 +50,6 @@ class AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee extends AbstractCo
      */
     public function toString()
     {
-        return "The Tax and The Shipping at the web POS was correctly.";
+        return "The Tax at the web POS was correctly.";
     }
 }

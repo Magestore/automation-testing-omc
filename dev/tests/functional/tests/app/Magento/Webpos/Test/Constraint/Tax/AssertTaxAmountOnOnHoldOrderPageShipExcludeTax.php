@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: PhucDo
- * Date: 1/5/2018
- * Time: 4:47 PM
- */
 
 namespace Magento\Webpos\Test\Constraint\Tax;
 
@@ -47,6 +41,7 @@ class AssertTaxAmountOnOnHoldOrderPageShipExcludeTax extends AbstractConstraint
             $rowTotalOfProduct = (float)substr($rowTotalOfProduct,1);
 
             $taxAmount = ($subtotalOfProduct - $discountAmountOfProduct) * $taxRate;
+	        $taxAmount = round($taxAmount, 2);
             $rowTotal = $subtotalOfProduct + $taxAmountOfProduct - $discountAmountOfProduct;
 
             $subtotalWholeCart += $subtotalOfProduct;
@@ -72,6 +67,7 @@ class AssertTaxAmountOnOnHoldOrderPageShipExcludeTax extends AbstractConstraint
         $shippingWholeCartOnPage = (float)substr($shippingWholeCartOnPage,1);
 
 	    $taxAmountWholeCart = ($subtotalWholeCartOnPage + $shippingWholeCartOnPage - $discountAmountWholeCart) * $taxRate;
+	    $taxAmountWholeCart = round($taxAmountWholeCart, 2);
 
 	    if($taxAmountWholeCart != 0){
             $taxAmountWholeCartOnPage = $webposIndex->getOnHoldOrderOrderViewFooter()->getRowValue('Tax');

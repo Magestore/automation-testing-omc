@@ -46,6 +46,7 @@ class AssertTaxAmountOnOrderHistoryInvoiceWithShippingFee extends AbstractConstr
             $rowTotalOfProduct = (float)substr($rowTotalOfProduct, 1);
 
             $taxAmount = ($subtotalOfProduct - $discountAmountOfProduct) * $taxRate;
+	        $taxAmount = round($taxAmount, 2);
             $rowTotal = $subtotalOfProduct + $taxAmountOfProduct - $discountAmountOfProduct;
 
             $subtotalWholeCart += $subtotalOfProduct;

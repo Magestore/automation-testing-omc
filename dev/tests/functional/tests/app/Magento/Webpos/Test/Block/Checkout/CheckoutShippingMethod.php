@@ -22,6 +22,21 @@ class CheckoutShippingMethod extends Block
         $this->_rootElement->click();
         $this->_rootElement->find('[id="flatrate_flatrate"]')->click();
     }
+    public function clickFreeShipping()
+    {
+        $this->_rootElement->click();
+        $this->_rootElement->find('[id="freeshipping_freeshipping"]')->click();
+    }
+    public function clickStorePickupShipping()
+    {
+        $this->_rootElement->click();
+        $this->_rootElement->find('[id="storepickup_storepickup"]')->click();
+    }
+    public function clickPOSShipping()
+    {
+        $this->_rootElement->click();
+        $this->_rootElement->find('[id="webpos_shipping_storepickup"]')->click();
+    }
 
 	public function clickShipPanel()
 	{

@@ -52,6 +52,11 @@ class OrderHistoryInvoice extends Block
 		return $this->getItemRow($name)->find('.input-qty');
 	}
 
+	public function getProductPrice($name)
+    {
+        return $this->getItemRow($name)->find('[data-bind="text: $parent.convertAndFormatPrice(item.base_price)"]')->getText();
+    }
+
     /**
      * @param $productName
      * @return \Magento\Mtf\Client\ElementInterface
@@ -95,5 +100,20 @@ class OrderHistoryInvoice extends Block
     public function getRowValue($label)
     {
         return $this->_rootElement->find('//*[@id="invoice-popup-form"]/div[2]/div[3]/div[2]/div/div/label[text()="'.$label.'"]/../span', Locator::SELECTOR_XPATH)->getText();
+    }
+
+    public function getSubtotal()
+    {
+        return $this->_rootElement->find('[id="invoice_subtotal"]')->getText();
+    }
+
+    public function getTaxAmount()
+    {
+        return $this->_rootElement->find('[data-bind="text: convertAndFormatPrice(taxAmount())"]')->getText();
+    }
+
+    public function getGrandtotal()
+    {
+        return $this->_rootElement->find('[id="invoice_grandtotal"]')->getText();
     }
 }

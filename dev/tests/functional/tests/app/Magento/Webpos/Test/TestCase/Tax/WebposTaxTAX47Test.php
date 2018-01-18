@@ -11,7 +11,7 @@ namespace Magento\Webpos\Test\TestCase\Tax;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountAndShippingOnCartPageAndCheckoutPageWithShippingFee;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
@@ -31,9 +31,9 @@ class WebposTaxTAX47Test extends Injectable
     protected $fixtureFactory;
 
     /**
-     * @var assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee
+     * @var AssertTaxAmountAndShippingOnCartPageAndCheckoutPageWithShippingFee
      */
-    protected $assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee;
+    protected $assertTaxAmountAndShippingOnCartPageAndCheckoutPageWithShippingFee;
 
     /**
      * Prepare data.
@@ -66,17 +66,17 @@ class WebposTaxTAX47Test extends Injectable
     /**
      * @param WebposIndex $webposIndex
      * @param FixtureFactory $fixtureFactory
-     * @param AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee $assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee
+     * @param AssertTaxAmountAndShippingOnCartPageAndCheckoutPageWithShippingFee $assertTaxAmountAndShippingOnCartPageAndCheckoutPageWithShippingFee
      */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
-        AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee $assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee
+        AssertTaxAmountAndShippingOnCartPageAndCheckoutPageWithShippingFee $assertTaxAmountAndShippingOnCartPageAndCheckoutPageWithShippingFee
     )
     {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
-        $this->assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee = $assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee;
+        $this->assertTaxAmountAndShippingOnCartPageAndCheckoutPageWithShippingFee = $assertTaxAmountAndShippingOnCartPageAndCheckoutPageWithShippingFee;
     }
 
     /**
@@ -131,17 +131,21 @@ class WebposTaxTAX47Test extends Injectable
         $this->webposIndex->getCheckoutShippingMethod()->openCheckoutShippingMethod();
         $this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Flat Rate - Fixed")->getText();
+        $shippingFee = (float)substr($shippingFee,1);
 
         //Assert Tax Amount on Checkout Page
-        $this->assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee->processAssert($taxRate, "Flat Rate - Fixed",  $this->webposIndex);
+        $this->assertTaxAmountAndShippingOnCartPageAndCheckoutPageWithShippingFee->processAssert($taxRate, $shippingFee, $this->webposIndex);
         //End Assert Tax Amount on Checkout Page
 
         // Change Shipping Method
         $this->webposIndex->getCheckoutShippingMethod()->getBestWayTableRate()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Best Way - Table Rate")->getText();
+        $shippingFee = (float)substr($shippingFee,1);
 
         //Assert Tax Amount on Checkout Page
-        $this->assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee->processAssert($taxRate, "Best Way - Table Rate",  $this->webposIndex);
+        $this->assertTaxAmountAndShippingOnCartPageAndCheckoutPageWithShippingFee->processAssert($taxRate, $shippingFee, $this->webposIndex);
         //End Assert Tax Amount on Checkout Page
 
         return [

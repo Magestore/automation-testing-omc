@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: PhucDo
- * Date: 1/15/2018
- * Time: 10:38 AM
+ * User: vong
+ * Date: 1/16/2018
+ * Time: 1:09 PM
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -11,17 +11,18 @@ namespace Magento\Webpos\Test\TestCase\Tax;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderPageWithShippingFee;
+use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
+use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountNoApplyTaxToFpt;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceExcludingTax;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountWithApplyTaxOnCustomPrice;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountWithIncludeFptInSubtotal;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-
-/**
- * Class WebposTaxTAX52Test
- * @package Magento\Webpos\Test\TestCase\Tax
- */
-class WebposTaxTAX52Test extends Injectable
+class WebposTaxTAX111Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -34,19 +35,19 @@ class WebposTaxTAX52Test extends Injectable
     protected $fixtureFactory;
 
     /**
-     * @var AssertTaxAmountOnOrderPageWithShippingFee
+     * @var TaxRule $caTaxRule
      */
-    protected $assertTaxAmountOnOrderPageWithShippingFee;
+    protected $caTaxRule;
+
+    /**
+     * @var AssertTaxAmountWithIncludeFptInSubtotal
+     */
+    protected $assertTaxAmountWithIncludeFptInSubtotal;
 
     /**
      * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-
-    /**
-     * @var AssertRefundSuccess
-     */
-    protected $assertRefundSuccess;
 
     /**
      * Prepare data.
@@ -63,8 +64,8 @@ class WebposTaxTAX52Test extends Injectable
         )->run();
 
         // Change TaxRate
-        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
-        $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
+        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($miTaxRate);
 
         // Add Customer
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
@@ -72,48 +73,37 @@ class WebposTaxTAX52Test extends Injectable
 
         return [
             'customer' => $customer,
-            'taxRate' => $taxRate->getRate()
+            'taxRate' => $miTaxRate->getRate()
         ];
     }
+
 
     /**
      * @param WebposIndex $webposIndex
      * @param FixtureFactory $fixtureFactory
-     * @param AssertTaxAmountOnOrderPageWithShippingFee $assertTaxAmountOnOrderPageWithShippingFee
-     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
-     * @param AssertRefundSuccess $assertRefundSuccess
      */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
-        AssertTaxAmountOnOrderPageWithShippingFee $assertTaxAmountOnOrderPageWithShippingFee,
-        AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
-        AssertRefundSuccess $assertRefundSuccess
+        AssertTaxAmountWithIncludeFptInSubtotal $assertTaxAmountWithIncludeFptInSubtotal,
+        AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
     )
     {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
-        $this->assertTaxAmountOnOrderPageWithShippingFee = $assertTaxAmountOnOrderPageWithShippingFee;
+        $this->assertTaxAmountWithIncludeFptInSubtotal = $assertTaxAmountWithIncludeFptInSubtotal;
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-        $this->assertRefundSuccess = $assertRefundSuccess;
     }
 
     /**
      * @param Customer $customer
      * @param $products
-     * @param $configData
-     * @param $taxRate
-     * @param bool $createInvoice
-     * @param bool $shipped
-     * @return array
+     * @param $shippingTaxRate
      */
     public function test(
         Customer $customer,
         $products,
-        $configData,
-        $taxRate,
-        $createInvoice = true,
-        $shipped = false
+        $taxRate
     )
     {
         // Create products
@@ -121,75 +111,50 @@ class WebposTaxTAX52Test extends Injectable
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run();
-
-        // Config
+        // Config [Include FPT In Subtotal] = Yes and [Enable FPT] = Yes
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $configData]
+            ['configData' => 'include_FPT_in_subtotal_and_enable_fpt']
         )->run();
-
         // Login webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-
         // Add product to cart
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',
             ['products' => $products]
         )->run();
-
-        // Change customer in cart
+        // Change customer in cart meet Michigan Tax and FPT tax
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
             ['customer' => $customer]
         )->run();
-
-        // Check out
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-        // Select Shipping Method
-        $this->webposIndex->getCheckoutShippingMethod()->openCheckoutShippingMethod();
-        $this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Flat Rate - Fixed")->getText();
-        $shippingFee = (float)substr($shippingFee, 1);
-
-        // Select Payment Method
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
             [
-                'createInvoice' => $createInvoice,
-                'shipped' => $shipped
+                'createInvoice' => true,
+                'shipped' => true
             ]
         )->run();
-
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-        //End Assert Place Order Success
-
-        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
-
+        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-
         sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
-        }
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
@@ -197,58 +162,14 @@ class WebposTaxTAX52Test extends Injectable
             . "\nExpected: " . $orderId
             . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
         );
+        $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
+        $this->webposIndex->getOrderHistoryAddOrderNote()->openRefundPopup();
+        $actualProductPrice = substr($this->webposIndex->getOrderHistoryRefund()->getItemPrice($products[0]['product']->getName()),1);
 
-        $totalRefundQty = 0;
-        $totalOrderQty = 0;
-        // Count
-        foreach ($products as $key => $item) {
-            $totalRefundQty += (int)$item['refundQty'];
-            $totalOrderQty += (int)$item['orderQty'];
-        }
 
-        // Create Refund Partial
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
-            [
-                'products' => $products
-            ]
-        )->run();
 
-        $expectStatus = 'Complete';
-        $totalPaid = (float)substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
-        $totalRefunded = $totalPaid / 2 + $shippingFee / $totalOrderQty * ($totalOrderQty - $totalRefundQty);
-
-        // Assert Total Refunded
-        $this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
-
-        // Refund Extant Items
-        foreach ($products as $key => $item) {
-            unset($products[$key]['refundQty']);
-        }
-
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
-            [
-                'products' => $products
-            ]
-        )->run();
-
-        $expectStatus = 'Closed';
-        $totalRefunded = $totalPaid;
-        $this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
-
-        // Assert Tax Amount in Order Page
-        $this->assertTaxAmountOnOrderPageWithShippingFee->processAssert($taxRate, $shippingFee, $products, $this->webposIndex);
-
-        return [
-            'products' => $products,
-            'taxRate' => $taxRate
-        ];
     }
 
-    /**
-     *
-     */
     public function tearDown()
     {
         // Config system value

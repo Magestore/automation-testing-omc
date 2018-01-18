@@ -61,7 +61,7 @@ class WebposCartPageCustomerCP175Test extends Injectable
         //Click icon < (Back to cart)
         $this->webposIndex->getCheckoutCartHeader()->getIconBackToCart()->click();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        sleep(3);
+        sleep(1);
         $styleLeftAfter = $this->webposIndex->getCheckoutContainer()->getStyleLeft();
 
         return ['styleLeftBefore' => $styleLeftBefore,

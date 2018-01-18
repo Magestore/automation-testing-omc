@@ -11,7 +11,7 @@ namespace Magento\Webpos\Test\TestCase\Tax;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderPageWithShippingMethod;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderPageWithShippingFee;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
@@ -31,9 +31,9 @@ class WebposTaxTAX49Test extends Injectable
     protected $fixtureFactory;
 
     /**
-     * @var AssertTaxAmountOnOrderPageWithShippingMethod
+     * @var AssertTaxAmountOnOrderPageWithShippingFee
      */
-    protected $assertTaxAmountOnOrderPageWithShippingMethod;
+    protected $assertTaxAmountOnOrderPageWithShippingFee;
 
     /**
      * Prepare data.
@@ -66,17 +66,17 @@ class WebposTaxTAX49Test extends Injectable
     /**
      * @param WebposIndex $webposIndex
      * @param FixtureFactory $fixtureFactory
-     * @param AssertTaxAmountOnOrderPageWithShippingMethod $assertTaxAmountOnOrderPageWithShippingMethod
+     * @param AssertTaxAmountOnOrderPageWithShippingFee $assertTaxAmountOnOrderPageWithShippingFee
      */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
-        AssertTaxAmountOnOrderPageWithShippingMethod $assertTaxAmountOnOrderPageWithShippingMethod
+        AssertTaxAmountOnOrderPageWithShippingFee $assertTaxAmountOnOrderPageWithShippingFee
     )
     {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
-        $this->assertTaxAmountOnOrderPageWithShippingMethod = $assertTaxAmountOnOrderPageWithShippingMethod;
+        $this->assertTaxAmountOnOrderPageWithShippingFee = $assertTaxAmountOnOrderPageWithShippingFee;
     }
 
     /**
@@ -176,7 +176,7 @@ class WebposTaxTAX49Test extends Injectable
         );
 
         //Assert Tax Amount on Orders History
-        $this->assertTaxAmountOnOrderPageWithShippingMethod->processAssert($taxRate, $shippingFee, $products, $this->webposIndex);
+        $this->assertTaxAmountOnOrderPageWithShippingFee->processAssert($taxRate, $shippingFee, $products, $this->webposIndex);
         //End Assert Tax Amount on Orders History
 
         return [
