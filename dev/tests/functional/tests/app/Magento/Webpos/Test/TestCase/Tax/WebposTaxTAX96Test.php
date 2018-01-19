@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: vinh
  * Date: 19/01/2018
- * Time: 08:09
+ * Time: 10:03
  */
 
 namespace Magento\Webpos\Test\TestCase\Tax;
@@ -11,12 +11,16 @@ namespace Magento\Webpos\Test\TestCase\Tax;
 
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Mtf\Test\TestCase\InjectableTest;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundPriceOfProductWithTaxIsCorrect;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposTaxTAX96Test extends InjectableTest
+/**
+ * Class WebposTaxTAX96Test
+ * @package Magento\Webpos\Test\TestCase\Tax
+ */
+class WebposTaxTAX96Test extends Injectable
 {
 	/**
 	 * @var WebposIndex
@@ -64,6 +68,12 @@ class WebposTaxTAX96Test extends InjectableTest
 		];
 	}
 
+	/**
+	 * @param WebposIndex $webposIndex
+	 * @param FixtureFactory $fixtureFactory
+	 * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+	 * @param AssertRefundPriceOfProductWithTaxIsCorrect $assertRefundPriceOfProductWithTaxIsCorrect
+	 */
 	public function __inject(
 		WebposIndex $webposIndex,
 		FixtureFactory $fixtureFactory,
@@ -74,9 +84,18 @@ class WebposTaxTAX96Test extends InjectableTest
 		$this->webposIndex = $webposIndex;
 		$this->fixtureFactory = $fixtureFactory;
 		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-		$this->assertTaxAmountOnOrderHistoryInvoice = $assertRefundPriceOfProductWithTaxIsCorrect;
+		$this->assertRefundPriceOfProductWithTaxIsCorrect = $assertRefundPriceOfProductWithTaxIsCorrect;
 	}
 
+	/**
+	 * @param Customer $customer
+	 * @param $taxRate
+	 * @param $products
+	 * @param $configData
+	 * @param bool $createInvoice
+	 * @param bool $shipped
+	 * @return array
+	 */
 	public function test(
 		Customer $customer,
 		$taxRate,
@@ -200,16 +219,21 @@ class WebposTaxTAX96Test extends InjectableTest
 		$this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
 
 		//Assert Price of product
-		$this->assertRefundPriceOfProductWithTaxIsCorrect->processAssert($this->webposIndex, $products, $taxRate);
+		$useCustomPrice = true;
+		$this->assertRefundPriceOfProductWithTaxIsCorrect->processAssert($this->webposIndex, $products, $taxRate, $useCustomPrice);
 
 		$this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
 		$this->webposIndex->getModal()->getOkButton()->click();
+
 
 		return [
 			'products' => $products
 		];
 	}
 
+	/**
+	 *
+	 */
 	public function tearDown()
 	{
 		$this->objectManager->getInstance()->create(
