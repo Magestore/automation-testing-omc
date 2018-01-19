@@ -13,6 +13,7 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling;
 use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountNoApplyTaxToFpt;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
@@ -40,9 +41,9 @@ class WebposTaxTAX111Test extends Injectable
     protected $caTaxRule;
 
     /**
-     * @var AssertTaxAmountWithIncludeFptInSubtotal
+     * @var AssertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling
      */
-    protected $assertTaxAmountWithIncludeFptInSubtotal;
+    protected $assertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling;
 
     /**
      * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
@@ -85,13 +86,13 @@ class WebposTaxTAX111Test extends Injectable
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
-        AssertTaxAmountWithIncludeFptInSubtotal $assertTaxAmountWithIncludeFptInSubtotal,
+        AssertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling $assertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
     )
     {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
-        $this->assertTaxAmountWithIncludeFptInSubtotal = $assertTaxAmountWithIncludeFptInSubtotal;
+        $this->assertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling = $assertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling;
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
 
@@ -103,7 +104,8 @@ class WebposTaxTAX111Test extends Injectable
     public function test(
         Customer $customer,
         $products,
-        $taxRate
+        $taxRate,
+        $expectStatus = 'Closed'
     )
     {
         // Create products
@@ -164,10 +166,9 @@ class WebposTaxTAX111Test extends Injectable
         );
         $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
         $this->webposIndex->getOrderHistoryAddOrderNote()->openRefundPopup();
-        $actualProductPrice = substr($this->webposIndex->getOrderHistoryRefund()->getItemPrice($products[0]['product']->getName()),1);
-
-
-
+        $this->assertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling->processAssert($this->webposIndex, $products, $taxRate);
+        $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
+        $this->webposIndex->getModal()->getOkButton()->click();
     }
 
     public function tearDown()

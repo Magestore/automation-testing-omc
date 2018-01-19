@@ -13,13 +13,16 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling;
 use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountNoApplyTaxToFpt;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceExcludingTax;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountWithApplyTaxOnCustomPrice;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposTaxTAX82Test extends Injectable
+class WebposTaxTAX106Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -37,9 +40,9 @@ class WebposTaxTAX82Test extends Injectable
     protected $caTaxRule;
 
     /**
-     * @var AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax
+     * @var AssertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling
      */
-    protected $assertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax;
+    protected $assertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling;
 
     /**
      * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
@@ -65,7 +68,7 @@ class WebposTaxTAX82Test extends Injectable
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($miTaxRate);
 
         // Add Customer
-        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI_ship_CA_bill']);
+        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
         $customer->persist();
 
         return [
@@ -82,13 +85,13 @@ class WebposTaxTAX82Test extends Injectable
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
-        AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax $assertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax,
+        AssertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling $assertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
     )
     {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
-        $this->assertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax = $assertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax;
+        $this->assertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling = $assertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling;
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
 
@@ -101,8 +104,7 @@ class WebposTaxTAX82Test extends Injectable
         Customer $customer,
         $products,
         $taxRate,
-        $addDiscount = false,
-        $discountAmount = null
+        $expectStatus = 'Closed'
     )
     {
         // Create products
@@ -110,10 +112,10 @@ class WebposTaxTAX82Test extends Injectable
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run();
-        // Config [Apply Discount On Prices] = Including tax
+        // Config [Apply Tax To FPT] = No and [Enable FPT] = Yes
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'apply_discount_on_prices_including_tax']
+            ['configData' => 'disable_tax_calculation_apply_tax_to_fpt_and_enable_fpt']
         )->run();
         // Login webpos
         $staff = $this->objectManager->getInstance()->create(
@@ -129,39 +131,43 @@ class WebposTaxTAX82Test extends Injectable
             'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
             ['customer' => $customer]
         )->run();
-        // Add Discount
-        if ($addDiscount) {
-            $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
-            sleep(1);
-            self::assertTrue(
-                $this->webposIndex->getCheckoutDiscount()->isVisible(),
-                'CategoryRepository - TaxClass page - Delete TaxClass - Add discount popup is not shown'
-            );
-            $this->webposIndex->getCheckoutDiscount()->setDiscountPercent($discountAmount);
-            $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
-            $this->webposIndex->getMsWebpos()->waitCartLoader();
-            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        }
-        $this->assertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax
-            ->processAssert($this->webposIndex, $products, $taxRate, $discountAmount);
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->assertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax
-            ->processAssert($this->webposIndex, $products, $taxRate, $discountAmount);
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
             [
                 'createInvoice' => true,
-                'shipped' => false
+                'shipped' => true
             ]
         )->run();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
+        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getCMenu()->ordersHistory();
+        sleep(2);
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        self::assertEquals(
+            $orderId,
+            $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
+            "Order Content - Order Id is wrong"
+            . "\nExpected: " . $orderId
+            . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
+        );
+        $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
+        $this->webposIndex->getOrderHistoryAddOrderNote()->openRefundPopup();
+        $this->assertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling->processAssert($this->webposIndex, $products, $taxRate);
+        $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
+        $this->webposIndex->getModal()->getOkButton()->click();
     }
 
     public function tearDown()
