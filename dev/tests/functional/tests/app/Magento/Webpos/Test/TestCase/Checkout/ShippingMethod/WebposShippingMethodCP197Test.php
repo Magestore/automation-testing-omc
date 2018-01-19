@@ -67,7 +67,8 @@ class WebposShippingMethodCP197Test extends Injectable
 
         return [
             'total' =>$this->webposIndex->getCheckoutWebposCart()->getTotal(),
-            'subtotal' =>$this->webposIndex->getCheckoutWebposCart()->getSubtotal()
+            'subtotal' =>$this->webposIndex->getCheckoutWebposCart()->getSubtotal(),
+            'tax' => $this->webposIndex->getCheckoutWebposCart()->getTax()
         ];
     }
 }
