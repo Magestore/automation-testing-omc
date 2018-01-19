@@ -95,4 +95,28 @@ class CheckoutPlaceOrder extends Block
 
         return $this->_rootElement->find('#checkout-method > div:nth-child(1) > div.panel-heading > h4 > a')->isVisible();
     }
+	public function getMessageAddMorePayment()
+    {
+        return $this->_rootElement->find('.//div[data-bind="visible: checkPaymentCollection()"] > span ');
+    }
+
+    public function getAddPaymentDisable()
+    {
+        return $this->_rootElement->find('button[id="add_payment_button"][disabled]');
+    }
+
+    public function getHeaderAmount()
+    {
+        return $this->_rootElement->find('.//*[@id="webpos_checkout"]//span[@class="price"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getRemainMoneyPrice()
+    {
+        return $this->_rootElement->find('.remain-money > span');
+    }
+
+    public function getInvoiceBox()
+    {
+        return $this->_rootElement->find('.invoice-box');
+    }
 }
