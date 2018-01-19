@@ -170,6 +170,10 @@ class WebposTaxTAX60Test extends Injectable
         $actualTaxAmount = substr($actualTaxAmount, 1);
         $this->assertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade->processAssert(
             $this->webposIndex, $currentTaxRate, $products[0]['product'], $actualPriceExcludeTax, $actualTaxAmount);
+        // Invoice order successfully
+        $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
+        $this->webposIndex->getModal()->getOkButton()->click();
+        return ['products' => $products];
     }
 
     public function tearDown()
