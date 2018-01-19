@@ -90,4 +90,9 @@ class CheckoutAddShippingAddress extends Block
 	{
 		return $this->_rootElement->find('//select[contains(@data-bind, "value: regionIdShipping")]/option[text()="' . $name . '"]', Locator::SELECTOR_XPATH);
 	}
+
+	public function setFieldAddress($data)
+    {
+
+    }
 }

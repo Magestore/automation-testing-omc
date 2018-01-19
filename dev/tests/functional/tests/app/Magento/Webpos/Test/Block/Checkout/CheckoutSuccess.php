@@ -57,4 +57,9 @@ class CheckoutSuccess extends Block
     {
         return $this->_rootElement->find('.checkout-actions');
     }
+
+    public function waitForLoadingIndicator()
+    {
+        $this->waitForElementNotVisible('.indicator');
+    }
 }
