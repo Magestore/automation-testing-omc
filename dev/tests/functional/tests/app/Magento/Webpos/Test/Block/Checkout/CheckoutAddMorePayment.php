@@ -1,25 +1,18 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: thomas
- * Date: 04/12/2017
- * Time: 10:10
+ * User: Bang
+ * Date: 1/17/2018
+ * Time: 2:12 PM
  */
 
 namespace Magento\Webpos\Test\Block\Checkout;
-
 use Magento\Mtf\Block\Block;
 use Magento\Mtf\Client\Locator;
-/**
- * Class CheckoutPaymentMethod
- * @package Magento\Webpos\Test\Block\CategoryRepository
- */
-class CheckoutPaymentMethod extends Block
+
+class CheckoutAddMorePayment extends Block
 {
-    /**
-     * @return \Magento\Mtf\Client\ElementInterface
-     */
-    public function getCashInMethod()
+    public function getCashIn()
     {
         return $this->_rootElement->find('.icon-iconPOS-payment-cashforpos');
     }
@@ -38,13 +31,5 @@ class CheckoutPaymentMethod extends Block
     public function getCustomPayment2()
     {
         return $this->_rootElement->find('.icon-iconPOS-payment-cp2forpos');
-    }
-    public function getAmountPayment()
-    {
-        return $this->_rootElement->find('.//*[@id="payment_selected"]//input[@onclick="this.select()"]', Locator::SELECTOR_XPATH);
-    }
-    public function getIconRemove()
-    {
-        return $this->_rootElement->find('.icon-iconPOS-remove');
     }
 }
