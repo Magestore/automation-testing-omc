@@ -113,4 +113,10 @@ class OrderHistoryOrderViewFooter extends Block
         return $this->waitForElementVisible('//*[@id="webpos_order_view_container"]/footer/div[1]/table/tbody/tr/td[text()="Total Refunded"]/..', Locator::SELECTOR_XPATH);
     }
 
+
+	public function getRow($label)
+	{
+		return $this->_rootElement->find('//*[@id="webpos_order_view_container"]/footer/div[1]/table/tbody/tr/td[text()="'.$label.'"]/../td[2]', Locator::SELECTOR_XPATH);
+	}
+
 }
