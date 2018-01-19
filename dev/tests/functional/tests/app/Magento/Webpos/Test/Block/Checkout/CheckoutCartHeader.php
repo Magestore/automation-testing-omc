@@ -58,4 +58,9 @@ class CheckoutCartHeader extends Block
 	{
         return $this->_rootElement->find('#back_to_cart');
 	}
+
+	public function getIconEditCustomer()
+    {
+        return $this->_rootElement->find('#webpos_cart > header > div.actions-customer > a.add-customer > span');
+    }
 }

@@ -99,7 +99,7 @@ class WebposCartPageCustomerCP179Test extends Injectable
 
         $configData = $configData->getData()['section'];
         return [
-            'name' => $customer->getAddress()[0]['firstname'].' '.$customer->getAddress()[0]['lastname'],
+            'name' => $customer->getFirstname().' '.$customer->getLastname(),
             'address' => $configData['webpos/guest_checkout/city']['value'].', '.$configData['webpos/guest_checkout/region_id']['label'].
                 ', '.$configData['webpos/guest_checkout/zip']['value'].', US',
             'phone' =>  $configData['webpos/guest_checkout/telephone']['value'],
