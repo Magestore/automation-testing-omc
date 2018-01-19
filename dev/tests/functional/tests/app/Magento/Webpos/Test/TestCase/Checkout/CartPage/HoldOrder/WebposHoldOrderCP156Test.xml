@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Tax\WebposTaxTAX82Test" summary="Tax" ticketId="WEBPOSTAX-82">
-        <variation name="WebposTaxTAX82TestVariation_TAX82">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder\WebposHoldOrderCP156Test" summary="Hold with a product" ticketId="WEBPOS-1">
+        <variation name="WebposHoldOrderCP156TestVariation">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
-                    <item name="orderQty" xsi:type="number">1</item>
                 </item>
             </data>
-            <data name="addDiscount" xsi:type="boolean">true</data>
-            <data name="discountAmount" xsi:type="string">10.00</data>
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertCartPageCustomerNameIsCorrect"/>-->
         </variation>
     </testCase>
 </config>

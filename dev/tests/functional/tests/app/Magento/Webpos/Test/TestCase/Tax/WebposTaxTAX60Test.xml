@@ -10,6 +10,7 @@
             </data>
             <data name="defaultTaxRate" xsi:type="string">8.25</data>
             <data name="currentTaxRate" xsi:type="string">8.5</data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoiceSuccess"/>
         </variation>
     </testCase>
 </config>

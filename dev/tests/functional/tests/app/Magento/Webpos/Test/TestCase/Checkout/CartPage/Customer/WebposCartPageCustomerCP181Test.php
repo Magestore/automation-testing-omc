@@ -61,6 +61,7 @@ class WebposCartPageCustomerCP181Test extends Injectable
         $this->webposIndex->getCheckoutAddCustomer()->setFieldWithoutShippingAndBilling($customer->getData());
         $this->webposIndex->getCheckoutAddCustomer()->getSaveButton()->click();
         sleep(2);
+
         //Add product to cart
         $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
