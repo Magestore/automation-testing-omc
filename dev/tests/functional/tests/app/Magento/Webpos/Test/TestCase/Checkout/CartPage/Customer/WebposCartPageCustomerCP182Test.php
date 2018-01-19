@@ -88,7 +88,7 @@ class WebposCartPageCustomerCP182Test extends Injectable
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
 
         return [
-            'name' => $address->getFirstname().' '.$address->getLastname(),
+            'name' => $customer->getFirstname().' '.$customer->getLastname(),
             'address' => $address->getCity().', '.$address->getRegion().', '.$address->getPostcode().', US',
             'phone' =>  $address->getTelephone(),
             'orderId' => $orderId
