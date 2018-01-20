@@ -139,6 +139,10 @@ class WebposTaxTAX18Test extends Injectable
 
         //Assert Tax Amount in Order History Invoice
         $this->assertTaxAmountOnOrderHistoryInvoice->processAssert($taxRate, $products, $this->webposIndex);
+
+        // Invoice order successfully
+        $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
+        $this->webposIndex->getModal()->getOkButton()->click();
         return ['products' => $products];
     }
 

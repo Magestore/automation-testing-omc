@@ -12,9 +12,19 @@ namespace Magento\Webpos\Test\Constraint\OrderHistory\Refund;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class AssertRefundPriceOfProductWithTaxIsCorrect
+ * @package Magento\Webpos\Test\Constraint\OrderHistory\Refund
+ */
 class AssertRefundPriceOfProductWithTaxIsCorrect extends AbstractConstraint
 {
-	public function processAssert(WebposIndex $webposIndex, $products, $taxRate = 0)
+	/**
+	 * @param WebposIndex $webposIndex
+	 * @param $products
+	 * @param int $taxRate
+	 * @param bool $useCustomPrice
+	 */
+	public function processAssert(WebposIndex $webposIndex, $products, $taxRate = 0, $useCustomPrice = false)
 	{
 		$taxRate = (float) $taxRate / 100;
 
@@ -22,7 +32,12 @@ class AssertRefundPriceOfProductWithTaxIsCorrect extends AbstractConstraint
 			$productName = $item['product']->getName();
 			$priceOfProduct = $webposIndex->getOrderHistoryRefund()->getItemPrice($productName);
 			$priceOfProduct = substr($priceOfProduct, 1);
-			$expectPriceOfProduct = (float) $item['product']->getPrice() * (1 + $taxRate);
+			if ($useCustomPrice) {
+				$price = (float) $item['customPrice'];
+			} else {
+				$price = (float) $item['product']->getPrice();
+			}
+			$expectPriceOfProduct =  $price * (1 + $taxRate);
 			$expectPriceOfProduct = round($expectPriceOfProduct, 2);
 
 			\PHPUnit_Framework_Assert::assertEquals(
