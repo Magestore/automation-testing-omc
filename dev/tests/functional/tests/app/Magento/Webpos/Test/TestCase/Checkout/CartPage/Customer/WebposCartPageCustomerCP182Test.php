@@ -25,11 +25,16 @@ class WebposCartPageCustomerCP182Test extends Injectable
      * @param FixtureFactory $fixtureFactory
      * @return array
      */
-    public function __prepare(FixtureFactory $fixtureFactory)
+
+    public function __prepare()
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'webpos_default_guest_checkout_rollback']
+        )->run();
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'have_shipping_method_on_webpos_CP197']
         )->run();
     }
 
@@ -88,7 +93,7 @@ class WebposCartPageCustomerCP182Test extends Injectable
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
 
         return [
-            'name' => $customer->getFirstname().' '.$customer->getLastname(),
+            'name' => $address->getFirstname().' '.$address->getLastname(),
             'address' => $address->getCity().', '.$address->getRegion().', '.$address->getPostcode().', US',
             'phone' =>  $address->getTelephone(),
             'orderId' => $orderId

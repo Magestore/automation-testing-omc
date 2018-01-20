@@ -53,6 +53,11 @@ class WebposCartPageCustomerCP179Test extends Injectable
             ['products' => $products]
         )->run()[0]['product'];
 
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'have_shipping_method_on_webpos_CP197']
+        )->run();
+
         //Login webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
