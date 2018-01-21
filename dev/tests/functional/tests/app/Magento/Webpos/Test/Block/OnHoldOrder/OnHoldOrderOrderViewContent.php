@@ -120,4 +120,19 @@ class OnHoldOrderOrderViewContent extends Block
     {
         return $this->_rootElement->find('//table/tbody/tr/td/h4[text()="'.$productName.'"]/../../td[8]', Locator::SELECTOR_XPATH);
     }
+
+    public function getProductByOrderTo($i)
+    {
+        return $this->_rootElement->find('//div/div[2]/div/div/div/table/tbody/tr['.$i.']', Locator::SELECTOR_XPATH);
+
+    }
+    public function getNameProductOrderTo($i)
+    {
+        return $this->_rootElement->find('//div/div[2]/div/div/div/table/tbody/tr['.$i.']', Locator::SELECTOR_XPATH)->find('.product-name')->getText();
+
+    }
+    public function getPriceProductByOrderTo($i)
+    {
+        return floatval(str_replace('$','',$this->_rootElement->find('//div/div[2]/div/div/div/table/tbody/tr['.$i.']/td[3]', Locator::SELECTOR_XPATH)->getText()));
+    }
 }

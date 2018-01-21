@@ -43,6 +43,12 @@ class WebposHoldOrderCP156Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+
+        //Checkout
+        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
@@ -50,5 +56,7 @@ class WebposHoldOrderCP156Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
+        return ['products' => [$product->getData()],
+            'cartProducts' => null];
     }
 }

@@ -4,7 +4,8 @@
         <variation name="WebposHoldOrderCP157TestVariation">
             <data name="tag" xsi:type="string">tag</data>
             <data name="attribute" xsi:type="string">black</data>
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertCartPageCustomerNameIsCorrect"/>-->
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckoutPage"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckCartConfigProduct"/>
         </variation>
     </testCase>
 </config>
