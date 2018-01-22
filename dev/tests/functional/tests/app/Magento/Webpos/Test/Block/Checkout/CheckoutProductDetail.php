@@ -23,4 +23,12 @@ class CheckoutProductDetail extends Block
     public function getButtonAddToCart(){
         return $this->_rootElement->find('#popup-product-detail > div > div > div > div.modal-body > div > div > div > div.ms-actions > button');
     }
+
+    public function waitForAvailableQtyVisible(){
+        return $this->waitForElementVisible('span[data-bind="text: childQty"]');
+    }
+
+    public function selectAttributes($label, $option){
+        $this->_rootElement->find('//*[@id="product-options-wrapper"]/div[2]/div/label/span[text()="'.$label.'"]/../../div/select', Locator::SELECTOR_XPATH, 'select')->setValue($option);
+    }
 }
