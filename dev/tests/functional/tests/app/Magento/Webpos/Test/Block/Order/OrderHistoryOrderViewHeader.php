@@ -47,4 +47,9 @@ class OrderHistoryOrderViewHeader extends Block
     {
         return $this->waitForElementVisible('.status.closed');
     }
+
+	public function getTakePaymentButton()
+	{
+		return $this->_rootElement->find('.take-payment');
+	}
 }

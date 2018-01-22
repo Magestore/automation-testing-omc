@@ -22,4 +22,9 @@ class CheckoutContainer extends Block
 	{
 		$this->waitForElementVisible('#popup-edit-product');
 	}
+
+	public function waitForProductDetailPopup()
+	{
+		$this->waitForElementVisible('#popup-product-detail');
+	}
 }
