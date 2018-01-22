@@ -53,6 +53,12 @@ class CheckoutWebposCart extends Block
         $value = $this->_rootElement->find('#webpos_cart > div > div > div > ul > li:nth-child(7) > div.price-box > span')->getText();
         return floatval(str_replace('$', '',$value));
     }
+
+    public function getTax()
+    {
+        $value = $this->_rootElement->find('#webpos_cart > div > div > div > ul > li:nth-child(6) > div.price-box > span')->getText();
+        return floatval(str_replace('$', '',$value));
+    }
     public function isDisplayShippingOnCart()
     {
         return $this->_rootElement->find('#webpos_cart > div > div > div > ul > li:nth-child(5)')->isVisible();

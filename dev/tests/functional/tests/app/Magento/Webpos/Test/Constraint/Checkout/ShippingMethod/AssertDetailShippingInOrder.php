@@ -40,7 +40,8 @@ class AssertDetailShippingInOrder extends AbstractConstraint
         );
 
         $subtotal = str_replace('$','', $webposIndex->getOrderHistoryOrderViewFooter()->getSubTotal());
-        $totalExpected = floatval($priceShipping) + floatval($subtotal);
+        $tax = str_replace('$','', $webposIndex->getOrderHistoryOrderViewFooter()->getTax());
+        $totalExpected = floatval($priceShipping) + floatval($subtotal) + floatval($tax);
         $totalActual = floatval(str_replace('$','', $webposIndex->getOrderHistoryOrderViewFooter()->getGrandTotal()));
 
         \PHPUnit_Framework_Assert::assertEquals(
