@@ -51,4 +51,9 @@ class OrderHistoryContainer extends Block
 	{
 		return $this->waitForElementVisible('#refund-popup');
 	}
+
+	public function waitForShipmentPopupIsVisible()
+	{
+		return $this->waitForElementVisible('#shipment-popup');
+	}
 }

@@ -21,4 +21,12 @@ class OrderHistoryAddOrderNote extends Block
     {
         $this->_rootElement->find('.//a[text()="Refund"]', Locator::SELECTOR_XPATH)->click();
     }
+
+    /**
+     *
+     */
+    public function openShipmentPopup()
+    {
+        $this->_rootElement->find('.//a[text()="Ship"]', Locator::SELECTOR_XPATH)->click();
+    }
 }

@@ -15,5 +15,11 @@ use Magento\Mtf\Block\Block;
  */
 class OrderHistoryShipment extends Block
 {
-
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getSubmitButton()
+    {
+        return $this->_rootElement->find('#shipment-popup-form > div.modal-body > div.actions > button.btn-cl-cfg-active');
+    }
 }

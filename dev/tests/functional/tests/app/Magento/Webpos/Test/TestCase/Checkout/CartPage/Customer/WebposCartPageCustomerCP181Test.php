@@ -32,6 +32,10 @@ class WebposCartPageCustomerCP181Test extends Injectable
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'webpos_default_guest_checkout_rollback']
         )->run();
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'have_shipping_method_on_webpos_CP197']
+        )->run();
     }
 
     public function __inject

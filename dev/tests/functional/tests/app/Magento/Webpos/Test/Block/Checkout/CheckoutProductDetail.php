@@ -23,4 +23,22 @@ class CheckoutProductDetail extends Block
     public function getButtonAddToCart(){
         return $this->_rootElement->find('#popup-product-detail > div > div > div > div.modal-body > div > div > div > div.ms-actions > button');
     }
+
+	public function getProductQtyInput()
+	{
+		return $this->_rootElement->find('#product_qty');
+	}
+
+	public function getRadioItemOfBundleProduct($name)
+	{
+		return $this->_rootElement->find('//*[@id="product-options-wrapper"]/fieldset/div/div/div/div[1]/label/span[text()="'.$name.'"]/../../input', Locator::SELECTOR_XPATH);
+	}
+
+    public function waitForAvailableQtyVisible(){
+        return $this->waitForElementVisible('span[data-bind="text: childQty"]');
+    }
+
+    public function selectAttributes($label, $option){
+        $this->_rootElement->find('//*[@id="product-options-wrapper"]/div[2]/div/label/span[text()="'.$label.'"]/../../div/select', Locator::SELECTOR_XPATH, 'select')->setValue($option);
+    }
 }

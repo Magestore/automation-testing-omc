@@ -31,6 +31,11 @@ class WebposCartPageCustomerCP177Test extends Injectable
             ['configData' => 'webpos_default_guest_checkout_rollback']
         )->run();
 
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'have_shipping_method_on_webpos_CP197']
+        )->run();
+
         //Create customer
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'webpos_guest_pi']);
         $customer->persist();
