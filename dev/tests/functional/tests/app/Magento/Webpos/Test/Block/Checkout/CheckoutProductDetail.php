@@ -33,4 +33,12 @@ class CheckoutProductDetail extends Block
 	{
 		return $this->_rootElement->find('//*[@id="product-options-wrapper"]/fieldset/div/div/div/div[1]/label/span[text()="'.$name.'"]/../../input', Locator::SELECTOR_XPATH);
 	}
+
+    public function waitForAvailableQtyVisible(){
+        return $this->waitForElementVisible('span[data-bind="text: childQty"]');
+    }
+
+    public function selectAttributes($label, $option){
+        $this->_rootElement->find('//*[@id="product-options-wrapper"]/div[2]/div/label/span[text()="'.$label.'"]/../../div/select', Locator::SELECTOR_XPATH, 'select')->setValue($option);
+    }
 }

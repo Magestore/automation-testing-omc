@@ -1,21 +1,22 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 1/18/2018
- * Time: 1:44 PM
+ * Date: 1/22/2018
+ * Time: 4:32 PM
  */
-
-namespace Magento\Webpos\Test\Constraint\OrderHistory\Invoice;
+namespace Magento\Webpos\Test\Constraint\OrderHistory\Shipment;
 
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+
 /**
- * Class AssertInvoiceSuccess
- * @package Magento\Webpos\Test\Constraint\OrderHistory\Invoice
+ * Class AssertShipmentSuccess
+ * @package Magento\Webpos\Test\Constraint\OrderHistory\Shipment
  */
-class AssertInvoiceSuccess extends AbstractConstraint
+class AssertShipmentSuccess extends AbstractConstraint
 {
     /**
      * @param WebposIndex $webposIndex
@@ -28,8 +29,8 @@ class AssertInvoiceSuccess extends AbstractConstraint
         );
 
         \PHPUnit_Framework_Assert::assertFalse(
-            $webposIndex->getOrderHistoryInvoice()->isVisible(),
-            'Invoice Pop is not closed'
+            $webposIndex->getOrderHistoryPayment()->isVisible(),
+            'Payment Pop is not closed'
         );
 
         sleep(1);
@@ -39,15 +40,10 @@ class AssertInvoiceSuccess extends AbstractConstraint
         );
 
         \PHPUnit_Framework_Assert::assertEquals(
-            'The invoice has been created successfully.',
+            'The shipment has been created successfully.',
             $webposIndex->getToaster()->getWarningMessage()->getText(),
             "Success message's Content is Wrong"
         );
-//
-//        \PHPUnit_Framework_Assert::assertFalse(
-//            $webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->isVisible(),
-//            'Invoice Button is not hiden'
-//        );
 
         $webposIndex->getNotification()->getNotificationBell()->click();
         \PHPUnit_Framework_Assert::assertTrue(
@@ -55,7 +51,7 @@ class AssertInvoiceSuccess extends AbstractConstraint
             'Notification list is empty'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            'The invoice has been created successfully.',
+            'The shipment has been created successfully.',
             $webposIndex->getNotification()->getFirstNotificationText(),
             'Notification Content is wrong'
         );
@@ -68,6 +64,6 @@ class AssertInvoiceSuccess extends AbstractConstraint
      */
     public function toString()
     {
-        return "Order History - Invoice - Submit Invoice: Success";
+        return "Order History - Shipment was correctly.";
     }
 }

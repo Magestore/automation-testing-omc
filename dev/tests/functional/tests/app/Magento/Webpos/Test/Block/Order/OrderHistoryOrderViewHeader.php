@@ -48,8 +48,26 @@ class OrderHistoryOrderViewHeader extends Block
         return $this->waitForElementVisible('.status.closed');
     }
 
-	public function getTakePaymentButton()
-	{
-		return $this->_rootElement->find('.take-payment');
-	}
+	public function waitForProcessingStatusVisisble()
+    {
+        return $this->waitForElementVisible('.status.processing');
+    }
+
+    public function waitForPendingStatusVisisble()
+    {
+        return $this->waitForElementVisible('.status.pending');
+    }
+
+    public function waitForCompleteStatusVisisble()
+    {
+        return $this->waitForElementVisible('.status.complete');
+    }
+
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getTakePaymentButton()
+    {
+        return $this->_rootElement->find('.take-payment');
+    }
 }
