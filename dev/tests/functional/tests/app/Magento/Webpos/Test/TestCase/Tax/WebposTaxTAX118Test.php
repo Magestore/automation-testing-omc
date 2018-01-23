@@ -14,6 +14,11 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus;
+use Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoiceSuccess;
+use Magento\Webpos\Test\Constraint\OrderHistory\Payment\AssertPaymentSuccess;
+use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
+use Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 class WebposTaxTAX118Test extends Injectable
@@ -27,6 +32,31 @@ class WebposTaxTAX118Test extends Injectable
 	 * @var FixtureFactory
 	 */
 	protected $fixtureFactory;
+
+	/**
+	 * @var AssertPaymentSuccess
+	 */
+	protected $assertPaymentSuccess;
+
+	/**
+	 * @var AssertInvoiceSuccess
+	 */
+	protected $assertInvoiceSuccess;
+
+	/**
+	 * @var AssertShipmentSuccess
+	 */
+	protected $assertShipmentSuccess;
+
+	/**
+	 * @var AssertRefundSuccess
+	 */
+	protected $assertRefundSuccess;
+
+	/**
+	 * @var AssertOrderStatus
+	 */
+	protected $assertOrderStatus;
 
 	/**
 	 * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
@@ -62,11 +92,21 @@ class WebposTaxTAX118Test extends Injectable
 	public function __inject(
 		WebposIndex $webposIndex,
 		FixtureFactory $fixtureFactory,
+		AssertPaymentSuccess $assertPaymentSuccess,
+		AssertInvoiceSuccess $assertInvoiceSuccess,
+		AssertShipmentSuccess $assertShipmentSuccess,
+		AssertRefundSuccess $assertRefundSuccess,
+		AssertOrderStatus $assertOrderStatus,
 		AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
 	)
 	{
 		$this->webposIndex = $webposIndex;
 		$this->fixtureFactory = $fixtureFactory;
+		$this->assertPaymentSuccess = $assertPaymentSuccess;
+		$this->assertInvoiceSuccess = $assertInvoiceSuccess;
+		$this->assertShipmentSuccess = $assertShipmentSuccess;
+		$this->assertRefundSuccess = $assertRefundSuccess;
+		$this->assertOrderStatus = $assertOrderStatus;
 		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 	}
 
@@ -152,6 +192,54 @@ class WebposTaxTAX118Test extends Injectable
 			. "\nExpected: " . $orderId
 			. "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
 		);
+
+		$this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
+		$this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->click();
+		$this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
+		$this->webposIndex->getModal()->getOkButton()->click();
+
+		//Assert Tax Amount in Order History Refund
+		$this->assertPaymentSuccess->processAssert($this->webposIndex);
+
+		// Invoice
+		$this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\CreateInvoiceInOrderHistoryStep',
+			['products' => $products]
+		)->run();
+
+		// Assert Invoice Success
+		$this->assertInvoiceSuccess->processAssert($this->webposIndex);
+		// Assert Order Status
+		$this->webposIndex->getOrderHistoryOrderViewHeader()->waitForProcessingStatusVisisble();
+		$this->assertOrderStatus->processAssert($this->webposIndex, 'Processing');
+
+		// Shipment
+		if (!$this->webposIndex->getOrderHistoryContainer()->getActionsBox()->isVisible()) {
+			$this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
+		}
+		$this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Ship')->click();
+		$this->webposIndex->getOrderHistoryContainer()->waitForShipmentPopupIsVisible();
+		$this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
+		$this->webposIndex->getModal()->getOkButton()->click();
+
+		// Assert Shipment Success
+		$this->assertShipmentSuccess->processAssert($this->webposIndex);
+		// Assert Order Status
+		$this->webposIndex->getOrderHistoryOrderViewHeader()->waitForCompleteStatusVisisble();
+		$this->assertOrderStatus->processAssert($this->webposIndex, 'Complete');
+
+
+		// Refund
+		$this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
+			['products' => $products]
+		)->run();
+
+		// Assert Refund Success
+		$this->assertRefundSuccess->processAssert($this->webposIndex, 'Closed');
+		// Assert Order Status
+		$this->webposIndex->getOrderHistoryOrderViewHeader()->waitForClosedStatusVisisble();
+		$this->assertOrderStatus->processAssert($this->webposIndex, 'Closed');
 
 
 		return [
