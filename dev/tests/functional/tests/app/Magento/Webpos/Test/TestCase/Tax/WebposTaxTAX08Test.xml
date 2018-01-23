@@ -17,7 +17,7 @@
 			</data>
 			<data name="createInvoice" xsi:type="boolean">false</data>
 
-			<!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\EditQty\AssertValueOfQtyTextboxIsCorrect"/>-->
+			<!--<constraint name="Magento\Webpos\Test\Constraint\Tax\AssertTaxOnOrderDetailIsCorrect"/>-->
 		</variation>
 	</testCase>
 </config>

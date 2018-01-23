@@ -7,6 +7,16 @@
  */
 namespace Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeTemplate\Grid;
 use Magento\Ui\Test\TestCase\GridFilteringTest;
+/**
+ * Precondition:
+ * 1. Create template
+ *
+ * Steps:
+ * 1. Go to grid page Barcode Template
+ * 2. Filter grid using provided columns
+ * 3. Perform Asserts
+ *
+ */
 class FilterGridEntityForTemplateTest extends GridFilteringTest
 {
     protected $gridBlock;

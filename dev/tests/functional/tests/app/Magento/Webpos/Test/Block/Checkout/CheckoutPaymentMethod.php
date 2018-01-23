@@ -9,6 +9,7 @@
 namespace Magento\Webpos\Test\Block\Checkout;
 
 use Magento\Mtf\Block\Block;
+use Magento\Mtf\Client\Locator;
 /**
  * Class CheckoutPaymentMethod
  * @package Magento\Webpos\Test\Block\CategoryRepository
@@ -25,5 +26,25 @@ class CheckoutPaymentMethod extends Block
     public function getCashOnDeliveryMethod()
     {
         return $this->_rootElement->find('.icon-iconPOS-payment-codforpos');
+    }
+    public function getCreditCard()
+    {
+        return $this->_rootElement->find('.icon-iconPOS-payment-ccforpos');
+    }
+    public function getCustomPayment1()
+    {
+        return $this->_rootElement->find('.icon-iconPOS-payment-cp1forpos');
+    }
+    public function getCustomPayment2()
+    {
+        return $this->_rootElement->find('.icon-iconPOS-payment-cp2forpos');
+    }
+    public function getAmountPayment()
+    {
+        return $this->_rootElement->find('.//*[@id="payment_selected"]//input[@onclick="this.select()"]', Locator::SELECTOR_XPATH);
+    }
+    public function getIconRemove()
+    {
+        return $this->_rootElement->find('.icon-iconPOS-remove');
     }
 }

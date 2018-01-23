@@ -8,6 +8,8 @@
         <block name="cMenu" class="Magento\Webpos\Test\Block\Cmenu" locator="#c-menu--push-left" strategy="css selector"/>
         <block name="modal" class="Magento\Webpos\Test\Block\Modal" locator=".modals-wrapper" strategy="css selector"/>
         <block name="notification" class="Magento\Webpos\Test\Block\Notification" locator="#webpos-notification" strategy="css selector"/>
+        <block name="body" class="Magento\Webpos\Test\Block\Body" locator="body" strategy="css selector"/>
+        <block name="checkoutContainer" class="Magento\Webpos\Test\Block\CheckoutContainer" locator="#checkout_container" strategy="css selector"/>
 
         <!--CategoryRepository Page-->
         <block name="checkoutProductList" class="Magento\Webpos\Test\Block\Checkout\CheckoutProductList" locator="#product-list-wrapper" strategy="css selector"/>
@@ -27,9 +29,10 @@
         <block name="checkoutCartFooter" class="Magento\Webpos\Test\Block\Checkout\CheckoutCartFooter" locator=".grand-total-footer" strategy="css selector"/>
         <block name="checkoutCustomSale" class="Magento\Webpos\Test\Block\Checkout\CheckoutCustomSale" locator="#popup-custom-sale" strategy="css selector"/>
         <block name="checkoutPlaceOrder" class="Magento\Webpos\Test\Block\Checkout\CheckoutPlaceOrder" locator="#webpos_checkout" strategy="css selector"/>
-        <block name="checkoutShippingMethod" class="Magento\Webpos\Test\Block\Checkout\CheckoutShippingMethod" locator="#shipping-method" strategy="css selector"/>
+        <block name="checkoutShippingMethod" class="Magento\Webpos\Test\Block\Checkout\CheckoutShippingMethod" locator="[data-bind='visible:shipAble']" strategy="css selector"/>
         <block name="checkoutPaymentMethod" class="Magento\Webpos\Test\Block\Checkout\CheckoutPaymentMethod" locator="#payment-method" strategy="css selector"/>
         <block name="checkoutSuccess" class="Magento\Webpos\Test\Block\Checkout\CheckoutSuccess" locator="#success_container" strategy="css selector"/>
+        <block name="checkoutAddMorePayment" class="Magento\Webpos\Test\Block\Checkout\CheckoutAddMorePayment" locator="#add-more-payment" strategy="css selector"/>
         <!--End CategoryRepository Page-->
         <block name="oWrapper" class="Magento\Webpos\Test\Block\OWrapper" locator="#o-wrapper" strategy="css selector"/>
         <!--Begin Order History-->
@@ -55,5 +58,12 @@
         <block name="sessionCloseShift" class="Magento\Webpos\Test\Block\SessionManagement\SessionCloseShift" locator="#close-shift-container" strategy="css selector"/>
         <block name="sessionSetClosingBalanceReason" class="Magento\Webpos\Test\Block\SessionManagement\SessionSetClosingBalanceReason" locator="#set-closing-balance-reason" strategy="css selector"/>
         <!--End Session management-->
+        <!--On-hold Order-->
+        <block name="onHoldOrderContainer" class="Magento\Webpos\Test\Block\OnHoldOrder\OnHoldOrderContainer" locator="#on_hold_orders_container" strategy="css selector"/>
+        <block name="onHoldOrderOrderList" class="Magento\Webpos\Test\Block\OnHoldOrder\OnHoldOrderOrderList" locator="#on_hold_orders_container #webpos_order_list" strategy="css selector"/>
+        <block name="onHoldOrderOrderViewHeader" class="Magento\Webpos\Test\Block\OnHoldOrder\OnHoldOrderOrderViewHeader" locator="#on_hold_orders_container .col-sm-8.col-left .o-header" strategy="css selector"/>
+        <block name="onHoldOrderOrderViewContent" class="Magento\Webpos\Test\Block\OnHoldOrder\OnHoldOrderOrderViewContent" locator="#on_hold_orders_container .col-sm-8.col-left .main-content" strategy="css selector"/>
+        <block name="onHoldOrderOrderViewFooter" class="Magento\Webpos\Test\Block\OnHoldOrder\OnHoldOrderOrderViewFooter" locator="#on_hold_orders_container .col-sm-8.col-left .footer-order" strategy="css selector"/>
+        <!--End On-hold Order-->
     </page>
 </config>

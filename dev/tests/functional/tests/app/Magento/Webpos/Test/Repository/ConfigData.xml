@@ -575,6 +575,24 @@
             </field>
         </dataset>
 
+        <dataset name="all_allow_shipping_for_POS">
+            <field name="webpos/shipping/allowspecific_shipping" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="label" xsi:type="string">All Allowed Shipping</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+
+        <dataset name="all_allow_shipping_for_POS_rollback">
+            <field name="webpos/shipping/allowspecific_shipping" xsi:type="array">
+                <item name="scope" xsi:type="string">webpos</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="label" xsi:type="string">Specific Shipping</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+        </dataset>
+
         <dataset name="webpos_default_guest_checkout_rollback">
             <field name="webpos/guest_checkout/first_name" xsi:type="array">
                 <item name="scope" xsi:type="string">webpos</item>
@@ -859,7 +877,855 @@
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="inherit" xsi:type="number">1</item>
             </field>
+            <!--Default Shipping Origin-->
+            <field name="shipping/origin/country_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="inherit" xsi:type="number">1</item>
+            </field>
+            <field name="shipping/origin/region_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="inherit" xsi:type="number">1</item>
+            </field>
         </dataset>
+
+        <!--Setting [Tax Class for Shipping] = Taxable goods-->
+        <dataset name="tax_class_for_shipping_taxable_goods">
+            <field name="tax/classes/shipping_tax_class" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Taxable Goods</item>
+                <item name="value" xsi:type="string">2</item>
+            </field>
+        </dataset>
+
         <!--End Tax Config-->
+        <!--Setting [Shipping price] = Taxable goods and Shipping including tax-->
+        <dataset name="taxable_good_shipping_including_tax_TAX47">
+            <!--Tax Classes-->
+            <field name="tax/classes/shipping_tax_class" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Taxable Goods</item>
+                <item name="value" xsi:type="string">2</item>
+            </field>
+
+            <!--Calculation Settings-->
+            <field name="tax/calculation/shipping_includes_tax" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Including Tax</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+
+            <!--Shipping Settings-->
+            <field name="shipping/origin/country_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">United States</item>
+                <item name="value" xsi:type="string">US</item>
+            </field>
+            <field name="shipping/origin/region_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Michigan</item>
+                <item name="value" xsi:type="string">33</item>
+            </field>
+
+            <!--Allow shipping fee-->
+            <field name="webpos/shipping/allowspecific_shipping" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="label" xsi:type="string">All Allowed Shipping</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <!--End Setting [Shipping price] = Taxable goods and Shipping including tax-->
+
+        <!--Setting TAX - Disable Cross Border Trade-->
+        <dataset name="taxable_good_shipping_including_tax_TAX55">
+            <!--Tax Classes-->
+            <field name="tax/classes/shipping_tax_class" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Taxable Goods</item>
+                <item name="value" xsi:type="string">2</item>
+            </field>
+
+            <!--Calculation Settings-->
+            <field name="tax/calculation/shipping_includes_tax" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Including Tax</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="tax/calculation/cross_border_trade_enabled" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+
+            <!--Shipping Settings-->
+            <field name="shipping/origin/country_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">United States</item>
+                <item name="value" xsi:type="string">US</item>
+            </field>
+            <field name="shipping/origin/region_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Michigan</item>
+                <item name="value" xsi:type="string">33</item>
+            </field>
+
+            <!--Allow shipping fee-->
+            <field name="webpos/shipping/allowspecific_shipping" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="label" xsi:type="string">All Allowed Shipping</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <!--End TAX - Disable Cross Border Trade-->
+
+        <!--Setting TAX - Enable Cross Border Trade-->
+        <dataset name="taxable_good_shipping_including_tax_TAX56">
+            <!--Tax Classes-->
+            <field name="tax/classes/shipping_tax_class" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Taxable Goods</item>
+                <item name="value" xsi:type="string">2</item>
+            </field>
+
+            <!--Calculation Settings-->
+            <field name="tax/calculation/shipping_includes_tax" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Including Tax</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="tax/calculation/cross_border_trade_enabled" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+
+            <!--Shipping Settings-->
+            <field name="shipping/origin/country_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">United States</item>
+                <item name="value" xsi:type="string">US</item>
+            </field>
+            <field name="shipping/origin/region_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Michigan</item>
+                <item name="value" xsi:type="string">33</item>
+            </field>
+
+            <!--Allow shipping fee-->
+            <field name="webpos/shipping/allowspecific_shipping" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="label" xsi:type="string">All Allowed Shipping</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <!--End TAX - Enable Cross Border Trade-->
+
+        <!--Setting: [Tax Calculation Based On] = Shipping Origin-->
+        <dataset name="taxable_good_shipping_including_tax_TAX71">
+            <!--Calculation Settings-->
+            <field name="tax/calculation/based_on" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Shipping Origin</item>
+                <item name="value" xsi:type="string">origin</item>
+            </field>
+
+            <!--Shipping Settings-->
+            <field name="shipping/origin/country_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">United States</item>
+                <item name="value" xsi:type="string">US</item>
+            </field>
+
+            <field name="shipping/origin/region_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">California</item>
+                <item name="value" xsi:type="string">12</item>
+            </field>
+
+            <!--Default Guest Checkout-->
+            <field name="webpos/guest_checkout/country_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">United States</item>
+                <item name="value" xsi:type="string">US</item>
+            </field>
+            <field name="webpos/guest_checkout/region_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">California</item>
+                <item name="value" xsi:type="string">12</item>
+            </field>
+        </dataset>
+        <!--End Setting: [Tax Calculation Based On] = Shipping Origin-->
+
+        <!--Setting: [Apply Customer Tax] = Before discount-->
+        <dataset name="tax_calculation_apply_customer_tax_before_discount_TAX76">
+            <!--Calculation Settings-->
+            <field name="tax/calculation/apply_after_discount" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Before Discount</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <!--End Setting: [Apply Customer Tax] = Before discount-->
+
+        <!--Setting [Catalog Prices] = Including tax & [Enable Cross Border Trade] = Yes-->
+        <dataset name="including_tax_and_enable_cross_border_trade">
+            <field name="tax/calculation/price_includes_tax" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Including Tax</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="tax/calculation/cross_border_trade_enabled" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+        </dataset>
+        <!--End Setting [Catalog Prices] = Including tax & [Enable Cross Border Trade] = Yes-->
+
+        <!--Setting [Catalog Prices] = Including tax & [Enable Cross Border Trade] = No-->
+        <dataset name="including_tax_and_disable_cross_border_trade">
+            <field name="tax/calculation/price_includes_tax" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Including Tax</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="tax/calculation/cross_border_trade_enabled" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <!--End Setting [Catalog Prices] = Including tax & [Enable Cross Border Trade] = No-->
+
+        <!--Setting Default Tax Destination Calculation California-->
+        <dataset name="california_default_tax_destination">
+            <field name="tax/defaults/country" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">United States</item>
+                <item name="value" xsi:type="string">US</item>
+            </field>
+            <field name="tax/defaults/region" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">California</item>
+                <item name="value" xsi:type="string">12</item>
+            </field>
+        </dataset>
+        <!--End Setting Default Tax Destination Calculation California-->
+
+        <!--Setting [Tax Calculation Based On] = Shipping address-->
+        <dataset name="tax_calculation_based_on_shipping_address">
+            <field name="tax/calculation/based_on" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Shipping Address</item>
+                <item name="value" xsi:type="string">shipping</item>
+            </field>
+        </dataset>
+        <!--End Setting [Tax Calculation Based On] = Shipping address-->
+
+        <!--Setting [Tax Calculation Based On] = Billing address-->
+        <dataset name="tax_calculation_based_on_billing_address">
+            <field name="tax/calculation/based_on" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Billing Address</item>
+                <item name="value" xsi:type="string">billing</item>
+            </field>
+        </dataset>
+        <!--End Setting [Tax Calculation Based On] = Billing address-->
+
+        <!--Setting: [Apply Tax On] = Original price only-->
+        <dataset name="tax_calculation_apply_tax_on_original_price_only">
+            <field name="tax/calculation/apply_tax_on" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Original price only</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+        </dataset>
+        <!--End Setting: [Apply Tax On] = Original price only-->
+
+        <!--Setting [Apply Discount On Prices] = Excluding tax-->
+        <dataset name="apply_discount_on_prices_excluding_tax">
+            <field name="tax/calculation/discount_tax" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Excluding Tax</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <!--End Setting [Apply Discount On Prices] = Excluding tax-->
+
+        <!--Setting [Apply Discount On Prices] = Including tax-->
+        <dataset name="apply_discount_on_prices_including_tax">
+            <field name="tax/calculation/discount_tax" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Including Tax</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+        </dataset>
+        <!--End Setting [Apply Discount On Prices] = Including tax-->
+
+        <!--Setting  [Apply Tax On] = Custome price if available-->
+        <dataset name="tax_calculation_apply_tax_on_custom_price_if_available">
+            <field name="tax/calculation/apply_tax_on" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Custom price if available</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <!--End Setting  [Apply Tax On] = Custome price if available-->
+
+        <!--Setting   [Apply Tax To FPT] = No and [Enable FPT] = Yes-->
+        <dataset name="disable_tax_calculation_apply_tax_to_fpt_and_enable_fpt">
+            <field name="tax/weee/enable" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="tax/weee/apply_vat" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <!--End Setting   [Apply Tax To FPT] = No-->
+
+        <!--Setting [Include FPT In Subtotal] = Yes and [Enable FPT] = Yes-->
+        <dataset name="include_FPT_in_subtotal_and_enable_fpt">
+            <field name="tax/weee/enable" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="tax/weee/include_in_subtotal" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+        </dataset>
+        <!--End Setting [Include FPT In Subtotal] = Yes and [Enable FPT] = Yes-->
+
+        <!--Setting: [Include FPT In Subtotal] = No and [Enable FPT] = Yes-->
+        <dataset name="include_FPT_in_subtotal_no_and_enable_fpt">
+            <field name="tax/weee/include_in_subtotal" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="tax/weee/enable" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+        </dataset>
+        <!--End Setting [Include FPT In Subtotal] = Yes and [Enable FPT] = Yes-->
+
+        <!--Setting: [Include FPT In Subtotal] = No and [Enable FPT] = Yes-->
+        <dataset name="enable_fpt_and_apply_tax_to_fpt_yes">
+            <field name="tax/weee/enable" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="tax/weee/apply_vat" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+        </dataset>
+        <!--End Setting   [Apply Tax To FPT] = Yes and [Enable FPT] = Yes-->
+
+        <!--Shipping Config-->
+        <dataset name="no_shipping_method_on_webpos_CP193">
+            <field name="carriers/webpos_shipping/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/flatrate/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/freeshipping/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/storepickup/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/tablerate/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/ups/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/usps/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/fedex/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/dhl/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+
+        <dataset name="have_shipping_method_on_webpos_CP194">
+            <field name="carriers/flatrate/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="carriers/flatrate/title" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">Flat Rate</item>
+            </field>
+            <field name="carriers/flatrate/name" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">Fixed</item>
+            </field>
+            <field name="webpos/shipping/allowspecific_shipping" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Specific Shipping</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="webpos/shipping/specificshipping" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Flat Rate - Fixed</item>
+                <item name="value" xsi:type="string">flatrate</item>
+            </field>
+            <field name="carriers/webpos_shipping/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/freeshipping/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/storepickup/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/tablerate/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/ups/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/usps/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/fedex/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/dhl/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+
+        <dataset name="have_shipping_method_on_webpos_CP195">
+            <field name="carriers/flatrate/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="carriers/flatrate/title" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">Flat Rate</item>
+            </field>
+            <field name="carriers/flatrate/name" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">Fixed</item>
+            </field>
+
+            <field name="webpos/shipping/allowspecific_shipping" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">All Allowed Shipping</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="webpos/shipping/defaultshipping" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Flat Rate - Fixed</item>
+                <item name="value" xsi:type="string">flatrate</item>
+            </field>
+
+            <field name="carriers/webpos_shipping/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="carriers/webpos_shipping/title" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">POS Shipping</item>
+            </field>
+            <field name="carriers/webpos_shipping/name" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">Store Pickup</item>
+            </field>
+
+            <field name="carriers/freeshipping/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="carriers/freeshipping/title" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">Free Shipping</item>
+            </field>
+            <field name="carriers/freeshipping/name" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">Free</item>
+            </field>
+
+            <field name="carriers/storepickup/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="carriers/storepickup/title" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">Store Pickup</item>
+            </field>
+            <field name="carriers/storepickup/name" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">Store Pickup</item>
+            </field>
+
+            <field name="carriers/tablerate/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/ups/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/usps/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/fedex/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/dhl/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <dataset name="have_shipping_method_on_webpos_CP197">
+            <field name="carriers/flatrate/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="carriers/flatrate/title" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">Flat Rate</item>
+            </field>
+            <field name="carriers/flatrate/name" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">Fixed</item>
+            </field>
+
+            <field name="webpos/shipping/allowspecific_shipping" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">All Allowed Shipping</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="webpos/shipping/defaultshipping" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Flat Rate - Fixed</item>
+                <item name="value" xsi:type="string">flatrate</item>
+            </field>
+
+            <field name="carriers/webpos_shipping/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="carriers/webpos_shipping/title" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">POS Shipping</item>
+            </field>
+            <field name="carriers/webpos_shipping/name" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">Store Pickup</item>
+            </field>
+            <field name="carriers/webpos_shipping/price" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">19</item>
+            </field>
+
+            <field name="carriers/freeshipping/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="carriers/freeshipping/title" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">Free Shipping</item>
+            </field>
+            <field name="carriers/freeshipping/name" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">Free</item>
+            </field>
+
+            <field name="carriers/storepickup/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+            <field name="carriers/storepickup/title" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">Store Pickup</item>
+            </field>
+            <field name="carriers/storepickup/name" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">Store Pickup</item>
+            </field>
+
+            <field name="carriers/tablerate/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/ups/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/usps/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/fedex/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="carriers/dhl/active" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <!--End Shipping Config-->
+
+        <!--Checkout Payment method-->
+        <dataset name="default_payment_method">
+            <field name="webpos/payment/allowspecific_payment" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Specific Payments</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+
+            <field name="webpos/payment/specificpayment" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Web POS - Cash In</item>
+                <item name="value" xsi:type="string">cashforpos</item>
+            </field>
+        </dataset>
+
+        <!--Checkout Payment method no payment-->
+        <dataset name="default_payment_method_no_payment">
+            <field name="webpos/payment/allowspecific_payment" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Specific Payments</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+
+            <field name="webpos/payment/specificpayment" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <!--Checkout Payment method all payment-->
+        <dataset name="default_payment_method_all_payment">
+            <field name="webpos/payment/allowspecific_payment" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">All Allowed Payments</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+
+            <field name="webpos/payment/specificpayment" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <!--Checkout Payment method all payment select cashin-->
+        <dataset name="default_payment_method_all_payment_select_cashin">
+            <field name="webpos/payment/allowspecific_payment" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">All Allowed Payments</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+
+            <field name="webpos/payment/specificpayment" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Web POS - Cash In</item>
+                <item name="value" xsi:type="string">cashforpos</item>
+            </field>
+        </dataset>
+
+        <!--Setting: Origin shipping California-->
+        <dataset name="origin_shipping_california">
+            <field name="shipping/origin/country_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">United States</item>
+                <item name="value" xsi:type="string">US</item>
+            </field>
+            <field name="shipping/origin/region_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">California</item>
+                <item name="value" xsi:type="string">12</item>
+            </field>
+        </dataset>
+        <!--End Setting: Origin shipping California-->
     </repository>
 </config>

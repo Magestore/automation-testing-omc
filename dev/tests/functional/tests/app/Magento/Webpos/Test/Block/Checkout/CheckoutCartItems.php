@@ -75,4 +75,9 @@ class CheckoutCartItems extends Block
         $value = $this->getCartOriginalItemPrice($name)->getText();
         return substr($value, 6);
     }
+
+	public function getCartItemImage($name)
+	{
+		return $this->getCartItem($name)->find('.product-img');
+	}
 }

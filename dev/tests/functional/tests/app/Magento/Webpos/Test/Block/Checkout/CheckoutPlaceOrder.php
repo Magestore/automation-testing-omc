@@ -73,4 +73,50 @@ class CheckoutPlaceOrder extends Block
 	{
 		return $this->_rootElement->find('#can_ship');
 	}
+
+	public function isShippingMethod(){
+	         return $this->_rootElement->find('[name="shipping_method"]')->isPresent();
+	}
+
+    public function isSelectedShippingMethod($shippingMethod){
+        return $this->_rootElement->find('#'.$shippingMethod)->isSelected();
+    }
+    public function getTitleShippingSection(){
+        return $this->_rootElement->find('#checkout-method > div:nth-child(1) > div.panel-heading > h4 > a')->getText();
+    }
+    public function getShippingCollapse(){
+        return $this->_rootElement->find('#checkout-method > div:nth-child(1) > div.panel-heading > h4 > a');
+    }
+    public function isMethodVisible($idShippingMethod){
+
+        return $this->_rootElement->find('#'.$idShippingMethod)->isPresent();
+    }
+    public function isPanelShippingMethod(){
+
+        return $this->_rootElement->find('#checkout-method > div:nth-child(1) > div.panel-heading > h4 > a')->isVisible();
+    }
+	public function getMessageAddMorePayment()
+    {
+        return $this->_rootElement->find('.//div[data-bind="visible: checkPaymentCollection()"] > span ');
+    }
+
+    public function getAddPaymentDisable()
+    {
+        return $this->_rootElement->find('button[id="add_payment_button"][disabled]');
+    }
+
+    public function getHeaderAmount()
+    {
+        return $this->_rootElement->find('.//*[@id="webpos_checkout"]//span[@class="price"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getRemainMoneyPrice()
+    {
+        return $this->_rootElement->find('.remain-money > span');
+    }
+
+    public function getInvoiceBox()
+    {
+        return $this->_rootElement->find('.invoice-box');
+    }
 }

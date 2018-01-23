@@ -23,12 +23,12 @@ use Magento\Webpos\Test\Page\WebposIndex;
  *
  * Test Flow:
  * 1. Login Web POS as staff
- * 2. Search product and add to cart
- * 3. Search customer and select customer
+ * 2. Add some taxable products
+ * 3. Select a customer to be unsatisfied about tax condition
  * 4. Click "CHECKOUT" in cart page
  * 5. Choose Payment Method
  * 6. Click Place Order
- * 7. Verify created
+ * 7. Verify created and check tax amount on cart page and checkout page
  *
  */
 
@@ -66,10 +66,24 @@ class WebposTaxTAX01Test extends Injectable
      */
     public function __prepare(FixtureFactory $fixtureFactory)
     {
-        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'UK_address']);
+        // Change TaxRate
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
+
+        // Config system value
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'default_tax_configuration_use_system_value']
+        )->run();
+
+        // Add Customer
+        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_UK']);
         $customer->persist();
 
-        return ['customer' => $customer];
+        return [
+            'customer' => $customer,
+            'taxRate' => 0.00
+        ];
     }
 
     /**
@@ -91,20 +105,22 @@ class WebposTaxTAX01Test extends Injectable
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
 
+
     /**
      * @param Customer $customer
      * @param $products
      * @param $configData
+     * @param $taxRate
      * @param bool $createInvoice
-     * @param $taxAmount
      * @param bool $shipped
+     * @return array
      */
     public function test(
         Customer $customer,
         $products,
         $configData,
+        $taxRate,
         $createInvoice = true,
-        $taxAmount,
         $shipped = false
     )
     {
@@ -138,7 +154,7 @@ class WebposTaxTAX01Test extends Injectable
         )->run();
 
         //Assert Tax Amount on Cart Page
-        $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxAmount, $this->webposIndex);
+        $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
 
         // Place Order
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
@@ -146,7 +162,7 @@ class WebposTaxTAX01Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         //Assert Tax Amount on Checkout Page
-        $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxAmount, $this->webposIndex);
+        $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
         // End Assert Tax Amount on Checkout Page
 
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
@@ -159,10 +175,10 @@ class WebposTaxTAX01Test extends Injectable
                 'shipped' => $shipped
             ]
         )->run();
-        // End Place Order
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        // End Place Order
 
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
@@ -179,6 +195,18 @@ class WebposTaxTAX01Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
 
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        self::assertEquals(
+            $orderId,
+            $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
+            "Order Content - Order Id is wrong"
+            . "\nExpected: " . $orderId
+            . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
+        );
 
+        return [
+            'products' => $products,
+            'taxRate' => $taxRate
+        ];
     }
 }

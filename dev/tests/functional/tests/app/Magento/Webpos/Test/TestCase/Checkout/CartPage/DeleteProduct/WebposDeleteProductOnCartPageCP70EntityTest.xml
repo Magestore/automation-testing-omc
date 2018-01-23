@@ -1,0 +1,13 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\DeleteProduct\WebposDeleteProductOnCartPageCP70EntityTest" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
+        <variation name="Webpos_DeleteProductOnCartPage_CP70EntityTest_CP70">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+                <item name="1" xsi:type="string">product2</item>
+                <item name="2" xsi:type="string">product3</item>
+                <item name="3" xsi:type="string">product4</item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\DeleteProduct\AssertWebposDeleteProductOnCartPageCP69" />
+        </variation>
+    </testCase>
+</config>

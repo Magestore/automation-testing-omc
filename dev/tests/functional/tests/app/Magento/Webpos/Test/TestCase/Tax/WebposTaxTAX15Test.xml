@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Tax\WebposTaxTAX15Test" summary="Tax" ticketId="WEBPOSTAX-15">
+        <variation name="WebposTaxTAX15TestVariation_TAX15">
+            <data name="description" xsi:type="string">Check tax amount when checkout On-hold order</data>
+            <data name="configData" xsi:type="string">default_tax_configuration_use_system_value</data>
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                    <item name="orderQty" xsi:type="number">2</item>
+                    <!--<item name="invoiceQty" xsi:type="number">1</item>-->
+                </item>
+            </data>
+            <data name="createInvoice" xsi:type="boolean">false</data>
+            <data name="taxRate" xsi:type="string">8.5</data>
+        </variation>
+    </testCase>
+</config>
