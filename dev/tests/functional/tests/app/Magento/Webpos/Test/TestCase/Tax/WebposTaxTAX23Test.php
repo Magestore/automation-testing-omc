@@ -168,9 +168,15 @@ class WebposTaxTAX23Test extends Injectable
         )->run();
 
         $expectStatus = 'Complete';
-        $totalPaid = (float) substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
-        $shippingFee = (float) substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getShipping(), 1);
-        $totalRefunded = ($totalPaid - $shippingFee)/2 + $shippingFee;
+        $totalRefunded = 0;
+        $refundShipping =  substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getShipping(), 1);
+        foreach ($products as $item) {
+            $productName = $item['product']->getName();
+            $rowTotalOfProduct = $this->webposIndex->getOrderHistoryOrderViewContent()->getRowTotalOfProduct($productName);
+            $rowTotalOfProduct = (float)substr($rowTotalOfProduct, 1);
+            $totalRefunded = $totalRefunded + ($rowTotalOfProduct / $item['orderQty']) * $item['refundQty'];
+        }
+        $totalRefunded += $refundShipping;
         $this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
 
         // Refund Extant Items
@@ -186,6 +192,7 @@ class WebposTaxTAX23Test extends Injectable
         )->run();
 
         $expectStatus = 'Closed';
+        $totalPaid = (float) substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
         $totalRefunded = $totalPaid;
         $this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
 

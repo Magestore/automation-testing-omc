@@ -128,7 +128,7 @@ class WebposTaxTAX22Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
         $this->webposIndex->getOrderHistoryAddOrderNote()->openRefundPopup();
         //Assert Tax Amount in Order History Invoice
-//        $this->assertTaxAmountOnOrderHistoryInvoice->processAssert($taxRate, $products, $this->webposIndex);
+        $this->assertTaxAmountOnOrderHistoryInvoice->processAssert($taxRate, $products, $this->webposIndex);
         return ['products' => $products];
     }
 
