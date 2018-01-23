@@ -126,7 +126,7 @@ class CreateRefundInOrderHistoryStep implements TestStepInterface
 
 			$this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
 
-
+			$this->webposIndex->getMsWebpos()->waitForModalPopup();
 //			// Assert Confirmation Popup
 //			$this->assertRefundConfirmPopupDisplay->processAssert($this->webposIndex);
 

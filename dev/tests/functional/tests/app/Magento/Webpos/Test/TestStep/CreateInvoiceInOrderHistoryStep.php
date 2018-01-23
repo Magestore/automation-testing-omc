@@ -86,7 +86,7 @@ class CreateInvoiceInOrderHistoryStep implements TestStepInterface
 
 			$this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
 
-
+			$this->webposIndex->getMsWebpos()->waitForModalPopup();
 			// Assert Confirmation Popup
 //			$this->assertInvoiceConfirmPopupDisplay->processAssert($this->webposIndex);
 
