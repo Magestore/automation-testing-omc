@@ -226,6 +226,31 @@ class WebposNonstopTest extends Injectable
 				$this->webposIndex->getOrderHistoryOrderViewHeader()->waitForCompleteStatusVisisble();
 				$this->assertOrderStatus->processAssert($this->webposIndex, 'Complete');
 
+				// Create Refund Partial
+				$this->objectManager->getInstance()->create(
+					'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
+					[
+						'products' => $products
+					]
+				)->run();
+
+				// Calculate total refunded
+				$totalRefunded = 0;
+				foreach ($products as $key => $item) {
+					$productName = $item['product']->getName();
+					$rowTotal = $this->webposIndex->getOrderHistoryOrderViewContent()->getRowTotalOfProduct($productName);
+					$rowTotal = (float)substr($rowTotal, 1);
+					$totalRefunded += ($rowTotal/$item['orderQty'])*$item['refundQty'];
+				}
+
+				$expectStatus = 'Complete';
+
+				$this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
+
+				// Refund Extant Items
+				foreach ($products as $key => $item) {
+					unset($products[$key]['refundQty']);
+				}
 
 				// Refund
 				$this->objectManager->getInstance()->create(
