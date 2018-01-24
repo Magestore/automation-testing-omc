@@ -73,6 +73,7 @@ class WebposPageActionMenuFullScreenCP191Test extends Injectable
 
         return ['minHeightBeforeFull' => $minHeightBeforeFull,
             'minHeightAfterFull' => $minHeightAfterFull,
-            'minHeightAfterAgain' => $minHeightAfterAgain];
+//            'minHeightAfterAgain' => $minHeightAfterAgain
+            ];
     }
 }
