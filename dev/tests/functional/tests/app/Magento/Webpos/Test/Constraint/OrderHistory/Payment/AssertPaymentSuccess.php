@@ -1,21 +1,21 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 1/18/2018
- * Time: 1:44 PM
+ * Date: 1/22/2018
+ * Time: 4:02 PM
  */
-
-namespace Magento\Webpos\Test\Constraint\OrderHistory\Invoice;
+namespace Magento\Webpos\Test\Constraint\OrderHistory\Payment;
 
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class AssertInvoiceSuccess
- * @package Magento\Webpos\Test\Constraint\OrderHistory\Invoice
+ * Class AssertPaymentSuccess
+ * @package Magento\Webpos\Test\Constraint\OrderHistory\Payment
  */
-class AssertInvoiceSuccess extends AbstractConstraint
+class AssertPaymentSuccess extends AbstractConstraint
 {
     /**
      * @param WebposIndex $webposIndex
@@ -28,8 +28,8 @@ class AssertInvoiceSuccess extends AbstractConstraint
         );
 
         \PHPUnit_Framework_Assert::assertFalse(
-            $webposIndex->getOrderHistoryInvoice()->isVisible(),
-            'Invoice Pop is not closed'
+            $webposIndex->getOrderHistoryPayment()->isVisible(),
+            'Payment Pop is not closed'
         );
 
         sleep(1);
@@ -39,15 +39,15 @@ class AssertInvoiceSuccess extends AbstractConstraint
         );
 
         \PHPUnit_Framework_Assert::assertEquals(
-            'The invoice has been created successfully.',
+            'Create payment successfully!',
             $webposIndex->getToaster()->getWarningMessage()->getText(),
             "Success message's Content is Wrong"
         );
-//
-//        \PHPUnit_Framework_Assert::assertFalse(
-//            $webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->isVisible(),
-//            'Invoice Button is not hiden'
-//        );
+
+        \PHPUnit_Framework_Assert::assertFalse(
+            $webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->isVisible(),
+            'Take Payment Button is not hiden'
+        );
 
         $webposIndex->getNotification()->getNotificationBell()->click();
         \PHPUnit_Framework_Assert::assertTrue(
@@ -55,7 +55,7 @@ class AssertInvoiceSuccess extends AbstractConstraint
             'Notification list is empty'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            'The invoice has been created successfully.',
+            'Create payment successfully!',
             $webposIndex->getNotification()->getFirstNotificationText(),
             'Notification Content is wrong'
         );
@@ -68,6 +68,6 @@ class AssertInvoiceSuccess extends AbstractConstraint
      */
     public function toString()
     {
-        return "Order History - Invoice - Submit Invoice: Success";
+        return "Order History - Payment was correctly.";
     }
 }

@@ -117,6 +117,11 @@ class OrderHistoryInvoice extends Block
         return $this->_rootElement->find('[id="invoice_grandtotal"]')->getText();
     }
 
+    public function getDiscount()
+    {
+        return $this->_rootElement->find('[data-bind="text: convertAndFormatPrice(-discountAmount())"]')->getText();
+    }
+
 	public function getFooterRow($label)
 	{
 		return $this->_rootElement->find('//*[@id="invoice-popup-form"]/div[2]/div[3]/div[2]/div/div/label[text()="'.$label.'"]/../span', Locator::SELECTOR_XPATH);
