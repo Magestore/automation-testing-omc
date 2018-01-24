@@ -248,14 +248,15 @@ class WebposNonstopTest extends Injectable
 				$this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
 
 				// Refund Extant Items
-				foreach ($products as $key => $item) {
-					unset($products[$key]['refundQty']);
+				$tempProducts = $products;
+				foreach ($tempProducts as $key => $item) {
+					unset($tempProducts[$key]['refundQty']);
 				}
 
 				// Refund
 				$this->objectManager->getInstance()->create(
 					'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
-					['products' => $products]
+					['products' => $tempProducts]
 				)->run();
 
 				// Assert Refund Success
