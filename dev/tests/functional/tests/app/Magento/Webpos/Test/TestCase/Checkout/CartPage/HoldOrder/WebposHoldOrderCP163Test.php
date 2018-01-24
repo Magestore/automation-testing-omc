@@ -24,7 +24,7 @@ class WebposHoldOrderCP163Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test($products, $percentPriceCustom)
+    public function test($products, $priceCustom)
     {
         //Create product
         $product = $this->objectManager->getInstance()->create(
@@ -50,7 +50,7 @@ class WebposHoldOrderCP163Test extends Injectable
             $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
         }
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($percentPriceCustom);
+        $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
         sleep(1);
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
@@ -69,5 +69,11 @@ class WebposHoldOrderCP163Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
+
+        $dataProduct = $product->getData();
+        $dataProduct['qty'] = 1;
+        return ['cartProducts' => [$dataProduct],
+                'type' => '$'];
+
     }
 }

@@ -8,6 +8,8 @@
                 </item>
             </data>
             <data xsi:type="string" name="priceCustom">21</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckoutPage"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckCartCustomPrice"/>
         </variation>
     </testCase>
 </config>

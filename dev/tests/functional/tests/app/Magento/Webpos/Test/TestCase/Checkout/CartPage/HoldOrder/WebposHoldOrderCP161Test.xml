@@ -16,6 +16,9 @@
             <data name="customer/data/group_id" xsi:type="array">
                 <item name="dataset" xsi:type="string">General</item>
             </data>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckoutPage"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckCartSimpleProduct"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckCustomer"/>
         </variation>
     </testCase>
 </config>

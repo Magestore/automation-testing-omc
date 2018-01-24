@@ -53,7 +53,6 @@ class WebposHoldOrderCP159Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getCheckoutProductList()->getFirstProduct()->click();
-        $this->webposIndex->getCheckoutProductList()->getFirstProduct()->click();
         sleep(1);
 
         //Hold
@@ -71,5 +70,12 @@ class WebposHoldOrderCP159Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
+
+        $dataProduct1 = $product1->getData();
+        $dataProduct1['qty'] = 3;
+        $dataProduct2 = $product2->getData();
+        $dataProduct2['qty'] = 2;
+        return ['cartProducts' => [$dataProduct1, $dataProduct2]];
+
     }
 }

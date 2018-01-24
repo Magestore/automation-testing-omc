@@ -34,7 +34,8 @@ class WebposHoldOrderCP154Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(1);
+        $warningMessage = $this->webposIndex->getToaster()->getWarningMessage()->getText();
 
+        return ['warningMessageActual'=> $warningMessage];
     }
 }
