@@ -11,7 +11,7 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\OrderStatus;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposOrderStatusOH04Test extends Injectable
+class WebposOrderStatusOH05Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -48,8 +48,16 @@ class WebposOrderStatusOH04Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         // Place Order
         $grandTotal = $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText();
-        $lessGrandTotal = (double)substr($grandTotal, 1) - 1;
-        $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($lessGrandTotal);
+//        $doubleGrandTotal = (double)substr($grandTotal, 1);
+//        $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($doubleGrandTotal);
+        sleep(2);
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
+            [
+                'createInvoice' => false,
+                'shipped' => false
+            ]
+        )->run();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
@@ -63,7 +71,8 @@ class WebposOrderStatusOH04Test extends Injectable
 
         return [
             'status' => 'Pending',
-            'grandTotal' => $grandTotal
-            ];
+            'grandTotal' => $grandTotal,
+            'takePayment' => false
+        ];
     }
 }

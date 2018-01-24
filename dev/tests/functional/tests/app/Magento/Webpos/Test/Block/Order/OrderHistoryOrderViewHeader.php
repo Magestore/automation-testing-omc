@@ -75,4 +75,9 @@ class OrderHistoryOrderViewHeader extends Block
     {
         return $this->_rootElement->find('[class="title-header-page"]')->isVisible();
     }
+
+    public function getGrandTotal()
+    {
+        return $this->_rootElement->find('.//span[@class="price"]', Locator::SELECTOR_XPATH)->getText();
+    }
 }
