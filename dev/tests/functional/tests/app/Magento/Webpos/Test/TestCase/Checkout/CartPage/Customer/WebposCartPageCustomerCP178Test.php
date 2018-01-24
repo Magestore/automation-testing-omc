@@ -85,14 +85,20 @@ class WebposCartPageCustomerCP178Test extends Injectable
         //Edit billing and shipping adress
         $this->webposIndex->getCheckoutCartHeader()->getIconEditCustomer()->click();
         $this->webposIndex->getCheckoutEditCustomer()->getEditShippingAddressIcon()->click();
-        $this->webposIndex->getCheckoutEditAddress()->setFiledAdress($address->getData());
+        $dataAddress = $address->getData();
+        $this->webposIndex->getCheckoutEditAddress()->setFiledAdress($dataAddress);
         sleep(1);
         $this->webposIndex->getCheckoutEditAddress()->getSaveButton()->click();
-        sleep(1);
+        $this->webposIndex->getCheckoutEditAddress()->waingPageLoading();
+        sleep(4);
         $this->webposIndex->getCheckoutEditCustomer()->getSaveButton()->click();
+        $this->webposIndex->getCheckoutWebposCart()->waitLoading();
+        $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+        sleep(4);
 
         //PlaceOrder
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         sleep(1);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
@@ -105,7 +111,7 @@ class WebposCartPageCustomerCP178Test extends Injectable
 
         return [
             'name' => $address->getFirstname().' '.$address->getLastname(),
-            'address' => $address->getCity().', '.$address->getRegionId().', '.$address->getPostcode().', US',
+            'address' => $address->getCity().', '.$address->getRegion().', '.$address->getPostcode().', US',
             'phone' =>  $address->getTelephone(),
             'orderId' => $orderId
         ];

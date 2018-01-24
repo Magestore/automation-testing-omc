@@ -118,4 +118,19 @@ class OrderHistoryOrderViewContent extends Block
     {
         return $this->_rootElement->find('.//table[@class="table"]',Locator::SELECTOR_XPATH)->isVisible();
     }
+
+	public function getShippingAddressContent()
+	{
+		return $this->_rootElement->find('#webpos_order_view_container > main > div > div:nth-child(1) > div:nth-child(2) > div > div.panel-body');
+	}
+
+	public function getPaymentMethodContent()
+	{
+		return $this->_rootElement->find('#webpos_order_view_container > main > div > div:nth-child(2) > div:nth-child(1) > div > div.panel-body');
+	}
+
+	public function getShippingMethodContent()
+	{
+		return $this->_rootElement->find('#webpos_order_view_container > main > div > div:nth-child(2) > div:nth-child(2) > div > div.panel-body');
+	}
 }
