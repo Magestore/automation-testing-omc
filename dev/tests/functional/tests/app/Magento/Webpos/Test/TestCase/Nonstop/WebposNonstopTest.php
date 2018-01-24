@@ -235,6 +235,8 @@ class WebposNonstopTest extends Injectable
 				)->run();
 
 				// Calculate total refunded
+				$shippingFee = $this->webposIndex->getOrderHistoryOrderViewFooter()->getShipping();
+				$shippingFee = (float)substr($shippingFee, 1);
 				$totalRefunded = 0;
 				foreach ($products as $key => $item) {
 					$productName = $item['product']->getName();
@@ -242,6 +244,7 @@ class WebposNonstopTest extends Injectable
 					$rowTotal = (float)substr($rowTotal, 1);
 					$totalRefunded += ($rowTotal/$item['orderQty'])*$item['refundQty'];
 				}
+				$totalRefunded += $shippingFee;
 
 				$expectStatus = 'Complete';
 

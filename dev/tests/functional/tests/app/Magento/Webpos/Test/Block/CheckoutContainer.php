@@ -27,4 +27,14 @@ class CheckoutContainer extends Block
 	{
 		$this->waitForElementVisible('#popup-product-detail');
 	}
+
+	public function waitForCustomSalePopup()
+	{
+		$this->waitForElementVisible('#popup-custom-sale');
+	}
+
+	public function waitForCartDiscountPopup()
+	{
+		$this->waitForElementVisible('#webpos_cart_discountpopup');
+	}
 }
