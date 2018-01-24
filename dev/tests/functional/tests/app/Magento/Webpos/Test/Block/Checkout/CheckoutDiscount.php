@@ -36,4 +36,9 @@ class CheckoutDiscount extends Block
 			$this->clickNumberButton($percent[$i]);
 		}
 	}
+
+	public function isDisplayPopup()
+    {
+        return $this->_rootElement->isVisible();
+    }
 }

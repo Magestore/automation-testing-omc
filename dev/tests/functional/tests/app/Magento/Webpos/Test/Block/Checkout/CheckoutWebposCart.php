@@ -63,4 +63,10 @@ class CheckoutWebposCart extends Block
     {
         return $this->_rootElement->find('#webpos_cart > div > div > div > ul > li:nth-child(5)')->isVisible();
     }
+
+    public function waitLoading()
+    {
+        $this->waitForElementVisible('.indicator');
+        $this->waitForElementNotVisible('.indicator');
+    }
 }
