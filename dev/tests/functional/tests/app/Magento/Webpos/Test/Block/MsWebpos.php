@@ -60,4 +60,14 @@ class MsWebpos extends Block
 	{
 		$this->waitForElementVisible('.modals-wrapper');
 	}
+
+	public function waitOrdersHistoryVisible()
+    {
+        $this->waitForElementVisible('[id="orders_history_container"]');
+    }
+
+    public function cmenuButtonIsVisible()
+    {
+        return $this->_rootElement->find('#c-button--push-left')->isVisible();
+    }
 }

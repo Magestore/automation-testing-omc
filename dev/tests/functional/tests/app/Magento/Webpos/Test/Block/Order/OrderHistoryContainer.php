@@ -56,4 +56,14 @@ class OrderHistoryContainer extends Block
 	{
 		return $this->waitForElementVisible('#shipment-popup');
 	}
+
+	public function getOrdersList()
+    {
+        return $this->_rootElement->find('[id="webpos_order_list"]');
+    }
+
+    public function getOrdersDetail()
+    {
+        return $this->_rootElement->find('[id="webpos_order_view_container"]');
+    }
 }
