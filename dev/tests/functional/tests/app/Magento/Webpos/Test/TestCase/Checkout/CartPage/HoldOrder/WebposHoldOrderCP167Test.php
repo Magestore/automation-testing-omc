@@ -3,18 +3,33 @@
  * Created by PhpStorm.
  * User: gvt
  * Date: 24/01/2018
- * Time: 08:52
+ * Time: 21:23
  */
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+use Magento\Customer\Test\Fixture\Customer;
+use Magento\Mtf\Fixture\FixtureFactory;
 
-class WebposHoldOrderCP164Test extends Injectable
+class WebposHoldOrderCP167Test extends Injectable
 {
     /**
      * @var WebposIndex
      */
     protected $webposIndex;
+
+    public function __prepare(FixtureFactory $fixtureFactory)
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'webpos_default_guest_checkout_rollback']
+        )->run();
+
+        //Create customer
+        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'webpos_guest_pi']);
+        $customer->persist();
+        return ['customer' => $customer];
+    }
 
     public function __inject
     (
@@ -24,7 +39,7 @@ class WebposHoldOrderCP164Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test($products, $discount)
+    public function test($products, $coupon, Customer $customer)
     {
         //Create product
         $product = $this->objectManager->getInstance()->create(
@@ -43,18 +58,13 @@ class WebposHoldOrderCP164Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
 
-        //Click on [Add discount] > on Discount tab, add dicount for whole cart (type: $)
-        while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup())
-        {
-            $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
-        }
-        $this->webposIndex->getCheckoutDiscount()->clickDiscountButton();
-        $this->webposIndex->getCheckoutDiscount()->setTypeDiscount('$');
-        $this->webposIndex->getCheckoutDiscount()->setNumberDiscount($discount);
-        $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        //Add an exist customer
+        $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
+        $this->webposIndex->getCheckoutChangeCustomer()->search($customer->getFirstname());
         sleep(1);
+        $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
+        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
 
         //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();

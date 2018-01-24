@@ -3,13 +3,13 @@
  * Created by PhpStorm.
  * User: gvt
  * Date: 24/01/2018
- * Time: 08:52
+ * Time: 22:21
  */
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposHoldOrderCP164Test extends Injectable
+class WebposHoldOrderCP173Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -24,36 +24,23 @@ class WebposHoldOrderCP164Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test($products, $discount)
+    public function test($products)
     {
+        //Login webpos
+        $staff = $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposStep'
+        )->run();
+
         //Create product
         $product = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run()[0]['product'];
 
-        //Login webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposStep'
-        )->run();
-
         //Add a product to cart
         $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(1);
-
-        //Click on [Add discount] > on Discount tab, add dicount for whole cart (type: $)
-        while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup())
-        {
-            $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
-        }
-        $this->webposIndex->getCheckoutDiscount()->clickDiscountButton();
-        $this->webposIndex->getCheckoutDiscount()->setTypeDiscount('$');
-        $this->webposIndex->getCheckoutDiscount()->setNumberDiscount($discount);
-        $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
         //Hold
@@ -71,6 +58,15 @@ class WebposHoldOrderCP164Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
+
+        //Click icon < (Back to cart)
+        $this->webposIndex->getCheckoutCartHeader()->getIconBackToCart()->click();
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        sleep(1);
+
+        //Click to Delete icon to clear cart
+        $this->webposIndex->getCheckoutCartHeader()->getIconDeleteCart()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
 
         $dataProduct = $product->getData();
         $dataProduct['qty'] = 1;

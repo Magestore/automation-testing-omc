@@ -41,4 +41,47 @@ class CheckoutDiscount extends Block
     {
         return $this->_rootElement->isVisible();
     }
+
+    public function setNumberDiscount($number)
+    {
+        $numbers = explode('.',$number);
+        foreach ($numbers as $number)
+        {
+            if (floatval($number) >= 100.0)
+                break;
+            if (floatval($number) >= 10)
+            {
+                $a = (int)($number / 10);
+                $b = (int)($number - $a*10);
+                $this->clickNumberButton((string)$a);
+                $this->clickNumberButton((string)$b);
+            }else
+                $this->clickNumberButton($number);
+
+        }
+    }
+
+    public function setTypeDiscount($type)
+    {
+        if ($type == '%')
+            $this->_rootElement->find('#btn-percent3')->click();
+        if ($type == '$')
+            $this->_rootElement->find('#btn-dollor3')->click();
+    }
+
+    public function clickDiscountButton()
+    {
+        $this->_rootElement->find('button[class="custom-price"]')->click();
+    }
+
+    public function clickPromotionButton()
+    {
+        $this->_rootElement->find('button[class="discount"]')->click();
+    }
+
+    public function setCouponCode($number)
+    {
+        $this->_rootElement->find('input[name="coupon_code"]')->setValue($number);
+
+    }
 }
