@@ -153,4 +153,5 @@ class OrderHistoryOrderViewContent extends Block
 	{
 		return $this->getPaymentMethod($label)->find('label[data-bind="text: $parents[1].getWebposPaymentAmount($data)"]');
 	}
+
 }
