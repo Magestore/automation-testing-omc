@@ -73,7 +73,7 @@ class WebposHoldOrderCP172Test extends Injectable
         $dataProduct1['qty'] = 1;
         $dataProduct2 = $product2->getData();
         $dataProduct2['qty'] = 1;
-        return ['cartProducts' => [$dataProduct1, $dataProduct2]];
+        return ['cartProducts' => [$dataProduct2, $dataProduct1]];
 
 
     }

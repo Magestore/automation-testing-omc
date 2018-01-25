@@ -65,6 +65,7 @@ class WebposHoldOrderCP167Test extends Injectable
         $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
         sleep(1);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $taxExpected = $this->webposIndex->getCheckoutCartFooter()->getTaxWithCheckout();
 
         //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
@@ -82,10 +83,14 @@ class WebposHoldOrderCP167Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
+        $taxActual = $this->webposIndex->getCheckoutCartFooter()->getTaxWithCheckout();
+
         $dataProduct = $product->getData();
         $dataProduct['qty'] = 1;
         return ['cartProducts' => [$dataProduct],
-            'type' => '$'];
+            'taxExpected' => $taxExpected,
+            'taxActual' => $taxActual
+        ];
 
     }
 }

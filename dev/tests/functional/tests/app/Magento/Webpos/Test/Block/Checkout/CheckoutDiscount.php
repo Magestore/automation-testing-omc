@@ -71,12 +71,14 @@ class CheckoutDiscount extends Block
 
     public function clickDiscountButton()
     {
-        $this->_rootElement->find('button[class="custom-price"]')->click();
+        if($this->_rootElement->find('button[class="custom-price"]')->isPresent())
+            $this->_rootElement->find('button[class="custom-price"]')->click();
     }
 
     public function clickPromotionButton()
     {
-        $this->_rootElement->find('button[class="discount"]')->click();
+        if($this->_rootElement->find('button[class="discount"]')->isPresent())
+            $this->_rootElement->find('button[class="discount"]')->click();
     }
 
     public function setCouponCode($number)
