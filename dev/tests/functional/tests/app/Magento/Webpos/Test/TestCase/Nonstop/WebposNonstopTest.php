@@ -121,7 +121,7 @@ class WebposNonstopTest extends Injectable
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();
-
+		$count = 0;
 		while(1) {
 			// Create products
 			$products = $this->objectManager->getInstance()->create(
@@ -129,6 +129,8 @@ class WebposNonstopTest extends Injectable
 				['products' => $dataProducts]
 			)->run();
 			for ($i = 0; $i < 4999; $i++) {
+				$count++;
+				\Zend_Debug::dump(' '.$count.' |');
 				// Open checkout page
 				$this->webposIndex->getMsWebpos()->clickCMenuButton();
 				$this->webposIndex->getCMenu()->checkout();
