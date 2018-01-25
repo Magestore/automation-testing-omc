@@ -11,9 +11,9 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 
-class AssertCheckoutPaymentMethodCP215 extends AbstractConstraint
+class AssertCheckoutPaymentMethodCP218 extends AbstractConstraint
 {
-    public function processAssert(WebposIndex $webposIndex,$amount)
+    public function processAssert(WebposIndex $webposIndex)
     {
         \PHPUnit_Framework_Assert::assertEquals(
             "Pending",
@@ -22,15 +22,16 @@ class AssertCheckoutPaymentMethodCP215 extends AbstractConstraint
         );
 
         $totalpaid = $webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid();
+        $grandtotal = $webposIndex->getOrderHistoryOrderViewFooter()->getGrandTotal();
         \PHPUnit_Framework_Assert::assertEquals(
-            $amount,
+            substr($grandtotal, 1),
             substr($totalpaid, 1),
-            'TaxClass page - CategoryRepository. On Tab PaymentMethod. Status order total paid.'
+            'TaxClass page - CategoryRepository. On Tab PaymentMethod. Total paid.'
         );
 
-        \PHPUnit_Framework_Assert::assertTrue(
+        \PHPUnit_Framework_Assert::assertNotTrue(
             $webposIndex->getOrderHistoryOrderViewHeader()->getButtonTakePayment()->isVisible(),
-            'TaxClass page - CategoryRepository. On Tab PaymentMethod. Take Payment visible.'
+            'TaxClass page - CategoryRepository. On Tab PaymentMethod. Take Payment not visible.'
         );
 
         \PHPUnit_Framework_Assert::assertTrue(

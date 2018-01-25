@@ -11,14 +11,14 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 
-class AssertCheckoutPaymentMethodCP215 extends AbstractConstraint
+class AssertCheckoutPaymentMethodCP216 extends AbstractConstraint
 {
-    public function processAssert(WebposIndex $webposIndex,$amount)
+    public function processAssert(WebposIndex $webposIndex, $amount)
     {
         \PHPUnit_Framework_Assert::assertEquals(
-            "Pending",
+            "Processing",
             $webposIndex->getOrderHistoryOrderViewHeader()->getStatus(),
-            'TaxClass page - CategoryRepository. On Tab PaymentMethod. Status order Pending.'
+            'TaxClass page - CategoryRepository. On Tab PaymentMethod. Status order Processing.'
         );
 
         $totalpaid = $webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid();
@@ -34,12 +34,12 @@ class AssertCheckoutPaymentMethodCP215 extends AbstractConstraint
         );
 
         \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getOrderHistoryOrderViewFooter()->getPrintButton()->isVisible(),
+            $webposIndex->getOrderHistoryOrderViewHeader()->getPrintButton()->isVisible(),
             'TaxClass page - CategoryRepository. On Tab PaymentMethod. Print visible.'
         );
 
         \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->isVisible(),
+            $webposIndex->OrderHistoryOrderViewHeader()->getInvoiceButton()->isVisible(),
             'TaxClass page - CategoryRepository. On Tab PaymentMethod. Invoice visible.'
         );
     }
