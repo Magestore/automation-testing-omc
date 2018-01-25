@@ -32,4 +32,9 @@ class CheckoutAddMorePayment extends Block
     {
         return $this->_rootElement->find('.icon-iconPOS-payment-cp2forpos');
     }
+
+	public function getPaymentMethodByLabel($label)
+	{
+		return $this->_rootElement->find('//*[@id="add-more-payment"]/div/div/div[2]/div[1]/div/div/label[text()="'.$label.'"]/..', Locator::SELECTOR_XPATH);
+	}
 }

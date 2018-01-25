@@ -3,13 +3,13 @@
  * Created by PhpStorm.
  * User: gvt
  * Date: 24/01/2018
- * Time: 08:52
+ * Time: 20:59
  */
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposHoldOrderCP164Test extends Injectable
+class WebposHoldOrderCP165Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -49,7 +49,7 @@ class WebposHoldOrderCP164Test extends Injectable
             $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
         }
         $this->webposIndex->getCheckoutDiscount()->clickDiscountButton();
-        $this->webposIndex->getCheckoutDiscount()->setTypeDiscount('$');
+        $this->webposIndex->getCheckoutDiscount()->setTypeDiscount('%');
         $this->webposIndex->getCheckoutDiscount()->setNumberDiscount($discount);
         $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
