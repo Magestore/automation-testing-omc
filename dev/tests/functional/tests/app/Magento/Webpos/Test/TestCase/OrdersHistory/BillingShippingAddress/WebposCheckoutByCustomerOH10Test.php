@@ -6,12 +6,13 @@
  * Time: 2:08 PM
  */
 
-namespace Magento\Webpos\Test\TestCase\OrdersHistory\OrderStatus;
+namespace Magento\Webpos\Test\TestCase\OrdersHistory\BillingShippingAddress;
 
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposOrderStatusOH05Test extends Injectable
+class WebposCheckoutByCustomerOH10Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -23,21 +24,29 @@ class WebposOrderStatusOH05Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test($products)
+    public function test(FixtureFactory $fixtureFactory, $products)
     {
-        // Login webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposStep'
-        )->run();
+        // Create Customer shipping address and billing address are the same
+        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'johndoe_MI']);
+        $customer->persist();
         // Create products
         $products = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run();
+        // Login webpos
+        $staff = $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposStep'
+        )->run();
         // Add product to cart
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',
             ['products' => $products]
+        )->run();
+        // change customer
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
+            ['customer' => $customer]
         )->run();
         // Checkout
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
@@ -47,16 +56,6 @@ class WebposOrderStatusOH05Test extends Injectable
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         // Place Order
-        $grandTotal = $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText();
-//        $doubleGrandTotal = (double)substr($grandTotal, 1);
-//        $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($doubleGrandTotal);
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
-            [
-                'createInvoice' => false,
-                'shipped' => false
-            ]
-        )->run();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
@@ -67,12 +66,19 @@ class WebposOrderStatusOH05Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-
+        $customerAddress = $customer->getAddress();
+        $shippingAddress = [];
+        $shippingAddress['name'] = $customerAddress[0]['firstname'] . ' ' . $customerAddress[0]['lastname'];
+        $shippingAddress['address'] = $customerAddress[0]['city'] . ', '
+            . $customerAddress[0]['region'] . ', '
+            . $customerAddress[0]['postcode'] . ', '
+            . 'US';
+        $shippingAddress['telephone'] = $customerAddress[0]['telephone'];
+        $billingAddress = $shippingAddress;
         return [
-            'status' => 'Pending',
-            'grandTotal' => $grandTotal,
-            'takePayment' => false,
-            'refund' => false
+            'shippingAddress' => $shippingAddress,
+            'billingAddress' => $billingAddress
         ];
+
     }
 }

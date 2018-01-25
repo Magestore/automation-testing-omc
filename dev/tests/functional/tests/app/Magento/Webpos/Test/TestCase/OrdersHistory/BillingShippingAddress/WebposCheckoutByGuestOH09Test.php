@@ -6,12 +6,13 @@
  * Time: 2:08 PM
  */
 
-namespace Magento\Webpos\Test\TestCase\OrdersHistory\OrderStatus;
+namespace Magento\Webpos\Test\TestCase\OrdersHistory\BillingShippingAddress;
 
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposOrderStatusOH05Test extends Injectable
+class WebposCheckoutByGuestOH09Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -23,16 +24,21 @@ class WebposOrderStatusOH05Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test($products)
+    public function test(FixtureFactory $fixtureFactory, $products, $configData)
     {
-        // Login webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposStep'
+        // Config Guest checkout
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => $configData]
         )->run();
         // Create products
         $products = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
+        )->run();
+        // Login webpos
+        $staff = $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
         // Add product to cart
         $this->objectManager->getInstance()->create(
@@ -47,16 +53,6 @@ class WebposOrderStatusOH05Test extends Injectable
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         // Place Order
-        $grandTotal = $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText();
-//        $doubleGrandTotal = (double)substr($grandTotal, 1);
-//        $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($doubleGrandTotal);
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
-            [
-                'createInvoice' => false,
-                'shipped' => false
-            ]
-        )->run();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
@@ -67,12 +63,21 @@ class WebposOrderStatusOH05Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-
+        $configData = $fixtureFactory->createByCode('configData', ['dataset' => $configData]);
+        $section = $configData->getSection();
+        $shippingAddress = [];
+        $shippingAddress['name'] = $section['webpos/guest_checkout/first_name']['value'] . ' '
+            . $section['webpos/guest_checkout/last_name']['value'];
+        $shippingAddress['address'] = $section['webpos/guest_checkout/city']['value'] . ', '
+            . $section['webpos/guest_checkout/region_id']['label'] . ', '
+            . $section['webpos/guest_checkout/zip']['value'] . ', '
+            . $section['webpos/guest_checkout/country_id']['value'];
+        $shippingAddress['telephone'] = $section['webpos/guest_checkout/telephone']['value'];
+        $billingAddress = $shippingAddress;
         return [
-            'status' => 'Pending',
-            'grandTotal' => $grandTotal,
-            'takePayment' => false,
-            'refund' => false
+            'shippingAddress' => $shippingAddress,
+            'billingAddress' => $billingAddress
         ];
+
     }
 }

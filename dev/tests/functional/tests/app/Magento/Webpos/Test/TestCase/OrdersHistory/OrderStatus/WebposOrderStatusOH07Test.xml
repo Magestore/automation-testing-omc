@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\OrderStatus\WebposOrderStatusOH05Test" summary="OrdersHistory-OrderStatus" ticketId="WEBPOSORDERSTATUS-OH05">
-        <variation name="WebposOrderStatusOH05TestVariation1">
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\OrderStatus\WebposOrderStatusOH07Test" summary="OrdersHistory-OrderStatus" ticketId="WEBPOSORDERSTATUS-OH07">
+        <variation name="WebposOrderStatusOH07TestVariation1">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>

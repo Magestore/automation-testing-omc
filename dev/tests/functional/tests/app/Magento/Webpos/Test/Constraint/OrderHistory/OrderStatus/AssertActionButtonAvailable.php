@@ -20,6 +20,11 @@ class AssertActionButtonAvailable extends AbstractConstraint
                 $webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->isVisible(),
                 'Take Payment button is not visible.'
             );
+        } else {
+            \PHPUnit_Framework_Assert::assertFalse(
+                $webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->isVisible(),
+                'Take Payment button is visible.'
+            );
         }
         if ($print) {
             \PHPUnit_Framework_Assert::assertTrue(
@@ -31,6 +36,11 @@ class AssertActionButtonAvailable extends AbstractConstraint
             \PHPUnit_Framework_Assert::assertTrue(
                 $webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->isVisible(),
                 'Invoice button is not visible.'
+            );
+        } else {
+            \PHPUnit_Framework_Assert::assertFalse(
+                $webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->isVisible(),
+                'Invoice button is visible.'
             );
         }
     }
