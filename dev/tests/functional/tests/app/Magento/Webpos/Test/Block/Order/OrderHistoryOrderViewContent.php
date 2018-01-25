@@ -56,6 +56,16 @@ class OrderHistoryOrderViewContent extends Block
         return $this->_rootElement->find('//table/tbody/tr/td/h4[text()="'.$name.'"]/../..', Locator::SELECTOR_XPATH);
     }
 
+	public function getProductSKU($name)
+	{
+		return $this->getProductRow($name)->find('span.product-sku');
+	}
+
+	public function getQtyOfProduct($name)
+	{
+		return $this->getProductRow($name)->find('td.order-id');
+	}
+
     public function getPriceOfProduct($name)
     {
         return $this->getProductRow($name)->find('td[data-bind="text: $parents[1].getItemPriceFormated(item)"]');
