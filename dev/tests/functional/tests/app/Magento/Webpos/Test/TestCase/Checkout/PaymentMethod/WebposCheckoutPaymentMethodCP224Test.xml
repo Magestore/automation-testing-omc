@@ -1,0 +1,12 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\PaymentMethod\WebposCheckoutPaymentMethodCP224Test" summary="Frontend - Web POS Checkout Payment Visible" ticketId="MAGETWO-34874">
+        <variation name="WebposCheckoutPaymentMethodCP224_CP224">
+            <data name="configData" xsi:type="string">default_payment_method_all_payment</data>
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+            </data>
+            <data name="amount" xsi:type="string">5</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\PaymentMethod\AssertCheckoutPaymentMethodCP224" />
+        </variation>
+    </testCase>
+</config>

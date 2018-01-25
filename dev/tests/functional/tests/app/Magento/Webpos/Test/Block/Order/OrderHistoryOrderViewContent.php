@@ -93,4 +93,9 @@ class OrderHistoryOrderViewContent extends Block
 	{
         return str_replace('$','', $this->_rootElement->find('#webpos_order_view_container > footer > div.col-sm-offset-6 > table > tbody > tr:nth-child(4) > td.a-right')->getText());
 	}
+
+	public function getPaymentName()
+    {
+        return $this->_rootElement->find('//main/div/div[2]/div[1]/div/div[2]/div/div/label[1]', Locator::SELECTOR_XPATH);
+    }
 }

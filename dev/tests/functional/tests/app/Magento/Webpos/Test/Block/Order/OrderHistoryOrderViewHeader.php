@@ -47,4 +47,9 @@ class OrderHistoryOrderViewHeader extends Block
     {
         return $this->waitForElementVisible('.status.closed');
     }
+
+    public function getButtonTakePayment()
+    {
+        return $this->_rootElement->find('.//*[@id="webpos_order_view_container"]/header/div[3]/a', Locator::SELECTOR_XPATH);
+    }
 }

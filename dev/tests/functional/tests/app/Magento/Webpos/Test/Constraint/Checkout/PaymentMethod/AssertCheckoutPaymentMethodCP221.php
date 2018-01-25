@@ -11,26 +11,27 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 
-class AssertCheckoutPaymentMethodCP215 extends AbstractConstraint
+class AssertCheckoutPaymentMethodCP221 extends AbstractConstraint
 {
-    public function processAssert(WebposIndex $webposIndex,$amount)
+    public function processAssert(WebposIndex $webposIndex)
     {
         \PHPUnit_Framework_Assert::assertEquals(
-            "Pending",
+            "Complete",
             $webposIndex->getOrderHistoryOrderViewHeader()->getStatus(),
-            'TaxClass page - CategoryRepository. On Tab PaymentMethod. Status order Pending.'
+            'TaxClass page - CategoryRepository. On Tab PaymentMethod. Status order Complete.'
         );
 
         $totalpaid = $webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid();
+        $grandtotal = $webposIndex->getOrderHistoryOrderViewFooter()->getGrandTotal();
         \PHPUnit_Framework_Assert::assertEquals(
-            $amount,
+            substr($grandtotal, 1),
             substr($totalpaid, 1),
-            'TaxClass page - CategoryRepository. On Tab PaymentMethod. Status order total paid.'
+            'TaxClass page - CategoryRepository. On Tab PaymentMethod. Total paid.'
         );
 
-        \PHPUnit_Framework_Assert::assertTrue(
+        \PHPUnit_Framework_Assert::assertNotTrue(
             $webposIndex->getOrderHistoryOrderViewHeader()->getButtonTakePayment()->isVisible(),
-            'TaxClass page - CategoryRepository. On Tab PaymentMethod. Take Payment visible.'
+            'TaxClass page - CategoryRepository. On Tab PaymentMethod. Take Payment not visible.'
         );
 
         \PHPUnit_Framework_Assert::assertTrue(
@@ -38,7 +39,7 @@ class AssertCheckoutPaymentMethodCP215 extends AbstractConstraint
             'TaxClass page - CategoryRepository. On Tab PaymentMethod. Print visible.'
         );
 
-        \PHPUnit_Framework_Assert::assertTrue(
+        \PHPUnit_Framework_Assert::assertNotTrue(
             $webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->isVisible(),
             'TaxClass page - CategoryRepository. On Tab PaymentMethod. Invoice visible.'
         );
