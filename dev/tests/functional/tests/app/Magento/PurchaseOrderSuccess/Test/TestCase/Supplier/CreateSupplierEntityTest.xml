@@ -19,7 +19,7 @@
             <data name="supplier/data/new_password" xsi:type="string">12345a</data>
             <data name="supplier/data/generated_password" xsi:type="string">Yes</data>
             <data name="supplier/data/send_pass_to_supplier" xsi:type="string">Yes</data>
-            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Supplier\AssertSupplierSuccessSaveMessage"/>
+            <!--<constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Supplier\AssertSupplierSuccessSaveMessage"/>-->
             <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Supplier\AssertSupplierInGrid"/>
         </variation>
         <variation name="CreateSupplierEntityTestVariation1-RequireFieldsData">
@@ -27,7 +27,7 @@
             <data name="supplier/data/supplier_name" xsi:type="string">magestore-%isolation%</data>
             <data name="supplier/data/contact_name" xsi:type="string">Bang</data>
             <data name="supplier/data/contact_email" xsi:type="string">bang_%isolation%@trueplus.vn</data>
-            <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Supplier\AssertSupplierSuccessSaveMessage"/>
+            <!--<constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Supplier\AssertSupplierSuccessSaveMessage"/>-->
             <constraint name="Magento\PurchaseOrderSuccess\Test\Constraint\Supplier\AssertSupplierInGrid"/>
         </variation>
         <variation name="CreateSupplierEntityTestVariation1-BlankAllFields">

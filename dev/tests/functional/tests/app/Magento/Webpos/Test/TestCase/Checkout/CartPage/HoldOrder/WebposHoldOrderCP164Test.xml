@@ -7,8 +7,7 @@
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
                 </item>
             </data>
-            <data xsi:type="string" name="priceCustom">15</data>
-            <data xsi:type="string" name="disCount">15</data>
+            <data xsi:type="string" name="discount">15.11</data>
             <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckoutPage"/>-->
             <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckCartCustomPrice"/>-->
         </variation>
