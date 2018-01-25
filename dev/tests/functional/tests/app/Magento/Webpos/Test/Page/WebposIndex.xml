@@ -48,6 +48,7 @@
         <block name="orderHistoryRefund" class="Magento\Webpos\Test\Block\Order\OrderHistoryRefund" locator="#refund-popup" strategy="css selector"/>
         <block name="orderHistoryAddComment" class="Magento\Webpos\Test\Block\Order\OrderHistoryAddComment" locator="#add-comment-order" strategy="css selector"/>
         <block name="orderHistoryAddCancelComment" class="Magento\Webpos\Test\Block\Order\OrderHistoryAddCancelComment" locator="#add-cancel-comment-order" strategy="css selector"/>
+        <block name="orderHistorySendEmail" class="Magento\Webpos\Test\Block\Order\OrderHistorySendEmail" locator="#send-email-order" strategy="css selector"/>
         <!--End Order History-->
         <!--Begin Session management-->
         <block name="sessionRegisterShift" class="Magento\Webpos\Test\Block\SessionManagement\SessionRegisterShift" locator="#register_shift_container" strategy="css selector"/>
