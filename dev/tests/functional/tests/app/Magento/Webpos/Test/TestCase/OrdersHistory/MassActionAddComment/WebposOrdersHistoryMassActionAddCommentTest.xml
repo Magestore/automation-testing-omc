@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionAddComment\WebposOrdersHistoryMassActionAddCommentTest" summary="Orders History - Mass action/Add comment" ticketId="WEBPOS-OH24">
+        <variation name="WebposOrdersHistoryMassActionAddComment_CheckGUI_OH24">
+            <data name="order/dataset" xsi:type="string">default</data>
+            <data name="order/data/entity_id/products" xsi:type="string">catalogProductSimple::default</data>
+            <data name="action" xsi:type="string">CheckGUI</data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistoryAddComment"/>
+        </variation>
+        <variation name="WebposOrdersHistoryMassActionAddComment_CheckCancel_OH25">
+            <data name="order/dataset" xsi:type="string">default</data>
+            <data name="order/data/entity_id/products" xsi:type="string">catalogProductSimple::default</data>
+            <data name="action" xsi:type="string">Cancel</data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistoryAddComment"/>
+        </variation>
+        <variation name="WebposOrdersHistoryMassActionAddComment_CheckSave_OH26">
+            <data name="order/dataset" xsi:type="string">default</data>
+            <data name="order/data/entity_id/products" xsi:type="string">catalogProductSimple::default</data>
+            <data name="action" xsi:type="string">Save</data>
+            <data name="comment" xsi:type="string">comment %isolation%</data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistoryAddComment"/>
+        </variation>
+    </testCase>
+</config>
