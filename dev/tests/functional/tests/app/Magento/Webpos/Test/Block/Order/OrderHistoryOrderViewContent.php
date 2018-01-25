@@ -56,6 +56,16 @@ class OrderHistoryOrderViewContent extends Block
         return $this->_rootElement->find('//table/tbody/tr/td/h4[text()="'.$name.'"]/../..', Locator::SELECTOR_XPATH);
     }
 
+	public function getProductSKU($name)
+	{
+		return $this->getProductRow($name)->find('span.product-sku');
+	}
+
+	public function getQtyOfProduct($name)
+	{
+		return $this->getProductRow($name)->find('td.order-id');
+	}
+
     public function getPriceOfProduct($name)
     {
         return $this->getProductRow($name)->find('td[data-bind="text: $parents[1].getItemPriceFormated(item)"]');
@@ -93,6 +103,16 @@ class OrderHistoryOrderViewContent extends Block
 	{
         return str_replace('$','', $this->_rootElement->find('#webpos_order_view_container > footer > div.col-sm-offset-6 > table > tbody > tr:nth-child(4) > td.a-right')->getText());
 	}
+
+	public function getPaymentName()
+    {
+        return $this->_rootElement->find('//main/div/div[2]/div[1]/div/div[2]/div/div/label[1]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getPaymentMethodName($stt)
+    {
+        return $this->_rootElement->find('//main/div/div[2]/div[1]/div/div[2]/div/div['.$stt.']/label[1]', Locator::SELECTOR_XPATH);
+    }
 
 	public function billingAddressBlockIsVisible()
     {
@@ -133,4 +153,15 @@ class OrderHistoryOrderViewContent extends Block
 	{
 		return $this->_rootElement->find('#webpos_order_view_container > main > div > div:nth-child(2) > div:nth-child(2) > div > div.panel-body');
 	}
+
+	public function getPaymentMethod($label)
+	{
+		return $this->_rootElement->find('//*[@id="webpos_order_view_container"]/main/div/div[2]/div[1]/div/div[2]/div/div/label[text()="'.$label.'"]/..', Locator::SELECTOR_XPATH);
+	}
+
+	public function getPaymentMethodAmount($label)
+	{
+		return $this->getPaymentMethod($label)->find('label[data-bind="text: $parents[1].getWebposPaymentAmount($data)"]');
+	}
+
 }

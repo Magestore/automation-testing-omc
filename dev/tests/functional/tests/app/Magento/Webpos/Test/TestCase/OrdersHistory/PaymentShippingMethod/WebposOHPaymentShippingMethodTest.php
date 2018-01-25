@@ -14,7 +14,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposOHPaymentShippingMethodNoMethodTest extends Injectable
+class WebposOHPaymentShippingMethodTest extends Injectable
 {
 	/**
 	 * @var WebposIndex
@@ -47,7 +47,9 @@ class WebposOHPaymentShippingMethodNoMethodTest extends Injectable
 		$addCustomSale = false,
 		$customProduct = null,
 		$addDiscount = false,
-		$discountAmount = ''
+		$discountAmount = '',
+		$addShipping = false,
+		$addPayment = true
 	)
 	{
 
@@ -87,9 +89,20 @@ class WebposOHPaymentShippingMethodNoMethodTest extends Injectable
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-		if ($addCustomSale) {
+		if ($addShipping) {
+			if (!$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->isVisible()) {
+				$this->webposIndex->getCheckoutShippingMethod()->clickShipPanel();
+			}
+			$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
+			$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+		}
+
+		$paymentAmount = 0;
+		if ($addPayment) {
 			$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
 			$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+			$paymentAmount = $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->getValue();
+			$paymentAmount = (float) substr($paymentAmount, 1);
 		}
 
 		$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
@@ -120,7 +133,8 @@ class WebposOHPaymentShippingMethodNoMethodTest extends Injectable
 		);
 
 		return [
-			'products' => $products
+			'products' => $products,
+			'paymentAmount' => $paymentAmount
 		];
 	}
 }

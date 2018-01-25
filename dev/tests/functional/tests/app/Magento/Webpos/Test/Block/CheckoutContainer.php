@@ -37,4 +37,9 @@ class CheckoutContainer extends Block
 	{
 		$this->waitForElementVisible('#webpos_cart_discountpopup');
 	}
+
+	public function waitForAddMorePaymentModal()
+	{
+		$this->waitForElementVisible('#add-more-payment');
+	}
 }

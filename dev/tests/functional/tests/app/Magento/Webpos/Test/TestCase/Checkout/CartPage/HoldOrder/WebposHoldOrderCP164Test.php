@@ -24,7 +24,7 @@ class WebposHoldOrderCP164Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test($products, $disCount)
+    public function test($products, $discount)
     {
         //Create product
         $product = $this->objectManager->getInstance()->create(
@@ -44,34 +44,38 @@ class WebposHoldOrderCP164Test extends Injectable
         sleep(1);
 
         //Click on [Add discount] > on Discount tab, add dicount for whole cart (type: $)
-//        while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup())
-//        {
-//            $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
-//        }
-//        $this->webposIndex->getCheckoutDiscount()->clickNumberButton($disCount);
-//        sleep(1);
-//        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-//
-//        //Hold
-//        $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
-//        $this->webposIndex->getMsWebpos()->waitCartLoader();
-//        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-//        sleep(1);
-//
-//        //Checkout in On-Hold
-//        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-//        $this->webposIndex->getCMenu()->onHoldOrders();
-//        sleep(1);
-//        $this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder()->click();
-//        $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();
-//        $this->webposIndex->getMsWebpos()->waitCartLoader();
-//        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-//        sleep(1);
-//
-//        $dataProduct = $product->getData();
-//        $dataProduct['qty'] = 1;
-//        return ['cartProducts' => [$dataProduct],
-//            'type' => '$'];
+        while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup())
+        {
+            $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
+        }
+        $this->webposIndex->getCheckoutDiscount()->clickDiscountButton();
+        $this->webposIndex->getCheckoutDiscount()->setTypeDiscount('$');
+        $this->webposIndex->getCheckoutDiscount()->setNumberDiscount($discount);
+        $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+
+        //Hold
+        $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+
+        //Checkout in On-Hold
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getCMenu()->onHoldOrders();
+        sleep(1);
+        $this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder()->click();
+        $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+
+        $dataProduct = $product->getData();
+        $dataProduct['qty'] = 1;
+        return ['cartProducts' => [$dataProduct],
+            'type' => '$'];
 
     }
 }

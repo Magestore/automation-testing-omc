@@ -61,6 +61,9 @@ class WebposOrderStatusOH04Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 
-        return ['status' => 'Pending'];
+        return [
+            'status' => 'Pending',
+            'grandTotal' => $grandTotal
+            ];
     }
 }
