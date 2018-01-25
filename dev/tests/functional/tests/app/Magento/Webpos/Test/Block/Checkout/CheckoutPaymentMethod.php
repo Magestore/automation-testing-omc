@@ -47,4 +47,9 @@ class CheckoutPaymentMethod extends Block
     {
         return $this->_rootElement->find('.icon-iconPOS-remove');
     }
+
+	public function getPaymentMethodByLabel($label)
+	{
+		return $this->_rootElement->find('//*[@id="payment_list"]/div/div/div/label[text()="'.$label.'"]/..', Locator::SELECTOR_XPATH);
+	}
 }
