@@ -4,9 +4,9 @@
             <data name="configData" xsi:type="string">default_payment_method_all_payment</data>
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="string">product1</item>
-                <item name="0" xsi:type="string">product2</item>
-                <item name="0" xsi:type="string">product3</item>
-                <item name="0" xsi:type="string">product4</item>
+                <item name="1" xsi:type="string">product2</item>
+                <item name="2" xsi:type="string">product3</item>
+                <item name="3" xsi:type="string">product4</item>
             </data>
             <data name="amount" xsi:type="string">5</data>
             <constraint name="Magento\Webpos\Test\Constraint\Checkout\PaymentMethod\AssertCheckoutPaymentMethodCP225" />

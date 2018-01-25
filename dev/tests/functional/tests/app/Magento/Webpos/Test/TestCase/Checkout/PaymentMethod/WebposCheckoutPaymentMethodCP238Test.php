@@ -13,7 +13,7 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
-class WebposCheckoutPaymentMethodCP225Test extends Injectable
+class WebposCheckoutPaymentMethodCP238Test extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex
@@ -82,13 +82,6 @@ class WebposCheckoutPaymentMethodCP225Test extends Injectable
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-        $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-
-        $this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();
-        sleep(1);
-        $this->webposIndex->getCheckoutAddMorePayment()->getCreditCard()->click();
-        sleep(1);
         // place order getCreateInvoiceCheckbox
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -98,14 +91,6 @@ class WebposCheckoutPaymentMethodCP225Test extends Injectable
 
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->ordersHistory();
-
-        sleep(2);
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-
-        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
     }
 
     public function tearDown()

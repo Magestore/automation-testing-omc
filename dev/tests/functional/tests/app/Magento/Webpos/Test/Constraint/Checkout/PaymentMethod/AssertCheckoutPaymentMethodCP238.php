@@ -11,20 +11,19 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 
-class AssertCheckoutPaymentMethodCP225 extends AbstractConstraint
+class AssertCheckoutPaymentMethodCP238 extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex)
     {
 
-        \PHPUnit_Framework_Assert::assertEquals(
-            "Web POS - Cash In",
-            $webposIndex->getOrderHistoryOrderViewContent()->getPaymentMethodName(1)->getText(),
-            'TaxClass page - CategoryRepository. On Tab PaymentMethod. Two Payment order Detail.'
+        \PHPUnit_Framework_Assert::assertNotTrue(
+            $webposIndex->getCheckoutCartItems()->getFirstCartItem()->isVisible(),
+            'TaxClass page - CategoryRepository. Default Cart'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            "Web POS - Credit Card",
-            $webposIndex->getOrderHistoryOrderViewContent()->getPaymentMethodName(2)->getText(),
-            'TaxClass page - CategoryRepository. On Tab PaymentMethod. Two Payment order Detail.'
+            1,
+            $webposIndex->getNotification()->getCountNotification()->getText(),
+            'TaxClass page - CategoryRepository. Count Notification'
         );
     }
 

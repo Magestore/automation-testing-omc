@@ -98,4 +98,9 @@ class OrderHistoryOrderViewContent extends Block
     {
         return $this->_rootElement->find('//main/div/div[2]/div[1]/div/div[2]/div/div/label[1]', Locator::SELECTOR_XPATH);
     }
+
+    public function getPaymentMethodName($stt)
+    {
+        return $this->_rootElement->find('//main/div/div[2]/div[1]/div/div[2]/div/div['.$stt.']/label[1]', Locator::SELECTOR_XPATH);
+    }
 }

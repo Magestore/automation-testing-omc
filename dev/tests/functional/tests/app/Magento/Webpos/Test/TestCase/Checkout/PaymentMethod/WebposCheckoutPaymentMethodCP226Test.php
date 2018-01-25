@@ -13,7 +13,7 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
-class WebposCheckoutPaymentMethodCP225Test extends Injectable
+class WebposCheckoutPaymentMethodCP226Test extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex
@@ -64,10 +64,13 @@ class WebposCheckoutPaymentMethodCP225Test extends Injectable
 
         $i = 0;
         foreach ($products as $product) {
-            $products[$i] = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);
-            $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-            $this->webposIndex->getCheckoutProductList()->search($products[$i]->getSku());
-            $this->webposIndex->getMsWebpos()->waitCartLoader();
+            if ($i < 3) {
+                $products[$i] = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);
+                $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+                $this->webposIndex->getCheckoutProductList()->search($products[$i]->getSku());
+                $this->webposIndex->getMsWebpos()->waitCartLoader();
+            }
+            if ($i == 3) break;
             $i++;
         }
 
@@ -82,13 +85,26 @@ class WebposCheckoutPaymentMethodCP225Test extends Injectable
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-        $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutCartHeader()->getIconBackToCart()->click();
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
 
-        $this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();
+        $this->webposIndex->getCheckoutCartHeader()->getIconDeleteCart()->click();
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+
+        $products[$i] = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getCheckoutProductList()->search($products[$i]->getSku());
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
-        $this->webposIndex->getCheckoutAddMorePayment()->getCreditCard()->click();
-        sleep(1);
+        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+
+        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+
         // place order getCreateInvoiceCheckbox
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
