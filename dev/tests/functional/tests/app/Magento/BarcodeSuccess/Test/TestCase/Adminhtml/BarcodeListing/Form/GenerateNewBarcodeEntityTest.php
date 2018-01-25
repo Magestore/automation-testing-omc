@@ -9,7 +9,14 @@ namespace Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeListing\Form;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeListing\BarcodeGenerateIndex;
 use Magento\BarcodeSuccess\Test\Fixture\BarcodeGenerate;
-
+/**
+ *
+ * Steps:
+ * 1. Open backend
+ * 2. Go to  page BarcodeGenerate
+ * 3. Perform Asserts for Form
+ *
+ */
 class GenerateNewBarcodeEntityTest extends Injectable
 {
     /* tags */

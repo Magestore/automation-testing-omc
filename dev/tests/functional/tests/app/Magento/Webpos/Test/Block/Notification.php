@@ -30,4 +30,9 @@ class Notification extends Block
 	{
 		return $this->getFirstNotification()->find('label[data-bind="text: label"]')->getText();
 	}
+
+	public function getCountNotification()
+    {
+        return $this->_rootElement->find('.notification-bell__mentions');
+    }
 }

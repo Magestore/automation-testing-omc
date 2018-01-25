@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct\WebposValidateDiscountCP63EntityTest" summary="Checkout - Cart Page - Webpos Check Validate Discount CP63" ticketId="WEBPOS-1">
+        <variation name="Webpos_CheckValidate_DiscountProduct_WithValidValueCP63_Test1_CP63">
+            <data name="product/dataset" xsi:type="string">product1</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\DiscountProduct\AssertWebposCheckValidateDiscountDollarCP63"/>
+        </variation>
+    </testCase>
+</config>

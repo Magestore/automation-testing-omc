@@ -55,4 +55,29 @@ class CheckoutAddCustomer extends Block
 	{
 		return $this->_rootElement->find('span[data-bind="click: showShippingAddress, visible: !isShowShippingSummaryForm()"]');
 	}
+
+	public function setFieldWithoutShippingAndBilling($customer)
+    {
+        foreach ($customer as $item => $value){
+            switch ($item)
+            {
+                case 'firstname' :
+                    $this->_rootElement->find('input[name="first-name"]')->setValue($value);
+                    break;
+
+                case 'lastname' :
+                    $this->_rootElement->find('input[name="last-name"]')->setValue($value);
+                    break;
+
+                case 'email' :
+                    $this->_rootElement->find('input[name="email"]')->setValue($value);
+                    break;
+
+                case 'group_id' :
+                    $this->_rootElement->find('#customer_group', Locator::SELECTOR_CSS, 'select')->setValue($value);
+                    break;
+
+            }
+        }
+    }
 }
