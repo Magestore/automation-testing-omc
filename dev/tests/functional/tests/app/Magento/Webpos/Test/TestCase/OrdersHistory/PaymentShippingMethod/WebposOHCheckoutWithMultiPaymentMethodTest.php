@@ -31,6 +31,19 @@ class WebposOHCheckoutWithMultiPaymentMethodTest extends Injectable
 	 */
 	protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
+	public function __prepare(FixtureFactory $fixtureFactory)
+	{
+		// Config: use system value for all field in Tax Config
+		$this->objectManager->getInstance()->create(
+			'Magento\Config\Test\TestStep\SetupConfigurationStep',
+			['configData' => 'default_tax_configuration_use_system_value']
+		)->run();
+		$this->objectManager->getInstance()->create(
+			'Magento\Config\Test\TestStep\SetupConfigurationStep',
+			['configData' => 'default_payment_method_all_payment']
+		)->run();
+	}
+
 	public function __inject(
 		WebposIndex $webposIndex,
 		FixtureFactory $fixtureFactory,
