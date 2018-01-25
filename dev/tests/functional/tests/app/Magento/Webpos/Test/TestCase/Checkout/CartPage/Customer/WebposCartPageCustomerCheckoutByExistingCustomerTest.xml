@@ -4,7 +4,7 @@
 		<variation name="WebposCartPageCustomerCheckoutByExistingCustomerTestVariation1_CP37_CP38">
 			<data name="product/dataset" xsi:type="string">product1</data>
 
-			<!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>-->
+			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>
 		</variation>
 
 		<variation name="WebposCartPageCustomerCheckoutByExistingCustomerTestVariation1_CP39">
@@ -12,7 +12,7 @@
 			<data name="editCustomer" xsi:type="boolean">true</data>
 			<data name="editAddress/dataset" xsi:type="string">US_address_edit</data>
 
-			<!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>-->
+			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>
 		</variation>
 
 		<variation name="WebposCartPageCustomerCheckoutByExistingCustomerTestVariation1_CP40">
@@ -21,7 +21,7 @@
 			<data name="useStoreAddress" xsi:type="boolean">true</data>
 			<data name="editAddress/dataset" xsi:type="string">default_webpos_guest_address</data>
 
-			<!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>-->
+			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>
 		</variation>
 	</testCase>
 </config>
