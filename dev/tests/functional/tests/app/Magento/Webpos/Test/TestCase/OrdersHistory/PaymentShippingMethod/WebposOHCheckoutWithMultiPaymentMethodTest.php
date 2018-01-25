@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: vinh
- * Date: 24/01/2018
- * Time: 09:45
+ * Date: 25/01/2018
+ * Time: 09:36
  */
 
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\PaymentShippingMethod;
@@ -14,7 +14,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposOHPaymentShippingMethodTest extends Injectable
+class WebposOHCheckoutWithMultiPaymentMethodTest extends Injectable
 {
 	/**
 	 * @var WebposIndex
@@ -44,12 +44,7 @@ class WebposOHPaymentShippingMethodTest extends Injectable
 
 	public function test(
 		$products = null,
-		$addCustomSale = false,
-		$customProduct = null,
-		$addDiscount = false,
-		$discountAmount = '',
-		$addShipping = false,
-		$addPayment = true
+		$paymentMethods
 	)
 	{
 
@@ -58,52 +53,34 @@ class WebposOHPaymentShippingMethodTest extends Injectable
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();
 
-		if ($addCustomSale) {
-			$this->objectManager->getInstance()->create(
-				'Magento\Webpos\Test\TestStep\AddCustomSaleStep',
-				['customProduct' => $customProduct]
-			)->run();
-		} else {
-			// Create products
-			$products = $this->objectManager->getInstance()->create(
-				'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
-				['products' => $products]
-			)->run();
+		// Create products
+		$products = $this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
+			['products' => $products]
+		)->run();
 
-			// Add product to cart
-			$this->objectManager->getInstance()->create(
-				'Magento\Webpos\Test\TestStep\AddProductToCartStep',
-				['products' => $products]
-			)->run();
-		}
-
-		if ($addDiscount) {
-			$this->objectManager->getInstance()->create(
-				'Magento\Webpos\Test\TestStep\AddDiscountWholeCartStep',
-				['percent' => $discountAmount]
-			)->run();
-		}
+		// Add product to cart
+		$this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\AddProductToCartStep',
+			['products' => $products]
+		)->run();
 
 		// Place Order
 		$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-		if ($addShipping) {
-			if (!$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->isVisible()) {
-				$this->webposIndex->getCheckoutShippingMethod()->clickShipPanel();
-			}
-			$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
-			$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+		if (!$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->isVisible()) {
+			$this->webposIndex->getCheckoutShippingMethod()->clickShipPanel();
 		}
+		$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
+		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-		$paymentAmount = 0;
-		if ($addPayment) {
-			$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-			$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-			$paymentAmount = $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->getValue();
-			$paymentAmount = (float) substr($paymentAmount, 1);
-		}
+		// Add Payment
+		$paymentMethods = $this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\AddPaymentOnCheckoutPageStep',
+			['paymentMethods' => $paymentMethods]
+		)->run();
 
 		$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -134,7 +111,7 @@ class WebposOHPaymentShippingMethodTest extends Injectable
 
 		return [
 			'products' => $products,
-			'paymentAmount' => $paymentAmount
+			'paymentMethods' => $paymentMethods
 		];
 	}
 }

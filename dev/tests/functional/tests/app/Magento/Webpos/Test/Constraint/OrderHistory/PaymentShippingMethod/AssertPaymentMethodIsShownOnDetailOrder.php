@@ -12,8 +12,17 @@ namespace Magento\Webpos\Test\Constraint\OrderHistory\PaymentShippingMethod;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class AssertPaymentMethodIsShownOnDetailOrder
+ * @package Magento\Webpos\Test\Constraint\OrderHistory\PaymentShippingMethod
+ */
 class AssertPaymentMethodIsShownOnDetailOrder extends AbstractConstraint
 {
+	/**
+	 * @param WebposIndex $webposIndex
+	 * @param $paymentLabel
+	 * @param $paymentAmount
+	 */
 	public function processAssert(WebposIndex $webposIndex, $paymentLabel, $paymentAmount)
 	{
 		\PHPUnit_Framework_Assert::assertTrue(
