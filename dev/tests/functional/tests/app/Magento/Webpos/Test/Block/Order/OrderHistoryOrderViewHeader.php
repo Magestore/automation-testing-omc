@@ -17,38 +17,38 @@ use Magento\Mtf\Client\Locator;
  */
 class OrderHistoryOrderViewHeader extends Block
 {
-	public function getOrderId()
-	{
-		return $this->_rootElement->find('div.id-order > label > span')->getText();
-	}
+    public function getOrderId()
+    {
+        return $this->_rootElement->find('div.id-order > label > span')->getText();
+    }
 
-	public function getStatus()
-	{
-		return $this->_rootElement->find('.status')->getText();
-	}
+    public function getStatus()
+    {
+        return $this->_rootElement->find('.status')->getText();
+    }
 
-	public function openAddOrderNote()
+    public function openAddOrderNote()
     {
         $this->_rootElement->find('.more-info')->click();
     }
 
-	// More info - Actions box
-	public function getMoreInfoButton()
-	{
-		return $this->_rootElement->find('nav > div.more-info > a');
-	}
+    // More info - Actions box
+    public function getMoreInfoButton()
+    {
+        return $this->_rootElement->find('nav > div.more-info > a');
+    }
 
-	public function getAction($text)
-	{
-		return $this->_rootElement->find('//*[@id="form-add-note-order"]/ul/li/a[text()="' . $text . '"]', Locator::SELECTOR_XPATH);
-	}
+    public function getAction($text)
+    {
+        return $this->_rootElement->find('//*[@id="form-add-note-order"]/ul/li/a[text()="' . $text . '"]', Locator::SELECTOR_XPATH);
+    }
 
-	public function waitForClosedStatusVisisble()
+    public function waitForClosedStatusVisisble()
     {
         return $this->waitForElementVisible('.status.closed');
     }
 
-	public function waitForProcessingStatusVisisble()
+    public function waitForProcessingStatusVisisble()
     {
         return $this->waitForElementVisible('.status.processing');
     }
@@ -69,5 +69,10 @@ class OrderHistoryOrderViewHeader extends Block
     public function getTakePaymentButton()
     {
         return $this->_rootElement->find('.take-payment');
+    }
+
+    public function titleOrderIdIsVisible()
+    {
+        return $this->_rootElement->find('[class="title-header-page"]')->isVisible();
     }
 }
