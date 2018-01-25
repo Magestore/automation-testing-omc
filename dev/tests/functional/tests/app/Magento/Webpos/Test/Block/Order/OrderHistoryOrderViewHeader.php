@@ -48,6 +48,39 @@ class OrderHistoryOrderViewHeader extends Block
         return $this->waitForElementVisible('.status.closed');
     }
 
+    public function waitForProcessingStatusVisisble()
+    {
+        return $this->waitForElementVisible('.status.processing');
+    }
+
+    public function waitForPendingStatusVisisble()
+    {
+        return $this->waitForElementVisible('.status.pending');
+    }
+
+    public function waitForCompleteStatusVisisble()
+    {
+        return $this->waitForElementVisible('.status.complete');
+    }
+
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getTakePaymentButton()
+    {
+        return $this->_rootElement->find('.take-payment');
+    }
+
+    public function titleOrderIdIsVisible()
+    {
+        return $this->_rootElement->find('[class="title-header-page"]')->isVisible();
+    }
+
+    public function getGrandTotal()
+    {
+        return $this->_rootElement->find('.//span[@class="price"]', Locator::SELECTOR_XPATH)->getText();
+    }
+
     public function getButtonTakePayment()
     {
         return $this->_rootElement->find('.//*[@id="webpos_order_view_container"]/header/div[3]/a', Locator::SELECTOR_XPATH);

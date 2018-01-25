@@ -17,4 +17,9 @@ class Toaster extends Block
 	    $this->waitForElementVisible('.message');
         return $this->_rootElement->find('.message');
     }
+
+    public function isWarningMessage()
+    {
+        return $this->_rootElement->find('.alert alert-warning alert-dismissible')->isVisible();
+    }
 }

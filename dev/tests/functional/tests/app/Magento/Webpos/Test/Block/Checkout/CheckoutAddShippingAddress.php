@@ -90,4 +90,50 @@ class CheckoutAddShippingAddress extends Block
 	{
 		return $this->_rootElement->find('//select[contains(@data-bind, "value: regionIdShipping")]/option[text()="' . $name . '"]', Locator::SELECTOR_XPATH);
 	}
+
+	public function setFieldAddress($data)
+    {
+        foreach ($data as $item => $value){
+            switch ($item)
+            {
+                case 'firstname' :
+                    $this->_rootElement->find('input[name="first-name"]')->setValue($value);
+                    break;
+
+                case 'lastname' :
+                    $this->_rootElement->find('input[name="last-name"]')->setValue($value);
+                    break;
+
+                case 'company' :
+                    $this->_rootElement->find('input[name="company"]')->setValue($value);
+                    break;
+
+                case 'telephone' :
+                    $this->_rootElement->find('input[name="phone"]')->setValue($value);
+                    break;
+
+                case 'street' :
+                    $this->_rootElement->find('input[name="street1"]')->setValue($value);
+                    break;
+
+                case 'city' :
+                    $this->_rootElement->find('input[name="city"]')->setValue($value);
+                    break;
+
+                case 'postcode' :
+                    $this->_rootElement->find('input[name="zipcode"]')->setValue($value);
+                    break;
+
+                case 'country_id' :
+                    $this->_rootElement->find('#add_shipping_country_id', Locator::SELECTOR_CSS, 'select')->setValue($value);
+                    break;
+
+                case 'region' :
+                    $this->_rootElement->find('#add_shipping_region_id', Locator::SELECTOR_CSS, 'select')->setValue($value);
+                    break;
+
+            }
+        }
+
+    }
 }

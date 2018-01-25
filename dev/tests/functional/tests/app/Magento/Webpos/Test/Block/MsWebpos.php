@@ -55,4 +55,19 @@ class MsWebpos extends Block
 		$this->waitForElementVisible('.first-screen');
 		$this->waitForElementNotVisible('.first-screen');
 	}
+
+	public function waitForModalPopup()
+	{
+		$this->waitForElementVisible('.modals-wrapper');
+	}
+
+	public function waitOrdersHistoryVisible()
+    {
+        $this->waitForElementVisible('[id="orders_history_container"]');
+    }
+
+    public function cmenuButtonIsVisible()
+    {
+        return $this->_rootElement->find('#c-button--push-left')->isVisible();
+    }
 }

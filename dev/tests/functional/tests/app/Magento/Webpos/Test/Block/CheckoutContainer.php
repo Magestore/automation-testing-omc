@@ -22,4 +22,24 @@ class CheckoutContainer extends Block
 	{
 		$this->waitForElementVisible('#popup-edit-product');
 	}
+
+	public function waitForProductDetailPopup()
+	{
+		$this->waitForElementVisible('#popup-product-detail');
+	}
+
+	public function waitForCustomSalePopup()
+	{
+		$this->waitForElementVisible('#popup-custom-sale');
+	}
+
+	public function waitForCartDiscountPopup()
+	{
+		$this->waitForElementVisible('#webpos_cart_discountpopup');
+	}
+
+	public function waitForAddMorePaymentModal()
+	{
+		$this->waitForElementVisible('#add-more-payment');
+	}
 }

@@ -42,7 +42,12 @@ class CreateNewProductsStep implements TestStepInterface
 	{
 		// Create products
 		foreach ($this->products as $key => $item) {
-			$this->products[$key]['product'] = $this->fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $item['product']]);
+			if (isset($item['fixtureName'])) {
+				$fixtureName = $item['fixtureName'];
+			} else {
+				$fixtureName = "catalogProductSimple";
+			}
+			$this->products[$key]['product'] = $this->fixtureFactory->createByCode($fixtureName, ['dataset' => $item['product']]);
 			$this->products[$key]['product']->persist();
 		}
 

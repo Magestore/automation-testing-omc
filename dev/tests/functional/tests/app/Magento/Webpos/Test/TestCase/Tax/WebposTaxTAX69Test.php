@@ -168,6 +168,10 @@ class WebposTaxTAX69Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
         $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
         $this->assertTaxAmountOnOrderHistoryInvoiceWithTaxCaculationBaseOnBilling->processAssert($this->webposIndex, $billingTaxRate);
+        // Invoice order successfully
+        $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
+        $this->webposIndex->getModal()->getOkButton()->click();
+        return ['products' => $products];
     }
 
     public function tearDown()

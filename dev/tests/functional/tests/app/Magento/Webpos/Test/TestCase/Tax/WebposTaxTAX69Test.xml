@@ -8,6 +8,7 @@
                     <item name="orderQty" xsi:type="number">1</item>
                 </item>
             </data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoiceSuccess"/>
         </variation>
     </testCase>
 </config>

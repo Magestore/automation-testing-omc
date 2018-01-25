@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder\WebposHoldOrderCP161Test" summary="Hold with new customer" ticketId="WEBPOS-1">
+        <variation name="WebposHoldOrderCP161TestVariation">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                </item>
+                <item name="1" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                </item>
+            </data>
+            <data name="customer/data/firstname" xsi:type="string">John%isolation%</data>
+            <data name="customer/data/lastname" xsi:type="string">Doe%isolation%</data>
+            <data name="customer/data/email" xsi:type="string">JohnDoe%isolation%@example.com</data>
+            <data name="customer/data/group_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">General</item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckoutPage"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckCartSimpleProduct"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckCustomer"/>
+        </variation>
+    </testCase>
+</config>

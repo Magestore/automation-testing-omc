@@ -10,9 +10,9 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 
 class AssertCheckTotalUpdate extends AbstractConstraint
 {
-    public function processAssert($priceShipping, $total, $subtotal)
+    public function processAssert($priceShipping, $total, $subtotal, $tax)
     {
-        $totalActual = floatval($priceShipping) + $subtotal;
+        $totalActual = floatval($priceShipping) + $subtotal + $tax;
         \PHPUnit_Framework_Assert::assertEquals(
             $totalActual,
             $total,

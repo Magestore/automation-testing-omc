@@ -119,4 +119,8 @@ class CheckoutPlaceOrder extends Block
     {
         return $this->_rootElement->find('.invoice-box');
     }
+
+    public function isActivePageCheckout(){
+        return (strpos($this->_rootElement->getAttribute('class'),'active')!== false ? true : false);
+    }
 }

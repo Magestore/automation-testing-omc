@@ -57,22 +57,23 @@ class WebposPageActionMenuFullScreenCP191Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         //Click ... Menu > click Enter/full screen
-        $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
-        sleep(1);
         $minHeightBeforeFull = $this->webposIndex->getBody()->getPageStyleMinHeight();
 
-        $this->webposIndex->getCheckoutFormAddNote()->getFullScreenMode()->click();
-        sleep(1);
+        $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
         $this->webposIndex->getCheckoutFormAddNote()->waitFullScreenMode();
+        $this->webposIndex->getCheckoutFormAddNote()->getFullScreenMode()->click();        sleep(1);
         $minHeightAfterFull = $this->webposIndex->getBody()->getPageStyleMinHeight();
 
         //Click again Enter/full screen
-        $this->webposIndex->getCheckoutFormAddNote()->getFullScreenMode()->click();
-        sleep(1);
-        $minHeightAfterAgain = $this->webposIndex->getBody()->getPageStyleMinHeight();
+//        $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
+//        $this->webposIndex->getCheckoutFormAddNote()->waitFullScreenMode();
+//        $this->webposIndex->getCheckoutFormAddNote()->getFullScreenMode()->click();
+//        sleep(1);
+//        $minHeightAfterAgain = $this->webposIndex->getBody()->getPageStyleMinHeight();
 
         return ['minHeightBeforeFull' => $minHeightBeforeFull,
             'minHeightAfterFull' => $minHeightAfterFull,
-            'minHeightAfterAgain' => $minHeightAfterAgain];
+//            'minHeightAfterAgain' => $minHeightAfterAgain
+            ];
     }
 }

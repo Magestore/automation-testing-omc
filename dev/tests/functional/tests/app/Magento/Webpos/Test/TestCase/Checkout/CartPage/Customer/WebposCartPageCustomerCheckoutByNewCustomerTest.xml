@@ -6,7 +6,7 @@
 			<data name="customer/dataset" xsi:type="string">johndoe_unique</data>
 			<data name="guestAddress/dataset" xsi:type="string">default_webpos_guest_address</data>
 
-			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>
+			<!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>-->
 		</variation>
 
 		<variation name="WebposCartPageCustomerCheckoutByNewCustomerTestVariation2_CP44">
@@ -14,7 +14,7 @@
 			<data name="customer/dataset" xsi:type="string">johndoe_unique</data>
 			<data name="addAddress" xsi:type="boolean">true</data>
 
-			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>
+			<!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>-->
 		</variation>
 	</testCase>
 </config>

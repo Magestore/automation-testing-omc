@@ -79,7 +79,7 @@ class CreateRefundInOrderHistoryStep implements TestStepInterface
 //		// Assert Refund Popup display
 //		$this->assertRefundPopupDisplay->processAssert($this->webposIndex, $products);
 
-		sleep(1);
+		$this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
 
 		foreach ($this->products as $item) {
 			if (isset($item['refundQty'])) {
@@ -126,7 +126,7 @@ class CreateRefundInOrderHistoryStep implements TestStepInterface
 
 			$this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
 
-
+			$this->webposIndex->getMsWebpos()->waitForModalPopup();
 //			// Assert Confirmation Popup
 //			$this->assertRefundConfirmPopupDisplay->processAssert($this->webposIndex);
 

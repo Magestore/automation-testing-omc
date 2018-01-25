@@ -16,7 +16,7 @@ class AssertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling extends Abst
     public function processAssert(WebposIndex $webposIndex, $products, $taxRate)
     {
         $productPrice = $products[0]['product']->getPrice() *(1 + $taxRate / 100);
-        $actualProductPrice = $webposIndex->getOrderHistoryRefund()->getItemPrice($products[0]['product']->getName())->getText();
+        $actualProductPrice = $webposIndex->getOrderHistoryRefund()->getItemPrice($products[0]['product']->getName());
         $actualProductPrice = substr($actualProductPrice, 1);
         \PHPUnit_Framework_Assert::assertEquals(
             $productPrice,

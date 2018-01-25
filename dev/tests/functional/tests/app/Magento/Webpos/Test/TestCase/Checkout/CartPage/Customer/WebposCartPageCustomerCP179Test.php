@@ -53,6 +53,11 @@ class WebposCartPageCustomerCP179Test extends Injectable
             ['products' => $products]
         )->run()[0]['product'];
 
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'have_shipping_method_on_webpos_CP197']
+        )->run();
+
         //Login webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
@@ -99,7 +104,7 @@ class WebposCartPageCustomerCP179Test extends Injectable
 
         $configData = $configData->getData()['section'];
         return [
-            'name' => $customer->getAddress()[0]['firstname'].' '.$customer->getAddress()[0]['lastname'],
+            'name' => $customer->getFirstname().' '.$customer->getLastname(),
             'address' => $configData['webpos/guest_checkout/city']['value'].', '.$configData['webpos/guest_checkout/region_id']['label'].
                 ', '.$configData['webpos/guest_checkout/zip']['value'].', US',
             'phone' =>  $configData['webpos/guest_checkout/telephone']['value'],

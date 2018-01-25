@@ -1243,7 +1243,24 @@
         </dataset>
         <!--End Setting [Include FPT In Subtotal] = Yes and [Enable FPT] = Yes-->
 
-        <!--Setting   [Apply Tax To FPT] = Yes and [Enable FPT] = Yes-->
+        <!--Setting: [Include FPT In Subtotal] = No and [Enable FPT] = Yes-->
+        <dataset name="include_FPT_in_subtotal_no_and_enable_fpt">
+            <field name="tax/weee/include_in_subtotal" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+            <field name="tax/weee/enable" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+        </dataset>
+        <!--End Setting [Include FPT In Subtotal] = Yes and [Enable FPT] = Yes-->
+
+        <!--Setting: [Include FPT In Subtotal] = No and [Enable FPT] = Yes-->
         <dataset name="enable_fpt_and_apply_tax_to_fpt_yes">
             <field name="tax/weee/enable" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -1259,7 +1276,6 @@
             </field>
         </dataset>
         <!--End Setting   [Apply Tax To FPT] = Yes and [Enable FPT] = Yes-->
-
 
         <!--Shipping Config-->
         <dataset name="no_shipping_method_on_webpos_CP193">
@@ -1694,5 +1710,22 @@
                 <item name="value" xsi:type="string">cashforpos</item>
             </field>
         </dataset>
+
+        <!--Setting: Origin shipping California-->
+        <dataset name="origin_shipping_california">
+            <field name="shipping/origin/country_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">United States</item>
+                <item name="value" xsi:type="string">US</item>
+            </field>
+            <field name="shipping/origin/region_id" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">California</item>
+                <item name="value" xsi:type="string">12</item>
+            </field>
+        </dataset>
+        <!--End Setting: Origin shipping California-->
     </repository>
 </config>

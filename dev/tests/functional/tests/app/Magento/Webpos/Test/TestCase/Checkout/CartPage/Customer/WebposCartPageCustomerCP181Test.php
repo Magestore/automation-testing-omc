@@ -32,6 +32,10 @@ class WebposCartPageCustomerCP181Test extends Injectable
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'webpos_default_guest_checkout_rollback']
         )->run();
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'have_shipping_method_on_webpos_CP197']
+        )->run();
     }
 
     public function __inject
@@ -61,6 +65,7 @@ class WebposCartPageCustomerCP181Test extends Injectable
         $this->webposIndex->getCheckoutAddCustomer()->setFieldWithoutShippingAndBilling($customer->getData());
         $this->webposIndex->getCheckoutAddCustomer()->getSaveButton()->click();
         sleep(2);
+
         //Add product to cart
         $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();

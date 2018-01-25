@@ -21,4 +21,42 @@ class OrderHistoryAddOrderNote extends Block
     {
         $this->_rootElement->find('.//a[text()="Refund"]', Locator::SELECTOR_XPATH)->click();
     }
+
+    /**
+     *
+     */
+    public function openShipmentPopup()
+    {
+        $this->_rootElement->find('.//a[text()="Ship"]', Locator::SELECTOR_XPATH)->click();
+    }
+
+    public function getSendMailButton()
+    {
+        return $this->_rootElement->find('a[data-bind^="text: $t(\'Send Email\')"]');
+    }
+
+    public function getShipButton()
+    {
+        return $this->_rootElement->find('a[data-bind^="text: $t(\'Ship\')"]');
+    }
+
+    public function getCancelButton()
+    {
+        return $this->_rootElement->find('a[data-bind^="text: $t(\'Cancel\')"]');
+    }
+
+    public function getAddCommentButton()
+    {
+        return $this->_rootElement->find('a[data-bind^="text: $t(\'Add Comment\')"]');
+    }
+
+    public function getReOrderButton()
+    {
+        return $this->_rootElement->find('a[data-bind^="text: $t(\'Re-order\')"]');
+    }
+
+    public function getRefundButton()
+    {
+        return $this->_rootElement->find('a[data-bind^="text: $t(\'Refund\')"]');
+    }
 }
