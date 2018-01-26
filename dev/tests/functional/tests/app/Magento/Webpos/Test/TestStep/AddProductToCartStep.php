@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\TestStep;
 
-
 use Magento\Mtf\TestStep\TestStepInterface;
 use Magento\Webpos\Test\Page\WebposIndex;
 
