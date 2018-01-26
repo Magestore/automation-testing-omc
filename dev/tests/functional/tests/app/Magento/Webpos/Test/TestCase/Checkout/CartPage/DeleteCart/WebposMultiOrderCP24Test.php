@@ -41,7 +41,14 @@ class WebposMultiOrderCP24Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-
-        $this->webposIndex->getCheckoutWebposCart()->getIconRemoveMultiOrder($number)->click();
+//        $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem(2)->click();
+//        $this->webposIndex->getMsWebpos()->waitCartLoader();
+//        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        \Zend_Debug::dump($this->webposIndex->getCheckoutCartHeader()->getItemRemoveIcon(2)->getText());
+        sleep(2);
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        sleep(2);
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getCheckoutCartHeader()->getItemRemoveIcon(2)->click();
     }
 }

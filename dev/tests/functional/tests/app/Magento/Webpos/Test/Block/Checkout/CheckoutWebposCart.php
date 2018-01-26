@@ -72,6 +72,6 @@ class CheckoutWebposCart extends Block
 
     public function getIconRemoveMultiOrder($number)
     {
-        return $this->_rootElement->find('//*[@id="webpos_cart"]/header/div[1]/span['.$number.']/span[2]', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('.//header/div[1]/span[2]/span[2]', Locator::SELECTOR_XPATH);
     }
 }
