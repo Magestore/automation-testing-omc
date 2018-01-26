@@ -82,6 +82,11 @@ class WebposNonstopTest extends Injectable
 			['configData' => 'default_tax_configuration_use_system_value']
 		)->run();
 
+		$this->objectManager->getInstance()->create(
+			'Magento\Config\Test\TestStep\SetupConfigurationStep',
+			['configData' => 'default_payment_method_all_payment']
+		)->run();
+
 		return [
 			'customer' => $customer,
 			'taxRate' => $taxRate->getRate()
@@ -153,7 +158,7 @@ class WebposNonstopTest extends Injectable
 				$this->webposIndex->getMsWebpos()->waitCartLoader();
 				$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-				$this->webposIndex->getCheckoutPaymentMethod()->getCashOnDeliveryMethod()->click();
+				$this->webposIndex->getCheckoutPaymentMethod()->getPaymentMethodByLabel('Web POS - Cash On Delivery')->click();
 				$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
 				$this->objectManager->getInstance()->create(
