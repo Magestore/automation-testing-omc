@@ -8,8 +8,8 @@
                 </item>
             </data>
             <data xsi:type="string" name="coupon">1532</data>
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckoutPage"/>-->
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckCartCustomPrice"/>-->
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckoutPage"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckDiscountDefault"/>
         </variation>
     </testCase>
 </config>
