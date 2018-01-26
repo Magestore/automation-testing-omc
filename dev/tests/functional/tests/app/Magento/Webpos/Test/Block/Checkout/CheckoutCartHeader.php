@@ -66,6 +66,6 @@ class CheckoutCartHeader extends Block
 
     public function getItemRemoveIcon($number)
     {
-        return $this->getMultiOrderItem($number)->find('//span[text()="x"]', Locator::SELECTOR_XPATH);
+        return $this->getMultiOrderItem($number)->find('//span[2]', Locator::SELECTOR_XPATH);
     }
 }

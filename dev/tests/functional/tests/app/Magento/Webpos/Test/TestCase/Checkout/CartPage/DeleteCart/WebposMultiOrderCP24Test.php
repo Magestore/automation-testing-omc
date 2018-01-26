@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\DeleteCart;
 
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
@@ -26,9 +25,7 @@ class WebposMultiOrderCP24Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test(
-        CatalogProductSimple $product, $number
-    )
+    public function test($number)
     {
         // Login webpos
         $staff = $this->objectManager->getInstance()->create(
@@ -41,14 +38,7 @@ class WebposMultiOrderCP24Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-//        $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem(2)->click();
-//        $this->webposIndex->getMsWebpos()->waitCartLoader();
-//        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        \Zend_Debug::dump($this->webposIndex->getCheckoutCartHeader()->getItemRemoveIcon(2)->getText());
         sleep(2);
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(2);
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getCheckoutCartHeader()->getItemRemoveIcon(2)->click();
+        $this->webposIndex->getCheckoutCartHeader()->getItemRemoveIcon($number)->click();
     }
 }
