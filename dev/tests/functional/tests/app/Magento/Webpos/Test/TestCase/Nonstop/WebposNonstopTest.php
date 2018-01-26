@@ -82,6 +82,11 @@ class WebposNonstopTest extends Injectable
 			['configData' => 'default_tax_configuration_use_system_value']
 		)->run();
 
+		$this->objectManager->getInstance()->create(
+			'Magento\Config\Test\TestStep\SetupConfigurationStep',
+			['configData' => 'default_payment_method_all_payment']
+		)->run();
+
 		return [
 			'customer' => $customer,
 			'taxRate' => $taxRate->getRate()

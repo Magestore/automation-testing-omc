@@ -9,25 +9,34 @@
 namespace Magento\Webpos\Test\Constraint\OrderHistory\ItemTable;
 
 
+use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class AssertItemTableIsCorrectTaxAfterDiscount extends AbstractConstraint
+class AssertItemTableIsCorrect extends AbstractConstraint
 {
-	public function processAssert(WebposIndex $webposIndex, $products, $taxRate, $discountAmount)
+	public function processAssert(WebposIndex $webposIndex, $products, $discountAmount, CatalogProductSimple $catalogProductSimple)
 	{
-		$taxRate = (float) $taxRate/100;
 		foreach ($products as $item) {
 			$productName = $item['product']->getName();
 			\PHPUnit_Framework_Assert::assertTrue(
 				$webposIndex->getOrderHistoryOrderViewContent()->getProductRow($productName)->isVisible(),
-				'Item tablet - Tax after discount - Product "'.$productName.'" is not shown'
+				'Item table - Product "'.$productName.'" is not shown'
 			);
 
 			\PHPUnit_Framework_Assert::assertEquals(
 				$item['product']->getSku(),
 				$webposIndex->getOrderHistoryOrderViewContent()->getProductSKU($productName)->getText(),
-				'Item table - Tax after discount - SKU of Product "'.$productName.'" is not wrong'
+				'Item table - SKU of Product "'.$productName.'" is wrong'
+			);
+
+			$originalPrice = (float) $item['product']->getPrice();
+			$originalPriceOnPage = $webposIndex->getOrderHistoryOrderViewContent()->getOriginalPriceOfProduct($productName)->getText();
+			$originalPriceOnPage = (float)substr($originalPriceOnPage, 1);
+			\PHPUnit_Framework_Assert::assertEquals(
+				$originalPrice,
+				$originalPriceOnPage,
+				'Item table - Product "'.$productName.'" - Original Price is wrong'
 			);
 
 			if (isset($item['customPrice'])) {
@@ -41,14 +50,14 @@ class AssertItemTableIsCorrectTaxAfterDiscount extends AbstractConstraint
 			\PHPUnit_Framework_Assert::assertEquals(
 				$price,
 				$priceOnPage,
-				'Item table - Tax after discount - Product "'.$productName.'" - Price is wrong'
+				'Item table - Product "'.$productName.'" - Price is wrong'
 			);
 
 			if (isset($item['qtyText'])) {
 				\PHPUnit_Framework_Assert::assertEquals(
 					$item['qtyText'],
 					$webposIndex->getOrderHistoryOrderViewContent()->getQtyOfProduct($productName)->getText(),
-					'Item table - Tax after discount - Product "'.$productName.'" - Qty is wrong'
+					'Item table - Product "'.$productName.'" - Qty is wrong'
 				);
 			}
 
@@ -58,33 +67,35 @@ class AssertItemTableIsCorrectTaxAfterDiscount extends AbstractConstraint
 			\PHPUnit_Framework_Assert::assertEquals(
 				$subTotal,
 				$subTotalOnPage,
-				'Item table - Tax after discount - Product "'.$productName.'" - SubTotal is wrong'
+				'Item table - Product "'.$productName.'" - SubTotal is wrong'
 			);
 
-			$tax = (float) (($subTotal - (float)$discountAmount) * $taxRate);
-			$tax = round($tax, 2);
 			$taxOnPage = $webposIndex->getOrderHistoryOrderViewContent()->getTaxAmountOfProduct($productName);
 			$taxOnPage = (float)substr($taxOnPage, 1);
-			\PHPUnit_Framework_Assert::assertEquals(
-				$tax,
+			\PHPUnit_Framework_Assert::assertNotEmpty(
 				$taxOnPage,
-				'Item table - Tax after discount - Product "'.$productName.'" - Tax is wrong'
+				'Item table - Product "'.$productName.'" - Tax is not shown'
 			);
 
+			$subTotalWholeCart = $webposIndex->getOrderHistoryOrderViewFooter()->getSubtotal();
+			$subTotalWholeCart = (float)substr($subTotalWholeCart, 1);
+
+			$discountOfProduct = (float) (($subTotal / $subTotalWholeCart) * (float)$discountAmount);
+			$discountOfProduct = round($discountOfProduct, 2);
 			$discountOnPage = $webposIndex->getOrderHistoryOrderViewContent()->getDiscountAmountOfProduct($productName);
 			$discountOnPage = (float)substr($discountOnPage, 1);
 			\PHPUnit_Framework_Assert::assertEquals(
-				(float)$discountAmount,
+				$discountOfProduct,
 				$discountOnPage,
-				'Item table - Tax after discount - Product "'.$productName.'" - Discount amount is wrong'
+				'Item table - Product "'.$productName.'" - Discount amount is wrong'
 			);
-			$rowTotal = (float)($subTotal + $tax - (float)$discountAmount);
+			$rowTotal = (float)($subTotal + $taxOnPage - (float)$discountAmount);
 			$rowTotalOnPage = $webposIndex->getOrderHistoryOrderViewContent()->getRowTotalOfProduct($productName);
 			$rowTotalOnPage = (float)substr($rowTotalOnPage, 1);
 			\PHPUnit_Framework_Assert::assertEquals(
 				$rowTotal,
 				$rowTotalOnPage,
-				'Item table - Tax after discount - Product "'.$productName.'" - Row Total is wrong'
+				'Item table - Product "'.$productName.'" - Row Total is wrong'
 			);
 		}
 	}
@@ -96,6 +107,6 @@ class AssertItemTableIsCorrectTaxAfterDiscount extends AbstractConstraint
 	 */
 	public function toString()
 	{
-		return "Orders History - Tax after discount - Item Table is displayed correctly";
+		return "Orders History - Item Table is displayed correctly";
 	}
 }
