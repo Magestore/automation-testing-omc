@@ -24,7 +24,6 @@ class WebposHoldOrderCP159Test extends Injectable
     {
         $this->webposIndex = $webposIndex;
     }
-
     public function test($products)
     {
         //Create product

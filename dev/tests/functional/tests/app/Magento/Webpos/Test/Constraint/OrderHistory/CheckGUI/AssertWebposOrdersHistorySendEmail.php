@@ -13,9 +13,18 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 
+/**
+ * Class AssertWebposOrdersHistorySendEmail
+ * @package Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI
+ */
 class AssertWebposOrdersHistorySendEmail extends AbstractConstraint
 {
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param null $action
+     * @param null $customerEmail
+     */
     public function processAssert(WebposIndex $webposIndex, $action = null, $customerEmail = null)
     {
         if ($action === 'CheckGUI'){

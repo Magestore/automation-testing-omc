@@ -56,4 +56,18 @@ class CheckoutCartFooter extends Block
 	{
 		$this->waitForElementVisible('.hold');
 	}
+
+    public function isAddDiscountVisible()
+    {
+        return $this->_rootElement->find('//div/ul/li[3]', Locator::SELECTOR_XPATH)->isVisible();
+    }
+    public function isDiscountVisible()
+    {
+        return $this->_rootElement->find('//div/ul/li[4]', Locator::SELECTOR_XPATH)->isVisible();
+    }
+    public function getTaxWithCheckout()
+    {
+        $value = $this->_rootElement->find('//div/ul/li/div[1]/label[text()="Tax"]/../../div[2]/span', Locator::SELECTOR_XPATH)->getText();
+        return floatval(str_replace('$', '',$value));
+    }
 }

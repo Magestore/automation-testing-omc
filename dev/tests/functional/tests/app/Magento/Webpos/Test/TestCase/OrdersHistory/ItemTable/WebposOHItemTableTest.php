@@ -3,18 +3,19 @@
  * Created by PhpStorm.
  * User: vinh
  * Date: 25/01/2018
- * Time: 09:36
+ * Time: 10:59
  */
 
-namespace Magento\Webpos\Test\TestCase\OrdersHistory\PaymentShippingMethod;
+namespace Magento\Webpos\Test\TestCase\OrdersHistory\ItemTable;
 
 
+use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposOHCheckoutWithMultiPaymentMethodTest extends Injectable
+class WebposOHItemTableTest extends Injectable
 {
 	/**
 	 * @var WebposIndex
@@ -31,17 +32,31 @@ class WebposOHCheckoutWithMultiPaymentMethodTest extends Injectable
 	 */
 	protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
+
+	/**
+	 * Prepare data.
+	 *
+	 * @param FixtureFactory $fixtureFactory
+	 * @return array
+	 */
 	public function __prepare(FixtureFactory $fixtureFactory)
 	{
+		$customer = $fixtureFactory->createByCode('customer', ['dataset' => 'johndoe_MI_unique_first_name']);
+		$customer->persist();
+
+		$taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
+		$this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
+
 		// Config: use system value for all field in Tax Config
 		$this->objectManager->getInstance()->create(
 			'Magento\Config\Test\TestStep\SetupConfigurationStep',
 			['configData' => 'default_tax_configuration_use_system_value']
 		)->run();
-		$this->objectManager->getInstance()->create(
-			'Magento\Config\Test\TestStep\SetupConfigurationStep',
-			['configData' => 'default_payment_method_all_payment']
-		)->run();
+
+		return [
+			'customer' => $customer,
+			'taxRate' => $taxRate->getRate()
+		];
 	}
 
 	public function __inject(
@@ -56,20 +71,30 @@ class WebposOHCheckoutWithMultiPaymentMethodTest extends Injectable
 	}
 
 	public function test(
-		$products = null,
-		$paymentMethods
+		Customer $customer,
+		$taxRate,
+		$products,
+		$configData,
+		$discountAmount,
+		$createInvoice = true,
+		$shipped = false
 	)
 	{
-
-		// Login webpos
-		$staff = $this->objectManager->getInstance()->create(
-			'Magento\Webpos\Test\TestStep\LoginWebposStep'
-		)->run();
-
 		// Create products
 		$products = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
 			['products' => $products]
+		)->run();
+
+		// Config
+		$this->objectManager->getInstance()->create(
+			'Magento\Config\Test\TestStep\SetupConfigurationStep',
+			['configData' => $configData]
+		)->run();
+
+		// Login webpos
+		$staff = $this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();
 
 		// Add product to cart
@@ -78,21 +103,41 @@ class WebposOHCheckoutWithMultiPaymentMethodTest extends Injectable
 			['products' => $products]
 		)->run();
 
+		// change customer
+		$this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
+			['customer' => $customer]
+		)->run();
+
+		// Custom Price
+		$this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\EditCustomPriceOfProductOnCartStep',
+			['products' => $products]
+		)->run();
+
+		// Add Discount
+		$this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\AddDiscountWholeCartStep',
+			[
+				'percent' => $discountAmount,
+				'type' => '$'
+			]
+		)->run();
+
 		// Place Order
 		$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-		if (!$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->isVisible()) {
-			$this->webposIndex->getCheckoutShippingMethod()->clickShipPanel();
-		}
-		$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
+		$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-		// Add Payment
-		$paymentMethods = $this->objectManager->getInstance()->create(
-			'Magento\Webpos\Test\TestStep\AddPaymentOnCheckoutPageStep',
-			['paymentMethods' => $paymentMethods]
+		$this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
+			[
+				'createInvoice' => $createInvoice,
+				'shipped' => $shipped
+			]
 		)->run();
 
 		$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
@@ -123,8 +168,16 @@ class WebposOHCheckoutWithMultiPaymentMethodTest extends Injectable
 		);
 
 		return [
-			'products' => $products,
-			'paymentMethods' => $paymentMethods
+			'products' => $products
 		];
+
+	}
+
+	public function tearDown()
+	{
+		$this->objectManager->getInstance()->create(
+			'Magento\Config\Test\TestStep\SetupConfigurationStep',
+			['configData' => 'default_tax_configuration_use_system_value']
+		)->run();
 	}
 }

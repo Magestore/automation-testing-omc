@@ -7,25 +7,25 @@
             <data name="action" xsi:type="string">CheckGUI</data>
             <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistorySendEmail"/>
         </variation>
-        <variation name="WebposOrdersHistoryMassActionSendMail_CheckCancel_OH19">
+        <variation name="WebposOrdersHistoryMassActionSendMail_CheckCancel_OH20">
             <data name="order/dataset" xsi:type="string">default</data>
             <data name="action" xsi:type="string">Cancel</data>
             <data name="order/data/entity_id/products" xsi:type="string">catalogProductSimple::default</data>
             <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistorySendEmail"/>
         </variation>
-        <variation name="WebposOrdersHistoryMassActionSendMail_CheckSend_OH19">
+        <variation name="WebposOrdersHistoryMassActionSendMail_CheckSend_OH21">
             <data name="order/dataset" xsi:type="string">default</data>
             <data name="action" xsi:type="string">Send</data>
             <data name="order/data/entity_id/products" xsi:type="string">catalogProductSimple::default</data>
             <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistorySendEmail"/>
         </variation>
-        <variation name="WebposOrdersHistoryMassActionSendMail_CheckDifferentInput_OH19">
+        <variation name="WebposOrdersHistoryMassActionSendMail_CheckDifferentInput_OH22">
             <data name="order/dataset" xsi:type="string">default</data>
             <data name="action" xsi:type="string">DifferentInput</data>
             <data name="order/data/entity_id/products" xsi:type="string">catalogProductSimple::default</data>
             <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistorySendEmail"/>
         </variation>
-        <variation name="WebposOrdersHistoryMassActionSendMail_CheckInvalidInput_OH19">
+        <variation name="WebposOrdersHistoryMassActionSendMail_CheckInvalidInput_OH23">
             <data name="order/dataset" xsi:type="string">default</data>
             <data name="action" xsi:type="string">InvalidInput</data>
             <data name="order/data/entity_id/products" xsi:type="string">catalogProductSimple::default</data>
