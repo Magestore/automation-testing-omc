@@ -89,7 +89,7 @@ class AssertItemTableIsCorrect extends AbstractConstraint
 				$discountOnPage,
 				'Item table - Product "'.$productName.'" - Discount amount is wrong'
 			);
-			$rowTotal = (float)($subTotal + $taxOnPage - (float)$discountAmount);
+			$rowTotal = (float)($subTotal + $taxOnPage - $discountOfProduct);
 			$rowTotalOnPage = $webposIndex->getOrderHistoryOrderViewContent()->getRowTotalOfProduct($productName);
 			$rowTotalOnPage = (float)substr($rowTotalOnPage, 1);
 			\PHPUnit_Framework_Assert::assertEquals(
