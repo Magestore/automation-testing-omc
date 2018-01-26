@@ -42,6 +42,28 @@ class CheckoutDiscount extends Block
         return $this->_rootElement->isVisible();
     }
 
+	public function getDollarButton()
+	{
+		return $this->_rootElement->find('#btn-dollor3');
+	}
+
+	public function getDiscountButton()
+	{
+		return $this->_rootElement->find('#btn-percent3');
+	}
+
+	/**
+	 * @param $amount
+	 * Ex: 80.00 , 100.00, 90.50 ...
+	 */
+	public function setDiscountAmount($amount)
+	{
+		$amount = str_replace('.', '', $amount);
+		for ($i = 0; $i < strlen($amount); $i++) {
+			$this->clickNumberButton($amount[$i]);
+		}
+	}
+
     public function setNumberDiscount($number)
     {
         $numbers = explode('.',$number);
@@ -71,12 +93,14 @@ class CheckoutDiscount extends Block
 
     public function clickDiscountButton()
     {
-        $this->_rootElement->find('button[class="custom-price"]')->click();
+        if($this->_rootElement->find('button[class="custom-price"]')->isPresent())
+            $this->_rootElement->find('button[class="custom-price"]')->click();
     }
 
     public function clickPromotionButton()
     {
-        $this->_rootElement->find('button[class="discount"]')->click();
+        if($this->_rootElement->find('button[class="discount"]')->isPresent())
+            $this->_rootElement->find('button[class="discount"]')->click();
     }
 
     public function setCouponCode($number)

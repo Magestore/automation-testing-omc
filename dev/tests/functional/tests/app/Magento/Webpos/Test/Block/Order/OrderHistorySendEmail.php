@@ -48,5 +48,4 @@ class OrderHistorySendEmail extends Block
     {
         return $this->_rootElement->find('#send-email-order .required-email');
     }
-
 }

@@ -1,24 +1,23 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 1/24/2018
- * Time: 1:54 PM
+ * Date: 1/25/2018
+ * Time: 8:20 AM
  */
 
-namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionSendMail;
+namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionAddComment;
 
 use Magento\Sales\Test\Fixture\OrderInjectable;
-use Magento\Customer\Test\Fixture\Customer;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\TestCase\Injectable;
 
+
 /**
- * Class WebposOrdersHistoryMassActionSendMailTest
+ * Class WebposOrdersHistoryMassActionAddCommentTest
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionSendMail
  */
-class WebposOrdersHistoryMassActionSendMailTest extends Injectable
+class WebposOrdersHistoryMassActionAddCommentTest extends Injectable
 {
     /**
      * @var WebposIndex
@@ -26,34 +25,28 @@ class WebposOrdersHistoryMassActionSendMailTest extends Injectable
     protected $webposIndex;
 
     /**
-     * @var Customer
-     */
-    protected $customer;
-
-    /**
      * @param WebposIndex $webposIndex
-     * @param Customer $customer
      */
-    public function __inject(WebposIndex $webposIndex, Customer $customer)
+    public function __inject(WebposIndex $webposIndex)
     {
         $this->webposIndex = $webposIndex;
-        $this->customer = $customer;
     }
+
 
     /**
      * @param OrderInjectable $order
      * @param null $action
+     * @param null $comment
      * @return array
      */
     public function test(
         OrderInjectable $order,
-        $action = null
+        $action = null,
+        $comment = null
     )
     {
         // Preconditions
         $order->persist();
-        $this->customer = $order->getData('customer_id');
-        $customerEmail = $this->customer->getEmail();
 
         // Login webpos
         $staff = $this->objectManager->getInstance()->create(
@@ -68,17 +61,20 @@ class WebposOrdersHistoryMassActionSendMailTest extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 
         $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
-        $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Send Email')->click();
+        $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Add Comment')->click();
 
-        if ($action === 'DifferentInput'){
-            $customerEmail = 'magestore123@example.com';
-        }elseif ($action === 'InvalidInput'){
-            $customerEmail = 'magestore';
+        if ($action === 'Save') {
+            $this->webposIndex->getOrderHistoryAddComment()->getInputComment()->setValue($comment);
+            $this->webposIndex->getOrderHistoryAddComment()->getSaveButton()->click();
+            sleep(1);
+        }elseif ($action === 'Cancel') {
+            $this->webposIndex->getOrderHistoryAddComment()->getCancelButton()->click();
+            sleep(1);
         }
 
         return [
             'action' => $action,
-            'customerEmail' => $customerEmail
+            'comment' => $comment
         ];
     }
 }

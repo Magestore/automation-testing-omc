@@ -15,5 +15,27 @@ use Magento\Mtf\Block\Block;
  */
 class OrderHistoryAddComment extends Block
 {
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getCancelButton()
+    {
+        return $this->_rootElement->find('#add-comment-order > div > div > form > div > button.close');
+    }
 
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getSaveButton()
+    {
+        return $this->_rootElement->find('#add-comment-order > div > div > form > div > button.btn-save.link-cl-cfg');
+    }
+
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getInputComment()
+    {
+        return $this->_rootElement->find('#input-add-comment-order');
+    }
 }
