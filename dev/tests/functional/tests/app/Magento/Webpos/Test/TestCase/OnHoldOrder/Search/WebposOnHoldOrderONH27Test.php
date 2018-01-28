@@ -1,22 +1,26 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: gvt
- * Date: 18/01/2018
- * Time: 16:00
+ * User: bang
+ * Date: 26/01/2018
+ * Time: 13:26
  */
-namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
+namespace Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckOnHoldOrderEmpty;use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Customer\Test\Fixture\Customer;
 
-class WebposHoldOrderCP160Test extends Injectable
+class WebposOnHoldOrderONH27Test extends Injectable
 {
     /**
      * @var WebposIndex
      */
     protected $webposIndex;
+    /**
+     * @var AssertCheckOnHoldOrderEmpty
+     */
+    protected $assertCheckEmpty;
 
     public function __prepare(FixtureFactory $fixtureFactory)
     {
@@ -33,10 +37,12 @@ class WebposHoldOrderCP160Test extends Injectable
 
     public function __inject
     (
-        WebposIndex $webposIndex
+        WebposIndex $webposIndex,
+        AssertCheckOnHoldOrderEmpty $assertCheckEmpty
     )
     {
         $this->webposIndex = $webposIndex;
+        $this->assertCheckEmpty = $assertCheckEmpty;
     }
 
     public function test(Customer $customer, $products)
@@ -47,53 +53,44 @@ class WebposHoldOrderCP160Test extends Injectable
             ['products' => $products]
         )->run();
         $product1 = $products[0]['product'];
-        $product2 = $products[1]['product'];
 
         //Login webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
-        //Add an exist customer
+        //Create a on-hold-order
+            //Add an exist customer
         $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
         $this->webposIndex->getCheckoutChangeCustomer()->search($customer->getFirstname());
         sleep(1);
         $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
         sleep(1);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-
-        //Add products to cart
+            //Add a product to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getCheckoutProductList()->getFirstProduct()->click();
         sleep(1);
-        $this->webposIndex->getCheckoutProductList()->search($product2->getName());
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(1);
-
-        //Hold
+            //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
-        //Checkout in On-Hold
+        //Go to on-hold order page
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->onHoldOrders();
         sleep(1);
-        $this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder()->click();
-        $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+
+        //Enter incorrect customer name/order id into box search
+        $this->webposIndex->getOnHoldOrderOrderList()->getSearchOrderInput()->setValue($customer->getFirstname().' '.$customer->getLastname());
         sleep(1);
 
-        $dataProduct1 = $product1->getData();
-        $dataProduct1['qty'] = 2;
-        $dataProduct2 = $product2->getData();
-        $dataProduct2['qty'] = 1;
-        return ['cartProducts' => [$dataProduct1, $dataProduct2]];
+        //Enter or click on Search icon
+        $this->webposIndex->getOnHoldOrderOrderList()->getIconSearch()->click();
+        $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
+        sleep(1);
 
     }
 }

@@ -1,28 +1,34 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: gvt
- * Date: 18/01/2018
- * Time: 15:37
+ * User: bang
+ * Date: 26/01/2018
+ * Time: 13:26
  */
-namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
+namespace Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckOnHoldOrderEmpty;
 
-class WebposHoldOrderCP158Test extends Injectable
+class WebposOnHoldOrderONH25Test extends Injectable
 {
     /**
      * @var WebposIndex
      */
     protected $webposIndex;
+    /**
+     * @var AssertCheckOnHoldOrderEmpty
+     */
+    protected $assertCheckEmpty;
 
     public function __inject
     (
-        WebposIndex $webposIndex
+        WebposIndex $webposIndex,
+        AssertCheckOnHoldOrderEmpty $assertCheckEmpty
     )
     {
         $this->webposIndex = $webposIndex;
+        $this->assertCheckEmpty = $assertCheckEmpty;
     }
 
     public function test($products)
@@ -33,28 +39,29 @@ class WebposHoldOrderCP158Test extends Injectable
             ['products' => $products]
         )->run();
         $product1 = $products[0]['product'];
-        $product2 = $products[1]['product'];
 
         //Login webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
-        //Add products to cart
+        //Create a on-hold-order
+            //Add a product to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
-        $this->webposIndex->getCheckoutProductList()->search($product2->getName());
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(1);
-
-        //Hold
+            //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
+
+        //Create multiorder
+        $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem('1')->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
 
         //Checkout in On-Hold
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
@@ -65,12 +72,6 @@ class WebposHoldOrderCP158Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
-
-        $dataProduct1 = $product1->getData();
-        $dataProduct1['qty'] = 1;
-        $dataProduct2 = $product2->getData();
-        $dataProduct2['qty'] = 1;
-        return ['cartProducts' => [$dataProduct1, $dataProduct2]];
 
     }
 }
