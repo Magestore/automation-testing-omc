@@ -38,7 +38,7 @@ class AssertCancelOrderSuccess extends AbstractConstraint
 		);
 
 		$expectStatus = 'Cancelled';
-		sleep(3);
+		$webposIndex->getOrderHistoryOrderViewFooter()->waitForInvoiceButtonNotVisible();
 		\PHPUnit_Framework_Assert::assertEquals(
 			$expectStatus,
 			$webposIndex->getOrderHistoryOrderViewHeader()->getStatus(),

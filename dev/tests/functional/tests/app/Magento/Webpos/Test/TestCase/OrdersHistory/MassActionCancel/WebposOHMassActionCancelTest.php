@@ -47,7 +47,7 @@ class WebposOHMassActionCancelTest extends Injectable
 		$this->webposIndex = $webposIndex;
 		$this->fixtureFactory = $fixtureFactory;
 		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-		$assertShipmentSuccess = $assertShipmentSuccess;
+		$this->assertShipmentSuccess = $assertShipmentSuccess;
 	}
 
 	public function test(
