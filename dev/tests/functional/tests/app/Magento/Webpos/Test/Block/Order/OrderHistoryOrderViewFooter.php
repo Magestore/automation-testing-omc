@@ -119,4 +119,9 @@ class OrderHistoryOrderViewFooter extends Block
 		return $this->_rootElement->find('//*[@id="webpos_order_view_container"]/footer/div[1]/table/tbody/tr/td[text()="'.$label.'"]/../td[2]', Locator::SELECTOR_XPATH);
 	}
 
+	public function waitForInvoiceButtonNotVisible()
+	{
+		$this->waitForElementNotVisible('button.invoice');
+	}
+
 }

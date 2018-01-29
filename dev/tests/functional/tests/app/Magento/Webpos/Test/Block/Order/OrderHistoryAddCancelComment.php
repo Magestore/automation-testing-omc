@@ -15,5 +15,18 @@ use Magento\Mtf\Block\Block;
  */
 class OrderHistoryAddCancelComment extends Block
 {
+	public function getCancelButton()
+	{
+		return $this->_rootElement->find('.close');
+	}
 
+	public function getSaveButton()
+	{
+		return $this->_rootElement->find('.btn-save');
+	}
+
+	public function getCommentInput()
+	{
+		return $this->_rootElement->find('#input-add-cancel-comment-order');
+	}
 }

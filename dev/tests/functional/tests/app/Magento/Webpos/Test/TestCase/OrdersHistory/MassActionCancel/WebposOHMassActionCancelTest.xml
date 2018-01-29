@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionCancel\WebposOHMassActionCancelTest" summary="Orders History - Mass Action - Cancel test" ticketId="WEBPOS-1">
+		<variation name="WebposOHMassActionCancelTestVariation_OH45_OH46">
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="product" xsi:type="string">product_100_dollar_taxable</item>
+					<item name="orderQty" xsi:type="number">1</item>
+				</item>
+			</data>
+			<data name="createInvoice" xsi:type="boolean">false</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="action" xsi:type="string">cancel</data>
+			<data name="status" xsi:type="string">Pending</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Cancel\AssertCancelOrderPopupClosed"/>
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\OrderStatus\AssertOrderStatus"/>
+		</variation>
+
+		<variation name="WebposOHMassActionCancelTestVariation_OH47_OH48">
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="product" xsi:type="string">product_100_dollar_taxable</item>
+					<item name="orderQty" xsi:type="number">1</item>
+				</item>
+			</data>
+			<data name="createInvoice" xsi:type="boolean">false</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="action" xsi:type="string">save</data>
+			<data name="confirmAction" xsi:type="string">close</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\ConfirmPopup\AssertConfirmPopupClosed"/>
+		</variation>
+
+		<variation name="WebposOHMassActionCancelTestVariation_OH49">
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="product" xsi:type="string">product_100_dollar_taxable</item>
+					<item name="orderQty" xsi:type="number">1</item>
+				</item>
+			</data>
+			<data name="createInvoice" xsi:type="boolean">false</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="action" xsi:type="string">save</data>
+			<data name="confirmAction" xsi:type="string">cancel</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\ConfirmPopup\AssertConfirmPopupClosed"/>
+		</variation>
+
+		<variation name="WebposOHMassActionCancelTestVariation_OH50">
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="product" xsi:type="string">product_100_dollar_taxable</item>
+					<item name="orderQty" xsi:type="number">1</item>
+				</item>
+			</data>
+			<data name="createInvoice" xsi:type="boolean">false</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="comment" xsi:type="string">Cancel Order Reason %isolation%</data>
+			<data name="action" xsi:type="string">save</data>
+			<data name="confirmAction" xsi:type="string">ok</data>
+			<data name="expectStatus" xsi:type="string">Canceled</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Cancel\AssertCancelOrderSuccess"/>
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatusInBackend"/>
+
+		</variation>
+
+		<variation name="WebposOHMassActionCancelTestVariation_OH51">
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="product" xsi:type="string">product_100_dollar_taxable</item>
+					<item name="orderQty" xsi:type="number">1</item>
+				</item>
+			</data>
+			<data name="createInvoice" xsi:type="boolean">false</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="createShipment" xsi:type="boolean">true</data>
+			<data name="comment" xsi:type="string">Cancel Order Reason %isolation%</data>
+			<data name="action" xsi:type="string">save</data>
+			<data name="confirmAction" xsi:type="string">ok</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Cancel\AssertCancelOrderSuccess"/>
+
+		</variation>
+	</testCase>
+</config>
