@@ -66,4 +66,9 @@ class OrderHistoryContainer extends Block
     {
         return $this->_rootElement->find('[id="webpos_order_view_container"]');
     }
+
+	public function waitForCancelPopupIsVisible()
+	{
+		$this->waitForElementVisible('#add-cancel-comment-order');
+	}
 }

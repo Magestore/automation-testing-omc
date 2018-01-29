@@ -59,4 +59,9 @@ class OrderHistoryShipment extends Block
     {
         return $this->_rootElement->find('[id="send_email_ship_popup"]');
     }
+
+	public function getTrackNumber()
+	{
+		return $this->_rootElement->find('input[name="tracking[1][number]"]');
+	}
 }
