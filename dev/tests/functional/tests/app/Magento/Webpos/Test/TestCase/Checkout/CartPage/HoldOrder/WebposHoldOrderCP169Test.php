@@ -69,8 +69,7 @@ class WebposHoldOrderCP169Test extends Injectable
 
         $dataProduct = $product->getData();
         $dataProduct['qty'] = 1;
-        return ['cartProducts' => [$dataProduct],
-            'type' => '$'];
+        return ['cartProducts' => [$dataProduct]];
 
     }
 }

@@ -29,14 +29,12 @@ class WebposHoldOrderCP170Test extends Injectable
     public function test($products)
     {
         //Create product
-        $product1 = $this->objectManager->getInstance()->create(
+        $products = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
-        )->run()[0]['product'];
-        $product2 = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
-            ['products' => $products]
-        )->run()[1]['product'];
+        )->run();
+        $product1 = $products[0]['product'];
+        $product2 = $products[1]['product'];
 
         //Login webpos
         $staff = $this->objectManager->getInstance()->create(
@@ -70,6 +68,15 @@ class WebposHoldOrderCP170Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
+        //Checkout in On-Hold
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getCMenu()->onHoldOrders();
+        sleep(1);
+        $this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder()->click();
+        $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
 
         $dataProduct1 = $product1->getData();
         $dataProduct1['qty'] = 1;

@@ -8,6 +8,9 @@
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\SalesRule\Test\Fixture\SalesRule;
+
 
 class WebposHoldOrderCP166Test extends Injectable
 {
@@ -15,6 +18,14 @@ class WebposHoldOrderCP166Test extends Injectable
      * @var WebposIndex
      */
     protected $webposIndex;
+
+    public function __prepare(FixtureFactory $fixtureFactory)
+    {
+        //Create coupon
+        $salesRule = $fixtureFactory->createByCode('salesRule', ['dataset' => 'active_sales_rule_with_fixed_price_discount_coupon_cp166']);
+        $salesRule->persist();
+        return ['salesRule' => $salesRule];
+    }
 
     public function __inject
     (
@@ -24,7 +35,7 @@ class WebposHoldOrderCP166Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test($products, $coupon)
+    public function test($products, SalesRule $salesRule)
     {
         //Create product
         $product = $this->objectManager->getInstance()->create(
@@ -49,33 +60,34 @@ class WebposHoldOrderCP166Test extends Injectable
             $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
         }
         $this->webposIndex->getCheckoutDiscount()->clickPromotionButton();
+        $coupon = $salesRule->getCouponCode();
         $this->webposIndex->getCheckoutDiscount()->setCouponCode($coupon);
-        sleep(5);
-//        $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
-//        $this->webposIndex->getMsWebpos()->waitCartLoader();
-//        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-//        sleep(1);
-//
-//        //Hold
-//        $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
-//        $this->webposIndex->getMsWebpos()->waitCartLoader();
-//        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-//        sleep(1);
-//
-//        //Checkout in On-Hold
-//        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-//        $this->webposIndex->getCMenu()->onHoldOrders();
-//        sleep(1);
-//        $this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder()->click();
-//        $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();
-//        $this->webposIndex->getMsWebpos()->waitCartLoader();
-//        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-//        sleep(1);
-//
-//        $dataProduct = $product->getData();
-//        $dataProduct['qty'] = 1;
-//        return ['cartProducts' => [$dataProduct],
-//            'type' => '$'];
+        $this->webposIndex->getCheckoutDiscount()->clickCheckPromotionButton();
+        sleep(4);
+        $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+
+        //Hold
+        $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+
+        //Checkout in On-Hold
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getCMenu()->onHoldOrders();
+        sleep(1);
+        $this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder()->click();
+        $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+
+        $dataProduct = $product->getData();
+        $dataProduct['qty'] = 1;
+        return ['cartProducts' => [$dataProduct]];
 
     }
 }

@@ -68,10 +68,7 @@ class WebposHoldOrderCP173Test extends Injectable
         $this->webposIndex->getCheckoutCartHeader()->getIconDeleteCart()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
-        $dataProduct = $product->getData();
-        $dataProduct['qty'] = 1;
-        return ['cartProducts' => [$dataProduct],
-            'type' => '$'];
+        return ['cartProducts' => null];
 
     }
 }

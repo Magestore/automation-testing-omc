@@ -136,6 +136,7 @@ class WebposTaxTAX61Test extends Injectable
         $this->webposIndex->getCheckoutEditCustomer()->getEditShippingAddressIcon()->click();
         $this->webposIndex->getCheckoutEditAddress()->getRegionId()->setValue('Michigan');
         $this->webposIndex->getCheckoutEditAddress()->getSaveButton()->click();
+        sleep(3);
         $this->webposIndex->getCheckoutEditCustomer()->getSaveButton()->click();
         $this->webposIndex->getToaster()->getWarningMessage();
         $actualPriceExcludeTax = $this->webposIndex->getCheckoutCartItems()->getCartItemPrice($products[0]['product']->getName())->getText();

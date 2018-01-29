@@ -46,7 +46,7 @@ class CheckoutCartItems extends Block
 
     public function getCartItemName($name)
     {
-        return $this->getCartItem($name)->find('.product-name')->getText();
+        return $this->_rootElement->find('//li/div/div/div[2]/h4[text()="'.$name.'"]', Locator::SELECTOR_XPATH)->getText();
     }
 
     public function getCartItemQty($name)

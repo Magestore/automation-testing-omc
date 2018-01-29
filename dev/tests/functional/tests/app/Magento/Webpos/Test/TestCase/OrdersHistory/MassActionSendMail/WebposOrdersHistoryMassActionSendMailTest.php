@@ -14,6 +14,10 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\TestCase\Injectable;
 
+/**
+ * Class WebposOrdersHistoryMassActionSendMailTest
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionSendMail
+ */
 class WebposOrdersHistoryMassActionSendMailTest extends Injectable
 {
     /**
@@ -26,12 +30,21 @@ class WebposOrdersHistoryMassActionSendMailTest extends Injectable
      */
     protected $customer;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param Customer $customer
+     */
     public function __inject(WebposIndex $webposIndex, Customer $customer)
     {
         $this->webposIndex = $webposIndex;
         $this->customer = $customer;
     }
 
+    /**
+     * @param OrderInjectable $order
+     * @param null $action
+     * @return array
+     */
     public function test(
         OrderInjectable $order,
         $action = null

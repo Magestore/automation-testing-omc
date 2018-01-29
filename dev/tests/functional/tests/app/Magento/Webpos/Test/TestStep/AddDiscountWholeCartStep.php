@@ -29,19 +29,22 @@ class AddDiscountWholeCartStep implements TestStepInterface
 	 */
 	protected $percent;
 
-
 	/**
-	 * AddDiscountWholeCartStep constructor.
-	 * @param WebposIndex $webposIndex
-	 * @param $percent
+	 * @var $type
+	 * value: % or $
 	 */
+	protected $type;
+
+
 	public function __construct(
 		WebposIndex $webposIndex,
-		$percent
+		$percent,
+		$type = '%'
 	)
 	{
 		$this->webposIndex = $webposIndex;
 		$this->percent = $percent;
+		$this->type = $type;
 	}
 
 	/**
@@ -52,7 +55,13 @@ class AddDiscountWholeCartStep implements TestStepInterface
 		$this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
 		$this->webposIndex->getCheckoutContainer()->waitForCartDiscountPopup();
 
-		$this->webposIndex->getCheckoutDiscount()->setDiscountPercent($this->percent);
+		if (strcmp($this->type, '%') == 0) {
+			$this->webposIndex->getCheckoutDiscount()->getDiscountButton()->click();
+		} else if (strcmp($this->type, '$') == 0) {
+			$this->webposIndex->getCheckoutDiscount()->getDollarButton()->click();
+		}
+
+		$this->webposIndex->getCheckoutDiscount()->setDiscountAmount($this->percent);
 		$this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
