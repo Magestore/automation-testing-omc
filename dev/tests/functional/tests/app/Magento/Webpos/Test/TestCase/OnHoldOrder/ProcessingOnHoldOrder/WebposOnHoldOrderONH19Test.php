@@ -5,7 +5,7 @@
  * Date: 26/01/2018
  * Time: 13:26
  */
-namespace Magento\Webpos\Test\TestCase\OnHoldOrder\CheckGUI;
+namespace Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 

@@ -24,11 +24,11 @@
             <data name="prices" xsi:type="array">
                 <item name="grandTotal" xsi:type="string">50.00</item>
             </data>
-            <data name="payment/method" xsi:type="string">banktransfer</data>
+            <data name="payment/method" xsi:type="string">checkmo</data>
             <data name="billingAddress/dataset" xsi:type="string">US_address_1</data>
             <data name="status" xsi:type="string">Pending</data>
             <data name="orderButtonsAvailable" xsi:type="string">Back, Edit, Cancel, Send Email, Hold, Invoice, Reorder, Mark as Verified</data>
-            <data name="configData" xsi:type="string">banktransfer</data>
+            <data name="configData" xsi:type="string">checkmo</data>
             <constraint name="Magento\Checkout\Test\Constraint\AssertOrderSuccessPlacedMessage" />
             <constraint name="Magento\Checkout\Test\Constraint\AssertMinicartEmpty" />
             <constraint name="Magento\Sales\Test\Constraint\AssertOrderStatusIsCorrect" />
@@ -50,11 +50,11 @@
             <data name="prices" xsi:type="array">
                 <item name="grandTotal" xsi:type="string">55.00</item>
             </data>
-            <data name="payment/method" xsi:type="string">banktransfer</data>
+            <data name="payment/method" xsi:type="string">checkmo</data>
             <data name="billingAddress/dataset" xsi:type="string">US_address_1_without_email</data>
             <data name="status" xsi:type="string">Pending</data>
             <data name="orderButtonsAvailable" xsi:type="string">Back, Send Email, Cancel, Hold, Ship, Invoice, Edit</data>
-            <data name="configData" xsi:type="string">banktransfer</data>
+            <data name="configData" xsi:type="string">checkmo</data>
             <constraint name="Magento\Checkout\Test\Constraint\AssertOrderSuccessPlacedMessage" />
             <constraint name="Magento\Checkout\Test\Constraint\AssertMinicartEmpty" />
             <constraint name="Magento\Sales\Test\Constraint\AssertOrderStatusIsCorrect" />
