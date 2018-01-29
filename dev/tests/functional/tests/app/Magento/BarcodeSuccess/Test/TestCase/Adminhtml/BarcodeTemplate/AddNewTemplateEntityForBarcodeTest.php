@@ -3,7 +3,15 @@
 namespace Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeTemplate;
 use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeTemplate\BarcodeTemplateIndex;
 use Magento\Mtf\TestCase\Injectable;
-
+/**
+ *
+ * Steps:
+ * 1. Open backend
+ * 2. Go to  page BarcodeTemplate
+ * 3. Click button ("Add New Template")
+ * 4. Perform Asserts
+ *
+ */
 class AddNewTemplateEntityForBarcodeTest extends Injectable
 {
     /* tags */

@@ -46,7 +46,7 @@ class CheckoutCartItems extends Block
 
     public function getCartItemName($name)
     {
-        return $this->getCartItem($name)->find('.product-name')->getText();
+        return $this->_rootElement->find('//li/div/div/div[2]/h4[text()="'.$name.'"]', Locator::SELECTOR_XPATH)->getText();
     }
 
     public function getCartItemQty($name)
@@ -74,5 +74,51 @@ class CheckoutCartItems extends Block
     {
         $value = $this->getCartOriginalItemPrice($name)->getText();
         return substr($value, 6);
+    }
+
+	public function getCartItemImage($name)
+	{
+		return $this->getCartItem($name)->find('.product-img');
+	}
+    public function isCartItem()
+    {
+        return $this->_rootElement->find('.product-item')->isPresent();
+
+    }
+    public function getCartItemByOrderTo($i)
+    {
+        return $this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH);
+
+    }
+    public function getNameCartItemByOrderTo($i)
+    {
+        return $this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('.product-name')->getText();
+
+    }
+    public function getPriceCartItemByOrderTo($i)
+    {
+        return floatval(str_replace('$','',$this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('.price')->getText()));
+
+    }
+    public function getAttributeCartItemByOrderTo($i)
+    {
+        return $this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('.item-options')->getText();
+
+    }
+    public function isQtyDisplay($i)
+    {
+        return $this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('.product-item .product-img')->find('.number')->isPresent();
+
+    }
+    public function getQtyDisplay($i)
+    {
+        return floatval($this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('.product-item .product-img')->find('.number')->getText());
+
+    }
+
+    public function getOriginPriceCartItemByOrderTo($i)
+    {
+        $value = $this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('.original-price')->getText();
+        return floatval(substr($value, 6));
     }
 }

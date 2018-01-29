@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionSendMail\WebposOrdersHistoryMassActionSendMailTest" summary="Orders History - Mass action/Send mail" ticketId="WEBPOS-19">
+        <variation name="WebposOrdersHistoryMassActionSendMail_CheckGUI_OH19">
+            <data name="order/dataset" xsi:type="string">default</data>
+            <data name="order/data/entity_id/products" xsi:type="string">catalogProductSimple::default</data>
+            <data name="action" xsi:type="string">CheckGUI</data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistorySendEmail"/>
+        </variation>
+        <variation name="WebposOrdersHistoryMassActionSendMail_CheckCancel_OH20">
+            <data name="order/dataset" xsi:type="string">default</data>
+            <data name="action" xsi:type="string">Cancel</data>
+            <data name="order/data/entity_id/products" xsi:type="string">catalogProductSimple::default</data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistorySendEmail"/>
+        </variation>
+        <variation name="WebposOrdersHistoryMassActionSendMail_CheckSend_OH21">
+            <data name="order/dataset" xsi:type="string">default</data>
+            <data name="action" xsi:type="string">Send</data>
+            <data name="order/data/entity_id/products" xsi:type="string">catalogProductSimple::default</data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistorySendEmail"/>
+        </variation>
+        <variation name="WebposOrdersHistoryMassActionSendMail_CheckDifferentInput_OH22">
+            <data name="order/dataset" xsi:type="string">default</data>
+            <data name="action" xsi:type="string">DifferentInput</data>
+            <data name="order/data/entity_id/products" xsi:type="string">catalogProductSimple::default</data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistorySendEmail"/>
+        </variation>
+        <variation name="WebposOrdersHistoryMassActionSendMail_CheckInvalidInput_OH23">
+            <data name="order/dataset" xsi:type="string">default</data>
+            <data name="action" xsi:type="string">InvalidInput</data>
+            <data name="order/data/entity_id/products" xsi:type="string">catalogProductSimple::default</data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistorySendEmail"/>
+        </variation>
+
+    </testCase>
+</config>

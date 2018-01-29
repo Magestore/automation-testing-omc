@@ -22,7 +22,6 @@
         <variation name="Update Full Field Information Quotation Test">
             <data name="description" xsi:type="string">Update Info to Quotation</data>
             <data name="initialQuotation/dataset" xsi:type="string">quotation_with_supplier</data>
-            <!--<data name="quotation/data/supplier_id/dataset" xsi:type="string">quotation_with_supplier</data>-->
             <data name="quotation/data/shipping_address" xsi:type="string">Test simple quotation %isolation%</data>
             <data name="quotation/data/shipping_method" xsi:type="string">New shipping method</data>
             <data name="quotation/data/new_shipping_method" xsi:type="string">New shipping %isolation%</data>

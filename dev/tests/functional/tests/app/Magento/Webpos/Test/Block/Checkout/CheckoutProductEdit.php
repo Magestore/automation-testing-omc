@@ -68,4 +68,14 @@ class CheckoutProductEdit extends Block
 	{
 		return $this->_rootElement->find('#btn-percent');
 	}
+
+	public function getPanelPriceBox()
+    {
+        return $this->_rootElement->find('[class="price-box"]');
+    }
+
+    public function getPanelDiscount()
+    {
+        return $this->_rootElement->find('.discount');
+    }
 }

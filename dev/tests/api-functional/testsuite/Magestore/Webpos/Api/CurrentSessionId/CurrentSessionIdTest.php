@@ -18,7 +18,7 @@ class CurrentSessionIdTest extends WebapiAbstract
     /**
      * @var $username
      */
-    protected $username = 'magentoadmin';
+    protected $username = 'admin';
     /**
      * @var $password
      */

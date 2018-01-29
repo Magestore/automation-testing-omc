@@ -132,8 +132,9 @@ class WebposCartPageCustomerCheckoutByExistingCustomerTest extends Injectable
 				$this->webposIndex->getCheckoutEditAddress()->getRegionItem($editAddress->getRegionId())->click();
 
 				$this->webposIndex->getCheckoutEditAddress()->getSaveButton()->click();
+				$this->webposIndex->getCheckoutEditAddress()->waingPageLoading();
 			}
-			sleep(2);
+			sleep(3);
 			$this->webposIndex->getCheckoutEditCustomer()->getSaveButton()->click();
 			sleep(1);
 			//Assert Customer save success
@@ -157,6 +158,8 @@ class WebposCartPageCustomerCheckoutByExistingCustomerTest extends Injectable
 		//Assert Place Order Success
 		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
 
+		$orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+
 		$this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 
@@ -173,7 +176,8 @@ class WebposCartPageCustomerCheckoutByExistingCustomerTest extends Injectable
 		return [
 			'name' => $name,
 			'address' => $addressText,
-			'phone' => $phone
+			'phone' => $phone,
+			'orderId' => $orderId
 		];
 	}
 }

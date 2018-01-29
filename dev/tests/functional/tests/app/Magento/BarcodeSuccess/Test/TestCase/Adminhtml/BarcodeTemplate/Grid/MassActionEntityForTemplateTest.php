@@ -10,7 +10,21 @@ use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeTemplate\BarcodeTemplateIn
 use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeTemplate\BarcodeViewTemplateIndex;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\BarcodeSuccess\Test\Fixture\TemplateBarcode;
-
+/**
+ *
+ * Test Flow:
+ * Preconditions:
+ * 1. Create template
+ *
+ * Steps:
+ * 1. Open backend
+ * 2. Go to  page BarcodeTemplate grid
+ * 3. Select template from preconditions
+ * 4. Select in MassAction ("Delete" or "Change status")
+ * 5. Accept alert
+ * 6. Perform all assertions according to dataset
+ *
+ */
 
 class MassActionEntityForTemplateTest extends Injectable
 {

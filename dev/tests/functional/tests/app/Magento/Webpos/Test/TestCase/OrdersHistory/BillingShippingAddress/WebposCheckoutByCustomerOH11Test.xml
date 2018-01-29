@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\BillingShippingAddress\WebposCheckoutByCustomerOH11Test" summary="OrdersHistory-BillingShippingAddress" ticketId="WEBPOSADDRESS-OH11">
+        <variation name="WebposCheckoutByCustomerOH11TestVariation1">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                    <item name="orderQty" xsi:type="number">2</item>
+                    <item name="invoiceQty" xsi:type="number">1</item>
+                </item>
+                <item name="1" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                    <item name="orderQty" xsi:type="number">1</item>
+                    <item name="invoiceQty" xsi:type="number">1</item>
+                </item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Address\AssertAddressInOrdersHistory"/>
+        </variation>
+    </testCase>
+</config>

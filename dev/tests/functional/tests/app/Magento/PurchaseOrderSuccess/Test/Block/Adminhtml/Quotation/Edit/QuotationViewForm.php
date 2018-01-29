@@ -10,6 +10,10 @@ namespace Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\Quotation\Edit;
 
 use Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\FormSection;
 
+/**
+ * Class QuotationViewForm
+ * @package Magento\PurchaseOrderSuccess\Test\Block\Adminhtml\Quotation\Edit
+ */
 class QuotationViewForm extends FormSection
 {
 

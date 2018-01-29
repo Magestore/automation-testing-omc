@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale\WebposCustomSaleCustomProductWithDiscountCP78EntityTest" summary="Checkout - Cart Page - Webpos Check GUI CustomSale CP78" ticketId="WEBPOS-1">
+        <variation name="Webpos_CustomSale_CustomProductWithDiscount_CP78_Test1_CP78">
+            <data name="product/dataset" xsi:type="string">product1</data>
+            <data name="productName" xsi:type="string">Custom Product</data>
+            <data name="price" xsi:type="string">50.00</data>
+            <data name="amountValue" xsi:type="string">50</data>
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomSale\AssertWebposCustomSaleCustomProductWithDiscountCP78"/>-->
+        </variation>
+    </testCase>
+</config>

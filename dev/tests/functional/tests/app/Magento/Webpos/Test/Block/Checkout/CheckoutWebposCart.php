@@ -35,4 +35,38 @@ class CheckoutWebposCart extends Block
     {
         return $this->_rootElement->find('.icon-iconPOS-previous');
     }
+
+    public function getPriceShipping()
+    {
+        $value = $this->_rootElement->find('#webpos_cart > div > div > div > ul > li:nth-child(5) > div.price-box > span')->getText();
+        return floatval(str_replace('$', '',$value));
+    }
+
+    public function getSubtotal()
+    {
+        $value = $this->_rootElement->find('#webpos_cart > div > div > div > ul > li:nth-child(1) > div.price-box > span')->getText();
+        return floatval(str_replace('$', '',$value));
+    }
+
+    public function getTotal()
+    {
+        $value = $this->_rootElement->find('#webpos_cart > div > div > div > ul > li:nth-child(7) > div.price-box > span')->getText();
+        return floatval(str_replace('$', '',$value));
+    }
+
+    public function getTax()
+    {
+        $value = $this->_rootElement->find('#webpos_cart > div > div > div > ul > li:nth-child(6) > div.price-box > span')->getText();
+        return floatval(str_replace('$', '',$value));
+    }
+    public function isDisplayShippingOnCart()
+    {
+        return $this->_rootElement->find('#webpos_cart > div > div > div > ul > li:nth-child(5)')->isVisible();
+    }
+
+    public function waitLoading()
+    {
+        $this->waitForElementVisible('.indicator');
+        $this->waitForElementNotVisible('.indicator');
+    }
 }

@@ -25,7 +25,6 @@ class AssertQuotationInGrid extends AbstractConstraint
      */
     public function processAssert(Quotation $quotation, QuotationIndex $quotationIndex)
     {
-        $quotationData = $quotation->getData();
         $filter = [
             'supplier_id' => $quotation->getData('supplier_id'),
             'purchased_at[from]' => $quotation->getData('purchased_at'),

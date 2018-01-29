@@ -8,7 +8,14 @@
 namespace Magento\BarcodeSuccess\Test\TestCase\Adminhtml\BarcodeListing\Form;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeListing\BarcodeImportIndex;
-
+/**
+ *
+ * Steps:
+ * 1. Open backend
+ * 2. Go to  page BarcodeImport
+ * 3. Perform Asserts for Form
+ *
+ */
 class ImportBarcodeEntityTest extends Injectable
 {
     /* tags */
