@@ -1,17 +1,15 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: gvt
- * Date: 18/01/2018
- * Time: 13:49
+ * User: bang
+ * Date: 26/01/2018
+ * Time: 13:26
  */
-namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
+namespace Magento\Webpos\Test\TestCase\OnHoldOrder\CheckGUI;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\ConfigurableProduct\Test\Fixture\ConfigurableProduct;
 
-class WebposHoldOrderCP156Test extends Injectable
+class WebposOnHoldOrderONH14Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -26,7 +24,7 @@ class WebposHoldOrderCP156Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test($products)
+    public function test($products, $discount)
     {
         //Create product
         $product = $this->objectManager->getInstance()->create(
@@ -39,11 +37,25 @@ class WebposHoldOrderCP156Test extends Injectable
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
-        //Add products to cart
+        //Create a on-hold-order
+            //Add a product to cart
         $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
+        sleep(1);
+            //Checkout
+        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+            //Choose PoS shipping method
+        $this->webposIndex->getCheckoutShippingMethod()->clickPOSShipping();
+        $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+        sleep(1);
+            //BackToCart
+        $this->webposIndex->getCheckoutWebposCart()->getIconPrevious()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
 
         //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
@@ -51,7 +63,10 @@ class WebposHoldOrderCP156Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
-        return ['products' => [$product->getData()],
-            'cartProducts' => null];
+        //Click on On-hold Orders menu
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getCMenu()->onHoldOrders();
+        sleep(1);
+        $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
     }
 }

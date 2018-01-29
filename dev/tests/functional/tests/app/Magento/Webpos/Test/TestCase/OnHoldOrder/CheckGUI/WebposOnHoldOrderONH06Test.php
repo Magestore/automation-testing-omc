@@ -1,17 +1,17 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: gvt
- * Date: 18/01/2018
- * Time: 16:00
+ * User: bang
+ * Date: 26/01/2018
+ * Time: 14:00
  */
-namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
+namespace Magento\Webpos\Test\TestCase\OnHoldOrder\CheckGUI;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Customer\Test\Fixture\Customer;
+use Magento\Mtf\Fixture\FixtureFactory;
 
-class WebposHoldOrderCP160Test extends Injectable
+class WebposOnHoldOrderONH06Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -39,61 +39,51 @@ class WebposHoldOrderCP160Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test(Customer $customer, $products)
+    public function test($products, Customer $customer)
     {
         //Create product
-        $products = $this->objectManager->getInstance()->create(
+        $product1 = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
-        )->run();
-        $product1 = $products[0]['product'];
-        $product2 = $products[1]['product'];
+        )->run()[0]['product'];
+        $product2 = $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
+            ['products' => $products]
+        )->run()[1]['product'];
 
         //Login webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
-        //Add an exist customer
+        //Create a on-hold-order
+            //Add some taxable products to cart
+        $this->webposIndex->getCheckoutProductList()->search($product1->getName());
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        sleep(1);
+        $this->webposIndex->getCheckoutProductList()->search($product2->getName());
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        sleep(1);
+            //Add an exist customer
         $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
         $this->webposIndex->getCheckoutChangeCustomer()->search($customer->getFirstname());
         sleep(1);
         $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
         sleep(1);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-
-        //Add products to cart
-        $this->webposIndex->getCheckoutProductList()->search($product1->getName());
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getCheckoutProductList()->getFirstProduct()->click();
-        sleep(1);
-        $this->webposIndex->getCheckoutProductList()->search($product2->getName());
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(1);
-
-        //Hold
+        $taxExpected = $this->webposIndex->getCheckoutCartFooter()->getTaxWithCheckout();
+            //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
-        //Checkout in On-Hold
+        //Click on On-hold Orders menu
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->onHoldOrders();
         sleep(1);
-        $this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder()->click();
-        $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(1);
-
-        $dataProduct1 = $product1->getData();
-        $dataProduct1['qty'] = 2;
-        $dataProduct2 = $product2->getData();
-        $dataProduct2['qty'] = 1;
-        return ['cartProducts' => [$dataProduct1, $dataProduct2]];
-
+        $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
     }
 }

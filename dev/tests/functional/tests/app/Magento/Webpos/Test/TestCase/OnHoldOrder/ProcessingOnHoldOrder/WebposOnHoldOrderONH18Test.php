@@ -1,17 +1,16 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: gvt
- * Date: 18/01/2018
- * Time: 16:00
+ * User: bang
+ * Date: 26/01/2018
+ * Time: 13:26
  */
-namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
+namespace Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Customer\Test\Fixture\Customer;
-
-class WebposHoldOrderCP160Test extends Injectable
+class WebposOnHoldOrderONH18Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -24,7 +23,10 @@ class WebposHoldOrderCP160Test extends Injectable
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'webpos_default_guest_checkout_rollback']
         )->run();
-
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'have_shipping_method_on_webpos_CP194']
+        )->run();
         //Create customer
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'webpos_guest_pi']);
         $customer->persist();
@@ -39,41 +41,45 @@ class WebposHoldOrderCP160Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test(Customer $customer, $products)
+    public function test(Customer $customer, $products, $discount)
     {
         //Create product
-        $products = $this->objectManager->getInstance()->create(
+        $product = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
-        )->run();
-        $product1 = $products[0]['product'];
-        $product2 = $products[1]['product'];
+        )->run()[0]['product'];
 
         //Login webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
-        //Add an exist customer
+        //Create a on-hold-order
+            //Add an exist customer
         $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
         $this->webposIndex->getCheckoutChangeCustomer()->search($customer->getFirstname());
         sleep(1);
         $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
         sleep(1);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-
-        //Add products to cart
-        $this->webposIndex->getCheckoutProductList()->search($product1->getName());
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getCheckoutProductList()->getFirstProduct()->click();
-        sleep(1);
-        $this->webposIndex->getCheckoutProductList()->search($product2->getName());
+            //Add a product to cart
+        $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
-
-        //Hold
+            //Click on [Add discount] > on Discount tab, add dicount for whole cart (type: $)
+        while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup())
+        {
+            $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
+        }
+        $this->webposIndex->getCheckoutDiscount()->clickDiscountButton();
+        $this->webposIndex->getCheckoutDiscount()->setTypeDiscount('$');
+        $this->webposIndex->getCheckoutDiscount()->setNumberDiscount($discount);
+        $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+            //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -88,12 +94,5 @@ class WebposHoldOrderCP160Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
-
-        $dataProduct1 = $product1->getData();
-        $dataProduct1['qty'] = 2;
-        $dataProduct2 = $product2->getData();
-        $dataProduct2['qty'] = 1;
-        return ['cartProducts' => [$dataProduct1, $dataProduct2]];
-
     }
 }
