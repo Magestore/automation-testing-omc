@@ -40,12 +40,12 @@ class UpdateGiftcodeEntityTest extends Injectable
         $giftcode->persist();
 
         $this->giftcodeIndex->open();
-        $this->giftcodeIndex->getGiftcodeGroupGrid()->searchAndOpen([
-            'gift_code' => $giftcode->getGiftCode()
-        ]);
-
-        $this->giftcodeNew->getGiftcodeForm()->fill($update);
-        $this->giftcodeNew->getGiftcodeMainActions()->$action();
+//        $this->giftcodeIndex->getGiftcodeGroupGrid()->searchAndOpen([
+//            'gift_code' => $giftcode->getGiftCode()
+//        ]);
+//
+//        $this->giftcodeNew->getGiftcodeForm()->fill($update);
+//        $this->giftcodeNew->getGiftcodeMainActions()->$action();
 
         return ['giftcode' => $giftcode->getData()];
     }

@@ -32,8 +32,6 @@ class AssertShipmentSuccess extends AbstractConstraint
             $webposIndex->getOrderHistoryPayment()->isVisible(),
             'Payment Pop is not closed'
         );
-
-        sleep(1);
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getToaster()->getWarningMessage()->isVisible(),
             'Success Message is not displayed'
@@ -54,6 +52,11 @@ class AssertShipmentSuccess extends AbstractConstraint
             'The shipment has been created successfully.',
             $webposIndex->getNotification()->getFirstNotificationText(),
             'Notification Content is wrong'
+        );
+        $webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
+        \PHPUnit_Framework_Assert::assertFalse(
+            $webposIndex->getOrderHistoryAddOrderNote()->getShipButton()->isVisible(),
+            'Ship button is not hidden.'
         );
     }
 

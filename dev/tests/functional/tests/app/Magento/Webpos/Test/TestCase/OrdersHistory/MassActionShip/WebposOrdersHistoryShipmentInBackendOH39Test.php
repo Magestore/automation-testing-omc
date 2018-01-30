@@ -11,7 +11,7 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposOrdersHistoryCreateShipmentOH36Test extends Injectable
+class WebposOrdersHistoryShipmentInBackendOH39Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -46,18 +46,10 @@ class WebposOrdersHistoryCreateShipmentOH36Test extends Injectable
         // Select payment
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        /*Mark as shipped: off
-        Create invoice : off*/
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
-            [
-                'createInvoice' => false,
-                'shipped' => false
-            ]
-        )->run();
         // Place Order
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         // Go to Order History
@@ -74,7 +66,8 @@ class WebposOrdersHistoryCreateShipmentOH36Test extends Injectable
         sleep(1);
         return [
             'products' => $products,
-            'status' => 'Processing'
-            ];
+            'status' => 'Complete',
+            'orderId' => $orderId
+        ];
     }
 }

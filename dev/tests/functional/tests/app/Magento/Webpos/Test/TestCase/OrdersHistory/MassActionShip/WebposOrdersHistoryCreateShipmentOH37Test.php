@@ -11,7 +11,7 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposOrdersHistoryCreateShipmentOH36Test extends Injectable
+class WebposOrdersHistoryCreateShipmentOH37Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -51,7 +51,7 @@ class WebposOrdersHistoryCreateShipmentOH36Test extends Injectable
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
             [
-                'createInvoice' => false,
+                'createInvoice' => true,
                 'shipped' => false
             ]
         )->run();
@@ -74,7 +74,7 @@ class WebposOrdersHistoryCreateShipmentOH36Test extends Injectable
         sleep(1);
         return [
             'products' => $products,
-            'status' => 'Processing'
-            ];
+            'status' => 'Complete'
+        ];
     }
 }
