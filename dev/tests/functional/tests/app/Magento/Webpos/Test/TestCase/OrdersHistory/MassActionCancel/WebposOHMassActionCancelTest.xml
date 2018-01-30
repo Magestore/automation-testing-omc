@@ -83,5 +83,34 @@
 			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Cancel\AssertCancelOrderSuccess"/>
 
 		</variation>
+
+		<variation name="WebposOHMassActionCancelTestVariation_OH53">
+			<data name="addCustomSale" xsi:type="boolean">true</data>
+			<data name="customProduct" xsi:type="array">
+				<item name="name" xsi:type="string">custom product %isolation%</item>
+				<item name="description" xsi:type="string">custom product description %isolation%</item>
+				<item name="price" xsi:type="number">100</item>
+				<item name="shipAble" xsi:type="boolean">false</item>
+			</data>
+			<data name="createInvoice" xsi:type="boolean">false</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="comment" xsi:type="string">Cancel Order Reason %isolation%</data>
+			<data name="action" xsi:type="string">save</data>
+			<data name="confirmAction" xsi:type="string">ok</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Cancel\AssertCancelOrderSuccess"/>
+
+		</variation>
+
+		<variation name="WebposOHMassActionCancelTestVariation_OH54">
+			<data name="createOrderInBackend" xsi:type="boolean">true</data>
+			<data name="order/dataset" xsi:type="string">default</data>
+			<data name="comment" xsi:type="string">Cancel Order Reason %isolation%</data>
+			<data name="action" xsi:type="string">save</data>
+			<data name="confirmAction" xsi:type="string">ok</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Cancel\AssertCancelOrderSuccess"/>
+
+		</variation>
 	</testCase>
 </config>
