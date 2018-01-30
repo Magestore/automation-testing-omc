@@ -54,7 +54,7 @@
                 <item name="is_in_stock" xsi:type="string">In Stock</item>
             </field>
             <field name="product_has_weight" xsi:type="string">This item has no weight</field>
-            <field name="gift_value" xsi:type="string">50</field>
+            <field name="gift_value" xsi:type="string">40</field>
             <field name="gift_type" xsi:type="string">Fixed value</field>
             <field name="gift_card_type" xsi:type="string">Physical</field>
             <field name="gift_price_type" xsi:type="string">Same as Gift Card Value</field>
@@ -83,7 +83,7 @@
                 <item name="is_in_stock" xsi:type="string">In Stock</item>
             </field>
             <field name="product_has_weight" xsi:type="string">This item has no weight</field>
-            <field name="gift_value" xsi:type="string">50</field>
+            <field name="gift_value" xsi:type="string">40</field>
             <field name="gift_type" xsi:type="string">Fixed value</field>
             <field name="gift_card_type" xsi:type="string">Virtual</field>
             <field name="gift_price_type" xsi:type="string">Same as Gift Card Value</field>
