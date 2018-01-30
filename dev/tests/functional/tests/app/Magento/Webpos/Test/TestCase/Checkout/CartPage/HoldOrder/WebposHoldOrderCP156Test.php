@@ -45,11 +45,6 @@ class WebposHoldOrderCP156Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
-        //Checkout
-        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
         //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();

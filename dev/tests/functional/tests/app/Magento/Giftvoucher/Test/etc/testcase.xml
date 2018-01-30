@@ -36,4 +36,7 @@
         <step name="fillBillingInformation" module="Magento_Giftvoucher" next="placeOrder"/>
         <step name="placeOrder" module="Magento_Checkout"/>
     </scenario>
+    <!--<scenario name="GiftvoucherProductCheckoutTest" firstStep="setupConfiguration">-->
+        <!--<step name="setupConfiguration" module="Magento_Config"/>-->
+    <!--</scenario>-->
 </config>

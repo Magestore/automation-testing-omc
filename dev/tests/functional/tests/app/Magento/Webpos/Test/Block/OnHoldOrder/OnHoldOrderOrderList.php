@@ -9,6 +9,7 @@
 namespace Magento\Webpos\Test\Block\OnHoldOrder;
 
 use Magento\Mtf\Block\Block;
+use Magento\Mtf\Client\Locator;
 
 /**
  * Class OnHoldOrderOrderList
@@ -47,5 +48,15 @@ class OnHoldOrderOrderList extends Block
     public function waitLoader()
     {
         $this->waitForElementNotVisible('.wrap-item-order .indicator');
+    }
+
+    public function getIconSearch()
+    {
+        return $this->_rootElement->find('.form-group .icon-iconPOS-search');
+    }
+
+    public function getIdFirstOrder()
+    {
+        return $this->_rootElement->find('div > div > ul > li.order-item > div > div.id-order > span.id')->getText();
     }
 }

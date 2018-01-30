@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+<testCase name="Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder\WebposOnHoldOrderONH25Test" summary="Checkout with multi order" ticketId="WEBPOS-1">
+    <variation name="WebposOnHoldOrderONH25TestVariation">
+        <data name="products" xsi:type="array">
+            <item name="0" xsi:type="array">
+                <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+            </item>
+            <item name="1" xsi:type="array">
+                <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+            </item>
+            <item name="2" xsi:type="array">
+                <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+            </item>
+        </data>
+        <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckAlertWarning"/>-->
+    </variation>
+</testCase>
+</config>

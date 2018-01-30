@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\OnHoldOrder\CheckGUI\WebposOnHoldOrderONH01Test" summary="Check GUI without exist onhold order" ticketId="WEBPOS-1">
+        <variation name="WebposOnHoldOrderONH01TestVariation">
+            <data name="warningMessageExpected" xsi:type="string">Please add item(s) to cart!</data>
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckAlertWarning"/>-->
+        </variation>
+    </testCase>
+</config>

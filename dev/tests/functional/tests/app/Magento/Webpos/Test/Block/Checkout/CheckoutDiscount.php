@@ -108,4 +108,16 @@ class CheckoutDiscount extends Block
         $this->_rootElement->find('input[name="coupon_code"]')->setValue($number);
 
     }
+
+    public function clickCheckPromotionButton()
+    {
+        $this->_rootElement->find('button[class="button checkPromotion"]')->click();
+        $this->waitLoadingIndicator();
+    }
+    public function waitLoadingIndicator()
+    {
+        while ($this->_rootElement->find('.indicator')->isPresent()){
+            sleep(1);
+        }
+    }
 }
