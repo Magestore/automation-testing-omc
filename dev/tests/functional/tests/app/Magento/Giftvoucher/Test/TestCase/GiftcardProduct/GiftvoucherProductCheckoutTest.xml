@@ -8,33 +8,33 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Giftvoucher\Test\TestCase\GiftcardProduct\GiftvoucherProductCheckoutTest" summary="Checkout Gift Voucher Product">
 
-        <variation name="GiftvoucherProductCheckoutTestVariation1">
-            <data name="tag" xsi:type="string">to_maintain:yes</data>
-            <data name="products" xsi:type="string">giftvoucherProduct::virtual_fixed_value_same</data>
-            <data name="giftCardInfo" xsi:type="array">
-                <item name="message" xsi:type="string">Send Message</item>
-                <item name="recipient_name" xsi:type="string">Eden</item>
-                <item name="recipient_email" xsi:type="string">eden@localhost.com</item>
-                <item name="day_to_send" xsi:type="string">03/03/2018</item>
-                <item name="timezone_to_send" xsi:type="string">GMT (UTC)</item>
-            </data>
-            <data name="salesRule" xsi:type="string">active_sales_rule_for_all_groups</data>
-            <data name="customer/dataset" xsi:type="string">default</data>
-            <data name="checkoutMethod" xsi:type="string">guest</data>
-            <data name="prices" xsi:type="array">
-                <item name="grandTotal" xsi:type="string">40.00</item>
-            </data>
-            <data name="payment/method" xsi:type="string">cashondelivery</data>
-            <data name="billingAddress/dataset" xsi:type="string">US_address_1</data>
-            <data name="status" xsi:type="string">Pending</data>
-            <data name="orderButtonsAvailable" xsi:type="string">Back, Edit, Cancel, Send Email, Hold, Invoice, Reorder, Mark as Verified</data>
-            <data name="configData" xsi:type="string">cashondelivery</data>
-            <constraint name="Magento\Checkout\Test\Constraint\AssertOrderSuccessPlacedMessage" />
-            <constraint name="Magento\Checkout\Test\Constraint\AssertMinicartEmpty" />
-            <constraint name="Magento\Sales\Test\Constraint\AssertOrderStatusIsCorrect" />
-            <constraint name="Magento\Sales\Test\Constraint\AssertOrderButtonsAvailable" />
-            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftProduct\AssertGiftCode" />
-        </variation>
+        <!--<variation name="GiftvoucherProductCheckoutTestVariation1">-->
+            <!--<data name="tag" xsi:type="string">to_maintain:yes</data>-->
+            <!--<data name="products" xsi:type="string">giftvoucherProduct::virtual_fixed_value_same</data>-->
+            <!--<data name="giftCardInfo" xsi:type="array">-->
+                <!--<item name="message" xsi:type="string">Send Message</item>-->
+                <!--<item name="recipient_name" xsi:type="string">Eden</item>-->
+                <!--<item name="recipient_email" xsi:type="string">eden@localhost.com</item>-->
+                <!--<item name="day_to_send" xsi:type="string">03/03/2018</item>-->
+                <!--<item name="timezone_to_send" xsi:type="string">GMT (UTC)</item>-->
+            <!--</data>-->
+            <!--<data name="salesRule" xsi:type="string">active_sales_rule_for_all_groups</data>-->
+            <!--<data name="customer/dataset" xsi:type="string">default</data>-->
+            <!--<data name="checkoutMethod" xsi:type="string">guest</data>-->
+            <!--<data name="prices" xsi:type="array">-->
+                <!--<item name="grandTotal" xsi:type="string">40.00</item>-->
+            <!--</data>-->
+            <!--<data name="payment/method" xsi:type="string">cashondelivery</data>-->
+            <!--<data name="billingAddress/dataset" xsi:type="string">US_address_1</data>-->
+            <!--<data name="status" xsi:type="string">Pending</data>-->
+            <!--<data name="orderButtonsAvailable" xsi:type="string">Back, Edit, Cancel, Send Email, Hold, Invoice, Reorder, Mark as Verified</data>-->
+            <!--<data name="configData" xsi:type="string">cashondelivery</data>-->
+            <!--<constraint name="Magento\Checkout\Test\Constraint\AssertOrderSuccessPlacedMessage" />-->
+            <!--<constraint name="Magento\Checkout\Test\Constraint\AssertMinicartEmpty" />-->
+            <!--<constraint name="Magento\Sales\Test\Constraint\AssertOrderStatusIsCorrect" />-->
+            <!--<constraint name="Magento\Sales\Test\Constraint\AssertOrderButtonsAvailable" />-->
+            <!--<constraint name="Magento\Giftvoucher\Test\Constraint\GiftProduct\AssertGiftCode" />-->
+        <!--</variation>-->
         <variation name="GiftvoucherProductCheckoutTestVariation2">
             <data name="tag" xsi:type="string">to_maintain:yes</data>
             <data name="products" xsi:type="string">giftvoucherProduct::physical_fixed_value_same</data>

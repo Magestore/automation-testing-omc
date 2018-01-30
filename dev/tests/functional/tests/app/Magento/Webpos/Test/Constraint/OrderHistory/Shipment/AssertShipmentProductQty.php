@@ -13,14 +13,14 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 class AssertShipmentProductQty extends AbstractConstraint
 {
-    public function processAssert(WebposIndex $webposIndex, $products)
+    public function processAssert(WebposIndex $webposIndex, $products, $partial = true)
     {
         foreach ($products as $item) {
             $productName = $item['product']->getName();
-            if (!isset($item['qtyToShip'])) {
-                $shipQty = $item['orderQty'];
-            } else {
+            if (isset($item['qtyToShip']) && $partial == true) {
                 $shipQty = $item['qtyToShip'];
+            } else {
+                $shipQty = $item['orderQty'];
             }
             $actualShipQty = $webposIndex->getOrderHistoryOrderViewContent()->getShippedQty($productName);
             \PHPUnit_Framework_Assert::assertEquals(
