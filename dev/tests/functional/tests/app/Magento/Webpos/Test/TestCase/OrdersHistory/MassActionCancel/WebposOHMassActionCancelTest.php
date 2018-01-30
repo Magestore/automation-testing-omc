@@ -11,6 +11,7 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionCancel;
 
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Sales\Test\Fixture\OrderInjectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
@@ -51,7 +52,11 @@ class WebposOHMassActionCancelTest extends Injectable
 	}
 
 	public function test(
-		$products,
+		$createOrderInBackend = false,
+		OrderInjectable $order = null,
+		$products = null,
+		$addCustomSale = false,
+		$customProduct = null,
 		$createInvoice = true,
 		$shipped = false,
 		$createShipment = false,
@@ -60,49 +65,62 @@ class WebposOHMassActionCancelTest extends Injectable
 		$confirmAction = 'ok'
 	)
 	{
-		// Create products
-		$products = $this->objectManager->getInstance()->create(
-			'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
-			['products' => $products]
-		)->run();
-
 		// Login webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();
 
-		// Add product to cart
-		$this->objectManager->getInstance()->create(
-			'Magento\Webpos\Test\TestStep\AddProductToCartStep',
-			['products' => $products]
-		)->run();
+		if ($createOrderInBackend) {
+			$order->persist();
+			$orderId = $order->getId();
+		} else {
+			if ($addCustomSale) {
+				$this->objectManager->getInstance()->create(
+					'Magento\Webpos\Test\TestStep\AddCustomSaleStep',
+					['customProduct' => $customProduct]
+				)->run();
+			} else {
+				// Create products
+				$products = $this->objectManager->getInstance()->create(
+					'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
+					['products' => $products]
+				)->run();
 
-		// Place Order
-		$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-		$this->webposIndex->getMsWebpos()->waitCartLoader();
-		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+				// Add product to cart
+				$this->objectManager->getInstance()->create(
+					'Magento\Webpos\Test\TestStep\AddProductToCartStep',
+					['products' => $products]
+				)->run();
+			}
 
-		$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+			// Place Order
+			$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
+			$this->webposIndex->getMsWebpos()->waitCartLoader();
+			$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-		$this->objectManager->getInstance()->create(
-			'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
-			[
-				'createInvoice' => $createInvoice,
-				'shipped' => $shipped
-			]
-		)->run();
+			$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+			$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-		$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
-		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+			$this->objectManager->getInstance()->create(
+				'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
+				[
+					'createInvoice' => $createInvoice,
+					'shipped' => $shipped
+				]
+			)->run();
 
-		//Assert Place Order Success
-		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
+			$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+			$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-		$orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+			//Assert Place Order Success
+			$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
 
-		$this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
-		$this->webposIndex->getMsWebpos()->waitCartLoader();
+			$orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+
+			$this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
+			$this->webposIndex->getMsWebpos()->waitCartLoader();
+		}
+
 
 		$this->webposIndex->getMsWebpos()->clickCMenuButton();
 		$this->webposIndex->getCMenu()->ordersHistory();
