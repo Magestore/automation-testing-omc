@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip\WebposOrdersHistoryCreateShipmentOH36Test" summary="OrdersHistory-MassActionShip" ticketId="WEBPOSMASSACTIONSHIP-OH36">
-        <variation name="WebposOrdersHistoryCreateShipmentOH36TestVariation1">
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip\WebposOrdersHistoryPartialShipmentOH40Test" summary="OrdersHistory-MassActionShip" ticketId="WEBPOSMASSACTIONSHIP-OH40">
+        <variation name="WebposOrdersHistoryPartialShipmentOH40TestVariation1">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
                     <item name="orderQty" xsi:type="number">2</item>
-                    <item name="invoiceQty" xsi:type="number">1</item>
+                    <item name="qtyToShip" xsi:type="number">1</item>
                 </item>
                 <item name="1" xsi:type="array">
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
-                    <item name="orderQty" xsi:type="number">1</item>
-                    <item name="invoiceQty" xsi:type="number">1</item>
+                    <item name="orderQty" xsi:type="number">2</item>
+                    <item name="qtyToShip" xsi:type="number">1</item>
                 </item>
             </data>
-            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentSuccess"/>
-            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus"/>
             <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentProductQty"/>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertPartialShipment"/>
         </variation>
     </testCase>
 </config>
