@@ -13,7 +13,7 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
-class WebposTakePaymentOH81Test extends Injectable
+class WebposTakePaymentOH82Test extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex

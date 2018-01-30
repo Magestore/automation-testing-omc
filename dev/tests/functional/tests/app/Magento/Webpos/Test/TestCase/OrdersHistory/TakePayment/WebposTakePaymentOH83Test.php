@@ -13,7 +13,7 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
-class WebposTakePaymentOH81Test extends Injectable
+class WebposTakePaymentOH83Test extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex
@@ -104,7 +104,7 @@ class WebposTakePaymentOH81Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         //click take payment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
-
+        $this->webposIndex->getOrderHistoryPayment()->getCannelButton()->click();
 
     }
 
