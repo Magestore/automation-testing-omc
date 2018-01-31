@@ -50,11 +50,11 @@
             <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSentInGrid" />
             <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeMassEmailSuccessMessage" />
         </variation>
-        <!-- Always be the last variation -->
-        <variation name="GiftcodeMassActionsTestVariation118" ticketId="MGC018">
-            <data name="giftcode/dataset" xsi:type="string">minimum</data>
-            <data name="action" xsi:type="string">Print Gift Code</data>
-            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertShowMassPrint" />
-        </variation>
+        <!--&lt;!&ndash; Always be the last variation &ndash;&gt;-->
+        <!--<variation name="GiftcodeMassActionsTestVariation118" ticketId="MGC018">-->
+            <!--<data name="giftcode/dataset" xsi:type="string">minimum</data>-->
+            <!--<data name="action" xsi:type="string">Print Gift Code</data>-->
+            <!--<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertShowMassPrint" />-->
+        <!--</variation>-->
 	</testCase>
 </config>

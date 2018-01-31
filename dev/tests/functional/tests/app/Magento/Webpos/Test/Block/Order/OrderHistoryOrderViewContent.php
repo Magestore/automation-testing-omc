@@ -66,6 +66,11 @@ class OrderHistoryOrderViewContent extends Block
 		return $this->getProductRow($name)->find('td.order-id');
 	}
 
+	public function getOriginalPriceOfProduct($name)
+	{
+		return $this->getProductRow($name)->find('td[data-bind="text: $parents[1].convertAndFormatPrice(item.base_original_price)"]');
+	}
+
     public function getPriceOfProduct($name)
     {
         return $this->getProductRow($name)->find('td[data-bind="text: $parents[1].getItemPriceFormated(item)"]');
@@ -164,4 +169,10 @@ class OrderHistoryOrderViewContent extends Block
 		return $this->getPaymentMethod($label)->find('label[data-bind="text: $parents[1].getWebposPaymentAmount($data)"]');
 	}
 
+	public function getShippedQty($productName)
+    {
+        $qtyColumn = $this->getQtyOfProduct($productName)->getText();
+        preg_match('/Shipped: (\d+)/', $qtyColumn, $match);
+        return $match[1];
+    }
 }
