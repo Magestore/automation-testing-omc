@@ -144,6 +144,14 @@ class OnHoldOrderOrderViewContent extends Block
         return floatval(str_replace('$','',$this->_rootElement->find('//div/div[2]/div/div/div/table/tbody/tr['.$i.']/td[3]', Locator::SELECTOR_XPATH)->getText()));
     }
 
+    public function getOriginPriceProductByOrderTo($i)
+    {
+        return floatval(str_replace('$','',$this->_rootElement->find('//div/div[2]/div/div/div/table/tbody/tr['.$i.']/td[2]', Locator::SELECTOR_XPATH)->getText()));
+    }
+    public function getSubtotalProductByOrderTo($i)
+    {
+        return floatval(str_replace('$','',$this->_rootElement->find('//div/div[2]/div/div/div/table/tbody/tr['.$i.']/td[5]', Locator::SELECTOR_XPATH)->getText()));
+    }
     public function getQtyProductByOrderTo($i)
     {
         return floatval(str_replace('$','',$this->_rootElement->find('//div/div[2]/div/div/div/table/tbody/tr['.$i.']/td[4]', Locator::SELECTOR_XPATH)->getText()));
