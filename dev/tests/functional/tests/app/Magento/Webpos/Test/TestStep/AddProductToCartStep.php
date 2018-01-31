@@ -40,6 +40,7 @@ class AddProductToCartStep implements TestStepInterface
 	 */
 	public function run()
 	{
+		$this->webposIndex->getCheckoutCartFooter()->waitButtonHoldVisible();
 		$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 
 		foreach ($this->products as $item) {

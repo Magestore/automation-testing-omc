@@ -52,7 +52,7 @@ class ProductsToGenerate extends Section
     {
         $this->waitingForLoadingMaskNotVisible();
         $this->waitingForLoadingMaskFormNotVisible();
-        $productsToGenerate = $this->getProductsToGenerateGrid($this->browser->find('.modal-inner-wrap'));
+        $productsToGenerate = $this->getProductsToGenerateGrid($this->_rootElement->find('.modal-content'));
         $this->filtersButtonIsVisible();
         foreach ($data as $product) {
             $productsToGenerate->searchAndSelect(['sku' => $product['sku']]);

@@ -8,8 +8,14 @@
                     <item name="orderQty" xsi:type="number">2</item>
                     <item name="customPrice" xsi:type="number">60</item>
                 </item>
+                <item name="1" xsi:type="array">
+                    <item name="product" xsi:type="string">default</item>
+                    <item name="orderQty" xsi:type="number">3</item>
+                    <item name="customPrice" xsi:type="number">60</item>
+                </item>
             </data>
             <constraint name="Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertRedirectToCheckoutCartPage"/>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\ReOrder\AssertItemsInCart"/>
         </variation>
     </testCase>
 </config>

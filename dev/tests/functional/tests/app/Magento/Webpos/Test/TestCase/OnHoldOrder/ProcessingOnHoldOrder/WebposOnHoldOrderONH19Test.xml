@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+<testCase name="Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder\WebposOnHoldOrderONH19Test" summary="Check Checkout button" ticketId="WEBPOS-1">
+    <variation name="WebposOnHoldOrderONH19TestVariation">
+        <data name="productCustom/name" xsi:type="string">jfkasdljfasld;</data>
+        <data name="productCustom/price" xsi:type="string">15</data>
+        <data xsi:type="string" name="priceCustom">10</data>
+    </variation>
+</testCase>
+</config>

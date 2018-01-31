@@ -9,63 +9,63 @@
 			<data name="giftcode/dataset" xsi:type="string">minimum</data>
             <data name="update/data/status" xsi:type="string">Active</data>
             <data name="fields/status/label" xsi:type="string">Status</data>
-			<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSuccessSaveMessage" />
-			<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeInGrid" />
-            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeFieldsInGrid" />
+			<!--<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSuccessSaveMessage" />-->
+			<!--<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeInGrid" />-->
+            <!--<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeFieldsInGrid" />-->
 		</variation>
-        <variation name="UpdateGiftcodeEntityTestVariation2" ticketId="MGC055">
-            <data name="giftcode/dataset" xsi:type="string">minimum</data>
-            <data name="update/data/expired_at" xsi:type="string">02/14/2015</data>
-            <data name="fields/status/value" xsi:type="string">Expired</data>
-            <data name="fields/status/label" xsi:type="string">Status</data>
-            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSuccessSaveMessage" />
-            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeFieldsInGrid" />
-        </variation>
-        <variation name="UpdateGiftcodeEntityTestVariation3" ticketId="MGC057">
-            <data name="giftcode/dataset" xsi:type="string">minimum</data>
-            <data name="giftcode/data/status" xsi:type="string">Active</data>
-            <data name="update/data/balance" xsi:type="string">0</data>
-            <data name="fields/status/value" xsi:type="string">Used</data>
-            <data name="fields/status/label" xsi:type="string">Status</data>
-            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSuccessSaveMessage" />
-            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeFieldsInGrid" />
-        </variation>
-        <variation name="UpdateGiftcodeEntityTestVariation4" ticketId="MGC057">
-            <data name="giftcode/dataset" xsi:type="string">minimum</data>
-            <data name="update/data/customer_name" xsi:type="string">John</data>
-            <data name="update/data/customer_email" xsi:type="string">john@example.com</data>
-            <data name="update/data/recipient_name" xsi:type="string">Jane</data>
-            <data name="update/data/recipient_email" xsi:type="string">jane@example.com</data>
-            <data name="update/data/recipient_address" xsi:type="string">Landing</data>
-            <data name="fields/customer_name/label" xsi:type="string">Customer</data>
-            <data name="fields/recipient_name/label" xsi:type="string">Recipient</data>
-            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSuccessSaveMessage" />
-            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeFieldsInGrid" />
-        </variation>
-        <variation name="UpdateGiftcodeEntityTestVariation5" ticketId="MGC054">
-            <data name="giftcode/dataset" xsi:type="string">minimum</data>
-            <data name="update/data/status" xsi:type="string">Active</data>
-            <data name="action" xsi:type="string">saveAndContinue</data>
-            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSuccessSaveMessage" />
-            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertInEditPage" />
-        </variation>
-        <variation name="UpdateGiftcodeEntityTestVariation6" ticketId="MGC059,MGC060">
-            <data name="giftcode/dataset" xsi:type="string">minimum</data>
-            <data name="update/data/giftcard_template_id" xsi:type="string">Default Template 2</data>
-            <data name="update/data/conditions_serialized" xsi:type="string">[Subtotal|equals or greater than|200]</data>
-            <data name="update/data/actions_serialized" xsi:type="string">[Quantity in cart|equals or greater than|3]</data>
-            <data name="action" xsi:type="string">saveAndContinue</data>
-            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSuccessSaveMessage" />
-            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertInEditPage" />
-        </variation>
-        <variation name="UpdateGiftcodeEntityTestVariation7" ticketId="MGC062,MGC063,MGC064">
-            <data name="giftcode/dataset" xsi:type="string">minimum</data>
-            <data name="update/data/description" xsi:type="string">Apply for order with subtotal more than $200</data>
-            <data name="update/data/conditions_serialized" xsi:type="string">[Subtotal|equals or greater than|200]</data>
-            <data name="update/data/actions_serialized" xsi:type="string">[Color|is|Blue]</data>
-            <data name="action" xsi:type="string">saveAndContinue</data>
-            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSuccessSaveMessage" />
-            <constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertInEditPage" />
-        </variation>
+        <!--<variation name="UpdateGiftcodeEntityTestVariation2" ticketId="MGC055">-->
+            <!--<data name="giftcode/dataset" xsi:type="string">minimum</data>-->
+            <!--<data name="update/data/expired_at" xsi:type="string">02/14/2015</data>-->
+            <!--<data name="fields/status/value" xsi:type="string">Expired</data>-->
+            <!--<data name="fields/status/label" xsi:type="string">Status</data>-->
+            <!--<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSuccessSaveMessage" />-->
+            <!--<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeFieldsInGrid" />-->
+        <!--</variation>-->
+        <!--<variation name="UpdateGiftcodeEntityTestVariation3" ticketId="MGC057">-->
+            <!--<data name="giftcode/dataset" xsi:type="string">minimum</data>-->
+            <!--<data name="giftcode/data/status" xsi:type="string">Active</data>-->
+            <!--<data name="update/data/balance" xsi:type="string">0</data>-->
+            <!--<data name="fields/status/value" xsi:type="string">Used</data>-->
+            <!--<data name="fields/status/label" xsi:type="string">Status</data>-->
+            <!--<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSuccessSaveMessage" />-->
+            <!--<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeFieldsInGrid" />-->
+        <!--</variation>-->
+        <!--<variation name="UpdateGiftcodeEntityTestVariation4" ticketId="MGC057">-->
+            <!--<data name="giftcode/dataset" xsi:type="string">minimum</data>-->
+            <!--<data name="update/data/customer_name" xsi:type="string">John</data>-->
+            <!--<data name="update/data/customer_email" xsi:type="string">john@example.com</data>-->
+            <!--<data name="update/data/recipient_name" xsi:type="string">Jane</data>-->
+            <!--<data name="update/data/recipient_email" xsi:type="string">jane@example.com</data>-->
+            <!--<data name="update/data/recipient_address" xsi:type="string">Landing</data>-->
+            <!--<data name="fields/customer_name/label" xsi:type="string">Customer</data>-->
+            <!--<data name="fields/recipient_name/label" xsi:type="string">Recipient</data>-->
+            <!--<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSuccessSaveMessage" />-->
+            <!--<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeFieldsInGrid" />-->
+        <!--</variation>-->
+        <!--<variation name="UpdateGiftcodeEntityTestVariation5" ticketId="MGC054">-->
+            <!--<data name="giftcode/dataset" xsi:type="string">minimum</data>-->
+            <!--<data name="update/data/status" xsi:type="string">Active</data>-->
+            <!--<data name="action" xsi:type="string">saveAndContinue</data>-->
+            <!--<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSuccessSaveMessage" />-->
+            <!--<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertInEditPage" />-->
+        <!--</variation>-->
+        <!--<variation name="UpdateGiftcodeEntityTestVariation6" ticketId="MGC059,MGC060">-->
+            <!--<data name="giftcode/dataset" xsi:type="string">minimum</data>-->
+            <!--<data name="update/data/giftcard_template_id" xsi:type="string">Default Template 2</data>-->
+            <!--<data name="update/data/conditions_serialized" xsi:type="string">[Subtotal|equals or greater than|200]</data>-->
+            <!--<data name="update/data/actions_serialized" xsi:type="string">[Quantity in cart|equals or greater than|3]</data>-->
+            <!--<data name="action" xsi:type="string">saveAndContinue</data>-->
+            <!--<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSuccessSaveMessage" />-->
+            <!--<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertInEditPage" />-->
+        <!--</variation>-->
+        <!--<variation name="UpdateGiftcodeEntityTestVariation7" ticketId="MGC062,MGC063,MGC064">-->
+            <!--<data name="giftcode/dataset" xsi:type="string">minimum</data>-->
+            <!--<data name="update/data/description" xsi:type="string">Apply for order with subtotal more than $200</data>-->
+            <!--<data name="update/data/conditions_serialized" xsi:type="string">[Subtotal|equals or greater than|200]</data>-->
+            <!--<data name="update/data/actions_serialized" xsi:type="string">[Color|is|Blue]</data>-->
+            <!--<data name="action" xsi:type="string">saveAndContinue</data>-->
+            <!--<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertGiftcodeSuccessSaveMessage" />-->
+            <!--<constraint name="Magento\Giftvoucher\Test\Constraint\GiftcardCode\AssertInEditPage" />-->
+        <!--</variation>-->
 	</testCase>
 </config>

@@ -49,14 +49,12 @@ class WebposHoldOrderCP171Test extends Injectable
     public function test($products, Customer $customer)
     {
         //Create product
-        $product1 = $this->objectManager->getInstance()->create(
+        $products = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
-        )->run()[0]['product'];
-        $product2 = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
-            ['products' => $products]
-        )->run()[1]['product'];
+        )->run();
+        $product1 = $products[0]['product'];
+        $product2 = $products[1]['product'];
 
         //Login webpos
         $staff = $this->objectManager->getInstance()->create(
