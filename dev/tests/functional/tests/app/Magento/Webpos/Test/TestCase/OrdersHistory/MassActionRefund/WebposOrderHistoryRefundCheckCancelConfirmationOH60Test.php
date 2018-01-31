@@ -2,16 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: vong
- * Date: 1/30/2018
- * Time: 7:57 AM
+ * Date: 1/31/2018
+ * Time: 1:13 PM
  */
 
-namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip;
+namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposOrdersHistoryCreateShipmentOH38Test extends Injectable
+class WebposOrderHistoryRefundCheckCancelConfirmationOH60Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -23,7 +23,7 @@ class WebposOrdersHistoryCreateShipmentOH38Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test($products, $trackNumber, $shipmentComment)
+    public function test($products)
     {
         // Create products
         $products = $this->objectManager->getInstance()->create(
@@ -46,10 +46,16 @@ class WebposOrdersHistoryCreateShipmentOH38Test extends Injectable
         // Select payment
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
+            [
+                'createInvoice' => true,
+                'shipped' => true
+            ]
+        )->run();
         // Place Order
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         // Go to Order History
@@ -60,17 +66,20 @@ class WebposOrdersHistoryCreateShipmentOH38Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         // Open shipment popup
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
-        $this->webposIndex->getOrderHistoryAddOrderNote()->getShipButton()->click();
-        $this->webposIndex->getOrderHistoryShipment()->getTrackNumber()->setValue($trackNumber);
-        $this->webposIndex->getOrderHistoryShipment()->getShipmentComment()->setValue($shipmentComment);
-        $this->webposIndex->getOrderHistoryShipment()->getSendMailCheckbox()->click();
-        $this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
-        $this->webposIndex->getModal()->getOkButton()->click();
+        $this->webposIndex->getOrderHistoryAddOrderNote()->getRefundButton()->click();
         sleep(1);
-        return [
-            'products' => $products,
-            'status' => 'Complete',
-            'orderId' => $orderId
-        ];
+        $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
+        sleep(1);
+        $this->assertTrue(
+            $this->webposIndex->getModal()->isVisible(),
+            'Confirmation popup is not visible.'
+        );
+        $this->webposIndex->getModal()->getCancelButton()->click();
+        sleep(1);
+        $this->assertFalse(
+            $this->webposIndex->getModal()->isVisible(),
+            'Confirmation popup is not close.'
+        );
+
     }
 }

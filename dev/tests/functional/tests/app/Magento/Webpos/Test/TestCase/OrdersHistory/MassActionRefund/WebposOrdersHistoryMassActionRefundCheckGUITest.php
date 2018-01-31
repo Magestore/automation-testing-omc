@@ -6,12 +6,12 @@
  * Time: 7:57 AM
  */
 
-namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip;
+namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposOrdersHistoryCreateShipmentOH38Test extends Injectable
+class WebposOrdersHistoryMassActionRefundCheckGUITest extends Injectable
 {
     /**
      * @var WebposIndex
@@ -23,8 +23,15 @@ class WebposOrdersHistoryCreateShipmentOH38Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test($products, $trackNumber, $shipmentComment)
+    public function test($products, $configData = null)
     {
+        // Config all allow shipping for pos
+        if ($configData) {
+            $this->objectManager->getInstance()->create(
+                'Magento\Config\Test\TestStep\SetupConfigurationStep',
+                ['configData' => $configData]
+            )->run();
+        }
         // Create products
         $products = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
@@ -43,13 +50,18 @@ class WebposOrdersHistoryCreateShipmentOH38Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        // Select flat rate shipping method
+        if ($configData) {
+            $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
+            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        }
+        $shippingFee = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Shipping')->getText(), 1);
         // Select payment
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         // Place Order
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         // Go to Order History
@@ -58,19 +70,21 @@ class WebposOrdersHistoryCreateShipmentOH38Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        // Open shipment popup
+        // Open refund popup
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
-        $this->webposIndex->getOrderHistoryAddOrderNote()->getShipButton()->click();
-        $this->webposIndex->getOrderHistoryShipment()->getTrackNumber()->setValue($trackNumber);
-        $this->webposIndex->getOrderHistoryShipment()->getShipmentComment()->setValue($shipmentComment);
-        $this->webposIndex->getOrderHistoryShipment()->getSendMailCheckbox()->click();
-        $this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
-        $this->webposIndex->getModal()->getOkButton()->click();
+        $this->webposIndex->getOrderHistoryAddOrderNote()->getRefundButton()->click();
         sleep(1);
         return [
             'products' => $products,
-            'status' => 'Complete',
-            'orderId' => $orderId
+            'shippingFee' => $shippingFee
         ];
+    }
+
+    public function tearDown()
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'all_allow_shipping_for_POS_rollback']
+        )->run();
     }
 }

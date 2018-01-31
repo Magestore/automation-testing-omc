@@ -8,9 +8,12 @@
                     <item name="orderQty" xsi:type="number">1</item>
                 </item>
             </data>
+            <data name="trackNumber" xsi:type="string">123</data>
+            <data name="shipmentComment" xsi:type="string">test comment</data>
             <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentSuccess"/>
             <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus"/>
             <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentProductQty"/>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentCommentAndTrackNumberInBackend"/>
         </variation>
     </testCase>
 </config>
