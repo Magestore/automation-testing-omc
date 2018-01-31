@@ -24,6 +24,10 @@ class OnHoldOrderOrderViewContent extends Block
     {
         return $this->_rootElement->find('label[data-bind="text: $parent.getCustomerName(\'billing\')"]')->getText();
     }
+    public function getBilling()
+    {
+        return $this->_rootElement->find('h5[data-bind="text: $t(\'Billing Address\')"]');
+    }
 
     /**
      * @return array|string
@@ -49,6 +53,10 @@ class OnHoldOrderOrderViewContent extends Block
         return $this->_rootElement->find('label[data-bind="text: $parent.getCustomerName(\'shipping\')"]')->getText();
     }
 
+    public function getShipping()
+    {
+        return $this->_rootElement->find('h5[data-bind="text: $t(\'Shipping Address\')"]');
+    }
     /**
      * @return array|string
      */
@@ -134,5 +142,19 @@ class OnHoldOrderOrderViewContent extends Block
     public function getPriceProductByOrderTo($i)
     {
         return floatval(str_replace('$','',$this->_rootElement->find('//div/div[2]/div/div/div/table/tbody/tr['.$i.']/td[3]', Locator::SELECTOR_XPATH)->getText()));
+    }
+
+    public function getQtyProductByOrderTo($i)
+    {
+        return floatval(str_replace('$','',$this->_rootElement->find('//div/div[2]/div/div/div/table/tbody/tr['.$i.']/td[4]', Locator::SELECTOR_XPATH)->getText()));
+    }
+
+    public function isMessageEmptyDiplay()
+    {
+        return $this->_rootElement->find('.icon-iconPOS-empty-order')->isPresent();
+    }
+    public function getMessageEmptyDiplay()
+    {
+        return $this->_rootElement->find('.title-box')->getText();
     }
 }

@@ -59,4 +59,9 @@ class OnHoldOrderOrderList extends Block
     {
         return $this->_rootElement->find('div > div > ul > li.order-item > div > div.id-order > span.id')->getText();
     }
+
+    public function getFirstTitleTime()
+    {
+        return $this->_rootElement->find('.title-time');
+    }
 }

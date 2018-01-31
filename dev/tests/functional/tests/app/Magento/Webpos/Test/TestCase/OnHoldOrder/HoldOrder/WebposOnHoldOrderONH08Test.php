@@ -5,11 +5,11 @@
  * Date: 26/01/2018
  * Time: 13:26
  */
-namespace Magento\Webpos\Test\TestCase\OnHoldOrder\CheckGUI;
+namespace Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposOnHoldOrderONH09Test extends Injectable
+class WebposOnHoldOrderONH08Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -43,10 +43,13 @@ class WebposOnHoldOrderONH09Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
-             //Click to product name > Discount tab > Input amount less than original
+            //Edit customer price of that product with type: $
         $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getDollarButton()->click();
+        if (!$this->webposIndex->getCheckoutProductEdit()->getPanelPriceBox()->isVisible())
+        {
+            $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
+        }
+        $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
         sleep(1);
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();

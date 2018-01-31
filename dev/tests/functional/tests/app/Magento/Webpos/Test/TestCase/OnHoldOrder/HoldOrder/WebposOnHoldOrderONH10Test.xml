@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-<testCase name="Magento\Webpos\Test\TestCase\OnHoldOrder\CheckGUI\WebposOnHoldOrderONH07Test" summary="Hold with custom price" ticketId="WEBPOS-1">
-    <variation name="WebposOnHoldOrderONH07TestVariation">
+<testCase name="Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder\WebposOnHoldOrderONH10Test" summary="Hold with custom price" ticketId="WEBPOS-1">
+    <variation name="WebposOnHoldOrderONH10TestVariation">
         <data name="products" xsi:type="array">
             <item name="0" xsi:type="array">
                 <item name="product" xsi:type="string">product_100_dollar_taxable</item>
             </item>
         </data>
-        <data xsi:type="string" name="priceCustom">10</data>
+        <data xsi:type="string" name="priceCustom">55</data>
     </variation>
 </testCase>
 </config>

@@ -5,11 +5,11 @@
  * Date: 26/01/2018
  * Time: 13:26
  */
-namespace Magento\Webpos\Test\TestCase\OnHoldOrder\CheckGUI;
+namespace Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposOnHoldOrderONH08Test extends Injectable
+class WebposOnHoldOrderONH07Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -49,7 +49,7 @@ class WebposOnHoldOrderONH08Test extends Injectable
         {
             $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
         }
-        $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
+        $this->webposIndex->getCheckoutProductEdit()->getDollarButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
         sleep(1);
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
