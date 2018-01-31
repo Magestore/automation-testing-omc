@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Magento, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Page/etc/PageObject.xsd">
+    <page name="WebposIndexPage" url="webpos" module="Magento_WebposCustomer">
+        <section name="WebposLoginSection" />
+        <section name="WebposMsWebposSection" />
+        <section name="WebposToasterSection" />
+        <section name="WebposFirstScreenSection" />
+        <section name="WebposCMenuSection" />
+        <!--Begin Webpos Customer Page-->
+        <section name="WebposCustomerListContainerSection">
+            <section name="WebposWrapBackOverSection" />
+            <section name="WebposCustomerListHeaderSection" />
+            <!--Begin Webpos Customer List Left-->
+            <section name="WebposCustomerListLeftSection" />
+            <section name="WebposCustomerListHeaderSection" />
+            <section name="WebposCustomerListMainItemSection" />
+            <!--End Webpos Customer List Left-->
+            <!--Begin Webpos Customer List Right-->
+            <section name="WebposCustomerRightSection" />
+            <section name="WebposCustomerRightHeaderSection" />
+            <!--Begin Webpos Customer List Right - Add New Address-->
+            <section name="WebposCustomerAddAddressHeaderSection" />
+            <section name="WebposCustomerAddAddressBodySection" />
+            <!--End Webpos Customer List Right - Add New Address-->
+            <!--Begin Webpos Customer List Right - Add New Customer-->
+            <section name="WebposCustomerAddCustomerHeaderSection" />
+            <section name="WebposCustomerAddCustomerBodySection" />
+            <section name="WebposCustomerAddCustomerFooterSection" />
+            <!--End Webpos Customer List Right - Add New Customer-->
+            <!--Begin Webpos Customer List Right - Add New Customer Shipping Address-->
+            <section name="WebposCustomerAddCustomerShippingAddressHeaderSection" />
+            <section name="WebposCustomerAddCustomerShippingAddressBodySection" />
+            <!--End Webpos Customer List Right - Add New Customer Shipping Address-->
+            <!--Begin Webpos Customer List Right - Add New Customer Billing Address-->
+            <section name="WebposCustomerAddCustomerBillingAddressHeaderSection" />
+            <section name="WebposCustomerAddCustomerBillingAddressBodySection" />
+            <!--End Webpos Customer List Right - Add New Customer Billing Address-->
+            <!--Begin Webpos Customer List Right - Add New Customer Complain-->
+            <section name="WebposCustomerAddCustomerComplainHeaderSection" />
+            <section name="WebposCustomerAddCustomerComplainBodySection" />
+            <!--End Webpos Customer List Right - Add New Customer Complain-->
+            <!--End Webpos Customer List Right-->
+        </section>
+        <!--End Webpos Customer Page-->
+    </page>
+</config>
