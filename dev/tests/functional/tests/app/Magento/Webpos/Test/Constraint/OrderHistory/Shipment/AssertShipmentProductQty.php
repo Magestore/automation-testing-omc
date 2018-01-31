@@ -16,6 +16,10 @@ class AssertShipmentProductQty extends AbstractConstraint
     public function processAssert(WebposIndex $webposIndex, $products, $partial = true)
     {
         foreach ($products as $item) {
+            if (!is_array($item)) {
+                $shipQty = $item->getCheckoutData()['qty'];
+                break;
+            }
             $productName = $item['product']->getName();
             if (isset($item['qtyToShip']) && $partial == true) {
                 $shipQty = $item['qtyToShip'];
