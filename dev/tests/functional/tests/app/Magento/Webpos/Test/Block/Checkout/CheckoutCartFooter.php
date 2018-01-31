@@ -52,6 +52,11 @@ class CheckoutCartFooter extends Block
 		return $this->_rootElement->find('//div/ul/li/div[contains(@class, "add-discount")]/..', Locator::SELECTOR_XPATH);
 	}
 
+	public function getDiscount()
+	{
+		return $this->_rootElement->find('//*[@id="webpos_cart"]/div/div/div/ul/li[4]', Locator::SELECTOR_XPATH);
+	}
+
 	public function waitButtonHoldVisible()
 	{
 		$this->waitForElementVisible('.hold');
