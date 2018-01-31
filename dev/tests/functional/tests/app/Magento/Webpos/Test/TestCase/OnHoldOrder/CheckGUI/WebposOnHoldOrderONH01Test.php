@@ -30,11 +30,5 @@ class WebposOnHoldOrderONH01Test extends Injectable
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-
-        //Click on On-hold Orders menu
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->onHoldOrders();
-        sleep(1);
-        $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
     }
 }

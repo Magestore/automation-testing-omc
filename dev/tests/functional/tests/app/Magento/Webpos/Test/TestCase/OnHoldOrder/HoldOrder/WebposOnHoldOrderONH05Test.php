@@ -5,9 +5,11 @@
  * Date: 26/01/2018
  * Time: 14:00
  */
-namespace Magento\Webpos\Test\TestCase\OnHoldOrder\CheckGUI;
+namespace Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Config\Test\Fixture\ConfigData;
 
 class WebposOnHoldOrderONH05Test extends Injectable
 {
@@ -15,6 +17,14 @@ class WebposOnHoldOrderONH05Test extends Injectable
      * @var WebposIndex
      */
     protected $webposIndex;
+
+    public function __prepare(FixtureFactory $fixtureFactory)
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'webpos_default_guest_checkout_rollback']
+        )->run();
+    }
 
     public function __inject
     (
@@ -24,7 +34,7 @@ class WebposOnHoldOrderONH05Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test($products)
+    public function test($products, ConfigData $configData)
     {
         //Create product
         $product1 = $this->objectManager->getInstance()->create(
@@ -57,10 +67,17 @@ class WebposOnHoldOrderONH05Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
-        //Click on On-hold Orders menu
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->onHoldOrders();
-        sleep(1);
-        $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
+        $configData = $configData->getData()['section'];
+        $dataProduct1 = $product1->getData();
+        $dataProduct1['qty'] = '1';
+        $dataProduct2 = $product2->getData();
+        $dataProduct2['qty'] = '1';
+        return ['products' => [$dataProduct1, $dataProduct2],
+            'product' => $dataProduct1,
+            'name' => $configData['webpos/guest_checkout/first_name']['value'].' '.$configData['webpos/guest_checkout/first_name']['value'],
+            'address' => $configData['webpos/guest_checkout/city']['value'].', '.$configData['webpos/guest_checkout/region_id']['label'].
+                ', '.$configData['webpos/guest_checkout/zip']['value'].', US',
+            'phone' =>  $configData['webpos/guest_checkout/telephone']['value']];
+
     }
 }

@@ -16,5 +16,28 @@ use Magento\Mtf\Block\Block;
  */
 class OnHoldOrderOrderViewHeader extends Block
 {
+    public function getBlockIdOrder()
+    {
+        return $this->_rootElement->find('.id-order');
+    }
 
+    public function getIdOrder()
+    {
+        return $this->getBlockIdOrder()->find('.title-header-page > span')->getText();
+    }
+
+    public function getCreateAt()
+    {
+        return $this->_rootElement->find('label[data-bind="text: $t(\'Created Date: \')"]');
+    }
+
+    public function getServeBy()
+    {
+        return $this->_rootElement->find('label[data-bind="text: $t(\'Served by: \')"]');
+    }
+
+    public function getStatus()
+    {
+        return $this->_rootElement->find('label[data-bind="text: $t(\'Status: \')"]');
+    }
 }
