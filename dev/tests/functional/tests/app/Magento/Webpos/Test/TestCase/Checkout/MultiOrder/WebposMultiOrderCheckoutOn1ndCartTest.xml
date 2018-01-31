@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\MultiOrder\WebposMultiOrderCheckoutOn1ndCartTest" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
+        <variation name="WebposMultiOrderCheckoutOn2ndCartTestVariation1_CP31">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+                <item name="1" xsi:type="string">product2</item>
+            </data>
+            <data name="secondCart" xsi:type="string">2</data>
+            <data name="orderNumber" xsi:type="string">1</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\MultiOrder\AssertWebposMultiOrderCheckoutOn1ndCart" />
+        </variation>
+    </testCase>
+</config>

@@ -16,15 +16,15 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 class AssertWebposMultiOrderCheckoutOn1ndCart extends AbstractConstraint
 {
-    public function processAssert(WebposIndex $webposIndex, $restCart, $orderNumber)
+    public function processAssert(WebposIndex $webposIndex, $secondCart, $orderNumber)
     {
         \PHPUnit_Framework_Assert::assertFalse(
             $webposIndex->getCheckoutCartHeader()->getMultiOrderItem($orderNumber)->isVisible(),
             'On the AssertWebposCheckGUICustomerPriceCP54 TaxClass Header - The cart item with name\'s'.$orderNumber.' was visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getCheckoutCartHeader()->getMultiOrderItem($restCart)->isVisible(),
-            'On the AssertWebposCheckGUICustomerPriceCP54 TaxClass Header - The cart item with name\'s'.$restCart.' was visible.'
+            $webposIndex->getCheckoutCartHeader()->getMultiOrderItem($secondCart)->isVisible(),
+            'On the AssertWebposCheckGUICustomerPriceCP54 TaxClass Header - The cart item with name\'s'.$secondCart.' was visible.'
         );
     }
 
@@ -35,6 +35,6 @@ class AssertWebposMultiOrderCheckoutOn1ndCart extends AbstractConstraint
      */
     public function toString()
     {
-        return "On the AssertWebposCheckGUICustomerPriceCP54 TaxClass Header - The cart item were visible correctly.";
+        return "On the AssertWebposMultiOrderCheckoutOn1ndCart TaxClass Header - The cart item were visible correctly.";
     }
 }
