@@ -135,7 +135,8 @@ class WebposNonstopTest extends Injectable
 			)->run();
 			for ($i = 0; $i < 4999; $i++) {
 				$count++;
-				\Zend_Debug::dump(' '.$count.' |');
+//				\Zend_Debug::dump(' '.$count.' |');
+				fwrite(STDOUT, $count.' | ');
 				// Open checkout page
 				$this->webposIndex->getMsWebpos()->clickCMenuButton();
 				$this->webposIndex->getCMenu()->checkout();
