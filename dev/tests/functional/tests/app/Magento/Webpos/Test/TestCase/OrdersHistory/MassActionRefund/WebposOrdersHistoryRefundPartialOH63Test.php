@@ -2,25 +2,32 @@
 /**
  * Created by PhpStorm.
  * User: vong
- * Date: 1/31/2018
- * Time: 1:13 PM
+ * Date: 2/1/2018
+ * Time: 8:05 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund;
 
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposOrdersHistoryRefundCheckOkConfirmationOH62Test extends Injectable
+class WebposOrdersHistoryRefundPartialOH63Test extends Injectable
 {
     /**
      * @var WebposIndex
      */
     protected $webposIndex;
 
-    public function __inject(WebposIndex $webposIndex)
+    /**
+     * @var AssertRefundSuccess
+     */
+    protected $assertRefundSuccess;
+
+    public function __inject(WebposIndex $webposIndex, AssertRefundSuccess $assertRefundSuccess)
     {
         $this->webposIndex = $webposIndex;
+        $this->assertRefundSuccess = $assertRefundSuccess;
     }
 
     public function test($products)
@@ -68,18 +75,29 @@ class WebposOrdersHistoryRefundCheckOkConfirmationOH62Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getOrderHistoryAddOrderNote()->getRefundButton()->click();
         sleep(1);
-        $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
-        sleep(1);
+        // Create Refund Partial
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
+            [
+                'products' => $products
+            ]
+        )->run();
+        // Calculate total refunded
+        $shippingFee = $this->webposIndex->getOrderHistoryOrderViewFooter()->getShipping();
+        $shippingFee = (float)substr($shippingFee, 1);
+        $totalRefunded = 0;
+        foreach ($products as $key => $item) {
+            $productName = $item['product']->getName();
+            $rowTotal = $this->webposIndex->getOrderHistoryOrderViewContent()->getRowTotalOfProduct($productName);
+            $rowTotal = (float)substr($rowTotal, 1);
+            $totalRefunded += ($rowTotal/$item['orderQty'])*$item['refundQty'];
+        }
+        $totalRefunded += $shippingFee;
+        $expectStatus = 'Complete';
+        $this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
         $this->assertTrue(
-            $this->webposIndex->getModal()->isVisible(),
-            'Confirmation popup is not visible.'
+            $this->webposIndex->getOrderHistoryAddOrderNote()->getRefundButton()->isVisible(),
+            'Refund button is not visible.'
         );
-        $this->webposIndex->getModal()->getOkButton()->click();
-        sleep(1);
-
-        return [
-            'expectStatus' => 'Closed',
-            'hideActionList' => 'Ship,Refund,Cancel'
-        ];
     }
 }
