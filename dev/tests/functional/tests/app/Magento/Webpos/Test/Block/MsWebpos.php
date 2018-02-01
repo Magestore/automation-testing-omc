@@ -25,6 +25,11 @@ class MsWebpos extends Block
 		$this->_rootElement->find('#c-button--push-left')->click();
 	}
 
+	public function getCMenuButton()
+	{
+		return $this->_rootElement->find('#c-button--push-left');
+	}
+
 	public function getLoader()
 	{
 		return $this->_rootElement->find('#checkout-loader');
