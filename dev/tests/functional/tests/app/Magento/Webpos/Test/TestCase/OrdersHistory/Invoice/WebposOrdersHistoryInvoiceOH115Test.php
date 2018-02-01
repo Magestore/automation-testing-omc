@@ -2,16 +2,21 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 2/1/2018
- * Time: 9:42 AM
+ * Date: 1/31/2018
+ * Time: 4:57 PM
  */
 
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\Invoice;
 
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Page\WebposIndex;
+use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderSuccess;
 
-class WebposOrdersHistoryInvoiceOH106Test extends Injectable
+/**
+ * Class WebposOrdersHistoryInvoiceOH115Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
+ */
+class WebposOrdersHistoryInvoiceOH115Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -19,18 +24,30 @@ class WebposOrdersHistoryInvoiceOH106Test extends Injectable
     protected $webposIndex;
 
     /**
+     * @var AssertOrderSuccess
+     */
+    protected $assertOrderSuccess;
+
+    /**
      * @param WebposIndex $webposIndex
+     * @param AssertOrderSuccess $assertOrderSuccess
      */
     public function __inject(
-        WebposIndex $webposIndex
+        WebposIndex $webposIndex,
+        AssertOrderSuccess $assertOrderSuccess
     )
     {
         $this->webposIndex = $webposIndex;
+        $this->assertOrderSuccess = $assertOrderSuccess;
     }
 
+
+    /**
+     * @param $products
+     * @return array
+     */
     public function test(
-        $products,
-        $invoiceComment
+        $products
     )
     {
         // Create products
@@ -60,36 +77,30 @@ class WebposOrdersHistoryInvoiceOH106Test extends Injectable
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
             [
-                'createInvoice' => false,
-                'shipped' => false
+                'createInvoice' => true,
+                'shipped' => true
             ]
         )->run();
+
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+		$orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
-        // Order history
+        // Assert order success
+        $this->assertOrderSuccess->processAssert($this->webposIndex, $orderId);
+
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-
-        // Click Button Invoice
-        $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
-        $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
-        $this->webposIndex->getOrderHistoryInvoice()->getCommentInput()->setValue($invoiceComment);
-        $this->webposIndex->getOrderHistoryInvoice()->getSendEmailCheckbox()->click();
-        $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForModalPopup();
-        $this->webposIndex->getModal()->getOkButton()->click();
-        sleep(1);
+        sleep(2);
 
         return [
             'products' => $products,
             'orderId' => $orderId
         ];
     }
+
 }

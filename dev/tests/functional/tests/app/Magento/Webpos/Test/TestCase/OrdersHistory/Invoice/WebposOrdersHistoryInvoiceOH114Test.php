@@ -2,16 +2,21 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 2/1/2018
- * Time: 9:42 AM
+ * Date: 1/31/2018
+ * Time: 4:57 PM
  */
 
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\Invoice;
 
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertOrdersHistoryTakePaymentNotAvailable;
+use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposOrdersHistoryInvoiceOH106Test extends Injectable
+/**
+ * Class WebposOrdersHistoryInvoiceOH114Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
+ */
+class WebposOrdersHistoryInvoiceOH114Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -19,18 +24,33 @@ class WebposOrdersHistoryInvoiceOH106Test extends Injectable
     protected $webposIndex;
 
     /**
+     * @var AssertOrdersHistoryTakePaymentNotAvailable
+     */
+    protected $assertOrdersHistoryTakePaymentNotAvailable;
+
+    /**
      * @param WebposIndex $webposIndex
+     * @param AssertOrdersHistoryTakePaymentNotAvailable $assertOrdersHistoryTakePaymentNotAvailable
      */
     public function __inject(
-        WebposIndex $webposIndex
+        WebposIndex $webposIndex,
+        AssertOrdersHistoryTakePaymentNotAvailable $assertOrdersHistoryTakePaymentNotAvailable
     )
     {
         $this->webposIndex = $webposIndex;
+        $this->assertOrdersHistoryTakePaymentNotAvailable = $assertOrdersHistoryTakePaymentNotAvailable;
     }
 
+    /**
+     * @param $products
+     * @param bool $addDiscount
+     * @param null $discountAmount
+     * @return array
+     */
     public function test(
         $products,
-        $invoiceComment
+        $addDiscount = false,
+        $discountAmount = null
     )
     {
         // Create products
@@ -50,11 +70,23 @@ class WebposOrdersHistoryInvoiceOH106Test extends Injectable
             ['products' => $products]
         )->run();
 
+        // Add Discount
+        if ($addDiscount) {
+            $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
+            sleep(1);
+            self::assertTrue(
+                $this->webposIndex->getCheckoutDiscount()->isVisible(),
+                'CategoryRepository - TaxClass page - Delete TaxClass - Add discount popup is not shown'
+            );
+            $this->webposIndex->getCheckoutDiscount()->setDiscountPercent($discountAmount);
+            $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
+            $this->webposIndex->getMsWebpos()->waitCartLoader();
+            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        }
+
         // Place Order
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         $this->objectManager->getInstance()->create(
@@ -64,32 +96,26 @@ class WebposOrdersHistoryInvoiceOH106Test extends Injectable
                 'shipped' => false
             ]
         )->run();
+
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-
-        // Order history
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
         sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 
-        // Click Button Invoice
+        // Assert Take payment
+        $this->assertOrdersHistoryTakePaymentNotAvailable->processAssert($this->webposIndex);
+
         $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
         $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
-        $this->webposIndex->getOrderHistoryInvoice()->getCommentInput()->setValue($invoiceComment);
-        $this->webposIndex->getOrderHistoryInvoice()->getSendEmailCheckbox()->click();
-        $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForModalPopup();
-        $this->webposIndex->getModal()->getOkButton()->click();
-        sleep(1);
 
         return [
-            'products' => $products,
-            'orderId' => $orderId
+            'products' => $products
         ];
     }
+
 }
