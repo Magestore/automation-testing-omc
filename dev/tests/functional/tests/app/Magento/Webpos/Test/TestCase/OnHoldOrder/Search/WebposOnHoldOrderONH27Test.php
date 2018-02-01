@@ -8,7 +8,7 @@
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\Search;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckOnHoldOrderEmpty;use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Customer\Test\Fixture\Customer;
 
 class WebposOnHoldOrderONH27Test extends Injectable
@@ -17,10 +17,6 @@ class WebposOnHoldOrderONH27Test extends Injectable
      * @var WebposIndex
      */
     protected $webposIndex;
-    /**
-     * @var AssertCheckOnHoldOrderEmpty
-     */
-    protected $assertCheckEmpty;
 
     public function __prepare(FixtureFactory $fixtureFactory)
     {
@@ -37,12 +33,10 @@ class WebposOnHoldOrderONH27Test extends Injectable
 
     public function __inject
     (
-        WebposIndex $webposIndex,
-        AssertCheckOnHoldOrderEmpty $assertCheckEmpty
+        WebposIndex $webposIndex
     )
     {
         $this->webposIndex = $webposIndex;
-        $this->assertCheckEmpty = $assertCheckEmpty;
     }
 
     public function test(Customer $customer, $products)
@@ -84,7 +78,7 @@ class WebposOnHoldOrderONH27Test extends Injectable
         sleep(1);
 
         //Enter incorrect customer name/order id into box search
-        $this->webposIndex->getOnHoldOrderOrderList()->getSearchOrderInput()->setValue($customer->getFirstname().' '.$customer->getLastname());
+        $this->webposIndex->getOnHoldOrderOrderList()->getSearchOrderInput()->setValue(strtolower($customer->getFirstname()));
         sleep(1);
 
         //Enter or click on Search icon
@@ -92,5 +86,7 @@ class WebposOnHoldOrderONH27Test extends Injectable
         $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
         sleep(1);
 
+        return ['result' => 'customer',
+                'input' => $customer->getFirstname()];
     }
 }
