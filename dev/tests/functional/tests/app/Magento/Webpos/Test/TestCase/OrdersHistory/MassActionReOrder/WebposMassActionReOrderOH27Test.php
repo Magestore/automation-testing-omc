@@ -30,10 +30,11 @@ class WebposMassActionReOrderOH27Test extends Injectable
     {
         // Preconditions
         $order->persist();
-        $products = $order->getEntityId()['products'];
-//        foreach ($products as $product) {
-//            \Zend_Debug::dump($product->getName());
-//        }
+        $list = $order->getEntityId()['products'];
+        $products = [];
+        foreach ($list as $key => $value){
+            $products[$key]['product'] = $value;
+        }
 
         // Login webpos
         $staff = $this->objectManager->getInstance()->create(

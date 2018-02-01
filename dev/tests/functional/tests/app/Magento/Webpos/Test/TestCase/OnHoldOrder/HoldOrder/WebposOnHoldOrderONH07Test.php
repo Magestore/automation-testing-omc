@@ -5,7 +5,7 @@
  * Date: 26/01/2018
  * Time: 13:26
  */
-namespace Magento\Webpos\Test\TestCase\OnHoldOrder\CheckGUI;
+namespace Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
@@ -59,10 +59,8 @@ class WebposOnHoldOrderONH07Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
-        //Click on On-hold Orders menu
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->onHoldOrders();
-        sleep(1);
-        $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
+        $dataProduct = $product->getData();
+        $dataProduct['qty'] = 1;
+        return ['product' => $dataProduct];
     }
 }

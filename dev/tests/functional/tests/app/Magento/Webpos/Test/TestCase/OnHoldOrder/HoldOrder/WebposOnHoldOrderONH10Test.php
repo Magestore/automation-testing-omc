@@ -5,11 +5,11 @@
  * Date: 26/01/2018
  * Time: 13:26
  */
-namespace Magento\Webpos\Test\TestCase\OnHoldOrder\CheckGUI;
+namespace Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposOnHoldOrderONH09Test extends Injectable
+class WebposOnHoldOrderONH10Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -43,10 +43,10 @@ class WebposOnHoldOrderONH09Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
-             //Click to product name > Discount tab > Input amount less than original
+            //Click to product name > Discount tab > Input amount less than original
         $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getDollarButton()->click();
+        $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
         sleep(1);
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
@@ -56,10 +56,8 @@ class WebposOnHoldOrderONH09Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
-        //Click on On-hold Orders menu
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->onHoldOrders();
-        sleep(1);
-        $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
+        $dataProduct = $product->getData();
+        $dataProduct['qty'] = 1;
+        return ['product' => $dataProduct];
     }
 }

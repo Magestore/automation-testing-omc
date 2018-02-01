@@ -5,11 +5,11 @@
  * Date: 26/01/2018
  * Time: 13:26
  */
-namespace Magento\Webpos\Test\TestCase\OnHoldOrder\CheckGUI;
+namespace Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposOnHoldOrderONH11Test extends Injectable
+class WebposOnHoldOrderONH08Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -24,7 +24,7 @@ class WebposOnHoldOrderONH11Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test($products, $discount)
+    public function test($products, $priceCustom)
     {
         //Create product
         $product = $this->objectManager->getInstance()->create(
@@ -43,30 +43,24 @@ class WebposOnHoldOrderONH11Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
-
-        //Click on [Add discount] > on Discount tab, add dicount for whole cart (type: $)
-        while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup())
+            //Edit customer price of that product with type: $
+        $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
+        if (!$this->webposIndex->getCheckoutProductEdit()->getPanelPriceBox()->isVisible())
         {
-            $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
+            $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
         }
-        $this->webposIndex->getCheckoutDiscount()->clickDiscountButton();
-        $this->webposIndex->getCheckoutDiscount()->setTypeDiscount('$');
-        $this->webposIndex->getCheckoutDiscount()->setNumberDiscount($discount);
-        $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
+        $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
         sleep(1);
-
-        //Hold
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+            //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
-        //Click on On-hold Orders menu
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->onHoldOrders();
-        sleep(1);
-        $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
+        $dataProduct = $product->getData();
+        $dataProduct['qty'] = 1;
+        return ['product' => $dataProduct];
     }
 }
