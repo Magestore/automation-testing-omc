@@ -13,7 +13,7 @@ use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposOrdersHistoryRefundWithReturnStockOH66Test extends Injectable
+class WebposOrdersHistoryRefundWithReturnStockOH66OH67Test extends Injectable
 {
     /**
      * @var WebposIndex
