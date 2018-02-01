@@ -57,6 +57,10 @@ class OrderHistoryInvoice extends Block
         return $this->getItemRow($name)->find('[data-bind="text: $parent.convertAndFormatPrice(item.base_price)"]')->getText();
     }
 
+    public function getQtyOfProduct($productName)
+    {
+        return $this->_rootElement->find('//*[@id="invoice-popup-form"]/div[2]/div[2]/table/tbody/tr/td[1]/h4[text()="'.$productName.'"]/../../td[3]', Locator::SELECTOR_XPATH);
+    }
     /**
      * @param $productName
      * @return \Magento\Mtf\Client\ElementInterface
