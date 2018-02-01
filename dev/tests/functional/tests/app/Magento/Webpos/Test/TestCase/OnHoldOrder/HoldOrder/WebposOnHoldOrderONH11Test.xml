@@ -8,6 +8,8 @@
             </item>
         </data>
         <data xsi:type="string" name="discount">15.11</data>
+        <constraint name="Magento\Webpos\Test\Constraint\OnHoldOrder\HoldOrder\AssertCheckOnHoldSimpleProduct"/>
+        <constraint name="Magento\Webpos\Test\Constraint\OnHoldOrder\HoldOrder\AssertCheckDiscountWhole"/>
     </variation>
 </testCase>
 </config>

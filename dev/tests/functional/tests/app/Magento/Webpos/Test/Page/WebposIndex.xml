@@ -66,5 +66,10 @@
         <block name="onHoldOrderOrderViewContent" class="Magento\Webpos\Test\Block\OnHoldOrder\OnHoldOrderOrderViewContent" locator="#on_hold_orders_container .col-sm-8.col-left .main-content" strategy="css selector"/>
         <block name="onHoldOrderOrderViewFooter" class="Magento\Webpos\Test\Block\OnHoldOrder\OnHoldOrderOrderViewFooter" locator="#on_hold_orders_container .col-sm-8.col-left .footer-order" strategy="css selector"/>
         <!--End On-hold Order-->
+        <!-- Manage Stocks-->
+        <block name="manageStockHeader" class="Magento\Webpos\Test\Block\ManageStocks\ManageStockHeader" locator="#manage_stock_container header" strategy="css selector"/>
+        <block name="manageStockList" class="Magento\Webpos\Test\Block\ManageStocks\ManageStockList" locator="#manage_stock_container main" strategy="css selector"/>
+        <!-- End Manage Stocks-->
+
     </page>
 </config>

@@ -165,4 +165,22 @@ class OnHoldOrderOrderViewContent extends Block
     {
         return $this->_rootElement->find('.title-box')->getText();
     }
+    public function getTaxAmountProductByOrderTo($i)
+    {
+        return floatval(str_replace('$','',$this->_rootElement->find('//div/div[2]/div/div/div/table/tbody/tr['.$i.']/td[6]', Locator::SELECTOR_XPATH)->getText()));
+    }
+    public function getRowTotalProductByOrderTo($i)
+    {
+        return floatval(str_replace('$','',$this->_rootElement->find('//div/div[2]/div/div/div/table/tbody/tr['.$i.']/td[8]', Locator::SELECTOR_XPATH)->getText()));
+    }
+
+    public function getDiscountProductByOrderTo($i)
+    {
+        return floatval(str_replace('$','',$this->_rootElement->find('//div/div[2]/div/div/div/table/tbody/tr['.$i.']/td[7]', Locator::SELECTOR_XPATH)->getText()));
+    }
+
+    public function getComment()
+    {
+        return $this->_rootElement->find('#on_hold_orders_container > div > div.col-sm-8.col-left > main > div > div:nth-child(3) > div > div > div.panel-body > div > table > tbody > tr > td:nth-child(2)');
+    }
 }

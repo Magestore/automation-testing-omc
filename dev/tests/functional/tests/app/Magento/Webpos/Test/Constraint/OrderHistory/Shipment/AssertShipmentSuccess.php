@@ -32,6 +32,12 @@ class AssertShipmentSuccess extends AbstractConstraint
             $webposIndex->getOrderHistoryPayment()->isVisible(),
             'Payment Pop is not closed'
         );
+
+        \PHPUnit_Framework_Assert::assertFalse(
+            $webposIndex->getOrderHistoryShipment()->isVisible(),
+            'Shipment Popup is not closed'
+        );
+
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getToaster()->getWarningMessage()->isVisible(),
             'Success Message is not displayed'

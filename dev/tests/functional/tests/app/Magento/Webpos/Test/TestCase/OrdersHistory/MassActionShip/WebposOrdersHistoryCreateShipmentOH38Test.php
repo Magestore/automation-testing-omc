@@ -23,7 +23,7 @@ class WebposOrdersHistoryCreateShipmentOH38Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test($products)
+    public function test($products, $trackNumber, $shipmentComment)
     {
         // Create products
         $products = $this->objectManager->getInstance()->create(
@@ -49,6 +49,7 @@ class WebposOrdersHistoryCreateShipmentOH38Test extends Injectable
         // Place Order
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         // Go to Order History
@@ -60,15 +61,16 @@ class WebposOrdersHistoryCreateShipmentOH38Test extends Injectable
         // Open shipment popup
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getOrderHistoryAddOrderNote()->getShipButton()->click();
-        $this->webposIndex->getOrderHistoryShipment()->getTrackNumber()->setValue('5');
-        $this->webposIndex->getOrderHistoryShipment()->getShipmentComment()->setValue('test comment');
+        $this->webposIndex->getOrderHistoryShipment()->getTrackNumber()->setValue($trackNumber);
+        $this->webposIndex->getOrderHistoryShipment()->getShipmentComment()->setValue($shipmentComment);
         $this->webposIndex->getOrderHistoryShipment()->getSendMailCheckbox()->click();
         $this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
         $this->webposIndex->getModal()->getOkButton()->click();
         sleep(1);
         return [
             'products' => $products,
-            'status' => 'Complete'
+            'status' => 'Complete',
+            'orderId' => $orderId
         ];
     }
 }

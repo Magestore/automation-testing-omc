@@ -8,7 +8,6 @@
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\Search;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckOnHoldOrderEmpty;
 
 class WebposOnHoldOrderONH28Test extends Injectable
 {
@@ -19,16 +18,13 @@ class WebposOnHoldOrderONH28Test extends Injectable
     /**
      * @var AssertCheckOnHoldOrderEmpty
      */
-    protected $assertCheckEmpty;
 
     public function __inject
     (
-        WebposIndex $webposIndex,
-        AssertCheckOnHoldOrderEmpty $assertCheckEmpty
+        WebposIndex $webposIndex
     )
     {
         $this->webposIndex = $webposIndex;
-        $this->assertCheckEmpty = $assertCheckEmpty;
     }
 
     public function test($products)
@@ -106,5 +102,7 @@ class WebposOnHoldOrderONH28Test extends Injectable
         $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
         sleep(1);
 
+        return ['result' => 'idOrder',
+            'input' => $idOrder1];
     }
 }
