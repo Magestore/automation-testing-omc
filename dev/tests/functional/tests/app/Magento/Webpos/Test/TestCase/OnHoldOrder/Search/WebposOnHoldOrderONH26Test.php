@@ -9,7 +9,8 @@ namespace Magento\Webpos\Test\TestCase\OnHoldOrder\Search;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckOnHoldOrderEmpty;
-
+use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Customer\Test\Fixture\Customer;
 class WebposOnHoldOrderONH26Test extends Injectable
 {
     /**
@@ -21,6 +22,19 @@ class WebposOnHoldOrderONH26Test extends Injectable
      */
     protected $assertCheckEmpty;
 
+    public function __prepare(FixtureFactory $fixtureFactory)
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'webpos_default_guest_checkout_rollback']
+        )->run();
+
+        //Create customer
+        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'webpos_guest_pi']);
+        $customer->persist();
+        return ['customer' => $customer];
+    }
+
     public function __inject
     (
         WebposIndex $webposIndex,
@@ -31,7 +45,7 @@ class WebposOnHoldOrderONH26Test extends Injectable
         $this->assertCheckEmpty = $assertCheckEmpty;
     }
 
-    public function test($products)
+    public function test(Customer $customer, $products)
     {
         //Create product
         $products = $this->objectManager->getInstance()->create(
@@ -46,6 +60,13 @@ class WebposOnHoldOrderONH26Test extends Injectable
         )->run();
 
         //Create a on-hold-order
+            //Add an exist customer
+        $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
+        $this->webposIndex->getCheckoutChangeCustomer()->search($customer->getFirstname());
+        sleep(1);
+        $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
+        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
             //Add a product to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
@@ -71,5 +92,7 @@ class WebposOnHoldOrderONH26Test extends Injectable
         $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
         sleep(1);
 
+        return ['result' => 'empty',
+            'input' => $product1->getName()];
     }
 }

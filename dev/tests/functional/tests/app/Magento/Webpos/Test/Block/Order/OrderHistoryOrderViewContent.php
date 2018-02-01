@@ -169,4 +169,10 @@ class OrderHistoryOrderViewContent extends Block
 		return $this->getPaymentMethod($label)->find('label[data-bind="text: $parents[1].getWebposPaymentAmount($data)"]');
 	}
 
+	public function getShippedQty($productName)
+    {
+        $qtyColumn = $this->getQtyOfProduct($productName)->getText();
+        preg_match('/Shipped: (\d+)/', $qtyColumn, $match);
+        return $match[1];
+    }
 }

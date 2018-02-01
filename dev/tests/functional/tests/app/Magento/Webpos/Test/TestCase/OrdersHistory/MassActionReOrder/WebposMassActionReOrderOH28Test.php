@@ -12,6 +12,10 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposMassActionReOrderOH28Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionReOrder
+ */
 class WebposMassActionReOrderOH28Test extends Injectable
 {
     /**
@@ -24,6 +28,10 @@ class WebposMassActionReOrderOH28Test extends Injectable
      */
     protected $fixtureFactory;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
+     */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory
@@ -33,6 +41,10 @@ class WebposMassActionReOrderOH28Test extends Injectable
         $this->fixtureFactory = $fixtureFactory;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test(
         $products
     )
@@ -59,12 +71,12 @@ class WebposMassActionReOrderOH28Test extends Injectable
             'Magento\Webpos\Test\TestStep\EditCustomPriceOfProductOnCartStep',
             ['products' => $products]
         )->run();
-        $customPrice = $products[0]['customPrice'];
 
-        // Place
+        // Place order
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+
         // Select Payment Method
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -72,8 +84,6 @@ class WebposMassActionReOrderOH28Test extends Injectable
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         // End Place Order
-
-        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
 
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();

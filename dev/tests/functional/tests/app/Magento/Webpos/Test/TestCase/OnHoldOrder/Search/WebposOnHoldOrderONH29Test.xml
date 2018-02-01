@@ -13,7 +13,7 @@
                 <item name="product" xsi:type="string">product_100_dollar_taxable</item>
             </item>
         </data>
-        <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckAlertWarning"/>-->
+        <constraint name="Magento\Webpos\Test\Constraint\OnHoldOrder\Search\AssertCheckNumberOrder"/>
     </variation>
 </testCase>
 </config>
