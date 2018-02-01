@@ -87,20 +87,20 @@ class DeleteGiftcodeEntityTest extends Injectable
         $giftcodes = $this->createGiftcodes($fixtureType, $dataset, 2);
         $grid = $this->giftcodeIndex->getGiftcodeGroupGrid();
         
-        // MGC010
-        $this->giftcodeIndex->open();
-        $grid->massaction([
-            ['giftvoucher_id' => $giftcodes[0]->getGiftvoucherId()],
-        ], 'Delete', true);
-        $messages['mass_delete'] = $this->giftcodeIndex->getMessagesBlock()->getSuccessMessage();
-        
-        // MGC011
-        $grid->searchAndOpen(['gift_code' => $giftcodes[1]->getGiftCode()]);
-        $this->giftcodeEdit->getGiftcodeMainActions()->delete();
-        $this->giftcodeEdit->getModalBlock()->acceptAlert();
-        $messages['delete'] = $this->giftcodeIndex->getMessagesBlock()->getSuccessMessage();
-        
-        return ['giftcodes' => $giftcodes, 'messages' => $messages];
+//        // MGC010
+//        $this->giftcodeIndex->open();
+//        $grid->massaction([
+//            ['giftvoucher_id' => $giftcodes[0]->getGiftvoucherId()],
+//        ], 'Delete', true);
+//        $messages['mass_delete'] = $this->giftcodeIndex->getMessagesBlock()->getSuccessMessage();
+//
+//        // MGC011
+//        $grid->searchAndOpen(['gift_code' => $giftcodes[1]->getGiftCode()]);
+//        $this->giftcodeEdit->getGiftcodeMainActions()->delete();
+//        $this->giftcodeEdit->getModalBlock()->acceptAlert();
+//        $messages['delete'] = $this->giftcodeIndex->getMessagesBlock()->getSuccessMessage();
+//
+//        return ['giftcodes' => $giftcodes, 'messages' => $messages];
     }
     
     protected function createGiftcodes($fixtureType, $dataset, $number) {
