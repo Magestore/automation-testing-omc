@@ -5,6 +5,8 @@
         <data name="productCustom/name" xsi:type="string">jfkasdljfasld;</data>
         <data name="productCustom/price" xsi:type="string">15</data>
         <data name="comment" xsi:type="string">1asdfsdsdfsdasdfds5</data>
+        <constraint name="Magento\Webpos\Test\Constraint\OnHoldOrder\HoldOrder\AssertCheckOnHoldSimpleProduct"/>
+        <constraint name="Magento\Webpos\Test\Constraint\OnHoldOrder\HoldOrder\AssertCheckComment"/>
     </variation>
 </testCase>
 </config>

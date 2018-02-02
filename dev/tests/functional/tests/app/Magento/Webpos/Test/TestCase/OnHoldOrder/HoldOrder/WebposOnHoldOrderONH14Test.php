@@ -16,6 +16,14 @@ class WebposOnHoldOrderONH14Test extends Injectable
      */
     protected $webposIndex;
 
+    public function __prepare()
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'have_shipping_method_on_webpos_CP194']
+        )->run();
+    }
+
     public function __inject
     (
         WebposIndex $webposIndex
@@ -24,7 +32,7 @@ class WebposOnHoldOrderONH14Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test($products, $discount)
+    public function test($products)
     {
         //Create product
         $product = $this->objectManager->getInstance()->create(
@@ -48,9 +56,11 @@ class WebposOnHoldOrderONH14Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
             //Choose PoS shipping method
-        $this->webposIndex->getCheckoutShippingMethod()->clickPOSShipping();
+        $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         sleep(1);
+        $feeShipping = $this->webposIndex->getCheckoutCartFooter()->getShippingPrice();
+
             //BackToCart
         $this->webposIndex->getCheckoutWebposCart()->getIconPrevious()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -63,10 +73,10 @@ class WebposOnHoldOrderONH14Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
-        //Click on On-hold Orders menu
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->onHoldOrders();
-        sleep(1);
-        $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
+        $dataProduct = $product->getData();
+        $dataProduct['qty'] = '1';
+        return ['products' => [$dataProduct],
+            'feeShipping'=> $feeShipping
+        ];
     }
 }

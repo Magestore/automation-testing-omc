@@ -64,4 +64,15 @@ class OnHoldOrderOrderList extends Block
     {
         return $this->_rootElement->find('.title-time');
     }
+
+    public function getFullNameCustomer()
+    {
+        return $this->_rootElement->find('span[data-bind="text: $parents[1].getCustomerName($data)"]');
+    }
+
+    public function getOrderByStt($i)
+    {
+        return $this->_rootElement->find('#webpos_order_list > div > div > ul > li:nth-child('.$i.')');
+    }
+
 }

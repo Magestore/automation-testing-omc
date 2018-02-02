@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Tax\IncludeFPTInSubtotalYes\WebposTaxTAX109Test" summary="Tax" ticketId="WEBPOSTAX-109">
+        <variation name="WebposTaxTAX109TestVariation_TAX109">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">simple_product_100_dollar_fpt</item>
+                    <item name="orderQty" xsi:type="number">1</item>
+                </item>
+            </data>
+        </variation>
+    </testCase>
+</config>

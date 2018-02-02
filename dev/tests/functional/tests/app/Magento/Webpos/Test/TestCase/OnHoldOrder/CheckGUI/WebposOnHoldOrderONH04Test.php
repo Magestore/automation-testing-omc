@@ -27,14 +27,12 @@ class WebposOnHoldOrderONH04Test extends Injectable
     public function test($products)
     {
         //Create product
-        $product1 = $this->objectManager->getInstance()->create(
+        $products = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
-        )->run()[0]['product'];
-        $product2 = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
-            ['products' => $products]
-        )->run()[1]['product'];
+        )->run();
+        $product1 = $products[0]['product'];
+        $product2 = $products[1]['product'];
 
         //Login webpos
         $staff = $this->objectManager->getInstance()->create(
@@ -69,6 +67,7 @@ class WebposOnHoldOrderONH04Test extends Injectable
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->logout();
         $this->webposIndex->getModal()->getOkButton()->click();
+        sleep(4);
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         //Login webpos again

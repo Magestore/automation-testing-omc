@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\Invoice\WebposOrdersHistoryInvoiceOH101Test" summary="Orders History - [Invoice] button" ticketId="WEBPOS-OH101">
+    <variation name="WebposOrdersHistoryInvoiceOH101Test_OH101">
+            <data name="configData" xsi:type="string">all_allow_shipping_for_POS</data>
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                    <item name="orderQty" xsi:type="number">1</item>
+                </item>
+            </data>
+            <data name="createInvoice" xsi:type="boolean">false</data>
+            <data name="addDiscount" xsi:type="boolean">true</data>
+            <data name="discountAmount" xsi:type="string">60.00</data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoicePopupCorrect"/>
+        </variation>
+    </testCase>
+</config>

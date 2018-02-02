@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund\WebposOrdersHistoryRefundWithReturnStockOH66OH67Test" summary="OrdersHistory-MassActionRefund" ticketId="WEBPOSMASSACTIONREFUND-OH66OH67">
+        <variation name="WebposOrdersHistoryRefundWithReturnStockOH66TestVariation1">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable_big_qty</item>
+                    <item name="orderQty" xsi:type="number">2</item>
+                    <item name="returnToStock" xsi:type="boolean">true</item>
+                </item>
+                <item name="1" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable_big_qty</item>
+                    <item name="orderQty" xsi:type="number">2</item>
+                    <item name="returnToStock" xsi:type="boolean">true</item>
+                </item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertProductQtyInManageStocksAfterRefund"/>
+        </variation>
+        <variation name="WebposOrdersHistoryRefundWithReturnStockOH67TestVariation1">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable_big_qty</item>
+                    <item name="orderQty" xsi:type="number">2</item>
+                </item>
+                <item name="1" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable_big_qty</item>
+                    <item name="orderQty" xsi:type="number">2</item>
+                </item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertProductQtyInManageStocksAfterRefund"/>
+        </variation>
+    </testCase>
+</config>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\Invoice\WebposOrdersHistoryInvoiceOH106Test" summary="Orders History - [Invoice] button" ticketId="WEBPOS-OH106">
+        <variation name="WebposOrdersHistoryInvoiceOH106Test_OH106">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                    <item name="orderQty" xsi:type="number">1</item>
+                </item>
+            </data>
+            <data name="expectStatus" xsi:type="string">Processing</data>
+            <data name="invoiceComment" xsi:type="string">Magestore1@3</data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertCreateInvoiceSuccess"/>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoiceCommentInBackend"/>
+        </variation>
+    </testCase>
+</config>
