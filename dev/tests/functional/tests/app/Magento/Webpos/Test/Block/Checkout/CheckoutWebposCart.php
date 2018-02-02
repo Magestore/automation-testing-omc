@@ -61,7 +61,7 @@ class CheckoutWebposCart extends Block
     }
     public function isDisplayShippingOnCart()
     {
-        return $this->_rootElement->find('//div/ul/li/div[1]/label[text()="Shipping"]/../..', Locator::SELECTOR_XPATH)->getText();
+        return $this->_rootElement->find('//div/ul/li/div[1]/label[text()="Shipping"]/../..', Locator::SELECTOR_XPATH)->isVisible();
     }
 
     public function waitLoading()
