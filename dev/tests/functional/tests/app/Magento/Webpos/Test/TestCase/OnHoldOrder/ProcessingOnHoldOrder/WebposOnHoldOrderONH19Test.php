@@ -63,5 +63,10 @@ class WebposOnHoldOrderONH19Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
+
+        $dataProduct = $productCustom;
+        $dataProduct['qty'] = 1;
+        return ['cartProducts' => [$dataProduct],
+            'type' => '$'];
     }
 }

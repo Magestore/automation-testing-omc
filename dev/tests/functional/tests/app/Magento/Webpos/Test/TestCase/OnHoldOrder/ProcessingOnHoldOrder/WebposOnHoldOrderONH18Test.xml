@@ -8,7 +8,11 @@
             </item>
         </data>
         <data xsi:type="string" name="discount">15.11</data>
-        <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckAlertWarning"/>-->
+        <constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckoutPage"/>
+        <constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckCartSimpleProduct"/>
+        <constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckCustomer"/>
+        <constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckTaxHoldOrder"/>
+        <constraint name="Magento\Webpos\Test\Constraint\OnHoldOrder\Processing\AssertCheckFeeShippingLoadCart"/>
     </variation>
 </testCase>
 </config>
