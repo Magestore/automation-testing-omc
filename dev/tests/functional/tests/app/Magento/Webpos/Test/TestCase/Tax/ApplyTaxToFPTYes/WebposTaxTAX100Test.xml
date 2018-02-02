@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\Tax\ApplyTaxToFPTYes\WebposTaxTAX100Test" summary="Tax - Setting: [Apply Tax On] = Original price only test" ticketId="WEBPOS-1">
+		<variation name="WebposTaxTAX100TestVariation_TAX100">
+			<data name="configData" xsi:type="string">enable_fpt_and_apply_tax_to_fpt_yes</data>
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="product" xsi:type="string">simple_product_100_dollar_fpt</item>
+					<item name="orderQty" xsi:type="number">1</item>
+				</item>
+			</data>
+			<data name="createInvoice" xsi:type="boolean">false</data>
+			<data name="shipped" xsi:type="boolean">false</data>
+			<data name="expectStatus" xsi:type="string">Processing</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertCreateInvoiceSuccess"/>
+		</variation>
+	</testCase>
+</config>

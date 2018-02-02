@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Tax\TaxCalculationBasedOnShippingOrigin\WebposTaxTAX74Test" summary="Tax - Check Tax amount on invoice popup" ticketId="WEBPOS-1">
+        <variation name="WebposTaxTAX74TestVariation_TAX74">
+            <data name="configData" xsi:type="string">taxable_good_shipping_including_tax_TAX71</data>
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                    <item name="orderQty" xsi:type="number">2</item>
+                </item>
+                <item name="1" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                    <item name="orderQty" xsi:type="number">1</item>
+                </item>
+            </data>
+            <data name="createInvoice" xsi:type="boolean">false</data>
+        </variation>
+    </testCase>
+</config>
