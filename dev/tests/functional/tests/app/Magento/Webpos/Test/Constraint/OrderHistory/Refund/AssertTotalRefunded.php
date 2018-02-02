@@ -44,6 +44,45 @@ class AssertTotalRefunded extends AbstractConstraint
                 . "\nActual: " . $actualTotalRefunded
             );
         }
+        if (($sumRowtotal + $refundShipping + $adjustRefund - $adjustFee) == $totalPaid) {
+            sleep(1);
+            \PHPUnit_Framework_Assert::assertTrue(
+                $webposIndex->getToaster()->getWarningMessage()->isVisible(),
+                'Success Message is not displayed'
+            );
+            \PHPUnit_Framework_Assert::assertEquals(
+                'A creditmemo has been created!',
+                $webposIndex->getToaster()->getWarningMessage()->getText(),
+                "Success message's Content is Wrong"
+            );
+            $totalRefund = substr($webposIndex->getOrderHistoryOrderViewFooter()->getGrandTotal(), 1);
+            $webposIndex->getOrderHistoryOrderViewFooter()->waitForTotalRefundedVisible();
+            $actualTotalRefunded = (float) substr($webposIndex->getOrderHistoryOrderViewFooter()->getTotalRefunded(), 1);
+            \PHPUnit_Framework_Assert::assertEquals(
+                (float) $totalRefund,
+                (float) $actualTotalRefunded,
+                'Total Refunded is wrong'
+                . "\nExpected: " . $totalRefund
+                . "\nActual: " . $actualTotalRefunded
+            );
+        }
+        if (($sumRowtotal + $refundShipping + $adjustRefund - $adjustFee) > $totalPaid) {
+            $grandTotal = $webposIndex->getOrderHistoryOrderViewFooter()->getGrandTotal();
+            sleep(1);
+            \PHPUnit_Framework_Assert::assertTrue(
+                $webposIndex->getModal()->isVisible(),
+                'Error popup is not displayed.'
+            );
+            $errorMessage = 'The refundable amount is limited at ' . $grandTotal;
+            $actualErrorMessage = $webposIndex->getModal()->getPopupMessage();
+            \PHPUnit_Framework_Assert::assertEquals(
+                $errorMessage,
+                $actualErrorMessage,
+                'Error message is wrong'
+                . "\nExpected: " . $errorMessage
+                . "\nActual: " . $actualErrorMessage
+            );
+        }
     }
     /**
      * Returns a string representation of the object.

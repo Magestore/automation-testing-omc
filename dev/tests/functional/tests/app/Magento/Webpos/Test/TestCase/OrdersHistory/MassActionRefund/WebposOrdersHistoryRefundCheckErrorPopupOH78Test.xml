@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund\WebposOrdersHistoryRefundOH74Test" summary="OrdersHistory-MassActionRefund" ticketId="WEBPOSMASSACTIONREFUND-OH74">
-        <variation name="WebposOrdersHistoryRefundOH74TestVariation1">
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund\WebposOrdersHistoryRefundCheckErrorPopupOH78Test" summary="OrdersHistory-MassActionRefund" ticketId="WEBPOSMASSACTIONREFUND-OH78">
+        <variation name="WebposOrdersHistoryRefundCheckErrorPopupOH78TestVariation1">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
@@ -12,7 +12,9 @@
                     <item name="orderQty" xsi:type="number">2</item>
                 </item>
             </data>
-            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertTotalRefunded"/>
+            <data name="refundShipping" xsi:type="number">20</data>
+            <data name="adjustRefund" xsi:type="number">20</data>
+            <data name="adjustFee" xsi:type="number">10</data>
         </variation>
     </testCase>
 </config>

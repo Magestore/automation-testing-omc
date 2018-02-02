@@ -13,7 +13,7 @@ use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposOrdersHistoryRefundOH74Test extends Injectable
+class WebposOrdersHistoryRefundCheckErrorPopupOH77Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -37,7 +37,7 @@ class WebposOrdersHistoryRefundOH74Test extends Injectable
         $this->assertOrderStatus = $assertOrderStatus;
     }
 
-    public function test($products)
+    public function test($products, $refundShipping , $adjustRefund, $adjustFee)
     {
         // Config all allow shipping for pos
         $this->objectManager->getInstance()->create(
@@ -92,16 +92,23 @@ class WebposOrdersHistoryRefundOH74Test extends Injectable
         $this->webposIndex->getOrderHistoryAddOrderNote()->getRefundButton()->click();
         sleep(1);
         // Refund
+        if (!isset($refundShipping)) {
+            $refundShipping = $shippingFee;
+        }
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
-            ['products' => $products, 'adjustRefund' => 10, 'adjustFee' => 20]
+            ['products' => $products, 'refundShipping' => $refundShipping,'adjustRefund' => $adjustRefund, 'adjustFee' => $adjustFee]
         )->run();
-
+        sleep(1);
+        $this->webposIndex->getModal()->getOkButton()->click();
+        sleep(1);
+        $this->assertFalse(
+            $this->webposIndex->getModal()->isVisible(),
+            'Error popup is not close.'
+        );
         return [
             'products' => $products,
-            'refundShipping' => $shippingFee,
-            'adjustRefund' => 10,
-            'adjustFee' => 20
+            'refundShipping' => $refundShipping,
         ];
     }
 
