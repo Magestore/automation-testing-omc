@@ -69,4 +69,9 @@ class CheckoutWebposCart extends Block
         $this->waitForElementVisible('.indicator');
         $this->waitForElementNotVisible('.indicator');
     }
+
+    public function getIconRemoveMultiOrder($number)
+    {
+        return $this->_rootElement->find('.//header/div[1]/span[2]/span[2]', Locator::SELECTOR_XPATH);
+    }
 }
