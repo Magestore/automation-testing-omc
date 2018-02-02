@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Tax\CheckTaxAmountWithDiscountWholeCart\WebposTaxTAX25Test" summary="Tax - Check tax amount on On-hold order" ticketId="WEBPOS-1">
+        <variation name="WebposTaxTAX25TestVariation_TAX01">
+            <data name="configData" xsi:type="string">default_tax_configuration_use_system_value</data>
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                    <item name="orderQty" xsi:type="number">2</item>
+                    <item name="invoiceQty" xsi:type="number">1</item>
+                </item>
+                <item name="1" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                    <item name="orderQty" xsi:type="number">1</item>
+                    <item name="invoiceQty" xsi:type="number">1</item>
+                </item>
+            </data>
+            <data name="addDiscount" xsi:type="boolean">true</data>
+            <data name="discountAmount" xsi:type="string">60.00</data>
+        </variation>
+    </testCase>
+</config>

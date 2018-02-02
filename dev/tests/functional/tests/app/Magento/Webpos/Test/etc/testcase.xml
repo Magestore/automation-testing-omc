@@ -42,4 +42,12 @@
         <step name="loginWebpos" module="Magento_Webpos" next="createShipment"/>
         <step name="createShipment" module="Magento_Webpos"/>
     </scenario>
+    <scenario name="WebposOrdersHistoryRefundOrderCreateOnBackendOH80Test" firstStep="setupConfiguration">
+        <step name="setupConfiguration" module="Magento_Config" next="createOrder" />
+        <step name="createOrder" module="Magento_Sales" next="createInvoice" />
+        <step name="createInvoice" module="Magento_Sales" next="loginWebpos"/>
+        <step name="loginWebpos" module="Magento_Webpos" next="CreateRefundExistOrderInBackend"/>
+        <step name="CreateRefundExistOrderInBackend" module="Magento_Webpos"/>
+
+    </scenario>
 </config>
