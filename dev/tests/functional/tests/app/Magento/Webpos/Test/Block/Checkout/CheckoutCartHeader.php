@@ -63,4 +63,9 @@ class CheckoutCartHeader extends Block
     {
         return $this->_rootElement->find('#webpos_cart > header > div.actions-customer > a.add-customer > span');
     }
+
+    public function getItemRemoveIcon($number)
+    {
+        return $this->getMultiOrderItem($number)->find('//span[2]', Locator::SELECTOR_XPATH);
+    }
 }

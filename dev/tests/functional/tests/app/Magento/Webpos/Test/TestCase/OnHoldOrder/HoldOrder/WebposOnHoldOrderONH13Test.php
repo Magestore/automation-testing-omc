@@ -66,10 +66,10 @@ class WebposOnHoldOrderONH13Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
-        //Click on On-hold Orders menu
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->onHoldOrders();
-        sleep(1);
-        $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
+        $dataProduct = $productCustom;
+        $dataProduct['qty'] = '1';
+        return [
+            'products' => [$dataProduct]
+        ];
     }
 }

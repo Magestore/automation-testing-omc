@@ -4,6 +4,7 @@
     <variation name="WebposOnHoldOrderONH12TestVariation">
         <data name="productCustom/name" xsi:type="string">jfkasdljfasld;</data>
         <data name="productCustom/price" xsi:type="string">15</data>
+        <constraint name="Magento\Webpos\Test\Constraint\OnHoldOrder\HoldOrder\AssertCheckOnHoldSimpleProduct"/>
     </variation>
 </testCase>
 </config>
