@@ -13,7 +13,7 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
-class WebposTakePaymentOH87Test extends Injectable
+class WebposTakePaymentOH88Test extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex
@@ -107,6 +107,8 @@ class WebposTakePaymentOH87Test extends Injectable
 //        $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
         $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
 
+        $this->webposIndex->getModal()->getOkButton()->click();
+        sleep(1);
         $this->webposIndex->getModal()->getOkButton()->click();
     }
 

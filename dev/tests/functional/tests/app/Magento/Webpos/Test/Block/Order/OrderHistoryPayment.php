@@ -42,4 +42,14 @@ class OrderHistoryPayment extends Block
     {
         return $this->_rootElement->find('#payment_popup_form > div > button[type=\'button\']');
     }
+
+    public function getCashInMethod()
+    {
+        return $this->_rootElement->find('.icon-iconPOS-payment-cashforpos');
+    }
+
+    public function getInputAmount()
+    {
+        return $this->_rootElement->find('//*[@id="payment_selected"]//input',Locator::SELECTOR_XPATH );
+    }
 }

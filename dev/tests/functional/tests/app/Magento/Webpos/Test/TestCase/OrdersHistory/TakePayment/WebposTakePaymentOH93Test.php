@@ -13,7 +13,7 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
-class WebposTakePaymentOH87Test extends Injectable
+class WebposTakePaymentOH93Test extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex
@@ -104,10 +104,15 @@ class WebposTakePaymentOH87Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         //click take payment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
-//        $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
+        $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
+        sleep(1);
+        $this->webposIndex->getOrderHistoryPayment()->getInputAmount()->setValue(0);
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+
         $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
 
         $this->webposIndex->getModal()->getOkButton()->click();
+
     }
 
     public function tearDown()
