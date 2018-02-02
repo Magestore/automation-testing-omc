@@ -37,14 +37,12 @@ class WebposOnHoldOrderONH05Test extends Injectable
     public function test($products, ConfigData $configData)
     {
         //Create product
-        $product1 = $this->objectManager->getInstance()->create(
+        $products = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
-        )->run()[0]['product'];
-        $product2 = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
-            ['products' => $products]
-        )->run()[1]['product'];
+        )->run();
+        $product1 = $products[0]['product'];
+        $product2 = $products[1]['product'];
 
         //Login webpos
         $staff = $this->objectManager->getInstance()->create(
@@ -77,7 +75,8 @@ class WebposOnHoldOrderONH05Test extends Injectable
             'name' => $configData['webpos/guest_checkout/first_name']['value'].' '.$configData['webpos/guest_checkout/first_name']['value'],
             'address' => $configData['webpos/guest_checkout/city']['value'].', '.$configData['webpos/guest_checkout/region_id']['label'].
                 ', '.$configData['webpos/guest_checkout/zip']['value'].', US',
-            'phone' =>  $configData['webpos/guest_checkout/telephone']['value']];
+            'phone' =>  $configData['webpos/guest_checkout/telephone']['value']
+        ];
 
     }
 }

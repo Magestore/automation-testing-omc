@@ -39,6 +39,14 @@ class OrderHistoryContainer extends Block
         return $this->waitForElementVisible('#invoice-popup');
     }
 
+    /**
+     * @return bool|null
+     */
+    public function waitOrderHistoryInvoiceIsNotVisible()
+    {
+        return $this->waitForElementNotVisible('#invoice-popup');
+    }
+
 	public function getActionsBox()
 	{
 		return $this->_rootElement->find('#form-add-note-order');
