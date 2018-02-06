@@ -15,7 +15,7 @@ use Magento\Webpos\Test\Constraint\OrderHistory\ReOrder\AssertItemsInCart;
 
 /**
  * Class WebposMassActionReOrderOH30Test
- * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionReOrder
+ * @package Magento\AutoTestWebposToaster\Test\TestCase\OrdersHistory\MassActionReOrder
  */
 class WebposMassActionReOrderOH30Test extends Injectable
 {

@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Test/etc/testSchema.xsd">
+    <cest name="WebPOSCustomerListCheckGUICest">
+        <annotations>
+            <features value="WebPOS Login With Valid Information"/>
+            <stories value="WebPOS Login With Valid Information"/>
+        </annotations>
+        <before>
+            <amOnPage url="{{WebPOSIndexPage.url}}" stepKey="openWebPOSLoginPage"/>
+            <actionGroup ref="WebPOSLoginWithValidInformation" stepKey="actionGroupWebPOSLoginWithValidInformation"/>
+            <actionGroup ref="WebPOSOpenCustomerListPageActionGroup" stepKey="actionGroupWebPOSOpenCustomerListPage"/>
+        </before>
+        <!--<after>-->
+        <!--<amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>-->
+        <!--</after>-->
+        <test name="WebPOSCustomerListPage">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Check GUI"/>
+                <description value="Check GUI - Customer list page - Click on Customer List menu"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL01"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <actionGroup ref="WebPOSCustomerListCheckGUIActionGroup" stepKey="actionGroupWebPOSCustomerListCheckGUI"/>
+        </test>
+        <test name="WebPOSCheckGUICustomerListPage">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Add new customer"/>
+                <description value="Add new customer - Check New customer popup"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL02"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderCancelButton}}" stepKey="assertVisibleAddCustomerFormHeaderCancelButton"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="assertVisibleAddCustomerFormHeaderSaveButton"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerBodySection.FirstNameField}}" stepKey="assertVisibleFirstNameField"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerBodySection.LastNameField}}" stepKey="assertVisibleLastNameField"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerBodySection.EmailField}}" stepKey="assertVisibleEmailField"/>
+            <seeOptionIsSelected selector="#add_customer_group" userInput="Please choose group..." stepKey="seeOptionAddCustomerGroupIsSelected"/>
+            <seeOptionIsSelected selector="#form-add-customer-customer .gender" userInput="Please choose gender..." stepKey="seeOptionGenderIsSelected"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerFooterSection.IconAddShippingAddress}}" stepKey="assertVisibleIconAddShippingAddress"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerFooterSection.IconAddBillingAddress}}" stepKey="assertVisibleIconAddBillingAddress"/>
+        </test>
+        <test name="WebPOSCheckCancelButtonOnNewCustomerPopup">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Add new customer"/>
+                <description value="Add new customer - Check New customer popup - Close Create Customer Popup"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL03"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderCancelButton}}" stepKey="ClickAddCustomerFormHeaderCancelButton"/>
+            <dontSeeElement selector="{{WebPOSCustomerAddCustomerSection.FormCreateNewCustomer}}" stepKey="assertFormCreateNewCustomerIsNotVisible"/>
+        </test>
+        <test name="WebPOSBlankAllFields">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Add new customer"/>
+                <description value="Add new customer - Check New customer popup - Save Create Customer Popup Without Fill Any Value"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL04"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddCustomerBodySection.FirstNameMessageRequired}}" time="60" stepKey="waitForErrorMessageOfFirstNameTextBoxIsVisible"/>
+            <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddCustomerBodySection.LastNameMessageRequired}}" time="60" stepKey="waitForErrorMessageOfLastNameTextBoxIsVisible"/>
+            <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddCustomerBodySection.EmailMessageRequired}}" time="60" stepKey="waitForErrorMessageOfEmailTextBoxIsVisible"/>
+            <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddCustomerBodySection.CustomerGroupMessageRequired}}" time="60" stepKey="waitForErrorMessageOfCustomerGroupSelectionIsVisible"/>
+        </test>
+        <test name="WebPOSInputAnInvalidEmail">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Add new customer"/>
+                <description value="Add new customer - Input an invalid email"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL05"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <fillField selector="{{WebPOSCustomerAddCustomerBodySection.EmailField}}" userInput="{{WebPOSCustomerInValidInformation.Email}}" stepKey="enterWebPOSCustomerEmail"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.WrongEmailMessage}}" selector="#email-error" time="60" stepKey="waitForErrorMessageOfEmailTextBoxIsVisible"/>
+        </test>
+        <test name="WebPOSInputAnEmailThatBelongsToAnExistCustomer">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Add new customer"/>
+                <description value="Add new customer - Input an email that belongs to an exist customer"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL06"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <fillField selector="{{WebPOSCustomerAddCustomerBodySection.FirstNameField}}" userInput="{{WebPOSCustomerValidInformationRequiredField.FirstName}}" stepKey="enterWebPOSCustomerFirstName"/>
+            <fillField selector="{{WebPOSCustomerAddCustomerBodySection.LastNameField}}" userInput="{{WebPOSCustomerValidInformationRequiredField.LastName}}" stepKey="enterWebPOSCustomerLastName"/>
+            <fillField selector="{{WebPOSCustomerAddCustomerBodySection.EmailField}}" userInput="{{WebPOSCustomerExistInformation.Email}}" stepKey="enterWebPOSCustomerEmail"/>
+            <selectOption selector="{{WebPOSCustomerAddCustomerBodySection.CustomerGroup}}" userInput="{{WebPOSCustomerValidInformationRequiredField.CustomerGroup2}}" stepKey="enterWebPOSCustomerCustomerGroup"/>
+            <wait time="3" stepKey="waitForAllMenuItemsIsVisibleIn2Seconds"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <waitForText selector="{{WebposToasterSection.ToasterMessage}}" userInput="{{WebposCreateNewCustomerErrorMessage.InvalidEmailMessage}}" time="60" stepKey="waitForErrorMessageOfEmailTextBoxIsVisible"/>
+        </test>
+        <test name="WebPOSCreateACustomerWithoutShippingAndBillingAddress">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Add new customer"/>
+                <description value="Add new customer - Create a customer without shipping and billing address"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL07"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <fillField selector="{{WebPOSCustomerAddCustomerBodySection.FirstNameField}}" userInput="{{WebPOSCustomerValidInformationRequiredField.FirstName}}" stepKey="enterWebPOSCustomerFirstName"/>
+            <fillField selector="{{WebPOSCustomerAddCustomerBodySection.LastNameField}}" userInput="{{WebPOSCustomerValidInformationRequiredField.LastName}}" stepKey="enterWebPOSCustomerLastName"/>
+            <fillField selector="{{WebPOSCustomerAddCustomerBodySection.EmailField}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" stepKey="enterWebPOSCustomerEmail"/>
+            <selectOption selector="{{WebPOSCustomerAddCustomerBodySection.CustomerGroup}}" userInput="{{WebPOSCustomerValidInformationRequiredField.CustomerGroup2}}" stepKey="enterWebPOSCustomerCustomerGroup"/>
+            <wait time="2" stepKey="waitAfterEnterValueInCreateCustomerFormIn2Seconds"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <waitForText selector="{{WebposToasterSection.ToasterMessage}}" userInput="{{WebposCreateNewCustomerSuccessData.MessageCreateCustomerSuccess}}" time="60" stepKey="waitForMessageCreateCustomerSuccessVisible"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" time="60" stepKey="waitForCustomerJustCreatedMomentAgoIsVisible"/>
+        </test>
+        <test name="WebPOSSubscribeNewsletterForNewCustomer">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Add new customer"/>
+                <description value="Add new customer - Subscribe Newsletter for New customer"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL08"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <actionGroup ref="WebposCreateNewCustomerWithSubscribeNewLetterActionGroup" stepKey="actionGroupWebposCreateNewCustomerWithSubscribe"/>
+            <actionGroup ref="WebposClickSaveAndAssertCustomerActionGroup" stepKey="actionGroupClickSaveAndAssertCustomer"/>
+            <actionGroup ref="BackendLoginAdminActionGroup" stepKey="ActionGroupBackendWebPOSLoginAdmin"/>
+            <amOnPage url="{{BackendNewletterSubscribePage.url(_ENV.MAGENTO_ADMIN_USERNAME)}}" stepKey="amOnPageNewsletterSubscribers"/>
+            <fillField selector="{{BackendSubscriberGridTableSection.SubscriberGridFilterSearchEmail}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" stepKey="searchValueSubscribeNewLetterWithEmailJustCreatedBefore"/>
+            <click selector="{{BackendSubscriberGridTableSection.SubscriberSearchButton}}" stepKey="clickButtonSearchInSubscribeNewLetterPage"/>
+            <wait time="1" stepKey="waitAfterSearchWithEmailCustomerIn1Seconds"/>
+            <see stepKey="assertCustomerIsVisible" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" selector="{{BackendSubscriberGridTableSection.SubscriberRowInGridTable}}" />
+        </test>
+        <test name="WebPOSCheckGUIAddShippingAddressPopup">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Shipping address popup"/>
+                <description value="Add new customer - Check GUI Add Shipping Address popup"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL09"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <click selector="{{WebPOSCustomerAddCustomerFooterSection.IconAddShippingAddress}}" stepKey="clickIconAddShippingAddressInFormCreateNewCustomer"/>
+            <actionGroup ref="WebPOSCheckGUIFormAddShippingAddressActionGroup" stepKey="actionGroupWebPOSCheckGUIFormAddShippingAddress"/>
+        </test>
+        <test name="WebPOSCheckCancelButtonOnAddShippingAddressPopup">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Shipping address popup"/>
+                <description value="Add new customer - Check [Cancel] button on Add Shipping Address popup"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL10"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <click selector="{{WebPOSCustomerAddCustomerFooterSection.IconAddShippingAddress}}" stepKey="clickIconAddShippingAddressInFormCreateNewCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerShippingAddressHeaderSection.FormHeaderCancelButton}}" stepKey="clickFormShippingAddressHeaderCancelButton"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerSection.FormCreateNewCustomer}}" stepKey="assertWebPOSCreateNewCustomerPopupIsVisible"/>
+        </test>
+        <test name="WebPOSBlankAllFields">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Shipping address popup"/>
+                <description value="Add new customer - Blank all fields"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL11"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <click selector="{{WebPOSCustomerAddCustomerFooterSection.IconAddShippingAddress}}" stepKey="clickIconAddShippingAddressInFormCreateNewCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerShippingAddressHeaderSection.FormHeaderSaveButton}}" stepKey="clickFormShippingAddressHeaderCancelButton"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <actionGroup ref="WebPOSSaveShippingAddressWithoutAnyValueActionGroup" stepKey="actionGroupWebPOSCheckRequiredMessagesOfFormCustomerShippingAddress"/>
+        </test>
+        <test name="WebPOSShippingAndBillingAreTheSameAddress">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Shipping address popup"/>
+                <description value="Add new customer - Shipping and Billing are the same address"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL12"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <actionGroup ref="WebposCreateNewCustomerActionGroup" stepKey="actionGroupSaveFillOutAllFieldsWebPOSCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerFooterSection.IconAddShippingAddress}}" stepKey="clickIconAddShippingAddressInFormCreateNewCustomer"/>
+            <actionGroup ref="WebPOSShippingAddressAfterFillCustomerInformationActionGroup" stepKey="actionGroupSaveWebPOSShippingAddressAfterFillCustomerInformation"/>
+            <click selector="{{WebPOSCustomerAddCustomerShippingAddressHeaderSection.FormHeaderSaveButton}}" stepKey="ClickFormAddShippingAddressHeaderSaveButton"/>
+            <dontSeeElement selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.FirstNameMessageRequired}}" stepKey="assertShippingAddressFirstNameMessageRequiredIsNotVisible"/>
+            <dontSeeElement selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.LastNameMessageRequired}}" stepKey="assertShippingLastNameMessageRequiredIsNotVisible"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerSection.FormCreateNewCustomer}}" stepKey="assertWebPOSCreateNewCustomerPopupIsVisible"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <waitForText selector="{{WebposToasterSection.ToasterMessage}}" userInput="{{WebposCreateNewCustomerSuccessData.MessageCreateCustomerSuccess}}" time="60" stepKey="waitForMessageCreateCustomerSuccessVisible"/>
+            <actionGroup ref="WebposSearchCustomerActionGroup" stepKey="actionGroupWebposSearchCustomer"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" time="60" stepKey="waitForCustomerJustCreatedMomentAgoIsVisible"/>
+        </test>
+        <test name="WebPOSSShippingAndBillingAddressAreDifferent">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Shipping address popup"/>
+                <description value="Add new customer - Shipping and Billing address are different"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL13"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <actionGroup ref="WebposCreateNewCustomerActionGroup" stepKey="actionGroupSaveFillOutAllFieldsWebPOSCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerFooterSection.IconAddShippingAddress}}" stepKey="clickIconAddShippingAddressInFormCreateNewCustomer"/>
+            <actionGroup ref="WebPOSShippingAddressAfterFillCustomerInformationActionGroup" stepKey="actionGroupSaveWebPOSShippingAddressAfterFillCustomerInformation"/>
+            <click selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.BillingAddressAndShippingAddressAreTheSame}}" stepKey="ClickBillingAddressAndShippingAddressAreTheSame"/>
+            <click selector="{{WebPOSCustomerAddCustomerShippingAddressHeaderSection.FormHeaderSaveButton}}" stepKey="ClickFormAddShippingAddressHeaderSaveButton"/>
+            <dontSeeElement selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.FirstNameMessageRequired}}" stepKey="assertShippingAddressFirstNameMessageRequiredIsNotVisible"/>
+            <dontSeeElement selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.LastNameMessageRequired}}" stepKey="assertShippingLastNameMessageRequiredIsNotVisible"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerSection.FormCreateNewCustomer}}" stepKey="assertWebPOSCreateNewCustomerPopupIsVisible"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerFooterSection.EditShippingAddressCreatedSuccess}}" stepKey="assertButtonEditShippingAddressIsVisible"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerFooterSection.DeleteShippingAddressCreatedSuccess}}" stepKey="assertButtonDeleteShippingAddressIsVisible"/>
+            <dontSeeElement selector="{{WebPOSCustomerAddCustomerFooterSection.EditBillingAddressCreatedSuccess}}" stepKey="assertButtonEditBillingAddressIsNotVisible"/>
+            <dontSeeElement selector="{{WebPOSCustomerAddCustomerFooterSection.DeleteBillingAddressCreatedSuccess}}" stepKey="assertButtonDeleteBillingAddressIsNotVisible"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <waitForText selector="{{WebposToasterSection.ToasterMessage}}" userInput="{{WebposCreateNewCustomerSuccessData.MessageCreateCustomerSuccess}}" time="60" stepKey="waitForMessageCreateCustomerSuccessVisible"/>
+        </test>
+        <test name="WebPOSCheckGUIAddBillingAddressPopup">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Billing address popup"/>
+                <description value="Add new customer - Check GUI Add Billing Address popup"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL14"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <click selector="{{WebPOSCustomerAddCustomerFooterSection.IconAddBillingAddress}}" stepKey="clickIconAddShippingAddressInFormCreateNewCustomer"/>
+            <actionGroup ref="WebPOSCheckGUIFormAddBillingAddressActionGroup" stepKey="actionGroupWebPOSCheckGUIFormAddBillingAddress"/>
+        </test>
+        <test name="WebPOSCheckCancelButtonOnAddBillingAddressPopup">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Billing address popup"/>
+                <description value="Add new customer - Check [Cancel] button on Add Billing Address popup"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL15"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <click selector="{{WebPOSCustomerAddCustomerFooterSection.IconAddBillingAddress}}" stepKey="clickIconAddBillingAddressInFormCreateNewCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerBillingAddressHeaderSection.FormHeaderCancelButton}}" stepKey="clickFormBillingAddressHeaderCancelButton"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <dontSeeElement selector="{{WebPOSCustomerAddCustomerBillingAddressSection.FormAddBillingAddress}}" stepKey="assertFormAddBillingAddressIsNotVisible"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerSection.FormCreateNewCustomer}}" stepKey="assertWebPOSCreateNewCustomerPopupIsVisible"/>
+        </test>
+        <test name="WebPOSBlankAllFieldsAddBilling">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Billing address popup"/>
+                <description value="Add new customer - Blank all fields"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL16"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <click selector="{{WebPOSCustomerAddCustomerFooterSection.IconAddBillingAddress}}" stepKey="clickIconAddBillingAddressInFormCreateNewCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerBillingAddressHeaderSection.FormHeaderSaveButton}}" stepKey="clickFormBillingAddressHeaderSaveButton"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <actionGroup ref="WebPOSSaveBillingAddressWithoutAnyValueActionGroup" stepKey="actionGroupWebPOSCheckRequiredMessagesOfFormCustomerBillingAddress"/>
+        </test>
+        <test name="WebPOSBillingInputAllFields">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Billing address popup"/>
+                <description value="Add new customer - Input all fields"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL17"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <actionGroup ref="WebposCreateNewCustomerActionGroup" stepKey="actionGroupSaveFillOutAllFieldsWebPOSCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerFooterSection.IconAddBillingAddress}}" stepKey="clickIconAddShippingAddressInFormCreateNewCustomer"/>
+            <actionGroup ref="WebPOSBillingAddressAfterFillCustomerInformationActionGroup" stepKey="actionGroupSaveWebPOSBillingAddressAfterFillCustomerInformation"/>
+            <click selector="{{WebPOSCustomerAddCustomerBillingAddressHeaderSection.FormHeaderSaveButton}}" stepKey="ClickFormAddBillingAddressHeaderSaveButton"/>
+            <dontSeeElement selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.FirstNameMessageRequired}}" stepKey="assertBillingAddressFirstNameMessageRequiredIsNotVisible"/>
+            <dontSeeElement selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.LastNameMessageRequired}}" stepKey="assertBillingLastNameMessageRequiredIsNotVisible"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerSection.FormCreateNewCustomer}}" stepKey="assertWebPOSCreateNewCustomerPopupIsVisible"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <waitForText selector="{{WebposToasterSection.ToasterMessage}}" userInput="{{WebposCreateNewCustomerSuccessData.MessageCreateCustomerSuccess}}" time="60" stepKey="waitForMessageCreateCustomerSuccessVisible"/>
+            <actionGroup ref="WebposSearchCustomerActionGroup" stepKey="actionGroupWebposSearchCustomer"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" time="60" stepKey="waitForCustomerJustCreatedMomentAgoIsVisible"/>
+        </test>
+        <test name="WebPOSSBillingAndShippingAddressAreDifferent">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Billing address popup"/>
+                <description value="Add new customer - Billing and Shipping address are differrent"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL18"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <actionGroup ref="WebposCreateNewCustomerActionGroup" stepKey="actionGroupSaveFillOutAllFieldsWebPOSCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerFooterSection.IconAddShippingAddress}}" stepKey="clickIconAddShippingAddress"/>
+            <actionGroup ref="WebPOSShippingAddressAfterFillCustomerInformationActionGroup" stepKey="actionGroupSaveWebPOSShippingAddressAfterFillCustomerInformation"/>
+            <click selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.BillingAddressAndShippingAddressAreTheSame}}" stepKey="ClickBillingAddressAndShippingAddressAreTheSame"/>
+            <click selector="{{WebPOSCustomerAddCustomerShippingAddressHeaderSection.FormHeaderSaveButton}}" stepKey="ClickFormAddShippingAddressHeaderSaveButton"/>
+            <dontSeeElement selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.FirstNameMessageRequired}}" stepKey="assertShippingAddressFirstNameMessageRequiredIsNotVisible"/>
+            <dontSeeElement selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.LastNameMessageRequired}}" stepKey="assertShippingLastNameMessageRequiredIsNotVisible"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerSection.FormCreateNewCustomer}}" stepKey="assertWebPOSCreateNewCustomerPopupIsVisible"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerFooterSection.EditShippingAddressCreatedSuccess}}" stepKey="assertButtonEditShippingAddressIsVisible"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerFooterSection.DeleteShippingAddressCreatedSuccess}}" stepKey="assertButtonDeleteShippingAddressIsVisible"/>
+            <dontSeeElement selector="{{WebPOSCustomerAddCustomerFooterSection.EditBillingAddressCreatedSuccess}}" stepKey="assertButtonEditBillingAddressIsNotVisible"/>
+            <dontSeeElement selector="{{WebPOSCustomerAddCustomerFooterSection.DeleteBillingAddressCreatedSuccess}}" stepKey="assertButtonDeleteBillingAddressIsNotVisible"/>
+            <click selector="{{WebPOSCustomerAddCustomerFooterSection.IconAddBillingAddress}}" stepKey="clickIconAddShippingAddressInFormCreateNewCustomer"/>
+            <actionGroup ref="WebPOSBillingAddressAfterFillCustomerInformationActionGroup" stepKey="actionGroupSaveWebPOSBillingAddressAfterFillCustomerInformation"/>
+            <click selector="{{WebPOSCustomerAddCustomerBillingAddressHeaderSection.FormHeaderSaveButton}}" stepKey="ClickFormAddBillingAddressHeaderSaveButton"/>
+            <dontSeeElement selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.FirstNameMessageRequired}}" stepKey="assertBillingAddressFirstNameMessageRequiredIsNotVisible"/>
+            <dontSeeElement selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.LastNameMessageRequired}}" stepKey="assertBillingLastNameMessageRequiredIsNotVisible"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerSection.FormCreateNewCustomer}}" stepKey="assertWebPOSCreateNewCustomerPopupIsVisible"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <waitForText selector="{{WebposToasterSection.ToasterMessage}}" userInput="{{WebposCreateNewCustomerSuccessData.MessageCreateCustomerSuccess}}" time="60" stepKey="waitForMessageCreateCustomerSuccessVisible"/>
+            <actionGroup ref="WebposSearchCustomerActionGroup" stepKey="actionGroupWebposSearchCustomer"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" time="60" stepKey="waitForCustomerJustCreatedMomentAgoIsVisible"/>
+        </test>
+        <test name="WebPOSSearchWithNoResults">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Billing address popup"/>
+                <description value="Add new customer - Search with no results"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL19"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <actionGroup ref="WebposSearchCustomerActionGroup" stepKey="actionGroupWebposSearchCustomer"/>
+            <wait time="3" stepKey="waitForResultCustomerSearchIn3Seconds"/>
+            <seeElement selector="{{WebposModalsWrapperSection.buttonOK}}" stepKey="assertWebposModalsWrapperSectionButtonOKIsVisible"/>
+            <seeElement selector="{{WebposModalsWrapperSection.buttonClose}}" stepKey="assertWebposModalsWrapperSectionButtonCloseIsVisible"/>
+            <seeElement selector="{{WebposModalsWrapperSection.modalContent8}}" stepKey="assertWebposModalsWrapperSectionButtonCloseIsVisible"/>
+            <click selector="{{WebposModalsWrapperSection.buttonClose}}" stepKey="clickWebposModalsWrapperSectionButtonOKIsVisible"/>
+            <dontSeeElement selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" stepKey="assertWebposThereAreNoCustomerWithTheseEmail"/>
+        </test>
+        <test name="WebPOSSearchWithCustomerEmail">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Billing address popup"/>
+                <description value="Add new customer - Search with Customer email"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL20"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <actionGroup ref="WebposSearchCustomerWithDefaultEmailActionGroup" stepKey="actionGroupWebposSearchCustomer"/>
+            <wait time="2" stepKey="waitForResultCustomerSearchIn2Seconds"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" userInput="{{WebPOSCustomerExistInformation.Email}}" time="60" stepKey="waitForCustomerWithTheDefaultEmailIsVisible"/>
+            <seeElement selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" stepKey="assertWebposSearchCustomerWithTheseEmailSuccess"/>
+        </test>
+        <test name="WebPOSSearchWithCustomerName">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Billing address popup"/>
+                <description value="Add new customer - Search with customer name"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL21"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <actionGroup ref="WebposSearchCustomerWithDefaultNameActionGroup" stepKey="actionGroupWebposSearchCustomerWithDefaultName"/>
+            <wait time="2" stepKey="waitForResultCustomerSearchIn2Seconds"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItemWithName}}" userInput="{{WebPOSCustomerExistInformation.FullName}}" time="60" stepKey="waitForCustomerWithTheDefaultNameIsVisible"/>
+            <seeElement selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" stepKey="assertWebposSearchCustomerWithTheseNameSuccess"/>
+        </test>
+        <test name="WebPOSSearchWithCustomerTelephoneNumber">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Billing address popup"/>
+                <description value="Add new customer - Search with customer telephone number"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL22"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <actionGroup ref="WebposSearchCustomerWithDefaultTelephoneActionGroup" stepKey="actionGroupWebposSearchCustomerWithTelephone"/>
+            <wait time="2" stepKey="waitForResultCustomerSearchIn2Seconds"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItemWithTelephone}}" userInput="{{WebPOSCustomerExistInformation.Telephone}}" time="60" stepKey="waitForCustomerWithTheDefaultTelephoneIsVisible"/>
+            <seeElement selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" stepKey="assertWebposSearchCustomerWithTheseTelephoneSuccess"/>
+        </test>
+        <test name="WebPOSClearKeyword">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Billing address popup"/>
+                <description value="Add new customer - Clear keyword"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL23"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <actionGroup ref="WebposSearchCustomerWithDefaultTelephoneActionGroup" stepKey="actionGroupWebposSearchCustomerWithTelephone"/>
+            <wait time="2" stepKey="waitForResultCustomerSearchIn2Seconds"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItemWithTelephone}}" userInput="{{WebPOSCustomerExistInformation.Telephone}}" time="60" stepKey="waitForCustomerWithTheDefaultTelephoneIsVisible"/>
+            <seeElement selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" stepKey="assertWebposSearchCustomerWithTheseTelephoneSuccess"/>
+            <actionGroup ref="WebposSearchCustomerWithoutValueActionGroup" stepKey="actionGroupWebposSearchCustomerWithoutValue"/>
+            <waitForElementVisible selector="{{WebPOSCustomerListMainItemSection.TheSecondCustomerInList}}" time="90" stepKey="waitForCustomerInListIsVisible"/>
+            <seeElement selector="{{WebPOSCustomerListMainItemSection.TheSecondCustomerInList}}" stepKey="assertWebposCustomerListIsVisibleSuccessfully"/>
+        </test>
+        <test name="WebPOSSearchACustomerThatCreatedOnFrontend">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Billing address popup"/>
+                <description value="Add new customer - Search a customer that created on frontend"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL24"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <actionGroup ref="WebposCreateNewCustomerActionGroup" stepKey="actionGroupSaveFillOutAllFieldsWebPOSCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <waitForText selector="{{WebposToasterSection.ToasterMessage}}" userInput="{{WebposCreateNewCustomerSuccessData.MessageCreateCustomerSuccess}}" time="60" stepKey="waitForMessageCreateCustomerSuccessVisible"/>
+            <actionGroup ref="WebposSearchCustomerActionGroup" stepKey="actionGroupWebposSearchCustomer"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" time="60" stepKey="waitForCustomerJustCreatedMomentAgoIsVisible"/>
+            <actionGroup ref="WebposSearchCustomerActionGroup" stepKey="actionGroupWebposSearchCustomer"/>
+            <wait time="2" stepKey="waitForResultCustomerSearchIn2Seconds"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItemWithTelephone}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" time="60" stepKey="waitForCustomerWithTheDefaultTelephoneIsVisible"/>
+        </test>
+        <test name="WebPOSPlaceOrderUseToCheckoutButton">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Check [Use to checkout] button"/>
+                <description value="Add new customer - Place order use [Use to checkout] button"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL25"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <actionGroup ref="WebposCreateNewCustomerActionGroup" stepKey="actionGroupSaveFillOutAllFieldsWebPOSCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <waitForText selector="{{WebposToasterSection.ToasterMessage}}" userInput="{{WebposCreateNewCustomerSuccessData.MessageCreateCustomerSuccess}}" time="60" stepKey="waitForMessageCreateCustomerSuccessVisible"/>
+            <actionGroup ref="WebposSearchCustomerActionGroup" stepKey="actionGroupWebposSearchCustomer"/>
+            <wait time="2" stepKey="waitForResultCustomerSearchIn2Seconds"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" time="60" stepKey="waitForCustomerJustCreatedMomentAgoIsVisible"/>
+            <click selector="{{WebPOSCustomerRightHeaderSection.UseToCheckoutButton}}" stepKey="ClickUseToCheckoutButton"/>
+            <waitForElementNotVisible selector="{{WebPOSCheckoutProductListSection.WebPOSProductListToLoad}}" time="90" stepKey="waitForWebPOSProductListToLoadNotVisible"/>
+            <see stepKey="assertCustomerSelectedIsVisible" userInput="{{WebPOSCustomerValidInformationRequiredField.FirstName}}" selector="{{WebPOSCartHeaderSection.customerName}}" />
+            <actionGroup ref="WebPOSAddProductToCartActionGroup" stepKey="actionGroupWebPOSAddProductToCart"/>
+            <actionGroup ref="WebPOSPlaceOrderWithCashInMethodActionGroup" stepKey="actionGroupWebPOSPlaceOrderWithCashInMethod"/>
+            <actionGroup ref="WebPOSReturnToCheckoutPageActionGroup" stepKey="actionGroupWebPOSReturnToCheckoutPage"/>
+        </test>
+        <test name="WebPOSCheckUseToCheckoutButtonWhenThereAreSomeProductsOnCartPage">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Check [Use to checkout] button"/>
+                <description value="Add new customer - Check [Use to checkout] button when there are some products on cart page"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL26"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <amOnPage url="{{WebPOSIndexPage.url}}" stepKey="openWebPOSLoginPage"/>
+            <actionGroup ref="WebPOSAddProductToCartActionGroup" stepKey="actionGroupWebPOSAddProductToCart"/>
+            <actionGroup ref="WebPOSOpenCustomerListPageActionGroup" stepKey="actionGroupWebPOSOpenCustomerListPage"/>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <actionGroup ref="WebposCreateNewCustomerActionGroup" stepKey="actionGroupSaveFillOutAllFieldsWebPOSCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <waitForText selector="{{WebposToasterSection.ToasterMessage}}" userInput="{{WebposCreateNewCustomerSuccessData.MessageCreateCustomerSuccess}}" time="60" stepKey="waitForMessageCreateCustomerSuccessVisible"/>
+            <actionGroup ref="WebposSearchCustomerActionGroup" stepKey="actionGroupWebposSearchCustomer"/>
+            <wait time="2" stepKey="waitForResultCustomerSearchIn2Seconds"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" time="60" stepKey="waitForCustomerJustCreatedMomentAgoIsVisible"/>
+            <click selector="{{WebPOSCustomerRightHeaderSection.UseToCheckoutButton}}" stepKey="ClickUseToCheckoutButton"/>
+            <waitForElementNotVisible selector="{{WebPOSCheckoutProductListSection.WebPOSProductListToLoad}}" time="90" stepKey="waitForWebPOSProductListToLoadNotVisible"/>
+            <see stepKey="assertCustomerSelectedIsVisible" userInput="{{WebPOSCustomerValidInformationRequiredField.FirstName}}" selector="{{WebPOSCartHeaderSection.customerName}}" />
+            <actionGroup ref="WebPOSPlaceOrderWithCashInMethodActionGroup" stepKey="actionGroupWebPOSPlaceOrderWithCashInMethod"/>
+            <actionGroup ref="WebPOSReturnToCheckoutPageActionGroup" stepKey="actionGroupWebPOSReturnToCheckoutPage"/>
+        </test>
+        <test name="WebPOSShowCustomerInformationOnThisSection">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Check customer information section"/>
+                <description value="Add new customer - Show customer information on this section"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL27"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <actionGroup ref="WebposCreateNewCustomerActionGroup" stepKey="actionGroupSaveFillOutAllFieldsWebPOSCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <waitForText selector="{{WebposToasterSection.ToasterMessage}}" userInput="{{WebposCreateNewCustomerSuccessData.MessageCreateCustomerSuccess}}" time="60" stepKey="waitForMessageCreateCustomerSuccessVisible"/>
+            <actionGroup ref="WebposSearchCustomerActionGroup" stepKey="actionGroupWebposSearchCustomer"/>
+            <wait time="2" stepKey="waitForResultCustomerSearchIn2Seconds"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" time="60" stepKey="waitForCustomerJustCreatedMomentAgoIsVisible"/>
+            <see stepKey="assertFirstNameOfCustomerSelectedVisible" userInput="{{WebPOSCustomerValidInformationRequiredField.FirstName}}" selector="{{WebPOSCustomerRightBodySection.CustomerInformationFirstName}}" />
+            <see stepKey="assertLasNameOfCustomerSelectedVisible" userInput="{{WebPOSCustomerValidInformationRequiredField.LastName}}" selector="{{WebPOSCustomerRightBodySection.CustomerInformationLastName}}" />
+            <see stepKey="assertEmailOfCustomerSelectedVisible" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" selector="{{WebPOSCustomerRightBodySection.CustomerInformationEmail}}" />
+            <see stepKey="assertGroupOfCustomerSelectedVisible" userInput="{{WebPOSCustomerValidInformationRequiredField.CustomerGroup2}}" selector="{{WebPOSCustomerRightBodySection.CustomerInformationGroup}}" />
+        </test>
+        <test name="WebPOSInputBlankToAllFields">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Check customer information section"/>
+                <description value="Add new customer - Input blank to all fields"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL28"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <actionGroup ref="WebposCreateNewCustomerActionGroup" stepKey="actionGroupSaveFillOutAllFieldsWebPOSCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <waitForText selector="{{WebposToasterSection.ToasterMessage}}" userInput="{{WebposCreateNewCustomerSuccessData.MessageCreateCustomerSuccess}}" time="60" stepKey="waitForMessageCreateCustomerSuccessVisible"/>
+            <actionGroup ref="WebposSearchCustomerActionGroup" stepKey="actionGroupWebposSearchCustomer"/>
+            <wait time="2" stepKey="waitForResultCustomerSearchIn2Seconds"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" time="60" stepKey="waitForCustomerJustCreatedMomentAgoIsVisible"/>
+            <click selector="{{WebPOSCustomerRightBodySection.EditCustomerButton}}" stepKey="ClickEditCustomerButton"/>
+            <clearField stepKey="clearFieldFirstNameOfCustomerSelectedVisible" selector="{{WebPOSCustomerRightBodySection.InputFirstName}}" />
+            <clearField stepKey="clearFieldLasNameOfCustomerSelectedVisible" selector="{{WebPOSCustomerRightBodySection.InputLastName}}" />
+            <clearField stepKey="clearFieldEmailOfCustomerSelectedVisible" selector="{{WebPOSCustomerRightBodySection.InputEmail}}" />
+            <selectOption selector="{{WebPOSCustomerRightBodySection.OptionCustomerGroup}}" userInput="{{WebPOSCustomerValidInformationRequiredField.CustomerGroup5}}" stepKey="chooseWebPOSCustomerCustomerGroup"/>
+            <click selector="{{WebPOSCustomerRightBodySection.SaveCustomerButton}}" stepKey="ClickSaveCustomerButton"/>
+            <see stepKey="assertErrorMessageRequiredOfFirstName" userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerRightBodySection.errorMessageOfFirstName}}" />
+            <see stepKey="assertErrorMessageRequiredOfLastName" userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerRightBodySection.errorMessageOfLastName}}" />
+            <see stepKey="assertErrorMessageRequiredOfEmail" userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerRightBodySection.errorMessageOfEmail}}" />
+            <see stepKey="assertErrorMessageRequiredOfCustomerGroup" userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerRightBodySection.errorMessageOfCustomerGroup}}" />
+        </test>
+        <test name="WebPOSEditCustomerInformationSuccessfully">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Check customer information section"/>
+                <description value="Add new customer - Edit customer information successfully"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL29"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <actionGroup ref="WebposCreateNewCustomerActionGroup" stepKey="actionGroupSaveFillOutAllFieldsWebPOSCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <waitForText selector="{{WebposToasterSection.ToasterMessage}}" userInput="{{WebposCreateNewCustomerSuccessData.MessageCreateCustomerSuccess}}" time="60" stepKey="waitForMessageCreateCustomerSuccessVisible"/>
+            <actionGroup ref="WebposSearchCustomerActionGroup" stepKey="actionGroupWebposSearchCustomer"/>
+            <wait time="2" stepKey="waitForResultCustomerSearchIn2Seconds"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" time="60" stepKey="waitForCustomerJustCreatedMomentAgoIsVisible"/>
+            <click selector="{{WebPOSCustomerRightBodySection.EditCustomerButton}}" stepKey="ClickEditCustomerButton"/>
+            <fillField selector="{{WebPOSCustomerRightBodySection.InputFirstName}}" userInput="{{WebPOSCustomerValidInformationRequiredField.LastName}}" stepKey="InsertFieldFirstNameOfCustomerSelectedVisible" />
+            <fillField selector="{{WebPOSCustomerRightBodySection.InputLastName}}" userInput="{{WebPOSCustomerValidInformationRequiredField.FirstName}}" stepKey="InsertFieldLasNameOfCustomerSelectedVisible" />
+            <fillField selector="{{WebPOSCustomerRightBodySection.InputEmail}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" stepKey="InsertFieldEmailOfCustomerSelectedVisible" />
+            <selectOption selector="{{WebPOSCustomerRightBodySection.OptionCustomerGroup}}" userInput="{{WebPOSCustomerValidInformationRequiredField.CustomerGroup3}}" stepKey="chooseWebPOSCustomerCustomerGroup"/>
+            <click selector="{{WebPOSCustomerRightBodySection.SaveCustomerButton}}" stepKey="ClickSaveCustomerButton"/>
+            <waitForText selector="{{WebposToasterSection.ToasterMessage}}" userInput="{{WebposCreateNewCustomerSuccessData.MessageCreateCustomerSuccess}}" time="60" stepKey="waitForMessageCreateCustomerSuccessVisible"/>
+        </test>
+        <test name="WebPOSCheckCancelButton">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Check Address section"/>
+                <description value="Add new customer - Check [Cancel] button"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL30"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <actionGroup ref="WebposCreateNewCustomerActionGroup" stepKey="actionGroupSaveFillOutAllFieldsWebPOSCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <waitForText selector="{{WebposToasterSection.ToasterMessage}}" userInput="{{WebposCreateNewCustomerSuccessData.MessageCreateCustomerSuccess}}" time="60" stepKey="waitForMessageCreateCustomerSuccessVisible"/>
+            <actionGroup ref="WebposSearchCustomerActionGroup" stepKey="actionGroupWebposSearchCustomer"/>
+            <wait time="2" stepKey="waitForResultCustomerSearchIn2Seconds"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" time="60" stepKey="waitForCustomerJustCreatedMomentAgoIsVisible"/>
+            <click selector="{{WebPOSCustomerRightBodySection.CustomerEditFormAddAddress}}" stepKey="ClickAddAddressButtonOnCustomerEditForm"/>
+            <actionGroup ref="WebPOSCheckGUIFormAddBillingAddressActionGroup" stepKey="actionGroupWebPOSCheckGUIFormAddCustomerAddress"/>
+            <click selector="{{WebPOSCustomerAddAddressHeaderSection.FormHeaderCancelButton}}" stepKey="ClickCloseButtonOnAddCustomerAddressForm"/>
+        </test>
+        <test name="WebPOSBlankAllFields">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Check Address section"/>
+                <description value="Add new customer - Blank all fields"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL31"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <actionGroup ref="WebposCreateNewCustomerActionGroup" stepKey="actionGroupSaveFillOutAllFieldsWebPOSCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <waitForText selector="{{WebposToasterSection.ToasterMessage}}" userInput="{{WebposCreateNewCustomerSuccessData.MessageCreateCustomerSuccess}}" time="60" stepKey="waitForMessageCreateCustomerSuccessVisible"/>
+            <actionGroup ref="WebposSearchCustomerActionGroup" stepKey="actionGroupWebposSearchCustomer"/>
+            <wait time="2" stepKey="waitForResultCustomerSearchIn2Seconds"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" time="60" stepKey="waitForCustomerJustCreatedMomentAgoIsVisible"/>
+            <click selector="{{WebPOSCustomerRightBodySection.CustomerEditFormAddAddress}}" stepKey="ClickAddAddressButtonOnCustomerEditForm"/>
+            <click selector="{{WebPOSCustomerAddAddressHeaderSection.FormHeaderSaveButton}}" stepKey="ClickCloseButtonOnAddCustomerAddressForm"/>
+            <actionGroup ref="WebPOSSaveCustomerAddressWithoutAnyValueActionGroup" stepKey="actionGroupWebPOSSaveCustomerAddressWithoutAnyValue"/>
+        </test>
+        <test name="WebPOSInputAllFields">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Check Address section"/>
+                <description value="Add new customer - Input all fields"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL32"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <actionGroup ref="WebposCreateNewCustomerActionGroup" stepKey="actionGroupSaveFillOutAllFieldsWebPOSCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <waitForText selector="{{WebposToasterSection.ToasterMessage}}" userInput="{{WebposCreateNewCustomerSuccessData.MessageCreateCustomerSuccess}}" time="60" stepKey="waitForMessageCreateCustomerSuccessVisible"/>
+            <actionGroup ref="WebposSearchCustomerActionGroup" stepKey="actionGroupWebposSearchCustomer"/>
+            <wait time="2" stepKey="waitForResultCustomerSearchIn2Seconds"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" time="60" stepKey="waitForCustomerJustCreatedMomentAgoIsVisible"/>
+            <click selector="{{WebPOSCustomerRightBodySection.CustomerEditFormAddAddress}}" stepKey="ClickAddAddressButtonOnCustomerEditForm"/>
+            <actionGroup ref="WebPOSAddNewCustomerAddressActionGroup" stepKey="actionGroupWebPOSAddNewCustomerAddress"/>
+            <click selector="{{WebPOSCustomerAddAddressHeaderSection.FormHeaderSaveButton}}" stepKey="ClickCloseButtonOnAddCustomerAddressForm"/>
+            <wait time="2" stepKey="waitAfterCreateCustomerAddressIn2Seconds"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" time="60" stepKey="waitAfterCreateCustomerAddressIsVisible"/>
+            <waitForText selector="{{WebposToasterSection.ToasterMessage}}" userInput="{{WebposCreateNewCustomerSuccessData.MessageCreateCustomerAddressSuccess}}" time="60" stepKey="waitForMessageCreateCustomerAddressSuccessVisible"/>
+            <seeElement selector="{{WebPOSCustomerRightBodySection.ButtonEditCustomerAddressAny}}" stepKey="assertVisibleButtonEditCustomerAddressAny"/>
+            <seeElement selector="{{WebPOSCustomerRightBodySection.ButtonDeleteCustomerAddressAny}}" stepKey="assertVisibleButtonDeleteCustomerAddressAny"/>
+        </test>
+        <test name="WebPOSEditAnAddress">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Check Address section"/>
+                <description value="Add new customer - Edit an address"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL33"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <actionGroup ref="WebposCreateNewCustomerActionGroup" stepKey="actionGroupSaveFillOutAllFieldsWebPOSCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerFooterSection.IconAddShippingAddress}}" stepKey="clickIconAddShippingAddress"/>
+            <actionGroup ref="WebPOSShippingAddressAfterFillCustomerInformationActionGroup" stepKey="actionGroupSaveWebPOSShippingAddressAfterFillCustomerInformation"/>
+            <click selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.BillingAddressAndShippingAddressAreTheSame}}" stepKey="ClickBillingAddressAndShippingAddressAreTheSame"/>
+            <click selector="{{WebPOSCustomerAddCustomerShippingAddressHeaderSection.FormHeaderSaveButton}}" stepKey="ClickFormAddShippingAddressHeaderSaveButton"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerSection.FormCreateNewCustomer}}" stepKey="assertWebPOSCreateNewCustomerPopupIsVisible"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <wait time="1" stepKey="waitForFormCreateCustomerIn1Seconds"/>
+            <actionGroup ref="WebposSearchCustomerActionGroup" stepKey="actionGroupWebposSearchCustomer"/>
+            <wait time="2" stepKey="waitForResultCustomerSearchIn2Seconds"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" time="60" stepKey="waitForCustomerJustCreatedMomentAgoIsVisible"/>
+            <click selector="{{WebPOSCustomerRightBodySection.ButtonEditCustomerAddressAny}}" stepKey="clickButtonEditCustomerAddressAny1"/>
+            <seeElement selector="{{WebPOSCustomerAddAddressSection.FormAddBillingAddress}}" stepKey="assertVisibleFormAddBillingAddress1"/>
+            <click selector="{{WebPOSCustomerAddAddressHeaderSection.FormHeaderCancelButton}}" stepKey="clickButtonCloseCustomerAddressForm"/>
+            <dontSeeElement selector="{{WebPOSCustomerAddAddressSection.FormAddBillingAddress}}" stepKey="assertNotVisibleFormAddBillingAddress"/>
+            <click selector="{{WebPOSCustomerRightBodySection.ButtonEditCustomerAddressAny}}" stepKey="clickButtonEditCustomerAddressAny2"/>
+            <seeElement selector="{{WebPOSCustomerAddAddressSection.FormAddBillingAddress}}" stepKey="assertVisibleFormAddBillingAddress2"/>
+            <actionGroup ref="WebPOSAddNewCustomerAddressActionGroup" stepKey="actionGroupWebPOSAddNewCustomerAddress"/>
+            <click selector="{{WebPOSCustomerAddAddressHeaderSection.FormHeaderSaveButton}}" stepKey="ClickCloseButtonOnAddCustomerAddressForm"/>
+            <wait time="2" stepKey="waitAfterCreateCustomerAddressIn2Seconds"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" time="60" stepKey="waitAfterCreateCustomerAddressIsVisible"/>
+            <waitForText selector="{{WebposToasterSection.ToasterMessage}}" userInput="{{WebposCreateNewCustomerSuccessData.MessageCreateCustomerAddressSuccess}}" time="60" stepKey="waitForMessageCreateCustomerAddressSuccessVisible"/>
+        </test>
+        <test name="WebPOSDeleteAnAddress">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Check Address section"/>
+                <description value="Add new customer - Delete an address"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL34"/>
+                <group value="WebPOSCustomerList"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <actionGroup ref="WebposCreateNewCustomerActionGroup" stepKey="actionGroupSaveFillOutAllFieldsWebPOSCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerFooterSection.IconAddShippingAddress}}" stepKey="clickIconAddShippingAddress"/>
+            <actionGroup ref="WebPOSShippingAddressAfterFillCustomerInformationActionGroup" stepKey="actionGroupSaveWebPOSShippingAddressAfterFillCustomerInformation"/>
+            <click selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.BillingAddressAndShippingAddressAreTheSame}}" stepKey="ClickBillingAddressAndShippingAddressAreTheSame"/>
+            <click selector="{{WebPOSCustomerAddCustomerShippingAddressHeaderSection.FormHeaderSaveButton}}" stepKey="ClickFormAddShippingAddressHeaderSaveButton"/>
+            <seeElement selector="{{WebPOSCustomerAddCustomerSection.FormCreateNewCustomer}}" stepKey="assertWebPOSCreateNewCustomerPopupIsVisible"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <wait time="1" stepKey="waitForFormCreateCustomerIn1Seconds"/>
+            <actionGroup ref="WebposSearchCustomerActionGroup" stepKey="actionGroupWebposSearchCustomer"/>
+            <wait time="2" stepKey="waitForResultCustomerSearchIn2Seconds"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" time="60" stepKey="waitForCustomerJustCreatedMomentAgoIsVisible"/>
+            <click selector="{{WebPOSCustomerRightBodySection.ButtonDeleteCustomerAddressAny}}" stepKey="clickButtonEditCustomerAddressAny1"/>
+            <wait time="2" stepKey="waitForFormEditCustomerAddressIn2Seconds1"/>
+            <seeElement selector="{{WebposModalsWrapperSection.buttonClose}}" stepKey="assertWebPOSPopUpDeleteCustomerAddressButtonCloseIsVisible"/>
+            <seeElement selector="{{WebposModalsWrapperSection.buttonCancel}}" stepKey="assertWebPOSPopUpDeleteCustomerAddressButtonCancelIsVisible"/>
+            <seeElement selector="{{WebposModalsWrapperSection.buttonOK}}" stepKey="assertWebPOSPopUpDeleteCustomerButtonOKAddressIsVisible"/>
+            <click selector="{{WebposModalsWrapperSection.buttonClose}}" stepKey="clickButtonClosePopupDeleteCustomerAddress"/>
+            <click selector="{{WebPOSCustomerRightBodySection.ButtonDeleteCustomerAddressAny}}" stepKey="clickButtonEditCustomerAddressAny2"/>
+            <wait time="2" stepKey="waitForFormEditCustomerAddressIn2Seconds2"/>
+            <click selector="{{WebposModalsWrapperSection.buttonCancel}}" stepKey="clickButtonCancelPopupDeleteCustomerAddress"/>
+            <click selector="{{WebPOSCustomerRightBodySection.ButtonDeleteCustomerAddressAny}}" stepKey="clickButtonEditCustomerAddressAny3"/>
+            <wait time="2" stepKey="waitForFormEditCustomerAddressIn2Seconds3"/>
+            <click selector="{{WebposModalsWrapperSection.buttonOK}}" stepKey="clickButtonOKPopupDeleteCustomerAddress"/>
+            <dontSeeElement selector="{{WebPOSCustomerRightBodySection.ButtonDeleteCustomerAddressAny}}" stepKey="assertButtonDeleteCustomerAddressIsNotVisible"/>
+        </test>
+        <test name="WebPOSClickOnOrderID">
+            <annotations>
+                <title value="You should be able to WebPOS login page. Click to Customer List menu to open the Customer List Page. Check [Order history in last month] section"/>
+                <description value="Add new customer - Click on Order ID"/>
+                <severity value="CRITICAL"/>
+                <testCaseId value="CL35"/>
+                <group value="WebPOSCustomerList1"/>
+            </annotations>
+            <click selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="clickAddNewCustomerElement"/>
+            <wait time="1" stepKey="waitForFormCreateNewCustomerIn1Seconds"/>
+            <actionGroup ref="WebposCreateNewCustomerActionGroup" stepKey="actionGroupSaveFillOutAllFieldsWebPOSCustomer"/>
+            <click selector="{{WebPOSCustomerAddCustomerHeaderSection.FormHeaderSaveButton}}" stepKey="ClickAddCustomerFormHeaderSaveButton"/>
+            <waitForText selector="{{WebposToasterSection.ToasterMessage}}" userInput="{{WebposCreateNewCustomerSuccessData.MessageCreateCustomerSuccess}}" time="60" stepKey="waitForMessageCreateCustomerSuccessVisible"/>
+            <waitForText selector="{{WebPOSCustomerListMainItemSection.LastestCustomerItem}}" userInput="{{WebPOSCustomerValidInformationRequiredField.Email}}" time="60" stepKey="waitForCustomerJustCreatedMomentAgoIsVisible1"/>
+            <click selector="{{WebPOSCustomerRightHeaderSection.UseToCheckoutButton}}" stepKey="ClickUseToCheckoutButton"/>
+            <waitForElementNotVisible selector="{{WebPOSCheckoutProductListSection.WebPOSProductListToLoad}}" time="90" stepKey="waitForWebPOSProductListToLoadNotVisible"/>
+            <see stepKey="assertCustomerSelectedIsVisible" userInput="{{WebPOSCustomerValidInformationRequiredField.FirstName}}" selector="{{WebPOSCartHeaderSection.customerName}}" />
+            <actionGroup ref="WebPOSAddProductToCartActionGroup" stepKey="actionGroupWebPOSAddProductToCart"/>
+            <actionGroup ref="WebPOSPlaceOrderWithCashInMethodActionGroup" stepKey="actionGroupWebPOSPlaceOrderWithCashInMethod"/>
+            <actionGroup ref="WebPOSReturnToCheckoutPageActionGroup" stepKey="actionGroupWebPOSReturnToCheckoutPage"/>
+            <actionGroup ref="WebPOSOpenCustomerListPageActionGroup" stepKey="actionGroupWebPOSOpenCustomerListPage"/>
+            <actionGroup ref="WebposSearchCustomerActionGroup" stepKey="actionGroupWebposSearchCustomer"/>
+            <wait time="3" stepKey="waitForResultCustomerSearchIn3Seconds"/>
+            <grabTextFrom selector="{{WebPOSCustomerRightBodySection.orderIDJustCreated}}" returnVariable="orderID" stepKey="getTextOrderIDJustCreated"/>
+            <click selector="{{WebPOSCustomerRightBodySection.orderIDJustCreated}}" stepKey="ClickToOrderIDJustCreated"/>
+            <wait time="3" stepKey="waitForRedirectToOrderHistoryPageIn3Seconds"/>
+            <see selector="{{WebPOSOrderListHistorySection.orderHistoryID}}" variable="orderID" stepKey="assertWebPOSOrderIDIsVisible" />
+        </test>
+    </cest>
+</config>

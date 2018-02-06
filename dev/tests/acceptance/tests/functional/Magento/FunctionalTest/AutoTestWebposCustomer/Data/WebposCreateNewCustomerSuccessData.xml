@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/DataGenerator/etc/dataProfileSchema.xsd">
+    <!--Begin Customer Email Message-->
+    <entity name="WebposCreateNewCustomerSuccessData" type="WebPOSCreateCustomerSuccess">
+        <data key="MessageCreateCustomerSuccess">The customer is saved successfully.</data>
+        <data key="MessageCreateCustomerAddressSuccess">The customer address is saved successfully.</data>
+    </entity>
+    <!--Email Customer Email Message-->
+</config>

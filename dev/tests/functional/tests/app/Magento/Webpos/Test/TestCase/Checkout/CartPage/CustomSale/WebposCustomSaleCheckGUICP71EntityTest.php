@@ -18,7 +18,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 /**
  * Class WebposCustomSaleCheckGUICP71EntityTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct
+ * @package Magento\AutoTestWebposToaster\Test\TestCase\Checkout\CartPage\DiscountProduct
  */
 class WebposCustomSaleCheckGUICP71EntityTest extends Injectable
 {

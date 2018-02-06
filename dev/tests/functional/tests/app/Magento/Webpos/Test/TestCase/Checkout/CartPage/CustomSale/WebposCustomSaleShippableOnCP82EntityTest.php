@@ -22,7 +22,7 @@ use Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomSale\AssertWebposCust
  */
 /**
  * Class WebposCustomSaleShippableOnCP82EntityTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale
+ * @package Magento\AutoTestWebposToaster\Test\TestCase\Checkout\CartPage\CustomSale
  */
 class WebposCustomSaleShippableOnCP82EntityTest  extends Injectable
 {

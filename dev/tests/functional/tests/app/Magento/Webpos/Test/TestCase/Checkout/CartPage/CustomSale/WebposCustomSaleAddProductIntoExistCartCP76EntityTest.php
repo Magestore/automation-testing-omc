@@ -21,7 +21,7 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
  */
 /**
  * Class WebposCustomSaleAddProductIntoExistCartCP76EntityTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale
+ * @package Magento\AutoTestWebposToaster\Test\TestCase\Checkout\CartPage\CustomSale
  */
 class WebposCustomSaleAddProductIntoExistCartCP76EntityTest extends Injectable
 {

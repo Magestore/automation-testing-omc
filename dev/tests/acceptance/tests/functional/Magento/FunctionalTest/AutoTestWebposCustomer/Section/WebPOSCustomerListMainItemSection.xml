@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Page/etc/SectionObject.xsd">
+    <section name="WebPOSCustomerListMainItemSection">
+        <element name="firstCustomerItem" type="wysiwyg" selector="//*[@id='customer_list_container']/div[1]/div[1]/div/div/ul/li[1]"/>
+        <element name="secondCustomerItem" type="wysiwyg" selector="//*[@id='customer_list_container']/div[1]/div[1]/div/div/ul/li[2]"/>
+        <element name="LastestCustomerItem" type="wysiwyg" selector='div.customer_list_wrap li:last-child a[data-bind="text: email"]'/>
+        <element name="LastestCustomerItemWithName" type="wysiwyg" selector='div.customer_list_wrap li:last-child h4.customer-name'/>
+        <element name="LastestCustomerItemWithTelephone" type="wysiwyg" selector='div.customer_list_wrap li:last-child span[data-bind="text: telephone"]'/>
+        <element name="TheSecondCustomerInList" type="wysiwyg" selector="div.customer_list_wrap li:nth-child(2)"/>
+    </section>
+</config>

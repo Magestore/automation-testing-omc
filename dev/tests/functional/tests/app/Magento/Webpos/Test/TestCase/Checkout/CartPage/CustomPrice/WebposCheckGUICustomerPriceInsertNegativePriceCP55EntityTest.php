@@ -13,7 +13,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 /**
  * Class WebposCheckGUICustomerPriceInsertNegativePriceCP55EntityTest
- * @package Magento\Webpos\Test\TestCase\CategoryRepository\CartPage\CustomPrice
+ * @package Magento\AutoTestWebposToaster\Test\TestCase\CategoryRepository\CartPage\CustomPrice
  */
 class WebposCheckGUICustomerPriceInsertNegativePriceCP55EntityTest extends Injectable
 {

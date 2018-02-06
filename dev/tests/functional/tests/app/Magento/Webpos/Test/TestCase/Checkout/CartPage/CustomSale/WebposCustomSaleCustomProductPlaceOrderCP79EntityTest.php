@@ -24,7 +24,7 @@ use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePla
  */
 /**
  * Class WebposCustomSaleCustomProductPlaceOrderCP79EntityTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale
+ * @package Magento\AutoTestWebposToaster\Test\TestCase\Checkout\CartPage\CustomSale
  */
 
 class WebposCustomSaleCustomProductPlaceOrderCP79EntityTest extends Injectable

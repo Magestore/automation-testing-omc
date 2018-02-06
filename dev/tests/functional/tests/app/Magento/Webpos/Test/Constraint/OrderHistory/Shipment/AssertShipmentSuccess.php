@@ -14,7 +14,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AssertShipmentSuccess
- * @package Magento\Webpos\Test\Constraint\OrderHistory\Shipment
+ * @package Magento\Webpos\Test\Constraint\SectionOrderHistory\Shipment
  */
 class AssertShipmentSuccess extends AbstractConstraint
 {

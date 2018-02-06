@@ -15,7 +15,7 @@ use Magento\Sales\Test\Page\Adminhtml\SalesOrderView;
 
 /**
  * Class AssertOrderStatusInBackend
- * @package Magento\Webpos\Test\Constraint\OrderHistory
+ * @package Magento\Webpos\Test\Constraint\SectionOrderHistory
  */
 class AssertOrderStatusInBackend extends AbstractConstraint
 {

@@ -10,7 +10,7 @@ namespace Magento\Webpos\Api\Cart\Constraint;
 
 /**
  * Class CategoryRepository
- * @package Magento\Webpos\Api\TaxClass\Constraint
+ * @package Magento\AutoTestWebposToaster\Api\TaxClass\Constraint
  */
 class Checkout
 {

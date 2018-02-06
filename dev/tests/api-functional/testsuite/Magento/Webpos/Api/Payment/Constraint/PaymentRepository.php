@@ -10,7 +10,7 @@ namespace Magento\Webpos\Api\Payment\Constraint;
 
 /**
  * Class PaymentRepository
- * @package Magento\Webpos\Api\Payment\Constraint
+ * @package Magento\AutoTestWebposToaster\Api\Payment\Constraint
  */
 class PaymentRepository
 {

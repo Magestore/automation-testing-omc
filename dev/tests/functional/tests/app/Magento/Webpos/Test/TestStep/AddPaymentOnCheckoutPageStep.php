@@ -14,12 +14,12 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AddPaymentOnCheckoutPageStep
- * @package Magento\Webpos\Test\TestStep
+ * @package Magento\AutoTestWebposToaster\Test\TestStep
  */
 class AddPaymentOnCheckoutPageStep implements TestStepInterface
 {
 	/**
-	 * Webpos Index page.
+	 * AutoTestWebposToaster Index page.
 	 * @var WebposIndex
 	 */
 	protected $webposIndex;

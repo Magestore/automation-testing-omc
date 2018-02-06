@@ -10,7 +10,7 @@ namespace Magento\Webpos\Api\Sales\Constraint;
 
 /**
  * Class CreditmemoRepository
- * @package Magento\Webpos\Api\Sales\Constraint
+ * @package Magento\AutoTestWebposToaster\Api\Sales\Constraint
  */
 class CreditmemoRepository
 {

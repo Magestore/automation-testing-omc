@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Page/etc/SectionObject.xsd">
+    <!--Begin Customer Right Header Section-->
+    <section name="WebPOSCustomerRightHeaderSection">
+        <element name="UseToCheckoutButton" type="wysiwyg" selector=".customer_list_wrap .col-left header div a"/>
+    </section>
+    <!--End Customer Right Header Section-->
+
+    <!--Begin Customer Right Body Section-->
+    <section name="WebPOSCustomerRightBodySection">
+        <!--Begin Customer Information-->
+        <element name="EditCustomerButton" type="wysiwyg" selector='#customer-edit-form a.action-edit' />
+        <element name="SaveCustomerButton" type="wysiwyg" selector='#customer-edit-form button.action-edit' />
+        <element name="CustomerInformationFirstName" type="wysiwyg" selector='#customer-edit-form span[data-bind="text: currentFirstName, visible: !isEditInformation()"]' />
+        <element name="CustomerInformationLastName" type="wysiwyg" selector='#customer-edit-form span[data-bind="text: currentLastName, visible: !isEditInformation()"]' />
+        <element name="CustomerInformationEmail" type="wysiwyg" selector='#customer-edit-form span[data-bind="text: currentEmail, visible: !isEditInformation()"]' />
+        <element name="CustomerInformationGroup" type="wysiwyg" selector='#customer-edit-form span[data-bind="text: customerData().group_label, visible: !isEditInformation()"]' />
+
+        <element name="InputFirstName" type="input" selector='#customer_firstname' />
+        <element name="InputLastName" type="input" selector='#customer_lastname' />
+        <element name="InputEmail" type="input" selector='#customer_email' />
+        <element name="OptionCustomerGroup" type="select" selector='#customer-edit-form select#customer_group' />
+
+        <element name="errorMessageOfFirstName" type="wysiwyg" selector='#customer_firstname-error' />
+        <element name="errorMessageOfLastName" type="wysiwyg" selector='#customer_lastname-error' />
+        <element name="errorMessageOfEmail" type="wysiwyg" selector='#customer_email-error' />
+        <element name="errorMessageOfCustomerGroup" type="wysiwyg" selector='#customer_group-error' />
+        <!--End Customer Information-->
+
+        <!--Begin Customer Address-->
+        <element name="CustomerEditFormAddAddress" type="wysiwyg" selector='#customer-edit-form div:nth-child(3) a.action-add' />
+        <element name="ButtonEditCustomerAddressAny" type="wysiwyg" selector='#customer-edit-form span.icon-iconPOS-edit-28' />
+        <element name="ButtonDeleteCustomerAddressAny" type="wysiwyg" selector='#customer-edit-form span.icon-iconPOS-emptycart' />
+        <!--End Customer Address-->
+
+        <!--Begin Customer Order History Last Month-->
+        <element name="orderIDJustCreated" type="wysiwyg" selector='#customer-edit-form td[data-bind="text: increment_id, click: $parent.viewOrderDetail.bind($parent)"]' />
+        <!--End Customer Order History Last Month-->
+    </section>
+    <!--End Customer Right Body Section-->
+</config>

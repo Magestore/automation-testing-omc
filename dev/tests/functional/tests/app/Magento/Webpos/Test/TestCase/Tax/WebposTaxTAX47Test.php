@@ -16,7 +16,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposTaxTAX47Test
- * @package Magento\Webpos\Test\TestCase\Tax
+ * @package Magento\AutoTestWebposToaster\Test\TestCase\Tax
  */
 class WebposTaxTAX47Test extends Injectable
 {

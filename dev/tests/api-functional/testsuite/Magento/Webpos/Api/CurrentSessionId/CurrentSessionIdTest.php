@@ -11,7 +11,7 @@ namespace Magento\Webpos\Api\CurrentSessionId;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 /**
  * Class CurrentSessionIdTest
- * @package Magento\Webpos\Api\CurrentSessionId
+ * @package Magento\AutoTestWebposToaster\Api\CurrentSessionId
  */
 class CurrentSessionIdTest extends WebapiAbstract
 {

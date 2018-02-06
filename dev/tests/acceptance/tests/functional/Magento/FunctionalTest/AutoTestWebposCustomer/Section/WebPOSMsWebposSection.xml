@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Page/etc/SectionObject.xsd">
+    <!--Begin WebPOS Ms WebPOS Section-->
+    <section name="WebPOSMsWebposSection">
+        <element name="WebPOSFirstScreen" type="wysiwyg" selector=".ms-webpos .first-screen"/>
+        <element name="WebPOSCMenuButton" type="button" selector="#c-button--push-left"/>
+    </section>
+    <!--End WebPOS Ms WebPOS Section-->
+    <!--Begin WebPOS Cart Section-->
+    <section name="WebPOSCartSection">
+        <element name="CartLoader" type="wysiwyg" selector="#webpos_cart > div.indicator"/>
+        <element name="CheckoutLoader" type="wysiwyg" selector="#webpos_checkout > div.indicator"/>
+    </section>
+    <!--End WebPOS Cart Section-->
+</config>

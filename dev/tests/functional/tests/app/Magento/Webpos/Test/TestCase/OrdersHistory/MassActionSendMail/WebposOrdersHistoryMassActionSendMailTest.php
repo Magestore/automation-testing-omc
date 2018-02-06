@@ -16,7 +16,7 @@ use Magento\Mtf\TestCase\Injectable;
 
 /**
  * Class WebposOrdersHistoryMassActionSendMailTest
- * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionSendMail
+ * @package Magento\AutoTestWebposToaster\Test\TestCase\OrdersHistory\MassActionSendMail
  */
 class WebposOrdersHistoryMassActionSendMailTest extends Injectable
 {

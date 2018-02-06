@@ -13,7 +13,7 @@ use Magento\Mtf\TestStep\TestStepInterface;
 
 /**
  * Class CreateNewConfigurableProductsStep
- * @package Magento\Webpos\Test\TestStep
+ * @package Magento\AutoTestWebposToaster\Test\TestStep
  */
 class CreateNewConfigurableProductsStep implements TestStepInterface
 {
