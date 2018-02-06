@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\ProductsGrid\CheckGUI\WebposProductsGridCheckGUITest" summary="Products Grid - CheckGUI" ticketId="WEBPOS-PG01">
+        <variation name="WebposProductsGridCheckGUITest_PG01">
+            <data name="description" xsi:type="string">Products Grid check GUI</data>
+            <constraint name="Magento\Webpos\Test\Constraint\ProductsGrid\CheckGUI\AssertProductsGridOnHeaderAvailable"/>
+            <constraint name="Magento\Webpos\Test\Constraint\ProductsGrid\CheckGUI\AssertProductsGridProductBlockAvailable"/>
+            <constraint name="Magento\Webpos\Test\Constraint\ProductsGrid\CheckGUI\AssertProductsGridOnFooterAvailable"/>
+        </variation>
+    </testCase>
+</config>
