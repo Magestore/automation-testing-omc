@@ -8,6 +8,7 @@
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+use Magento\Config\Test\Fixture\ConfigData;
 
 class WebposOnHoldOrderONH23Test extends Injectable
 {
@@ -20,7 +21,7 @@ class WebposOnHoldOrderONH23Test extends Injectable
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'have_shipping_method_on_webpos_CP197']
+            ['configData' => 'webpos_default_guest_checkout_rollback']
         )->run();
     }
 
@@ -32,7 +33,7 @@ class WebposOnHoldOrderONH23Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test($products)
+    public function test($products, ConfigData $configData)
     {
         //Create product
         $product = $this->objectManager->getInstance()->create(
@@ -78,10 +79,16 @@ class WebposOnHoldOrderONH23Test extends Injectable
         $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
         $orderId= ltrim ($orderId,'#');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
-
+        $dataProduct = $product->getData();
+        $dataProduct['qty'] = '1';
+        $configData = $configData->getData()['section'];
         return [
+            'name' => $configData['webpos/guest_checkout/first_name']['value'].' '.$configData['webpos/guest_checkout/last_name']['value'],
+            'address' => $configData['webpos/guest_checkout/city']['value'].', '.$configData['webpos/guest_checkout/region_id']['label'].
+                ', '.$configData['webpos/guest_checkout/zip']['value'].', US',
+            'phone' =>  $configData['webpos/guest_checkout/telephone']['value'],
             'orderId' => $orderId,
-            'shippingDescription' => 'Flat Rate - Fixed'
+            'products' => [$dataProduct]
         ];
     }
 }

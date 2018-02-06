@@ -17,7 +17,7 @@ class AssertCheckFeeShipping extends AbstractConstraint
         $webposIndex->getCMenu()->onHoldOrders();
         sleep(1);
 
-        //Check comment
+        //Check fee shipping
         $feeShippingActual = floatval(str_replace('$','',$webposIndex->getOnHoldOrderOrderViewFooter()->getRowValue('Shipping')));
         \PHPUnit_Framework_Assert::assertEquals(
             $feeShipping,

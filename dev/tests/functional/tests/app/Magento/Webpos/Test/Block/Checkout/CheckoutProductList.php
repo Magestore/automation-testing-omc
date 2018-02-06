@@ -9,6 +9,8 @@
 namespace Magento\Webpos\Test\Block\Checkout;
 
 use Magento\Mtf\Block\Block;
+use Magento\Mtf\Client\Locator;
+
 /**
  * Class CheckoutProductList
  * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Block\CategoryRepository
@@ -23,6 +25,31 @@ class CheckoutProductList extends Block
     public function getFirstProduct()
     {
         return $this->_rootElement->find('.product-item');
+    }
+
+    public function getFirstProductImage()
+    {
+        return $this->_rootElement->find('//*[@id="block-product-list"]/div/div/div/div/div[1]/div/div[@class="product-img"]/img', Locator::SELECTOR_XPATH);
+    }
+
+    public function getFirstProductName()
+    {
+        return $this->_rootElement->find('//*[@id="block-product-list"]/div/div/div/div/div[1]/div/div[@class="product-info"]/h3[@class="product-name"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getFirstProductQty()
+    {
+        return $this->_rootElement->find('#block-product-list > div > div > div > div > div:nth-child(1) > div > div.product-info > label[data-bind="text: $parent.getAvailableQty(stocks, $data)"]');
+    }
+
+    public function getFirstProductDetailButtonHover()
+    {
+        $this->_rootElement->find('//*[@id="block-product-list"]/div/div/div/div/div[1]/div/a',Locator::SELECTOR_XPATH)->hover();
+    }
+
+    public function getFirstProductDetailButton()
+    {
+        return $this->_rootElement->find('//*[@id="block-product-list"]/div/div/div/div/div[1]/div/a/span', Locator::SELECTOR_XPATH);
     }
 
     public function getFirstProductPrice()
@@ -59,5 +86,25 @@ class CheckoutProductList extends Block
     {
         $this->waitForElementVisible('#product-list-overlay > span.product-loader');
         $this->waitForElementNotVisible('#product-list-overlay > span.product-loader');
+    }
+
+    public function getSearchInput()
+    {
+        return $this->_rootElement->find('#search-header-product');
+    }
+
+    public function getCategoryButton()
+    {
+        return $this->_rootElement->find('div[data-bind="click: getAllCategories"]');
+    }
+
+    public function getNumberOfProducts()
+    {
+        return $this->_rootElement->find('label[data-bind="text: total.call() + \' product(s)\'"]');
+    }
+
+    public function getPageNumber()
+    {
+        return $this->_rootElement->find('//*[@id="productPager"]/ul/li/span[@class="pager"]', Locator::SELECTOR_XPATH);
     }
 }

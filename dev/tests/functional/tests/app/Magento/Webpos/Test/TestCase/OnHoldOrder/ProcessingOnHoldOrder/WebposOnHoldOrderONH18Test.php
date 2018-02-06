@@ -25,7 +25,7 @@ class WebposOnHoldOrderONH18Test extends Injectable
         )->run();
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'have_shipping_method_on_webpos_CP194']
+            ['configData' => 'have_shipping_method_on_webpos_CP195']
         )->run();
         //Create customer
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'webpos_guest_pi']);
@@ -67,7 +67,8 @@ class WebposOnHoldOrderONH18Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
-            //Click on [Add discount] > on Discount tab, add dicount for whole cart (type: $)
+        $taxExpected = $this->webposIndex->getCheckoutWebposCart()->getTax();
+        //Click on [Add discount] > on Discount tab, add dicount for whole cart (type: $)
         while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup())
         {
             $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
@@ -78,6 +79,19 @@ class WebposOnHoldOrderONH18Test extends Injectable
         $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        //Choose shipping POS
+            //Checkout
+        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $feeShippingBefore =$this->webposIndex->getCheckoutCartFooter()->getShippingPrice();
+            //Choose PoS shipping method
+        $this->webposIndex->getCheckoutShippingMethod()->clickPOSShipping();
+        $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+        sleep(1);
+             //BackToCart
+        $this->webposIndex->getCheckoutWebposCart()->getIconPrevious()->click();
+        sleep(1);
         sleep(1);
             //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
@@ -94,5 +108,14 @@ class WebposOnHoldOrderONH18Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
+        $taxActual = $this->webposIndex->getCheckoutWebposCart()->getTax();
+        $feeShippingAfter = $this->webposIndex->getCheckoutCartFooter()->getShippingPrice();
+        $dataProduct = $product->getData();
+        $dataProduct['qty'] = 1;
+        return ['cartProducts' => [$dataProduct],
+            'taxExpected' => $taxExpected,
+            'taxActual' => $taxActual,
+            'feeShippingBefore' => $feeShippingBefore,
+            'feeShippingAfter' => $feeShippingAfter];
     }
 }

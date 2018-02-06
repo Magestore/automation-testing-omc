@@ -54,7 +54,7 @@ class CheckoutCartFooter extends Block
 
 	public function getDiscount()
 	{
-		return $this->_rootElement->find('//*[@id="webpos_cart"]/div/div/div/ul/li[4]', Locator::SELECTOR_XPATH);
+		return $this->_rootElement->find('//div/ul/li/div[1]/label[text()="Discount"]/../..', Locator::SELECTOR_XPATH);
 	}
 
 	public function waitButtonHoldVisible()
@@ -64,11 +64,11 @@ class CheckoutCartFooter extends Block
 
     public function isAddDiscountVisible()
     {
-        return $this->_rootElement->find('//div/ul/li[3]', Locator::SELECTOR_XPATH)->isVisible();
+        return $this->_rootElement->find('//div/ul/li/div[1]/label[text()="Add Discount"]/../..', Locator::SELECTOR_XPATH)->isVisible();
     }
     public function isDiscountVisible()
     {
-        return $this->_rootElement->find('//div/ul/li[4]', Locator::SELECTOR_XPATH)->isVisible();
+        return $this->_rootElement->find('//div/ul/li/div[1]/label[text()="Discount"]/../..', Locator::SELECTOR_XPATH)->isVisible();
     }
     public function getTaxWithCheckout()
     {

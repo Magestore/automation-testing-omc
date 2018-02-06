@@ -67,6 +67,7 @@ class WebposOnHoldOrderONH04Test extends Injectable
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->logout();
         $this->webposIndex->getModal()->getOkButton()->click();
+        sleep(4);
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         //Login webpos again

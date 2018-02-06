@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Tax\ApplyTaxOnCustomePriceIfAvailable\WebposTaxTAX91Test" summary="Tax" ticketId="WEBPOSTAX-91">
+        <variation name="WebposTaxTAX91TestVariation_TAX91">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                    <item name="orderQty" xsi:type="number">1</item>
+                    <item name="customPrice" xsi:type="number">60</item>
+                </item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess"/>
+        </variation>
+    </testCase>
+</config>

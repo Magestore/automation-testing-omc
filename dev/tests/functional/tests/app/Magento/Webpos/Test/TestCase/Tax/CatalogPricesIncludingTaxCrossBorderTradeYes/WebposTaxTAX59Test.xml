@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Tax\CatalogPricesIncludingTaxCrossBorderTradeYes\WebposTaxTAX59Test" summary="Tax" ticketId="WEBPOSTAX-59">
+        <variation name="WebposTaxTAX59TestVariation_TAX59">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                    <item name="orderQty" xsi:type="number">1</item>
+                </item>
+            </data>
+            <data name="defaultTaxRate" xsi:type="string">8.25</data>
+            <data name="currentTaxRate" xsi:type="string">8.5</data>
+        </variation>
+    </testCase>
+</config>

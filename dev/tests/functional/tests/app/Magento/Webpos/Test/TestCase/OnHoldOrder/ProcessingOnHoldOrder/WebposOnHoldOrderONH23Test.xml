@@ -7,7 +7,8 @@
                 <item name="product" xsi:type="string">product_100_dollar_taxable</item>
             </item>
         </data>
-        <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckAlertWarning"/>-->
+        <data name="configData/dataset" xsi:type="string">webpos_default_guest_checkout_rollback</data>
+        <constraint name="Magento\Webpos\Test\Constraint\OnHoldOrder\Processing\AssertDetailOrderHistory" />
     </variation>
 </testCase>
 </config>
