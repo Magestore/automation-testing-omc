@@ -22,7 +22,7 @@ use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePla
  */
 /**
  * Class WebposCheckoutWithDiscountProductDollarCP65EntityTest
- * @package Magento\AutoTestWebposToaster\Test\TestCase\Checkout\CartPage\DiscountProduct
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct
  */
 class WebposCheckoutWithDiscountProductDollarCP65EntityTest extends Injectable
 {

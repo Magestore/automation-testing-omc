@@ -21,7 +21,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 /**
  * Class WebposCustomSaleAddCustomSaleWithBlankFieldsCP72EntityTest
- * @package Magento\AutoTestWebposToaster\Test\TestCase\Checkout\CartPage\CustomSale
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale
  */
 
 class WebposCustomSaleAddCustomSaleWithBlankFieldsCP72EntityTest extends Injectable

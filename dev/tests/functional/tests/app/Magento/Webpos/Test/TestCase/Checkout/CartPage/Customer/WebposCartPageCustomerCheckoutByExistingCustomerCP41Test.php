@@ -14,7 +14,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposCartPageCustomerCheckoutByExistingCustomerCP41Test
- * @package Magento\AutoTestWebposToaster\Test\TestCase\CategoryRepository\CartPage\Customer
+ * @package Magento\Webpos\Test\TestCase\CategoryRepository\CartPage\Customer
  */
 class WebposCartPageCustomerCheckoutByExistingCustomerCP41Test extends Injectable
 {

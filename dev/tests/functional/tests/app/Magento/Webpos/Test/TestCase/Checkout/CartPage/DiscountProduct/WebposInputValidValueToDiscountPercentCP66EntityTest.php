@@ -25,7 +25,7 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
  */
 /**
  * Class WebposInputValidValueToDiscountPercentCP66EntityTest
- * @package Magento\AutoTestWebposToaster\Test\TestCase\Checkout\CartPage\DiscountProduct
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct
  */
 class WebposInputValidValueToDiscountPercentCP66EntityTest extends Injectable
 {

@@ -22,7 +22,7 @@ use Magento\Mtf\Fixture\FixtureFactory;
  */
 /**
  * Class WebposCustomSaleTaxableGoodCP84EntityTest
- * @package Magento\AutoTestWebposToaster\Test\TestCase\Checkout\CartPage\CustomSale
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale
  */
 
 class WebposCustomSaleTaxableGoodCP84EntityTest extends Injectable

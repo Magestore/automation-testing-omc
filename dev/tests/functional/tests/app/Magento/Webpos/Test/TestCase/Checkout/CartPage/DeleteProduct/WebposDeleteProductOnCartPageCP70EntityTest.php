@@ -25,7 +25,7 @@ use Magento\Mtf\Fixture\FixtureFactory;
 
 /**
  * Class WebposDeleteProductOnCartPageCP70EntityTest
- * @package Magento\AutoTestWebposToaster\Test\TestCase\Checkout\CartPage\DeleteProduct
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\DeleteProduct
  */
 class WebposDeleteProductOnCartPageCP70EntityTest extends Injectable
 {

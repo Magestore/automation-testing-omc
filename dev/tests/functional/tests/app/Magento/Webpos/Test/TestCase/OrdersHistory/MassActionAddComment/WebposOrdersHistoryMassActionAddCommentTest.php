@@ -15,7 +15,7 @@ use Magento\Mtf\TestCase\Injectable;
 
 /**
  * Class WebposOrdersHistoryMassActionAddCommentTest
- * @package Magento\AutoTestWebposToaster\Test\TestCase\OrdersHistory\MassActionSendMail
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionSendMail
  */
 class WebposOrdersHistoryMassActionAddCommentTest extends Injectable
 {

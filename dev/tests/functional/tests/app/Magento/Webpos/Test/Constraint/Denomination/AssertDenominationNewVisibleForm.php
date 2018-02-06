@@ -13,7 +13,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 
 /**
  * Class AssertDenominationVisibleForm
- * @package Magento\AutoTestWebposToaster\Test\Constraint\Denomination
+ * @package Magento\Webpos\Test\Constraint\Denomination
  */
 class AssertDenominationNewVisibleForm extends AbstractConstraint
 {
@@ -46,6 +46,6 @@ class AssertDenominationNewVisibleForm extends AbstractConstraint
      */
     public function toString()
     {
-        return 'On The Backend Page, all the elements Button in the Grid Header Page Of the Extension AutoTestWebposToaster was visible successfully.';
+        return 'On The Backend Page, all the elements Button in the Grid Header Page Of the Extension Webpos was visible successfully.';
     }
 }

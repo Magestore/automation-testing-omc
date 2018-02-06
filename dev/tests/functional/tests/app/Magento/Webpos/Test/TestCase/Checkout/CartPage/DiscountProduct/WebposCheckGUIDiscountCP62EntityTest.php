@@ -23,7 +23,7 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
  */
 /**
  * Class WebposCheckGUIDiscountCP62EntityTest
- * @package Magento\AutoTestWebposToaster\Test\TestCase\Checkout\CartPage\DiscountProduct
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct
  */
 class WebposCheckGUIDiscountCP62EntityTest extends Injectable
 {

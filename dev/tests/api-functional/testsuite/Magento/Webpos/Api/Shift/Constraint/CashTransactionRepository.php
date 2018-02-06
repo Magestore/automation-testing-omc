@@ -10,7 +10,7 @@ namespace Magento\Webpos\Api\Shift\Constraint;
 
 /**
  * Class CashTransactionRepository
- * @package Magento\AutoTestWebposToaster\Api\Shift\Constraint
+ * @package Magento\Webpos\Api\Shift\Constraint
  */
 class CashTransactionRepository
 {

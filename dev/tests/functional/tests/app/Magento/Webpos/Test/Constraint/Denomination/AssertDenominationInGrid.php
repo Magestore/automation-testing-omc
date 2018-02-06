@@ -36,7 +36,7 @@ class AssertDenominationInGrid extends AbstractConstraint
         $denominationIndex->open();
         \PHPUnit_Framework_Assert::assertTrue(
             $denominationIndex->getDenominationsGrid()->isRowVisible($filter),
-            'AutoTestWebposToaster Cash Denomination with Denomination Name \'' . $denomination->getDenominationName() . '\' is absent in AutoTestWebposToaster Denomination Denomination grid.'
+            'Webpos Cash Denomination with Denomination Name \'' . $denomination->getDenominationName() . '\' is absent in Webpos Denomination Denomination grid.'
         );
     }
 
@@ -47,6 +47,6 @@ class AssertDenominationInGrid extends AbstractConstraint
      */
     public function toString()
     {
-        return 'AutoTestWebposToaster Cash Denomination is present in AutoTestWebposToaster Staff timezone_denomination_get() grid.';
+        return 'Webpos Cash Denomination is present in Webpos Staff timezone_denomination_get() grid.';
     }
 }

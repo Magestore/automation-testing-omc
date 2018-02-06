@@ -14,7 +14,7 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 /**
  * Class WebposPlaceOrderWithCustomerPriceCP58Test
- * @package Magento\AutoTestWebposToaster\Test\TestCase\CategoryRepository\CartPage\CustomPrice
+ * @package Magento\Webpos\Test\TestCase\CategoryRepository\CartPage\CustomPrice
  */
 class WebposPlaceOrderWithCustomerPriceCP58Test extends Injectable
 {

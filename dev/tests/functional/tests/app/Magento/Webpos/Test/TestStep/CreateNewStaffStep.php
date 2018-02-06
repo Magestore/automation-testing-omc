@@ -14,12 +14,12 @@ use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
 /**
  * Class CreateNewStaffStep
- * @package Magento\AutoTestWebposToaster\Test\TestStep
+ * @package Magento\Webpos\Test\TestStep
  */
 class CreateNewStaffStep implements TestStepInterface
 {
     /**
-     * AutoTestWebposToaster Staff Index page.
+     * Webpos Staff Index page.
      *
      * @var StaffIndex
      */
@@ -31,7 +31,7 @@ class CreateNewStaffStep implements TestStepInterface
      */
     private $staffsNew;
     /**
-     * AutoTestWebposToaster Index page.
+     * Webpos Index page.
      *
      * @var Staff
      */

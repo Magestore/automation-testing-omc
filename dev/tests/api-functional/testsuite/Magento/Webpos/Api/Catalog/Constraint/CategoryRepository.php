@@ -10,7 +10,7 @@ namespace Magento\Webpos\Api\Catalog\Constraint;
 
 /**
  * Class CategoryRepository
- * @package Magento\AutoTestWebposToaster\Api\Catalog\Constraint
+ * @package Magento\Webpos\Api\Catalog\Constraint
  */
 class CategoryRepository
 {

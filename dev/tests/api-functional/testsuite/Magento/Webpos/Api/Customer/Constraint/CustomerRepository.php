@@ -10,7 +10,7 @@ namespace Magento\Webpos\Api\Customer\Constraint;
 
 /**
  * Class CustomerRepository
- * @package Magento\AutoTestWebposToaster\Api\Customer\Constraint
+ * @package Magento\Webpos\Api\Customer\Constraint
  */
 class CustomerRepository
 {

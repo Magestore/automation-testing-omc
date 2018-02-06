@@ -15,7 +15,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposMassActionReOrderOH29Test
- * @package Magento\AutoTestWebposToaster\Test\TestCase\OrdersHistory\MassActionReOrder
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionReOrder
  */
 class WebposMassActionReOrderOH29Test extends Injectable
 {

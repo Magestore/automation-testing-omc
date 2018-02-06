@@ -22,7 +22,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 /**
  * Class WebposCustomSaleInputPriceByKeyBoardCP74EntityTest
- * @package Magento\AutoTestWebposToaster\Test\TestCase\Checkout\CartPage\CustomSale
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale
  */
 
 class WebposCustomSaleInputPriceByKeyBoardCP74EntityTest extends  Injectable

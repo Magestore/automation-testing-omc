@@ -14,7 +14,7 @@ use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Store\Model\ScopeInterface;
 /**
  * Class ShiftRepositoryTest
- * @package Magento\AutoTestWebposToaster\Api\Shift
+ * @package Magento\Webpos\Api\Shift
  */
 class ShiftRepositoryTest extends WebapiAbstract
 {
