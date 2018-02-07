@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund\WebposOrdersHistoryRefundOH74OH75OH76Test" summary="OrdersHistory-MassActionRefund" ticketId="WEBPOSMASSACTIONREFUND-OH747576">
+        <variation name="WebposOrdersHistoryRefundOH74TestVariation1">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                    <item name="orderQty" xsi:type="number">2</item>
+                </item>
+                <item name="1" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                    <item name="orderQty" xsi:type="number">2</item>
+                </item>
+            </data>
+            <data name="refundShipping" xsi:type="number">20</data>
+            <data name="adjustRefund" xsi:type="number">10</data>
+            <data name="adjustFee" xsi:type="number">20</data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertTotalRefunded"/>
+        </variation>
+        <variation name="WebposOrdersHistoryRefundOH75TestVariation2">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                    <item name="orderQty" xsi:type="number">2</item>
+                </item>
+                <item name="1" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                    <item name="orderQty" xsi:type="number">2</item>
+                </item>
+            </data>
+            <data name="refundShipping" xsi:type="number">20</data>
+            <data name="adjustRefund" xsi:type="number">10</data>
+            <data name="adjustFee" xsi:type="number">10</data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertTotalRefunded"/>
+        </variation>
+        <variation name="WebposOrdersHistoryRefundOH76TestVariation3">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                    <item name="orderQty" xsi:type="number">2</item>
+                </item>
+                <item name="1" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                    <item name="orderQty" xsi:type="number">2</item>
+                </item>
+            </data>
+            <data name="refundShipping" xsi:type="number">20</data>
+            <data name="adjustRefund" xsi:type="number">20</data>
+            <data name="adjustFee" xsi:type="number">10</data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertTotalRefunded"/>
+        </variation>
+    </testCase>
+</config>

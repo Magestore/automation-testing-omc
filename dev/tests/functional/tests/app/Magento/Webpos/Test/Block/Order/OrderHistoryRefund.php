@@ -91,4 +91,10 @@ class OrderHistoryRefund extends Block
 	{
 		return $this->_rootElement->find('input[name="shipping_amount"]');
 	}
+
+	public function getTableHeader($title)
+    {
+        $template = './/table//th[text()= "%s"]';
+        return $this->_rootElement->find(sprintf($template, $title), Locator::SELECTOR_XPATH);
+    }
 }

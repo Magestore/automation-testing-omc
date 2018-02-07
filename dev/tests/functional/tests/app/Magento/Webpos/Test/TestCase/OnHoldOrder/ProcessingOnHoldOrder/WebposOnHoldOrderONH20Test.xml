@@ -7,7 +7,8 @@
                 <item name="product" xsi:type="string">product_100_dollar_taxable</item>
             </item>
         </data>
-        <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckAlertWarning"/>-->
+        <data name="messageEmtpy" xsi:type="string">You don't have any orders yet</data>
+        <constraint name="Magento\Webpos\Test\Constraint\OnHoldOrder\Processing\AssertCheckDeletedOrder"/>
     </variation>
 </testCase>
 </config>

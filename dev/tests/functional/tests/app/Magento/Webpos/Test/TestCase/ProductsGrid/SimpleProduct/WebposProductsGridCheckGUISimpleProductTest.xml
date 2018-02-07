@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct\WebposProductsGridCheckGUISimpleProductTest" summary="Products Grid - Simple Product" ticketId="WEBPOS-PG">
+        <!--<variation name="WebposProductsGridCheckGUISimpleProductTest_PG02">-->
+            <!--<data name="products" xsi:type="array">-->
+                <!--<item name="0" xsi:type="array">-->
+                    <!--<item name="product" xsi:type="string">product_100_dollar_taxable</item>-->
+                <!--</item>-->
+            <!--</data>-->
+            <!--<constraint name="Magento\Webpos\Test\Constraint\ProductsGrid\CheckGUI\AssertProductsGridProductOnProductsList"/>-->
+        <!--</variation>-->
+        <variation name="WebposProductsGridCheckGUISimpleProductTest_PG04">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_no_qty</item>
+                </item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\ProductsGrid\CheckGUI\AssertProductsGridProductOnProductsList"/>
+        </variation>
+    </testCase>
+</config>

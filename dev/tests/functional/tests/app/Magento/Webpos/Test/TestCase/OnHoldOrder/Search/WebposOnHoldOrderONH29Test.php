@@ -8,8 +8,7 @@
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\Search;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckOnHoldOrderEmpty;
-
+use Magento\Webpos\Test\Constraint\OnHoldOrder\Search\AssertCheckSearch;
 class WebposOnHoldOrderONH29Test extends Injectable
 {
     /**
@@ -17,18 +16,18 @@ class WebposOnHoldOrderONH29Test extends Injectable
      */
     protected $webposIndex;
     /**
-     * @var AssertCheckOnHoldOrderEmpty
+     * @var AssertCheckSearch
      */
-    protected $assertCheckEmpty;
+    protected $assertCheckSearch;
 
     public function __inject
     (
         WebposIndex $webposIndex,
-        AssertCheckOnHoldOrderEmpty $assertCheckEmpty
+        AssertCheckSearch $assertCheckSearch
     )
     {
         $this->webposIndex = $webposIndex;
-        $this->assertCheckEmpty = $assertCheckEmpty;
+        $this->assertCheckSearch = $assertCheckSearch;
     }
 
     public function test($products)
@@ -97,7 +96,7 @@ class WebposOnHoldOrderONH29Test extends Injectable
         $this->webposIndex->getCMenu()->onHoldOrders();
         sleep(1);
 
-        //Enter incorrect customer name/order id into box search
+        //Enter correct customer name/order id into box search
         $this->webposIndex->getOnHoldOrderOrderList()->getSearchOrderInput()->setValue($idOrder1);
         sleep(1);
 
@@ -105,6 +104,7 @@ class WebposOnHoldOrderONH29Test extends Injectable
         $this->webposIndex->getOnHoldOrderOrderList()->getIconSearch()->click();
         $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
         sleep(1);
+        $this->assertCheckSearch->processAssert($this->webposIndex, 'idOrder', $idOrder1);
 
         //Remove keyword
         $this->webposIndex->getOnHoldOrderOrderList()->getSearchOrderInput()->setValue('');
@@ -115,5 +115,6 @@ class WebposOnHoldOrderONH29Test extends Injectable
         $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
         sleep(1);
 
+        return ['numberExpected' => 3];
     }
 }

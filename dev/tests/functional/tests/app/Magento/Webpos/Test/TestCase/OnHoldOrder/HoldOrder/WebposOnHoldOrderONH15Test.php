@@ -26,14 +26,12 @@ class WebposOnHoldOrderONH15Test extends Injectable
     public function test($products)
     {
         //Create product
-        $product1 = $this->objectManager->getInstance()->create(
+        $products = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
-        )->run()[0]['product'];
-        $product2 = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
-            ['products' => $products]
-        )->run()[1]['product'];
+        )->run();
+        $product1 = $products[0]['product'];
+        $product2 = $products[1]['product'];
 
         //Login webpos
         $staff = $this->objectManager->getInstance()->create(
@@ -68,10 +66,13 @@ class WebposOnHoldOrderONH15Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
-        //Click on On-hold Orders menu
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->onHoldOrders();
-        sleep(1);
-        $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
+        $dataProduct1 = $product1->getData();
+        $dataProduct1['qty'] = '1';
+        $dataProduct2 = $product2->getData();
+        $dataProduct2['qty'] = '1';
+        return ['products' => [$dataProduct1],
+            'cartProducts' => null
+        ];
+
     }
 }

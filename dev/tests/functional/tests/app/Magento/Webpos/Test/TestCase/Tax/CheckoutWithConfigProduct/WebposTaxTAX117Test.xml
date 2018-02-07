@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Tax\CheckoutWithConfigProduct\WebposTaxTAX117Test" summary="Tax" ticketId="WEBPOS-TAX117">
+        <variation name="WebposTaxTAX117TestVariation_TAX117">
+            <data name="configData" xsi:type="string">default_tax_configuration_use_system_value</data>
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">configurable_product_with_one_attribute</item>
+                    <item name="orderQty" xsi:type="number">1</item>
+                </item>
+            </data>
+            <data name="createInvoice" xsi:type="boolean">false</data>
+        </variation>
+    </testCase>
+</config>

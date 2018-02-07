@@ -8,6 +8,8 @@
             </item>
         </data>
         <data xsi:type="string" name="priceCustom">10</data>
+        <data xsi:type="string" name="type">custom_$</data>
+        <constraint name="Magento\Webpos\Test\Constraint\OnHoldOrder\HoldOrder\AssertCheckPriceWithOneProduct"/>
     </variation>
 </testCase>
 </config>

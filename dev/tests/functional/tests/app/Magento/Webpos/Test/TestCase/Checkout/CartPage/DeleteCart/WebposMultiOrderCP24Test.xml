@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\DeleteCart\WebposMultiOrderCP24Test" summary="Checkout - Cart Page - Delete Cart with multi order Test" ticketId="WEBPOS-1">
+        <variation name="WebposMultiOrderCP24">
+            <data name="firstCart" xsi:type="string">1</data>
+            <data name="number" xsi:type="string">2</data>
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\DeleteCart\AssertWebposMultiOrderCP24"/>-->
+        </variation>
+    </testCase>
+</config>

@@ -57,6 +57,10 @@ class OrderHistoryInvoice extends Block
         return $this->getItemRow($name)->find('[data-bind="text: $parent.convertAndFormatPrice(item.base_price)"]')->getText();
     }
 
+    public function getQtyOfProduct($productName)
+    {
+        return $this->_rootElement->find('//*[@id="invoice-popup-form"]/div[2]/div[2]/table/tbody/tr/td[1]/h4[text()="'.$productName.'"]/../../td[3]', Locator::SELECTOR_XPATH);
+    }
     /**
      * @param $productName
      * @return \Magento\Mtf\Client\ElementInterface
@@ -124,6 +128,17 @@ class OrderHistoryInvoice extends Block
 
 	public function getFooterRow($label)
 	{
-		return $this->_rootElement->find('//*[@id="invoice-popup-form"]/div[2]/div[3]/div[2]/div/div/label[text()="'.$label.'"]/../span', Locator::SELECTOR_XPATH);
+		return $this->_rootElement->find('//div[@class="refund-bottom-right"]/div/label[text()="'.$label.'"]/../span', Locator::SELECTOR_XPATH);
 	}
+
+	public function getHeaderLabel($label)
+	{
+		return $this->_rootElement->find('//div[@class="total-invoice-top"]/label/span[text()="'.$label.'"]/../span[2]', Locator::SELECTOR_XPATH);
+	}
+
+    public function getItemCol($label)
+    {
+        return $this->_rootElement->find('//*[@id="invoice-popup-form"]/div/table/thead/tr/th[text()="'.$label.'"]', Locator::SELECTOR_XPATH);
+    }
+
 }

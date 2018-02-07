@@ -38,35 +38,40 @@ class CheckoutWebposCart extends Block
 
     public function getPriceShipping()
     {
-        $value = $this->_rootElement->find('#webpos_cart > div > div > div > ul > li:nth-child(5) > div.price-box > span')->getText();
+        $value = $this->_rootElement->find('//div/ul/li/div[1]/label[text()="Shipping"]/../../div[2]/span', Locator::SELECTOR_XPATH)->getText();
         return floatval(str_replace('$', '',$value));
     }
 
     public function getSubtotal()
     {
-        $value = $this->_rootElement->find('#webpos_cart > div > div > div > ul > li:nth-child(1) > div.price-box > span')->getText();
+        $value = $this->_rootElement->find('//div/ul/li/div[1]/label[text()="Subtotal"]/../../div[2]/span', Locator::SELECTOR_XPATH)->getText();
         return floatval(str_replace('$', '',$value));
     }
 
     public function getTotal()
     {
-        $value = $this->_rootElement->find('#webpos_cart > div > div > div > ul > li:nth-child(7) > div.price-box > span')->getText();
+        $value = $this->_rootElement->find('//div/ul/li/div[1]/label[text()="Total"]/../../div[2]/span', Locator::SELECTOR_XPATH)->getText();
         return floatval(str_replace('$', '',$value));
     }
 
     public function getTax()
     {
-        $value = $this->_rootElement->find('#webpos_cart > div > div > div > ul > li:nth-child(6) > div.price-box > span')->getText();
+        $value = $this->_rootElement->find('//div/ul/li/div[1]/label[text()="Tax"]/../../div[2]/span', Locator::SELECTOR_XPATH)->getText();
         return floatval(str_replace('$', '',$value));
     }
     public function isDisplayShippingOnCart()
     {
-        return $this->_rootElement->find('#webpos_cart > div > div > div > ul > li:nth-child(5)')->isVisible();
+        return $this->_rootElement->find('//div/ul/li/div[1]/label[text()="Shipping"]/../..', Locator::SELECTOR_XPATH)->isVisible();
     }
 
     public function waitLoading()
     {
         $this->waitForElementVisible('.indicator');
         $this->waitForElementNotVisible('.indicator');
+    }
+
+    public function getIconRemoveMultiOrder($number)
+    {
+        return $this->_rootElement->find('.//header/div[1]/span[2]/span[2]', Locator::SELECTOR_XPATH);
     }
 }

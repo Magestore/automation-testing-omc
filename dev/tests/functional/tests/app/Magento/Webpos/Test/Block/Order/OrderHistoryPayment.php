@@ -28,8 +28,35 @@ class OrderHistoryPayment extends Block
     /**
      * @return \Magento\Mtf\Client\ElementInterface
      */
+    public function getPaymentPriceInput(){
+        return $this->_rootElement->find('//*[@id="payment_selected"]/div/div/div/div[3]/div/input',Locator::SELECTOR_XPATH);
+    }
+
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
     public function getSubmitButton()
     {
         return $this->_rootElement->find('#payment_popup_form > div.modal-body > div.action > button.btn-cl-cfg-active');
+    }
+
+    public function  getAddMorePaymentButton()
+    {
+        return $this->_rootElement->find('#add_more_payment_btn');
+    }
+
+    public function  getCannelButton()
+    {
+        return $this->_rootElement->find('#payment_popup_form > div > button[type=\'button\']');
+    }
+
+    public function getCashInMethod()
+    {
+        return $this->_rootElement->find('.icon-iconPOS-payment-cashforpos');
+    }
+
+    public function getInputAmount()
+    {
+        return $this->_rootElement->find('//*[@id="payment_selected"]//input',Locator::SELECTOR_XPATH );
     }
 }
