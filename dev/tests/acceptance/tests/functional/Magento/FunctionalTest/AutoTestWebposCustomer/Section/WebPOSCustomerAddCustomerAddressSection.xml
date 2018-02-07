@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Page/etc/SectionObject.xsd">
+    <!--Begin Customer Address Shipping Section-->
+    <section name="WebPOSCustomerAddCustomerShippingAddressHeaderSection">
+        <element name="FormHeaderCancelButton" type="wysiwyg" selector="#form-customer-shipping-address .popup-header button.close" />
+        <element name="FormHeaderSaveButton" type="wysiwyg" selector="#form-customer-shipping-address .popup-header button.btn-save" />
+    </section>
+    <section name="WebPOSCustomerAddCustomerShippingAddressBodySection">
+        <element name="FirstNameField" type="input" selector="#form-customer-shipping-address .modal-body input[name='first-name']" />
+        <element name="LastNameField" type="input" selector="#form-customer-shipping-address .modal-body input[name='last-name']" />
+        <element name="CompanyField" type="input" selector="#form-customer-shipping-address .modal-body input[name='company']" />
+        <element name="PhoneField" type="input" selector="#form-customer-shipping-address .modal-body input[name='phone']" />
+        <element name="Street1Field" type="input" selector="#form-customer-shipping-address .modal-body input[name='street1']" />
+        <element name="Street2Field" type="input" selector="#form-customer-shipping-address .modal-body input[name='Street2']" />
+        <element name="CityField" type="input" selector="#form-customer-shipping-address .modal-body input[name='city']" />
+        <element name="ZipCodeField" type="input" selector="#form-customer-shipping-address .modal-body input[name='zipcode']" />
+        <element name="CountryOptionField" type="select" selector="#add_shipping_customer_country_id" />
+        <element name="RegionField" type="input" selector="#form-customer-shipping-address .modal-body input[name='region']" />
+        <element name="VATField" type="input" selector="#form-customer-shipping-address .modal-body input[name='vat']" />
+        <element name="BillingAddressAndShippingAddressAreTheSame" type="checkbox" selector="#form-customer-shipping-address .modal-body input[data-bind='checked: isSameBillingShipping']" />
+        <!--Begin Message Required-->
+        <element name="FirstNameMessageRequired" type="input" selector="#first-name-error" />
+        <element name="LastNameMessageRequired" type="input" selector="#last-name-error" />
+        <element name="PhoneMessageRequired" type="input" selector="#phone-error" />
+        <element name="Street1MessageRequired" type="input" selector="#street1-error" />
+        <element name="CityMessageRequired" type="input" selector="#city-error" />
+        <element name="ZipCodeMessageRequired" type="input" selector="#zipcode-error" />
+        <element name="ShippingCustomerCountryMessageRequired" type="input" selector="#add_shipping_customer_country_id-error" />
+        <!--End Message Required-->
+    </section>
+    <!--End Customer Address Shipping Section-->
+
+    <!--Begin Customer Address Billing Section-->
+    <section name="WebPOSCustomerAddCustomerBillingAddressSection">
+        <element name="FormAddBillingAddress" type="wysiwyg" selector="#form-customer-billing-address" />
+    </section>
+    <section name="WebPOSCustomerAddCustomerBillingAddressHeaderSection">
+        <element name="FormHeaderCancelButton" type="wysiwyg" selector="#form-customer-billing-address .popup-header button.close" />
+        <element name="FormHeaderSaveButton" type="wysiwyg" selector="#form-customer-billing-address .popup-header button.btn-save" />
+    </section>
+    <section name="WebPOSCustomerAddCustomerBillingAddressBodySection">
+        <element name="FirstNameField" type="input" selector="#form-customer-billing-address .modal-body input[name='first-name']" />
+        <element name="LastNameField" type="input" selector="#form-customer-billing-address .modal-body input[name='last-name']" />
+        <element name="CompanyField" type="input" selector="#form-customer-billing-address .modal-body input[name='company']" />
+        <element name="PhoneField" type="input" selector="#form-customer-billing-address .modal-body input[name='phone']" />
+        <element name="Street1Field" type="input" selector="#form-customer-billing-address .modal-body input[name='street1']" />
+        <element name="Street2Field" type="input" selector="#form-customer-billing-address .modal-body input[name='Street2']" />
+        <element name="CityField" type="input" selector="#form-customer-billing-address .modal-body input[name='city']" />
+        <element name="ZipCodeField" type="input" selector="#form-customer-billing-address .modal-body input[name='zipcode']" />
+        <element name="CountryOptionField" type="select" selector="#add_billing_customer_country_id" />
+        <element name="RegionField" type="input" selector="#form-customer-billing-address .modal-body input[name='region']" />
+        <element name="VATField" type="input" selector="#form-customer-billing-address .modal-body input[name='vat']" />
+        <!--Begin Message Required-->
+        <element name="FirstNameMessageRequired" type="input" selector="#first-name-error" />
+        <element name="LastNameMessageRequired" type="input" selector="#last-name-error" />
+        <element name="PhoneMessageRequired" type="input" selector="#phone-error" />
+        <element name="Street1MessageRequired" type="input" selector="#street1-error" />
+        <element name="CityMessageRequired" type="input" selector="#city-error" />
+        <element name="ZipCodeMessageRequired" type="input" selector="#zipcode-error" />
+        <element name="BillingCustomerCountryMessageRequired" type="input" selector="#add_billing_customer_country_id-error" />
+        <!--End Message Required-->
+    </section>
+    <!--End Customer Address Billing Section-->
+
+    <!--Begin Customer Add Address Section-->
+    <section name="WebPOSCustomerAddAddressSection">
+        <element name="FormAddBillingAddress" type="wysiwyg" selector="#form-customer-add-address" />
+    </section>
+    <section name="WebPOSCustomerAddAddressHeaderSection">
+        <element name="FormHeaderCancelButton" type="wysiwyg" selector="#form-customer-add-address .popup-header button.close" />
+        <element name="FormHeaderSaveButton" type="wysiwyg" selector="#form-customer-add-address .popup-header button.btn-save" />
+    </section>
+    <section name="WebPOSCustomerAddAddressBodySection">
+        <element name="FirstNameField" type="input" selector="#form-customer-add-address .modal-body input[name='first-name']" />
+        <element name="LastNameField" type="input" selector="#form-customer-add-address .modal-body input[name='last-name']" />
+        <element name="CompanyField" type="input" selector="#form-customer-add-address .modal-body input[name='company']" />
+        <element name="PhoneField" type="input" selector="#form-customer-add-address .modal-body input[name='phone']" />
+        <element name="Street1Field" type="input" selector="#form-customer-add-address .modal-body input[name='street1']" />
+        <element name="Street2Field" type="input" selector="#form-customer-add-address .modal-body input[name='Street2']" />
+        <element name="CityField" type="input" selector="#form-customer-add-address .modal-body input[name='city']" />
+        <element name="ZipCodeField" type="input" selector="#form-customer-add-address .modal-body input[name='zipcode']" />
+        <element name="CountryOptionField" type="select" selector="#add_address_customer_country_id" />
+        <element name="RegionField" type="input" selector="#form-customer-add-address .modal-body input[name='region']" />
+        <element name="VATField" type="input" selector="#form-customer-add-address .modal-body input[name='vat']" />
+        <!--Begin Message Required-->
+        <element name="FirstNameMessageRequired" type="input" selector="#first-name-error" />
+        <element name="LastNameMessageRequired" type="input" selector="#last-name-error" />
+        <element name="PhoneMessageRequired" type="input" selector="#phone-error" />
+        <element name="Street1MessageRequired" type="input" selector="#street1-error" />
+        <element name="CityMessageRequired" type="input" selector="#city-error" />
+        <element name="ZipCodeMessageRequired" type="input" selector="#zipcode-error" />
+        <element name="CustomerCountryMessageRequired" type="input" selector="#add_address_customer_country_id-error" />
+        <!--End Message Required-->
+    </section>
+    <!--End Customer Add Address Section-->
+</config>

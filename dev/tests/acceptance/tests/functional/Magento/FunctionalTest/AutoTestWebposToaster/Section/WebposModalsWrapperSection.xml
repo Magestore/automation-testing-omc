@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Page/etc/SectionObject.xsd">
+    <!--Begin WebPOS Modals Wrapper Section-->
+    <section name="WebposModalsWrapperSection">
+        <element name="buttonClose" type="button" selector=".modals-wrapper div.modal-inner-wrap header button"/>
+        <element name="buttonOK" type="button" selector="div.modals-wrapper div.modal-inner-wrap footer button.action-accept"/>
+        <element name="buttonCancel" type="button" selector="div.modals-wrapper div.modal-inner-wrap footer button.action-dismiss"/>
+        <element name="modalContent8" type="wysiwyg" selector="#modal-content-8"/>
+    </section>
+    <!--End WebPOS Modals Wrapper Section-->
+</config>

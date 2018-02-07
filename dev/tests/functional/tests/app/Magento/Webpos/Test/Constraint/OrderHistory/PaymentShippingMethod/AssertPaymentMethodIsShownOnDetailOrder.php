@@ -14,7 +14,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AssertPaymentMethodIsShownOnDetailOrder
- * @package Magento\Webpos\Test\Constraint\OrderHistory\PaymentShippingMethod
+ * @package Magento\Webpos\Test\Constraint\SectionOrderHistory\PaymentShippingMethod
  */
 class AssertPaymentMethodIsShownOnDetailOrder extends AbstractConstraint
 {

@@ -14,7 +14,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AssertConfirmPopupClosed
- * @package Magento\Webpos\Test\Constraint\OrderHistory\ConfirmPopup
+ * @package Magento\Webpos\Test\Constraint\SectionOrderHistory\ConfirmPopup
  */
 class AssertConfirmPopupClosed extends AbstractConstraint
 {

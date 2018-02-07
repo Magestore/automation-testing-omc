@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/DataGenerator/etc/dataProfileSchema.xsd">
+    <!--Begin Products List-->
+    <!--Begin Simple Product-->
+    <entity name="WebPOSSimpleProduct" type="WebPOSSimpleProduct">
+        <!--Begin Simple Product 1-->
+        <data key="product1Name">Affirm Water Bottle</data>
+        <!--End Simple Product 1-->
+        <!--Begin Simple Product 2-->
+        <data key="product2Name">Compete Track Tote</data>
+        <!--End Simple Product 2-->
+    </entity>
+    <!--End Simple Product-->
+    <!--Begin Configurable Product-->
+
+    <!--End Configurable Product-->
+    <!--Begin Virtual Product-->
+
+    <!--End Virtual Product-->
+    <!--Begin Grouped Product-->
+
+    <!--End Grouped Product-->
+    <!--Begin Bundle Product-->
+
+    <!--End Bundle Product-->
+    <!--Begin Downloadable Product-->
+
+    <!--End Downloadable Product-->
+    <!--End Products List-->
+</config>

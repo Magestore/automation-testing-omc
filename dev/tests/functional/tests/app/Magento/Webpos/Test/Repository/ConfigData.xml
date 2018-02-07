@@ -27,7 +27,7 @@
                 <item name="inherit" xsi:type="number">1</item>
             </field>
         </dataset>
-        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 Config Color and delivery Settings-->
+        <!-- Magento AssertWebposCheckGUICustomerPriceCP54 Config Color and delivery Settings-->
         <dataset name="webpos_synchronization_configcolor">
             <field name="webpos/general/webpos_color" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -44,7 +44,7 @@
                 <item name="inherit" xsi:type="number">1</item>
             </field>
         </dataset>
-        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 General Settings-->
+        <!-- Magento AssertWebposCheckGUICustomerPriceCP54 General Settings-->
         <dataset name="magestore_webpos_general">
             <!--<field name="webpos/general/webpos_logo" xsi:type="array">-->
                 <!--<item name="scope" xsi:type="string">default</item>-->
@@ -118,7 +118,7 @@
             </field>
         </dataset>
         <!-- Ta co the test cho tat ca cac settings can thiet vao mot dataset sau do nhap field vao. -->
-        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 Shipping Settings-->
+        <!-- Magento AssertWebposCheckGUICustomerPriceCP54 Shipping Settings-->
         <dataset name="magestore_webpos_shipping">
             <field name="webpos/shipping/allowspecific_shipping" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -162,7 +162,7 @@
                 </item>
             </field>
         </dataset>
-        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 Synchronization Default Payment-->
+        <!-- Magento AssertWebposCheckGUICustomerPriceCP54 Synchronization Default Payment-->
         <dataset name="magestore_webpos_default_payment">
             <field name="webpos/payment/defaultpayment" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -172,7 +172,7 @@
                 <item name="inherit" xsi:type="number">1</item>
             </field>
         </dataset>
-        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 Payment Settings-->
+        <!-- Magento AssertWebposCheckGUICustomerPriceCP54 Payment Settings-->
         <dataset name="magestore_webpos_payment_setting">
             <field name="webpos/payment/authorizenet_enable" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -357,7 +357,7 @@
                 <item name="inherit" xsi:type="number">1</item>
             </field>
         </dataset>
-        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 Product Search Settings-->
+        <!-- Magento AssertWebposCheckGUICustomerPriceCP54 Product Search Settings-->
         <dataset name="magestore_webpos_product_search">
             <field name="webpos/product/search_product_attribute" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -367,7 +367,7 @@
                 <item name="inherit" xsi:type="number">1</item>
             </field>
         </dataset>
-        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 Synchronization Settings-->
+        <!-- Magento AssertWebposCheckGUICustomerPriceCP54 Synchronization Settings-->
         <dataset name="magestore_webpos_synchronization">
             <field name="webpos/offline/product_time" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -405,7 +405,7 @@
                 <item name="inherit" xsi:type="number">1</item>
             </field>
         </dataset>
-        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 Online Mode Configuration Settings-->
+        <!-- Magento AssertWebposCheckGUICustomerPriceCP54 Online Mode Configuration Settings-->
         <dataset name="magestore_webpos_online_mode_configuration">
             <field name="webpos/online/use_custom_order_id" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -415,7 +415,7 @@
                 <item name="inherit" xsi:type="number">1</item>
             </field>
         </dataset>
-        <!-- Magestore AssertWebposCheckGUICustomerPriceCP54 Default Guest CategoryRepository Settings-->
+        <!-- Magento AssertWebposCheckGUICustomerPriceCP54 Default Guest CategoryRepository Settings-->
         <dataset name="magestore_webpos_default_guest_checkout">
             <field name="webpos/guest_checkout/first_name" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>

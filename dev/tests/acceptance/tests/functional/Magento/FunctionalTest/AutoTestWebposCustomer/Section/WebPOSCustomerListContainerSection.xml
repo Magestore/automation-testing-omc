@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Page/etc/SectionObject.xsd">
+    <section name="WebPOSCustomerListHeaderSection">
+        <element name="addNewCustomer" type="wysiwyg" selector="#customer_list_container header span.icon-iconPOS-add" />
+        <element name="InputSearchCustomer" type="input" selector="#search-header-customer" />
+        <element name="SearchCustomerButton" type="wysiwyg" selector="#customer_list_container header span.icon-iconPOS-search" />
+    </section>
+    <section name="WebPOSCustomerListContainerSection">
+        <element name="WebPOSCustomerMainItemOrder" type="wysiwyg" selector="#customer_list_container .main-item-order"/>
+    </section>
+</config>

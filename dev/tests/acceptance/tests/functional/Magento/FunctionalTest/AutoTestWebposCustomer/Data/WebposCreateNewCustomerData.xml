@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/DataGenerator/etc/dataProfileSchema.xsd">
+<!--BEGIN VALID INFORMATION-->
+    <!--Begin Customer Information Full Fields-->
+    <entity name="WebPOSCustomerValidInformationFullField" type="WebPOSCustomerInformation">
+        <data key="FirstName">WebPOS</data>
+        <data key="LastName" unique="suffix">Customer</data>
+        <data key="Email" unique="prefix">.magestore@gmail.com</data>
+        <data key="CustomerGroup1">Please choose group...</data>
+        <data key="CustomerGroup2">General</data>
+        <data key="CustomerGroup3">Wholesale</data>
+        <data key="CustomerGroup4">Retailer</data>
+        <data key="DateOfBirth">12/09/1995</data>
+        <data key="TaxVATNumber" >04111995</data>
+        <data key="CustomerGender1">Please choose gender...</data>
+        <data key="CustomerGender2">Male</data>
+        <data key="CustomerGender3">Female</data>
+        <data key="CustomerGender4">Not Specified</data>
+    </entity>
+    <!--End Customer Information Full Fields-->
+    <!--Begin Customer Information Required Fields-->
+    <entity name="WebPOSCustomerValidInformationRequiredField" type="WebPOSCustomerInformation">
+        <data key="FirstName">WebPOS</data>
+        <data key="LastName" unique="suffix">Customer</data>
+        <data key="Email" unique="prefix">.magestore@gmail.com</data>
+        <data key="CustomerGroup1">Please choose group...</data>
+        <data key="CustomerGroup2">General</data>
+        <data key="CustomerGroup3">Wholesale</data>
+        <data key="CustomerGroup4">Retailer</data>
+        <data key="CustomerGroup5">Choose...</data>
+    </entity>
+    <!--End Customer Information Required Fields-->
+
+    <!--Begin Customer Address Full Fields-->
+    <entity name="WebPOSCustomerValidFullField" type="WebPOSCustomerAddressInsertValidValue">
+        <data key="CustomerAddressCompany" unique="suffix">Magestore Technology Joint Stock Company</data>
+        <data key="CustomerAddressPhone" unique="suffix">0</data>
+        <data key="CustomerAddressStreet1" unique="prefix">170 De La Thanh Street - Ba Dinh District</data>
+        <data key="CustomerAddressStreet2" unique="prefix">139 Tam Trinh Street - Hoang Mai District</data>
+        <data key="CustomerAddressCity">Ha Noi City</data>
+        <data key="CustomerAddressZipCode">10000</data>
+        <data key="CustomerAddressCountry">Vietnam</data>
+        <data key="CustomerAddressStateOrProvince">Ha Noi</data>
+        <data key="CustomerAddressVAT">04111995</data>
+    </entity>
+    <!--End Customer Address Full Fields-->
+    <!--Begin Customer Address Required Fields-->
+    <entity name="WebPOSCustomerValidShippingRequiredField" type="WebPOSCustomerAddressInsertValidValue">
+        <data key="CustomerAddressFirstName">WebPOS</data>
+        <data key="CustomerAddressLastName" unique="suffix">Customer</data>
+        <data key="CustomerAddressPhone" unique="suffix">0</data>
+        <data key="CustomerAddressStreet1" unique="prefix">170 De La Thanh Street - Ba Dinh District</data>
+        <data key="CustomerAddressCity">Ha Noi City</data>
+        <data key="CustomerAddressZipCode">10000</data>
+    </entity>
+    <!--End Customer Address Required Fields-->
+
+    <!--Begin Customer Shipping Address Full Fields-->
+    <entity name="WebPOSCustomerValidShippingFullField" type="WebPOSCustomerValidShipping">
+        <data key="ShippingFirstName">WebPOS</data>
+        <data key="ShippingLastName" unique="suffix">Customer</data>
+        <data key="ShippingCompany" unique="suffix">Magestore Technology Joint Stock Company</data>
+        <data key="ShippingPhone" unique="suffix">0</data>
+        <data key="ShippingStreet1" unique="prefix">170 De La Thanh Street - Ba Dinh District</data>
+        <data key="ShippingStreet2" unique="prefix">139 Tam Trinh Street - Hoang Mai District</data>
+        <data key="ShippingCity">Ha Noi City</data>
+        <data key="ShippingZipCode">10000</data>
+        <data key="ShippingCountry">Vietnam</data>
+        <data key="ShippingStateOrProvince">Ha Noi</data>
+        <data key="ShippingVAT">04111995</data>
+    </entity>
+    <!--End Customer Shipping Address Full Fields-->
+    <!--Begin Customer Shipping Address Required Fields-->
+    <entity name="WebPOSCustomerValidShippingRequiredField" type="WebPOSCustomerValidShipping">
+        <data key="ShippingFirstName">WebPOS</data>
+        <data key="ShippingLastName" unique="suffix">Customer</data>
+        <data key="ShippingPhone" unique="suffix">0</data>
+        <data key="ShippingStreet1" unique="prefix">170 De La Thanh Street - Ba Dinh District</data>
+        <data key="ShippingCity">Ha Noi City</data>
+        <data key="ShippingZipCode">10000</data>
+    </entity>
+    <!--End Customer Shipping Address Required Fields-->
+
+    <!--Begin Customer Billing Address Full Fields-->
+    <entity name="WebPOSCustomerValidBillingFullField" type="WebPOSCustomerInvalidBilling">
+        <data key="BillingFirstName">WebPOS</data>
+        <data key="BillingLastName" unique="suffix">Customer</data>
+        <data key="BillingCompany" unique="suffix">Magestore Technology Joint Stock Company</data>
+        <data key="BillingPhone" unique="suffix">0</data>
+        <data key="BillingStreet1" unique="prefix">170 De La Thanh Street - Ba Dinh District</data>
+        <data key="BillingStreet2" unique="prefix">139 Tam Trinh Street - Hoang Mai District</data>
+        <data key="BillingCity">Ha Noi City</data>
+        <data key="BillingZipCode">10000</data>
+        <data key="BillingCountry">Vietnam</data>
+        <data key="BillingStateOrProvince">Ha Noi</data>
+        <data key="BillingVAT">04111995</data>
+    </entity>
+    <!--End Customer Billing Address Full Fields-->
+    <!--Begin Customer Billing Address Required Fields-->
+    <entity name="WebPOSCustomerValidBillingRequiredField" type="WebPOSCustomerInvalidBilling">
+        <data key="BillingFirstName">WebPOS</data>
+        <data key="BillingLastName" unique="suffix">Customer</data>
+        <data key="BillingPhone" unique="suffix">0</data>
+        <data key="BillingStreet1" unique="prefix">170 De La Thanh Street - Ba Dinh District</data>
+        <data key="BillingCity">Ha Noi City</data>
+        <data key="BillingZipCode">10000</data>
+    </entity>
+    <!--End Customer Billing Address Required Fields-->
+
+<!--END VALID INFORMATION-->
+
+    <!--Begin Customer Invalid Information-->
+    <entity name="WebPOSCustomerInValidInformation" type="WebPOSCustomerInformation">
+        <data key="Email" unique="prefix">.magestore@.com</data>
+    </entity>
+    <!--End Customer Invalid Information-->
+    <!--Begin Customer Exist Information-->
+    <entity name="WebPOSCustomerExistInformation" type="WebPOSCustomerInformation">
+        <data key="FullName">Veronica Costello</data>
+        <data key="Email">roni_cost@example.com</data>
+        <data key="Telephone">(555) 229-3326</data>
+    </entity>
+    <!--End Customer Exist Information-->
+</config>

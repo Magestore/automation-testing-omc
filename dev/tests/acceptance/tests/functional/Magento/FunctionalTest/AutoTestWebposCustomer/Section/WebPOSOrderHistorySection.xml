@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Page/etc/SectionObject.xsd">
+    <!--Begin WebPOS Order History Section-->
+    <section name="WebPOSOrderHistorySection">
+        <element name="orderHistoryID" type="button" selector='#webpos_order_list span[data-bind="text: increment_id"]'/>
+    </section>
+    <!--End WebPOS Order History Section-->
+
+    <!--Begin WebPOS Order History Main Item Section-->
+    <section name="WebPOSOrderHistoryMainItemSection">
+        <element name="WebPOSOrderMainItemOrder" type="wysiwyg" selector='#webpos_order_list div.wrap-item-order'/>
+        <element name="FirstOrderItem" type="wysiwyg" selector='#webpos_order_list .list-orders .order-item'/>
+    </section>
+    <!--End WebPOS Order History Body Section-->
+
+    <!--Begin WebPOS Order View Container Section-->
+    <section name="WebPOSOrderViewContainerHeaderSection">
+        <element name="ItemAddMore" type="wysiwyg" selector='#webpos_order_view_container header span.icon-iconPOS-more'/>
+    </section>
+    <!--End WebPOS Order History Body Section-->
+
+    <!--Begin WebPOS Add Note Order Section-->
+    <section name="WebPOSAddNoteOrderSection">
+        <element name="SendEmailMode" type="wysiwyg" selector='//*[@id="form-add-note-order"]/ul/li[1]/a' />
+        <element name="ShipMode" type="wysiwyg" selector='//*[@id="form-add-note-order"]/ul/li[2]/a' />
+        <element name="AddCommentMode" type="wysiwyg" selector='//*[@id="form-add-note-order"]/ul/li[3]/a' />
+        <element name="ReOrderMode" type="wysiwyg" selector='//*[@id="form-add-note-order"]/ul/li[4]/a' />
+        <element name="RefundMode" type="wysiwyg" selector='//*[@id="form-add-note-order"]/ul/li[5]/a' />
+    </section>
+    <!--End WebPOS Add Note Order Section-->
+
+    <!--Begin WebPOS Refund Popup Section-->
+    <section name="WebPOSRefundPopupSection">
+        <element name="RefundPopup" type="wysiwyg" selector='#refund-popup' />
+        <element name="SubmitRefundButton" type="wysiwyg" selector='#creditmemo-popup-form > div.modal-body > div.actions > button.submit-refund' />
+    </section>
+    <!--End WebPOS Refund Popup Section-->
+
+
+
+
+</config>

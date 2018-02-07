@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Page/etc/SectionObject.xsd">
+    <section name="WebPOSCustomerAddCustomerSection">
+        <element name="FormCreateNewCustomer" type="wysiwyg" selector="#form-add-customer-customer" />
+    </section>
+    <section name="WebPOSCustomerAddCustomerHeaderSection">
+        <element name="FormHeaderCancelButton" type="wysiwyg" selector="#form-add-customer-customer .popup-header button.close" />
+        <element name="FormHeaderSaveButton" type="wysiwyg" selector="#form-add-customer-customer .popup-header button.btn-save" />
+    </section>
+    <section name="WebPOSCustomerAddCustomerBodySection">
+        <element name="FirstNameField" type="input" selector="#form-add-customer-customer .modal-body input[name='first-name']" />
+        <element name="LastNameField" type="input" selector="#form-add-customer-customer .modal-body input[name='last-name']" />
+        <element name="EmailField" type="input" selector="#form-add-customer-customer .modal-body input[name='email']" />
+        <element name="CustomerGroup" type="select" selector="#add_customer_group" />
+        <element name="SubscribeNewLetter" type="select" selector="#form-add-customer-customer .switch-box .ios-ui-select" />
+        <element name="FirstNameMessageRequired" type="input" selector="#first-name-error" />
+        <element name="LastNameMessageRequired" type="input" selector="#last-name-error" />
+        <element name="EmailMessageRequired" type="input" selector="#email-error" />
+        <element name="CustomerGroupMessageRequired" type="input" selector="#add_customer_group-error" />
+    </section>
+    <section name="WebPOSCustomerAddCustomerFooterSection">
+        <element name="IconAddShippingAddress" type="input" selector="span[data-bind='visible: !isShowShippingSummaryForm()']" />
+        <element name="IconAddBillingAddress" type="input" selector="span[data-bind='visible: !isShowBillingSummaryForm()']" />
+        <element name="ShippingAddressInformation" type="wysiwyg" selector="div[data-bind='visible: isShowShippingSummaryForm']" />
+        <element name="EditShippingAddressCreatedSuccess" type="wysiwyg" selector="#collapse1 a[data-bind='click: editShippingAddress']" />
+        <element name="DeleteShippingAddressCreatedSuccess" type="wysiwyg" selector="#collapse1 a[data-bind='click: deleteShippingAddress']" />
+        <element name="EditBillingAddressCreatedSuccess" type="wysiwyg" selector="#collapse2 a[data-bind='click: editBillingAddress']" />
+        <element name="DeleteBillingAddressCreatedSuccess" type="wysiwyg" selector="#collapse2 a[data-bind='click: deleteBillingAddress']" />
+    </section>
+</config>

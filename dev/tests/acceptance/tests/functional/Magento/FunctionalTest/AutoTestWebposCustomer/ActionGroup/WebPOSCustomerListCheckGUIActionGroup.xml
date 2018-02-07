@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Test/etc/testSchema.xsd">
+    <actionGroup name="WebPOSCustomerListCheckGUIActionGroup">
+        <seeElement selector="{{WebPOSMsWebposSection.WebPOSCMenuButton}}" stepKey="assertMenuIconNotificationShowOnTheLeft"/>
+        <seeElement selector="{{WebPOSCustomerListHeaderSection.addNewCustomer}}" stepKey="assertCustomerIconShowsOnTheTopOfTheRight"/>
+        <seeElement selector="{{WebPOSCustomerListHeaderSection.InputSearchCustomer}}" stepKey="assertCustomerTextBoxSearch"/>
+        <assertGreaterThan stepKey="assertTheNextGreaterThanPrevious" expected="2" expectedType="int" actual="5" actualType="int" message="Customers will be sorted in ascending customer id"/>
+        <seeElement selector="{{WebPOSCustomerRightHeaderSection.UseToCheckoutButton}}" stepKey="assertUseToCheckoutButton"/>
+        <seeElement selector="{{WebPOSCustomerInformationSection.actionEdit}}" stepKey="assertCustomerInformationActionEdit"/>
+        <seeElement selector="{{WebPOSCustomerInformationSection.customerFirstName}}" stepKey="assertCustomerInformationFirstName"/>
+        <seeElement selector="{{WebPOSCustomerInformationSection.customerLastName}}" stepKey="assertCustomerInformationLastName"/>
+        <seeElement selector="{{WebPOSCustomerInformationSection.customerEmail}}" stepKey="assertCustomerInformationEmail"/>
+        <seeElement selector="{{WebPOSCustomerInformationSection.customerGroup}}" stepKey="assertCustomerInformationGroup"/>
+        <seeElement selector="{{WebPOSCustomerAddressSection.WebPOSCustomerAddAddressButton}}" stepKey="assertCustomerAddAddressButton"/>
+        <seeElement selector="{{WebPOSCustomerComplainSection.WebPOSCustomerAddComplainButton}}" stepKey="assertCustomerAddComplainButton"/>
+    </actionGroup>
+</config>
