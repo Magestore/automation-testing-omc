@@ -58,6 +58,16 @@ class CheckoutProductList extends Block
         return substr($text, 1);
     }
 
+    public function getFirstProductRegularPrice()
+    {
+        return $this->_rootElement->find('//*[@id="block-product-list"]/div/div/div/div/div[1]/div/div[@class="product-info"]/div/span[@class="regular-price price"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getFirstProductFinalPrice()
+    {
+        return $this->_rootElement->find('//*[@id="block-product-list"]/div/div/div/div/div[1]/div/div[@class="product-info"]/div/span[@class="final-price price"]', Locator::SELECTOR_XPATH);
+    }
+
     public function getFirstProductOutOfStockIcon()
     {
         return $this->_rootElement->find('#block-product-list > div > div > div > div > div:nth-child(1) > div > div.product-img > a > span');
