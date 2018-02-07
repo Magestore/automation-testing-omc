@@ -13,5 +13,10 @@
         <data key="MessageCreateCustomerSuccess">The customer is saved successfully.</data>
         <data key="MessageCreateCustomerAddressSuccess">The customer address is saved successfully.</data>
     </entity>
-    <!--Email Customer Email Message-->
+    <!--End Customer Email Message-->
+    <!--Begin Add Customer Complain Success Message-->
+    <entity name="WebPOSAddCustomerComplainSuccessData" type="WebPOSAddCustomerComplainSuccess">
+        <data key="MessageAddComplaintSuccess">The customer's complaint is saved successfully.</data>
+    </entity>
+    <!--End Add Customer Complain Success Message-->
 </config>

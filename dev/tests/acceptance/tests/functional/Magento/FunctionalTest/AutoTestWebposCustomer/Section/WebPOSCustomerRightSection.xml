@@ -42,8 +42,24 @@
         <!--End Customer Address-->
 
         <!--Begin Customer Order History Last Month-->
-        <element name="orderIDJustCreated" type="wysiwyg" selector='#customer-edit-form td[data-bind="text: increment_id, click: $parent.viewOrderDetail.bind($parent)"]' />
+        <element name="orderIDJustCreated" type="wysiwyg" selector='#customer-edit-form div:nth-child(4) td[data-bind="text: increment_id, click: $parent.viewOrderDetail.bind($parent)"]' />
         <!--End Customer Order History Last Month-->
+
+        <!--Begin Customer Order Refund Last Month-->
+        <element name="orderIDRefundCreated" type="wysiwyg" selector='#customer-edit-form > div:nth-child(5) > div.panel-body > table > tbody > tr > td.order-id' />
+        <!--End Customer Order Refund Last Month-->
+
+        <!--Begin Customer Complain-->
+        <element name="orderIDRefundCreated" type="wysiwyg" selector='#customer-edit-form > div:nth-child(6) > div.panel-heading > a' />
+        <!--End Customer Complain-->
     </section>
     <!--End Customer Right Body Section-->
+
+    <!--Begin Form Popup Add Complain-->
+    <section name="WebPOSFormPopupAddComplainSection">
+        <element name="CancelButton" type="wysiwyg" selector='#form-add-customer-complain div.popup-header button.close' />
+        <element name="SaveButton" type="wysiwyg" selector='#form-add-customer-complain div.popup-header button.btn-save' />
+        <element name="ComplainFormTextArea" type="wysiwyg" selector='#complain-form' />
+    </section>
+    <!--End Form Popup Add Complain-->
 </config>

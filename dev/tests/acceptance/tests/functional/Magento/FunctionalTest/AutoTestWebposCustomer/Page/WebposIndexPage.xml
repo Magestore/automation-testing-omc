@@ -8,7 +8,7 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Page/etc/PageObject.xsd">
-    <page name="WebPOSIndexPage" url="webpos" module="Magento_AutoTestWebposCustomer">
+    <page name="WebPOSIndexPage" url="webpos" module="Magento_Webpos">
         <section name="WebPOSLoginSection" />
         <section name="WebPOSMsWebposSection" />
         <section name="WebPOSToasterSection" />
@@ -57,7 +57,7 @@
         <!--End WebPOS Place Order Section-->
 
         <!--Begin WebPOS Order History Section-->
-        <section name="WebPOSOrderListHistorySection" />
+        <section name="WebPOSOrderHistorySection" />
         <!--End WebPOS Order History Section-->
 
     </page>

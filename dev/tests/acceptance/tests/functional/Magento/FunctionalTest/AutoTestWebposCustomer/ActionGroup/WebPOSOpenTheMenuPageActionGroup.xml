@@ -8,11 +8,23 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Test/etc/testSchema.xsd">
+    <!--Begin Open Customer List Page-->
     <actionGroup name="WebPOSOpenCustomerListPageActionGroup">
         <click selector="{{WebPOSMsWebposSection.WebPOSCMenuButton}}" stepKey="clickCmenuButton"/>
-        <wait time="1" stepKey="waitForAllMenuItemsIsVisibleIn2Seconds"/>
+        <wait time="1" stepKey="waitForAllMenuItemsIsVisibleIn1Seconds"/>
         <click selector="{{WebPOSCMenuListSection.WebPOSMenuCustomer}}" stepKey="clickCustomerListMenu"/>
         <waitForElementVisible selector="{{WebPOSCustomerListContainerSection.WebPOSCustomerMainItemOrder}}" time="90" stepKey="waitForWebPOSCustomerMainItemOrderVisible"/>
         <wait time="2" stepKey="waitForCustomerListPageIn2Seconds"/>
     </actionGroup>
+    <!--End Open Customer List Page-->
+
+    <!--Begin Open Order History Page-->
+    <actionGroup name="WebPOSOpenOrderHistoryPageActionGroup">
+        <click selector="{{WebPOSMsWebposSection.WebPOSCMenuButton}}" stepKey="clickCmenuButton"/>
+        <wait time="1" stepKey="waitForAllMenuItemsIsVisibleIn2Seconds"/>
+        <click selector="{{WebPOSCMenuListSection.WebPOSMenuOrdersHistory}}" stepKey="clickOrderHistoryMenu"/>
+        <waitForElementVisible selector="{{WebPOSOrderHistoryMainItemSection.WebPOSOrderMainItemOrder}}" time="90" stepKey="waitForWebPOSOrderHistoryMainItemOrderVisible"/>
+        <wait time="2" stepKey="waitForOrderHistoryPageIn2Seconds"/>
+    </actionGroup>
+    <!--End Open Order History Page-->
 </config>
