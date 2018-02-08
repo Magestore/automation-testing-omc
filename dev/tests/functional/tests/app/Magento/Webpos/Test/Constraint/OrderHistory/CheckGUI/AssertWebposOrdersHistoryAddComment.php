@@ -13,7 +13,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AssertWebposOrdersHistoryAddComment
- * @package Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI
+ * @package Magento\Webpos\Test\Constraint\SectionOrderHistory\CheckGUI
  */
 class AssertWebposOrdersHistoryAddComment extends AbstractConstraint
 {

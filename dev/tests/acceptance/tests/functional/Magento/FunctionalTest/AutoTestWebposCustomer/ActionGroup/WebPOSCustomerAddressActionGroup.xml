@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Test/etc/testSchema.xsd">
+    <!--Begin Add Shipping Address - Customer Information-->
+    <actionGroup name="WebPOSShippingAddressAfterFillCustomerInformationActionGroup">
+        <fillField selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.CompanyField}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingCompany}}" stepKey="enterWebPOSShippingFullFieldCompany"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.PhoneField}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingPhone}}" stepKey="enterWebPOSShippingFullFieldPhone"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.Street1Field}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingStreet1}}" stepKey="enterWebPOSShippingFullFieldStreet1"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.Street2Field}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingStreet2}}" stepKey="enterWebPOSShippingFullFieldStreet2"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.CityField}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingCity}}" stepKey="enterWebPOSShippingFullFieldCity"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.ZipCodeField}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingZipCode}}" stepKey="enterWebPOSShippingFullFieldZipCode"/>
+        <selectOption selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.CountryOptionField}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingCountry}}" stepKey="enterWebPOSShippingFullFieldCountry"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.RegionField}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingStateOrProvince}}" stepKey="enterWebPOSShippingFullFieldProvince"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.VATField}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingVAT}}" stepKey="enterWebPOSShippingFullFieldVAT"/>
+        <wait time="2" stepKey="waitForEnterValueShippingAddressIn2Seconds"/>
+    </actionGroup>
+    <actionGroup name="WebPOSCustomerShippingAddressActionGroup">
+        <fillField selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.FirstNameField}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingFirstName}}" stepKey="enterWebPOSShippingFullFieldFirstName"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.LastNameField}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingLastName}}" stepKey="enterWebPOSShippingFullFieldLastName"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.CompanyField}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingCompany}}" stepKey="enterWebPOSShippingFullFieldCompany"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.PhoneField}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingPhone}}" stepKey="enterWebPOSShippingFullFieldPhone"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.Street1Field}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingStreet1}}" stepKey="enterWebPOSShippingFullFieldStreet1"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.Street2Field}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingStreet2}}" stepKey="enterWebPOSShippingFullFieldStreet2"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.CityField}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingCity}}" stepKey="enterWebPOSShippingFullFieldCity"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.ZipCodeField}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingZipCode}}" stepKey="enterWebPOSShippingFullFieldZipCode"/>
+        <selectOption selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.CountryOptionField}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingCountry}}" stepKey="enterWebPOSShippingFullFieldCountry"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.RegionField}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingStateOrProvince}}" stepKey="enterWebPOSShippingFullFieldProvince"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.VATField}}" userInput="{{WebPOSCustomerValidShippingFullField.ShippingVAT}}" stepKey="enterWebPOSShippingFullFieldVAT"/>
+        <wait time="2" stepKey="waitForEnterValueShippingAddressIn2Seconds"/>
+        <click selector="{{WebPOSCustomerAddCustomerShippingAddressHeaderSection.FormHeaderSaveButton}}" stepKey="ClickFormAddShippingAddressHeaderSaveButton"/>
+    </actionGroup>
+    <actionGroup name="WebPOSSaveShippingAddressWithoutAnyValueActionGroup">
+        <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.FirstNameMessageRequired}}" time="60" stepKey="waitForErrorMessageOfFirstNameTextBoxIsVisibleAddShippingAddress"/>
+        <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.LastNameMessageRequired}}" time="60" stepKey="waitForErrorMessageOfLastNameTextBoxIsVisibleAddShippingAddress"/>
+        <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.PhoneMessageRequired}}" time="60" stepKey="waitForErrorMessageOfPhoneTextBoxIsVisibleAddShippingAddress"/>
+        <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.Street1MessageRequired}}" time="60" stepKey="waitForErrorMessageOfStreet1IsVisibleAddShippingAddress"/>
+        <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.CityMessageRequired}}" time="60" stepKey="waitForErrorMessageOfCityIsVisibleAddShippingAddress"/>
+        <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.ZipCodeMessageRequired}}" time="60" stepKey="waitForErrorMessageOfZipCodeIsVisibleAddShippingAddress"/>
+        <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.ShippingCustomerCountryMessageRequired}}" time="60" stepKey="waitForErrorMessageOfShippingCustomerCountryIsVisibleAddShippingAddress"/>
+    </actionGroup>
+    <!--End Add Shipping Address - Customer Information-->
+
+    <!--Begin Add Billing Address - Customer Information-->
+    <actionGroup name="WebPOSBillingAddressAfterFillCustomerInformationActionGroup">
+        <fillField selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.CompanyField}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingCompany}}" stepKey="enterWebPOSBillingFullFieldCompany"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.PhoneField}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingPhone}}" stepKey="enterWebPOSBillingFullFieldPhone"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.Street1Field}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingStreet1}}" stepKey="enterWebPOSBillingFullFieldStreet1"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.Street2Field}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingStreet2}}" stepKey="enterWebPOSBillingFullFieldStreet2"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.CityField}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingCity}}" stepKey="enterWebPOSBillingFullFieldCity"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.ZipCodeField}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingZipCode}}" stepKey="enterWebPOSBillingFullFieldZipCode"/>
+        <selectOption selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.CountryOptionField}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingCountry}}" stepKey="enterWebPOSBillingFullFieldCountry"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.RegionField}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingStateOrProvince}}" stepKey="enterWebPOSBillingFullFieldProvince"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.VATField}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingVAT}}" stepKey="enterWebPOSBillingFullFieldVAT"/>
+        <wait time="2" stepKey="waitForEnterValueBillingAddressIn2Seconds"/>
+    </actionGroup>
+    <actionGroup name="WebPOSCustomerBillingAddressActionGroup">
+        <fillField selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.FirstNameField}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingFirstName}}" stepKey="enterWebPOSBillingFullFieldFirstName"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.LastNameField}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingLastName}}" stepKey="enterWebPOSBillingFullFieldLastName"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.CompanyField}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingCompany}}" stepKey="enterWebPOSBillingFullFieldCompany"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.PhoneField}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingPhone}}" stepKey="enterWebPOSBillingFullFieldPhone"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.Street1Field}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingStreet1}}" stepKey="enterWebPOSBillingFullFieldStreet1"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.Street2Field}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingStreet2}}" stepKey="enterWebPOSBillingFullFieldStreet2"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.CityField}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingCity}}" stepKey="enterWebPOSBillingFullFieldCity"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.ZipCodeField}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingZipCode}}" stepKey="enterWebPOSBillingFullFieldZipCode"/>
+        <selectOption selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.CountryOptionField}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingCountry}}" stepKey="enterWebPOSBillingFullFieldCountry"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.RegionField}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingStateOrProvince}}" stepKey="enterWebPOSBillingFullFieldProvince"/>
+        <fillField selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.VATField}}" userInput="{{WebPOSCustomerValidBillingFullField.BillingVAT}}" stepKey="enterWebPOSBillingFullFieldVAT"/>
+        <wait time="2" stepKey="waitForEnterValueBillingAddressIn2Seconds"/>
+        <click selector="{{WebPOSCustomerAddCustomerBillingAddressHeaderSection.FormHeaderSaveButton}}" stepKey="ClickFormAddBillingAddressHeaderSaveButton"/>
+    </actionGroup>
+    <actionGroup name="WebPOSSaveBillingAddressWithoutAnyValueActionGroup">
+        <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.FirstNameMessageRequired}}" time="60" stepKey="waitForErrorMessageOfFirstNameTextBoxIsVisibleAddBillingAddress"/>
+        <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.LastNameMessageRequired}}" time="60" stepKey="waitForErrorMessageOfLastNameTextBoxIsVisibleAddBillingAddress"/>
+        <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.PhoneMessageRequired}}" time="60" stepKey="waitForErrorMessageOfPhoneTextBoxIsVisibleAddBillingAddress"/>
+        <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.Street1MessageRequired}}" time="60" stepKey="waitForErrorMessageOfStreet1IsVisibleAddBillingAddress"/>
+        <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.CityMessageRequired}}" time="60" stepKey="waitForErrorMessageOfCityIsVisibleAddBillingAddress"/>
+        <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.ZipCodeMessageRequired}}" time="60" stepKey="waitForErrorMessageOfZipCodeIsVisibleAddBillingAddress"/>
+        <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.BillingCustomerCountryMessageRequired}}" time="60" stepKey="waitForErrorMessageOfBillingCustomerCountryIsVisibleAddBillingAddress"/>
+    </actionGroup>
+    <!--End Add Billing Address - Customer Information-->
+
+    <!--Begin Add Customer Address - Customer Information-->
+    <actionGroup name="WebPOSSaveCustomerAddressWithoutAnyValueActionGroup">
+        <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddAddressBodySection.PhoneMessageRequired}}" time="60" stepKey="waitForErrorMessageOfPhoneTextBoxIsVisibleAddCustomerAddress"/>
+        <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddAddressBodySection.Street1MessageRequired}}" time="60" stepKey="waitForErrorMessageOfStreet1IsVisibleAddCustomerAddress"/>
+        <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddAddressBodySection.CityMessageRequired}}" time="60" stepKey="waitForErrorMessageOfCityIsVisibleAddCustomerAddress"/>
+        <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddAddressBodySection.ZipCodeMessageRequired}}" time="60" stepKey="waitForErrorMessageOfZipCodeIsVisibleAddCustomerAddress"/>
+        <waitForText userInput="{{WebposCreateNewCustomerErrorMessage.CustomerRequiredMessage}}" selector="{{WebPOSCustomerAddAddressBodySection.CustomerCountryMessageRequired}}" time="60" stepKey="waitForErrorMessageOfCountryIsVisibleAddCustomerAddress"/>
+    </actionGroup>
+    <actionGroup name="WebPOSAddNewCustomerAddressActionGroup">
+        <fillField selector="{{WebPOSCustomerAddAddressBodySection.CompanyField}}" userInput="{{WebPOSCustomerValidFullField.CustomerAddressCompany}}" stepKey="enterWebPOSCustomerAddressFullFieldCompany"/>
+        <fillField selector="{{WebPOSCustomerAddAddressBodySection.PhoneField}}" userInput="{{WebPOSCustomerValidFullField.CustomerAddressPhone}}" stepKey="enterWebPOSCustomerAddressFullFieldPhone"/>
+        <fillField selector="{{WebPOSCustomerAddAddressBodySection.Street1Field}}" userInput="{{WebPOSCustomerValidFullField.CustomerAddressStreet1}}" stepKey="enterWebPOSCustomerAddressFullFieldStreet1"/>
+        <fillField selector="{{WebPOSCustomerAddAddressBodySection.Street2Field}}" userInput="{{WebPOSCustomerValidFullField.CustomerAddressStreet2}}" stepKey="enterWebPOSCustomerAddressFullFieldStreet2"/>
+        <fillField selector="{{WebPOSCustomerAddAddressBodySection.CityField}}" userInput="{{WebPOSCustomerValidFullField.CustomerAddressCity}}" stepKey="enterWebPOSCustomerAddressFullFieldCity"/>
+        <fillField selector="{{WebPOSCustomerAddAddressBodySection.ZipCodeField}}" userInput="{{WebPOSCustomerValidFullField.CustomerAddressZipCode}}" stepKey="enterWebPOSCustomerAddressFullFieldZipCode"/>
+        <selectOption selector="{{WebPOSCustomerAddAddressBodySection.CountryOptionField}}" userInput="{{WebPOSCustomerValidFullField.CustomerAddressCountry}}" stepKey="enterWebPOSCustomerAddressFullFieldCountry"/>
+        <fillField selector="{{WebPOSCustomerAddAddressBodySection.RegionField}}" userInput="{{WebPOSCustomerValidFullField.CustomerAddressStateOrProvince}}" stepKey="enterWebPOSCustomerAddressFullFieldProvince"/>
+        <fillField selector="{{WebPOSCustomerAddAddressBodySection.VATField}}" userInput="{{WebPOSCustomerValidFullField.CustomerAddressVAT}}" stepKey="enterWebPOSCustomerAddressFullFieldVAT"/>
+        <wait time="2" stepKey="waitForEnterValueCustomerAddressAddressIn2Seconds"/>
+    </actionGroup>
+    <!--End Add Customer Address - Customer Information-->
+</config>

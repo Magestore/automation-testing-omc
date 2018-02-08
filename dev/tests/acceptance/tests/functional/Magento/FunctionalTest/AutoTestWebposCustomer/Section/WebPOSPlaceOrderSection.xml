@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Page/etc/SectionObject.xsd">
+    <!--Begin WebPOS Cart Header Section-->
+    <section name="WebPOSCheckoutPaymentMethodSection">
+        <element name="CashInMethod" type="wysiwyg" selector="#payment-method .icon-iconPOS-payment-cashforpos"/>
+        <element name="placeOrderButton" type="wysiwyg" selector="#checkout_button"/>
+    </section>
+    <!--End WebPOS Cart Header Section-->
+
+    <!--Begin WebPOS Checkout Success Section-->
+    <section name="WebPOSCheckoutSuccessSection">
+        <element name="NewOrderButton" type="button" selector="#success_container button.checkout-actions"/>
+    </section>
+    <!--End WebPOS Checkout Success Section-->
+</config>

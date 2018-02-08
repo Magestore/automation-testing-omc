@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Page/etc/SectionObject.xsd">
+    <section name="WebPOSCustomerListHeaderSection">
+        <element name="addNewCustomer" type="wysiwyg" selector="#customer_list_container header span.icon-iconPOS-add" />
+        <element name="InputSearchCustomer" type="input" selector="#search-header-customer" />
+        <element name="SearchCustomerButton" type="wysiwyg" selector="#customer_list_container header span.icon-iconPOS-search" />
+    </section>
+
+    <section name="WebPOSCustomerListContainerSection">
+        <element name="WebPOSCustomerMainItemOrder" type="wysiwyg" selector="#customer_list_container .main-item-order"/>
+    </section>
+
+    <section name="WebPOSCustomerListMainItemSection">
+        <element name="listCustomer" type="wysiwyg" selector="#customer_list_container div.customer_list_wrap ul"/>
+        <element name="firstCustomerItem" type="wysiwyg" selector="//*[@id='customer_list_container']/div[1]/div[1]/div/div/ul/li[1]"/>
+        <element name="secondCustomerItem" type="wysiwyg" selector="//*[@id='customer_list_container']/div[1]/div[1]/div/div/ul/li[2]"/>
+        <element name="LastestCustomerItem" type="wysiwyg" selector='div.customer_list_wrap li:last-child a[data-bind="text: email"]'/>
+        <element name="customerSearch" type="wysiwyg" selector='//*[@id="customer_list_container"]/div[1]/div[1]/div/div/ul/li/div/a'/>
+        <element name="LastestCustomerItemWithName" type="wysiwyg" selector='div.customer_list_wrap li:last-child h4.customer-name'/>
+        <element name="LastestCustomerItemWithTelephone" type="wysiwyg" selector='div.customer_list_wrap li:last-child span[data-bind="text: telephone"]'/>
+        <element name="TheSecondCustomerInList" type="wysiwyg" selector="div.customer_list_wrap li:nth-child(2)"/>
+    </section>
+</config>

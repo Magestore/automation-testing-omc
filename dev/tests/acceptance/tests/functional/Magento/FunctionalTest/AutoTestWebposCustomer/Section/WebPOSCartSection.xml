@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Page/etc/SectionObject.xsd">
+    <!--Begin WebPOS Cart Header Section-->
+    <section name="WebPOSCartHeaderSection">
+        <element name="customerName" type="button" selector='#webpos_cart header label[data-bind="text: currentCustomerName, click: editCustomer"]'/>
+    </section>
+    <!--End WebPOS Cart Header Section-->
+    <!--Begin WebPOS Cart Footer Section-->
+    <section name="WebPOSCartFooterSection">
+        <element name="CheckoutButton" type="button" selector=".grand-total-footer .checkout"/>
+        <element name="HoldOrderButton" type="button" selector=".grand-total-footer .hold"/>
+    </section>
+    <!--End WebPOS Cart Footer Section-->
+</config>
