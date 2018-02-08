@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Page/etc/SectionObject.xsd">
+    <section name="BackendSubscriberGridTableSection">
+        <element name="SubscriberSearchButton" type="button" selector=".admin__filter-actions button[data-action='grid-filter-apply']" />
+    </section>
+    <section name="BackendSubscriberGridTableSection">
+        <element name="SubscriberRowInGridTable" type="wysiwyg" selector="#subscriberGrid_table tbody td[data-column='email']" />
+        <element name="SubscriberGridFilterSearchEmail" type="input" selector="#subscriberGrid_filter_email" />
+    </section>
+</config>

@@ -13,7 +13,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AssertRefundSuccessWithShippingFee
- * @package Magento\Webpos\Test\Constraint\OrderHistory\Refund
+ * @package Magento\Webpos\Test\Constraint\SectionOrderHistory\Refund
  */
 class AssertRefundSuccessWithShippingFee extends AbstractConstraint
 {

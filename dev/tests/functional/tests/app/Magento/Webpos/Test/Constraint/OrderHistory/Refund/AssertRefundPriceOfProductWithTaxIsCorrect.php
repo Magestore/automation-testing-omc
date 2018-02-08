@@ -14,7 +14,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AssertRefundPriceOfProductWithTaxIsCorrect
- * @package Magento\Webpos\Test\Constraint\OrderHistory\Refund
+ * @package Magento\Webpos\Test\Constraint\SectionOrderHistory\Refund
  */
 class AssertRefundPriceOfProductWithTaxIsCorrect extends AbstractConstraint
 {

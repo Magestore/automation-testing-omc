@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct\WebposProductsGridPG13Test" summary="Products Grid - Simple Product" ticketId="WEBPOS-PG13">
+        <variation name="WebposProductsGridPG13Test_PG13">
+            <data name="catalogPriceRule/dataset" xsi:type="string">catalog_price_rule_all_groups_discount_50_percent</data>
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_one_qty</item>
+                </item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderSuccess"/>
+        </variation>
+    </testCase>
+</config>
