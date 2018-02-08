@@ -13,7 +13,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AssertInvoiceSuccess
- * @package Magento\Webpos\Test\Constraint\OrderHistory\Invoice
+ * @package Magento\Webpos\Test\Constraint\SectionOrderHistory\Invoice
  */
 class AssertInvoiceSuccess extends AbstractConstraint
 {

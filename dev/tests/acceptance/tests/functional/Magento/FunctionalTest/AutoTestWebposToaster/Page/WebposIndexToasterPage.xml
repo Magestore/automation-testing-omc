@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Page/etc/PageObject.xsd">
+    <page name="WebposIndexToasterPage" url="webpos" module="Magento_Webpos">
+        <!--Begin Toaster Section-->
+        <section name="WebposToasterSection" />
+        <section name="WebposModalsWrapperSection" />
+        <!--End Toaster Section-->
+    </page>
+</config>

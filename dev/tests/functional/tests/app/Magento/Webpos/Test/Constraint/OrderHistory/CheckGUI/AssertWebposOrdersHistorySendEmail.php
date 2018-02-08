@@ -15,7 +15,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AssertWebposOrdersHistorySendEmail
- * @package Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI
+ * @package Magento\Webpos\Test\Constraint\SectionOrderHistory\CheckGUI
  */
 class AssertWebposOrdersHistorySendEmail extends AbstractConstraint
 {

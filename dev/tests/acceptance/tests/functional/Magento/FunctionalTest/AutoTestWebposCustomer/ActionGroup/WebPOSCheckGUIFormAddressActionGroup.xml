@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Test/etc/testSchema.xsd">
+    <!--Begin assert Add Shipping Address-->
+    <actionGroup name="WebPOSCheckGUIFormAddShippingAddressActionGroup">
+        <seeElement selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.FirstNameField}}" stepKey="assertWebPOSShippingFullFieldFirstName"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.LastNameField}}" stepKey="assertWebPOSShippingFullFieldLastNameField"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.CompanyField}}" stepKey="assertWebPOSShippingFullFieldCompanyField"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.PhoneField}}" stepKey="assertWebPOSShippingFullFieldPhoneField"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.Street1Field}}" stepKey="assertWebPOSShippingFullFieldStreet1Field"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.Street2Field}}" stepKey="assertWebPOSShippingFullFieldStreet2Field"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.CityField}}" stepKey="assertWebPOSShippingFullFieldCityField"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.ZipCodeField}}" stepKey="assertWebPOSShippingFullFieldZipCodeField"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.CountryOptionField}}" stepKey="assertWebPOSShippingFullFieldCountryOptionField"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.RegionField}}" stepKey="assertWebPOSShippingFullFieldRegionField"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerShippingAddressBodySection.VATField}}" stepKey="assertWebPOSShippingFullFieldVATField"/>
+    </actionGroup>
+    <!--End assert Add Shipping Address-->
+
+    <!--Begin assert Add Billing Address-->
+    <actionGroup name="WebPOSCheckGUIFormAddBillingAddressActionGroup">
+        <seeElement selector="{{WebPOSCustomerAddCustomerBillingAddressHeaderSection.FormHeaderCancelButton}}" stepKey="assertBillingFormHeaderCancelButtonIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerBillingAddressHeaderSection.FormHeaderSaveButton}}" stepKey="assertBillingFormHeaderSaveButtonIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.FirstNameField}}" stepKey="assertWebPOSBillingFullFieldFirstNameIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.LastNameField}}" stepKey="assertWebPOSBillingFullFieldLastNameFieldIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.CompanyField}}" stepKey="assertWebPOSBillingFullFieldCompanyFieldIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.PhoneField}}" stepKey="assertWebPOSBillingFullFieldPhoneFieldIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.Street1Field}}" stepKey="assertWebPOSBillingFullFieldStreet1FieldIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.Street2Field}}" stepKey="assertWebPOSBillingFullFieldStreet2FieldIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.CityField}}" stepKey="assertWebPOSBillingFullFieldCityFieldIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.ZipCodeField}}" stepKey="assertWebPOSBillingFullFieldZipCodeFieldIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.CountryOptionField}}" stepKey="assertWebPOSBillingFullFieldCountryOptionFieldIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.RegionField}}" stepKey="assertWebPOSBillingFullFieldRegionFieldIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddCustomerBillingAddressBodySection.VATField}}" stepKey="assertWebPOSBillingFullFieldVATFieldIsVisible"/>
+    </actionGroup>
+    <!--End assert Add Billing Address-->
+
+    <!--Begin assert Add Customer Address-->
+    <actionGroup name="WebPOSCheckGUIFormAddBillingAddressActionGroup">
+        <seeElement selector="{{WebPOSCustomerAddAddressHeaderSection.FormHeaderCancelButton}}" stepKey="assertAddCustomerAddressFormHeaderCancelButtonIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddAddressHeaderSection.FormHeaderSaveButton}}" stepKey="assertAddCustomerAddressFormHeaderSaveButtonIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddAddressBodySection.FirstNameField}}" stepKey="assertWebPOSAddCustomerAddressFullFieldFirstNameIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddAddressBodySection.LastNameField}}" stepKey="assertWebPOSAddCustomerAddressFullFieldLastNameFieldIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddAddressBodySection.CompanyField}}" stepKey="assertWebPOSAddCustomerAddressFullFieldCompanyFieldIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddAddressBodySection.PhoneField}}" stepKey="assertWebPOSAddCustomerAddressFullFieldPhoneFieldIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddAddressBodySection.Street1Field}}" stepKey="assertWebPOSAddCustomerAddressFullFieldStreet1FieldIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddAddressBodySection.Street2Field}}" stepKey="assertWebPOSAddCustomerAddressFullFieldStreet2FieldIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddAddressBodySection.CityField}}" stepKey="assertWebPOSAddCustomerAddressFullFieldCityFieldIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddAddressBodySection.ZipCodeField}}" stepKey="assertWebPOSAddCustomerAddressFullFieldZipCodeFieldIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddAddressBodySection.CountryOptionField}}" stepKey="assertWebPOSAddCustomerAddressFullFieldCountryOptionFieldIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddAddressBodySection.RegionField}}" stepKey="assertWebPOSAddCustomerAddressFullFieldRegionFieldIsVisible"/>
+        <seeElement selector="{{WebPOSCustomerAddAddressBodySection.VATField}}" stepKey="assertWebPOSAddCustomerAddressFullFieldVATFieldIsVisible"/>
+    </actionGroup>
+    <!--End assert Add Customer Address-->
+</config>
