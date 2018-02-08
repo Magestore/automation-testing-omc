@@ -59,4 +59,14 @@ class OrderHistoryPayment extends Block
     {
         return $this->_rootElement->find('//*[@id="payment_selected"]//input',Locator::SELECTOR_XPATH );
     }
+
+    public function getInputAmountMulti($stt)
+    {
+        return $this->_rootElement->find('//*[@id="payment_selected"]/div/div/div['.$stt.']/div[3]/div/input',Locator::SELECTOR_XPATH );
+    }
+
+    public function getRemainMoney()
+    {
+        return $this->_rootElement->find('//*[@id="payment_popup_form"]/div[2]/div[3]/span',Locator::SELECTOR_XPATH );
+    }
 }
