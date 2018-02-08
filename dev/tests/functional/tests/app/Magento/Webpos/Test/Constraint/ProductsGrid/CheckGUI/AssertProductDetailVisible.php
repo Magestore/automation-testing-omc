@@ -31,23 +31,23 @@ class AssertProductDetailVisible extends AbstractConstraint
             'Products Grid - Button Add To Cart is not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getCheckoutProductDetail()->getProductPrice()->isVisible(),
+            $webposIndex->getCheckoutProductDetail()->getSimpleProductPrice()->isVisible(),
             'Products Grid - Price of Product is not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getCheckoutProductDetail()->getProductAvailableQty()->isVisible(),
+            $webposIndex->getCheckoutProductDetail()->getSimpleProductAvailableQty()->isVisible(),
             'Products Grid - Available Qty of Product is not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getCheckoutProductDetail()->getProductImage()->isVisible(),
+            $webposIndex->getCheckoutProductDetail()->getSimpleProductImage()->isVisible(),
             'Products Grid - Image of Product is not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getCheckoutProductDetail()->getProductName()->isVisible(),
+            $webposIndex->getCheckoutProductDetail()->getSimpleProductName()->isVisible(),
             'Products Grid - Name of Product is not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getCheckoutProductDetail()->getProductSKU()->isVisible(),
+            $webposIndex->getCheckoutProductDetail()->getSimpleProductSKU()->isVisible(),
             'Products Grid - SKU of Product is not visible.'
         );
     }

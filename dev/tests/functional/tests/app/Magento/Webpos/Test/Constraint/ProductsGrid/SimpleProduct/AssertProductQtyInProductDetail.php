@@ -24,7 +24,7 @@ class AssertProductQtyInProductDetail extends AbstractConstraint
      */
     public function processAssert(WebposIndex $webposIndex, $qty)
     {
-        $productQtyOnPage = (float) $webposIndex->getCheckoutProductDetail()->getProductQty()->getValue();
+        $productQtyOnPage = (float) $webposIndex->getCheckoutProductDetail()->getSimpleProductQty()->getValue();
         \PHPUnit_Framework_Assert::assertEquals(
             $qty,
             $productQtyOnPage,
