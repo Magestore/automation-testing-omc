@@ -76,27 +76,27 @@ class CheckoutProductDetail extends Block
         }
     }
 
-    public function getProductName()
+    public function getSimpleProductName()
     {
         return $this->_rootElement->find('//*[@id="popup-product-detail"]/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/h3[@class="product-name"]', Locator::SELECTOR_XPATH);
     }
 
-    public function getProductSKU()
+    public function getSimpleProductSKU()
     {
         return $this->_rootElement->find('//*[@id="popup-product-detail"]/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/span[@class="sku"]', Locator::SELECTOR_XPATH);
     }
 
-    public function getProductAvailableQty()
+    public function getSimpleProductAvailableQty()
     {
         return $this->_rootElement->find('//*[@id="popup-product-detail"]/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[2]/span[@class="available_qty"]', Locator::SELECTOR_XPATH);
     }
 
-    public function getProductPrice()
+    public function getSimpleProductPrice()
     {
         return $this->_rootElement->find('//*[@id="popup-product-detail"]/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[3]/div/span[@class="price"]', Locator::SELECTOR_XPATH);
     }
 
-    public function getProductImage()
+    public function getSimpleProductImage()
     {
         return $this->_rootElement->find('//*[@id="product-img-slise"]', Locator::SELECTOR_XPATH);
     }
@@ -111,8 +111,48 @@ class CheckoutProductDetail extends Block
         return $this->_rootElement->find('//*[@id="popup-product-detail"]/div/div/div/div[2]/div/div[1]/div[2]/div[2]/span[@class="up"]', Locator::SELECTOR_XPATH);
     }
 
-    public function getProductQty()
+    public function getSimpleProductQty()
     {
         return $this->_rootElement->find('//*[@id="product_qty"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getCancelButton()
+    {
+        return $this->_rootElement->find('.close');
+    }
+
+    public function getProductName()
+    {
+        return $this->_rootElement->find('.modal-title');
+    }
+
+    public function getConfigProductName()
+    {
+        return $this->_rootElement->find('.config-product .product-name');
+    }
+
+    public function getConfigProductSku()
+    {
+        return $this->_rootElement->find('.config-product .sku');
+    }
+
+    public function getPrice()
+    {
+        return $this->_rootElement->find('.price');
+    }
+
+    public function getProductOptionsWrap()
+    {
+        return $this->_rootElement->find('[id="product-options-wrapper"]');
+    }
+
+    public function getAvailableQty()
+    {
+        return str_replace(' item(s)', '', $this->_rootElement->find('.available_qty')->getText());
+    }
+
+    public function getAvailability()
+    {
+        return $this->_rootElement->find('.availability');
     }
 }

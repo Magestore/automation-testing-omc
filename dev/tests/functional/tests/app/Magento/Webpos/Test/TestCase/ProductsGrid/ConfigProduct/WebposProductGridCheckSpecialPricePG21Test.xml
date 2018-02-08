@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\ProductsGrid\ConfigProduct\WebposProductGridCheckSpecialPricePG21Test" summary="Products Grid - Config Product" ticketId="WEBPOS-PG21">
+        <variation name="WebposProductGridCheckSpecialPricePG21TestVariation1">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="fixtureName" xsi:type="string">configurableProduct</item>
+                    <item name="product" xsi:type="string">product_with_special_price</item>
+                </item>
+            </data>
+        </variation>
+    </testCase>
+</config>

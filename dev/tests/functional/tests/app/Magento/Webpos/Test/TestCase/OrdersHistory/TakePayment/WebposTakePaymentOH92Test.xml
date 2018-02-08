@@ -1,7 +1,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment\WebposTakePaymentOH92Test" summary="Frontend - Web POS" ticketId="MAGETWO-34874">
         <variation name="WebposTakePayment_OH92">
-            <data name="configData" xsi:type="string">default_payment_method</data>
+            <data name="configData" xsi:type="string">default_payment_method_all_method</data>
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="string">product1</item>
                 <item name="1" xsi:type="string">product2</item>
@@ -9,7 +9,7 @@
                 <item name="3" xsi:type="string">product4</item>
             </data>
             <data name="amount" xsi:type="string">5</data>
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\PaymentMethod\AssertWebposTakePaymentOH92" />-->
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\TakePayment\AssertWebposTakePaymentOH92" />
         </variation>
     </testCase>
 </config>
