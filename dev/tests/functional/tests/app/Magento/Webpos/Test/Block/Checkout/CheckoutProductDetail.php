@@ -71,4 +71,29 @@ class CheckoutProductDetail extends Block
             }
         }
     }
+
+    public function getCancelButton()
+    {
+        return $this->_rootElement->find('.close');
+    }
+
+    public function getProductName()
+    {
+        return $this->_rootElement->find('.modal-title');
+    }
+
+    public function getPrice()
+    {
+        return $this->_rootElement->find('.price');
+    }
+
+    public function getProductOptionsWrap()
+    {
+        return $this->_rootElement->find('[id="product-options-wrapper"]');
+    }
+
+    public function getAvailableQty()
+    {
+        return str_replace(' item(s)', '', $this->_rootElement->find('.available_qty')->getText());
+    }
 }
