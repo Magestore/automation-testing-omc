@@ -8,6 +8,7 @@
                     <item name="product" xsi:type="string">configurable_product_with_only_two_options</item>
                 </item>
             </data>
+            <constraint name="Magento\Webpos\Test\Constraint\ProductsGrid\ConfigProduct\AssertConfigProductDetailAvailable"/>
         </variation>
     </testCase>
 </config>

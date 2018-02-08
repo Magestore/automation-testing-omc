@@ -82,6 +82,16 @@ class CheckoutProductDetail extends Block
         return $this->_rootElement->find('.modal-title');
     }
 
+    public function getConfigProductName()
+    {
+        return $this->_rootElement->find('.config-product .product-name');
+    }
+
+    public function getConfigProductSku()
+    {
+        return $this->_rootElement->find('.config-product .sku');
+    }
+
     public function getPrice()
     {
         return $this->_rootElement->find('.price');
@@ -95,5 +105,10 @@ class CheckoutProductDetail extends Block
     public function getAvailableQty()
     {
         return str_replace(' item(s)', '', $this->_rootElement->find('.available_qty')->getText());
+    }
+
+    public function getAvailability()
+    {
+        return $this->_rootElement->find('.availability');
     }
 }
