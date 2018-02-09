@@ -8,8 +8,7 @@
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckOnHoldOrderEmpty;
-
+use Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckCartSimpleProduct;
 class WebposOnHoldOrderONH25Test extends Injectable
 {
     /**
@@ -17,18 +16,18 @@ class WebposOnHoldOrderONH25Test extends Injectable
      */
     protected $webposIndex;
     /**
-     * @var AssertCheckOnHoldOrderEmpty
+     * @var AssertCheckCartSimpleProduct
      */
-    protected $assertCheckEmpty;
+    protected $assertCheckCart;
 
     public function __inject
     (
         WebposIndex $webposIndex,
-        AssertCheckOnHoldOrderEmpty $assertCheckEmpty
+        AssertCheckCartSimpleProduct $assertCheckCart
     )
     {
         $this->webposIndex = $webposIndex;
-        $this->assertCheckEmpty = $assertCheckEmpty;
+        $this->assertCheckCart = $assertCheckCart;
     }
 
     public function test($products)
@@ -72,6 +71,21 @@ class WebposOnHoldOrderONH25Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
+
+        //Click icon < (Back to cart)
+        $this->webposIndex->getCheckoutCartHeader()->getIconBackToCart()->click();
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        sleep(1);
+
+        $dataProduct1 = $product1->getData();
+        $dataProduct1['qty'] = 1;
+        $this->assertCheckCart->processAssert($this->webposIndex,[$dataProduct1]);
+        sleep(1);
+
+        $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem('2')->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        sleep(5);
+        $this->assertCheckCart->processAssert($this->webposIndex, null);
 
     }
 }
