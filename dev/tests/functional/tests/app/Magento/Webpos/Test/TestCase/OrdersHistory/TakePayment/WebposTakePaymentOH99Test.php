@@ -111,7 +111,7 @@ class WebposTakePaymentOH99Test extends Injectable
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
         $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
-        $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash On Delivery")->click();
+//        $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash On Delivery")->click();
         $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
 
         $this->webposIndex->getModal()->getOkButton()->click();
