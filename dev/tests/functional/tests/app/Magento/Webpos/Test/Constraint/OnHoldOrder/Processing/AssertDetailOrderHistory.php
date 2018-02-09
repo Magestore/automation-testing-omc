@@ -66,6 +66,7 @@ class AssertDetailOrderHistory extends AbstractConstraint
             . "\nActual: " . $webposIndex->getOrderHistoryOrderViewContent()->getShippingPhone()
         );
 
+        //Check product item
         for ($i = 0; $i < count($products); ++$i)
         {
             \PHPUnit_Framework_Assert::assertEquals(

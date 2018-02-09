@@ -78,4 +78,9 @@ class OrderHistoryOrderList extends Block
     {
         return $this->_rootElement->find('[class="notsync"]');
     }
+
+    public function orderListIsVisible()
+    {
+        return $this->_rootElement->find('.list-orders')->isVisible();
+    }
 }
