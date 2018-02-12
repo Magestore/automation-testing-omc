@@ -1740,38 +1740,48 @@
         </dataset>
         <!--End Setting: Origin shipping California-->
 
-        <!--Setting [ Backorders], On Webpos setting, [Still allow to sync Order from WebPOS if there are out-stock items in that Order] system value-->
+        <!--Setting [Backorders] system value-->
         <dataset name="default_backorders_configuration_use_system_value">
             <field name="cataloginventory/item_options/backorders" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="inherit" xsi:type="number">1</item>
             </field>
-            <field name="webpos/general/ignore_checkout" xsi:type="array">
-                <item name="scope" xsi:type="string">default</item>
-                <item name="scope_id" xsi:type="number">0</item>
-                <item name="label" xsi:type="string">Yes</item>
-                <item name="value" xsi:type="string">1</item>
-            </field>
         </dataset>
-        <!--End Setting: Origin shipping California-->
+        <!--End Setting [Backorders] system value-->
 
-        <!--Setting [ Backorders] = "No backorders", On Webpos setting, [Still allow to sync Order from WebPOS if there are out-stock items in that Order] = "No" -->
-        <dataset name="no_backordes_no_still_allow_to_sync_order_from_WebPOS">
+        <!--Setting [Backorders] = "No backorders"-->
+        <dataset name="backorders_no_backordes">
             <field name="cataloginventory/item_options/backorders" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">No Backorders</item>
                 <item name="value" xsi:type="string">0</item>
             </field>
-            <field name="webpos/general/ignore_checkout" xsi:type="array">
+        </dataset>
+        <!--End Setting:[Backorders] = "No backorders"-->
+
+        <!--Setting [Backorders] = "Allow Qty Below 0"-->
+        <dataset name="backorders_allow_qty_below_0">
+            <field name="cataloginventory/item_options/backorders" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="label" xsi:type="string">No</item>
-                <item name="value" xsi:type="string">0</item>
+                <item name="label" xsi:type="string">Allow Qty Below 0</item>
+                <item name="value" xsi:type="string">1</item>
             </field>
         </dataset>
-        <!--End Setting: Origin shipping California-->
+        <!--End Setting:[Backorders] = "Allow Qty Below 0"-->
+
+        <!--Setting [Backorders] = "Allow Qty Below 0 and Notify Customer"-->
+        <dataset name="backorders_allow_qty_below_0_and_notify_customer">
+            <field name="cataloginventory/item_options/backorders" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Allow Qty Below 0 and Notify Customer</item>
+                <item name="value" xsi:type="string">2</item>
+            </field>
+        </dataset>
+        <!--End Setting:[Backorders] = "Allow Qty Below 0 and Notify Customer"-->
         <!--Setting TAX - Price Display Settings - Including Tax-->
         <dataset name="tax_price_display_setting_including_tax">
             <!--Price Display Settings-->

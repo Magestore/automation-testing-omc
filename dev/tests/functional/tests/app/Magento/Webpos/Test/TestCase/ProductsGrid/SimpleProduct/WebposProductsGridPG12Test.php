@@ -28,7 +28,6 @@ class WebposProductsGridPG12Test extends Injectable
      */
     protected $assertProductWithSpecialPrice;
 
-
     /**
      * @param WebposIndex $webposIndex
      * @param AssertProductWithSpecialPrice $assertProductWithSpecialPrice

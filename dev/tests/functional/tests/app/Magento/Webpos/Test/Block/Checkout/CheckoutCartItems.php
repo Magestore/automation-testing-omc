@@ -39,6 +39,11 @@ class CheckoutCartItems extends Block
 		return $this->_rootElement->find('.product-item');
 	}
 
+	public function getFirstCartItemQty()
+	{
+		return $this->_rootElement->find('//*[@id="order-items"]/li[1]/div/div/div[1]/a[@data-bind="text:qty"]', Locator::SELECTOR_XPATH);
+	}
+
 	public function getFirstCartItemOption()
     {
         return $this->getFirstCartItem()->find('.item-options');

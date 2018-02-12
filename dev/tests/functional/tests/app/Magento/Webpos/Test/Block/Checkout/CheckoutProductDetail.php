@@ -30,6 +30,10 @@ class CheckoutProductDetail extends Block
         return $this->_rootElement->find('#popup-product-detail > div > div > div > div.modal-body > div > div > div > div.ms-actions > button');
     }
 
+    public function getButtonCancel(){
+        return $this->_rootElement->find('//*[@id="popup-product-detail"]/div/div/div/div[1]/button[@class="close"]', Locator::SELECTOR_XPATH);
+    }
+
 	public function getProductQtyInput()
 	{
 		return $this->_rootElement->find('#product_qty');
@@ -70,6 +74,46 @@ class CheckoutProductDetail extends Block
                 $this->_rootElement->click();
             }
         }
+    }
+
+    public function getSimpleProductName()
+    {
+        return $this->_rootElement->find('//*[@id="popup-product-detail"]/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/h3[@class="product-name"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getSimpleProductSKU()
+    {
+        return $this->_rootElement->find('//*[@id="popup-product-detail"]/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/span[@class="sku"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getSimpleProductAvailableQty()
+    {
+        return $this->_rootElement->find('//*[@id="popup-product-detail"]/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[2]/span[@class="available_qty"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getSimpleProductPrice()
+    {
+        return $this->_rootElement->find('//*[@id="popup-product-detail"]/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[3]/div/span[@class="price"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getSimpleProductImage()
+    {
+        return $this->_rootElement->find('//*[@id="product-img-slise"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getButtonDownQty()
+    {
+        return $this->_rootElement->find('//*[@id="popup-product-detail"]/div/div/div/div[2]/div/div[1]/div[2]/div[2]/span[@class="down"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getButtonUpQty()
+    {
+        return $this->_rootElement->find('//*[@id="popup-product-detail"]/div/div/div/div[2]/div/div[1]/div[2]/div[2]/span[@class="up"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getSimpleProductQty()
+    {
+        return $this->_rootElement->find('//*[@id="product_qty"]', Locator::SELECTOR_XPATH);
     }
 
     public function getCancelButton()

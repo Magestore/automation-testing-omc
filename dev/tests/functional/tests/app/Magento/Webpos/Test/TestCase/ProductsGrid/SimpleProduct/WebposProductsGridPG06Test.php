@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 2/7/2018
- * Time: 8:40 AM
+ * Date: 2/9/2018
+ * Time: 2:43 PM
  */
 
 namespace Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct;
@@ -13,10 +13,10 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\ProductsGrid\SimpleProduct\AssertProductQtyInProductList;
 
 /**
- * Class WebposProductsGridPG05Test
+ * Class WebposProductsGridPG06Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct
  */
-class WebposProductsGridPG05Test extends Injectable
+class WebposProductsGridPG06Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -70,7 +70,7 @@ class WebposProductsGridPG05Test extends Injectable
         // Config
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'backorders_no_backordes']
+            ['configData' => 'backorders_allow_qty_below_0']
         )->run();
 
         // Login webpos
@@ -81,18 +81,37 @@ class WebposProductsGridPG05Test extends Injectable
         // Add products to cart
         $this->webposIndex->getCheckoutCartFooter()->waitButtonHoldVisible();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $qty = 1;
+        for ($i = 0; $i < 2; $i++) {
+            $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
+            $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+            $this->webposIndex->getMsWebpos()->waitCartLoader();
+        }
+        $availableQty = 1;
 
         // Assert available qty on page
-        $this->assertProductQtyInProductList->processAssert($this->webposIndex, $qty);
+        $this->assertProductQtyInProductList->processAssert($this->webposIndex, $availableQty);
 
-        // Add products to cart
+        // Check out and Place Order
+        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        // Placer Order
+
+        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+
         $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
+
+        $availableQty = -1;
+
+        // Assert available qty on page
+        $this->assertProductQtyInProductList->processAssert($this->webposIndex, $availableQty);
 
         return [
             'products' => $products
