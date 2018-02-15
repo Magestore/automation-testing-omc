@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\ProductsGrid\BundleProduct\WebposProductsGridPG29Test" summary="Products Grid - Bundle Product" ticketId="WEBPOS-PG29">
+        <variation name="WebposProductsGridPG29Test_PG29">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">bundle_dynamic_custom_type_radio</item>
+                    <item name="fixtureName" xsi:type="string">bundleProduct</item>
+                </item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\ProductsGrid\BundleProduct\AssertProductsGridBundleProductOnProductsList"/>
+        </variation>
+    </testCase>
+</config>
