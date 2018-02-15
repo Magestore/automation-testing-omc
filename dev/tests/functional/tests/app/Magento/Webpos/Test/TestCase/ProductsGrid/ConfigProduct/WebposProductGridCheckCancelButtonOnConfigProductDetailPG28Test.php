@@ -16,7 +16,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * Class WebposProductGridCheckConfigProductBlockPG19Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\ConfigProduct
  */
-class  WebposProductGridCheckAddToCartOnConfigProductDetailPG27Test extends Injectable
+class  WebposProductGridCheckCancelButtonOnConfigProductDetailPG28Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -52,38 +52,11 @@ class  WebposProductGridCheckAddToCartOnConfigProductDetailPG27Test extends Inje
         $this->webposIndex->getCheckoutProductList()->getFirstProduct()->hover();
         $this->webposIndex->getCheckoutProductList()->getFirstProductDetailButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-product-detail"]');
-        sleep(3);
-        // Select options
-        $attributes = $products[0]['product']->getConfigurableAttributesData()['attributes_data'];
-        foreach ($attributes as $attribute) {
-            $option = $attribute['options']['option_key_0']['label'];
-            if($option === ""){
-                $option = $attribute['options']['option_key_0']['admin'];
-            }
-            $label = $attribute['label'];
-            $this->webposIndex->getCheckoutProductDetail()->selectAttributes($label, $option);
-        }
-//        $this->webposIndex->getCheckoutProductDetail()->waitForAvailableQtyVisible();
-//        $actualAvailableQty = $this->webposIndex->getCheckoutProductDetail()->getAvailableQty();
-//        $availableQty = $products[0]['product']->getConfigurableAttributesData()['matrix']['attribute_key_0:option_key_0']['qty'];
-//        $this->assertEquals(
-//            $availableQty,
-//            $actualAvailableQty,
-//            'Available qty is wrong.'
-//        );
-        $this->webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
-        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-product-detail"]');
-        $this->assertTrue(
-            $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->isVisible(),
-            'Add product to cart is not successful.'
+        $this->webposIndex->getCheckoutProductDetail()->getCancelButton()->click();
+        sleep(2);
+        $this->assertFalse(
+            $this->webposIndex->getCheckoutProductDetail()->isVisible(),
+            'Product detail popup is not hidden.'
         );
-        $productOption = $products[0]['product']->getConfigurableAttributesData()['attributes_data']['attribute_key_0']['options']['option_key_0']['label'];
-        $actualProductOption = $this->webposIndex->getCheckoutCartItems()->getFirstCartItemOption()->getText();
-        $this->assertEquals(
-            $productOption,
-            $actualProductOption,
-            'Selected product atribute is wrong.'
-        );
-
     }
 }
