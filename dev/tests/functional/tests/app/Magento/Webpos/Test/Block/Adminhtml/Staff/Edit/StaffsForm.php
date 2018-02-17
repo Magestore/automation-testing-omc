@@ -15,5 +15,12 @@ use Magento\Mtf\Block\Form;
 
 class StaffsForm extends Form
 {
-
+    public function getMessageRequired($id)
+    {
+        return $this->_rootElement->find('#'.$id)->getText();
+    }
+    public function isMessageRequiredDisplay($id)
+    {
+        return $this->_rootElement->find('#'.$id);
+    }
 }

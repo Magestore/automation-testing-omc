@@ -13,6 +13,7 @@ namespace Magento\Webpos\Test\Block\Adminhtml\Staff;
 
 use Magento\Ui\Test\Block\Adminhtml\DataGrid;
 use Magento\Mtf\Client\Element\SimpleElement;
+use Magento\Mtf\Client\Locator;
 
 class StaffsGrid extends DataGrid
 {
@@ -83,5 +84,13 @@ class StaffsGrid extends DataGrid
     {
         $this->waitLoader();
         parent::resetFilter();
+    }
+
+    public function getRowByEmail($email, $isStrict = true)
+    {
+        $rowTemplate = ($isStrict) ? $this->rowTemplateStrict : $this->rowTemplate;
+        $rows = sprintf($rowTemplate, $email);
+        $location = sprintf($this->rowPattern, $rows);
+        return $this->_rootElement->find($location, Locator::SELECTOR_XPATH);
     }
 }
