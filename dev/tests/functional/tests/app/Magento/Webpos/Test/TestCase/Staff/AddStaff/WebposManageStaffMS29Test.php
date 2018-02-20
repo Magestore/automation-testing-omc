@@ -46,6 +46,19 @@ class WebposManageStaffMS29Test extends Injectable
         $this->staffsNew->getStaffsForm()->fill($staff);
         $this->staffsNew->getFormPageActionsStaff()->reset();
         sleep(1);
+
+        return ['fields' => [
+            'display_name' => '',
+            'username' => '',
+            'email' => '',
+            'pin' => '0000',
+            'customer_group' => '',
+            'location_id' => '',
+            'role_id' => 'admin',
+            'status' => 'Enabled',
+            'pos_ids' => ''
+        ]];
+
     }
 }
 

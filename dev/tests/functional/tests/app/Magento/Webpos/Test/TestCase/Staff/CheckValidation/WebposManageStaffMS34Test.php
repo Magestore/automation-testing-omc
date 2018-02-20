@@ -46,6 +46,8 @@ class WebposManageStaffMS34Test extends Injectable
         $this->staffsNew->getStaffsForm()->fill($staff);
         $this->staffsNew->getFormPageActions()->save();
         sleep(1);
+
+//        return ['message' => 'Email '.$staff->getEmail().' is existed.'];
     }
 }
 

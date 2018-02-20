@@ -46,6 +46,8 @@ class WebposManageStaffMS28Test extends Injectable
         $this->staffsNew->getStaffsForm()->fill($staff);
         $this->staffsNew->getFormPageActionsStaff()->saveAndContinue();
         sleep(1);
+
+        return ['fields' => $staff->getData()];
     }
 }
 

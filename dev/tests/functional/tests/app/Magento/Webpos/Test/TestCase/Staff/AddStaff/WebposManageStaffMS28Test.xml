@@ -3,6 +3,9 @@
     <testCase name="Magento\Webpos\Test\TestCase\Staff\AddStaff\WebposManageStaffMS28Test" summary="Add Staff" ticketId="MAGETWO-1234">
         <variation name="WebposManageStaffMS28TestVariation">
             <data name="staff/dataset" xsi:type="string">default</data>
+            <data name="message" xsi:type="string">Staff was successfully saved</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertStaffSuccessSaveContinueMessage" />
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertStaffContinueEditAfterCreateStaff" />
         </variation>
     </testCase>
 </config>

@@ -5,9 +5,7 @@
  * Date: 05/12/2017
  * Time: 14:07
  */
-
 namespace Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form;
-
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
 use Magento\Mtf\Constraint\AbstractConstraint;
 
