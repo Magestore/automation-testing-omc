@@ -41,7 +41,8 @@ class Curl extends AbstractCurl implements StaffInterface
         'status'  => [
             'Enabled'       => '1',
             'Disabled'      => '2'
-        ]
+        ],
+        'pos_ids' => ['Store POS' => '1']
     ];
 
     public function persist(FixtureInterface $fixture = null)
@@ -53,11 +54,11 @@ class Curl extends AbstractCurl implements StaffInterface
         $curl->write($url, $data);
         $response = $curl->read();
         $curl->close();
-//         if (!strpos($response, 'data-ui-id="messages-message-success"')) {
-//             throw new \Exception(
-//                 "Staff entity creation by curl handler was not successful! Response: $response"
-//             );
-//         }
+        if (!strpos($response, 'data-ui-id="messages-message-success"')) {
+             throw new \Exception(
+                 "Staff entity creation by curl handler was not successful! Response: $response"
+             );
+        }
 
         $data['staff_id'] = $this->getStaffId($fixture->getEmail());
         return ['staff_id' => $data['staff_id']];
