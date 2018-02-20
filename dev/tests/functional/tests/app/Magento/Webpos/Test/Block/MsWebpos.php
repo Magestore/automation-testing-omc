@@ -66,6 +66,11 @@ class MsWebpos extends Block
 		$this->waitForElementNotVisible('.first-screen');
 	}
 
+	public function waitForSyncDataVisible()
+	{
+		$this->waitForElementVisible('.first-screen');
+	}
+
 	public function waitForModalPopup()
 	{
 		$this->waitForElementVisible('.modals-wrapper');

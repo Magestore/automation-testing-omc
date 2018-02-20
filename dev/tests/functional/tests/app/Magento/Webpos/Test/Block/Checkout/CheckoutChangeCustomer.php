@@ -29,14 +29,15 @@ class CheckoutChangeCustomer extends Block
 	{
 		$this->waitForCustomerList();
 		$this->_rootElement->find('#search-customer')->setValue($text);
+		$this->_rootElement->find('.icon-iconPOS-search')->click();
 		$this->waitForCustomerList();
 	}
 
 	public function getFirstCustomer()
 	{
-		$this->waitForCustomerList();
-		$this->_rootElement->click();
-		$this->waitForCustomerList();
+//		$this->waitForCustomerList();
+//		$this->_rootElement->click();
+//		$this->waitForCustomerList();
 		return $this->_rootElement->find('ul.list-customer-old > li:nth-child(1)');
 	}
 
