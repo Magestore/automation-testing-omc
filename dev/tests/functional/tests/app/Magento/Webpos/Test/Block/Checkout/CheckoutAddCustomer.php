@@ -80,4 +80,49 @@ class CheckoutAddCustomer extends Block
             }
         }
     }
+
+	public function getCustomerGroup()
+	{
+		return $this->_rootElement->find('//select[contains(@data-bind, "value: groupCustomer")]', Locator::SELECTOR_XPATH);
+	}
+
+	public function getSubscribeSwitchBox()
+	{
+		return $this->_rootElement->find('.subscribe-box .switch-box');
+	}
+
+	/**
+	 * @param ElementInterface $divCheckbox
+	 * @return bool|int
+	 */
+	public function isCheckboxChecked($divCheckbox)
+	{
+		$class = $divCheckbox->find('.ios-ui-select')->getAttribute('class');
+		return strpos($class, 'checked');
+	}
+
+	public function getAddBillingAddressIcon()
+	{
+		return $this->_rootElement->find('span[data-bind="click: showBillingAddress, visible: !isShowBillingSummaryForm()"]');
+	}
+
+	public function getFirstNameError()
+	{
+		return $this->_rootElement->find('#first-name-error');
+	}
+
+	public function getLastNameError()
+	{
+		return $this->_rootElement->find('#last-name-error');
+	}
+
+	public function getEmailError()
+	{
+		return $this->_rootElement->find('#email-error');
+	}
+
+	public function getCustomerGroupError()
+	{
+		return $this->_rootElement->find('#customer_group-error');
+	}
 }
