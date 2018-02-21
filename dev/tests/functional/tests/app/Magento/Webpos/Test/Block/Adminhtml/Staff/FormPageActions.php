@@ -133,4 +133,12 @@ class FormPageActions extends PageActions
     {
         return $this->_rootElement->find($this->deleteButton)->isVisible();
     }
+
+    public function getButtonById($id)
+    {
+        $this->waitForElementNotVisible($this->spinner);
+        $this->waitForElementNotVisible($this->loader, Locator::SELECTOR_XPATH);
+        $this->waitForElementNotVisible($this->loaderOld, Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('#'.$id);
+    }
 }

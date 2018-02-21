@@ -10,7 +10,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 
-class WebposManageStaffMS21Test extends Injectable
+class WebposManageStaffMS23Test extends Injectable
 {
     /**
      * Webpos Staff Index page.
@@ -46,6 +46,10 @@ class WebposManageStaffMS21Test extends Injectable
         $this->staffsIndex->open();
         $this->staffsIndex->getStaffsGrid()->search(['email' => $staff->getEmail()]);
         $this->staffsIndex->getStaffsGrid()->getRowByEmail($staff->getEmail())->click();
+        $this->staffsIndex->getStaffsGrid()->setDisplayName('abc');
+        $this->staffsIndex->getStaffsGrid()->setStatusName('Disabled');
+        $this->staffsIndex->getStaffsGrid()->setEmail('Disabled@gmail.com');
+        $this->staffsIndex->getStaffsGrid()->getSaveButton()->click();
         sleep(3);
     }
 }

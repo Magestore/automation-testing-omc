@@ -93,4 +93,31 @@ class StaffsGrid extends DataGrid
         $location = sprintf($this->rowPattern, $rows);
         return $this->_rootElement->find($location, Locator::SELECTOR_XPATH);
     }
+
+    public function getCancelButton()
+    {
+        return $this->_rootElement->find('.admin__data-grid-wrap')->find('//button/span[text()="Cancel"]',Locator::SELECTOR_XPATH);
+    }
+
+    public function getSaveButton()
+    {
+        return $this->_rootElement->find('.admin__data-grid-wrap')->find('//button/span[text()="Save"]',Locator::SELECTOR_XPATH);
+    }
+
+    public function setDisplayName($displayName)
+    {
+        $this->_rootElement->find('input[name="display_name"]')->setValue($displayName);
+    }
+
+    public function setEmail($emailChange)
+    {
+        $this->_rootElement->find('input[name="email"]')->setValue($emailChange);
+
+    }
+
+    public function setStatusName($status)
+    {
+        $this->_rootElement->find('input[name="status"]', Locator::SELECTOR_CSS,'select')->setValue($status);
+
+    }
 }

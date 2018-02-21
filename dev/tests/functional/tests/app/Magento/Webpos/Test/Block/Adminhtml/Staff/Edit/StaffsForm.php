@@ -30,14 +30,29 @@ class StaffsForm extends Form
         return $this->_rootElement->find('#page_password')->getText();
     }
 
+    public function setPassword($pass)
+    {
+        $this->_rootElement->find('#page_password')->setValue($pass);
+    }
+
     public function getConfimPassword()
     {
         return $this->_rootElement->find('#page_password_confirmation')->getText();
     }
 
+    public function setConfimPassword($passConfim)
+    {
+        $this->_rootElement->find('#page_password_confirmation')->setValue($passConfim);
+    }
+
     public function getDisplayName()
     {
         return $this->_rootElement->find('#page_display_name')->getValue();
+    }
+
+    public function setDisplayName($displayName)
+    {
+        $this->_rootElement->find('#page_display_name')->setValue($displayName);
     }
 
     public function getUserName()
@@ -48,6 +63,11 @@ class StaffsForm extends Form
     public function getEmailAddress()
     {
         return $this->_rootElement->find('#page_email')->getValue();
+    }
+
+    public function setEmailAddress($email)
+    {
+        $this->_rootElement->find('#page_email')->setValue($email);
     }
 
     public function getPinCode()
@@ -108,6 +128,11 @@ class StaffsForm extends Form
     public function getTextBoxEmailValid()
     {
         return $this->_rootElement->find('#page_email-error');
+    }
+
+    public function getFieldById($id)
+    {
+        return $this->_rootElement->find('#'.$id);
     }
 
 }

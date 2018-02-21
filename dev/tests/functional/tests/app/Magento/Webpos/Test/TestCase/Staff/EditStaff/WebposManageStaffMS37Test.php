@@ -9,8 +9,9 @@ namespace Magento\Webpos\Test\TestCase\Staff\EditStaffOnGrid;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
+use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
 
-class WebposManageStaffMS21Test extends Injectable
+class WebposManageStaffMS37Test extends Injectable
 {
     /**
      * Webpos Staff Index page.
@@ -18,6 +19,10 @@ class WebposManageStaffMS21Test extends Injectable
      * @var StaffIndex
      */
     private $staffsIndex;
+    /**
+     * @var StaffNews
+     */
+    private $staffsNew;
 
     /**
      * Inject Staff pages.
@@ -26,9 +31,11 @@ class WebposManageStaffMS21Test extends Injectable
      * @return void
      */
     public function __inject(
-        StaffIndex $staffsIndex
+        StaffIndex $staffsIndex,
+        StaffNews $staffsNew
     ) {
         $this->staffsIndex = $staffsIndex;
+        $this->staffsNew = $staffsNew;
     }
 
     /**
@@ -45,8 +52,17 @@ class WebposManageStaffMS21Test extends Injectable
         // Steps
         $this->staffsIndex->open();
         $this->staffsIndex->getStaffsGrid()->search(['email' => $staff->getEmail()]);
-        $this->staffsIndex->getStaffsGrid()->getRowByEmail($staff->getEmail())->click();
-        sleep(3);
+        $this->staffsIndex->getStaffsGrid()->getRowByEmail($staff->getEmail())->find('.action-menu-item')->click();
+        sleep(1);
+        $this->staffsNew->getStaffsForm()->setPassword($staff->getPassword());
+        $this->staffsNew->getStaffsForm()->setConfimPassword($staff->getPasswordConfirmation());
+        $this->staffsNew->getFormPageActionsStaff()->save();
+        sleep(1);
+        $fields = $staff->getData();
+        $fields['customer_group'] = $fields['customer_group'][0];
+        $fields['location_id'] = $fields['location_id'][0];
+        $fields['pos_ids'] = $fields['pos_ids'][0];
+        return ['dataStaff' => $fields];
     }
 }
 

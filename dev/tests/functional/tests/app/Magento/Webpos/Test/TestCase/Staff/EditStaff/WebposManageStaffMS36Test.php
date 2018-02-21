@@ -10,7 +10,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 
-class WebposManageStaffMS21Test extends Injectable
+class WebposManageStaffMS36Test extends Injectable
 {
     /**
      * Webpos Staff Index page.
@@ -41,12 +41,16 @@ class WebposManageStaffMS21Test extends Injectable
     {
         // Preconditions:
         $staff->persist();
-
         // Steps
         $this->staffsIndex->open();
         $this->staffsIndex->getStaffsGrid()->search(['email' => $staff->getEmail()]);
-        $this->staffsIndex->getStaffsGrid()->getRowByEmail($staff->getEmail())->click();
-        sleep(3);
+        $this->staffsIndex->getStaffsGrid()->getRowByEmail($staff->getEmail())->find('.action-menu-item')->click();
+        sleep(1);
+        $fields = $staff->getData();
+        $fields['customer_group'] = $fields['customer_group'][0];
+        $fields['location_id'] = $fields['location_id'][0];
+        $fields['pos_ids'] = $fields['pos_ids'][0];
+        return ['fields' => $fields];
     }
 }
 
