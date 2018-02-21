@@ -105,4 +105,24 @@ class CheckoutAddCustomer extends Block
 	{
 		return $this->_rootElement->find('span[data-bind="click: showBillingAddress, visible: !isShowBillingSummaryForm()"]');
 	}
+
+	public function getFirstNameError()
+	{
+		return $this->_rootElement->find('#first-name-error');
+	}
+
+	public function getLastNameError()
+	{
+		return $this->_rootElement->find('#last-name-error');
+	}
+
+	public function getEmailError()
+	{
+		return $this->_rootElement->find('#email-error');
+	}
+
+	public function getCustomerGroupError()
+	{
+		return $this->_rootElement->find('#customer_group-error');
+	}
 }
