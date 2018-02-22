@@ -50,10 +50,6 @@ class StaffsGrid extends DataGrid
             'selector' => '.admin__data-grid-filters input[name="staff_id"]',
             'input' => 'select',
         ],
-        'staff_id[from]' => [
-            'selector' => '.admin__data-grid-filters input[name="staff_id"]',
-            'input' => 'select',
-        ],
         'role_id' => [
             'selector' => '.admin__data-grid-filters input[name="role_id"]',
             'input' => 'select',
@@ -65,18 +61,25 @@ class StaffsGrid extends DataGrid
 
     ];
 
+    public function waitLoader()
+    {
+        $this->waitForElementNotVisible($this->loader);
+        $this->getTemplateBlock()->waitLoader();
+    }
+
     /**
      * Click on "Edit" link.
      *
      * @param SimpleElement $rowItem
      * @return void
      */
-     protected function clickEditLink(SimpleElement $rowItem)
-        {
-            $rowItem->find($this->selectAction)->click();
-            // Neu nhu co 2 action. Vi du: delete va edit thi moi them lenh duoi day de lua chon.
-            // $rowItem->find($this->editLink)->click();
-        }
+    protected function clickEditLink(SimpleElement $rowItem)
+    {
+        $rowItem->find($this->selectAction)->click();
+        // Neu nhu co 2 action. Vi du: delete va edit thi moi them lenh duoi day de lua chon.
+        // $rowItem->find($this->editLink)->click();
+    }
+
     /**
      * Fix core
      */
@@ -94,30 +97,38 @@ class StaffsGrid extends DataGrid
         return $this->_rootElement->find($location, Locator::SELECTOR_XPATH);
     }
 
-    public function getCancelButton()
+    public function getActionButtonEditing($nameButton)
     {
-        return $this->_rootElement->find('.admin__data-grid-wrap')->find('//button/span[text()="Cancel"]',Locator::SELECTOR_XPATH);
-    }
-
-    public function getSaveButton()
-    {
-        return $this->_rootElement->find('.admin__data-grid-wrap')->find('//button/span[text()="Save"]',Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//tbody/tr/td/button[*[text()[normalize-space()="' . $nameButton . '"]]]', Locator::SELECTOR_XPATH);
     }
 
     public function setDisplayName($displayName)
     {
-        $this->_rootElement->find('input[name="display_name"]')->setValue($displayName);
+        $this->_rootElement->find('//tbody/tr/td/*/input[@name="display_name"]', Locator::SELECTOR_XPATH)->setValue($displayName);
     }
 
     public function setEmail($emailChange)
     {
-        $this->_rootElement->find('input[name="email"]')->setValue($emailChange);
-
+        $this->_rootElement->find('//tbody/tr/td/*/input[@name="email"]', Locator::SELECTOR_XPATH)->setValue($emailChange);
     }
 
-    public function setStatusName($status)
+    public function getInputFieldEdtingByName($name)
     {
-        $this->_rootElement->find('input[name="status"]', Locator::SELECTOR_CSS,'select')->setValue($status);
+        return $this->_rootElement->find('//tbody/tr/td/*/input[@name="' . $name . '"]', Locator::SELECTOR_XPATH);
+    }
 
+    public function getSelectFieldEdtingByName($name)
+    {
+        return $this->_rootElement->find('//tbody/tr/td/*/select[@name="' . $name . '"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getFieldDisableEditingDisplay($text)
+    {
+        return $this->_rootElement->find('//tbody/tr/td[*[text()[normalize-space()="' . $text . '"]]]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getMessageEditSuccess()
+    {
+        return $this->_rootElement->find('.data-grid-info-panel .message');
     }
 }
