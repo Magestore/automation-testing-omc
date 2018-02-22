@@ -54,8 +54,6 @@ class WebposManageStaffMS37Test extends Injectable
         $this->staffsIndex->getStaffsGrid()->search(['email' => $staff->getEmail()]);
         $this->staffsIndex->getStaffsGrid()->getRowByEmail($staff->getEmail())->find('.action-menu-item')->click();
         sleep(1);
-        $this->staffsNew->getStaffsForm()->setPassword($staff->getPassword());
-        $this->staffsNew->getStaffsForm()->setConfimPassword($staff->getPasswordConfirmation());
         $this->staffsNew->getFormPageActionsStaff()->save();
         sleep(1);
         $fields = $staff->getData();
