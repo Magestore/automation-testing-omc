@@ -46,7 +46,8 @@ class WebposManageStaffMS21Test extends Injectable
         $this->staffsIndex->open();
         $this->staffsIndex->getStaffsGrid()->search(['email' => $staff->getEmail()]);
         $this->staffsIndex->getStaffsGrid()->getRowByEmail($staff->getEmail())->click();
-        sleep(3);
+        $this->staffsIndex->getStaffsGrid()->waitLoader();
+        sleep(1);
     }
 }
 

@@ -3,6 +3,11 @@
     <testCase name="Magento\Webpos\Test\TestCase\Staff\EditStaffOnGrid\WebposManageStaffMS21Test" summary="Check GUI of a record when editing" ticketId="MAGETWO-1234">
         <variation name="WebposManageStaffMS21TestVariation">
             <data name="staff/dataset" xsi:type="string">staffMS21</data>
+            <data name="nameButtons" xsi:type="string">Cancel, Save</data>
+            <data name="nameSelectFields" xsi:type="string">location_id, role_id, status</data>
+            <data name="nameInputFields" xsi:type="string">display_name, email</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertCheckButtonOnGridWhenClick" />
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertFieldsEnableEditOnGridWhenClick" />
         </variation>
     </testCase>
 </config>

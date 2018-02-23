@@ -13,8 +13,16 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Constraint\AbstractAssertForm;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class AssertCreateCustomerOnCheckoutPageSuccess
+ * @package Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\CreateCustomer
+ */
 class AssertCreateCustomerOnCheckoutPageSuccess extends AbstractAssertForm
 {
+	/**
+	 * @param WebposIndex $webposIndex
+	 * @param Customer $customer
+	 */
 	public function processAssert(WebposIndex $webposIndex, Customer $customer)
 	{
 

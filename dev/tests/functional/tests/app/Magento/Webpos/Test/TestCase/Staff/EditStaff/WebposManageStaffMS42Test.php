@@ -7,11 +7,11 @@
  */
 namespace Magento\Webpos\Test\TestCase\Staff\EditStaffOnGrid;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
+use Magento\Mtf\Fixture\FixtureFactory;
 
-class WebposManageStaffMS37Test extends Injectable
+class WebposManageStaffMS42Test extends Injectable
 {
     /**
      * Webpos Staff Index page.
@@ -38,29 +38,20 @@ class WebposManageStaffMS37Test extends Injectable
         $this->staffsNew = $staffsNew;
     }
 
-    /**
-     * Create Staff group test.
-     *
-     * @param Staff $location
-     * @return void
-     */
-    public function test(Staff $staff)
+    public function test(FixtureFactory $fixtureFactory, $pass)
     {
         // Preconditions:
+        $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staffMS21']);
         $staff->persist();
-
         // Steps
         $this->staffsIndex->open();
         $this->staffsIndex->getStaffsGrid()->search(['email' => $staff->getEmail()]);
         $this->staffsIndex->getStaffsGrid()->getRowByEmail($staff->getEmail())->find('.action-menu-item')->click();
         sleep(1);
+        $this->staffsNew->getStaffsForm()->setPassword($pass);
+        $this->staffsNew->getStaffsForm()->setConfimPassword($pass);
         $this->staffsNew->getFormPageActionsStaff()->save();
         sleep(1);
-        $fields = $staff->getData();
-        $fields['customer_group'] = $fields['customer_group'][0];
-        $fields['location_id'] = $fields['location_id'][0];
-        $fields['pos_ids'] = $fields['pos_ids'][0];
-        return ['dataStaff' => $fields];
     }
 }
 

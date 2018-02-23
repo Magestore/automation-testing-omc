@@ -3,6 +3,9 @@
     <testCase name="Magento\Webpos\Test\TestCase\Staff\EditStaffOnGrid\WebposManageStaffMS23Test" summary="Check [Save] button" ticketId="MAGETWO-1234">
         <variation name="WebposManageStaffMS23TestVariation">
             <data name="staff/dataset" xsi:type="string">staffMS21</data>
+            <data name="nameSelectFields" xsi:type="string">location_id, role_id, status</data>
+            <data name="nameInputFields" xsi:type="string">display_name, email</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertFieldsDisableEditOnGridWhenClick" />
         </variation>
     </testCase>
 </config>
