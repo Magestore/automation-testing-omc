@@ -81,6 +81,11 @@ class CheckoutEditCustomer extends Block
 	}
 
 	// Shipping Info
+	public function getShippingAddressBox()
+	{
+		return $this->_rootElement->find('.shipping-address .info-address-edit');
+	}
+
 	public function getShippingName()
 	{
 		return $this->_rootElement->find('.shipping-address .info-address-edit .customer-name');
@@ -98,6 +103,11 @@ class CheckoutEditCustomer extends Block
 	// End Shipping Info
 
 	// Billing Info
+	public function getBillingAddressBox()
+	{
+		return $this->_rootElement->find('.billing-address .info-address-edit');
+	}
+
 	public function getBillingName()
 	{
 		return $this->_rootElement->find('.billing-address .info-address-edit .customer-name');

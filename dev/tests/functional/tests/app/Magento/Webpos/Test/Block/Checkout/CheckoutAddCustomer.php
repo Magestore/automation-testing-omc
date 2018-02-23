@@ -131,8 +131,28 @@ class CheckoutAddCustomer extends Block
 		return $this->_rootElement->find('div[data-bind="visible: isShowShippingSummaryForm"]');
 	}
 
+	public function getEditShippingAddressIcon()
+	{
+		return $this->_rootElement->find('a[data-bind="click: editShippingAddress"]');
+	}
+
+	public function getDeleteShippingAddressIcon()
+	{
+		return $this->_rootElement->find('a[data-bind="click: deleteShippingAddress"]');
+	}
+
 	public function getBillingAddressBox()
 	{
 		return $this->_rootElement->find('div[data-bind="visible: isShowBillingSummaryForm"]');
+	}
+
+	public function getEditBillingAddressIcon()
+	{
+		return $this->_rootElement->find('a[data-bind="click: editBillingAddress"]');
+	}
+
+	public function getDeleteBillingAddressIcon()
+	{
+		return $this->_rootElement->find('a[data-bind="click: deleteBillingAddress"]');
 	}
 }
