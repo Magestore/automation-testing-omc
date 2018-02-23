@@ -1793,5 +1793,21 @@
             </field>
         </dataset>
         <!--End Setting: Origin shipping California-->
+
+        <!--1. Go to Sales > Webpos > Settings > Product search:-->
+        <!--[Product Attribute(s) for Search]: choose "SKU" and "Product name"-->
+        <dataset name="webpos_product_search_sku_product_name">
+            <field name="webpos/product_search/product_attribute" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Including Tax</item>
+                <item name="value" xsi:type="array">
+                    <item name="Product Name" xsi:type="string">name</item>
+                    <item name="SKU" xsi:type="string">sku</item>
+                </item>
+            </field>
+        </dataset>
+        <!--End setting product search-->
+
     </repository>
 </config>
