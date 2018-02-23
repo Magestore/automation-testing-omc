@@ -7,11 +7,12 @@
  */
 namespace Magento\Webpos\Test\TestCase\Staff\EditStaff;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
-use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\Client\Locator;
 
-class WebposManageStaffMS40Test extends Injectable
+class WebposManageStaffMS49Test extends Injectable
 {
     /**
      * Webpos Staff Index page.
@@ -38,19 +39,24 @@ class WebposManageStaffMS40Test extends Injectable
         $this->staffsNew = $staffsNew;
     }
 
-    public function test(FixtureFactory $fixtureFactory)
+    /**
+     * Create Staff group test.
+     *
+     * @param Staff $location
+     * @return void
+     */
+    public function test(Staff $staff)
     {
         // Preconditions:
-        $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staffMS21']);
         $staff->persist();
+
         // Steps
         $this->staffsIndex->open();
         $this->staffsIndex->getStaffsGrid()->search(['email' => $staff->getEmail()]);
         $this->staffsIndex->getStaffsGrid()->getRowByEmail($staff->getEmail())->find('.action-menu-item')->click();
         sleep(1);
-        $this->staffsNew->getStaffsForm()->setPassword('testavc123');
-        $this->staffsNew->getStaffsForm()->setConfimPassword('testavc123ds');
-        $this->staffsNew->getFormPageActionsStaff()->save();
+        $this->staffsNew->getFormPageActionsStaff()->deleteButton()->click();
+        $this->staffsNew->getModalsWrapper()->getOkButton()->click();
         sleep(1);
     }
 }

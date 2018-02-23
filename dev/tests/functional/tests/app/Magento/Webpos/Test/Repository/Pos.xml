@@ -15,5 +15,11 @@
             <field name="pos_id[from]" xsi:type="string">3</field>
             <field name="pos_id[to]" xsi:type="string">8</field>
         </dataset>
+        <dataset name="MS44Staff">
+            <field name="pos_name" xsi:type="string">Post Test %isolation%</field>
+            <field name="location_id" xsi:type="string">Store Address</field>
+            <field name="staff_id" xsi:type="string">admin admin</field>
+            <field name="status" xsi:type="string">Enabled</field>
+        </dataset>
     </repository>
 </config>
