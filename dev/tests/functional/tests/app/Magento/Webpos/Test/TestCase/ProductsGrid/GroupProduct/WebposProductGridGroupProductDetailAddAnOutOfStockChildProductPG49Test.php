@@ -59,6 +59,15 @@ class  WebposProductGridGroupProductDetailAddAnOutOfStockChildProductPG49Test ex
         $childProducts = $products[0]['product']->getAssociated()['products'];
         $this->webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-product-detail"]');
+        $this->assertTrue(
+            $this->webposIndex->getToaster()->isVisible(),
+            'Warning message is not visible.'
+        );
+        $this->assertEquals(
+            'This product is currently out of stock',
+            $this->webposIndex->getToaster()->getWarningMessage()->getText(),
+            'Out of stock message is wrong.'
+        );
 
     }
 }

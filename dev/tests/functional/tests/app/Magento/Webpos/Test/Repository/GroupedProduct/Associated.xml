@@ -23,7 +23,7 @@
                 </item>
             </field>
             <field name="products" xsi:type="array">
-                <item name="0" xsi:type="string">catalogProductSimple::out_of_stock</item>
+                <item name="0" xsi:type="string">catalogProductSimple::simple_out_of_stock</item>
                 <item name="1" xsi:type="string">catalogProductSimple::product_100_dollar</item>
             </field>
         </dataset>
