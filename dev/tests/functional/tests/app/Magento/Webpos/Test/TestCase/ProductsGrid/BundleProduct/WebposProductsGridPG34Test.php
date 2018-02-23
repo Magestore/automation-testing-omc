@@ -12,10 +12,10 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposProductsGridPG32Test
+ * Class WebposProductsGridPG34Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct
  */
-class WebposProductsGridPG32Test extends Injectable
+class WebposProductsGridPG34Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -57,6 +57,16 @@ class WebposProductsGridPG32Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
+
+        // Close popup
+        if ($this->webposIndex->getCheckoutProductDetail()->isVisible()){
+            $this->webposIndex->getCheckoutProductDetail()->getButtonCancel()->click();
+        }
+
+        // Click detail product
+        $this->webposIndex->getCheckoutProductList()->getFirstProduct()->hover();
+        $this->webposIndex->getCheckoutProductList()->getFirstProductDetailButton()->click();
+        sleep(1);
 
         return [
             'products' => $products,

@@ -22,6 +22,10 @@ class CheckoutProductDetail extends Block
 
     protected $qty = '[name^="super_group"]';
 
+    public function getModalTitle(){
+        return $this->_rootElement->find('//*[@id="popup-product-detail"]/div/div/div/div[1]/h4[@class="modal-title"]', Locator::SELECTOR_XPATH);
+    }
+
     public function selectedOneAttribute($attribute){
         $this->_rootElement->find('[class="super-attribute-select"]',Locator::SELECTOR_CSS,'select')->setValue($attribute);
     }
@@ -43,6 +47,19 @@ class CheckoutProductDetail extends Block
 	{
 		return $this->_rootElement->find('//*[@id="product-options-wrapper"]/fieldset/div/div/div/div[1]/label/span[text()="'.$name.'"]/../../input', Locator::SELECTOR_XPATH);
 	}
+
+    public function getProductPriceOfOption($productName)
+    {
+        // Bundle product
+        return $this->_rootElement->find('//*[@id="product-options-wrapper"]/fieldset/div/div/div/div/label/span[text()="'.$productName.'"]/../span[@class="price-notice"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getQtyOfOption($option)
+    {
+        // Bundle product
+        // option = 1,2,3...
+        return $this->_rootElement->find('//*[@id="product-options-wrapper"]/fieldset/div['.$option.']/div/div/div[4]/div/input', Locator::SELECTOR_XPATH);
+    }
 
     public function waitForAvailableQtyVisible(){
         return $this->waitForElementVisible('span[data-bind="text: childQty"]');
@@ -139,6 +156,11 @@ class CheckoutProductDetail extends Block
     public function getPrice()
     {
         return $this->_rootElement->find('.price');
+    }
+
+    public function getBundleProductPrice()
+    {
+        return $this->_rootElement->find('//*[@id="popup-product-detail"]//span[@class="price"]', Locator::SELECTOR_XPATH);
     }
 
     public function getProductOptionsWrap()

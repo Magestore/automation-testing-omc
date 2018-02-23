@@ -10,12 +10,13 @@ namespace Magento\Webpos\Test\TestCase\ProductsGrid\BundleProduct;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+use Magento\Webpos\Test\Constraint\ProductsGrid\BundleProduct\AssertChildProductOnProductDetail;
 
 /**
- * Class WebposProductsGridPG32Test
+ * Class WebposProductsGridPG35Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct
  */
-class WebposProductsGridPG32Test extends Injectable
+class WebposProductsGridPG35Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -23,13 +24,21 @@ class WebposProductsGridPG32Test extends Injectable
     protected $webposIndex;
 
     /**
+     * @var AssertChildProductOnProductDetail
+     */
+    protected $assertChildProductOnProductDetail;
+
+    /**
      * @param WebposIndex $webposIndex
+     * @param AssertChildProductOnProductDetail $assertChildProductOnProductDetail
      */
     public function __inject(
-        WebposIndex $webposIndex
+        WebposIndex $webposIndex,
+        AssertChildProductOnProductDetail $assertChildProductOnProductDetail
     )
     {
         $this->webposIndex = $webposIndex;
+        $this->assertChildProductOnProductDetail = $assertChildProductOnProductDetail;
     }
 
     /**
@@ -58,9 +67,26 @@ class WebposProductsGridPG32Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
+        // Close popup
+        if ($this->webposIndex->getCheckoutProductDetail()->isVisible()){
+            $this->webposIndex->getCheckoutProductDetail()->getButtonCancel()->click();
+        }
+
+        // Click detail product
+        $this->webposIndex->getCheckoutProductList()->getFirstProduct()->hover();
+        $this->webposIndex->getCheckoutProductList()->getFirstProductDetailButton()->click();
+        sleep(1);
+        $this->webposIndex->getCheckoutProductDetail()->getQtyOfOption(1)->setValue(2);
+        
+        // Assert
+        $this->assertChildProductOnProductDetail->processAssert($this->webposIndex, $products);
+
+        // Click add to cart
+        $this->webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
+        sleep(1);
+
         return [
-            'products' => $products,
-            'checkDefault' => true
+            'products' => $products
         ];
     }
 }
