@@ -45,7 +45,6 @@
                     <item name="required" xsi:type="string">Yes</item>
                     <item name="assigned_products" xsi:type="array">
                         <item name="0" xsi:type="array">
-                            <!--<item name="is_default" xsi:type="array">1</item>-->
                             <item name="search_data" xsi:type="array">
                                 <item name="name" xsi:type="string">%product_name%</item>
                             </item>
