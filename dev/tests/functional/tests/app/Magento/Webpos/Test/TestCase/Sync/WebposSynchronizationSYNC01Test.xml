@@ -1,0 +1,7 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Sync\WebposSynchronizationSYNC01Test" summary="Frontend - Web POS" ticketId="MAGETWO-34874">
+        <variation name="WebposSynchronization_SYNC01">
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Synchronization\AssertWebposSynchronizationSYNC01" />-->
+        </variation>
+    </testCase>
+</config>
