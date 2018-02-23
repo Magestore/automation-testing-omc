@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 2/13/2018
- * Time: 8:57 AM
+ * Date: 2/22/2018
+ * Time: 2:14 PM
  */
 
 namespace Magento\Webpos\Test\TestCase\ProductsGrid\BundleProduct;
@@ -12,10 +12,10 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposProductsGridPG32Test
+ * Class WebposProductsGridPG33Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct
  */
-class WebposProductsGridPG32Test extends Injectable
+class WebposProductsGridPG33Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -58,9 +58,12 @@ class WebposProductsGridPG32Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
+        // Click add to cart
+        $this->webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
+        sleep(1);
+
         return [
-            'products' => $products,
-            'checkDefault' => true
+            'products' => $products
         ];
     }
 }
