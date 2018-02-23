@@ -7,8 +7,6 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
-
-
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Customer\Test\Fixture\Address;
 use Magento\Mtf\TestCase\Injectable;

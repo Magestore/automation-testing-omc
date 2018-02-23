@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\CreateCustomer\WebposCCCreateCustomerTest" summary="Customer On Checkout Page - Create Customer test" ticketId="WEBPOS-1">
+		<variation name="WebposCCCreateCustomerTestVariation_CC03">
+			<data name="action" xsi:type="string">cancel</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\CreateCustomer\AssertNewCustomerPopupIsClosed"/>
+		</variation>
+
+		<variation name="WebposCCCreateCustomerTestVariation_CC04">
+
+			<constraint name="Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\CreateCustomer\AssertRequireMessagesAreDisplayedUnderRequiredFeilds"/>
+		</variation>
+
+		<variation name="WebposCCCreateCustomerTestVariation_CC05">
+			<data name="customer/data/firstname" xsi:type="string">John%isolation%</data>
+			<data name="customer/data/lastname" xsi:type="string">Doe%isolation%</data>
+			<data name="customer/data/email" xsi:type="string">abc</data>
+			<data name="customer/data/group_id" xsi:type="array">
+				<item name="dataset" xsi:type="string">General</item>
+			</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\CreateCustomer\AssertInvalidEmailMessageIsShown"/>
+		</variation>
+
+		<variation name="WebposCCCreateCustomerTestVariation_CC06">
+			<data name="inputExistEmail" xsi:type="boolean">true</data>
+
+			<data name="customer/data/firstname" xsi:type="string">John%isolation%</data>
+			<data name="customer/data/lastname" xsi:type="string">Doe%isolation%</data>
+			<data name="customer/data/group_id" xsi:type="array">
+				<item name="dataset" xsi:type="string">General</item>
+			</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\CreateCustomer\AssertCustomerEmailIsExistedMessageIsDisplayed"/>
+		</variation>
+
+		<variation name="WebposCCCreateCustomerTestVariation_CC07">
+			<data name="customer/data/firstname" xsi:type="string">John%isolation%</data>
+			<data name="customer/data/lastname" xsi:type="string">Doe%isolation%</data>
+			<data name="customer/data/email" xsi:type="string">JohnDoe%isolation%@example.com</data>
+			<data name="customer/data/group_id" xsi:type="array">
+				<item name="dataset" xsi:type="string">General</item>
+			</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\CreateCustomer\AssertCreateCustomerOnCheckoutPageSuccess"/>
+			<constraint name="Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\CreateCustomer\AssertCustomerIsShownOnCustomerListOnCartPage"/>
+		</variation>
+
+		<variation name="WebposCCCreateCustomerTestVariation_CC08">
+			<data name="customer/data/firstname" xsi:type="string">John%isolation%</data>
+			<data name="customer/data/lastname" xsi:type="string">Doe%isolation%</data>
+			<data name="customer/data/email" xsi:type="string">JohnDoe%isolation%@example.com</data>
+			<data name="customer/data/group_id" xsi:type="array">
+				<item name="dataset" xsi:type="string">General</item>
+			</data>
+
+			<data name="subscribeNewsletter" xsi:type="boolean">true</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\CreateCustomer\AssertCreateCustomerOnCheckoutPageSuccess"/>
+			<constraint name="Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\CreateCustomer\AssertCustomerInShowOnGridOfNewletterSubscribers"/>
+		</variation>
+
+	</testCase>
+</config>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\EditStaffOnGrid\WebposManageStaffMS39Test" summary="Check [Save] button when changing email to an exist email" ticketId="MAGETWO-1234">
+        <variation name="WebposManageStaffMS39TestVariation">
+            <data name="tag" xsi:type="string">1</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertValidationEmailExist" />
+        </variation>
+    </testCase>
+</config>

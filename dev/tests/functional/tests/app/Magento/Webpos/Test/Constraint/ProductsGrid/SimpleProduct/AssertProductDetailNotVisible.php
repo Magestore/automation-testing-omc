@@ -23,6 +23,10 @@ class AssertProductDetailNotVisible extends AbstractConstraint
      */
     public function processAssert(WebposIndex $webposIndex)
     {
+        if($webposIndex->getCheckoutProductDetail()->isVisible()){
+            $webposIndex->getCheckoutProductDetail()->getButtonCancel()->click();
+            sleep(1);
+        }
         \PHPUnit_Framework_Assert::assertFalse(
             $webposIndex->getCheckoutProductDetail()->isVisible(),
             'Product Detail Popup is not closed.'

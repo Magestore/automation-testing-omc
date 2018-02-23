@@ -80,4 +80,79 @@ class CheckoutAddCustomer extends Block
             }
         }
     }
+
+	public function getCustomerGroup()
+	{
+		return $this->_rootElement->find('//select[contains(@data-bind, "value: groupCustomer")]', Locator::SELECTOR_XPATH, 'select');
+	}
+
+	public function getSubscribeSwitchBox()
+	{
+		return $this->_rootElement->find('.subscribe-box .switch-box');
+	}
+
+	/**
+	 * @param ElementInterface $divCheckbox
+	 * @return bool|int
+	 */
+	public function isCheckboxChecked($divCheckbox)
+	{
+		$class = $divCheckbox->find('.ios-ui-select')->getAttribute('class');
+		return strpos($class, 'checked');
+	}
+
+	public function getAddBillingAddressIcon()
+	{
+		return $this->_rootElement->find('span[data-bind="click: showBillingAddress, visible: !isShowBillingSummaryForm()"]');
+	}
+
+	public function getFirstNameError()
+	{
+		return $this->_rootElement->find('#first-name-error');
+	}
+
+	public function getLastNameError()
+	{
+		return $this->_rootElement->find('#last-name-error');
+	}
+
+	public function getEmailError()
+	{
+		return $this->_rootElement->find('#email-error');
+	}
+
+	public function getCustomerGroupError()
+	{
+		return $this->_rootElement->find('#customer_group-error');
+	}
+
+	public function getShippingAddressBox()
+	{
+		return $this->_rootElement->find('div[data-bind="visible: isShowShippingSummaryForm"]');
+	}
+
+	public function getEditShippingAddressIcon()
+	{
+		return $this->_rootElement->find('a[data-bind="click: editShippingAddress"]');
+	}
+
+	public function getDeleteShippingAddressIcon()
+	{
+		return $this->_rootElement->find('a[data-bind="click: deleteShippingAddress"]');
+	}
+
+	public function getBillingAddressBox()
+	{
+		return $this->_rootElement->find('div[data-bind="visible: isShowBillingSummaryForm"]');
+	}
+
+	public function getEditBillingAddressIcon()
+	{
+		return $this->_rootElement->find('a[data-bind="click: editBillingAddress"]');
+	}
+
+	public function getDeleteBillingAddressIcon()
+	{
+		return $this->_rootElement->find('a[data-bind="click: deleteBillingAddress"]');
+	}
 }

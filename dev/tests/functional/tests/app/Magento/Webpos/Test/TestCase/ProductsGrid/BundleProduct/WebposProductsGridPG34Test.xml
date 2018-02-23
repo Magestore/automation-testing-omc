@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\ProductsGrid\BundleProduct\WebposProductsGridPG34Test" summary="Products Grid - Bundle Product" ticketId="WEBPOS-PG34">
+        <variation name="WebposProductsGridPG34Test_PG34">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">bundle_dynamic_with_three_radio_button</item>
+                    <item name="fixtureName" xsi:type="string">webposBundleProduct</item>
+                </item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\ProductsGrid\CheckGUI\AssertProductDetailVisible"/>
+            <constraint name="Magento\Webpos\Test\Constraint\ProductsGrid\BundleProduct\AssertChildProductOnProductDetail"/>
+            <constraint name="Magento\Webpos\Test\Constraint\ProductsGrid\SimpleProduct\AssertProductDetailNotVisible"/>
+        </variation>
+    </testCase>
+</config>

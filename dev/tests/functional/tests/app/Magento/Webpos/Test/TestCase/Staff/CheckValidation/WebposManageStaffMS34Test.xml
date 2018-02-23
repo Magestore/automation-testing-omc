@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\CheckValidation\WebposManageStaffMS34Test" summary="Check validate [Email address] fields" ticketId="MAGETWO-1234">
+        <variation name="WebposManageStaffMS34TestVariation">
+            <data name="staff/dataset" xsi:type="string">staffMS34</data>
+            <data name="message" xsi:type="string">Please enter a valid email address (Ex: johndoe@domain.com).</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertValidationEmailValid" />
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertValidationEmailExist" />-->
+        </variation>
+    </testCase>
+</config>

@@ -39,7 +39,7 @@ class CheckoutProductList extends Block
 
     public function getFirstProductQty()
     {
-        return $this->_rootElement->find('#block-product-list > div > div > div > div > div:nth-child(1) > div > div.product-info > label[data-bind="text: $parent.getAvailableQty(stocks, $data)"]');
+        return $this->_rootElement->find('//*[@id="block-product-list"]/div/div/div/div/div[1]/div/div[@class="product-info"]/label[@class="available_qty"]', Locator::SELECTOR_XPATH);
     }
 
     public function getFirstProductDetailButtonHover()

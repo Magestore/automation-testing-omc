@@ -46,6 +46,11 @@ class CheckoutChangeCustomer extends Block
         return $this->getFirstCustomer()->find('a');
     }
 
+	public function getFirstCustomerPhone()
+	{
+		return $this->getFirstCustomer()->find('.phone-number');
+	}
+
 	public function waitForCustomerList()
 	{
 //		sleep(1);
@@ -56,4 +61,9 @@ class CheckoutChangeCustomer extends Block
     {
         return $this->_rootElement->find('.list-customer-old a');
     }
+
+	public function getSearchBox()
+	{
+		return $this->_rootElement->find('#search-customer');
+	}
 }

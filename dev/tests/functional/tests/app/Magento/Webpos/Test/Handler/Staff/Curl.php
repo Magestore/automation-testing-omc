@@ -39,25 +39,36 @@ class Curl extends AbstractCurl implements StaffInterface
             'Retailer'   => '3'
         ],
         'status'  => [
-            'Enabled'       => '1',
-            'Disabled'      => '2'
+            'Enabled'    => '1',
+            'Disabled'   => '2'
+        ],
+        'pos_ids' => [
+            'Store POS' => '1'
+        ],
+        'location_id' => [
+            'Store Address' => '1'
+        ],
+        'role_id' => [
+            'admin' => '1'
         ]
     ];
 
     public function persist(FixtureInterface $fixture = null)
     {
         $data = $this->replaceMappingData($fixture->getData());
-
+        $data = $this->prepareCustomerGroup($data);
+        $data = $this->prepareLocation($data);
+        $data = $this->preparePOS($data);
         $url = $_ENV['app_backend_url'] . $this->saveUrl;
         $curl = new BackendDecorator(new CurlTransport(), $this->_configuration);
         $curl->write($url, $data);
         $response = $curl->read();
         $curl->close();
-//         if (!strpos($response, 'data-ui-id="messages-message-success"')) {
-//             throw new \Exception(
-//                 "Staff entity creation by curl handler was not successful! Response: $response"
-//             );
-//         }
+        if (!strpos($response, 'data-ui-id="messages-message-success"')) {
+             throw new \Exception(
+                 "Staff entity creation by curl handler was not successful! Response: $response"
+             );
+        }
 
         $data['staff_id'] = $this->getStaffId($fixture->getEmail());
         return ['staff_id' => $data['staff_id']];
@@ -82,5 +93,39 @@ class Curl extends AbstractCurl implements StaffInterface
 
         preg_match('/webpos_staff_listing_data_source.+items.+"staff_id":"(\d+)"/', $response, $match);
         return empty($match[1]) ? null : $match[1];
+    }
+
+    protected function prepareCustomerGroup(array $data)
+    {
+        foreach ($data['customer_group'] as $key => $value) {
+            if (!isset($this->mappingData['customer_group'][$value])) {
+                continue;
+            }
+            $data['customer_group'][$key] = $this->mappingData['customer_group'][$value];
+
+        }
+        return $data;
+    }
+
+    protected function prepareLocation(array $data)
+    {
+        foreach ($data['location_id'] as $key => $value) {
+            if (!isset($this->mappingData['location_id'][$value])) {
+                continue;
+            }
+            $data['location_id'][$key] = $this->mappingData['location_id'][$value];
+        }
+        return $data;
+    }
+
+    protected function preparePOS(array $data)
+    {
+        foreach ($data['pos_ids'] as $key => $value) {
+            if (!isset($this->mappingData['pos_ids'][$value])) {
+                continue;
+            }
+            $data['pos_ids'][$key] = $this->mappingData['pos_ids'][$value];
+        }
+        return $data;
     }
 }
