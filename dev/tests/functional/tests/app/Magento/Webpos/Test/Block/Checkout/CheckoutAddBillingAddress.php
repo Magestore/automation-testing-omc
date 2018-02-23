@@ -80,12 +80,12 @@ class CheckoutAddBillingAddress extends Block
 
     public function getCountryItem($name)
     {
-        return $this->_rootElement->find('//select[contains(@data-bind, "value: countryShipping")]/option[text()="' . $name . '"]', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//select[contains(@data-bind, "value: countryBilling")]/option[text()="' . $name . '"]', Locator::SELECTOR_XPATH);
     }
 
     public function getRegionInput()
     {
-        return $this->_rootElement->find('#add_shipping_region');
+        return $this->_rootElement->find('#add_billing_region');
     }
 
     public function getRegionSelect()
@@ -101,7 +101,7 @@ class CheckoutAddBillingAddress extends Block
 
     public function getRegionItem($name)
     {
-        return $this->_rootElement->find('//select[contains(@data-bind, "value: regionIdShipping")]/option[text()="' . $name . '"]', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//select[contains(@data-bind, "value: regionIdBilling")]/option[text()="' . $name . '"]', Locator::SELECTOR_XPATH);
     }
 
     public function setFieldAddress($data)
@@ -138,21 +138,16 @@ class CheckoutAddBillingAddress extends Block
                     break;
 
                 case 'country_id' :
-                    $this->_rootElement->find('#add_shipping_country_id', Locator::SELECTOR_CSS, 'select')->setValue($value);
+                    $this->_rootElement->find('#add_billing_country_id', Locator::SELECTOR_CSS, 'select')->setValue($value);
                     break;
 
                 case 'region' :
-                    $this->_rootElement->find('#add_shipping_region_id', Locator::SELECTOR_CSS, 'select')->setValue($value);
+                    $this->_rootElement->find('#add_billing_region_id', Locator::SELECTOR_CSS, 'select')->setValue($value);
                     break;
 
             }
         }
 
-    }
-
-    public function getSameBillingShippingCheckbox()
-    {
-        return $this->_rootElement->find('input[data-bind="checked: isSameBillingShipping"]', Locator::SELECTOR_CSS, 'checkbox');
     }
 
     // Feild's error messages
@@ -188,7 +183,7 @@ class CheckoutAddBillingAddress extends Block
 
     public function getCountryError()
     {
-        return $this->_rootElement->find('#add_shipping_country_id-error');
+        return $this->_rootElement->find('#add_billing_country_id-error');
     }
     // End Feild's error messages
 }
