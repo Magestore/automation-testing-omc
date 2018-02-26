@@ -10,6 +10,7 @@ namespace Magento\Webpos\Test\TestCase\Sync;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+use Magento\Customer\Test\Fixture\Customer;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
 
@@ -20,13 +21,15 @@ class WebposSync04Test extends Injectable
      */
     protected $webposIndex;
 
-    public function __prepare()
+    public function __prepare(FixtureFactory $fixtureFactory)
     {
-        // Config: use system value for all field in Tax Config
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => 'default_payment_method_all_method']
-//        )->run();
+        // Add Customer
+        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
+        $customer->persist();
+
+        return [
+            'customer' => $customer
+        ];
     }
 
     public function __inject(
@@ -40,22 +43,26 @@ class WebposSync04Test extends Injectable
      *
      * @return void
      */
-    public function test(FixtureFactory $fixtureFactory)
+    public function test(
+        FixtureFactory $fixtureFactory,
+        Customer $customer,
+        $products
+    )
     {
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => $configData]
-//        )->run();
-
         $staff = $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
+        )->run();
+
+        $products = $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
+            ['products' => $products]
         )->run();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->synchronization();
 
         sleep(2);
-        $this->webposIndex->getSyncTabRight()->buttonResetLocal()->click();
+        $this->webposIndex->getSyncTabRight()->tabErrorLogs()->click();
     }
 
     public function tearDown()
