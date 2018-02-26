@@ -12,5 +12,8 @@ use Magento\Mtf\Block\Block;
 
 class SyncTabData extends Block
 {
-
+    public function btnUpdateAll()
+    {
+        return $this->_rootElement->find('.update-all');
+    }
 }
