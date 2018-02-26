@@ -19,5 +19,23 @@
                 <item name="dataset" xsi:type="string">staffMS21</item>
             </field>
         </dataset>
+        <dataset name="MS55Staff">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">0</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">1</field>
+            <field name="staff_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">staffMS21</item>
+            </field>
+        </dataset>
+        <dataset name="MS56Staff">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string"></field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">1</field>
+            <field name="staff_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">staffMS21</item>
+            </field>
+        </dataset>
     </repository>
 </config>
