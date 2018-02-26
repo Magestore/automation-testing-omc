@@ -4,7 +4,7 @@
  * Created by PhpStorm.
  * User: ducvu
  * Date: 2/23/2018
- * Time: 3:28 PM
+ * Time: 3:57 PM
  */
 namespace Magento\Webpos\Test\TestCase\Sync;
 
@@ -13,15 +13,12 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
 
-class WebposSynchronizationSYNC01Test extends Injectable
+class WebposSync03Test extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
-    /**
-     * @var
-     */
 
     public function __prepare()
     {
@@ -43,7 +40,7 @@ class WebposSynchronizationSYNC01Test extends Injectable
      *
      * @return void
      */
-    public function test( FixtureFactory $fixtureFactory)
+    public function test(FixtureFactory $fixtureFactory)
     {
 //        $this->objectManager->getInstance()->create(
 //            'Magento\Config\Test\TestStep\SetupConfigurationStep',
@@ -54,11 +51,11 @@ class WebposSynchronizationSYNC01Test extends Injectable
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
-
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->synchronization();
 
         sleep(2);
-
+        $this->webposIndex->getSyncTabRight()->buttonResetLocal()->click();
     }
 
     public function tearDown()
@@ -68,4 +65,5 @@ class WebposSynchronizationSYNC01Test extends Injectable
 //            ['configData' => 'default_payment_method']
 //        )->run();
     }
+
 }
