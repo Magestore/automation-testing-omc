@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Test/etc/testSchema.xsd">
+    <actionGroup name="WebPOSLoginWithValidInformation">
+        <conditionalClick selector="{{WebPOSLoginSection.WebPOSLoginUsername}}" dependentSelector="{{WebPOSLoginSection.WebPOSLoginUsername}}" stepKey="enterWebPOSLoginUsername"/>
+        <fillField selector="{{WebPOSLoginSection.WebPOSLoginUsername}}" userInput="{{_ENV.MAGENTO_ADMIN_USERNAME}}" stepKey="enterWebPOSLoginUsername"/>
+        <fillField selector="{{WebPOSLoginSection.WebPOSLoginPassword}}" userInput="{{_ENV.MAGENTO_ADMIN_PASSWORD}}" stepKey="enterWebPOSLoginPassword"/>
+        <click selector="{{WebPOSLoginSection.WebPOSLoginButton}}" stepKey="clickWebPOSLoginButton"/>
+        <waitForElementVisible selector="{{WebPOSMsWebposSection.WebPOSFirstScreen}}" time="90" stepKey="waitForWebPOSFirstScreenVisible"/>
+        <waitForElementNotVisible selector="{{WebPOSMsWebposSection.WebPOSFirstScreen}}" time="90" stepKey="waitForWebPOSFirstScreenNotVisible"/>
+        <wait time="2" stepKey="waitForCheckoutProductListIn2Seconds"/>
+        <waitForElementNotVisible selector="{{WebPOSCheckoutProductListSection.WebPOSProductListToLoad}}" time="90" stepKey="waitForWebPOSProductListToLoadNotVisible"/>
+    </actionGroup>
+    <actionGroup name="WebPOSLoginWithInValidInformation">
+        <fillField selector="{{WebPOSLoginSection.WebPOSLoginUsername}}" userInput="{{WebPOSLoginInValidInformation.username}}" stepKey="enterWebPOSLoginUsername"/>
+        <fillField selector="{{WebPOSLoginSection.WebPOSLoginPassword}}" userInput="{{WebPOSLoginInValidInformation.password}}" stepKey="enterWebPOSLoginPassword"/>
+        <click selector="{{WebPOSLoginSection.WebPOSLoginButton}}" stepKey="clickWebPOSLoginButton"/>
+    </actionGroup>
+</config>

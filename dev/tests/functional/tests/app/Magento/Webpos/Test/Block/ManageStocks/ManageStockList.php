@@ -39,4 +39,19 @@ class ManageStockList extends Block
     {
         return $this->getProductQtyInput($productName)->getValue();
     }
+
+    public function getInStockSwitchByProduct($productName)
+    {
+        return $this->getProductRow($productName)->find('.ios-ui-select');
+    }
+
+    public function getUpdateButtonByProduct($productName)
+    {
+        return $this->getProductRow($productName)->find('.update');
+    }
+
+    public function getUpdateSuccessByProduct($productName)
+    {
+        return $this->getProductRow($productName)->find('.icon-iconPOS-success');
+    }
 }

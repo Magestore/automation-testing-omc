@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Setting\Login\WebPOSLoginUnsuccessfullyTest" summary="Open WebPOS Checkout In Backend Name" ticketId="MAGETWO-34874">
+        <variation name="WebPOSLoginWithoutAccountAndPasswordTestVariation_SET26">
+            <data name="username" xsi:type="string"></data>
+            <data name="password" xsi:type="string"></data>
+            <data name="message" xsi:type="string">This is a required field.</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Setting\Login\AssertWebPOSLoginWithoutAccountAndPassword"/>
+        </variation>
+
+        <variation name="WebPOSLoginWithIncorrectUsernameAndPasswordTestVariation_SET27">
+            <data name="username" xsi:type="string">admin123</data>
+            <data name="password" xsi:type="string">admin15196541</data>
+            <data name="message" xsi:type="string">Your login information is wrong!</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Setting\Login\AssertWebPOSLoginWithIncorrectUsernameAndPassword"/>
+        </variation>
+
+        <variation name="WebPOSLoginWithCorrectUsernameAndWrongPasswordTestVariation_SET28">
+            <data name="username" xsi:type="string">admin</data>
+            <data name="password" xsi:type="string">admin5623562</data>
+            <data name="message" xsi:type="string">Your login information is wrong!</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Setting\Login\AssertWebPOSLoginWithCorrectUsernameAndWrongPassword"/>
+        </variation>
+    </testCase>
+</config>

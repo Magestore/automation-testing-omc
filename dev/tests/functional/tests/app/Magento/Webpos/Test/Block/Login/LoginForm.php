@@ -13,6 +13,10 @@ use Magento\Mtf\Client\Locator;
 
 class LoginForm extends Form
 {
+    public function waitForLoginForm()
+    {
+        $this->waitForElementVisible('#webpos-login');
+    }
 	public function getUsernameField()
 	{
 		return $this->_rootElement->find('#username');

@@ -117,4 +117,9 @@ class CheckoutProductList extends Block
     {
         return $this->_rootElement->find('//*[@id="productPager"]/ul/li/span[@class="pager"]', Locator::SELECTOR_XPATH);
     }
+
+    public function getProductNameSearch($productName)
+    {
+        return $this->_rootElement->find('//*[@id="product1"]/div[2]/h3[text()='.$productName.']', Locator::SELECTOR_XPATH);
+    }
 }

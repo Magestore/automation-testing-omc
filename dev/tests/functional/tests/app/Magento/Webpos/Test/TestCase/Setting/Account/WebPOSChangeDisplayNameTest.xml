@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Setting\Account\WebPOSChangeDisplayNameTest" summary="Customer On Checkout Page - Check GUI test" ticketId="WEBPOS-1">
+        <variation name="WebPOSChangeDisplayNameUnsuccessfullyTestVariation_SET03">
+            <data name="displayName" xsi:type="string">Magestore WebPOS</data>
+            <data name="currentPassword" xsi:type="string">admin1234</data>
+            <data name="errorMessage" xsi:type="string">Old password is incorrect!</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Setting\Account\AssertWebPOSChangeDisplayNameUnsuccessfully"/>
+        </variation>
+
+        <variation name="WebPOSChangeDisplayNameUnsuccessfullyTestVariation_SET04">
+            <data name="displayName" xsi:type="string">Magestore WebPOS</data>
+            <data name="successMessage" xsi:type="string">Your account is saved successfully!</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Setting\Account\AssertWebPOSChangeDisplayNameSuccessfully"/>
+        </variation>
+    </testCase>
+</config>
