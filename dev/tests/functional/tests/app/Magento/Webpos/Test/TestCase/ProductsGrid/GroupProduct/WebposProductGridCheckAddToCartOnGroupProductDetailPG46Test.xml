@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct\WebposProductGridCheckAddToCartOnGroupProductDetailPG46Test" summary="Products Grid - Group Product" ticketId="WEBPOS-PG46">
+        <variation name="WebposProductGridCheckAddToCartOnGroupProductDetailPG46TestVariation1">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="fixtureName" xsi:type="string">groupedProduct</item>
+                    <item name="product" xsi:type="string">withSimpleProducts_without_qty_and_1_product_add_to_cart</item>
+                </item>
+            </data>
+        </variation>
+    </testCase>
+</config>

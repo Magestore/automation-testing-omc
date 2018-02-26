@@ -31,7 +31,18 @@ class Curl extends AbstractCurl implements PosInterface
      *
      * @var array
      */
-    protected $mappingData = [];
+    protected $mappingData = [
+        'staff_id' => [
+            'admin admin' => '1'
+        ],
+        'status' => [
+            'Enabled' => '1',
+            'Disabled' => '2'
+        ],
+        'location_id' => [
+            'Store Address' => '1'
+        ]
+    ];
 
     public function persist(FixtureInterface $fixture = null)
     {
