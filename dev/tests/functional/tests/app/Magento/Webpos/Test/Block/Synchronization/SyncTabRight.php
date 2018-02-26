@@ -15,16 +15,16 @@ class SyncTabRight extends Block
 {
     public function tabErrorLogs()
     {
-        $this->_rootElement->find('//*[@id="block-webpos-settings-synchronization"]/div/div[1]/div/div/ul/li[2]/a', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//div/div/ul/li[2]/a', Locator::SELECTOR_XPATH);
     }
 
     public function tabSyncData()
     {
-        $this->_rootElement->find('//*[@id="block-webpos-settings-synchronization"]/div/div[1]/div/div/ul/li[1]/a', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//div/div/ul/li[1]/a', Locator::SELECTOR_XPATH);
     }
 
     public function buttonResetLocal()
     {
-        $this->_rootElement->find('.btn-reset-db');
+        return $this->_rootElement->find('.btn-reset-db');
     }
 }
