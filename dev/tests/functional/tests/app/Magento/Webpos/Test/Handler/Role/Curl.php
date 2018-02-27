@@ -34,7 +34,11 @@ class Curl extends AbstractCurl implements RoleInterface
     public function persist(FixtureInterface $fixture = null)
     {
         $data = $this->replaceMappingData($fixture->getData());
-
+        if(isset($data['staff_id']))
+        {
+            $data['role_staff'] = $data['staff_id'];
+            unset($data['staff_id']);
+        }
         $url = $_ENV['app_backend_url'] . $this->saveUrl;
         $curl = new BackendDecorator(new CurlTransport(), $this->_configuration);
         $curl->write($url, $data);

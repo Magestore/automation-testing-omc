@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Staff\EditStaffOnGrid\WebposManageStaffMS41Test" summary="Check [Save] button when changing password" ticketId="MAGETWO-1234">
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\EditStaff\WebposManageStaffMS41Test" summary="Check [Save] button when changing password" ticketId="MAGETWO-1234">
         <variation name="WebposManageStaffMS41TestVariation">
             <data name="tag" xsi:type="string">2</data>
             <data name="message/2" xsi:type="string">Please enter 7 or more characters, using both numeric and alphabetic.</data>

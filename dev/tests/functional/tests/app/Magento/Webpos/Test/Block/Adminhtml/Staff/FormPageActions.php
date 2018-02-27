@@ -124,6 +124,13 @@ class FormPageActions extends PageActions
         $this->_rootElement->find($this->deleteButton)->click();
     }
 
+    public function deleteButton()
+    {
+        $this->waitForElementNotVisible($this->spinner);
+        $this->waitForElementNotVisible($this->loader, Locator::SELECTOR_XPATH);
+        $this->waitForElementNotVisible($this->loaderOld, Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('#delete');
+       }
     /**
      * Check 'Delete' button availability.
      *
