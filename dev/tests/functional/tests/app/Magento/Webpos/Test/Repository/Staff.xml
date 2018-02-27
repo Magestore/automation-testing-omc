@@ -28,5 +28,101 @@
             <field name="password_confirmation" xsi:type="string">admin1234</field>
             <field name="email" xsi:type="string">test@trueplus.vn</field>
         </dataset>
+        <dataset name="staffWithRequiredFileds">
+            <field name="username" xsi:type="string">test%isolation%</field>
+            <field name="password" xsi:type="string">test12345</field>
+            <field name="password_confirmation" xsi:type="string">test12345</field>
+            <field name="display_name" xsi:type="string">Test Automation %isolation%</field>
+            <field name="email" xsi:type="string">test%isolation%@trueplus.vn</field>
+            <field name="customer_group" xsi:type="string">All groups</field>
+            <field name="location_id" xsi:type="string">Store Address</field>
+            <field name="role_id" xsi:type="string">admin</field>
+            <field name="status" xsi:type="string">Enabled</field>
+            <field name="pos_ids" xsi:type="string">Store POS</field>
+        </dataset>
+        <dataset name="staffMS31">
+            <field name="username" xsi:type="string">test%isolation%</field>
+            <field name="password" xsi:type="string">test12345</field>
+            <field name="password_confirmation" xsi:type="string">test132325</field>
+            <field name="display_name" xsi:type="string">Test Automation %isolation%</field>
+            <field name="email" xsi:type="string">test%isolation%@trueplus.vn</field>
+            <field name="pin" xsi:type="string">1209</field>
+            <field name="customer_group" xsi:type="string">All groups</field>
+            <field name="location_id" xsi:type="string">Store Address</field>
+            <field name="role_id" xsi:type="string">admin</field>
+            <field name="status" xsi:type="string">Enabled</field>
+            <field name="pos_ids" xsi:type="string">Store POS</field>
+        </dataset>
+        <dataset name="staffMS32">
+            <field name="username" xsi:type="string">test%isolation%</field>
+            <field name="password" xsi:type="string">test12</field>
+            <field name="password_confirmation" xsi:type="string">test12</field>
+            <field name="display_name" xsi:type="string">Test Automation %isolation%</field>
+            <field name="email" xsi:type="string">test%isolation%@trueplus.vn</field>
+            <field name="pin" xsi:type="string">1209</field>
+            <field name="customer_group" xsi:type="string">All groups</field>
+            <field name="location_id" xsi:type="string">Store Address</field>
+            <field name="role_id" xsi:type="string">admin</field>
+            <field name="status" xsi:type="string">Enabled</field>
+            <field name="pos_ids" xsi:type="string">Store POS</field>
+        </dataset>
+        <dataset name="staffMS33Numberic">
+            <field name="username" xsi:type="string">test%isolation%</field>
+            <field name="password" xsi:type="string">12345678</field>
+            <field name="password_confirmation" xsi:type="string">12345678</field>
+            <field name="display_name" xsi:type="string">Test Automation %isolation%</field>
+            <field name="email" xsi:type="string">test%isolation%@trueplus.vn</field>
+            <field name="pin" xsi:type="string">1209</field>
+            <field name="customer_group" xsi:type="string">All groups</field>
+            <field name="location_id" xsi:type="string">Store Address</field>
+            <field name="role_id" xsi:type="string">admin</field>
+            <field name="status" xsi:type="string">Enabled</field>
+            <field name="pos_ids" xsi:type="string">Store POS</field>
+        </dataset>
+        <dataset name="staffMS33Character">
+            <field name="username" xsi:type="string">test%isolation%</field>
+            <field name="password" xsi:type="string">abcdefgh</field>
+            <field name="password_confirmation" xsi:type="string">abcdefgh</field>
+            <field name="display_name" xsi:type="string">Test Automation %isolation%</field>
+            <field name="email" xsi:type="string">test%isolation%@trueplus.vn</field>
+            <field name="pin" xsi:type="string">1209</field>
+            <field name="customer_group" xsi:type="string">All groups</field>
+            <field name="location_id" xsi:type="string">Store Address</field>
+            <field name="role_id" xsi:type="string">admin</field>
+            <field name="status" xsi:type="string">Enabled</field>
+            <field name="pos_ids" xsi:type="string">Store POS</field>
+        </dataset>
+        <dataset name="staffMS34">
+            <field name="username" xsi:type="string">test%isolation%</field>
+            <field name="password" xsi:type="string">test1234</field>
+            <field name="password_confirmation" xsi:type="string">test1234</field>
+            <field name="display_name" xsi:type="string">Test Automation %isolation%</field>
+            <field name="email" xsi:type="string">abc</field>
+            <field name="pin" xsi:type="string">1209</field>
+            <field name="customer_group" xsi:type="string">All groups</field>
+            <field name="location_id" xsi:type="string">Store Address</field>
+            <field name="role_id" xsi:type="string">admin</field>
+            <field name="status" xsi:type="string">Enabled</field>
+            <field name="pos_ids" xsi:type="string">Store POS</field>
+        </dataset>
+        <dataset name="staffMS21">
+            <field name="username" xsi:type="string">test%isolation%</field>
+            <field name="password" xsi:type="string">test12345</field>
+            <field name="password_confirmation" xsi:type="string">test12345</field>
+            <field name="display_name" xsi:type="string">Test Automation %isolation%</field>
+            <field name="email" xsi:type="string">test%isolation%@trueplus.vn</field>
+            <field name="pin" xsi:type="string">1209</field>
+            <field name="customer_group" xsi:type="array">
+                <item name="0" xsi:type="string">All groups</item>
+            </field>
+            <field name="location_id" xsi:type="array">
+                <item name="0" xsi:type="string">Store Address</item>
+            </field>
+            <field name="role_id" xsi:type="string">admin</field>
+            <field name="status" xsi:type="string">Enabled</field>
+            <field name="pos_ids" xsi:type="array">
+                <item name="0" xsi:type="string">Store POS</item>
+            </field>
+        </dataset>
     </repository>
 </config>

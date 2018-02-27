@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\EditStaff\WebposManageStaffMS36Test" summary="Check GUI Edit staff page" ticketId="MAGETWO-1234">
+        <variation name="WebposManageStaffMS36TestVariation">
+            <data name="staff/dataset" xsi:type="string">staffMS21</data>
+            <data name="idButtons" xsi:type="string">back, reset, saveandcontinue, save, delete</data>
+            <data name="idFields" xsi:type="string">page_username, page_password, page_password_confirmation, page_display_name, page_email, page_pin, page_customer_group, page_location_id, page_role_id, page_status, page_pos_ids</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertGUIButtonAction" />
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertGUIContainFields" />
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertStaffContinueEditAfterCreateStaff" />
+        </variation>
+    </testCase>
+</config>

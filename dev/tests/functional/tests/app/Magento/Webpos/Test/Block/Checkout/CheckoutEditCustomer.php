@@ -44,10 +44,20 @@ class CheckoutEditCustomer extends Block
 		return $this->_rootElement->find('a[data-bind="click: editShippingPreview"]');
 	}
 
+	public function getDeleteShippingAddressIcon()
+    {
+        return $this->_rootElement->find('a[data-bind="click: deleteShippingPreview"]');
+    }
+
 	public function getEditBillingAddressIcon()
 	{
 		return $this->_rootElement->find('a[data-bind="click: editBillingPreview"]');
 	}
+
+	public function getDeleteBillingAddressIcon()
+    {
+        return $this->_rootElement->find('a[data-bind="click: deleteBillingPreview"]');
+    }
 
 	public function clickShippingAddressSelect()
 	{
@@ -79,4 +89,67 @@ class CheckoutEditCustomer extends Block
 	{
 	    $this->_rootElement->find('#billing-checkout', Locator::SELECTOR_CSS,'select')->setValue($text);
 	}
+
+	// Shipping Info
+	public function getShippingAddressBox()
+	{
+		return $this->_rootElement->find('.shipping-address .info-address-edit');
+	}
+
+	public function getShippingName()
+	{
+		return $this->_rootElement->find('.shipping-address .info-address-edit .customer-name');
+	}
+
+	public function getShippingAddress()
+	{
+		return $this->_rootElement->find('.shipping-address .info-address-edit .customer-address');
+	}
+
+	public function getShippingPhone()
+	{
+		return $this->_rootElement->find('.shipping-address .info-address-edit .customer-phone');
+	}
+	// End Shipping Info
+
+	// Billing Info
+	public function getBillingAddressBox()
+	{
+		return $this->_rootElement->find('.billing-address .info-address-edit');
+	}
+
+	public function getBillingName()
+	{
+		return $this->_rootElement->find('.billing-address .info-address-edit .customer-name');
+	}
+
+	public function getBillingAddress()
+	{
+		return $this->_rootElement->find('.billing-address .info-address-edit .customer-address');
+	}
+
+	public function getBillingPhone()
+	{
+		return $this->_rootElement->find('.billing-address .info-address-edit .customer-phone');
+	}
+	// End Billing Info
+    public function getCustomerGroup()
+    {
+        return $this->_rootElement->find('[name="customer_group"]');
+    }
+
+    public function getShippingAddressList()
+    {
+        return $this->_rootElement->find('select[name="shipping_address"]', Locator::SELECTOR_CSS, 'select');
+    }
+
+    public function getBillingAddressList()
+    {
+        return $this->_rootElement->find('select[name="billing_address"]', Locator::SELECTOR_CSS, 'select');
+    }
+
+    public function getAddAddressButton()
+    {
+        return $this->_rootElement->find('.btn-add-address');
+    }
 }

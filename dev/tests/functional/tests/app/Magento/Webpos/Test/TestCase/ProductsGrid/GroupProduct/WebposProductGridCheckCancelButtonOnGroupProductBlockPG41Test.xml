@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct\WebposProductGridCheckCancelButtonOnGroupProductBlockPG41Test" summary="Products Grid - Group Product" ticketId="WEBPOS-PG41">
+        <variation name="WebposProductGridCheckCancelButtonOnGroupProductBlockPG41TestVariation1">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="fixtureName" xsi:type="string">groupedProduct</item>
+                    <item name="product" xsi:type="string">three_simple_products</item>
+                </item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\ProductsGrid\GroupedProduct\AssertGroupedProductPopupAvailable"/>
+        </variation>
+    </testCase>
+</config>

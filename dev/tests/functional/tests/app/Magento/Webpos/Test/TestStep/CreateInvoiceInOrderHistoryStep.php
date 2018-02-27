@@ -98,6 +98,7 @@ class CreateInvoiceInOrderHistoryStep implements TestStepInterface
 			} elseif (strcmp($this->confirmAction, 'ok') == 0) {
 				$this->webposIndex->getModal()->getOkButton()->click();
 			}
+			sleep(1);
 		}
 	}
 }

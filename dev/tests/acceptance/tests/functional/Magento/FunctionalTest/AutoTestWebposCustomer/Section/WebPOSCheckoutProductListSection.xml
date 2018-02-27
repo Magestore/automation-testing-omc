@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Page/etc/SectionObject.xsd">
+    <!--Begin WebPOS Checkout Product List Section-->
+    <section name="WebPOSCheckoutProductListSection">
+        <element name="searchProduct" type="input" selector="#search-header-product"/>
+        <element name="iconSearchProduct" type="wysiwyg" selector="#product-list-wrapper span.icon-iconPOS-search"/>
+        <element name="WebPOSProductListToLoad" type="wysiwyg" selector="#product-list-overlay > span.product-loader"/>
+    </section>
+    <!--End WebPOS Checkout Product List Section-->
+    <!--Begin WebPOS Cart Section-->
+    <section name="WebPOSCartSection">
+        <element name="searchProduct" type="input" selector="#search-header-product"/>
+    </section>
+    <!--End WebPOS Cart Section-->
+</config>

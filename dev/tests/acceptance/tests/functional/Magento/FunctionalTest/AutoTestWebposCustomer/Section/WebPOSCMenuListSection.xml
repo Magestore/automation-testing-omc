@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Page/etc/SectionObject.xsd">
+    <section name="WebPOSCMenuListSection">
+        <element name="customerFirstName" type="button" selector="#customer-edit-form .panel-body .{{var1}}" parameterized="true"/>
+        <!--Begin ORDERS-->
+        <element name="WebPOSMenuCheckout" type="wysiwyg" selector="//*[@id='checkout']"/>
+        <element name="WebPOSMenuOrdersHistory" type="wysiwyg" selector="//*[@id='orders_history']"/>
+        <element name="WebPOSMenuOnHoldOrders" type="wysiwyg" selector="//*[@id='on_hold_orders']"/>
+        <!--End ORDERS-->
+        <!--Begin CUSTOMER-->
+        <element name="WebPOSMenuCustomer" type="wysiwyg" selector="//*[@id='customer_list']"/>
+        <!--End CUSTOMER-->
+        <!--Begin INVENTORY-->
+        <element name="WebPOSMenuManageStocks" type="wysiwyg" selector="//*[@id='manage_stock']"/>
+        <!--End INVENTORY-->
+        <!--Begin SETTINGS-->
+        <element name="WebPOSMenuGeneral" type="wysiwyg" selector="//*[@id='general']"/>
+        <element name="WebPOSMenuSynchronization" type="wysiwyg" selector="//*[@id='synchronization']"/>
+        <element name="WebPOSMenuAccount" type="wysiwyg" selector="//*[@id='account']"/>
+        <!--End SETTINGS-->
+    </section>
+</config>

@@ -175,4 +175,14 @@ class OrderHistoryOrderViewContent extends Block
         preg_match('/Shipped: (\d+)/', $qtyColumn, $match);
         return $match[1];
     }
+
+    public function getNameProductOrderTo($i)
+    {
+        return $this->_rootElement->find('//div/div[3]/div/div/div/table/tbody/tr['.$i.']', Locator::SELECTOR_XPATH)->find('.product-name')->getText();
+    }
+
+    public function getPriceProductByOrderTo($i)
+    {
+        return floatval(str_replace('$','',$this->_rootElement->find('//div/div[3]/div/div/div/table/tbody/tr['.$i.']/td[3]', Locator::SELECTOR_XPATH)->getText()));
+    }
 }

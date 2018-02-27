@@ -1,0 +1,166 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\Bundle\Test\Repository\BundleProduct\BundleSelection">
+        <dataset name="dynamic_type_radio">
+            <field name="bundle_options" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="title" xsi:type="string">Radio Option</item>
+                    <item name="type" xsi:type="string">Radio Buttons</item>
+                    <item name="frontend_type" xsi:type="string">Radio Buttons</item>
+                    <item name="required" xsi:type="string">Yes</item>
+                    <item name="assigned_products" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="search_data" xsi:type="array">
+                                <item name="name" xsi:type="string">%product_name%</item>
+                            </item>
+                            <item name="data" xsi:type="array">
+                                <item name="selection_qty" xsi:type="string">1</item>
+                            </item>
+                        </item>
+                        <item name="1" xsi:type="array">
+                            <item name="search_data" xsi:type="array">
+                                <item name="name" xsi:type="string">%product_name%</item>
+                            </item>
+                            <item name="data" xsi:type="array">
+                                <item name="selection_qty" xsi:type="string">1</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </field>
+            <field name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="0" xsi:type="string">catalogProductSimple::product_100_dollar</item>
+                    <item name="1" xsi:type="string">catalogProductSimple::default</item>
+                </item>
+            </field>
+        </dataset>
+
+        <dataset name="three_radio_dynamic">
+            <field name="bundle_options" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="title" xsi:type="string">Radio Button Option 1</item>
+                    <item name="type" xsi:type="string">Radio Buttons</item>
+                    <item name="frontend_type" xsi:type="string">Radio Buttons</item>
+                    <item name="required" xsi:type="string">Yes</item>
+                    <item name="assigned_products" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="search_data" xsi:type="array">
+                                <item name="name" xsi:type="string">%product_name%</item>
+                            </item>
+                            <item name="data" xsi:type="array">
+                                <item name="selection_qty" xsi:type="string">1</item>
+                            </item>
+                        </item>
+                        <item name="1" xsi:type="array">
+                            <item name="search_data" xsi:type="array">
+                                <item name="name" xsi:type="string">%product_name%</item>
+                            </item>
+                            <item name="data" xsi:type="array">
+                                <item name="selection_qty" xsi:type="string">1</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+                <item name="1" xsi:type="array">
+                    <item name="title" xsi:type="string">Radio Button Option 2</item>
+                    <item name="type" xsi:type="string">Radio Buttons</item>
+                    <item name="frontend_type" xsi:type="string">Radio Buttons</item>
+                    <item name="required" xsi:type="string">Yes</item>
+                    <item name="assigned_products" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="search_data" xsi:type="array">
+                                <item name="name" xsi:type="string">%product_name%</item>
+                            </item>
+                            <item name="data" xsi:type="array">
+                                <item name="selection_qty" xsi:type="string">1</item>
+                            </item>
+                        </item>
+                        <item name="1" xsi:type="array">
+                            <item name="search_data" xsi:type="array">
+                                <item name="name" xsi:type="string">%product_name%</item>
+                            </item>
+                            <item name="data" xsi:type="array">
+                                <item name="selection_qty" xsi:type="string">1</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+                <item name="2" xsi:type="array">
+                    <item name="title" xsi:type="string">Radio Button Option 3</item>
+                    <item name="type" xsi:type="string">Radio Buttons</item>
+                    <item name="frontend_type" xsi:type="string">Radio Buttons</item>
+                    <item name="required" xsi:type="string">Yes</item>
+                    <item name="assigned_products" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="search_data" xsi:type="array">
+                                <item name="name" xsi:type="string">%product_name%</item>
+                            </item>
+                            <item name="data" xsi:type="array">
+                                <item name="selection_qty" xsi:type="string">1</item>
+                            </item>
+                        </item>
+                        <item name="1" xsi:type="array">
+                            <item name="search_data" xsi:type="array">
+                                <item name="name" xsi:type="string">%product_name%</item>
+                            </item>
+                            <item name="data" xsi:type="array">
+                                <item name="selection_qty" xsi:type="string">1</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </field>
+            <field name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="0" xsi:type="string">catalogProductSimple::default</item>
+                    <item name="1" xsi:type="string">catalogProductSimple::product_100_dollar</item>
+                </item>
+                <item name="1" xsi:type="array">
+                    <item name="0" xsi:type="string">catalogProductSimple::default</item>
+                    <item name="1" xsi:type="string">catalogProductSimple::product_100_dollar</item>
+                </item>
+                <item name="2" xsi:type="array">
+                    <item name="0" xsi:type="string">catalogProductSimple::default</item>
+                    <item name="1" xsi:type="string">catalogProductSimple::product_100_dollar</item>
+                </item>
+            </field>
+        </dataset>
+
+        <dataset name="dynamic_type_radio_with_special_price">
+            <field name="bundle_options" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="title" xsi:type="string">Radio Option</item>
+                    <item name="type" xsi:type="string">Radio Buttons</item>
+                    <item name="frontend_type" xsi:type="string">Radio Buttons</item>
+                    <item name="required" xsi:type="string">Yes</item>
+                    <item name="assigned_products" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="search_data" xsi:type="array">
+                                <item name="name" xsi:type="string">%product_name%</item>
+                            </item>
+                            <item name="data" xsi:type="array">
+                                <item name="selection_qty" xsi:type="string">1</item>
+                            </item>
+                        </item>
+                        <item name="1" xsi:type="array">
+                            <item name="search_data" xsi:type="array">
+                                <item name="name" xsi:type="string">%product_name%</item>
+                            </item>
+                            <item name="data" xsi:type="array">
+                                <item name="selection_qty" xsi:type="string">1</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </field>
+            <field name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="0" xsi:type="string">catalogProductSimple::product_100_dollar_with_special_price</item>
+                    <item name="1" xsi:type="string">catalogProductSimple::product_100_dollar</item>
+                </item>
+            </field>
+        </dataset>
+
+    </repository>
+</config>

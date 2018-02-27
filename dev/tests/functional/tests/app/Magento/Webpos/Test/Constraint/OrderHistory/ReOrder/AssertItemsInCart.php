@@ -13,7 +13,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AssertItemsInCart
- * @package Magento\Webpos\Test\Constraint\OrderHistory\ReOrder
+ * @package Magento\Webpos\Test\Constraint\SectionOrderHistory\ReOrder
  */
 class AssertItemsInCart extends AbstractConstraint
 {

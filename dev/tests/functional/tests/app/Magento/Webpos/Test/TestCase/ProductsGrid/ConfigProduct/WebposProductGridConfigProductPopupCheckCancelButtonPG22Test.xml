@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\ProductsGrid\ConfigProduct\WebposProductGridConfigProductPopupCheckCancelButtonPG22Test" summary="Products Grid - Config Product" ticketId="WEBPOS-PG22">
+        <variation name="WebposProductGridConfigProductPopupCheckCancelButtonPG22TestVariation1">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="fixtureName" xsi:type="string">configurableProduct</item>
+                    <item name="product" xsi:type="string">configurable_product_with_only_two_options</item>
+                </item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\ProductsGrid\ConfigProduct\AssertConfigProductPopupAvailable"/>
+        </variation>
+    </testCase>
+</config>

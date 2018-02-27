@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct\WebposProductsGridPG18Test" summary="Products Grid - Simple Product" ticketId="WEBPOS-PG18">
+        <variation name="WebposProductsGridPG18Test_PG18">
+            <data name="description" xsi:type="string">Products Grid check GUI Cancel</data>
+            <constraint name="Magento\Webpos\Test\Constraint\ProductsGrid\SimpleProduct\AssertProductDetailNotVisible"/>
+        </variation>
+    </testCase>
+</config>

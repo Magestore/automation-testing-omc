@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\SearchAndFilterOrder\WebposOrderHistorySearchWithOrderIdOH128Test" summary="OrdersHistory-Search" ticketId="WEBPOSORDERSEARCH-OH128">
+        <variation name="WebposOrderHistorySearchWithOrderIdOH128TestVariation1">
+            <data name="description" xsi:type="string">search with no result</data>
+        </variation>
+    </testCase>
+</config>

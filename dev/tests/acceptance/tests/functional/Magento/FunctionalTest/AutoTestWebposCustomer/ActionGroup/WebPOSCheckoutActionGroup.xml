@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Test/etc/testSchema.xsd">
+    <!--Begin WebPOS Checkout & Add Products To Cart-->
+    <actionGroup name="WebPOSAddProductToCartActionGroup">
+        <fillField selector="{{WebPOSCheckoutProductListSection.searchProduct}}" userInput="{{WebPOSSimpleProduct.product1Name}}" stepKey="enterWebPOSProductName1"/>
+        <click selector="{{WebPOSCheckoutProductListSection.iconSearchProduct}}" stepKey="clickWebPOSSearchProductIcon1"/>
+        <waitForElementNotVisible selector="{{WebPOSCheckoutProductListSection.WebPOSProductListToLoad}}" time="90" stepKey="waitForWebPOSProductListToLoadNotVisible1"/>
+        <waitForElementNotVisible selector="{{WebPOSCartSection.CartLoader}}" time="90" stepKey="waitForWebPOSCartLoaderNotVisible1"/>
+        <fillField selector="{{WebPOSCheckoutProductListSection.searchProduct}}" userInput="{{WebPOSSimpleProduct.product2Name}}" stepKey="enterWebPOSProductName2"/>
+        <click selector="{{WebPOSCheckoutProductListSection.iconSearchProduct}}" stepKey="clickWebPOSSearchProductIcon2"/>
+        <waitForElementNotVisible selector="{{WebPOSCheckoutProductListSection.WebPOSProductListToLoad}}" time="90" stepKey="waitForWebPOSProductListToLoadNotVisible2"/>
+        <waitForElementNotVisible selector="{{WebPOSCartSection.CartLoader}}" time="90" stepKey="waitForWebPOSCartLoaderNotVisible2"/>
+        </actionGroup>
+    <!--End WebPOS Checkout & Add Products To Cart-->
+
+    <!--Begin WebPOS Place Order With Cash In Method - No Send Email-->
+    <actionGroup name="WebPOSPlaceOrderWithCashInMethodActionGroup">
+        <click selector="{{WebPOSCartFooterSection.CheckoutButton}}" stepKey="clickWebPOSCheckoutButton"/>
+        <waitForElementNotVisible selector="{{WebPOSCartSection.CartLoader}}" time="90" stepKey="waitForWebPOSCartLoaderNotVisible3"/>
+        <waitForElementNotVisible selector="{{WebPOSCartSection.CheckoutLoader}}" time="90" stepKey="waitForWebPOSCheckoutLoaderNotVisible"/>
+        <click selector="{{WebPOSCheckoutPaymentMethodSection.CashInMethod}}" stepKey="selectCashInPaymentMethod"/>
+        <waitForElementNotVisible selector="{{WebPOSCartSection.CheckoutLoader}}" time="90" stepKey="waitForWebPOSCheckoutLoaderNotVisible1"/>
+        <click selector="{{WebPOSCheckoutPaymentMethodSection.placeOrderButton}}" stepKey="clickToPlaceOrderButton"/>
+        <waitForElementNotVisible selector="{{WebPOSCartSection.CheckoutLoader}}" time="90" stepKey="waitForWebPOSCheckoutLoaderNotVisible2"/>
+   </actionGroup>
+    <!--End WebPOS Place Order With Cash In Method - No Send Email-->
+
+    <!--Begin Return To Checkout Page-->
+    <actionGroup name="WebPOSReturnToCheckoutPageActionGroup">
+        <wait time="1" stepKey="waitForCheckoutSuccessPageIn1Seconds"/>
+        <click selector="{{WebPOSCheckoutSuccessSection.NewOrderButton}}" stepKey="clickNewOrderButton"/>
+        <waitForElementNotVisible selector="{{WebPOSCartSection.CartLoader}}" time="90" stepKey="waitForWebPOSCartLoaderNotVisible4"/>
+    </actionGroup>
+    <!--End Return To Checkout Page-->
+</config>

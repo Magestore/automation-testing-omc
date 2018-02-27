@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\ProductsGrid\BundleProduct\WebposProductsGridPG31Test" summary="Products Grid - Bundle Product" ticketId="WEBPOS-PG31">
+        <variation name="WebposProductsGridPG31Test_PG31">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">bundle_dynamic_with_special_price</item>
+                    <item name="fixtureName" xsi:type="string">bundleProduct</item>
+                </item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderSuccess"/>
+        </variation>
+    </testCase>
+</config>

@@ -52,8 +52,9 @@ class WebposOnHoldOrderONH21Test extends Injectable
         //Click checkout button on On-hold Orders menu
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->onHoldOrders();
-        sleep(1);
         $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
+        sleep(1);
+        $orderId = $this->webposIndex->getOnHoldOrderOrderList()->getIdFirstOrder();
         $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -70,9 +71,9 @@ class WebposOnHoldOrderONH21Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
-        //Go to On-hold orders menu
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->onHoldOrders();
-        sleep(1);
+        $dataProduct = $product->getData();
+        $dataProduct['qty'] = '1';
+        return ['orderId' => $orderId,
+            'products' => [$dataProduct]];
     }
 }

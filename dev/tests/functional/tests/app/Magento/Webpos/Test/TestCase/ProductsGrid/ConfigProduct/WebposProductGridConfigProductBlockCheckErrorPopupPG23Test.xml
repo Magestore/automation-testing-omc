@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\ProductsGrid\ConfigProduct\WebposProductGridConfigProductBlockCheckErrorPopupPG23Test" summary="Products Grid - Config Product" ticketId="WEBPOS-PG23">
+        <variation name="WebposProductGridConfigProductBlockCheckErrorPopupPG23TestVariation1">
+            <data name="description" xsi:type="string">check error popup</data>
+        </variation>
+    </testCase>
+</config>

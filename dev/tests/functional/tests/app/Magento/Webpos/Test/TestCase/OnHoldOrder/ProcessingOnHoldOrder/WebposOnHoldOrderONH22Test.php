@@ -8,7 +8,6 @@
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckOnHoldOrderEmpty;
 
 class WebposOnHoldOrderONH22Test extends Injectable
 {
@@ -16,19 +15,13 @@ class WebposOnHoldOrderONH22Test extends Injectable
      * @var WebposIndex
      */
     protected $webposIndex;
-    /**
-     * @var AssertCheckOnHoldOrderEmpty
-     */
-    protected $assertCheckEmpty;
 
     public function __inject
     (
-        WebposIndex $webposIndex,
-        AssertCheckOnHoldOrderEmpty $assertCheckEmpty
+        WebposIndex $webposIndex
     )
     {
         $this->webposIndex = $webposIndex;
-        $this->assertCheckEmpty = $assertCheckEmpty;
     }
 
     public function test($products)
@@ -62,6 +55,7 @@ class WebposOnHoldOrderONH22Test extends Injectable
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->onHoldOrders();
         sleep(1);
+        $orderId = $this->webposIndex->getOnHoldOrderOrderList()->getIdFirstOrder();
         $this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder()->click();
         $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -71,16 +65,6 @@ class WebposOnHoldOrderONH22Test extends Injectable
         //Click icon < (Back to cart)
         $this->webposIndex->getCheckoutCartHeader()->getIconBackToCart()->click();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        sleep(1);
-
-        //Assert empty order in on-hold-order
-        $this->assertCheckEmpty->processAssert($this->webposIndex);
-
-        //Back to checkout
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->checkout();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
         //Add more product to cart
@@ -94,10 +78,12 @@ class WebposOnHoldOrderONH22Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
+        $dataProduct1 = $product1->getData();
+        $dataProduct1['qty'] = '1';
+        $dataProduct2 = $product2->getData();
+        $dataProduct2['qty'] = '1';
 
-        //Go to On-hold orders menu
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->onHoldOrders();
-        sleep(1);
+        return ['orderId' => $orderId,
+            'products' => [$dataProduct1, $dataProduct2]];
     }
 }

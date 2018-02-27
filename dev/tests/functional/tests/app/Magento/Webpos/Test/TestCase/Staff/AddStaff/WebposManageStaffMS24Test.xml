@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\AddStaff\WebposManageStaffMS24Test" summary="Add Staff" ticketId="MAGETWO-1234">
+        <variation name="WebposManageStaffMS24TestVariation">
+            <data name="staff/dataset" xsi:type="string">default</data>
+            <data name="idRequireds" xsi:type="string">page_username-error, page_password-error, page_password_confirmation-error, page_display_name-error, page_email-error, page_customer_group-error, page_location_id-error</data>
+            <data name="labelRequired" xsi:type="string">This is a required field.</data>
+             <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertStaffErrorSaveMessage" />
+        </variation>
+    </testCase>
+</config>

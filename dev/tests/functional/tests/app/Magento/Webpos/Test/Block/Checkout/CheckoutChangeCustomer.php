@@ -29,14 +29,15 @@ class CheckoutChangeCustomer extends Block
 	{
 		$this->waitForCustomerList();
 		$this->_rootElement->find('#search-customer')->setValue($text);
+		$this->_rootElement->find('.icon-iconPOS-search')->click();
 		$this->waitForCustomerList();
 	}
 
 	public function getFirstCustomer()
 	{
-		$this->waitForCustomerList();
-		$this->_rootElement->click();
-		$this->waitForCustomerList();
+//		$this->waitForCustomerList();
+//		$this->_rootElement->click();
+//		$this->waitForCustomerList();
 		return $this->_rootElement->find('ul.list-customer-old > li:nth-child(1)');
 	}
 
@@ -44,6 +45,11 @@ class CheckoutChangeCustomer extends Block
     {
         return $this->getFirstCustomer()->find('a');
     }
+
+	public function getFirstCustomerPhone()
+	{
+		return $this->getFirstCustomer()->find('.phone-number');
+	}
 
 	public function waitForCustomerList()
 	{
@@ -54,5 +60,32 @@ class CheckoutChangeCustomer extends Block
     public function getCustomerResult()
     {
         return $this->_rootElement->find('.list-customer-old a');
+    }
+
+	public function getSearchBox()
+	{
+		return $this->_rootElement->find('#search-customer');
+	}
+
+	public function getCustomerNames()
+    {
+        $customerNameElements = $this->_rootElement->getElements('[data-bind="text: firstname + \' \' + lastname"]');
+        foreach ($customerNameElements as $customerNameElement)
+        {
+            $customerNames[] = $customerNameElement->getText();
+        }
+
+        return $customerNames;
+    }
+
+    public function getCustomerTelePhones()
+    {
+        $customerTelephoneElements = $this->_rootElement->getElements('.phone-number');
+        foreach ($customerTelephoneElements as $customerTelephoneElement)
+        {
+            $customerTelephones[] = $customerTelephoneElement->getText();
+        }
+
+        return $customerTelephones;
     }
 }
