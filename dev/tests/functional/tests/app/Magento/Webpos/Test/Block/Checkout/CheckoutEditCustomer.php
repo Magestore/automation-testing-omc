@@ -44,10 +44,20 @@ class CheckoutEditCustomer extends Block
 		return $this->_rootElement->find('a[data-bind="click: editShippingPreview"]');
 	}
 
+	public function getDeleteShippingAddressIcon()
+    {
+        return $this->_rootElement->find('a[data-bind="click: deleteShippingPreview"]');
+    }
+
 	public function getEditBillingAddressIcon()
 	{
 		return $this->_rootElement->find('a[data-bind="click: editBillingPreview"]');
 	}
+
+	public function getDeleteBillingAddressIcon()
+    {
+        return $this->_rootElement->find('a[data-bind="click: deleteBillingPreview"]');
+    }
 
 	public function clickShippingAddressSelect()
 	{
