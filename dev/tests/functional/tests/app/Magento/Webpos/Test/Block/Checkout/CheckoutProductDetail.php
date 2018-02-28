@@ -93,6 +93,27 @@ class CheckoutProductDetail extends Block
         }
     }
 
+    public function getGroupChildProductSpecialPrices()
+    {
+        $specialPriceElements = $this->_rootElement->getElements('.row-tier-price td');
+        foreach ($specialPriceElements as $specialPriceElement) {
+            $specialPrices[] = substr($specialPriceElement->getText(), 1);
+        }
+        return $specialPrices;
+    }
+
+    public function getGroupProductRowItem($productName)
+    {
+        $selectorTemplate = './/tr[.//strong[@class="product-item-name" and text()="%s"]]';
+        $rowItemSelector = sprintf($selectorTemplate, $productName);
+        return $this->_rootElement->find($rowItemSelector, Locator::SELECTOR_XPATH);
+    }
+
+    public function getGroupProductItemQtyMessageError($productName)
+    {
+        return $this->getGroupProductRowItem($productName)->find('//div[@class="mage-error"]', Locator::SELECTOR_XPATH);
+    }
+
     public function getSimpleProductName()
     {
         return $this->_rootElement->find('//*[@id="popup-product-detail"]/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/h3[@class="product-name"]', Locator::SELECTOR_XPATH);

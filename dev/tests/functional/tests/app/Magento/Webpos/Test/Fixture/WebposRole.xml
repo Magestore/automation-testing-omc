@@ -18,7 +18,7 @@
         <field name="display_name" is_required="0" group="general"/>
         <field name="description" is_required="0" group="general"/>
         <field name="maximum_discount_percent" is_required="0" group="general"/>
-
+        <field name="staff_id" source="Magento\Webpos\Test\Fixture\WebposRole\StaffId" repository="Magento\Webpos\Test\Repository\Staff"/>
         <field name="all" is_required="0" group="permission"/>
         <field name="resource" is_required="0" group="permission"/>
         <!--<field name="limit" is_required="0"/>-->

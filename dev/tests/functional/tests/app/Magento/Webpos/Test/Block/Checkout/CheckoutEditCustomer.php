@@ -44,10 +44,20 @@ class CheckoutEditCustomer extends Block
 		return $this->_rootElement->find('a[data-bind="click: editShippingPreview"]');
 	}
 
+	public function getDeleteShippingAddressIcon()
+    {
+        return $this->_rootElement->find('a[data-bind="click: deleteShippingPreview"]');
+    }
+
 	public function getEditBillingAddressIcon()
 	{
 		return $this->_rootElement->find('a[data-bind="click: editBillingPreview"]');
 	}
+
+	public function getDeleteBillingAddressIcon()
+    {
+        return $this->_rootElement->find('a[data-bind="click: deleteBillingPreview"]');
+    }
 
 	public function clickShippingAddressSelect()
 	{
@@ -123,4 +133,23 @@ class CheckoutEditCustomer extends Block
 		return $this->_rootElement->find('.billing-address .info-address-edit .customer-phone');
 	}
 	// End Billing Info
+    public function getCustomerGroup()
+    {
+        return $this->_rootElement->find('[name="customer_group"]');
+    }
+
+    public function getShippingAddressList()
+    {
+        return $this->_rootElement->find('select[name="shipping_address"]', Locator::SELECTOR_CSS, 'select');
+    }
+
+    public function getBillingAddressList()
+    {
+        return $this->_rootElement->find('select[name="billing_address"]', Locator::SELECTOR_CSS, 'select');
+    }
+
+    public function getAddAddressButton()
+    {
+        return $this->_rootElement->find('.btn-add-address');
+    }
 }

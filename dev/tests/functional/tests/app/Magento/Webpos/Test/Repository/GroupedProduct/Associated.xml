@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\GroupedProduct\Test\Repository\GroupedProduct\Associated">
+        <dataset name="one_product_out_of_stock">
+            <field name="assigned_products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="id" xsi:type="string">%id%</item>
+                    <item name="name" xsi:type="string">%item1_simple::getProductName%</item>
+                    <item name="position" xsi:type="string">%position%</item>
+                    <item name="qty" xsi:type="string">0</item>
+                </item>
+                <item name="1" xsi:type="array">
+                    <item name="id" xsi:type="string">%id%</item>
+                    <item name="name" xsi:type="string">%item1_simple::getProductName%</item>
+                    <item name="position" xsi:type="string">%position%</item>
+                    <item name="qty" xsi:type="string">0</item>
+                </item>
+            </field>
+            <field name="products" xsi:type="array">
+                <item name="0" xsi:type="string">catalogProductSimple::simple_out_of_stock</item>
+                <item name="1" xsi:type="string">catalogProductSimple::product_100_dollar</item>
+            </field>
+        </dataset>
+    </repository>
+</config>

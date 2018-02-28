@@ -71,6 +71,11 @@
         <block name="manageStockHeader" class="Magento\Webpos\Test\Block\ManageStocks\ManageStockHeader" locator="#manage_stock_container header" strategy="css selector"/>
         <block name="manageStockList" class="Magento\Webpos\Test\Block\ManageStocks\ManageStockList" locator="#manage_stock_container main" strategy="css selector"/>
         <!-- End Manage Stocks-->
-
+        <!-- Synchronization-->
+        <block name="SyncTabRight" class="Magento\Webpos\Test\Block\Synchronization\SyncTabRight" locator="#synchronization_container .wrap-general_container .col-right" strategy="css selector"/>
+        <block name="SyncTabLeftHeader" class="Magento\Webpos\Test\Block\Synchronization\SyncTabLeftHeader" locator="#synchronization_container .wrap-general_container .col-left header" strategy="css selector"/>
+        <block name="SyncTabData" class="Magento\Webpos\Test\Block\Synchronization\SyncTabData" locator="#synchronization_container .wrap-general_container .col-left #sync-data" strategy="css selector"/>
+        <block name="SyncErrorLogs" class="Magento\Webpos\Test\Block\Synchronization\SyncErrorLogs" locator="#synchronization_container .wrap-general_container .col-left #error-logs" strategy="css selector"/>
+        <!-- End Synchronization-->
     </page>
 </config>

@@ -13,6 +13,7 @@ namespace Magento\Webpos\Test\Block\Adminhtml\Staff\Edit;
 
 use Magento\Mtf\Block\Form;
 use Magento\Mtf\Client\Locator;
+use Magento\Webpos\Test\Fixture\Location;
 
 class StaffsForm extends Form
 {
@@ -91,6 +92,11 @@ class StaffsForm extends Form
         return $this->_rootElement->find('#page_location_id')->find('[value="'.$value.'"]')->getText();
     }
 
+    public function setLocation($nameLocation)
+    {
+        $this->_rootElement->find('#page_location_id', Locator::SELECTOR_CSS, 'multiselect')->setValue($nameLocation);
+    }
+
     public function getRow()
     {
         $value = $this->_rootElement->find('#page_role_id')->getValue();
@@ -113,6 +119,11 @@ class StaffsForm extends Form
         if($value == null)
             return '';
         return $this->_rootElement->find('#page_pos_ids')->find('[value="'.$value.'"]')->getText();
+    }
+
+    public function setPos($namePos)
+    {
+        $this->_rootElement->find('#page_pos_ids', Locator::SELECTOR_CSS, 'multiselect')->setValue($namePos);
     }
 
     public function getTextBoxMessagePassConfim()
