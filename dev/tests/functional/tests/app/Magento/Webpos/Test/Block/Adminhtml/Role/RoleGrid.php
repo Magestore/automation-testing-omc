@@ -70,5 +70,16 @@ class RoleGrid extends DataGrid
 	{
 		return $this->_rootElement->find('button[data-bind="click: save, disable: !canSave()"]');
 	}
+
+	public function getRowEditMessage()
+	{
+		return $this->_rootElement->find('.data-grid-info-panel');
+	}
 	// End Edit Row Actions
+
+	public function waitForGridLoader()
+	{
+		$this->waitForElementNotVisible($this->loader);
+		$this->getTemplateBlock()->waitLoader();
+	}
 }
