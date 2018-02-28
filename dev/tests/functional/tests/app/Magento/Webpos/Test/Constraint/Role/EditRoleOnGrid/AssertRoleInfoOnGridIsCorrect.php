@@ -19,8 +19,7 @@ class AssertRoleInfoOnGridIsCorrect extends AbstractConstraint
 	public function processAssert(WebposRoleIndex $webposRoleIndex, WebposRole $role)
 	{
 		$webposRoleIndex->getRoleGrid()->search([
-			'role_id_from' => $role->getRoleId(),
-			'role_id_to' => $role->getRoleId()
+			'display_name' => $role->getDisplayName(),
 		]);
 		\PHPUnit_Framework_Assert::assertEquals(
 			$role->getDisplayName(),
@@ -28,9 +27,14 @@ class AssertRoleInfoOnGridIsCorrect extends AbstractConstraint
 			'Display name of Role '.$role->getRoleId().' on grid is wrong'
 		);
 
+		if (empty($role->getDescription())) {
+			$descriptionText = '';
+		} else {
+			$descriptionText = $webposRoleIndex->getRoleGrid()->getColumnValue($role->getRoleId(), "Description");
+		}
 		\PHPUnit_Framework_Assert::assertEquals(
 			$role->getDescription(),
-			$webposRoleIndex->getRoleGrid()->getColumnValue($role->getRoleId(), "Description"),
+			$descriptionText,
 			'Description of Role '.$role->getRoleId().' on grid is wrong'
 		);
 	}
