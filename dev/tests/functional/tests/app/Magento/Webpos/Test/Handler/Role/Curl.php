@@ -34,9 +34,17 @@ class Curl extends AbstractCurl implements RoleInterface
     public function persist(FixtureInterface $fixture = null)
     {
         $data = $this->replaceMappingData($fixture->getData());
+        $data['role_staff'] = '';
         if(isset($data['staff_id']))
         {
-            $data['role_staff'] = $data['staff_id'];
+            foreach ($data['staff_id'] as $staffId) {
+                if ($data['role_staff'] == '') {
+                    $data['role_staff'] = $staffId;
+                } else {
+                    $data['role_staff'] .= '&' . $staffId;
+                }
+            }
+//            $data['role_staff'] = $data['staff_id'];
             unset($data['staff_id']);
         }
         $url = $_ENV['app_backend_url'] . $this->saveUrl;
