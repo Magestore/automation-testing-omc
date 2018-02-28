@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\EditCustomer\WebposEditCustomerCheckAddAddressButtonCC37Test" summary="Customer on checkout page" ticketId="WEBPOS-CC37">
+        <variation name="WebposEditCustomerCheckAddAddressButtonCC37TestVariation1">
+            <data name="description" xsi:type="string">Check add address button</data>
+            <data name="address/dataset" xsi:type="string">CA_address_billing</data>
+        </variation>
+    </testCase>
+</config>
