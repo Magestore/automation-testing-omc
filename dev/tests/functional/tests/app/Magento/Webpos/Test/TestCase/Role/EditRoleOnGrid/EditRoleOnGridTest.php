@@ -100,9 +100,10 @@ class EditRoleOnGridTest extends Injectable
 		return $this->fixtureFactory->createByCode('webposRole', $data);
 	}
 
-//	public function tearDown()
-//	{
-//		$this->webposRoleIndex->open();
-//		$this->webposRoleIndex->getRoleGrid()->massaction()
-//	}
+	public function tearDown()
+	{
+		$this->webposRoleIndex->open();
+
+		$this->webposRoleIndex->getRoleGrid()->massaction([['id' => $this->role->getRoleId()]],'Delete',true);
+	}
 }
