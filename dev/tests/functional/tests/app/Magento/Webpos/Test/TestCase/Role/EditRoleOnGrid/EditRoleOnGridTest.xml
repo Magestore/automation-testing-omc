@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\Role\EditRoleOnGrid\EditRoleOnGridTest" summary="Role - Edit Role On Grid" ticketId="WEBPOS-1">
+		<variation name="EditRoleOnGridTestVariation_MR13">
+			<data name="initialRole/dataset" xsi:type="string">default</data>
+			<data name="editRole/data/display_name" xsi:type="string">Edit Role %isolation%</data>
+			<data name="editRole/data/description" xsi:type="string">Edit Description %isolation%</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\Role\EditRoleOnGrid\AssertEditableRowIsVisible" />
+		</variation>
+
+		<variation name="EditRoleOnGridTestVariation_MR14">
+			<data name="initialRole/dataset" xsi:type="string">default</data>
+			<data name="editRole/data/display_name" xsi:type="string">Edit Role %isolation%</data>
+			<data name="editRole/data/description" xsi:type="string">Edit Description %isolation%</data>
+
+			<data name="action" xsi:type="string">cancel</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\Role\EditRoleOnGrid\AssertEditableRowIsNotShown" />
+		</variation>
+
+		<variation name="EditRoleOnGridTestVariation_MR15">
+			<data name="initialRole/dataset" xsi:type="string">default</data>
+			<data name="editRole/data/display_name" xsi:type="string">Edit Role %isolation%</data>
+			<data name="editRole/data/description" xsi:type="string">Edit Description %isolation%</data>
+
+			<data name="action" xsi:type="string">save</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\Role\EditRoleOnGrid\AssertRoleSuccessEditMessage" />
+			<constraint name="Magento\Webpos\Test\Constraint\Role\EditRoleOnGrid\AssertEditableRowIsNotShown" />
+			<constraint name="Magento\Webpos\Test\Constraint\Role\EditRoleOnGrid\AssertRoleInfoOnGridIsCorrect" />
+		</variation>
+	</testCase>
+</config>
