@@ -14,6 +14,10 @@ use Magento\Mtf\Util\Protocol\CurlTransport;
 use Magento\Mtf\Util\Protocol\CurlInterface;
 use Magento\Mtf\Util\Protocol\CurlTransport\BackendDecorator;
 
+/**
+ * Class Curl
+ * @package Magento\Webpos\Test\Handler\Role
+ */
 class Curl extends AbstractCurl implements RoleInterface
 {
     /**
@@ -30,7 +34,38 @@ class Curl extends AbstractCurl implements RoleInterface
      */
     protected $mappingData = [];
 
+    /**
+     * Url for delete data.
+     *
+     * @var string
+     */
+    protected $deleteUrl = 'webposadmin/staff_role/delete/id/%d/';
 
+    /**
+     * @param FixtureInterface|null $fixture
+     * @throws \Exception
+     */
+    public function deleteRole(FixtureInterface $fixture = null)
+    {
+        $roleId = $fixture->getData('role_id');
+        $this->deleteUrl = sprintf($this->deleteUrl, $roleId);
+        $url = $_ENV['app_backend_url'] . $this->deleteUrl;
+        $curl = new BackendDecorator(new CurlTransport(), $this->_configuration);
+        $curl->write($url);
+        $response = $curl->read();
+        $curl->close();
+        if (!strpos($response, 'data-ui-id="messages-message-success"')) {
+            throw new \Exception(
+                "Role entity delete by curl handler was not successful! Response: $response"
+            );
+        }
+    }
+
+    /**
+     * @param FixtureInterface|null $fixture
+     * @return array|mixed
+     * @throws \Exception
+     */
     public function persist(FixtureInterface $fixture = null)
     {
         $data = $this->replaceMappingData($fixture->getData());
