@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\BillingAddressPopup\WebposBillingAddressPopupCheckGUITest" summary="Customer On Checkout Page - Check GUI test" ticketId="WEBPOS-1">
+        <variation name="WebposBillingAddressPopupCheckGUITest_CC18">
+            <constraint name="Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\BillingAddressPopup\AssertAddBillingAddressPopupIsDisplayed"/>
+        </variation>
+
+        <variation name="WebposBillingAddressPopupCheckGUITest_CC19">
+            <data name="action" xsi:type="string">cancel</data>
+            <constraint name="Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\BillingAddressPopup\AssertAddBillingAddressPopupIsClosed"/>
+        </variation>
+
+        <variation name="WebposBillingAddressPopupCheckGUITest_CC20">
+            <data name="action" xsi:type="string">save</data>
+            <constraint name="Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\BillingAddressPopup\AssertAddBillingAddressPopupShowedRequireMessages"/>
+        </variation>
+    </testCase>
+</config>
