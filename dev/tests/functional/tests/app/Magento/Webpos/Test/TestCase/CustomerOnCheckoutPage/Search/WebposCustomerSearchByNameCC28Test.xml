@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\Search\WebposCustomerSearchByNameCC28Test" summary="Customer on checkout page" ticketId="WEBPOS-CC28">
+        <variation name="WebposCustomerSearchByNameCC28TestVariation1">
+            <data name="description" xsi:type="string">search with customer name</data>
+            <constraint name="Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\Search\AssertCustomerNameSearch"/>
+        </variation>
+    </testCase>
+</config>
