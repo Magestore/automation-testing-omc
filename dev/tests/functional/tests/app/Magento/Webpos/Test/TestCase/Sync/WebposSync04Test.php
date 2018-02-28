@@ -59,11 +59,13 @@ class WebposSync04Test extends Injectable
             ['products' => $products]
         )->run();
 
+
+
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->synchronization();
 
         sleep(2);
-        $this->webposIndex->getSyncTabData()->btnUpdateAll()->click();
+        $this->webposIndex->getSyncTabData()->getUpdateAllButton()->click();
     }
 
     public function tearDown()
