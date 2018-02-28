@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 2/23/2018
- * Time: 2:36 PM
+ * Date: 2/28/2018
+ * Time: 8:28 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\BillingAddressPopup;
@@ -12,16 +12,15 @@ use Magento\Customer\Test\Fixture\Address;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\CreateCustomer\AssertCreateCustomerOnCheckoutPageSuccess;
-use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\ShippingAddressPopup\AssertShippingAddressOnNewCustomerPopupIsCorrect;
 use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\ShippingAddressPopup\AssertBillingAddressOnNewCustomerPopupIsCorrect;
+use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\CreateCustomer\AssertCreateCustomerOnCheckoutPageSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposCustomerOnCheckoutPageCC21Test
- * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\ShippingAddressPopup
+ * Class WebposCustomerOnCheckoutPageCC25Test
+ * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\BillingAddressPopup
  */
-class WebposCustomerOnCheckoutPageCC21Test extends Injectable
+class WebposCustomerOnCheckoutPageCC25Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -34,40 +33,33 @@ class WebposCustomerOnCheckoutPageCC21Test extends Injectable
     protected $fixtureFactory;
 
     /**
-     * @var AssertCreateCustomerOnCheckoutPageSuccess
-     */
-    protected $assertCreateCustomerOnCheckoutPageSuccess;
-
-    /**
-     * @var AssertShippingAddressOnNewCustomerPopupIsCorrect
-     */
-    protected $assertShippingAddressOnNewCustomerPopupIsCorrect;
-
-    /**
      * @var AssertBillingAddressOnNewCustomerPopupIsCorrect
      */
     protected $assertBillingAddressOnNewCustomerPopupIsCorrect;
 
     /**
+     * @var AssertCreateCustomerOnCheckoutPageSuccess
+     */
+    protected $assertCreateCustomerOnCheckoutPageSuccess;
+
+    /**
      * @param WebposIndex $webposIndex
      * @param FixtureFactory $fixtureFactory
-     * @param AssertCreateCustomerOnCheckoutPageSuccess $assertCreateCustomerOnCheckoutPageSuccess
      * @param AssertBillingAddressOnNewCustomerPopupIsCorrect $assertBillingAddressOnNewCustomerPopupIsCorrect
-     * @param AssertShippingAddressOnNewCustomerPopupIsCorrect $assertShippingAddressOnNewCustomerPopupIsCorrect
+     * @param AssertCreateCustomerOnCheckoutPageSuccess $assertCreateCustomerOnCheckoutPageSuccess
      */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
-        AssertCreateCustomerOnCheckoutPageSuccess $assertCreateCustomerOnCheckoutPageSuccess,
         AssertBillingAddressOnNewCustomerPopupIsCorrect $assertBillingAddressOnNewCustomerPopupIsCorrect,
-        AssertShippingAddressOnNewCustomerPopupIsCorrect $assertShippingAddressOnNewCustomerPopupIsCorrect
+        AssertCreateCustomerOnCheckoutPageSuccess $assertCreateCustomerOnCheckoutPageSuccess
     )
     {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
-        $this->assertCreateCustomerOnCheckoutPageSuccess = $assertCreateCustomerOnCheckoutPageSuccess;
         $this->assertBillingAddressOnNewCustomerPopupIsCorrect = $assertBillingAddressOnNewCustomerPopupIsCorrect;
-        $this->assertShippingAddressOnNewCustomerPopupIsCorrect = $assertShippingAddressOnNewCustomerPopupIsCorrect;
+        $this->assertCreateCustomerOnCheckoutPageSuccess = $assertCreateCustomerOnCheckoutPageSuccess;
+
     }
 
     /**
@@ -97,30 +89,19 @@ class WebposCustomerOnCheckoutPageCC21Test extends Injectable
 
         // fill customer info
         $this->webposIndex->getCheckoutAddCustomer()->setFieldWithoutShippingAndBilling($customer->getData());
-        $this->webposIndex->getCheckoutAddCustomer()->getAddBillingAddressIcon()->click();
-        sleep(1);
 
         // fill Billing address info
+        $this->webposIndex->getCheckoutAddCustomer()->getAddBillingAddressIcon()->click();
+        sleep(1);
         $this->webposIndex->getCheckoutAddBillingAddress()->setFieldAddress($address->getData());
         $this->webposIndex->getCheckoutAddBillingAddress()->getSaveButton()->click();
         sleep(1);
 
-        // - The created billing address will be shown on [Billing address] section
-        $country= [
-            'United States' => 'US',
-            'United Kingdom' => 'GB',
-            'Germany' => 'DE'
-        ];
-        $addressText = $address->getFirstname().' '.$address->getLastname().', '
-            .$address->getStreet().' '.$address->getCity().', '
-            .$country[$address->getCountryId()].', '
-            .$address->getPostcode().', '
-            .$address->getTelephone();
-        $this->assertBillingAddressOnNewCustomerPopupIsCorrect->processAssert($this->webposIndex, $addressText);
+        $this->webposIndex->getCheckoutAddCustomer()->getDeleteBillingAddressIcon()->click();
+        sleep(1);
 
-        // - [Shipping address] section is blank
-        $this->assertShippingAddressOnNewCustomerPopupIsCorrect->processAssert($this->webposIndex, '');
-
+        // - [Billing address] section is blank
+        $this->assertBillingAddressOnNewCustomerPopupIsCorrect->processAssert($this->webposIndex, '');
         $this->webposIndex->getCheckoutAddCustomer()->getSaveButton()->click();
 
         // Assert create customer success

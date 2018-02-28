@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\BillingAddressPopup\WebposCustomerOnCheckoutPageCC24Test" summary="Customer On Checkout Page - Billing Address Popup test" ticketId="WEBPOS-1">
+        <variation name="WebposCustomerOnCheckoutPageCC24Test_CC24">
+            <data name="customer/data/firstname" xsi:type="string">John%isolation%</data>
+            <data name="customer/data/lastname" xsi:type="string">Doe%isolation%</data>
+            <data name="customer/data/email" xsi:type="string">JohnDoe%isolation%@example.com</data>
+            <data name="customer/data/group_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">General</item>
+            </data>
+            <data name="address/dataset" xsi:type="string">address_pi</data>
+        </variation>
+    </testCase>
+</config>
