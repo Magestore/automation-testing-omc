@@ -36,6 +36,6 @@ class AssertStaffSuccessSaveContinueMessage extends AbstractConstraint
      */
     public function toString()
     {
-        return 'Message success is not match';
+        return 'Message success match';
     }
 }

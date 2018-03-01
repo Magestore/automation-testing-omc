@@ -54,10 +54,10 @@ class WebposManageStaffMS45Test extends Injectable
         $this->staffsIndex->getStaffsGrid()->search(['email' => $staff->getEmail()]);
         $this->staffsIndex->getStaffsGrid()->getRowByEmail($staff->getEmail())->find('.action-menu-item')->click();
         sleep(1);
-        $this->staffsNew->getStaffsForm()->setPassword($staff->getPassword());
-        $this->staffsNew->getStaffsForm()->setConfimPassword($staff->getPasswordConfirmation());
-        $this->staffsNew->getStaffsForm()->setEmailAddress('test'.$staff->getEmail());
+        $this->staffsNew->getStaffsForm()->setUserName('test'.$staff->getUsername());
         $this->staffsNew->getStaffsForm()->setDisplayName('test'.$staff->getDisplayName());
+        $this->staffsNew->getStaffsForm()->setEmailAddress('test'.$staff->getEmail());
+        $this->staffsNew->getStaffsForm()->setPinCode('0123');
         $this->staffsNew->getFormPageActionsStaff()->saveAndContinue();
         sleep(1);
 
@@ -67,7 +67,9 @@ class WebposManageStaffMS45Test extends Injectable
         $fields['pos_ids'] = $fields['pos_ids'][0];
         $fields['email'] = 'test'.$staff->getEmail();
         $fields['display_name'] = 'test'.$staff->getDisplayName();
-        return ['dataStaff' => $fields];
+        $fields['username'] = 'test'.$staff->getUsername();
+        $fields['pin'] = '0123';
+        return ['fields' => $fields];
     }
 }
 

@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 /**
  * Check that success message is displayed after widget saved
  */
-class AssertStaffContinueEditAfterCreateStaff extends AbstractConstraint
+class AssertStaffContinueEditAfterEditStaff extends AbstractConstraint
 {
     /**
      *
