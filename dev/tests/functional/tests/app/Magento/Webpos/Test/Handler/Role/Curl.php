@@ -28,7 +28,24 @@ class Curl extends AbstractCurl implements RoleInterface
      *
      * @var array
      */
-    protected $mappingData = [];
+    protected $mappingData = [
+        'resource' => [
+            'manage_order' => [
+                'Magestore_Webpos::manage_order',
+                'Magestore_Webpos::manage_order_me',
+                'Magestore_Webpos::manage_order_location',
+                'Magestore_Webpos::manage_all_order'
+            ],
+            'manage_order_created_by_this_staff' => [
+                'Magestore_Webpos::manage_order',
+                'Magestore_Webpos::manage_order_me'
+            ],
+            'manage_order_created_at_location_of_staff' => [
+                'Magestore_Webpos::manage_order',
+                'Magestore_Webpos::manage_order_location'
+            ]
+        ]
+    ];
 
 
     public function persist(FixtureInterface $fixture = null)
