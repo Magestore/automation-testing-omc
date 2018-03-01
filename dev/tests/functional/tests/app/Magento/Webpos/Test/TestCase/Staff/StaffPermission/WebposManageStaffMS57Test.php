@@ -56,7 +56,7 @@ class WebposManageStaffMS57Test extends Injectable
     {
         //Create role and staff for role
         $webposRole->persist();
-        $dataStaff = $webposRole->getDataFieldConfig('staff_id')['source']->getStaff();
+        $dataStaff = $webposRole->getDataFieldConfig('staff_id')['source']->getStaffs()[0]->getData();
 
         //Create product
         $products = $this->objectManager->getInstance()->create(
