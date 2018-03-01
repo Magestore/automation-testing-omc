@@ -1809,5 +1809,24 @@
         </dataset>
         <!--End setting product search-->
 
+        <!--Setting create section before working-->
+        <dataset name="create_section_before_working_yes_MS57">
+            <field name="webpos/general/enable_session" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+        </dataset>
+        <dataset name="create_section_before_working_no_MS57">
+            <field name="webpos/general/enable_session" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+        <!--End Setting: create section before working-->
+
     </repository>
 </config>
