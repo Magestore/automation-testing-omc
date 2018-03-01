@@ -5,5 +5,6 @@
         <block name="messagesBlock" class="Magento\Backend\Test\Block\Messages" locator="#messages .messages" strategy="css selector"/>
         <block name="gridPageActions" class="Magento\Backend\Test\Block\GridPageActions" locator=".page-main-actions" strategy="css selector" />
         <block name="roleGrid" class="Magento\Webpos\Test\Block\Adminhtml\Role\RoleGrid" locator="[id='page:main-container']" strategy="css selector" />
+        <block name="editableRow" class="Magento\Webpos\Test\Block\Adminhtml\Role\EditableRow" locator="//tr[@class='data-grid-editable-row']" strategy="xpath" />
     </page>
 </config>

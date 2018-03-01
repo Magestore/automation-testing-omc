@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\ProductsGrid\Search\WebposProductsGridPG50Test" summary="Products Grid - Bundle Product" ticketId="WEBPOS-PG50">
+        <variation name="WebposProductsGridPG50Test_PG50">
+            <data name="key" xsi:type="string">q^w-e$1@3</data>
+            <constraint name="Magento\Webpos\Test\Constraint\ProductsGrid\CheckGUI\AssertProductBlockNoRecord"/>
+        </variation>
+    </testCase>
+</config>
