@@ -6,6 +6,5 @@
         <block name="roleForm" class="Magento\Webpos\Test\Block\Adminhtml\Role\Edit\WebposRoleForm" locator="[id='page:main-container']" strategy="css selector" />
         <block name="formPageActions" class="Magento\Webpos\Test\Block\Adminhtml\Role\Edit\RoleFormPageActions" locator=".page-main-actions" strategy="css selector" />
         <block name="modalBlock" class="Magento\Ui\Test\Block\Adminhtml\Modal" locator="._show[data-role=modal]" strategy="css selector"/>
-        <block name="roleFormPageActions" class="Magento\Webpos\Test\Block\Adminhtml\Role\Edit\RoleFormPageAction" locator=".page-main-actions" strategy="css selector" />
     </page>
 </config>

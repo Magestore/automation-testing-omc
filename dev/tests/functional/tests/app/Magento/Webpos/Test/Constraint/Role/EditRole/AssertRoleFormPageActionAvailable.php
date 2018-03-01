@@ -27,7 +27,7 @@ class AssertRoleFormPageActionAvailable extends AbstractConstraint
             $buttonArray = explode(",", $buttons);
             foreach ($buttonArray as $button) {
                 \PHPUnit_Framework_Assert::assertTrue(
-                    $webposRoleNew->getRoleFormPageActions()->actionButton(trim($button))->isVisible(),
+                    $webposRoleNew->getFormPageActions()->actionButton(trim($button))->isVisible(),
                     'Action button ' . $button . ' is not available.'
                 );
             }

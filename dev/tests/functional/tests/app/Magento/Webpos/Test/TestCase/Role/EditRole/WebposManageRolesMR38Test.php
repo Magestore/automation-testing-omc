@@ -79,7 +79,7 @@ class WebposManageRolesMR38Test extends Injectable
         $this->webposRoleIndex->getRoleGrid()->searchAndOpen($filter);
         $this->webposRoleNew->getRoleForm()->fill($editRole);
 
-        $this->webposRoleNew->getRoleFormPageActions()->actionButton('saveandcontinue')->click();
+        $this->webposRoleNew->getFormPageActions()->actionButton('saveandcontinue')->click();
 
         return [
             'webposRole' => $editRole
