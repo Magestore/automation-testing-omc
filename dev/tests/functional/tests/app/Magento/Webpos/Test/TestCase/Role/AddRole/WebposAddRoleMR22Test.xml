@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\Role\AddRole\WebposAddRoleMR22Test" summary="Role - Add Role Test" ticketId="WEBPOS-1">
+
+		<variation name="WebposAddRoleMR22TestVariation_MR22">
+			<data name="role1/dataset" xsi:type="string">MS51Staff</data>
+
+			<data name="role2/data/display_name" xsi:type="string">Role %isolation%</data>
+			<data name="role2/data/description" xsi:type="string">Description %isolation%</data>
+			<data name="role2/data/maximum_discount_percent" xsi:type="string">90</data>
+
+			<data name="role2/data/all" xsi:type="string">Custom</data>
+			<data name="role2/data/resource" xsi:type="string">Manage Order</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\Role\AddRole\AssertSuccessSaveMessageInEditPage" />
+			<!--<constraint name="Magento\Webpos\Test\Constraint\Role\AddRole\AssertInputFieldsAreShownExactlyOnEditPage" />-->
+			<!--<constraint name="Magento\Webpos\Test\Constraint\Role\AssertRoleInGrid" />-->
+		</variation>
+	</testCase>
+</config>
