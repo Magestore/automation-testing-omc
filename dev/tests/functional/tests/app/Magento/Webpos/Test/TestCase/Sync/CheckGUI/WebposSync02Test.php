@@ -6,14 +6,14 @@
  * Date: 2/23/2018
  * Time: 3:57 PM
  */
-namespace Magento\Webpos\Test\TestCase\Sync;
+namespace Magento\Webpos\Test\TestCase\Sync\CheckGUI;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
 
-class WebposSync03Test extends Injectable
+class WebposSync02Test extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex
@@ -55,7 +55,7 @@ class WebposSync03Test extends Injectable
         $this->webposIndex->getCMenu()->synchronization();
 
         sleep(2);
-        $this->webposIndex->getSyncTabRight()->buttonResetLocal()->click();
+        $this->webposIndex->getSyncTabRight()->tabErrorLogs()->click();
     }
 
     public function tearDown()

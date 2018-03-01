@@ -1,0 +1,9 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Sync\Configuration\WebposSync08Test" summary="Frontend - Web POS" ticketId="MAGETWO-34874">
+        <variation name="WebposSync_08">
+            <data name="configData" xsi:type="string">webpos_synchronization_configcolor</data>
+
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Sync\AssertWebposSync08" />-->
+        </variation>
+    </testCase>
+</config>
