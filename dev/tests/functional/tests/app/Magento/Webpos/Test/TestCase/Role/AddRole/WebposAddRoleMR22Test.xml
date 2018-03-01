@@ -13,8 +13,7 @@
 			<data name="role2/data/resource" xsi:type="string">Manage Order</data>
 
 			<constraint name="Magento\Webpos\Test\Constraint\Role\AddRole\AssertSuccessSaveMessageInEditPage" />
-			<!--<constraint name="Magento\Webpos\Test\Constraint\Role\AddRole\AssertInputFieldsAreShownExactlyOnEditPage" />-->
-			<!--<constraint name="Magento\Webpos\Test\Constraint\Role\AssertRoleInGrid" />-->
+			<constraint name="Magento\Webpos\Test\Constraint\Role\AddRole\AssertStaffIsAssignedToRole" />
 		</variation>
 	</testCase>
 </config>

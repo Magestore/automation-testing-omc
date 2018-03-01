@@ -30,8 +30,14 @@ class WebposAddRoleMR22Test extends Injectable
 	protected $webposRoleNew;
 
 	/**
+	 * @var FixtureFactory
+	 */
+	protected $fixtureFactory;
+
+	/**
 	 * @param FixtureFactory $fixtureFactory
 	 * @param WebposRoleIndex $webposRoleIndex
+	 * @param WebposRoleNew $webposRoleNew
 	 */
 	public function __inject(
 		FixtureFactory $fixtureFactory,
@@ -49,7 +55,6 @@ class WebposAddRoleMR22Test extends Injectable
 	)
 	{
 		$role1->persist();
-		\Zend_Debug::dump($role1->getData());die;
 
 		$this->webposRoleIndex->open();
 		$this->webposRoleIndex->getPageActionsBlock()->addNew();
@@ -58,6 +63,11 @@ class WebposAddRoleMR22Test extends Injectable
 		$this->webposRoleNew->getRoleForm()->fill($role2);
 
 		$this->webposRoleNew->getFormPageActions()->save();
+
+		return [
+			'role' => $role2,
+			'staffId' => $role2->getRoleStaff()
+		];
 	}
 
 	/**
