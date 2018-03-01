@@ -54,9 +54,9 @@ class WebposManageRolesMR35Test extends Injectable
         $initialRole->persist();
         $this->role = $initialRole;
 
-//        $filter = ['rolename' => $this->role->getRoleName()];
-//        $this->userRoleIndex->open();
-//        $this->userRoleIndex->getRoleGrid()->searchAndOpen($filter);
+        $filter = ['display_name' => $this->role->getDisplayName()];
+        $this->webposRoleIndex->open();
+        $this->webposRoleIndex->getRoleGrid()->searchAndOpen($filter);
 
         return [
             'role' => $this->role
