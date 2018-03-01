@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: vinh
- * Date: 28/02/2018
- * Time: 10:46
+ * Date: 01/03/2018
+ * Time: 11:00
  */
 
 namespace Magento\Webpos\Test\TestCase\Role\AddRole;
@@ -15,7 +15,7 @@ use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\Adminhtml\WebposRoleIndex;
 use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
 
-class WebposAddRoleTest extends Injectable
+class WebposAddRoleMR22Test extends Injectable
 {
 	/**
 	 * Role Index page
@@ -30,20 +30,14 @@ class WebposAddRoleTest extends Injectable
 	protected $webposRoleNew;
 
 	/**
-	 * Factory for fixture
-	 *
 	 * @var FixtureFactory
 	 */
 	protected $fixtureFactory;
 
 	/**
-	 * @var WebposRole
-	 */
-	protected $role;
-
-	/**
 	 * @param FixtureFactory $fixtureFactory
 	 * @param WebposRoleIndex $webposRoleIndex
+	 * @param WebposRoleNew $webposRoleNew
 	 */
 	public function __inject(
 		FixtureFactory $fixtureFactory,
@@ -56,46 +50,37 @@ class WebposAddRoleTest extends Injectable
 	}
 
 	public function test(
-		WebposRole $webposRole = null,
-		$action = ''
+		WebposRole $role1,
+		WebposRole $role2
 	)
 	{
+		$role1->persist();
 
 		$this->webposRoleIndex->open();
 		$this->webposRoleIndex->getPageActionsBlock()->addNew();
 
-		if (isset($webposRole)) {
-			$webposRole = $this->prepareRoleStaff($webposRole);
-			$this->webposRoleNew->getRoleForm()->fill($webposRole);
-		}
+		$role2 = $this->prepareRoleStaff($role1, $role2);
+		$this->webposRoleNew->getRoleForm()->fill($role2);
 
-		if ($action === 'save') {
-			$this->webposRoleNew->getFormPageActions()->save();
-		}
-		elseif ($action === 'saveAndContinue') {
-			$this->webposRoleNew->getFormPageActions()->saveAndContinue();
-		}
-		elseif ($action === 'reset') {
-			$this->webposRoleNew->getFormPageActions()->reset();
-		}
-		elseif ($action === 'back') {
-			$this->webposRoleNew->getFormPageActions()->back();
-		}
+		$this->webposRoleNew->getFormPageActions()->save();
+
+		return [
+			'role' => $role2,
+			'staffId' => $role2->getRoleStaff()
+		];
 	}
 
 	/**
-	 * @param WebposRole $webposRole
+	 * @param WebposRole $role1
+	 * @param WebposRole $role2
 	 * @return WebposRole
 	 */
-	private function prepareRoleStaff(WebposRole $webposRole)
+	private function prepareRoleStaff(WebposRole $role1, WebposRole $role2)
 	{
-		$data = $webposRole->getData();
-		if (isset($data['staff_id'])) {
-			$data['role_staff'] = $data['staff_id'];
-			unset($data['staff_id']);
-			return $this->fixtureFactory->createByCode('webposRole', ['data' => $data]);
-		}
-		return $webposRole;
+		$data = $role2->getData();
+		$data['role_staff'] = $role1->getStaffId()[0];
+		unset($data['staff_id']);
+		return $this->fixtureFactory->createByCode('webposRole', ['data' => $data]);
 
 	}
 }
