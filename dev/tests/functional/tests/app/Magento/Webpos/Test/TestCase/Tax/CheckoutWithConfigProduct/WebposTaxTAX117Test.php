@@ -231,6 +231,7 @@ class WebposTaxTAX117Test extends Injectable
 
 
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
+        sleep(1);
         $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->click();
         $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
         $this->webposIndex->getModal()->getOkButton()->click();
@@ -238,6 +239,7 @@ class WebposTaxTAX117Test extends Injectable
         //Assert Tax Amount in Order History Refund
         $this->assertPaymentSuccess->processAssert($this->webposIndex);
 
+        sleep(1);
         // Invoice
         $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
         $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
@@ -250,6 +252,7 @@ class WebposTaxTAX117Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForProcessingStatusVisisble();
         $this->assertOrderStatus->processAssert($this->webposIndex, 'Processing');
 
+        sleep(1);
         // Shipment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
         $this->webposIndex->getOrderHistoryAddOrderNote()->openShipmentPopup();
@@ -262,10 +265,12 @@ class WebposTaxTAX117Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForCompleteStatusVisisble();
         $this->assertOrderStatus->processAssert($this->webposIndex, 'Complete');
 
-
+        sleep(1);
         // Refund
         $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
         $this->webposIndex->getOrderHistoryAddOrderNote()->openRefundPopup();
+        $qty = $this->webposIndex->getOrderHistoryRefund()->getItemQty($products[0]['product']->getName());
+        $this->webposIndex->getOrderHistoryRefund()->getItemQtyToRefundInput($products[0]['product']->getName())->setValue($qty);
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
         $this->webposIndex->getModal()->getOkButton()->click();
 

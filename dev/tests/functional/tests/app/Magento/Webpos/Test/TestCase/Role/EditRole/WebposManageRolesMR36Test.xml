@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Role\EditRole\WebposManageRolesMR36Test" summary="Role - Edit Role" ticketId="WEBPOS-1">
+        <variation name="WebposManageRolesMR36Test_MR36">
+            <data name="initialRole/dataset" xsi:type="string">role_1_staff</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Role\AssertRoleSuccessSaveMessage" />
+            <constraint name="Magento\Webpos\Test\Constraint\Role\AssertRoleInGrid" />
+        </variation>
+    </testCase>
+</config>

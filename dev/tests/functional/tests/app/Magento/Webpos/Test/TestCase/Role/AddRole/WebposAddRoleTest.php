@@ -60,15 +60,42 @@ class WebposAddRoleTest extends Injectable
 		$action = ''
 	)
 	{
+
 		$this->webposRoleIndex->open();
 		$this->webposRoleIndex->getPageActionsBlock()->addNew();
 
 		if (isset($webposRole)) {
+			$webposRole = $this->prepareRoleStaff($webposRole);
 			$this->webposRoleNew->getRoleForm()->fill($webposRole);
 		}
 
 		if ($action === 'save') {
 			$this->webposRoleNew->getFormPageActions()->save();
 		}
+		elseif ($action === 'saveAndContinue') {
+			$this->webposRoleNew->getFormPageActions()->saveAndContinue();
+		}
+		elseif ($action === 'reset') {
+			$this->webposRoleNew->getFormPageActions()->reset();
+		}
+		elseif ($action === 'back') {
+			$this->webposRoleNew->getFormPageActions()->back();
+		}
+	}
+
+	/**
+	 * @param WebposRole $webposRole
+	 * @return WebposRole
+	 */
+	private function prepareRoleStaff(WebposRole $webposRole)
+	{
+		$data = $webposRole->getData();
+		if (isset($data['staff_id'])) {
+			$data['role_staff'] = $data['staff_id'];
+			unset($data['staff_id']);
+			return $this->fixtureFactory->createByCode('webposRole', ['data' => $data]);
+		}
+		return $webposRole;
+
 	}
 }

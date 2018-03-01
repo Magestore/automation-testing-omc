@@ -2,9 +2,10 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Webpos\Test\TestCase\Role\EditRole\WebposManageRolesMR35Test" summary="Role - Edit Role" ticketId="WEBPOS-1">
         <variation name="WebposManageRolesMR35Test_MR35">
-            <data name="initialRole/dataset" xsi:type="string">default</data>
-
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Role\EditRoleOnGrid\AssertEditableRowIsVisible" />-->
+            <data name="initialRole/dataset" xsi:type="string">role_1_staff</data>
+            <data name="buttons" xsi:type="string">back,reset,saveandcontinue,save</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Role\EditRole\AssertRoleFormPageActionAvailable" />
+            <constraint name="Magento\Webpos\Test\Constraint\Role\EditRole\AssertRoleInformationOnFormIsCorrect" />
         </variation>
     </testCase>
 </config>

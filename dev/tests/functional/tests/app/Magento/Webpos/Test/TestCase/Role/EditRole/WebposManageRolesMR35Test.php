@@ -13,6 +13,10 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\Adminhtml\WebposRoleIndex;
 
+/**
+ * Class WebposManageRolesMR35Test
+ * @package Magento\Webpos\Test\TestCase\Role\EditRole
+ */
 class WebposManageRolesMR35Test extends Injectable
 {
     /**
@@ -46,6 +50,11 @@ class WebposManageRolesMR35Test extends Injectable
         $this->fixtureFactory = $fixtureFactory;
     }
 
+    /**
+     * @param WebposRole $initialRole
+     * @return array
+     * @throws \Exception
+     */
     public function test(
         WebposRole $initialRole
     )
@@ -54,9 +63,9 @@ class WebposManageRolesMR35Test extends Injectable
         $initialRole->persist();
         $this->role = $initialRole;
 
-//        $filter = ['rolename' => $this->role->getRoleName()];
-//        $this->userRoleIndex->open();
-//        $this->userRoleIndex->getRoleGrid()->searchAndOpen($filter);
+        $filter = ['display_name' => $this->role->getDisplayName()];
+        $this->webposRoleIndex->open();
+        $this->webposRoleIndex->getRoleGrid()->searchAndOpen($filter);
 
         return [
             'role' => $this->role
@@ -64,7 +73,10 @@ class WebposManageRolesMR35Test extends Injectable
 
     }
 
-	public function tearDown()
+    /**
+     *
+     */
+    public function tearDown()
 	{
         // Delete Role
         $this->objectManager->create('Magento\Webpos\Test\Handler\Role\Curl')->deleteRole($this->role);

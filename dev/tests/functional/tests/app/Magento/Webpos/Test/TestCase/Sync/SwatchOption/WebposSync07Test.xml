@@ -1,0 +1,18 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Sync\SwatchOption\WebposSync07Test" summary="Frontend - Web POS" ticketId="MAGETWO-34874">
+        <variation name="WebposSync_07">
+            <data name="des" xsi:type="string">Check GUI of [Sync Data] tab</data>
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">configurable_product_with_one_attribute</item>
+                    <item name="orderQty" xsi:type="number">1</item>
+                </item>
+            </data>
+
+            <data name="product/data/name" xsi:type="string">Test simple product %isolation%</data>
+
+            <data name="customer/data/firstname" xsi:type="string">JohnName</data>
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Sync\AssertWebposSync07" />-->
+        </variation>
+    </testCase>
+</config>

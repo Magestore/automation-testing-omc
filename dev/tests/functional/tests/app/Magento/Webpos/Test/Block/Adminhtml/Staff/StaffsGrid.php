@@ -46,10 +46,6 @@ class StaffsGrid extends DataGrid
         'display_name' => [
             'selector' => '.admin__data-grid-filters input[name="display_name"]',
         ],
-        'staff_id[from]' => [
-            'selector' => '.admin__data-grid-filters input[name="staff_id"]',
-            'input' => 'select',
-        ],
         'role_id' => [
             'selector' => '.admin__data-grid-filters input[name="role_id"]',
             'input' => 'select',

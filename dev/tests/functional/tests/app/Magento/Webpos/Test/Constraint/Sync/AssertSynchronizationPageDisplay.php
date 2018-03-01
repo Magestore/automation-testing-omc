@@ -17,50 +17,13 @@ class AssertSynchronizationPageDisplay extends AbstractConstraint
     public function processAssert(WebposIndex $webposIndex)
     {
         \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getSynchronization()->isVisible(),
-            'Synchronization - Synchronization page is not shown'
-        );
-        \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getSynchronization()->getUpdateAllButton()->isVisible(),
+            $webposIndex->getSyncTabData()->getUpdateAllButton()->isVisible(),
             'Synchronization - Update All Button is not shown'
         );
         \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getSynchronization()->getReloadAllButton()->isVisible(),
+            $webposIndex->getSyncTabData()->getReloadAllButton()->isVisible(),
             'Synchronization - Reload All Button is not shown'
         );
-        $itemList = [
-            'Swatch Option',
-            'Configuration',
-            'Category',
-            'Product',
-            'Stock Item',
-            'Shift',
-            'Group',
-            'Customer Complaints',
-            'Customer',
-            'Currency',
-            'Country',
-            'Order',
-            'Payment',
-            'Shipping',
-            'Tax Rate',
-            'Tax Classes',
-            'Tax rule'
-        ];
-        foreach ($itemList as $item) {
-            \PHPUnit_Framework_Assert::assertTrue(
-                $webposIndex->getSynchronization()->getItemRow($item)->isVisible(),
-                "Synchronization - Item ".$item."is not shown"
-            );
-            \PHPUnit_Framework_Assert::assertTrue(
-                $webposIndex->getSynchronization()->getItemRowUpdateButton($item)->isVisible(),
-                'Synchronization - Update button of "'.$item.'" is not shown'
-            );
-            \PHPUnit_Framework_Assert::assertTrue(
-                $webposIndex->getSynchronization()->getItemRowReloadButton($item)->isVisible(),
-                'Synchronization - Reload button of "'.$item.'" is not shown'
-            );
-        }
     }
 
     /**
