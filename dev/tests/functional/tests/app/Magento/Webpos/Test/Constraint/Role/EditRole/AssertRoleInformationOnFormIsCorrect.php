@@ -12,8 +12,17 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
 use Magento\Webpos\Test\Fixture\WebposRole;
 
+/**
+ * Class AssertRoleInformationOnFormIsCorrect
+ * @package Magento\Webpos\Test\Constraint\Role\EditRole
+ */
 class AssertRoleInformationOnFormIsCorrect extends AbstractConstraint
 {
+    /**
+     * @param WebposRoleNew $webposRoleNew
+     * @param WebposRole $role
+     * @throws \Exception
+     */
     public function processAssert(WebposRoleNew $webposRoleNew, WebposRole $role)
     {
         $fieldsData = $webposRoleNew->getRoleForm()->getTab('general')->getFieldsData();
@@ -32,8 +41,24 @@ class AssertRoleInformationOnFormIsCorrect extends AbstractConstraint
             $fieldsData['description'],
             'Description is not correctly.'
         );
-        $fieldsDataPermissionTab = $webposRoleNew->getRoleForm()->getTab('permission')->getFieldsData();
-        \Zend_Debug::dump($fieldsDataPermissionTab);
+
+        $webposRoleNew->getRoleForm()->openTab('permission');
+        $fieldsDataPermissionTab = $webposRoleNew->getRoleForm()->getTab('permission')->getFieldsData(['all' => 1]);
+        \PHPUnit_Framework_Assert::assertEquals(
+            'All',
+            $fieldsDataPermissionTab['all'],
+            'Roles Resources is not correctly.'
+        );
+
+        $webposRoleNew->getRoleForm()->openTab('user_section');
+        $staffGridBlock = $webposRoleNew->getRoleForm()->getTab('user_section')->getUserGrid();
+        $staffGridBlock->getFirstItemId();
+        \PHPUnit_Framework_Assert::assertEquals(
+            $role->getStaffId()[0],
+            $staffGridBlock->getFirstItemId(),
+            'Staff list is not correctly.'
+        );
+
     }
     /**
      * Returns a string representation of the object.

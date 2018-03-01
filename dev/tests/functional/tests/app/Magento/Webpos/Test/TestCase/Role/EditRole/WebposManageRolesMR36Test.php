@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 2/28/2018
- * Time: 11:10 AM
+ * Date: 3/1/2018
+ * Time: 9:26 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\Role\EditRole;
@@ -12,12 +12,13 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\Adminhtml\WebposRoleIndex;
+use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
 
 /**
- * Class WebposManageRolesMR35Test
+ * Class WebposManageRolesMR36Test
  * @package Magento\Webpos\Test\TestCase\Role\EditRole
  */
-class WebposManageRolesMR35Test extends Injectable
+class WebposManageRolesMR36Test extends Injectable
 {
     /**
      * Role Index page
@@ -25,6 +26,11 @@ class WebposManageRolesMR35Test extends Injectable
      * @var WebposRoleIndex
      */
     protected $webposRoleIndex;
+
+    /**
+     * @var WebposRoleNew
+     */
+    protected $webposRoleNew;
 
     /**
      * Factory for fixture
@@ -39,15 +45,18 @@ class WebposManageRolesMR35Test extends Injectable
     protected $role;
 
     /**
-     * @param WebposRoleIndex $webposRoleIndex
      * @param FixtureFactory $fixtureFactory
+     * @param WebposRoleIndex $webposRoleIndex
+     * @param WebposRoleNew $webposRoleNew
      */
     public function __inject(
+        FixtureFactory $fixtureFactory,
         WebposRoleIndex $webposRoleIndex,
-        FixtureFactory $fixtureFactory
+        WebposRoleNew $webposRoleNew
     ) {
-        $this->webposRoleIndex = $webposRoleIndex;
         $this->fixtureFactory = $fixtureFactory;
+        $this->webposRoleIndex = $webposRoleIndex;
+        $this->webposRoleNew = $webposRoleNew;
     }
 
     /**
@@ -66,9 +75,10 @@ class WebposManageRolesMR35Test extends Injectable
         $filter = ['display_name' => $this->role->getDisplayName()];
         $this->webposRoleIndex->open();
         $this->webposRoleIndex->getRoleGrid()->searchAndOpen($filter);
+        $this->webposRoleNew->getFormPageActions()->save();
 
         return [
-            'role' => $this->role
+            'webposRole' => $this->role
         ];
 
     }
@@ -77,8 +87,8 @@ class WebposManageRolesMR35Test extends Injectable
      *
      */
     public function tearDown()
-	{
+    {
         // Delete Role
         $this->objectManager->create('Magento\Webpos\Test\Handler\Role\Curl')->deleteRole($this->role);
-	}
+    }
 }
