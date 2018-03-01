@@ -66,4 +66,26 @@ class CheckoutChangeCustomer extends Block
 	{
 		return $this->_rootElement->find('#search-customer');
 	}
+
+	public function getCustomerNames()
+    {
+        $customerNameElements = $this->_rootElement->getElements('[data-bind="text: firstname + \' \' + lastname"]');
+        foreach ($customerNameElements as $customerNameElement)
+        {
+            $customerNames[] = $customerNameElement->getText();
+        }
+
+        return $customerNames;
+    }
+
+    public function getCustomerTelePhones()
+    {
+        $customerTelephoneElements = $this->_rootElement->getElements('.phone-number');
+        foreach ($customerTelephoneElements as $customerTelephoneElement)
+        {
+            $customerTelephones[] = $customerTelephoneElement->getText();
+        }
+
+        return $customerTelephones;
+    }
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Role\CheckValidate\EnterValueGreater100MR24Test" summary="Manage Role" ticketId="WEBPOS-MR24">
+        <variation name="EnterValueGreater100MR24TestVariation1">
+            <data name="role/data/display_name" xsi:type="string">Role %isolation%</data>
+            <data name="role/data/maximum_discount_percent" xsi:type="string">200</data>
+            <data name="role/data/description" xsi:type="string">Description %isolation%</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Role\AssertSuccessSaveWebposRoleWithMaximumDiscountGreater100"/>
+        </variation>
+    </testCase>
+</config>

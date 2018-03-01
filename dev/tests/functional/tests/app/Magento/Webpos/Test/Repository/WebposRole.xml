@@ -68,5 +68,14 @@
             </field>
         </dataset>
 
+        <dataset name="Role2Staff">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">100</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">1</field>
+            <field name="staff_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">default,disable_staff</item>
+            </field>
+        </dataset>
     </repository>
 </config>
