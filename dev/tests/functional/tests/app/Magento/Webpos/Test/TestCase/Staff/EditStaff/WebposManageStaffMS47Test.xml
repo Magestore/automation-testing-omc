@@ -3,9 +3,11 @@
     <testCase name="Magento\Webpos\Test\TestCase\Staff\EditStaff\WebposManageStaffMS47Test" summary="Check [Delete] button" ticketId="MAGETWO-1234">
         <variation name="WebposManageStaffMS47TestVariation">
             <data name="staff/dataset" xsi:type="string">staffMS21</data>
-            <!--<data name="message" xsi:type="string">Staff was successfully saved</data>-->
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertStaffSuccessSaveMessage" />-->
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertCheckInfoDisplayOnGridCreatedBefore" />-->
+            <data name="idButtons" xsi:type="string">back, reset, saveandcontinue, save, delete</data>
+            <data name="idFields" xsi:type="string">page_username, page_password, page_password_confirmation, page_display_name, page_email, page_pin, page_customer_group, page_location_id, page_role_id, page_status, page_pos_ids</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertPopupDelete" />
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertGUIButtonAction" />
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertGUIContainFields" />
         </variation>
     </testCase>
 </config>
