@@ -59,6 +59,6 @@ class AssertLoginWebposChangePass extends AbstractConstraint
      */
     public function toString()
     {
-        return 'sdfa';
+        return 'Pass is correct';
     }
 }

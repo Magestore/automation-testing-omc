@@ -61,6 +61,11 @@ class StaffsForm extends Form
         return $this->_rootElement->find('#page_username')->getValue();
     }
 
+    public function setUserName($name)
+    {
+        $this->_rootElement->find('#page_username')->setValue($name);
+    }
+
     public function getEmailAddress()
     {
         return $this->_rootElement->find('#page_email')->getValue();
@@ -74,6 +79,11 @@ class StaffsForm extends Form
     public function getPinCode()
     {
         return $this->_rootElement->find('#page_pin')->getValue();
+    }
+
+    public function setPinCode($pin)
+    {
+        $this->_rootElement->find('#page_pin')->setValue($pin);
     }
 
     public function getCustomerGroup()
