@@ -12,5 +12,10 @@
             <field name="address" xsi:type="string">Test Store Address %isolation%</field>
             <field name="description" xsi:type="string">Test Store Address %isolation%</field>
         </dataset>
+        <dataset name="MS44">
+            <field name="display_name" xsi:type="string">Test Store Address %isolation%</field>
+            <field name="address" xsi:type="string">Test Store Address %isolation%</field>
+            <field name="description" xsi:type="string">Test Store Address %isolation%</field>
+        </dataset>
     </repository>
 </config>

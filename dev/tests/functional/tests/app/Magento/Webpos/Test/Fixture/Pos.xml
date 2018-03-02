@@ -17,7 +17,7 @@
         entity_type="webpos_pos">
         <field name="pos_id" is_required="1"/>
         <field name="pos_name" is_required="0"/>
-        <field name="location_id" is_required="0"/>
+        <field name="location_id" source="Magento\Webpos\Test\Fixture\Pos\LocationId"/>
         <field name="store_id" is_required="0"/>
         <field name="staff_id" is_required="0"/>
         <field name="status" is_required="0"/>
