@@ -9,6 +9,7 @@
 namespace Magento\Webpos\Test\Block\ManageStocks;
 
 use Magento\Mtf\Block\Block;
+use Magento\Mtf\Client\ElementInterface;
 use Magento\Mtf\Client\Locator;
 
 class ManageStockList extends Block
@@ -63,4 +64,79 @@ class ManageStockList extends Block
         $row = $this->getProductRow($productName);
         return $row->find('.update');
     }
+
+	public function getProductName($productName)
+	{
+		$row = $this->getProductRow($productName);
+		return $row->find('span[data-bind="text: name"]');
+	}
+
+	public function getProductSku($productName)
+	{
+		$row = $this->getProductRow($productName);
+		return $row->find('span[data-bind="text: sku"]');
+	}
+
+	public function getProductInStockCheckbox($productName)
+	{
+		$row = $this->getProductRow($productName);
+		return $row->find('td:nth-child(4)');
+	}
+
+	public function getProductManageStocksCheckbox($productName)
+	{
+		$row = $this->getProductRow($productName);
+		return $row->find('td:nth-child(5)');
+	}
+
+	public function getProductBackOrdersCheckbox($productName)
+	{
+		$row = $this->getProductRow($productName);
+		return $row->find('td:nth-child(6)');
+	}
+
+	public function getProductIconSuccess($productName)
+	{
+		$row = $this->getProductRow($productName);
+		return $row->find('.icon-iconPOS-success');
+	}
+
+
+	public function getFirstProductName()
+	{
+		return $this->_rootElement->find('.table-product tbody tr td.a-left span')->getText();
+	}
+
+	public function getFirstProductRow()
+	{
+		return $this->_rootElement->find('.table-product tbody tr:nth-child(1)');
+	}
+
+	/**
+	 * @param ElementInterface $divCheckbox
+	 * @return bool|int
+	 */
+	public function isCheckboxChecked($divCheckbox)
+	{
+		$class = $divCheckbox->find('div')->getAttribute('class');
+		return strpos($class, 'checked');
+	}
+
+	/**
+	 * @param ElementInterface $divCheckbox
+	 * @param bool $value
+	 */
+	public function setCheckboxValue($divCheckbox, $value)
+	{
+		if ($divCheckbox->isVisible()) {
+			if ($value != $this->isCheckboxChecked($divCheckbox)) {
+				$divCheckbox->click();
+			}
+		}
+	}
+
+	public function getUpdateAllButton()
+	{
+		return $this->_rootElement->find('th.a-right a');
+	}
 }
