@@ -66,11 +66,24 @@ class WebposManageStaffMS44Test extends Injectable
         $this->staffsNew->getStaffsForm()->setPos([$pos->getPosName(), 'Store POS']);
         sleep(1);
         $this->staffsNew->getFormPageActionsStaff()->save();
+
+        //Open webpos
         $this->webposIndex->open();
-        $this->webposIndex->getLoginForm()->getUsernameField()->setValue($staff->getUsername());
-        $this->webposIndex->getLoginForm()->getPasswordField()->setValue($staff->getPassword());
-        $this->webposIndex->getLoginForm()->clickLoginButton();
-        $this->webposIndex->getLoginForm()->clickLoginButton();
+        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
+        if ($this->webposIndex->getLoginForm()->isVisible()) {
+            $this->webposIndex->getLoginForm()->getUsernameField()->setValue($staff->getUsername());
+            $this->webposIndex->getLoginForm()->getPasswordField()->setValue($staff->getPassword());
+            $this->webposIndex->getLoginForm()->clickLoginButton();
+            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
+            $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
+            $this->webposIndex->getLoginForm()->setLocation($location->getDisplayName());
+            $this->webposIndex->getLoginForm()->getEnterToPos()->click();
+            $this->webposIndex->getLoginForm()->setPos($pos->getPosName());
+            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
+//            $this->webposIndex->getLoginForm()->getEnterToPos()->click();
+
+        }
+
 //			$this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
         $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
         $time = time();
