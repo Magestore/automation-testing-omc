@@ -45,6 +45,11 @@ class Cmenu extends Block
         $this->_rootElement->find('#manage_stock')->click();
     }
 
+    public function manageStocksIsVisible()
+    {
+        return $this->_rootElement->find('#manage_stock')->isVisible();
+    }
+
     public function synchronization()
     {
         $this->_rootElement->find('#synchronization')->click();
