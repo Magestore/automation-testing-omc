@@ -61,7 +61,7 @@
             <field name="display_name" xsi:type="string">Role %isolation%</field>
             <field name="maximum_discount_percent" xsi:type="string">50</field>
             <field name="description" xsi:type="string">Description %isolation%</field>
-            <field name="all" xsi:type="string">1</field>
+            <field name="all" xsi:type="string">0</field>
             <field name="resource" xsi:type="string">manage_order_created_at_location_of_staff</field>
             <field name="staff_id" xsi:type="array">
                 <item name="dataset" xsi:type="string">staffMS21</item>

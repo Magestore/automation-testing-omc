@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Role\EditRole\CheckResetButtonMR39Test" summary="Manage Role" ticketId="WEBPOS-MR39">
+        <variation name="CheckResetButtonMR39TestVariation1">
+            <data name="roleEdit/data/display_name" xsi:type="string">test</data>
+            <data name="roleEdit/data/maximum_discount_percent" xsi:type="string">50</data>
+            <data name="roleEdit/data/description" xsi:type="string">test</data>
+        </variation>
+    </testCase>
+</config>
