@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Location\AddLocation\WebposManageLocationML20Test" summary="Check [Save and continue] button without filling out all fields" ticketId="MAGETWO-1234">
+        <variation name="WebposManageLocationML20TestVariation">
+            <data name="test" xsi:type="string"></data>
+           </variation>
+    </testCase>
+</config>

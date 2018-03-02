@@ -60,7 +60,6 @@ class WebposManageStaffMS51Test extends Injectable
             ['products' => $products]
         )->run();
         $product1 = $products[0]['product'];
-        $product2 = $products[1]['product'];
 
         //Login
         $this->loginWebpos($this->webposIndex, $dataStaff['username'],$dataStaff['password']);
@@ -69,13 +68,6 @@ class WebposManageStaffMS51Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getCheckoutProductList()->getFirstProduct()->click();
-        $this->webposIndex->getCheckoutProductList()->getFirstProduct()->click();
-        sleep(1);
-        $this->webposIndex->getCheckoutProductList()->search($product2->getName());
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getCheckoutProductList()->getFirstProduct()->click();
         sleep(1);
 
         //Click on [Add discount] > on Discount tab, add dicount for whole cart (type: $)
@@ -95,12 +87,16 @@ class WebposManageStaffMS51Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getMsWebpos()->waitForElementVisible('#webpos_checkout > div.indicator');
+        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#webpos_checkout > div.indicator');
 
         //PlaceOrder
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#webpos_checkout > div.indicator');
         sleep(1);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
         //Get orderId

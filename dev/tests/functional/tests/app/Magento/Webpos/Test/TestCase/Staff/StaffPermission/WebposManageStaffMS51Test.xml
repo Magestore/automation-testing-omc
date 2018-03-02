@@ -7,9 +7,6 @@
                 <item name="0" xsi:type="array">
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
                 </item>
-                <item name="1" xsi:type="array">
-                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
-                </item>
             </data>
             <data xsi:type="string" name="discount">60.00</data>
             <!--<data name="message" xsi:type="string">Staff was successfully saved</data>-->
