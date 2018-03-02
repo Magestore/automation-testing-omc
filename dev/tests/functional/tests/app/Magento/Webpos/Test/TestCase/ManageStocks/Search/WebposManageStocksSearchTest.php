@@ -57,5 +57,6 @@ class WebposManageStocksSearchTest extends Injectable
 		}
 
 		$this->webposIndex->getManageStockList()->searchProduct($searchText);
+		sleep(3);
 	}
 }
