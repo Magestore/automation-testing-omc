@@ -58,8 +58,14 @@ class WebposManageStocksSearchTest extends Injectable
 		elseif ($action === 'search_name') {
 			$searchText = $product->getName();
 		}
+		elseif ($action === 'search_sku') {
+			$searchText = $product->getSku();
+		}
+		elseif ($action === 'clear_keyword') {
+			$this->webposIndex->getManageStockList()->searchProduct('asajbabjadbvdakvb');
+			$searchText = '';
+		}
 
 		$this->webposIndex->getManageStockList()->searchProduct($searchText);
-		sleep(3);
 	}
 }
