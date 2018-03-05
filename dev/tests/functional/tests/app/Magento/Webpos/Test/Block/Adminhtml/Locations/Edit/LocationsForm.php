@@ -15,5 +15,9 @@ use Magento\Mtf\Block\Form;
 
 class LocationsForm extends Form
 {
-
+    public function getField($id)
+    {
+        $id = '#'.$id;
+        return $this->_rootElement->find($id);
+    }
 }

@@ -97,4 +97,12 @@ class LocationsGrid  extends DataGrid
     {
         $this->_rootElement->find('//tbody/tr/td/*/input[@name="display_name"]', Locator::SELECTOR_XPATH)->setValue($locationName);
     }
+
+    public function getRowByDescription($description, $isStrict = true)
+    {
+        $rowTemplate = ($isStrict) ? $this->rowTemplateStrict : $this->rowTemplate;
+        $rows = sprintf($rowTemplate, $description);
+        $location = sprintf($this->rowPattern, $rows);
+        return $this->_rootElement->find($location, Locator::SELECTOR_XPATH);
+    }
 }

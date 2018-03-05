@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Location\EditLocation\WebposManageLocationML24Test" summary="Check GUI Edit Location page" ticketId="MAGETWO-1234">
+        <variation name="WebposManageLocationML24TestVariation">
+            <data name="location/dataset" xsi:type="string">ML19</data>
+           </variation>
+    </testCase>
+</config>

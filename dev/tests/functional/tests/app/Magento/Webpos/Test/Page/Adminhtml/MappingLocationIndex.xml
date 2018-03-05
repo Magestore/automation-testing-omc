@@ -5,5 +5,6 @@
         <block name="gridPageActions" class="Magento\Backend\Test\Block\GridPageActions" locator=".page-main-actions" strategy="css selector"/>
         <block name="mappingLocationGrid" class="Magento\Webpos\Test\Block\Adminhtml\MappingLocation\MappingLocationGrid" locator="[id='page:main-container']" strategy="css selector" />
         <block name="locationModal" class="Magento\Webpos\Test\Block\Adminhtml\MappingLocation\LocationModal" locator=".os_warehouse_locations_mapping_form_os_warehouse_locations_mapping_form_warehouse_location_warehouse_location_modal" strategy="css selector" />
+        <block name="FormPageActions" class="Magento\Webpos\Test\Block\Adminhtml\MappingLocation\FormPageActions" locator=".page-main-actions" strategy="css selector" />
     </page>
 </config>
