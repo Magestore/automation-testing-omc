@@ -139,4 +139,10 @@ class ManageStockList extends Block
 	{
 		return $this->_rootElement->find('th.a-right a');
 	}
+
+	public function countProductRows()
+	{
+		$products = $this->_rootElement->getElements('.table-product tr');
+		return count($products);
+	}
 }

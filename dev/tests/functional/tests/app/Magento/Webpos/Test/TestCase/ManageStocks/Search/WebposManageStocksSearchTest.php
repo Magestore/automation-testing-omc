@@ -55,6 +55,9 @@ class WebposManageStocksSearchTest extends Injectable
 		if ($action === 'search_incorrect') {
 			$searchText = 'asajbabjadbvdakvb';
 		}
+		elseif ($action === 'search_name') {
+			$searchText = $product->getName();
+		}
 
 		$this->webposIndex->getManageStockList()->searchProduct($searchText);
 		sleep(3);
