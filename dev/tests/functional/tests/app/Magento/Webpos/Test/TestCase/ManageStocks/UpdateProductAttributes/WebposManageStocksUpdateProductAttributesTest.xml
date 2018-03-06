@@ -21,6 +21,7 @@
 			<data name="action" xsi:type="string">update</data>
 
 			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes\AssertUpdateButtonIsNotShownOnProductRow" />
+			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes\AssertProductIsUpdatedInBackend" />
 		</variation>
 	</testCase>
 </config>

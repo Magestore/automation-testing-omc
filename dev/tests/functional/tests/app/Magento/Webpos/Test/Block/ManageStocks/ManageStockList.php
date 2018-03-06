@@ -152,4 +152,9 @@ class ManageStockList extends Block
 		$selector = './/tr[.//span[@data-bind="text: name" and text()="%s"]].//span[@class="icon-iconPOS-success"]';
 		$this->waitForElementVisible(sprintf($selector, $productName), Locator::SELECTOR_XPATH);
 	}
+
+	public function getStoreAddress()
+	{
+		return $this->_rootElement->find('.sum-info-top .address');
+	}
 }

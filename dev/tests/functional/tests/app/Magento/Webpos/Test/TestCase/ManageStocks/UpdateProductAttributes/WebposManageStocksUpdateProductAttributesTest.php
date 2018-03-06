@@ -9,6 +9,7 @@
 namespace Magento\Webpos\Test\TestCase\ManageStocks\UpdateProductAttributes;
 
 
+use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
@@ -56,6 +57,8 @@ class WebposManageStocksUpdateProductAttributesTest extends Injectable
 
 		// Edit product info
 		$this->webposIndex->getManageStockList()->searchProduct($productName);
+		$this->webposIndex->getManageStockList()->getStoreAddress()->click();
+		sleep(2);
 
 		if (isset($productInfo['qty'])) {
 			$this->webposIndex->getManageStockList()->getProductQtyInput($productName)->setValue($productInfo['qty']);
@@ -76,7 +79,6 @@ class WebposManageStocksUpdateProductAttributesTest extends Injectable
 		// action
 		if ($action === 'update') {
 			$this->webposIndex->getManageStockList()->getUpdateButton($productName)->click();
-			$this->webposIndex->getManageStockList()->waitForProductIconSuccess($productName);
 		}
 
 		return [
