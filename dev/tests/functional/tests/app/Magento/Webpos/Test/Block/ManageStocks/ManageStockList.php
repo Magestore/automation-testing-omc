@@ -146,4 +146,10 @@ class ManageStockList extends Block
 		$products = $this->_rootElement->getElements('.table-product tbody tr');
 		return count($products);
 	}
+
+	public function waitForProductIconSuccess($productName)
+	{
+		$selector = './/tr[.//span[@data-bind="text: name" and text()="%s"]].//span[@class="icon-iconPOS-success"]';
+		$this->waitForElementVisible(sprintf($selector, $productName), Locator::SELECTOR_XPATH);
+	}
 }
