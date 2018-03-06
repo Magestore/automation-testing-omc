@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
 	<testCase name="Magento\Webpos\Test\TestCase\ManageStocks\UpdateProductAttributes\WebposManageStocksUpdateProductAttributesTest" summary="Manage Stocks - Update Product Attributes Test" ticketId="WEBPOS-1">
-		<!--<variation name="WebposManageStocksUpdateProductAttributesTestVariation_MSK07">-->
-			<!--<data name="productInfo" xsi:type="array">-->
-				<!--<item name="product" xsi:type="string">default</item>-->
-				<!--<item name="qty" xsi:type="number">150</item>-->
-				<!--<item name="inStock" xsi:type="boolean">false</item>-->
-			<!--</data>-->
+		<variation name="WebposManageStocksUpdateProductAttributesTestVariation_MSK07">
+			<data name="productInfo" xsi:type="array">
+				<item name="product" xsi:type="string">default</item>
+				<item name="qty" xsi:type="number">150</item>
+				<item name="inStock" xsi:type="boolean">false</item>
+			</data>
 
-			<!--<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes\AssertUpdateButtonIsShownOnProductRow" />-->
-		<!--</variation>-->
+			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes\AssertUpdateButtonIsShownOnProductRow" />
+		</variation>
 
 		<variation name="WebposManageStocksUpdateProductAttributesTestVariation_MSK08">
 			<data name="productInfo" xsi:type="array">
