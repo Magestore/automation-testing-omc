@@ -50,7 +50,7 @@ class StaffId extends DataSource
                 $this->staffs[] = $staff;
             }
         } else {
-            $this->data = null;
+            $this->data = $data;
         }
     }
 
