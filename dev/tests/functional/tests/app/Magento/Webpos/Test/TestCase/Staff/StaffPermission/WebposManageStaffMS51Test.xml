@@ -5,13 +5,14 @@
             <data name="webposRole/dataset" xsi:type="string">MS51Staff</data>
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">
-                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
+                    <item name="product" xsi:type="string">product_50_dollar_taxable</item>
+                </item>
+                <item name="1" xsi:type="array">
+                    <item name="product" xsi:type="string">product_50_dollar_taxable</item>
                 </item>
             </data>
-            <data xsi:type="string" name="discount">60.00</data>
-            <!--<data name="message" xsi:type="string">Staff was successfully saved</data>-->
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertStaffSuccessSaveMessage" />-->
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertCheckInfoDisplayOnGridCreatedBefore" />-->
+            <data xsi:type="string" name="discount">85.00</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertDiscountWholeCart" />
         </variation>
     </testCase>
 </config>

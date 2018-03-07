@@ -22,10 +22,6 @@ class WebposManageStaffMS51Test extends Injectable
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'webpos_default_guest_checkout_rollback']
-        )->run();
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'have_shipping_method_on_webpos_CP197']
         )->run();
     }
@@ -60,12 +56,17 @@ class WebposManageStaffMS51Test extends Injectable
             ['products' => $products]
         )->run();
         $product1 = $products[0]['product'];
+        $product2 = $products[1]['product'];
 
         //Login
         $this->loginWebpos($this->webposIndex, $dataStaff['username'],$dataStaff['password']);
 
         //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        sleep(1);
+        $this->webposIndex->getCheckoutProductList()->search($product2->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
@@ -77,13 +78,15 @@ class WebposManageStaffMS51Test extends Injectable
         }
         $this->webposIndex->getCheckoutDiscount()->clickDiscountButton();
         $this->webposIndex->getCheckoutDiscount()->setTypeDiscount('$');
-        $this->webposIndex->getCheckoutDiscount()->setNumberDiscount($discount);
+        $this->webposIndex->getCheckoutDiscount()->setDiscountAmount($discount);
         $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
         sleep(1);
 
         //Checkout
+        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -104,8 +107,10 @@ class WebposManageStaffMS51Test extends Injectable
         $orderId= ltrim ($orderId,'#');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         sleep(1);
+        $discount = floatval($webposRole->getMaximumDiscountPercent())*($product1->getPrice() + $product1->getPrice())*0.01;
         return [
             'orderId' => $orderId,
+            'discount' => $discount,
             'shippingDescription' => 'Flat Rate - Fixed'
         ];
     }

@@ -13,8 +13,6 @@
             </data>
             <data xsi:type="string" name="priceCustom">80</data>
             <data xsi:type="string" name="discount">100.00</data>
-            <!--<data name="message" xsi:type="string">Staff was successfully saved</data>-->
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertStaffSuccessSaveMessage" />-->
             <!--<constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertCheckInfoDisplayOnGridCreatedBefore" />-->
         </variation>
     </testCase>
