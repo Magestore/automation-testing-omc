@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Location\ChooseLocations\WebposManageLocationML43Test" summary="Manage Location - Check [Choose locations] page" ticketId="WEBPOS-1">
+        <variation name="WebposManageLocationML43Test_ML43">
+            <data name="location/dataset" xsi:type="string">default</data>
+            <constraint name="Magento\Webpos\Test\Constraint\MappingLocation\AssertMappingLocationSuccessSaveMessage" />
+        </variation>
+    </testCase>
+</config>

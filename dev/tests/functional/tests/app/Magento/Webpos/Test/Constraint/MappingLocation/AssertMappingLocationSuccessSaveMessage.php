@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 3/5/2018
- * Time: 4:00 PM
+ * Date: 3/7/2018
+ * Time: 9:23 AM
  */
 
 namespace Magento\Webpos\Test\Constraint\MappingLocation;
@@ -12,19 +12,25 @@ use Magento\Webpos\Test\Page\Adminhtml\MappingLocationIndex;
 use Magento\Mtf\Constraint\AbstractConstraint;
 
 /**
- * Class AssertChooseLocationModalNotVisible
+ * Class AssertMappingLocationSuccessSaveMessage
  * @package Magento\Webpos\Test\Constraint\MappingLocation
  */
-class AssertChooseLocationModalNotVisible extends AbstractConstraint
+class AssertMappingLocationSuccessSaveMessage extends AbstractConstraint
 {
+    /**
+     *
+     */
+    const SUCCESS_MESSAGE = 'The mapping warehouses - locations have been saved.';
+
     /**
      * @param MappingLocationIndex $mappingLocationIndex
      */
     public function processAssert(MappingLocationIndex $mappingLocationIndex)
     {
-        \PHPUnit_Framework_Assert::assertFalse(
-            $mappingLocationIndex->getLocationModal()->getModalOverlay()->isVisible(),
-            'Location Modal is visible.'
+        \PHPUnit_Framework_Assert::assertEquals(
+            self::SUCCESS_MESSAGE,
+            $mappingLocationIndex->getMessagesBlock()->getSuccessMessage(),
+            'Wrong success message is displayed.'
         );
     }
 
@@ -35,6 +41,6 @@ class AssertChooseLocationModalNotVisible extends AbstractConstraint
      */
     public function toString()
     {
-        return 'Locations Modal is correctly.';
+        return 'Mapping Locations - Success message is displayed.';
     }
 }

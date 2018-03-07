@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 3/5/2018
- * Time: 4:00 PM
+ * Date: 3/7/2018
+ * Time: 2:22 PM
  */
 
 namespace Magento\Webpos\Test\Constraint\MappingLocation;
@@ -12,19 +12,19 @@ use Magento\Webpos\Test\Page\Adminhtml\MappingLocationIndex;
 use Magento\Mtf\Constraint\AbstractConstraint;
 
 /**
- * Class AssertChooseLocationModalNotVisible
+ * Class AssertFilterNoRecord
  * @package Magento\Webpos\Test\Constraint\MappingLocation
  */
-class AssertChooseLocationModalNotVisible extends AbstractConstraint
+class AssertFilterNoRecord extends AbstractConstraint
 {
     /**
      * @param MappingLocationIndex $mappingLocationIndex
      */
     public function processAssert(MappingLocationIndex $mappingLocationIndex)
     {
-        \PHPUnit_Framework_Assert::assertFalse(
-            $mappingLocationIndex->getLocationModal()->getModalOverlay()->isVisible(),
-            'Location Modal is visible.'
+        \PHPUnit_Framework_Assert::assertTrue(
+            $mappingLocationIndex->getLocationModal()->getRowNoData()->isVisible(),
+            'Message No Record not visible.'
         );
     }
 
@@ -35,6 +35,6 @@ class AssertChooseLocationModalNotVisible extends AbstractConstraint
      */
     public function toString()
     {
-        return 'Locations Modal is correctly.';
+        return 'Locations Modal - Message No record is visible.';
     }
 }

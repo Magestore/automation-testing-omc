@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 3/5/2018
- * Time: 2:18 PM
+ * Date: 3/7/2018
+ * Time: 8:24 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\Location\ChooseLocations;
@@ -12,10 +12,10 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\MappingLocationIndex;
 
 /**
- * Class WebposManageLocationML41Test
+ * Class WebposManageLocationML42Test
  * @package Magento\Webpos\Test\TestCase\Location\ChooseLocations
  */
-class WebposManageLocationML41Test extends Injectable
+class WebposManageLocationML42Test extends Injectable
 {
     /**
      * Mapping Location Index page
@@ -42,7 +42,7 @@ class WebposManageLocationML41Test extends Injectable
         $this->mappingLocationIndex->open();
         $this->mappingLocationIndex->getMappingLocationGrid()->chooseLocations();
         $this->mappingLocationIndex->getLocationModal()->waitLoader();
-        $this->mappingLocationIndex->getLocationModal()->getCancelButton()->click();
+        $this->mappingLocationIndex->getLocationModal()->getAddButton()->click();
         sleep(1);
     }
 }
