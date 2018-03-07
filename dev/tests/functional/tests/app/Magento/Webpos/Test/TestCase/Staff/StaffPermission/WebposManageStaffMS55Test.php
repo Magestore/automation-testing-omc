@@ -22,10 +22,6 @@ class WebposManageStaffMS55Test extends Injectable
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'webpos_default_guest_checkout_rollback']
-        )->run();
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'have_shipping_method_on_webpos_CP197']
         )->run();
     }
@@ -75,6 +71,16 @@ class WebposManageStaffMS55Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
 
+        //Click to first product name > Discount tab > Input amount greater than original
+        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
+        $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
+        $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
+        $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
+        $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
+        sleep(1);
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
+
         //Click on [Add discount] > on Discount tab, add dicount for whole cart (type: %)
         while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup())
         {
@@ -86,20 +92,16 @@ class WebposManageStaffMS55Test extends Injectable
         $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
         sleep(1);
-
-        //Click to first product name > Discount tab > Input amount greater than original
-        $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
-        sleep(1);
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
         //Checkout
+        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#webpos_checkout > div.indicator');
 
         //PlaceOrder
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();

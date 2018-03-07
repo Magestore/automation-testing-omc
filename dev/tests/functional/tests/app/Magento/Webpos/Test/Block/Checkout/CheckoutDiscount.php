@@ -66,21 +66,32 @@ class CheckoutDiscount extends Block
 
     public function setNumberDiscount($number)
     {
-        $numbers = explode('.',$number);
-        foreach ($numbers as $number)
+        if (floatval($number) == 100.00)
         {
-            if (floatval($number) >= 100.0)
-                break;
-            if (floatval($number) >= 10)
+            $this->clickNumberButton('1');
+            $this->clickNumberButton('0');
+            $this->clickNumberButton('0');
+            $this->clickNumberButton('0');
+            $this->clickNumberButton('0');
+        }else
+        {
+            $numbers = explode('.',$number);
+            foreach ($numbers as $number)
             {
-                $a = (int)($number / 10);
-                $b = (int)($number - $a*10);
-                $this->clickNumberButton((string)$a);
-                $this->clickNumberButton((string)$b);
-            }else
-                $this->clickNumberButton($number);
+                if (floatval($number) > 100.0)
+                    break;
+                if (floatval($number) >= 10)
+                {
+                    $a = (int)($number / 10);
+                    $b = (int)($number - $a*10);
+                    $this->clickNumberButton((string)$a);
+                    $this->clickNumberButton((string)$b);
+                }else
+                    $this->clickNumberButton($number);
 
+            }
         }
+
     }
 
     public function setTypeDiscount($type)
