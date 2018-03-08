@@ -71,7 +71,7 @@ class WebposManageStaffMS70Test extends Injectable
         $locationId = $location->getLocationId();
         $posData['pos_name'] = 'Pos Test %isolation%';
         $posData['status'] = 'Enabled';
-        $posData['location_id'] = $locationId;
+        $posData['location_id'][] = $locationId;
         /**@var Pos $pos*/
         $pos = $this->fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
@@ -97,6 +97,7 @@ class WebposManageStaffMS70Test extends Injectable
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',
             ['products' => $products]
         )->run();
+        //Add discount to product
         $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-edit-product"]');
         $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();

@@ -91,6 +91,22 @@ class Curl extends AbstractCurl implements RoleInterface
                 'Magestore_Webpos::manage_all_order',
                 'Magestore_Webpos::manage_discount',
                 'Magestore_Webpos::apply_coupon'
+            ],
+            'manage_order_and_apply_custom_discount_per_item' => [
+                'Magestore_Webpos::manage_order',
+                'Magestore_Webpos::manage_order_me',
+                'Magestore_Webpos::manage_order_location',
+                'Magestore_Webpos::manage_all_order',
+                'Magestore_Webpos::manage_discount',
+                'Magestore_Webpos::apply_discount_per_item'
+            ],
+            'manage_order_and_apply_custom_price' => [
+                'Magestore_Webpos::manage_order',
+                'Magestore_Webpos::manage_order_me',
+                'Magestore_Webpos::manage_order_location',
+                'Magestore_Webpos::manage_all_order',
+                'Magestore_Webpos::manage_discount',
+                'Magestore_Webpos::apply_custom_price',
             ]
         ]
     ];

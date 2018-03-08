@@ -68,7 +68,7 @@ class WebposManageStaffMS65Test extends Injectable
         $locationId = $location->getLocationId();
         $posData['pos_name'] = 'Pos Test %isolation%';
         $posData['status'] = 'Enabled';
-        $posData['location_id'] = $locationId;
+        $posData['location_id'][] = $locationId;
         /**@var Pos $pos*/
         $pos = $this->fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
