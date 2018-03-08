@@ -12,6 +12,11 @@
             <field name="address" xsi:type="string">Test Store Address %isolation%</field>
             <field name="description" xsi:type="string">Test Store Address %isolation%</field>
         </dataset>
+        <dataset name="default2">
+            <field name="display_name" xsi:type="string">Test Location Name %isolation%</field>
+            <field name="address" xsi:type="string">Test Address %isolation%</field>
+            <field name="description" xsi:type="string">Test Description %isolation%</field>
+        </dataset>
         <dataset name="MS44">
             <field name="display_name" xsi:type="string">Test Display Name %isolation%</field>
             <field name="address" xsi:type="string">Test Address %isolation%</field>

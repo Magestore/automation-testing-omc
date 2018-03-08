@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Location\ChooseLocations\WebposManageLocationML45Test" summary="Manage Location - Check [Choose locations] page" ticketId="WEBPOS-1">
+        <variation name="WebposManageLocationML45Test_ML45">
+            <data name="initialLocation/dataset" xsi:type="string">default</data>
+            <data name="location/dataset" xsi:type="string">default2</data>
+            <constraint name="Magento\Webpos\Test\Constraint\MappingLocation\AssertFilterBlockNotVisible" />
+            <constraint name="Magento\Webpos\Test\Constraint\MappingLocation\AssertFilterNoRecord" />
+        </variation>
+    </testCase>
+</config>

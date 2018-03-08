@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Location\ChooseLocations\WebposManageLocationSortingTest" summary="Manage Location - Check [Choose locations] page" ticketId="WEBPOS-1">
+        <variation name="WebposManageLocationSortingTest_ML48">
+            <data name="initialLocation/dataset" xsi:type="string">default</data>
+            <data name="location/dataset" xsi:type="string">default2</data>
+            <data name="columnsForSorting" xsi:type="string">ID</data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+        </variation>
+        <variation name="WebposManageLocationSortingTest_ML49">
+            <data name="initialLocation/dataset" xsi:type="string">default</data>
+            <data name="location/dataset" xsi:type="string">default2</data>
+            <data name="columnsForSorting" xsi:type="string">Display Name</data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+        </variation>
+        <variation name="WebposManageLocationSortingTest_ML50">
+            <data name="initialLocation/dataset" xsi:type="string">default</data>
+            <data name="location/dataset" xsi:type="string">default2</data>
+            <data name="columnsForSorting" xsi:type="string">Address</data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+        </variation>
+        <variation name="WebposManageLocationSortingTest_ML51">
+            <data name="initialLocation/dataset" xsi:type="string">default</data>
+            <data name="location/dataset" xsi:type="string">default2</data>
+            <data name="columnsForSorting" xsi:type="string">Description</data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+        </variation>
+    </testCase>
+</config>

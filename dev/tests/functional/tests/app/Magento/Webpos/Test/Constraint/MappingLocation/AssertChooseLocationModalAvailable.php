@@ -18,24 +18,24 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 class AssertChooseLocationModalAvailable extends AbstractConstraint
 {
     /**
-     * @param MappingLocationIndex $indexPage
+     * @param MappingLocationIndex $mappingLocationIndex
      */
-    public function processAssert(MappingLocationIndex $indexPage)
+    public function processAssert(MappingLocationIndex $mappingLocationIndex)
     {
         \PHPUnit_Framework_Assert::assertTrue(
-            $indexPage->getLocationModal()->getCancelButton()->isVisible(),
+            $mappingLocationIndex->getLocationModal()->getCancelButton()->isVisible(),
             'Cancel button is not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
-            $indexPage->getLocationModal()->getAddButton()->isVisible(),
+            $mappingLocationIndex->getLocationModal()->getAddButton()->isVisible(),
             'Add button is not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
-            $indexPage->getLocationModal()->getDataGridHeader()->isVisible(),
+            $mappingLocationIndex->getLocationModal()->getDataGridHeader()->isVisible(),
             'Data Grid Header is not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
-            $indexPage->getLocationModal()->getDataGridWrap()->isVisible(),
+            $mappingLocationIndex->getLocationModal()->getDataGridWrap()->isVisible(),
             'Data Grid Wrap is not visible.'
         );
     }

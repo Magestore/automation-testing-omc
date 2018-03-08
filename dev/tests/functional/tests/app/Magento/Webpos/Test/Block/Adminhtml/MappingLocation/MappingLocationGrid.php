@@ -29,7 +29,7 @@ class MappingLocationGrid extends DataGrid
      *
      * @var string
      */
-    protected $spinner = '[data-role="spinner"]';
+    protected $spinner = '[data-component="os_warehouse_locations_mapping_form.os_warehouse_locations_mapping_form"]';
 
     /**
      * Press 'Choose Locations' button.
