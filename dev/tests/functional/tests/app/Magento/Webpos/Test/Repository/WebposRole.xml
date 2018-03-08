@@ -101,5 +101,33 @@
             <field name="all" xsi:type="string">0</field>
             <field name="resource" xsi:type="string">manage_inventory</field>
         </dataset>
+        <dataset name="role_ms69">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">50</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_discount</field>
+        </dataset>
+        <dataset name="role_ms70">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">50</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_discount_apply_all_discount</field>
+        </dataset>
+        <dataset name="role_ms71">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">50</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_order_and_apply_custom_discount_per_cart</field>
+        </dataset>
+        <dataset name="role_ms73">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">100</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_order_and_apply_coupon_code</field>
+        </dataset>
     </repository>
 </config>
