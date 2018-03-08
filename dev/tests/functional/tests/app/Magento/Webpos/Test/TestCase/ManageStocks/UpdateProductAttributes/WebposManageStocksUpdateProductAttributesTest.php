@@ -44,7 +44,7 @@ class WebposManageStocksUpdateProductAttributesTest extends Injectable
 	{
 		// Create product
 		$productInfo['product'] = $this->fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $productInfo['product']]);
-		$this->objectManager->create('Magento\Catalog\Test\Handler\CatalogProductSimple\Curl')->persist($productInfo['product']);
+		$productInfo['product'] = $this->objectManager->create('Magento\Catalog\Test\Handler\CatalogProductSimple\Curl')->persist($productInfo['product']);
 
 		// Login webpos
 		$staff = $this->objectManager->getInstance()->create(

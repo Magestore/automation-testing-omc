@@ -23,8 +23,10 @@ class WebposManageStocksSearchTest extends Injectable
 
 	public function __prepare(FixtureFactory $fixtureFactory)
 	{
-		$product = $fixtureFactory->createByCode('catalogProductSimple');
-		$product->persist();
+		$product = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => 'product_in_primary_warehouse']);
+//		$product->persist();
+		$product = $this->objectManager->create('Magento\Catalog\Test\Handler\CatalogProductSimple\Curl')->persist($product);
+
 		return ['product' => $product];
 	}
 
