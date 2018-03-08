@@ -59,5 +59,20 @@
 			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible" />
 			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes\AssertQtyOfProductOnManageStocksPageIsCorrect" />
 		</variation>
+
+		<variation name="WebposManageStocksUpdateProductAttributesTestVariation_MSK14">
+			<data name="productInfo" xsi:type="array">
+				<item name="product" xsi:type="string">product_in_primary_warehouse</item>
+				<item name="qty" xsi:type="number">1</item>
+				<item name="manageStock" xsi:type="boolean">true</item>
+				<item name="backorders" xsi:type="boolean">false</item>
+				<item name="orderQty" xsi:type="number">2</item>
+			</data>
+
+			<data name="action" xsi:type="string">update</data>
+			<data name="placeOrder" xsi:type="boolean">false</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes\AssertDoNotAllowToAddProductToCartMoreThanItQty" />
+		</variation>
 	</testCase>
 </config>
