@@ -29,7 +29,7 @@ class MappingLocationGrid extends DataGrid
      *
      * @var string
      */
-    protected $spinner = '[data-component="os_webpos_locations_listing.os_webpos_locations_listing.os_webpos_locations_listing_columns"]';
+    protected $spinner = '[data-component="os_warehouse_locations_mapping_form.os_warehouse_locations_mapping_form"]';
 
     /**
      * Press 'Choose Locations' button.
