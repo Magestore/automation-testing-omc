@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Bang
- * Date: 3/1/2018
- * Time: 1:43 PM
+ * Date: 3/7/2018
+ * Time: 4:03 PM
  */
 
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
@@ -15,7 +15,7 @@ use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposManageStaffMS61Test extends Injectable
+class WebposManageStaffMS65Test extends Injectable
 {
 
     /**
@@ -44,6 +44,11 @@ class WebposManageStaffMS61Test extends Injectable
 
     public function __prepare(FixtureFactory $fixtureFactory)
     {
+        //Config create session before working
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_yes_MS57']
+        )->run();
         $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
         return ['staffData' => $staff->getData()];
     }
@@ -70,17 +75,11 @@ class WebposManageStaffMS61Test extends Injectable
         $posId = $pos->getPosId();
         $staffData['location_id'][] = $locationId;
         $staffData['pos_ids'][] = $posId;
-        $staffData['username'] = 'test%isolation%';
-        $staffData['display_name'] = 'Staff %isolation%';
-        $staffData['email'] = 'test%isolation%@trueplus.vn';
-        /**@var Staff $staff1*/
-        $staff1 = $this->fixtureFactory->createByCode('staff', ['data' => $staffData]);
-        $staff1->persist();
-        /**@var Staff $staff2*/
-        $staff2 = $this->fixtureFactory->createByCode('staff', ['data' => $staffData]);
-        $staff2->persist();
+        /**@var Staff $staff*/
+        $staff = $this->fixtureFactory->createByCode('staff', ['data' => $staffData]);
+        $staff->persist();
         $roleData = $webposRole->getData();
-        $roleData['staff_id'][] = $staff2->getStaffId();
+        $roleData['staff_id'][] = $staff->getStaffId();
         $role = $this->fixtureFactory->createByCode('webposRole', ['data' => $roleData]);
         $role->persist();
         //Create product
@@ -89,36 +88,7 @@ class WebposManageStaffMS61Test extends Injectable
             ['products' => $products]
         )->run();
         //Login
-        $this->login($staff1);
-        // Add product to cart
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\AddProductToCartStep',
-            ['products' => $products]
-        )->run();
-        // Place Order
-        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="toaster"]');
-        //Logout
-        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->logout();
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
-        $this->webposIndex->getModal()->getOkButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader.loading-mask');
-        //Config create session before working
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'create_section_before_working_yes_MS57']
-        )->run();
-        //Login by staff2
-        $this->login($staff2, $location, $pos);
+        $this->login($staff, $location, $pos);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         sleep(2);
@@ -168,17 +138,13 @@ class WebposManageStaffMS61Test extends Injectable
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        $this->assertCount(
-            1,
-            $this->webposIndex->getOrderHistoryOrderList()->getAllOrderItems(),
-            'Orders in orders list are wrong.'
+        $this->assertTrue(
+            $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->isVisible(),
+            'Not show any order.'
         );
 
     }
 
-    /**
-     * @param Staff $staff
-     */
     public function login(Staff $staff, Location $location = null, Pos $pos = null)
     {
         $username = $staff->getUsername();
@@ -221,5 +187,6 @@ class WebposManageStaffMS61Test extends Injectable
             ['configData' => 'create_section_before_working_no_MS57']
         )->run();
     }
+
 }
 

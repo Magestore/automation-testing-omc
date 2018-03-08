@@ -83,4 +83,9 @@ class OrderHistoryOrderList extends Block
     {
         return $this->_rootElement->find('.list-orders')->isVisible();
     }
+
+    public function getAllOrderItems()
+    {
+        return $this->_rootElement->getElements('.item');
+    }
 }

@@ -87,5 +87,19 @@
                 <item name="dataset" xsi:type="string">default</item>
             </field>
         </dataset>
+        <dataset name="role_ms65">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">50</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_all_order</field>
+        </dataset>
+        <dataset name="role_ms66">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">50</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_inventory</field>
+        </dataset>
     </repository>
 </config>

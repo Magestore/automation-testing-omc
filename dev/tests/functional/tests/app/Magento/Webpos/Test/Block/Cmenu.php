@@ -31,6 +31,11 @@ class Cmenu extends Block
         $this->_rootElement->find('#orders_history')->click();
     }
 
+    public function ordersHistoryIsVisisble()
+    {
+        return $this->_rootElement->find('#orders_history')->isVisible();
+    }
+
     public function onHoldOrders()
     {
         $this->_rootElement->find('#on_hold_orders')->click();
