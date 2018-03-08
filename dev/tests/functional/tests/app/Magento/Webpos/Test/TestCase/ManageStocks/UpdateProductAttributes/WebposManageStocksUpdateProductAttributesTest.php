@@ -12,6 +12,7 @@ namespace Magento\Webpos\Test\TestCase\ManageStocks\UpdateProductAttributes;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 class WebposManageStocksUpdateProductAttributesTest extends Injectable
@@ -37,12 +38,13 @@ class WebposManageStocksUpdateProductAttributesTest extends Injectable
 
 	public function test(
 		$productInfo,
-		$action = ''
+		$action = '',
+		$placeOrder = false
 	)
 	{
 		// Create product
 		$productInfo['product'] = $this->fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $productInfo['product']]);
-		$productInfo['product']->persist();
+		$this->objectManager->create('Magento\Catalog\Test\Handler\CatalogProductSimple\Curl')->persist($productInfo['product']);
 
 		// Login webpos
 		$staff = $this->objectManager->getInstance()->create(
@@ -58,7 +60,7 @@ class WebposManageStocksUpdateProductAttributesTest extends Injectable
 		// Edit product info
 		$this->webposIndex->getManageStockList()->searchProduct($productName);
 		$this->webposIndex->getManageStockList()->getStoreAddress()->click();
-		sleep(2);
+		sleep(1);
 
 		if (isset($productInfo['qty'])) {
 			$this->webposIndex->getManageStockList()->getProductQtyInput($productName)->setValue($productInfo['qty']);
@@ -79,6 +81,34 @@ class WebposManageStocksUpdateProductAttributesTest extends Injectable
 		// action
 		if ($action === 'update') {
 			$this->webposIndex->getManageStockList()->getUpdateButton($productName)->click();
+//			$this->webposIndex->getManageStockList()->waitForProductIconSuccess($productName);
+		}
+
+		if (isset($productInfo['orderQty'])) {
+			// Open checkout page
+			$this->webposIndex->getMsWebpos()->clickCMenuButton();
+			$this->webposIndex->getCMenu()->checkout();
+			$this->webposIndex->getCheckoutCartFooter()->waitButtonHoldVisible();
+			$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+
+			// Add product to cart
+			for ($i = 0; $i < $productInfo['orderQty']; $i++) {
+				$this->webposIndex->getCheckoutProductList()->search($productInfo['product']->getSku());
+				$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+				$this->webposIndex->getMsWebpos()->waitCartLoader();
+			}
+
+			if ($placeOrder) {
+				$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
+				$this->webposIndex->getMsWebpos()->waitCartLoader();
+				$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+
+				$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+				$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+
+				$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+				$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+			}
 		}
 
 		return [

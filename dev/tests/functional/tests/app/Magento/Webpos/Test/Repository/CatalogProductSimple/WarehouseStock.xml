@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+	<repository class="Magento\Webpos\Test\Repository\CatalogProductSimple\WarehouseStock">
+		<dataset name="primary_warehouse_stock">
+			<field name="warehouse_stock_row" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="warehouse_select" xsi:type="string">2</item>
+					<item name="use_config_available_qty" xsi:type="string">0</item>
+					<item name="total_qty" xsi:type="string">150</item>
+				</item>
+			</field>
+		</dataset>
+	</repository>
+</config>
