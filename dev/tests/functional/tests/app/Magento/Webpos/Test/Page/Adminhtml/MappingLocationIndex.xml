@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
+    <page name="MappingLocationIndex" area="Adminhtml" mca="inventorysuccess/warehouse_locations/mapping" module="Magento_Webpos">
+        <block name="messagesBlock" class="Magento\Backend\Test\Block\Messages" locator="#messages .messages" strategy="css selector"/>
+        <block name="pageActions" class="Magento\Backend\Test\Block\FormPageActions" locator=".page-main-actions" strategy="css selector"/>
+        <block name="mappingLocationGrid" class="Magento\Webpos\Test\Block\Adminhtml\MappingLocation\MappingLocationGrid" locator="[id='page:main-container']" strategy="css selector" />
+        <block name="locationModal" class="Magento\Webpos\Test\Block\Adminhtml\MappingLocation\LocationModal" locator=".modals-wrapper" strategy="css selector" />
+        <block name="FormPageActions" class="Magento\Webpos\Test\Block\Adminhtml\MappingLocation\FormPageActions" locator=".page-main-actions" strategy="css selector" />
+    </page>
+</config>

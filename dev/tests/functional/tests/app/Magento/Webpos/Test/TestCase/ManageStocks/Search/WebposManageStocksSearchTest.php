@@ -23,8 +23,10 @@ class WebposManageStocksSearchTest extends Injectable
 
 	public function __prepare(FixtureFactory $fixtureFactory)
 	{
-		$product = $fixtureFactory->createByCode('catalogProductSimple');
-		$product->persist();
+		$product = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => 'product_in_primary_warehouse']);
+//		$product->persist();
+		$product = $this->objectManager->create('Magento\Catalog\Test\Handler\CatalogProductSimple\Curl')->persist($product);
+
 		return ['product' => $product];
 	}
 
@@ -55,8 +57,17 @@ class WebposManageStocksSearchTest extends Injectable
 		if ($action === 'search_incorrect') {
 			$searchText = 'asajbabjadbvdakvb';
 		}
+		elseif ($action === 'search_name') {
+			$searchText = $product->getName();
+		}
+		elseif ($action === 'search_sku') {
+			$searchText = $product->getSku();
+		}
+		elseif ($action === 'clear_keyword') {
+			$this->webposIndex->getManageStockList()->searchProduct('asajbabjadbvdakvb');
+			$searchText = '';
+		}
 
 		$this->webposIndex->getManageStockList()->searchProduct($searchText);
-		sleep(3);
 	}
 }

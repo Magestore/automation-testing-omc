@@ -38,14 +38,6 @@ class WebposManageStaffMS44Test extends Injectable
      */
     protected $webposIndex;
 
-    public function __prepare(Location $location, Pos $pos)
-    {
-        $location->persist();
-        $pos->persist();
-        return ['location' => $location,
-            'pos' => $pos];
-    }
-
     public function __inject(
         StaffIndex $staffsIndex,
         StaffNews $staffsNew,
@@ -57,25 +49,41 @@ class WebposManageStaffMS44Test extends Injectable
 
     }
 
-    public function test(Staff $staff, Location $location, Pos $pos)
+    public function test(Staff $staff, Pos $pos)
     {
         // Preconditions:
-        $location->persist();
         $pos->persist();
+
+        $location = $pos->getDataFieldConfig('location_id')['source']->getLocation();
+
         $staff->persist();
         // Steps
         $this->staffsIndex->open();
         $this->staffsIndex->getStaffsGrid()->search(['email' => $staff->getEmail()]);
         $this->staffsIndex->getStaffsGrid()->getRowByEmail($staff->getEmail())->find('.action-menu-item')->click();
         sleep(1);
-        $this->staffsNew->getStaffsForm()->setLocation($location->getDisplayName());
-        $this->staffsNew->getStaffsForm()->setPos($pos->getPosName());
+        $this->staffsNew->getStaffsForm()->setLocation([$location->getDisplayName(), 'Store Address']);
+        $this->staffsNew->getStaffsForm()->setPos([$pos->getPosName(), 'Store POS']);
         sleep(1);
         $this->staffsNew->getFormPageActionsStaff()->save();
+
+        //Open webpos
         $this->webposIndex->open();
-        $this->webposIndex->getLoginForm()->getUsernameField()->setValue($staff->getUsername());
-        $this->webposIndex->getLoginForm()->getPasswordField()->setValue($staff->getPassword());
-        $this->webposIndex->getLoginForm()->clickLoginButton();
+        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
+        if ($this->webposIndex->getLoginForm()->isVisible()) {
+            $this->webposIndex->getLoginForm()->getUsernameField()->setValue($staff->getUsername());
+            $this->webposIndex->getLoginForm()->getPasswordField()->setValue($staff->getPassword());
+            $this->webposIndex->getLoginForm()->clickLoginButton();
+            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
+            $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
+            $this->webposIndex->getLoginForm()->setLocation($location->getDisplayName());
+            $this->webposIndex->getLoginForm()->getEnterToPos()->click();
+            $this->webposIndex->getLoginForm()->setPos($pos->getPosName());
+            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
+//            $this->webposIndex->getLoginForm()->getEnterToPos()->click();
+
+        }
+
 //			$this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
         $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
         $time = time();

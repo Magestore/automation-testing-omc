@@ -6,5 +6,23 @@
 
 			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\Search\AssertProductListIsEmpty" />
 		</variation>
+
+		<variation name="WebposManageStocksSearchTestVariation_MSK03">
+			<data name="action" xsi:type="string">search_name</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\Search\AssertSearchedProductIsShownOnStocksList" />
+		</variation>
+
+		<variation name="WebposManageStocksSearchTestVariation_MSK04">
+			<data name="action" xsi:type="string">search_sku</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\Search\AssertSearchedProductIsShownOnStocksList" />
+		</variation>
+
+		<variation name="WebposManageStocksSearchTestVariation_MSK05">
+			<data name="action" xsi:type="string">clear_keyword</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\Search\AssertProductListShowAllProduct" />
+		</variation>
 	</testCase>
 </config>
