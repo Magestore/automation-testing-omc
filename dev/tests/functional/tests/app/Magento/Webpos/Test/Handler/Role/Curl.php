@@ -107,6 +107,25 @@ class Curl extends AbstractCurl implements RoleInterface
                 'Magestore_Webpos::manage_all_order',
                 'Magestore_Webpos::manage_discount',
                 'Magestore_Webpos::apply_custom_price',
+            ],
+            'manage_shift' => [
+                'Magestore_Webpos::manage_shift',
+                'Magestore_Webpos::manage_shift_adjustment',
+                'Magestore_Webpos::open_shift',
+                'Magestore_Webpos::close_shift'
+            ],
+            'manage_shift_can_make_shift_adjustment' => [
+                'Magestore_Webpos::manage_shift',
+                'Magestore_Webpos::manage_shift_adjustment'
+            ],
+            'manage_shift_can_open_shift' => [
+                'Magestore_Webpos::manage_shift',
+                'Magestore_Webpos::open_shift'
+            ],
+            'manage_shift_can_open_close_shift' => [
+                'Magestore_Webpos::manage_shift',
+                'Magestore_Webpos::open_shift',
+                'Magestore_Webpos::close_shift'
             ]
         ]
     ];
