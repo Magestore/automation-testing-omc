@@ -12,8 +12,16 @@ namespace Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes;
 use Magento\Catalog\Test\Page\Adminhtml\CatalogProductEdit;
 use Magento\Mtf\Constraint\AbstractConstraint;
 
+/**
+ * Class AssertProductIsUpdatedInBackend
+ * @package Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes
+ */
 class AssertProductIsUpdatedInBackend extends AbstractConstraint
 {
+	/**
+	 * @param CatalogProductEdit $catalogProductEdit
+	 * @param $productInfo
+	 */
 	public function processAssert(CatalogProductEdit $catalogProductEdit, $productInfo)
 	{
 		$catalogProductEdit->open(['id' => $productInfo['product']->getId()]);

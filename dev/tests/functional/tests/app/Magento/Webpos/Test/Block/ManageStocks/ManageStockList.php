@@ -149,7 +149,7 @@ class ManageStockList extends Block
 
 	public function waitForProductIconSuccess($productName)
 	{
-		$selector = './/tr[.//span[@data-bind="text: name" and text()="%s"]].//span[@class="icon-iconPOS-success"]';
+		$selector = './/tr[.//span[@data-bind="text: name" and text()="%s"]]//span[@class="icon-iconPOS-success"]';
 		$this->waitForElementVisible(sprintf($selector, $productName), Locator::SELECTOR_XPATH);
 	}
 
