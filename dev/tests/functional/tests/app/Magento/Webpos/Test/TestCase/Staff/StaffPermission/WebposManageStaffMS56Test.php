@@ -9,6 +9,7 @@ namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
+use Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertEditDiscountCustomPrice;
 
 class WebposManageStaffMS56Test extends Injectable
 {
@@ -18,6 +19,10 @@ class WebposManageStaffMS56Test extends Injectable
      */
     private $webposIndex;
 
+    /**
+     * @var AssertEditDiscountCustomPrice
+     */
+    protected $assertEditDiscountCustomPrice;
     public function __prepare()
     {
         $this->objectManager->getInstance()->create(
@@ -33,9 +38,11 @@ class WebposManageStaffMS56Test extends Injectable
      * @return void
      */
     public function __inject(
-        WebposIndex $webposIndex
+        WebposIndex $webposIndex,
+        AssertEditDiscountCustomPrice $assertEditDiscountCustomPrice
     ) {
         $this->webposIndex = $webposIndex;
+        $this->assertEditDiscountCustomPrice = $assertEditDiscountCustomPrice;
     }
 
     /**
@@ -81,7 +88,19 @@ class WebposManageStaffMS56Test extends Injectable
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
 
+        //Assert custom price
+        $this->assertEditDiscountCustomPrice->processAssert($this->webposIndex, 80, 1);
+
+        //Checkout
+        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
+        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#webpos_checkout > div.indicator');
+
         //Click on [Add discount] > on Discount tab, add dicount for whole cart (type: %)
+        $total = $this->webposIndex->getCheckoutCartFooter()->getTotal();
         while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup())
         {
             $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
@@ -92,21 +111,10 @@ class WebposManageStaffMS56Test extends Injectable
         $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
         sleep(1);
-
-        //Checkout
-        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
-        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(1);
-        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#webpos_checkout > div.indicator');
 
         //PlaceOrder
-//        if($this->webposIndex->getCheckoutCartFooter()->get)
-        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-        sleep(1);
+        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('#checkout_button');
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         sleep(1);
@@ -118,7 +126,9 @@ class WebposManageStaffMS56Test extends Injectable
         sleep(1);
         return [
             'orderId' => $orderId,
-            'shippingDescription' => 'Flat Rate - Fixed'
+            'shippingDescription' => 'Flat Rate - Fixed',
+            'discount' => 100,
+            'total' => $total
         ];
     }
 
