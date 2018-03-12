@@ -63,6 +63,69 @@ class Curl extends AbstractCurl implements RoleInterface
             ],
             'manage_inventory' => [
                 'Magestore_Webpos::manage_inventory'
+            ],
+            'manage_discount' => [
+                'Magestore_Webpos::manage_discount',
+                'Magestore_Webpos::apply_discount_per_cart',
+                'Magestore_Webpos::apply_coupon',
+                'Magestore_Webpos::apply_discount_per_item',
+                'Magestore_Webpos::apply_custom_price',
+                'Magestore_Webpos::all_discount'
+            ],
+            'manage_discount_apply_all_discount' => [
+                'Magestore_Webpos::manage_discount',
+                'Magestore_Webpos::all_discount'
+            ],
+            'manage_order_and_apply_custom_discount_per_cart' => [
+                'Magestore_Webpos::manage_order',
+                'Magestore_Webpos::manage_order_me',
+                'Magestore_Webpos::manage_order_location',
+                'Magestore_Webpos::manage_all_order',
+                'Magestore_Webpos::manage_discount',
+                'Magestore_Webpos::apply_discount_per_cart'
+            ],
+            'manage_order_and_apply_coupon_code' => [
+                'Magestore_Webpos::manage_order',
+                'Magestore_Webpos::manage_order_me',
+                'Magestore_Webpos::manage_order_location',
+                'Magestore_Webpos::manage_all_order',
+                'Magestore_Webpos::manage_discount',
+                'Magestore_Webpos::apply_coupon'
+            ],
+            'manage_order_and_apply_custom_discount_per_item' => [
+                'Magestore_Webpos::manage_order',
+                'Magestore_Webpos::manage_order_me',
+                'Magestore_Webpos::manage_order_location',
+                'Magestore_Webpos::manage_all_order',
+                'Magestore_Webpos::manage_discount',
+                'Magestore_Webpos::apply_discount_per_item'
+            ],
+            'manage_order_and_apply_custom_price' => [
+                'Magestore_Webpos::manage_order',
+                'Magestore_Webpos::manage_order_me',
+                'Magestore_Webpos::manage_order_location',
+                'Magestore_Webpos::manage_all_order',
+                'Magestore_Webpos::manage_discount',
+                'Magestore_Webpos::apply_custom_price',
+            ],
+            'manage_shift' => [
+                'Magestore_Webpos::manage_shift',
+                'Magestore_Webpos::manage_shift_adjustment',
+                'Magestore_Webpos::open_shift',
+                'Magestore_Webpos::close_shift'
+            ],
+            'manage_shift_can_make_shift_adjustment' => [
+                'Magestore_Webpos::manage_shift',
+                'Magestore_Webpos::manage_shift_adjustment'
+            ],
+            'manage_shift_can_open_shift' => [
+                'Magestore_Webpos::manage_shift',
+                'Magestore_Webpos::open_shift'
+            ],
+            'manage_shift_can_open_close_shift' => [
+                'Magestore_Webpos::manage_shift',
+                'Magestore_Webpos::open_shift',
+                'Magestore_Webpos::close_shift'
             ]
         ]
     ];

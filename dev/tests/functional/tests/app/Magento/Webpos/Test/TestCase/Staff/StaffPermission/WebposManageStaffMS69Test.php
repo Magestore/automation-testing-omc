@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Bang
- * Date: 3/7/2018
- * Time: 4:03 PM
+ * Date: 3/8/2018
+ * Time: 2:27 PM
  */
 
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
@@ -15,7 +15,7 @@ use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposManageStaffMS65Test extends Injectable
+class WebposManageStaffMS69Test extends Injectable
 {
 
     /**
@@ -44,11 +44,6 @@ class WebposManageStaffMS65Test extends Injectable
 
     public function __prepare(FixtureFactory $fixtureFactory)
     {
-        //Config create session before working
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'create_section_before_working_yes_MS57']
-        )->run();
         $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
         return ['staffData' => $staff->getData()];
     }
@@ -88,31 +83,16 @@ class WebposManageStaffMS65Test extends Injectable
             ['products' => $products]
         )->run();
         //Login
-        $this->login($staff, $location, $pos);
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
-        $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
-        sleep(2);
+        $this->login($staff);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="c-button--push-left"]');
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->assertFalse(
             $this->webposIndex->getCMenu()->manageStocksIsVisible(),
-            'Manage Stocks on Menu is not hidden.'
+            'Manage stock is not hidden.'
         );
-        $this->assertTrue(
-            $this->webposIndex->getCMenu()->ordersMenuIsVisible(),
-            'Order menu is not visible.'
-        );
-        $this->assertTrue(
-            $this->webposIndex->getCMenu()->sessionManagementMenuIsVisible(),
-            'Session Management menu is not visible.'
-        );
-        $this->assertTrue(
-            $this->webposIndex->getCMenu()->customersMenuIsVisible(),
-            'Customer menu is not visible.'
-        );
-        $this->assertTrue(
-            $this->webposIndex->getCMenu()->settingsMenuIsVisible(),
-            'Settings menu is not visible.'
+        $this->assertFalse(
+            $this->webposIndex->getCMenu()->ordersHistoryIsVisisble(),
+            'Order history is not hidden.'
         );
         $this->webposIndex->getCMenu()->checkout();
         // Add product to cart
@@ -120,27 +100,20 @@ class WebposManageStaffMS65Test extends Injectable
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',
             ['products' => $products]
         )->run();
-        $this->assertFalse(
+        sleep(2);
+        $this->assertTrue(
             $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->isVisible(),
-            'Add discount function is not hidden.'
+            'Add discount function is not visible.'
         );
         $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-edit-product"]');
-        $this->assertFalse(
-            $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->isVisible(),
-            'Custom Price button is not hidden.'
-        );
-        $this->assertFalse(
-            $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->isVisible(),
-            'Discount button is not hidden.'
-        );
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-        $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
-        $this->webposIndex->getCMenu()->ordersHistory();
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->assertTrue(
-            $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->isVisible(),
-            'Not show any order.'
+            $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->isVisible(),
+            'Custom Price button is not visible.'
+        );
+        $this->assertTrue(
+            $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->isVisible(),
+            'Discount button is not visible.'
         );
 
     }
@@ -178,14 +151,6 @@ class WebposManageStaffMS65Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 //        $this->webposIndex->getMsWebpos()->waitCartLoader();
 
-    }
-
-    public function tearDown()
-    {
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'create_section_before_working_no_MS57']
-        )->run();
     }
 
 }

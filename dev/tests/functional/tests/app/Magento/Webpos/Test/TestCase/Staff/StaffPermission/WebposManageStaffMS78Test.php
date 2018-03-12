@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Bang
- * Date: 3/7/2018
- * Time: 4:03 PM
+ * Date: 3/9/2018
+ * Time: 8:23 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
@@ -14,8 +14,9 @@ use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
+use function MongoDB\BSON\toJSON;
 
-class WebposManageStaffMS65Test extends Injectable
+class WebposManageStaffMS78Test extends Injectable
 {
 
     /**
@@ -59,7 +60,7 @@ class WebposManageStaffMS65Test extends Injectable
      * @param WebposRole
      * @return void
      */
-    public function test(WebposRole $webposRole, $products, $staffData)
+    public function test(WebposRole $webposRole, $staffData)
     {
         //Create role and staff for role
         /**@var Location $location*/
@@ -82,66 +83,35 @@ class WebposManageStaffMS65Test extends Injectable
         $roleData['staff_id'][] = $staff->getStaffId();
         $role = $this->fixtureFactory->createByCode('webposRole', ['data' => $roleData]);
         $role->persist();
-        //Create product
-        $products = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
-            ['products' => $products]
-        )->run();
         //Login
         $this->login($staff, $location, $pos);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
+        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
         sleep(2);
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="c-button--push-left"]');
-        $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
-        $this->assertFalse(
-            $this->webposIndex->getCMenu()->manageStocksIsVisible(),
-            'Manage Stocks on Menu is not hidden.'
-        );
         $this->assertTrue(
-            $this->webposIndex->getCMenu()->ordersMenuIsVisible(),
-            'Order menu is not visible.'
+            $this->webposIndex->getListShift()->getFirstItemShift()->isVisible(),
+            'Open a shift not successfully.'
         );
-        $this->assertTrue(
-            $this->webposIndex->getCMenu()->sessionManagementMenuIsVisible(),
-            'Session Management menu is not visible.'
-        );
-        $this->assertTrue(
-            $this->webposIndex->getCMenu()->customersMenuIsVisible(),
-            'Customer menu is not visible.'
-        );
-        $this->assertTrue(
-            $this->webposIndex->getCMenu()->settingsMenuIsVisible(),
-            'Settings menu is not visible.'
-        );
-        $this->webposIndex->getCMenu()->checkout();
-        // Add product to cart
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\AddProductToCartStep',
-            ['products' => $products]
-        )->run();
-        $this->assertFalse(
-            $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->isVisible(),
-            'Add discount function is not hidden.'
-        );
-        $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-edit-product"]');
-        $this->assertFalse(
-            $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->isVisible(),
-            'Custom Price button is not hidden.'
-        );
-        $this->assertFalse(
-            $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->isVisible(),
-            'Discount button is not hidden.'
-        );
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-        $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
-        $this->webposIndex->getCMenu()->ordersHistory();
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        $this->assertTrue(
-            $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->isVisible(),
-            'Not show any order.'
-        );
+        //Put money in
+        $this->webposIndex->getSessionInfo()->getPutMoneyInButton()->click();
+        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-make-adjustment"]');
+        $this->webposIndex->getPutMoneyInPopup()->getAmountInput()->setValue(69);
+        $this->webposIndex->getPutMoneyInPopup()->getDoneButton()->click();
+        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-make-adjustment"]');
+        //Take money out
+        $this->webposIndex->getSessionInfo()->getTakeMoneyOutButton()->click();
+        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-make-adjustment"]');
+        $this->webposIndex->getPutMoneyInPopup()->getAmountInput()->setValue(69);
+        $this->webposIndex->getPutMoneyInPopup()->getDoneButton()->click();
+        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-make-adjustment"]');
+        //Close the shift
+        $this->webposIndex->getSessionInfo()->getSetClosingBalanceButton()->click();
+        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-close-shift"]');
+        $this->webposIndex->getSessionCloseShift()->getConfirmSession()->click();
+        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-close-shift"]');
+        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
+        $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
 
     }
 

@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Bang
- * Date: 3/7/2018
- * Time: 4:03 PM
+ * Date: 3/9/2018
+ * Time: 8:04 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
@@ -15,7 +15,7 @@ use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposManageStaffMS65Test extends Injectable
+class WebposManageStaffMS77Test extends Injectable
 {
 
     /**
@@ -98,21 +98,9 @@ class WebposManageStaffMS65Test extends Injectable
             $this->webposIndex->getCMenu()->manageStocksIsVisible(),
             'Manage Stocks on Menu is not hidden.'
         );
-        $this->assertTrue(
-            $this->webposIndex->getCMenu()->ordersMenuIsVisible(),
-            'Order menu is not visible.'
-        );
-        $this->assertTrue(
-            $this->webposIndex->getCMenu()->sessionManagementMenuIsVisible(),
-            'Session Management menu is not visible.'
-        );
-        $this->assertTrue(
-            $this->webposIndex->getCMenu()->customersMenuIsVisible(),
-            'Customer menu is not visible.'
-        );
-        $this->assertTrue(
-            $this->webposIndex->getCMenu()->settingsMenuIsVisible(),
-            'Settings menu is not visible.'
+        $this->assertFalse(
+            $this->webposIndex->getCMenu()->ordersHistoryIsVisisble(),
+            'Order History is not hidden.'
         );
         $this->webposIndex->getCMenu()->checkout();
         // Add product to cart
@@ -136,11 +124,18 @@ class WebposManageStaffMS65Test extends Injectable
         );
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
-        $this->webposIndex->getCMenu()->ordersHistory();
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getCMenu()->getSessionManagement();
         $this->assertTrue(
-            $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->isVisible(),
-            'Not show any order.'
+            $this->webposIndex->getSessionInfo()->getPutMoneyInButton()->isVisible(),
+            'Put In Money button is not visible.'
+        );
+        $this->assertTrue(
+            $this->webposIndex->getSessionInfo()->getTakeMoneyOutButton()->isVisible(),
+            'Take Money Out button is not visible.'
+        );
+        $this->assertTrue(
+            $this->webposIndex->getSessionInfo()->getSetClosingBalanceButton()->isVisible(),
+            'Set Closing Balance button is not visible.'
         );
 
     }
