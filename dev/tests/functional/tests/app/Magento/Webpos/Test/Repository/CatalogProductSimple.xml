@@ -434,9 +434,11 @@
                 <item name="dataset" xsi:type="string">simple_order_default</item>
             </field>
             <field name="warehouse_stock" xsi:type="array">
-                <item name="0" xsi:type="array">
-                    <item name="use_config_available_qty" xsi:type="string">0</item>
-                    <item name="total_qty" xsi:type="string">150</item>
+                <item name="warehouse_stock_row" xsi:type="array">
+                    <item name="0" xsi:type="array">
+                        <item name="use_config_available_qty" xsi:type="string">0</item>
+                        <item name="total_qty" xsi:type="string">150</item>
+                    </item>
                 </item>
             </field>
         </dataset>

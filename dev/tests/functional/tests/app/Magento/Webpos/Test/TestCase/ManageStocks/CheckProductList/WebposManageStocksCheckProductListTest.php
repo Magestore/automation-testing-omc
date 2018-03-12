@@ -65,20 +65,10 @@ class WebposManageStocksCheckProductListTest extends Injectable
 
 		$warehouse = $this->prepareWarehouse($warehouse, $location->getLocationId());
 		$warehouse->persist();
-		\Zend_Debug::dump($pos->getData());
-		\Zend_Debug::dump($staff->getData());
-		\Zend_Debug::dump($warehouse->getData());
 
-//		// Create product
-//		foreach ($productList as $key => $item) {
-//			$productList[$key]['product'] = $this->objectManager->getInstance()->create(
-//				'Magento\Webpos\Test\TestStep\CreateNewProductByCurlStep',
-//				[
-//					'productData' => $productList[$key]['product']
-//				]
-//			)->run();
-//		}
-//
+		// Create product
+		$productList = $this->createProducts($productList, $warehouse->getWarehouseId());
+
 //		// Login webpos
 //		$staff = $this->objectManager->getInstance()->create(
 //			'Magento\Webpos\Test\TestStep\LoginWebposStep'
@@ -170,9 +160,39 @@ class WebposManageStocksCheckProductListTest extends Injectable
 	protected function prepareStaff(Staff $staff, $locationId, $posId)
 	{
 		$data = $staff->getData();
-		$data['location_id'] = $locationId;
-		$data['pos_ids'] = $posId;
+		$data['location_id'][] = $locationId;
+		$data['pos_ids'][] = $posId;
 
 		return $this->fixtureFactory->createByCode('staff', ['data' => $data]);
+	}
+
+	protected function createProducts($productList, $warehouseId) {
+		foreach ($productList as $key => $item) {
+			$product = $this->fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $item['product']]);
+			$data = $product->getData();
+
+			if (isset($item['qty'])) {
+				$data['warehouse_stock']['warehouse_stock_row'][0]['total_qty'] = $item['qty'];
+			}
+
+			if (isset($item['inStock'])) {
+				if ($item['inStock']) {
+					$data['quantity_and_stock_status']['is_in_stock'] = 'In Stock';
+				} else {
+					$data['quantity_and_stock_status']['is_in_stock'] = 'Out of Stock';
+				}
+			}
+
+			$data['warehouse_stock']['warehouse_stock_row'][0]['warehouse_select'] = $warehouseId;
+
+			$product = $this->fixtureFactory->createByCode('catalogProductSimple', ['data' => $data]);
+
+			$id = $this->objectManager->create('Magento\Catalog\Test\Handler\CatalogProductSimple\Curl')->persist($product);
+			$data = array_merge($product->getData(), $id);
+
+			$productList[$key]['product'] = $this->fixtureFactory->createByCode('catalogProductSimple', ['data' => $data]);
+		}
+
+		return $productList;
 	}
 }
