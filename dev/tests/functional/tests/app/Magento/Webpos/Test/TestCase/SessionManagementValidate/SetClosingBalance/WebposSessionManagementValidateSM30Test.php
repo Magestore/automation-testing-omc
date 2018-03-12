@@ -10,7 +10,8 @@ namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\SetClosingBalan
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Webpos\Test\Constraint\SessionManagement\AssertSetClosingBalancePopupNotVisible;
+use Magento\Webpos\Test\Fixture\Denomination;
+use Magento\Webpos\Test\Constraint\SessionManagement\AssertConfirmModalPopup;
 
 /**
  * Class WebposSessionManagementValidateSM30Test
@@ -24,28 +25,34 @@ class WebposSessionManagementValidateSM30Test extends Injectable
     protected $webposIndex;
 
     /**
-     * @var AssertSetClosingBalancePopupNotVisible
+     * @var AssertConfirmModalPopup
      */
-    protected $assertSetClosingBalancePopupNotVisible;
+    protected $assertConfirmModalPopup;
 
     /**
      * @param WebposIndex $webposIndex
-     * @param AssertSetClosingBalancePopupNotVisible $assertSetClosingBalancePopupNotVisible
+     * @param AssertConfirmModalPopup $assertConfirmModalPopup
      */
     public function __inject(
         WebposIndex $webposIndex,
-        AssertSetClosingBalancePopupNotVisible $assertSetClosingBalancePopupNotVisible
+        AssertConfirmModalPopup $assertConfirmModalPopup
     ) {
         $this->webposIndex = $webposIndex;
-        $this->assertSetClosingBalancePopupNotVisible = $assertSetClosingBalancePopupNotVisible;
+        $this->assertConfirmModalPopup = $assertConfirmModalPopup;
     }
 
+
     /**
-     *
+     * @param Denomination $denomination
      */
-    public function test()
+    public function test(
+        Denomination $denomination
+    )
     {
-        //Config create session before working
+        // Precondition
+        $denomination->persist();
+
+        // Config create session before working
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'create_section_before_working_yes']
@@ -58,18 +65,28 @@ class WebposSessionManagementValidateSM30Test extends Injectable
 
         // Open session
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
-        sleep(100);
-//        $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
-//        sleep(1);
-//        $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
-//        sleep(1);
-//        $this->webposIndex->getSessionSetClosingBalancePopup()->getCancelButton()->click();
-//
-//        $this->assertSetClosingBalancePopupNotVisible->processAssert($this->webposIndex);
 
-        // End session
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
+        $this->webposIndex->getOpenSessionPopup()->waitForElementNotVisible('[data-bind="visible:loading"]');
+        $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
+        $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
+
+        $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
+        sleep(1);
+        $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
+        sleep(1);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
+
+        $realBalance = $this->webposIndex->getSessionConfirmModalPopup()->getRealBalance();
+        $theoryIs = $this->webposIndex->getSessionConfirmModalPopup()->getTheoryIs();
+        $loss = $this->webposIndex->getSessionConfirmModalPopup()->getLoss();
+
+        $this->assertConfirmModalPopup->processAssert($this->webposIndex, $realBalance, $theoryIs, $loss);
+        $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
+
+        $this->webposIndex->getSessionSetReasonPopup()->getReason()->setValue('Magento');
+        $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
+        sleep(1);
+        // End session
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
         $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
     }
