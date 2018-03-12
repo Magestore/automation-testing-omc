@@ -60,6 +60,9 @@
         <block name="sessionCloseShift" class="Magento\Webpos\Test\Block\SessionManagement\SessionCloseShift" locator="#close-shift-container" strategy="css selector"/>
         <block name="sessionSetClosingBalanceReason" class="Magento\Webpos\Test\Block\SessionManagement\SessionSetClosingBalanceReason" locator="#set-closing-balance-reason" strategy="css selector"/>
         <block name="openSessionPopup" class="Magento\Webpos\Test\Block\SessionManagement\OpenSessionPopup" locator="#popup-open-shift" strategy="css selector"/>
+        <block name="listShift" class="Magento\Webpos\Test\Block\SessionManagement\ListShift" locator=".main-item-shift.main-shift" strategy="css selector"/>
+        <block name="sessionInfo" class="Magento\Webpos\Test\Block\SessionManagement\SessionInfo" locator=".//div[@class='sum-info-top' and .//div[@class='session-info']]" strategy="xpath"/>
+        <block name="putMoneyInPopup" class="Magento\Webpos\Test\Block\SessionManagement\PutMoneyInPopup" locator="#popup-make-adjustment" strategy="css selector"/>
         <block name="sessionSetClosingBalancePopup" class="Magento\Webpos\Test\Block\SessionManagement\SessionSetClosingBalancePopup" locator="#popup-close-shift" strategy="css selector"/>
         <block name="sessionConfirmModalPopup" class="Magento\Webpos\Test\Block\SessionManagement\SessionConfirmModalPopup" locator=".close-confirm" strategy="css selector"/>
         <!--End Session management-->

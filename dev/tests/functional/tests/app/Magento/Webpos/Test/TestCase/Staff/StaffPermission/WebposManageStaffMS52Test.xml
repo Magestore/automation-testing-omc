@@ -12,7 +12,7 @@
                 </item>
             </data>
             <data xsi:type="string" name="discount">85.00</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertDiscountWholeCart" />
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertDiscountWholeCartPercentage" />
         </variation>
     </testCase>
 </config>
