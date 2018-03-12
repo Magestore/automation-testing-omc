@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Bang
  * Date: 3/12/2018
- * Time: 9:03 AM
+ * Time: 1:12 PM
  */
 
 namespace Magento\Webpos\Test\TestCase\SessionManagement\LockRegisterConfiguration;
@@ -13,7 +13,7 @@ use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Page\Adminhtml\PosEdit;
 use Magento\Webpos\Test\Page\Adminhtml\PosIndex;
 
-class SessionManagementLR001Test extends Injectable
+class SessionManagementLR003Test extends Injectable
 {
     /**
      * @var PosIndex
@@ -36,9 +36,11 @@ class SessionManagementLR001Test extends Injectable
         $pos->persist();
         $this->posIndex->open();
         $this->posIndex->getPosGrid()->searchAndOpen(['pos_name' => $pos->getPosName()]);
-        $this->assertTrue(
-            $this->posEdit->getPosForm()->lockRegisterSectionIsVisible(),
-            'Lock Register section is not visible.'
+        $value = $this->posEdit->getPosForm()->getIsAllowToLockField()->getValue();
+        $this->assertEquals(
+            'No',
+            $value,
+            'Lock register default value is wrong.'
         );
     }
 }

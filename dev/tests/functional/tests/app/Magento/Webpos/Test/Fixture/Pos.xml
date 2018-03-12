@@ -22,5 +22,7 @@
         <field name="staff_id" is_required="0"/>
         <field name="status" is_required="0"/>
         <field name="auto_join" is_required="0"/>
+        <field name="is_allow_to_lock" is_required="0"/>
+        <field name="pin" is_required="0"/>
     </fixture>
 </config>
