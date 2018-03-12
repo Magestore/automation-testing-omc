@@ -43,8 +43,13 @@ class WebposManageStocksUpdateProductAttributesTest extends Injectable
 	)
 	{
 		// Create product
-		$productInfo['product'] = $this->fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $productInfo['product']]);
-		$productInfo['product'] = $this->objectManager->create('Magento\Catalog\Test\Handler\CatalogProductSimple\Curl')->persist($productInfo['product']);
+
+		$productInfo['product'] = $this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\CreateNewProductByCurlStep',
+			[
+				'productData' => $productInfo['product']
+			]
+		)->run();
 
 		// Login webpos
 		$staff = $this->objectManager->getInstance()->create(
@@ -81,7 +86,7 @@ class WebposManageStocksUpdateProductAttributesTest extends Injectable
 		// action
 		if ($action === 'update') {
 			$this->webposIndex->getManageStockList()->getUpdateButton($productName)->click();
-//			$this->webposIndex->getManageStockList()->waitForProductIconSuccess($productName);
+			$this->webposIndex->getManageStockList()->waitForProductIconSuccess($productName);
 		}
 
 		if (isset($productInfo['orderQty'])) {
