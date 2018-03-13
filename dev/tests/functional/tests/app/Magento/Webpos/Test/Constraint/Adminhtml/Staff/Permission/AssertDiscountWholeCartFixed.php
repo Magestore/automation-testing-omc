@@ -9,7 +9,7 @@ namespace Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class AssertDiscountWholeCart extends AbstractConstraint
+class AssertDiscountWholeCartFixed extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex, $orderId, $discount)
     {

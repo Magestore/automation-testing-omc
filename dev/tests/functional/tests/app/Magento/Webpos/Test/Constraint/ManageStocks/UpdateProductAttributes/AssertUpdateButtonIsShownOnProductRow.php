@@ -12,8 +12,16 @@ namespace Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class AssertUpdateButtonIsShownOnProductRow
+ * @package Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes
+ */
 class AssertUpdateButtonIsShownOnProductRow extends AbstractConstraint
 {
+	/**
+	 * @param WebposIndex $webposIndex
+	 * @param $productInfo
+	 */
 	public function processAssert(WebposIndex $webposIndex, $productInfo)
 	{
 		$productName = $productInfo['product']->getName();

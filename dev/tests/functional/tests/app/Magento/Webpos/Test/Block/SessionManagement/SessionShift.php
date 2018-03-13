@@ -20,4 +20,15 @@ class SessionShift extends Block
         return $this->_rootElement->find('.btn-close-shift');
     }
 
+    public function getOpenShiftButton() {
+        return $this->_rootElement->find('[data-bind="afterRender:afterRenderOpenButton"]');
+    }
+
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getSetClosingBalanceButton()
+    {
+        return $this->_rootElement->find('button[data-bind="click: setClosingBalance"]');
+    }
 }
