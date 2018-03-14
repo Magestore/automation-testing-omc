@@ -42,9 +42,18 @@ class WebposManageLocationML15Test extends Injectable
         $this->locationIndex->getLocationsGrid()->getRowByDisplayName( $location->getDisplayName())->click();
         sleep(1);
         $this->locationIndex->getLocationsGrid()->getActionButtonEditing('Cancel')->click();
-        sleep(1);
         $this->locationIndex->getLocationsGrid()->waitLoader();
         sleep(1);
+
+        $locationId = $this->locationIndex->getLocationsGrid()->getAllIds()[0];
+        return ['dataDisplay' =>
+            [
+                'location_id' => $locationId,
+                'description' => $location->getDescription(),
+                'address' => $location->getAddress(),
+                'locationName' => $location->getDisplayName()
+            ]
+        ];
     }
 }
 

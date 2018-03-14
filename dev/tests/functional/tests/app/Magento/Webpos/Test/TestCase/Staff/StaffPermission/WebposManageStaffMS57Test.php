@@ -110,6 +110,7 @@ class WebposManageStaffMS57Test extends Injectable
             $webposIndex->getLoginForm()->getPasswordField()->setValue($password);
             $webposIndex->getLoginForm()->clickLoginButton();
             $webposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader');
+            $webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
             $webposIndex->getLoginForm()->setLocation('Store Address');
             $webposIndex->getLoginForm()->setPos('Store POS');
             $webposIndex->getLoginForm()->getEnterToPos()->click();

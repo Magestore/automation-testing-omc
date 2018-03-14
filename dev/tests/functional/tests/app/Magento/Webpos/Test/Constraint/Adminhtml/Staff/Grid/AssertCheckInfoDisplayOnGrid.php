@@ -30,7 +30,6 @@ class AssertCheckInfoDisplayOnGrid extends AbstractConstraint
     {
         $staffIndex->getStaffsGrid()->search(['email' => $staff->getEmail()]);
         $id = $staffIndex->getStaffsGrid()->getAllIds()[0];
-        $staffIndex->getStaffsGrid()->resetFilter();
 
         \PHPUnit_Framework_Assert::assertEquals(
             $staff->getUsername(),
@@ -63,6 +62,7 @@ class AssertCheckInfoDisplayOnGrid extends AbstractConstraint
             'Status is incorrect'
         );
 
+        $staffIndex->getStaffsGrid()->resetFilter();
     }
 
     /**

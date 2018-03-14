@@ -105,4 +105,23 @@ class LocationsGrid  extends DataGrid
         $location = sprintf($this->rowPattern, $rows);
         return $this->_rootElement->find($location, Locator::SELECTOR_XPATH);
     }
+    public function getInputFieldEdtingByName($name)
+    {
+        return $this->_rootElement->find('//tbody/tr/td/*/input[@name="' . $name . '"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getSelectFieldEdtingByName($name)
+    {
+        return $this->_rootElement->find('//tbody/tr/td/*/select[@name="' . $name . '"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getFieldDisableEditingDisplay($text)
+    {
+        return $this->_rootElement->find('//tbody/tr/td[*[text()[normalize-space()="' . $text . '"]]]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getMessageEditSuccess()
+    {
+        return $this->_rootElement->find('.data-grid-info-panel .message');
+    }
 }
