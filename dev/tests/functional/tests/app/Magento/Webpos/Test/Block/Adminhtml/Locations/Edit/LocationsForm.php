@@ -20,4 +20,12 @@ class LocationsForm extends Form
         $id = '#'.$id;
         return $this->_rootElement->find($id);
     }
+    public function getMessageRequired($id)
+    {
+        return $this->_rootElement->find('#'.$id)->getText();
+    }
+    public function isMessageRequiredDisplay($id)
+    {
+        return $this->_rootElement->find('#'.$id);
+    }
 }

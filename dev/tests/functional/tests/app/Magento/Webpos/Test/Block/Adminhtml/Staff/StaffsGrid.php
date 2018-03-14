@@ -113,11 +113,6 @@ class StaffsGrid extends DataGrid
         return $this->_rootElement->find('//tbody/tr/td/*/input[@name="' . $name . '"]', Locator::SELECTOR_XPATH);
     }
 
-    public function getSelectFieldEdtingByName($name)
-    {
-        return $this->_rootElement->find('//tbody/tr/td/*/select[@name="' . $name . '"]', Locator::SELECTOR_XPATH);
-    }
-
     public function getFieldDisableEditingDisplay($text)
     {
         return $this->_rootElement->find('//tbody/tr/td[*[text()[normalize-space()="' . $text . '"]]]', Locator::SELECTOR_XPATH);
