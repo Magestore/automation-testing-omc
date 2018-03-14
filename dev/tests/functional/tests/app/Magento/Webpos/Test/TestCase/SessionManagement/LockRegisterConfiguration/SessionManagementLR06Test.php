@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Bang
- * Date: 3/12/2018
- * Time: 2:24 PM
+ * Date: 3/14/2018
+ * Time: 8:32 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\SessionManagement\LockRegisterConfiguration;
@@ -13,7 +13,7 @@ use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Page\Adminhtml\PosEdit;
 use Magento\Webpos\Test\Page\Adminhtml\PosIndex;
 
-class SessionManagementLR008Test extends Injectable
+class SessionManagementLR06Test extends Injectable
 {
     /**
      * @var PosIndex
@@ -36,16 +36,12 @@ class SessionManagementLR008Test extends Injectable
         $pos->persist();
         $this->posIndex->open();
         $this->posIndex->getPosGrid()->searchAndOpen(['pos_name' => $pos->getPosName()]);
-        $this->posEdit->getPosForm()->getSecurityPinField()->setValue('');
-        $this->posEdit->getFormPageActions()->save();
+        $this->posEdit->getPosForm()->getIsAllowToLockField()->setValue('No');
+        $this->posEdit->getFormPageActions()->saveAndContinue();
+        $data = $this->posEdit->getPosForm()->getStatusFieldData();
         $this->assertTrue(
-            $this->posEdit->getPosForm()->getSecurityPinError()->isVisible(),
-            'Security pin require error message is not visible'
-        );
-        $this->assertEquals(
-            'This is a required field.',
-            $this->posEdit->getPosForm()->getSecurityPinError()->getText(),
-            'Require field message is wrong.'
+            strpos($data, 'Locked') == false,
+            'Option Locked in Status field is not hidden.'
         );
     }
 }

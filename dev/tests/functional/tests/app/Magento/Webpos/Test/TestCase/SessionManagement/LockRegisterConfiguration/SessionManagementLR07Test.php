@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Bang
  * Date: 3/12/2018
- * Time: 2:12 PM
+ * Time: 1:45 PM
  */
 
 namespace Magento\Webpos\Test\TestCase\SessionManagement\LockRegisterConfiguration;
@@ -17,7 +17,7 @@ use Magento\Webpos\Test\Page\Adminhtml\PosEdit;
 use Magento\Webpos\Test\Page\Adminhtml\PosIndex;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class SessionManagementLR007Test extends Injectable
+class SessionManagementLR07Test extends Injectable
 {
     /**
      * @var PosIndex
@@ -70,10 +70,11 @@ class SessionManagementLR007Test extends Injectable
             ]
         )->run();
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
-        $this->assertFalse(
+        $this->assertTrue(
             $this->webposIndex->getCMenu()->getLockRegister()->isVisible(),
             'Lock Register menu is not visible.'
         );
+
 
     }
 }

@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Bang
- * Date: 3/12/2018
- * Time: 1:21 PM
+ * Date: 3/14/2018
+ * Time: 9:14 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\SessionManagement\LockRegisterConfiguration;
@@ -13,7 +13,7 @@ use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Page\Adminhtml\PosEdit;
 use Magento\Webpos\Test\Page\Adminhtml\PosIndex;
 
-class SessionManagementLR004LR005Test extends Injectable
+class SessionManagementLR10Test extends Injectable
 {
     /**
      * @var PosIndex
@@ -40,11 +40,6 @@ class SessionManagementLR004LR005Test extends Injectable
         $this->assertTrue(
             $this->posEdit->getPosForm()->waitForElementVisible('[name="pin"][type="password"]'),
             'Security pin field is not visible.'
-        );
-        $this->posEdit->getPosForm()->getIsAllowToLockField()->setValue('No');
-        $this->assertTrue(
-            $this->posEdit->getPosForm()->waitForElementNotVisible('[name="pin"]'),
-            'Security pin field is not hidden.'
         );
     }
 }

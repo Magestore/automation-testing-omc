@@ -10,7 +10,7 @@
 
         <block name="posForm" class="Magento\Webpos\Test\Block\Adminhtml\Pos\Edit\PosForm" locator="[id='page:main-container']" strategy="css selector" />
 
-        <block name="formPageActions" class="Magento\Backend\Test\Block\FormPageActions" locator=".page-main-actions" strategy="css selector" />
+        <block name="formPageActions" class="Magento\Webpos\Test\Block\Adminhtml\Pos\Edit\FormPageActions" locator=".page-main-actions" strategy="css selector" />
 
         <block name="templateBlock" class="Magento\Backend\Test\Block\Template" locator="body" strategy="css selector" />
 

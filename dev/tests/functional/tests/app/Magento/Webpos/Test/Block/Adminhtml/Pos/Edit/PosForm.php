@@ -34,11 +34,16 @@ class PosForm extends Form
 
     public function getSecurityPinField()
     {
-        return $this->_rootElement->find('[name="pin"]');
+        return $this->_rootElement->find('[name="pin"][type="password"]');
     }
 
     public function getSecurityPinError()
     {
         return $this->_rootElement->find('[id="page_pin-error"]');
+    }
+
+    public function getStatusFieldData()
+    {
+        return $this->_rootElement->find('[name="status"]')->getText();
     }
 }

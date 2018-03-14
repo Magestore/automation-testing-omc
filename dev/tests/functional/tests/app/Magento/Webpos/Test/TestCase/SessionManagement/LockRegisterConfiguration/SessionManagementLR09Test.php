@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Bang
  * Date: 3/12/2018
- * Time: 1:21 PM
+ * Time: 2:24 PM
  */
 
 namespace Magento\Webpos\Test\TestCase\SessionManagement\LockRegisterConfiguration;
@@ -13,7 +13,7 @@ use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Page\Adminhtml\PosEdit;
 use Magento\Webpos\Test\Page\Adminhtml\PosIndex;
 
-class SessionManagementLR004LR005Test extends Injectable
+class SessionManagementLR09Test extends Injectable
 {
     /**
      * @var PosIndex
@@ -36,15 +36,16 @@ class SessionManagementLR004LR005Test extends Injectable
         $pos->persist();
         $this->posIndex->open();
         $this->posIndex->getPosGrid()->searchAndOpen(['pos_name' => $pos->getPosName()]);
-        $this->posEdit->getPosForm()->getIsAllowToLockField()->setValue('Yes');
+        $this->posEdit->getPosForm()->getSecurityPinField()->setValue('');
+        $this->posEdit->getFormPageActions()->save();
         $this->assertTrue(
-            $this->posEdit->getPosForm()->waitForElementVisible('[name="pin"][type="password"]'),
-            'Security pin field is not visible.'
+            $this->posEdit->getPosForm()->getSecurityPinError()->isVisible(),
+            'Security pin require error message is not visible'
         );
-        $this->posEdit->getPosForm()->getIsAllowToLockField()->setValue('No');
-        $this->assertTrue(
-            $this->posEdit->getPosForm()->waitForElementNotVisible('[name="pin"]'),
-            'Security pin field is not hidden.'
+        $this->assertEquals(
+            'This is a required field.',
+            $this->posEdit->getPosForm()->getSecurityPinError()->getText(),
+            'Require field message is wrong.'
         );
     }
 }

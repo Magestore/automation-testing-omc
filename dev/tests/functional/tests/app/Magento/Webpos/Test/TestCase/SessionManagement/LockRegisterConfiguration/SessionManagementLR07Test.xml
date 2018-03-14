@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\SessionManagement\LockRegisterConfiguration\SessionManagementLR007Test" summary="Session Management" ticketId="LR007">
-        <variation name="SessionManagementLR007TestVariation"  summary="LR007">
+    <testCase name="Magento\Webpos\Test\TestCase\SessionManagement\LockRegisterConfiguration\SessionManagementLR07Test" summary="Session Management" ticketId="LR07">
+        <variation name="SessionManagementLR07TestVariation"  summary="LR07">
             <data name="pos/data/pos_name" xsi:type="string">test pos %isolation%</data>
             <data name="pos/data/status" xsi:type="string">Enabled</data>
-            <data name="pos/data/is_allow_to_lock" xsi:type="string">0</data>
+            <data name="pos/data/is_allow_to_lock" xsi:type="string">1</data>
+            <data name="pos/data/pin" xsi:type="string">1234</data>
         </variation>
     </testCase>
 </config>
