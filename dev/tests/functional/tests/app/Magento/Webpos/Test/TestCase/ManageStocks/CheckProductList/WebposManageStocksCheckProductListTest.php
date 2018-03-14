@@ -69,52 +69,23 @@ class WebposManageStocksCheckProductListTest extends Injectable
 		// Create product
 		$productList = $this->createProducts($productList, $warehouse->getWarehouseId());
 
-//		// Login webpos
-//		$staff = $this->objectManager->getInstance()->create(
-//			'Magento\Webpos\Test\TestStep\LoginWebposStep'
-//		)->run();
-//
-//		$this->webposIndex->getMsWebpos()->clickCMenuButton();
-//		$this->webposIndex->getCMenu()->manageStocks();
-//		sleep(2);
-//
-//		$this->webposIndex->getManageStockList()->searchProduct('Simple Product MSK09');
-//		$this->webposIndex->getManageStockList()->getStoreAddress()->click();
-//		sleep(1);
-//
-//		foreach ($productList as $item) {
-//
-//			$productName = $item['product']->getName();
-//
-//			// Edit product info
-//
-//			if (isset($item['qty'])) {
-//				$this->webposIndex->getManageStockList()->getProductQtyInput($productName)->setValue($item['qty']);
-//			}
-//			if (isset($item['inStock'])) {
-//				$inStockCheckbox = $this->webposIndex->getManageStockList()->getProductInStockCheckbox($productName);
-//				$this->webposIndex->getManageStockList()->setCheckboxValue($inStockCheckbox, $item['inStock']);
-//			}
-//			if (isset($item['manageStock'])) {
-//				$manageStockCheckbox = $this->webposIndex->getManageStockList()->getProductManageStocksCheckbox($productName);
-//				$this->webposIndex->getManageStockList()->setCheckboxValue($manageStockCheckbox, $item['manageStock']);
-//			}
-//			if (isset($item['backorders'])) {
-//				$backordersCheckbox = $this->webposIndex->getManageStockList()->getProductBackOrdersCheckbox($productName);
-//				$this->webposIndex->getManageStockList()->setCheckboxValue($backordersCheckbox, $item['backorders']);
-//			}
-//		}
-//
-//		// action
-//		$this->webposIndex->getManageStockList()->getUpdateAllButton()->click();
-//		foreach ($productList as $item) {
-//			$productName = $item['product']->getName();
-//			$this->webposIndex->getManageStockList()->waitForProductIconSuccess($productName);
-//		}
-//
-//		return [
-//			'productList' => $productList
-//		];
+		// Login webpos
+		$this->objectManager->getInstance()->create(
+			'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+			[
+				'staff' => $staff,
+				'location' => $location,
+				'pos' => $pos
+			]
+		)->run();
+
+		$this->webposIndex->getMsWebpos()->clickCMenuButton();
+		$this->webposIndex->getCMenu()->manageStocks();
+		sleep(2);
+
+		return [
+			'productList' => $productList
+		];
 	}
 
 	public function tearDown()

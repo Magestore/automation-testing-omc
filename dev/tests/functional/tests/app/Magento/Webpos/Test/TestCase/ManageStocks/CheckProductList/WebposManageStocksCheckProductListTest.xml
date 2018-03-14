@@ -20,7 +20,7 @@
 				<item name="1" xsi:type="array">
 					<item name="product" xsi:type="string">product_without_warehouse_id</item>
 					<item name="qty" xsi:type="number">170</item>
-					<item name="inStock" xsi:type="boolean">false</item>
+					<item name="inStock" xsi:type="boolean">true</item>
 				</item>
 				<item name="2" xsi:type="array">
 					<item name="product" xsi:type="string">product_without_warehouse_id</item>
@@ -29,8 +29,7 @@
 				</item>
 			</data>
 
-			<!--<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes\AssertUpdateButtonsOfProductsAreNotShown" />-->
-			<!--<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes\AssertProductsAreUpdatedInBackend" />-->
+			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\CheckProductList\AssertProductListIsShownAllProduct" />
 		</variation>
 	</testCase>
 </config>
