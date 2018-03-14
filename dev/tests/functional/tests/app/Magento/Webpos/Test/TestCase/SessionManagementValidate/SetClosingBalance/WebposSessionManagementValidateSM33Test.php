@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 3/12/2018
- * Time: 1:31 PM
+ * Date: 3/14/2018
+ * Time: 8:01 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\SetClosingBalance;
@@ -11,13 +11,13 @@ namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\SetClosingBalan
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Fixture\Denomination;
-use Magento\Webpos\Test\Constraint\SessionManagement\AssertConfirmModalPopup;
+use Magento\Webpos\Test\Constraint\SessionManagement\AssertSetReasonPopup;
 
 /**
- * Class WebposSessionManagementValidateSM30Test
+ * Class WebposSessionManagementValidateSM33Test
  * @package Magento\Webpos\Test\TestCase\SessionManagementValidate\SetClosingBalance
  */
-class WebposSessionManagementValidateSM30Test extends Injectable
+class WebposSessionManagementValidateSM33Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -25,20 +25,20 @@ class WebposSessionManagementValidateSM30Test extends Injectable
     protected $webposIndex;
 
     /**
-     * @var AssertConfirmModalPopup
+     * @var AssertSetReasonPopup
      */
-    protected $assertConfirmModalPopup;
+    protected $assertSetReasonPopup;
 
     /**
      * @param WebposIndex $webposIndex
-     * @param AssertConfirmModalPopup $assertConfirmModalPopup
+     * @param AssertSetReasonPopup $assertSetReasonPopup
      */
     public function __inject(
         WebposIndex $webposIndex,
-        AssertConfirmModalPopup $assertConfirmModalPopup
+        AssertSetReasonPopup $assertSetReasonPopup
     ) {
         $this->webposIndex = $webposIndex;
-        $this->assertConfirmModalPopup = $assertConfirmModalPopup;
+        $this->assertSetReasonPopup = $assertSetReasonPopup;
     }
 
     /**
@@ -63,7 +63,6 @@ class WebposSessionManagementValidateSM30Test extends Injectable
 
         // Open session
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
-
         $this->webposIndex->getOpenSessionPopup()->waitForElementNotVisible('[data-bind="visible:loading"]');
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
@@ -73,17 +72,27 @@ class WebposSessionManagementValidateSM30Test extends Injectable
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
         sleep(1);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-
-        $realBalance = $this->webposIndex->getSessionConfirmModalPopup()->getRealBalance();
-        $theoryIs = $this->webposIndex->getSessionConfirmModalPopup()->getTheoryIs();
-        $loss = $this->webposIndex->getSessionConfirmModalPopup()->getLoss();
-
-        $this->assertConfirmModalPopup->processAssert($this->webposIndex, $realBalance, $theoryIs, $loss);
         $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
 
-        $this->webposIndex->getSessionSetReasonPopup()->getReason()->setValue('Magento');
-        $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
-        sleep(1);
+        // Assert Set Reason popup
+        $this->assertSetReasonPopup->processAssert($this->webposIndex);
+
+        $this->webposIndex->getSessionSetReasonPopup()->getCancelButton()->click();
+
+        // Assert Set Reason popup not visible
+        $this->assertFalse(
+            $this->webposIndex->getSessionSetReasonPopup()->isVisible(),
+            'Set Reason Popup is visible.'
+        );
+
+        // Assert [End of session] button changes into [Validate Closing] button
+        $this->assertEquals(
+            'Validate Closing',
+            $this->webposIndex->getSessionShift()->getButtonEndSession()->getText(),
+            'Button "Validate Closing" is not visible.'
+        );
+
+        sleep(2);
         // End session
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
         $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');

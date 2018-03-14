@@ -9,6 +9,8 @@
 namespace Magento\Webpos\Test\Block\SessionManagement;
 
 use Magento\Mtf\Block\Block;
+use Magento\Mtf\Client\Locator;
+
 /**
  * Class SessionShift
  * @package Magento\Webpos\Test\Block\SessionManagement
@@ -30,5 +32,29 @@ class SessionShift extends Block
     public function getSetClosingBalanceButton()
     {
         return $this->_rootElement->find('button[data-bind="click: setClosingBalance"]');
+    }
+
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getPutMoneyInButton()
+    {
+        return $this->_rootElement->find('button[data-bind="click: putMoneyIn"]');
+    }
+
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getTakeMoneyOutButton()
+    {
+        return $this->_rootElement->find('button[data-bind="click: takeMoneyOut"]');
+    }
+
+    /**
+     * @param $label
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getTransactionsInfo($label){
+        return $this->_rootElement->find('//div[@class="transactions-info"]/div/table/tbody/tr/td[1]/label[text()="'.$label.'"]/../../td[2]/span',Locator::SELECTOR_XPATH);
     }
 }

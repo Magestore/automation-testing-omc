@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 3/12/2018
- * Time: 1:31 PM
+ * Date: 3/14/2018
+ * Time: 8:01 AM
  */
 
 namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\SetClosingBalance;
@@ -11,13 +11,13 @@ namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\SetClosingBalan
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Fixture\Denomination;
-use Magento\Webpos\Test\Constraint\SessionManagement\AssertConfirmModalPopup;
+use Magento\Webpos\Test\Constraint\SessionManagement\AssertConfirmModalPopupNotVisible;
 
 /**
- * Class WebposSessionManagementValidateSM30Test
+ * Class WebposSessionManagementValidateSM31Test
  * @package Magento\Webpos\Test\TestCase\SessionManagementValidate\SetClosingBalance
  */
-class WebposSessionManagementValidateSM30Test extends Injectable
+class WebposSessionManagementValidateSM31Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -25,20 +25,20 @@ class WebposSessionManagementValidateSM30Test extends Injectable
     protected $webposIndex;
 
     /**
-     * @var AssertConfirmModalPopup
+     * @var AssertConfirmModalPopupNotVisible
      */
-    protected $assertConfirmModalPopup;
+    protected $assertConfirmModalPopupNotVisible;
 
     /**
      * @param WebposIndex $webposIndex
-     * @param AssertConfirmModalPopup $assertConfirmModalPopup
+     * @param AssertConfirmModalPopupNotVisible $assertConfirmModalPopupNotVisible
      */
     public function __inject(
         WebposIndex $webposIndex,
-        AssertConfirmModalPopup $assertConfirmModalPopup
+        AssertConfirmModalPopupNotVisible $assertConfirmModalPopupNotVisible
     ) {
         $this->webposIndex = $webposIndex;
-        $this->assertConfirmModalPopup = $assertConfirmModalPopup;
+        $this->assertConfirmModalPopupNotVisible = $assertConfirmModalPopupNotVisible;
     }
 
     /**
@@ -63,7 +63,6 @@ class WebposSessionManagementValidateSM30Test extends Injectable
 
         // Open session
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
-
         $this->webposIndex->getOpenSessionPopup()->waitForElementNotVisible('[data-bind="visible:loading"]');
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
@@ -73,17 +72,19 @@ class WebposSessionManagementValidateSM30Test extends Injectable
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
         sleep(1);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
+        $this->webposIndex->getSessionConfirmModalPopup()->getCancelButton()->click();
 
-        $realBalance = $this->webposIndex->getSessionConfirmModalPopup()->getRealBalance();
-        $theoryIs = $this->webposIndex->getSessionConfirmModalPopup()->getTheoryIs();
-        $loss = $this->webposIndex->getSessionConfirmModalPopup()->getLoss();
+        // Assert Confirm Modal Popup Not visible
+        $this->assertConfirmModalPopupNotVisible->processAssert($this->webposIndex);
 
-        $this->assertConfirmModalPopup->processAssert($this->webposIndex, $realBalance, $theoryIs, $loss);
-        $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
+        // Assert [End of session] button changes into [Validate Closing] button
+        $this->assertEquals(
+            'Validate Closing',
+            $this->webposIndex->getSessionShift()->getButtonEndSession()->getText(),
+            'Button "Validate Closing" is not visible.'
+        );
 
-        $this->webposIndex->getSessionSetReasonPopup()->getReason()->setValue('Magento');
-        $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
-        sleep(1);
+        sleep(2);
         // End session
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
         $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
