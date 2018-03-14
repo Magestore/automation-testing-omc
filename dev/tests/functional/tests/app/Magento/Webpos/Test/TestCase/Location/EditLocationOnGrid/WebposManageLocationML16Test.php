@@ -7,8 +7,10 @@
  */
 namespace Magento\Webpos\Test\TestCase\Location\EditLocationOnGrid;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertEditDiscountCustomPrice;
 use Magento\Webpos\Test\Fixture\Location;
 use Magento\Webpos\Test\Page\Adminhtml\LocationIndex;
+use Magento\Webpos\Test\Constraint\Adminhtml\Location\Grid\AssertMessageEditSuccessOnGrid;
 
 class WebposManageLocationML16Test extends Injectable
 {
@@ -18,7 +20,10 @@ class WebposManageLocationML16Test extends Injectable
      * @var LocationIndex
      */
     private $locationIndex;
-
+    /**
+     * @var AssertMessageEditSuccessOnGrid
+     */
+    protected $assertMessageEditSuccessOnGrid;
     /**
      * Inject location pages.
      *
@@ -26,9 +31,11 @@ class WebposManageLocationML16Test extends Injectable
      * @return void
      */
     public function __inject(
-        LocationIndex $locationIndex
+        LocationIndex $locationIndex,
+        AssertMessageEditSuccessOnGrid $assertMessageEditSuccessOnGrid
     ) {
         $this->locationIndex = $locationIndex;
+        $this->assertMessageEditSuccessOnGrid = $assertMessageEditSuccessOnGrid;
     }
 
     public function test(Location $location)
@@ -45,9 +52,19 @@ class WebposManageLocationML16Test extends Injectable
         $this->locationIndex->getLocationsGrid()->setLocationName('test'.$location->getDisplayName());
         $this->locationIndex->getLocationsGrid()->setDescription('test'.$location->getDescription());
         $this->locationIndex->getLocationsGrid()->getActionButtonEditing('Save')->click();
-        sleep(1);
+        $this->assertMessageEditSuccessOnGrid->processAssert($this->locationIndex, 'You have successfully saved your edits.');
         $this->locationIndex->getLocationsGrid()->waitLoader();
         sleep(1);
+
+        $locationId = $this->locationIndex->getLocationsGrid()->getAllIds()[0];
+        return ['dataDisplay' =>
+            [
+                'location_id' => $locationId,
+                'description' => 'test'.$location->getDescription(),
+                'address' => 'test'.$location->getAddress(),
+                'locationName' => 'test'.$location->getDisplayName()
+            ]
+        ];
     }
 }
 

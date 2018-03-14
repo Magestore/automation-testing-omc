@@ -5,7 +5,7 @@
             <data name="staff/dataset" xsi:type="string">default</data>
             <data name="idRequireds" xsi:type="string">page_username-error, page_password-error, page_password_confirmation-error, page_display_name-error, page_email-error, page_customer_group-error, page_location_id-error</data>
             <data name="labelRequired" xsi:type="string">This is a required field.</data>
-             <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertStaffErrorSaveMessage" />
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertStaffErrorSaveMessage" />
         </variation>
     </testCase>
 </config>

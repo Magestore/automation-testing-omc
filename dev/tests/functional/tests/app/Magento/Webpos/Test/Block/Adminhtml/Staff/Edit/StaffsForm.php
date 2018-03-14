@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @Author: Thomas Mr 0
  * @Created At:   2017-09-07 14:35:45
@@ -8,12 +7,10 @@
  * @Last Modified time: 2017-09-07 14:41:26
  * @Links : https://www.facebook.com/Onjin.Matsui.VTC.NQC
  */
-
 namespace Magento\Webpos\Test\Block\Adminhtml\Staff\Edit;
 
 use Magento\Mtf\Block\Form;
 use Magento\Mtf\Client\Locator;
-use Magento\Webpos\Test\Fixture\Location;
 
 class StaffsForm extends Form
 {
