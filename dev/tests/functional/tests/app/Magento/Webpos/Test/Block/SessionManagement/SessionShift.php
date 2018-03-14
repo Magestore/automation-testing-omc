@@ -17,11 +17,17 @@ use Magento\Mtf\Client\Locator;
  */
 class SessionShift extends Block
 {
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
     public function getButtonEndSession()
     {
         return $this->_rootElement->find('.btn-close-shift');
     }
 
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
     public function getOpenShiftButton() {
         return $this->_rootElement->find('[data-bind="afterRender:afterRenderOpenButton"]');
     }
@@ -56,5 +62,12 @@ class SessionShift extends Block
      */
     public function getTransactionsInfo($label){
         return $this->_rootElement->find('//div[@class="transactions-info"]/div/table/tbody/tr/td[1]/label[text()="'.$label.'"]/../../td[2]/span',Locator::SELECTOR_XPATH);
+    }
+
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getCloseTime(){
+        return $this->_rootElement->find('//tr[@data-bind="visible:isClosed()"]/td[2]/span', Locator::SELECTOR_XPATH);
     }
 }
