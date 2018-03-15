@@ -2,20 +2,20 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 3/14/2018
- * Time: 2:23 PM
+ * Date: 3/15/2018
+ * Time: 8:31 AM
  */
 
-namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\SetClosingBalance;
+namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\CheckPrintButton;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposSessionManagementValidateSM37Test
- * @package Magento\Webpos\Test\TestCase\SessionManagementValidate\SetClosingBalance
+ * Class WebposSessionManagementValidateSM39Test
+ * @package Magento\Webpos\Test\TestCase\SessionManagementValidate\CheckPrintButton
  */
-class WebposSessionManagementValidateSM37Test extends Injectable
+class WebposSessionManagementValidateSM39Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -50,16 +50,16 @@ class WebposSessionManagementValidateSM37Test extends Injectable
         // Open session
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
+        $this->webposIndex->getSessionShift()->getPrintButton()->click();
 
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-
-        // Assert Set Closing Balance Popup visible
+        // Assert
         $this->assertTrue(
-            $this->webposIndex->getSessionSetClosingBalancePopup()->isVisible(),
-            'Set Closing Balance Popup is not visible.'
+            $this->webposIndex->getSessionPrintShiftPopup()->isVisible(),
+            'X-report is not visible.'
         );
 
-        // End session
+        $this->webposIndex->getSessionShift()->getHidePopup()->click();
+        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
         $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');

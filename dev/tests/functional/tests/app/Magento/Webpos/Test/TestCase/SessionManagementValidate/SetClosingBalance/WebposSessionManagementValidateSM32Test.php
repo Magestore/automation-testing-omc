@@ -14,10 +14,10 @@ use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Constraint\SessionManagement\AssertConfirmModalPopupNotVisible;
 
 /**
- * Class WebposSessionManagementValidateSM31Test
+ * Class WebposSessionManagementValidateSM32Test
  * @package Magento\Webpos\Test\TestCase\SessionManagementValidate\SetClosingBalance
  */
-class WebposSessionManagementValidateSM31Test extends Injectable
+class WebposSessionManagementValidateSM32Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -72,7 +72,7 @@ class WebposSessionManagementValidateSM31Test extends Injectable
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
         sleep(1);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        $this->webposIndex->getSessionConfirmModalPopup()->getCloseButton()->click();
+        $this->webposIndex->getSessionConfirmModalPopup()->getCancelButton()->click();
 
         // Assert Confirm Modal Popup Not visible
         $this->assertConfirmModalPopupNotVisible->processAssert($this->webposIndex);

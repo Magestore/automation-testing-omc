@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\ManageStocks\CheckProductList\WebposManageStocksCheckProductListMSK06_1Test" summary="Manage Stocks - Check Product List Test" ticketId="WEBPOS-1">
+		<variation name="WebposManageStocksCheckProductListMSK06_1TestVariation_MSK06_1">
+			<data name="location/dataset" xsi:type="string">default</data>
+
+			<data name="pos/data/pos_name" xsi:type="string">Post Test %isolation%</data>
+			<data name="pos/data/status" xsi:type="string">Enabled</data>
+
+			<data name="staff/dataset" xsi:type="string">default</data>
+
+			<data name="warehouse/dataset" xsi:type="string">default</data>
+
+			<data name="productList" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="product" xsi:type="string">product_without_warehouse_id</item>
+					<item name="qty" xsi:type="number">150</item>
+					<item name="inStock" xsi:type="boolean">true</item>
+				</item>
+				<item name="1" xsi:type="array">
+					<item name="product" xsi:type="string">product_without_warehouse_id</item>
+					<item name="qty" xsi:type="number">170</item>
+					<item name="inStock" xsi:type="boolean">true</item>
+				</item>
+				<item name="2" xsi:type="array">
+					<item name="product" xsi:type="string">product_without_warehouse_id</item>
+					<item name="qty" xsi:type="number">190</item>
+					<item name="inStock" xsi:type="boolean">true</item>
+				</item>
+			</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\CheckProductList\AssertProductIsShownOnListWithCorrectQty" />
+		</variation>
+	</testCase>
+</config>
