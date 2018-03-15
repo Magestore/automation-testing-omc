@@ -14,7 +14,7 @@ use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Fixture\Denomination;
 
-class WebposManagementValidate07Test extends Injectable
+class WebposManagementValidate09Test extends Injectable
 {
 
     /**
@@ -42,9 +42,11 @@ class WebposManagementValidate07Test extends Injectable
         )->run();
     }
 
-    public function test(Denomination $denomination)
+    public function test(WebposRole $webposRole,Denomination $denomination)
     {
         $denomination->persist();
+        $webposRole->persist();
+        $dataStaff = $webposRole->getDataFieldConfig('staff_id')['source']->getStaffs()[0]->getData();
         //Login
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposChooseLocationStep'
@@ -54,16 +56,20 @@ class WebposManagementValidate07Test extends Injectable
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->webposIndex->getCMenu()->getSessionManagement();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-
-        $this->webposIndex->getOpenSessionPopup()->getIconAddNew()->click();
 //        $this->webposIndex->getSessionShift()->getAddSession()->click();
         $this->webposIndex->getOpenSessionPopup()->setQtyCoinBill(10);
-        sleep(2);
-
 
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         sleep(2);
 
+        $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
+        $this->webposIndex->getCMenu()->logout();
+        sleep(2);
+        $this->loginWebpos($this->webposIndex, $dataStaff['username'],$dataStaff['password']);
+
+
+        $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
+        $this->webposIndex->getCMenu()->getSessionManagement();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         // End session
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
@@ -73,6 +79,25 @@ class WebposManagementValidate07Test extends Injectable
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
         $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
 
+    }
+
+    public function loginWebpos(WebposIndex $webposIndex, $username, $password)
+    {
+        $webposIndex->open();
+        if ($webposIndex->getLoginForm()->isVisible()) {
+            $webposIndex->getLoginForm()->getUsernameField()->setValue($username);
+            $webposIndex->getLoginForm()->getPasswordField()->setValue($password);
+            $webposIndex->getLoginForm()->clickLoginButton();
+//			$this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
+            $webposIndex->getMsWebpos()->waitForSyncDataVisible();
+            $time = time();
+            $timeAfter = $time + 360;
+            while ($webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+                $time = time();
+            }
+            sleep(2);
+        }
+        $webposIndex->getCheckoutProductList()->waitProductListToLoad();
     }
 
     public function tearDown()

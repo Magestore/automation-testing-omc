@@ -67,13 +67,13 @@ class OpenSessionPopup extends Block
 
     public function setQtyCoinBillNumber($number, $vt)
     {
-        $coin = $this->_rootElement->find();
+        $coin = $this->_rootElement->find('//input[@data-bind="value:cashQty"]', Locator::SELECTOR_CSS);
         $coin->setValue($number);
     }
 
     public function setCoinBillValueName($name, $vt)
     {
-        $coin = $this->_rootElement->find('//*[@id="popup-open-shift"]/div/div[3]/div[2]/div[3]/table[2]/tbody/tr['.$vt.']/td[1]/select', Locator::SELECTOR_CSS);
+        $coin = $this->_rootElement->find('//select[@class="cash-counting-value"]', Locator::SELECTOR_CSS);
         $coin->setValue($name);
     }
 

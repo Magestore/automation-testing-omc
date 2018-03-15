@@ -14,7 +14,7 @@ use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Fixture\Denomination;
 
-class WebposManagementValidate07Test extends Injectable
+class WebposManagementValidate08Test extends Injectable
 {
 
     /**
@@ -54,17 +54,13 @@ class WebposManagementValidate07Test extends Injectable
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->webposIndex->getCMenu()->getSessionManagement();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-
-        $this->webposIndex->getOpenSessionPopup()->getIconAddNew()->click();
 //        $this->webposIndex->getSessionShift()->getAddSession()->click();
         $this->webposIndex->getOpenSessionPopup()->setQtyCoinBill(10);
-        sleep(2);
-
 
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         sleep(2);
 
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+
         // End session
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();

@@ -75,4 +75,9 @@ class SessionShift extends Block
     public function getCloseTime(){
         return $this->_rootElement->find('//tr[@data-bind="visible:isClosed()"]/td[2]/span', Locator::SELECTOR_XPATH);
     }
+
+    public function getBtnOpen()
+    {
+        return $this->_rootElement->find('.btn-open-shift');
+    }
 }
