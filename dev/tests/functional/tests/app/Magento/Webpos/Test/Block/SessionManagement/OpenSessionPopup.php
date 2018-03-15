@@ -48,4 +48,9 @@ class OpenSessionPopup extends Block
         sleep(1);
         return $this->_rootElement->find('button[type="submit"]');
     }
+
+    public function isOpenSessionDisplay()
+    {
+        return $this->_rootElement->find('.shift-wrap-backover')->isVisible();
+    }
 }

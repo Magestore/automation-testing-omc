@@ -10,7 +10,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
 use Magento\Webpos\Test\Fixture\Staff;
-use Magento\Webpos\Test\Fixture\Location;
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Page\WebposIndex;
 
@@ -38,6 +38,17 @@ class WebposManageStaffMS44Test extends Injectable
      */
     protected $webposIndex;
 
+    public function __prepare(FixtureFactory $fixtureFactory)
+    {
+        $pos1 = $fixtureFactory->createByCode('pos', ['dataset' => 'MS44Staff']);
+        $pos1->persist();
+        $pos2 = $fixtureFactory->createByCode('pos', ['dataset' => 'MS44Staff']);
+        $pos2->persist();
+        return ['pos1' => $pos1,
+            'pos2' => $pos2
+        ];
+    }
+
     public function __inject(
         StaffIndex $staffsIndex,
         StaffNews $staffsNew,
@@ -49,12 +60,11 @@ class WebposManageStaffMS44Test extends Injectable
 
     }
 
-    public function test(Staff $staff, Pos $pos)
+    public function test(Staff $staff, Pos $pos1, Pos $pos2)
     {
         // Preconditions:
-        $pos->persist();
-
-        $location = $pos->getDataFieldConfig('location_id')['source']->getLocation();
+        $location1 = $pos1->getDataFieldConfig('location_id')['source']->getLocation();
+        $location2 = $pos2->getDataFieldConfig('location_id')['source']->getLocation();
 
         $staff->persist();
         // Steps
@@ -62,8 +72,8 @@ class WebposManageStaffMS44Test extends Injectable
         $this->staffsIndex->getStaffsGrid()->search(['email' => $staff->getEmail()]);
         $this->staffsIndex->getStaffsGrid()->getRowByEmail($staff->getEmail())->find('.action-menu-item')->click();
         sleep(1);
-        $this->staffsNew->getStaffsForm()->setLocation([$location->getDisplayName(), 'Store Address']);
-        $this->staffsNew->getStaffsForm()->setPos([$pos->getPosName(), 'Store POS']);
+        $this->staffsNew->getStaffsForm()->setPos([$pos1->getPosName(), $pos2->getPosName()]);
+        $this->staffsNew->getStaffsForm()->setLocation([$location1->getDisplayName(), $location2->getDisplayName()]);
         sleep(1);
         $this->staffsNew->getFormPageActionsStaff()->save();
 
@@ -76,9 +86,9 @@ class WebposManageStaffMS44Test extends Injectable
             $this->webposIndex->getLoginForm()->clickLoginButton();
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
             $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
-            $this->webposIndex->getLoginForm()->setLocation($location->getDisplayName());
+            $this->webposIndex->getLoginForm()->setLocation($location1->getDisplayName());
             $this->webposIndex->getLoginForm()->getEnterToPos()->click();
-            $this->webposIndex->getLoginForm()->setPos($pos->getPosName());
+            $this->webposIndex->getLoginForm()->setPos($pos1->getPosName());
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
 //            $this->webposIndex->getLoginForm()->getEnterToPos()->click();
 
