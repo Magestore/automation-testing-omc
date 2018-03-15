@@ -13,7 +13,7 @@ use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+use Magento\Webpos\Test\Constraint\Staff\AssertCheckLocationForm;
 class WebposManageStaffMS44Test extends Injectable
 {
     /**
@@ -26,20 +26,20 @@ class WebposManageStaffMS44Test extends Injectable
      * @var StaffNews
      */
     private $staffsNew;
-
-    /**
-     * Inject Staff pages.
-     *
-     * @param StaffIndex $staffsIndex
-     * @return void
-     */
     /**
      * @var WebposIndex
      */
     protected $webposIndex;
-
+    /**
+     * @var AssertCheckLocationForm
+     */
+    protected $assertCheckLocationForm;
     public function __prepare(FixtureFactory $fixtureFactory)
     {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_yes_MS57']
+        )->run();
         $pos1 = $fixtureFactory->createByCode('pos', ['dataset' => 'MS44Staff']);
         $pos1->persist();
         $pos2 = $fixtureFactory->createByCode('pos', ['dataset' => 'MS44Staff']);
@@ -52,11 +52,13 @@ class WebposManageStaffMS44Test extends Injectable
     public function __inject(
         StaffIndex $staffsIndex,
         StaffNews $staffsNew,
-        WebposIndex $webposIndex
+        WebposIndex $webposIndex,
+        AssertCheckLocationForm $assertCheckLocationForm
     ) {
         $this->staffsIndex = $staffsIndex;
         $this->staffsNew = $staffsNew;
         $this->webposIndex = $webposIndex;
+        $this->assertCheckLocationForm = $assertCheckLocationForm;
 
     }
 
@@ -86,22 +88,26 @@ class WebposManageStaffMS44Test extends Injectable
             $this->webposIndex->getLoginForm()->clickLoginButton();
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
             $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
-            $this->webposIndex->getLoginForm()->setLocation($location1->getDisplayName());
-            $this->webposIndex->getLoginForm()->getEnterToPos()->click();
-            $this->webposIndex->getLoginForm()->setPos($pos1->getPosName());
-            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-//            $this->webposIndex->getLoginForm()->getEnterToPos()->click();
-
+            $locations = [
+                [
+                    'location' => $location1,
+                    'pos' => $pos1,
+                ],
+                [
+                    'location' => $location2,
+                    'pos' => $pos2,
+                ]
+            ];
+            $this->assertCheckLocationForm->processAssert($this->webposIndex, $locations);
         }
+    }
 
-//			$this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
-        $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
-        $time = time();
-        $timeAfter = $time + 360;
-        while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
-            $time = time();
-        }
-        sleep(2);
+    public function tearDown()
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_no_MS57']
+        )->run();
     }
 }
 
