@@ -31,4 +31,9 @@ class SessionShift extends Block
     {
         return $this->_rootElement->find('button[data-bind="click: setClosingBalance"]');
     }
+
+    public function getAddSession()
+    {
+        return $this->_rootElement->find('.icon-iconPOS-add');
+    }
 }

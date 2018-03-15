@@ -1,20 +1,19 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: ducvu
- * Date: 3/8/2018
- * Time: 1:55 PM
+ * Date: 3/13/2018
+ * Time: 10:08 AM
  */
 
-namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\CheckGUI;
+namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\OpenSession;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-class WebposManagementValidate02Test extends Injectable
+class WebposManagementValidate04Test extends Injectable
 {
 
     /**
@@ -55,14 +54,14 @@ class WebposManagementValidate02Test extends Injectable
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 //        $this->webposIndex->getSessionShift()->getAddSession()->click();
 
-//        $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
-//        sleep(1);
-//
-//        // End session
-//        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-//        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-//        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-//        $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
+        $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
+        sleep(1);
+
+        // End session
+        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
+        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
+        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
+        $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
 
     }
 

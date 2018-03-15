@@ -48,4 +48,37 @@ class OpenSessionPopup extends Block
         sleep(1);
         return $this->_rootElement->find('button[type="submit"]');
     }
+
+    public function getCancelButton()
+    {
+        return $this->_rootElement->find('.cancel');
+    }
+
+    public function setQtyCoinBill($number)
+    {
+        $coin = $this->_rootElement->find('.cash-counting-qty', Locator::SELECTOR_CSS, 'input');
+        $coin->setValue($number);
+    }
+
+    public function getIconDeleteFirst()
+    {
+        return $this->_rootElement->find('.icon-iconPOS-delete');
+    }
+
+    public function setQtyCoinBillNumber($number, $vt)
+    {
+        $coin = $this->_rootElement->find();
+        $coin->setValue($number);
+    }
+
+    public function setCoinBillValueName($name, $vt)
+    {
+        $coin = $this->_rootElement->find('//*[@id="popup-open-shift"]/div/div[3]/div[2]/div[3]/table[2]/tbody/tr['.$vt.']/td[1]/select', Locator::SELECTOR_CSS);
+        $coin->setValue($name);
+    }
+
+    public function getIconAddNew()
+    {
+        return $this->_rootElement->find('.icon-iconPOS-add');
+    }
 }

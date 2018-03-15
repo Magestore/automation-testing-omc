@@ -1,20 +1,20 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: ducvu
- * Date: 3/8/2018
- * Time: 1:55 PM
+ * Date: 3/13/2018
+ * Time: 10:08 AM
  */
 
-namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\CheckGUI;
+namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\OpenSession;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
+use Magento\Webpos\Test\Fixture\Denomination;
 
-class WebposManagementValidate02Test extends Injectable
+class WebposManagementValidate06Test extends Injectable
 {
 
     /**
@@ -42,8 +42,9 @@ class WebposManagementValidate02Test extends Injectable
         )->run();
     }
 
-    public function test(WebposRole $webposRole)
+    public function test(Denomination $denomination)
     {
+        $denomination->persist();
         //Login
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposChooseLocationStep'
@@ -54,13 +55,18 @@ class WebposManagementValidate02Test extends Injectable
         $this->webposIndex->getCMenu()->getSessionManagement();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 //        $this->webposIndex->getSessionShift()->getAddSession()->click();
+//        $this->webposIndex->getOpenSessionPopup()->setQtyCoinBill(1);
 
-//        $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
-//        sleep(1);
-//
-//        // End session
+        $this->webposIndex->getOpenSessionPopup()->getIconDeleteFirst()->click();
+        sleep(10);
+
+
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        // End session
 //        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
 //        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
+//        $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
+//        $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
 //        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
 //        $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
 
