@@ -3,6 +3,9 @@
     <testCase name="Magento\Webpos\Test\TestCase\Location\AddLocation\WebposManageLocationML19Test" summary="Create Location successfully with filling out all fields" ticketId="MAGETWO-1234">
         <variation name="WebposManageLocationML19TestVariation">
             <data name="location/dataset" xsi:type="string">ML19</data>
-           </variation>
+            <data name="message" xsi:type="string">Location was successfully saved</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Location\Form\AssertLocationSuccessSaveMessage" />
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Location\Grid\AssertCheckInfoDisplayOnGrid" />
+        </variation>
     </testCase>
 </config>

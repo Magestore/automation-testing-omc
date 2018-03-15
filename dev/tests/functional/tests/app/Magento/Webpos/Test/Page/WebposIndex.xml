@@ -66,6 +66,7 @@
         <block name="sessionSetClosingBalancePopup" class="Magento\Webpos\Test\Block\SessionManagement\SessionSetClosingBalancePopup" locator="#popup-close-shift" strategy="css selector"/>
         <block name="sessionConfirmModalPopup" class="Magento\Webpos\Test\Block\SessionManagement\SessionConfirmModalPopup" locator=".close-confirm" strategy="css selector"/>
         <block name="sessionSetReasonPopup" class="Magento\Webpos\Test\Block\SessionManagement\SessionSetReasonPopup" locator="#set-closing" strategy="css selector"/>
+        <block name="sessionMakeAdjustmentPopup" class="Magento\Webpos\Test\Block\SessionManagement\SessionMakeAdjustmentPopup" locator="#popup-make-adjustment" strategy="css selector"/>
         <!--End Session management-->
         <!--On-hold Order-->
         <block name="onHoldOrderContainer" class="Magento\Webpos\Test\Block\OnHoldOrder\OnHoldOrderContainer" locator="#on_hold_orders_container" strategy="css selector"/>
