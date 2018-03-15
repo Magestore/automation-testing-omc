@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\SessionManagementValidate\CheckPrintButton\WebposSessionManagementValidateSM40Test" summary="Session Management Validate - Check Print" ticketId="WEBPOS-PG01">
+        <variation name="WebposSessionManagementValidateSM40Test_SM40">
+            <data name="description" xsi:type="string">Check Print Button</data>
+        </variation>
+    </testCase>
+</config>

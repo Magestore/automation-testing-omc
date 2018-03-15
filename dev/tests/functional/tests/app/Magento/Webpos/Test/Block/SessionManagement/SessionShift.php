@@ -62,6 +62,14 @@ class SessionShift extends Block
     }
 
     /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getPrintButton()
+    {
+        return $this->_rootElement->find('.footer-shift .btn-print');
+    }
+
+    /**
      * @param $label
      * @return \Magento\Mtf\Client\ElementInterface
      */
@@ -74,6 +82,13 @@ class SessionShift extends Block
      */
     public function getCloseTime(){
         return $this->_rootElement->find('//tr[@data-bind="visible:isClosed()"]/td[2]/span', Locator::SELECTOR_XPATH);
+    }
+
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getHidePopup(){
+        return $this->_rootElement->find('.shift-wrap-backover.wrap-backover.hide-popup');
     }
 
     public function getBtnOpen()

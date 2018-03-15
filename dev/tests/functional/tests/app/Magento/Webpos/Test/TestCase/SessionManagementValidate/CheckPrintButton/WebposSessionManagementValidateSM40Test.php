@@ -2,20 +2,20 @@
 /**
  * Created by PhpStorm.
  * User: PhucDo
- * Date: 3/14/2018
- * Time: 3:36 PM
+ * Date: 3/15/2018
+ * Time: 8:31 AM
  */
 
-namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\SetClosingBalance;
+namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\CheckPrintButton;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposSessionManagementValidateSM38Test
- * @package Magento\Webpos\Test\TestCase\SessionManagementValidate\SetClosingBalance
+ * Class WebposSessionManagementValidateSM40Test
+ * @package Magento\Webpos\Test\TestCase\SessionManagementValidate\CheckPrintButton
  */
-class WebposSessionManagementValidateSM38Test extends Injectable
+class WebposSessionManagementValidateSM40Test extends Injectable
 {
     /**
      * @var WebposIndex
@@ -54,32 +54,12 @@ class WebposSessionManagementValidateSM38Test extends Injectable
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
         $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
-        sleep(2);
+        $this->webposIndex->getSessionShift()->getPrintButton()->click();
 
         // Assert
-        $this->assertFalse(
-            $this->webposIndex->getSessionShift()->getPutMoneyInButton()->isVisible(),
-            'Put Money In Button is visible.'
-        );
-        $this->assertFalse(
-            $this->webposIndex->getSessionShift()->getTakeMoneyOutButton()->isVisible(),
-            'Take Money Out Button is visible.'
-        );
-        $this->assertFalse(
-            $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->isVisible(),
-            'Set Closing Balance Button is visible.'
-        );
-        $this->assertFalse(
-            $this->webposIndex->getSessionShift()->getButtonEndSession()->isVisible(),
-            'Validate Closing Button is visible.'
-        );
         $this->assertTrue(
-            $this->webposIndex->getSessionShift()->getCloseTime()->isVisible(),
-            'Time Of Close Session is not visible.'
-        );
-        $this->assertTrue(
-            $this->webposIndex->getSessionShift()->getOpenShiftButton()->isVisible(),
-            'Add Session button is not visible.'
+            $this->webposIndex->getSessionPrintShiftPopup()->isVisible(),
+            'X-report is not visible.'
         );
     }
 
