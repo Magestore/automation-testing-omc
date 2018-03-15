@@ -128,12 +128,47 @@ class WebposManageStaffMS58Test extends Injectable
         sleep(1);
 
         //Get orderId
-        $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
-        $orderId= ltrim ($orderId,'#');
+        $orderId1 = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
+        $orderId1= ltrim ($orderId1,'#');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         sleep(1);
+
+        //Add products to cart
+        $this->webposIndex->getCheckoutProductList()->search($product1->getName());
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        sleep(1);
+        $this->webposIndex->getCheckoutProductList()->search($product2->getName());
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        sleep(1);
+
+        //Check can't edit custom price
+        $this->assertEditCustomPrice->processAssert($this->webposIndex, [1,2]);
+
+        //Check hide dicount function
+        $this->assertShowHideDiscountFunction->processAssert($this->webposIndex, 'hide');
+
+        //Checkout
+        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+
+        //PlaceOrder
+        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        sleep(1);
+        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+        $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+        sleep(1);
+
+        //Get orderId
+        $orderId2 = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
+        $orderId2= ltrim ($orderId2,'#');
+        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
+        sleep(1);
+
         return [
-            'orderIds' => [$orderId],
+            'orderIds' => [$orderId1, $orderId2],
             'shippingDescription' => 'Flat Rate - Fixed'
         ];
     }

@@ -16,11 +16,26 @@ class AssertOrderOnlyCreatedByStaff extends AbstractConstraint
         $webposIndex->getCMenu()->ordersHistory();
         sleep(1);
         $webposIndex->getOrderHistoryOrderList()->waitLoader();
-        $webposIndex->getOrderHistoryOrderList()->getAllOrderItems();
-        \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getOrderHistoryOrderList()->getFirstOrder()->isVisible(),
-            'Place order is not successfully'
+
+        $items = $webposIndex->getOrderHistoryOrderList()->getAllOrderItems();
+        \PHPUnit_Framework_Assert::assertEquals(
+            count($orderIds),
+            count($items),
+            'Order Items is incorrect'
         );
+
+        for ($i=0; $i<count($orderIds); ++$i)
+        {
+            $webposIndex->getOrderHistoryOrderList()->search($orderIds[$i]);
+            $webposIndex->getMsWebpos()->clickOutsidePopup();
+            $webposIndex->getOrderHistoryOrderList()->waitLoader();
+            sleep(1);
+            \PHPUnit_Framework_Assert::assertTrue(
+                $webposIndex->getOrderHistoryOrderList()->getFirstOrder()->isVisible(),
+                'Order Items is incorrect'
+            );
+        }
+
         $webposIndex->getMsWebpos()->clickCMenuButton();
         $webposIndex->getCMenu()->checkout();
         sleep(1);
