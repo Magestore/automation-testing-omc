@@ -81,4 +81,9 @@ class OpenSessionPopup extends Block
     {
         return $this->_rootElement->find('.icon-iconPOS-add');
     }
+
+    public function isOpenSessionDisplay()
+    {
+        return $this->_rootElement->find('.shift-wrap-backover')->isVisible();
+    }
 }

@@ -105,4 +105,9 @@ class Cmenu extends Block
     {
         return $this->_rootElement->find('.//ul[@class="c-menu__items" and .//li[@id="group_setting"]]', Locator::SELECTOR_XPATH)->isVisible();
     }
+
+    public function getItem($id)
+    {
+        return $this->_rootElement->find('#'.$id);
+    }
 }

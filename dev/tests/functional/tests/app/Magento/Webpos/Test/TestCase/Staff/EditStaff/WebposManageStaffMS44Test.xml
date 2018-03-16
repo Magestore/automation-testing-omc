@@ -5,7 +5,6 @@
             <data name="staff/dataset" xsi:type="string">staffMS21</data>
             <data name="pos/dataset" xsi:type="string">MS44Staff</data>
             <data name="message" xsi:type="string">Staff was successfully saved</data>
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertStaffSuccessSaveMessage" />-->
         </variation>
     </testCase>
 </config>

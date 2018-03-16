@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Staff\StaffPermission\WebposManageStaffMS57Test" summary="Permission" ticketId="MAGETWO-1234">
-        <variation name="WebposManageStaffMS57TestVariation">
-            <data name="webposRole/dataset" xsi:type="string">MS57Staff</data>
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\StaffPermission\WebposManageStaffMS60Test" summary="Permission" ticketId="MAGETWO-1234">
+        <variation name="WebposManageStaffMS60TestVariation">
+            <data name="webposRole/dataset" xsi:type="string">MS58Staff</data>
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
@@ -11,7 +11,7 @@
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
                 </item>
             </data>
-            <constraint name="Magento\Webpos\Test\Constraint\Staff\AssertPlaceOrderSuccess" />
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckCartSimpleProduct"/>
         </variation>
     </testCase>
 </config>

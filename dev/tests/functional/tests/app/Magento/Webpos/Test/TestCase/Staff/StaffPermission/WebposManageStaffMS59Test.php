@@ -9,31 +9,13 @@ namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Webpos\Test\Constraint\Staff\AssertShowHideMenu;
-use Magento\Webpos\Test\Constraint\Staff\AssertShowHideDiscountFunction;
-use Magento\Webpos\Test\Constraint\Staff\AssertEditCustomPrice;
-class WebposManageStaffMS58Test extends Injectable
+class WebposManageStaffMS59Test extends Injectable
 {
 
     /**
      * @var WebposIndex
      */
     private $webposIndex;
-
-    /**
-     * @var AssertShowHideMenu
-     */
-    protected $assertShowHideMenu;
-
-    /**
-     * @var AssertShowHideDiscountFunction
-     */
-    protected $assertShowHideDiscountFunction;
-
-    /**
-     * @var AssertEditCustomPrice
-     */
-    protected $assertEditCustomPrice;
 
     public function __prepare()
     {
@@ -54,16 +36,9 @@ class WebposManageStaffMS58Test extends Injectable
      * @return void
      */
     public function __inject(
-        WebposIndex $webposIndex,
-        AssertShowHideMenu $assertShowHideMenu,
-        AssertShowHideDiscountFunction $assertShowHideDiscountFunction,
-        AssertEditCustomPrice $assertEditCustomPrice
-
+        WebposIndex $webposIndex
     ) {
         $this->webposIndex = $webposIndex;
-        $this->assertShowHideMenu = $assertShowHideMenu;
-        $this->assertShowHideDiscountFunction = $assertShowHideDiscountFunction;
-        $this->assertEditCustomPrice = $assertEditCustomPrice;
     }
 
     /**
@@ -89,51 +64,84 @@ class WebposManageStaffMS58Test extends Injectable
         //Login
         $this->loginWebpos($this->webposIndex, $dataStaff['username'],$dataStaff['password']);
 
-        //Check show hide item menu
-        $this->assertShowHideMenu->processAssert($this->webposIndex,[
-            ['id' => 'item_manage_stock',
-                'tag' => false],
-            ['id' => 'group_customer',
-                'tag' => true],
-            ['id' => 'group_setting',
-                'tag' => true]
-        ]);
-
         //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
-        $this->webposIndex->getCheckoutProductList()->search($product2->getName());
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(1);
-
-        //Check can't edit custom price
-        $this->assertEditCustomPrice->processAssert($this->webposIndex, [1,2]);
-
-        //Check hide dicount function
-        $this->assertShowHideDiscountFunction->processAssert($this->webposIndex, 'hide');
-
         //Checkout
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
         //PlaceOrder
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
+        $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue(0);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         sleep(1);
-
         //Get orderId
         $orderId1 = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
         $orderId1= ltrim ($orderId1,'#');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         sleep(1);
+        //Take payment
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getCMenu()->ordersHistory();
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->search($orderId1);
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
+        sleep(1);
+        if($this->webposIndex->getOrderHistoryPayment()->getCashInMethod()->isVisible())
+            $this->webposIndex->getOrderHistoryPayment()->getCashInMethod()->click();
+        sleep(1);
+        $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
+        while(!$this->webposIndex->getModal()->isVisible())
+        {
+            sleep(1);
+        }
+        $this->webposIndex->getModal()->getOkButton()->click();
 
-        //Add products to cart
+        //Check take payment successfully
+
+        //Create Shipping
+        $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
+        while(!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible())
+        {
+            sleep(1);
+        }
+        $this->webposIndex->getOrderHistoryAddOrderNote()->getShipButton()->click();
+        while(!$this->webposIndex->getOrderHistoryShipment()->isVisible())
+        {
+            sleep(1);
+        }
+        $this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
+        $this->webposIndex->getModal()->getOkButton()->click();
+
+        //Check shipment successfully
+
+        //Create invoice a partial
+        $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
+        while(!$this->webposIndex->getOrderHistoryInvoice()->isVisible())
+        {
+            sleep(1);
+        }
+        $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
+        while(!$this->webposIndex->getModal()->isVisible())
+        {
+            sleep(1);
+        }
+        $this->webposIndex->getModal()->getOkButton()->click();
+        //Check create invoice successfully
+
+        //Create refund product
+
+
+
+        //Create cancel
+            //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -142,35 +150,88 @@ class WebposManageStaffMS58Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
-
-        //Check can't edit custom price
-        $this->assertEditCustomPrice->processAssert($this->webposIndex, [1,2]);
-
-        //Check hide dicount function
-        $this->assertShowHideDiscountFunction->processAssert($this->webposIndex, 'hide');
-
-        //Checkout
+            //Checkout
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-        //PlaceOrder
+            //PlaceOrder
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
+        $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue(0);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         sleep(1);
-
-        //Get orderId
+            //Get orderId
         $orderId2 = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
         $orderId2= ltrim ($orderId2,'#');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         sleep(1);
+            //Take payment
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getCMenu()->ordersHistory();
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->search($orderId2);
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
+        sleep(1);
+        if($this->webposIndex->getOrderHistoryPayment()->getCashInMethod()->isVisible())
+            $this->webposIndex->getOrderHistoryPayment()->getCashInMethod()->click();
+        sleep(1);
+        $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
+        while(!$this->webposIndex->getModal()->isVisible())
+        {
+            sleep(1);
+        }
+        $this->webposIndex->getModal()->getOkButton()->click();
+        //Create Shipping
+        $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
+        while(!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible())
+        {
+            sleep(1);
+        }
+        $this->webposIndex->getOrderHistoryAddOrderNote()->getShipButton()->click();
+        while(!$this->webposIndex->getOrderHistoryShipment()->isVisible())
+        {
+            sleep(1);
+        }
+        $this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
+        while(!$this->webposIndex->getModal()->isVisible())
+        {
+            sleep(1);
+        }
+        $this->webposIndex->getModal()->getOkButton()->click();
+            //Create invoice a partial
+        $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
+        while(!$this->webposIndex->getOrderHistoryInvoice()->isVisible())
+        {
+            sleep(1);
+        }
+        $this->webposIndex->getOrderHistoryInvoice()->getItemQtyToInvoiceInput($product1->getName())->setValue(0);
+        $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
+        while(!$this->webposIndex->getModal()->isVisible())
+        {
+            sleep(1);
+        }
+        $this->webposIndex->getModal()->getOkButton()->click();
+        //Create cancel
+        $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
+        while(!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible())
+        {
+            sleep(1);
+        }
+        $this->webposIndex->getOrderHistoryAddOrderNote()->getCancelButton()->click();
+        while(!$this->webposIndex->getOrderHistoryAddCancelComment()->isVisible())
+        {
+            sleep(1);
+        }
+        $this->webposIndex->getOrderHistoryAddCancelComment()->getSaveButton()->click();
+        while(!$this->webposIndex->getModal()->isVisible())
+        {
+            sleep(1);
+        }
+        $this->webposIndex->getModal()->getOkButton()->click();
 
-        return [
-            'orderIds' => [$orderId1, $orderId2],
-            'shippingDescription' => 'Flat Rate - Fixed'
-        ];
     }
 
     public function loginWebpos(WebposIndex $webposIndex, $username, $password)
