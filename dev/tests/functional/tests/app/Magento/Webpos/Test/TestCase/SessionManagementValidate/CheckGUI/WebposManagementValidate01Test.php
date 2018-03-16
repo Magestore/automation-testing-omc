@@ -38,13 +38,9 @@ class WebposManagementValidate01Test extends Injectable
     protected $fixtureFactory;
 
     public function __inject(
-        WebposIndex $webposIndex,
-		DataInterface $configuration,
-		FixtureFactory $fixtureFactory
+        WebposIndex $webposIndex
     ) {
         $this->webposIndex = $webposIndex;
-        $this->configuration = $configuration;
-        $this->fixtureFactory = $fixtureFactory;
     }
 
     public function __prepare()
@@ -61,7 +57,9 @@ class WebposManagementValidate01Test extends Injectable
 //        $webposRole->persist();
 //        $staff = $webposRole->getDataFieldConfig('staff_id')['source']->getStaffs()[0];
         //Login
-        $this->login();
+        $staff = $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposChooseLocationStep'
+        )->run();
 
         //click menu
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();

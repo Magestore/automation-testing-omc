@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\SessionManagementValidate\PutMoney\WebposManagementValidate14Test" summary="Permission" ticketId="WEBPOSMS-61">
+        <variation name="WebposManagementValidate14_01">
+            <data name="denomination/dataset" xsi:type="string">default</data>
+            <data name="des" xsi:type="string">-123</data>
+        </variation>
+    </testCase>
+</config>

@@ -26,4 +26,9 @@ class PutMoneyInPopup extends Block
     {
         return $this->_rootElement->find('textarea');
     }
+
+    public function getBtnCancel()
+    {
+        return $this->_rootElement->find('.cancel');
+    }
 }

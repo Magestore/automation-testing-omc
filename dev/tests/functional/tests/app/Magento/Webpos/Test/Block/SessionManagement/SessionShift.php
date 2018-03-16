@@ -95,4 +95,9 @@ class SessionShift extends Block
     {
         return $this->_rootElement->find('.btn-open-shift');
     }
+
+    public function getAddTransition()
+    {
+        return $this->_rootElement->find('//div/div[2]/header/div[2]/div[3]/div[1]/table/tbody/tr[2]/td[1]/a', Locator::SELECTOR_XPATH);
+    }
 }
