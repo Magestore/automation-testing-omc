@@ -11,45 +11,75 @@ namespace Magento\Webpos\Test\Block\SessionManagement;
 use Magento\Mtf\Block\Block;
 use Magento\Mtf\Client\Locator;
 
+/**
+ * Class SessionConfirmModalPopup
+ * @package Magento\Webpos\Test\Block\SessionManagement
+ */
 class SessionConfirmModalPopup extends Block
 {
-//    public function getTitleBox()
-//    {
-//        return $this->_rootElement->find('.title-box');
-//    }
-//
-//    public function getCancelButton()
-//    {
-//        return $this->_rootElement->find('.cancel');
-//    }
-//
-//    public function getConfirmButton()
-//    {
-//        return $this->_rootElement->find('.modal-body .btn-done');
-//    }
-//
-//    public function getNotice()
-//    {
-//        return $this->_rootElement->find('.cash-counting-notice');
-//    }
-//
-//    public function getAddNewRowButton()
-//    {
-//        return $this->_rootElement->find('//div[@class="counting-box"]/table[3]/tfoot/tr/td[1]/div/span', Locator::SELECTOR_XPATH);
-//    }
-//
-//    public function getColumnCoin()
-//    {
-//        return $this->_rootElement->find('//div[@class="counting-box"]/table[1]/thead/tr/th[1]', Locator::SELECTOR_XPATH);
-//    }
-//
-//    public function getColumnNumberOfCoins()
-//    {
-//        return $this->_rootElement->find('//div[@class="counting-box"]/table[1]/thead/tr/th[2]', Locator::SELECTOR_XPATH);
-//    }
-//
-//    public function getColumnSubtotal()
-//    {
-//        return $this->_rootElement->find('//div[@class="counting-box"]/table[1]/thead/tr/th[3]', Locator::SELECTOR_XPATH);
-//    }
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getModalTitle()
+    {
+        return $this->_rootElement->find('#modal-title-4');
+    }
+
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getCancelButton()
+    {
+        return $this->_rootElement->find('.action-dismiss');
+    }
+
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getOkButton()
+    {
+        return $this->_rootElement->find('.action-accept');
+    }
+
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getCloseButton()
+    {
+        return $this->_rootElement->find('.action-close');
+    }
+
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getContent(){
+        return $this->_rootElement->find('#modal-content-4');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRealBalance(){
+        $text = $this->getContent()->getText();
+        preg_match_all('/\d+\.\d+/', $text, $matches);
+        return $matches[0][0];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTheoryIs(){
+        $text = $this->getContent()->getText();
+        preg_match_all('/\d+\.\d+/', $text, $matches);
+        return $matches[0][1];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLoss(){
+        $text = $this->getContent()->getText();
+        preg_match_all('/\d+\.\d+/', $text, $matches);
+        return $matches[0][2];
+    }
 }

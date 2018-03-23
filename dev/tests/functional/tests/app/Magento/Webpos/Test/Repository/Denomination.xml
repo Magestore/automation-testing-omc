@@ -18,5 +18,17 @@
             <field name="denomination_value" xsi:type="string" />
             <field name="sort_order" xsi:type="string" />
         </dataset>
+
+        <dataset name="one_dollar">
+            <field name="denomination_name" xsi:type="string">Denomination One Dollar %isolation%</field>
+            <field name="denomination_value" xsi:type="string">1</field>
+            <field name="sort_order" xsi:type="string">%isolation%</field>
+        </dataset>
+
+        <dataset name="ten_dollar">
+            <field name="denomination_name" xsi:type="string">Denomination Ten Dollar %isolation%</field>
+            <field name="denomination_value" xsi:type="string">10</field>
+            <field name="sort_order" xsi:type="string">%isolation%</field>
+        </dataset>
     </repository>
 </config>

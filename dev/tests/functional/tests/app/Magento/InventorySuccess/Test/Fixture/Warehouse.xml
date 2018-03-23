@@ -29,5 +29,6 @@
         <field name="created_at" is_required="0"/>
         <field name="updated_at" is_required="0"/>
         <field name="store_id" is_required="0"/>
+        <field name="location_id" is_required="0"/>
     </fixture>
 </config>

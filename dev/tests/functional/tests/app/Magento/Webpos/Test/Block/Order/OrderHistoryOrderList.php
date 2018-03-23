@@ -93,4 +93,5 @@ class OrderHistoryOrderList extends Block
     {
         return $this->_rootElement->getElements('.item');
     }
+
 }

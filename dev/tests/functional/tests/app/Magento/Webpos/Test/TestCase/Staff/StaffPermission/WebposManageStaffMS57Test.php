@@ -9,7 +9,9 @@ namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+use Magento\Webpos\Test\Constraint\Staff\AssertShowHideMenu;
+use Magento\Webpos\Test\Constraint\Staff\AssertShowHideDiscountFunction;
+use Magento\Webpos\Test\Constraint\Staff\AssertEditCustomPrice;
 class WebposManageStaffMS57Test extends Injectable
 {
 
@@ -18,12 +20,23 @@ class WebposManageStaffMS57Test extends Injectable
      */
     private $webposIndex;
 
+    /**
+     * @var AssertShowHideMenu
+     */
+    protected $assertShowHideMenu;
+
+    /**
+     * @var AssertShowHideDiscountFunction
+     */
+    protected $assertShowHideDiscountFunction;
+
+    /**
+     * @var AssertEditCustomPrice
+     */
+    protected $assertEditCustomPrice;
+
     public function __prepare()
     {
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'webpos_default_guest_checkout_rollback']
-        )->run();
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'have_shipping_method_on_webpos_CP197']
@@ -41,9 +54,16 @@ class WebposManageStaffMS57Test extends Injectable
      * @return void
      */
     public function __inject(
-        WebposIndex $webposIndex
+        WebposIndex $webposIndex,
+        AssertShowHideMenu $assertShowHideMenu,
+        AssertShowHideDiscountFunction $assertShowHideDiscountFunction,
+        AssertEditCustomPrice $assertEditCustomPrice
+
     ) {
         $this->webposIndex = $webposIndex;
+        $this->assertShowHideMenu = $assertShowHideMenu;
+        $this->assertShowHideDiscountFunction = $assertShowHideDiscountFunction;
+        $this->assertEditCustomPrice = $assertEditCustomPrice;
     }
 
     /**
@@ -69,6 +89,16 @@ class WebposManageStaffMS57Test extends Injectable
         //Login
         $this->loginWebpos($this->webposIndex, $dataStaff['username'],$dataStaff['password']);
 
+        //Check show hide item menu
+        $this->assertShowHideMenu->processAssert($this->webposIndex,[
+            ['id' => 'item_manage_stock',
+                'tag' => false],
+            ['id' => 'group_customer',
+                'tag' => true],
+            ['id' => 'group_setting',
+                'tag' => true]
+        ]);
+
         //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
@@ -78,6 +108,12 @@ class WebposManageStaffMS57Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
+
+        //Check can't edit custom price
+        $this->assertEditCustomPrice->processAssert($this->webposIndex, [1,2]);
+
+        //Check hide dicount function
+        $this->assertShowHideDiscountFunction->processAssert($this->webposIndex, 'hide');
 
         //Checkout
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
@@ -110,6 +146,7 @@ class WebposManageStaffMS57Test extends Injectable
             $webposIndex->getLoginForm()->getPasswordField()->setValue($password);
             $webposIndex->getLoginForm()->clickLoginButton();
             $webposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader');
+            $webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
             $webposIndex->getLoginForm()->setLocation('Store Address');
             $webposIndex->getLoginForm()->setPos('Store POS');
             $webposIndex->getLoginForm()->getEnterToPos()->click();
@@ -123,6 +160,12 @@ class WebposManageStaffMS57Test extends Injectable
             sleep(2);
         }
         $webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        if($this->webposIndex->getOpenSessionPopup()->isOpenSessionDisplay())
+        {
+            $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
+            $this->webposIndex->getMsWebpos()->clickCMenuButton();
+            $this->webposIndex->getCMenu()->checkout();
+        }
     }
     public function tearDown()
     {

@@ -3,6 +3,10 @@
     <testCase name="Magento\Webpos\Test\TestCase\Location\EditLocationOnGrid\WebposManageLocationML14Test" summary="Check GUI of a record when editing" ticketId="MAGETWO-1234">
         <variation name="WebposManageLocationML14TestVariation">
             <data name="location/dataset" xsi:type="string">MS44</data>
-           </variation>
+            <data name="nameButtons" xsi:type="string">Cancel, Save</data>
+            <data name="nameInputFields" xsi:type="string">display_name, address, description</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Location\Grid\AssertCheckButtonOnGridWhenClick" />
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Location\Grid\AssertFieldsEnableEditOnGridWhenClick" />
+        </variation>
     </testCase>
 </config>

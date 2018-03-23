@@ -110,4 +110,9 @@ class Cmenu extends Block
     {
         return $this->_rootElement->find('[data-bind="click: lockRegister"] a');
     }
+
+    public function getItem($id)
+    {
+        return $this->_rootElement->find('#'.$id);
+    }
 }

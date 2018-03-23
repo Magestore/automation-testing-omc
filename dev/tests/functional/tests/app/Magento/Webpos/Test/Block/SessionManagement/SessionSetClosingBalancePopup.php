@@ -81,4 +81,10 @@ class SessionSetClosingBalancePopup extends Block
         return $this->_rootElement->find('//div[@class="counting-box"]/table[1]/thead/tr/th[3]', Locator::SELECTOR_XPATH);
     }
 
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function  getNumberOfCoinsBills(){
+        return $this->_rootElement->find('.cash-counting-qty.a-center');
+    }
 }
