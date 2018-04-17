@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Role\CheckGridOfStaffList\GridStaffListSortingMR26MR27MR28MR29MR30Test" summary="Manage Role" ticketId="WEBPOS-MR26">
+        <variation name="GridStaffListSortingMR26MR27MR28MR29MR30TestVariation1">
+            <data name="description" xsi:type="string">test</data>
+            <data name="columnsForSorting" xsi:type="array">
+                <item name="id" xsi:type="string">ID</item>
+                <item name="user_name" xsi:type="string">User Name</item>
+                <item name="user_display_name" xsi:type="string">Display Name</item>
+                <item name="email" xsi:type="string">Email</item>
+                <item name="status" xsi:type="string">Status</item>
+            </data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+        </variation>
+    </testCase>
+</config>

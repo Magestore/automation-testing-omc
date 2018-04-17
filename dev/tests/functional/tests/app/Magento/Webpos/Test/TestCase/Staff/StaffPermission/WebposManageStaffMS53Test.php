@@ -9,7 +9,8 @@ namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+use Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertWarningDiscountCustomPrice;
+use Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertEditDiscountCustomPrice;
 class WebposManageStaffMS53Test extends Injectable
 {
 
@@ -18,12 +19,18 @@ class WebposManageStaffMS53Test extends Injectable
      */
     private $webposIndex;
 
+    /**
+     * @var AssertWarningDiscountCustomPrice
+     */
+    protected $assertWarningDiscountCustomPrice;
+
+    /**
+     * @var AssertEditDiscountCustomPrice
+     */
+    protected $assertEditDiscountCustomPrice;
+
     public function __prepare()
     {
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'webpos_default_guest_checkout_rollback']
-        )->run();
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'have_shipping_method_on_webpos_CP197']
@@ -37,9 +44,13 @@ class WebposManageStaffMS53Test extends Injectable
      * @return void
      */
     public function __inject(
-        WebposIndex $webposIndex
+        WebposIndex $webposIndex,
+        AssertWarningDiscountCustomPrice $assertWarningDiscountCustomPrice,
+        AssertEditDiscountCustomPrice $assertEditDiscountCustomPrice
     ) {
         $this->webposIndex = $webposIndex;
+        $this->assertWarningDiscountCustomPrice = $assertWarningDiscountCustomPrice;
+        $this->assertEditDiscountCustomPrice = $assertEditDiscountCustomPrice;
     }
 
     /**
@@ -52,7 +63,7 @@ class WebposManageStaffMS53Test extends Injectable
     {
         //Create role and staff for role
         $webposRole->persist();
-        $dataStaff = $webposRole->getDataFieldConfig('staff_id')['source']->getStaff();
+        $dataStaff = $webposRole->getDataFieldConfig('staff_id')['source']->getStaffs()[0]->getData();
 
         //Create product
         $products = $this->objectManager->getInstance()->create(
@@ -82,11 +93,17 @@ class WebposManageStaffMS53Test extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
         sleep(1);
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->assertWarningDiscountCustomPrice->processAssert($this->webposIndex, 'You are able to apply discount under '.$webposRole->getMaximumDiscountPercent().'% only');
+        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
+        sleep(1);
+        $this->assertEditDiscountCustomPrice->processAssert($this->webposIndex, $webposRole->getMaximumDiscountPercent(), 1);
 
         //Checkout
+        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#webpos_checkout > div.indicator');
 
         //PlaceOrder
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();

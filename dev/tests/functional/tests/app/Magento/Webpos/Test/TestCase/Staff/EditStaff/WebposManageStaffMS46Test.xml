@@ -3,9 +3,7 @@
     <testCase name="Magento\Webpos\Test\TestCase\Staff\EditStaff\WebposManageStaffMS46Test" summary="Check [Reset] button" ticketId="MAGETWO-1234">
         <variation name="WebposManageStaffMS46TestVariation">
             <data name="staff/dataset" xsi:type="string">staffMS21</data>
-            <!--<data name="message" xsi:type="string">Staff was successfully saved</data>-->
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertStaffSuccessSaveMessage" />-->
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertCheckInfoDisplayOnGridCreatedBefore" />-->
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertStaffContinueEditAfterEditStaff" />
         </variation>
     </testCase>
 </config>

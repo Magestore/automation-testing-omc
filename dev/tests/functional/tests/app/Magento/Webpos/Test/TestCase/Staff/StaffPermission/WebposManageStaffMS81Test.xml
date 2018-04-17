@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\StaffPermission\WebposManageStaffMS81Test" summary="Permission" ticketId="WEBPOSMS-81">
+        <variation name="WebposManageStaffMS81TestVariation">
+            <data name="webposRole/dataset" xsi:type="string">role_ms81</data>
+        </variation>
+    </testCase>
+</config>

@@ -31,5 +31,9 @@
             <selector>[name='auto_join']</selector>
             <input>Checkbox</input>
         </auto_join>
+        <is_allow_to_lock>
+            <selector>[name="is_allow_to_lock"]</selector>
+            <input>select</input>
+        </is_allow_to_lock>
     </fields>
 </mapping>

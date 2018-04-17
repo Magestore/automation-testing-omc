@@ -27,4 +27,12 @@ class ModalsWrapper extends Block
     {
         return $this->_rootElement->find('//aside/div/header/button[*[text()[normalize-space()="Close"]]]', Locator::SELECTOR_XPATH);
     }
+    public function getMessageDelete()
+    {
+        return $this->_rootElement->find('.modal-content > div');
+    }
+    public function getAsidePopup()
+    {
+        return $this->_rootElement->find('//aside', Locator::SELECTOR_XPATH);
+    }
 }

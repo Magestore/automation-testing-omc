@@ -12,6 +12,7 @@
 namespace Magento\Webpos\Test\Block;
 
 use Magento\Mtf\Block\Block;
+use Magento\Mtf\Client\Locator;
 
 class Cmenu extends Block
 {
@@ -30,6 +31,11 @@ class Cmenu extends Block
         $this->_rootElement->find('#orders_history')->click();
     }
 
+    public function ordersHistoryIsVisisble()
+    {
+        return $this->_rootElement->find('#orders_history')->isVisible();
+    }
+
     public function onHoldOrders()
     {
         $this->_rootElement->find('#on_hold_orders')->click();
@@ -43,6 +49,11 @@ class Cmenu extends Block
     public function manageStocks()
     {
         $this->_rootElement->find('#manage_stock')->click();
+    }
+
+    public function manageStocksIsVisible()
+    {
+        return $this->_rootElement->find('#manage_stock')->isVisible();
     }
 
     public function synchronization()
@@ -73,5 +84,35 @@ class Cmenu extends Block
     public function customerList()
     {
         $this->_rootElement->find('#customer_list')->click();
+    }
+
+    public function ordersMenuIsVisible()
+    {
+        return $this->_rootElement->find('.//ul[@class="c-menu__items" and .//li[@id="group_order"]]', Locator::SELECTOR_XPATH)->isVisible();
+    }
+
+    public function sessionManagementMenuIsVisible()
+    {
+        return $this->_rootElement->find('.//ul[@class="c-menu__items" and .//li[@id="group_shift"]]', Locator::SELECTOR_XPATH)->isVisible();
+    }
+
+    public function customersMenuIsVisible()
+    {
+        return $this->_rootElement->find('.//ul[@class="c-menu__items" and .//li[@id="group_customer"]]', Locator::SELECTOR_XPATH)->isVisible();
+    }
+
+    public function settingsMenuIsVisible()
+    {
+        return $this->_rootElement->find('.//ul[@class="c-menu__items" and .//li[@id="group_setting"]]', Locator::SELECTOR_XPATH)->isVisible();
+    }
+
+    public function getLockRegister()
+    {
+        return $this->_rootElement->find('[data-bind="click: lockRegister"] a');
+    }
+
+    public function getItem($id)
+    {
+        return $this->_rootElement->find('#'.$id);
     }
 }

@@ -10,6 +10,7 @@ namespace Magento\Webpos\Test\Block\Adminhtml\Role;
 
 
 use Magento\Mtf\Client\Element\SimpleElement;
+use Magento\Mtf\Client\Locator;
 use Magento\Ui\Test\Block\Adminhtml\DataGrid;
 
 class RoleGrid extends DataGrid
@@ -52,4 +53,33 @@ class RoleGrid extends DataGrid
         $this->waitLoader();
         parent::resetFilter();
     }
+
+	public function clickFirstRowToEdit()
+	{
+		$this->_rootElement->find('.data-grid .data-row td:nth-child(2)')->click();
+		$this->waitForElementVisible('//tr[@class="data-grid-editable-row"]', Locator::SELECTOR_XPATH);
+	}
+
+	// Edit Row Actions
+	public function getCancelButton()
+	{
+		return $this->_rootElement->find('button[data-bind="click: cancel"]');
+	}
+
+	public function getSaveButton()
+	{
+		return $this->_rootElement->find('button[data-bind="click: save, disable: !canSave()"]');
+	}
+
+	public function getRowEditMessage()
+	{
+		return $this->_rootElement->find('.data-grid-info-panel');
+	}
+	// End Edit Row Actions
+
+	public function waitForGridLoader()
+	{
+		$this->waitForElementNotVisible($this->loader);
+		$this->getTemplateBlock()->waitLoader();
+	}
 }

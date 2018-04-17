@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @Author: Thomas Mr 0
  * @Created At:   2017-09-07 08:57:00
@@ -8,11 +7,10 @@
  * @Last Modified time: 2017-10-06 09:42:58
  * @Links : https://www.facebook.com/Onjin.Matsui.VTC.NQC
  */
-
 namespace Magento\Webpos\Test\Block\Adminhtml\Locations;
-
 use Magento\Ui\Test\Block\Adminhtml\DataGrid;
 use Magento\Mtf\Client\Element\SimpleElement;
+use Magento\Mtf\Client\Locator;
 
 class LocationsGrid  extends DataGrid
 {
@@ -64,5 +62,66 @@ class LocationsGrid  extends DataGrid
     {
         $this->waitLoader();
         parent::resetFilter();
+    }
+
+    public function getRowByDisplayName($displayName, $isStrict = true)
+    {
+        $rowTemplate = ($isStrict) ? $this->rowTemplateStrict : $this->rowTemplate;
+        $rows = sprintf($rowTemplate, $displayName);
+        $location = sprintf($this->rowPattern, $rows);
+        return $this->_rootElement->find($location, Locator::SELECTOR_XPATH);
+    }
+
+    public function waitLoader()
+    {
+        $this->waitForElementNotVisible($this->loader);
+        $this->getTemplateBlock()->waitLoader();
+    }
+
+    public function getActionButtonEditing($nameButton)
+    {
+        return $this->_rootElement->find('//tbody/tr/td/button[*[text()[normalize-space()="' . $nameButton . '"]]]', Locator::SELECTOR_XPATH);
+    }
+
+    public function setDescription($description)
+    {
+        $this->_rootElement->find('//tbody/tr/td/*/input[@name="description"]', Locator::SELECTOR_XPATH)->setValue($description);
+    }
+
+    public function setAddress($address)
+    {
+        $this->_rootElement->find('//tbody/tr/td/*/input[@name="address"]', Locator::SELECTOR_XPATH)->setValue($address);
+    }
+
+    public function setLocationName($locationName)
+    {
+        $this->_rootElement->find('//tbody/tr/td/*/input[@name="display_name"]', Locator::SELECTOR_XPATH)->setValue($locationName);
+    }
+
+    public function getRowByDescription($description, $isStrict = true)
+    {
+        $rowTemplate = ($isStrict) ? $this->rowTemplateStrict : $this->rowTemplate;
+        $rows = sprintf($rowTemplate, $description);
+        $location = sprintf($this->rowPattern, $rows);
+        return $this->_rootElement->find($location, Locator::SELECTOR_XPATH);
+    }
+    public function getInputFieldEdtingByName($name)
+    {
+        return $this->_rootElement->find('//tbody/tr/td/*/input[@name="' . $name . '"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getSelectFieldEdtingByName($name)
+    {
+        return $this->_rootElement->find('//tbody/tr/td/*/select[@name="' . $name . '"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getFieldDisableEditingDisplay($text)
+    {
+        return $this->_rootElement->find('//tbody/tr/td[*[text()[normalize-space()="' . $text . '"]]]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getMessageEditSuccess()
+    {
+        return $this->_rootElement->find('.data-grid-info-panel .message');
     }
 }

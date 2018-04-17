@@ -9,6 +9,7 @@ namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
+use Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertEditDiscountCustomPrice;
 
 class WebposManageStaffMS54Test extends Injectable
 {
@@ -18,12 +19,13 @@ class WebposManageStaffMS54Test extends Injectable
      */
     private $webposIndex;
 
+    /**
+     * @var AssertEditDiscountCustomPrice
+     */
+    protected $assertEditDiscountCustomPrice;
+
     public function __prepare()
     {
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'webpos_default_guest_checkout_rollback']
-        )->run();
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'have_shipping_method_on_webpos_CP197']
@@ -37,9 +39,11 @@ class WebposManageStaffMS54Test extends Injectable
      * @return void
      */
     public function __inject(
-        WebposIndex $webposIndex
+        WebposIndex $webposIndex,
+        AssertEditDiscountCustomPrice $assertEditDiscountCustomPrice
     ) {
         $this->webposIndex = $webposIndex;
+        $this->assertEditDiscountCustomPrice = $assertEditDiscountCustomPrice;
     }
 
     /**
@@ -52,7 +56,7 @@ class WebposManageStaffMS54Test extends Injectable
     {
         //Create role and staff for role
         $webposRole->persist();
-        $dataStaff = $webposRole->getDataFieldConfig('staff_id')['source']->getStaff();
+        $dataStaff = $webposRole->getDataFieldConfig('staff_id')['source']->getStaffs()[0]->getData();
 
         //Create product
         $products = $this->objectManager->getInstance()->create(
@@ -75,18 +79,24 @@ class WebposManageStaffMS54Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
 
-        //Click to first product name > Discount tab > Input amount less than original
+        //Click to first product name > Discount tab > Input amount greater than original
         $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
         sleep(1);
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
+        sleep(1);
+        $this->assertEditDiscountCustomPrice->processAssert($this->webposIndex, $priceCustom, 1);
 
         //Checkout
+        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#webpos_checkout > div.indicator');
 
         //PlaceOrder
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();

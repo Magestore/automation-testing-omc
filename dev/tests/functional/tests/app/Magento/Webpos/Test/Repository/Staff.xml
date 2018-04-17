@@ -14,6 +14,25 @@
             <field name="display_name" xsi:type="string">Test Automation %isolation%</field>
             <field name="email" xsi:type="string">test%isolation%@trueplus.vn</field>
             <field name="pin" xsi:type="string">1209</field>
+            <field name="customer_group" xsi:type="array">
+                <item name="0" xsi:type="string">All groups</item>
+            </field>
+            <field name="location_id" xsi:type="array">
+                <item name="0" xsi:type="string">Store Address</item>
+            </field>
+            <field name="role_id" xsi:type="string">admin</field>
+            <field name="status" xsi:type="string">Enabled</field>
+            <field name="pos_ids" xsi:type="array">
+                <item name="0" xsi:type="string">Store POS</item>
+            </field>
+        </dataset>
+        <dataset name="staffMS26">
+            <field name="username" xsi:type="string">test%isolation%</field>
+            <field name="password" xsi:type="string">test12345</field>
+            <field name="password_confirmation" xsi:type="string">test12345</field>
+            <field name="display_name" xsi:type="string">Test Automation %isolation%</field>
+            <field name="email" xsi:type="string">test%isolation%@trueplus.vn</field>
+            <field name="pin" xsi:type="string">1209</field>
             <field name="customer_group" xsi:type="string">All groups</field>
             <field name="location_id" xsi:type="string">Store Address</field>
             <field name="role_id" xsi:type="string">admin</field>
@@ -123,6 +142,38 @@
             <field name="pos_ids" xsi:type="array">
                 <item name="0" xsi:type="string">Store POS</item>
             </field>
+        </dataset>
+        <dataset name="disable_staff">
+            <field name="username" xsi:type="string">disable_test%isolation%</field>
+            <field name="password" xsi:type="string">test12345</field>
+            <field name="password_confirmation" xsi:type="string">test12345</field>
+            <field name="display_name" xsi:type="string">Disable Staff %isolation%</field>
+            <field name="email" xsi:type="string">disabletest%isolation%@trueplus.vn</field>
+            <field name="pin" xsi:type="string">1209</field>
+            <field name="customer_group" xsi:type="array">
+                <item name="0" xsi:type="string">All groups</item>
+            </field>
+            <field name="location_id" xsi:type="array">
+                <item name="0" xsi:type="string">Store Address</item>
+            </field>
+            <field name="role_id" xsi:type="string">admin</field>
+            <field name="status" xsi:type="string">Disabled</field>
+            <field name="pos_ids" xsi:type="array">
+                <item name="0" xsi:type="string">Store POS</item>
+            </field>
+        </dataset>
+        <dataset name="staff_ms61">
+            <field name="username" xsi:type="string">test%isolation%</field>
+            <field name="password" xsi:type="string">test12345</field>
+            <field name="password_confirmation" xsi:type="string">test12345</field>
+            <field name="display_name" xsi:type="string">Staff %isolation%</field>
+            <field name="email" xsi:type="string">test%isolation%@trueplus.vn</field>
+            <field name="pin" xsi:type="string">1209</field>
+            <field name="customer_group" xsi:type="array">
+                <item name="0" xsi:type="string">All groups</item>
+            </field>
+            <field name="role_id" xsi:type="string">admin</field>
+            <field name="status" xsi:type="string">Enabled</field>
         </dataset>
     </repository>
 </config>

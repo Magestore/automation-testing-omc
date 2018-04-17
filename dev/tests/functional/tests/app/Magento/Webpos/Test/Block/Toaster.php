@@ -22,4 +22,8 @@ class Toaster extends Block
     {
         return $this->_rootElement->find('.alert alert-warning alert-dismissible')->isVisible();
     }
+    public function waitWarningMessageHide()
+    {
+        $this->waitForElementVisible('.message');
+    }
 }

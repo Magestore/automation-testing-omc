@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Location\AddLocation\WebposManageLocationML23Test" summary="Check [Back] button" ticketId="MAGETWO-1234">
+        <variation name="WebposManageLocationML23TestVariation">
+            <data name="test" xsi:type="string"></data>
+            <data name="pageTitle" xsi:type="string">Location</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Location\Grid\AssertPageManageLocation" />
+        </variation>
+    </testCase>
+</config>

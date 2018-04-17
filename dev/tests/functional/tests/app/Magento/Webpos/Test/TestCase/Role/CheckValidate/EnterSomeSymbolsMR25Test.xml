@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Role\CheckValidate\EnterSomeSymbolsMR25Test" summary="Manage Role" ticketId="WEBPOS-MR25">
+        <variation name="EnterSomeSymbolsMR25TestVariation1">
+            <data name="role/data/display_name" xsi:type="string">Role %isolation%</data>
+            <data name="role/data/maximum_discount_percent" xsi:type="string">asdf234@#</data>
+            <data name="role/data/description" xsi:type="string">Description %isolation%</data>
+        </variation>
+    </testCase>
+</config>

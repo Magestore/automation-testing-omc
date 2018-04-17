@@ -54,10 +54,10 @@ class WebposManageStaffMS46Test extends Injectable
         $this->staffsIndex->getStaffsGrid()->search(['email' => $staff->getEmail()]);
         $this->staffsIndex->getStaffsGrid()->getRowByEmail($staff->getEmail())->find('.action-menu-item')->click();
         sleep(1);
-        $this->staffsNew->getStaffsForm()->setPassword($staff->getPassword());
-        $this->staffsNew->getStaffsForm()->setConfimPassword($staff->getPasswordConfirmation());
-        $this->staffsNew->getStaffsForm()->setEmailAddress('test'.$staff->getEmail());
+        $this->staffsNew->getStaffsForm()->setUserName('test'.$staff->getUsername());
         $this->staffsNew->getStaffsForm()->setDisplayName('test'.$staff->getDisplayName());
+        $this->staffsNew->getStaffsForm()->setEmailAddress('test'.$staff->getEmail());
+        $this->staffsNew->getStaffsForm()->setPinCode('0123');
         $this->staffsNew->getFormPageActionsStaff()->reset();
         sleep(1);
 
@@ -65,9 +65,7 @@ class WebposManageStaffMS46Test extends Injectable
         $fields['customer_group'] = $fields['customer_group'][0];
         $fields['location_id'] = $fields['location_id'][0];
         $fields['pos_ids'] = $fields['pos_ids'][0];
-        $fields['email'] = 'test'.$staff->getEmail();
-        $fields['display_name'] = 'test'.$staff->getDisplayName();
-        return ['dataStaff' => $fields];
+        return ['fields' => $fields];
     }
 }
 

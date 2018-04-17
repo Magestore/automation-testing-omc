@@ -1,8 +1,0 @@
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Sync\WebposSync01Test" summary="Frontend - Web POS" ticketId="MAGETWO-34874">
-        <variation name="WebposSync_01">
-            <data name="des" xsi:type="string">Check GUI of [Sync Data] tab</data>
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Sync\AssertWebposSync01" />-->
-        </variation>
-    </testCase>
-</config>

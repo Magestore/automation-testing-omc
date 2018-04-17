@@ -68,7 +68,7 @@ class MsWebpos extends Block
 
 	public function waitForSyncDataVisible()
 	{
-		$this->waitForElementVisible('.first-screen');
+		$this->waitForElementVisible('[class="first-screen"]');
 	}
 
 	public function waitForModalPopup()

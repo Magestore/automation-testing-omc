@@ -23,6 +23,7 @@
         <block name="checkoutEditCustomer" class="Magento\Webpos\Test\Block\Checkout\CheckoutEditCustomer" locator="#form-edit-customer" strategy="css selector"/>
         <block name="checkoutAddCustomer" class="Magento\Webpos\Test\Block\Checkout\CheckoutAddCustomer" locator="#form-customer-add-customer-checkout" strategy="css selector"/>
         <block name="checkoutAddShippingAddress" class="Magento\Webpos\Test\Block\Checkout\CheckoutAddShippingAddress" locator="#form-customer-add-shipping-address-checkout" strategy="css selector"/>
+        <block name="checkoutAddBillingAddress" class="Magento\Webpos\Test\Block\Checkout\CheckoutAddBillingAddress" locator="#form-customer-add-billing-address-checkout" strategy="css selector"/>
         <block name="checkoutEditAddress" class="Magento\Webpos\Test\Block\Checkout\CheckoutEditAddress" locator="#form-customer-add-address-checkout" strategy="css selector"/>
         <block name="checkoutProductEdit" class="Magento\Webpos\Test\Block\Checkout\CheckoutProductEdit" locator="#popup-edit-product" strategy="css selector"/>
         <block name="checkoutDiscount" class="Magento\Webpos\Test\Block\Checkout\CheckoutDiscount" locator="#webpos_cart_discountpopup" strategy="css selector"/>
@@ -58,6 +59,15 @@
         <block name="sessionInstall" class="Magento\Webpos\Test\Block\SessionManagement\SessionInstall" locator="#install_container" strategy="css selector"/>
         <block name="sessionCloseShift" class="Magento\Webpos\Test\Block\SessionManagement\SessionCloseShift" locator="#close-shift-container" strategy="css selector"/>
         <block name="sessionSetClosingBalanceReason" class="Magento\Webpos\Test\Block\SessionManagement\SessionSetClosingBalanceReason" locator="#set-closing-balance-reason" strategy="css selector"/>
+        <block name="openSessionPopup" class="Magento\Webpos\Test\Block\SessionManagement\OpenSessionPopup" locator="#popup-open-shift" strategy="css selector"/>
+        <block name="listShift" class="Magento\Webpos\Test\Block\SessionManagement\ListShift" locator=".main-item-shift.main-shift" strategy="css selector"/>
+        <block name="sessionInfo" class="Magento\Webpos\Test\Block\SessionManagement\SessionInfo" locator=".//div[@class='sum-info-top' and .//div[@class='session-info']]" strategy="xpath"/>
+        <block name="putMoneyInPopup" class="Magento\Webpos\Test\Block\SessionManagement\PutMoneyInPopup" locator="#popup-make-adjustment" strategy="css selector"/>
+        <block name="sessionSetClosingBalancePopup" class="Magento\Webpos\Test\Block\SessionManagement\SessionSetClosingBalancePopup" locator="#popup-close-shift" strategy="css selector"/>
+        <block name="sessionConfirmModalPopup" class="Magento\Webpos\Test\Block\SessionManagement\SessionConfirmModalPopup" locator=".close-confirm" strategy="css selector"/>
+        <block name="sessionSetReasonPopup" class="Magento\Webpos\Test\Block\SessionManagement\SessionSetReasonPopup" locator="#set-closing" strategy="css selector"/>
+        <block name="sessionMakeAdjustmentPopup" class="Magento\Webpos\Test\Block\SessionManagement\SessionMakeAdjustmentPopup" locator="#popup-make-adjustment" strategy="css selector"/>
+        <block name="sessionPrintShiftPopup" class="Magento\Webpos\Test\Block\SessionManagement\SessionPrintShiftPopup" locator="#print-shift-popup" strategy="css selector"/>
         <!--End Session management-->
         <!--On-hold Order-->
         <block name="onHoldOrderContainer" class="Magento\Webpos\Test\Block\OnHoldOrder\OnHoldOrderContainer" locator="#on_hold_orders_container" strategy="css selector"/>

@@ -99,6 +99,6 @@ class AssertStaffContinueEditAfterCreateStaff extends AbstractConstraint
      */
     public function toString()
     {
-        return 'Fields are incorrect';
+        return 'Fields are correct';
     }
 }
