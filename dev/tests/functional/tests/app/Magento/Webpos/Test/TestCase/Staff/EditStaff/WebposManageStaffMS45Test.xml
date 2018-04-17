@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\EditStaff\WebposManageStaffMS45Test" summary="Check [Save and continue edit] button " ticketId="MAGETWO-1234">
+        <variation name="WebposManageStaffMS45TestVariation">
+            <data name="staff/dataset" xsi:type="string">staffMS21</data>
+            <data name="message" xsi:type="string">Staff was successfully saved</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertStaffSuccessSaveContinueMessage" />
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertStaffContinueEditAfterEditStaff" />
+
+        </variation>
+    </testCase>
+</config>

@@ -1,19 +1,77 @@
 <?php
-
 /**
- * @Author: Thomas Mr 0
- * @Created At:   2017-09-07 09:20:18
- * @Email:  thomas@trueplus.vn
- * @Last Modified by:   thomas
- * @Last Modified time: 2017-09-07 09:20:33
- * @Links : https://www.facebook.com/Onjin.Matsui.VTC.NQC
+ * Created by PhpStorm.
+ * User: gvt
+ * Date: 05/12/2017
+ * Time: 14:07
  */
-
 namespace Magento\Webpos\Test\Block\Adminhtml\Locations\Edit;
-
 use Magento\Mtf\Block\Form;
+use Magento\Mtf\Client\Locator;
 
 class LocationsForm extends Form
 {
+    public function getField($id)
+    {
+        $id = '#'.$id;
+        return $this->_rootElement->find($id);
+    }
+    public function getMessageRequired($id)
+    {
+        return $this->_rootElement->find('#'.$id)->getText();
+    }
+    public function isMessageRequiredDisplay($id)
+    {
+        return $this->_rootElement->find('#'.$id);
+    }
+    public function getLocationName()
+    {
+        return $this->_rootElement->find('#page_display_name')->getValue();
+    }
 
+    public function setLocationName($displayName)
+    {
+        $this->_rootElement->find('#page_display_name')->setValue($displayName);
+    }
+
+    public function getAddress()
+    {
+        return $this->_rootElement->find('#page_address')->getValue();
+    }
+
+    public function setAddress($address)
+    {
+        $this->_rootElement->find('#page_address')->setValue($address);
+    }
+
+    public function getDescription()
+    {
+        return $this->_rootElement->find('#page_description')->getValue();
+    }
+
+    public function setDescription($description)
+    {
+        $this->_rootElement->find('#page_description')->setValue($description);
+    }
+
+    public function getWarehouse()
+    {
+        $value = $this->_rootElement->find('#page_warehouse_id')->getValue();
+        if($value == null)
+            return '';
+        return $this->_rootElement->find('#page_warehouse_id')->find('[value="'.$value.'"]')->getText();
+    }
+
+    public function setWarehouse($nameWarehouse)
+    {
+        $this->_rootElement->find('#page_warehouse_id', Locator::SELECTOR_CSS, 'multiselect')->setValue($nameWarehouse);
+    }
+
+    public function getStoreView()
+    {
+        $value = $this->_rootElement->find('#page_store_id')->getValue();
+        if($value == null)
+            return '';
+        return $this->_rootElement->find('#page_store_id')->find('[value="'.$value.'"]')->getText();
+    }
 }

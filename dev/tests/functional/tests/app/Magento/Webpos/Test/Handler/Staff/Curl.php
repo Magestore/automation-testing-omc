@@ -65,23 +65,23 @@ class Curl extends AbstractCurl implements StaffInterface
         $response = $curl->read();
         $curl->close();
         if (!strpos($response, 'data-ui-id="messages-message-success"')) {
-             throw new \Exception(
-                 "Staff entity creation by curl handler was not successful! Response: $response"
-             );
+            throw new \Exception(
+                "Staff entity creation by curl handler was not successful! Response: $response"
+            );
         }
 
         $data['staff_id'] = $this->getStaffId($fixture->getEmail());
         return ['staff_id' => $data['staff_id']];
     }
 
-    protected function getStaffId($username)
+    protected function getStaffId($email)
     {
         $url = $_ENV['app_backend_url'] . 'mui/index/render/';
         $data = [
             'namespace' => 'webpos_staff_listing',
             'filters' => [
                 'placeholder' => false,
-                'username' => $username
+                'email' => $email
             ],
             'isAjax' => true
         ];

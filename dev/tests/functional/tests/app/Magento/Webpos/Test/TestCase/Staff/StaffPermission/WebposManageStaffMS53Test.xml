@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\StaffPermission\WebposManageStaffMS53Test" summary="Edit custom price" ticketId="MAGETWO-1234">
+        <variation name="WebposManageStaffMS53TestVariation">
+            <data name="webposRole/dataset" xsi:type="string">MS51Staff</data>
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_50_dollar_taxable</item>
+                </item>
+                <item name="1" xsi:type="array">
+                    <item name="product" xsi:type="string">product_50_dollar_taxable</item>
+                </item>
+            </data>
+            <data xsi:type="string" name="priceCustom">80</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertPlaceOrderSuccess" />
+        </variation>
+    </testCase>
+</config>

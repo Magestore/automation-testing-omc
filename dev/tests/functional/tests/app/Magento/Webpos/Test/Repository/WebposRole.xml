@@ -10,6 +10,166 @@
 
             <!--<field name="role_staff" xsi:type="string">1</field>-->
         </dataset>
+        <dataset name="MS51Staff">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">50</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">1</field>
+            <field name="staff_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">staffMS21</item>
+            </field>
+        </dataset>
+        <dataset name="MS55Staff">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">0</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">1</field>
+            <field name="staff_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">staffMS21</item>
+            </field>
+        </dataset>
+        <dataset name="MS56Staff">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string"></field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">1</field>
+            <field name="staff_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">staffMS21</item>
+            </field>
+        </dataset>
+        <dataset name="MS57Staff">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">50</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_order</field>
+            <field name="staff_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">staffMS21</item>
+            </field>
+        </dataset>
+        <dataset name="MS58Staff">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string"></field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_order_created_by_this_staff</field>
+            <field name="staff_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">staffMS21</item>
+            </field>
+        </dataset>
+        <dataset name="MS61Staff">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">50</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_order_created_at_location_of_staff</field>
+            <!--<field name="staff_id" xsi:type="array">-->
+                <!--<item name="dataset" xsi:type="string">staffMS21</item>-->
+            <!--</field>-->
+        </dataset>
 
+        <dataset name="Role2Staff">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">100</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">1</field>
+            <field name="staff_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">default,disable_staff</item>
+            </field>
+        </dataset>
+
+        <dataset name="role_1_staff">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">100</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">1</field>
+            <field name="staff_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">default</item>
+            </field>
+        </dataset>
+        <dataset name="role_ms65">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">50</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_all_order</field>
+        </dataset>
+        <dataset name="role_ms66">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">50</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_inventory</field>
+        </dataset>
+        <dataset name="role_ms69">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">50</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_discount</field>
+        </dataset>
+        <dataset name="role_ms70">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">50</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_discount_apply_all_discount</field>
+        </dataset>
+        <dataset name="role_ms71">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">50</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_order_and_apply_custom_discount_per_cart</field>
+        </dataset>
+        <dataset name="role_ms73">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">100</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_order_and_apply_coupon_code</field>
+        </dataset>
+        <dataset name="role_ms74">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">100</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_order_and_apply_custom_discount_per_item</field>
+        </dataset>
+        <dataset name="role_ms76">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">100</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_order_and_apply_custom_price</field>
+        </dataset>
+        <dataset name="role_ms77">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">100</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_shift</field>
+        </dataset>
+        <dataset name="role_ms79">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">100</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_shift_can_make_shift_adjustment</field>
+        </dataset>
+        <dataset name="role_ms80">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">100</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_shift_can_open_shift</field>
+        </dataset>
+        <dataset name="role_ms81">
+            <field name="display_name" xsi:type="string">Role %isolation%</field>
+            <field name="maximum_discount_percent" xsi:type="string">100</field>
+            <field name="description" xsi:type="string">Description %isolation%</field>
+            <field name="all" xsi:type="string">0</field>
+            <field name="resource" xsi:type="string">manage_shift_can_open_close_shift</field>
+        </dataset>
     </repository>
 </config>

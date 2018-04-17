@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\StaffPermission\WebposManageStaffMS52Test" summary="Discount whole cart" ticketId="MAGETWO-1234">
+        <variation name="WebposManageStaffMS52TestVariation">
+            <data name="webposRole/dataset" xsi:type="string">MS51Staff</data>
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_50_dollar_taxable</item>
+                </item>
+                <item name="1" xsi:type="array">
+                    <item name="product" xsi:type="string">product_50_dollar_taxable</item>
+                </item>
+            </data>
+            <data xsi:type="string" name="discount">85.00</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertDiscountWholeCartPercentage" />
+        </variation>
+    </testCase>
+</config>

@@ -69,6 +69,11 @@ class CheckoutAddShippingAddress extends Block
 		return $this->_rootElement->find('input[name="vat"]');
 	}
 
+	public function getCountrySelect()
+	{
+		return $this->_rootElement->find('select[name="country_id"]',Locator::SELECTOR_CSS, 'select');
+	}
+
 	public function clickCountrySelect()
 	{
 		$this->_rootElement->find('select[name="country_id"]')->click();
@@ -78,6 +83,16 @@ class CheckoutAddShippingAddress extends Block
 	public function getCountryItem($name)
 	{
 		return $this->_rootElement->find('//select[contains(@data-bind, "value: countryShipping")]/option[text()="' . $name . '"]', Locator::SELECTOR_XPATH);
+	}
+
+	public function getRegionInput()
+	{
+		return $this->_rootElement->find('#add_shipping_region');
+	}
+
+	public function getRegionSelect()
+	{
+		return $this->_rootElement->find('select[name="region_id"]',Locator::SELECTOR_CSS, 'select');
 	}
 
 	public function clickRegionSelect()
@@ -136,4 +151,46 @@ class CheckoutAddShippingAddress extends Block
         }
 
     }
+
+	public function getSameBillingShippingCheckbox()
+	{
+		return $this->_rootElement->find('input[data-bind="checked: isSameBillingShipping"]', Locator::SELECTOR_CSS, 'checkbox');
+	}
+
+	// Feild's error messages
+	public function getFirstNameError()
+	{
+		return $this->_rootElement->find('#first-name-error');
+	}
+
+	public function getLastNameError()
+	{
+		return $this->_rootElement->find('#last-name-error');
+	}
+
+	public function getPhoneError()
+	{
+		return $this->_rootElement->find('#phone-error');
+	}
+
+	public function getStreet1Error()
+	{
+		return $this->_rootElement->find('#street1-error');
+	}
+
+	public function getCityError()
+	{
+		return $this->_rootElement->find('#city-error');
+	}
+
+	public function getZipcodeError()
+	{
+		return $this->_rootElement->find('#zipcode-error');
+	}
+
+	public function getCountryError()
+	{
+		return $this->_rootElement->find('#add_shipping_country_id-error');
+	}
+	// End Feild's error messages
 }

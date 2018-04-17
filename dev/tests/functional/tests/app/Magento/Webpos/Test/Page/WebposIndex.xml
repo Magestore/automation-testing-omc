@@ -23,6 +23,7 @@
         <block name="checkoutEditCustomer" class="Magento\Webpos\Test\Block\Checkout\CheckoutEditCustomer" locator="#form-edit-customer" strategy="css selector"/>
         <block name="checkoutAddCustomer" class="Magento\Webpos\Test\Block\Checkout\CheckoutAddCustomer" locator="#form-customer-add-customer-checkout" strategy="css selector"/>
         <block name="checkoutAddShippingAddress" class="Magento\Webpos\Test\Block\Checkout\CheckoutAddShippingAddress" locator="#form-customer-add-shipping-address-checkout" strategy="css selector"/>
+        <block name="checkoutAddBillingAddress" class="Magento\Webpos\Test\Block\Checkout\CheckoutAddBillingAddress" locator="#form-customer-add-billing-address-checkout" strategy="css selector"/>
         <block name="checkoutEditAddress" class="Magento\Webpos\Test\Block\Checkout\CheckoutEditAddress" locator="#form-customer-add-address-checkout" strategy="css selector"/>
         <block name="checkoutProductEdit" class="Magento\Webpos\Test\Block\Checkout\CheckoutProductEdit" locator="#popup-edit-product" strategy="css selector"/>
         <block name="checkoutDiscount" class="Magento\Webpos\Test\Block\Checkout\CheckoutDiscount" locator="#webpos_cart_discountpopup" strategy="css selector"/>
@@ -58,6 +59,15 @@
         <block name="sessionInstall" class="Magento\Webpos\Test\Block\SessionManagement\SessionInstall" locator="#install_container" strategy="css selector"/>
         <block name="sessionCloseShift" class="Magento\Webpos\Test\Block\SessionManagement\SessionCloseShift" locator="#close-shift-container" strategy="css selector"/>
         <block name="sessionSetClosingBalanceReason" class="Magento\Webpos\Test\Block\SessionManagement\SessionSetClosingBalanceReason" locator="#set-closing-balance-reason" strategy="css selector"/>
+        <block name="openSessionPopup" class="Magento\Webpos\Test\Block\SessionManagement\OpenSessionPopup" locator="#popup-open-shift" strategy="css selector"/>
+        <block name="listShift" class="Magento\Webpos\Test\Block\SessionManagement\ListShift" locator=".main-item-shift.main-shift" strategy="css selector"/>
+        <block name="sessionInfo" class="Magento\Webpos\Test\Block\SessionManagement\SessionInfo" locator=".//div[@class='sum-info-top' and .//div[@class='session-info']]" strategy="xpath"/>
+        <block name="putMoneyInPopup" class="Magento\Webpos\Test\Block\SessionManagement\PutMoneyInPopup" locator="#popup-make-adjustment" strategy="css selector"/>
+        <block name="sessionSetClosingBalancePopup" class="Magento\Webpos\Test\Block\SessionManagement\SessionSetClosingBalancePopup" locator="#popup-close-shift" strategy="css selector"/>
+        <block name="sessionConfirmModalPopup" class="Magento\Webpos\Test\Block\SessionManagement\SessionConfirmModalPopup" locator=".close-confirm" strategy="css selector"/>
+        <block name="sessionSetReasonPopup" class="Magento\Webpos\Test\Block\SessionManagement\SessionSetReasonPopup" locator="#set-closing" strategy="css selector"/>
+        <block name="sessionMakeAdjustmentPopup" class="Magento\Webpos\Test\Block\SessionManagement\SessionMakeAdjustmentPopup" locator="#popup-make-adjustment" strategy="css selector"/>
+        <block name="sessionPrintShiftPopup" class="Magento\Webpos\Test\Block\SessionManagement\SessionPrintShiftPopup" locator="#print-shift-popup" strategy="css selector"/>
         <!--End Session management-->
         <!--On-hold Order-->
         <block name="onHoldOrderContainer" class="Magento\Webpos\Test\Block\OnHoldOrder\OnHoldOrderContainer" locator="#on_hold_orders_container" strategy="css selector"/>
@@ -68,19 +78,13 @@
         <!--End On-hold Order-->
         <!-- Manage Stocks-->
         <block name="manageStockHeader" class="Magento\Webpos\Test\Block\ManageStocks\ManageStockHeader" locator="#manage_stock_container header" strategy="css selector"/>
-        <block name="manageStockList" class="Magento\Webpos\Test\Block\ManageStocks\ManageStockList" locator="#block-stock-list" strategy="css selector"/>
+        <block name="manageStockList" class="Magento\Webpos\Test\Block\ManageStocks\ManageStockList" locator="#manage_stock_container main" strategy="css selector"/>
         <!-- End Manage Stocks-->
-
-        <!--Begin The Account Setting Form-->
-        <block name="staffSettingFormHeader" class="Magento\Webpos\Test\Block\Setting\Account\StaffSettingFormHeader" locator="#staff-settings-form header" strategy="css selector"/>
-        <block name="staffSettingFormMainAccount" class="Magento\Webpos\Test\Block\Setting\Account\StaffSettingFormMainAccount" locator="#staff-settings-form main" strategy="css selector"/>
-        <block name="staffSettingFormFooter" class="Magento\Webpos\Test\Block\Setting\Account\StaffSettingFormFooter" locator="#staff-settings-form footer" strategy="css selector"/>
-        <!--End The Account Setting Form-->
-
-        <!--Begin The General Setting Page-->
-        <block name="generalSettingMenuHeader" class="Magento\Webpos\Test\Block\Setting\General\GeneralSettingMenuHeader" locator="#block-webpos-settings-general div.col-right header" strategy="css selector"/>
-        <block name="generalSettingMenuLMainItem" class="Magento\Webpos\Test\Block\Setting\General\GeneralSettingMenuLMainItem" locator="#block-webpos-settings-general div.col-right div.main-item-general" strategy="css selector"/>
-        <block name="generalSettingContentRight" class="Magento\Webpos\Test\Block\Setting\General\GeneralSettingContentRight" locator="#block-webpos-settings-general div.col-left" strategy="css selector"/>
-        <!--End The General Setting Page-->
+        <!-- Synchronization-->
+        <block name="SyncTabRight" class="Magento\Webpos\Test\Block\Synchronization\SyncTabRight" locator="#synchronization_container .wrap-general_container .col-right" strategy="css selector"/>
+        <block name="SyncTabLeftHeader" class="Magento\Webpos\Test\Block\Synchronization\SyncTabLeftHeader" locator="#synchronization_container .wrap-general_container .col-left header" strategy="css selector"/>
+        <block name="SyncTabData" class="Magento\Webpos\Test\Block\Synchronization\SyncTabData" locator="#synchronization_container .wrap-general_container .col-left #sync-data" strategy="css selector"/>
+        <block name="SyncErrorLogs" class="Magento\Webpos\Test\Block\Synchronization\SyncErrorLogs" locator="#synchronization_container .wrap-general_container .col-left #error-logs" strategy="css selector"/>
+        <!-- End Synchronization-->
     </page>
 </config>

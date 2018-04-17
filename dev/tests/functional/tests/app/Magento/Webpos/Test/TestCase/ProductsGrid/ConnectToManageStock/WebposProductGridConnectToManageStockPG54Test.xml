@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\ProductsGrid\ConnectToManageStock\WebposProductGridConnectToManageStockPG54Test" summary="Products Grid - Connect to manage stock" ticketId="WEBPOS-PG54">
+        <variation name="WebposProductGridConnectToManageStockPG54TestVariation1">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">product_100_dollar_taxable_big_qty</item>
+                </item>
+            </data>
+        </variation>
+    </testCase>
+</config>

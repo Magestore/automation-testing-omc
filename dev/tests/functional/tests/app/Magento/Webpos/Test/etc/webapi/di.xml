@@ -2,4 +2,5 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 	<preference for="Magento\Webpos\Test\Handler\Zreport\ZreportInterface" type="Magento\Webpos\Test\Handler\Zreport\Webapi" />
 	<preference for="Magento\Webpos\Test\Handler\CustomerComplain\CustomerComplainInterface" type="Magento\Webpos\Test\Handler\CustomerComplain\Webapi" />
+	<preference for="Magento\Webpos\Test\Handler\BundleProduct\WebposBundleProductInterface" type="Magento\Webpos\Test\Handler\BundleProduct\Webapi" />
 </config>

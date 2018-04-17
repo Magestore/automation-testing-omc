@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\ManageStocks\UpdateProductAttributes\WebposManageStocksUpdateProductAttributesMSK09Test" summary="Manage Stocks - Update Product Attributes Test" ticketId="WEBPOS-1">
+		<variation name="WebposManageStocksUpdateProductAttributesMSK09TestVariation_MSK09">
+			<data name="productList" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="product" xsi:type="string">catalogProductSimple::product_in_primary_warehouse_MSK09</item>
+					<item name="qty" xsi:type="number">150</item>
+					<item name="inStock" xsi:type="boolean">false</item>
+				</item>
+				<item name="1" xsi:type="array">
+					<item name="product" xsi:type="string">catalogProductSimple::product_in_primary_warehouse_MSK09</item>
+					<item name="qty" xsi:type="number">170</item>
+					<item name="inStock" xsi:type="boolean">false</item>
+				</item>
+				<item name="2" xsi:type="array">
+					<item name="product" xsi:type="string">catalogProductSimple::product_in_primary_warehouse_MSK09</item>
+					<item name="qty" xsi:type="number">190</item>
+					<item name="inStock" xsi:type="boolean">false</item>
+				</item>
+			</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes\AssertUpdateButtonsOfProductsAreNotShown" />
+			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes\AssertProductsAreUpdatedInBackend" />
+		</variation>
+	</testCase>
+</config>

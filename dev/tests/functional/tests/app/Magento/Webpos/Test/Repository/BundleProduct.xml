@@ -63,7 +63,6 @@
             <field name="price" xsi:type="array">
                 <item name="dataset" xsi:type="string">bundle_dynamic_with_category</item>
             </field>
-            <field name="special_price" xsi:type="string">10</field>
             <field name="quantity_and_stock_status" xsi:type="array">
                 <item name="is_in_stock" xsi:type="string">In Stock</item>
             </field>
@@ -73,7 +72,7 @@
                 </item>
             </field>
             <field name="bundle_selections" xsi:type="array">
-                <item name="dataset" xsi:type="string">dynamic_type_radio</item>
+                <item name="dataset" xsi:type="string">dynamic_type_radio_with_special_price</item>
             </field>
             <!--<field name="checkout_data" xsi:type="array">-->
             <!--<item name="dataset" xsi:type="string">bundle_default</item>-->

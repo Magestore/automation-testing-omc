@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\EditStaff\WebposManageStaffMS44Test" summary="Edit location scope of staff" ticketId="MAGETWO-1234">
+        <variation name="WebposManageStaffMS44TestVariation">
+            <data name="staff/dataset" xsi:type="string">staffMS21</data>
+            <data name="pos/dataset" xsi:type="string">MS44Staff</data>
+            <data name="message" xsi:type="string">Staff was successfully saved</data>
+        </variation>
+    </testCase>
+</config>

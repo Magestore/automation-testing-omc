@@ -5,10 +5,12 @@
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">
                     <item name="product" xsi:type="string">bundle_dynamic_with_three_radio_button</item>
-                    <item name="fixtureName" xsi:type="string">bundleProduct</item>
+                    <item name="fixtureName" xsi:type="string">webposBundleProduct</item>
                 </item>
             </data>
-            <!--<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderSuccess"/>-->
+            <constraint name="Magento\Webpos\Test\Constraint\ProductsGrid\CheckGUI\AssertProductBlockDetailVisible"/>
+            <constraint name="Magento\Webpos\Test\Constraint\ProductsGrid\BundleProduct\AssertChildProductOnProductDetail"/>
+            <constraint name="Magento\Webpos\Test\Constraint\ProductsGrid\SimpleProduct\AssertProductDetailNotVisible"/>
         </variation>
     </testCase>
 </config>

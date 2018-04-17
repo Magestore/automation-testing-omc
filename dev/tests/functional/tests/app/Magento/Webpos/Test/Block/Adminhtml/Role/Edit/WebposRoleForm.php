@@ -13,5 +13,8 @@ use Magento\Backend\Test\Block\Widget\FormTabs;
 
 class WebposRoleForm extends FormTabs
 {
-
+	public function getDisplayNameError()
+	{
+		return $this->_rootElement->find('#page_display_name-error');
+	}
 }

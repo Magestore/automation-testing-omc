@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\EditStaff\WebposManageStaffMS49Test" summary="Check [Delete] button" ticketId="MAGETWO-1234">
+        <variation name="WebposManageStaffMS49TestVariation">
+            <data name="staff/dataset" xsi:type="string">staffMS21</data>
+            <data name="message" xsi:type="string">Staff was successfully deleted</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertStaffSuccessDeleteMessage" />
+        </variation>
+    </testCase>
+</config>

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @Author: Thomas Mr 0
  * @Created At:   2017-09-07 14:35:45
@@ -8,7 +7,6 @@
  * @Last Modified time: 2017-09-07 14:41:26
  * @Links : https://www.facebook.com/Onjin.Matsui.VTC.NQC
  */
-
 namespace Magento\Webpos\Test\Block\Adminhtml\Staff\Edit;
 
 use Magento\Mtf\Block\Form;
@@ -60,6 +58,11 @@ class StaffsForm extends Form
         return $this->_rootElement->find('#page_username')->getValue();
     }
 
+    public function setUserName($name)
+    {
+        $this->_rootElement->find('#page_username')->setValue($name);
+    }
+
     public function getEmailAddress()
     {
         return $this->_rootElement->find('#page_email')->getValue();
@@ -73,6 +76,11 @@ class StaffsForm extends Form
     public function getPinCode()
     {
         return $this->_rootElement->find('#page_pin')->getValue();
+    }
+
+    public function setPinCode($pin)
+    {
+        $this->_rootElement->find('#page_pin')->setValue($pin);
     }
 
     public function getCustomerGroup()
@@ -89,6 +97,11 @@ class StaffsForm extends Form
         if($value == null)
             return '';
         return $this->_rootElement->find('#page_location_id')->find('[value="'.$value.'"]')->getText();
+    }
+
+    public function setLocation($nameLocation)
+    {
+        $this->_rootElement->find('#page_location_id', Locator::SELECTOR_CSS, 'multiselect')->setValue($nameLocation);
     }
 
     public function getRow()
@@ -113,6 +126,11 @@ class StaffsForm extends Form
         if($value == null)
             return '';
         return $this->_rootElement->find('#page_pos_ids')->find('[value="'.$value.'"]')->getText();
+    }
+
+    public function setPos($namePos)
+    {
+        $this->_rootElement->find('#page_pos_ids', Locator::SELECTOR_CSS, 'multiselect')->setValue($namePos);
     }
 
     public function getTextBoxMessagePassConfim()

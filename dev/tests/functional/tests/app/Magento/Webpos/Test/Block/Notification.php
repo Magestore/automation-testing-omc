@@ -9,6 +9,7 @@
 namespace Magento\Webpos\Test\Block;
 
 use Magento\Mtf\Block\Block;
+use Magento\Mtf\Client\Locator;
 
 /**
  * Class Notification
@@ -34,5 +35,10 @@ class Notification extends Block
 	public function getCountNotification()
     {
         return $this->_rootElement->find('.notification-bell__mentions');
+    }
+
+    public function getClearAll()
+    {
+        return $this->_rootElement->find('//div[2]/div[1]/label[2]', Locator::SELECTOR_XPATH);
     }
 }

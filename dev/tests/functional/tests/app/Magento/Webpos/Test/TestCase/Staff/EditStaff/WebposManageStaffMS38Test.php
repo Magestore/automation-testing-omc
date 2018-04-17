@@ -5,7 +5,7 @@
  * Date: 12/02/2018
  * Time: 09:14
  */
-namespace Magento\Webpos\Test\TestCase\Staff\EditStaffOnGrid;
+namespace Magento\Webpos\Test\TestCase\Staff\EditStaff;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;

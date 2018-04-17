@@ -34,6 +34,11 @@ class OrderHistoryOrderList extends Block
 		return $this->_rootElement->find('.list-orders .order-item');
 	}
 
+    public function getFirstOrderId()
+    {
+        return $this->_rootElement->find('.list-orders .order-item .id');
+    }
+
 	public function waitLoader()
 	{
 		$this->waitForElementNotVisible('.wrap-item-order .indicator');
@@ -83,4 +88,10 @@ class OrderHistoryOrderList extends Block
     {
         return $this->_rootElement->find('.list-orders')->isVisible();
     }
+
+    public function getAllOrderItems()
+    {
+        return $this->_rootElement->getElements('.item');
+    }
+
 }
