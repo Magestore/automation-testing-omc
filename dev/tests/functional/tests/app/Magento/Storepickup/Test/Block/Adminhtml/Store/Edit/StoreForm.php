@@ -34,7 +34,6 @@ class StoreForm extends FormTabs
     protected $generalInformation = [
         'Store Name' => '[name="store_name"]',
         'Description' => '[name="description"]',
-        'Link to warehouse' => '[name="warehouse_id"]',
         'Status' => '[name="status"]',
         "Store's Link" => '[name="link"]',
         'Sort Order' => '[name="sort_order"]',
@@ -178,9 +177,15 @@ class StoreForm extends FormTabs
         $this->waitForElementNotVisible($spinner, Locator::SELECTOR_XPATH);
     }
 
-    public function waitOpenOrderTab()
+    public function waitOpenSpecialTab()
     {
         $spinner = './/*[@id="store_tabs_specialday_section"]/span/span/span[@class="spinner"]';
+        $this->waitForElementNotVisible($spinner, Locator::SELECTOR_XPATH);
+    }
+
+    public function waitOpenOrderTab()
+    {
+        $spinner = './/*[@id="store_tabs_serialized_orders"]/span/span/span[@class="spinner"]';
         $this->waitForElementNotVisible($spinner, Locator::SELECTOR_XPATH);
     }
 }
