@@ -84,4 +84,8 @@ class LoginForm extends Form
     {
         return $this->_rootElement->find('button.btn-default');
     }
+
+    public function waitForLoginFormVisiable(){
+	    return $this->waitForElementVisible('.wrap-login-form');
+    }
 }
