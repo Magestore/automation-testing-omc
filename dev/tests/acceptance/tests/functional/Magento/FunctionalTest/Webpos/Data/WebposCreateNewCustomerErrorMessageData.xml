@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/DataGenerator/etc/dataProfileSchema.xsd">
+    <!--Begin Customer Email Message-->
+    <entity name="WebposCreateNewCustomerErrorMessage" type="WebPOSCustomerErrorMessage">
+        <data key="CustomerRequiredMessage">This is a required field.</data>
+        <data key="WrongEmailMessage">Please enter a valid email address (Ex: johndoe@domain.com).</data>
+        <data key="InvalidEmailMessage">The customer email is existed.</data>
+        <data key="ExistEmailMessage">The customer email is existed.</data>
+    </entity>
+    <!--Email Customer Email Message-->
+</config>

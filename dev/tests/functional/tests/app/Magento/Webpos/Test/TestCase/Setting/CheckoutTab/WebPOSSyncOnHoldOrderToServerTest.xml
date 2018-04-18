@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Setting\CheckoutTab\WebPOSSyncOnHoldOrderToServerTest" summary="Customer On Checkout Page - Check GUI test" ticketId="WEBPOS-1">
+        <variation name="WebPOSSyncOnHoldOrderToServerSET17TestVariation_SET17">
+            <data name="productName" xsi:type="string">Joust Duffle Bag</data>
+            <data name="menuItem" xsi:type="string">Checkout</data>
+            <data name="optionYes" xsi:type="string">Yes</data>
+            <data name="optionNo" xsi:type="string">No</data>
+            <data name="testCaseID" xsi:type="string">SET17</data>
+            <data name="successMessage" xsi:type="string">Save setting successfully!</data>
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Setting\Account\AssertWebPOSDisplayOutOfStockProductsInSearchResults"/>-->
+        </variation>
+
+        <variation name="WebPOSSyncOnHoldOrderToServerSET18TestVariation_SET18">
+            <data name="productName" xsi:type="string">Joust Duffle Bag</data>
+            <data name="menuItem" xsi:type="string">Checkout</data>
+            <data name="optionYes" xsi:type="string">Yes</data>
+            <data name="optionNo" xsi:type="string">No</data>
+            <data name="testCaseID" xsi:type="string">SET18</data>
+            <data name="successMessage" xsi:type="string">Save setting successfully!</data>
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Setting\Account\AssertWebPOSDisplayOutOfStockProductsInSearchResults"/>-->
+        </variation>
+
+        <variation name="WebPOSSyncOnHoldOrderToServerSET19TestVariation_SET19">
+            <data name="productName" xsi:type="string">Joust Duffle Bag</data>
+            <data name="menuItem" xsi:type="string">Checkout</data>
+            <data name="optionYes" xsi:type="string">Yes</data>
+            <data name="optionNo" xsi:type="string">No</data>
+            <data name="testCaseID" xsi:type="string">SET19</data>
+            <data name="successMessage" xsi:type="string">Save setting successfully!</data>
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Setting\Account\AssertWebPOSDisplayOutOfStockProductsInSearchResults"/>-->
+        </variation>
+    </testCase>
+</config>

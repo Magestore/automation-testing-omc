@@ -76,16 +76,25 @@ class AssertStoreFormAvailable extends AbstractConstraint
             'Store Tag grid is not visible.'
         );
         $storeNew->getStoreForm()->openTab('store-holidays');
+        sleep(1);
         $storeNew->getStoreForm()->waitOpenHolidayTab();
         \PHPUnit_Framework_Assert::assertTrue(
             $storeNew->getStoreForm()->fieldIsVisible('[id="storepickupadmin_holiday_grid"]'),
             'Store Holiday grid is not visible.'
         );
+        $storeNew->getStoreForm()->openTab('store-special');
+        sleep(1);
+        $storeNew->getStoreForm()->waitOpenSpecialTab();
+        \PHPUnit_Framework_Assert::assertTrue(
+            $storeNew->getStoreForm()->fieldIsVisible('[id="storepickupadmin_specialday_grid"]'),
+            'Store store special days grid is not visible.'
+        );
         $storeNew->getStoreForm()->openTab('store-orders');
+        sleep(1);
         $storeNew->getStoreForm()->waitOpenOrderTab();
         \PHPUnit_Framework_Assert::assertTrue(
             $storeNew->getStoreForm()->fieldIsVisible('[id="storepickupadmin_orders_grid"]'),
-            'Store Holiday grid is not visible.'
+            'Store store orders grid is not visible.'
         );
     }
     /**

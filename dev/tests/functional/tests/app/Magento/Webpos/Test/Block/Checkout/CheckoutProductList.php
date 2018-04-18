@@ -118,8 +118,8 @@ class CheckoutProductList extends Block
         return $this->_rootElement->find('//*[@id="productPager"]/ul/li/span[@class="pager"]', Locator::SELECTOR_XPATH);
     }
 
-    public function getSpanNoRecord()
+    public function getProductNameSearch($productName)
     {
-        return $this->_rootElement->find("//*[@id=\"block-product-list\"]/div/div/div/div/span[@data-bind=\"i18n: 'We couldn\'t find any records.'\"]", Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//*[@id="product1"]/div[2]/h3[text()='.$productName.']', Locator::SELECTOR_XPATH);
     }
 }

@@ -13,6 +13,10 @@ use Magento\Mtf\Client\Locator;
 
 class LoginForm extends Form
 {
+    public function waitForLoginForm()
+    {
+        $this->waitForElementVisible('#webpos-login');
+    }
 	public function getUsernameField()
 	{
 		return $this->_rootElement->find('#username');
@@ -79,5 +83,9 @@ class LoginForm extends Form
     public function getEnterToPos()
     {
         return $this->_rootElement->find('button.btn-default');
+    }
+
+    public function waitForLoginFormVisiable(){
+	    return $this->waitForElementVisible('.wrap-login-form');
     }
 }

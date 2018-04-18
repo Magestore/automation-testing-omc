@@ -59,19 +59,28 @@ class LoginWebposStep implements TestStepInterface
 			$this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
 			$this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
 			$this->webposIndex->getLoginForm()->clickLoginButton();
-//      $this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin(); 
-            sleep(3);
+//      $this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
+            $this->webposIndex->getWrapWarningForm()->waitForWrapWarningFormVisible();
 			//check if WrapWarningForm is visible when this staff has been logged in
             if ($this->webposIndex->getWrapWarningForm()->isVisible()) {
                 $this->webposIndex->getWrapWarningForm()->getButtonContinue()->click();
             }
-			$this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
-			$time = time();
-			$timeAfter = $time + 360;
-			while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
-                $time = time();
+            // check if LoginForm must choose location and pos
+            $this->webposIndex->getLoginForm()->waitForLoginFormVisiable();
+            if($this->webposIndex->getLoginForm()->isVisible()){
+                $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
+                $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
+                $this->webposIndex->getLoginForm()->getEnterToPos()->click();
+                $this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
+                sleep(2);
             }
-			sleep(2);
+//			$this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
+//			$time = time();
+//			$timeAfter = $time + 360;
+//			while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+//                $time = time();
+//            }
+//			sleep(2);
 		}
 
 		$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Thomas, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Page/etc/SectionObject.xsd">
+    <section name="WebPOSCustomerInformationSection">
+        <element name="actionEdit" type="wysiwyg" selector="#customer-edit-form .panel-heading a"/>
+        <element name="buttonSave" type="wysiwyg" selector="#customer-edit-form .panel-heading button"/>
+        <element name="customerFirstName" type="wysiwyg" selector="#customer-edit-form .panel-body .customer-fname"/>
+        <element name="customerLastName" type="wysiwyg" selector="#customer-edit-form .panel-body .customer-lname"/>
+        <element name="customerEmail" type="wysiwyg" selector="#customer-edit-form .panel-body .customer-email"/>
+        <element name="customerGroup" type="wysiwyg" selector="#customer-edit-form .panel-body .customer-group"/>
+        <element name="customerInput" type="wysiwyg" selector="#customer-edit-form .panel-body .{{var1}}" parameterized="true"/>
+        <element name="customerFirstNameInput" type="wysiwyg" selector="#customer-edit-form .panel-body #customer_firstname"/>
+        <element name="customerLastNameInput" type="input" selector="#customer-edit-form .panel-body #customer_lastname"/>
+        <element name="customerEmailInput" type="input" selector="#customer-edit-form .panel-body #customer_email"/>
+        <element name="customerGroupInput" type="input" selector="#customer-edit-form .panel-body #customer_group"/>
+    </section>
+    <section name="WebPOSCustomerAccountInformationSection">
+        <element name="WebPOSCustomerMainItemOrder" type="wysiwyg" selector="#customer_list_container .main-item-order"/>
+    </section>
+    <section name="WebPOSCustomerAddressSection">
+        <element name="WebPOSCustomerAddAddressButton" type="wysiwyg" selector="#customer-edit-form > div:nth-child(2) > div.panel-heading > a"/>
+    </section>
+    <section name="WebPOSCustomerOrderHistoryLastMonthSection">
+        <element name="WebPOSCustomerMainItemOrder" type="wysiwyg" selector="#customer_list_container .main-item-order"/>
+    </section>
+    <section name="WebPOSCustomerOrderRefundLastMonthSection">
+        <element name="WebPOSCustomerMainItemOrder" type="wysiwyg" selector="#customer_list_container .main-item-order"/>
+    </section>
+    <section name="WebPOSCustomerComplainSection">
+        <element name="WebPOSCustomerAddComplainButton" type="wysiwyg" selector="#customer-edit-form > div:nth-child(5) > div.panel-heading > a"/>
+    </section>
+</config>
