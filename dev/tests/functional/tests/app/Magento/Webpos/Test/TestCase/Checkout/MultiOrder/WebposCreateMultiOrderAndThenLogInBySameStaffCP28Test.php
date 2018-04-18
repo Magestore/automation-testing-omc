@@ -67,6 +67,12 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
             sleep(2);
         }
 
+        $this->webposIndex->getWrapWarningForm()->waitForWrapWarningFormVisible();
+        //check if WrapWarningForm is visible when this staff has been logged in
+        if ($this->webposIndex->getWrapWarningForm()->isVisible()) {
+            $this->webposIndex->getWrapWarningForm()->getButtonContinue()->click();
+        }
+
         $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
         $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
         $this->webposIndex->getLoginForm()->getEnterToPos()->click();
