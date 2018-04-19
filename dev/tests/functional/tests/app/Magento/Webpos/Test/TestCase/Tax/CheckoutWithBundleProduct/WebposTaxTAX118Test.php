@@ -194,9 +194,12 @@ class WebposTaxTAX118Test extends Injectable
 		);
 
 		$this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
+		sleep(1);
 		$this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->click();
+		sleep(1);
 		$this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
 		$this->webposIndex->getMsWebpos()->waitForModalPopup();
+		sleep(2);
 		$this->webposIndex->getModal()->getOkButton()->click();
 
 		//Assert Tax Amount in Order History Refund
@@ -222,6 +225,7 @@ class WebposTaxTAX118Test extends Injectable
 		$this->webposIndex->getOrderHistoryContainer()->waitForShipmentPopupIsVisible();
 		$this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
 		$this->webposIndex->getMsWebpos()->waitForModalPopup();
+		sleep(2);
 		$this->webposIndex->getModal()->getOkButton()->click();
 
 		// Assert Shipment Success

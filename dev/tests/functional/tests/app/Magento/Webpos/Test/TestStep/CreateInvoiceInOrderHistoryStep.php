@@ -90,7 +90,7 @@ class CreateInvoiceInOrderHistoryStep implements TestStepInterface
 			$this->webposIndex->getMsWebpos()->waitForModalPopup();
 			// Assert Confirmation Popup
 //			$this->assertInvoiceConfirmPopupDisplay->processAssert($this->webposIndex);
-
+            sleep(2);
 			if (strcmp($this->confirmAction, 'close') == 0) {
 				$this->webposIndex->getModal()->getCloseButton()->click();
 			} elseif (strcmp($this->confirmAction, 'cancel') == 0) {
