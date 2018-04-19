@@ -54,19 +54,6 @@ class LocationsForm extends Form
         $this->_rootElement->find('#page_description')->setValue($description);
     }
 
-    public function getWarehouse()
-    {
-        $value = $this->_rootElement->find('#page_warehouse_id')->getValue();
-        if($value == null)
-            return '';
-        return $this->_rootElement->find('#page_warehouse_id')->find('[value="'.$value.'"]')->getText();
-    }
-
-    public function setWarehouse($nameWarehouse)
-    {
-        $this->_rootElement->find('#page_warehouse_id', Locator::SELECTOR_CSS, 'multiselect')->setValue($nameWarehouse);
-    }
-
     public function getStoreView()
     {
         $value = $this->_rootElement->find('#page_store_id')->getValue();
