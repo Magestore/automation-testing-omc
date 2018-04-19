@@ -67,20 +67,20 @@ class LoginWebposStep implements TestStepInterface
             }
             // check if LoginForm must choose location and pos
             $this->webposIndex->getLoginForm()->waitForLoginFormVisiable();
-            if($this->webposIndex->getLoginForm()->isVisible()){
-                $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
-                $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
-                $this->webposIndex->getLoginForm()->getEnterToPos()->click();
-                $this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
-                sleep(2);
+            if ($this->webposIndex->getLoginForm()->getLocationID()->isVisible()) {
+                if ($this->webposIndex->getLoginForm()->getLocationItem('Store Address')->isVisible()) {
+                    $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
+                }
             }
-//			$this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
-//			$time = time();
-//			$timeAfter = $time + 360;
-//			while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
-//                $time = time();
-//            }
-//			sleep(2);
+            if ($this->webposIndex->getLoginForm()->getPosID()->isVisible()) {
+                if ($this->webposIndex->getLoginForm()->getPosItem('Store POS')->isVisible()) {
+                    $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
+                }
+            }
+            if ($this->webposIndex->getLoginForm()->getEnterToPos()->isVisible()) {
+                $this->webposIndex->getLoginForm()->getEnterToPos()->click();
+            }
+            $this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
 		}
 
 		$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();

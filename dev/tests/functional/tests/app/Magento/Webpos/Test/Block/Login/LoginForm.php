@@ -57,6 +57,11 @@ class LoginForm extends Form
         $this->getLocationID()->click();
         return $this->_rootElement->find('//*[@id="location"]/option[text()="'.$name.'"]', Locator::SELECTOR_XPATH);
     }
+
+    public function getLocationItem($name) {
+        return $this->_rootElement->find('//*[@id="location"]/option[text()="'.$name.'"]');
+    }
+
     public function setLocation($name)
     {
         $location = $this->_rootElement->find('#location', Locator::SELECTOR_CSS, 'select');
@@ -66,6 +71,10 @@ class LoginForm extends Form
 	public function getPosID()
     {
 	    return $this->_rootElement->find('//*[@id="pos"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getPosItem($name) {
+        return $this->_rootElement->find('//*[@id="pos"]/option[text()="'.$name.'"]');
     }
 
     public function selectPos($name)
