@@ -3,7 +3,7 @@
     <testCase name="Magento\Webpos\Test\TestCase\Pos\CreatePosEntityTest" summary="Create Pos" ticketId="MAGETWO-1234">
         <variation name="CreatePosEntityTestVariation1" summary="Create Pos Entity Test Variation">
             <data name="pos/data/pos_name" xsi:type="string">Pos Test %isolation%</data>
-            <data name="pos/data/location_id" xsi:type="string">Test Store Address</data>
+            <data name="pos/data/location_id" xsi:type="string">Store Address</data>
             <data name="pos/data/staff_id" xsi:type="string">admin admin</data>
             <data name="pos/data/status" xsi:type="string">Disabled</data>
 

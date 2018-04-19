@@ -13,7 +13,7 @@ class AssertCheckMessageEmpty extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex, $messageEmtpy)
     {
-        $webposIndex->getMsWebpos()->clickCMenuButton();
+        $webposIndex->getMsWebpos()->getCMenuButton()->click();
         $webposIndex->getCMenu()->onHoldOrders();
         sleep(1);
         $webposIndex->getOnHoldOrderOrderList()->waitLoader();

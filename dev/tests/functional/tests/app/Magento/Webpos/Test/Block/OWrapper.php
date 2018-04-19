@@ -15,5 +15,8 @@ use Magento\Mtf\Block\Block;
  */
 class OWrapper extends Block
 {
-
+    public function getCMenuButton()
+    {
+        return $this->_rootElement->find('#c-button--push-left');
+    }
 }

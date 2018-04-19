@@ -60,35 +60,24 @@ class LoginWebposStep implements TestStepInterface
 			$this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
 			$this->webposIndex->getLoginForm()->clickLoginButton();
 //      $this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
+            //check if WrapWarningForm is visible when this staff has been logged in
             $this->webposIndex->getWrapWarningForm()->waitForWrapWarningFormVisible();
-			//check if WrapWarningForm is visible when this staff has been logged in
             if ($this->webposIndex->getWrapWarningForm()->isVisible()) {
                 $this->webposIndex->getWrapWarningForm()->getButtonContinue()->click();
             }
-            // check if LoginForm must choose location and pos
-            $this->webposIndex->getLoginForm()->waitForLoginFormVisiable();
-            if ($this->webposIndex->getLoginForm()->getLocationID()->isVisible()) {
-                if ($this->webposIndex->getLoginForm()->getLocationItem('Store Address')->isVisible()) {
-                    $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
-                }
+            $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
+            $time = time();
+            $timeAfter = $time + 360;
+            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+                $time = time();
             }
-            if ($this->webposIndex->getLoginForm()->getPosID()->isVisible()) {
-                if ($this->webposIndex->getLoginForm()->getPosItem('Store POS')->isVisible()) {
-                    $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
-                }
-            }
-            if ($this->webposIndex->getLoginForm()->getEnterToPos()->isVisible()) {
-                $this->webposIndex->getLoginForm()->getEnterToPos()->click();
-            }
-            $this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
-		}
-
-		$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-
-		$data = [
-			'username' => $username,
-			'password' => $password
-		];
-		return $this->fixtureFactory->createByCode('staff' , ['data' => $data]);
-	}
+            sleep(2);
+        }
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $data = [
+            'username' => $username,
+            'password' => $password
+        ];
+        return $this->fixtureFactory->createByCode('staff' , ['data' => $data]);
+    }
 }
