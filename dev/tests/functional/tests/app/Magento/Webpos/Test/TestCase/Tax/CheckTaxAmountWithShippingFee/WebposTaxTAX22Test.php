@@ -101,18 +101,27 @@ class WebposTaxTAX22Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+
         $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
         $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        sleep(1);
         $this->webposIndex->getCMenu()->ordersHistory();
         sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
@@ -126,7 +135,9 @@ class WebposTaxTAX22Test extends Injectable
             . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
         );
         $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
+        sleep(1);
         $this->webposIndex->getOrderHistoryAddOrderNote()->openRefundPopup();
+        sleep(1);
         //Assert Tax Amount in Order History Invoice
         $this->assertTaxAmountOnOrderHistoryInvoice->processAssert($taxRate, $products, $this->webposIndex);
         return ['products' => $products];

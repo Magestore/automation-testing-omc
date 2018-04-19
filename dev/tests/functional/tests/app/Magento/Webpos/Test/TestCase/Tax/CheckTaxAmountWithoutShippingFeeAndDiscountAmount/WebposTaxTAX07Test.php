@@ -213,12 +213,14 @@ class WebposTaxTAX07Test extends Injectable
 
         $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
         $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
+        sleep(1);
 
         //Assert Tax Amount in Order History Invoice
         $this->assertTaxAmountOnOrderHistoryInvoice->processAssert($taxRate, $products, $this->webposIndex);
 
         // Invoice order successfully
         $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
+        sleep(2);
         $this->webposIndex->getModal()->getOkButton()->click();
 
         return [

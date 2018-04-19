@@ -61,6 +61,7 @@ class CreateInvoiceInOrderHistoryStep implements TestStepInterface
 		if (!$this->webposIndex->getOrderHistoryInvoice()->isVisible()) {
 			$this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
 			$this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
+			sleep(1);
 		}
 
 		foreach ($this->products as $item) {
@@ -88,9 +89,7 @@ class CreateInvoiceInOrderHistoryStep implements TestStepInterface
 			$this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
 
 			$this->webposIndex->getMsWebpos()->waitForModalPopup();
-			// Assert Confirmation Popup
-//			$this->assertInvoiceConfirmPopupDisplay->processAssert($this->webposIndex);
-            sleep(2);
+			sleep(2);
 			if (strcmp($this->confirmAction, 'close') == 0) {
 				$this->webposIndex->getModal()->getCloseButton()->click();
 			} elseif (strcmp($this->confirmAction, 'cancel') == 0) {

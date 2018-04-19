@@ -229,9 +229,9 @@ class WebposTaxTAX34Test extends Injectable
         $this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
 
         // Refund Extant Items
-        foreach ($products as $key => $item) {
-            unset($products[$key]['refundQty']);
-        }
+//        foreach ($products as $key => $item) {
+//            unset($products[$key]['refundQty']);
+//        }
 
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
