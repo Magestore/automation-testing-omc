@@ -22,7 +22,6 @@ class AssertManageStocksPageIsDisplayedCorrectly extends AbstractConstraint
 		);
 
 		$firstProductName = $webposIndex->getManageStockList()->getFirstProductName();
-
 		\PHPUnit_Framework_Assert::assertNotEmpty(
 			$firstProductName,
 			"Manage Stocks - Product list is empty"

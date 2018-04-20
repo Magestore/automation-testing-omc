@@ -97,12 +97,16 @@ class Curl extends AbstractCurl implements StaffInterface
 
     protected function prepareCustomerGroup(array $data)
     {
-        foreach ($data['customer_group'] as $key => $value) {
-            if (!isset($this->mappingData['customer_group'][$value])) {
-                continue;
-            }
-            $data['customer_group'][$key] = $this->mappingData['customer_group'][$value];
+        if(is_array($data['customer_group'])){
+            foreach ($data['customer_group'] as $key => $value) {
+                if (!isset($this->mappingData['customer_group'][$value])) {
+                    continue;
+                }
+                $data['customer_group'][$key] = $this->mappingData['customer_group'][$value];
 
+            }
+        }else{
+            $data['customer_group'] = [$data['customer_group']];
         }
         return $data;
     }
