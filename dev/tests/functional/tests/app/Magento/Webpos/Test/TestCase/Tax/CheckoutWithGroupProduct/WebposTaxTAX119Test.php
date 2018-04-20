@@ -122,7 +122,6 @@ class WebposTaxTAX119Test extends Injectable
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run();
-
         // Login webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
@@ -135,6 +134,7 @@ class WebposTaxTAX119Test extends Injectable
             $this->webposIndex->getCheckoutProductList()->search($item['product']->getSku());
             $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
             $this->webposIndex->getCheckoutContainer()->waitForProductDetailPopup();
+            sleep(1);
             $this->webposIndex->getCheckoutProductDetail()->fillGroupedProductQty($item['product']);
             $this->webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
             $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -194,15 +194,18 @@ class WebposTaxTAX119Test extends Injectable
         $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
         sleep(2);
         $this->webposIndex->getModal()->getOkButton()->click();
-
-        //Assert Tax Amount in Order History Refund
+        //Assert Tax Amount in Order History Payment
         $this->assertPaymentSuccess->processAssert($this->webposIndex);
 
         // Invoice
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\CreateInvoiceInOrderHistoryStep',
-            ['products' => $products]
-        )->run();
+        sleep(5);
+        $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
+        $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
+        while (!$this->webposIndex->getOrderHistoryInvoice()->isVisible()){}
+        $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
+        $this->webposIndex->getMsWebpos()->waitForModalPopup();
+        sleep(2);
+        $this->webposIndex->getModal()->getOkButton()->click();
 
         // Assert Invoice Success
         $this->assertInvoiceSuccess->processAssert($this->webposIndex);
@@ -228,10 +231,22 @@ class WebposTaxTAX119Test extends Injectable
 
 
         // Refund
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
-            ['products' => $products]
-        )->run();
+        if (!$this->webposIndex->getOrderHistoryRefund()->isVisible()) {
+            if (!$this->webposIndex->getOrderHistoryContainer()->getActionsBox()->isVisible()) {
+                $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
+            }
+            sleep(1);
+            $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Refund')->click();
+            sleep(2);
+        }
+        $this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
+        $this->webposIndex->getOrderHistoryRefund()->getItemQtyToRefundInput($products[0]['product']->getAssociated()['products'][0]->getName())->setValue(3);
+        $this->webposIndex->getOrderHistoryRefund()->getItemQtyToRefundInput($products[0]['product']->getAssociated()['products'][1]->getName())->setValue(1);
+        $this->webposIndex->getOrderHistoryRefund()->getItemQtyToRefundInput($products[0]['product']->getAssociated()['products'][2]->getName())->setValue(2);
+        $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
+        sleep(2);
+        $this->webposIndex->getMsWebpos()->waitForModalPopup();
+        $this->webposIndex->getModal()->getOkButton()->click();
 
         // Assert Refund Success
         $this->assertRefundSuccess->processAssert($this->webposIndex, 'Closed');

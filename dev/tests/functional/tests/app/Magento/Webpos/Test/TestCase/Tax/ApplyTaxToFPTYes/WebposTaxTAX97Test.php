@@ -107,7 +107,7 @@ class WebposTaxTAX97Test extends Injectable
 			['customer' => $customer]
 		)->run();
 
-        sleep(30);
+        sleep(5);
 
         // Assert Tax on Cart
 		$this->assertTaxAmountOnCartPageAndCheckoutPageWithTaxApplyToFPT->processAssert($taxRate, $products, $this->webposIndex);
