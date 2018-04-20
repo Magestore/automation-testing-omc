@@ -160,7 +160,7 @@ class WebposTaxTAX82Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitCartLoader();
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }
-        sleep(50);
+        sleep(5);
 
         $actualTaxAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText(), 1);
         $actualDiscountAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Discount')->getText(), 2);
