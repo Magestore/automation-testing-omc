@@ -272,10 +272,6 @@ class WebposTaxTAX118Test extends Injectable
 
 
 		// Refund
-//		$this->objectManager->getInstance()->create(
-//			'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
-//			['products' => $products]
-//		)->run();
         if (!$this->webposIndex->getOrderHistoryRefund()->isVisible()) {
             if (!$this->webposIndex->getOrderHistoryContainer()->getActionsBox()->isVisible()) {
                 $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
