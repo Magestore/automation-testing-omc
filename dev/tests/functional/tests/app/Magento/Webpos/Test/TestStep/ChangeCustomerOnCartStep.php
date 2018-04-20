@@ -56,6 +56,7 @@ class ChangeCustomerOnCartStep implements TestStepInterface
 		sleep(1);
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
+        sleep(2);
 
-	}
+    }
 }

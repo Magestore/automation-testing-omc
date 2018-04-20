@@ -150,6 +150,8 @@ class WebposTaxTAX76Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }
 
+        sleep(5);
+
         //Assert Tax Amount on Cart Page
         $this->assertTaxAmountOnCartPageAndCheckoutPageBeforeDiscount->processAssert($taxRate, $this->webposIndex);
         //End Assert Tax Amount on Cart Page
@@ -158,6 +160,8 @@ class WebposTaxTAX76Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+
+        sleep(5);
 
         //Assert Tax Amount on Checkout Page
         $this->assertTaxAmountOnCartPageAndCheckoutPageBeforeDiscount->processAssert($taxRate, $this->webposIndex);

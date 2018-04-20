@@ -113,6 +113,8 @@ class WebposTaxTAX92Test extends Injectable
 			['products' => $products]
 		)->run();
 
+        sleep(5);
+
 		// Assert SubTotal updated
 		$subTotal = 0;
 		foreach ($products as $item) {
@@ -120,6 +122,8 @@ class WebposTaxTAX92Test extends Injectable
 		}
 		$subTotalOnPage = $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Subtotal')->getText();
 		$subTotalOnPage = (float)substr($subTotalOnPage, 1);
+        $taxAmountOnHomePage = $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice("Tax")->getText();
+        $taxAmountOnHomePage = (float)substr($taxAmountOnHomePage,1);
 
 		self::assertEquals(
 			$subTotal,
@@ -136,8 +140,17 @@ class WebposTaxTAX92Test extends Injectable
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-		// Assert Tax amount is correct
-		$this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
+        sleep(3);
+        $taxAmountOnCheckoutPage = $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice("Tax")->getText();
+        $taxAmountOnCheckoutPage = (float)substr($taxAmountOnCheckoutPage,1);
+
+        \PHPUnit_Framework_Assert::assertEquals(
+            $taxAmountOnHomePage,
+            $taxAmountOnCheckoutPage,
+            'On the Cart - The Tax is changed.'
+        );
+//        // Assert Tax amount is correct
+//		$this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
 
 		$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();

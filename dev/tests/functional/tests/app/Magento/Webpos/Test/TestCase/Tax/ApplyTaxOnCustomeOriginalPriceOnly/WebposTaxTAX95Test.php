@@ -121,7 +121,9 @@ class WebposTaxTAX95Test extends Injectable
 			['products' => $products]
 		)->run();
 
-		// Assert SubTotal updated
+        sleep(5);
+
+        // Assert SubTotal updated
 		$subTotal = 0;
 		foreach ($products as $item) {
 			$subTotal += $item['customPrice'] * $item['orderQty'];
@@ -142,7 +144,9 @@ class WebposTaxTAX95Test extends Injectable
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-		$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        sleep(3);
+
+        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
 		$this->objectManager->getInstance()->create(

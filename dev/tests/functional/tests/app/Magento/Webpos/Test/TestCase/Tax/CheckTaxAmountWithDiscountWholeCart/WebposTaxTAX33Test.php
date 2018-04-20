@@ -145,6 +145,9 @@ class WebposTaxTAX33Test extends Injectable
 
         // Add Discount
         if ($addDiscount) {
+            $this->webposIndex->getMsWebpos()->waitCartLoader();
+            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+            sleep(2);
             $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
             sleep(1);
             self::assertTrue(
@@ -210,7 +213,11 @@ class WebposTaxTAX33Test extends Injectable
 
         // Assert Tax Amount in Order History Invoice
         $this->assertProductPriceOnOrderHistoryRefund->processAssert($taxRate, $products, $this->webposIndex);
-
+        foreach ($products as $item) {
+            if (isset($item['refundQty'])) {
+                $this->webposIndex->getOrderHistoryRefund()->getItemQtyToRefundInput($item['product']->getName())->setValue($item['refundQty']);
+            }
+        }
         // Refund successfully
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
         sleep(2);
