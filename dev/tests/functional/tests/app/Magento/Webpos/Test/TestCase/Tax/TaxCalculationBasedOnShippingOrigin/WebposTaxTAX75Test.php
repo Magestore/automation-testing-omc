@@ -153,9 +153,11 @@ class WebposTaxTAX75Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(2);
 
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
 
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
@@ -167,6 +169,7 @@ class WebposTaxTAX75Test extends Injectable
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
         // End Place Order
 
         //Assert Place Order Success
@@ -196,13 +199,20 @@ class WebposTaxTAX75Test extends Injectable
 
         // Refund
         $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
+        sleep(1);
         $this->webposIndex->getOrderHistoryAddOrderNote()->openRefundPopup();
+        sleep(1);
 
         //Assert Tax Amount in Order History Invoice
         $this->assertProductPriceOnOrderHistoryRefund->processAssert($taxRates['taxRateCA']->getRate(), $products, $this->webposIndex);
-
+        foreach ($products as $item) {
+            if (isset($item['refundQty'])) {
+                $this->webposIndex->getOrderHistoryRefund()->getItemQtyToRefundInput($item['product']->getName())->setValue($item['refundQty']);
+            }
+        }
         // Refund successfully
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
+        sleep(1);
         $this->webposIndex->getModal()->getOkButton()->click();
 
         return [
