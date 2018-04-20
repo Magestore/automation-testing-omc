@@ -23,7 +23,7 @@ class Cmenu extends Block
 
     public function checkout()
     {
-        $this->_rootElement->find('#item_checkout')->click();
+        $this->_rootElement->find('a#checkout')->click();
     }
 
     public function ordersHistory()
