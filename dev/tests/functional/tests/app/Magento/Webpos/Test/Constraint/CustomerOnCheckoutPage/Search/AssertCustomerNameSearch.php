@@ -19,7 +19,7 @@ class AssertCustomerNameSearch extends AbstractConstraint
         $customerNames = $webposIndex->getCheckoutChangeCustomer()->getCustomerNames();
         $expectedCustomerName = $customer->getFirstname() . ' ' . $customer->getLastname();
         foreach ($customerNames as $customerName) {
-            \PHPUnit_Framework_Assert::assertEquals(
+            \PHPUnit_Framework_Assert::assertContains(
                 $expectedCustomerName,
                 $customerName,
                 'Cutomer result is wrong.'

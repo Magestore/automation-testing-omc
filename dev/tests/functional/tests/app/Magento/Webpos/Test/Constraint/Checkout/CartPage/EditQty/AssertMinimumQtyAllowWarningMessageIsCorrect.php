@@ -17,12 +17,12 @@ class AssertMinimumQtyAllowWarningMessageIsCorrect extends AbstractConstraint
 {
 	public function processAssert(WebposIndex $webposIndex, CatalogProductSimple $product)
 	{
-		$message = "%s has minimum quantity allow in cart is 1";
+		$message = "The fewest you may purchase is 1";
 		\PHPUnit_Framework_Assert::assertEquals(
 			sprintf($message, $product->getName()),
 			$webposIndex->getToaster()->getWarningMessage()->getText(),
 			'CategoryRepository - TaxClass - Edit Product Qty - Minimum qty allow warning message is wrong'
-			. "\nExpected: " . sprintf($message, $product->getName())
+			. "\nExpected: " . sprintf($message)
 			. "\nActual: " . $webposIndex->getToaster()->getWarningMessage()->getText()
 		);
 	}
