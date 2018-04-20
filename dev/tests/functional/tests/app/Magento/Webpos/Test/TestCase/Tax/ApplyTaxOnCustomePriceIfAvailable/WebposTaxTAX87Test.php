@@ -133,6 +133,9 @@ class WebposTaxTAX87Test extends Injectable
             'Magento\Webpos\Test\TestStep\EditCustomPriceOfProductOnCartStep',
             ['products' => $products]
         )->run();
+
+        sleep(5);
+
         $customPrice = $products[0]['customPrice'];
         $actualTaxAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText(), 1);
         $this->assertTaxAmountWithApplyTaxOnCustomPrice
@@ -140,6 +143,9 @@ class WebposTaxTAX87Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+
+        sleep(3);
+
         $actualTaxAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText(), 1);
         $this->assertTaxAmountWithApplyTaxOnCustomPrice
             ->processAssert($customPrice, $actualTaxAmount, $taxRate);

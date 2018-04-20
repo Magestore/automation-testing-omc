@@ -145,21 +145,27 @@ class WebposTaxTAX78Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }
 
+        sleep(5);
+
         // Place Order
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
+        sleep(5);
+
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+
 
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
             [
-                'createInvoice' => $createInvoice,
-                'shipped' => $shipped
+                'createInvoice' => true,
+                'shipped' => false
             ]
         )->run();
+
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

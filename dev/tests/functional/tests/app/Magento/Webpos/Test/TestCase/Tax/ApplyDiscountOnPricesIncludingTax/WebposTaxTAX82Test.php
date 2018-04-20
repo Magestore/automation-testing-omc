@@ -160,6 +160,8 @@ class WebposTaxTAX82Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitCartLoader();
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }
+        sleep(50);
+
         $actualTaxAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText(), 1);
         $actualDiscountAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Discount')->getText(), 2);
         $this->assertTaxAmountAndDiscountAmountWithApplyDiscountOnPriceIncludingTax
@@ -167,6 +169,9 @@ class WebposTaxTAX82Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+
+        sleep(3);
+
         $actualTaxAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText(), 1);
         $actualDiscountAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Discount')->getText(), 2);
         $this->assertTaxAmountAndDiscountAmountWithApplyDiscountOnPriceIncludingTax

@@ -129,11 +129,17 @@ class WebposTaxTAX102Test extends Injectable
             'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
             ['customer' => $customer]
         )->run();
+
+        sleep(3);
+
         $actualTaxAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText(), 1);
         $this->assertTaxAmountNoApplyTaxToFpt->processAssert($products[0]['product']->getPrice(), $actualTaxAmount, $taxRate);
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+
+        sleep(3);
+
         $actualTaxAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText(), 1);
         $this->assertTaxAmountNoApplyTaxToFpt->processAssert($products[0]['product']->getPrice(), $actualTaxAmount, $taxRate);
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
