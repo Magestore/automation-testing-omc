@@ -24,7 +24,6 @@ class WebposManageStocksSearchTest extends Injectable
 	public function __prepare(FixtureFactory $fixtureFactory)
 	{
 		$product = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => 'product_in_primary_warehouse']);
-//		$product->persist();
 		$product = $this->objectManager->create('Magento\Catalog\Test\Handler\CatalogProductSimple\Curl')->persist($product);
 
 		return ['product' => $product];
@@ -39,35 +38,39 @@ class WebposManageStocksSearchTest extends Injectable
 	}
 
 	public function test(
-		CatalogProductSimple $product,
+	    $product,
 		$action
 	)
 	{
-		// Login webpos
+	    /*Get product by ID*/
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $product_entity = $objectManager->create('Magento\Catalog\Model\Product')->load($product['id']);
+
+        // Login webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();
 
-		$this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
 		$this->webposIndex->getCMenu()->manageStocks();
-		sleep(2);
 
+        $this->webposIndex->getManageStockList()->waitForProductListShow();
 		$searchText = '';
 
 		if ($action === 'search_incorrect') {
 			$searchText = 'asajbabjadbvdakvb';
 		}
 		elseif ($action === 'search_name') {
-			$searchText = $product->getName();
+			$searchText = $product_entity->getName();
 		}
 		elseif ($action === 'search_sku') {
-			$searchText = $product->getSku();
+			$searchText = $product_entity->getSku();
 		}
 		elseif ($action === 'clear_keyword') {
 			$this->webposIndex->getManageStockList()->searchProduct('asajbabjadbvdakvb');
 			$searchText = '';
 		}
-
 		$this->webposIndex->getManageStockList()->searchProduct($searchText);
+        sleep(2);
 	}
 }

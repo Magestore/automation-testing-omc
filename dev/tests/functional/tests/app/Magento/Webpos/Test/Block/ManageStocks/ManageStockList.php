@@ -20,11 +20,8 @@ class ManageStockList extends Block
 
     public function searchProduct($value)
     {
-//        $this->getSearchBox()->setValue('');
-//        $this->_rootElement->find('.icon-iconPOS-search')->click();
         $this->getSearchBox()->setValue($value);
-//        $this->_rootElement->find('.icon-iconPOS-search')->click();
-        sleep(2);
+        $this->_rootElement->find('.icon-iconPOS-search')->click();
     }
 
     public function getProductRow($productName)
@@ -102,6 +99,7 @@ class ManageStockList extends Block
 
     public function getFirstProductName()
     {
+        $this->waitForProductListShow();
         return $this->_rootElement->find('.table-product tbody tr td.a-left span')->getText();
     }
 
@@ -140,6 +138,7 @@ class ManageStockList extends Block
 
     public function countProductRows()
     {
+        $this->waitForProductListShow();
         $products = $this->_rootElement->getElements('.table-product tbody tr');
         return count($products);
     }
@@ -153,5 +152,9 @@ class ManageStockList extends Block
     public function getStoreAddress()
     {
         return $this->_rootElement->find('.sum-info-top .address');
+    }
+
+    public function waitForProductListShow(){
+        $this->waitForElementVisible('.table-product tbody');
     }
 }
