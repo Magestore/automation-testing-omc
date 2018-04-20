@@ -123,7 +123,6 @@ class WebposTaxTAX118Test extends Injectable
 			'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
 			['products' => $products]
 		)->run();
-
 		// Login webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
@@ -137,26 +136,53 @@ class WebposTaxTAX118Test extends Injectable
 			$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 			$this->webposIndex->getCheckoutContainer()->waitForProductDetailPopup();
 			// Choose first product
-			$this->webposIndex->getCheckoutProductDetail()->getRadioItemOfBundleProduct($item['product']->getBundleSelections()['products'][0][0]->getName())->click();
+            sleep(4);
+            $this->webposIndex->getCheckoutProductDetail()->getRadioItemOfBundleProduct($item['product']->getBundleSelections()['products'][0][0]->getName())->click();
 			sleep(1);
 			$this->webposIndex->getCheckoutProductDetail()->getProductQtyInput()->setValue($item['orderQty']);
 			$this->webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
 			$this->webposIndex->getMsWebpos()->waitCartLoader();
-		}
+            sleep(2);
+        }
 
 		// change customer
 		$this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
 			['customer' => $customer]
 		)->run();
+        $k =0;
+        while (!$this->webposIndex->getCheckoutProductDetail()->isVisible() && $k < 5) {
+            sleep(1);
+            $k++;
+        }
+        if($this->webposIndex->getCheckoutProductDetail()->isVisible()) {
+            $this->webposIndex->getCheckoutProductDetail()->getRadioItemOfBundleProduct($item['product']->getBundleSelections()['products'][0][0]->getName())->click();
+            sleep(1);
+            $this->webposIndex->getCheckoutProductDetail()->getProductQtyInput()->setValue($item['orderQty']);
+            $this->webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
+            $this->webposIndex->getMsWebpos()->waitCartLoader();
+            sleep(2);
+        }
 
 		// Place Order
 		$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(2);
 
+        if($this->webposIndex->getCheckoutProductDetail()->isVisible()) {
+            // Choose first product
+            sleep(4);
+            $this->webposIndex->getCheckoutProductDetail()->getRadioItemOfBundleProduct($item['product']->getBundleSelections()['products'][0][0]->getName())->click();
+            sleep(1);
+            $this->webposIndex->getCheckoutProductDetail()->getProductQtyInput()->setValue($item['orderQty']);
+            $this->webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
+            $this->webposIndex->getMsWebpos()->waitCartLoader();
+            sleep(2);
+        }
 		$this->webposIndex->getCheckoutPaymentMethod()->getCashOnDeliveryMethod()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
 
 		$this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
@@ -166,7 +192,17 @@ class WebposTaxTAX118Test extends Injectable
 			]
 		)->run();
 
-		$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+        if($this->webposIndex->getCheckoutProductDetail()->isVisible()) {
+            // Choose first product
+            sleep(4);
+            $this->webposIndex->getCheckoutProductDetail()->getRadioItemOfBundleProduct($item['product']->getBundleSelections()['products'][0][0]->getName())->click();
+            sleep(1);
+            $this->webposIndex->getCheckoutProductDetail()->getProductQtyInput()->setValue($item['orderQty']);
+            $this->webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
+            $this->webposIndex->getMsWebpos()->waitCartLoader();
+            sleep(2);
+        }
+        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
 		//Assert Place Order Success
@@ -236,10 +272,26 @@ class WebposTaxTAX118Test extends Injectable
 
 
 		// Refund
-		$this->objectManager->getInstance()->create(
-			'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
-			['products' => $products]
-		)->run();
+//		$this->objectManager->getInstance()->create(
+//			'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
+//			['products' => $products]
+//		)->run();
+        if (!$this->webposIndex->getOrderHistoryRefund()->isVisible()) {
+            if (!$this->webposIndex->getOrderHistoryContainer()->getActionsBox()->isVisible()) {
+                $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
+            }
+            sleep(1);
+            $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Refund')->click();
+            sleep(2);
+        }
+        $this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
+        if (isset($item['refundQty'])) {
+            $this->webposIndex->getOrderHistoryRefund()->getItemQtyToRefundInput($products[0]['product']->getBundleSelections()['products'][0][0]->getName())->setValue($item['refundQty']);
+        }
+        $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
+        sleep(2);
+        $this->webposIndex->getMsWebpos()->waitForModalPopup();
+        $this->webposIndex->getModal()->getOkButton()->click();
 
 		// Assert Refund Success
 		$this->assertRefundSuccess->processAssert($this->webposIndex, 'Closed');
