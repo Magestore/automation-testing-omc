@@ -176,12 +176,14 @@ class WebposTaxTAX26Test extends Injectable
             $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
             $this->webposIndex->getMsWebpos()->waitCartLoader();
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+            sleep(5);
         }
 
         // Check out
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(5);
 
         // Select Shipping Method
         $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
@@ -190,12 +192,15 @@ class WebposTaxTAX26Test extends Injectable
         // Select Payment Method
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(5);
 
         // Back to Checkout Home
         $this->webposIndex->getCheckoutWebposCart()->getIconPrevious()->click();
+        sleep(2);
 
         // Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
+        sleep(2);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();

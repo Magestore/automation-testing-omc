@@ -48,7 +48,8 @@ class AddProductToCartStep implements TestStepInterface
 				$this->webposIndex->getCheckoutProductList()->search($item['product']->getSku());
 				$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 				$this->webposIndex->getMsWebpos()->waitCartLoader();
-			}
+                sleep(1);
+            }
 		}
 	}
 }

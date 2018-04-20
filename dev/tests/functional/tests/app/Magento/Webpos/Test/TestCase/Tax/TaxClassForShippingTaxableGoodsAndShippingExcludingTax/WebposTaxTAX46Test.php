@@ -125,15 +125,18 @@ class WebposTaxTAX46Test extends Injectable
 		$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(2);
 
 		$this->webposIndex->getCheckoutShippingMethod()->clickShipPanel();
 		$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-		$shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Flat Rate - Fixed")->getText();
+        sleep(1);
+        $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Flat Rate - Fixed")->getText();
 		$shippingFee = (float)substr($shippingFee, 1);
 
 		$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
 
 		$this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
@@ -145,6 +148,7 @@ class WebposTaxTAX46Test extends Injectable
 
 		$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
 
 		//Assert Place Order Success
 		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
@@ -195,9 +199,9 @@ class WebposTaxTAX46Test extends Injectable
 		$this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
 
 		// Refund Extant Items
-		foreach ($products as $key => $item) {
-			unset($products[$key]['refundQty']);
-		}
+//		foreach ($products as $key => $item) {
+//			unset($products[$key]['refundQty']);
+//		}
 
 		$this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',

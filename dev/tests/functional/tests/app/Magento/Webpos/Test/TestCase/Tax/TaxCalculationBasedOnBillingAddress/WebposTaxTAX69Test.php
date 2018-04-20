@@ -136,8 +136,11 @@ class WebposTaxTAX69Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
             [
@@ -147,6 +150,7 @@ class WebposTaxTAX69Test extends Injectable
         )->run();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
         $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
@@ -170,6 +174,7 @@ class WebposTaxTAX69Test extends Injectable
         $this->assertTaxAmountOnOrderHistoryInvoiceWithTaxCaculationBaseOnBilling->processAssert($this->webposIndex, $billingTaxRate);
         // Invoice order successfully
         $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
+        sleep(1);
         $this->webposIndex->getModal()->getOkButton()->click();
         return ['products' => $products];
     }

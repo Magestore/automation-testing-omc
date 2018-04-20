@@ -165,6 +165,7 @@ class WebposTaxTAX71Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
 
         // Assert Tax Amount on Checkout Page
         $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRates['taxRateCA']->getRate(), $this->webposIndex);
@@ -172,6 +173,7 @@ class WebposTaxTAX71Test extends Injectable
 
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
 
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
@@ -183,6 +185,7 @@ class WebposTaxTAX71Test extends Injectable
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
         // End Place Order
 
         //Assert Place Order Success

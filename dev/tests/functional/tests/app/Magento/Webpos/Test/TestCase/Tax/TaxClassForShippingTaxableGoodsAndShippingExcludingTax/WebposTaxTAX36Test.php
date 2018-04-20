@@ -106,13 +106,15 @@ class WebposTaxTAX36Test extends Injectable
 		$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
+        sleep(2);
 		$this->webposIndex->getCheckoutShippingMethod()->clickShipPanel();
 		$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
 
 		$this->webposIndex->getCheckoutShippingMethod()->getBestWayTableRate()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
 
 		return [
 			'products' => $products

@@ -164,6 +164,7 @@ class WebposTaxTAX24Test extends Injectable
         //End Assert Tax Amount on Checkout Page
 
         // Check out
+        sleep(4);
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

@@ -173,6 +173,7 @@ class WebposTaxTAX25Test extends Injectable
         }
 
         // Hold
+        sleep(4);
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 

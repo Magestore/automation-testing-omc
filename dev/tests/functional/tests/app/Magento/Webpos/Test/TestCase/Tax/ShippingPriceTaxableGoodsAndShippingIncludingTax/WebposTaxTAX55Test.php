@@ -151,11 +151,13 @@ class WebposTaxTAX55Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
 
         // Select Shipping Method
         $this->webposIndex->getCheckoutShippingMethod()->openCheckoutShippingMethod();
         $this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
         $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Flat Rate - Fixed")->getText();
         $shippingFee = (float)substr($shippingFee, 1);
 
@@ -165,13 +167,18 @@ class WebposTaxTAX55Test extends Injectable
 
         //Change customer address to California
         $this->webposIndex->getCheckoutCartHeader()->getCustomerTitleDefault()->click();
+        sleep(1);
         $this->webposIndex->getCheckoutEditCustomer()->getEditShippingAddressIcon()->click();
+        sleep(1);
         $this->webposIndex->getCheckoutEditAddress()->getRegionId()->setValue('California');
+        sleep(1);
         $this->webposIndex->getCheckoutEditAddress()->getSaveButton()->click();
+        sleep(1);
         $this->webposIndex->getCheckoutEditCustomer()->getSaveButton()->click();
         $this->webposIndex->getToaster()->getWarningMessage();
-
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(3);
         //Assert Tax Amount on Checkout Page
         $this->assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee->processAssert($taxRates['taxRateCA']->getRate(), $shippingFee, $this->webposIndex);
         //End Assert Tax Amount on Checkout Page

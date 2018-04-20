@@ -145,6 +145,9 @@ class WebposTaxTAX33Test extends Injectable
 
         // Add Discount
         if ($addDiscount) {
+            $this->webposIndex->getMsWebpos()->waitCartLoader();
+            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+            sleep(2);
             $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
             sleep(1);
             self::assertTrue(
@@ -155,15 +158,18 @@ class WebposTaxTAX33Test extends Injectable
             $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
             $this->webposIndex->getMsWebpos()->waitCartLoader();
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+            sleep(5);
         }
 
         // Place Order
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(2);
 
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
 
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
@@ -175,6 +181,7 @@ class WebposTaxTAX33Test extends Injectable
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
 
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
@@ -206,9 +213,14 @@ class WebposTaxTAX33Test extends Injectable
 
         // Assert Tax Amount in Order History Invoice
         $this->assertProductPriceOnOrderHistoryRefund->processAssert($taxRate, $products, $this->webposIndex);
-
+        foreach ($products as $item) {
+            if (isset($item['refundQty'])) {
+                $this->webposIndex->getOrderHistoryRefund()->getItemQtyToRefundInput($item['product']->getName())->setValue($item['refundQty']);
+            }
+        }
         // Refund successfully
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
+        sleep(2);
         $this->webposIndex->getModal()->getOkButton()->click();
 
         $expectStatus = 'Closed';

@@ -8,7 +8,9 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Webpos\Test\TestCase\Pos\DeletePosEntityTest" summary="Delete Pos Backend Entity" ticketId="MAGETWO-24764">
         <variation name="DeletePosEntityTestVariation1" summary="Delete webpos pos" ticketId="MAGETWO-43660">
-            <data name="pos/dataset" xsi:type="string">default</data>
+            <data name="pos/data/pos_name" xsi:type="string">Pos Test %isolation%</data>
+            <data name="pos/data/location_id" xsi:type="string">Store Address</data>
+            <data name="pos/data/status" xsi:type="string">Disabled</data>
         </variation>
     </testCase>
 </config>

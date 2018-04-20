@@ -4,14 +4,15 @@
         <variation name="CreatePosEntityTestVariation1" summary="Create Pos Entity Test Variation">
             <data name="pos/data/pos_name" xsi:type="string">Pos Test %isolation%</data>
             <data name="pos/data/location_id" xsi:type="string">Store Address</data>
-            <data name="pos/data/staff_id" xsi:type="string">admin admin</data>
             <data name="pos/data/status" xsi:type="string">Disabled</data>
 
             <constraint name="Magento\Webpos\Test\Constraint\Pos\AssertPosInGrid" />
 
         </variation>
         <variation name="CreatePosEntityTestVariation2"  summary="Create Pos Entity Test Variation">
-            <data name="pos/dataset" xsi:type="string">default</data>
+            <data name="pos/data/pos_name" xsi:type="string">Pos Test %isolation%</data>
+            <data name="pos/data/location_id" xsi:type="string">Store Address</data>
+            <data name="pos/data/status" xsi:type="string">Disabled</data>
 
             <constraint name="Magento\Webpos\Test\Constraint\Pos\AssertPosInGrid" />
 
