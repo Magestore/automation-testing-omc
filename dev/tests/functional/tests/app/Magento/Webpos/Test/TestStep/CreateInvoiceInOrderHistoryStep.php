@@ -85,7 +85,7 @@ class CreateInvoiceInOrderHistoryStep implements TestStepInterface
 		if (strcmp($this->action, 'cancel') == 0) {
 			$this->webposIndex->getOrderHistoryInvoice()->getCancelButton()->click();
 		} elseif (strcmp($this->action, 'submit') == 0) {
-
+            sleep(2);
 			$this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
 
 			$this->webposIndex->getMsWebpos()->waitForModalPopup();

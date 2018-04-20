@@ -132,11 +132,16 @@ class WebposTaxTAX57Test extends Injectable
             $this->webposIndex, $defaultTaxRate, $products[0]['product'], $actualPriceExcludeTax, $actualTaxAmount);
         //Change customer address to Michigan
         $this->webposIndex->getCheckoutCartHeader()->getCustomerTitleDefault()->click();
+        sleep(1);
         $this->webposIndex->getCheckoutEditCustomer()->getEditShippingAddressIcon()->click();
+        sleep(1);
         $this->webposIndex->getCheckoutEditAddress()->getRegionId()->setValue('Michigan');
+        sleep(1);
         $this->webposIndex->getCheckoutEditAddress()->getSaveButton()->click();
+        sleep(1);
         $this->webposIndex->getCheckoutEditCustomer()->getSaveButton()->click();
         $this->webposIndex->getToaster()->getWarningMessage();
+        sleep(2);
         $actualPriceExcludeTax = $this->webposIndex->getCheckoutCartItems()->getCartItemPrice($products[0]['product']->getName())->getText();
         $actualPriceExcludeTax = substr($actualPriceExcludeTax, 1);
         $actualTaxAmount = $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText();
@@ -146,6 +151,7 @@ class WebposTaxTAX57Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(2);
         $actualPriceExcludeTax = $this->webposIndex->getCheckoutCartItems()->getCartItemPrice($products[0]['product']->getName())->getText();
         $actualPriceExcludeTax = substr($actualPriceExcludeTax, 1);
         $actualTaxAmount = $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText();
