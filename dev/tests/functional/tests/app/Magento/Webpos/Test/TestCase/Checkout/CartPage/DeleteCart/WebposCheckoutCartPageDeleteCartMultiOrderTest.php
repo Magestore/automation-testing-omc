@@ -12,6 +12,19 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class AssertFirstCartIsRemains
+ *
+ * Precondition: 1. Login Webpos as a staff
+ * Steps: "1. Click on (+) add multi order icon
+2. Add a product to 1st cart
+3. Add a product to 2nd cart
+4. Click on Delete icon of 2nd cart"
+ * Accept: "1. Product in 2nd card is removed
+2. Product in 1st remains"
+ *
+ * @package Magento\Webpos\Test\Constraint\Checkout\CartPage\DeleteCart
+ */
 class WebposCheckoutCartPageDeleteCartMultiOrderTest extends Injectable
 {
 	/**

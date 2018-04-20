@@ -14,6 +14,19 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CartPage\EditQty\AssertEditProductPopupIsAvailable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposCheckoutCartEditQtyChangeProductQtyByManualTest
+ *
+ * Pre: "1. Login webpos by a  staff
+2. Add a product to cart with qty = 1"
+ * Step: "1. Click on name or image of a product in cart
+2. Input special symbols or text to qty textbox
+Ex: #$^&* or abc
+3. Click Enter"
+ * Expect: Show message: "Warning: The fewest you may purchase is 1"
+ *
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\EditQty
+ */
 class WebposCheckoutCartEditQtyChangeProductQtyByManualTest extends Injectable
 {
 	/**

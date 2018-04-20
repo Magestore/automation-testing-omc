@@ -9,6 +9,19 @@ namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposHoldOrderCP165Test
+ * Pre: "1. Login Webpos as a staff
+2. Add a product
+3. Click on [Add discount] > on Discount tab, add dicount for whole cart (type: %)
+4. Hold order successfully"
+ * Step: "1. Go to [On-hold orders] menu
+2. Click on [Checkout] button on that detail order"
+ *
+ * Expect: Order will be loaded to cart page without discount then auto next to checkout page.
+ *
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
+ */
 class WebposHoldOrderCP165Test extends Injectable
 {
     /**
