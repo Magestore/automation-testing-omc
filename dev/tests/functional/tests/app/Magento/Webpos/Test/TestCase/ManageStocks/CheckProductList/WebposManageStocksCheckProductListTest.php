@@ -117,7 +117,8 @@ class WebposManageStocksCheckProductListTest extends Injectable
 	protected function preparePos(Pos $pos, $locationId)
 	{
 		$data = $pos->getData();
-		$data['location_id'][] = $locationId;
+        $data['location_id'] = array();
+        $data['location_id'][] = $locationId;
 
 		return $this->fixtureFactory->createByCode('pos', ['data' => $data]);
 	}
@@ -131,8 +132,11 @@ class WebposManageStocksCheckProductListTest extends Injectable
 	protected function prepareStaff(Staff $staff, $locationId, $posId)
 	{
 		$data = $staff->getData();
-		$data['location_id'][] = $locationId;
-		$data['pos_ids'][] = $posId;
+        $data['location_id'] = array();
+        $data['location_id'][] = $locationId;
+
+        $data['pos_ids'] = array();
+        $data['pos_ids'][] = $posId;
 
 		return $this->fixtureFactory->createByCode('staff', ['data' => $data]);
 	}

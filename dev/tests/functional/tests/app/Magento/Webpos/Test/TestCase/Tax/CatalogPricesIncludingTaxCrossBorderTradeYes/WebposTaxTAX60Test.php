@@ -172,6 +172,7 @@ class WebposTaxTAX60Test extends Injectable
             $this->webposIndex, $currentTaxRate, $products[0]['product'], $actualPriceExcludeTax, $actualTaxAmount);
         // Invoice order successfully
         $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
+        sleep(2);
         $this->webposIndex->getModal()->getOkButton()->click();
         return ['products' => $products];
     }

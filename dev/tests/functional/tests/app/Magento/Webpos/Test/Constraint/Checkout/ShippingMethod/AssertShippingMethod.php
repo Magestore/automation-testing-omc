@@ -17,7 +17,7 @@ class AssertShippingMethod extends AbstractConstraint
             {
                 \PHPUnit_Framework_Assert::assertTrue(
                     $webposIndex->getCheckoutPlaceOrder()->isMethodVisible($id),
-                    'Shipping method with id : '.$id.' doesn" display.'
+                    'Shipping method with id : '.$id.' doesn\'t display.'
                 );
             }
     }

@@ -52,7 +52,6 @@ class WebposManageLocationML22Test extends Injectable
             'page_display_name' => '',
             'page_address' => '',
             'page_description' => '',
-            'page_warehouse_id' => 'Don\'t link to any Warehouses',
             'page_store_id' => 'Default Store View'
         ]];
     }

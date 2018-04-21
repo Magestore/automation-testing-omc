@@ -12,7 +12,7 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderHistoryInvoice;
+use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderHistoryRefund;
 
 class WebposTaxTAX22Test extends Injectable
 {
@@ -27,9 +27,9 @@ class WebposTaxTAX22Test extends Injectable
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
-     * @var AssertTaxAmountOnOrderHistoryInvoice
+     * @var AssertTaxAmountOnOrderHistoryRefund
      */
-    protected $assertTaxAmountOnOrderHistoryInvoice;
+    protected $assertTaxAmountOnOrderHistoryRefund;
 
     /**
      * Prepare data.
@@ -51,11 +51,11 @@ class WebposTaxTAX22Test extends Injectable
     public function __inject(
         WebposIndex $webposIndex,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
-        AssertTaxAmountOnOrderHistoryInvoice $assertTaxAmountOnOrderHistoryInvoice
+        AssertTaxAmountOnOrderHistoryRefund $assertTaxAmountOnOrderHistoryRefund
     ){
         $this->webposIndex = $webposIndex;
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-        $this->assertTaxAmountOnOrderHistoryInvoice = $assertTaxAmountOnOrderHistoryInvoice;
+        $this->assertTaxAmountOnOrderHistoryRefund = $assertTaxAmountOnOrderHistoryRefund;
     }
 
     public function test(
@@ -98,21 +98,31 @@ class WebposTaxTAX22Test extends Injectable
             ['customer' => $customer]
         )->run();
 
+        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+
         $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
         $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        sleep(1);
         $this->webposIndex->getCMenu()->ordersHistory();
         sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
@@ -126,9 +136,11 @@ class WebposTaxTAX22Test extends Injectable
             . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
         );
         $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
+        sleep(1);
         $this->webposIndex->getOrderHistoryAddOrderNote()->openRefundPopup();
-        //Assert Tax Amount in Order History Invoice
-        $this->assertTaxAmountOnOrderHistoryInvoice->processAssert($taxRate, $products, $this->webposIndex);
+        sleep(1);
+        //Assert Tax Amount in Refund popup
+        $this->assertTaxAmountOnOrderHistoryRefund->processAssert($taxRate, $products, $this->webposIndex);
         return ['products' => $products];
     }
 

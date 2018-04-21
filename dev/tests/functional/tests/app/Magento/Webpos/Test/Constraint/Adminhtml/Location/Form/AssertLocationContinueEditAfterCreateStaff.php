@@ -38,13 +38,6 @@ class AssertLocationContinueEditAfterCreateStaff extends AbstractConstraint
             'Description is incorrect '
         );
 
-        //Warehouse
-        \PHPUnit_Framework_Assert::assertEquals(
-            $fields['page_warehouse_id'],
-            $locationNews->getLocationsForm()->getWarehouse(),
-            'Warehouse is incorrect '
-        );
-
         //Store view
         \PHPUnit_Framework_Assert::assertEquals(
             $fields['page_store_id'],

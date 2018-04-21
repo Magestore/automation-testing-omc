@@ -141,11 +141,15 @@ class WebposTaxTAX81Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitCartLoader();
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }
+        sleep(5);
+
         $this->assertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceExcludingTax
             ->processAssert($this->webposIndex, $products, $taxRate, $discountAmount);
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(3);
+
         $this->assertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceExcludingTax
             ->processAssert($this->webposIndex, $products, $taxRate, $discountAmount);
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();

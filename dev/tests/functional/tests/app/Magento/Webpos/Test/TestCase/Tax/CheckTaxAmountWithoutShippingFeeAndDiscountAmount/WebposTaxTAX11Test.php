@@ -176,8 +176,13 @@ class WebposTaxTAX11Test extends Injectable
 
 		//Assert Price of product
 		$this->assertRefundPriceOfProductWithTaxIsCorrect->processAssert($this->webposIndex, $products, $taxRate);
-
+        foreach ($products as $item) {
+            if (isset($item['refundQty'])) {
+                $this->webposIndex->getOrderHistoryRefund()->getItemQtyToRefundInput($item['product']->getName())->setValue($item['refundQty']);
+            }
+        }
 		$this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
+		sleep(2);
 		$this->webposIndex->getModal()->getOkButton()->click();
 
 

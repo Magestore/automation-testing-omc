@@ -33,7 +33,6 @@ class WebposManageStocksCheckGUITest extends Injectable
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();
-
 		$this->webposIndex->getMsWebpos()->clickCMenuButton();
 		$this->webposIndex->getCMenu()->manageStocks();
 		sleep(2);

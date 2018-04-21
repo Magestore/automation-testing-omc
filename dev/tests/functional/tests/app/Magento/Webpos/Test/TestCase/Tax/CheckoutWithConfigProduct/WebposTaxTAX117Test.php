@@ -234,6 +234,7 @@ class WebposTaxTAX117Test extends Injectable
         sleep(1);
         $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->click();
         $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
+        sleep(2);
         $this->webposIndex->getModal()->getOkButton()->click();
 
         //Assert Tax Amount in Order History Refund
@@ -244,6 +245,7 @@ class WebposTaxTAX117Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
         $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
         $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
+        sleep(2);
         $this->webposIndex->getModal()->getOkButton()->click();
 
         // Assert Invoice Success
@@ -257,6 +259,7 @@ class WebposTaxTAX117Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
         $this->webposIndex->getOrderHistoryAddOrderNote()->openShipmentPopup();
         $this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
+        sleep(2);
         $this->webposIndex->getModal()->getOkButton()->click();
 
         // Assert Shipment Success
@@ -272,6 +275,7 @@ class WebposTaxTAX117Test extends Injectable
         $qty = $this->webposIndex->getOrderHistoryRefund()->getItemQty($products[0]['product']->getName());
         $this->webposIndex->getOrderHistoryRefund()->getItemQtyToRefundInput($products[0]['product']->getName())->setValue($qty);
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
+        sleep(2);
         $this->webposIndex->getModal()->getOkButton()->click();
 
         // Assert Refund Success
