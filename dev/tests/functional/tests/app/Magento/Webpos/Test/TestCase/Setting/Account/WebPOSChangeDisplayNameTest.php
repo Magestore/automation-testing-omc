@@ -21,6 +21,8 @@ class WebPOSChangeDisplayNameTest extends Injectable
      * @var WebposIndex
      */
     protected $webposIndex;
+    protected $username;
+    protected $testCaseId;
 
     /**
      * System config.
@@ -38,7 +40,7 @@ class WebPOSChangeDisplayNameTest extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test($displayName)
+    public function test($displayName, $testCaseID, $currentPassword)
     {
         $password = $this->configuration->get('application/0/backendPassword/0/value');
         // Login webpos
@@ -52,8 +54,23 @@ class WebPOSChangeDisplayNameTest extends Injectable
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->account();
         sleep(1);
+        if ($testCaseID == 'SET03') {
+            $this->webposIndex->getStaffSettingFormMainAccount()->getCurrentPassword()->setValue($currentPassword);
+        } elseif ($testCaseID == 'SET04') {
+            $this->webposIndex->getStaffSettingFormMainAccount()->getCurrentPassword()->setValue($password);
+            $username = $this->configuration->get('application/0/backendLogin/0/value');
+            $this->username=$username . ' ' . $username;
+        }
         $this->webposIndex->getStaffSettingFormMainAccount()->getDisplayName()->setValue($displayName);
-        $this->webposIndex->getStaffSettingFormMainAccount()->getCurrentPassword()->setValue($password);
         $this->webposIndex->getStaffSettingFormFooter()->getSaveButton()->click();
+        $this->testCaseId = $testCaseID;
+    }
+
+    public function tearDown()
+    {
+        if ($this->testCaseId == 'SET04') {
+            $this->webposIndex->getStaffSettingFormMainAccount()->getDisplayName()->setValue($this->username);
+            $this->webposIndex->getStaffSettingFormFooter()->getSaveButton()->click();
+        }
     }
 }

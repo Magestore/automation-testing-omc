@@ -138,8 +138,11 @@ class WebposOrdersHistoryInvoiceOH107Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
+        sleep(1);
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        sleep(1);
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         $this->objectManager->getInstance()->create(
@@ -150,11 +153,14 @@ class WebposOrdersHistoryInvoiceOH107Test extends Injectable
             ]
         )->run();
 
+        sleep(1);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
+        sleep(1);
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        sleep(1);
         $this->webposIndex->getCMenu()->ordersHistory();
         sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();

@@ -115,7 +115,7 @@ class WebposCreateMultiOrderAndLogoutCP26Test extends Injectable
         }
         // Begin delete new Staff on magento backend
         $this->objectManager->create(
-            '\Magento\Webpos\Test\TestStep\DeleteStaffEntityTest',
+            '\Magento\Webpos\Test\TestStep\DeleteStaffEntityStep',
             ['staff' => $createStaff]
         )->run();
         // End delete new Staff on magento backend

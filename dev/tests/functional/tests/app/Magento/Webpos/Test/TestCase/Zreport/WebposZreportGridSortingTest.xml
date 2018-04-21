@@ -5,10 +5,10 @@
 			<data name="columnsForSorting" xsi:type="array">
 				<item name="entity_id" xsi:type="string">No</item>
 				<item name="shift_id" xsi:type="string">Shift ID</item>
-				<!--<item name="opened_at" xsi:type="string">Open From</item>-->
-				<!--<item name="closed_at" xsi:type="string">Closed At</item>-->
-				<!--<item name="float_amount" xsi:type="string">Opening Amount</item>-->
-				<!--<item name="closed_amount" xsi:type="string">Closed Amount</item>-->
+				<item name="opened_at" xsi:type="string">Open From</item>
+				<item name="closed_at" xsi:type="string">Closed At</item>
+				<item name="float_amount" xsi:type="string">Opening Amount</item>
+				<item name="closed_amount" xsi:type="string">Closed Amount</item>
 
 			</data>
 			<data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\ShiftIndex</data>

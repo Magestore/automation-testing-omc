@@ -24,10 +24,6 @@ class AssertCheckComment extends AbstractConstraint
             $commentActual,
             'Comment is not correct'
         );
-
-        $webposIndex->getMsWebpos()->clickCMenuButton();
-        $webposIndex->getCMenu()->checkout();
-        sleep(1);
     }
 
     /**

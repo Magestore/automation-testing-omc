@@ -63,6 +63,7 @@ class WebposOrderStatusOH06Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 
         return [
