@@ -149,17 +149,20 @@ class WebposTaxTAX54Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
 
         // Select Shipping Method
         $this->webposIndex->getCheckoutShippingMethod()->openCheckoutShippingMethod();
         $this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
         $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Flat Rate - Fixed")->getText();
         $shippingFee = (float)substr($shippingFee, 1);
 
         // Select Payment Method
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
 
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
@@ -171,6 +174,7 @@ class WebposTaxTAX54Test extends Injectable
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
 
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
@@ -213,6 +217,7 @@ class WebposTaxTAX54Test extends Injectable
                 $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
             }
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction($refundText)->click();
+            sleep(1);
         }
 
         // Assert Refund Shipping On PopUp Refund
@@ -220,13 +225,13 @@ class WebposTaxTAX54Test extends Injectable
 
         // Close pop-up refund
         $this->webposIndex->getOrderHistoryRefund()->getCancelButton()->click();
-
+        sleep(1);
         $totalPaid = (float)substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
 
         // Refund Extant Items
-        foreach ($products as $key => $item) {
-            unset($products[$key]['refundQty']);
-        }
+//        foreach ($products as $key => $item) {
+//            unset($products[$key]['refundQty']);
+//        }
 
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',

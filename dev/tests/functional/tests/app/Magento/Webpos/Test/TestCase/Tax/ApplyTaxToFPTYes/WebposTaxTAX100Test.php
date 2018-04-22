@@ -115,12 +115,16 @@ class WebposTaxTAX100Test extends Injectable
 			['customer' => $customer]
 		)->run();
 
+        sleep(3);
+
 		// Place Order
 		$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-		$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        sleep(3);
+
+        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
 		$this->objectManager->getInstance()->create(

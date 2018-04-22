@@ -96,7 +96,7 @@ class WebposOrdersHistoryInvoiceOH114Test extends Injectable
                 'shipped' => false
             ]
         )->run();
-
+        sleep(1);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();

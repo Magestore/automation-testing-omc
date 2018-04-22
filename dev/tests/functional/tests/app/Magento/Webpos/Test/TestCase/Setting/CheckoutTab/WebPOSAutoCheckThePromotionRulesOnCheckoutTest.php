@@ -120,8 +120,8 @@ class WebPOSAutoCheckThePromotionRulesOnCheckoutTest extends Injectable
         for ($j=0;$j<$number;$j++) {
             $prices[$j] = (float)$prices[$j][0];
             $originalPrices[$j] = (float)$originalPrices[$j][1];
-            \Zend_Debug::dump($prices[$j]);
-            \Zend_Debug::dump($originalPrices[$j]);
+//            \Zend_Debug::dump($prices[$j]);
+//            \Zend_Debug::dump($originalPrices[$j]);
             self::assertEquals(
                 $originalPrices[$j],
                 2*$prices[$j],

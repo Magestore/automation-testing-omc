@@ -88,5 +88,17 @@
         <block name="SyncTabData" class="Magento\Webpos\Test\Block\Synchronization\SyncTabData" locator="#synchronization_container .wrap-general_container .col-left #sync-data" strategy="css selector"/>
         <block name="SyncErrorLogs" class="Magento\Webpos\Test\Block\Synchronization\SyncErrorLogs" locator="#synchronization_container .wrap-general_container .col-left #error-logs" strategy="css selector"/>
         <!-- End Synchronization-->
+
+        <!--Begin The Account Setting Form-->
+        <block name="staffSettingFormHeader" class="Magento\Webpos\Test\Block\Setting\Account\StaffSettingFormHeader" locator="#staff-settings-form header" strategy="css selector"/>
+        <block name="staffSettingFormMainAccount" class="Magento\Webpos\Test\Block\Setting\Account\StaffSettingFormMainAccount" locator="#staff-settings-form main" strategy="css selector"/>
+        <block name="staffSettingFormFooter" class="Magento\Webpos\Test\Block\Setting\Account\StaffSettingFormFooter" locator="#staff-settings-form footer" strategy="css selector"/>
+        <!--End The Account Setting Form-->
+
+        <!--Begin The General Setting Page-->
+        <block name="generalSettingMenuHeader" class="Magento\Webpos\Test\Block\Setting\General\GeneralSettingMenuHeader" locator="#block-webpos-settings-general div.col-right header" strategy="css selector"/>
+        <block name="generalSettingMenuLMainItem" class="Magento\Webpos\Test\Block\Setting\General\GeneralSettingMenuLMainItem" locator="#block-webpos-settings-general div.col-right div.main-item-general" strategy="css selector"/>
+        <block name="generalSettingContentRight" class="Magento\Webpos\Test\Block\Setting\General\GeneralSettingContentRight" locator="#block-webpos-settings-general div.col-left" strategy="css selector"/>
+        <!--End The General Setting Page-->
     </page>
 </config>

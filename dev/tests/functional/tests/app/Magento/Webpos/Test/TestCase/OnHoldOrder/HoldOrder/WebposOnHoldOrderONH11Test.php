@@ -61,7 +61,7 @@ class WebposOnHoldOrderONH11Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(1);
+        sleep(2);
 
         $dataProduct = $product->getData();
         $dataProduct['qty'] = '1';

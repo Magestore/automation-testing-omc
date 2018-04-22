@@ -126,11 +126,14 @@ class WebposTaxTAX47Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
 
         // Select Shipping Method
         $this->webposIndex->getCheckoutShippingMethod()->openCheckoutShippingMethod();
         $this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+
         $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Flat Rate - Fixed")->getText();
         $shippingFee = (float)substr($shippingFee,1);
 
@@ -141,6 +144,8 @@ class WebposTaxTAX47Test extends Injectable
         // Change Shipping Method
         $this->webposIndex->getCheckoutShippingMethod()->getBestWayTableRate()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(2);
+
         $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Best Way - Table Rate")->getText();
         $shippingFee = (float)substr($shippingFee,1);
 

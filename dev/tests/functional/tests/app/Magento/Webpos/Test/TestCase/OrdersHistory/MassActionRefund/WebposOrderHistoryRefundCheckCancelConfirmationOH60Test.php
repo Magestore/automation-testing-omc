@@ -63,17 +63,20 @@ class WebposOrderHistoryRefundCheckCancelConfirmationOH60Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        sleep(0.5);
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         // Open shipment popup
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
+        sleep(0.5);
         $this->webposIndex->getOrderHistoryAddOrderNote()->getRefundButton()->click();
         sleep(1);
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
-        sleep(1);
+        sleep(0.5);
         $this->assertTrue(
             $this->webposIndex->getModal()->isVisible(),
             'Confirmation popup is not visible.'
         );
+        sleep(0.5);
         $this->webposIndex->getModal()->getCancelButton()->click();
         sleep(1);
         $this->assertFalse(

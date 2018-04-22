@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\Constraint\Checkout\CartPage\DeleteCart;
 
-
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
@@ -33,11 +32,12 @@ class AssertFirstCartIsRemains extends AbstractConstraint
 			"CategoryRepository - TaxClass Page - First cart's Subtotal is wrong"
 		);
 
-		\PHPUnit_Framework_Assert::assertEquals(
-			(float) $product->getPrice(),
-			(float) substr($webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText(), 1),
-			"CategoryRepository - TaxClass Page - First cart's Total is wrong"
-		);
+		// comment by total price = sub total + shipping then total price # product price
+//		\PHPUnit_Framework_Assert::assertEquals(
+//			(float) $product->getPrice(),
+//			(float) substr($webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText(), 1),
+//			"CategoryRepository - TaxClass Page - First cart's Total is wrong"
+//		);
 	}
 
 	/**

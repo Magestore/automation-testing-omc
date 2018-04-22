@@ -154,10 +154,14 @@ class WebposTaxTAX79Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }
 
+        sleep(5);
+
         // Place Order
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+
+        sleep(5);
 
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

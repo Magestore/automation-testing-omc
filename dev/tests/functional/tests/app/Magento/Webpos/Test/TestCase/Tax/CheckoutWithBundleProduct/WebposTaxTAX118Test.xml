@@ -7,11 +7,11 @@
 					<item name="product" xsi:type="string">bundle_dynamic_custom_type_radio</item>
 					<item name="fixtureName" xsi:type="string">bundleProduct</item>
 					<item name="orderQty" xsi:type="number">1</item>
+					<item name="refundQty" xsi:type="number">1</item>
 				</item>
 			</data>
 			<data name="createInvoice" xsi:type="boolean">false</data>
 			<data name="shipped" xsi:type="boolean">false</data>
-
 		</variation>
 	</testCase>
 </config>

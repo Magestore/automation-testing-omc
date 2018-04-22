@@ -135,8 +135,10 @@ class WebposTaxTAX70Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
             [
@@ -146,6 +148,8 @@ class WebposTaxTAX70Test extends Injectable
         )->run();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
         $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
@@ -168,7 +172,9 @@ class WebposTaxTAX70Test extends Injectable
         $this->webposIndex->getOrderHistoryAddOrderNote()->openRefundPopup();
         $this->assertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling->processAssert($this->webposIndex, $products, $billingTaxRate);
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
+        sleep(1);
         $this->webposIndex->getModal()->getOkButton()->click();
+        sleep(1);
     }
 
     public function tearDown()

@@ -56,6 +56,7 @@ class WebposSync02Test extends Injectable
 
         sleep(2);
         $this->webposIndex->getSyncTabRight()->tabErrorLogs()->click();
+        sleep(1);
     }
 
     public function tearDown()

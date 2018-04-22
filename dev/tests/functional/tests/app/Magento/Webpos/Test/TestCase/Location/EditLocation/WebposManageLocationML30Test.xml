@@ -3,6 +3,6 @@
     <testCase name="Magento\Webpos\Test\TestCase\Location\EditLocation\WebposManageLocationML30Test" summary="Check [Delete] button" ticketId="MAGETWO-1234">
         <variation name="WebposManageLocationML30TestVariation">
             <data name="location/dataset" xsi:type="string">ML19</data>
-           </variation>
+       </variation>
     </testCase>
 </config>

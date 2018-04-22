@@ -140,7 +140,9 @@ class WebposTaxTAX96Test extends Injectable
 			['products' => $products]
 		)->run();
 
-		// Assert SubTotal updated
+        sleep(5);
+
+        // Assert SubTotal updated
 		$subTotal = 0;
 		foreach ($products as $item) {
 			$subTotal += $item['customPrice'] * $item['orderQty'];
@@ -161,7 +163,9 @@ class WebposTaxTAX96Test extends Injectable
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-		$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        sleep(3);
+
+        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
 		$this->objectManager->getInstance()->create(
@@ -218,11 +222,18 @@ class WebposTaxTAX96Test extends Injectable
 		$this->webposIndex->getOrderHistoryOrderViewHeader()->getAction($refundText)->click();
 		$this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
 
+        foreach ($products as $item) {
+            if (isset($item['refundQty'])) {
+                $this->webposIndex->getOrderHistoryRefund()->getItemQtyToRefundInput($item['product']->getName())->setValue($item['refundQty']);
+            }
+        }
+
 		//Assert Price of product
 		$useCustomPrice = true;
 		$this->assertRefundPriceOfProductWithTaxIsCorrect->processAssert($this->webposIndex, $products, $taxRate, $useCustomPrice);
 
 		$this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
+		sleep(2);
 		$this->webposIndex->getModal()->getOkButton()->click();
 
 

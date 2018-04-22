@@ -57,13 +57,19 @@ class CreatePaymentAndInvoiceSuccessfullyStep implements TestStepInterface
     public function run()
     {
         // Go to Order History
+        $this->webposIndex->open();
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        sleep(1);
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        sleep(1);
         $this->webposIndex->getCMenu()->ordersHistory();
+        sleep(1);
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         // Open shipment popup
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
+        sleep(1);
         $this->webposIndex->getOrderHistoryPayment()->getCashInMethod()->click();
         $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
         sleep(1);
@@ -71,8 +77,10 @@ class CreatePaymentAndInvoiceSuccessfullyStep implements TestStepInterface
         sleep(1);
         // Assert Take Payment Success
         $this->assertPaymentSuccess->processAssert($this->webposIndex);
+        sleep(1);
         // Invoice
         $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
+        sleep(1);
         $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
         $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
         sleep(1);

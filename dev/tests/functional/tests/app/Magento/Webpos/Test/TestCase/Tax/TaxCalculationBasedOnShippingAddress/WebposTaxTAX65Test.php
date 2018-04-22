@@ -134,9 +134,11 @@ class WebposTaxTAX65Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
         $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($shippingTaxRate, $this->webposIndex);
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
             [
@@ -146,6 +148,7 @@ class WebposTaxTAX65Test extends Injectable
         )->run();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
     }

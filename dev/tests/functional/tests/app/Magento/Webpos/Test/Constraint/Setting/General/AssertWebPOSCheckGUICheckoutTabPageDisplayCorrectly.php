@@ -22,16 +22,12 @@ class AssertWebPOSCheckGUICheckoutTabPageDisplayCorrectly extends AbstractConstr
     public function processAssert(WebposIndex $webposIndex)
     {
         \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getGeneralSettingContentRight()->getUseOnlineModeSelection()->isVisible(),
-            'On the Setting General Page - In the menu Checkout Page. Use Online Mode Selection were visible correctly.'
-        );
-        \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getGeneralSettingContentRight()->getAutoCheckPromotionSelection()->isVisible(),
-            'On the Setting General Page - In the menu Checkout Page. Use Auto Check Promotion Selection were visible correctly.'
+            'On the Setting General Page - In the menu Checkout Page. Use Auto Check Promotion Selection were not visible correctly.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getGeneralSettingContentRight()->getSyncOnHoldOrderToServerSelection()->isVisible(),
-            'On the Setting General Page - In the menu Checkout Page. Use Sync On Hold Order To Server Selection were visible correctly.'
+            'On the Setting General Page - In the menu Checkout Page. Use Sync On Hold Order To Server Selection were not visible correctly.'
         );
     }
 

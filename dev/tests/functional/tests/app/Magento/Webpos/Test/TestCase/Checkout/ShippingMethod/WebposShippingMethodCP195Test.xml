@@ -7,7 +7,7 @@
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
                 </item>
             </data>
-            <data name="idShippingMethods" xsi:type="string">flatrate_flatrate, freeshipping_freeshipping, storepickup_storepickup, webpos_shipping_storepickup</data>
+            <data name="idShippingMethods" xsi:type="string">flatrate_flatrate, freeshipping_freeshipping, webpos_shipping_storepickup</data>
             <data name="tagExpected" xsi:type="boolean">true</data>
             <data name="priceShipping" xsi:type="string">5.00</data>
             <constraint name="Magento\Webpos\Test\Constraint\Checkout\ShippingMethod\AssertShippingMethod" />
