@@ -62,7 +62,7 @@ class LoginWebposStep implements TestStepInterface
 //      $this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
             //check if WrapWarningForm is visible when this staff has been logged in
             $time = time();
-            $timeAfter = $time + 10;
+            $timeAfter = $time + 30;
             while (!$this->webposIndex->getWrapWarningForm()->isVisible() && $time < $timeAfter){
                 $time = time();
             }
