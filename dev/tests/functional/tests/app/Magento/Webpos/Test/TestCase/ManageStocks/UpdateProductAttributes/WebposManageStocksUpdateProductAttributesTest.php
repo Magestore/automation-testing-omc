@@ -105,14 +105,15 @@ class WebposManageStocksUpdateProductAttributesTest extends Injectable
 
 			if ($placeOrder) {
 				$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-				$this->webposIndex->getMsWebpos()->waitCartLoader();
-				$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-				sleep(2);
-				$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-				$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-				$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
-				$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+                sleep(3);
+                if($this->webposIndex->getCheckoutPlaceOrder()->isCheckoutButtonVisible()){
+                    $this->webposIndex->getMsWebpos()->waitCartLoader();
+                    $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+                    $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+                    $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+                    $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+                    $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+                }
 			}
 		}
 

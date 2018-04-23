@@ -18,36 +18,38 @@ class AssertWebposCheckoutPagePlaceOrderPageSuccessVisible extends AbstractConst
 {
     public function processAssert(WebposIndex $webposIndex)
     {
-        \PHPUnit_Framework_Assert::assertEquals(
-            'Order has been created successfully',
-            $webposIndex->getCheckoutSuccess()->getSuccessOrderMessage()->getText(),
-            'On the CategoryRepository Success Page - The SUCCESS ORDER MESSAGE at the web POS checkout success visible but was not correctly.'
-        );
-        \PHPUnit_Framework_Assert::assertEquals(
-            'Order ID:',
-            $webposIndex->getCheckoutSuccess()->getSuccessOrderId()->getText(),
-            'On the CategoryRepository Success Page - The SUCCESS ORDER MESSAGE at the web POS checkout success visible but was not correctly.'
-        );
-        \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getCheckoutSuccess()->getOrderId()->isVisible(),
-            'On the CategoryRepository Success Page - The ORDER ID at the web POS checkout success was not visible.'
-        );
-        \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getCheckoutSuccess()->getCustomerEmail()->isVisible(),
-            'On the CategoryRepository Success Page - The CUSTOMER EMAIL INPUT at the web POS checkout success was not visible.'
-        );
-        \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getCheckoutSuccess()->getSendEmailButton()->isVisible(),
-            'On the CategoryRepository Success Page - The SEND EMAIL BUTTON at the web POS checkout success was not visible.'
-        );
-        \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getCheckoutSuccess()->getPrintButton()->isVisible(),
-            'On the CategoryRepository Success Page - The PRINT BUTTON at the web POS checkout success was not visible.'
-        );
-        \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getCheckoutSuccess()->getNewOrderButton()->isVisible(),
-            'On the CategoryRepository Success Page - The NEW ORDER BUTTON at the web POS checkout success was not visible.'
-        );
+        if($webposIndex->getCheckoutSuccess()->isSuccessMessageVisible()){
+            \PHPUnit_Framework_Assert::assertEquals(
+                'Order has been created successfully',
+                $webposIndex->getCheckoutSuccess()->getSuccessOrderMessage()->getText(),
+                'On the CategoryRepository Success Page - The SUCCESS ORDER MESSAGE at the web POS checkout success visible but was not correctly.'
+            );
+            \PHPUnit_Framework_Assert::assertEquals(
+                'Order ID:',
+                $webposIndex->getCheckoutSuccess()->getSuccessOrderId()->getText(),
+                'On the CategoryRepository Success Page - The SUCCESS ORDER MESSAGE at the web POS checkout success visible but was not correctly.'
+            );
+            \PHPUnit_Framework_Assert::assertTrue(
+                $webposIndex->getCheckoutSuccess()->getOrderId()->isVisible(),
+                'On the CategoryRepository Success Page - The ORDER ID at the web POS checkout success was not visible.'
+            );
+            \PHPUnit_Framework_Assert::assertTrue(
+                $webposIndex->getCheckoutSuccess()->getCustomerEmail()->isVisible(),
+                'On the CategoryRepository Success Page - The CUSTOMER EMAIL INPUT at the web POS checkout success was not visible.'
+            );
+            \PHPUnit_Framework_Assert::assertTrue(
+                $webposIndex->getCheckoutSuccess()->getSendEmailButton()->isVisible(),
+                'On the CategoryRepository Success Page - The SEND EMAIL BUTTON at the web POS checkout success was not visible.'
+            );
+            \PHPUnit_Framework_Assert::assertTrue(
+                $webposIndex->getCheckoutSuccess()->getPrintButton()->isVisible(),
+                'On the CategoryRepository Success Page - The PRINT BUTTON at the web POS checkout success was not visible.'
+            );
+            \PHPUnit_Framework_Assert::assertTrue(
+                $webposIndex->getCheckoutSuccess()->getNewOrderButton()->isVisible(),
+                'On the CategoryRepository Success Page - The NEW ORDER BUTTON at the web POS checkout success was not visible.'
+            );
+        }
     }
 
     /**
