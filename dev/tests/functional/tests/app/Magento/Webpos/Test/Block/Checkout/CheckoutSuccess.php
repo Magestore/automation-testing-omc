@@ -9,6 +9,7 @@
 namespace Magento\Webpos\Test\Block\Checkout;
 
 use Magento\Mtf\Block\Block;
+
 /**
  * Class CheckoutSuccess
  * @package Magento\Webpos\Test\Block\CategoryRepository
@@ -18,7 +19,7 @@ class CheckoutSuccess extends Block
     /**
      * @return \Magento\Mtf\Client\ElementInterface
      */
-    public  function getNotifyOrder()
+    public function getNotifyOrder()
     {
         return $this->_rootElement->find('.notify-order');
     }
@@ -61,5 +62,10 @@ class CheckoutSuccess extends Block
     public function waitForLoadingIndicator()
     {
         $this->waitForElementNotVisible('.indicator');
+    }
+
+    public function isSuccessMessageVisible()
+    {
+        return $this->_rootElement->isVisible();
     }
 }

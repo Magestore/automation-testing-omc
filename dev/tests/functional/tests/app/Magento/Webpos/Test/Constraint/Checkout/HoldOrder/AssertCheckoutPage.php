@@ -16,7 +16,8 @@ class AssertCheckoutPage extends AbstractConstraint
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutPlaceOrder()->isActivePageCheckout(),
             'Checkout page is not active'
-        );    }
+        );
+    }
 
     /**
      * Returns a string representation of the object.

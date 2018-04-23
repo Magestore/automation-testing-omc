@@ -27,7 +27,6 @@ class AssertSynchronization04 extends AbstractConstraint
             'Category',
             'Product',
             'Stock Item',
-            'Shift',
             'Group',
             'Customer Complaints',
             'Customer',

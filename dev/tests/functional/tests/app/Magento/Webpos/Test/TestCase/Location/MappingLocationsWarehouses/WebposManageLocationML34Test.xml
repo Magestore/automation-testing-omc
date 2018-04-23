@@ -3,6 +3,6 @@
     <testCase name="Magento\Webpos\Test\TestCase\Location\MappingLocationsWarehouses\WebposManageLocationML34Test" summary="Check GUI" ticketId="MAGETWO-1234">
         <variation name="WebposManageLocationML34TestVariation">
             <data name="test" xsi:type="string"></data>
-           </variation>
+       </variation>
     </testCase>
 </config>

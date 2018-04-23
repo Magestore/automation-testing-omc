@@ -46,7 +46,7 @@ class WebposMassActionReOrderOH27Test extends Injectable
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        sleep(2);
 
         $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Re-order')->click();

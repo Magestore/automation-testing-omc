@@ -29,7 +29,7 @@ class OrderHistoryOrderViewHeader extends Block
 
 	public function openAddOrderNote()
     {
-        $this->_rootElement->find('.more-info')->click();
+        $this->_rootElement->find('.icon-iconPOS-more')->click();
     }
 
 	// More info - Actions box

@@ -96,20 +96,27 @@ class WebposOrdersHistoryInvoiceOH112Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
         $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->click();
         $paymentPrice = (float) substr( $this->webposIndex->getOrderHistoryPayment()->getPaymentPriceInput()->getValue(), 1);
+        sleep(0.5);
         $this->webposIndex->getOrderHistoryPayment()->getPaymentPriceInput()->setValue($paymentPrice / 2);
+        sleep(0.5);
         $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
+        sleep(0.5);
         $this->webposIndex->getMsWebpos()->waitForModalPopup();
+        sleep(0.5);
         $this->webposIndex->getModal()->getOkButton()->click();
         sleep(1);
 
         // Click Button Invoice
         $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
         $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
+        sleep(0.5);
         $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
         $this->webposIndex->getMsWebpos()->waitForModalPopup();
+        sleep(0.5);
         $this->webposIndex->getModal()->getOkButton()->click();
 
         // Assert Invoice successful.
+        sleep(1);
         $this->assertInvoiceSuccess->processAssert($this->webposIndex);
 
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForProcessingStatusVisisble();

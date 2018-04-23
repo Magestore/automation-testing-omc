@@ -54,7 +54,7 @@ class PlaceOrderSetShipAndCreateInvoiceSwitchStep implements TestStepInterface
 
 		$createInvoiceCheckbox = $this->webposIndex->getCheckoutPlaceOrder()->getCreateInvoiceCheckbox();
 		if ($createInvoiceCheckbox->isVisible()) {
-			if ($this->createInvoice != $this->webposIndex->getCheckoutPlaceOrder()->isCheckboxChecked($createInvoiceCheckbox)) {
+			if ($this->webposIndex->getCheckoutPlaceOrder()->isCheckboxChecked($createInvoiceCheckbox) != $this->createInvoice) {
 				$createInvoiceCheckbox->click();
 			}
 		}

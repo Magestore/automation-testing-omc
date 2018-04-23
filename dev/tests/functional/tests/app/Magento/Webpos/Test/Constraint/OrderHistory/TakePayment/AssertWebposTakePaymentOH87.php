@@ -13,11 +13,20 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 class AssertWebposTakePaymentOH87 extends AbstractConstraint
 {
-    public function processAssert(WebposIndex $webposIndex, $amount)
+    public function processAssert(WebposIndex $webposIndex, $message)
     {
-        \PHPUnit_Framework_Assert::assertNotTrue(
+        \PHPUnit_Framework_Assert::assertEquals(
+            $message,
+            $webposIndex->getModal()->getPopupMessage(),
+            'Message after click OK submit take payment display is not correctly.'
+        );
+        \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getModal()->getModalPopup()->isVisible(),
-            'Visible close popup confirm'
+            'Visible close popup is not visible correctly.'
+        );
+        \PHPUnit_Framework_Assert::assertTrue(
+            $webposIndex->getModal()->getOkButton()->isVisible(),
+            'Button OK is not visible correctly.'
         );
     }
     /**

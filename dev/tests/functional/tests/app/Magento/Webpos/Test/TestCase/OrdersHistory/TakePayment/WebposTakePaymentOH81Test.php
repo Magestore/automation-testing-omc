@@ -105,8 +105,10 @@ class WebposTakePaymentOH81Test extends Injectable
         //select order
         sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        sleep(0.5);
 
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        sleep(0.5);
         //click take payment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
 

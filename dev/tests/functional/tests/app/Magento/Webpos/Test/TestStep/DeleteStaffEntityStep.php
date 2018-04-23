@@ -13,10 +13,10 @@ use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffEdit;
 /**
- * Class DeleteStaffEntityTest
+ * Class DeleteStaffEntityStep
  * @package Magento\Webpos\Test\TestStep
  */
-class DeleteStaffEntityTest implements TestStepInterface
+class DeleteStaffEntityStep implements TestStepInterface
 {
     /* tags */
     const MVP = 'yes';

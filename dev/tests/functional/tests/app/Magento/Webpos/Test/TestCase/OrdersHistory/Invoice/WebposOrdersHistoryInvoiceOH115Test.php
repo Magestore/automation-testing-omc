@@ -82,18 +82,24 @@ class WebposOrdersHistoryInvoiceOH115Test extends Injectable
             ]
         )->run();
 
+        sleep(1);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
 		$orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
+        // Assert order success
+        $this->assertOrderSuccess->processAssert($this->webposIndex, $orderId);
+        sleep(1);
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
-        // Assert order success
-        $this->assertOrderSuccess->processAssert($this->webposIndex, $orderId);
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        sleep(1);
         $this->webposIndex->getCMenu()->ordersHistory();
+        sleep(1);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        sleep(1);
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         sleep(2);
 

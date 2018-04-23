@@ -86,9 +86,12 @@ class WebposOrderHistoryRefundWithoutShippingFeeOH71Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         // Open refund popup
+        sleep(0.5);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
+        sleep(0.5);
         $this->webposIndex->getOrderHistoryAddOrderNote()->getRefundButton()->click();
         sleep(1);
         // Refund

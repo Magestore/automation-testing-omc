@@ -11,7 +11,6 @@ namespace Magento\Webpos\Test\TestCase\Sync\Product;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Catalog\Test\Page\Adminhtml\CatalogProductEdit;
 use Magento\Catalog\Test\Page\Adminhtml\CatalogProductIndex;
-use Magento\Customer\Test\Fixture\Address;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Customer\Test\Page\Adminhtml\CustomerIndex;
 use Magento\Customer\Test\Page\Adminhtml\CustomerIndexEdit;
@@ -19,9 +18,12 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Sync\AssertSynchronizationPageDisplay;
 use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposSync10Test
+ * @package Magento\Webpos\Test\TestCase\Sync\Product
+ */
 class WebposSync10Test extends Injectable
 {
     /**
@@ -66,17 +68,6 @@ class WebposSync10Test extends Injectable
      */
     protected $assertItemUpdateSuccess;
 
-    public function __prepare(FixtureFactory $fixtureFactory)
-    {
-        // Add Customer
-//        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
-//        $customer->persist();
-//
-//        return [
-//            'customer' => $customer
-//        ];
-    }
-
     public function __inject(
         WebposIndex $webposIndex,
         CustomerIndex $customerIndexPage,
@@ -119,15 +110,6 @@ class WebposSync10Test extends Injectable
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run();
-
-        // Edit Created Product in backend
-//        $filter = ['sku' => $initialProduct->getSku()];
-//        $this->productGrid->open();
-//        $this->productGrid->getProductGrid()->searchAndOpen($filter);
-//        $this->editProductPage->getProductForm()->fill($product);
-//        $this->editProductPage->getFormPageActions()->save();
-
-//        $this->webposIndex->open();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->synchronization();
 
@@ -136,14 +118,6 @@ class WebposSync10Test extends Injectable
         sleep(5);
         $action = 'Reload';
         $this->assertItemUpdateSuccess->processAssert($this->webposIndex, "Product", $action);
-    }
-
-    public function tearDown()
-    {
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => 'default_payment_method']
-//        )->run();
     }
 
 }

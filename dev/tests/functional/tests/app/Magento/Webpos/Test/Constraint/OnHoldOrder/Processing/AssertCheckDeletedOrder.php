@@ -13,10 +13,6 @@ class AssertCheckDeletedOrder extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex, $messageEmtpy, $orderId)
     {
-        $webposIndex->getMsWebpos()->clickCMenuButton();
-        $webposIndex->getCMenu()->onHoldOrders();
-        sleep(1);
-        $webposIndex->getOnHoldOrderOrderList()->waitLoader();
         $webposIndex->getOnHoldOrderOrderList()->getSearchOrderInput()->setValue($orderId);
         sleep(1);
 

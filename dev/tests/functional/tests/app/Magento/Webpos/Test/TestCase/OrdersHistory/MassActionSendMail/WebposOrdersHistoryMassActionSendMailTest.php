@@ -65,7 +65,7 @@ class WebposOrdersHistoryMassActionSendMailTest extends Injectable
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        sleep(1);
 
         $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Send Email')->click();

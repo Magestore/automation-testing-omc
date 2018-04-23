@@ -38,6 +38,7 @@ class GeneralSettingContentRight extends Block
     {
         return $this->_rootElement->find('#os_checkout\2e sync_order_onhold');
     }
+
     public function selectSyncOnHoldOrderOption($option)
     {
         $this->getSyncOnHoldOrderToServerSelection()->click();

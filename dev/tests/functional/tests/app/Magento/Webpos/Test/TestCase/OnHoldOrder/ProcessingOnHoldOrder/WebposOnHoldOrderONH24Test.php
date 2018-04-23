@@ -79,10 +79,11 @@ class WebposOnHoldOrderONH24Test extends Injectable
 
         //Back to checkout
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        sleep(1);
         $this->webposIndex->getCMenu()->checkout();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(1);
+        sleep(2);
 
         //Add more product to cart
         $this->webposIndex->getCheckoutProductList()->search($product2->getName());

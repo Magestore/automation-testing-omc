@@ -13,10 +13,6 @@ class AssertCheckDiscountWhole extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex, $discount)
     {
-        $webposIndex->getMsWebpos()->clickCMenuButton();
-        $webposIndex->getCMenu()->onHoldOrders();
-        sleep(1);
-
         //Check discount
         $discountActual = str_replace('$','',$webposIndex->getOnHoldOrderOrderViewFooter()->getRowValue('Discount'));
         $discountActual = str_replace('-','',$discountActual);
