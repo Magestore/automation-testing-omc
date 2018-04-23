@@ -76,8 +76,14 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
         $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
         $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
         $this->webposIndex->getLoginForm()->getEnterToPos()->click();
-        $this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
+        $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
+        $time = time();
+        $timeAfter = $time + 360;
+        while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            $time = time();
+        }
         sleep(2);
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
@@ -89,10 +95,13 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
         sleep(1);
         $this->webposIndex->getSessionCloseShift()->getConfirmSession()->click();
         sleep(1);
-        $this->webposIndex->getModal()->getOkButton()->click();
-        sleep(1);
-        $this->webposIndex->getSessionSetClosingBalanceReason()->getButtonBtnDone()->click();
-        sleep(1);
+        if($this->webposIndex->getModal()->isVisible()){
+            $this->webposIndex->getModal()->getOkButton()->click();
+            sleep(1);
+            $this->webposIndex->getSessionSetClosingBalanceReason()->getButtonBtnDone()->click();
+            sleep(1);
+        }
+        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         sleep(1);

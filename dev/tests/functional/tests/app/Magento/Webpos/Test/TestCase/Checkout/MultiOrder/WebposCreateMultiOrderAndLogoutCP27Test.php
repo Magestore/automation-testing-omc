@@ -118,6 +118,7 @@ class WebposCreateMultiOrderAndLogoutCP27Test extends Injectable
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
         //End The 3rd login webpos
+        sleep(2);
         for ($i=1; $i<=2; $i++) {
             self::assertFalse(
                 $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($i)->isVisible(),
