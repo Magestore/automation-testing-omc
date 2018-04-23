@@ -25,8 +25,9 @@
 			<data name="editRole/data/description" xsi:type="string">Edit Description %isolation%</data>
 
 			<data name="action" xsi:type="string">save</data>
-
-			<constraint name="Magento\Webpos\Test\Constraint\Role\EditRoleOnGrid\AssertRoleSuccessEditMessage" />
+<!-- rooney: Message no show on Magento 2.2.3 -->
+			<!--<constraint name="Magento\Webpos\Test\Constraint\Role\EditRoleOnGrid\AssertRoleSuccessEditMessage" />-->
+<!-- end -->
 			<constraint name="Magento\Webpos\Test\Constraint\Role\EditRoleOnGrid\AssertEditableRowIsNotShown" />
 			<constraint name="Magento\Webpos\Test\Constraint\Role\EditRoleOnGrid\AssertRoleInfoOnGridIsCorrect" />
 		</variation>

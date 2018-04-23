@@ -37,9 +37,6 @@ class AssertCheckOnHoldSimpleProduct extends AbstractConstraint
                 'Qty product is not correct'
             );
         }
-
-        $webposIndex->getMsWebpos()->clickCMenuButton();
-        $webposIndex->getCMenu()->checkout();
         sleep(1);
     }
 

@@ -23,22 +23,22 @@ class Cmenu extends Block
 
     public function checkout()
     {
-        $this->_rootElement->find('a#checkout')->click();
+        $this->_rootElement->find('#checkout')->click();
     }
 
     public function ordersHistory()
     {
-        $this->_rootElement->find('#item_orders_history')->click();
+        $this->_rootElement->find('#orders_history')->click();
     }
 
     public function ordersHistoryIsVisisble()
     {
-        return $this->_rootElement->find('#item_orders_history')->isVisible();
+        return $this->_rootElement->find('#orders_history')->isVisible();
     }
 
     public function onHoldOrders()
     {
-        $this->_rootElement->find('#item_on_hold_orders')->click();
+        $this->_rootElement->find('#on_hold_orders')->click();
     }
 
     public function getSessionManagement()

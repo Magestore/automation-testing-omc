@@ -22,7 +22,7 @@ class AssertCheckTaxOnHoldOrder extends AbstractConstraint
         \PHPUnit_Framework_Assert::assertEquals(
             floatval($tax[0]),
             floatval($taxActualInTable),
-            'Tax is not correct, taxExpected is : $'.$tax[0].'and taxActual in table is : $'.$taxActualInTable
+            'Tax is not correct, taxExpected is : $'.$tax[0].' and taxActual in table is : $'.$taxActualInTable
         );
 
         //Check tax item

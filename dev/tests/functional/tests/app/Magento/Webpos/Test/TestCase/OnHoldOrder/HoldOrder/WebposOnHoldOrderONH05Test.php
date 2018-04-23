@@ -11,6 +11,10 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Config\Test\Fixture\ConfigData;
 
+/**
+ * Class WebposOnHoldOrderONH05Test
+ * @package Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder
+ */
 class WebposOnHoldOrderONH05Test extends Injectable
 {
     /**
@@ -63,7 +67,7 @@ class WebposOnHoldOrderONH05Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(1);
+        sleep(2);
 
         $configData = $configData->getData()['section'];
         $dataProduct1 = $product1->getData();

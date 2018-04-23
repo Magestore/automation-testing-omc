@@ -15,8 +15,9 @@ class AssertWebposTakePaymentOH98 extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex, $amount)
     {
-        \PHPUnit_Framework_Assert::assertNotTrue(
-            $webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->isVisible()
+        \PHPUnit_Framework_Assert::assertFalse(
+            $webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->isVisible(),
+            'Button take payment is not visible correctly.'
         );
         $total = $webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid();
         \PHPUnit_Framework_Assert::assertGreaterThan(

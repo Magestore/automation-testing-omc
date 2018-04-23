@@ -94,11 +94,5 @@ class WebPOSLoginByInactiveAccountTest extends Injectable
             $this->webposIndex->getToaster()->getWarningMessage()->getText(),
             'In the WebPOS Login Page, We could not login with an inactive account.'
         );
-        // Begin delete new Staff on magento backend
-        $this->objectManager->create(
-            '\Magento\Webpos\Test\TestStep\DeleteStaffEntityTest',
-            ['staff' => $createStaff]
-        )->run();
-        // End delete new Staff on magento backend
     }
 }

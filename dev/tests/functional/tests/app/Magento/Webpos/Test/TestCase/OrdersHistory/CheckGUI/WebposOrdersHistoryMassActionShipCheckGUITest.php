@@ -53,7 +53,9 @@ class WebposOrdersHistoryMassActionShipCheckGUITest extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         // Go to Order History
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        sleep(1);
         $this->webposIndex->getCMenu()->ordersHistory();
+        sleep(1);
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
