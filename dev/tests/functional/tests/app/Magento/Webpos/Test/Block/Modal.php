@@ -13,29 +13,34 @@ use Magento\Mtf\Block\Block;
 
 class Modal extends Block
 {
-	public function getModalPopup()
-	{
-		return $this->_rootElement->find('.modal-popup');
-	}
+    public function getModalPopup()
+    {
+        return $this->_rootElement->find('.modal-popup');
+    }
 
-	public function getPopupMessage()
-	{
-		return $this->_rootElement->find('aside > div.modal-inner-wrap > div > div')->getText();
-	}
+    public function getPopupMessage()
+    {
+        return $this->_rootElement->find('aside > div.modal-inner-wrap > div > div')->getText();
+    }
 
-	public function getCancelButton()
-	{
-		return $this->_rootElement->find('aside > div.modal-inner-wrap > footer > button.action-secondary.action-dismiss');
-	}
+    public function getCancelButton()
+    {
+        return $this->_rootElement->find('aside > div.modal-inner-wrap > footer > button.action-secondary.action-dismiss');
+    }
 
-	public function getOkButton()
-	{
-		return $this->_rootElement->find('.action-accept');
-	}
+    public function getOkButton()
+    {
+        return $this->_rootElement->find('.action-accept');
+    }
 
-	public function getCloseButton()
-	{
-		return $this->_rootElement->find('.action-close');
-	}
+    public function getCloseButton()
+    {
+        return $this->_rootElement->find('.action-close');
+    }
+
+    public function waitForLoadingIndicator()
+    {
+        $this->waitForElementNotVisible('.indicator');
+    }
 
 }

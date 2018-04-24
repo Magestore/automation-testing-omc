@@ -13,6 +13,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Config\Test\Fixture\ConfigData;
 use Magento\Mtf\Config\DataInterface;
+
 /**
  * Class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test
  * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\MultiOrder
@@ -57,36 +58,28 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
             ['dataConfig' => $dataConfig]
         )->run();
 
-        $username = $this->configuration->get('application/0/backendLogin/0/value');
-        $password = $this->configuration->get('application/0/backendPassword/0/value');
-        $this->webposIndex->open();
-        if ($this->webposIndex->getLoginForm()->isVisible()) {
-            $this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
-            $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
-            $this->webposIndex->getLoginForm()->clickLoginButton();
+        // Login webpos
+        $staff = $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
+        )->run();
+
+        // Open session
+//        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
+        if($this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->isVisible()){
+            if($this->webposIndex->getOpenSessionPopup()->getLoadingElement()->isVisible()){
+                $this->webposIndex->getOpenSessionPopup()->waitForElementNotVisible('.indicator[data-bind="visible:loading"]');
+            }
+            $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
+            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
+            sleep(2);
+            $this->webposIndex->getMsWebpos()->clickCMenuButton();
+            $this->webposIndex->getCMenu()->checkout();
             sleep(2);
         }
 
-        $this->webposIndex->getWrapWarningForm()->waitForWrapWarningFormVisible();
-        //check if WrapWarningForm is visible when this staff has been logged in
-        if ($this->webposIndex->getWrapWarningForm()->isVisible()) {
-            $this->webposIndex->getWrapWarningForm()->getButtonContinue()->click();
-        }
-
-        $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
-        $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
-        $this->webposIndex->getLoginForm()->getEnterToPos()->click();
-        $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
-        $time = time();
-        $timeAfter = $time + 360;
-        while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
-            $time = time();
-        }
-        sleep(2);
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+        sleep(3);
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         sleep(1);
         $this->webposIndex->getCMenu()->getSessionManagement();
@@ -95,7 +88,7 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
         sleep(1);
         $this->webposIndex->getSessionCloseShift()->getConfirmSession()->click();
         sleep(1);
-        if($this->webposIndex->getModal()->isVisible()){
+        if ($this->webposIndex->getModal()->isVisible()) {
             $this->webposIndex->getModal()->getOkButton()->click();
             sleep(1);
             $this->webposIndex->getSessionSetClosingBalanceReason()->getButtonBtnDone()->click();
@@ -111,16 +104,10 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
 
         //Login webpos by the same staff
         $this->objectManager->create(
-            '\Magento\Webpos\Test\TestStep\LoginWebposStep'
+            '\Magento\Webpos\Test\TestStep\LoginWebposChooseLocationStep'
         )->run();
-        $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
-        sleep(1);
-        $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
-        $this->webposIndex->getLoginForm()->getEnterToPos()->click();
-        sleep(3);
-        while ($this->webposIndex->getFirstScreen()->isVisible()) {}
-        sleep(2);
-        for ($i=1; $i<=2; $i++) {
+
+        for ($i = 1; $i <= 2; $i++) {
             self::assertFalse(
                 $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($i)->isVisible(),
                 'On the AssertWebposCheckGUICustomerPriceCP54 TaxClass, the cart order item was visible successfully.'
