@@ -11,6 +11,10 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrdersHistoryShipmentWithExtantItemsOH41OH42Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip
+ */
 class WebposOrdersHistoryShipmentWithExtantItemsOH41OH42Test extends Injectable
 {
     /**
@@ -67,6 +71,7 @@ class WebposOrdersHistoryShipmentWithExtantItemsOH41OH42Test extends Injectable
             $this->webposIndex->getOrderHistoryShipment()->getQtyToShipInput($productName)->setValue($qtyToShip);
         }
         $this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
+        $this->webposIndex->getModal()->waitForOkButtonIsVisible();
         $this->webposIndex->getModal()->getOkButton()->click();
         while ($this->webposIndex->getToaster()->isVisible()) {};
         sleep(1);
@@ -74,6 +79,7 @@ class WebposOrdersHistoryShipmentWithExtantItemsOH41OH42Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getOrderHistoryAddOrderNote()->getShipButton()->click();
         $this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
+        $this->webposIndex->getModal()->waitForOkButtonIsVisible();
         $this->webposIndex->getModal()->getOkButton()->click();
         sleep(1);
         return [

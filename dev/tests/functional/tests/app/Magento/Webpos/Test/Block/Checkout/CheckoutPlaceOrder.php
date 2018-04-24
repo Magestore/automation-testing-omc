@@ -60,7 +60,7 @@ class CheckoutPlaceOrder extends Block
 	 */
 	public function isCheckboxChecked($divCheckbox)
 	{
-		$class = $divCheckbox->find('div')->getAttribute('class');
+		$class = $divCheckbox->find('.ios-ui-select')->getAttribute('class');
 		return strpos($class, 'checked');
 	}
 

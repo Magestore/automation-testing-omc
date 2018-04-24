@@ -61,6 +61,7 @@ class WebposOrdersHistoryCheckConfirmationPopupCloseOH34Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getOrderHistoryAddOrderNote()->getShipButton()->click();
         $this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
+        $this->webposIndex->getModal()->waitForCloseButtonIsVisible();
         $this->webposIndex->getModal()->getCloseButton()->click();
         sleep(3);
         \PHPUnit_Framework_Assert::assertFalse(

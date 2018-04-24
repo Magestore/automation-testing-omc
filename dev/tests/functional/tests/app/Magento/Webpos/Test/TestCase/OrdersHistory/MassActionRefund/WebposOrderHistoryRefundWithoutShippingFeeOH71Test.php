@@ -13,6 +13,10 @@ use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrderHistoryRefundWithoutShippingFeeOH71Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ */
 class WebposOrderHistoryRefundWithoutShippingFeeOH71Test extends Injectable
 {
     /**
@@ -86,7 +90,6 @@ class WebposOrderHistoryRefundWithoutShippingFeeOH71Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         // Open refund popup
         sleep(0.5);

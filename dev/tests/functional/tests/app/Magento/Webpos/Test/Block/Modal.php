@@ -28,14 +28,26 @@ class Modal extends Block
 		return $this->_rootElement->find('aside > div.modal-inner-wrap > footer > button.action-secondary.action-dismiss');
 	}
 
+	public function waitForCancelButtonIsVisible() {
+	    return $this->waitForElementVisible('aside > div.modal-inner-wrap > footer > button.action-secondary.action-dismiss');
+    }
+
 	public function getOkButton()
 	{
 		return $this->_rootElement->find('.action-accept');
 	}
 
+    public function waitForOkButtonIsVisible() {
+        return $this->waitForElementVisible('.action-accept');
+    }
+
 	public function getCloseButton()
 	{
 		return $this->_rootElement->find('.action-close');
 	}
+
+    public function waitForCloseButtonIsVisible() {
+        return $this->waitForElementVisible('.action-close');
+    }
 
 }

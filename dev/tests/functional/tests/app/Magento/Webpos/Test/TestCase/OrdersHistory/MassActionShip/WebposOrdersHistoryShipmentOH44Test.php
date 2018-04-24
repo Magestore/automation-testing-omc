@@ -12,6 +12,10 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Mtf\TestCase\Scenario;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrdersHistoryShipmentOH44Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip
+ */
 class WebposOrdersHistoryShipmentOH44Test extends Scenario
 {
     /**

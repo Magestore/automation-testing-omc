@@ -17,6 +17,11 @@ use Magento\Mtf\Client\Locator;
  */
 class OrderHistoryRefund extends Block
 {
+	public function waitForCancelButtonVisible()
+	{
+		return $this->waitForElementVisible('button.close');
+	}
+
 	public function getCancelButton()
 	{
 		return $this->_rootElement->find('button.close');

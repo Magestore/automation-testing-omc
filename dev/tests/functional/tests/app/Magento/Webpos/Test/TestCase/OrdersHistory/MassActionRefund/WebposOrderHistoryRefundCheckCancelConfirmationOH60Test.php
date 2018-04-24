@@ -11,6 +11,10 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrderHistoryRefundCheckCancelConfirmationOH60Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ */
 class WebposOrderHistoryRefundCheckCancelConfirmationOH60Test extends Injectable
 {
     /**
@@ -63,7 +67,6 @@ class WebposOrderHistoryRefundCheckCancelConfirmationOH60Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        sleep(0.5);
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         // Open shipment popup
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
@@ -76,7 +79,7 @@ class WebposOrderHistoryRefundCheckCancelConfirmationOH60Test extends Injectable
             $this->webposIndex->getModal()->isVisible(),
             'Confirmation popup is not visible.'
         );
-        sleep(0.5);
+        $this->webposIndex->getModal()->waitForCancelButtonIsVisible();
         $this->webposIndex->getModal()->getCancelButton()->click();
         sleep(1);
         $this->assertFalse(

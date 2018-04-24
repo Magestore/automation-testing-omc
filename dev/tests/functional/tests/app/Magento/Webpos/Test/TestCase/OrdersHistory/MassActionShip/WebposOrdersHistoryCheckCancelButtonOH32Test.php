@@ -60,6 +60,7 @@ class WebposOrdersHistoryCheckCancelButtonOH32Test extends Injectable
         // Open shipment popup
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getOrderHistoryAddOrderNote()->getShipButton()->click();
+        sleep(0.5);
         $this->webposIndex->getOrderHistoryShipment()->getCancelButton()->click();
         sleep(2);
 
