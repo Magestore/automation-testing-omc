@@ -59,7 +59,13 @@ class LoginWebposStep implements TestStepInterface
 			$this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
 			$this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
 			$this->webposIndex->getLoginForm()->clickLoginButton();
-            $this->webposIndex->getWrapWarningForm()->waitForWrapWarningFormVisible();
+//      $this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
+            //check if WrapWarningForm is visible when this staff has been logged in
+            $time = time();
+            $timeAfter = $time + 30;
+            while (!$this->webposIndex->getWrapWarningForm()->isVisible() && $time < $timeAfter){
+                $time = time();
+            }
             if ($this->webposIndex->getWrapWarningForm()->isVisible()) {
                 $this->webposIndex->getWrapWarningForm()->getButtonContinue()->click();
             }

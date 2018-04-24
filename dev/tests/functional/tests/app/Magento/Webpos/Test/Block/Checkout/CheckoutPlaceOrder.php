@@ -54,6 +54,10 @@ class CheckoutPlaceOrder extends Block
         return $this->_rootElement->find('#checkout_button');
     }
 
+    public function isCheckoutButtonVisible(){
+        return $this->_rootElement->find('#checkout_button')->isVisible();
+    }
+
 	/**
 	 * @param ElementInterface $divCheckbox
 	 * @return bool|int

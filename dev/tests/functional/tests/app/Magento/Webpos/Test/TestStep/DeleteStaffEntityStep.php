@@ -58,7 +58,8 @@ class DeleteStaffEntityStep implements TestStepInterface
     public function run()
     {
         // Preconditions:
-        $this->staff->persist();
+        // staff send from TestCase not persist
+//        $this->staff->persist();
 
         // Steps:
         $filter = ['email' => $this->staff->getEmail()];

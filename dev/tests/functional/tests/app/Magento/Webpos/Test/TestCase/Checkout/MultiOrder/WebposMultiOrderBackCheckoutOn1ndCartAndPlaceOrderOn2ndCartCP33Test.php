@@ -78,7 +78,7 @@ class WebposMultiOrderBackCheckoutOn1ndCartAndPlaceOrderOn2ndCartCP33Test extend
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Click On Icon Previous
         $this->webposIndex->getCheckoutWebposCart()->getIconPrevious()->click();
-        sleep(2);
+        sleep(3);
         $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($secondOrder)->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         //Add a product to 2nd cart
@@ -101,6 +101,7 @@ class WebposMultiOrderBackCheckoutOn1ndCartAndPlaceOrderOn2ndCartCP33Test extend
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(2);
 
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);

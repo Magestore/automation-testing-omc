@@ -12,6 +12,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+
 /**
  * Class WebposMultiOrderAddSomeProductsAndCustomerCP32EntityTest
  * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\MultiOrder
@@ -66,7 +67,7 @@ class WebposMultiOrderAddSomeProductsAndCustomerCP32EntityTest extends Injectabl
         $this->webposIndex->getCheckoutWebposCart()->getIconChangeCustomer()->click();
         $customerName = $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomerName()->getText();
         $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
-
+        sleep(2);
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($orderNumber)->click();
@@ -82,8 +83,10 @@ class WebposMultiOrderAddSomeProductsAndCustomerCP32EntityTest extends Injectabl
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
+        sleep(2);
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(2);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 

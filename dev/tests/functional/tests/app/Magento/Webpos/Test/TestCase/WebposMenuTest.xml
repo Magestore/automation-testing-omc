@@ -13,7 +13,7 @@
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
         </variation>
         <variation name="WebposMenuTest2">
-            <data name="menuItem" xsi:type="string">Sales > Manage Staffs</data>
+            <data name="menuItem" xsi:type="string">Sales > Manage Staff</data>
             <data name="pageTitle" xsi:type="string">Staff</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
         </variation>
@@ -38,7 +38,7 @@
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
         </variation>
         <variation name="WebposMenuTest7">
-            <data name="menuItem" xsi:type="string">Manage Cash Denomination</data>
+            <data name="menuItem" xsi:type="string">Sales > Manage Cash Denomination</data>
             <data name="pageTitle" xsi:type="string">Denomination</data>
             <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
         </variation>
