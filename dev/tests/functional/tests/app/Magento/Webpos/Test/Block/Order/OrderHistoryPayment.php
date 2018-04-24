@@ -25,6 +25,10 @@ class OrderHistoryPayment extends Block
        return $this->_rootElement->find('//*[@id="order_payment_list_container"]/div/div[1]/div/div/label[text()="'.$label.'"]/..',Locator::SELECTOR_XPATH);
     }
 
+    public function waitForPaymendMethodVisible($label){
+        $this->waitForElementVisible('//*[@id="order_payment_list_container"]/div/div[1]/div/div/label[text()="'.$label.'"]/..',Locator::SELECTOR_XPATH);
+    }
+
     /**
      * @return \Magento\Mtf\Client\ElementInterface
      */

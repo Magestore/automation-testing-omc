@@ -57,11 +57,17 @@ class WebposManageLocationML43Test extends Injectable
         $this->mappingLocationIndex->open();
         $this->mappingLocationIndex->getMappingLocationGrid()->chooseLocations();
         $this->mappingLocationIndex->getLocationModal()->waitLoader();
-        $this->mappingLocationIndex->getLocationModal()->searchAndSelect(['display_name' => $location->getDisplayName()]);
-        $this->mappingLocationIndex->getLocationModal()->getAddButton()->click();
+        sleep(2);
+        if($this->mappingLocationIndex->getLocationModal()->isClearButtonVisible()){
+            $this->mappingLocationIndex->getLocationModal()->getClearFilterButton()->click();
+        }
+        sleep(3);
+        $this->mappingLocationIndex->getLocationModal()->search(['display_name' => $location->getDisplayName()]);
         $this->mappingLocationIndex->getMappingLocationGrid()->waitPageToLoad();
         $this->assertLocationShownOnGrid->processAssert($this->mappingLocationIndex);
-        $this->mappingLocationIndex->getPageActions()->save();
-        sleep(1);
+        $this->mappingLocationIndex->getLocationModal()->getAddButton()->click();
+        sleep(2);
+        $this->mappingLocationIndex->getFormPageActions()->save();
+        sleep(2);
     }
 }

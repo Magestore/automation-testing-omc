@@ -122,4 +122,9 @@ class StaffsGrid extends DataGrid
     {
         return $this->_rootElement->find('.data-grid-info-panel .message');
     }
+
+    public function getSelectFieldEdtingByName($name)
+    {
+        return $this->_rootElement->find('//tbody/tr/td/*/select[@name="' . $name . '"]', Locator::SELECTOR_XPATH);
+    }
 }

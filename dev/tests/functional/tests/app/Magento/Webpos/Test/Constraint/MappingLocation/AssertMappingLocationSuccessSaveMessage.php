@@ -29,7 +29,7 @@ class AssertMappingLocationSuccessSaveMessage extends AbstractConstraint
     {
         \PHPUnit_Framework_Assert::assertEquals(
             self::SUCCESS_MESSAGE,
-            $mappingLocationIndex->getMessagesBlock()->getSuccessMessage(),
+            $mappingLocationIndex->getMessagesBlock()->getMessagesBlock(),
             'Wrong success message is displayed.'
         );
     }

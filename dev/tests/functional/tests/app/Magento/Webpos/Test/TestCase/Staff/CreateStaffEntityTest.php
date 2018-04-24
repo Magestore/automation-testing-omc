@@ -11,6 +11,7 @@
 
 namespace Magento\Webpos\Test\TestCase\Staff;
 
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
@@ -41,11 +42,13 @@ class CreateStaffEntityTest extends Injectable
      */
     private $staffsNew;
 
+
     /**
      * Inject Staff pages.
      *
      * @param StaffIndex $staffsIndex
      * @param StaffNews $staffsNew
+     * @param FixtureFactory $fixtureFactory
      * @return void
      */
     public function __inject(
@@ -57,18 +60,15 @@ class CreateStaffEntityTest extends Injectable
     }
 
     /**
-     * Create Staff group test.
-     *
-     * @param Staff $location
-     * @return void
+     * @param Staff $staff
      */
     public function test(Staff $staff)
     {
-        // Steps
         $this->staffsIndex->open();
         $this->staffsIndex->getPageActionsBlock()->addNew();
         $this->staffsNew->getStaffsForm()->fill($staff);
         $this->staffsNew->getFormPageActions()->save();
     }
+
 }
 

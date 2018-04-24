@@ -18,7 +18,7 @@ class AssertCheckLocationForm extends AbstractConstraint
             $webposIndex->getLoginForm()->setLocation($location['location']->getDisplayName());
             $poss = $webposIndex->getLoginForm()->getPosID()->getText();
             $poss = str_replace('--- Choose a POS ---','', $poss);
-            \PHPUnit_Framework_Assert::assertEquals(
+            \PHPUnit_Framework_Assert::assertContains(
                 $location['pos']->getPosName(),
                 trim($poss),
                 'Pos does not display correct'

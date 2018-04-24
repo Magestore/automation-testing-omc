@@ -6,7 +6,7 @@
  * Time: 2:14 PM
  */
 
-namespace Magento\Webpos\Test\TestCase\Location\ChooseLocations;
+namespace Magento\Webpos\Test\TestCase\Location\FilterLocations;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\MappingLocationIndex;
@@ -51,6 +51,7 @@ class WebposManageLocationML46Test extends Injectable
         $this->mappingLocationIndex->getLocationModal()->waitLoader();
         $this->mappingLocationIndex->getLocationModal()->openFilterBlock();
         $this->mappingLocationIndex->getLocationModal()->resetFilter();
+        sleep(3);
         $this->mappingLocationIndex->getLocationModal()->getApplyButtonFilter()->click();
         $this->mappingLocationIndex->getLocationModal()->waitLoader();
 

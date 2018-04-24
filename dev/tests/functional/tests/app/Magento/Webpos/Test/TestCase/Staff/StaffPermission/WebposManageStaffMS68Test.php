@@ -7,6 +7,7 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+
 use Magento\Catalog\Test\Page\Adminhtml\CatalogProductIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
@@ -38,7 +39,8 @@ class WebposManageStaffMS68Test extends Injectable
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
     }
@@ -58,24 +60,32 @@ class WebposManageStaffMS68Test extends Injectable
     public function test(WebposRole $webposRole, $products, $staffData)
     {
         //Create role and staff for role
-        /**@var Location $location*/
+        /**@var Location $location */
         $location = $this->fixtureFactory->createByCode('location', ['dataset' => 'default']);
         $location->persist();
         $locationId = $location->getLocationId();
         $posData['pos_name'] = 'Pos Test %isolation%';
         $posData['status'] = 'Enabled';
-        $posData['location_id'][] = $locationId;
-        /**@var Pos $pos*/
+        $array = [];
+        $array[] = $locationId;
+        $posData['location_id'] = $array;
+        /**@var Pos $pos */
         $pos = $this->fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
-        $staffData['location_id'][] = $locationId;
-        $staffData['pos_ids'][] = $posId;
-        /**@var Staff $staff*/
+        $array = array();
+        $array[] = $locationId;
+        $staffData['location_id'] = $array;
+        $array = array();
+        $array[] = $posId;
+        $staffData['pos_ids'] = $array;
+        /**@var Staff $staff */
         $staff = $this->fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff->persist();
         $roleData = $webposRole->getData();
-        $roleData['staff_id'][] = $staff->getStaffId();
+        $array = array();
+        $array[] = $staff->getStaffId();
+        $roleData['staff_id'] = $array;
         $role = $this->fixtureFactory->createByCode('webposRole', ['data' => $roleData]);
         $role->persist();
         //Create product
@@ -83,7 +93,8 @@ class WebposManageStaffMS68Test extends Injectable
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run();
-        //Login
+
+        // Login webpos
         $this->login($staff);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="c-button--push-left"]');
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
@@ -93,6 +104,7 @@ class WebposManageStaffMS68Test extends Injectable
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',
             ['products' => $products]
         )->run();
+        sleep(3);
         // Place Order
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -135,10 +147,11 @@ class WebposManageStaffMS68Test extends Injectable
                 $this->webposIndex->getLoginForm()->getEnterToPos()->click();
             }
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
+            sleep(2);
             $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 360;
-            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
                 $time = time();
             }
             sleep(2);

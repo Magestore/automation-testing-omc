@@ -32,15 +32,15 @@ class Curl extends AbstractCurl implements StaffInterface
      * @var array
      */
     protected $mappingData = [
-        'customer_group'  => [
+        'customer_group' => [
             'All groups' => 'all',
-            'General'    => '1',
-            'Wholesale'  => '2',
-            'Retailer'   => '3'
+            'General' => '1',
+            'Wholesale' => '2',
+            'Retailer' => '3'
         ],
-        'status'  => [
-            'Enabled'    => '1',
-            'Disabled'   => '2'
+        'status' => [
+            'Enabled' => '1',
+            'Disabled' => '2'
         ],
         'pos_ids' => [
             'Store POS' => '1'
@@ -97,7 +97,7 @@ class Curl extends AbstractCurl implements StaffInterface
 
     protected function prepareCustomerGroup(array $data)
     {
-        if(is_array($data['customer_group'])){
+        if (is_array($data['customer_group'])) {
             foreach ($data['customer_group'] as $key => $value) {
                 if (!isset($this->mappingData['customer_group'][$value])) {
                     continue;
@@ -105,7 +105,7 @@ class Curl extends AbstractCurl implements StaffInterface
                 $data['customer_group'][$key] = $this->mappingData['customer_group'][$value];
 
             }
-        }else{
+        } else {
             $data['customer_group'] = [$data['customer_group']];
         }
         return $data;
@@ -113,22 +113,34 @@ class Curl extends AbstractCurl implements StaffInterface
 
     protected function prepareLocation(array $data)
     {
-        foreach ($data['location_id'] as $key => $value) {
-            if (!isset($this->mappingData['location_id'][$value])) {
-                continue;
+        if (is_array($data['location_id'])) {
+            foreach ($data['location_id'] as $key => $value) {
+                if (!isset($this->mappingData['location_id'][$value])) {
+                    continue;
+                }
+                $data['location_id'][$key] = $this->mappingData['location_id'][$value];
             }
-            $data['location_id'][$key] = $this->mappingData['location_id'][$value];
+        } else {
+            $array = array();
+            $array[]= $data['location_id'];
+            $data['location_id'] = $array;
         }
         return $data;
     }
 
     protected function preparePOS(array $data)
     {
-        foreach ($data['pos_ids'] as $key => $value) {
-            if (!isset($this->mappingData['pos_ids'][$value])) {
-                continue;
+        if (is_array($data['pos_ids'])) {
+            foreach ($data['pos_ids'] as $key => $value) {
+                if (!isset($this->mappingData['pos_ids'][$value])) {
+                    continue;
+                }
+                $data['pos_ids'][$key] = $this->mappingData['pos_ids'][$value];
             }
-            $data['pos_ids'][$key] = $this->mappingData['pos_ids'][$value];
+        } else {
+            $array = array();
+            $array[]= $data['pos_ids'];
+            $data['pos_ids'] = $array;
         }
         return $data;
     }

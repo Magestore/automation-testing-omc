@@ -62,10 +62,8 @@ class DeleteStaffEntityTest extends Injectable
     }
 
     /**
-     * Runs Delete Staff Backend Entity test
-     *
      * @param Staff $staff
-     * @return void
+     * @throws \Exception
      */
     public function testDeleteStaffEntityTest(Staff $staff)
     {

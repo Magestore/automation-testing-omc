@@ -39,10 +39,10 @@ class WebposManageStaffMS51Test extends Injectable
     }
 
     /**
-     * Create WebposRole group test.
-     *
-     * @param WebposRole
-     * @return void
+     * @param WebposRole $webposRole
+     * @param $products
+     * @param $discount
+     * @return array
      */
     public function test(WebposRole $webposRole, $products, $discount)
     {
@@ -123,6 +123,7 @@ class WebposManageStaffMS51Test extends Injectable
             $webposIndex->getLoginForm()->getPasswordField()->setValue($password);
             $webposIndex->getLoginForm()->clickLoginButton();
 //			$this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
+            sleep(2);
             $webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 360;
