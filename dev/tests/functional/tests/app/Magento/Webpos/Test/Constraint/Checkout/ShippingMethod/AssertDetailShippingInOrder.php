@@ -40,7 +40,10 @@ class AssertDetailShippingInOrder extends AbstractConstraint
         );
 
         $subtotal = str_replace('$','', $webposIndex->getOrderHistoryOrderViewFooter()->getSubTotal());
-        $tax = str_replace('$','', $webposIndex->getOrderHistoryOrderViewFooter()->getTax());
+        $tax = 0;
+        if($webposIndex->getOrderHistoryOrderViewFooter()->getRowValueElement('Tax')->isVisible()){
+            $tax = str_replace('$','', $webposIndex->getOrderHistoryOrderViewFooter()->getTax());
+        }
         $totalExpected = floatval($priceShipping) + floatval($subtotal) + floatval($tax);
         $totalActual = floatval(str_replace('$','', $webposIndex->getOrderHistoryOrderViewFooter()->getGrandTotal()));
 

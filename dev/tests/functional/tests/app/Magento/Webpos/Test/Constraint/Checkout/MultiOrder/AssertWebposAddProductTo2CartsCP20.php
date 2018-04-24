@@ -29,7 +29,7 @@ class AssertWebposAddProductTo2CartsCP20 extends AbstractConstraint
             for ($j=$k;$j<2*$i; $j++) {
                 \PHPUnit_Framework_Assert::assertTrue(
                     $webposIndex->getCheckoutCartItems()->getCartItem($products[$j]->getName())->isVisible(),
-                    'On the AssertWebposCheckGUICustomerPriceCP54 TaxClass - The cart item with name\'s'.$products[$j]->getName().' was not visible.'
+                    'On the AssertWebposAddProductTo2CartsCP20 TaxClass - The cart item with name\'s'.$products[$j]->getName().' was not visible.'
                 );
             }
             $k += $j;

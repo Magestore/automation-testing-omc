@@ -105,9 +105,24 @@ class CheckoutCartItems extends Block
         return $this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('.product-name')->getText();
 
     }
+    public function getPriceCartItemByOrderToElement($i)
+    {
+        return floatval(str_replace('$','',$this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('.price')));
+
+    }
+    public function findPriceCartItemByOrderToElement($i)
+    {
+        return $this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('.price');
+
+    }
     public function getPriceCartItemByOrderTo($i)
     {
         return floatval(str_replace('$','',$this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('.price')->getText()));
+
+    }
+    public function getAttributeCartItemByOrderToElement($i)
+    {
+        return $this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('.item-options');
 
     }
     public function getAttributeCartItemByOrderTo($i)
@@ -124,6 +139,11 @@ class CheckoutCartItems extends Block
     {
         return floatval($this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('.product-item .product-img')->find('.number')->getText());
 
+    }
+
+    public function getOriginPriceCartItemByOrderToElement($i)
+    {
+        return $this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('.original-price');
     }
 
     public function getOriginPriceCartItemByOrderTo($i)

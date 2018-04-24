@@ -693,6 +693,12 @@
 
         <!--Tax Config-->
         <dataset name="default_tax_configuration_use_system_value">
+            <field name="webpos/general/enable_session" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
             <!--Tax Classes-->
             <field name="tax/classes/shipping_tax_class" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -1082,6 +1088,12 @@
 
         <!--Setting: [Apply Customer Tax] = Before discount-->
         <dataset name="tax_calculation_apply_customer_tax_before_discount_TAX76">
+            <field name="webpos/general/enable_session" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
             <!--Calculation Settings-->
             <field name="tax/calculation/apply_after_discount" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -1190,6 +1202,12 @@
 
         <!--Setting [Apply Discount On Prices] = Excluding tax-->
         <dataset name="apply_discount_on_prices_excluding_tax">
+            <field name="webpos/general/enable_session" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
             <field name="tax/calculation/discount_tax" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
@@ -1201,6 +1219,12 @@
 
         <!--Setting [Apply Discount On Prices] = Including tax-->
         <dataset name="apply_discount_on_prices_including_tax">
+            <field name="webpos/general/enable_session" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
             <field name="tax/calculation/discount_tax" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
@@ -1212,6 +1236,12 @@
 
         <!--Setting  [Apply Tax On] = Custome price if available-->
         <dataset name="tax_calculation_apply_tax_on_custom_price_if_available">
+            <field name="webpos/general/enable_session" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
             <field name="tax/calculation/apply_tax_on" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
