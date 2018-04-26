@@ -9,6 +9,10 @@ namespace Magento\Webpos\Test\TestCase\OnHoldOrder\CheckGUI;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOnHoldOrderONH03Test
+ * @package Magento\Webpos\Test\TestCase\OnHoldOrder\CheckGUI
+ */
 class WebposOnHoldOrderONH03Test extends Injectable
 {
     /**

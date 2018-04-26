@@ -40,12 +40,12 @@ class OnHoldOrderOrderViewFooter extends Block
      */
     public function getRowValue($label)
     {
-        return $this->_rootElement->find('//div[1]/table/tbody/tr/td[text()="'.$label.'"]/../td[2]', Locator::SELECTOR_XPATH)->getText();
+        return $this->_rootElement->find('//*[@id="on_hold_orders_container"]/div/div[2]/footer/div[1]/table/tbody/tr/td[text()="'.$label.'"]/../td[2]', Locator::SELECTOR_XPATH)->getText();
     }
 
     public function getRow($label)
     {
-        return $this->_rootElement->find('//div[1]/table/tbody/tr/td[text()="'.$label.'"]/../td[2]', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//*[@id="on_hold_orders_container"]/div/div[2]/footer/div[1]/table/tbody/tr/td[text()="'.$label.'"]/../td[2]', Locator::SELECTOR_XPATH);
     }
 
     public function getTableTotal()

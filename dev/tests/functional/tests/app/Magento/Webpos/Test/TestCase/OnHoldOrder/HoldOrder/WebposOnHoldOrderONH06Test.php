@@ -11,6 +11,10 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 
+/**
+ * Class WebposOnHoldOrderONH06Test
+ * @package Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder
+ */
 class WebposOnHoldOrderONH06Test extends Injectable
 {
     /**
