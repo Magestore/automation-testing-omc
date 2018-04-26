@@ -63,10 +63,11 @@ class WebposEditCustomerEditShippingAndBillingAddressCC39Test extends Injectable
         //Edit shipping address
         $this->webposIndex->getCheckoutEditCustomer()->getEditShippingAddressIcon()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="form-customer-add-address-checkout"]');
+        sleep(3);
         $this->webposIndex->getCheckoutEditAddress()->setFiledAdress($address->getData());
         $this->webposIndex->getCheckoutEditAddress()->getSaveButton()->click();
         $this->webposIndex->getCheckoutEditAddress()->waitForElementNotVisible('[id="customer-overlay"]');
-        sleep(1);
+        sleep(3);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="form-edit-customer"]');
         $this->assertEquals(
             '6161 West Centinela Avenue , Culver City , California , US 90230',
@@ -75,11 +76,12 @@ class WebposEditCustomerEditShippingAndBillingAddressCC39Test extends Injectable
         );
         //Edit billing address
         $this->webposIndex->getCheckoutEditCustomer()->getEditBillingAddressIcon()->click();
+        sleep(3);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="form-customer-add-address-checkout"]');
         $this->webposIndex->getCheckoutEditAddress()->setFiledAdress($address->getData());
         $this->webposIndex->getCheckoutEditAddress()->getSaveButton()->click();
         $this->webposIndex->getCheckoutEditAddress()->waitForElementNotVisible('[id="customer-overlay"]');
-        sleep(1);
+        sleep(3);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="form-edit-customer"]');
         $this->assertEquals(
             '6161 West Centinela Avenue , Culver City , California , US 90230',
@@ -116,6 +118,7 @@ class WebposEditCustomerEditShippingAndBillingAddressCC39Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        sleep(3);
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         $customerAddress = $address->getData();
         $shippingAddress = [];

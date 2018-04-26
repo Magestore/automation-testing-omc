@@ -155,4 +155,8 @@ class CheckoutAddCustomer extends Block
 	{
 		return $this->_rootElement->find('a[data-bind="click: deleteBillingAddress"]');
 	}
+
+    public function waitForPopupVisible(){
+        $this->waitForElementVisible('#form-customer-add-customer-checkout');
+    }
 }

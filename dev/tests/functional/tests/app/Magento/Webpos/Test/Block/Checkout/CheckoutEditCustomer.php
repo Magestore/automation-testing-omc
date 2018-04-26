@@ -152,4 +152,8 @@ class CheckoutEditCustomer extends Block
     {
         return $this->_rootElement->find('.btn-add-address');
     }
+
+    public function waitForPopupVisible(){
+	    $this->waitForElementVisible('#form-edit-customer');
+    }
 }

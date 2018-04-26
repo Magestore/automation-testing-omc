@@ -193,4 +193,8 @@ class CheckoutAddShippingAddress extends Block
 		return $this->_rootElement->find('#add_shipping_country_id-error');
 	}
 	// End Feild's error messages
+
+    public function waitForPopupVisible(){
+	    $this->waitForElementVisible('#form-customer-add-shipping-address-checkout');
+    }
 }

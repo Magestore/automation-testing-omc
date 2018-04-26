@@ -87,14 +87,15 @@ class WebposCustomerOnCheckoutPageCC23Test extends Injectable
         $this->webposIndex->getCheckoutChangeCustomer()->waitForCustomerList();
 
         $this->webposIndex->getCheckoutChangeCustomer()->getAddNewCustomerButton()->click();
-        sleep(1);
+        sleep(3);
 
         // fill customer info
+        $this->webposIndex->getCheckoutAddCustomer()->waitForPopupVisible();
         $this->webposIndex->getCheckoutAddCustomer()->setFieldWithoutShippingAndBilling($customer->getData());
 
         // fill Billing address info
         $this->webposIndex->getCheckoutAddCustomer()->getAddBillingAddressIcon()->click();
-        sleep(1);
+        sleep(3);
         $this->webposIndex->getCheckoutAddBillingAddress()->setFieldAddress($address->getData());
         $this->webposIndex->getCheckoutAddBillingAddress()->getSaveButton()->click();
         sleep(1);
@@ -115,9 +116,10 @@ class WebposCustomerOnCheckoutPageCC23Test extends Injectable
         $this->assertBillingAddressOnNewCustomerPopupIsCorrect->processAssert($this->webposIndex, $addressText);
 
         $this->webposIndex->getCheckoutAddCustomer()->getEditBillingAddressIcon()->click();
-        sleep(1);
+        sleep(3);
 
         //fill Billing address info
+        $this->webposIndex->getCheckoutAddBillingAddress()->waitForPopupVisible();
         $this->webposIndex->getCheckoutAddBillingAddress()->setFieldAddress($editAddress->getData());
         $this->webposIndex->getCheckoutAddBillingAddress()->getSaveButton()->click();
 

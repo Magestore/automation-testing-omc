@@ -66,6 +66,8 @@ class WebposEditCustomerCheckAddAddressButtonCC38Test extends Injectable
             'Add address popup is not visible.'
         );
         //fill address data
+        $this->webposIndex->getCheckoutEditAddress()->waingPageLoading();
+        sleep(3);
         $this->webposIndex->getCheckoutEditAddress()->setFiledAdress($address->getData());
         $this->webposIndex->getCheckoutEditAddress()->getSaveButton()->click();
         $this->webposIndex->getCheckoutEditAddress()->waitForElementNotVisible('[id="customer-overlay"]');
@@ -96,6 +98,7 @@ class WebposEditCustomerCheckAddAddressButtonCC38Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        sleep(3);
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         $customerAddress = $address->getData();
         $shippingAddress = [];
