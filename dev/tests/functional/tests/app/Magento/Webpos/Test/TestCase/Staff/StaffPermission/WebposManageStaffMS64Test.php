@@ -15,6 +15,10 @@ use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposManageStaffMS64Test
+ * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
+ */
 class WebposManageStaffMS64Test extends Injectable
 {
 
@@ -109,26 +113,32 @@ class WebposManageStaffMS64Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue(0);
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="toaster"]');
-        //Logout
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        //Logout
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->logout();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
         $this->webposIndex->getModal()->getOkButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader.loading-mask');
         //Login by staff2
-        $this->login($staff2);
+        $staff = $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposStep'
+        )->run();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="c-button--push-left"]');
-        // Go to orders history
+        //Go to orders history
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         sleep(3);
         //Take payment

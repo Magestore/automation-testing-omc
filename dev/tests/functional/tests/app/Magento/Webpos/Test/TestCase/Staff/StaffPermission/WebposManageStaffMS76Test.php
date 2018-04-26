@@ -15,7 +15,10 @@ use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposManageStaffMS76Test
+ * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
+ */
 class WebposManageStaffMS76Test extends Injectable
 {
 
@@ -168,7 +171,7 @@ class WebposManageStaffMS76Test extends Injectable
             if ($pos) {
                 $this->webposIndex->getLoginForm()->setPos($pos->getPosName());
             }
-            if ($location || $pos) {
+            if ($location && $pos) {
                 $this->webposIndex->getLoginForm()->getEnterToPos()->click();
             }
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');

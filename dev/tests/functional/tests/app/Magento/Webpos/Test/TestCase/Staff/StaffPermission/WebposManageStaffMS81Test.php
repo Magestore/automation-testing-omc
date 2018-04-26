@@ -17,6 +17,10 @@ use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 use function MongoDB\BSON\toJSON;
 
+/**
+ * Class WebposManageStaffMS81Test
+ * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
+ */
 class WebposManageStaffMS81Test extends Injectable
 {
 
