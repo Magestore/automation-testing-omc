@@ -53,7 +53,7 @@ class WebposSessionManagementValidateSM28Test extends Injectable
 
         // Login webpos
         $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposChooseLocationStep'
+            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
         )->run();
 
         // Open session

@@ -49,6 +49,10 @@ class OpenSessionPopup extends Block
         return $this->_rootElement->find('button[type="submit"]');
     }
 
+    public function getLoadingElement(){
+        return $this->_rootElement->find('[data-bind="visible:loading"]');
+    }
+
     public function getCancelButton()
     {
         return $this->_rootElement->find('.cancel');

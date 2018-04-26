@@ -6,7 +6,7 @@
  * Time: 8:15 AM
  */
 
-namespace Magento\Webpos\Test\TestCase\Location\ChooseLocations;
+namespace Magento\Webpos\Test\TestCase\Location\SortingLocations;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\MappingLocationIndex;
@@ -51,16 +51,21 @@ class WebposManageLocationSortingTest extends Injectable
         $location->persist();
         $this->mappingLocationIndex->open();
         $this->mappingLocationIndex->getMappingLocationGrid()->waitPageToLoad();
+        sleep(1);
         $this->mappingLocationIndex->getMappingLocationGrid()->chooseLocations();
         $this->mappingLocationIndex->getLocationModal()->waitLoader();
         $this->mappingLocationIndex->getLocationModal()->resetFilter();
-
+        sleep(2);
+        if($this->mappingLocationIndex->getLocationModal()->isClearButtonVisible()){
+            $this->mappingLocationIndex->getLocationModal()->getClearFilterButton();
+        }
         $sortingResults = [];
         $this->mappingLocationIndex->getLocationModal()->sortByColumn($columnsForSorting);
-        $sortingResults[$columnsForSorting]['firstIdAfterFirstSoring'] = $this->mappingLocationIndex->getLocationModal()->getFirstItemId();
+        sleep(2);
+        $sortingResults[$columnsForSorting]['firstIdAfterFirstSoring'] = (string) $this->mappingLocationIndex->getLocationModal()->getFirstItemId();
         $this->mappingLocationIndex->getLocationModal()->sortByColumn($columnsForSorting);
+        sleep(2);
         $sortingResults[$columnsForSorting]['firstIdAfterSecondSoring'] = $this->mappingLocationIndex->getLocationModal()->getFirstItemId();
-
         return ['sortingResults' => $sortingResults];
     }
 }

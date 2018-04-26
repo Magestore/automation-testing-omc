@@ -1,12 +1,11 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: PhucDo
- * Date: 3/8/2018
- * Time: 2:03 PM
+ * User: thomas
+ * Date: 22/11/2017
+ * Time: 10:22
  */
-
-namespace Magento\Webpos\Test\TestStep;
+namespace  Magento\Webpos\Test\TestStep;
 
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Page\WebposIndex;
@@ -14,10 +13,10 @@ use Magento\Mtf\TestStep\TestStepInterface;
 use Magento\Mtf\Config\DataInterface;
 
 /**
- * Class LoginWebposChooseLocationStep
+ * Class LoginWebposWithSelectLocationPosStep
  * @package Magento\Webpos\Test\TestStep
  */
-class LoginWebposChooseLocationStep implements TestStepInterface
+class LoginWebposWithSelectLocationPosStep implements TestStepInterface
 {
     /**
      * System config.
@@ -32,16 +31,14 @@ class LoginWebposChooseLocationStep implements TestStepInterface
      */
     protected $webposIndex;
 
+
     /**
      * @var FixtureFactory
      */
     protected $fixtureFactory;
 
     /**
-     * LoginWebposChooseLocationStep constructor.
      * @param WebposIndex $webposIndex
-     * @param DataInterface $configuration
-     * @param FixtureFactory $fixtureFactory
      */
     public function __construct(
         WebposIndex $webposIndex,
@@ -53,38 +50,40 @@ class LoginWebposChooseLocationStep implements TestStepInterface
         $this->fixtureFactory = $fixtureFactory;
     }
 
-    /**
-     * @return \Magento\Mtf\Fixture\FixtureInterface|mixed
-     */
     public function run()
     {
         $username = $this->configuration->get('application/0/backendLogin/0/value');
         $password = $this->configuration->get('application/0/backendPassword/0/value');
         $this->webposIndex->open();
-        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
         if ($this->webposIndex->getLoginForm()->isVisible()) {
             $this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
             $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
             $this->webposIndex->getLoginForm()->clickLoginButton();
-            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-            $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
-
-            // Choose Location: Store Address and Pos: Store POS
-            $this->webposIndex->getLoginForm()->setLocation('Store Address');
-            $this->webposIndex->getLoginForm()->setPos('Store POS');
-            $this->webposIndex->getLoginForm()->getEnterToPos()->click();
-
-            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-            $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
-            $time = time();
-            $timeAfter = $time + 360;
-            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
-                $time = time();
-            }
             sleep(2);
         }
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 
+        //check if WrapWarningForm is visible when this staff has been logged in
+        $time = time();
+        $timeAfter = $time + 30;
+        while (!$this->webposIndex->getWrapWarningForm()->isVisible() && $time < $timeAfter){
+            $time = time();
+        }
+        if ($this->webposIndex->getWrapWarningForm()->isVisible() &&
+            $this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible()) {
+            $this->webposIndex->getWrapWarningForm()->getButtonContinue()->click();
+        }
+
+        $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
+        $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
+        $this->webposIndex->getLoginForm()->getEnterToPos()->click();
+        $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
+        $time = time();
+        $timeAfter = $time + 360;
+        while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            $time = time();
+        }
+//        sleep(2);
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $data = [
             'username' => $username,
             'password' => $password

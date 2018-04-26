@@ -36,6 +36,7 @@ class LocationModal extends DataGrid
      */
     protected $firstRowSelector = '//tbody/tr/td[4]';
 
+    protected $filterButton = 'button[data-action="grid-filter-expand"]';
     /**
      * Grid fields map
      *
@@ -118,7 +119,6 @@ class LocationModal extends DataGrid
     public function openFilterBlock()
     {
         $this->waitFilterToLoad();
-
         $toggleFilterButton = $this->_rootElement->find($this->filterButton);
         $searchButton = $this->_rootElement->find($this->searchButton);
         if ($toggleFilterButton->isVisible() && !$searchButton->isVisible()) {
@@ -214,7 +214,7 @@ class LocationModal extends DataGrid
 
     public function getFilterFirstDisplayName()
     {
-        return $this->_rootElement->find('//table[@class="data-grid data-grid-draggable"]/tbody/tr[1]/td[3]', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//table[@class="data-grid data-grid-draggable"]/tbody/tr[1]/td[2]', Locator::SELECTOR_XPATH);
     }
 
     public function getFilterFirstAddress()
@@ -237,4 +237,15 @@ class LocationModal extends DataGrid
         $this->waitForElementNotVisible($this->loader);
         $this->getTemplateBlock()->waitLoader();
     }
+
+    public function getClearFilterButton()
+    {
+        return $this->_rootElement->find('.action-clear');
+    }
+    public function isClearButtonVisible()
+    {
+        $this->waitLoader();
+        return $this->_rootElement->find('.action-clear')->isVisible();
+    }
+
 }

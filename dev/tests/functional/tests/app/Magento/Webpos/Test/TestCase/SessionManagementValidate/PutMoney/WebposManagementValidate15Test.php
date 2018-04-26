@@ -47,7 +47,7 @@ class WebposManagementValidate15Test extends Injectable
         $denomination->persist();
         //Login
         $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposChooseLocationStep'
+            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
         )->run();
 
         //click menu

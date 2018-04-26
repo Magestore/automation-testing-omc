@@ -22,7 +22,7 @@ class AssertLocationOnGridModalCorrectly extends AbstractConstraint
      * @param MappingLocationIndex $mappingLocationIndex
      * @param Location $location
      */
-    public function processAssert(MappingLocationIndex $mappingLocationIndex, Location $location)
+    public function processAssert(MappingLocationIndex $mappingLocationIndex, $location)
     {
         \PHPUnit_Framework_Assert::assertEquals(
             $location->getDisplayName(),

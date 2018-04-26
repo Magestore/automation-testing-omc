@@ -59,6 +59,7 @@ class WebposPlaceOrderWithOrderNoteTest extends Injectable
         $this->webposIndex->getCheckoutNoteOrder()->getTextArea()->setValue($textNote);
         $this->webposIndex->getCheckoutNoteOrder()->getSaveOrderNoteButon()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+        sleep(3);
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();

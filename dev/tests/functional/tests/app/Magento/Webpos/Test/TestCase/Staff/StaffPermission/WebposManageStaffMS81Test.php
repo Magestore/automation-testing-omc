@@ -7,6 +7,7 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Location;
@@ -38,7 +39,8 @@ class WebposManageStaffMS81Test extends Injectable
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
     }
@@ -63,24 +65,32 @@ class WebposManageStaffMS81Test extends Injectable
     public function test(WebposRole $webposRole, $staffData)
     {
         //Create role and staff for role
-        /**@var Location $location*/
+        /**@var Location $location */
         $location = $this->fixtureFactory->createByCode('location', ['dataset' => 'default']);
         $location->persist();
         $locationId = $location->getLocationId();
         $posData['pos_name'] = 'Pos Test %isolation%';
         $posData['status'] = 'Enabled';
-        $posData['location_id'][] = $locationId;
-        /**@var Pos $pos*/
+        $array = [];
+        $array[] = $locationId;
+        $posData['location_id'] = $array;
+        /**@var Pos $pos */
         $pos = $this->fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
-        $staffData['location_id'][] = $locationId;
-        $staffData['pos_ids'][] = $posId;
-        /**@var Staff $staff*/
+        $array = [];
+        $array[] = $locationId;
+        $staffData['location_id'] = $array;
+        $array = [];
+        $array[] = $posId;
+        $staffData['pos_ids'] = $array;
+        /**@var Staff $staff */
         $staff = $this->fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff->persist();
         $roleData = $webposRole->getData();
-        $roleData['staff_id'][] = $staff->getStaffId();
+        $array = [];
+        $array[] = $staff->getStaffId();
+        $roleData['staff_id'] = $array;
         $role = $this->fixtureFactory->createByCode('webposRole', ['data' => $roleData]);
         $role->persist();
         //Login
@@ -89,10 +99,6 @@ class WebposManageStaffMS81Test extends Injectable
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
         sleep(2);
-        $this->assertTrue(
-            $this->webposIndex->getListShift()->getFirstItemShift()->isVisible(),
-            'Open a shift not successfully.'
-        );
         //Close the shift
         $this->webposIndex->getSessionInfo()->getSetClosingBalanceButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-close-shift"]');
@@ -128,7 +134,7 @@ class WebposManageStaffMS81Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 360;
-            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
                 $time = time();
             }
             sleep(2);

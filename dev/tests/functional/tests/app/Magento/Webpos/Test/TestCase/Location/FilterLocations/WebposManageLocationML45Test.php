@@ -6,17 +6,17 @@
  * Time: 2:14 PM
  */
 
-namespace Magento\Webpos\Test\TestCase\Location\ChooseLocations;
+namespace Magento\Webpos\Test\TestCase\Location\FilterLocations;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\MappingLocationIndex;
 use Magento\Webpos\Test\Fixture\Location;
 
 /**
- * Class WebposManageLocationML47Test
+ * Class WebposManageLocationML45Test
  * @package Magento\Webpos\Test\TestCase\Location\ChooseLocations
  */
-class WebposManageLocationML47Test extends Injectable
+class WebposManageLocationML45Test extends Injectable
 {
     /**
      * Mapping Location Index page
@@ -37,7 +37,6 @@ class WebposManageLocationML47Test extends Injectable
     /**
      * @param Location $initialLocation
      * @param Location $location
-     * @return array
      */
     public function test(
         Location $initialLocation,
@@ -50,12 +49,13 @@ class WebposManageLocationML47Test extends Injectable
         $this->mappingLocationIndex->open();
         $this->mappingLocationIndex->getMappingLocationGrid()->chooseLocations();
         $this->mappingLocationIndex->getLocationModal()->waitLoader();
-        $this->mappingLocationIndex->getLocationModal()->search(['display_name' => $location->getDisplayName()]);
+        sleep(2);
+        if($this->mappingLocationIndex->getLocationModal()->isClearButtonVisible()){
+            $this->mappingLocationIndex->getLocationModal()->getClearFilterButton()->click();
+        }
         $this->mappingLocationIndex->getLocationModal()->waitLoader();
+        sleep(3);
+        $this->mappingLocationIndex->getLocationModal()->search(['display_name' => 'Magestore1@3']);
         sleep(1);
-
-        return [
-            'location' => $location
-        ];
     }
 }

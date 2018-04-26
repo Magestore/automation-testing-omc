@@ -88,17 +88,21 @@ class WebposMultiOrderBackCheckoutOn1ndCartAndPlaceOrderOn2ndCartCP33Test extend
             break;
         }
 
+        sleep(3);
         $this->webposIndex->getCheckoutWebposCart()->getIconChangeCustomer()->click();
         $customerName = $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomerName()->getText();
         $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
 
+        sleep(3);
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(3);
 
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(3);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(2);
