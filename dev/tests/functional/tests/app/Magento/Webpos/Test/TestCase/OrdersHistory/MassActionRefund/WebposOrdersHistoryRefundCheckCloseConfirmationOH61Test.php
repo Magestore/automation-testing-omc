@@ -11,6 +11,10 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrdersHistoryRefundCheckCloseConfirmationOH61Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ */
 class WebposOrdersHistoryRefundCheckCloseConfirmationOH61Test extends Injectable
 {
     /**
@@ -74,6 +78,7 @@ class WebposOrdersHistoryRefundCheckCloseConfirmationOH61Test extends Injectable
             $this->webposIndex->getModal()->isVisible(),
             'Confirmation popup is not visible.'
         );
+        $this->webposIndex->getModal()->waitForCloseButtonIsVisible();
         $this->webposIndex->getModal()->getCloseButton()->click();
         sleep(1);
         $this->assertFalse(

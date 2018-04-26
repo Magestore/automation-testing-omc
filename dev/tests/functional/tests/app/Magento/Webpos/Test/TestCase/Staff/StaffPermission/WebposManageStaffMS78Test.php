@@ -7,6 +7,7 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Location;
@@ -16,6 +17,10 @@ use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 use function MongoDB\BSON\toJSON;
 
+/**
+ * Class WebposManageStaffMS78Test
+ * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
+ */
 class WebposManageStaffMS78Test extends Injectable
 {
 
@@ -38,7 +43,8 @@ class WebposManageStaffMS78Test extends Injectable
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
     }
@@ -63,7 +69,7 @@ class WebposManageStaffMS78Test extends Injectable
     public function test(WebposRole $webposRole, $staffData)
     {
         //Create role and staff for role
-        /**@var Location $location*/
+        /**@var Location $location */
         $location = $this->fixtureFactory->createByCode('location', ['dataset' => 'default']);
         $location->persist();
         $locationId = $location->getLocationId();
@@ -72,23 +78,17 @@ class WebposManageStaffMS78Test extends Injectable
         $array = [];
         $array[] = $locationId;
         $posData['location_id'] = $array;
-        /**@var Pos $pos*/
+        /**@var Pos $pos */
         $pos = $this->fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
-        $array = [];
-        $array[] = $locationId;
-        $staffData['location_id'] = $array;
-        $array = [];
-        $array[] = $posId;
-        $staffData['pos_ids'] = $array;
-        /**@var Staff $staff*/
+        $staffData['location_id'] = [$locationId];
+        $staffData['pos_ids'] = [$posId];
+        /**@var Staff $staff */
         $staff = $this->fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff->persist();
         $roleData = $webposRole->getData();
-        $array = [];
-        $array[] = $staff->getStaffId();
-        $roleData['staff_id'] = $array;
+        $roleData['staff_id'] = [$staff->getStaffId()];
         $role = $this->fixtureFactory->createByCode('webposRole', ['data' => $roleData]);
         $role->persist();
         //Login
@@ -149,7 +149,7 @@ class WebposManageStaffMS78Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 360;
-            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
                 $time = time();
             }
             sleep(2);

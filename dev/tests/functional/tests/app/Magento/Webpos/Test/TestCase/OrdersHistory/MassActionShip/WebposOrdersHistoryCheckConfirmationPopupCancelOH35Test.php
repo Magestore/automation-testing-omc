@@ -61,6 +61,7 @@ class WebposOrdersHistoryCheckConfirmationPopupCancelOH35Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getOrderHistoryAddOrderNote()->getShipButton()->click();
         $this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
+        $this->webposIndex->getModal()->waitForCancelButtonIsVisible();
         $this->webposIndex->getModal()->getCancelButton()->click();
         sleep(3);
         \PHPUnit_Framework_Assert::assertFalse(

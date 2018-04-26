@@ -70,11 +70,12 @@ class WebposOrdersHistoryCreateShipmentOH36Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getOrderHistoryAddOrderNote()->getShipButton()->click();
         $this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
+        $this->webposIndex->getModal()->waitForOkButtonIsVisible();
         $this->webposIndex->getModal()->getOkButton()->click();
         sleep(1);
         return [
             'products' => $products,
             'status' => 'Processing'
-            ];
+        ];
     }
 }

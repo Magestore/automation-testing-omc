@@ -110,7 +110,7 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
 
         //Login webpos by the same staff
         $this->objectManager->create(
-            '\Magento\Webpos\Test\TestStep\LoginWebposChooseLocationStep'
+            '\Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
         )->run();
 
         for ($i = 1; $i <= 2; $i++) {

@@ -16,6 +16,10 @@ use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposManageStaffMS72Test
+ * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
+ */
 class WebposManageStaffMS72Test extends Injectable
 {
 
@@ -78,19 +82,13 @@ class WebposManageStaffMS72Test extends Injectable
         $pos = $this->fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
-        $array = [];
-        $array[] = $locationId;
-        $staffData['location_id'] = $array;
-        $array = [];
-        $array[] = $posId;
-        $staffData['pos_ids'] = $array;
+        $staffData['location_id'] = [$locationId];
+        $staffData['pos_ids'] = [$posId];
         /**@var Staff $staff*/
         $staff = $this->fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff->persist();
         $roleData = $webposRole->getData();
-        $array = [];
-        $array[] = $staff->getStaffId();
-        $roleData['staff_id'][] = $array;
+        $roleData['staff_id'] = [$staff->getStaffId()];
         $role = $this->fixtureFactory->createByCode('webposRole', ['data' => $roleData]);
         $role->persist();
         //Create product

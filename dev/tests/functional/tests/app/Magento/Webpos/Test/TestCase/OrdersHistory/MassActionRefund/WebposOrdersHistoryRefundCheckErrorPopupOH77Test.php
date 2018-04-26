@@ -13,6 +13,10 @@ use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrdersHistoryRefundCheckErrorPopupOH77Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ */
 class WebposOrdersHistoryRefundCheckErrorPopupOH77Test extends Injectable
 {
     /**
@@ -99,8 +103,6 @@ class WebposOrdersHistoryRefundCheckErrorPopupOH77Test extends Injectable
             'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
             ['products' => $products, 'refundShipping' => $refundShipping,'adjustRefund' => $adjustRefund, 'adjustFee' => $adjustFee]
         )->run();
-        sleep(1);
-        $this->webposIndex->getModal()->getOkButton()->click();
         sleep(1);
         $this->assertFalse(
             $this->webposIndex->getModal()->isVisible(),

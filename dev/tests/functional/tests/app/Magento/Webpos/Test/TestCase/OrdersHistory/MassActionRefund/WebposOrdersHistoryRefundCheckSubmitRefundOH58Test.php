@@ -11,6 +11,10 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrdersHistoryRefundCheckSubmitRefundOH58Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ */
 class WebposOrdersHistoryRefundCheckSubmitRefundOH58Test extends Injectable
 {
     /**

@@ -17,6 +17,10 @@ use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposManageStaffMS68Test
+ * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
+ */
 class WebposManageStaffMS68Test extends Injectable
 {
 

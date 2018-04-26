@@ -58,16 +58,18 @@ class WebposOrdersHistoryMassActionAddCommentTest extends Injectable
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        sleep(0.5);
+        sleep(2);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
-        sleep(0.5);
+        sleep(1);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Add Comment')->click();
 
         if ($action === 'Save') {
             $this->webposIndex->getOrderHistoryAddComment()->getInputComment()->setValue($comment);
+            sleep(0.5);
             $this->webposIndex->getOrderHistoryAddComment()->getSaveButton()->click();
             sleep(1);
         }elseif ($action === 'Cancel') {
+            sleep(0.5);
             $this->webposIndex->getOrderHistoryAddComment()->getCancelButton()->click();
             sleep(1);
         }

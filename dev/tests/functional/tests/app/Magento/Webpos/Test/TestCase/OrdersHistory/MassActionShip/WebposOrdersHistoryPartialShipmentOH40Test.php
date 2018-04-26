@@ -11,6 +11,10 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrdersHistoryPartialShipmentOH40Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip
+ */
 class WebposOrdersHistoryPartialShipmentOH40Test extends Injectable
 {
     /**
@@ -67,6 +71,7 @@ class WebposOrdersHistoryPartialShipmentOH40Test extends Injectable
             $this->webposIndex->getOrderHistoryShipment()->getQtyToShipInput($productName)->setValue($qtyToShip);
         }
         $this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
+        $this->webposIndex->getModal()->waitForOkButtonIsVisible();
         $this->webposIndex->getModal()->getOkButton()->click();
         sleep(1);
         return [

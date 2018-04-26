@@ -13,6 +13,10 @@ use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrdersHistoryRefundPartialOH64Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ */
 class WebposOrdersHistoryRefundPartialOH64Test extends Injectable
 {
     /**
