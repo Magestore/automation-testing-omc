@@ -9,6 +9,10 @@ namespace Magento\Webpos\Test\TestCase\OnHoldOrder\CheckGUI;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOnHoldOrderONH04Test
+ * @package Magento\Webpos\Test\TestCase\OnHoldOrder\CheckGUI
+ */
 class WebposOnHoldOrderONH04Test extends Injectable
 {
     /**
@@ -66,6 +70,7 @@ class WebposOnHoldOrderONH04Test extends Injectable
         //Logout webpos
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->logout();
+        sleep(0.5);
         $this->webposIndex->getModal()->getOkButton()->click();
         sleep(4);
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

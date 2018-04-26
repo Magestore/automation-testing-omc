@@ -8,13 +8,16 @@
 
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\ItemTable;
 
-
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOHItemTableTest
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\ItemTable
+ */
 class WebposOHItemTableTest extends Injectable
 {
 	/**

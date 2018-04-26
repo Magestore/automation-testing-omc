@@ -49,7 +49,7 @@ class WebposManagementValidate09Test extends Injectable
         $dataStaff = $webposRole->getDataFieldConfig('staff_id')['source']->getStaffs()[0]->getData();
         //Login
         $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposChooseLocationStep'
+            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
         )->run();
 
         //click menu

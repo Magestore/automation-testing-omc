@@ -21,7 +21,7 @@ class AssertRefundShipping extends AbstractConstraint
             'Success Message is not displayed'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            'A creditmemo has been created!',
+            'Data Refund Invalid!',
             $webposIndex->getToaster()->getWarningMessage()->getText(),
             "Success message's Content is Wrong"
         );
@@ -31,17 +31,6 @@ class AssertRefundShipping extends AbstractConstraint
             $rowTotal = substr($webposIndex->getOrderHistoryOrderViewContent()->getRowTotalOfProduct($productName), 1);
             $sumRowtotal += $rowTotal;
         }
-        $totalRefund = $sumRowtotal + $refundShipping;
-        $webposIndex->getOrderHistoryOrderViewFooter()->waitForTotalRefundedVisible();
-        $actualTotalRefund = (float) substr($webposIndex->getOrderHistoryOrderViewFooter()->getTotalRefunded(), 1);
-        \PHPUnit_Framework_Assert::assertEquals(
-            $totalRefund,
-            $actualTotalRefund,
-            'Total refund is not equal actual total refund.'
-            . "\nExpected: " . $totalRefund
-            . "\nActual: " . $actualTotalRefund
-        );
-
     }
     /**
      * Returns a string representation of the object.

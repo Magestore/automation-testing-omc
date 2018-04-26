@@ -69,7 +69,7 @@ class WebposManageStaffMS60Test extends Injectable
 
         //Create product
         $products = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
+            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep',
             ['products' => $products]
         )->run();
         $product1 = $products[0]['product'];

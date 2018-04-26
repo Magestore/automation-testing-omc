@@ -99,12 +99,12 @@ class AssertCheckVisibleGUI extends AbstractConstraint
 
         //Check fields: subtotal, shipping, grand total
         \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getOnHoldOrderOrderViewFooter()->getRow('Subtotal')->isVisible(),
-            'Subtotal table is not display'
-        );
-        \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getOnHoldOrderOrderViewFooter()->getRow('Shipping')->isVisible(),
             'Shipping table is not display'
+        );
+        \PHPUnit_Framework_Assert::assertTrue(
+            $webposIndex->getOnHoldOrderOrderViewFooter()->getRow('Subtotal')->isVisible(),
+            'Subtotal table is not display'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getOnHoldOrderOrderViewFooter()->getRow('Grand Total')->isVisible(),

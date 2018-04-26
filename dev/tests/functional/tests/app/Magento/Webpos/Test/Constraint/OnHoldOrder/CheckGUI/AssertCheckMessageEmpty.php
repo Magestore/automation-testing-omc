@@ -15,11 +15,11 @@ class AssertCheckMessageEmpty extends AbstractConstraint
     {
         $webposIndex->getMsWebpos()->getCMenuButton()->click();
         $webposIndex->getCMenu()->onHoldOrders();
-        sleep(1);
         $webposIndex->getOnHoldOrderOrderList()->waitLoader();
+        sleep(1);
 
         \PHPUnit_Framework_Assert::assertFalse(
-            $webposIndex->getOnHoldOrderOrderList()->getFirstOrder()->isPresent(),
+            $webposIndex->getOnHoldOrderOrderList()->getFirstOrder()->isVisible(),
             'List Order is not empty'
         );
 

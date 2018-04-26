@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="2cdbc24e-a084-4d92-83f3-8278565dcb85" name="magento223" url="http://localhost">
+        <fileTransfer port="0" mountedRoot="/var/www/html/magento223/dev/tests/functional" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>

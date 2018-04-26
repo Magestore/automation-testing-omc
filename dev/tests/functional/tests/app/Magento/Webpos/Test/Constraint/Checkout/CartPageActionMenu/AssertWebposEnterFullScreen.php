@@ -24,7 +24,7 @@ class AssertWebposEnterFullScreen extends AbstractConstraint
         else
             $tag = 'None';
         \PHPUnit_Framework_Assert::assertEquals('Full',$tag,
-            'Khong thanh cong');
+            'Not enter full screen');
     }
 
     /**

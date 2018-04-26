@@ -42,6 +42,11 @@ class OrderHistoryOrderViewFooter extends Block
 		return $this->_rootElement->find('//*[@id="webpos_order_view_container"]/footer/div[1]/table/tbody/tr/td[text()="'.$label.'"]/../td[2]', Locator::SELECTOR_XPATH)->getText();
 	}
 
+    public function getRowValueElement($label)
+    {
+        return $this->_rootElement->find('//*[@id="webpos_order_view_container"]/footer/div[1]/table/tbody/tr/td[text()="'.$label.'"]/../td[2]', Locator::SELECTOR_XPATH);
+    }
+
     /**
      * @return array|string
      */

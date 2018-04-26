@@ -66,7 +66,7 @@ class WebPOSSyncOnHoldOrderToServerTest extends Injectable
             $this->webposIndex->getGeneralSettingContentRight()->selectSyncOnHoldOrderOption($optionNo)->click();
         }
 
-        sleep(1);
+        sleep(0.5);
         self::assertEquals(
             $successMessage,
             $this->webposIndex->getToaster()->getWarningMessage()->getText(),

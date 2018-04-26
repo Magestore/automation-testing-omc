@@ -31,7 +31,7 @@ class GeneralSettingContentRight extends Block
     public function selectAutoCheckPromotionOption($option)
     {
         $this->getAutoCheckPromotionSelection()->click();
-        return $this->_rootElement->find('//*[@id="os_checkout.auto_check_promotion_rules"]/option[text()="' . $option . '"]', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//*[@id="checkout_setting"]/div[2]/div[2]/div/select/option[text()="' . $option . '"]', Locator::SELECTOR_XPATH);
     }
 
     public function getSyncOnHoldOrderToServerSelection()
@@ -42,7 +42,7 @@ class GeneralSettingContentRight extends Block
     public function selectSyncOnHoldOrderOption($option)
     {
         $this->getSyncOnHoldOrderToServerSelection()->click();
-        return $this->_rootElement->find('//*[@id="os_checkout.sync_order_onhold"]/option[text()="' . $option . '"]', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//*[@id="checkout_setting"]/div[3]/div[2]/div/select/option[text()="' . $option . '"]', Locator::SELECTOR_XPATH);
     }
 
     /**

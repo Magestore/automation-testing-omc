@@ -13,6 +13,10 @@ use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrdersHistoryRefundOH68Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ */
 class WebposOrdersHistoryRefundOH68Test extends Injectable
 {
     /**
@@ -87,13 +91,13 @@ class WebposOrdersHistoryRefundOH68Test extends Injectable
             'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
             ['products' => $products]
         )->run();
-        sleep(1);
+        sleep(0.5);
         $this->assertTrue(
             $this->webposIndex->getToaster()->isVisible(),
             'Error message is not visible.'
         );
         $this->assertEquals(
-            'Data Refund Invalid!',
+            'A creditmemo has been created!',
             $this->webposIndex->getToaster()->getWarningMessage()->getText(),
             "Error message's is Wrong"
             . "\nExpected: " . 'Data Refund Invalid!'

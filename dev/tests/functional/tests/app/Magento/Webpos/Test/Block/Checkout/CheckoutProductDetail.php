@@ -27,7 +27,7 @@ class CheckoutProductDetail extends Block
     }
 
     public function selectedOneAttribute($attribute){
-        $this->_rootElement->find('[class="super-attribute-select"]',Locator::SELECTOR_CSS,'select')->setValue($attribute);
+        $this->_rootElement->find('.super-attribute-select',Locator::SELECTOR_CSS,'select')->setValue($attribute);
     }
 
     public function getButtonAddToCart(){

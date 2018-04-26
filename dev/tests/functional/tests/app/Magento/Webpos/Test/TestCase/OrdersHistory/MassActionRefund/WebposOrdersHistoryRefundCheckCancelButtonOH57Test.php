@@ -11,6 +11,10 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrdersHistoryRefundCheckCancelButtonOH57Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ */
 class WebposOrdersHistoryRefundCheckCancelButtonOH57Test extends Injectable
 {
     /**
@@ -67,7 +71,7 @@ class WebposOrdersHistoryRefundCheckCancelButtonOH57Test extends Injectable
         // Open shipment popup
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getOrderHistoryAddOrderNote()->getRefundButton()->click();
-        sleep(1);
+        sleep(0.5);
         $this->webposIndex->getOrderHistoryRefund()->getCancelButton()->click();
         sleep(1);
         $this->assertFalse(

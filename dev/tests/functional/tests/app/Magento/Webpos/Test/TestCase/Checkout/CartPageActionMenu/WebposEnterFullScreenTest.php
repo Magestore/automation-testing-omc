@@ -10,8 +10,15 @@ namespace Magento\Webpos\Test\TestCase\Checkout\CartPageActionMenu;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposEnterFullScreenTest
+ *
+ * Pre: 1. Login Webpos as a staff
+ * Step: "1. Click on action menu ""..."" on the top-right of the screen
+2. Click on ""Enter/exit fullscreen mode""  "
+ * Accept: Webpos will be displayed full screen mode
+ *
  * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\CartPageActionMenu
  */
 class WebposEnterFullScreenTest extends Injectable
@@ -44,9 +51,10 @@ class WebposEnterFullScreenTest extends Injectable
         $staff = $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-
+        $minHeightBefore = $this->webposIndex->getBody()->getPageStyleMinHeight();
         $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
         $this->webposIndex->getCheckoutFormAddNote()->waitFullScreenMode();
         $this->webposIndex->getCheckoutFormAddNote()->getFullScreenMode()->click();
+        return ['minHeightBefore' => $minHeightBefore];
     }
 }
