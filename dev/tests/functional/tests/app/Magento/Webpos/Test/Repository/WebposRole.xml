@@ -53,9 +53,9 @@
             <field name="description" xsi:type="string">Description %isolation%</field>
             <field name="all" xsi:type="string">0</field>
             <field name="resource" xsi:type="string">manage_order_created_by_this_staff</field>
-            <field name="staff_id" xsi:type="array">
-                <item name="dataset" xsi:type="string">staffMS21</item>
-            </field>
+            <!--<field name="staff_id" xsi:type="array">-->
+                <!--<item name="dataset" xsi:type="string">staffMS21</item>-->
+            <!--</field>-->
         </dataset>
         <dataset name="MS61Staff">
             <field name="display_name" xsi:type="string">Role %isolation%</field>
