@@ -56,11 +56,13 @@ class WebposManageLocationML44Test extends Injectable
         $initialLocation->persist();
         $location->persist();
         $this->mappingLocationIndex->open();
+        sleep(2);
         $this->mappingLocationIndex->getMappingLocationGrid()->chooseLocations();
         $this->mappingLocationIndex->getLocationModal()->waitLoader();
+        sleep(5);
         $this->mappingLocationIndex->getLocationModal()->openFilterBlock();
         $this->assertCheckGUIFilterOnModalPage->processAssert($this->mappingLocationIndex);
         $this->mappingLocationIndex->getLocationModal()->getCancelButtonFilter()->click();
-        sleep(1);
+        sleep(3);
     }
 }

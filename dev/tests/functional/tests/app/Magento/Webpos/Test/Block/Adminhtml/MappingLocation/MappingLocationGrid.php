@@ -51,4 +51,5 @@ class MappingLocationGrid extends DataGrid
     {
         $this->waitForElementNotVisible($this->spinner);
     }
+
 }

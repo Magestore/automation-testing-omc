@@ -62,21 +62,19 @@ class WebposManageStaffMS44Test extends Injectable
 
     }
 
-    public function test(Staff $staff, Pos $pos1, Pos $pos2)
+    public function test(Staff $staff, $pos1, $pos2)
     {
         // Preconditions:
         $location1 = $pos1->getDataFieldConfig('location_id')['source']->getLocation();
         $location2 = $pos2->getDataFieldConfig('location_id')['source']->getLocation();
-
         $staff->persist();
         // Steps
         $this->staffsIndex->open();
         $this->staffsIndex->getStaffsGrid()->search(['email' => $staff->getEmail()]);
         $this->staffsIndex->getStaffsGrid()->getRowByEmail($staff->getEmail())->find('.action-menu-item')->click();
-        sleep(1);
+        sleep(2);
         $this->staffsNew->getStaffsForm()->setPos([$pos1->getPosName(), $pos2->getPosName()]);
         $this->staffsNew->getStaffsForm()->setLocation([$location1->getDisplayName(), $location2->getDisplayName()]);
-        sleep(1);
         $this->staffsNew->getFormPageActionsStaff()->save();
 
         //Open webpos

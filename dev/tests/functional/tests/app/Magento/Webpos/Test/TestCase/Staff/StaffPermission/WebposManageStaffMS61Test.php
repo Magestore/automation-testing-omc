@@ -63,13 +63,19 @@ class WebposManageStaffMS61Test extends Injectable
         $locationId = $location->getLocationId();
         $posData['pos_name'] = 'Pos Test %isolation%';
         $posData['status'] = 'Enabled';
-        $posData['location_id'][] = $locationId;
+        $array = [];
+        $array[] = $locationId;
+        $posData['location_id'] = $array;
         /**@var Pos $pos*/
         $pos = $this->fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
-        $staffData['location_id'][] = $locationId;
-        $staffData['pos_ids'][] = $posId;
+        $array = [];
+        $array[] = $locationId;
+        $staffData['location_id'] = $array;
+        $array = [];
+        $array[] = $posId;
+        $staffData['pos_ids'] = $array;
         $staffData['username'] = 'test%isolation%';
         $staffData['display_name'] = 'Staff %isolation%';
         $staffData['email'] = 'test%isolation%@trueplus.vn';
@@ -80,7 +86,9 @@ class WebposManageStaffMS61Test extends Injectable
         $staff2 = $this->fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff2->persist();
         $roleData = $webposRole->getData();
-        $roleData['staff_id'][] = $staff2->getStaffId();
+        $array = [];
+        $array[] = $staff2->getStaffId();
+        $roleData['staff_id'] = $array;
         $role = $this->fixtureFactory->createByCode('webposRole', ['data' => $roleData]);
         $role->persist();
         //Create product
