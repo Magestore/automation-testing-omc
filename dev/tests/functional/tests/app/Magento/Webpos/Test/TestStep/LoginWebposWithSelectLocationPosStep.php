@@ -62,7 +62,6 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
             sleep(2);
         }
 
-        $this->webposIndex->getWrapWarningForm()->waitForWrapWarningFormVisible();
         //check if WrapWarningForm is visible when this staff has been logged in
         $time = time();
         $timeAfter = $time + 30;
