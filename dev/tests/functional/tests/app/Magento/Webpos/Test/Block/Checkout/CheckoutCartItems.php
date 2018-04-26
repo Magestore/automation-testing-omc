@@ -128,7 +128,7 @@ class CheckoutCartItems extends Block
 
     public function getOriginPriceCartItemByOrderTo($i)
     {
-        $value = $this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('.price')->getText();
+        $value = $this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('.original-price')->getText();
         return floatval(substr($value, 6));
     }
 }
