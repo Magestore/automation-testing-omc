@@ -5,13 +5,17 @@
  * Date: 12/02/2018
  * Time: 09:14
  */
+
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Staff\AssertShowHideMenu;
 use Magento\Webpos\Test\Constraint\Staff\AssertShowHideDiscountFunction;
 use Magento\Webpos\Test\Constraint\Staff\AssertEditCustomPrice;
+
 class WebposManageStaffMS57Test extends Injectable
 {
 
@@ -59,7 +63,8 @@ class WebposManageStaffMS57Test extends Injectable
         AssertShowHideDiscountFunction $assertShowHideDiscountFunction,
         AssertEditCustomPrice $assertEditCustomPrice
 
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->assertShowHideMenu = $assertShowHideMenu;
         $this->assertShowHideDiscountFunction = $assertShowHideDiscountFunction;
@@ -72,12 +77,21 @@ class WebposManageStaffMS57Test extends Injectable
      * @param WebposRole
      * @return void
      */
-    public function test(WebposRole $webposRole, $products)
+    public function test(WebposRole $webposRole, FixtureFactory $fixtureFactory, $products)
     {
-        //Create role and staff for role
+        /*Create pos and location*/
+        $pos = $fixtureFactory->createByCode('pos', ['dataset' => 'MS57Staff']);
+        $pos->persist();
+        $dataLocation = $pos->getDataFieldConfig('location_id')['source']->getLocation()->getData();
         $webposRole->persist();
-        $dataStaff = $webposRole->getDataFieldConfig('staff_id')['source']->getStaffs()[0]->getData();
-
+        $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staffMS21']);
+        $dataStaff = $staff->getData();
+        $dataStaff['location_id'] = [$dataLocation['location_id']];
+        $dataStaff['pos_ids'] = [$pos->getData('pos_id')];
+        $dataStaff['role_id'] = $webposRole->getRoleId();
+        $staff = $fixtureFactory->createByCode('staff', ['data' => $dataStaff]);
+        $staff->persist();
+//        $dataStaff = $webposRole->getDataFieldConfig('staff_id')['source']->getStaffs()[0]->getData();
         //Create product
         $products = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
@@ -87,58 +101,24 @@ class WebposManageStaffMS57Test extends Injectable
         $product2 = $products[1]['product'];
 
         //Login
-        $this->loginWebpos($this->webposIndex, $dataStaff['username'],$dataStaff['password']);
+        $this->loginWebpos($this->webposIndex, $dataStaff['username'], $dataStaff['password'], $dataLocation['display_name'], $pos->getData('pos_name'));
 
         //Check show hide item menu
-        $this->assertShowHideMenu->processAssert($this->webposIndex,[
+        $this->assertShowHideMenu->processAssert($this->webposIndex, [
             ['id' => 'item_manage_stock',
                 'tag' => false],
             ['id' => 'group_customer',
                 'tag' => true],
             ['id' => 'group_setting',
-                'tag' => true]
+                'tag' => true],
+            ['id' => 'orders_history',
+            'tag' => true],
+            ['id' => 'register_shift',
+                'tag' => true],
         ]);
-
-        //Add products to cart
-        $this->webposIndex->getCheckoutProductList()->search($product1->getName());
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(1);
-        $this->webposIndex->getCheckoutProductList()->search($product2->getName());
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(1);
-
-        //Check can't edit custom price
-        $this->assertEditCustomPrice->processAssert($this->webposIndex, [1,2]);
-
-        //Check hide dicount function
-        $this->assertShowHideDiscountFunction->processAssert($this->webposIndex, 'hide');
-
-        //Checkout
-        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-        //PlaceOrder
-        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-        sleep(1);
-        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
-        $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
-        sleep(1);
-
-        //Get orderId
-        $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
-        $orderId= ltrim ($orderId,'#');
-        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
-        sleep(1);
-        return [
-            'orderId' => $orderId,
-            'shippingDescription' => 'Flat Rate - Fixed'
-        ];
     }
 
-    public function loginWebpos(WebposIndex $webposIndex, $username, $password)
+    public function loginWebpos(WebposIndex $webposIndex, $username, $password, $locationName, $posName)
     {
         $webposIndex->open();
         if ($webposIndex->getLoginForm()->isVisible()) {
@@ -147,26 +127,26 @@ class WebposManageStaffMS57Test extends Injectable
             $webposIndex->getLoginForm()->clickLoginButton();
             $webposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader');
             $webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
-            $webposIndex->getLoginForm()->setLocation('Store Address');
-            $webposIndex->getLoginForm()->setPos('Store POS');
+            $webposIndex->getLoginForm()->setLocation($locationName);
+            $webposIndex->getLoginForm()->setPos($posName);
             $webposIndex->getLoginForm()->getEnterToPos()->click();
             //			$this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
             $webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 360;
-            while ($webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            while ($webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
                 $time = time();
             }
             sleep(2);
         }
         $webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        if($this->webposIndex->getOpenSessionPopup()->isOpenSessionDisplay())
-        {
+        if ($this->webposIndex->getOpenSessionPopup()->isOpenSessionDisplay()) {
             $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
             $this->webposIndex->getMsWebpos()->clickCMenuButton();
             $this->webposIndex->getCMenu()->checkout();
         }
     }
+
     public function tearDown()
     {
         $this->objectManager->getInstance()->create(
