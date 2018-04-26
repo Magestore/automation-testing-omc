@@ -12,6 +12,10 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Staff\AssertShowMessageNotification;
 use Magento\Webpos\Test\Constraint\Staff\AssertShowNewNotification;
 
+/**
+ * Class WebposManageStaffMS60Test
+ * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
+ */
 class WebposManageStaffMS60Test extends Injectable
 {
 
@@ -65,18 +69,19 @@ class WebposManageStaffMS60Test extends Injectable
     {
         //Create role and staff for role
         $webposRole->persist();
-        $dataStaff = $webposRole->getDataFieldConfig('staff_id')['source']->getStaffs()[0]->getData();
 
         //Create product
         $products = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep',
+            'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run();
         $product1 = $products[0]['product'];
         $product2 = $products[1]['product'];
 
         //Login
-        $this->loginWebpos($this->webposIndex, $dataStaff['username'],$dataStaff['password']);
+        $staff = $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
+        )->run();
 
         //Create order
             //Add products to cart
@@ -112,6 +117,7 @@ class WebposManageStaffMS60Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->search($orderId1);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        sleep(1);
 
         $this->webposIndex->getNotification()->getNotificationBell()->click();
         $this->webposIndex->getNotification()->getClearAll()->click();
@@ -173,35 +179,6 @@ class WebposManageStaffMS60Test extends Injectable
         return ['cartProducts' => [$dataProduct1, $dataProduct2]];
     }
 
-    public function loginWebpos(WebposIndex $webposIndex, $username, $password)
-    {
-        $webposIndex->open();
-        if ($webposIndex->getLoginForm()->isVisible()) {
-            $webposIndex->getLoginForm()->getUsernameField()->setValue($username);
-            $webposIndex->getLoginForm()->getPasswordField()->setValue($password);
-            $webposIndex->getLoginForm()->clickLoginButton();
-            $webposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader');
-            $webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
-            $webposIndex->getLoginForm()->setLocation('Store Address');
-            $webposIndex->getLoginForm()->setPos('Store POS');
-            $webposIndex->getLoginForm()->getEnterToPos()->click();
-            //			$this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
-            $webposIndex->getMsWebpos()->waitForSyncDataVisible();
-            $time = time();
-            $timeAfter = $time + 360;
-            while ($webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
-                $time = time();
-            }
-            sleep(2);
-        }
-        $webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        if($this->webposIndex->getOpenSessionPopup()->isOpenSessionDisplay())
-        {
-            $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
-            $this->webposIndex->getMsWebpos()->clickCMenuButton();
-            $this->webposIndex->getCMenu()->checkout();
-        }
-    }
     public function tearDown()
     {
         $this->objectManager->getInstance()->create(

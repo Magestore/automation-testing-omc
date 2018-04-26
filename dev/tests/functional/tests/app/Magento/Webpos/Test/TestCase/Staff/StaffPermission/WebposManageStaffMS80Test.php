@@ -16,6 +16,10 @@ use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 use function MongoDB\BSON\toJSON;
 
+/**
+ * Class WebposManageStaffMS80Test
+ * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
+ */
 class WebposManageStaffMS80Test extends Injectable
 {
 
@@ -74,8 +78,8 @@ class WebposManageStaffMS80Test extends Injectable
         $pos = $this->fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
-        $staffData['location_id'][] = $locationId;
-        $staffData['pos_ids'][] = $posId;
+        $staffData['location_id'] = $locationId;
+        $staffData['pos_ids'] = $posId;
         /**@var Staff $staff*/
         $staff = $this->fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff->persist();
