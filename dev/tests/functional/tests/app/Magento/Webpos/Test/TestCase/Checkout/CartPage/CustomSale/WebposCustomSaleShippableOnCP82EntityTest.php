@@ -94,6 +94,7 @@ class WebposCustomSaleShippableOnCP82EntityTest  extends Injectable
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        sleep(3);
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
     }
 }

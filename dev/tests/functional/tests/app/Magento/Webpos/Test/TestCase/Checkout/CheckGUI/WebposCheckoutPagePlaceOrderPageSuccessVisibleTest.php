@@ -66,6 +66,7 @@ class WebposCheckoutPagePlaceOrderPageSuccessVisibleTest extends Injectable
             $this->webposIndex->getCheckoutProductList()->search($products[$i]->getSku());
             $i++;
         }
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         if ($testCaseId == 'CP03' || $testCaseId == 'CP04') {
             $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
             $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
@@ -73,6 +74,7 @@ class WebposCheckoutPagePlaceOrderPageSuccessVisibleTest extends Injectable
             $this->webposIndex->getCheckoutPlaceOrder()->waitPaymentSection();
         }
         if ($testCaseId == 'CP04') {
+            sleep(3);
             $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
             $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
             $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
