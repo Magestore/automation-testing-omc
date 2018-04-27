@@ -19,9 +19,19 @@ class CheckoutPaymentMethod extends Block
     /**
      * @return \Magento\Mtf\Client\ElementInterface
      */
+    public function waitForCashInMethodVisible()
+    {
+        $this->waitForElementVisible('.icon-iconPOS-payment-cashforpos');
+    }
+
     public function getCashInMethod()
     {
         return $this->_rootElement->find('.icon-iconPOS-payment-cashforpos');
+    }
+
+    public function getCashInMethodWhileHaveALotOfPaymentMethod()
+    {
+        return $this->_rootElement->find('#payment_list .icon-iconPOS-payment-cashforpos');
     }
     public function getCashOnDeliveryMethod()
     {

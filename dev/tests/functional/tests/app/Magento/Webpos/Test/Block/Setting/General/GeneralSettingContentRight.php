@@ -39,10 +39,15 @@ class GeneralSettingContentRight extends Block
         return $this->_rootElement->find('#os_checkout\2e sync_order_onhold');
     }
 
+    public function getTextSyncOnHoldOrderToServerSelection()
+    {
+        return $this->_rootElement->find('//*[@id="block-webpos-settings-general"]/div/div[2]/main/div/div[1]/div[3]/div[2]/div/select');
+    }
+
     public function selectSyncOnHoldOrderOption($option)
     {
         $this->getSyncOnHoldOrderToServerSelection()->click();
-        return $this->_rootElement->find('//*[@id="checkout_setting"]/div[3]/div[2]/div/select/option[text()="' . $option . '"]', Locator::SELECTOR_XPATH);
+        $this->_rootElement->find('//*[@id="block-webpos-settings-general"]/div/div[2]/main/div/div[1]/div[3]/div[2]/div/select/option[text()="' . $option . '"]', Locator::SELECTOR_XPATH)->click();
     }
 
     /**

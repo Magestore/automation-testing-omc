@@ -21,6 +21,7 @@ class WebPOSSyncOnHoldOrderToServerTest extends Injectable
      * @var WebposIndex
      */
     protected $webposIndex;
+    protected $testCaseId;
 
     /**
      * @var OrderIndex
@@ -60,10 +61,11 @@ class WebPOSSyncOnHoldOrderToServerTest extends Injectable
         sleep(1);
         $this->webposIndex->getGeneralSettingMenuLMainItem()->getMenuItem($menuItem)->click();
         sleep(1);
-        if ($testCaseID == 'SET19') {
-            $this->webposIndex->getGeneralSettingContentRight()->selectSyncOnHoldOrderOption($optionYes)->click();
-        } else {
-            $this->webposIndex->getGeneralSettingContentRight()->selectSyncOnHoldOrderOption($optionNo)->click();
+        if ($testCaseID == 'SET17' || $testCaseID == 'SET18') {
+            $this->webposIndex->getGeneralSettingContentRight()->selectSyncOnHoldOrderOption($optionYes);
+        } elseif ($testCaseID == 'SET19') {
+            $this->webposIndex->getGeneralSettingContentRight()->selectSyncOnHoldOrderOption($optionYes);
+            $this->webposIndex->getGeneralSettingContentRight()->selectSyncOnHoldOrderOption($optionNo);
         }
 
         sleep(0.5);
@@ -86,6 +88,7 @@ class WebPOSSyncOnHoldOrderToServerTest extends Injectable
         //Get hold order ID
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->onHoldOrders();
+        sleep(1);
         $orderID = $this->webposIndex->getOnHoldOrderOrderList()->getIdFirstOrder();
         if ($testCaseID == 'SET18') {
             $this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder()->click();
@@ -110,29 +113,32 @@ class WebPOSSyncOnHoldOrderToServerTest extends Injectable
                 'We could not save the on hold order ID from WebPOS to order list backend page.'
             );
         }
+        $this->testCaseId = $testCaseID;
     }
 
     public function tearDown()
     {
-        // Login webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposStep'
-        )->run();
+        if ($this->testCaseId == 'SET17' || $this->testCaseId == 'SET18') {
+            // Login webpos
+            $staff = $this->objectManager->getInstance()->create(
+                'Magento\Webpos\Test\TestStep\LoginWebposStep'
+            )->run();
 
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
+            $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+            $this->webposIndex->getMsWebpos()->waitCartLoader();
 
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->general();
-        sleep(1);
-        $this->webposIndex->getGeneralSettingMenuLMainItem()->getMenuItem($this->menuItem)->click();
-        sleep(1);
-        $this->webposIndex->getGeneralSettingContentRight()->selectSyncOnHoldOrderOption($this->optionNo)->click();
-        sleep(1);
-        self::assertEquals(
-            $this->successMessage,
-            $this->webposIndex->getToaster()->getWarningMessage()->getText(),
-            'On the Account Setting General Page - We could not save the Sync Hold Order Option. Please check again.'
-        );
+            $this->webposIndex->getMsWebpos()->clickCMenuButton();
+            $this->webposIndex->getCMenu()->general();
+            sleep(1);
+            $this->webposIndex->getGeneralSettingMenuLMainItem()->getMenuItem($this->menuItem)->click();
+            sleep(1);
+            $this->webposIndex->getGeneralSettingContentRight()->selectSyncOnHoldOrderOption($this->optionNo);
+            sleep(1);
+            self::assertEquals(
+                $this->successMessage,
+                $this->webposIndex->getToaster()->getWarningMessage()->getText(),
+                'On the Account Setting General Page - We could not save the Sync Hold Order Option. Please check again.'
+            );
+        }
     }
 }
