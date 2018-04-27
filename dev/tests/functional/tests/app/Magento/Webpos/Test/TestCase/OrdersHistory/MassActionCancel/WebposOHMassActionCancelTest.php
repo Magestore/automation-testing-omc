@@ -95,8 +95,10 @@ class WebposOHMassActionCancelTest extends Injectable
 
 			// Place Order
 			$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-			$this->webposIndex->getMsWebpos()->waitCartLoader();
-			$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+			for ($i=0; $i<2; $i++) {
+                $this->webposIndex->getMsWebpos()->waitCartLoader();
+                $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+            }
 
 			$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
 			$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -125,10 +127,10 @@ class WebposOHMassActionCancelTest extends Injectable
 		$this->webposIndex->getMsWebpos()->clickCMenuButton();
 		$this->webposIndex->getCMenu()->ordersHistory();
 
-		sleep(2);
-		$this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        sleep(1);
 
-		$this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 		while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
 		self::assertEquals(
 			$orderId,

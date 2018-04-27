@@ -12,7 +12,6 @@ use Magento\Sales\Test\Fixture\OrderInjectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\TestCase\Injectable;
 
-
 /**
  * Class WebposOrdersHistoryMassActionAddCommentTest
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionSendMail
