@@ -132,9 +132,11 @@ class WebposMassActionReOrderOH29Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         // Select Payment Method
-        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        sleep(1);
+        $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment2()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
+        sleep(1);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         // End Place Order
@@ -145,7 +147,6 @@ class WebposMassActionReOrderOH29Test extends Injectable
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
 
-        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
 
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
