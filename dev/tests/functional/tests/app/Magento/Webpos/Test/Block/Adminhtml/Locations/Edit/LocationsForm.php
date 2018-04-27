@@ -11,6 +11,10 @@ use Magento\Mtf\Client\Locator;
 
 class LocationsForm extends Form
 {
+    public function waitLoad(){
+        $this->waitForElementVisible($this->_rootElement);
+    }
+
     public function getField($id)
     {
         $id = '#'.$id;
@@ -60,5 +64,9 @@ class LocationsForm extends Form
         if($value == null)
             return '';
         return $this->_rootElement->find('#page_store_id')->find('[value="'.$value.'"]')->getText();
+    }
+
+    public function getFieldByName($name){
+        return $this->_rootElement->find('//div[@class="edit_form"]//fieldset//label/span[text()="'.$name.'"]', Locator::SELECTOR_XPATH);
     }
 }
