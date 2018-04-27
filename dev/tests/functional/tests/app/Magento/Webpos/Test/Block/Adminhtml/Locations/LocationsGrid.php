@@ -7,12 +7,14 @@
  * @Last Modified time: 2017-10-06 09:42:58
  * @Links : https://www.facebook.com/Onjin.Matsui.VTC.NQC
  */
+
 namespace Magento\Webpos\Test\Block\Adminhtml\Locations;
+
 use Magento\Ui\Test\Block\Adminhtml\DataGrid;
 use Magento\Mtf\Client\Element\SimpleElement;
 use Magento\Mtf\Client\Locator;
 
-class LocationsGrid  extends DataGrid
+class LocationsGrid extends DataGrid
 {
     /**
      * Select action toggle.
@@ -55,6 +57,7 @@ class LocationsGrid  extends DataGrid
     {
         $rowItem->find($this->selectAction)->click();
     }
+
     /**
      * Fix core
      */
@@ -105,9 +108,24 @@ class LocationsGrid  extends DataGrid
         $location = sprintf($this->rowPattern, $rows);
         return $this->_rootElement->find($location, Locator::SELECTOR_XPATH);
     }
+
     public function getInputFieldEdtingByName($name)
     {
         return $this->_rootElement->find('//tbody/tr/td/*/input[@name="' . $name . '"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getInputFieldGridByName($name)
+    {
+        return $this->_rootElement->find('//thead//th/span[text()="' . $name . '"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getFilterButton(){
+        return $this->_rootElement->find('//div[@class="data-grid-filters-actions-wrap"]//button[text()="Filters"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getMassActionOptionByName($name)
+    {
+        return $this->_rootElement->find('//div[@class="action-menu-items"]//ul//li//span[text()="' . $name . '"]   ', Locator::SELECTOR_XPATH);
     }
 
     public function getSelectFieldEdtingByName($name)
