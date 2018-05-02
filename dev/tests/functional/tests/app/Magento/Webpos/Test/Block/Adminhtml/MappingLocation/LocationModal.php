@@ -214,7 +214,7 @@ class LocationModal extends DataGrid
 
     public function getFilterFirstDisplayName()
     {
-        return $this->_rootElement->find('//table[@class="data-grid data-grid-draggable"]/tbody/tr[1]/td[2]', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//table[@class="data-grid data-grid-draggable"]/tbody/tr[1]/td[3]', Locator::SELECTOR_XPATH);
     }
 
     public function getFilterFirstAddress()

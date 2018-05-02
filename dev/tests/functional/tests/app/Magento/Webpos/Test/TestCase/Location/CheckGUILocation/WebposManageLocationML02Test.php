@@ -6,7 +6,7 @@
  * Time: 2:17 PM
  */
 
-namespace Magento\Webpos\Test\TestCase\Location\AddLocation;
+namespace Magento\Webpos\Test\TestCase\Location\CheckGUILocation;
 
 
 use Magento\Mtf\TestCase\Injectable;

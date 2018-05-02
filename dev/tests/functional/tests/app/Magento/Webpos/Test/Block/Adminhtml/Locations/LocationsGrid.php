@@ -125,7 +125,7 @@ class LocationsGrid extends DataGrid
 
     public function getMassActionOptionByName($name)
     {
-        return $this->_rootElement->find('//div[@class="action-menu-items"]//ul//li//span[text()="' . $name . '"]   ', Locator::SELECTOR_XPATH);
+            return $this->_rootElement->find('//div[@class="action-menu-items"]//ul//li//span[text()="' . $name . '"]   ', Locator::SELECTOR_XPATH);
     }
 
     public function getSelectFieldEdtingByName($name)
@@ -141,5 +141,29 @@ class LocationsGrid extends DataGrid
     public function getMessageEditSuccess()
     {
         return $this->_rootElement->find('.data-grid-info-panel .message');
+    }
+
+    public function waitForFilterCancelButton()
+    {
+        $this->waitForElementVisible('//button[@data-action="grid-filter-cancel"]', locator::SELECTOR_XPATH);
+    }
+
+    public function waitForFilterForm()
+    {
+        $this->waitForElementVisible('//admin__data-grid-filters-wrap _show', locator::SELECTOR_XPATH);
+    }
+
+
+    public function getFilterCancelButton()
+    {
+        return $this->_rootElement->find('.//button[@data-action="grid-filter-cancel"]', locator::SELECTOR_XPATH);
+    }
+
+    public function getGridFilterForm(){
+        return $this->_rootElement->find('.//div[@class="admin__data-grid-filters-wrap _show"]', locator::SELECTOR_XPATH);
+    }
+
+    public function getDataGridFirstRow(){
+        return $this->_rootElement->find('.//table//tbody/tr[]', locator::SELECTOR_XPATH);
     }
 }

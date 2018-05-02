@@ -51,6 +51,7 @@ class WebposManageLocationML16Test extends Injectable
         $this->locationIndex->getLocationsGrid()->setLocationName('test'.$location->getDisplayName());
         $this->locationIndex->getLocationsGrid()->setDescription('test'.$location->getDescription());
         $this->locationIndex->getLocationsGrid()->getActionButtonEditing('Save')->click();
+        sleep(2);
         $this->assertMessageEditSuccessOnGrid->processAssert($this->locationIndex, 'You have successfully saved your edits.');
         $this->locationIndex->getLocationsGrid()->waitLoader();
 

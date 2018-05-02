@@ -8,5 +8,6 @@
         <block name="mappingAction" class="Magento\Webpos\Test\Block\Adminhtml\Locations\LocationIndex" locator=".page-main-actions" strategy="css selector" />
         <block name="errorBlock" class="Magento\Backend\Test\Block\Page\Error" locator="[id='page:main-container']" strategy="css selector" />
         <block name="titleBlock" class="Magento\Theme\Test\Block\Html\Title" locator=".page-title-wrapper" strategy="css selector" />
+        <block name="modal" class="Magento\Webpos\Test\Block\Modal" locator=".modals-wrapper" strategy="css selector"/>
     </page>
 </config>

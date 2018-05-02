@@ -14,7 +14,7 @@ use Magento\Webpos\Test\Page\Adminhtml\LocationNews;
 
 class AssertLocationFormDisplay extends AbstractConstraint
 {
-    protected $_locationNews ;
+    protected $_locationNews;
 
     public function processAssert(LocationNews $locationNews, $buttons, $title, $fields)
     {
@@ -23,8 +23,7 @@ class AssertLocationFormDisplay extends AbstractConstraint
         $this->assertButtons($buttons);
         $this->assertTitle($title);
 
-//        $fields = explode(',', $fields);
-//        $this->assertFormField($fields);
+        $this->assertFormField($fields);
     }
 
     /**
@@ -48,7 +47,7 @@ class AssertLocationFormDisplay extends AbstractConstraint
      *
      * @param $title
      */
-    private function assertTitle( $title)
+    private function assertTitle($title)
     {
         $title = trim($title);
         \PHPUnit_Framework_Assert::assertTrue(
@@ -59,11 +58,13 @@ class AssertLocationFormDisplay extends AbstractConstraint
 
     private function assertFormField($fields)
     {
-        foreach ($fields as $field){
-            $field = trim($field);
+        foreach ($fields as $field) {
+            $title = trim($field['title']);
+            $required = trim('required');
+
             \PHPUnit_Framework_Assert::assertTrue(
-                $this->_locationNews->getLocationsForm()->getFieldByName($field)->isVisible(),
-                'Field '.$field. ' couldn\'t show display'
+                $this->_locationNews->getLocationsForm()->getFieldByName($title)->isVisible(),
+                'Field ' . $title . ' couldn\'t show display'
             );
         }
     }
