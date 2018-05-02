@@ -15,7 +15,7 @@ class AssertStaffPageDisplay extends AbstractConstraint
 {
     const ERROR_TEXT = '404 Error';
 
-    public function processAssert(StaffIndex $staffIndex, $pageTitle, $nameInputFields)
+    public function processAssert(StaffIndex $staffIndex, $pageTitle, $nameInputFields, $actionNames)
     {
         \PHPUnit_Framework_Assert::assertEquals(
             $pageTitle,
@@ -42,10 +42,18 @@ class AssertStaffPageDisplay extends AbstractConstraint
             );
         }
 
-//        \PHPUnit_Framework_Assert::assertTrue(
-//            $staffIndex->getStaffsGrid()->($nameInputField),
-//            'Field ' . $nameInputField . ' does not display'
-//        );
+        $actionNames = explode(', ', $actionNames);
+        foreach ($actionNames as $actionName) {
+            \PHPUnit_Framework_Assert::assertTrue(
+                $staffIndex->getGridHeader()->gridHeaderContainActionName($actionName),
+                'Action ' . $actionName . ' does not display'
+            );
+        }
+
+        \PHPUnit_Framework_Assert::assertTrue(
+            $staffIndex->getGridHeader()->gridHeaderContainFilter(),
+            'Filter does not display'
+        );
     }
 
     /**

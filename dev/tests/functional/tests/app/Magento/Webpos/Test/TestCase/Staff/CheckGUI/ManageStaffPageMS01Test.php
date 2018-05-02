@@ -31,7 +31,7 @@ class ManageStaffPageMS01Test extends Injectable
      *
      * @var StaffIndex
      */
-    private $staffsIndex;
+    private $staffIndex;
 
     /**
      * Inject Staff pages.
@@ -42,7 +42,7 @@ class ManageStaffPageMS01Test extends Injectable
     public function __inject(
         StaffIndex $staffsIndex
     ) {
-        $this->staffsIndex = $staffsIndex;
+        $this->staffIndex = $staffsIndex;
     }
 
     /**
@@ -53,7 +53,6 @@ class ManageStaffPageMS01Test extends Injectable
     public function test()
     {
         // Steps
-        $this->staffsIndex->open();
+        $this->staffIndex->open();
     }
 }
-

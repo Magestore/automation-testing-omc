@@ -4,6 +4,7 @@
         <variation name="WebposManageStaffMS01TestVariation">
             <data name="pageTitle" xsi:type="string">Staff</data>
             <data name="nameInputFields" xsi:type="string">ID, Username, Email, Display Name, Location, Role, Status, Action</data>
+            <data name="actionNames" xsi:type="string">Delete, Change status</data>
             <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\GUI\AssertStaffPageDisplay" />
         </variation>
     </testCase>

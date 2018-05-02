@@ -134,4 +134,5 @@ class StaffsGrid extends DataGrid
     {
         return $this->_rootElement->find(sprintf($this->col, $column), Locator::SELECTOR_XPATH)->isVisible();
     }
+
 }
