@@ -57,6 +57,8 @@ class StaffsGrid extends DataGrid
 
     ];
 
+    protected $col = './/th[span = "%s"]';
+
     public function waitLoader()
     {
         $this->waitForElementNotVisible($this->loader);
@@ -126,5 +128,10 @@ class StaffsGrid extends DataGrid
     public function getSelectFieldEdtingByName($name)
     {
         return $this->_rootElement->find('//tbody/tr/td/*/select[@name="' . $name . '"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function columnIsVisible($column)
+    {
+        return $this->_rootElement->find(sprintf($this->col, $column), Locator::SELECTOR_XPATH)->isVisible();
     }
 }

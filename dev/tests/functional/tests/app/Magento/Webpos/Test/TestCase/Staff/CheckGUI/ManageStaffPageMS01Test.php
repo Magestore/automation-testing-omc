@@ -12,10 +12,19 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 
 /**
- * Class MageStaffPageMS01Test
+ * Class ManageStaffPageMS01Test
+ * Precondition: 1. Go to backend
+ * Steps: 1. Go to Sales > Manage Staffs
+ * Acceptance:
+ * 1. Display [Manage Staffs] page including:
+    - Titles: Staff
+    - Buttons: Add Staff
+    - The grid with columns: ID, Username, Email, Display name, Location, Role, Status, Action
+    - Mass actions contains: Delete and Changes status
+    - Filter function
  * @package Magento\Webpos\Test\TestCase\Staff\CheckGUI
  */
-class MageStaffPageMS01Test extends Injectable
+class ManageStaffPageMS01Test extends Injectable
 {
     /**
      * Webpos Staff Index page.
