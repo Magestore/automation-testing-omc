@@ -62,6 +62,8 @@ class WebposPlaceOrderWithOrderNoteTest extends Injectable
         sleep(3);
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(3);
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();

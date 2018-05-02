@@ -56,6 +56,7 @@ class AddCustomSaleStep implements TestStepInterface
 		$this->customProduct['name'] = str_replace('%isolation%', $random, $this->customProduct['name']);
 		$this->customProduct['description'] = str_replace('%isolation%', $random, $this->customProduct['description']);
 
+		$this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
 		$this->webposIndex->getCheckoutProductList()->getCustomSaleButton()->click();
 		$this->webposIndex->getCheckoutContainer()->waitForCustomSalePopup();
 

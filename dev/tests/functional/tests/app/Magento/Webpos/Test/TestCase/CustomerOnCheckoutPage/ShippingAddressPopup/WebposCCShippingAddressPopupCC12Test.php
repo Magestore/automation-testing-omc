@@ -83,6 +83,7 @@ class WebposCCShippingAddressPopupCC12Test extends Injectable
 		sleep(1);
 
 		// fill customer info
+        $this->webposIndex->getCheckoutAddCustomer()->waitForPopupVisible();
 		$this->webposIndex->getCheckoutAddCustomer()->setFieldWithoutShippingAndBilling($customer->getData());
 
 		$this->webposIndex->getCheckoutAddCustomer()->getAddShippingAddressIcon()->click();
@@ -101,7 +102,8 @@ class WebposCCShippingAddressPopupCC12Test extends Injectable
 		);
 
 		//fill shipping address info
-		$this->webposIndex->getCheckoutAddShippingAddress()->setFieldAddress($address->getData());
+        $this->webposIndex->getCheckoutAddShippingAddress()->waitForPopupVisible();
+        $this->webposIndex->getCheckoutAddShippingAddress()->setFieldAddress($address->getData());
 
 		$this->webposIndex->getCheckoutAddShippingAddress()->getSaveButton()->click();
 		sleep(1);
