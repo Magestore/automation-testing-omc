@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Location\CheckGUILocation\WebposManageLocationML08Test" summary="Display Add Location Page" ticketId="MAGETWO-0008">
+        <variation name="WebposManageLocationML08TestVariation">
+            <data name="location" xsi:type="array">
+                <item name="display_name" xsi:type="string">Location abc123</item>
+                <item  name="description" xsi:type="string">Location Description abc123</item>
+                <item  name="address" xsi:type="string">Location Address abc123</item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Location\Grid\AssertGridFilterNoResult" />
+        </variation>
+    </testCase>
+</config>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Location\CheckGUILocation\WebposManageLocationML01Test" summary="Check GUI" ticketId="MAGETWO-0001">
+        <variation name="ManageLocationML01TestVariation">
+            <data name="title" xsi:type="string">Location</data>
+            <data name="buttonNames" xsi:type="string">Add Location, Mapping Locations - Warehouses</data>
+            <data name="inputFieldNames" xsi:type="string">ID, Description, Address, Location Name, Action</data>
+            <data name="massActions" xsi:type="string">Delete</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Location\Grid\AssertCheckButtonOnPageAction" />
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Location\Grid\AssertManageLocationIndexPage"/>
+        </variation>
+    </testCase>
+</config>
