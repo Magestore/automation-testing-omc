@@ -173,7 +173,7 @@ class WebposTaxTAX25Test extends Injectable
         }
 
         // Hold
-        sleep(4);
+        sleep(5);
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
@@ -182,7 +182,7 @@ class WebposTaxTAX25Test extends Injectable
 
         $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
         $this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder();
-
+        sleep(5);
         // Assert tax amount in On-Hold Order
         $this->assertTaxAmountOnOnHoldOrderPage->processAssert($taxRate, $products, $this->webposIndex);
 
