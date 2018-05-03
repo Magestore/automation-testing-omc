@@ -134,7 +134,7 @@ class WebposTaxTAX119Test extends Injectable
             $this->webposIndex->getCheckoutProductList()->search($item['product']->getSku());
             $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
             $this->webposIndex->getCheckoutContainer()->waitForProductDetailPopup();
-            sleep(1);
+            sleep(5);
             $this->webposIndex->getCheckoutProductDetail()->fillGroupedProductQty($item['product']);
             $this->webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
             $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -147,6 +147,7 @@ class WebposTaxTAX119Test extends Injectable
         )->run();
 
         // Place Order
+        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermission\CheckWhenUserAssignedPermissionToLockRegisterLR18LR19Test" summary="Create Admin User Role" ticketId="MAGETWO-23413">
+        <variation name="CheckWhenUserAssignedPermisionToLockRegisterLR18TestVariation1">
+            <data name="testId" xsi:type="string">LR18</data>
+
+            <data name="tag" xsi:type="string">test_type:extended_acceptance_test</data>
+            <data name="role/data/rolename" xsi:type="string">WebposRole%isolation%</data>
+            <data name="role/data/current_password" xsi:type="string">%current_password%</data>
+            <data name="role/data/resource_access" xsi:type="string">All</data>
+
+            <data name="tag" xsi:type="string">test_type:extended_acceptance_test</data>
+            <data name="user/data/username" xsi:type="string">AdminUser%isolation%</data>
+            <data name="user/data/firstname" xsi:type="string">FirstName%isolation%</data>
+            <data name="user/data/lastname" xsi:type="string">LastName%isolation%</data>
+            <data name="user/data/email" xsi:type="string">email%isolation%@example.com</data>
+            <data name="user/data/password" xsi:type="string">123123q</data>
+            <data name="user/data/password_confirmation" xsi:type="string">123123q</data>
+            <data name="user/data/is_active" xsi:type="string">Active</data>
+            <data name="user/data/role_id/dataset" xsi:type="string">role::Administrator</data>
+            <data name="user/data/current_password" xsi:type="string">%current_password%</data>
+
+            <data name="pos_name" xsi:type="string">Store POS</data>
+            <data name="is_allow_to_lock" xsi:type="string">Yes</data>
+            <data name="pin" xsi:type="string">1209</data>
+
+            <constraint name="Magento\User\Test\Constraint\AssertUserSuccessSaveMessage" />
+            <constraint name="Magento\User\Test\Constraint\AssertUserInGrid" />
+            <constraint name="Magento\User\Test\Constraint\AssertUserSuccessLogOut" />
+            <constraint name="Magento\User\Test\Constraint\AssertUserSuccessLogin" />
+            <constraint name="Magento\Webpos\Test\Constraint\SessionManagement\CheckAssignmentPermission\AssertPosCheckLockUnlockLR18" />
+        </variation>
+
+        <variation name="CheckWhenUserAssignedPermisionToLockRegisterLR19TestVariation1">
+            <data name="testId" xsi:type="string">LR19</data>
+
+            <data name="tag" xsi:type="string">test_type:extended_acceptance_test</data>
+            <data name="role/data/rolename" xsi:type="string">WebposRole%isolation%</data>
+            <data name="role/data/current_password" xsi:type="string">%current_password%</data>
+            <data name="role/data/resource_access" xsi:type="string">Custom</data>
+
+            <data name="tag" xsi:type="string">test_type:extended_acceptance_test</data>
+            <data name="user/data/username" xsi:type="string">AdminUser%isolation%</data>
+            <data name="user/data/firstname" xsi:type="string">FirstName%isolation%</data>
+            <data name="user/data/lastname" xsi:type="string">LastName%isolation%</data>
+            <data name="user/data/email" xsi:type="string">email%isolation%@example.com</data>
+            <data name="user/data/password" xsi:type="string">123123q</data>
+            <data name="user/data/password_confirmation" xsi:type="string">123123q</data>
+            <data name="user/data/is_active" xsi:type="string">Active</data>
+            <data name="user/data/role_id/dataset" xsi:type="string">role::WebposRole</data>
+            <data name="user/data/current_password" xsi:type="string">%current_password%</data>
+
+            <data name="pos_name" xsi:type="string">Store POS</data>
+            <data name="is_allow_to_lock" xsi:type="string">Yes</data>
+            <data name="pin" xsi:type="string">1209</data>
+
+            <constraint name="Magento\User\Test\Constraint\AssertUserSuccessSaveMessage" />
+            <constraint name="Magento\User\Test\Constraint\AssertUserInGrid" />
+            <constraint name="Magento\User\Test\Constraint\AssertUserSuccessLogOut" />
+            <constraint name="Magento\User\Test\Constraint\AssertUserSuccessLogin" />
+        </variation>
+    </testCase>
+</config>

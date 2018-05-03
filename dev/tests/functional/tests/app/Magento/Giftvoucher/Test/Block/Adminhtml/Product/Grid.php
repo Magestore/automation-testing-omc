@@ -104,4 +104,17 @@ class Grid extends DataGrid
         }
         parent::resetFilter();
     }
+
+    public function get()
+    {
+        $clear = $this->_rootElement->find('[data-action="grid-filter-reset"]');
+        if ($clear->isVisible()) {
+            $clear->click();
+        }
+        parent::resetFilter();
+    }
+
+    public function getHeadingNoticePermission() {
+        return $this->_rootElement->find('#container > div > h2');
+    }
 }
