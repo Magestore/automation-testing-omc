@@ -74,9 +74,12 @@ class WebposProductsGridPG06Test extends Injectable
         )->run();
 
         // Login webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposStep'
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();
+
+
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 
         // Add products to cart
         $this->webposIndex->getCheckoutCartFooter()->waitButtonHoldVisible();
