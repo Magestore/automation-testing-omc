@@ -164,6 +164,7 @@ class LocationsGrid extends DataGrid
     }
 
     public function getDataGridFirstRow(){
-        return $this->_rootElement->find('.//table//tbody/tr[]', locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('.//table//tbody//tr[@class="data-row"][1]', locator::SELECTOR_XPATH);
     }
+
 }
