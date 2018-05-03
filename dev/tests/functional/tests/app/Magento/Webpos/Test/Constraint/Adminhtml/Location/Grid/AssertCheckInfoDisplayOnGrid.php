@@ -54,6 +54,6 @@ class AssertCheckInfoDisplayOnGrid extends AbstractConstraint
      */
     public function toString()
     {
-        return 'Info staff is incorrec on grid';
+        return 'Info staff is incorrect on grid';
     }
 }
