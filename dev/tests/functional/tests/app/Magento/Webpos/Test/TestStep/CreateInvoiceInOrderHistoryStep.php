@@ -57,7 +57,7 @@ class CreateInvoiceInOrderHistoryStep implements TestStepInterface
 	 */
 	public function run()
 	{
-		sleep(1);
+		sleep(5);
 		if (!$this->webposIndex->getOrderHistoryInvoice()->isVisible()) {
 			$this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
 			$this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();

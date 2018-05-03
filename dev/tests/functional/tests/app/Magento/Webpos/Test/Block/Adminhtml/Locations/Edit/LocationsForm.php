@@ -5,25 +5,35 @@
  * Date: 05/12/2017
  * Time: 14:07
  */
+
 namespace Magento\Webpos\Test\Block\Adminhtml\Locations\Edit;
+
 use Magento\Mtf\Block\Form;
 use Magento\Mtf\Client\Locator;
 
 class LocationsForm extends Form
 {
+    public function waitLoad()
+    {
+        $this->waitForElementVisible($this->_rootElement);
+    }
+
     public function getField($id)
     {
-        $id = '#'.$id;
+        $id = '#' . $id;
         return $this->_rootElement->find($id);
     }
+
     public function getMessageRequired($id)
     {
-        return $this->_rootElement->find('#'.$id)->getText();
+        return $this->_rootElement->find('#' . $id)->getText();
     }
+
     public function isMessageRequiredDisplay($id)
     {
-        return $this->_rootElement->find('#'.$id);
+        return $this->_rootElement->find('#' . $id);
     }
+
     public function getLocationName()
     {
         return $this->_rootElement->find('#page_display_name')->getValue();
@@ -57,8 +67,13 @@ class LocationsForm extends Form
     public function getStoreView()
     {
         $value = $this->_rootElement->find('#page_store_id')->getValue();
-        if($value == null)
+        if ($value == null)
             return '';
-        return $this->_rootElement->find('#page_store_id')->find('[value="'.$value.'"]')->getText();
+        return $this->_rootElement->find('#page_store_id')->find('[value="' . $value . '"]')->getText();
+    }
+
+    public function getFieldByName($name)
+    {
+        return $this->_rootElement->find('//form[@id = "edit_form"]//label//span[text()="'.$name.'"]', locator::SELECTOR_XPATH);
     }
 }

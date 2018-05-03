@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
     <page name="LocationIndex" area="Adminhtml" mca="webposadmin/location/index" module="Magento_Webpos">
-        <block name="pageActionsBlock" class="Magento\Backend\Test\Block\GridPageActions" locator=".page-main-actions" strategy="css selector"/>
+        <block name="pageActionsBlock" class="Magento\Webpos\Test\Block\Adminhtml\WebposPageActionsBlock" locator=".page-main-actions" strategy="css selector"/>
         <block name="messagesBlock" class="Magento\Backend\Test\Block\Messages" locator="#messages .messages" strategy="css selector"/>
         <block name="locationsGrid" class="Magento\Webpos\Test\Block\Adminhtml\Locations\LocationsGrid" locator="[id='page:main-container']" strategy="css selector" />
         <block name="gridPageActions" class="Magento\Backend\Test\Block\GridPageActions" locator=".page-main-actions" strategy="css selector" />
         <block name="mappingAction" class="Magento\Webpos\Test\Block\Adminhtml\Locations\LocationIndex" locator=".page-main-actions" strategy="css selector" />
         <block name="errorBlock" class="Magento\Backend\Test\Block\Page\Error" locator="[id='page:main-container']" strategy="css selector" />
         <block name="titleBlock" class="Magento\Theme\Test\Block\Html\Title" locator=".page-title-wrapper" strategy="css selector" />
+        <block name="modal" class="Magento\Webpos\Test\Block\Modal" locator=".modals-wrapper" strategy="css selector"/>
     </page>
 </config>

@@ -5,7 +5,9 @@
  * Date: 12/02/2018
  * Time: 09:14
  */
+
 namespace Magento\Webpos\Test\TestCase\Location\EditLocationOnGrid;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertEditDiscountCustomPrice;
 use Magento\Webpos\Test\Fixture\Location;
@@ -20,10 +22,7 @@ class WebposManageLocationML16Test extends Injectable
      * @var LocationIndex
      */
     private $locationIndex;
-    /**
-     * @var AssertMessageEditSuccessOnGrid
-     */
-    protected $assertMessageEditSuccessOnGrid;
+
     /**
      * Inject location pages.
      *
@@ -31,11 +30,10 @@ class WebposManageLocationML16Test extends Injectable
      * @return void
      */
     public function __inject(
-        LocationIndex $locationIndex,
-        AssertMessageEditSuccessOnGrid $assertMessageEditSuccessOnGrid
-    ) {
+        LocationIndex $locationIndex
+    )
+    {
         $this->locationIndex = $locationIndex;
-        $this->assertMessageEditSuccessOnGrid = $assertMessageEditSuccessOnGrid;
     }
 
     public function test(Location $location)
@@ -46,21 +44,21 @@ class WebposManageLocationML16Test extends Injectable
         // Steps
         $this->locationIndex->open();
         $this->locationIndex->getLocationsGrid()->search(['display_name' => $location->getDisplayName()]);
-        $this->locationIndex->getLocationsGrid()->getRowByDisplayName( $location->getDisplayName())->click();
-        $this->locationIndex->getLocationsGrid()->setAddress('test'.$location->getAddress());
-        $this->locationIndex->getLocationsGrid()->setLocationName('test'.$location->getDisplayName());
-        $this->locationIndex->getLocationsGrid()->setDescription('test'.$location->getDescription());
+        $this->locationIndex->getLocationsGrid()->getRowByDisplayName($location->getDisplayName())->click();
+        $this->locationIndex->getLocationsGrid()->setAddress('test' . $location->getAddress());
+        $this->locationIndex->getLocationsGrid()->setLocationName('test' . $location->getDisplayName());
+        $this->locationIndex->getLocationsGrid()->setDescription('test' . $location->getDescription());
         $this->locationIndex->getLocationsGrid()->getActionButtonEditing('Save')->click();
-        $this->assertMessageEditSuccessOnGrid->processAssert($this->locationIndex, 'You have successfully saved your edits.');
+        sleep(2);
         $this->locationIndex->getLocationsGrid()->waitLoader();
 
         $locationId = $this->locationIndex->getLocationsGrid()->getAllIds()[0];
         return ['dataDisplay' =>
             [
                 'location_id' => $locationId,
-                'description' => 'test'.$location->getDescription(),
-                'address' => 'test'.$location->getAddress(),
-                'locationName' => 'test'.$location->getDisplayName()
+                'description' => 'test' . $location->getDescription(),
+                'address' => 'test' . $location->getAddress(),
+                'locationName' => 'test' . $location->getDisplayName()
             ]
         ];
     }

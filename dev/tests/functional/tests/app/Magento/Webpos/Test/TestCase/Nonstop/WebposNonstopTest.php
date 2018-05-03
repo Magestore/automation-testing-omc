@@ -153,12 +153,13 @@ class WebposNonstopTest extends Injectable
 					'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
 					['customer' => $customer]
 				)->run();
-
+                sleep(2);
 				// Place Order
 				$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
 				$this->webposIndex->getMsWebpos()->waitCartLoader();
 				$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
+                sleep(2);
 				$this->webposIndex->getCheckoutPaymentMethod()->getPaymentMethodByLabel('Web POS - Cash On Delivery')->click();
 				$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
@@ -195,8 +196,9 @@ class WebposNonstopTest extends Injectable
 					. "\nExpected: " . $orderId
 					. "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
 				);
-                sleep(5);
+                sleep(3);
 				$this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
+				sleep(3);
                 $this->webposIndex->getOrderHistoryPayment()->waitForPaymendMethodVisible('Web POS - Cash In');
 				$this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->click();
 				$this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
@@ -204,7 +206,7 @@ class WebposNonstopTest extends Injectable
 				$this->webposIndex->getModal()->getOkButton()->click();
 				//Assert Take payment success
 //				$this->assertPaymentSuccess->processAssert($this->webposIndex);
-
+                sleep(2);
 				// Invoice
 				$this->objectManager->getInstance()->create(
 					'Magento\Webpos\Test\TestStep\CreateInvoiceInOrderHistoryStep',
