@@ -101,6 +101,7 @@ class WebposCustomerOnCheckoutPageCC21Test extends Injectable
         sleep(1);
 
         // fill Billing address info
+        $this->webposIndex->getCheckoutAddBillingAddress()->waitForPopupVisible();
         $this->webposIndex->getCheckoutAddBillingAddress()->setFieldAddress($address->getData());
         $this->webposIndex->getCheckoutAddBillingAddress()->getSaveButton()->click();
         sleep(1);

@@ -146,4 +146,8 @@ class CheckoutEditAddress extends Block
     {
         $this->waitForElementNotVisible('#customer-overlay');
     }
+
+    public function waitForPopupVisible(){
+	    $this->waitForElementVisible('#form-customer-add-address-checkout');
+    }
 }

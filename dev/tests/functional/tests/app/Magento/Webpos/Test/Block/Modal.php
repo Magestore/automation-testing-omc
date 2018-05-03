@@ -51,8 +51,7 @@ class Modal extends Block
         $this->waitForElementNotVisible('.indicator');
     }
 
-    public function waitForCloseButtonIsVisible() {
-        return $this->waitForElementVisible('.action-close');
+    public function waitForLoader() {
+	    $this->waitForElementVisible('.modal-popup');
     }
-
 }

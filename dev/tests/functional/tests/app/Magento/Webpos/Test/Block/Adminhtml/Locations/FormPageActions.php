@@ -5,9 +5,12 @@
  * Date: 17/02/2018
  * Time: 19:58
  */
+
 namespace Magento\Webpos\Test\Block\Adminhtml\Locations;
+
 use Magento\Mtf\Client\Locator;
 use Magento\Backend\Test\Block\PageActions;
+
 /**
  * Class FormPageActions
  * Form page actions block
@@ -130,7 +133,8 @@ class FormPageActions extends PageActions
         $this->waitForElementNotVisible($this->loader, Locator::SELECTOR_XPATH);
         $this->waitForElementNotVisible($this->loaderOld, Locator::SELECTOR_XPATH);
         return $this->_rootElement->find('#delete');
-       }
+    }
+
     /**
      * Check 'Delete' button availability.
      *
@@ -146,6 +150,16 @@ class FormPageActions extends PageActions
         $this->waitForElementNotVisible($this->spinner);
         $this->waitForElementNotVisible($this->loader, Locator::SELECTOR_XPATH);
         $this->waitForElementNotVisible($this->loaderOld, Locator::SELECTOR_XPATH);
-        return $this->_rootElement->find('#'.$id);
+        return $this->_rootElement->find('#' . $id);
+    }
+
+    public function getButtonByname($name)
+    {
+        return $this->_rootElement->find('//div[@class="page-actions-buttons"]//button//span[text()="' . $name . '"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getTitleByName($name)
+    {
+        return $this->_rootElement->find('//div[@class="page-actions-inner"][@data-title="' . $name . '"]', Locator::SELECTOR_XPATH);
     }
 }

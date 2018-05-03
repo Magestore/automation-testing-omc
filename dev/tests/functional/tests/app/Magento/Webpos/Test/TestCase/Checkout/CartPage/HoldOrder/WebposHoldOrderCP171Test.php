@@ -92,6 +92,7 @@ class WebposHoldOrderCP171Test extends Injectable
         $this->assertCheckEmpty->processAssert($this->webposIndex);
 
         //Back to checkout
+        sleep(1);
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->checkout();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
