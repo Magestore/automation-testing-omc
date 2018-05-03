@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\SessionManagement\CheckLockUnlockButton\CheckWhileClickingOnLockButtonLR16LR17Test" summary="Check the position of the Lock/Unlock button" ticketId="MAGETWO-1234">
+        <variation name="CheckWhileClickingOnLockButtonLR16TestVariation1" summary="Check when clicking on Lock button">
+            <data name="testId" xsi:type="string">LR15</data>
+            <data name="pos_name" xsi:type="string">Store POS</data>
+            <data name="is_allow_to_lock" xsi:type="string">Yes</data>
+            <data name="pin" xsi:type="string">1209</data>
+        </variation>
+        <variation name="CheckWhileClickingOnLockButtonLR17TestVariation1" summary="Check when clicking on Lock button">
+            <data name="testId" xsi:type="string">LR16</data>
+            <data name="pos_name" xsi:type="string">Store POS</data>
+            <data name="is_allow_to_lock" xsi:type="string">Yes</data>
+            <data name="pin" xsi:type="string">1209</data>
+        </variation>
+    </testCase>
+</config>
