@@ -172,4 +172,16 @@ class ManageStockList extends Block
     {
         return $this->getProductRow($productName)->find('.icon-iconPOS-success');
     }
+
+    public function resetSearchProduct(){
+        $this->getSearchBox()->setValue('');
+    }
+
+    public function getInStockValueByProduct($productName){
+        $inStock = $this->getInStockSwitchByProduct($productName);
+        if (strpos($inStock->getAttribute('class'), 'checked') !== false) {
+            return true;
+        }
+        return false;
+    }
 }
