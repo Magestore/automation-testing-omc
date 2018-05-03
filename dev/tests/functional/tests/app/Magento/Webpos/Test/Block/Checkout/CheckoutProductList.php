@@ -90,12 +90,12 @@ class CheckoutProductList extends Block
 
     public function waitProductListToLoad()
     {
-        $this->waitForElementNotVisible('#product-list-overlay > span.product-loader');
+        return $this->waitForElementNotVisible('#product-list-overlay > span.product-loader');
     }
     public function waitProductListVisibleToNotVisible()
     {
         $this->waitForElementVisible('#product-list-overlay > span.product-loader');
-        $this->waitForElementNotVisible('#product-list-overlay > span.product-loader');
+        return $this->waitForElementNotVisible('#product-list-overlay > span.product-loader');
     }
 
     public function getSearchInput()
