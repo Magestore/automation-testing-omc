@@ -76,6 +76,7 @@ class LoginWebposStep implements TestStepInterface
             sleep(2);
         }
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+		sleep(2);
         $data = [
             'username' => $username,
             'password' => $password
