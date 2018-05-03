@@ -31,13 +31,12 @@ class  WebposProductGridCheckAddToCartOnGroupProductDetailPG45Test extends Injec
             ['products' => $products]
         )->run();
         // Login webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposStep'
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();
 
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
 
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-product-detail"]');
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
