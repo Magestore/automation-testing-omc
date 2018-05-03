@@ -131,6 +131,8 @@ class WebposTaxTAX57Test extends Injectable
         $this->assertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade->processAssert(
             $this->webposIndex, $defaultTaxRate, $products[0]['product'], $actualPriceExcludeTax, $actualTaxAmount);
         //Change customer address to Michigan
+
+        $this->webposIndex->getCheckoutCartHeader()->waitForElementVisible('.add-customer > .title-header-page');
         $this->webposIndex->getCheckoutCartHeader()->getCustomerTitleDefault()->click();
         sleep(1);
         $this->webposIndex->getCheckoutEditCustomer()->getEditShippingAddressIcon()->click();
