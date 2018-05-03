@@ -122,4 +122,9 @@ class CheckoutProductList extends Block
     {
         return $this->_rootElement->find('//*[@id="product1"]/div[2]/h3[text()='.$productName.']', Locator::SELECTOR_XPATH);
     }
+
+    public function getSpanNoRecord()
+    {
+        return $this->_rootElement->find('#block-product-list span');
+    }
 }
