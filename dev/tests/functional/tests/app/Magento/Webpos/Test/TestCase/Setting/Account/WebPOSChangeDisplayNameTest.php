@@ -69,6 +69,13 @@ class WebPOSChangeDisplayNameTest extends Injectable
     public function tearDown()
     {
         if ($this->testCaseId == 'SET04') {
+            $this->webposIndex->open();
+            $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+            $this->webposIndex->getMsWebpos()->waitCartLoader();
+
+            $this->webposIndex->getMsWebpos()->clickCMenuButton();
+            $this->webposIndex->getCMenu()->account();
+            sleep(1);
             $this->webposIndex->getStaffSettingFormMainAccount()->getDisplayName()->setValue($this->username);
             $this->webposIndex->getStaffSettingFormFooter()->getSaveButton()->click();
         }
