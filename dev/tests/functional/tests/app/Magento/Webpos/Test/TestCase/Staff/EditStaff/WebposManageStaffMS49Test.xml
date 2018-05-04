@@ -4,7 +4,8 @@
         <variation name="WebposManageStaffMS49TestVariation">
             <data name="staff/dataset" xsi:type="string">staffMS21</data>
             <data name="message" xsi:type="string">Staff was successfully deleted</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertStaffSuccessDeleteMessage" />
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertStaffSuccessDeleteMessage" />-->
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertStaffGridWithNoResult"/>
         </variation>
     </testCase>
 </config>

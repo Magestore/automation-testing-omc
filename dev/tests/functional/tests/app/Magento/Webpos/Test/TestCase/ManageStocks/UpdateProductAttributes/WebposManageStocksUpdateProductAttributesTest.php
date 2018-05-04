@@ -65,8 +65,8 @@ class WebposManageStocksUpdateProductAttributesTest extends Injectable
 		// Edit product info
 		$this->webposIndex->getManageStockList()->searchProduct($productName);
 		$this->webposIndex->getManageStockList()->getStoreAddress()->click();
-		sleep(1);
-
+        $this->webposIndex->getManageStockList()->waitForProductListShow();
+        sleep(5);
 		if (isset($productInfo['qty'])) {
 			$this->webposIndex->getManageStockList()->getProductQtyInput($productName)->setValue($productInfo['qty']);
 		}

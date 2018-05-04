@@ -125,10 +125,12 @@ class WebposManageStaffMS64Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Logout
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        sleep(1);
         $this->webposIndex->getCMenu()->logout();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
         $this->webposIndex->getModal()->getOkButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader.loading-mask');
+        sleep(2);
         //Login by staff2
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
@@ -148,6 +150,7 @@ class WebposManageStaffMS64Test extends Injectable
         $this->webposIndex->getOrderHistoryPayment()->getCashInMethod()->click();
         $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
+        sleep(2);
         $this->webposIndex->getModal()->getOkButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="toaster"]');
         $this->assertEquals(
@@ -173,9 +176,11 @@ class WebposManageStaffMS64Test extends Injectable
         $this->webposIndex->getOrderHistoryAddOrderNote()->getShipButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="shipment-popup"]');
         $this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
+        sleep(2);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
         $this->webposIndex->getModal()->getOkButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="toaster"]');
+//        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="toaster"]');
+        sleep(1);
         $this->assertEquals(
             'The shipment has been created successfully.',
             $this->webposIndex->getToaster()->getWarningMessage()->getText(),
@@ -198,6 +203,7 @@ class WebposManageStaffMS64Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="invoice-popup"]');
         $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
+        sleep(2);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
         $this->webposIndex->getModal()->getOkButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="toaster"]');
@@ -230,6 +236,7 @@ class WebposManageStaffMS64Test extends Injectable
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
         $this->webposIndex->getModal()->getOkButton()->click();
+        sleep(2);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="toaster"]');
         $this->assertEquals(
             'A creditmemo has been created!',

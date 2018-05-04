@@ -210,7 +210,7 @@ class WebposNonstopTest extends Injectable
 				// Invoice
 				$this->objectManager->getInstance()->create(
 					'Magento\Webpos\Test\TestStep\CreateInvoiceInOrderHistoryStep',
-					['products' => $products]
+		    			['products' => $products]
 				)->run();
 
 				// Assert Invoice Success
@@ -270,9 +270,9 @@ class WebposNonstopTest extends Injectable
 //					'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
 //					['products' => $tempProducts]
 //				)->run();
+//				$this->webposIndex->getOrderHistoryOrderViewHeader()->waitForClosedStatusVisisble();
 
-				$this->webposIndex->getOrderHistoryOrderViewHeader()->waitForClosedStatusVisisble();
-				$this->assertOrderStatus->processAssert($this->webposIndex, 'Complete');
+                $this->assertOrderStatus->processAssert($this->webposIndex, 'Complete');
 			}
 		}
 	}

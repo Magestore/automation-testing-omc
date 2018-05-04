@@ -37,10 +37,6 @@ class WebposManageStaffMS60Test extends Injectable
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'have_shipping_method_on_webpos_CP197']
         )->run();
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'create_section_before_working_yes_MS57']
-        )->run();
     }
 
     /**
@@ -80,7 +76,7 @@ class WebposManageStaffMS60Test extends Injectable
 
         //Login
         $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
+            'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
         //Create order
@@ -178,13 +174,5 @@ class WebposManageStaffMS60Test extends Injectable
         $dataProduct2['qty'] = 1;
         return ['cartProducts' => [$dataProduct1, $dataProduct2]];
     }
-
-    public function tearDown()
-    {
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'create_section_before_working_no_MS57']
-        )->run();
     }
-}
 
