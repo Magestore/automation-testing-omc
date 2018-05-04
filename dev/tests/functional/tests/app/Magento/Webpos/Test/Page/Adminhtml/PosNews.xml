@@ -5,7 +5,7 @@
         <!-- For identifying a form block on the HTML page -->
         <block name="posForm" class="Magento\Webpos\Test\Block\Adminhtml\Pos\Edit\PosForm" locator="[id='page:main-container']" strategy="css selector" />
         <!-- this code for save action -->
-        <block name="formPageActions" class="Magento\Backend\Test\Block\FormPageActions" locator=".page-main-actions" strategy="css selector" />
+        <block name="formPageActions" class="Magento\Webpos\Test\Block\Adminhtml\Pos\Edit\FormPageActions" locator=".page-main-actions" strategy="css selector" />
 
         <block name="messagesBlock" class="Magento\Backend\Test\Block\Messages" locator="#messages .messages" strategy="css selector"/>
     </page>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Pos\PosGrid\WebposManagePosMP01Test" summary="Check GUI" ticketId="MAGETWO-0001">
+        <variation name="ManagePosMP01TestVariation">
+            <data name="title" xsi:type="string">POS</data>
+            <data name="buttonNames" xsi:type="string">Add POS</data>
+            <data name="inputFieldNames" xsi:type="string">ID, Name, Location, Current Staff, Status, Action</data>
+            <data name="massActions" xsi:type="string">Delete</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Pos\Grid\AssertManagePosIndexPage"/>
+        </variation>
+    </testCase>
+</config>

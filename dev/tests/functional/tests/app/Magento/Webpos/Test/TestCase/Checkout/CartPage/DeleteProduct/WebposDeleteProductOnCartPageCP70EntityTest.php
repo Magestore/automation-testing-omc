@@ -60,6 +60,7 @@ class WebposDeleteProductOnCartPageCP70EntityTest extends Injectable
         foreach ($products as $product) {
             $products[$i] = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);
             $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+            sleep(3);
             $this->webposIndex->getCheckoutProductList()->search($products[$i]->getSku());
             $this->webposIndex->getMsWebpos()->waitCartLoader();
             $i++;

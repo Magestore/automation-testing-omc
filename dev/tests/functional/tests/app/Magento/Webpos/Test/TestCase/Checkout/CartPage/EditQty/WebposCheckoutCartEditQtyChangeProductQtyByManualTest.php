@@ -62,6 +62,7 @@ class WebposCheckoutCartEditQtyChangeProductQtyByManualTest extends Injectable
 		$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 
 		for ($i = 0; $i < $qty; $i++) {
+		    sleep(2);
 			$this->webposIndex->getCheckoutProductList()->search($product->getName());
 			$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 			$this->webposIndex->getMsWebpos()->waitCartLoader();
