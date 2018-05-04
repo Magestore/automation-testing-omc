@@ -47,6 +47,7 @@ class WebposCheckoutCartPageDeleteCartTest extends Injectable
 
 		if ($addProduct) {
 			if (!$customSale) {
+			    sleep(2);
 				$this->webposIndex->getCheckoutProductList()->search($product->getName());
 				$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 			} else {

@@ -11,6 +11,7 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\Invoice;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistoryInvoice;
+use Magento\Config\Test\Fixture\ConfigData;
 
 
 /**
@@ -51,7 +52,8 @@ class WebposOrdersHistoryInvoiceCheckGUITest extends Injectable
     public function test(
         $products,
         $createInvoice = true,
-        $shipped = false
+        $shipped = false,
+        $dataConfig
     )
     {
         // Create products
@@ -69,6 +71,11 @@ class WebposOrdersHistoryInvoiceCheckGUITest extends Injectable
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',
             ['products' => $products]
+        )->run();
+        //Config payment method
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => $dataConfig]
         )->run();
 
         // Place Order
@@ -98,38 +105,41 @@ class WebposOrdersHistoryInvoiceCheckGUITest extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 
         // Take payment
+        $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->isVisible();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
-        $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->click();
-        $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForModalPopup();
-        $this->webposIndex->getModal()->getOkButton()->click();
+        if ($this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->isVisible()) {
+            $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->click();
+            $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
+            $this->webposIndex->getMsWebpos()->waitForModalPopup();
+            $this->webposIndex->getModal()->getOkButton()->click();
 
-        // Click Button Invoice
-        $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
-        $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
+            // Click Button Invoice
+            $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
+            $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
 
-        $action = 'CheckGUI';
-        $this->assertWebposOrdersHistoryInvoice->processAssert($this->webposIndex, $action);
+            $action = 'CheckGUI';
+            $this->assertWebposOrdersHistoryInvoice->processAssert($this->webposIndex, $action);
 
-        sleep(2);
-        $action = 'Popup-CheckGUI';
-        $this->assertWebposOrdersHistoryInvoice->processAssert($this->webposIndex, $action);
+            sleep(2);
+            $action = 'Popup-CheckGUI';
+            $this->assertWebposOrdersHistoryInvoice->processAssert($this->webposIndex, $action);
 
-        sleep(2);
-        $action = 'Popup-Cancel';
-        $this->assertWebposOrdersHistoryInvoice->processAssert($this->webposIndex, $action);
+            sleep(2);
+            $action = 'Popup-Cancel';
+            $this->assertWebposOrdersHistoryInvoice->processAssert($this->webposIndex, $action);
 
-        sleep(2);
-        $action = 'Popup-Close';
-        $this->assertWebposOrdersHistoryInvoice->processAssert($this->webposIndex, $action);
+            sleep(2);
+            $action = 'Popup-Close';
+            $this->assertWebposOrdersHistoryInvoice->processAssert($this->webposIndex, $action);
 
-        sleep(2);
-        $action = 'Cancel';
-        $this->assertWebposOrdersHistoryInvoice->processAssert($this->webposIndex, $action);
+            sleep(2);
+            $action = 'Cancel';
+            $this->assertWebposOrdersHistoryInvoice->processAssert($this->webposIndex, $action);
 
-        return [
-            'products' => $products,
-            'action' => $action
-        ];
+            return [
+                'products' => $products,
+                'action' => $action
+            ];
+        }
     }
 }

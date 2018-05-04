@@ -11,6 +11,10 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Customer\Test\Fixture\Customer;
 
+/**
+ * Class WebposCartPageCustomerCP180Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer
+ */
 class WebposCartPageCustomerCP180Test extends Injectable
 {
     /**
@@ -84,7 +88,7 @@ class WebposCartPageCustomerCP180Test extends Injectable
         //Change customer
         $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
         $this->webposIndex->getCheckoutChangeCustomer()->search($customer2->getFirstname());
-        sleep(1);
+        sleep(2);
         $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
         sleep(1);
         $this->webposIndex->getMsWebpos()->waitCartLoader();

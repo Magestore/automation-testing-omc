@@ -36,7 +36,7 @@ class WebposMultiOrderCP25Test extends Injectable
         )->run();
 
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-
+        sleep(2);
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 

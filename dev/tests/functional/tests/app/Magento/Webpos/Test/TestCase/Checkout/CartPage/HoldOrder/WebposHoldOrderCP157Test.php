@@ -14,12 +14,16 @@ use Magento\ConfigurableProduct\Test\Fixture\ConfigurableProduct;
 /**
  * Class WebposHoldOrderCP157Test
  *
- * Pre: 1. Login Webpos as a staff
-2. Add a configurable product to cart
-3. Hold order successfully
- * Step: "1. Go to [On-hold orders] menu
-2. Click on [Checkout] button on that detail order"
- * Accept: Order will be loaded to cart page with corresponding product and attributes
+ * Precondition:
+ * 1. Login Webpos as a staff
+ * 2. Add a configurable product to cart
+ * 3. Hold order successfully
+ *
+ * Steps:
+ * 1. Go to [On-hold orders] menu
+ * 2. Click on [Checkout] button on that detail order"
+ *
+ * Acceptance: Order will be loaded to cart page with corresponding product and attributes
  *
  * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
  */

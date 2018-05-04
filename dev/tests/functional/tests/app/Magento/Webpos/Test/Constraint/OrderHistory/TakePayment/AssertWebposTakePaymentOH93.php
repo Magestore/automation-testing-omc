@@ -15,7 +15,8 @@ class AssertWebposTakePaymentOH93 extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex, $amount)
     {
-        \PHPUnit_Framework_Assert::assertTrue(
+        sleep(1);
+        \PHPUnit_Framework_Assert::assertFalse(
             $webposIndex->getOrderHistoryPayment()->isVisible(),
             'Visible popup takepayment'
         );
