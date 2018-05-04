@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Pos\PosForm\WebposManagePosMP02Test" summary="Check GUI" ticketId="MAGETWO-0001">
+        <variation name="WebposManageLocationML02TestVariation">
+            <data name="buttons" xsi:type="string">Back, Reset, Save and Continue Edit, Save</data>
+            <data name="title" xsi:type="string">New Pos</data>
+            <data name="fields" xsi:type="array">
+                <item name="name" xsi:type="array">
+                    <item name="title" xsi:type="string">Location Name</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                </item>
+                <item name="store" xsi:type="array">
+                    <item name="title" xsi:type="string">Store View</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                </item>
+                <item name="address" xsi:type="array">
+                    <item name="title" xsi:type="string">Address</item>
+                    <item name="required" xsi:type="boolean">false</item>
+                </item>
+                <item name="description" xsi:type="array">
+                    <item name="title" xsi:type="string">Description</item>
+                    <item name="required" xsi:type="boolean">false</item>
+                </item>
+                <item name="warehouse" xsi:type="array">
+                    <item name="title" xsi:type="string">Warehouse</item>
+                    <item name="required" xsi:type="boolean">false</item>
+                </item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\Pos\Form\AssertPosFormDisplay" />
+        </variation>
+    </testCase>
+</config>
