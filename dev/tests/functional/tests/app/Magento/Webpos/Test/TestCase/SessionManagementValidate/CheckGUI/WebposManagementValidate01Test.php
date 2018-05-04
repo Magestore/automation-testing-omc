@@ -12,9 +12,9 @@ namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\CheckGUI;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Config\DataInterface;
+use Magento\Webpos\Test\Fixture\Pos;
+use Magento\Webpos\Test\Fixture\Location;
 
 class WebposManagementValidate01Test extends Injectable
 {
@@ -51,48 +51,53 @@ class WebposManagementValidate01Test extends Injectable
         )->run();
     }
 
-    public function test(WebposRole $webposRole)
+    /**
+     * @param Pos $pos
+     * @param FixtureFactory $fixtureFactory
+     */
+    public function test(Pos $pos, FixtureFactory $fixtureFactory)
     {
-        //Create role and staff for role
-//        $webposRole->persist();
-//        $staff = $webposRole->getDataFieldConfig('staff_id')['source']->getStaffs()[0];
-        //Login
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
+        //Config create session before working
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_yes']
+        )->run();
+
+        /**@var Location $location*/
+        $location = $fixtureFactory->createByCode('location', ['dataset' => 'default']);
+        $location->persist();
+        $locationId = $location->getLocationId();
+        $posData = $pos->getData();
+        $posData['location_id'][] = $locationId;
+        /**@var Pos $pos*/
+        $pos = $fixtureFactory->createByCode('pos', ['data' => $posData]);
+        $pos->persist();
+        $posId = $pos->getPosId();
+        $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
+        $staffData = $staff->getData();
+        $staffData['location_id'][] = $locationId;
+        $staffData['pos_ids'][] = $posId;
+        /**@var Staff $staff*/
+        $staff = $fixtureFactory->createByCode('staff', ['data' => $staffData]);
+        $staff->persist();
+        // Login webpos
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            [
+                'staff' => $staff,
+                'location' => $location,
+                'pos' => $pos
+            ]
         )->run();
 
         //click menu
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->webposIndex->getCMenu()->getSessionManagement();
 
-    }
-
-    public function login()
-    {
-        $username = $this->configuration->get('application/0/backendLogin/0/value');
-        $password = $this->configuration->get('application/0/backendPassword/0/value');
-        $this->webposIndex->open();
-        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-        if ($this->webposIndex->getLoginForm()->isVisible()) {
-            $this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
-            $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
-            $this->webposIndex->getLoginForm()->clickLoginButton();
-            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-            $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
-            $this->webposIndex->getLoginForm()->setLocation('Store Address');
-            $this->webposIndex->getLoginForm()->setPos('Store POS');
-            $this->webposIndex->getLoginForm()->getEnterToPos()->click();
-            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-            $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
-            $time = time();
-            $timeAfter = $time + 360;
-            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
-                $time = time();
-            }
-            sleep(2);
-        }
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-
+        $this->assertTrue(
+            $this->webposIndex->getListShift()->isVisible(),
+            'List session is not show'
+        );
     }
 
     public function tearDown()

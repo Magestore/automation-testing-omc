@@ -4,6 +4,9 @@
         <variation name="WebposManagementValidate12_01">
             <data name="denomination/dataset" xsi:type="string">default</data>
             <data name="des" xsi:type="string">Description</data>
+            <data name="pos/data/pos_name" xsi:type="string">test pos %isolation%</data>
+            <data name="pos/data/status" xsi:type="string">Enabled</data>
+            <data name="pos/data/is_allow_to_lock" xsi:type="string">0</data>
         </variation>
     </testCase>
 </config>

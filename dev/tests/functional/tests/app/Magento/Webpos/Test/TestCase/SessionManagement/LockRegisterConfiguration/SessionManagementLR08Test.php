@@ -43,6 +43,12 @@ class SessionManagementLR08Test extends Injectable
 
     public function test(Pos $pos, FixtureFactory $fixtureFactory)
     {
+        //Config create session before working
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_yes_MS57']
+        )->run();
+
         /**@var Location $location*/
         $location = $fixtureFactory->createByCode('location', ['dataset' => 'default']);
         $location->persist();
@@ -75,5 +81,14 @@ class SessionManagementLR08Test extends Injectable
             'Lock Register menu is not hidden.'
         );
 
+    }
+
+
+    public function tearDown()
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_no_MS57']
+        )->run();
     }
 }

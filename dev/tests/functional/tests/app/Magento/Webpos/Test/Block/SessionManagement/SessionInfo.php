@@ -27,4 +27,35 @@ class SessionInfo extends Block
         return $this->_rootElement->find('[data-bind="click: setClosingBalance"]');
     }
 
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getOpeningBalance()
+    {
+        return $this->_rootElement->find('[data-bind="text: formatPrice(shiftData().float_amount)"]');
+    }
+
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getDifferenceAmount()
+    {
+        return $this->_rootElement->find('[data-bind="text: formatPrice(differenceAmount())"]');
+    }
+
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getTheoreticalClosingBalance()
+    {
+        return $this->_rootElement->find('[data-bind="text: formatPrice(differenceAmount())"]');
+    }
+
+    /**
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getAddTransactionTotal()
+    {
+        return $this->_rootElement->find('[data-bind="text: formatPrice(getAddTransactionTotal())"]');
+    }
 }

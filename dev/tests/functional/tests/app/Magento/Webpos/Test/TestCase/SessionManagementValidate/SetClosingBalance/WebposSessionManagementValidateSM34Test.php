@@ -11,6 +11,10 @@ namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\SetClosingBalan
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Fixture\Denomination;
+use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Webpos\Test\Fixture\Pos;
+use Magento\Webpos\Test\Fixture\Location;
+use Magento\Webpos\Test\Fixture\Staff;
 
 /**
  * Class WebposSessionManagementValidateSM34Test
@@ -34,27 +38,47 @@ class WebposSessionManagementValidateSM34Test extends Injectable
 
     /**
      * @param Denomination $denomination
+     * @param Pos $pos
+     * @param FixtureFactory $fixtureFactory
      */
-    public function test(
-        Denomination $denomination
-    ) {
+    public function test( Denomination $denomination, Pos $pos, FixtureFactory $fixtureFactory)
+    {
         // Precondition
         $denomination->persist();
 
-        // Config create session before working
+        //Config create session before working
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'create_section_before_working_yes']
         )->run();
 
+        /**@var Location $location*/
+        $location = $fixtureFactory->createByCode('location', ['dataset' => 'default']);
+        $location->persist();
+        $locationId = $location->getLocationId();
+        $posData = $pos->getData();
+        $posData['location_id'][] = $locationId;
+        /**@var Pos $pos*/
+        $pos = $fixtureFactory->createByCode('pos', ['data' => $posData]);
+        $pos->persist();
+        $posId = $pos->getPosId();
+        $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
+        $staffData = $staff->getData();
+        $staffData['location_id'][] = $locationId;
+        $staffData['pos_ids'][] = $posId;
+        /**@var Staff $staff*/
+        $staff = $fixtureFactory->createByCode('staff', ['data' => $staffData]);
+        $staff->persist();
         // Login webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            [
+                'staff' => $staff,
+                'location' => $location,
+                'pos' => $pos,
+                'hasOpenSession' => false
+            ]
         )->run();
-
-        // Open session
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
-        $this->webposIndex->getOpenSessionPopup()->waitForElementNotVisible('[data-bind="visible:loading"]');
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
 
@@ -63,8 +87,9 @@ class WebposSessionManagementValidateSM34Test extends Injectable
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
         sleep(1);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
+        sleep(1);
         $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
-
+        sleep(1);
         $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
 
         // Assert Set Reason popup not visible
