@@ -37,8 +37,8 @@ class WeposProductGridCheckGroupProductBlockPG36Test extends Injectable
         )->run();
 
         // Login webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposStep'
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();
 
         // Add product to cart

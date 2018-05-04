@@ -169,6 +169,7 @@ class WebposTaxTAX34Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(2);
 
+        $this->webposIndex->getCheckoutPaymentMethod()->waitForElementVisible('.icon-iconPOS-payment-cashforpos');
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);

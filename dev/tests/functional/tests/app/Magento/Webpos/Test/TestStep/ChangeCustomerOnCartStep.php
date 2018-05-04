@@ -47,10 +47,11 @@ class ChangeCustomerOnCartStep implements TestStepInterface
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 
 		// Select an existing customer
+		$this->webposIndex->getCheckoutCartHeader()->waitForElementVisible('.icon-iconPOS-change-customer');
 		$this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
 
 		$this->webposIndex->getCheckoutChangeCustomer()->search($this->customer->getEmail());
-		sleep(1);
+		sleep(3);
         $this->webposIndex->getCheckoutChangeCustomer()->waitForCustomerList();
 		$this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
 		sleep(1);

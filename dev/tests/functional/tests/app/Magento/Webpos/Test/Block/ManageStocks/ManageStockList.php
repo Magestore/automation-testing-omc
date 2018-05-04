@@ -115,7 +115,10 @@ class ManageStockList extends Block
     public function isCheckboxChecked($divCheckbox)
     {
         $class = $divCheckbox->find('div')->getAttribute('class');
-        return strpos($class, 'checked');
+        if(strpos($class, 'checked') !== false){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -163,6 +166,14 @@ class ManageStockList extends Block
         return $this->getProductRow($productName)->find('.ios-ui-select');
     }
 
+    public function getManageStockSwitchByProduct($productName){
+        return $this->getProductManageStocksCheckbox($productName)->find('.ios-ui-select');
+    }
+
+    public function getBackOrdersSwitchByProduct($productName){
+        return $this->getProductBackOrdersCheckbox($productName)->find('.ios-ui-select');
+    }
+
     public function getUpdateButtonByProduct($productName)
     {
         return $this->getProductRow($productName)->find('.update');
@@ -171,5 +182,33 @@ class ManageStockList extends Block
     public function getUpdateSuccessByProduct($productName)
     {
         return $this->getProductRow($productName)->find('.icon-iconPOS-success');
+    }
+
+    public function resetSearchProduct(){
+        $this->getSearchBox()->setValue('');
+    }
+
+    public function getInStockValueByProduct($productName){
+        $inStock = $this->getInStockSwitchByProduct($productName);
+        if (strpos($inStock->getAttribute('class'), 'checked') !== false) {
+            return true;
+        }
+        return false;
+    }
+
+    public function getManageStockValueByProduct($productName){
+        $inStock = $this->getManageStockSwitchByProduct($productName);
+        if (strpos($inStock->getAttribute('class'), 'checked') !== false) {
+            return true;
+        }
+        return false;
+    }
+
+    public function getBackOrdersValueByProduct($productName){
+        $inStock = $this->getBackOrdersSwitchByProduct($productName);
+        if (strpos($inStock->getAttribute('class'), 'checked') !== false) {
+            return true;
+        }
+        return false;
     }
 }

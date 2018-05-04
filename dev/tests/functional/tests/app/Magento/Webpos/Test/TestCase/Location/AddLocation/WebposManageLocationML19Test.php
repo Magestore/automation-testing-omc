@@ -7,11 +7,12 @@
  */
 namespace Magento\Webpos\Test\TestCase\Location\AddLocation;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Constraint\Adminhtml\Location\Grid\AssertSearchExistLocationSuccess;
 use Magento\Webpos\Test\Fixture\Location;
 use Magento\Webpos\Test\Page\Adminhtml\LocationIndex;
 use Magento\Webpos\Test\Page\Adminhtml\LocationNews;
 
-class WebposManageLocationML18Test extends Injectable
+class WebposManageLocationML19Test extends Injectable
 {
     /**
      * Webpos Location Index page.
@@ -30,12 +31,17 @@ class WebposManageLocationML18Test extends Injectable
      * @param LocationIndex
      * @return void
      */
+
+    private $assertSearchLocation;
+
     public function __inject(
         LocationIndex $locationIndex,
-        LocationNews $locationNews
+        LocationNews $locationNews,
+        AssertSearchExistLocationSuccess $assertSearchExistLocationSuccess
     ) {
         $this->locationIndex = $locationIndex;
         $this->locationNews = $locationNews;
+        $this->assertSearchLocation = $assertSearchExistLocationSuccess;
     }
 
     public function test(Location $location)
@@ -46,7 +52,10 @@ class WebposManageLocationML18Test extends Injectable
         sleep(1);
         $this->locationNews->getLocationsForm()->fill($location);
         $this->locationNews->getFormPageActions()->save();
-        sleep(1);
+        sleep(2);
+        $this->assertSearchLocation->processAssert($this->locationIndex, $location->getData());
+
+
     }
 }
 

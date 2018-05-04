@@ -46,13 +46,16 @@ class WebposProductsGridCheckGUISimpleProductTest extends Injectable
             ['products' => $products]
         )->run();
 
-        // Login webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposStep'
-        )->run();
+        $this->webposIndex->open();
 
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        if ($this->webposIndex->getLoginForm()->isVisible()) {
+            // Login webpos
+            $this->objectManager->getInstance()->create(
+                'Magento\Webpos\Test\TestStep\SessionInstallStep'
+            )->run();
+        }
+
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 
         $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();

@@ -57,33 +57,40 @@ class WebposProductsGridPG16PG17Test extends Injectable
             ['products' => $products]
         )->run();
 
-        // Login webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposStep'
-        )->run();
+        $this->webposIndex->open();
 
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        if ($this->webposIndex->getLoginForm()->isVisible()) {
+            // Login webpos
+            $this->objectManager->getInstance()->create(
+                'Magento\Webpos\Test\TestStep\SessionInstallStep'
+            )->run();
+        }
+
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
         $this->webposIndex->getCheckoutProductList()->getFirstProduct()->hover();
         $this->webposIndex->getCheckoutProductList()->getFirstProductDetailButton()->click();
 
-        $qty = 1;
+        $qty = 2;
 
         if ($action === 'add to cart'){
             $this->webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
+            /**
+             *  cuz search by sku, simple product added 1 before we trigger ad to cart
+             */
         }elseif ($action === 'change qty'){
+
             // Click on "+" two time
             $this->webposIndex->getCheckoutProductDetail()->getButtonUpQty()->click();
-            $qty++;
-            $this->assertProductQtyInProductDetail->processAssert($this->webposIndex, $qty);
+            $qty+=1;
             $this->webposIndex->getCheckoutProductDetail()->getButtonUpQty()->click();
-            $qty++;
-            $this->assertProductQtyInProductDetail->processAssert($this->webposIndex, $qty);
+            $qty+=1;
             // Click on "-" one time
             $this->webposIndex->getCheckoutProductDetail()->getButtonDownQty()->click();
-            $qty--;
-            $this->assertProductQtyInProductDetail->processAssert($this->webposIndex, $qty);
+            $qty-=1;
             $this->webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
         }
 

@@ -43,11 +43,6 @@ class AssertInvoiceSuccess extends AbstractConstraint
             $webposIndex->getToaster()->getWarningMessage()->getText(),
             "Success message's Content is Wrong"
         );
-//
-//        \PHPUnit_Framework_Assert::assertFalse(
-//            $webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->isVisible(),
-//            'Invoice Button is not hiden'
-//        );
 
         $webposIndex->getNotification()->getNotificationBell()->click();
         \PHPUnit_Framework_Assert::assertTrue(

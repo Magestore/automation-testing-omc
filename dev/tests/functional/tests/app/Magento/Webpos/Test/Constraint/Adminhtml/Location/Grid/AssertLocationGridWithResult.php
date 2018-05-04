@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\Constraint\Adminhtml\Location\Grid;
 
-
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\Adminhtml\LocationIndex;
 
@@ -17,7 +16,7 @@ class AssertLocationGridWithResult extends AbstractConstraint
 
     public function processAssert(LocationIndex $locationIndex){
         \PHPUnit_Framework_Assert::assertTrue(
-            $locationIndex->getLocationsGrid()->isFirstRowVisible(),
+            $locationIndex->getLocationsGrid()->getDataGridFirstRow()->isVisible(),
             'Data Grid is not empty'
         );
     }

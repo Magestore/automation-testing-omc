@@ -3,6 +3,12 @@
     <testCase name="Magento\Webpos\Test\TestCase\ProductsGrid\ConfigProduct\WebposProductGridConfigProductBlockCheckErrorPopupPG23Test" summary="Products Grid - Config Product" ticketId="WEBPOS-PG23">
         <variation name="WebposProductGridConfigProductBlockCheckErrorPopupPG23TestVariation1">
             <data name="description" xsi:type="string">check error popup</data>
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="fixtureName" xsi:type="string">configurableProduct</item>
+                    <item name="product" xsi:type="string">configurable_product_with_only_two_options</item>
+                </item>
+            </data>
         </variation>
     </testCase>
 </config>
