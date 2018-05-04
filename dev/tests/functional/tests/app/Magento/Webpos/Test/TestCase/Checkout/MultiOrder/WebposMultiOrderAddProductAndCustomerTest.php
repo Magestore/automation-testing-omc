@@ -57,7 +57,7 @@ class WebposMultiOrderAddProductAndCustomerTest extends Injectable
 
         $this->webposIndex->getCheckoutWebposCart()->getIconChangeCustomer()->click();
         $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
-
+        sleep(3);
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($orderNumber)->click();
