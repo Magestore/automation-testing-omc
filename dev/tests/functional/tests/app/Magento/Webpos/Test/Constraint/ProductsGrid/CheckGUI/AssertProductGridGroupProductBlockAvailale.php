@@ -28,7 +28,7 @@ class AssertProductGridGroupProductBlockAvailale extends AbstractConstraint
             'Products Grid - First product detail button is not visible.'
         );
         \PHPUnit_Framework_Assert::assertFalse(
-            $webposIndex->getCheckoutProductList()->getFirstProductQty()->isVisible(),
+            !empty(trim($webposIndex->getCheckoutProductList()->getFirstProductQty()->getText())),
             'Products Grid - Config product available qty is not hidden.'
         );
         $price = $webposIndex->getCheckoutProductList()->getFirstProductPrice();

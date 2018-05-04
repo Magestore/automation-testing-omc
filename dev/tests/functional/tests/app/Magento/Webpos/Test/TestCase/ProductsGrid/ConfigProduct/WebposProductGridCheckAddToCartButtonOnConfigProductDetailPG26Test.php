@@ -27,17 +27,21 @@ class  WebposProductGridCheckAddToCartButtonOnConfigProductDetailPG26Test extend
         $this->webposIndex = $webposIndex;
     }
 
-    public function test()
+    public function test($products)
     {
-        // Login webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposStep'
+        // Create products
+        $products = $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
+            ['products' => $products]
         )->run();
 
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        // Login webpos
+        $staff = $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\SessionInstallStep'
+        )->run();
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 
-        $this->webposIndex->getCheckoutProductList()->search('Abominable Hoodie');
+        $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-product-detail"]');
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-product-detail"]');
@@ -46,6 +50,12 @@ class  WebposProductGridCheckAddToCartButtonOnConfigProductDetailPG26Test extend
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-product-detail"]');
         sleep(3);
         $this->webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
+
+        $this->assertTrue(
+            $this->webposIndex->getModal()->isVisible(),
+            'Error popup message is not showed.'
+        );
+
         $this->assertEquals(
             'Please choose all options',
             $this->webposIndex->getModal()->getPopupMessage(),

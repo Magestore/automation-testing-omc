@@ -34,20 +34,27 @@ class  WebposProductGridConnectToManageStockPG54Test extends Injectable
             ['products' => $products]
         )->run();
         // Login webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposStep'
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();
 
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
+
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->manageStocks();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="manage_stock_container"]');
         $productName = $products[0]['product']->getName();
         $this->webposIndex->getManageStockList()->searchProduct($productName);
-        $this->webposIndex->getManageStockList()->waitForElementVisible('//table[@class="table table-product"]//tr', Locator::SELECTOR_XPATH);
-        sleep(2);
-//        $this->webposIndex->getManageStockList()->getProductQtyInput($productName)->setValue('12312423543534');
+
+        /** wait until search done */
+        while (!$this->webposIndex->getManageStockList()->waitForElementVisible('//table[@class="table table-product"]//tr', Locator::SELECTOR_XPATH)) {
+
+        }
+
+        while (!$this->webposIndex->getManageStockList()->getProductName($productName)->isVisible()) {
+
+        }
+
         $this->webposIndex->getManageStockList()->setProductOutOfStock($productName);
         $this->webposIndex->getManageStockList()->getUpdateButton($productName)->click();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();

@@ -33,8 +33,8 @@ class WebposProductGridConnectToManageStockPG56Test extends Injectable
             ['products' => $products]
         )->run();
         // Login webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposStep'
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();
         // Add product to cart
         $this->objectManager->getInstance()->create(

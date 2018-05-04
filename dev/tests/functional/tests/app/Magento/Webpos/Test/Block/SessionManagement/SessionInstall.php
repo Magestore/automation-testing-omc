@@ -15,5 +15,8 @@ use Magento\Mtf\Block\Block;
  */
 class SessionInstall extends Block
 {
-
+    public function getPercent()
+    {
+        return $this->_rootElement->find('.label-percent.first-rates-label-percent');
+    }
 }
