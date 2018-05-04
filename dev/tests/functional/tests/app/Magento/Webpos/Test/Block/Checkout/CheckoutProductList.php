@@ -90,12 +90,12 @@ class CheckoutProductList extends Block
 
     public function waitProductListToLoad()
     {
-        $this->waitForElementNotVisible('#product-list-overlay > span.product-loader');
+        return $this->waitForElementNotVisible('#product-list-overlay > span.product-loader');
     }
     public function waitProductListVisibleToNotVisible()
     {
         $this->waitForElementVisible('#product-list-overlay > span.product-loader');
-        $this->waitForElementNotVisible('#product-list-overlay > span.product-loader');
+        return $this->waitForElementNotVisible('#product-list-overlay > span.product-loader');
     }
 
     public function getSearchInput()
@@ -121,5 +121,10 @@ class CheckoutProductList extends Block
     public function getProductNameSearch($productName)
     {
         return $this->_rootElement->find('//*[@id="product1"]/div[2]/h3[text()='.$productName.']', Locator::SELECTOR_XPATH);
+    }
+
+    public function getSpanNoRecord()
+    {
+        return $this->_rootElement->find('#block-product-list span');
     }
 }

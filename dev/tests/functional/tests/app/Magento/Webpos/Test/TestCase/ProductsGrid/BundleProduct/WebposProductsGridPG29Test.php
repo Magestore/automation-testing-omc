@@ -10,7 +10,6 @@ namespace Magento\Webpos\Test\TestCase\ProductsGrid\BundleProduct;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Webpos\Test\Constraint\ProductsGrid\SimpleProduct\AssertProductQtyInProductList;
 
 /**
  * Class WebposProductsGridPG29Test
@@ -48,9 +47,10 @@ class WebposProductsGridPG29Test extends Injectable
         )->run();
 
         // Login webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposStep'
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();
+
 
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());

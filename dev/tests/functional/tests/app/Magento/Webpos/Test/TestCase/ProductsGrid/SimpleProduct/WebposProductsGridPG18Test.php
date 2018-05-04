@@ -37,12 +37,12 @@ class WebposProductsGridPG18Test extends Injectable
     )
     {
         // Login webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposStep'
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();
 
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
+
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 
         $this->webposIndex->getCheckoutProductList()->getFirstProduct()->hover();
         $this->webposIndex->getCheckoutProductList()->getFirstProductDetailButton()->click();

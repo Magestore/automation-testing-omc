@@ -86,7 +86,7 @@ class WebposManageStocksUpdateProductAttributesMSK09Test extends Injectable
 
 		// action
 		$this->webposIndex->getManageStockList()->getUpdateAllButton()->click();
-		foreach ($productList as $item) {
+            foreach ($productList as $item) {
 			$productName = $item['product']->getName();
 			$this->webposIndex->getManageStockList()->waitForProductIconSuccess($productName);
 		}

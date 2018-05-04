@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct\WebposProductsGridPG16PG17Test" summary="Products Grid - Simple Product" ticketId="WEBPOS-PG16PG17">
-        <variation name="WebposProductsGridPG16PG17Test_PG16PG17_0">
-            <data name="products" xsi:type="array">
-                <item name="0" xsi:type="array">
-                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
-                </item>
-            </data>
-            <data name="action" xsi:type="string">add to cart</data>
-            <constraint name="Magento\Webpos\Test\Constraint\ProductsGrid\SimpleProduct\AssertProductQtyInCart"/>
-        </variation>
+        <!--<variation name="WebposProductsGridPG16PG17Test_PG16PG17_0">-->
+            <!--<data name="products" xsi:type="array">-->
+                <!--<item name="0" xsi:type="array">-->
+                    <!--<item name="product" xsi:type="string">product_100_dollar_taxable</item>-->
+                <!--</item>-->
+            <!--</data>-->
+            <!--<data name="action" xsi:type="string">add to cart</data>-->
+            <!--<constraint name="Magento\Webpos\Test\Constraint\ProductsGrid\SimpleProduct\AssertProductQtyInCart"/>-->
+        <!--</variation>-->
         <variation name="WebposProductsGridPG16PG17Test_PG16PG17_1">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">

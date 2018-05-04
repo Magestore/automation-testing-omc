@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\ManageStocks\UpdateProductAttributes\WebposManageStockMSK11Test"
+              summary="Manage Stocks - Update Product Attributes Test" ticketId="WEBPOS-10000">
+        <variation name="WebposManageStockMSK10TestVariation_MSK11">
+            <data name="productInfo" xsi:type="array">
+                <item name="product" xsi:type="string">catalogProductSimple::product_in_primary_warehouse_MSK10</item>
+                <item name="qty" xsi:type="number">-2</item>
+                <item name="inStock" xsi:type="boolean">true</item>
+                <item name="manageStock" xsi:type="boolean">false</item>
+                <item name="backOrders" xsi:type="boolean">true</item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes\AssertProductUpdateSuccess"/>
+        </variation>
+    </testCase>
+</config>
