@@ -66,9 +66,9 @@ class WebposProductsGridPG31Test extends Injectable
 
 
         // Choose first product
+        sleep(5);
         $this->webposIndex->getCheckoutProductDetail()->getRadioItemOfBundleProduct($products[0]['product']
             ->getBundleSelections()['products'][0][0]->getName())->click();
-        sleep(1);
         $this->webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         // Check out and Place Order
