@@ -25,10 +25,48 @@ class AssertProductUpdateSuccess extends AbstractConstraint
         }
 
         if (isset($productInfo['inStock'])) {
-            \PHPUnit_Framework_Assert::assertFalse(
-                $webposIndex->getManageStockList()->getInStockValueByProduct($product->getName()),
-                'inStock of product is incorrect'
-            );
+            if ((int)$productInfo['qty'] <= 0) {
+                \PHPUnit_Framework_Assert::assertFalse(
+                    $webposIndex->getManageStockList()->getInStockValueByProduct($product->getName()),
+                    'inStock of product is incorrect'
+                );
+            } else {
+                \PHPUnit_Framework_Assert::assertTrue(
+                    $webposIndex->getManageStockList()->getInStockValueByProduct($product->getName()),
+                    'inStock of product is incorrect'
+                );
+            }
+
+        }
+
+        if (isset($productInfo['manageStock'])) {
+            if ($productInfo['manageStock']) {
+                \PHPUnit_Framework_Assert::assertTrue(
+                    $webposIndex->getManageStockList()->getManageStockValueByProduct($product->getName()),
+                    'Manage Stock of product is incorrect'
+                );
+            } else {
+                \PHPUnit_Framework_Assert::assertFalse(
+                    $webposIndex->getManageStockList()->getManageStockValueByProduct($product->getName()),
+                    'Manage Stock of product is incorrect'
+                );
+            }
+
+        }
+
+        if (isset($productInfo['backOrders'])) {
+            if ($productInfo['backOrders']) {
+                \PHPUnit_Framework_Assert::assertTrue(
+                    $webposIndex->getManageStockList()->getBackOrdersValueByProduct($product->getName()),
+                    'Manage Stock of product is incorrect'
+                );
+            } else {
+                \PHPUnit_Framework_Assert::assertFalse(
+                    $webposIndex->getManageStockList()->getBackOrdersValueByProduct($product->getName()),
+                    'Manage Stock of product is incorrect'
+                );
+            }
+
         }
     }
 
