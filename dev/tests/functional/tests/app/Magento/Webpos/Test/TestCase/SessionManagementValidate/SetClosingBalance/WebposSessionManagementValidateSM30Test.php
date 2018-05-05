@@ -66,15 +66,15 @@ class WebposSessionManagementValidateSM30Test extends Injectable
         $location->persist();
         $locationId = $location->getLocationId();
         $posData = $pos->getData();
-        $posData['location_id'][] = $locationId;
+        $posData['location_id'] = [ $locationId ];
         /**@var Pos $pos*/
         $pos = $fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
         $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
         $staffData = $staff->getData();
-        $staffData['location_id'][] = $locationId;
-        $staffData['pos_ids'][] = $posId;
+        $staffData['location_id'] = [ $locationId ];
+        $staffData['pos_ids'] = [ $posId ];
         /**@var Staff $staff*/
         $staff = $fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff->persist();
