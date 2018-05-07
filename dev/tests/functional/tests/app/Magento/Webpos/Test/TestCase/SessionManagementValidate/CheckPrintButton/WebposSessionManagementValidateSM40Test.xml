@@ -3,6 +3,9 @@
     <testCase name="Magento\Webpos\Test\TestCase\SessionManagementValidate\CheckPrintButton\WebposSessionManagementValidateSM40Test" summary="Session Management Validate - Check Print" ticketId="WEBPOS-PG01">
         <variation name="WebposSessionManagementValidateSM40Test_SM40">
             <data name="description" xsi:type="string">Check Print Button</data>
+            <data name="pos/data/pos_name" xsi:type="string">test pos %isolation%</data>
+            <data name="pos/data/status" xsi:type="string">Enabled</data>
+            <data name="pos/data/is_allow_to_lock" xsi:type="string">0</data>
         </variation>
     </testCase>
 </config>

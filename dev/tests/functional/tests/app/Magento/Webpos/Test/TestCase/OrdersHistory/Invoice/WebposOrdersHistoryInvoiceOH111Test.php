@@ -11,6 +11,7 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\Invoice;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistoryInvoice;
+use Magento\Config\Test\Fixture\ConfigData;
 
 /**
  * Class WebposOrdersHistoryInvoiceOH111Test
@@ -43,12 +44,10 @@ class WebposOrdersHistoryInvoiceOH111Test extends Injectable
 
     /**
      * @param $products
+     * @param ConfigData $dataConfig
      * @return array
      */
-    public function test(
-        $products
-    )
-    {
+    public function test ($products, $dataConfig) {
         // Create products
         $products = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
@@ -64,6 +63,11 @@ class WebposOrdersHistoryInvoiceOH111Test extends Injectable
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',
             ['products' => $products]
+        )->run();
+        //Config payment method
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => $dataConfig]
         )->run();
 
         // Place Order
@@ -94,22 +98,42 @@ class WebposOrdersHistoryInvoiceOH111Test extends Injectable
 
         // Take payment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
-        $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->click();
-        $paymentPrice = (float) substr( $this->webposIndex->getOrderHistoryPayment()->getPaymentPriceInput()->getValue(), 1);
-        $this->webposIndex->getOrderHistoryPayment()->getPaymentPriceInput()->setValue($paymentPrice / 2);
-        $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForModalPopup();
-        $this->webposIndex->getModal()->getOkButton()->click();
-        sleep(1);
-        $totalPaid = (float) substr( $this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
+        if ($this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->isVisible()) {
+            $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->click();
+            $paymentPrice = (float) substr( $this->webposIndex->getOrderHistoryPayment()->getPaymentPriceInput()->getValue(), 1);
+            $this->webposIndex->getOrderHistoryPayment()->getPaymentPriceInput()->setValue($paymentPrice / 2);
+            $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
+            $this->webposIndex->getMsWebpos()->waitForModalPopup();
+            $this->webposIndex->getModal()->getOkButton()->click();
+            sleep(1);
+            $totalPaid = (float) substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
 
-        // Click Button Invoice
-        $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
-        $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
+            // Click Button Invoice
+            $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
+            $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
 
-        return [
-            'products' => $products,
-            'totalPaid' => $totalPaid
-        ];
+            return [
+                'products' => $products,
+                'totalPaid' => $totalPaid
+            ];
+
+            $rowTotal = 0;
+            foreach ($products as $item){
+                $productName = $item['product']->getName();
+                $rowTotal += (float) substr($this->webposIndex->getOrderHistoryInvoice()->getRowTotalOfProduct($productName)->getText(), 1);
+            }
+
+            self::assertGreaterThan(
+                0,
+                $rowTotal,
+                'Row total is not greater than 0.'
+            );
+
+            self::assertLessThan(
+                $totalPaid,
+                $rowTotal,
+                'No have invoice items that have Row total less than total paid.'
+            );
+        }
     }
 }

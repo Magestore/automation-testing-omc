@@ -8,6 +8,7 @@
                     <item name="orderQty" xsi:type="number">1</item>
                 </item>
             </data>
+            <data name="dataConfig" xsi:type="string">magestore_webpos_specific_payment</data>
             <data name="createInvoice" xsi:type="boolean">false</data>
             <data name="shipped" xsi:type="boolean">false</data>
         </variation>

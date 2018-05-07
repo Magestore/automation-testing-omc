@@ -52,6 +52,7 @@ class AddPaymentOnCheckoutPageStep implements TestStepInterface
 		foreach ($this->paymentMethods as $key => $method) {
 			$this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();
 			$this->webposIndex->getCheckoutContainer()->waitForAddMorePaymentModal();
+			sleep(1);
 			$this->webposIndex->getCheckoutAddMorePayment()->getPaymentMethodByLabel($method['label'])->click();
 			$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 

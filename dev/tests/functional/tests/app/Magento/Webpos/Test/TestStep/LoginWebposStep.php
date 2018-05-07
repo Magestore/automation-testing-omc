@@ -65,7 +65,7 @@ class LoginWebposStep implements TestStepInterface
             while (!$this->webposIndex->getWrapWarningForm()->isVisible() && $time < $timeAfter){
                 $time = time();
             }
-            if ($this->webposIndex->getWrapWarningForm()->isVisible()) {
+            if ($this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible()) {
                 $this->webposIndex->getWrapWarningForm()->getButtonContinue()->click();
             }
             $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
