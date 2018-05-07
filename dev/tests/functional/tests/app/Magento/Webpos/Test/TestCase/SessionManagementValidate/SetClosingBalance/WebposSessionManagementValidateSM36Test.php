@@ -87,6 +87,7 @@ class WebposSessionManagementValidateSM36Test extends Injectable
             ]
         )->run();
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
+        /** now balance is 100 */
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         sleep(1);
@@ -97,6 +98,7 @@ class WebposSessionManagementValidateSM36Test extends Injectable
         sleep(2);
         $this->webposIndex->getCheckoutCartFooter()->waitButtonHoldVisible();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        /** product price 100 */
         $this->webposIndex->getCheckoutProductList()->search($product->getSku());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -108,6 +110,7 @@ class WebposSessionManagementValidateSM36Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        /** now balance is 200 */
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
@@ -117,17 +120,31 @@ class WebposSessionManagementValidateSM36Test extends Injectable
         // Put money in
 
         $this->webposIndex->getSessionShift()->getPutMoneyInButton()->click();
-        $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue(50);
+        sleep(1);
+        /** now balance is 200, put in 500 */
+        $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue(1);
         $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();
+        $differenceAmountBeforePutIn = $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText();
+        while ($differenceAmountBeforePutIn == $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText()) {
+
+        }
         $this->webposIndex->getSessionShift()->getTakeMoneyOutButton()->click();
-        $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue(20);
+        sleep(1);
+        /** now balance is 200, put out 200 */
+        $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue(1);
         $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();
+        $differenceAmountBeforePutOut = $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText();
+        while ($differenceAmountBeforePutOut == $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText()) {
+
+        }
 
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
+        sleep(1);
         $this->webposIndex->getOpenSessionPopup()->waitForElementNotVisible('[data-bind="visible:loading"]');
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getNumberOfCoinsBills()->setValue(23);
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
 
+        $this->webposIndex->getSessionSetClosingBalancePopup()->getNumberOfCoinsBills()->setValue(20);
+        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
+        sleep(2);
         // Assert Set Closing Balance Popup not visible
         $this->assertFalse(
             $this->webposIndex->getSessionSetClosingBalancePopup()->isVisible(),
@@ -141,19 +158,15 @@ class WebposSessionManagementValidateSM36Test extends Injectable
             'Button "Validate Closing" is not visible.'
         );
 
+
         // Assert Difference = 0
         $difference = $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText();
         $difference = substr($difference, 2);
         $this->assertEquals(
             '0',
             $difference,
-            'Difference is not correct.'
+            'Difference is not correct. '. $difference
         );
-
-        sleep(2);
-        // End session
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
     }
 
     /**

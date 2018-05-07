@@ -74,11 +74,16 @@ class WebposSessionManagementValidateSM38Test extends Injectable
                 'pos' => $pos
             ]
         )->run();
+        while (! $this->webposIndex->getSessionShift()->getButtonEndSession()->isVisible()) {
+
+        }
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
+        sleep(1);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
+        sleep(1);
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
+        sleep(1);
         $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
-        sleep(2);
 
         // Assert
         $this->assertFalse(
