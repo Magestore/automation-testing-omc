@@ -199,10 +199,10 @@ class WebposManageStaffMS61Test extends Injectable
 
     public function tearDown()
     {
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'create_section_before_working_no_MS57']
-        )->run();
+//        $this->objectManager->getInstance()->create(
+//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+//            ['configData' => 'create_section_before_working_no_MS57']
+//        )->run();
     }
 }
 

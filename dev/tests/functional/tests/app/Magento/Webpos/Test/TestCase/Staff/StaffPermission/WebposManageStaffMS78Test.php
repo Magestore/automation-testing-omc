@@ -114,6 +114,7 @@ class WebposManageStaffMS78Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-make-adjustment"]');
         $this->webposIndex->getPutMoneyInPopup()->getAmountInput()->setValue(69);
         $this->webposIndex->getPutMoneyInPopup()->getDoneButton()->click();
+        sleep(2);
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-make-adjustment"]');
         //Close the shift
         sleep(2);

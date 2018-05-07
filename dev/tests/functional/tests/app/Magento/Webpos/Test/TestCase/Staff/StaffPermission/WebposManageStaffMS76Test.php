@@ -164,6 +164,7 @@ class WebposManageStaffMS76Test extends Injectable
             $this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
             $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
             $this->webposIndex->getLoginForm()->clickLoginButton();
+            sleep(2);
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
             $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
             if ($location) {

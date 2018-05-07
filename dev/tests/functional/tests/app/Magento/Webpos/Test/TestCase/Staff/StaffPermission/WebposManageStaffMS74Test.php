@@ -114,6 +114,7 @@ class WebposManageStaffMS74Test extends Injectable
         $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-edit-product"]');
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
+        sleep(3);
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue(69);
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         sleep(2);

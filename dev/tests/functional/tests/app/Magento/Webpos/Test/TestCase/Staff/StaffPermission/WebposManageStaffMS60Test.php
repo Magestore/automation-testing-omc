@@ -5,7 +5,9 @@
  * Date: 12/02/2018
  * Time: 09:14
  */
+
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
@@ -31,6 +33,7 @@ class WebposManageStaffMS60Test extends Injectable
      * @var AssertShowNewNotification
      */
     protected $assertShowNewNotification;
+
     public function __prepare()
     {
         $this->objectManager->getInstance()->create(
@@ -49,7 +52,8 @@ class WebposManageStaffMS60Test extends Injectable
         WebposIndex $webposIndex,
         AssertShowMessageNotification $assertShowMessageNotification,
         AssertShowNewNotification $assertShowNewNotification
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->assertShowMessageNotification = $assertShowMessageNotification;
         $this->assertShowNewNotification = $assertShowNewNotification;
@@ -80,20 +84,21 @@ class WebposManageStaffMS60Test extends Injectable
         )->run();
 
         //Create order
-            //Add products to cart
+        //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+       sleep(2);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(1);
         $this->webposIndex->getCheckoutProductList()->search($product2->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        sleep(2);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
-            //Checkout
+        //Checkout
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-            //PlaceOrder
+        //PlaceOrder
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
@@ -101,9 +106,9 @@ class WebposManageStaffMS60Test extends Injectable
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         sleep(1);
-            //Get orderId
+        //Get orderId
         $orderId1 = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
-        $orderId1= ltrim ($orderId1,'#');
+        $orderId1 = ltrim($orderId1, '#');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         sleep(4);
 
@@ -120,13 +125,11 @@ class WebposManageStaffMS60Test extends Injectable
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         //Send email
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
-        while(!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible())
-        {
+        while (!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible()) {
             sleep(1);
         }
         $this->webposIndex->getOrderHistoryAddOrderNote()->getSendMailButton()->click();
-        while(!$this->webposIndex->getOrderHistorySendEmail()->isVisible())
-        {
+        while (!$this->webposIndex->getOrderHistorySendEmail()->isVisible()) {
             sleep(1);
         }
         $this->webposIndex->getOrderHistorySendEmail()->getInputSendEmail()->setValue('test@gmail.com');
@@ -142,13 +145,11 @@ class WebposManageStaffMS60Test extends Injectable
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         //Add comment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
-        while(!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible())
-        {
+        while (!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible()) {
             sleep(1);
         }
         $this->webposIndex->getOrderHistoryAddOrderNote()->getAddCommentButton()->click();
-        while(!$this->webposIndex->getOrderHistoryAddComment()->isVisible())
-        {
+        while (!$this->webposIndex->getOrderHistoryAddComment()->isVisible()) {
             sleep(1);
         }
         $this->webposIndex->getOrderHistoryAddComment()->getInputComment()->setValue('test add comment');
@@ -161,8 +162,7 @@ class WebposManageStaffMS60Test extends Injectable
 
         //Re-order
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
-        while(!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible())
-        {
+        while (!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible()) {
             sleep(1);
         }
         $this->webposIndex->getOrderHistoryAddOrderNote()->getReOrderButton()->click();
@@ -174,5 +174,5 @@ class WebposManageStaffMS60Test extends Injectable
         $dataProduct2['qty'] = 1;
         return ['cartProducts' => [$dataProduct1, $dataProduct2]];
     }
-    }
+}
 
