@@ -32,7 +32,7 @@ class AssertCheckCartConfigProduct extends AbstractConstraint
                     floatval($cartProducts[$i]['configurable_attributes_data']['matrix']['attribute_key_0:option_key_0']['price']),
                     'Price product is not correct'
                 );
-//                \PHPUnit_Framework_Assert::assertTrue($webposIndex->getCheckoutCartItems()->getAttributeCartItemByOrderToElement($i + 1)->isVisible());
+                \PHPUnit_Framework_Assert::assertTrue($webposIndex->getCheckoutCartItems()->getAttributeCartItemByOrderToElement($i + 1)->isVisible());
                 if ($webposIndex->getCheckoutCartItems()->getAttributeCartItemByOrderToElement($i + 1)->isVisible()) {
                     \PHPUnit_Framework_Assert::assertEquals(
                         $webposIndex->getCheckoutCartItems()->getAttributeCartItemByOrderTo($i + 1),

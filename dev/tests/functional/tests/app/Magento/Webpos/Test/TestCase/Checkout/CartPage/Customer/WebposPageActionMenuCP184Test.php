@@ -60,7 +60,7 @@ class WebposPageActionMenuCP184Test extends Injectable
         $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
         sleep(1);
         $this->webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->click();
-        $this->webposIndex->getCheckoutContainer()->waitForAddNoteModalNotVisible();
+
         sleep(2);
     }
 }
