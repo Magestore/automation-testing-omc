@@ -51,7 +51,7 @@ class WebposHoldOrderCP162Test extends Injectable
         }
         $this->webposIndex->getCheckoutProductEdit()->getDollarButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
-        sleep(1);
+        sleep(3);
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
         //Hold

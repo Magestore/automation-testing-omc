@@ -8,12 +8,15 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\EditQty;
 
-
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CartPage\EditQty\AssertEditProductPopupIsAvailable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposCheckoutCartEditQtyChangeProductQtyTest
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\EditQty
+ */
 class WebposCheckoutCartEditQtyChangeProductQtyTest extends Injectable
 {
 	/**
