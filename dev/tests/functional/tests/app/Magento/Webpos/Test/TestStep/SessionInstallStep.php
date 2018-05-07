@@ -26,13 +26,8 @@ class SessionInstallStep extends LoginWebposStep
         /**
          *  wait sync complete
          */
-        while (
-            ( rtrim($this->webposIndex->getSessionInstall()->getPercent()->getText(),"%") * 1 ) < 95
-        ) {
-
-        }
-
-        sleep(4);
+        $this->webposIndex->getBody()->waitForElementNotVisible('.wrap-login-form');
+        sleep(3);
         return $staff;
     }
 }

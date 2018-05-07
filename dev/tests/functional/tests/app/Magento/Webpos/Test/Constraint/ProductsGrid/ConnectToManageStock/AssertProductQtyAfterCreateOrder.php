@@ -8,6 +8,7 @@
 
 namespace Magento\Webpos\Test\Constraint\ProductsGrid\ConnectToManageStock;
 
+use Magento\Mtf\Client\Locator;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
@@ -24,6 +25,7 @@ class AssertProductQtyAfterCreateOrder extends AbstractConstraint
             $expectedQty = $item['product']->getQuantityAndStockStatus()['qty'] - $item['orderQty'];
             $productName = $item['product']->getName();
             $webposIndex->getManageStockList()->searchProduct($productName);
+            sleep(5);
             $actualProductQty = $webposIndex->getManageStockList()->getProductQtyValue($productName);
             \PHPUnit_Framework_Assert::assertEquals(
                 $expectedQty,

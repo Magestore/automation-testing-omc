@@ -86,12 +86,15 @@ class WebposManagementValidate15Test extends Injectable
                 'hasOpenSession' => false
             ]
         )->run();
+
+        $beforeOpeningBalance  =  $this->webposIndex->getSessionInfo()->getOpeningBalance()->getText();
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         $openAmount = $denomination->getDenominationValue() * 10;
 
-        sleep(1);
+        /** wait request done */
+        while ( $beforeOpeningBalance ==  $this->webposIndex->getSessionInfo()->getOpeningBalance()->getText()) {}
 
         $this->assertTrue(
             strpos(
@@ -108,9 +111,8 @@ class WebposManagementValidate15Test extends Injectable
         $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();
 
         $differenceAmountBeforePutOut = $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText();
-        while ($differenceAmountBeforePutOut == $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText()) {
-
-        }
+        /** wait request done */
+        while ($differenceAmountBeforePutOut == $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText()) {}
 
         $this->assertTrue(
             !$this->webposIndex->getSessionMakeAdjustmentPopup()->isVisible(),

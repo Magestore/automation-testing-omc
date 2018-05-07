@@ -102,6 +102,9 @@ class LoginWebposByStaff implements TestStepInterface
             sleep(2);
             $this->webposIndex->getOpenSessionPopup()->waitForElementNotVisible('.indicator[data-bind="visible:loading"]');
             if ($this->hasOpenSession) {
+                while (! $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->isVisible()) {
+
+                }
                 $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
                 $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
             }
