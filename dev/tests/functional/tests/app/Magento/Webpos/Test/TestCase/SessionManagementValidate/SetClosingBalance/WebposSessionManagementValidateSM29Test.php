@@ -83,15 +83,11 @@ class WebposSessionManagementValidateSM29Test extends Injectable
             ]
         )->run();
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
+        sleep(1);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getCancelButton()->click();
+        sleep(1);
 
         $this->assertSetClosingBalancePopupNotVisible->processAssert($this->webposIndex);
-
-        // End session
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
     }
 
     /**
