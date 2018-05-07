@@ -78,7 +78,7 @@ class WebposEditCustomerDeleteShippingAndBillingAddressCC40Test extends Injectab
         sleep(1);
         $this->webposIndex->getModal()->getOkButton()->click();
         sleep(2);
-//        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.modal-popup');
+        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.modal-popup');
         $this->webposIndex->getCheckoutEditCustomer()->waitForBillingAddressBoxNotVisible();
         $this->assertFalse(
             $this->webposIndex->getCheckoutEditCustomer()->getBillingAddressItem('John Doe, Culver City, US, California, 555-55-555-55')->isVisible(),

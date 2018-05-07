@@ -81,7 +81,8 @@ class WebposCartPageCustomerCP178Test extends Injectable
         $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
         sleep(1);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-
+        $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+        sleep(2);
         //Edit billing and shipping adress
         $this->webposIndex->getCheckoutCartHeader()->getIconEditCustomer()->click();
         $this->webposIndex->getCheckoutEditCustomer()->getEditShippingAddressIcon()->click();

@@ -63,7 +63,8 @@ class WebposCheckoutCartEditQtyCheckEditProductFormTest extends Injectable
 		//Assert edit product popup is available
 		$this->assertEditProductPopupIsAvailable->processAssert($this->webposIndex);
 
-		$this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        sleep(3);
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
 	}
 }

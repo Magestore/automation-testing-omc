@@ -79,6 +79,7 @@ class WebposCheckoutPaymentMethodCP226Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //select shipping
+        sleep(3);
         $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //select payment

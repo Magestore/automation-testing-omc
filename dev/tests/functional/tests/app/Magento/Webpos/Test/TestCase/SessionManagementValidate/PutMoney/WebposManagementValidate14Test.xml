@@ -7,6 +7,7 @@
             <data name="pos/data/status" xsi:type="string">Enabled</data>
             <data name="pos/data/is_allow_to_lock" xsi:type="string">0</data>
             <data name="des" xsi:type="string">-123</data>
+            <data name="message" xsi:type="string">Amount must be greater than 0!</data>
         </variation>
     </testCase>
 </config>

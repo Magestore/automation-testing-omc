@@ -47,5 +47,7 @@ class WebposCheckoutAddOrderNoteTest extends Injectable
 
         $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
         $this->webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->click();
+        $this->webposIndex->getCheckoutContainer()->waitForAddNoteModalNotVisible();
+        sleep(2);
     }
 }
