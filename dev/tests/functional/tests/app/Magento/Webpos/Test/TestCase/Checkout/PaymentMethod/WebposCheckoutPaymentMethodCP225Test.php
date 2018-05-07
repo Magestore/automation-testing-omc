@@ -83,7 +83,7 @@ class WebposCheckoutPaymentMethodCP225Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getMainContent()->clickOutsidePopup();
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();
         sleep(1);

@@ -48,7 +48,7 @@ class WeposProductGridCheckGroupProductBlockPG36Test extends Injectable
             $this->webposIndex->getCheckoutProductList()->search($item['product']->getSku());
             $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
             $this->webposIndex->getCheckoutContainer()->waitForProductDetailPopup();
-            $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+            $this->webposIndex->getMainContent()->clickOutsidePopup();
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-product-detail"]');
 
         }

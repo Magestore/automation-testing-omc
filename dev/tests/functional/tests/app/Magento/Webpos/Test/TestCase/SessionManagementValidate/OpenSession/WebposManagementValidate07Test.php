@@ -53,7 +53,7 @@ class WebposManagementValidate07Test extends Injectable
         //click menu
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->webposIndex->getCMenu()->getSessionManagement();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getMainContent()->clickOutsidePopup();
 
         $this->webposIndex->getOpenSessionPopup()->getIconAddNew()->click();
 //        $this->webposIndex->getSessionShift()->getAddSession()->click();
@@ -64,7 +64,7 @@ class WebposManagementValidate07Test extends Injectable
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         sleep(2);
 
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getMainContent()->clickOutsidePopup();
         // End session
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();

@@ -84,7 +84,7 @@ class WebposCheckoutPaymentMethodCP221Test extends Injectable
 
         $amount = $this->webposIndex->getCheckoutPlaceOrder()->getTopTotalPrice()->getText();
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getMainContent()->clickOutsidePopup();
 
         $this->webposIndex->getCheckoutPlaceOrder()->getShippingCheckbox()->click();
 

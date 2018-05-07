@@ -65,7 +65,7 @@ class WebposInputValidValueToDiscountDollarCP64EntityTest extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($price-$price/2);
         //we need to set sleep($second) in this case.
         sleep(1);
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getMainContent()->clickOutsidePopup();
         return [
             'product' => $product,
             'price' => $price

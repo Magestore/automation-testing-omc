@@ -63,7 +63,7 @@ class WebposManagementValidate03Test extends Injectable
         //click menu
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->webposIndex->getCMenu()->getSessionManagement();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getMainContent()->clickOutsidePopup();
         $this->webposIndex->getOpenSessionPopup()->getCancelButton()->click();
 
 //        $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();

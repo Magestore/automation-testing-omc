@@ -29,4 +29,9 @@ class OrderHistoryAddCancelComment extends Block
 	{
 		return $this->_rootElement->find('#input-add-cancel-comment-order');
 	}
+
+	public function waitForCommentInputVisible()
+	{
+		return $this->waitForElementVisible('#input-add-cancel-comment-order');
+	}
 }

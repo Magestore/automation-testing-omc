@@ -75,6 +75,7 @@ class CancelOrderStep implements TestStepInterface
 
 		if (isset($this->comment)) {
 			$this->comment = str_replace('%isolation%', rand(1, 9999999), $this->comment);
+			$this->webposIndex->getOrderHistoryAddCancelComment()->waitForCommentInputVisible();
 			$this->webposIndex->getOrderHistoryAddCancelComment()->getCommentInput()->setValue($this->comment);
 		}
 

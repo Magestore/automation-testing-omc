@@ -176,7 +176,7 @@ class WebposManageStaffMS61Test extends Injectable
             $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->isVisible(),
             'Discount button is not hidden.'
         );
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getMainContent()->clickOutsidePopup();
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();

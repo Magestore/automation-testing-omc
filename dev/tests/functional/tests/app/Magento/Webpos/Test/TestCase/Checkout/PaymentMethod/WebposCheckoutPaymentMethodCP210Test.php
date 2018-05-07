@@ -74,7 +74,7 @@ class WebposCheckoutPaymentMethodCP210Test extends Injectable
 //        $amount = $this->webposIndex->getCheckoutPlaceOrder()->getHeaderAmount()->getText();
 //        \Zend_Debug::dump($amount); die();
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getMainContent()->clickOutsidePopup();
     }
 
     public function tearDown()

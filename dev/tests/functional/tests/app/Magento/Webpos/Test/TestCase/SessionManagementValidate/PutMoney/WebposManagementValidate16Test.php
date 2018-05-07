@@ -53,7 +53,7 @@ class WebposManagementValidate16Test extends Injectable
         //click menu
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->webposIndex->getCMenu()->getSessionManagement();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getMainContent()->clickOutsidePopup();
 //        $this->webposIndex->getSessionShift()->getAddSession()->click();
         $this->webposIndex->getOpenSessionPopup()->setQtyCoinBill(10);
 
@@ -70,7 +70,7 @@ class WebposManagementValidate16Test extends Injectable
         $this->webposIndex->getPutMoneyInPopup()->getDoneButton()->click();
         $this->webposIndex->getSessionShift()->getAddTransition()->click();
 
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getMainContent()->clickOutsidePopup();
         // End session
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();

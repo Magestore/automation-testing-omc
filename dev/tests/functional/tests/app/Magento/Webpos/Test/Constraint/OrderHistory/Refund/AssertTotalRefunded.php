@@ -13,16 +13,18 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 class AssertTotalRefunded extends AbstractConstraint
 {
-    public function processAssert(WebposIndex $webposIndex, $products, $refundShipping, $adjustRefund, $adjustFee)
+    public function processAssert(WebposIndex $webposIndex, $products, $refundShipping, $adjustRefund, $adjustFee, $testCaseId)
     {
         $sumRowtotal = 0;
+        $refundValue = $sumRowtotal + $refundShipping + $adjustRefund - $adjustFee;
+
         foreach ($products as $item) {
             $productName = $item['product']->getName();
             $rowTotal = substr($webposIndex->getOrderHistoryOrderViewContent()->getRowTotalOfProduct($productName), 1);
             $sumRowtotal += $rowTotal;
         }
         $totalPaid = substr($webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
-        if (($sumRowtotal + $refundShipping + $adjustRefund - $adjustFee) < $totalPaid) {
+        if (($refundValue) < $totalPaid) {
             sleep(1);
             \PHPUnit_Framework_Assert::assertTrue(
                 $webposIndex->getToaster()->getWarningMessage()->isVisible(),
@@ -33,7 +35,7 @@ class AssertTotalRefunded extends AbstractConstraint
                 $webposIndex->getToaster()->getWarningMessage()->getText(),
                 "Success message's Content is Wrong"
             );
-            $totalRefund = $sumRowtotal + $refundShipping + $adjustRefund - $adjustFee;
+            $totalRefund = $refundValue;
             $webposIndex->getOrderHistoryOrderViewFooter()->waitForTotalRefundedVisible();
             $actualTotalRefunded = (float) substr($webposIndex->getOrderHistoryOrderViewFooter()->getTotalRefunded(), 1);
             \PHPUnit_Framework_Assert::assertEquals(
@@ -44,7 +46,7 @@ class AssertTotalRefunded extends AbstractConstraint
                 . "\nActual: " . $actualTotalRefunded
             );
         }
-        if (($sumRowtotal + $refundShipping + $adjustRefund - $adjustFee) == $totalPaid) {
+        if (($refundValue) == $totalPaid) {
             sleep(1);
             \PHPUnit_Framework_Assert::assertTrue(
                 $webposIndex->getToaster()->getWarningMessage()->isVisible(),
@@ -66,22 +68,23 @@ class AssertTotalRefunded extends AbstractConstraint
                 . "\nActual: " . $actualTotalRefunded
             );
         }
-        if (($sumRowtotal + $refundShipping + $adjustRefund - $adjustFee) > $totalPaid) {
-            $grandTotal = $webposIndex->getOrderHistoryOrderViewFooter()->getGrandTotal();
-            sleep(1);
-            \PHPUnit_Framework_Assert::assertTrue(
-                $webposIndex->getModal()->isVisible(),
-                'Error popup is not displayed.'
-            );
-            $errorMessage = 'The refundable amount is limited at ' . $grandTotal;
-            $actualErrorMessage = $webposIndex->getModal()->getPopupMessage();
-            \PHPUnit_Framework_Assert::assertEquals(
-                $errorMessage,
-                $actualErrorMessage,
-                'Error message is wrong'
-                . "\nExpected: " . $errorMessage
-                . "\nActual: " . $actualErrorMessage
-            );
+        if (($refundValue) > $totalPaid) {
+            if ($testCaseId != 'OH76') {
+                $grandTotal = $webposIndex->getOrderHistoryOrderViewFooter()->getGrandTotal();
+                \PHPUnit_Framework_Assert::assertTrue(
+                    $webposIndex->getModal()->isVisible(),
+                    'Error popup is not displayed.'
+                );
+                $errorMessage = 'The refundable amount is limited at ' . $grandTotal;
+                $actualErrorMessage = $webposIndex->getModal()->getPopupMessage();
+                \PHPUnit_Framework_Assert::assertEquals(
+                    $errorMessage,
+                    $actualErrorMessage,
+                    'Error message is wrong'
+                    . "\nExpected: " . $errorMessage
+                    . "\nActual: " . $actualErrorMessage
+                );
+            }
         }
     }
     /**

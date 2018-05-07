@@ -90,7 +90,7 @@ class WebposManageStaffMS80Test extends Injectable
         //Login
         $this->login($staff, $location, $pos);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getMainContent()->clickOutsidePopup();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
         $this->webposIndex->getSessionShift()->getOpenShiftButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');

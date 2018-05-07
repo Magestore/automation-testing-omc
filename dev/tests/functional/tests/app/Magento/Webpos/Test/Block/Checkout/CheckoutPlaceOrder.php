@@ -73,9 +73,19 @@ class CheckoutPlaceOrder extends Block
 		return $this->_rootElement->find('#can_paid');
 	}
 
+	public function waitForCreateInvoiceCheckboxVisible()
+	{
+	    $this->waitForElementVisible('#can_paid');
+	}
+
 	public function getShippingCheckbox()
 	{
 		return $this->_rootElement->find('#can_ship');
+	}
+
+	public function waitForShippingCheckboxVisible()
+	{
+		 $this->waitForElementVisible('#can_ship');
 	}
 
 	public function isShippingMethod(){

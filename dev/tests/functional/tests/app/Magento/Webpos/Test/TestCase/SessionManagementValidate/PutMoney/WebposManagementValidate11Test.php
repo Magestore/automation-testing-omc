@@ -53,7 +53,7 @@ class WebposManagementValidate11Test extends Injectable
         //click menu
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->webposIndex->getCMenu()->getSessionManagement();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getMainContent()->clickOutsidePopup();
 //        $this->webposIndex->getSessionShift()->getAddSession()->click();
         $this->webposIndex->getOpenSessionPopup()->setQtyCoinBill(10);
 
