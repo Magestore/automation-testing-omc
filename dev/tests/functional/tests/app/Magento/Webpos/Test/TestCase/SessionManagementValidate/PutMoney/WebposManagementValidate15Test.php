@@ -106,7 +106,12 @@ class WebposManagementValidate15Test extends Injectable
         sleep(1);
         $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue($des);
         $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();
-        sleep(1);
+
+        $differenceAmountBeforePutOut = $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText();
+        while ($differenceAmountBeforePutOut == $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText()) {
+
+        }
+
         $this->assertTrue(
             !$this->webposIndex->getSessionMakeAdjustmentPopup()->isVisible(),
             'Put Money In popup is not hidden'
@@ -117,6 +122,7 @@ class WebposManagementValidate15Test extends Injectable
                 ''.($des + $openAmount)
                 ) !== false,
             'Difference amount must be -'.($des + $openAmount)
+            . ' not be ' . $this->webposIndex->getSessionInfo()->getDifferenceAmount()->getText()
         );
         $this->assertTrue(
             strpos(

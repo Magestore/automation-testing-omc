@@ -80,7 +80,17 @@ class WebposManagementValidate09Test extends Injectable
                 'hasOpenSession' => false
             ]
         )->run();
+
+        /**
+         *  wait field is show
+         */
+        while ( !$this->webposIndex->getOpenSessionPopup()->getCoinBillValue()->isVisible()) {
+        }
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
+
+        while ( !$this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->isVisible()) {
+        }
+
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
 
