@@ -6,12 +6,15 @@
                 <item name="0" xsi:type="array">
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
                     <item name="orderQty" xsi:type="number">2</item>
+                    <item name="refundQty" xsi:type="number">2</item>
                 </item>
                 <item name="1" xsi:type="array">
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
                     <item name="orderQty" xsi:type="number">2</item>
+                    <item name="refundQty" xsi:type="number">2</item>
                 </item>
             </data>
+            <data name="testCaseId" xsi:type="string">OH74</data>
             <data name="refundShipping" xsi:type="number">20</data>
             <data name="adjustRefund" xsi:type="number">10</data>
             <data name="adjustFee" xsi:type="number">20</data>
@@ -22,12 +25,15 @@
                 <item name="0" xsi:type="array">
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
                     <item name="orderQty" xsi:type="number">2</item>
+                    <item name="refundQty" xsi:type="number">2</item>
                 </item>
                 <item name="1" xsi:type="array">
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
                     <item name="orderQty" xsi:type="number">2</item>
+                    <item name="refundQty" xsi:type="number">2</item>
                 </item>
             </data>
+            <data name="testCaseId" xsi:type="string">OH75</data>
             <data name="refundShipping" xsi:type="number">20</data>
             <data name="adjustRefund" xsi:type="number">10</data>
             <data name="adjustFee" xsi:type="number">10</data>
@@ -44,6 +50,7 @@
                     <item name="orderQty" xsi:type="number">2</item>
                 </item>
             </data>
+            <data name="testCaseId" xsi:type="string">OH76</data>
             <data name="refundShipping" xsi:type="number">20</data>
             <data name="adjustRefund" xsi:type="number">20</data>
             <data name="adjustFee" xsi:type="number">10</data>

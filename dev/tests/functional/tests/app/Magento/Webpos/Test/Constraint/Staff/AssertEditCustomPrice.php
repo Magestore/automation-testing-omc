@@ -20,8 +20,8 @@ class AssertEditCustomPrice extends AbstractConstraint
                 $webposIndex->getCheckoutProductEdit()->getDiscountButton()->isVisible(),
                 'Discount display but not hide'
             );
-            sleep(3);
-            $webposIndex->getMsWebpos()->clickOutsidePopup();
+            sleep(1);
+            $webposIndex->getMainContent()->clickOutsidePopup();
         }
     }
 

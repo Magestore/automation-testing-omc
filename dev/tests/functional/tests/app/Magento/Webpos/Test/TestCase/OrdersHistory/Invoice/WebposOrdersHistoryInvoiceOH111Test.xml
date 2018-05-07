@@ -13,7 +13,7 @@
                 </item>
             </data>
             <data name="dataConfig" xsi:type="string">magestore_webpos_specific_payment</data>
-            <!--<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoiceAllowInvoiceItems"/>-->
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoiceAllowInvoiceItems"/>
         </variation>
     </testCase>
 </config>

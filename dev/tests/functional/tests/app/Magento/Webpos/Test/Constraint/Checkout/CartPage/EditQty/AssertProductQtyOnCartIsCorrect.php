@@ -17,8 +17,7 @@ class AssertProductQtyOnCartIsCorrect extends AbstractConstraint
 {
 	public function processAssert(WebposIndex $webposIndex, CatalogProductSimple $product, $expectQty)
 	{
-	    sleep(3);
-		$webposIndex->getMsWebpos()->clickOutsidePopup();
+		$webposIndex->getMainContent()->clickOutsidePopup();
 		sleep(1);
 		if ($expectQty == 1) {
 			\PHPUnit_Framework_Assert::assertFalse(

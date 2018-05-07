@@ -59,6 +59,10 @@ class OrderHistoryContainer extends Block
 	{
 		return $this->waitForElementVisible('#refund-popup');
 	}
+	public function waitForCreditMemoPopupFormIsVisible()
+	{
+		return $this->waitForElementVisible('#creditmemo-popup-form');
+	}
 
 	public function waitForShipmentPopupIsVisible()
 	{

@@ -44,7 +44,6 @@ class AssertRefundSuccess extends AbstractConstraint
 			$webposIndex->getOrderHistoryOrderViewHeader()->getStatus(),
 			'Order Status is wrong'
 		);
-
 		if (isset($totalRefunded)) {
 			$expectTotalRefunded = $totalRefunded;
 		} else {

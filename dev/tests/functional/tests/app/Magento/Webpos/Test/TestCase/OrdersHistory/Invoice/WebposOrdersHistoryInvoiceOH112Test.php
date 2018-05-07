@@ -84,43 +84,47 @@ class WebposOrdersHistoryInvoiceOH112Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-
+        //Refresh Webpos
+        $this->webposIndex->open();
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
         // Order history
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(2);
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        //select order
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-
         // Take payment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
-        $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->click();
-        $paymentPrice = (float) substr( $this->webposIndex->getOrderHistoryPayment()->getPaymentPriceInput()->getValue(), 1);
-        sleep(0.5);
-        $this->webposIndex->getOrderHistoryPayment()->getPaymentPriceInput()->setValue($paymentPrice / 2);
-        sleep(0.5);
-        $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
-        sleep(0.5);
-        $this->webposIndex->getMsWebpos()->waitForModalPopup();
-        sleep(0.5);
-        $this->webposIndex->getModal()->getOkButton()->click();
-        sleep(1);
+        if ($this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->isVisible()) {
+            $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->click();
+            $paymentPrice = (float)substr($this->webposIndex->getOrderHistoryPayment()->getPaymentPriceInput()->getValue(), 1);
+            sleep(0.5);
+            $this->webposIndex->getOrderHistoryPayment()->getPaymentPriceInput()->setValue($paymentPrice / 2);
+            sleep(0.5);
+            $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
+            sleep(0.5);
+            $this->webposIndex->getMsWebpos()->waitForModalPopup();
+            sleep(0.5);
+            $this->webposIndex->getModal()->getOkButton()->click();
+            sleep(1);
 
-        // Click Button Invoice
-        $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
-        $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
-        sleep(0.5);
-        $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForModalPopup();
-        sleep(0.5);
-        $this->webposIndex->getModal()->getOkButton()->click();
+            // Click Button Invoice
+            $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
+            $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
+            sleep(0.5);
+            $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
+            $this->webposIndex->getMsWebpos()->waitForModalPopup();
+            sleep(0.5);
+            $this->webposIndex->getModal()->getOkButton()->click();
 
-        // Assert Invoice successful.
-        sleep(1);
-        $this->assertInvoiceSuccess->processAssert($this->webposIndex);
+            // Assert Invoice successful.
+            sleep(1);
+            $this->assertInvoiceSuccess->processAssert($this->webposIndex);
 
-        $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForProcessingStatusVisisble();
-
+            $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForProcessingStatusVisisble();
+        }
         return [
             'products' => $products
         ];

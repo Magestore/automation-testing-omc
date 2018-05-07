@@ -81,8 +81,11 @@ class WebposOrdersHistoryInvoiceOH117Test extends Injectable
         // Order history
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(2);
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
+        for ($i=0;$i<2;$i++) {
+            $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        }
+        //select the first order
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 
         // Click Button Invoice

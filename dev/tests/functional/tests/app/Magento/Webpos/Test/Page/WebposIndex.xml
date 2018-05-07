@@ -2,6 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
     <page name="WebposIndex" mca="webpos" module="Magento_Webpos">
         <block name="msWebpos" class="Magento\Webpos\Test\Block\MsWebpos" locator=".ms-webpos" strategy="css selector"/>
+        <block name="mainContent" class="Magento\Webpos\Test\Block\MainContent" locator="#maincontent" strategy="css selector"/>
         <block name="checkoutLoader" class="Magento\Webpos\Test\Block\MsWebpos" locator="#checkout-loader" strategy="css selector"/>
         <block name="wrapWarningForm" class="Magento\Webpos\Test\Block\WrapWarningForm" locator=".ms-webpos .wrap-warning-form" strategy="css selector"/>
         <block name="loginForm" class="Magento\Webpos\Test\Block\Login\LoginForm" locator=".wrap-login-form" strategy="css selector"/>

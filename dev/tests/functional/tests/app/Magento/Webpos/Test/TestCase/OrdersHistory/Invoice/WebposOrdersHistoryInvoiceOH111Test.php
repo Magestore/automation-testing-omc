@@ -89,11 +89,16 @@ class WebposOrdersHistoryInvoiceOH111Test extends Injectable
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
+        //Refresh Webpos
+        $this->webposIndex->open();
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
         // Order history
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(2);
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        //select order
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 
         // Take payment
@@ -116,24 +121,6 @@ class WebposOrdersHistoryInvoiceOH111Test extends Injectable
                 'products' => $products,
                 'totalPaid' => $totalPaid
             ];
-
-            $rowTotal = 0;
-            foreach ($products as $item){
-                $productName = $item['product']->getName();
-                $rowTotal += (float) substr($this->webposIndex->getOrderHistoryInvoice()->getRowTotalOfProduct($productName)->getText(), 1);
-            }
-
-            self::assertGreaterThan(
-                0,
-                $rowTotal,
-                'Row total is not greater than 0.'
-            );
-
-            self::assertLessThan(
-                $totalPaid,
-                $rowTotal,
-                'No have invoice items that have Row total less than total paid.'
-            );
         }
     }
 }
