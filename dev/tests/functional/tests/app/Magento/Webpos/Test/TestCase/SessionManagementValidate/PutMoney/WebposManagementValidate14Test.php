@@ -10,9 +10,10 @@ namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\PutMoney;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
-use Magento\Webpos\Test\Fixture\WebposRole;
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Webpos\Test\Fixture\Denomination;
+use Magento\Webpos\Test\Fixture\Pos;
+use Magento\Webpos\Test\Fixture\Location;
 
 class WebposManagementValidate14Test extends Injectable
 {
@@ -42,39 +43,58 @@ class WebposManagementValidate14Test extends Injectable
         )->run();
     }
 
-    public function test(Denomination $denomination, $des)
-    {
-        $denomination->persist();
-        //Login
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
+    /**
+     * @param Pos $pos
+     * @param FixtureFactory $fixtureFactory
+     * @param string $message
+     * @param string $des
+     */
+    public function test(
+        Pos $pos,
+        FixtureFactory $fixtureFactory,
+        $message,
+        $des
+    ) {
+
+        /**@var Location $location*/
+        $location = $fixtureFactory->createByCode('location', ['dataset' => 'default']);
+        $location->persist();
+        $locationId = $location->getLocationId();
+        $posData = $pos->getData();
+        $posData['location_id'] = [ $locationId ];
+        /**@var Pos $pos*/
+        $pos = $fixtureFactory->createByCode('pos', ['data' => $posData]);
+        $pos->persist();
+        $posId = $pos->getPosId();
+        $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
+        $staffData = $staff->getData();
+        $staffData['location_id'] = [$locationId];
+        $staffData['pos_ids'] = [$posId];
+        /**@var Staff $staff*/
+        $staff = $fixtureFactory->createByCode('staff', ['data' => $staffData]);
+        $staff->persist();
+        // Login webpos
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            [
+                'staff' => $staff,
+                'location' => $location,
+                'pos' => $pos,
+            ]
         )->run();
 
-        //click menu
-        $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
-        $this->webposIndex->getCMenu()->getSessionManagement();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-//        $this->webposIndex->getSessionShift()->getAddSession()->click();
-        $this->webposIndex->getOpenSessionPopup()->setQtyCoinBill(10);
-
-        $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
-        sleep(2);
-
         $this->webposIndex->getSessionShift()->getPutMoneyInButton()->click();
-
-        $this->webposIndex->getPutMoneyInPopup()->getAmountInput()->setValue($des);
-
-        $this->webposIndex->getPutMoneyInPopup()->getDoneButton()->click();
-        $this->webposIndex->getPutMoneyInPopup()->getBtnCancel()->click();
-        // End session
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
-        $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
-
+        sleep(1);
+        $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue($des);
+        $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();
+        sleep(1);
+        $this->assertTrue(
+            $this->webposIndex->getSessionMakeAdjustmentPopup()->getErrorMessage()->getText()
+            == $message,
+            'Message '.$message. 'is not show'
+        );
     }
+
 
     public function tearDown()
     {

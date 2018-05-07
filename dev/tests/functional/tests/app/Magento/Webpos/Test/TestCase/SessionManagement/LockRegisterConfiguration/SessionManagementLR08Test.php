@@ -43,20 +43,26 @@ class SessionManagementLR08Test extends Injectable
 
     public function test(Pos $pos, FixtureFactory $fixtureFactory)
     {
+        //Config create session before working
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_yes_MS57']
+        )->run();
+
         /**@var Location $location*/
         $location = $fixtureFactory->createByCode('location', ['dataset' => 'default']);
         $location->persist();
         $locationId = $location->getLocationId();
         $posData = $pos->getData();
-        $posData['location_id'][] = $locationId;
+        $posData['location_id'] = [ $locationId ];
         /**@var Pos $pos*/
         $pos = $fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
         $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
         $staffData = $staff->getData();
-        $staffData['location_id'][] = $locationId;
-        $staffData['pos_ids'][] = $posId;
+        $staffData['location_id'] = [ $locationId ];
+        $staffData['pos_ids'] = [ $posId ];
         /**@var Staff $staff*/
         $staff = $fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff->persist();
@@ -75,5 +81,14 @@ class SessionManagementLR08Test extends Injectable
             'Lock Register menu is not hidden.'
         );
 
+    }
+
+
+    public function tearDown()
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_no_MS57']
+        )->run();
     }
 }

@@ -64,6 +64,7 @@ class WebposShippingMethodCP196Test extends Injectable
         $shippingMethodBefore = [$this->webposIndex->getCheckoutWebposCart()->getPriceShipping(), $this->webposIndex->getCheckoutPlaceOrder()->getTitleShippingSection()];
 
         //Choose another shipping method
+        $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         $this->webposIndex->getCheckoutShippingMethod()->clickFreeShipping();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         sleep(1);

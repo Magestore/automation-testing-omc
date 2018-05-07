@@ -11,6 +11,10 @@ namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\SetClosingBalan
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\SessionManagement\AssertCheckGUIOnSetClosingBalancePopup;
+use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Webpos\Test\Fixture\Pos;
+use Magento\Webpos\Test\Fixture\Location;
+use Magento\Webpos\Test\Fixture\Staff;
 
 /**
  * Class WebposSessionManagementValidateSM28Test
@@ -41,9 +45,10 @@ class WebposSessionManagementValidateSM28Test extends Injectable
     }
 
     /**
-     *
+     * @param Pos $pos
+     * @param FixtureFactory $fixtureFactory
      */
-    public function test()
+    public function test(Pos $pos, FixtureFactory $fixtureFactory)
     {
         //Config create session before working
         $this->objectManager->getInstance()->create(
@@ -51,17 +56,33 @@ class WebposSessionManagementValidateSM28Test extends Injectable
             ['configData' => 'create_section_before_working_yes']
         )->run();
 
+        /**@var Location $location*/
+        $location = $fixtureFactory->createByCode('location', ['dataset' => 'default']);
+        $location->persist();
+        $locationId = $location->getLocationId();
+        $posData = $pos->getData();
+        $posData['location_id'] = [ $locationId ];
+        /**@var Pos $pos*/
+        $pos = $fixtureFactory->createByCode('pos', ['data' => $posData]);
+        $pos->persist();
+        $posId = $pos->getPosId();
+        $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
+        $staffData = $staff->getData();
+        $staffData['location_id'] = [ $locationId ];
+        $staffData['pos_ids'] = [ $posId ];
+        /**@var Staff $staff*/
+        $staff = $fixtureFactory->createByCode('staff', ['data' => $staffData]);
+        $staff->persist();
         // Login webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            [
+                'staff' => $staff,
+                'location' => $location,
+                'pos' => $pos
+            ]
         )->run();
-
-        // Open session
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
-        $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
-        sleep(1);
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
-        sleep(1);
         $this->assertCheckGUIOnSetClosingBalancePopup->processAssert($this->webposIndex);
 
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();

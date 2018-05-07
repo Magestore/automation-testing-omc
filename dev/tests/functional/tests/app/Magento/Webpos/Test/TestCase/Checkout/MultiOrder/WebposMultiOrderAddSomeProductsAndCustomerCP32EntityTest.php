@@ -63,13 +63,14 @@ class WebposMultiOrderAddSomeProductsAndCustomerCP32EntityTest extends Injectabl
             $i++;
         }
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-
+        sleep(3);
         $this->webposIndex->getCheckoutWebposCart()->getIconChangeCustomer()->click();
         $customerName = $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomerName()->getText();
         $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
         sleep(2);
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+        sleep(2);
         $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($orderNumber)->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
 
@@ -83,7 +84,7 @@ class WebposMultiOrderAddSomeProductsAndCustomerCP32EntityTest extends Injectabl
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-        sleep(2);
+        sleep(3);
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(2);

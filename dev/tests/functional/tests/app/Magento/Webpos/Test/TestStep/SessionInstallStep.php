@@ -18,6 +18,10 @@ class SessionInstallStep extends LoginWebposStep
 
 	public function run()
 	{
+        \Magento\Mtf\ObjectManager::getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_no_MS57']
+        )->run();
 		$staff = parent::run();
         /**
          *  wait sync complete

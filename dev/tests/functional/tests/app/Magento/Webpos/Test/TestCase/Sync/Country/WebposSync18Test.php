@@ -9,7 +9,6 @@
 namespace Magento\Webpos\Test\TestCase\Sync\Country;
 
 use Magento\Backend\Test\Page\Adminhtml\SystemConfigEdit;
-use Magento\Config\Test\Fixture\ConfigData;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;

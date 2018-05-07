@@ -24,7 +24,6 @@ use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
 
-
 class WebposSync14Test extends Injectable
 {
     /**
@@ -66,18 +65,6 @@ class WebposSync14Test extends Injectable
     protected $assertSynchronizationPageDisplay;
     protected $assertItemUpdateSuccess;
 
-
-    public function __prepare(FixtureFactory $fixtureFactory)
-    {
-        // Add Customer
-//        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
-//        $customer->persist();
-//
-//        return [
-//            'customer' => $customer
-//        ];
-    }
-
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
@@ -118,14 +105,6 @@ class WebposSync14Test extends Injectable
         );
         $customerComplain->persist();
 
-        // Edit Created Customer in backend
-//        $filter = ['email' => $initialCustomer->getEmail()];
-//        $this->customerIndexPage->open();
-//        $this->customerIndexPage->getCustomerGridBlock()->searchAndOpen($filter);
-//        $this->customerIndexEditPage->getCustomerForm()->updateCustomer($customer);
-//        $this->customerIndexEditPage->getPageActionsBlock()->save();
-
-//        $this->webposIndex->open();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->synchronization();
 
@@ -134,14 +113,6 @@ class WebposSync14Test extends Injectable
         sleep(5);
         $action = 'Reload';
         $this->assertItemUpdateSuccess->processAssert($this->webposIndex, "Customer Complaints", $action);
-    }
-
-    public function tearDown()
-    {
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => 'default_payment_method']
-//        )->run();
     }
 
 }

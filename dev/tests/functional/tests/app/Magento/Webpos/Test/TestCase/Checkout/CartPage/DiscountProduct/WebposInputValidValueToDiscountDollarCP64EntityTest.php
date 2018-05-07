@@ -54,6 +54,7 @@ class WebposInputValidValueToDiscountDollarCP64EntityTest extends Injectable
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
+        sleep(3);
         $this->webposIndex->getCheckoutProductList()->search($product->getSku());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();

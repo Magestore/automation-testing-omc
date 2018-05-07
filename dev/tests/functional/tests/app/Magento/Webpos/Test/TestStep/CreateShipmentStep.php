@@ -35,8 +35,8 @@ class CreateShipmentStep implements TestStepInterface
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        sleep(2);
         // Open shipment popup
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getOrderHistoryAddOrderNote()->getShipButton()->click();
