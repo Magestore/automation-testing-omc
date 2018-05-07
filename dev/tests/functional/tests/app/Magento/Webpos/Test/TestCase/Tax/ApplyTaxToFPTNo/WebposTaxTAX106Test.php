@@ -172,8 +172,11 @@ class WebposTaxTAX106Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
         $this->webposIndex->getOrderHistoryAddOrderNote()->openRefundPopup();
         $this->assertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling->processAssert($this->webposIndex, $products, $taxRate);
+        sleep(1);
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
+        sleep(1);
         $this->webposIndex->getModal()->getOkButton()->click();
+        sleep(1);
     }
 
     public function tearDown()
