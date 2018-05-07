@@ -145,7 +145,7 @@ class WebposTaxTAX47Test extends Injectable
         $this->webposIndex->getCheckoutShippingMethod()->getBestWayTableRate()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(2);
-
+        $this->webposIndex->getCheckoutShippingMethod()->waitForElementVisible('#tablerate_bestway');
         $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Best Way - Table Rate")->getText();
         $shippingFee = (float)substr($shippingFee,1);
 

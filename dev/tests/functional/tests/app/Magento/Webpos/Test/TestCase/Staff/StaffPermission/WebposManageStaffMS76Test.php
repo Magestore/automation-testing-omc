@@ -113,8 +113,9 @@ class WebposManageStaffMS76Test extends Injectable
         $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-edit-product"]');
         $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
+        sleep(2);
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue(69);
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        sleep(3);         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         sleep(2);
         $totalAfter = $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText();
         $this->assertNotEquals(
@@ -163,6 +164,7 @@ class WebposManageStaffMS76Test extends Injectable
             $this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
             $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
             $this->webposIndex->getLoginForm()->clickLoginButton();
+            sleep(2);
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
             $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
             if ($location) {

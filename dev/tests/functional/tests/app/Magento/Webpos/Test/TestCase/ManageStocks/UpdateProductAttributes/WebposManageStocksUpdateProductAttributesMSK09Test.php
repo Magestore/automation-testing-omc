@@ -59,7 +59,7 @@ class WebposManageStocksUpdateProductAttributesMSK09Test extends Injectable
 
 		$this->webposIndex->getManageStockList()->searchProduct('Simple Product MSK09');
 		$this->webposIndex->getManageStockList()->getStoreAddress()->click();
-		sleep(1);
+		sleep(5);
 
 		foreach ($productList as $item) {
 

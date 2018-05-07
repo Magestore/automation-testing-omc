@@ -26,7 +26,7 @@ class OrderHistoryPayment extends Block
     }
 
     public function waitForPaymendMethodVisible($label){
-        $this->waitForElementVisible('//*[@id="order_payment_list_container"]/div/div[1]/div/div/label[text()="'.$label.'"]/..',Locator::SELECTOR_XPATH);
+            $this->waitForElementVisible('//*[@id="order_payment_list_container"]/div/div[1]/div/div/label[text()="'.$label.'"]/..',Locator::SELECTOR_XPATH);
     }
 
     /**

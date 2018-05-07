@@ -23,13 +23,13 @@ class AssertCheckCartCustomPrice extends AbstractConstraint
             );
             \PHPUnit_Framework_Assert::assertTrue(
                 $webposIndex->getCheckoutCartItems()->getOriginPriceCartItemByOrderToElement($i + 1)->isVisible(),
-                'Price product is not display'
+                'Origin Price product is not display'
             );
             if ($webposIndex->getCheckoutCartItems()->getOriginPriceCartItemByOrderToElement($i + 1)->isVisible()) {
                 \PHPUnit_Framework_Assert::assertEquals(
                     floatval($cartProducts[$i]['price'] * $cartProducts[$i]['qty']),
                     $webposIndex->getCheckoutCartItems()->getOriginPriceCartItemByOrderTo($i + 1),
-                    'Price product is not correct'
+                    'Origin Price product is not correct'
                 );
             }
 

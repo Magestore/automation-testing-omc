@@ -60,7 +60,8 @@ class WebposSaveOrderNoteCP188Test extends Injectable
         $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
         sleep(1);
         $this->webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->click();
-        sleep(1);
+
+        sleep(2);
 
         //Click save button
         $this->webposIndex->getCheckoutNoteOrder()->getTextArea()->setValue($commentEdit);
@@ -73,7 +74,8 @@ class WebposSaveOrderNoteCP188Test extends Injectable
         $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
         sleep(1);
         $this->webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->click();
-        sleep(1);
+
+        sleep(2);
         $this->webposIndex->getCheckoutNoteOrder()->getTextArea()->setValue($comment);
         $this->webposIndex->getCheckoutNoteOrder()->getSaveOrderNoteButon()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();

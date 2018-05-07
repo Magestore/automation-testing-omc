@@ -78,10 +78,8 @@ class CreateRefundInOrderHistoryStep implements TestStepInterface
             sleep(2);
 		}
 
-//		// Assert Refund Popup display
-//		$this->assertRefundPopupDisplay->processAssert($this->webposIndex, $products);
-
 		$this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
+		$this->webposIndex->getOrderHistoryContainer()->waitForCreditMemoPopupFormIsVisible();
 
 		foreach ($this->products as $item) {
 			if (isset($item['refundQty'])) {

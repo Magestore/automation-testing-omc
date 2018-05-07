@@ -142,6 +142,7 @@ class WebposTaxTAX50Test extends Injectable
 
         // Select Shipping Method
         $this->webposIndex->getCheckoutShippingMethod()->openCheckoutShippingMethod();
+        $this->webposIndex->getCheckoutShippingMethod()->waitForElementVisible('#flatrate_flatrate');
         $this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
@@ -149,6 +150,7 @@ class WebposTaxTAX50Test extends Injectable
         $shippingFee = (float)substr($shippingFee,1);
 
         // Select Payment Method
+        $this->webposIndex->getCheckoutPaymentMethod()->waitForElementVisible('.icon-iconPOS-payment-cashforpos');
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);

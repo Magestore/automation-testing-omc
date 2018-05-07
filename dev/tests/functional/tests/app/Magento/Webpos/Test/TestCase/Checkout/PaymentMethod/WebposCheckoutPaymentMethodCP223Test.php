@@ -78,6 +78,7 @@ class WebposCheckoutPaymentMethodCP223Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //select shipping
+        sleep(3);
         $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //select payment
@@ -86,6 +87,7 @@ class WebposCheckoutPaymentMethodCP223Test extends Injectable
 
         $am = $this->webposIndex->getCheckoutPlaceOrder()->getTopTotalPrice()->getText();
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue(substr($am,1)+$amount);
+        sleep(3);
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
         // place order getCreateInvoiceCheckbox

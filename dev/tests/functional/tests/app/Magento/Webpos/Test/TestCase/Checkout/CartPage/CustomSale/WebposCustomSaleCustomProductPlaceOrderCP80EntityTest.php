@@ -59,6 +59,7 @@ class WebposCustomSaleCustomProductPlaceOrderCP80EntityTest extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
+        sleep(3);
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         $i = 0;
         foreach ($products as $product) {

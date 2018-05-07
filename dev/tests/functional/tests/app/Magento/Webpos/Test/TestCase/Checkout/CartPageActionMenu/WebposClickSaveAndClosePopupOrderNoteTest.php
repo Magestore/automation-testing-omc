@@ -47,6 +47,8 @@ class WebposClickSaveAndClosePopupOrderNoteTest extends Injectable
 
         $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
         $this->webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->click();
+
+        sleep(2);
         $this->webposIndex->getCheckoutNoteOrder()->getSaveOrderNoteButon()->click();
     }
 }

@@ -14,11 +14,6 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceOnRefundPopupWithApplyTaxOnCustomPrice;
-use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceExcludingTax;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountWithApplyTaxOnCustomPrice;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 class WebposTaxTAX91Test extends Injectable

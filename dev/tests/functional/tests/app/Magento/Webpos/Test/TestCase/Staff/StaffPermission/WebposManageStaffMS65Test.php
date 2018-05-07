@@ -127,33 +127,33 @@ class WebposManageStaffMS65Test extends Injectable
             'Settings menu is not visible.'
         );
         $this->webposIndex->getCMenu()->checkout();
-        // Add product to cart
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\AddProductToCartStep',
-            ['products' => $products]
-        )->run();
-        $this->assertFalse(
-            $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->isVisible(),
-            'Add discount function is not hidden.'
-        );
-        $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-edit-product"]');
-        $this->assertFalse(
-            $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->isVisible(),
-            'Custom Price button is not hidden.'
-        );
-        $this->assertFalse(
-            $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->isVisible(),
-            'Discount button is not hidden.'
-        );
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-        $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
-        $this->webposIndex->getCMenu()->ordersHistory();
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        $this->assertTrue(
-            $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->isVisible(),
-            'Not show any order.'
-        );
+//        // Add product to cart
+//        $this->objectManager->getInstance()->create(
+//            'Magento\Webpos\Test\TestStep\AddProductToCartStep',
+//            ['products' => $products]
+//        )->run();
+//        $this->assertFalse(
+//            $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->isVisible(),
+//            'Add discount function is not hidden.'
+//        );
+//        $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
+//        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-edit-product"]');
+//        $this->assertFalse(
+//            $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->isVisible(),
+//            'Custom Price button is not hidden.'
+//        );
+//        $this->assertFalse(
+//            $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->isVisible(),
+//            'Discount button is not hidden.'
+//        );
+//        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+//        $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
+//        $this->webposIndex->getCMenu()->ordersHistory();
+//        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+//        $this->assertTrue(
+//            $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->isVisible(),
+//            'Not show any order.'
+//        );
 
     }
 

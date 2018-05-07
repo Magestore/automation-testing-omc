@@ -87,7 +87,7 @@ class WebposTakePaymentOH87Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        sleep(3);         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
         // place order getCreateInvoiceCheckbox
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();

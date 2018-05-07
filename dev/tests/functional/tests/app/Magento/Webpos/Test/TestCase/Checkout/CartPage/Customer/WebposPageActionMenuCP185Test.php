@@ -58,11 +58,12 @@ class WebposPageActionMenuCP185Test extends Injectable
 
         //Click ... Menu > click Add order note
         $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
-        sleep(1);
+        sleep(2);
         $this->webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->click();
-        sleep(1);
+
+        sleep(2);
         $this->webposIndex->getCheckoutNoteOrder()->getCloseOrderNoteButton()->click();
-        sleep(1);
+        sleep(2);
 
 
     }

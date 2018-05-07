@@ -52,8 +52,9 @@ class WebposOnHoldOrderONH13Test extends Injectable
         sleep(1);
             //Click ... Menu > click Add order note
         $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
-        sleep(1);
         $this->webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->click();
+
+        sleep(2);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);

@@ -84,7 +84,7 @@ class OrderHistoryRefund extends Block
 
 	public function getItemReturnToStockCheckbox($name)
 	{
-		return $this->getItemRow($name)->find('input[data-bind="attr: {name: \'items[\'+item.item_id+\'][back_to_stock]\'}"]');
+		return $this->getItemRow($name)->find('input[data-bind="attr: {name: \'items[\'+item.item_id+\'][back_to_stock]\', checked: $parent.isCheckedReturnStockDefault}"]');
 	}
 
 	public function getItemPrice($name)
