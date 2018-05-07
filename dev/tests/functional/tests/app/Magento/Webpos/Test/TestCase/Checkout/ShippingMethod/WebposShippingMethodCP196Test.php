@@ -65,6 +65,7 @@ class WebposShippingMethodCP196Test extends Injectable
 
         //Choose another shipping method
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+        sleep(2);
         $this->webposIndex->getCheckoutShippingMethod()->clickFreeShipping();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         sleep(1);
