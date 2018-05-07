@@ -54,7 +54,7 @@ class WebposCheckGUICustomerPriceTest extends Injectable
         $this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
         $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
-        $this->webposIndex->getMainContent()->clickOutsidePopup();
+        sleep(3);         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         return [
             'product' => $product,
             'price' => $price];

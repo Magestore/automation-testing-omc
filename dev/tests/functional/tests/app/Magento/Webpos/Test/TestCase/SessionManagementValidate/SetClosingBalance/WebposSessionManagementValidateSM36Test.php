@@ -12,6 +12,9 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Webpos\Test\Fixture\Pos;
+use Magento\Webpos\Test\Fixture\Location;
+use Magento\Webpos\Test\Fixture\Staff;
 
 /**
  * Class WebposSessionManagementValidateSM36Test
@@ -40,30 +43,51 @@ class WebposSessionManagementValidateSM36Test extends Injectable
 
     /**
      * @param Denomination $denomination
+     * @param Pos $pos
+     * @param FixtureFactory $fixtureFactory
      */
-    public function test(
-        Denomination $denomination
-    ) {
+    public function test( Denomination $denomination, Pos $pos, FixtureFactory $fixtureFactory)
+    {
         // Precondition
         $denomination->persist();
         $product = $this->fixtureFactory->createByCode('catalogProductSimple', ['dataset' => 'product_100_dollar_taxable']);
         $product->persist();
 
-        // Config create session before working
+        //Config create session before working
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'create_section_before_working_yes']
         )->run();
 
+        /**@var Location $location*/
+        $location = $fixtureFactory->createByCode('location', ['dataset' => 'default']);
+        $location->persist();
+        $locationId = $location->getLocationId();
+        $posData = $pos->getData();
+        $posData['location_id'] = [ $locationId ];
+        /**@var Pos $pos*/
+        $pos = $fixtureFactory->createByCode('pos', ['data' => $posData]);
+        $pos->persist();
+        $posId = $pos->getPosId();
+        $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
+        $staffData = $staff->getData();
+        $staffData['location_id'] = [ $locationId ];
+        $staffData['pos_ids'] = [ $posId ];
+        /**@var Staff $staff*/
+        $staff = $fixtureFactory->createByCode('staff', ['data' => $staffData]);
+        $staff->persist();
         // Login webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            [
+                'staff' => $staff,
+                'location' => $location,
+                'pos' => $pos,
+                'hasOpenSession' => false
+            ]
         )->run();
-
-        // Open session
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
-        $this->webposIndex->getOpenSessionPopup()->waitForElementNotVisible('[data-bind="visible:loading"]');
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
+        /** now balance is 100 */
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         sleep(1);
@@ -74,6 +98,7 @@ class WebposSessionManagementValidateSM36Test extends Injectable
         sleep(2);
         $this->webposIndex->getCheckoutCartFooter()->waitButtonHoldVisible();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        /** product price 100 */
         $this->webposIndex->getCheckoutProductList()->search($product->getSku());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -85,6 +110,7 @@ class WebposSessionManagementValidateSM36Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        /** now balance is 200 */
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
@@ -94,17 +120,31 @@ class WebposSessionManagementValidateSM36Test extends Injectable
         // Put money in
 
         $this->webposIndex->getSessionShift()->getPutMoneyInButton()->click();
-        $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue(50);
+        sleep(1);
+        /** now balance is 200, put in 500 */
+        $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue(1);
         $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();
+        $differenceAmountBeforePutIn = $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText();
+        while ($differenceAmountBeforePutIn == $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText()) {
+
+        }
         $this->webposIndex->getSessionShift()->getTakeMoneyOutButton()->click();
-        $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue(20);
+        sleep(1);
+        /** now balance is 200, put out 200 */
+        $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue(1);
         $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();
+        $differenceAmountBeforePutOut = $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText();
+        while ($differenceAmountBeforePutOut == $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText()) {
+
+        }
 
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
+        sleep(1);
         $this->webposIndex->getOpenSessionPopup()->waitForElementNotVisible('[data-bind="visible:loading"]');
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getNumberOfCoinsBills()->setValue(23);
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
 
+        $this->webposIndex->getSessionSetClosingBalancePopup()->getNumberOfCoinsBills()->setValue(20);
+        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
+        sleep(2);
         // Assert Set Closing Balance Popup not visible
         $this->assertFalse(
             $this->webposIndex->getSessionSetClosingBalancePopup()->isVisible(),
@@ -118,19 +158,15 @@ class WebposSessionManagementValidateSM36Test extends Injectable
             'Button "Validate Closing" is not visible.'
         );
 
+
         // Assert Difference = 0
         $difference = $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText();
         $difference = substr($difference, 2);
         $this->assertEquals(
             '0',
             $difference,
-            'Difference is not correct.'
+            'Difference is not correct. '. $difference
         );
-
-        sleep(2);
-        // End session
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
     }
 
     /**

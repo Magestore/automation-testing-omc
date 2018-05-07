@@ -49,7 +49,6 @@ class WebposManageStaffMS49Test extends Injectable
     {
         // Preconditions:
         $staff->persist();
-
         // Steps
         $this->staffsIndex->open();
         $this->staffsIndex->getStaffsGrid()->search(['email' => $staff->getEmail()]);
@@ -57,6 +56,12 @@ class WebposManageStaffMS49Test extends Injectable
         sleep(1);
         $this->staffsNew->getFormPageActionsStaff()->deleteButton()->click();
         $this->staffsNew->getModalsWrapper()->getOkButton()->click();
+        sleep(2);
+        $this->staffsIndex->open();
+        $this->staffsIndex->getStaffsGrid()->search([
+            'email'=> $staff->getEmail()
+        ]);
+        $this->staffsIndex->getStaffsGrid()->waitLoader();
         sleep(1);
     }
 }

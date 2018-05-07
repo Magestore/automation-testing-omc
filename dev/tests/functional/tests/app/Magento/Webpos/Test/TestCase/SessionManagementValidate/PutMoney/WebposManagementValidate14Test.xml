@@ -3,7 +3,11 @@
     <testCase name="Magento\Webpos\Test\TestCase\SessionManagementValidate\PutMoney\WebposManagementValidate14Test" summary="Permission" ticketId="WEBPOSMS-61">
         <variation name="WebposManagementValidate14_01">
             <data name="denomination/dataset" xsi:type="string">default</data>
+            <data name="pos/data/pos_name" xsi:type="string">test pos %isolation%</data>
+            <data name="pos/data/status" xsi:type="string">Enabled</data>
+            <data name="pos/data/is_allow_to_lock" xsi:type="string">0</data>
             <data name="des" xsi:type="string">-123</data>
+            <data name="message" xsi:type="string">Amount must be greater than 0!</data>
         </variation>
     </testCase>
 </config>

@@ -16,6 +16,7 @@ class AssertProductListShowAllProduct extends AbstractConstraint
 {
 	public function processAssert(WebposIndex $webposIndex)
 	{
+	    $webposIndex->getManageStockList()->waitForProductListShow();
 		\PHPUnit_Framework_Assert::assertGreaterThan(
 			1,
 			$webposIndex->getManageStockList()->countProductRows(),

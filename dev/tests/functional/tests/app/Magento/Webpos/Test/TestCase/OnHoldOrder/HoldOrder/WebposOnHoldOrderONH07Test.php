@@ -56,7 +56,7 @@ class WebposOnHoldOrderONH07Test extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getDollarButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
         sleep(1);
-        $this->webposIndex->getMainContent()->clickOutsidePopup();
+        sleep(3);         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
             //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();

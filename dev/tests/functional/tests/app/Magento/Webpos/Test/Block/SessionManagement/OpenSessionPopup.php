@@ -69,6 +69,11 @@ class OpenSessionPopup extends Block
         return $this->_rootElement->find('.icon-iconPOS-delete');
     }
 
+    public function getIconDeletes()
+    {
+        return $this->_rootElement->getElements('.icon-iconPOS-delete');
+    }
+
     public function setQtyCoinBillNumber($number, $vt)
     {
         $coin = $this->_rootElement->find('//input[@data-bind="value:cashQty"]', Locator::SELECTOR_CSS);
@@ -90,4 +95,47 @@ class OpenSessionPopup extends Block
     {
         return $this->_rootElement->find('.shift-wrap-backover')->isVisible();
     }
+
+    public function getStaff()
+    {
+        return $this->_rootElement->find('span[data-bind="text:staffName"]');
+    }
+
+    public function getPOS()
+    {
+        return $this->_rootElement->find('span[data-bind="text: window.webposConfig.posName"]');
+    }
+
+    public function getCoinBillValueColumn()
+    {
+        return $this->_rootElement
+            ->find(
+                '//*[@id="popup-open-shift"]/div/div[3]/div[2]/div[3]/table[1]/thead/tr/th[text() = "Coin/Bill Value"]',
+                Locator::SELECTOR_XPATH
+            );
+    }
+
+    public function getSubtotalColumn()
+    {
+        return $this->_rootElement
+            ->find(
+                '//*[@id="popup-open-shift"]/div/div[3]/div[2]/div[3]/table[1]/thead/tr/th[text() = "Subtotal"]',
+                Locator::SELECTOR_XPATH
+            );
+    }
+
+    public function getNumberOfCoinBillValueColumn()
+    {
+        return $this->_rootElement
+            ->find(
+                '//*[@id="popup-open-shift"]/div/div[3]/div[2]/div[3]/table[1]/thead/tr/th[text() = "Number of Coins/Bills"]',
+                Locator::SELECTOR_XPATH
+            );
+    }
+
+    public function getOpeningBalance()
+    {
+        return $this->_rootElement->find('span.opening-balance', Locator::SELECTOR_CSS);
+    }
+
 }

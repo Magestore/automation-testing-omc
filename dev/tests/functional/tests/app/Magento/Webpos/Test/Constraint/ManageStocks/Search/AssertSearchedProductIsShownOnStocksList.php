@@ -22,6 +22,7 @@ class AssertSearchedProductIsShownOnStocksList extends AbstractConstraint
         $product_entity = $objectManager->create('Magento\Catalog\Model\Product')->load($product['id']);
 
         $webposIndex->getManageStockList()->waitForProductListShow();
+        sleep(3);
         \PHPUnit_Framework_Assert::assertEquals(
 			1,
 			$webposIndex->getManageStockList()->countProductRows(),

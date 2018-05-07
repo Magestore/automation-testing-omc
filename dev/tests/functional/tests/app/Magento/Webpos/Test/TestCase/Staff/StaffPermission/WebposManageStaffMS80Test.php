@@ -90,13 +90,15 @@ class WebposManageStaffMS80Test extends Injectable
         //Login
         $this->login($staff, $location, $pos);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
-        $this->webposIndex->getMainContent()->clickOutsidePopup();
+        sleep(2);
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
         $this->webposIndex->getSessionShift()->getOpenShiftButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
+        sleep(3);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
-        sleep(2);
+        sleep(3);
+//        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
         $this->assertTrue(
             $this->webposIndex->getListShift()->getFirstItemShift()->isVisible(),
             'Open a shift not successfully.'

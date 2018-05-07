@@ -76,6 +76,7 @@ class WebposCheckoutPaymentMethodCP215Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //select shipping
+        sleep(3);
         $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //select payment
@@ -84,7 +85,8 @@ class WebposCheckoutPaymentMethodCP215Test extends Injectable
 
 
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getMainContent()->clickOutsidePopup();
+        sleep(3);
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         // place order
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

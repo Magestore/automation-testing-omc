@@ -62,7 +62,8 @@ class WebposCheckoutCartEditQtyCheckoutByEditQtyProductTest extends Injectable
 		$this->assertEditProductPopupIsAvailable->processAssert($this->webposIndex);
 
 		$this->webposIndex->getCheckoutProductEdit()->getQtyInput()->setValue($qtyInput);
-		$this->webposIndex->getMainContent()->clickOutsidePopup();
+        sleep(3);
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
 		$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();

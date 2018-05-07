@@ -10,8 +10,10 @@ namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\PutMoney;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
-use Magento\Webpos\Test\Fixture\WebposRole;
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Page\WebposIndex;
+use Magento\Webpos\Test\Fixture\Pos;
+use Magento\Webpos\Test\Fixture\Location;
 use Magento\Webpos\Test\Fixture\Denomination;
 
 class WebposManagementValidate15Test extends Injectable
@@ -42,41 +44,122 @@ class WebposManagementValidate15Test extends Injectable
         )->run();
     }
 
-    public function test(Denomination $denomination, $des)
-    {
+    /**
+     * @param Denomination $denomination
+     * @param Pos $pos
+     * @param FixtureFactory $fixtureFactory
+     * @param float $des
+     */
+    public function test(
+        Denomination $denomination,
+        Pos $pos,
+        FixtureFactory $fixtureFactory,
+        $des
+    ) {
+        // Precondition
         $denomination->persist();
-        //Login
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
+
+        /**@var Location $location*/
+        $location = $fixtureFactory->createByCode('location', ['dataset' => 'default']);
+        $location->persist();
+        $locationId = $location->getLocationId();
+        $posData = $pos->getData();
+        $posData['location_id'] = [ $locationId ];
+        /**@var Pos $pos*/
+        $pos = $fixtureFactory->createByCode('pos', ['data' => $posData]);
+        $pos->persist();
+        $posId = $pos->getPosId();
+        $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
+        $staffData = $staff->getData();
+        $staffData['location_id'] = [$locationId];
+        $staffData['pos_ids'] = [$posId];
+        /**@var Staff $staff*/
+        $staff = $fixtureFactory->createByCode('staff', ['data' => $staffData]);
+        $staff->persist();
+        // Login webpos
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            [
+                'staff' => $staff,
+                'location' => $location,
+                'pos' => $pos,
+                'hasOpenSession' => false
+            ]
         )->run();
-
-        //click menu
-        $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
-        $this->webposIndex->getCMenu()->getSessionManagement();
-        $this->webposIndex->getMainContent()->clickOutsidePopup();
-//        $this->webposIndex->getSessionShift()->getAddSession()->click();
-        $this->webposIndex->getOpenSessionPopup()->setQtyCoinBill(10);
-
+        $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
+        $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
-        sleep(2);
+        $openAmount = $denomination->getDenominationValue() * 10;
+
+        sleep(1);
+
+        $this->assertTrue(
+            strpos(
+                $this->webposIndex->getSessionInfo()->getOpeningBalance()->getText(),
+                $openAmount.''
+            ) !== false,
+            'Subtotal is not equal opening balance'. $this->webposIndex->getSessionInfo()->getOpeningBalance()->getText().
+            $openAmount.''
+        );
 
         $this->webposIndex->getSessionShift()->getPutMoneyInButton()->click();
+        sleep(1);
+        $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue($des);
+        $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();
 
-        $this->webposIndex->getPutMoneyInPopup()->getAmountInput()->setValue($des);
+        $differenceAmountBeforePutOut = $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText();
+        while ($differenceAmountBeforePutOut == $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText()) {
 
-        $this->webposIndex->getPutMoneyInPopup()->getDoneButton()->click();
+        }
+
+        $this->assertTrue(
+            !$this->webposIndex->getSessionMakeAdjustmentPopup()->isVisible(),
+            'Put Money In popup is not hidden'
+        );
+        $this->assertTrue(
+            strpos(
+                $this->webposIndex->getSessionInfo()->getDifferenceAmount()->getText(),
+                ''.($des + $openAmount)
+                ) !== false,
+            'Difference amount must be -'.($des + $openAmount)
+            . ' not be ' . $this->webposIndex->getSessionInfo()->getDifferenceAmount()->getText()
+        );
+        $this->assertTrue(
+            strpos(
+                $this->webposIndex->getSessionInfo()->getTheoreticalClosingBalance()->getText(),
+                ($des + $openAmount) . ''
+            ) !== false,
+            'Theoretical Closing Balance amount must be '.($des + $openAmount)
+        );
+
+        $this->assertTrue(
+            strpos(
+                $this->webposIndex->getSessionInfo()->getAddTransactionTotal()->getText(),
+                $des. ''
+            ) !== false,
+            'Add Transaction amount must be '.$des
+        );
+
         $this->webposIndex->getSessionShift()->getAddTransition()->click();
+        sleep(1);
 
-        $this->webposIndex->getMainContent()->clickOutsidePopup();
-        // End session
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
-        $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
+        /**
+         * @var \Magento\Mtf\Client\ElementInterface $transaction
+         */
+        $hasTransaction = false;
+        foreach ($this->webposIndex->getCashActivitiesPopup()->getTransactionsWithValue() as $transaction) {
+            if ($transaction->getText() === $this->webposIndex->getSessionInfo()->getAddTransactionTotal()->getText()) {
+                $hasTransaction = true;
+                break;
+            }
+        }
 
+        $this->assertTrue(
+            $hasTransaction,
+            'Put Money In transaction is not record'
+        );
     }
+
 
     public function tearDown()
     {

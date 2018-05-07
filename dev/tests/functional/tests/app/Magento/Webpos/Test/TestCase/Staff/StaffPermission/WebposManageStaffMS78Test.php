@@ -96,22 +96,25 @@ class WebposManageStaffMS78Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
-        sleep(2);
-//        $this->assertTrue(
-//            $this->webposIndex->getListShift()->getFirstItemShift()->isVisible(),
-//            'Open a shift not successfully.'
-//        );
+        sleep(5);
+        $this->assertTrue(
+            $this->webposIndex->getListShift()->getFirstItemShift()->isVisible(),
+            'Open a shift not successfully.'
+        );
+
         //Put money in
         $this->webposIndex->getSessionInfo()->getPutMoneyInButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-make-adjustment"]');
         $this->webposIndex->getPutMoneyInPopup()->getAmountInput()->setValue(69);
         $this->webposIndex->getPutMoneyInPopup()->getDoneButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-make-adjustment"]');
+        sleep(3);
         //Take money out
         $this->webposIndex->getSessionInfo()->getTakeMoneyOutButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-make-adjustment"]');
         $this->webposIndex->getPutMoneyInPopup()->getAmountInput()->setValue(69);
         $this->webposIndex->getPutMoneyInPopup()->getDoneButton()->click();
+        sleep(2);
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-make-adjustment"]');
         //Close the shift
         sleep(2);

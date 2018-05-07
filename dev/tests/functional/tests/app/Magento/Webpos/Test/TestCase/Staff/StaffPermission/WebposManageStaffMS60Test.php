@@ -5,7 +5,9 @@
  * Date: 12/02/2018
  * Time: 09:14
  */
+
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
@@ -31,15 +33,12 @@ class WebposManageStaffMS60Test extends Injectable
      * @var AssertShowNewNotification
      */
     protected $assertShowNewNotification;
+
     public function __prepare()
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'have_shipping_method_on_webpos_CP197']
-        )->run();
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'create_section_before_working_yes_MS57']
         )->run();
     }
 
@@ -53,7 +52,8 @@ class WebposManageStaffMS60Test extends Injectable
         WebposIndex $webposIndex,
         AssertShowMessageNotification $assertShowMessageNotification,
         AssertShowNewNotification $assertShowNewNotification
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->assertShowMessageNotification = $assertShowMessageNotification;
         $this->assertShowNewNotification = $assertShowNewNotification;
@@ -80,24 +80,25 @@ class WebposManageStaffMS60Test extends Injectable
 
         //Login
         $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
+            'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
         //Create order
-            //Add products to cart
+        //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+       sleep(2);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(1);
         $this->webposIndex->getCheckoutProductList()->search($product2->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        sleep(2);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
-            //Checkout
+        //Checkout
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-            //PlaceOrder
+        //PlaceOrder
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
@@ -105,9 +106,9 @@ class WebposManageStaffMS60Test extends Injectable
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         sleep(1);
-            //Get orderId
+        //Get orderId
         $orderId1 = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
-        $orderId1= ltrim ($orderId1,'#');
+        $orderId1 = ltrim($orderId1, '#');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         sleep(4);
 
@@ -121,16 +122,15 @@ class WebposManageStaffMS60Test extends Injectable
 
         $this->webposIndex->getNotification()->getNotificationBell()->click();
         $this->webposIndex->getNotification()->getClearAll()->click();
-        $this->webposIndex->getMainContent()->clickOutsidePopup();
+        sleep(3);
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         //Send email
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
-        while(!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible())
-        {
+        while (!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible()) {
             sleep(1);
         }
         $this->webposIndex->getOrderHistoryAddOrderNote()->getSendMailButton()->click();
-        while(!$this->webposIndex->getOrderHistorySendEmail()->isVisible())
-        {
+        while (!$this->webposIndex->getOrderHistorySendEmail()->isVisible()) {
             sleep(1);
         }
         $this->webposIndex->getOrderHistorySendEmail()->getInputSendEmail()->setValue('test@gmail.com');
@@ -138,21 +138,19 @@ class WebposManageStaffMS60Test extends Injectable
         $this->assertShowMessageNotification->processAssert($this->webposIndex, 'An email has been sent for this order!');
         $this->webposIndex->getNotification()->getNotificationBell()->click();
         $textNotif = $this->webposIndex->getNotification()->getFirstNotificationText();
-        $this->webposIndex->getMainContent()->clickOutsidePopup();
+        sleep(3);         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         $this->assertShowNewNotification->processAssert($this->webposIndex, 'An email has been sent for this order!', $textNotif);
 
         $this->webposIndex->getNotification()->getNotificationBell()->click();
         $this->webposIndex->getNotification()->getClearAll()->click();
-        $this->webposIndex->getMainContent()->clickOutsidePopup();
+        sleep(3);         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         //Add comment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
-        while(!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible())
-        {
+        while (!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible()) {
             sleep(1);
         }
         $this->webposIndex->getOrderHistoryAddOrderNote()->getAddCommentButton()->click();
-        while(!$this->webposIndex->getOrderHistoryAddComment()->isVisible())
-        {
+        while (!$this->webposIndex->getOrderHistoryAddComment()->isVisible()) {
             sleep(1);
         }
         $this->webposIndex->getOrderHistoryAddComment()->getInputComment()->setValue('test add comment');
@@ -160,13 +158,12 @@ class WebposManageStaffMS60Test extends Injectable
         $this->assertShowMessageNotification->processAssert($this->webposIndex, 'Add order comment successfully!');
         $this->webposIndex->getNotification()->getNotificationBell()->click();
         $textNotif = $this->webposIndex->getNotification()->getFirstNotificationText();
-        $this->webposIndex->getMainContent()->clickOutsidePopup();
+        sleep(3);         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         $this->assertShowNewNotification->processAssert($this->webposIndex, 'Add order comment successfully!', $textNotif);
 
         //Re-order
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
-        while(!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible())
-        {
+        while (!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible()) {
             sleep(1);
         }
         $this->webposIndex->getOrderHistoryAddOrderNote()->getReOrderButton()->click();
@@ -177,14 +174,6 @@ class WebposManageStaffMS60Test extends Injectable
         $dataProduct2 = $product2->getData();
         $dataProduct2['qty'] = 1;
         return ['cartProducts' => [$dataProduct1, $dataProduct2]];
-    }
-
-    public function tearDown()
-    {
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'create_section_before_working_no_MS57']
-        )->run();
     }
 }
 

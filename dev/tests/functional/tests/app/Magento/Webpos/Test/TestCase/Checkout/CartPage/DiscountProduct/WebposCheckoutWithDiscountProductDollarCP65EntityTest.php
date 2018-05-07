@@ -71,8 +71,8 @@ class WebposCheckoutWithDiscountProductDollarCP65EntityTest extends Injectable
         $this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($price-$price/2);
-        sleep(1);
-        $this->webposIndex->getMainContent()->clickOutsidePopup();
+        sleep(3);
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         //CategoryRepository
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();

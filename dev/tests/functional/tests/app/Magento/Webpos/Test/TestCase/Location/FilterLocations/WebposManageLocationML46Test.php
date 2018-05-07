@@ -49,6 +49,7 @@ class WebposManageLocationML46Test extends Injectable
         $this->mappingLocationIndex->open();
         $this->mappingLocationIndex->getMappingLocationGrid()->chooseLocations();
         $this->mappingLocationIndex->getLocationModal()->waitLoader();
+        sleep(2);
         $this->mappingLocationIndex->getLocationModal()->openFilterBlock();
         $this->mappingLocationIndex->getLocationModal()->resetFilter();
         sleep(3);

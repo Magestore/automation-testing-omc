@@ -84,8 +84,8 @@ class WebposManageStaffMS55Test extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
-        sleep(1);
-        $this->webposIndex->getMainContent()->clickOutsidePopup();
+        sleep(2);
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
 
         //Assert custom price

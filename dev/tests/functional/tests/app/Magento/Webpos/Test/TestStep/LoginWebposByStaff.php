@@ -36,16 +36,31 @@ class LoginWebposByStaff implements TestStepInterface
      */
     protected $pos;
 
+    /**
+     * @var boolean hasOpenSession
+     */
+    protected $hasOpenSession;
+
+    /**
+     * @var boolean hasWaitOpenSessionPopup
+     */
+    protected $hasWaitOpenSessionPopup;
+
     public function __construct(
         WebposIndex $webposIndex,
         Staff $staff,
         Location $location = null,
-        Pos $pos = null
+        Pos $pos = null,
+        $hasOpenSession = true,
+        $hasWaitOpenSessionPopup = true
     ) {
         $this->webposIndex = $webposIndex;
         $this->staff = $staff;
         $this->location = $location;
         $this->pos = $pos;
+        $this->hasOpenSession = $hasOpenSession;
+        $this->hasOpenSession = $hasOpenSession;
+        $this->hasWaitOpenSessionPopup = $hasWaitOpenSessionPopup;
     }
 
     public function run()
@@ -82,12 +97,14 @@ class LoginWebposByStaff implements TestStepInterface
 //        $this->webposIndex->getMsWebpos()->waitCartLoader();
         if ($this->location || $this->pos) {
             if($this->webposIndex->getMsWebpos()->isVisible('[id="popup-open-shift"]')){
-                $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
+                $this->hasWaitOpenSessionPopup && $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
             }
             sleep(2);
             $this->webposIndex->getOpenSessionPopup()->waitForElementNotVisible('.indicator[data-bind="visible:loading"]');
-            $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
-            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
+            if ($this->hasOpenSession) {
+                $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
+                $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
+            }
         }
 
     }
