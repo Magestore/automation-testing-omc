@@ -8,10 +8,12 @@
 
 namespace Magento\Webpos\Test\TestStep;
 
-
 use Magento\Mtf\TestStep\TestStepInterface;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class EditCustomPriceOfProductOnCartStep
+ * @package Magento\Webpos\Test\TestStep
+ */
 class EditCustomPriceOfProductOnCartStep implements TestStepInterface
 {
 	/**
@@ -50,8 +52,8 @@ class EditCustomPriceOfProductOnCartStep implements TestStepInterface
 				$this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
 				$this->webposIndex->getCheckoutProductEdit()->getDollarButton()->click();
 				$this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($item['customPrice']);
-				sleep(1);
-				sleep(3);         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+				sleep(3);
+				$this->webposIndex->getMainContent()->clickOutsidePopup();
 			}
 		}
 	}
