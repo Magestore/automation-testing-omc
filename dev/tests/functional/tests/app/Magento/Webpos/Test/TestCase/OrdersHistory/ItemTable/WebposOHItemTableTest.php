@@ -80,7 +80,8 @@ class WebposOHItemTableTest extends Injectable
 		$configData,
 		$discountAmount,
 		$createInvoice = true,
-		$shipped = false
+		$shipped = false,
+        $testcaseID
 	)
 	{
 		// Create products
@@ -146,6 +147,11 @@ class WebposOHItemTableTest extends Injectable
 				'shipped' => $shipped
 			]
 		)->run();
+
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+		$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
 		$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();

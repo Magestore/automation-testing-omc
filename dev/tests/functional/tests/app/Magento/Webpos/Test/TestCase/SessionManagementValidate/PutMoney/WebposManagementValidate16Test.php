@@ -107,11 +107,14 @@ class WebposManagementValidate16Test extends Injectable
 
         $this->webposIndex->getSessionShift()->getPutMoneyInButton()->click();
         sleep(1);
+        $beforeDifference = $this->webposIndex->getSessionInfo()->getDifferenceAmount()->getText();
         $reasonText = 'Test reason';
         $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue($des);
         $this->webposIndex->getSessionMakeAdjustmentPopup()->getReason()->setValue($reasonText);
         $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();
-        sleep(1);
+        /** wait request done */
+        while ( $beforeDifference ==  $this->webposIndex->getSessionInfo()->getDifferenceAmount()->getText()) {}
+
         $this->assertTrue(
             !$this->webposIndex->getSessionMakeAdjustmentPopup()->isVisible(),
             'Put Money In popup is not hidden'

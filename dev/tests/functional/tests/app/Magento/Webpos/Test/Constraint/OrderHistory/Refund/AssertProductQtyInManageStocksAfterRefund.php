@@ -27,6 +27,7 @@ class AssertProductQtyInManageStocksAfterRefund extends AbstractConstraint
             }
             $productName = $item['product']->getName();
             $webposIndex->getManageStockList()->searchProduct($productName);
+            sleep(1);
             $actualProductQty = $webposIndex->getManageStockList()->getProductQtyValue($productName);
             \PHPUnit_Framework_Assert::assertEquals(
                 $expectedQty,

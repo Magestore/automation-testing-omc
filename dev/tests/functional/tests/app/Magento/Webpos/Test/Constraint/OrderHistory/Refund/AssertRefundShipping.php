@@ -21,7 +21,7 @@ class AssertRefundShipping extends AbstractConstraint
             'Success Message is not displayed'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            'Data Refund Invalid!',
+            'A creditmemo has been created!',
             $webposIndex->getToaster()->getWarningMessage()->getText(),
             "Success message's Content is Wrong"
         );
