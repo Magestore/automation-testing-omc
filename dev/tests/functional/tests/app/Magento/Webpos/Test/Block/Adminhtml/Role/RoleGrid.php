@@ -82,4 +82,18 @@ class RoleGrid extends DataGrid
 		$this->waitForElementNotVisible($this->loader);
 		$this->getTemplateBlock()->waitLoader();
 	}
+
+	public function getButtonByName($name){
+        return $this->_rootElement->find('./..//div[@class="page-actions-buttons"]//span[text()="'.$name.'"]', locator::SELECTOR_XPATH);
+    }
+
+
+    public function getMassActionOptionByName($name)
+    {
+        return $this->_rootElement->find('//div[@class="action-menu-items"]//ul//li//span[text()="' . $name . '"]   ', Locator::SELECTOR_XPATH);
+    }
+
+    public function getFilterButton(){
+        return $this->_rootElement->find('//div[@class="data-grid-filters-actions-wrap"]//button[text()="Filters"]', Locator::SELECTOR_XPATH);
+    }
 }
