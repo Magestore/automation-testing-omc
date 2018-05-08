@@ -80,6 +80,7 @@ class WebposTakePaymentOH93Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //select shipping
+        sleep(1);
         $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //select payment
@@ -101,11 +102,9 @@ class WebposTakePaymentOH93Test extends Injectable
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        //select order
-        sleep(2);
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-
-        sleep(0.5);
+        //select order
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         //click take payment
         sleep(0.5);

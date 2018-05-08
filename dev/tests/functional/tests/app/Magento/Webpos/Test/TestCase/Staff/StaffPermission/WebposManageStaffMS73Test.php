@@ -119,6 +119,7 @@ class WebposManageStaffMS73Test extends Injectable
         //Add coupon
         $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
         $this->webposIndex->getCheckoutDiscount()->setCouponCode($salesRule->getCouponCode());
+        sleep(2);
         $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -171,6 +172,7 @@ class WebposManageStaffMS73Test extends Injectable
             $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
             sleep(1);
             $this->webposIndex->getLoginForm()->clickLoginButton();
+            sleep(2);
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
             $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
             if ($location) {

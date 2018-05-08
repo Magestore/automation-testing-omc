@@ -7,6 +7,7 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+
 use Magento\Catalog\Test\Page\Adminhtml\CatalogProductIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
@@ -48,7 +49,8 @@ class WebposManageStaffMS67Test extends Injectable
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
         CatalogProductIndex $catalogProductIndex
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
         $this->catalogProductIndex = $catalogProductIndex;
@@ -69,7 +71,7 @@ class WebposManageStaffMS67Test extends Injectable
     public function test(WebposRole $webposRole, $products, $staffData)
     {
         //Create role and staff for role
-        /**@var Location $location*/
+        /**@var Location $location */
         $location = $this->fixtureFactory->createByCode('location', ['dataset' => 'default']);
         $location->persist();
         $locationId = $location->getLocationId();
@@ -78,17 +80,17 @@ class WebposManageStaffMS67Test extends Injectable
         $array = [];
         $array[] = $locationId;
         $posData['location_id'] = $array;
-        /**@var Pos $pos*/
+        /**@var Pos $pos */
         $pos = $this->fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
         $array = [];
         $array[] = $locationId;
-        $staffData['location_id']=$array;
+        $staffData['location_id'] = $array;
         $array = [];
         $array[] = $posId;
         $staffData['pos_ids'] = $array;
-        /**@var Staff $staff*/
+        /**@var Staff $staff */
         $staff = $this->fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff->persist();
         $roleData = $webposRole->getData();
@@ -128,7 +130,6 @@ class WebposManageStaffMS67Test extends Injectable
         }
 
 
-
     }
 
     public function login(Staff $staff, Location $location = null, Pos $pos = null)
@@ -142,6 +143,7 @@ class WebposManageStaffMS67Test extends Injectable
             $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
             $this->webposIndex->getLoginForm()->clickLoginButton();
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
+            sleep(2);
             $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
             if ($location) {
                 $this->webposIndex->getLoginForm()->setLocation($location->getDisplayName());
@@ -156,7 +158,7 @@ class WebposManageStaffMS67Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 360;
-            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
                 $time = time();
             }
             sleep(2);

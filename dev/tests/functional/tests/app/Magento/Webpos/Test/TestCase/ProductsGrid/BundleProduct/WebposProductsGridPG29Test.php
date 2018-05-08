@@ -57,6 +57,8 @@ class WebposProductsGridPG29Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
+        /** wait render popup */
+        sleep(2);
         if ($this->webposIndex->getCheckoutProductDetail()->isVisible()){
             $this->webposIndex->getCheckoutProductDetail()->getButtonCancel()->click();
         }

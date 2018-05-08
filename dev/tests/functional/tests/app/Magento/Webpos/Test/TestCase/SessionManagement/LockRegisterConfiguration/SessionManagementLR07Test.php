@@ -60,8 +60,8 @@ class SessionManagementLR07Test extends Injectable
         $posId = $pos->getPosId();
         $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
         $staffData = $staff->getData();
-        $staffData['location_id'][] = $locationId;
-        $staffData['pos_ids'][] = $posId;
+        $staffData['location_id'] = [ $locationId ];
+        $staffData['pos_ids'] = [ $posId ];
         /**@var Staff $staff*/
         $staff = $fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff->persist();

@@ -80,6 +80,7 @@ class WebposOrdersHistoryInvoiceOH106Test extends Injectable
         // Click Button Invoice
         $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
         $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
+        sleep(1);
         $this->webposIndex->getOrderHistoryInvoice()->getCommentInput()->setValue($invoiceComment);
         $this->webposIndex->getOrderHistoryInvoice()->getSendEmailCheckbox()->click();
         $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();

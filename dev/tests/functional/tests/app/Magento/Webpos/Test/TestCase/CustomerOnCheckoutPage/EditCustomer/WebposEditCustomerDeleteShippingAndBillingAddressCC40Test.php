@@ -58,9 +58,11 @@ class WebposEditCustomerDeleteShippingAndBillingAddressCC40Test extends Injectab
         //Delete shipping address
         $this->webposIndex->getCheckoutEditCustomer()->getDeleteShippingAddressIcon()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('.modal-popup');
-        $this->webposIndex->getModal()->getOkButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.modal-popup');
         sleep(1);
+        $this->webposIndex->getModal()->getOkButton()->click();
+        sleep(2);
+        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.modal-popup');
+        $this->webposIndex->getCheckoutEditCustomer()->waitForShippingAddressBoxNotVisible();
         $this->assertFalse(
             $this->webposIndex->getCheckoutEditCustomer()->getShippingAddressItem('John Doe, Calder, US, Michigan, 01012031411')->isVisible(),
             'Shipping address is not deleted.'
@@ -73,9 +75,11 @@ class WebposEditCustomerDeleteShippingAndBillingAddressCC40Test extends Injectab
         //Delete billing address
         $this->webposIndex->getCheckoutEditCustomer()->getDeleteBillingAddressIcon()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('.modal-popup');
-        $this->webposIndex->getModal()->getOkButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.modal-popup');
         sleep(1);
+        $this->webposIndex->getModal()->getOkButton()->click();
+        sleep(2);
+//        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.modal-popup');
+        $this->webposIndex->getCheckoutEditCustomer()->waitForBillingAddressBoxNotVisible();
         $this->assertFalse(
             $this->webposIndex->getCheckoutEditCustomer()->getBillingAddressItem('John Doe, Culver City, US, California, 555-55-555-55')->isVisible(),
             'Billing address is not deleted.'

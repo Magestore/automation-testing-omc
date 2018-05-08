@@ -34,7 +34,7 @@ class WebposOrderHistorySearchClearKeywordOH129Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        $this->webposIndex->getOrderHistoryOrderList()->search('fewfewfewfew1221');
+        $this->webposIndex->getOrderHistoryOrderList()->search('dadasdasdasdasdasdasd');
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->assertFalse(
             $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->isVisible(),

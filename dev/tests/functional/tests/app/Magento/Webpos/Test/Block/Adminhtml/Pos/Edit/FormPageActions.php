@@ -8,6 +8,8 @@
 
 namespace Magento\Webpos\Test\Block\Adminhtml\Pos\Edit;
 
+use Magento\Mtf\Client\Locator;
+
 class FormPageActions extends  \Magento\Backend\Test\Block\FormPageActions
 {
     protected $saveAndContinueButton = '#saveandcontinue';
@@ -26,5 +28,15 @@ class FormPageActions extends  \Magento\Backend\Test\Block\FormPageActions
 
     public function getUnlockButton() {
         return $this->_rootElement->find('#unlock');
+    }
+
+    public function getButtonByname($name)
+    {
+        return $this->_rootElement->find('//div[@class="page-actions-buttons"]//button//span[text()="' . $name . '"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getTitleByName($name)
+    {
+        return $this->_rootElement->find('//div[@class="page-actions-inner"][@data-title="' . $name . '"]', Locator::SELECTOR_XPATH);
     }
 }

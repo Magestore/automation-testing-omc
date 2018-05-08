@@ -7,6 +7,7 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Location;
@@ -41,7 +42,8 @@ class WebposManageStaffMS64Test extends Injectable
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
     }
@@ -61,7 +63,7 @@ class WebposManageStaffMS64Test extends Injectable
     public function test(WebposRole $webposRole, $products, $staffData)
     {
         //Create role and staff for role
-        /**@var Location $location*/
+        /**@var Location $location */
         $location = $this->fixtureFactory->createByCode('location', ['dataset' => 'default']);
         $location->persist();
         $locationId = $location->getLocationId();
@@ -70,7 +72,7 @@ class WebposManageStaffMS64Test extends Injectable
         $array = [];
         $array[] = $locationId;
         $posData['location_id'] = $array;
-        /**@var Pos $pos*/
+        /**@var Pos $pos */
         $pos = $this->fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
@@ -83,10 +85,10 @@ class WebposManageStaffMS64Test extends Injectable
         $staffData['username'] = 'test%isolation%';
         $staffData['display_name'] = 'Staff %isolation%';
         $staffData['email'] = 'test%isolation%@trueplus.vn';
-        /**@var Staff $staff1*/
+        /**@var Staff $staff1 */
         $staff1 = $this->fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff1->persist();
-        /**@var Staff $staff2*/
+        /**@var Staff $staff2 */
         $staff2 = $this->fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff2->persist();
         $roleData = $webposRole->getData();
@@ -121,6 +123,7 @@ class WebposManageStaffMS64Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="toaster"]');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
+        sleep(2);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Logout
@@ -129,15 +132,18 @@ class WebposManageStaffMS64Test extends Injectable
         $this->webposIndex->getCMenu()->logout();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
         $this->webposIndex->getModal()->getOkButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader.loading-mask');
-        sleep(2);
+        sleep(4);
+//        $this->wesbposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader.loading-mask');
+//        sleep(4);
         //Login by staff2
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
+        sleep(3);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="c-button--push-left"]');
         //Go to orders history
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
+        sleep(2);
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         sleep(2);
@@ -146,7 +152,7 @@ class WebposManageStaffMS64Test extends Injectable
         //Take payment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="payment-popup"]');
-        sleep(3);
+        sleep(5);
         $this->webposIndex->getOrderHistoryPayment()->getCashInMethod()->click();
         $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
@@ -228,6 +234,7 @@ class WebposManageStaffMS64Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="form-add-note-order"]');
         $this->webposIndex->getOrderHistoryAddOrderNote()->getRefundButton()->click();
+        sleep(2);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="refund-popup"]');
         foreach ($products as $item) {
             $productName = $item['product']->getName();
@@ -236,7 +243,7 @@ class WebposManageStaffMS64Test extends Injectable
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
         $this->webposIndex->getModal()->getOkButton()->click();
-        sleep(2);
+        sleep(3);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="toaster"]');
         $this->assertEquals(
             'A creditmemo has been created!',
@@ -258,6 +265,7 @@ class WebposManageStaffMS64Test extends Injectable
         //Send mail
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="form-add-note-order"]');
+        sleep(2);
         $this->webposIndex->getOrderHistoryAddOrderNote()->getSendMailButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="send-email-order"]');
         $this->webposIndex->getOrderHistorySendEmail()->getSendButton()->click();
@@ -338,7 +346,7 @@ class WebposManageStaffMS64Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 360;
-            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
                 $time = time();
             }
             sleep(2);

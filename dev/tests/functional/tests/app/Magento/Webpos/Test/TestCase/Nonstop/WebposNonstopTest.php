@@ -173,7 +173,7 @@ class WebposNonstopTest extends Injectable
 
 				$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
 				$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
+                sleep(5);
 				//Assert Place Order Success
 				$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
 
@@ -186,7 +186,7 @@ class WebposNonstopTest extends Injectable
 				$this->webposIndex->getCMenu()->ordersHistory();
 
 				$this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-				sleep(2);
+				sleep(10);
 				$this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 				while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
 				self::assertEquals(
@@ -228,7 +228,7 @@ class WebposNonstopTest extends Injectable
 				$this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
 				$this->webposIndex->getMsWebpos()->waitForModalPopup();
 				$this->webposIndex->getModal()->getOkButton()->click();
-
+                sleep(2);
 				// Assert Shipment Success
 //				$this->assertShipmentSuccess->processAssert($this->webposIndex);
 				// Assert Order Status
