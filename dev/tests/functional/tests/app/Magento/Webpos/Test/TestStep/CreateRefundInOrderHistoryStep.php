@@ -8,10 +8,12 @@
 
 namespace Magento\Webpos\Test\TestStep;
 
-
 use Magento\Mtf\TestStep\TestStepInterface;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class CreateRefundInOrderHistoryStep
+ * @package Magento\Webpos\Test\TestStep
+ */
 class CreateRefundInOrderHistoryStep implements TestStepInterface
 {
 	/**

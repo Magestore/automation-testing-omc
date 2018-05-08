@@ -53,8 +53,9 @@ class EditCustomPriceOfProductOnCartStep implements TestStepInterface
 				$this->webposIndex->getCheckoutProductEdit()->getDollarButton()->click();
 				$this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($item['customPrice']);
 				sleep(3);
-				$this->webposIndex->getMainContent()->clickOutsidePopup();
-			}
+                $this->webposIndex->getMainContent()->clickOutsidePopup();
+                sleep(1);
+            }
 		}
 	}
 }
