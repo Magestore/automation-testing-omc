@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Webpos\Test\TestCase\Staff\CheckSortColumnInGrid\ManageStaffSortByColumnTest" summary="Check manage staff page" ticketId="MAGETWO-1234">
-        <variation name="ManageStaffSortByIdColumnMS03TestTestVariation">
+        <variation name="ManageStaffSortByIdColumnMS03TestVariation">
             <data name="itemsCount" xsi:type="string">1</data>
             <data name="fixtureName" xsi:type="string">staff</data>
             <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
@@ -16,7 +16,7 @@
             <data name="gridRetriever" xsi:type="string">getStaffsGrid</data>
             <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
         </variation>
-        <variation name="ManageStaffSortByUsernameColumnMS04TestTestVariation">
+        <variation name="ManageStaffSortByUsernameColumnMS04TestVariation">
             <data name="itemsCount" xsi:type="string">1</data>
             <data name="fixtureName" xsi:type="string">staff</data>
             <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
@@ -31,7 +31,7 @@
             <data name="gridRetriever" xsi:type="string">getStaffsGrid</data>
             <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
         </variation>
-        <variation name="ManageStaffSortByEmailColumnMS05TestTestVariation">
+        <variation name="ManageStaffSortByEmailColumnMS05TestVariation">
             <data name="itemsCount" xsi:type="string">1</data>
             <data name="fixtureName" xsi:type="string">staff</data>
             <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
@@ -46,7 +46,7 @@
             <data name="gridRetriever" xsi:type="string">getStaffsGrid</data>
             <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
         </variation>
-        <variation name="ManageStaffSortByDisplayNameColumnMS06TestTestVariation">
+        <variation name="ManageStaffSortByDisplayNameColumnMS06TestVariation">
             <data name="itemsCount" xsi:type="string">1</data>
             <data name="fixtureName" xsi:type="string">staff</data>
             <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
@@ -61,7 +61,7 @@
             <data name="gridRetriever" xsi:type="string">getStaffsGrid</data>
             <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
         </variation>
-        <variation name="ManageStaffSortByLocationColumnMS07TestTestVariation">
+        <variation name="ManageStaffSortByLocationColumnMS07TestVariation">
             <data name="itemsCount" xsi:type="string">1</data>
             <data name="fixtureName" xsi:type="string">staff</data>
             <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
@@ -76,7 +76,7 @@
             <data name="gridRetriever" xsi:type="string">getStaffsGrid</data>
             <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
         </variation>
-        <variation name="ManageStaffSortByRoleColumnMS08TestTestVariation">
+        <variation name="ManageStaffSortByRoleColumnMS08TestVariation">
             <data name="itemsCount" xsi:type="string">1</data>
             <data name="fixtureName" xsi:type="string">staff</data>
             <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
@@ -92,7 +92,7 @@
             <data name="gridRetriever" xsi:type="string">getStaffsGrid</data>
             <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
         </variation>
-        <variation name="ManageStaffSortByStatusColumnMS09TestTestVariation">
+        <variation name="ManageStaffSortByStatusColumnMS09TestVariation">
             <data name="itemsCount" xsi:type="string">1</data>
             <data name="fixtureName" xsi:type="string">staff</data>
             <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
