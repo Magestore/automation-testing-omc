@@ -96,12 +96,17 @@ class LoginWebposByStaff implements TestStepInterface
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 //        $this->webposIndex->getMsWebpos()->waitCartLoader();
         if ($this->location || $this->pos) {
+            /**
+             *  wait sync complete
+             */
+            $this->webposIndex->getBody()->waitForElementNotVisible('.wrap-login-form');
+            sleep(2);
             if($this->webposIndex->getMsWebpos()->isVisible('[id="popup-open-shift"]')){
                 $this->hasWaitOpenSessionPopup && $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
             }
-            sleep(2);
             $this->webposIndex->getOpenSessionPopup()->waitForElementNotVisible('.indicator[data-bind="visible:loading"]');
             if ($this->hasOpenSession) {
+                $this->webposIndex->getOpenSessionPopup()->waitForElementVisible('button[type="submit"]');
                 $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
                 $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
             }

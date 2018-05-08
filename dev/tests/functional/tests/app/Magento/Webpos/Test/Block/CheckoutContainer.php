@@ -42,9 +42,4 @@ class CheckoutContainer extends Block
 	{
 		$this->waitForElementVisible('#add-more-payment');
 	}
-
-    public function waitForAddNoteModalNotVisible()
-    {
-        $this->waitForElementNotVisible('#form-add-note');
-    }
 }

@@ -86,12 +86,15 @@ class WebposManagementValidate16Test extends Injectable
                 'hasOpenSession' => false
             ]
         )->run();
+
+        $beforeOpeningBalance  =  $this->webposIndex->getSessionInfo()->getOpeningBalance()->getText();
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         $openAmount = $denomination->getDenominationValue() * 10;
 
-        sleep(1);
+        /** wait request done */
+        while ( $beforeOpeningBalance ==  $this->webposIndex->getSessionInfo()->getOpeningBalance()->getText()) {}
 
         $this->assertTrue(
             strpos(
@@ -104,11 +107,14 @@ class WebposManagementValidate16Test extends Injectable
 
         $this->webposIndex->getSessionShift()->getPutMoneyInButton()->click();
         sleep(1);
+        $beforeDifference = $this->webposIndex->getSessionInfo()->getDifferenceAmount()->getText();
         $reasonText = 'Test reason';
         $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue($des);
         $this->webposIndex->getSessionMakeAdjustmentPopup()->getReason()->setValue($reasonText);
         $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();
-        sleep(1);
+        /** wait request done */
+        while ( $beforeDifference ==  $this->webposIndex->getSessionInfo()->getDifferenceAmount()->getText()) {}
+
         $this->assertTrue(
             !$this->webposIndex->getSessionMakeAdjustmentPopup()->isVisible(),
             'Put Money In popup is not hidden'

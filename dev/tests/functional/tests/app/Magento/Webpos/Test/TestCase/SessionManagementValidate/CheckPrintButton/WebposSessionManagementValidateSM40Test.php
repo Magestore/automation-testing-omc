@@ -74,10 +74,14 @@ class WebposSessionManagementValidateSM40Test extends Injectable
             ]
         )->run();
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
+        sleep(1);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
+        sleep(1);
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
+        sleep(1);
         $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
+        sleep(1);
 
         // Assert
         $this->assertTrue(

@@ -58,10 +58,10 @@ class WebposSaveOrderNoteCP187Test extends Injectable
 
         //Click ... Menu > click Add order note
         $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
-        $this->webposIndex->getCheckoutContainer()->waitForAddNoteModalNotVisible();
+
         sleep(2);
         $this->webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->click();
-        $this->webposIndex->getCheckoutContainer()->waitForAddNoteModalNotVisible();
+
         sleep(2);
 
         //Click save button

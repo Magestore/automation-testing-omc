@@ -82,11 +82,6 @@ class WebposSessionManagementValidateSM39Test extends Injectable
             'X-report is not visible.'
         );
 
-        $this->webposIndex->getSessionShift()->getHidePopup()->click();
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
     }
 
     /**

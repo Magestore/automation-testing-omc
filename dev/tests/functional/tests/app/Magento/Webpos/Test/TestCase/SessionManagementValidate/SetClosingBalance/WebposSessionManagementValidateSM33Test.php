@@ -93,27 +93,27 @@ class WebposSessionManagementValidateSM33Test extends Injectable
          *  wait fields show
          */
 
-        while (! $this->webposIndex->getOpenSessionPopup()->getCoinBillValue()->isVisible()) {
-
-        }
+        while (! $this->webposIndex->getOpenSessionPopup()->getCoinBillValue()->isVisible()) {}
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
 
-        while (! $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->isVisible()) {
-
-        }
+        while (! $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->isVisible()) {}
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
 
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
-        sleep(1);
+        /** wait request done  */
+        while ( !$this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->isVisible() ) {}
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
         sleep(1);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
+        sleep(1);
         $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
+        sleep(1);
 
         // Assert Set Reason popup
         $this->assertSetReasonPopup->processAssert($this->webposIndex);
 
         $this->webposIndex->getSessionSetReasonPopup()->getCancelButton()->click();
+        sleep(2);
 
         // Assert Set Reason popup not visible
         $this->assertFalse(
@@ -128,10 +128,6 @@ class WebposSessionManagementValidateSM33Test extends Injectable
             'Button "Validate Closing" is not visible.'
         );
 
-        sleep(2);
-        // End session
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
     }
 
     /**

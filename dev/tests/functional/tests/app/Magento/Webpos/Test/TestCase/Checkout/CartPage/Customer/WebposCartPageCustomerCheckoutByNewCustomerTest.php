@@ -77,6 +77,7 @@ class WebposCartPageCustomerCheckoutByNewCustomerTest extends Injectable
 			$this->webposIndex->getCheckoutAddCustomer()->isVisible(),
 			'CategoryRepository - TaxClass Page - Add customer popup is not shown'
 		);
+		sleep(2);
 		$this->webposIndex->getCheckoutAddCustomer()->getFirstNameInput()->setValue($customer->getFirstname());
 		$this->webposIndex->getCheckoutAddCustomer()->getLastNameInput()->setValue($customer->getLastname());
 		$this->webposIndex->getCheckoutAddCustomer()->getEmailInput()->setValue($customer->getEmail());
