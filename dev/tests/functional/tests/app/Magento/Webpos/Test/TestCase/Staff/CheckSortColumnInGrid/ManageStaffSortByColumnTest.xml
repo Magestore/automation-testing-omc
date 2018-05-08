@@ -4,6 +4,7 @@
         <variation name="ManageStaffSortByIdColumnMS03TestTestVariation">
             <data name="itemsCount" xsi:type="string">1</data>
             <data name="fixtureName" xsi:type="string">staff</data>
+            <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
             <data name="steps" xsi:type="array">
                 <item name="0" xsi:type="string">-</item>
                 <item name="1" xsi:type="string">-</item>
@@ -15,76 +16,82 @@
             <data name="gridRetriever" xsi:type="string">getStaffsGrid</data>
             <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
         </variation>
-        <!--<variation name="ManageStaffSortByUsernameColumnMS04TestTestVariation">-->
-            <!--<data name="itemsCount" xsi:type="string">1</data>-->
-            <!--<data name="fixtureName" xsi:type="string">staff</data>-->
-            <!--<data name="steps" xsi:type="array">-->
-                <!--<item name="0" xsi:type="string">-</item>-->
-                <!--<item name="1" xsi:type="string">-</item>-->
-            <!--</data>-->
-            <!--<data name="columnsForSorting" xsi:type="array">-->
-                <!--<item name="username" xsi:type="string">Username</item>-->
-            <!--</data>-->
-            <!--<data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\StaffIndex</data>-->
-            <!--<data name="gridRetriever" xsi:type="string">getStaffsGrid</data>-->
-            <!--<constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>-->
-        <!--</variation>-->
-        <!--<variation name="ManageStaffSortByEmailColumnMS05TestTestVariation">-->
-            <!--<data name="itemsCount" xsi:type="string">1</data>-->
-            <!--<data name="fixtureName" xsi:type="string">staff</data>-->
-            <!--<data name="steps" xsi:type="array">-->
-                <!--<item name="0" xsi:type="string">-</item>-->
-                <!--<item name="1" xsi:type="string">-</item>-->
-            <!--</data>-->
-            <!--<data name="columnsForSorting" xsi:type="array">-->
-                <!--<item name="email" xsi:type="string">Email</item>-->
-            <!--</data>-->
-            <!--<data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\StaffIndex</data>-->
-            <!--<data name="gridRetriever" xsi:type="string">getStaffsGrid</data>-->
-            <!--<constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>-->
-        <!--</variation>-->
-        <!--<variation name="ManageStaffSortByDisplayNameColumnMS06TestTestVariation">-->
-            <!--<data name="itemsCount" xsi:type="string">1</data>-->
-            <!--<data name="fixtureName" xsi:type="string">staff</data>-->
-            <!--<data name="steps" xsi:type="array">-->
-                <!--<item name="0" xsi:type="string">-</item>-->
-                <!--<item name="1" xsi:type="string">-</item>-->
-            <!--</data>-->
-            <!--<data name="columnsForSorting" xsi:type="array">-->
-                <!--<item name="display_name" xsi:type="string">Display Name</item>-->
-            <!--</data>-->
-            <!--<data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\StaffIndex</data>-->
-            <!--<data name="gridRetriever" xsi:type="string">getStaffsGrid</data>-->
-            <!--<constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>-->
-        <!--</variation>-->
-        <!--<variation name="ManageStaffSortByLocationColumnMS07TestTestVariation">-->
-            <!--<data name="itemsCount" xsi:type="string">1</data>-->
-            <!--<data name="fixtureName" xsi:type="string">staff</data>-->
-            <!--<data name="steps" xsi:type="array">-->
-                <!--<item name="0" xsi:type="string">-</item>-->
-                <!--<item name="1" xsi:type="string">-</item>-->
-            <!--</data>-->
-            <!--<data name="columnsForSorting" xsi:type="array">-->
-                <!--<item name="location_id" xsi:type="string">Location</item>-->
-            <!--</data>-->
-            <!--<data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\StaffIndex</data>-->
-            <!--<data name="gridRetriever" xsi:type="string">getStaffsGrid</data>-->
-            <!--<constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>-->
-        <!--</variation>-->
-        <!--<variation name="ManageStaffSortByRoleColumnMS08TestTestVariation">-->
-            <!--<data name="itemsCount" xsi:type="string">1</data>-->
-            <!--<data name="fixtureName" xsi:type="string">staff</data>-->
-            <!--<data name="steps" xsi:type="array">-->
-                <!--<item name="0" xsi:type="string">-</item>-->
-                <!--<item name="1" xsi:type="string">-</item>-->
-            <!--</data>-->
-            <!--<data name="columnsForSorting" xsi:type="array">-->
-                <!--<item name="role_id" xsi:type="string">Role</item>-->
-            <!--</data>-->
-            <!--<data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\StaffIndex</data>-->
-            <!--<data name="gridRetriever" xsi:type="string">getStaffsGrid</data>-->
-            <!--<constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>-->
-        <!--</variation>-->
+        <variation name="ManageStaffSortByUsernameColumnMS04TestTestVariation">
+            <data name="itemsCount" xsi:type="string">1</data>
+            <data name="fixtureName" xsi:type="string">staff</data>
+            <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
+            <data name="steps" xsi:type="array">
+                <item name="0" xsi:type="string">-</item>
+                <item name="1" xsi:type="string">-</item>
+            </data>
+            <data name="columnsForSorting" xsi:type="array">
+                <item name="username" xsi:type="string">Username</item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\StaffIndex</data>
+            <data name="gridRetriever" xsi:type="string">getStaffsGrid</data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+        </variation>
+        <variation name="ManageStaffSortByEmailColumnMS05TestTestVariation">
+            <data name="itemsCount" xsi:type="string">1</data>
+            <data name="fixtureName" xsi:type="string">staff</data>
+            <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
+            <data name="steps" xsi:type="array">
+                <item name="0" xsi:type="string">-</item>
+                <item name="1" xsi:type="string">-</item>
+            </data>
+            <data name="columnsForSorting" xsi:type="array">
+                <item name="email" xsi:type="string">Email</item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\StaffIndex</data>
+            <data name="gridRetriever" xsi:type="string">getStaffsGrid</data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+        </variation>
+        <variation name="ManageStaffSortByDisplayNameColumnMS06TestTestVariation">
+            <data name="itemsCount" xsi:type="string">1</data>
+            <data name="fixtureName" xsi:type="string">staff</data>
+            <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
+            <data name="steps" xsi:type="array">
+                <item name="0" xsi:type="string">-</item>
+                <item name="1" xsi:type="string">-</item>
+            </data>
+            <data name="columnsForSorting" xsi:type="array">
+                <item name="display_name" xsi:type="string">Display Name</item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\StaffIndex</data>
+            <data name="gridRetriever" xsi:type="string">getStaffsGrid</data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+        </variation>
+        <variation name="ManageStaffSortByLocationColumnMS07TestTestVariation">
+            <data name="itemsCount" xsi:type="string">1</data>
+            <data name="fixtureName" xsi:type="string">staff</data>
+            <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
+            <data name="steps" xsi:type="array">
+                <item name="0" xsi:type="string">-</item>
+                <item name="1" xsi:type="string">-</item>
+            </data>
+            <data name="columnsForSorting" xsi:type="array">
+                <item name="location_id" xsi:type="string">Location</item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\StaffIndex</data>
+            <data name="gridRetriever" xsi:type="string">getStaffsGrid</data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+        </variation>
+        <variation name="ManageStaffSortByRoleColumnMS08TestTestVariation">
+            <data name="itemsCount" xsi:type="string">1</data>
+            <data name="fixtureName" xsi:type="string">staff</data>
+            <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
+            <data name="webposRole/dataset" xsi:type="string">role_ms77</data>
+            <data name="steps" xsi:type="array">
+                <item name="0" xsi:type="string">-</item>
+                <item name="1" xsi:type="string">-</item>
+            </data>
+            <data name="columnsForSorting" xsi:type="array">
+                <item name="role_id" xsi:type="string">Role</item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\StaffIndex</data>
+            <data name="gridRetriever" xsi:type="string">getStaffsGrid</data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+        </variation>
         <variation name="ManageStaffSortByStatusColumnMS09TestTestVariation">
             <data name="itemsCount" xsi:type="string">1</data>
             <data name="fixtureName" xsi:type="string">staff</data>
