@@ -88,6 +88,7 @@ class WebposSessionManagementValidateSM36Test extends Injectable
         )->run();
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
         /** now balance is 100 */
+        sleep(1);
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         sleep(1);
