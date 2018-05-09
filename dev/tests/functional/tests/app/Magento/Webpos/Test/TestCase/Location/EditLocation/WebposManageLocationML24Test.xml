@@ -3,6 +3,32 @@
     <testCase name="Magento\Webpos\Test\TestCase\Location\EditLocation\WebposManageLocationML24Test" summary="Check GUI Edit Location page" ticketId="MAGETWO-1234">
         <variation name="WebposManageLocationML24TestVariation">
             <data name="location/dataset" xsi:type="string">ML19</data>
-       </variation>
+            <data name="page" xsi:type="string">edit</data>
+            <data name="title" xsi:type="string">Edit Location</data>
+            <data name="buttons" xsi:type="string">Back, Delete, Reset, Save and Continue Edit</data>
+            <data name="fields" xsi:type="array">
+                <item name="name" xsi:type="array">
+                    <item name="title" xsi:type="string">Location Name</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                </item>
+                <item name="store" xsi:type="array">
+                    <item name="title" xsi:type="string">Store View</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                </item>
+                <item name="address" xsi:type="array">
+                    <item name="title" xsi:type="string">Address</item>
+                    <item name="required" xsi:type="boolean">false</item>
+                </item>
+                <item name="description" xsi:type="array">
+                    <item name="title" xsi:type="string">Description</item>
+                    <item name="required" xsi:type="boolean">false</item>
+                </item>
+                <item name="warehouse" xsi:type="array">
+                    <item name="title" xsi:type="string">Warehouse</item>
+                    <item name="required" xsi:type="boolean">false</item>
+                </item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Location\Form\AssertLocationFormDisplay"/>
+        </variation>
     </testCase>
 </config>
