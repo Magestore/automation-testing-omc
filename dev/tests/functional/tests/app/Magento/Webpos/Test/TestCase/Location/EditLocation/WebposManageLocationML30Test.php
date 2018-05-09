@@ -49,7 +49,7 @@ class WebposManageLocationML30Test extends Injectable
         $this->locationIndex->getLocationsGrid()->getRowByDisplayName($location->getDescription())->find('.action-menu-item')->click();
         sleep(1);
         $this->locationNews->getFormPageActionsLocation()->deleteButton()->click();
-        $this->locationNews->getModalsWrapper()->getCancleButton()->click();
+        $this->locationNews->getModalsWrapper()->getCancelButton()->click();
         sleep(1);
     }
 }

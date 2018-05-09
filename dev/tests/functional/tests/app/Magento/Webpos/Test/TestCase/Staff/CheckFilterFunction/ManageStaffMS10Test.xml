@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\CheckFilterFunction\ManageStaffMS10Test" summary="Manage Staff - Check [Choose staff] page" ticketId="WEBPOS-1">
+        <variation name="ManageStaffMS10TestVariation">
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\GUI\AssertFilterBlockNotVisible" />
+        </variation>
+    </testCase>
+</config>

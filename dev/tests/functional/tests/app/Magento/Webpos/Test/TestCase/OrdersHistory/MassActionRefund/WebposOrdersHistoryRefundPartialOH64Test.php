@@ -104,22 +104,18 @@ class WebposOrdersHistoryRefundPartialOH64Test extends Injectable
             $totalRefunded += ($rowTotal/$item['orderQty'])*$item['refundQty'];
         }
         $totalRefunded += $shippingFee;
-        $expectStatus = 'Complete';
-        $this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
+        // Assert Refund Success
+        $this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus = 'Complete', $totalRefunded);
         // Refund Extant Items
         $tempProducts = $products;
-        foreach ($tempProducts as $key => $item) {
-            unset($tempProducts[$key]['refundQty']);
-        }
+        unset($tempProducts[0]['refundQty']);
         // Refund
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
             ['products' => $tempProducts]
         )->run();
-        // Assert Refund Success
-        $this->assertRefundSuccess->processAssert($this->webposIndex, 'Closed', null, 'Ship,Refund,Cancel');
         // Assert Order Status
-        $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForClosedStatusVisisble();
-        $this->assertOrderStatus->processAssert($this->webposIndex, 'Closed');
+        $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForCompleteStatusVisisble();
+        $this->assertOrderStatus->processAssert($this->webposIndex, 'Complete');
     }
 }

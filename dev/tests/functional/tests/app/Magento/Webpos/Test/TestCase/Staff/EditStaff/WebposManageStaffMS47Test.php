@@ -62,7 +62,7 @@ class WebposManageStaffMS47Test extends Injectable
             ['tag' =>'open', 'message' => $message]);
 
         //Cancel
-        $this->staffsNew->getModalsWrapper()->getCancleButton()->click();
+        $this->staffsNew->getModalsWrapper()->getCancelButton()->click();
         sleep(1);
 
         return [
