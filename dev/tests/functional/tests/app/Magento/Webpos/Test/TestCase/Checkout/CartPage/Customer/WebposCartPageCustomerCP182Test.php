@@ -82,7 +82,8 @@ class WebposCartPageCustomerCP182Test extends Injectable
 
         //PlaceOrder
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(2);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         sleep(1);

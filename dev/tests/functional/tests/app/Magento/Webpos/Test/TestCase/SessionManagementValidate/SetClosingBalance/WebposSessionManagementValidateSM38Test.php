@@ -75,7 +75,7 @@ class WebposSessionManagementValidateSM38Test extends Injectable
             ]
         )->run();
         while (! $this->webposIndex->getSessionShift()->getButtonEndSession()->isVisible()) {
-
+            sleep(1);
         }
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
         sleep(1);

@@ -85,12 +85,14 @@ class WebposManagementValidate09Test extends Injectable
          *  wait field is show
          */
         while ( !$this->webposIndex->getOpenSessionPopup()->getCoinBillValue()->isVisible()) {}
+        $beforeOpeningBalance  =  $this->webposIndex->getSessionInfo()->getOpeningBalance()->getText();
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
         sleep(1);
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
-        /** wait request done  */
-        sleep(3);
+        /** wait request done */
+        while ( $beforeOpeningBalance ==  $this->webposIndex->getSessionInfo()->getOpeningBalance()->getText()) {}
+
         $this->assertTrue(
             strpos(
                 $this->webposIndex->getSessionInfo()->getOpeningBalance()->getText(),

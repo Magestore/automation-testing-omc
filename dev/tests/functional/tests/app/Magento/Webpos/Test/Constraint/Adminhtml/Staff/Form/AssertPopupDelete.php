@@ -29,7 +29,7 @@ class AssertPopupDelete extends AbstractConstraint
                 'Popup delete does not display'
             );
             \PHPUnit_Framework_Assert::assertTrue(
-                $staffNews->getModalsWrapper()->getCancleButton()->isVisible(),
+                $staffNews->getModalsWrapper()->getCancelButton()->isVisible(),
                 'Cancel does not display'
             );
             \PHPUnit_Framework_Assert::assertTrue(

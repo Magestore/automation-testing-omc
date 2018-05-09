@@ -15,7 +15,7 @@ use Magento\Mtf\Block\Block;
  */
 class ModalsWrapper extends Block
 {
-    public function getCancleButton()
+    public function getCancelButton()
     {
         return $this->_rootElement->find('//aside/div/footer/button[*[text()[normalize-space()="Cancel"]]]', Locator::SELECTOR_XPATH);
     }
@@ -34,5 +34,14 @@ class ModalsWrapper extends Block
     public function getAsidePopup()
     {
         return $this->_rootElement->find('//aside', Locator::SELECTOR_XPATH);
+    }
+
+    public function waitForLoader() {
+        $this->waitForElementVisible('.modal-popup');
+    }
+
+    public function getModalPopup()
+    {
+        return $this->_rootElement->find('.modal-popup');
     }
 }

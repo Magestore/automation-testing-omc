@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Webpos\Test\TestCase\Staff\StaffPermission\WebposManageStaffMS55Test" summary="Edit custom price and discount for whole cart " ticketId="MAGETWO-1234">
         <variation name="WebposManageStaffMS55TestVariation">
-            <data name="webposRole/dataset" xsi:type="string">MS55Staff</data>
+            <data name="webposRole/dataset" xsi:type="string">MS57Staff</data>
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
@@ -13,8 +13,6 @@
             </data>
             <data xsi:type="string" name="priceCustom">80</data>
             <data xsi:type="string" name="discount">100.00</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertPlaceOrderSuccess" />
-            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertDiscountWholeCartPercentage" />
         </variation>
     </testCase>
 </config>

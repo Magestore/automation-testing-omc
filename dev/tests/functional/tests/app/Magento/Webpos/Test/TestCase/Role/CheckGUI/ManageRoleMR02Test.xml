@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Role\CheckGUI\ManageRoleMR02Test" summary="Check GUI" ticketId="MAGETWO-0001">
+        <variation name="ManageRoleMR02TestCase">
+            <data name="title" xsi:type="string">New Role</data>
+            <data name="tabTitles" xsi:type="string">General, Permission, Staff List</data>
+            <data name="tabs" xsi:type="array">
+                <item name="general" xsi:type="array">
+                    <item name="name" xsi:type="string">general</item>
+                    <item name="fields" xsi:type="array">
+                        <item name="name" xsi:type="string">Role Name</item>
+                        <item name="discount" xsi:type="string">Maximum discount percent(%)</item>
+                        <item name="description" xsi:type="string">Description</item>
+                    </item>
+                </item>
+                <item name="permission" xsi:type="array">
+                    <item name="name" xsi:type="string">permission</item>
+                    <item name="fields" xsi:type="array">
+                        <item name="all" xsi:type="string">All</item>
+                        <item name="custom" xsi:type="string">Custom</item>
+                    </item>
+                </item>
+                <item name="user_section" xsi:type="array">
+                    <item name="name" xsi:type="string">user_section</item>
+                    <item name="fields" xsi:type="array">
+                        <item name="id" xsi:type="string">ID</item>
+                        <item name="name" xsi:type="string">User Name</item>
+                        <item name="display_name" xsi:type="string">Display Name</item>
+                        <item name="email" xsi:type="string">Email</item>
+                        <item name="status" xsi:type="string">Status</item>
+                    </item>
+                </item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\Role\CheckGUI\AssertCheckRoleForm"/>
+        </variation>
+    </testCase>
+</config>

@@ -135,4 +135,35 @@ class StaffsGrid extends DataGrid
         return $this->_rootElement->find(sprintf($this->col, $column), Locator::SELECTOR_XPATH)->isVisible();
     }
 
+    public function getFilterBlock(){
+        return $this->_rootElement->find('.//div[@class="admin__data-grid-filters-wrap _show"]', locator::SELECTOR_XPATH);
+    }
+
+    public function waitForFilterCancelButton()
+    {
+        $this->waitForElementVisible('//button[@data-action="grid-filter-cancel"]', locator::SELECTOR_XPATH);
+    }
+
+    public function waitForFilterForm()
+    {
+        $this->waitForElementVisible('//admin__data-grid-filters-wrap _show', locator::SELECTOR_XPATH);
+    }
+
+
+    public function getFilterCancelButton()
+    {
+        return $this->_rootElement->find('.//button[@data-action="grid-filter-cancel"]', locator::SELECTOR_XPATH);
+    }
+
+    public function getGridFilterForm(){
+        return $this->_rootElement->find('.//div[@class="admin__data-grid-filters-wrap _show"]', locator::SELECTOR_XPATH);
+    }
+
+    public function getFilterButton(){
+        return $this->_rootElement->find('//div[@class="data-grid-filters-actions-wrap"]//button[text()="Filters"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getDataGridFirstRow(){
+        return $this->_rootElement->find('.//table//tbody//tr[@class="data-row"][1]', locator::SELECTOR_XPATH);
+    }
 }

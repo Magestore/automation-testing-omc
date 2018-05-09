@@ -20,7 +20,7 @@ class AssertDiscountWholeCartPercentage extends AbstractConstraint
         $webposIndex->getOrderHistoryOrderList()->waitLoader();
         $webposIndex->getOrderHistoryOrderList()->search($orderId);
         $webposIndex->getOrderHistoryOrderList()->waitLoader();
-
+        sleep(2);
         $discountActual = str_replace('-$', '', $webposIndex->getOrderHistoryOrderViewFooter()->getDiscount());
         \PHPUnit_Framework_Assert::assertEquals(
             floatval($discount),
