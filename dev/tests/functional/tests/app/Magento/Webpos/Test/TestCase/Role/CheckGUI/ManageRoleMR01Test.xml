@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Role\CheckGUI\ManageRoleMR01Test" summary="Check GUI" ticketId="MAGETWO-0001">
+        <variation name="ManageRoleMR01TestCase">
+            <data name="title" xsi:type="string">Role</data>
+            <data name="buttonNames" xsi:type="string">Add Role</data>
+            <data name="inputFieldNames" xsi:type="string">ID, Display Name, Description, Action</data>
+            <data name="massActions" xsi:type="string">Delete</data>
+            <data name="filter" xsi:type="string">Filter</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Role\CheckGUI\AssertCheckRoleGrid"/>
+        </variation>
+    </testCase>
+</config>
