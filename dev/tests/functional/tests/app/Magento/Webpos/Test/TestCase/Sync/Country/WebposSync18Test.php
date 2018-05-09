@@ -13,7 +13,10 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
-
+/**
+ * Class WebposSync18Test
+ * @package Magento\Webpos\Test\TestCase\Sync\Country
+ */
 class WebposSync18Test extends Injectable
 {
     /* tags */

@@ -29,25 +29,12 @@
             <data name="storepickupStore/data/zipcode" xsi:type="string">12345</data>
             <data name="storepickupStore/data/country_id" xsi:type="string">Vietnam</data>
             <data name="storepickupStore/data/state" xsi:type="string">Ha Noi</data>
-            <!--<data name="storepickupStore/data/baseimage_id" xsi:type="array">-->
-                <!--<item name="0" xsi:type="array">-->
-                    <!--<item name="file" xsi:type="string">magestore.png</item>-->
-                <!--</item>-->
-            <!--</data>-->
             <data name="storepickupStore/data/schedule_id/dataset" xsi:type="string">default1</data>
             <data name="storepickupStore/data/tag_ids/dataset" xsi:type="string">default1</data>
             <data name="storepickupStore/data/holiday_ids/dataset" xsi:type="string">default1</data>
             <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreSuccessSaveMessage"/>
             <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreInGrid"/>
         </variation>
-        <!--<variation name="Create store pickup store entity test with require fields data">-->
-            <!--<data name="storepickupStore/data/store_name" xsi:type="string">magestore_test_require_%isolation%</data>-->
-            <!--<data name="storepickupStore/data/address" xsi:type="string">magestore_address_%isolation%</data>-->
-            <!--<data name="storepickupStore/data/city" xsi:type="string">magestore_city_%isolation%</data>-->
-            <!--<data name="storepickupStore/data/zipcode" xsi:type="string">12345</data>-->
-            <!--<constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreSuccessSaveMessage"/>-->
-            <!--<constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreInGrid"/>-->
-        <!--</variation>-->
         <variation name="Create store pickup store entity test with blank fields data">
             <data name="storepickupStore/data/store_name" xsi:type="string"/>
             <constraint name="Magento\Storepickup\Test\Constraint\Store\AssertStoreFormRequireFieldVisible"/>
