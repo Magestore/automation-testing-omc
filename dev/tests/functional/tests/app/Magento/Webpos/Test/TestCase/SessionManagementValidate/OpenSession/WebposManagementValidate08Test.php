@@ -87,11 +87,15 @@ class WebposManagementValidate08Test extends Injectable
                 'hasOpenSession' => false
             ]
         )->run();
+
+        $beforeOpeningBalance = $this->webposIndex->getSessionInfo()->getOpeningBalance()->getText();
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
 
-        sleep(1);
+        while ( $beforeOpeningBalance == $this->webposIndex->getSessionInfo()->getOpeningBalance()->getText()) {
+            sleep(1);
+        }
 
         $this->assertTrue(
             strpos(
