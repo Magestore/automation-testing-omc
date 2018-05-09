@@ -55,7 +55,6 @@ class WebposManageStaffMS23Test extends Injectable
         $this->staffsIndex->getStaffsGrid()->setDisplayName('test'.$staff->getDisplayName());
         $this->staffsIndex->getStaffsGrid()->setEmail('test'.$staff->getEmail());
         $this->staffsIndex->getStaffsGrid()->getActionButtonEditing('Save')->click();
-        $this->assertCheckMessageSuccess->processAssert($this->staffsIndex, 'You have successfully saved your edits.');
         $this->staffsIndex->getStaffsGrid()->waitLoader();
         sleep(1);
 
