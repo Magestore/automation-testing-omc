@@ -132,27 +132,22 @@ class WebposManageStaffMS64Test extends Injectable
         $this->webposIndex->getCMenu()->logout();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
         $this->webposIndex->getModal()->getOkButton()->click();
-        sleep(4);
-//        $this->wesbposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader.loading-mask');
-//        sleep(4);
+        sleep(1);
         //Login by staff2
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposStep'
-        )->run();
-        sleep(3);
+        $this->login($staff2);
+        sleep(10);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="c-button--push-left"]');
         //Go to orders history
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
-        sleep(2);
+        $this->webposIndex->getCMenu()->waitForElementVisible('#orders_history');
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        sleep(3);
+        sleep(2);
         //Take payment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="payment-popup"]');
-        sleep(5);
+        sleep(1);
         $this->webposIndex->getOrderHistoryPayment()->getCashInMethod()->click();
         $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
@@ -176,6 +171,9 @@ class WebposManageStaffMS64Test extends Injectable
             'Create payment notification message is wrong.'
         );
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="toaster"]');
+        sleep(2);
+        $this->webposIndex->getNotification()->getNotificationBell()->click();
+
         //Create shipment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="form-add-note-order"]');
@@ -185,8 +183,7 @@ class WebposManageStaffMS64Test extends Injectable
         sleep(2);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
         $this->webposIndex->getModal()->getOkButton()->click();
-//        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="toaster"]');
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="toaster"]');
         $this->assertEquals(
             'The shipment has been created successfully.',
             $this->webposIndex->getToaster()->getWarningMessage()->getText(),
@@ -205,6 +202,9 @@ class WebposManageStaffMS64Test extends Injectable
         );
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="toaster"]');
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForProcessingStatusVisisble();
+        sleep(2);
+        $this->webposIndex->getNotification()->getNotificationBell()->click();
+
         //Create invoice
         $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="invoice-popup"]');
@@ -230,20 +230,23 @@ class WebposManageStaffMS64Test extends Injectable
             'Create invoice notification message is wrong.'
         );
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="toaster"]');
+        sleep(2);
+        $this->webposIndex->getNotification()->getNotificationBell()->click();
         //Create refund
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="form-add-note-order"]');
         $this->webposIndex->getOrderHistoryAddOrderNote()->getRefundButton()->click();
         sleep(2);
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="refund-popup"]');
+        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="creditmemo-popup-form"]');
         foreach ($products as $item) {
             $productName = $item['product']->getName();
             $this->webposIndex->getOrderHistoryRefund()->getItemQtyToRefundInput($productName)->setValue($item['qtyToRefund']);
         }
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
+        sleep(1);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
         $this->webposIndex->getModal()->getOkButton()->click();
-        sleep(3);
+        sleep(1);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="toaster"]');
         $this->assertEquals(
             'A creditmemo has been created!',
@@ -261,13 +264,15 @@ class WebposManageStaffMS64Test extends Injectable
             $this->webposIndex->getNotification()->getFirstNotificationText(),
             'Create refund notification message is wrong.'
         );
+        sleep(2);
+        $this->webposIndex->getNotification()->getNotificationBell()->click();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="toaster"]');
         //Send mail
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="form-add-note-order"]');
-        sleep(2);
         $this->webposIndex->getOrderHistoryAddOrderNote()->getSendMailButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="send-email-order"]');
+        sleep(1);
         $this->webposIndex->getOrderHistorySendEmail()->getSendButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="send-email-order"]');
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="toaster"]');
@@ -288,6 +293,9 @@ class WebposManageStaffMS64Test extends Injectable
             'Send email notification message is wrong.'
         );
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="toaster"]');
+        sleep(2);
+        $this->webposIndex->getNotification()->getNotificationBell()->click();
+
         //Add comment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="form-add-note-order"]');
@@ -314,6 +322,9 @@ class WebposManageStaffMS64Test extends Injectable
             'Add comment notification message is wrong.'
         );
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="toaster"]');
+        sleep(2);
+        $this->webposIndex->getNotification()->getNotificationBell()->click();
+
         //Reorder
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="form-add-note-order"]');

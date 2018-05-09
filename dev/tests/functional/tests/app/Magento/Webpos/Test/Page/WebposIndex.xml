@@ -7,7 +7,7 @@
         <block name="loginForm" class="Magento\Webpos\Test\Block\Login\LoginForm" locator=".wrap-login-form" strategy="css selector"/>
         <block name="toaster" class="Magento\Webpos\Test\Block\Toaster" locator="#toaster" strategy="css selector"/>
         <block name="firstScreen" class="Magento\Webpos\Test\Block\Login\FirstScreen" locator="#block-webpos-install .first-screen" strategy="css selector"/>
-        <block name="cMenu" class="Magento\Webpos\Test\Block\Cmenu" locator="#c-menu--push-left" strategy="css selector"/>
+        <block name="cMenu" class="Magento\Webpos\Test\Block\Cmenu" locator="#shift_container" strategy="css selector"/>
         <block name="modal" class="Magento\Webpos\Test\Block\Modal" locator=".modals-wrapper" strategy="css selector"/>
         <block name="notification" class="Magento\Webpos\Test\Block\Notification" locator="#webpos-notification" strategy="css selector"/>
         <block name="body" class="Magento\Webpos\Test\Block\Body" locator="body" strategy="css selector"/>

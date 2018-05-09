@@ -112,8 +112,9 @@ class WebposManageStaffMS67Test extends Injectable
         sleep(1);
         foreach ($products as $item) {
             $this->webposIndex->getManageStockList()->searchProduct($item['product']->getName());
-            sleep(3);
+            $this->webposIndex->getManageStockList()->waitForProductListShow();
             $this->webposIndex->getManageStockList()->getFirstProductRow()->click();
+            sleep(1);
             $this->webposIndex->getManageStockList()->getProductQtyInput($item['product']->getName())->setValue(69);
             $this->webposIndex->getManageStockList()->getUpdateButton($item['product']->getName())->click();
         }
@@ -144,7 +145,7 @@ class WebposManageStaffMS67Test extends Injectable
             $this->webposIndex->getLoginForm()->clickLoginButton();
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
             sleep(2);
-            $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
+//            $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
             if ($location) {
                 $this->webposIndex->getLoginForm()->setLocation($location->getDisplayName());
             }
