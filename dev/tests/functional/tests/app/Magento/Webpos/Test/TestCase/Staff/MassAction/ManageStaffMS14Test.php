@@ -15,6 +15,19 @@ use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 
 /**
  * Class ManageStaffMS14Test
+ *
+ * Precondition:
+ * 1. Go to backend > Sales > Manage Staffs
+ *
+ * Steps:
+ * "1. Tick on checkbox to select 1 Staff on the grid
+ * 2. Click on Mass action > Delete
+ * 3. Click on [Cancel] button"
+ *
+ * Acceptance:
+ * "2. Show a confirmation popup with message: ""Are you sure you want to delete selected items?"" and 2 buttons: Cancel, OK
+ * 3. Close the confirmation popup, no record is deleted"
+ *
  * @package Magento\Webpos\Test\TestCase\Staff\MassAction
  */
 class ManageStaffMS14Test extends Injectable
@@ -41,9 +54,8 @@ class ManageStaffMS14Test extends Injectable
         $this->fixtureFactory = $fixtureFactory;
     }
 
-    public function test()
+    public function test(Staff $staff)
     {
-        $staff = $this->fixtureFactory->createByCode('staff', ['dataset' => 'default']);
         $staff->persist();
         $this->staffIndex->open();
         $this->staffIndex->getStaffsGrid()->waitLoader();

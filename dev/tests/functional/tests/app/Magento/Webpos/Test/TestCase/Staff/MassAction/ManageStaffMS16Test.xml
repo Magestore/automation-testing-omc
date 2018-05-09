@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\MassAction\ManageStaffMS16Test" summary="Grid UI Component Filtering" ticketId="MAGETWO-41329">
+        <variation name="ManageStaffMS16TestVariation">
+            <data name="staff1/dataset" xsi:type="string">default</data>
+            <data name="staff2/dataset" xsi:type="string">default</data>
+        </variation>
+    </testCase>
+</config>
