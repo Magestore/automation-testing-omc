@@ -90,7 +90,8 @@ class WebposCheckoutPaymentMethodCP225Test extends Injectable
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();
         sleep(1);
         $this->webposIndex->getCheckoutAddMorePayment()->getCreditCard()->click();
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(2);
         // place order getCreateInvoiceCheckbox
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
