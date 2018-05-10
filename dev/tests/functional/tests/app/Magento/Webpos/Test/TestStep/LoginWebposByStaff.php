@@ -59,7 +59,6 @@ class LoginWebposByStaff implements TestStepInterface
         $this->location = $location;
         $this->pos = $pos;
         $this->hasOpenSession = $hasOpenSession;
-        $this->hasOpenSession = $hasOpenSession;
         $this->hasWaitOpenSessionPopup = $hasWaitOpenSessionPopup;
     }
 

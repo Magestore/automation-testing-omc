@@ -15,6 +15,19 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposZreportCheckGUITest
+ *
+ * Precondition: There are some POSs and setting [Need to create session before working] = ""Yes"" on the test site
+ * 1. Login webpos by a staff who has open and close session permission
+ * 2. Open a session
+ * 3. Create some orders successfully"
+ *
+ * Steps:
+ * 1. Go to [Session Management] menu
+ * 2. Click on [End of Session] > Input real money > [Confirm] > Close session successfully
+ * 3. Click on [Print] button
+ *
+ * Acceptance:
+ *
  * @package Magento\Webpos\Test\TestCase\Zreport
  */
 class WebposZreportCheckGUITest extends Injectable
@@ -78,11 +91,21 @@ class WebposZreportCheckGUITest extends Injectable
         // End session
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
         sleep(1);
+
+        $openedString = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
+        $openedString .= ' by ' . $staffName;
+        $closedString = $this->webposIndex->getSessionShift()->getCloseTime()->getText();
+        $closedString .= ' by ' . $staffName;
+
         $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitZreportVisible();
         sleep(2);
-        return ['staffName' => $staffName];
+        return [
+            'staffName' => $staffName,
+            'openedString' => $openedString,
+            'closedString' => $closedString
+        ];
     }
 
     public function tearDown()
@@ -92,5 +115,4 @@ class WebposZreportCheckGUITest extends Injectable
 //            ['dataConfig' => $this->dataConfigToNo]
 //        )->run();
     }
-
 }

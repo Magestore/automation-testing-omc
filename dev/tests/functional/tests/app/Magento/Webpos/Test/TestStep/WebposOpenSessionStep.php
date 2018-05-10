@@ -41,7 +41,6 @@ class WebposOpenSessionStep implements TestStepInterface
             $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
             sleep(2);
-
             $this->webposIndex->getMsWebpos()->clickCMenuButton();
             $this->webposIndex->getCMenu()->checkout();
             sleep(1);
