@@ -6,6 +6,8 @@
  * Time: 15:26
  */
 
+namespace Magento\Webpos\Test\Constraint\Zreport;
+
 use Magento\Webpos\Test\Page\WebposIndex;
 
 class AssertGUIZreport extends \Magento\Mtf\Constraint\AbstractConstraint

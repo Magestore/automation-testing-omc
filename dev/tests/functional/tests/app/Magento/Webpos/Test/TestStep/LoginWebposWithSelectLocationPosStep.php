@@ -64,13 +64,16 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
 
         //check if WrapWarningForm is visible when this staff has been logged in
         $time = time();
-        $timeAfter = $time + 30;
-        while (!$this->webposIndex->getWrapWarningForm()->isVisible() && $time < $timeAfter){
+        $timeAfter = $time + 5;
+        while (!$this->webposIndex->getWrapWarningForm()->isVisible() &&
+            !$this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible() &&
+            $time < $timeAfter){
             $time = time();
         }
         if ($this->webposIndex->getWrapWarningForm()->isVisible() &&
             $this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible()) {
             $this->webposIndex->getWrapWarningForm()->getButtonContinue()->click();
+            sleep(2);
         }
 
         $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
@@ -78,7 +81,7 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
         $this->webposIndex->getLoginForm()->getEnterToPos()->click();
         $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
         $time = time();
-        $timeAfter = $time + 360;
+        $timeAfter = $time + 90;
         while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
             $time = time();
         }

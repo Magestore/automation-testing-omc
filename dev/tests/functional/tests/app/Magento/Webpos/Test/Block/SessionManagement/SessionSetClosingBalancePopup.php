@@ -90,6 +90,6 @@ class SessionSetClosingBalancePopup extends Block
 
     public function getColumnNumberOfCoinsAtRow($rowIndex)
     {
-        return $this->_rootElement->find('//div[@class="counting-box"]/table['.$rowIndex.']/thead/tr/th[2]', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//div[@class="counting-box"]/table['.$rowIndex.']/tbody/tr/td[2]/input', Locator::SELECTOR_XPATH);
     }
 }
