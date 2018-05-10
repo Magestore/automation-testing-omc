@@ -38,21 +38,22 @@ class  WebposProductGridConnectToManageStockPG54Test extends Injectable
             'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();
 
-
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->manageStocks();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="manage_stock_container"]');
+
+        /** wait first screen */
+        while (!$this->webposIndex->getManageStockList()->getFirstProductRow()->isVisible()) {
+            sleep(1);
+        }
+
         $productName = $products[0]['product']->getName();
         $this->webposIndex->getManageStockList()->searchProduct($productName);
 
         /** wait until search done */
-        while (!$this->webposIndex->getManageStockList()->waitForElementVisible('//table[@class="table table-product"]//tr', Locator::SELECTOR_XPATH)) {
-
-        }
-
         while (!$this->webposIndex->getManageStockList()->getProductName($productName)->isVisible()) {
-
+            sleep(1);
         }
 
         $this->webposIndex->getManageStockList()->setProductOutOfStock($productName);
@@ -60,22 +61,23 @@ class  WebposProductGridConnectToManageStockPG54Test extends Injectable
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->checkout();
         $this->webposIndex->getCheckoutProductList()->search($productName);
-        sleep(1);
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->webposIndex->getCheckoutProductList()->waitForElementVisible('.product-item');
-        $this->assertFalse(
-            $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->isVisible(),
-            'Out of stock product have been added to cart.'
-        );
-        $this->assertTrue(
-            $this->webposIndex->getToaster()->isVisible(),
-            'Warning message is not visible.'
-        );
+
+        /** wait toast */
+        while ( !$this->webposIndex->getToaster()->isVisible()) {
+            sleep(1);
+        }
+
         $this->assertEquals(
             'This product is currently out of stock',
             $this->webposIndex->getToaster()->getWarningMessage()->getText(),
             'Warning message is wrong.'
         );
+
+        $this->assertFalse(
+            $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->isVisible(),
+            'Out of stock product have been added to cart.'
+        );
+
         $this->assertTrue(
             $this->webposIndex->getCheckoutProductList()->getFirstProductOutOfStockIcon()->isVisible(),
             'Out of stock icon is not visible.'

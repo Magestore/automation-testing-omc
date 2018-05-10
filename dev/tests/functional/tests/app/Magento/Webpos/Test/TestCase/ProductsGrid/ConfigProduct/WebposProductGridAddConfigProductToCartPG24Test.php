@@ -44,6 +44,9 @@ class  WebposProductGridAddConfigProductToCartPG24Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-product-detail"]');
+
+        /** wait render */
+        sleep(2);
         // Select options
         $attributes = $products[0]['product']->getConfigurableAttributesData()['attributes_data'];
         foreach ($attributes as $attribute) {
