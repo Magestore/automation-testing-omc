@@ -8,19 +8,22 @@
 
 namespace Magento\Webpos\Test\Constraint\Zreport;
 
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class AssertGUIZreportStaffName
+ * @package Magento\Webpos\Test\Constraint\Zreport
+ */
 class AssertGUIZreportStaffName extends \Magento\Mtf\Constraint\AbstractConstraint
 {
-    public function processAssert(WebposIndex $webposIndex, Staff $staff)
+    public function processAssert(WebposIndex $webposIndex, $staffName)
     {
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionPrintShiftPopup()->getStaffName()->isVisible(),
             'Zreport Pos Name not visible'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            $staff->getDisplayName(),
+            $staffName,
             $webposIndex->getSessionPrintShiftPopup()->getStaffName()->getText(),
             'Zreport Pos Name not visible'
         );

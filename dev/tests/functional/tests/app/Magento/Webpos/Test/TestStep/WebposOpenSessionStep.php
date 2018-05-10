@@ -22,7 +22,8 @@ class WebposOpenSessionStep implements TestStepInterface
 
     public function __construct(
         WebposIndex $webposIndex
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
     }
 
@@ -36,10 +37,7 @@ class WebposOpenSessionStep implements TestStepInterface
             $time = time();
         }
         if ($this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->isVisible()) {
-            sleep(1);
-            if ($this->webposIndex->getOpenSessionPopup()->getLoadingElement()->isVisible()) {
-                $this->webposIndex->getOpenSessionPopup()->waitForElementNotVisible('.indicator[data-bind="visible:loading"]');
-            }
+            $this->webposIndex->getOpenSessionPopup()->waitForElementNotVisible('.indicator[data-bind="visible:loading"]');
             $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
             sleep(2);

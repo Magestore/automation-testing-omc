@@ -5,7 +5,8 @@
  * Date: 22/11/2017
  * Time: 10:22
  */
-namespace  Magento\Webpos\Test\TestStep;
+
+namespace Magento\Webpos\Test\TestStep;
 
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Page\WebposIndex;
@@ -44,7 +45,8 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
         WebposIndex $webposIndex,
         DataInterface $configuration,
         FixtureFactory $fixtureFactory
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->configuration = $configuration;
         $this->fixtureFactory = $fixtureFactory;
@@ -60,37 +62,37 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
             $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
             $this->webposIndex->getLoginForm()->clickLoginButton();
             sleep(2);
-        }
-
-        //check if WrapWarningForm is visible when this staff has been logged in
-        $time = time();
-        $timeAfter = $time + 5;
-        while (!$this->webposIndex->getWrapWarningForm()->isVisible() &&
-            !$this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible() &&
-            $time < $timeAfter){
+            //check if WrapWarningForm is visible when this staff has been logged in
             $time = time();
-        }
-        if ($this->webposIndex->getWrapWarningForm()->isVisible() &&
-            $this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible()) {
-            $this->webposIndex->getWrapWarningForm()->getButtonContinue()->click();
+            $timeAfter = $time + 5;
+            while (!$this->webposIndex->getWrapWarningForm()->isVisible() &&
+                !$this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible() &&
+                $time < $timeAfter) {
+                $time = time();
+            }
+            if ($this->webposIndex->getWrapWarningForm()->isVisible() &&
+                $this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible()) {
+                $this->webposIndex->getWrapWarningForm()->getButtonContinue()->click();
+                sleep(2);
+            }
+
+            $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
+            $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
+            $this->webposIndex->getLoginForm()->getEnterToPos()->click();
+            $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
+            $time = time();
+            $timeAfter = $time + 90;
+            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
+                $time = time();
+            }
             sleep(2);
         }
 
-        $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
-        $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
-        $this->webposIndex->getLoginForm()->getEnterToPos()->click();
-        $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
-        $time = time();
-        $timeAfter = $time + 90;
-        while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
-            $time = time();
-        }
-//        sleep(2);
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $data = [
             'username' => $username,
             'password' => $password
         ];
-        return $this->fixtureFactory->createByCode('staff' , ['data' => $data]);
+        return $this->fixtureFactory->createByCode('staff', ['data' => $data]);
     }
 }

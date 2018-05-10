@@ -11,7 +11,6 @@ namespace Magento\Webpos\Test\TestCase\Zreport;
 use Magento\Config\Test\Fixture\ConfigData;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Denomination;
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
@@ -62,6 +61,7 @@ class WebposZreportCheckGUITest extends Injectable
         )->run();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $staffName = $this->webposIndex->getCMenu()->getUsername();
         $this->webposIndex->getCMenu()->getSessionManagement();
         sleep(1);
         // Set closing balance
@@ -82,7 +82,7 @@ class WebposZreportCheckGUITest extends Injectable
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitZreportVisible();
         sleep(2);
-        return ['staff'=> $staff];
+        return ['staffName' => $staffName];
     }
 
     public function tearDown()
