@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Role\MassAction\WebposManageRoleMR12Test" summary="Check GUI" ticketId="MAGETWO-0012">
+        <variation name="WebposManageRoleMR12TestVariation">
+            <data name="webposRole" xsi:type="string">default</data>
+        </variation>
+    </testCase>
+</config>

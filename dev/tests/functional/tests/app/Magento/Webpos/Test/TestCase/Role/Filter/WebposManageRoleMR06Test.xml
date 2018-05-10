@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Role\Filter\WebposManageRoleMR06Test" summary="Check GUI" ticketId="MAGETWO-0001">
+        <variation name="WebposManageRoleMR06TestVariation">
+            <data name="fields" xsi:type="string">ID, Display Name, Description</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Role\Filter\AssertManageRoleFilterBlock"/>
+        </variation>
+    </testCase>
+</config>

@@ -39,7 +39,8 @@
         <step name="selectShippingMethodForOrder" module="Magento_Sales" next="selectPaymentMethodForOrder" />
         <step name="selectPaymentMethodForOrder" module="Magento_Sales" next="submitOrder" />
         <step name="submitOrder" module="Magento_Sales" next="loginWebpos"/>
-        <step name="loginWebpos" module="Magento_Webpos" next="createShipment"/>
+        <step name="loginWebpos" module="Magento_Webpos" next="synchronization"/>
+        <step name="synchronization" module="Magento_Webpos" next="createShipment"/>
         <step name="createShipment" module="Magento_Webpos"/>
     </scenario>
     <scenario name="WebposOrdersHistoryRefundOrderCreateOnBackendOH80Test" firstStep="setupConfiguration">

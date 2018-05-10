@@ -122,7 +122,7 @@ class WebposMassActionReOrderOH29Test extends Injectable
             'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
             ['customer' => $customer]
         )->run();
-        sleep(1);
+        sleep(2);
         // Add Discount
         if ($addDiscount) {
             $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();

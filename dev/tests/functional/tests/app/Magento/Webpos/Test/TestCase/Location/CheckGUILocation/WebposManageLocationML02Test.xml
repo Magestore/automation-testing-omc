@@ -2,6 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Webpos\Test\TestCase\Location\CheckGUILocation\WebposManageLocationML02Test" summary="Display Add Location Page" ticketId="MAGETWO-0002">
         <variation name="WebposManageLocationML02TestVariation">
+            <data name="page" xsi:type="string">new</data>
             <data name="buttons" xsi:type="string">Back, Reset, Save and Continue Edit, Save</data>
             <data name="title" xsi:type="string">New Location</data>
             <data name="fields" xsi:type="array">

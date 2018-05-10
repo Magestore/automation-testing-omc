@@ -9,12 +9,14 @@ namespace Magento\Webpos\Test\Constraint\OnHoldOrder\CheckGUI;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class AssertCheckVisibleGUI
+ * @package Magento\Webpos\Test\Constraint\OnHoldOrder\CheckGUI
+ */
 class AssertCheckVisibleGUI extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex, $searchPlaceHolder, $product)
     {
-        $webposIndex->getMsWebpos()->clickCMenuButton();
-        $webposIndex->getCMenu()->onHoldOrders();
         sleep(1);
         $webposIndex->getOnHoldOrderOrderList()->waitLoader();
 

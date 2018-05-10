@@ -10,7 +10,10 @@ namespace Magento\Webpos\Test\TestStep;
 
 use Magento\Mtf\TestStep\TestStepInterface;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class CreateShipmentStep
+ * @package Magento\Webpos\Test\TestStep
+ */
 class CreateShipmentStep implements TestStepInterface
 {
     /**

@@ -10,18 +10,19 @@ namespace Magento\Webpos\Test\Constraint\Adminhtml\Location\Form;
 
 
 use Magento\Mtf\Constraint\AbstractConstraint;
+use Magento\Webpos\Test\Fixture\Location;
 use Magento\Webpos\Test\Page\Adminhtml\LocationNews;
 
 class AssertLocationFormDisplay extends AbstractConstraint
 {
     protected $_locationNews;
 
-    public function processAssert(LocationNews $locationNews, $buttons, $title, $fields)
+    public function processAssert(LocationNews $locationNews, $page, $buttons, $title, $fields, $location = null)
     {
         $this->_locationNews = $locationNews;
         $buttons = explode(',', $buttons);
         $this->assertButtons($buttons);
-        $this->assertTitle($title);
+        $this->assertTitle($page, $title, $location);
 
         $this->assertFormField($fields);
     }
@@ -47,13 +48,22 @@ class AssertLocationFormDisplay extends AbstractConstraint
      *
      * @param $title
      */
-    private function assertTitle($title)
+    private function assertTitle($page, $title, $location)
     {
         $title = trim($title);
-        \PHPUnit_Framework_Assert::assertTrue(
-            $this->_locationNews->getFormPageActionsLocation()->getTitleByName($title)->isVisible(),
-            'Title ' . $title . ' couldn\'t display'
-        );
+        if($page == 'new'){
+            \PHPUnit_Framework_Assert::assertTrue(
+                $this->_locationNews->getFormPageActionsLocation()->getTitleByName($title)->isVisible(),
+                'Title ' . $title . ' couldn\'t display'
+            );
+        }elseif ($page = 'edit'){
+            $title = $title  . ' ' .  $location->getDisplayName();
+            \PHPUnit_Framework_Assert::assertTrue(
+                $this->_locationNews->getFormPageActionsLocation()->getTitleByName($title)->isVisible(),
+                'Title ' . $title . ' couldn\'t display'
+            );
+        }
+
     }
 
     private function assertFormField($fields)

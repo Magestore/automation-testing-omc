@@ -62,6 +62,11 @@ class WebposOnHoldOrderONH20Test extends Injectable
         $this->webposIndex->getCMenu()->checkout();
         sleep(1);
 
+
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getCMenu()->onHoldOrders();
+        sleep(1);
+
         return ['orderId' => $orderId];
     }
 }

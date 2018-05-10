@@ -23,7 +23,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 class WebposManageStaffMS71Test extends Injectable
 {
-
     /**
      * @var WebposIndex
      */
@@ -105,7 +104,7 @@ class WebposManageStaffMS71Test extends Injectable
             ['products' => $products]
         )->run();
         //Login
-        $this->login($staff);
+        $this->login($staff, $location, $pos);
         // Add product to cart
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',

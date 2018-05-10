@@ -10,6 +10,11 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Customer\Test\Fixture\Customer;
+
+/**
+ * Class WebposOnHoldOrderONH18Test
+ * @package Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder
+ */
 class WebposOnHoldOrderONH18Test extends Injectable
 {
     /**
@@ -67,7 +72,11 @@ class WebposOnHoldOrderONH18Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
-        $taxExpected = $this->webposIndex->getCheckoutWebposCart()->getTax();
+        //Get Tax Percent
+        $taxPercent = $this->webposIndex->getCheckoutWebposCart()->getTax();
+
+        $taxExpected = round(($product->getPrice() - $discount) * 0.085,2);
+
         //Click on [Add discount] > on Discount tab, add dicount for whole cart (type: $)
         while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup())
         {
@@ -86,6 +95,7 @@ class WebposOnHoldOrderONH18Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $feeShippingBefore =$this->webposIndex->getCheckoutCartFooter()->getShippingPrice();
             //Choose PoS shipping method
+        sleep(1);
         $this->webposIndex->getCheckoutShippingMethod()->clickPOSShipping();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         sleep(1);

@@ -8,8 +8,12 @@
 
 namespace Magento\Webpos\Test\TestCase\ProductsGrid\ConfigProduct;
 
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+use Magento\Config\Test\TestStep\SetupConfigurationStep;
+use Magento\Mtf\TestStep\TestStepFactory;
+
 
 /**
  * Class WebposProductGridCheckConfigProductBlockPG19Test
@@ -18,35 +22,46 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class  WebposProductGridConfigProductBlockCheckErrorPopupPG23Test extends Injectable
 {
     /**
+     * Factory for creation SetupConfigurationStep.
+     *
+     * @var TestStepFactory
+     */
+    private $testStepFactory;
+    /**
      * @var WebposIndex
      */
     protected $webposIndex;
 
-    public function __inject(WebposIndex $webposIndex)
+    public function __inject(WebposIndex $webposIndex,  TestStepFactory $testStepFactory)
     {
         $this->webposIndex = $webposIndex;
+        $this->testStepFactory = $testStepFactory;
     }
 
-    public function test($products)
-    {
-        // Create products
-        $products = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
-            ['products' => $products]
+    public function test( FixtureFactory $fixtureFactory) {
+
+        $this->testStepFactory->create(
+            SetupConfigurationStep::class,
+            ['configData' => 'enable_swatches_visibility_in_catalog', 'flushCache' => true]
         )->run();
+
+        $product = $fixtureFactory->createByCode('configurableProduct', ['dataset' => 'product_with_text_swatch']);
+        $product->persist();
 
         // Login webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
-
+        $this->webposIndex->getCheckoutProductList()->search($product->getSku());
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-product-detail"]');
+
+        /** wait watches render */
+        sleep(2);
         $this->webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
 
         $this->assertTrue(
-            $this->webposIndex->getModal()->isVisible(),
+            $this->webposIndex->getModal()->getPopupMessageElement()->isVisible(),
             'Error popup message is not showed.'
         );
 
@@ -58,7 +73,7 @@ class  WebposProductGridConfigProductBlockCheckErrorPopupPG23Test extends Inject
         $this->webposIndex->getModal()->getOkButton()->click();
         sleep(1);
         $this->assertFalse(
-            $this->webposIndex->getModal()->isVisible(),
+            $this->webposIndex->getModal()->getPopupMessageElement()->isVisible(),
             'Error popup is not hidden.'
         );
         $this->webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
@@ -66,7 +81,7 @@ class  WebposProductGridConfigProductBlockCheckErrorPopupPG23Test extends Inject
         $this->webposIndex->getModal()->getCloseButton()->click();
         sleep(1);
         $this->assertFalse(
-            $this->webposIndex->getModal()->isVisible(),
+            $this->webposIndex->getModal()->getPopupMessageElement()->isVisible(),
             'Error popup is not hidden.'
         );
 

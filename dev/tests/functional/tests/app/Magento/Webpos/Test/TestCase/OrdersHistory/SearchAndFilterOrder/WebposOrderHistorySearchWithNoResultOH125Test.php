@@ -35,6 +35,7 @@ class WebposOrderHistorySearchWithNoResultOH125Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->search('dasdadasdada');
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->assertFalse(
             $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->isVisible(),
