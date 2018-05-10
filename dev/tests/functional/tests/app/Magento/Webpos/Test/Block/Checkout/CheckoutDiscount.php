@@ -120,6 +120,12 @@ class CheckoutDiscount extends Block
 
     }
 
+    public function waitForCouponCodeVisible()
+    {
+        return $this->waitForElementVisible('input[name="coupon_code"]');
+
+    }
+
     public function clickCheckPromotionButton()
     {
         $this->_rootElement->find('button[class="button checkPromotion"]')->click();

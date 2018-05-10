@@ -50,6 +50,11 @@ class CheckoutProductEdit extends Block
 		return $this->_rootElement->find('.discount');
 	}
 
+	public function waitForDiscountButtonVisible()
+	{
+		return $this->waitForElementVisible('.discount');
+	}
+
 	public function getAmountInput()
 	{
 		return $this->_rootElement->find('div.price-box > input');

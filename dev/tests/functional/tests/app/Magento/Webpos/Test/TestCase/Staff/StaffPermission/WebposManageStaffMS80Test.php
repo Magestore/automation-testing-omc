@@ -7,6 +7,7 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Location;
@@ -14,7 +15,6 @@ use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
-use function MongoDB\BSON\toJSON;
 
 /**
  * Class WebposManageStaffMS80Test
@@ -95,10 +95,8 @@ class WebposManageStaffMS80Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
         $this->webposIndex->getSessionShift()->getOpenShiftButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
-        sleep(3);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         sleep(3);
-//        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
         $this->assertTrue(
             $this->webposIndex->getListShift()->getFirstItemShift()->isVisible(),
             'Open a shift not successfully.'
@@ -137,7 +135,6 @@ class WebposManageStaffMS80Test extends Injectable
             sleep(2);
         }
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-//        $this->webposIndex->getMsWebpos()->waitCartLoader();
 
     }
 

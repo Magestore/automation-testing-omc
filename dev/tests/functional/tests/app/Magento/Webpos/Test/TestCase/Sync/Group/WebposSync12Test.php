@@ -8,20 +8,19 @@
 
 namespace Magento\Webpos\Test\TestCase\Sync\Group;
 
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Catalog\Test\Page\Adminhtml\CatalogProductEdit;
 use Magento\Catalog\Test\Page\Adminhtml\CatalogProductIndex;
-use Magento\Customer\Test\Fixture\Address;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Customer\Test\Page\Adminhtml\CustomerIndex;
 use Magento\Customer\Test\Page\Adminhtml\CustomerIndexEdit;
-use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Sync\AssertSynchronizationPageDisplay;
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
-
+/**
+ * Class WebposSync12Test
+ * @package Magento\Webpos\Test\TestCase\Sync\Group
+ */
 class WebposSync12Test extends Injectable
 {
     /**
@@ -63,17 +62,6 @@ class WebposSync12Test extends Injectable
     protected $assertSynchronizationPageDisplay;
     protected $assertItemUpdateSuccess;
 
-    public function __prepare(FixtureFactory $fixtureFactory)
-    {
-        // Add Customer
-//        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
-//        $customer->persist();
-//
-//        return [
-//            'customer' => $customer
-//        ];
-    }
-
     public function __inject(
         WebposIndex $webposIndex,
         CustomerIndex $customerIndexPage,
@@ -100,12 +88,7 @@ class WebposSync12Test extends Injectable
      * @return void
      */
     public function test(
-        FixtureFactory $fixtureFactory,
-        Customer $initialCustomer,
-        Customer $customer,
-        CatalogProductSimple $initialProduct,
-        CatalogProductSimple $product,
-        $products
+        Customer $initialCustomer
     )
     {
         $staff = $this->objectManager->create(
@@ -114,14 +97,6 @@ class WebposSync12Test extends Injectable
 
         $initialCustomer->persist();
 
-        // Edit Created Customer in backend
-//        $filter = ['email' => $initialCustomer->getEmail()];
-//        $this->customerIndexPage->open();
-//        $this->customerIndexPage->getCustomerGridBlock()->searchAndOpen($filter);
-//        $this->customerIndexEditPage->getCustomerForm()->updateCustomer($customer);
-//        $this->customerIndexEditPage->getPageActionsBlock()->save();
-
-//        $this->webposIndex->open();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->synchronization();
 
@@ -130,14 +105,6 @@ class WebposSync12Test extends Injectable
         sleep(5);
         $action = 'Reload';
         $this->assertItemUpdateSuccess->processAssert($this->webposIndex, "Group", $action);
-    }
-
-    public function tearDown()
-    {
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => 'default_payment_method']
-//        )->run();
     }
 
 }

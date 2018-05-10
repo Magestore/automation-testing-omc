@@ -132,10 +132,9 @@ class WebposOHItemTableTest extends Injectable
 
         // Place Order
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-        for ($i=0; $i<3; $i++) {
-            $this->webposIndex->getMsWebpos()->waitCartLoader();
-            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        }
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(2);
 
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -149,8 +148,6 @@ class WebposOHItemTableTest extends Injectable
 		)->run();
 
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-		$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
 		$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();

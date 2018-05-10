@@ -9,10 +9,13 @@
 namespace Magento\Webpos\Test\TestCase\Checkout\PaymentMethod;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
+/**
+ * Class WebposCheckoutPaymentMethodCP213Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\PaymentMethod
+ */
 class WebposCheckoutPaymentMethodCP213Test extends Injectable
 {
     /**
@@ -51,7 +54,7 @@ class WebposCheckoutPaymentMethodCP213Test extends Injectable
      *
      * @return void
      */
-    public function test($products, FixtureFactory $fixtureFactory, $configData)
+    public function test($products, FixtureFactory $fixtureFactory, $configData, $dataConfig)
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
@@ -60,6 +63,11 @@ class WebposCheckoutPaymentMethodCP213Test extends Injectable
 
         $staff = $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
+        )->run();
+        //Config payment method
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => $dataConfig]
         )->run();
 
         $i = 0;

@@ -13,16 +13,13 @@ class AssertCheckCartSimpleProduct extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex,$cartProducts)
     {
-        if ($cartProducts == null)
-        {
-            \PHPUnit_Framework_Assert::assertFalse($webposIndex->getCheckoutCartItems()->isCartItem(),
-            'Cart is not default'
-
+        if ($cartProducts == null) {
+            \PHPUnit_Framework_Assert::assertFalse(
+                $webposIndex->getCheckoutCartItems()->isCartItem(),
+                'Cart is not default'
             );
-        }else
-        {
-            for ($i = 0; $i < count($cartProducts); ++$i)
-            {
+        } else {
+            for ($i = 0; $i < count($cartProducts); ++$i) {
                 \PHPUnit_Framework_Assert::assertEquals(
                     $webposIndex->getCheckoutCartItems()->getNameCartItemByOrderTo($i+1),
                     $cartProducts[$i]['name'],
@@ -34,8 +31,7 @@ class AssertCheckCartSimpleProduct extends AbstractConstraint
                     'Price product is not correct'
                 );
 
-                if (floatval($cartProducts[$i]['qty']) >1)
-                {
+                if (floatval($cartProducts[$i]['qty']) >1) {
                     \PHPUnit_Framework_Assert::assertTrue(
                         $webposIndex->getCheckoutCartItems()->isQtyDisplay($i+1),
                         'Qty is not display'

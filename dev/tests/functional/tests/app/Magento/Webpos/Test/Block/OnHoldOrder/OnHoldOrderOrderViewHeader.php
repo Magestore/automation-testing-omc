@@ -28,16 +28,16 @@ class OnHoldOrderOrderViewHeader extends Block
 
     public function getCreateAt()
     {
-        return $this->_rootElement->find('label[data-bind="text: $t(\'Created Date: \')"]');
+        return $this->_rootElement->find('span[data-bind="text: $parent.getFullDate($parent.orderData().created_at)"]');
     }
 
     public function getServeBy()
     {
-        return $this->_rootElement->find('label[data-bind="text: $t(\'Served by: \')"]');
+        return $this->_rootElement->find('span[data-bind="text: $parent.orderData().webpos_staff_name"]');
     }
 
     public function getStatus()
     {
-        return $this->_rootElement->find('label[data-bind="text: $t(\'Status: \')"]');
+        return $this->_rootElement->find('span[data-bind="attr: {class: \'status\' + $parent.orderData().status}, text: $t(\'On Hold\')"]');
     }
 }

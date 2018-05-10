@@ -3,7 +3,6 @@
     <page name="WebposIndex" mca="webpos" module="Magento_Webpos">
         <block name="msWebpos" class="Magento\Webpos\Test\Block\MsWebpos" locator=".ms-webpos" strategy="css selector"/>
         <block name="mainContent" class="Magento\Webpos\Test\Block\MainContent" locator="#maincontent" strategy="css selector"/>
-        <block name="checkoutLoader" class="Magento\Webpos\Test\Block\MsWebpos" locator="#checkout-loader" strategy="css selector"/>
         <block name="wrapWarningForm" class="Magento\Webpos\Test\Block\WrapWarningForm" locator=".ms-webpos .wrap-warning-form" strategy="css selector"/>
         <block name="loginForm" class="Magento\Webpos\Test\Block\Login\LoginForm" locator=".wrap-login-form" strategy="css selector"/>
         <block name="toaster" class="Magento\Webpos\Test\Block\Toaster" locator="#toaster" strategy="css selector"/>
@@ -76,7 +75,7 @@
         <!--On-hold Order-->
         <block name="onHoldOrderContainer" class="Magento\Webpos\Test\Block\OnHoldOrder\OnHoldOrderContainer" locator="#on_hold_orders_container" strategy="css selector"/>
         <block name="onHoldOrderOrderList" class="Magento\Webpos\Test\Block\OnHoldOrder\OnHoldOrderOrderList" locator="#on_hold_orders_container #webpos_order_list" strategy="css selector"/>
-        <block name="onHoldOrderOrderViewHeader" class="Magento\Webpos\Test\Block\OnHoldOrder\OnHoldOrderOrderViewHeader" locator="#on_hold_orders_container .col-sm-8.col-left .o-header" strategy="css selector"/>
+        <block name="onHoldOrderOrderViewHeader" class="Magento\Webpos\Test\Block\OnHoldOrder\OnHoldOrderOrderViewHeader" locator="#on_hold_orders_container div.col-sm-8.col-left header.o-header" strategy="css selector"/>
         <block name="onHoldOrderOrderViewContent" class="Magento\Webpos\Test\Block\OnHoldOrder\OnHoldOrderOrderViewContent" locator="#on_hold_orders_container .col-sm-8.col-left .main-content" strategy="css selector"/>
         <block name="onHoldOrderOrderViewFooter" class="Magento\Webpos\Test\Block\OnHoldOrder\OnHoldOrderOrderViewFooter" locator="#on_hold_orders_container div.col-sm-8.col-left footer" strategy="css selector"/>
         <!--End On-hold Order-->

@@ -8,13 +8,14 @@
 
 namespace Magento\Webpos\Test\TestCase\ManageStocks\UpdateProductAttributes;
 
-
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposManageStocksUpdateProductAttributesTest
+ * @package Magento\Webpos\Test\TestCase\ManageStocks\UpdateProductAttributes
+ */
 class WebposManageStocksUpdateProductAttributesTest extends Injectable
 {
 	/**
@@ -66,7 +67,7 @@ class WebposManageStocksUpdateProductAttributesTest extends Injectable
 		$this->webposIndex->getManageStockList()->searchProduct($productName);
 		$this->webposIndex->getManageStockList()->getStoreAddress()->click();
         $this->webposIndex->getManageStockList()->waitForProductListShow();
-        sleep(5);
+        sleep(1);
 		if (isset($productInfo['qty'])) {
 			$this->webposIndex->getManageStockList()->getProductQtyInput($productName)->setValue($productInfo['qty']);
 		}
@@ -79,9 +80,12 @@ class WebposManageStocksUpdateProductAttributesTest extends Injectable
 			$this->webposIndex->getManageStockList()->setCheckboxValue($manageStockCheckbox, $productInfo['manageStock']);
 		}
 		if (isset($productInfo['backorders'])) {
-			$backordersCheckbox = $this->webposIndex->getManageStockList()->getProductBackOrdersCheckbox($productName);
-			$this->webposIndex->getManageStockList()->setCheckboxValue($backordersCheckbox, $productInfo['backorders']);
-		}
+		    sleep(2);
+            $backordersCheckbox = $this->webposIndex->getManageStockList()->getProductBackOrdersCheckbox($productName);
+            sleep(2);
+            $this->webposIndex->getManageStockList()->setCheckboxValue($backordersCheckbox, $productInfo['backorders']);
+            sleep(2);
+        }
 
 		// action
 		if ($action === 'update') {

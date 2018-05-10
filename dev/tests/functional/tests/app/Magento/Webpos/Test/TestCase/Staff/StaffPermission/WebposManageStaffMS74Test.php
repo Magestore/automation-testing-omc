@@ -7,6 +7,7 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
@@ -15,7 +16,6 @@ use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class WebposManageStaffMS74Test
  * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
@@ -110,15 +110,20 @@ class WebposManageStaffMS74Test extends Injectable
             ['products' => $products]
         )->run();
         $totalBefore = $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText();
+        $totalBefore = (float)(substr($totalBefore, '1'));
         //Add discount to product
         $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-edit-product"]');
+        sleep(1);
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
-        sleep(3);
+        sleep(1);
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue(69);
-        sleep(3);         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-        sleep(2);
+        sleep(1);
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        sleep(1);
+//        sleep(2);
         $totalAfter = $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText();
+        $totalAfter = (float)(substr($totalAfter, '1'));
         $this->assertNotEquals(
             $totalBefore,
             $totalAfter,

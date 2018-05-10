@@ -9,6 +9,10 @@ namespace Magento\Webpos\Test\Constraint\OnHoldOrder\HoldOrder;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class AssertCheckOnHoldSimpleProduct
+ * @package Magento\Webpos\Test\Constraint\OnHoldOrder\HoldOrder
+ */
 class AssertCheckOnHoldSimpleProduct extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex,$products)
