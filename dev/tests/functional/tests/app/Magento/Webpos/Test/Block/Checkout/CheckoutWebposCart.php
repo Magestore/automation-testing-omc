@@ -59,6 +59,7 @@ class CheckoutWebposCart extends Block
         $value = $this->_rootElement->find('//div/ul/li/div[1]/label[text()="Tax"]/../../div[2]/span', Locator::SELECTOR_XPATH)->getText();
         return floatval(str_replace('$', '',$value));
     }
+
     public function isDisplayShippingOnCart()
     {
         return $this->_rootElement->find('//div/ul/li/div[1]/label[text()="Shipping"]/../..', Locator::SELECTOR_XPATH)->isVisible();
@@ -66,8 +67,7 @@ class CheckoutWebposCart extends Block
 
     public function waitLoading()
     {
-        $this->waitForElementVisible('.indicator');
-        $this->waitForElementNotVisible('.indicator');
+        $this->waitForElementNotVisible('iv.indicator');
     }
 
     public function getIconRemoveMultiOrder($number)

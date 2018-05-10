@@ -78,7 +78,7 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
         $this->webposIndex->getLoginForm()->getEnterToPos()->click();
         $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
         $time = time();
-        $timeAfter = $time + 360;
+        $timeAfter = $time + 90;
         while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
             $time = time();
         }

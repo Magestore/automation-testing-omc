@@ -120,6 +120,7 @@ class WebposManageStaffMS73Test extends Injectable
         $totalBefore = $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText();
         //Add coupon
         $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
+        $this->webposIndex->getCheckoutDiscount()->waitForCouponCodeVisible();
         $this->webposIndex->getCheckoutDiscount()->setCouponCode($salesRule->getCouponCode());
         sleep(2);
         $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
@@ -168,36 +169,46 @@ class WebposManageStaffMS73Test extends Injectable
         $username = $staff->getUsername();
         $password = $staff->getPassword();
         $this->webposIndex->open();
-        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
         if ($this->webposIndex->getLoginForm()->isVisible()) {
             $this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
             $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
-            sleep(1);
             $this->webposIndex->getLoginForm()->clickLoginButton();
             sleep(2);
-            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-            $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
-            if ($location) {
-                $this->webposIndex->getLoginForm()->setLocation($location->getDisplayName());
-            }
-            if ($pos) {
-                $this->webposIndex->getLoginForm()->setPos($pos->getPosName());
-            }
-            if ($location || $pos) {
-                $this->webposIndex->getLoginForm()->getEnterToPos()->click();
-            }
-            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-            $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
-            $time = time();
-            $timeAfter = $time + 360;
-            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
-                $time = time();
-            }
-            sleep(2);
         }
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-//        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        //check if WrapWarningForm is visible when this staff has been logged in
+        $time = time();
+        $timeAfter = $time + 30;
+        while (!$this->webposIndex->getWrapWarningForm()->isVisible() && $time < $timeAfter){
+            $time = time();
+        }
+        if ($this->webposIndex->getWrapWarningForm()->isVisible() &&
+            $this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible()) {
+            $this->webposIndex->getWrapWarningForm()->getButtonContinue()->click();
+        }
 
+        if ($location) {
+            $this->webposIndex->getLoginForm()->setLocation($location->getDisplayName());
+        }
+        if ($pos) {
+            $this->webposIndex->getLoginForm()->setPos($pos->getPosName());
+        }
+        if ($location || $pos) {
+            $this->webposIndex->getLoginForm()->getEnterToPos()->click();
+        }
+        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
+        $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
+        $time = time();
+        $timeAfter = $time + 90;
+        while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            $time = time();
+        }
+//        sleep(2);
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $data = [
+            'username' => $username,
+            'password' => $password
+        ];
+        return $this->fixtureFactory->createByCode('staff' , ['data' => $data]);
     }
 
 }

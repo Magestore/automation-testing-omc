@@ -61,10 +61,10 @@ class WebposManageLocationSortingTest extends Injectable
         }
         $sortingResults = [];
         $this->mappingLocationIndex->getLocationModal()->sortByColumn($columnsForSorting);
-        sleep(5);
+        sleep(2);
         $sortingResults[$columnsForSorting]['firstIdAfterFirstSoring'] = (string) $this->mappingLocationIndex->getLocationModal()->getFirstItemId();
         $this->mappingLocationIndex->getLocationModal()->sortByColumn($columnsForSorting);
-        sleep(5);
+        sleep(2);
         $sortingResults[$columnsForSorting]['firstIdAfterSecondSoring'] = $this->mappingLocationIndex->getLocationModal()->getFirstItemId();
         return ['sortingResults' => $sortingResults];
     }
