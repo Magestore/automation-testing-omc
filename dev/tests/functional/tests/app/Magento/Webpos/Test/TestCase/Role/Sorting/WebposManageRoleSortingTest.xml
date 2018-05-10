@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Role\Sorting\WebposManageRoleSortingTest" summary="Grid UI Component Sorting" ticketId="MAGETWO-0003">
+        <variation name="GridRoleSortingMR03Test">
+            <data name="tag" xsi:type="string">to_maintain:yes</data>
+            <data name="description" xsi:type="string">Verify role grid sorting</data>
+            <data name="itemsCount" xsi:type="string">2</data>
+            <data name="fixtureName" xsi:type="string">webposRole</data>
+            <data name="fixtureDataSet" xsi:type="string">WebposRole</data>
+            <data name="steps" xsi:type="array">
+                <item name="0" xsi:type="string">-</item>
+                <item name="1" xsi:type="string">-</item>
+            </data>
+            <data name="columnsForSorting" xsi:type="array">
+                <item name="role_id" xsi:type="string">ID</item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\WebposRoleIndex</data>
+            <data name="gridRetriever" xsi:type="string">getRoleGrid</data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+        </variation>
+        <variation name="GridRoleSortingMR04Test">
+            <data name="tag" xsi:type="string">to_maintain:yes</data>
+            <data name="description" xsi:type="string">Verify role grid sorting</data>
+            <data name="itemsCount" xsi:type="string">2</data>
+            <data name="fixtureName" xsi:type="string">webposRole</data>
+            <data name="fixtureDataSet" xsi:type="string">WebposRole</data>
+            <data name="steps" xsi:type="array">
+                <item name="0" xsi:type="string">-</item>
+                <item name="1" xsi:type="string">-</item>
+            </data>
+            <data name="columnsForSorting" xsi:type="array">
+                <item name="role_id" xsi:type="string">Display Name</item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\WebposRoleIndex</data>
+            <data name="gridRetriever" xsi:type="string">getRoleGrid</data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+        </variation>
+        <variation name="GridRoleSortingMR05Test">
+            <data name="tag" xsi:type="string">to_maintain:yes</data>
+            <data name="description" xsi:type="string">Verify role grid sorting</data>
+            <data name="itemsCount" xsi:type="string">2</data>
+            <data name="fixtureName" xsi:type="string">webposRole</data>
+            <data name="fixtureDataSet" xsi:type="string">WebposRole</data>
+            <data name="steps" xsi:type="array">
+                <item name="0" xsi:type="string">-</item>
+                <item name="1" xsi:type="string">-</item>
+            </data>
+            <data name="columnsForSorting" xsi:type="array">
+                <item name="role_id" xsi:type="string">Description</item>
+            </data>
+            <data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\WebposRoleIndex</data>
+            <data name="gridRetriever" xsi:type="string">getRoleGrid</data>
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
+        </variation>
+    </testCase>
+</config>

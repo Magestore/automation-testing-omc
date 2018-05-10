@@ -20,8 +20,13 @@ class Modal extends Block
 
 	public function getPopupMessage()
 	{
-		return $this->_rootElement->find('aside > div.modal-inner-wrap > div > div')->getText();
+		return $this->getPopupMessageElement()->getText();
 	}
+
+    public function getPopupMessageElement()
+    {
+        return $this->_rootElement->find('aside > div.modal-inner-wrap > div > div');
+    }
 
 	public function getCancelButton()
 	{

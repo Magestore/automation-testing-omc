@@ -7,5 +7,6 @@
         <block name="roleGrid" class="Magento\Webpos\Test\Block\Adminhtml\Role\RoleGrid" locator="[id='page:main-container']" strategy="css selector" />
         <block name="editableRow" class="Magento\Webpos\Test\Block\Adminhtml\Role\EditableRow" locator="//tr[@class='data-grid-editable-row']" strategy="xpath" />
         <block name="titleBlock" class="Magento\Theme\Test\Block\Html\Title" locator=".page-title-wrapper" strategy="css selector"></block>
+        <block name="modal" class="Magento\Webpos\Test\Block\Modal" locator=".modals-wrapper" strategy="css selector"/>
     </page>
 </config>

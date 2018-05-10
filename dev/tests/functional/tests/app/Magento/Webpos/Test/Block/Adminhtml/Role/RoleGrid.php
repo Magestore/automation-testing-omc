@@ -15,36 +15,37 @@ use Magento\Ui\Test\Block\Adminhtml\DataGrid;
 
 class RoleGrid extends DataGrid
 {
-	/**
-	 * Filters array mapping.
-	 *
-	 * @var array
-	 */
-	protected $filters = [
-		'role_id_from' => [
-			'selector' => '[name="role_id[from]"]',
-		],
-		'role_id_to' => [
-			'selector' => '[name="role_id[to]"]',
-		],
-		'display_name' => [
-			'selector' => '[name="display_name"]',
-		],
-		'description' => [
-			'selector' => '[name="description"]',
-		]
-	];
+    /**
+     * Filters array mapping.
+     *
+     * @var array
+     */
+    protected $filters = [
+        'role_id_from' => [
+            'selector' => '[name="role_id[from]"]',
+        ],
+        'role_id_to' => [
+            'selector' => '[name="role_id[to]"]',
+        ],
+        'display_name' => [
+            'selector' => '[name="display_name"]',
+        ],
+        'description' => [
+            'selector' => '[name="description"]',
+        ]
+    ];
 
-	/**
-	 * Click on "Edit" link.
-	 *
-	 * @param SimpleElement $rowItem
-	 * @return void
-	 */
-	protected function clickEditLink(SimpleElement $rowItem)
-	{
-		$rowItem->find($this->editLink)->click();
-	}
+    /**
+     * Click on "Edit" link.
+     *
+     * @param SimpleElement $rowItem
+     * @return void
+     */
+    protected function clickEditLink(SimpleElement $rowItem)
+    {
+        $rowItem->find($this->editLink)->click();
+    }
+
     /**
      * Fix core
      */
@@ -54,37 +55,39 @@ class RoleGrid extends DataGrid
         parent::resetFilter();
     }
 
-	public function clickFirstRowToEdit()
-	{
-		$this->_rootElement->find('.data-grid .data-row td:nth-child(2)')->click();
-		$this->waitForElementVisible('//tr[@class="data-grid-editable-row"]', Locator::SELECTOR_XPATH);
-	}
+    public function clickFirstRowToEdit()
+    {
+        $this->_rootElement->find('.data-grid .data-row td:nth-child(2)')->click();
+        $this->waitForElementVisible('//tr[@class="data-grid-editable-row"]', Locator::SELECTOR_XPATH);
+    }
 
-	// Edit Row Actions
-	public function getCancelButton()
-	{
-		return $this->_rootElement->find('button[data-bind="click: cancel"]');
-	}
+    // Edit Row Actions
+    public function getCancelButton()
+    {
+        return $this->_rootElement->find('button[data-bind="click: cancel"]');
+    }
 
-	public function getSaveButton()
-	{
-		return $this->_rootElement->find('button[data-bind="click: save, disable: !canSave()"]');
-	}
+    public function getSaveButton()
+    {
+        return $this->_rootElement->find('button[data-bind="click: save, disable: !canSave()"]');
+    }
 
-	public function getRowEditMessage()
-	{
-		return $this->_rootElement->find('.data-grid-info-panel');
-	}
-	// End Edit Row Actions
+    public function getRowEditMessage()
+    {
+        return $this->_rootElement->find('.data-grid-info-panel');
+    }
 
-	public function waitForGridLoader()
-	{
-		$this->waitForElementNotVisible($this->loader);
-		$this->getTemplateBlock()->waitLoader();
-	}
+    // End Edit Row Actions
 
-	public function getButtonByName($name){
-        return $this->_rootElement->find('./..//div[@class="page-actions-buttons"]//span[text()="'.$name.'"]', locator::SELECTOR_XPATH);
+    public function waitForGridLoader()
+    {
+        $this->waitForElementNotVisible($this->loader);
+        $this->getTemplateBlock()->waitLoader();
+    }
+
+    public function getButtonByName($name)
+    {
+        return $this->_rootElement->find('./..//div[@class="page-actions-buttons"]//span[text()="' . $name . '"]', locator::SELECTOR_XPATH);
     }
 
 
@@ -93,7 +96,33 @@ class RoleGrid extends DataGrid
         return $this->_rootElement->find('//div[@class="action-menu-items"]//ul//li//span[text()="' . $name . '"]   ', Locator::SELECTOR_XPATH);
     }
 
-    public function getFilterButton(){
+    public function getFilterButton()
+    {
         return $this->_rootElement->find('//div[@class="data-grid-filters-actions-wrap"]//button[text()="Filters"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function waitForFilterVisible()
+    {
+        $this->waitForElementVisible('div[@data-part="filter-form"]', locator::SELECTOR_XPATH);
+    }
+
+    public function getFilterFieldByName($name)
+    {
+        return $this->_rootElement->find('//div[@data-part="filter-form"]//span[text()="' . $name . '"]', locator::SELECTOR_XPATH);
+    }
+
+    public function getFilterCancelButton()
+    {
+        return $this->_rootElement->find('//button[@data-action="grid-filter-cancel"]', locator::SELECTOR_XPATH);
+    }
+
+    public function getFirtRowData()
+    {
+        return $this->_rootElement->find('//table[@class="data-grid"]/tbody/tr[@class="data-row"][1]', locator::SELECTOR_XPATH);
+    }
+
+    public function waitForPopupModalVisible()
+    {
+        $this->waitForFilterVisible('//aside[@class="modal-popup"]', locator::SELECTOR_XPATH);
     }
 }

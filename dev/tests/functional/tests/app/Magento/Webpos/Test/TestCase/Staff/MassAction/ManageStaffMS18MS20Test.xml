@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\MassAction\ManageStaffMS18MS20Test" summary="Grid UI Component Filtering" ticketId="MAGETWO-41329">
+        <variation name="ManageStaffMS18TestVariation">
+            <data name="staffQty" xsi:type="string">2</data>
+            <data name="staff1/dataset" xsi:type="string">staffMS03</data>
+            <data name="staff2/dataset" xsi:type="string">staffMS03</data>
+            <data name="status" xsi:type="string">Enabled</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertStaffMassChangeStatusSuccessMessage" />
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertStaffMassChangeStatusInGrid" />
+        </variation>
+        <variation name="ManageStaffMS20TestVariation">
+            <data name="staffQty" xsi:type="string">2</data>
+            <data name="staff1/dataset" xsi:type="string">default</data>
+            <data name="staff2/dataset" xsi:type="string">default</data>
+            <data name="status" xsi:type="string">Disabled</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertStaffMassChangeStatusSuccessMessage" />
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertStaffMassChangeStatusInGrid" />
+        </variation>
+    </testCase>
+</config>

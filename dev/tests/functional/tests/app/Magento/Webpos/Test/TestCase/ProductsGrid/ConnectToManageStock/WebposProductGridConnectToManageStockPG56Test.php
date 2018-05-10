@@ -9,8 +9,6 @@
 namespace Magento\Webpos\Test\TestCase\ProductsGrid\ConnectToManageStock;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus;
-use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 class WebposProductGridConnectToManageStockPG56Test extends Injectable
@@ -36,12 +34,15 @@ class WebposProductGridConnectToManageStockPG56Test extends Injectable
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();
+
         // Add product to cart
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\AddProductToCartStep',
-            ['products' => $products]
-        )->run();
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
+
         // Checkout
+        while ( !$this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->isVisible()) {
+            sleep(1);
+        }
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

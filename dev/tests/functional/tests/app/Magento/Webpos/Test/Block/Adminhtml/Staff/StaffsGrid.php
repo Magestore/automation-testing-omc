@@ -166,4 +166,8 @@ class StaffsGrid extends DataGrid
     public function getDataGridFirstRow(){
         return $this->_rootElement->find('.//table//tbody//tr[@class="data-row"][1]', locator::SELECTOR_XPATH);
     }
+
+    public function getColumnOfDataGridFirstRow($number){
+        return $this->_rootElement->find('.//table//tbody//tr[@class="data-row"][1]//td['.$number.']//div[@class="data-grid-cell-content"]', locator::SELECTOR_XPATH);
+    }
 }
