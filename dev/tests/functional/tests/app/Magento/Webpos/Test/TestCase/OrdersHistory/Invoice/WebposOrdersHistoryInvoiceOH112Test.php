@@ -46,9 +46,9 @@ class WebposOrdersHistoryInvoiceOH112Test extends Injectable
      * @return array
      */
     public function test(
-        $products
-    )
-    {
+        $products,
+        $dataConfig
+    ) {
         // Create products
         $products = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
@@ -64,6 +64,11 @@ class WebposOrdersHistoryInvoiceOH112Test extends Injectable
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',
             ['products' => $products]
+        )->run();
+        //Config payment method
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => $dataConfig]
         )->run();
 
         // Place Order

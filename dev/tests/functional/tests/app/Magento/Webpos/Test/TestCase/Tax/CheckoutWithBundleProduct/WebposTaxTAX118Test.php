@@ -8,8 +8,6 @@
 
 namespace Magento\Webpos\Test\TestCase\Tax\CheckoutWithBundleProduct;
 
-
-use Magento\Bundle\Test\Fixture\BundleProduct;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
@@ -20,7 +18,10 @@ use Magento\Webpos\Test\Constraint\OrderHistory\Payment\AssertPaymentSuccess;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposTaxTAX118Test
+ * @package Magento\Webpos\Test\TestCase\Tax\CheckoutWithBundleProduct
+ */
 class WebposTaxTAX118Test extends Injectable
 {
 	/**
@@ -115,7 +116,8 @@ class WebposTaxTAX118Test extends Injectable
 		$taxRate,
 		$products,
 		$createInvoice = true,
-		$shipped = false
+		$shipped = false,
+        $dataConfig
 	)
 	{
 		// Create products
@@ -150,6 +152,11 @@ class WebposTaxTAX118Test extends Injectable
 			'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
 			['customer' => $customer]
 		)->run();
+        //Config payment method
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => $dataConfig]
+        )->run();
         $k =0;
         while (!$this->webposIndex->getCheckoutProductDetail()->isVisible() && $k < 5) {
             sleep(1);
