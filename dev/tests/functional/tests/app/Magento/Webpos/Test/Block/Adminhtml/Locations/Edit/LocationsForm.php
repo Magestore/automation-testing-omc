@@ -13,11 +13,6 @@ use Magento\Mtf\Client\Locator;
 
 class LocationsForm extends Form
 {
-    public function waitLoad()
-    {
-        $this->waitForElementVisible($this->_rootElement);
-    }
-
     public function getField($id)
     {
         $id = '#' . $id;

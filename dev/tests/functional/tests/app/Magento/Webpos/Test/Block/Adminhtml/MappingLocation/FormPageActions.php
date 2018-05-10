@@ -79,4 +79,8 @@ class FormPageActions extends PageActions
         $this->waitForElementNotVisible($this->loaderOld, Locator::SELECTOR_XPATH);
         return $this->_rootElement->find('#'.$id);
     }
+
+    public function getButtonByName($name){
+        return $this->_rootElement->find('//button/span[text()="'.$name.'"]', locator::SELECTOR_XPATH);
+    }
 }

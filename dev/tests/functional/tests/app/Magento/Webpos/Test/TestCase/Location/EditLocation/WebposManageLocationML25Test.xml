@@ -3,6 +3,7 @@
     <testCase name="Magento\Webpos\Test\TestCase\Location\EditLocation\WebposManageLocationML25Test" summary="Check [Save] button without editing" ticketId="MAGETWO-1234">
         <variation name="WebposManageLocationML25TestVariation">
             <data name="location/dataset" xsi:type="string">ML19</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Location\Grid\AssertMessageEditSuccessOnGrid"></constraint>
        </variation>
     </testCase>
 </config>
