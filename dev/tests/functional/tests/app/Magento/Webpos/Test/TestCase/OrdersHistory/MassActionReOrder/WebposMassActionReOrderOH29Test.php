@@ -12,7 +12,6 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class WebposMassActionReOrderOH29Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionReOrder
@@ -28,6 +27,8 @@ class WebposMassActionReOrderOH29Test extends Injectable
      * @var FixtureFactory
      */
     protected $fixtureFactory;
+
+    protected $defaultPaymentMethod;
 
     /**
      * Prepare data.
@@ -72,6 +73,8 @@ class WebposMassActionReOrderOH29Test extends Injectable
      * @param $taxRate
      * @param bool $addDiscount
      * @param null $discountAmount
+     * @param $dataConfigPayment
+     * @param $defaultPaymentMethod
      * @return array
      */
     public function test(
@@ -80,16 +83,24 @@ class WebposMassActionReOrderOH29Test extends Injectable
         $configData,
         $taxRate,
         $addDiscount = false,
-        $discountAmount = null
+        $discountAmount = null,
+        $dataConfigPayment,
+        $defaultPaymentMethod
     )
     {
+        //Config Customer Credit Payment Method
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => $dataConfigPayment]
+        )->run();
+
         // Create products
         $products = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run();
 
-        // Config
+        // Config Tax
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => $configData]
@@ -111,7 +122,7 @@ class WebposMassActionReOrderOH29Test extends Injectable
             'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
             ['customer' => $customer]
         )->run();
-
+        sleep(1);
         // Add Discount
         if ($addDiscount) {
             $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
@@ -130,13 +141,11 @@ class WebposMassActionReOrderOH29Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
+        sleep(3);
         // Select Payment Method
-        sleep(1);
         $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment2()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-        sleep(1);
+        sleep(2);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         // End Place Order
@@ -156,9 +165,19 @@ class WebposMassActionReOrderOH29Test extends Injectable
 
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 
+        $this->defaultPaymentMethod = $defaultPaymentMethod;
         return [
             'products' => $products,
             'taxRate' => $taxRate
         ];
+    }
+
+    public function tearDown()
+    {
+        //Config Payment Payment Method
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => $this->defaultPaymentMethod]
+        )->run();
     }
 }

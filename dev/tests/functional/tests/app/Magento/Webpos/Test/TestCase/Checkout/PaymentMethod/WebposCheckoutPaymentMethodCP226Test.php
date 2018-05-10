@@ -7,6 +7,7 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\PaymentMethod;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
@@ -89,7 +90,8 @@ class WebposCheckoutPaymentMethodCP226Test extends Injectable
         $this->webposIndex->getCheckoutCartHeader()->getIconBackToCart()->click();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-
+        sleep(2);
+        $this->webposIndex->getCheckoutCartHeader()->waitForElementVisible('#empty_cart');
         $this->webposIndex->getCheckoutCartHeader()->getIconDeleteCart()->click();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();

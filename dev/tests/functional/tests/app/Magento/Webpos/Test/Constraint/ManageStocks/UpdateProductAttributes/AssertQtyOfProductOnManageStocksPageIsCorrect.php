@@ -29,6 +29,7 @@ class AssertQtyOfProductOnManageStocksPageIsCorrect extends AbstractConstraint
 		// Edit product info
 		$webposIndex->getManageStockList()->searchProduct($productName);
 		$webposIndex->getManageStockList()->getStoreAddress()->click();
+		$webposIndex->getManageStockList->waitForProductListShow();
 		sleep(5);
 		\PHPUnit_Framework_Assert::assertEquals(
 			$expectQty,

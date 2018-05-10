@@ -40,6 +40,9 @@ class WebposHoldOrderCP169Test extends Injectable
         )->run();
 
         //Create multiorder
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem('1')->click();

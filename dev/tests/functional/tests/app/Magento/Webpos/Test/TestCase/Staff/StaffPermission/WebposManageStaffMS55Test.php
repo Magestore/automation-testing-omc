@@ -6,6 +6,7 @@
  * Time: 09:14
  */
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
@@ -29,6 +30,10 @@ class WebposManageStaffMS55Test extends Injectable
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'have_shipping_method_on_webpos_CP197']
         )->run();
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_yes_MS57']
+        )->run();
     }
 
     /**
@@ -51,11 +56,31 @@ class WebposManageStaffMS55Test extends Injectable
      * @param WebposRole
      * @return void
      */
-    public function test(WebposRole $webposRole, $products, $priceCustom, $discount)
+    public function test(WebposRole $webposRole, FixtureFactory $fixtureFactory, $products, $priceCustom, $discount)
     {
-        //Create role and staff for role
+        /*Create pos and location*/
+        $pos = $fixtureFactory->createByCode('pos', ['dataset' => 'MS57Staff']);
+        $pos->persist();
+        $dataLocation = $pos->getDataFieldConfig('location_id')['source']->getLocation()->getData();
         $webposRole->persist();
-        $dataStaff = $webposRole->getDataFieldConfig('staff_id')['source']->getStaffs()[0]->getData();
+        $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staffMS21']);
+        $dataStaff = $staff->getData();
+        $dataStaff['location_id'] = [$dataLocation['location_id']];
+        $dataStaff['pos_ids'] = [$pos->getData('pos_id')];
+        $dataStaff['role_id'] = $webposRole->getRoleId();
+        $staff = $fixtureFactory->createByCode('staff', ['data' => $dataStaff]);
+        $staff->persist();
+        //Login
+        $this->loginWebpos($this->webposIndex, $dataStaff['username'], $dataStaff['password'], $dataLocation['display_name'], $pos->getData('pos_name'));
+        sleep(2);
+        $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
+        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
+        sleep(1);
+        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
+        sleep(1);
+        $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
+        $this->webposIndex->getCMenu()->waitForElementVisible('#checkout');
+        $this->webposIndex->getCMenu()->checkout();
 
         //Create product
         $products = $this->objectManager->getInstance()->create(
@@ -65,9 +90,6 @@ class WebposManageStaffMS55Test extends Injectable
         $product1 = $products[0]['product'];
         $product2 = $products[1]['product'];
 
-        //Login
-        $this->loginWebpos($this->webposIndex, $dataStaff['username'],$dataStaff['password']);
-
         //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
@@ -76,79 +98,36 @@ class WebposManageStaffMS55Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->search($product2->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(1);
-
-        //Click to first product name > Discount tab > Input amount greater than original
-        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
-        $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
         sleep(2);
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
-
-        //Assert custom price
-        $this->assertEditDiscountCustomPrice->processAssert($this->webposIndex, 80, 1);
-
-        //Checkout
-        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
-        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(1);
-        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#webpos_checkout > div.indicator');
-
-        //Click on [Add discount] > on Discount tab, add dicount for whole cart (type: %)
-        $total = $this->webposIndex->getCheckoutCartFooter()->getTotal();
-        while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup())
-        {
-            $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
-        }
-        $this->webposIndex->getCheckoutDiscount()->clickDiscountButton();
-        $this->webposIndex->getCheckoutDiscount()->setTypeDiscount('%');
-        $this->webposIndex->getCheckoutDiscount()->setNumberDiscount($discount);
-        $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(1);
-
-        //PlaceOrder
-        $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('#checkout_button');
-        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
-        $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
-        sleep(1);
-
-        //Get orderId
-        $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
-        $orderId= ltrim ($orderId,'#');
-        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
-        sleep(1);
-        return [
-            'orderId' => $orderId,
-            'shippingDescription' => 'Flat Rate - Fixed',
-            'discount' => 100,
-            'total' => $total
-        ];
     }
 
-    public function loginWebpos(WebposIndex $webposIndex, $username, $password)
+    public function loginWebpos(WebposIndex $webposIndex, $username, $password, $locationName, $posName)
     {
         $webposIndex->open();
         if ($webposIndex->getLoginForm()->isVisible()) {
             $webposIndex->getLoginForm()->getUsernameField()->setValue($username);
             $webposIndex->getLoginForm()->getPasswordField()->setValue($password);
             $webposIndex->getLoginForm()->clickLoginButton();
-//			$this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
+            $webposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader');
+            $webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
+            $webposIndex->getLoginForm()->setLocation($locationName);
+            $webposIndex->getLoginForm()->setPos($posName);
+            $webposIndex->getLoginForm()->getEnterToPos()->click();
+            //			$this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
             $webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 360;
-            while ($webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            while ($webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
                 $time = time();
             }
-            sleep(2);
+            sleep(5);
         }
-        $webposIndex->getCheckoutProductList()->waitProductListToLoad();
+//        $webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        if ($this->webposIndex->getOpenSessionPopup()->isOpenSessionDisplay()) {
+            $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
+            $this->webposIndex->getMsWebpos()->clickCMenuButton();
+            $this->webposIndex->getCMenu()->checkout();
+        }
     }
 
 }

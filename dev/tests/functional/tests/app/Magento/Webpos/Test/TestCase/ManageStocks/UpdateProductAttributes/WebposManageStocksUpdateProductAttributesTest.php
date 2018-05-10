@@ -60,7 +60,7 @@ class WebposManageStocksUpdateProductAttributesTest extends Injectable
 		$this->webposIndex->getCMenu()->manageStocks();
 		sleep(2);
 
-		$productName = $productInfo['produ  ct']->getName();
+		$productName = $productInfo['product']->getName();
 
 		// Edit product info
 		$this->webposIndex->getManageStockList()->searchProduct($productName);

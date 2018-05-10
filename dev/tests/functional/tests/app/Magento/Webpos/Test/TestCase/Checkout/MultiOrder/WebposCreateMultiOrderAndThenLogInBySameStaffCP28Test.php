@@ -83,6 +83,9 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
             sleep(2);
         }
 
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         sleep(3);
