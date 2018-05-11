@@ -23,13 +23,17 @@ use Magento\Webpos\Test\Constraint\Sync\AssertSynchronizationPageDisplay;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
-
+/**
+ * Class WebposSync14Test
+ * @package Magento\Webpos\Test\TestCase\Sync\CustomerComplaints
+ */
 class WebposSync14Test extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
+    protected $fixtureFactory;
 
     /**
      * Customer grid page.

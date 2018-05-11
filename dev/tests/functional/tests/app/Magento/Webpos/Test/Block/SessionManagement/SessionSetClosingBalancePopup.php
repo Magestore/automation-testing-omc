@@ -87,4 +87,9 @@ class SessionSetClosingBalancePopup extends Block
     public function  getNumberOfCoinsBills(){
         return $this->_rootElement->find('.cash-counting-qty.a-center');
     }
+
+    public function getColumnNumberOfCoinsAtRow($rowIndex)
+    {
+        return $this->_rootElement->find('//div[@class="counting-box"]/table['.$rowIndex.']/tbody/tr/td[2]/input', Locator::SELECTOR_XPATH);
+    }
 }

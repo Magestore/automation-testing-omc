@@ -8,7 +8,6 @@
                 <item name="user_name" xsi:type="string">User Name</item>
                 <item name="user_display_name" xsi:type="string">Display Name</item>
                 <item name="email" xsi:type="string">Email</item>
-                <item name="status" xsi:type="string">Status</item>
             </data>
             <constraint name="Magento\Ui\Test\Constraint\AssertGridSorting"/>
         </variation>

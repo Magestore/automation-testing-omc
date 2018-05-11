@@ -8,10 +8,12 @@
 
 namespace Magento\Webpos\Test\Constraint\Sync;
 
-
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class AssertItemUpdateSuccess
+ * @package Magento\Webpos\Test\Constraint\Sync
+ */
 class AssertItemUpdateSuccess extends AbstractConstraint
 {
 	public function processAssert(WebposIndex $webposIndex, $text, $action = '')

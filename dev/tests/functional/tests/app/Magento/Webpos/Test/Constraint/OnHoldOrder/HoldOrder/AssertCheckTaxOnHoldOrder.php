@@ -13,8 +13,6 @@ class AssertCheckTaxOnHoldOrder extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex, $tax, $products)
     {
-        $webposIndex->getMsWebpos()->clickCMenuButton();
-        $webposIndex->getCMenu()->onHoldOrders();
         sleep(1);
 
         //Check tax in table

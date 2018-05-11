@@ -1,17 +1,36 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: gvt
- * Date: 12/02/2018
- * Time: 09:14
+ * User: stephen
+ * Date: 10/05/2018
+ * Time: 09:36
  */
+
 namespace Magento\Webpos\Test\TestCase\Location\EditLocation;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\LocationIndex;
 use Magento\Webpos\Test\Fixture\Location;
 use Magento\Webpos\Test\Page\Adminhtml\LocationNews;
 
-
+/**
+ * Delete Location
+ * Testcase ML33 - Check [Back] button
+ *
+ * Precondition
+ * - Exist at least 1 Location on the grid of Manage Locations page
+ *
+ * Steps
+ * - Go to backend > Sales > Manage Locations
+ * - Click on [Edit] button to edit the Location
+ * - Click on [Back] button
+ *
+ * Acceptance
+ * - Back to the Manage Locations page
+ *
+ * Class WebposManageLocationML33Test
+ * @package Magento\Webpos\Test\TestCase\Location\EditLocation
+ */
 class WebposManageLocationML33Test extends Injectable
 {
     /**
@@ -25,16 +44,17 @@ class WebposManageLocationML33Test extends Injectable
      * @var LocationNews
      */
     private $locationNews;
+
     /**
-     * Inject location pages.
-     *
-     * @param LocationIndex
+     * @param LocationIndex $locationIndex
+     * @param LocationNews $locationNews
      * @return void
      */
     public function __inject(
         LocationIndex $locationIndex,
         LocationNews $locationNews
-    ) {
+    )
+    {
         $this->locationIndex = $locationIndex;
         $this->locationNews = $locationNews;
     }
@@ -44,12 +64,16 @@ class WebposManageLocationML33Test extends Injectable
         // Steps
         $location->persist();
         $this->locationIndex->open();
+        $this->locationIndex->getLocationsGrid()->waitLoader();
         $this->locationIndex->getLocationsGrid()->resetFilter();
-        $this->locationIndex->getLocationsGrid()->search(['description' => $location->getDescription()]);
-        $this->locationIndex->getLocationsGrid()->getRowByDisplayName($location->getDescription())->find('.action-menu-item')->click();
-        sleep(1);
+        $this->locationIndex->getLocationsGrid()->openEditByRow([
+            'display_name' => $location->getDisplayName()
+        ]);
         $this->locationNews->getFormPageActionsLocation()->back();
-        sleep(1);
+        \PHPUnit_Framework_Assert::assertTrue(
+            $this->locationIndex->getLocationsGrid()->isVisible(),
+            'Manage Location Page could not display'
+        );
     }
 }
 

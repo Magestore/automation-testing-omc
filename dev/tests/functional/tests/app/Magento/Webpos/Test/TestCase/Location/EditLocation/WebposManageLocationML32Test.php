@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: gvt
- * Date: 12/02/2018
- * Time: 09:14
+ * User: stephen
+ * Date: 10/05/2018
+ * Time: 09:16
  */
 namespace Magento\Webpos\Test\TestCase\Location\EditLocation;
 use Magento\Mtf\TestCase\Injectable;
@@ -11,7 +11,27 @@ use Magento\Webpos\Test\Page\Adminhtml\LocationIndex;
 use Magento\Webpos\Test\Fixture\Location;
 use Magento\Webpos\Test\Page\Adminhtml\LocationNews;
 
-
+/**
+ * Delete Location
+ * Testcase ML32 - Check [Delete] button
+ *
+ * Precondition
+ * - Exist at least 1 Location on the grid of Manage Locations page
+ *
+ * Steps
+ * - Go to backend > Sales > Manage Locations
+ * - Click on [Edit] button to edit the Location
+ * - Click on [Delete] button
+ * - Click on [OK] button on the confirmation popup
+ *
+ *
+ * Acceptance
+ * - Display a confirmation popup with message: "Are you sure you want to do this?" and 2 buttons: Cancel, OK
+ * - Back to Manage Locations page and show message: "Location was successfully deleted"
+ *
+ * Class WebposManageLocationML32Test
+ * @package Magento\Webpos\Test\TestCase\Location\EditLocation
+ */
 class WebposManageLocationML32Test extends Injectable
 {
     /**
@@ -25,11 +45,10 @@ class WebposManageLocationML32Test extends Injectable
      * @var LocationNews
      */
     private $locationNews;
+
     /**
-     * Inject location pages.
-     *
-     * @param LocationIndex
-     * @return void
+     * @param LocationIndex $locationIndex
+     * @param LocationNews $locationNews
      */
     public function __inject(
         LocationIndex $locationIndex,
@@ -44,13 +63,17 @@ class WebposManageLocationML32Test extends Injectable
         // Steps
         $location->persist();
         $this->locationIndex->open();
+        $this->locationIndex->getLocationsGrid()->waitLoader();
         $this->locationIndex->getLocationsGrid()->resetFilter();
-        $this->locationIndex->getLocationsGrid()->search(['description' => $location->getDescription()]);
-        $this->locationIndex->getLocationsGrid()->getRowByDisplayName($location->getDescription())->find('.action-menu-item')->click();
-        sleep(1);
+        $this->locationIndex->getLocationsGrid()->openEditByRow([
+            'display_name' => $location->getDisplayName()
+        ]);
         $this->locationNews->getFormPageActionsLocation()->deleteButton()->click();
         $this->locationNews->getModalsWrapper()->getOkButton()->click();
-        sleep(1);
+        return [
+            'page' => 'index',
+            'location' =>$location
+        ];
     }
 }
 

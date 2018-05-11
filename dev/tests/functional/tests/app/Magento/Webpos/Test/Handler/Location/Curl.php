@@ -53,10 +53,9 @@ class Curl extends AbstractCurl implements LocationInterface
     }
 
     /**
-     * Get location id by name
-     *
-     * @param string $name
-     * @return int|null
+     * @param $name
+     * @return null
+     * @throws \Exception
      */
     protected function getLocationId($name)
     {

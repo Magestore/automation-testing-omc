@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\TestCase\Tax\CheckoutWithGroupProduct;
 
-use Magento\Bundle\Test\Fixture\BundleProduct;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
@@ -20,6 +19,10 @@ use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposTaxTAX119Test
+ * @package Magento\Webpos\Test\TestCase\Tax\CheckoutWithGroupProduct
+ */
 class WebposTaxTAX119Test extends Injectable
 {
     /**
@@ -114,9 +117,9 @@ class WebposTaxTAX119Test extends Injectable
         $taxRate,
         $products,
         $createInvoice = true,
-        $shipped = false
-    )
-    {
+        $shipped = false,
+        $dataConfig
+    ) {
         // Create products
         $products = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
@@ -144,6 +147,11 @@ class WebposTaxTAX119Test extends Injectable
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
             ['customer' => $customer]
+        )->run();
+        //Config payment method
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => $dataConfig]
         )->run();
 
         // Place Order

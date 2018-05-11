@@ -7,12 +7,16 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\PaymentMethod;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-
+/**
+ * Class WebposCheckoutPaymentMethodCP225Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\PaymentMethod
+ */
 class WebposCheckoutPaymentMethodCP225Test extends Injectable
 {
     /**

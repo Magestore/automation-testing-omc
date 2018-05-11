@@ -8,20 +8,20 @@
 
 namespace Magento\Webpos\Test\TestCase\Sync\Group;
 
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Catalog\Test\Page\Adminhtml\CatalogProductEdit;
 use Magento\Catalog\Test\Page\Adminhtml\CatalogProductIndex;
-use Magento\Customer\Test\Fixture\Address;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Customer\Test\Page\Adminhtml\CustomerIndex;
 use Magento\Customer\Test\Page\Adminhtml\CustomerIndexEdit;
-use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Sync\AssertSynchronizationPageDisplay;
 use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposSync13Test
+ * @package Magento\Webpos\Test\TestCase\Sync\Group
+ */
 class WebposSync13Test extends Injectable
 {
     /**
@@ -63,17 +63,6 @@ class WebposSync13Test extends Injectable
      */
     protected $assertSynchronizationPageDisplay;
 
-    public function __prepare(FixtureFactory $fixtureFactory)
-    {
-        // Add Customer
-//        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
-//        $customer->persist();
-//
-//        return [
-//            'customer' => $customer
-//        ];
-    }
-
     public function __inject(
         WebposIndex $webposIndex,
         CustomerIndex $customerIndexPage,
@@ -95,17 +84,9 @@ class WebposSync13Test extends Injectable
 
     }
 
-    /**
-     *
-     * @return void
-     */
     public function test(
-        FixtureFactory $fixtureFactory,
         Customer $initialCustomer,
-        Customer $customer,
-        CatalogProductSimple $initialProduct,
-        CatalogProductSimple $product,
-        $products
+        Customer $customer
     )
     {
         $staff = $this->objectManager->create(
@@ -131,13 +112,4 @@ class WebposSync13Test extends Injectable
         $action = 'Update';
         $this->assertItemUpdateSuccess->processAssert($this->webposIndex, "Group", $action);
     }
-
-    public function tearDown()
-    {
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => 'default_payment_method']
-//        )->run();
-    }
-
 }

@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionCancel;
 
-
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Sales\Test\Fixture\OrderInjectable;
@@ -16,6 +15,10 @@ use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePla
 use Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOHMassActionCancelTest
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionCancel
+ */
 class WebposOHMassActionCancelTest extends Injectable
 {
 	/**
@@ -38,20 +41,19 @@ class WebposOHMassActionCancelTest extends Injectable
 	 */
 	protected $assertShipmentSuccess;
 
-	public function __inject(
+	public function __inject (
 		WebposIndex $webposIndex,
 		FixtureFactory $fixtureFactory,
 		AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
 		AssertShipmentSuccess $assertShipmentSuccess
-	)
-	{
+	) {
 		$this->webposIndex = $webposIndex;
 		$this->fixtureFactory = $fixtureFactory;
 		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 		$this->assertShipmentSuccess = $assertShipmentSuccess;
 	}
 
-	public function test(
+	public function test (
 		$createOrderInBackend = false,
 		OrderInjectable $order = null,
 		$products = null,
@@ -63,8 +65,7 @@ class WebposOHMassActionCancelTest extends Injectable
 		$comment = null,
 		$action = 'save',
 		$confirmAction = 'ok'
-	)
-	{
+	) {
 		// Login webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
@@ -164,6 +165,5 @@ class WebposOHMassActionCancelTest extends Injectable
 			'products' => $products,
 			'orderId' => $orderId
 		];
-
 	}
 }

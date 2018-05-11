@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
 	<testCase name="Magento\Webpos\Test\TestCase\ManageStocks\UpdateProductAttributes\WebposManageStocksUpdateProductAttributesTest" summary="Manage Stocks - Update Product Attributes Test" ticketId="WEBPOS-1">
+		<variation name="WebposManageStocksUpdateProductAttributesTestVariation_MSK13">
+			<data name="productInfo" xsi:type="array">
+				<item name="product" xsi:type="string">catalogProductSimple::product_in_primary_warehouse</item>
+				<item name="qty" xsi:type="number">0</item>
+				<item name="manageStock" xsi:type="boolean">true</item>
+				<item name="backorders" xsi:type="boolean">true</item>
+				<item name="orderQty" xsi:type="number">2</item>
+			</data>
+
+			<data name="action" xsi:type="string">update</data>
+			<data name="placeOrder" xsi:type="boolean">true</data>
+
+			<data name="expectQty" xsi:type="number">-2</data>
+
+			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible" />
+			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes\AssertQtyOfProductOnManageStocksPageIsCorrect" />
+		</variation>
+
 		<variation name="WebposManageStocksUpdateProductAttributesTestVariation_MSK07">
 			<data name="productInfo" xsi:type="array">
 				<item name="product" xsi:type="string">catalogProductSimple::product_in_primary_warehouse</item>
@@ -37,24 +55,6 @@
 			<data name="placeOrder" xsi:type="boolean">true</data>
 
 			<data name="expectQty" xsi:type="number">0</data>
-
-			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible" />
-			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes\AssertQtyOfProductOnManageStocksPageIsCorrect" />
-		</variation>
-
-		<variation name="WebposManageStocksUpdateProductAttributesTestVariation_MSK13">
-			<data name="productInfo" xsi:type="array">
-				<item name="product" xsi:type="string">catalogProductSimple::product_in_primary_warehouse</item>
-				<item name="qty" xsi:type="number">0</item>
-				<item name="manageStock" xsi:type="boolean">true</item>
-				<item name="backorders" xsi:type="boolean">true</item>
-				<item name="orderQty" xsi:type="number">2</item>
-			</data>
-
-			<data name="action" xsi:type="string">update</data>
-			<data name="placeOrder" xsi:type="boolean">true</data>
-
-			<data name="expectQty" xsi:type="number">-2</data>
 
 			<constraint name="Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible" />
 			<constraint name="Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes\AssertQtyOfProductOnManageStocksPageIsCorrect" />

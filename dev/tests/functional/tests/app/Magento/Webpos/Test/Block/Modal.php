@@ -51,6 +51,10 @@ class Modal extends Block
 		return $this->_rootElement->find('.action-close');
 	}
 
+    public function waitForCloseButtonIsVisible() {
+        return $this->waitForElementVisible('.action-close');
+    }
+
     public function waitForLoadingIndicator()
     {
         $this->waitForElementNotVisible('.indicator');

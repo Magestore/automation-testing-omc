@@ -11,14 +11,18 @@ namespace Magento\Webpos\Test\Constraint\Checkout\HoldOrder;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class AssertCheckCartConfigProduct
+ * @package Magento\Webpos\Test\Constraint\Checkout\HoldOrder
+ */
 class AssertCheckCartConfigProduct extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex, $cartProducts)
     {
         if ($cartProducts == null) {
-            \PHPUnit_Framework_Assert::assertFalse($webposIndex->getCheckoutCartItems()->isCartItem(),
+            \PHPUnit_Framework_Assert::assertFalse(
+                $webposIndex->getCheckoutCartItems()->isCartItem(),
                 'Cart is not default'
-
             );
         } else {
             for ($i = 0; $i < count($cartProducts); ++$i) {
@@ -32,7 +36,6 @@ class AssertCheckCartConfigProduct extends AbstractConstraint
                     floatval($cartProducts[$i]['configurable_attributes_data']['matrix']['attribute_key_0:option_key_0']['price']),
                     'Price product is not correct'
                 );
-                \PHPUnit_Framework_Assert::assertTrue($webposIndex->getCheckoutCartItems()->getAttributeCartItemByOrderToElement($i + 1)->isVisible());
                 if ($webposIndex->getCheckoutCartItems()->getAttributeCartItemByOrderToElement($i + 1)->isVisible()) {
                     \PHPUnit_Framework_Assert::assertEquals(
                         $webposIndex->getCheckoutCartItems()->getAttributeCartItemByOrderTo($i + 1),

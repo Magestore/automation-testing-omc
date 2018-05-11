@@ -6,11 +6,16 @@
  * Time: 13:49
  */
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\ConfigurableProduct\Test\Fixture\ConfigurableProduct;
 
+/**
+ * Class WebposHoldOrderCP156Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
+ */
 class WebposHoldOrderCP156Test extends Injectable
 {
     /**
@@ -18,11 +23,12 @@ class WebposHoldOrderCP156Test extends Injectable
      */
     protected $webposIndex;
 
-    public function __inject
-    (
+    /**
+     * @param WebposIndex $webposIndex
+     */
+    public function __inject (
         WebposIndex $webposIndex
-    )
-    {
+    ) {
         $this->webposIndex = $webposIndex;
     }
 
@@ -51,7 +57,9 @@ class WebposHoldOrderCP156Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
-        return ['products' => [$product->getData()],
-            'cartProducts' => null];
+        return [
+            'products' => [$product->getData()],
+            'cartProducts' => null
+        ];
     }
 }

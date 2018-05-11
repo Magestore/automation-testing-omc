@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Zreport\WebposZreportCheckGUITest"
+              summary="Grid UI Component Filtering" ticketId="WEBPOS-1">
+        <!--<variation name="WebposZreportCheckGUIZR001Test">-->
+            <!--<data name="products" xsi:type="array">-->
+                <!--<item name="0" xsi:type="string">product1</item>-->
+                <!--<item name="1" xsi:type="string">product2</item>-->
+            <!--</data>-->
+            <!--<data name="denomination/dataset" xsi:type="string">default</data>-->
+            <!--<data name="denominationNumberCoin" xsi:type="string">1</data>-->
+            <!--<data name="dataConfig/dataset" xsi:type="string">create_session_before_working</data>-->
+            <!--<data name="dataConfigToNo/dataset" xsi:type="string">setup_session_before_working_to_no</data>-->
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIZreport"/>-->
+        <!--</variation>-->
+        <!--<variation name="WebposZreportCheckGUIZR002Test">-->
+            <!--<data name="products" xsi:type="array">-->
+                <!--<item name="0" xsi:type="string">product1</item>-->
+                <!--<item name="1" xsi:type="string">product2</item>-->
+            <!--</data>-->
+            <!--<data name="posName" xsi:type="string">Store POS</data>-->
+            <!--<data name="denomination/dataset" xsi:type="string">default</data>-->
+            <!--<data name="denominationNumberCoin" xsi:type="string">1</data>-->
+            <!--<data name="dataConfig/dataset" xsi:type="string">create_session_before_working</data>-->
+            <!--<data name="dataConfigToNo/dataset" xsi:type="string">setup_session_before_working_to_no</data>-->
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIZreportPosName"/>-->
+        <!--</variation>-->
+        <variation name="WebposZreportCheckGUIZR003Test">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+                <item name="1" xsi:type="string">product2</item>
+            </data>
+            <data name="denomination/dataset" xsi:type="string">default</data>
+            <data name="denominationNumberCoin" xsi:type="string">1</data>
+            <data name="dataConfig/dataset" xsi:type="string">create_session_before_working</data>
+            <data name="dataConfigToNo/dataset" xsi:type="string">setup_session_before_working_to_no</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIZreportStaffName"/>
+        </variation>
+    </testCase>
+</config>

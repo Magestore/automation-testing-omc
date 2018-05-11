@@ -3,6 +3,7 @@
     <testCase name="Magento\Webpos\Test\TestCase\Location\EditLocation\WebposManageLocationML29Test" summary="Check [Reset] button" ticketId="MAGETWO-1234">
         <variation name="WebposManageLocationML29TestVariation">
             <data name="location/dataset" xsi:type="string">ML19</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Location\Form\AssertLocationFormReset"></constraint>
         </variation>
     </testCase>
 </config>

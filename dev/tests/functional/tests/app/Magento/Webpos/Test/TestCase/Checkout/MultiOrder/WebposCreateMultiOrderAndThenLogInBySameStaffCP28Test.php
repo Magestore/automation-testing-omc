@@ -66,7 +66,7 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
         // Open session
 //        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
         $time = time();
-        $timeAfter = $time + 30;
+        $timeAfter = $time + 5;
         while (!$this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->isVisible()
             && $time < $timeAfter){
             $time = time();
