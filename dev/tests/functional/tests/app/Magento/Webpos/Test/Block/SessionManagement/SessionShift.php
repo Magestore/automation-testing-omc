@@ -79,9 +79,24 @@ class SessionShift extends Block
         return $this->_rootElement->find('//div[@class="transactions-info"]/div/table/tbody/tr/td[1]/label[text()="' . $label . '"]/../../td[2]/span', Locator::SELECTOR_XPATH);
     }
 
+    public function getStaffName()
+    {
+        return $this->_rootElement->find('//span[@data-bind="text: shiftData().staff_name"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getPosName()
+    {
+        return $this->_rootElement->find('//span[@data-bind="text: shiftData().pos_name"]', Locator::SELECTOR_XPATH);
+    }
+
     public function getOpenTime()
     {
         return $this->_rootElement->find('//span[@data-bind="text: getFullDatetime(convertToCurrentTime(shiftData().opened_at))"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getPaymentAmount($rowIndex = 1)
+    {
+        return $this->_rootElement->find('//*[@id="shift-detail-sale"]/table/tbody/tr['.$rowIndex.']/td[2]/span[@data-bind="text: $parent.formatPrice(payment_amount)"]', Locator::SELECTOR_XPATH);
     }
 
     /**

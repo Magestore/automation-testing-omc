@@ -112,9 +112,9 @@ class SessionPrintShiftPopup extends Block
         return $this->_rootElement->find('//*[@id="zreport-print-content"]/div/table[@class="table table-total"]/tbody/tr[6]/td[2]/span[@data-bind="text: netSaleFormatted"]', Locator::SELECTOR_XPATH);
     }
 
-    public function getPaymentCashIn()
+    public function getPaymentAmount($rowIndex = 1)
     {
-        return $this->_rootElement->find('//*[@id="zreport-print-content"]/div/table[@class="table table-payment"]/tbody/tr[1]/td[2]/span[@data-bind="text: $parent.formatPrice(payment_amount)"]', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//*[@id="zreport-print-content"]/div/table[@class="table table-payment"]/tbody/tr['.$rowIndex.']/td[2]/span[@data-bind="text: $parent.formatPrice(payment_amount)"]', Locator::SELECTOR_XPATH);
     }
 
     public function getTimeToPrint()

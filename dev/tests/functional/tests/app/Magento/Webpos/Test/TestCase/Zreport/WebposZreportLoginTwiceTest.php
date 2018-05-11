@@ -160,10 +160,6 @@ class WebposZreportLoginTwiceTest extends Injectable
         $openedString .= ' by ' . $staffName1;
         $closedString = $this->webposIndex->getSessionShift()->getCloseTime()->getText();
         $closedString .= ' by ' . $staffName2;
-        \Zend_Debug::dump($staffName1);
-        \Zend_Debug::dump($staffName2);
-        \Zend_Debug::dump($openedString);
-        \Zend_Debug::dump($closedString);
 
         $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
