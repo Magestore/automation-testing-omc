@@ -78,7 +78,7 @@ class WebposManagementValidate16Test extends Injectable
         $staff->persist();
         // Login webpos
         $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaffAndWaitSessionInstall',
             [
                 'staff' => $staff,
                 'location' => $location,
@@ -87,14 +87,15 @@ class WebposManagementValidate16Test extends Injectable
             ]
         )->run();
 
-        $beforeOpeningBalance  =  $this->webposIndex->getSessionInfo()->getOpeningBalance()->getText();
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         $openAmount = $denomination->getDenominationValue() * 10;
 
         /** wait request done */
-        while ( $beforeOpeningBalance ==  $this->webposIndex->getSessionInfo()->getOpeningBalance()->getText()) {}
+        while ( !$this->webposIndex->getListShift()->getFirstItemShift()->isVisible()) {
+            sleep(1);
+        }
 
         $this->assertTrue(
             strpos(
@@ -113,7 +114,9 @@ class WebposManagementValidate16Test extends Injectable
         $this->webposIndex->getSessionMakeAdjustmentPopup()->getReason()->setValue($reasonText);
         $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();
         /** wait request done */
-        while ( $beforeDifference ==  $this->webposIndex->getSessionInfo()->getDifferenceAmount()->getText()) {}
+        while ( $beforeDifference ==  $this->webposIndex->getSessionInfo()->getDifferenceAmount()->getText()) {
+            sleep(1);
+        }
 
         $this->assertTrue(
             !$this->webposIndex->getSessionMakeAdjustmentPopup()->isVisible(),

@@ -78,7 +78,7 @@ class WebposManagementValidate15Test extends Injectable
         $staff->persist();
         // Login webpos
         $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaffAndWaitSessionInstall',
             [
                 'staff' => $staff,
                 'location' => $location,
@@ -112,7 +112,9 @@ class WebposManagementValidate15Test extends Injectable
 
         $differenceAmountBeforePutOut = $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText();
         /** wait request done */
-        while ($differenceAmountBeforePutOut == $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText()) {}
+        while ($differenceAmountBeforePutOut == $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText()) {
+            sleep(1);
+        }
 
         $this->assertTrue(
             !$this->webposIndex->getSessionMakeAdjustmentPopup()->isVisible(),
