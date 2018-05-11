@@ -20,7 +20,6 @@ class AssertSearchGridWithResult extends AbstractConstraint
             'display_name' => $webposRole->getDisplayName()
         ];
        if($fullCondition){
-           $filter['id'] =  $webposRole->getRoleId();
            $filter['description'] = $webposRole->getDescription();
        }
         \PHPUnit_Framework_Assert::assertTrue(

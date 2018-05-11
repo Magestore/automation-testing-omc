@@ -13,10 +13,11 @@ use Magento\Webpos\Test\Constraint\Adminhtml\Location\Grid\AssertLocationGridWit
 use Magento\Webpos\Test\Fixture\Location;
 use Magento\Webpos\Test\Page\Adminhtml\LocationIndex;
 use Magento\Webpos\Test\Page\Adminhtml\LocationNews;
+use Magento\Webpos\Test\Page\Adminhtml\MappingLocationIndex;
 
 /**
  * Add Location
- * Testcase ML21 - Check [Save and continue] button with filling out all fields
+ * Testcase ML21-1 - Check Location Modal show on mapping Location
  *
  * Precondition
  * - Empty
@@ -25,22 +26,16 @@ use Magento\Webpos\Test\Page\Adminhtml\LocationNews;
  * - Go to backend > Sales > Manage Locations
  * - Click on [Add Location] button
  * - Fill out correctly all fields [Warehouse]: Don't link to any warehouse
- * - Click on [Save and continue edit] button > create location A
- * - Go to Manage Staff > Edit staff B > Assign location A to a staff B
- * - Login webpos by staff B and select location A
+ * - Click on [Save] button
+ * - Click on [Mapping locations - Warehouses] button > Click on [Choose Locations] button
  *
  * Acceptance
- * - Create Location successfully
- * - Display Edit Location page to continue edit
- * - [Warehouse]: a new warehouse is created and assigned to this Location
- * - Show message: "Location was successfully saved"
- * - There are no product on webpos
+ * - The created location will be shown on the grid
  *
- *
- * Class WebposManageLocationML21Test
+ * Class WebposManageLocationML21ATest
  * @package Magento\Webpos\Test\TestCase\Location\AddLocation
  */
-class WebposManageLocationML21Test extends Injectable
+class WebposManageLocationML21ATest extends Injectable
 {
     /**
      * Webpos Location Index page.
@@ -55,9 +50,14 @@ class WebposManageLocationML21Test extends Injectable
     private $locationNews;
 
     /**
+     * @var MappingLocation
+     */
+    private $mappingLocationIndex;
+
+    /**
      * @var $_asssertGridWithResult
      */
-    private $assertGridWithResult;
+    private $asssertGridWithResult;
 
     /**
      * Inject location pages.
@@ -68,25 +68,32 @@ class WebposManageLocationML21Test extends Injectable
     public function __inject(
         LocationIndex $locationIndex,
         LocationNews $locationNews,
+        MappingLocationIndex $mappingLocationIndex,
         AssertLocationGridWithResult $assertLocationGridWithResult
 
     )
     {
         $this->locationIndex = $locationIndex;
         $this->locationNews = $locationNews;
-        $this->assertGridWithResult = $assertLocationGridWithResult;
+        $this->mappingLocationIndex = $mappingLocationIndex;
+        $this->asssertGridWithResult = $assertLocationGridWithResult;
     }
 
     public function test(Location $location)
     {
         // Steps
         $this->locationIndex->open();
-        $this->locationIndex->getPageActionsBlock()->addNew();
-        sleep(2);
-        $this->locationNews->getLocationsForm()->fill($location);
-        $this->locationNews->getFormPageActionsLocation()->saveAndContinue();
-        $this->locationNews->getFormPageActionsLocation()->getButtonByname('Back')->click();
         $this->locationIndex->getLocationsGrid()->waitLoader();
+        $this->locationIndex->getPageActionsBlock()->addNew();
+        $this->locationNews->getLocationsForm()->fill($location);
+        $this->locationNews->getFormPageActionsLocation()->save();
+        $this->locationIndex->getLocationsGrid()->waitLoader();
+
+        /*Mapping Location*/
+        $this->locationIndex->getMappingAction()->mappingButton();
+        $this->mappingLocationIndex->getMappingLocationGrid()->waitLoader();
+        $this->mappingLocationIndex->getMappingLocationGrid()->chooseLocations();
+        $this->mappingLocationIndex->getLocationModal()->waitLoader();
     }
 }
 
