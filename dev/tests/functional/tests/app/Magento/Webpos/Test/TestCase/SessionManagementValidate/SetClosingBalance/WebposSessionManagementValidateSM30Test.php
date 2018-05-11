@@ -80,7 +80,7 @@ class WebposSessionManagementValidateSM30Test extends Injectable
         $staff->persist();
         // Login webpos
         $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaffAndWaitSessionInstall',
             [
                 'staff' => $staff,
                 'location' => $location,
@@ -92,7 +92,10 @@ class WebposSessionManagementValidateSM30Test extends Injectable
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
 
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
-        sleep(1);
+        /** wait done open request */
+        while ( !$this->webposIndex->getListShift()->getFirstItemShift()->isVisible()) {
+            sleep(1);
+        }
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
         sleep(1);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
@@ -107,10 +110,6 @@ class WebposSessionManagementValidateSM30Test extends Injectable
         $this->webposIndex->getSessionSetReasonPopup()->getReason()->setValue('Magento');
         $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
         sleep(1);
-        // End session
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        sleep(1);
-        $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
     }
 
     /**

@@ -115,9 +115,15 @@ class CheckoutCartItems extends Block
         return $this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('.price');
 
     }
+    public function getPriceCartItemByDataBind($i)
+    {
+        return $this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('span[data-bind="text:row_total_formated"]');
+
+    }
     public function getPriceCartItemByOrderTo($i)
     {
-        return floatval(str_replace('$','',$this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('.price')->getText()));
+        $price = $this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('span.price')->getText();
+        return floatval(str_replace('$','',$price));
 
     }
     public function getAttributeCartItemByOrderToElement($i)
