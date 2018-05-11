@@ -67,7 +67,7 @@ class WebposSessionManagementValidateSM38Test extends Injectable
         $staff->persist();
         // Login webpos
         $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaffAndWaitSessionInstall',
             [
                 'staff' => $staff,
                 'location' => $location,
@@ -82,8 +82,10 @@ class WebposSessionManagementValidateSM38Test extends Injectable
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
         sleep(1);
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        sleep(1);
-        $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
+
+        while ($this->webposIndex->getSessionShift()->getButtonEndSession()->isVisible()) {
+            sleep(1);
+        }
 
         // Assert
         $this->assertFalse(

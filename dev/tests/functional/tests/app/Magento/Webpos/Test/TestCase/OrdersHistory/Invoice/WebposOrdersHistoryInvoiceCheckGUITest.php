@@ -13,7 +13,6 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistoryInvoice;
 use Magento\Config\Test\Fixture\ConfigData;
 
-
 /**
  * Class WebposOrdersHistoryInvoiceCheckGUITest
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice

@@ -78,7 +78,7 @@ class WebposSessionManagementValidateSM36Test extends Injectable
         $staff->persist();
         // Login webpos
         $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaffAndWaitSessionInstall',
             [
                 'staff' => $staff,
                 'location' => $location,
@@ -86,12 +86,20 @@ class WebposSessionManagementValidateSM36Test extends Injectable
                 'hasOpenSession' => false
             ]
         )->run();
+
+        while ( !$this->webposIndex->getOpenSessionPopup()->getCoinBillValue()->isVisible()) {
+            sleep(1);
+        }
+
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
         /** now balance is 100 */
-        sleep(1);
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
-        sleep(1);
+
+        /** wait done open request */
+        while ( !$this->webposIndex->getListShift()->getFirstItemShift()->isVisible()) {
+            sleep(1);
+        }
 
         // Order
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
@@ -117,7 +125,11 @@ class WebposSessionManagementValidateSM36Test extends Injectable
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->getSessionManagement();
-        sleep(1);
+
+        /** wait list request */
+        while ( !$this->webposIndex->getListShift()->getFirstItemShift()->isVisible()) {
+            sleep(1);
+        }
         // Put money in
 
         $this->webposIndex->getSessionShift()->getPutMoneyInButton()->click();
@@ -127,7 +139,7 @@ class WebposSessionManagementValidateSM36Test extends Injectable
         $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();
         $differenceAmountBeforePutIn = $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText();
         while ($differenceAmountBeforePutIn == $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText()) {
-
+            sleep(1);
         }
         $this->webposIndex->getSessionShift()->getTakeMoneyOutButton()->click();
         sleep(1);
@@ -136,7 +148,7 @@ class WebposSessionManagementValidateSM36Test extends Injectable
         $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();
         $differenceAmountBeforePutOut = $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText();
         while ($differenceAmountBeforePutOut == $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText()) {
-
+            sleep(1);
         }
 
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
@@ -145,7 +157,7 @@ class WebposSessionManagementValidateSM36Test extends Injectable
 
         $this->webposIndex->getSessionSetClosingBalancePopup()->getNumberOfCoinsBills()->setValue(20);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        sleep(2);
+        sleep(5);
         // Assert Set Closing Balance Popup not visible
         $this->assertFalse(
             $this->webposIndex->getSessionSetClosingBalancePopup()->isVisible(),

@@ -75,7 +75,7 @@ class WebposManagementValidate03Test extends Injectable
         $staff->persist();
         // Login webpos
         $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaffAndWaitSessionInstall',
             [
                 'staff' => $staff,
                 'location' => $location,
@@ -85,6 +85,7 @@ class WebposManagementValidate03Test extends Injectable
         )->run();
 
         $this->webposIndex->getOpenSessionPopup()->getCancelButton()->click();
+        sleep(1);
 
         $this->assertTrue(
             !$this->webposIndex->getOpenSessionPopup()->isVisible(),
