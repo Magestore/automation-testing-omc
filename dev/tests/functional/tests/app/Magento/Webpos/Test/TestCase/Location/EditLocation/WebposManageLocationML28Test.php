@@ -1,17 +1,39 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: gvt
- * Date: 12/02/2018
- * Time: 09:14
+ * User: stephen
+ * Date: 10/05/2018
+ * Time: 09:20
  */
+
 namespace Magento\Webpos\Test\TestCase\Location\EditLocation;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\LocationIndex;
 use Magento\Webpos\Test\Fixture\Location;
 use Magento\Webpos\Test\Page\Adminhtml\LocationNews;
 
-
+/**
+ * Edit Location
+ * ML28 - Check [Save and continue edit] button
+ *
+ * Precondition
+ * - Exist at least 1 Location on the grid of Manage Locations page
+ *
+ * Steps
+ * 1. Go to backend > Sales > Manage Locations
+ * 2. Click on [Edit] button to edit the Location
+ * 3. Edit correctly some fields
+ * 4. Click on [Save and continue edit] button
+ *
+ * Acceptance
+ * - Still stay on Edit location page
+ * - Show message: "Location was successfully saved"
+ * - The information of that Location is updated correctly follow the edited fields
+ *
+ * Class WebposManageLocationML28Test
+ * @package Magento\Webpos\Test\TestCase\Location\EditLocation
+ */
 class WebposManageLocationML28Test extends Injectable
 {
     /**
@@ -25,16 +47,16 @@ class WebposManageLocationML28Test extends Injectable
      * @var LocationNews
      */
     private $locationNews;
+
     /**
-     * Inject location pages.
-     *
-     * @param LocationIndex
-     * @return void
+     * @param LocationIndex $locationIndex
+     * @param LocationNews $locationNews
      */
     public function __inject(
         LocationIndex $locationIndex,
         LocationNews $locationNews
-    ) {
+    )
+    {
         $this->locationIndex = $locationIndex;
         $this->locationNews = $locationNews;
     }
@@ -44,15 +66,18 @@ class WebposManageLocationML28Test extends Injectable
         // Steps
         $location->persist();
         $this->locationIndex->open();
+        $this->locationIndex->getLocationsGrid()->waitLoader();
         $this->locationIndex->getLocationsGrid()->resetFilter();
-        $this->locationIndex->getLocationsGrid()->search(['description' => $location->getDescription()]);
-        $this->locationIndex->getLocationsGrid()->getRowByDisplayName($location->getDescription())->find('.action-menu-item')->click();
-        sleep(1);
-        $this->locationNews->getLocationsForm()->getField('page_display_name')->setValue('name '.$location->getDisplayName());
-        $this->locationNews->getLocationsForm()->getField('page_address')->setValue('address '.$location->getAddress());
-        $this->locationNews->getLocationsForm()->getField('page_description')->setValue('description '.$location->getDescription());
+        $this->locationIndex->getLocationsGrid()->openEditByRow([
+            'display_name' => $location->getDisplayName()
+        ]);
+        $this->locationNews->getLocationsForm()->getField('page_display_name')->setValue('Test Edit Name ' . $location->getDisplayName());
+        $this->locationNews->getLocationsForm()->getField('page_address')->setValue('Test Edit Address ' . $location->getAddress());
+        $this->locationNews->getLocationsForm()->getField('page_description')->setValue('Test Edit Description ' . $location->getDescription());
         $this->locationNews->getFormPageActionsLocation()->saveAndContinue();
-        sleep(1);
+        return [
+            'page' => 'new'
+        ];
     }
 }
 

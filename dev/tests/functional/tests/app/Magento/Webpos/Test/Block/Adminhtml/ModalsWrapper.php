@@ -40,6 +40,9 @@ class ModalsWrapper extends Block
         $this->waitForElementVisible('.modal-popup');
     }
 
+    public function waitForHidden(){
+        $this->waitForElementNotVisible('.modal-popup');
+    }
     public function getModalPopup()
     {
         return $this->_rootElement->find('.modal-popup');

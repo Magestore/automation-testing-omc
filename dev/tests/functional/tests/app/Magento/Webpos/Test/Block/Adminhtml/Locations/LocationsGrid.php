@@ -167,4 +167,13 @@ class LocationsGrid extends DataGrid
         return $this->_rootElement->find('.//table//tbody//tr[@class="data-row"][1]', locator::SELECTOR_XPATH);
     }
 
+    public function openEditByRow($filter){
+        $rowItem = $this->getRow($filter);
+        if ($rowItem->isVisible()) {
+            $rowItem->find($this->editLink, Locator::SELECTOR_CSS)->click();
+        } else {
+            throw new \Exception("Searched item was not found by filter\n" . print_r($filter, true));
+        }
+        $this->waitLoader();
+    }
 }
