@@ -8,6 +8,7 @@
 namespace Magento\Webpos\Test\Constraint\Adminhtml\Location\Grid;
 use Magento\Webpos\Test\Page\Adminhtml\LocationIndex;
 use Magento\Mtf\Constraint\AbstractConstraint;
+use Magento\Webpos\Test\Page\Adminhtml\LocationNews;
 
 class AssertMessageEditSuccessOnGrid extends AbstractConstraint
 {
@@ -16,17 +17,26 @@ class AssertMessageEditSuccessOnGrid extends AbstractConstraint
     /* end tags */
 
     /**
+     * Assert show message edit success
      *
-     * @param LocationIndex
-     * @return void
+     * @param LocationIndex $locationIndex
      */
-    public function processAssert(LocationIndex $locationIndex, $message)
+    public function processAssert(LocationIndex $locationIndex, LocationNews $locationNews, $page)
     {
-        $locationIndex->getLocationsGrid()->waitForElementVisible('.data-grid-info-panel .message');
-        \PHPUnit_Framework_Assert::assertTrue(
-            true,
-            'Message does not display'
-        );
+        if($page == 'index'){
+            $locationIndex->getLocationsGrid()->waitForElementVisible('#messages div[data-ui-id="messages-message-success"]');
+            \PHPUnit_Framework_Assert::assertTrue(
+                true,
+                'Message does not display'
+            );
+        }elseif($page == 'new'){
+            $locationNews->getMessagesBlock()->waitForElementVisible('#messages div[data-ui-id="messages-message-success"]');
+            \PHPUnit_Framework_Assert::assertTrue(
+                true,
+                'Message does not display'
+            );
+        }
+
     }
 
     /**

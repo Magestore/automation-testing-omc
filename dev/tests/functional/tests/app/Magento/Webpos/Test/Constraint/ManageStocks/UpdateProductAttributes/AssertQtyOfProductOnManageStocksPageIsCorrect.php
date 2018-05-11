@@ -8,10 +8,13 @@
 
 namespace Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes;
 
-
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class AssertQtyOfProductOnManageStocksPageIsCorrect
+ * @package Magento\Webpos\Test\Constraint\ManageStocks\UpdateProductAttributes
+ */
 class AssertQtyOfProductOnManageStocksPageIsCorrect extends AbstractConstraint
 {
 	public function processAssert(WebposIndex $webposIndex, $productInfo, $expectQty)
@@ -29,8 +32,8 @@ class AssertQtyOfProductOnManageStocksPageIsCorrect extends AbstractConstraint
 		// Edit product info
 		$webposIndex->getManageStockList()->searchProduct($productName);
 		$webposIndex->getManageStockList()->getStoreAddress()->click();
-		$webposIndex->getManageStockList->waitForProductListShow();
-		sleep(5);
+		$webposIndex->getManageStockList()->waitForProductListShow();
+		sleep(2);
 		\PHPUnit_Framework_Assert::assertEquals(
 			$expectQty,
 			$webposIndex->getManageStockList()->getProductQtyInput($productName)->getValue(),

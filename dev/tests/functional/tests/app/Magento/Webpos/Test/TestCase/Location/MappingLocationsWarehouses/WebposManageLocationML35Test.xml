@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Webpos\Test\TestCase\Location\MappingLocationsWarehouses\WebposManageLocationML35Test" summary="Check [Cancel] button" ticketId="MAGETWO-1234">
         <variation name="WebposManageLocationML35TestVariation">
-            <data name="test" xsi:type="string"></data>
+            <data name="warehouse/dataset" xsi:type="string">default</data>
        </variation>
     </testCase>
 </config>

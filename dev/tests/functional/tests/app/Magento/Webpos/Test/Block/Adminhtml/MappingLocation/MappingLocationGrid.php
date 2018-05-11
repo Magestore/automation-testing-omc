@@ -52,4 +52,7 @@ class MappingLocationGrid extends DataGrid
         $this->waitForElementNotVisible($this->spinner);
     }
 
+    public function getFirstData(){
+        return $this-> _rootElement->find('table > tbody > tr');
+    }
 }
