@@ -61,11 +61,11 @@ class WebposHoldOrderCP157Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(3);
+        sleep(1);
         $this->webposIndex->getCheckoutProductDetail()->selectedOneAttribute($attribute);
-        sleep(3);
+        sleep(1);
         $this->webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
-        sleep(3);
+        sleep(1);
 
         //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
@@ -76,6 +76,7 @@ class WebposHoldOrderCP157Test extends Injectable
         //Checkout in On-Hold
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->onHoldOrders();
+        $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
         sleep(1);
         $this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder()->click();
         $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();

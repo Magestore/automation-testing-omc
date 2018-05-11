@@ -91,6 +91,7 @@ class WebposCheckoutPaymentMethodCP226Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(2);
+        //Wait for icon delete cart visible
         $this->webposIndex->getCheckoutCartHeader()->waitForElementVisible('#empty_cart');
         $this->webposIndex->getCheckoutCartHeader()->getIconDeleteCart()->click();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();

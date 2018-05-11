@@ -12,6 +12,10 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckOnHoldOrderEmpty;
 
+/**
+ * Class WebposHoldOrderCP171Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
+ */
 class WebposHoldOrderCP171Test extends Injectable
 {
     /**

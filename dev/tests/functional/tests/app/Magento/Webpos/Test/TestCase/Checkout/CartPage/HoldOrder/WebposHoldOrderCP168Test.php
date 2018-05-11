@@ -6,11 +6,16 @@
  * Time: 21:30
  */
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\ConfigurableProduct\Test\Fixture\ConfigurableProduct;
 
+/**
+ * Class WebposHoldOrderCP168Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
+ */
 class WebposHoldOrderCP168Test extends Injectable
 {
     /**

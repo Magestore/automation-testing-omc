@@ -6,12 +6,17 @@
  * Time: 11:31
  */
 namespace Magento\Webpos\Test\Constraint\Checkout\HoldOrder;
+
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class AssertCheckCartSimpleProduct
+ * @package Magento\Webpos\Test\Constraint\Checkout\HoldOrder
+ */
 class AssertCheckCartSimpleProduct extends AbstractConstraint
 {
-    public function processAssert(WebposIndex $webposIndex,$cartProducts)
+    public function processAssert(WebposIndex $webposIndex, $cartProducts)
     {
         if ($cartProducts == null) {
             \PHPUnit_Framework_Assert::assertFalse(
@@ -19,26 +24,28 @@ class AssertCheckCartSimpleProduct extends AbstractConstraint
                 'Cart is not default'
             );
         } else {
-            for ($i = 0; $i < count($cartProducts); ++$i) {
+            foreach ($cartProducts as $key => $cartProduct) {
+                $expectedPrice = floatval($cartProduct['price']*$cartProduct['qty']);
                 \PHPUnit_Framework_Assert::assertEquals(
-                    $webposIndex->getCheckoutCartItems()->getNameCartItemByOrderTo($i+1),
-                    $cartProducts[$i]['name'],
+                    $webposIndex->getCheckoutCartItems()->getNameCartItemByOrderTo($key+1),
+                    $cartProduct['name'],
                     'Name product is not correct'
                 );
+
                 \PHPUnit_Framework_Assert::assertEquals(
-                    $webposIndex->getCheckoutCartItems()->getPriceCartItemByOrderTo($i+1),
-                    floatval($cartProducts[$i]['price']*$cartProducts[$i]['qty']),
+                    $expectedPrice,
+                    $webposIndex->getCheckoutCartItems()->getPriceCartItemByOrderTo($key+1),
                     'Price product is not correct'
                 );
 
-                if (floatval($cartProducts[$i]['qty']) >1) {
+                if (floatval($cartProduct['qty']) >1) {
                     \PHPUnit_Framework_Assert::assertTrue(
-                        $webposIndex->getCheckoutCartItems()->isQtyDisplay($i+1),
+                        $webposIndex->getCheckoutCartItems()->isQtyDisplay($key+1),
                         'Qty is not display'
                     );
                     \PHPUnit_Framework_Assert::assertEquals(
-                        $webposIndex->getCheckoutCartItems()->getQtyDisplay($i+1),
-                        floatval($cartProducts[$i]['qty']),
+                        $webposIndex->getCheckoutCartItems()->getQtyDisplay($key+1),
+                        floatval($cartProduct['qty']),
                         'Qtu product is not display correct'
                     );
                 }

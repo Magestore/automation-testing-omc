@@ -6,9 +6,14 @@
  * Time: 16:14
  */
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposHoldOrderCP162Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
+ */
 class WebposHoldOrderCP162Test extends Injectable
 {
     /**
@@ -51,7 +56,7 @@ class WebposHoldOrderCP162Test extends Injectable
         }
         $this->webposIndex->getCheckoutProductEdit()->getDollarButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
-        sleep(3);
+        sleep(1);
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
         //Hold
@@ -72,7 +77,9 @@ class WebposHoldOrderCP162Test extends Injectable
 
         $dataProduct = $product->getData();
         $dataProduct['qty'] = 1;
-        return ['cartProducts' => [$dataProduct],
-                'type' => '$'];
+        return [
+            'cartProducts' => [$dataProduct],
+            'type' => '$'
+        ];
     }
 }
