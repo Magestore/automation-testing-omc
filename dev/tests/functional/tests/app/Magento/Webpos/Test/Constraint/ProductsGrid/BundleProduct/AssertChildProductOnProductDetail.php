@@ -33,9 +33,12 @@ class AssertChildProductOnProductDetail extends AbstractConstraint
             $firstItemProduct = $bundleOptions[0];
 
             // Check product price of option
-            \PHPUnit_Framework_Assert::assertEquals(
-                $firstItemProduct->getPrice(),
-                (float) substr($webposIndex->getCheckoutProductDetail()->getProductPriceOfOption($firstItemProduct->getName())->getText(), 2),
+            \PHPUnit_Framework_Assert::assertTrue(
+                strpos(
+                    str_replace(',' , '', $webposIndex->getCheckoutProductDetail()->getProductPriceOfOption(
+                        $firstItemProduct->getName()
+                    )->getText()), $firstItemProduct->getPrice().''
+                ) !== false,
                 'Price of product ' . $firstItemProduct->getName() .' not correctly.'
             );
 
@@ -56,15 +59,14 @@ class AssertChildProductOnProductDetail extends AbstractConstraint
             }
             $expectedPrice = $expectedPrice + ($firstItemProduct->getPrice() * $qtyOfOption);
         }
-        $actualPrice = $webposIndex->getCheckoutProductDetail()->getBundleProductPrice()->getText();
-        $actualPrice = str_replace(',','', $actualPrice);
-        $actualPrice = (float) substr($actualPrice, 1);
+        $actualPrice = str_replace(',' , '',
+            $webposIndex->getCheckoutProductDetail()->getBundleProductPrice()->getText()
+        );
 
         // Check SUM price
-        \PHPUnit_Framework_Assert::assertEquals(
-            $expectedPrice,
-            $actualPrice,
-            'Price not correctly.'
+        \PHPUnit_Framework_Assert::assertTrue(
+            strpos( $actualPrice, $expectedPrice.'') !== false,
+            'Price not correctly. '
         );
     }
     /**
