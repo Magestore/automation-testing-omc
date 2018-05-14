@@ -42,9 +42,6 @@ class MsWebpos extends Block
 	{
 		$this->waitForElementNotVisible('#webpos_cart > div.indicator');
 	}
-//	public function isCartLoaderVisible(){
-//       return $this->_rootElement.find('#webpos_cart > div.indicator')->isVisible();
-//    }
 
 	public function waitCartLoaderVisibleToNotVisible()
 	{

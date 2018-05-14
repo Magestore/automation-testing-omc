@@ -14,14 +14,12 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling;
-use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountNoApplyTaxToFpt;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceExcludingTax;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountWithApplyTaxOnCustomPrice;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposTaxTAX106Test
+ * @package Magento\Webpos\Test\TestCase\Tax\ApplyTaxToFPTNo
+ */
 class WebposTaxTAX106Test extends Injectable
 {
     /**
@@ -104,7 +102,7 @@ class WebposTaxTAX106Test extends Injectable
         Customer $customer,
         $products,
         $taxRate,
-        $expectStatus = 'Closed'
+        $expectStatus
     )
     {
         // Create products

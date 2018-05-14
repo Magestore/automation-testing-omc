@@ -140,10 +140,10 @@ class WebposTaxTAX46Test extends Injectable
 		)->run();
 
 		// Place Order
-		$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-		$this->webposIndex->getMsWebpos()->waitCartLoader();
-		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(2);
+        $this->webposIndex->getCheckoutCartFooter()->waitForButtonCheckout();
+        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
 		$this->webposIndex->getCheckoutShippingMethod()->clickShipPanel();
 		$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
@@ -152,7 +152,8 @@ class WebposTaxTAX46Test extends Injectable
         $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Flat Rate - Fixed")->getText();
 		$shippingFee = (float)substr($shippingFee, 1);
 
-		$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
+        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
@@ -209,11 +210,8 @@ class WebposTaxTAX46Test extends Injectable
 			$rowTotal = (float)substr($rowTotal, 1);
 			$totalRefunded += ($rowTotal/$item['orderQty'])*$item['refundQty'];
 		}
-
 		$totalRefunded += $shippingFee * (1+$taxRate);
-
 		$expectStatus = 'Complete';
-
 		$this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
 
 		$this->objectManager->getInstance()->create(
@@ -222,7 +220,6 @@ class WebposTaxTAX46Test extends Injectable
 				'products' => $products
 			]
 		)->run();
-
 
 		return [
 			'products' => $products

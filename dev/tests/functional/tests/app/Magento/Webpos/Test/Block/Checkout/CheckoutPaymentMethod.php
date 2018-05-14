@@ -29,6 +29,17 @@ class CheckoutPaymentMethod extends Block
         return $this->_rootElement->find('.icon-iconPOS-payment-cashforpos');
     }
 
+    public function waitForCashInMethod()
+    {
+        $cashInMethod = $this->_rootElement->find('.icon-iconPOS-payment-cashforpos');
+        $browser = $this->_rootElement;
+        $browser->waitUntil(
+            function () use ($cashInMethod) {
+                return $cashInMethod->isVisible() ? true : null;
+            }
+        );
+    }
+
     public function getCashInMethodWhileHaveALotOfPaymentMethod()
     {
         return $this->_rootElement->find('#payment_list .icon-iconPOS-payment-cashforpos');

@@ -16,6 +16,10 @@ use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePla
 use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceOnRefundPopupWithApplyTaxOnCustomPrice;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposTaxTAX91Test
+ * @package Magento\Webpos\Test\TestCase\Tax\ApplyTaxOnCustomePriceIfAvailable
+ */
 class WebposTaxTAX91Test extends Injectable
 {
     /**
@@ -131,16 +135,13 @@ class WebposTaxTAX91Test extends Injectable
             ['products' => $products]
         )->run();
 
-        sleep(3);
-
+        $this->webposIndex->getCheckoutCartFooter()->waitForButtonCheckout();
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-        sleep(3);
-
+        $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
             [
@@ -148,6 +149,11 @@ class WebposTaxTAX91Test extends Injectable
                 'shipped' => true
             ]
         )->run();
+        if (!$this->webposIndex->getCheckoutPaymentMethod()->getIconRemove()->isVisible()) {
+            $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
+            $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        }
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Assert Place Order Success
@@ -157,8 +163,8 @@ class WebposTaxTAX91Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
         self::assertEquals(

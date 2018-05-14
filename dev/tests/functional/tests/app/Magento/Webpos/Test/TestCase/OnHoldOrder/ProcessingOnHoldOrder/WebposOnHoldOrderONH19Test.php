@@ -6,9 +6,13 @@
  * Time: 13:26
  */
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposOnHoldOrderONH19Test
+ * @package Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder
+ */
 class WebposOnHoldOrderONH19Test extends Injectable
 {
     /**
@@ -24,6 +28,11 @@ class WebposOnHoldOrderONH19Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $productCustom
+     * @param $priceCustom
+     * @return array
+     */
     public function test($productCustom, $priceCustom)
     {
         //Login webpos
@@ -47,8 +56,9 @@ class WebposOnHoldOrderONH19Test extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getDollarButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
         sleep(1);
-        sleep(3);         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-            //Hold
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

@@ -14,12 +14,11 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceOnRefundPopupWithApplyDiscountOnPriceIncludingTax;
-use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountAndDiscountAmountWithApplyDiscountOnPriceIncludingTax;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceExcludingTax;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposTaxTAX86Test
+ * @package Magento\Webpos\Test\TestCase\Tax\ApplyDiscountOnPricesIncludingTax
+ */
 class WebposTaxTAX86Test extends Injectable
 {
     /**
@@ -111,8 +110,7 @@ class WebposTaxTAX86Test extends Injectable
         $originTaxRate,
         $currentTaxRate,
         $addDiscount = false,
-        $discountPercent = null,
-        $expectStatus = 'Closed'
+        $discountPercent = null
     )
     {
         // Create products
@@ -159,20 +157,16 @@ class WebposTaxTAX86Test extends Injectable
             );
             $this->webposIndex->getCheckoutDiscount()->setDiscountPercent($discountPercent);
             $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
-            $this->webposIndex->getMsWebpos()->waitCartLoader();
-            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }
-
-        sleep(5);
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-        sleep(3);
-
+        $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
             [
@@ -180,6 +174,11 @@ class WebposTaxTAX86Test extends Injectable
                 'shipped' => true
             ]
         )->run();
+        if (!$this->webposIndex->getCheckoutPaymentMethod()->getIconRemove()->isVisible()) {
+            $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
+            $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        }
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Assert Place Order Success

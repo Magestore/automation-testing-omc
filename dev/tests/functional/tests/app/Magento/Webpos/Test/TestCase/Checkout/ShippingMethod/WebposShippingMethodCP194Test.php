@@ -6,8 +6,13 @@
  * Time: 14:45
  */
 namespace Magento\Webpos\Test\TestCase\Checkout\ShippingMethod;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+/**
+ * Class WebposShippingMethodCP194Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\ShippingMethod
+ */
 class WebposShippingMethodCP194Test extends Injectable
 {
     /**

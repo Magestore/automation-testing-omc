@@ -6,9 +6,13 @@
  * Time: 07:47
  */
 namespace Magento\Webpos\Test\Constraint\Checkout\ShippingMethod;
+
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class AssertCheckSection
+ * @package Magento\Webpos\Test\Constraint\Checkout\ShippingMethod
+ */
 class AssertCheckSection extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex, $tagExpected, $titleExpected, $idSelected)
@@ -20,6 +24,7 @@ class AssertCheckSection extends AbstractConstraint
             $tagActual,
             'Shipping blank doesn"t fit expected '
         );
+        $webposIndex->getCheckoutWebposCart()->waitForDisplayShippingOnCart();
         $tagActual = $webposIndex->getCheckoutWebposCart()->isDisplayShippingOnCart();
         \PHPUnit_Framework_Assert::assertEquals(
             $tagExpected,

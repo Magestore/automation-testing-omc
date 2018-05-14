@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\TestCase\Tax\CheckTaxAmountWithoutShippingFeeAndDiscountAmount;
 
-
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
@@ -16,6 +15,10 @@ use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePla
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundPriceOfProductWithTaxIsCorrect;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposTaxTAX11Test
+ * @package Magento\Webpos\Test\TestCase\Tax\CheckTaxAmountWithoutShippingFeeAndDiscountAmount
+ */
 class WebposTaxTAX11Test extends Injectable
 {
 	/**
@@ -125,13 +128,13 @@ class WebposTaxTAX11Test extends Injectable
 		)->run();
 
 		// Place Order
-		$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-		$this->webposIndex->getMsWebpos()->waitCartLoader();
-		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getCheckoutCartFooter()->waitForButtonCheckout();
+        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-		$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
+        $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
+        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
 		$this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
 			[
@@ -139,7 +142,6 @@ class WebposTaxTAX11Test extends Injectable
 				'shipped' => $shipped
 			]
 		)->run();
-
 		$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
@@ -153,9 +155,8 @@ class WebposTaxTAX11Test extends Injectable
 
 		$this->webposIndex->getMsWebpos()->clickCMenuButton();
 		$this->webposIndex->getCMenu()->ordersHistory();
-
-		sleep(2);
 		$this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
 
 		$this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 		while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
@@ -191,9 +192,6 @@ class WebposTaxTAX11Test extends Injectable
 		];
 	}
 
-	/**
-	 *
-	 */
 	public function tearDown()
 	{
 		$this->objectManager->getInstance()->create(

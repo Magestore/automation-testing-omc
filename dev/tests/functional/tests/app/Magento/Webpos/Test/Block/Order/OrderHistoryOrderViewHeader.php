@@ -27,12 +27,15 @@ class OrderHistoryOrderViewHeader extends Block
 		return $this->_rootElement->find('.status')->getText();
 	}
 
-//	public function waitForChangeStatus() {
-//	    $before = $this->getStatus();
-//	    sleep(2);
-//	    $after = $this->getStatus();
-//
-//    }
+	public function waitForChangeStatus($status) {
+	    $statusElement = $this->_rootElement->find('.status');
+        $browser = $this->_rootElement;
+        $browser->waitUntil(
+            function () use ($statusElement, $status) {
+                return $statusElement->getText()===$status ? true : null;
+            }
+        );
+    }
 
 	public function openAddOrderNote()
     {

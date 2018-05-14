@@ -14,9 +14,12 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderHistoryInvoiceWithTaxCaculationBaseOnBilling;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposTaxTAX70Test
+ * @package Magento\Webpos\Test\TestCase\Tax\TaxCalculationBasedOnBillingAddress
+ */
 class WebposTaxTAX70Test extends Injectable
 {
     /**
@@ -104,8 +107,7 @@ class WebposTaxTAX70Test extends Injectable
     public function test(
         Customer $customer,
         $products,
-        $billingTaxRate,
-        $expectStatus = 'Closed'
+        $billingTaxRate
     )
     {
         // Create products
@@ -132,13 +134,14 @@ class WebposTaxTAX70Test extends Injectable
             'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
             ['customer' => $customer]
         )->run();
+
+        $this->webposIndex->getCheckoutCartFooter()->waitForButtonCheckout();
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(1);
+
+        $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(1);
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
             [
@@ -146,6 +149,11 @@ class WebposTaxTAX70Test extends Injectable
                 'shipped' => true
             ]
         )->run();
+        if (!$this->webposIndex->getCheckoutPaymentMethod()->getIconRemove()->isVisible()) {
+            $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
+            $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        }
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
@@ -157,8 +165,8 @@ class WebposTaxTAX70Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
         self::assertEquals(

@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\TestCase\Tax\ApplyTaxToFPTYes;
 
-
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
@@ -16,6 +15,10 @@ use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePla
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundPriceOfProductWithTaxIsCorrect;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposTaxTAX101Test
+ * @package Magento\Webpos\Test\TestCase\Tax\ApplyTaxToFPTYes
+ */
 class WebposTaxTAX101Test extends Injectable
 {
 	/**
