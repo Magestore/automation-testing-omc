@@ -38,7 +38,7 @@ class ShiftRepositoryTest extends WebapiAbstract
         $configResource->saveConfig(
             'webpos/general/enable_session',
             '1',
-            ScopeInterface::SCOPE_DEFAULT,
+            ScopeInterface::SCOPE_STORES,
             0
         );
     }

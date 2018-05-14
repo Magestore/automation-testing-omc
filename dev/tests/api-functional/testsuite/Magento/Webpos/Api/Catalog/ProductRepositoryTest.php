@@ -86,6 +86,7 @@ class ProductRepositoryTest extends WebapiAbstract
      */
     public function testGetOptions()
     {
+        //You should not delete the option product. Because, this case will be run relate to option product has size or color like clothes.
         $serviceInfo = [
             'rest' => [
                 'resourcePath' => self::GET_OPTIONS_RESOURCE_PATH .'872/options?' ,

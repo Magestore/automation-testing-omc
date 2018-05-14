@@ -27,6 +27,13 @@ class OrderHistoryOrderViewHeader extends Block
 		return $this->_rootElement->find('.status')->getText();
 	}
 
+//	public function waitForChangeStatus() {
+//	    $before = $this->getStatus();
+//	    sleep(2);
+//	    $after = $this->getStatus();
+//
+//    }
+
 	public function openAddOrderNote()
     {
         $this->_rootElement->find('.icon-iconPOS-more')->click();

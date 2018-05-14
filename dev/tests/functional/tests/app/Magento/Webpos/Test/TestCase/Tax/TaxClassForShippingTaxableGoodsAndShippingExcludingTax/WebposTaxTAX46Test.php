@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\TestCase\Tax\TaxClassForShippingTaxableGoodsAndShippingExcludingTax;
 
-
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
@@ -16,6 +15,10 @@ use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePla
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposTaxTAX46Test
+ * @package Magento\Webpos\Test\TestCase\Tax\TaxClassForShippingTaxableGoodsAndShippingExcludingTax
+ */
 class WebposTaxTAX46Test extends Injectable
 {
 	/**
@@ -69,6 +72,12 @@ class WebposTaxTAX46Test extends Injectable
 		];
 	}
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @param AssertRefundSuccess $assertRefundSuccess
+     */
 	public function __inject(
 		WebposIndex $webposIndex,
 		FixtureFactory $fixtureFactory,
@@ -82,6 +91,15 @@ class WebposTaxTAX46Test extends Injectable
 		$this->assertRefundSuccess = $assertRefundSuccess;
 	}
 
+    /**
+     * @param Customer $customer
+     * @param $taxRate
+     * @param $products
+     * @param $configData
+     * @param bool $createInvoice
+     * @param bool $shipped
+     * @return array
+     */
 	public function test(
 		Customer $customer,
 		$taxRate,
@@ -197,11 +215,6 @@ class WebposTaxTAX46Test extends Injectable
 		$expectStatus = 'Complete';
 
 		$this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
-
-		// Refund Extant Items
-//		foreach ($products as $key => $item) {
-//			unset($products[$key]['refundQty']);
-//		}
 
 		$this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',

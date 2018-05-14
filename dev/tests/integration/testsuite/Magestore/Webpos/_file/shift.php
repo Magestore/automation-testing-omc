@@ -34,8 +34,8 @@ $shift->setShiftId('shift_custom_1')
 	->setClosedNote('Close Note 1')
 	->setFloatAmount(10000)
 	->setLocationId(1)
-	->setOpenedAt('2016-12-21 00:00:00')
-	->setOpenedNote('Open Note 1')
+	->setOpenedAt('2018-04-21 00:00:00')
+	->setOpenedNote('Opn Note 1')
 	->setShiftCurrencyCode('USD');
 $shift->setTotalSales(0);
 
