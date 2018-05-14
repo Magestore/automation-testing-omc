@@ -80,7 +80,7 @@ class WebposSessionManagementValidateSM33Test extends Injectable
         $staff->persist();
         // Login webpos
         $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaffAndWaitSessionInstall',
             [
                 'staff' => $staff,
                 'location' => $location,
@@ -89,19 +89,12 @@ class WebposSessionManagementValidateSM33Test extends Injectable
             ]
         )->run();
 
-        /**
-         *  wait fields show
-         */
-
-        while (! $this->webposIndex->getOpenSessionPopup()->getCoinBillValue()->isVisible()) {}
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
-
-        while (! $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->isVisible()) {}
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
 
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         /** wait request done  */
-        while ( !$this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->isVisible() ) {}
+        while ( !$this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->isVisible() ) { sleep(1); }
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
         sleep(1);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();

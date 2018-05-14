@@ -84,15 +84,16 @@ class WebposProductsGridPG06Test extends Injectable
         // Add products to cart
         $this->webposIndex->getCheckoutCartFooter()->waitButtonHoldVisible();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        for ($i = 0; $i < 2; $i++) {
-            $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
-            $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-            $this->webposIndex->getMsWebpos()->waitCartLoader();
-        }
-        $availableQty = 1;
 
-        // Assert available qty on page
-        $this->assertProductQtyInProductList->processAssert($this->webposIndex, $availableQty);
+        $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
+        while ( !$this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->isVisible() ) {
+            sleep(1);
+        }
+
+        $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
+        while ( $this->webposIndex->getCheckoutCartItems()->getFirstCartItemQty()->getText() != 2) {
+            sleep(1);
+        }
 
         // Check out and Place Order
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();

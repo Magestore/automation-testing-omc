@@ -79,7 +79,7 @@ class WebposManagementValidate05Test extends Injectable
         $staff->persist();
         // Login webpos
         $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaffAndWaitSessionInstall',
             [
                 'staff' => $staff,
                 'location' => $location,
@@ -88,12 +88,13 @@ class WebposManagementValidate05Test extends Injectable
             ]
         )->run();
 
-        $beforeOpeningBalance  =  $this->webposIndex->getSessionInfo()->getOpeningBalance()->getText();
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(2);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         /** wait request done */
-        while ( $beforeOpeningBalance ==  $this->webposIndex->getSessionInfo()->getOpeningBalance()->getText()) {}
+        while ( !$this->webposIndex->getListShift()->getFirstItemShift()->isVisible()) {
+            sleep(1);
+        }
 
         $this->assertTrue(
             strpos(

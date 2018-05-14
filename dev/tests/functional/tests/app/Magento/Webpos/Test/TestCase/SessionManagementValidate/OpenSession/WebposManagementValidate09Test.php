@@ -72,7 +72,7 @@ class WebposManagementValidate09Test extends Injectable
         $staff->persist();
         // Login webpos
         $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaffAndWaitSessionInstall',
             [
                 'staff' => $staff,
                 'location' => $location,
@@ -81,18 +81,13 @@ class WebposManagementValidate09Test extends Injectable
             ]
         )->run();
 
-        /**
-         *  wait field is show
-         */
-        while ( !$this->webposIndex->getOpenSessionPopup()->getCoinBillValue()->isVisible()) {}
-        $beforeOpeningBalance  =  $this->webposIndex->getSessionInfo()->getOpeningBalance()->getText();
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
-        sleep(1);
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         /** wait request done */
-        while ( $beforeOpeningBalance ==  $this->webposIndex->getSessionInfo()->getOpeningBalance()->getText()) {}
-
+        while ( !$this->webposIndex->getListShift()->getFirstItemShift()->isVisible()) {
+            sleep(1);
+        }
         $this->assertTrue(
             strpos(
                 $this->webposIndex->getSessionInfo()->getOpeningBalance()->getText(),
@@ -119,18 +114,22 @@ class WebposManagementValidate09Test extends Injectable
         $staff->persist();
 
         $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaffAndWaitSessionInstall',
             [
                 'staff' => $staff,
                 'location' => $location,
                 'pos' => $pos,
                 'hasOpenSession' => false,
-                'hasWaitOpenSessionPopup' => false
+                'hasWaitOpenSessionPopup' => false,
             ]
         )->run();
 
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->webposIndex->getCMenu()->getSessionManagement();
+
+        while ( !$this->webposIndex->getListShift()->getFirstItemShift()->isVisible()) {
+            sleep(1);
+        }
 
         $this->assertTrue(
             strpos(
