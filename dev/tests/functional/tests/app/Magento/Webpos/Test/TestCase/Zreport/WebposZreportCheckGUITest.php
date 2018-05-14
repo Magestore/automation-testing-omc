@@ -52,12 +52,12 @@ class WebposZreportCheckGUITest extends Injectable
                          $denominationNumberCoin, ConfigData $dataConfig, ConfigData $dataConfigToNo)
     {
         // Create denomination
-//        $denomination->persist();
-//        $this->dataConfigToNo = $dataConfigToNo;
-//        $this->objectManager->create(
-//            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
-//            ['dataConfig' => $dataConfig]
-//        )->run();
+        $denomination->persist();
+        $this->dataConfigToNo = $dataConfigToNo;
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
+            ['dataConfig' => $dataConfig]
+        )->run();
 
         // Login webpos
         $staff = $this->objectManager->getInstance()->create(
@@ -110,9 +110,9 @@ class WebposZreportCheckGUITest extends Injectable
 
     public function tearDown()
     {
-//        $this->objectManager->create(
-//            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
-//            ['dataConfig' => $this->dataConfigToNo]
-//        )->run();
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
+            ['dataConfig' => $this->dataConfigToNo]
+        )->run();
     }
 }
