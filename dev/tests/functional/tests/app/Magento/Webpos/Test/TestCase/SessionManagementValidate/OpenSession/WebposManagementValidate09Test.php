@@ -127,6 +127,10 @@ class WebposManagementValidate09Test extends Injectable
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->webposIndex->getCMenu()->getSessionManagement();
 
+        while ( !$this->webposIndex->getListShift()->getFirstItemShift()->isVisible()) {
+            sleep(1);
+        }
+
         $this->assertTrue(
             strpos(
                 $this->webposIndex->getSessionInfo()->getOpeningBalance()->getText(),

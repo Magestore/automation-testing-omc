@@ -52,8 +52,10 @@ class WebposProductsGridPG34Test extends Injectable
         )->run();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
+
+        while ( $this->webposIndex->getCheckoutProductList()->getNumberOfProducts()->getText() != 1) {
+            sleep(1);
+        }
 
         // Close popup
         if ($this->webposIndex->getCheckoutProductDetail()->isVisible()){
