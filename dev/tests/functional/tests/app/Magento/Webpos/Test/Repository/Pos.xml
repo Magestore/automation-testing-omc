@@ -30,5 +30,9 @@
             </field>
             <field name="status" xsi:type="string">Enabled</field>
         </dataset>
+        <dataset name="test">
+            <field name="pos_name" xsi:type="string">Post Test %isolation%</field>
+            <field name="status" xsi:type="string">Enabled</field>
+        </dataset>
     </repository>
 </config>

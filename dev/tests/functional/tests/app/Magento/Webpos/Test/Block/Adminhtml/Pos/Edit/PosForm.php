@@ -46,4 +46,17 @@ class PosForm extends Form
     {
         return $this->_rootElement->find('[name="status"]')->getText();
     }
+
+    public function setLocation($nameLocation)
+    {
+        $this->_rootElement->find('#page_location_id', locator::SELECTOR_CSS, 'select')->setValue($nameLocation);
+    }
+
+    public function setPosName($posName){
+        $this->_rootElement->find('#page_pos_name')->setValue($posName);
+    }
+
+    public function waitLoader(){
+        $this->waitForElementVisible('#edit_form');
+    }
 }

@@ -8,11 +8,20 @@
 
 namespace Magento\Webpos\Test\TestCase\Location\AddLocation;
 
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Adminhtml\Location\Grid\AssertLocationGridWithResult;
+use Magento\Webpos\Test\Constraint\Adminhtml\Location\Grid\AssertSearchExistLocationSuccess;
 use Magento\Webpos\Test\Fixture\Location;
+use Magento\Webpos\Test\Fixture\Pos;
+use Magento\Webpos\Test\Fixture\Staff;
+use Magento\Webpos\Test\Handler\Pos\PosInterface;
 use Magento\Webpos\Test\Page\Adminhtml\LocationIndex;
 use Magento\Webpos\Test\Page\Adminhtml\LocationNews;
+use Magento\Webpos\Test\Page\Adminhtml\PosIndex;
+use Magento\Webpos\Test\Page\Adminhtml\PosNews;
+use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
+use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Add Location
@@ -59,34 +68,117 @@ class WebposManageLocationML21Test extends Injectable
      */
     private $assertGridWithResult;
 
+
+    /**
+     * @var $staffIndex
+     */
+    private $staffIndex;
+
+    /**
+     * @var $staffNew
+     */
+    private $staffNew;
+    /**
+     * @var $posIndex
+     */
+    private $posIndex;
+    /**
+     * @var $posNew
+     */
+    private $posNew;
+
+    /**
+     * @var $webposIndex
+     */
+    private $webposIndex;
+
     /**
      * Inject location pages.
      *
      * @param LocationIndex $locationIndex
      * @param LocationNews $locationNews
      */
+
     public function __inject(
         LocationIndex $locationIndex,
         LocationNews $locationNews,
-        AssertLocationGridWithResult $assertLocationGridWithResult
+        PosIndex $posIndex,
+        PosNews $posNews,
+        StaffIndex $staffIndex,
+        StaffNews $staffNews,
+        WebposIndex $webposIndex,
+        AssertSearchExistLocationSuccess $assertSearchExistLocationSuccess
 
     )
     {
         $this->locationIndex = $locationIndex;
         $this->locationNews = $locationNews;
-        $this->assertGridWithResult = $assertLocationGridWithResult;
+        $this->posIndex = $posIndex;
+        $this->posNew = $posNews;
+        $this->staffIndex = $staffIndex;
+        $this->staffNew = $staffNews;
+        $this->webposIndex = $webposIndex;
+        $this->assertGridWithResult = $assertSearchExistLocationSuccess;
     }
 
-    public function test(Location $location)
+    public function test(FixtureFactory $fixtureFactory, Location $location, Staff $staff, Pos $pos)
     {
+        //Precondition
+
         // Steps
+        //Add Location New
         $this->locationIndex->open();
         $this->locationIndex->getPageActionsBlock()->addNew();
-        sleep(2);
         $this->locationNews->getLocationsForm()->fill($location);
         $this->locationNews->getFormPageActionsLocation()->saveAndContinue();
-        $this->locationNews->getFormPageActionsLocation()->getButtonByname('Back')->click();
+        $this->locationNews->getFormPageActions()->back();
         $this->locationIndex->getLocationsGrid()->waitLoader();
+        $this->assertGridWithResult->processAssert($this->locationIndex, $location->getData());
+        sleep(1);
+
+        //Add Pos
+        $this->posIndex->open();
+        $this->posIndex->getPageActionsBlock()->addNew();
+        $this->posNew->getPosForm()->waitLoader();
+        $this->posNew->getPosForm()->setPosName($pos->getData('pos_name'));
+        $this->posNew->getPosForm()->setLocation($location->getDisplayName());
+        $this->posNew->getFormPageActions()->save();
+        sleep(1);
+
+        //Edit Staff
+        $this->staffIndex->open();
+        $this->staffIndex->getPageActionsBlock()->addNew();
+        $this->staffNew->getStaffsForm()->fill($staff);
+        $this->staffNew->getFormPageActions()->save();
+        $this->staffIndex->getStaffsGrid()->waitLoader();
+        $this->staffIndex->getStaffsGrid()->searchAndOpen([
+            'username' => $staff->getUsername()
+        ]);
+
+        $this->staffNew->getStaffsForm()->setLocation($location->getDisplayName());
+        $this->staffNew->getStaffsForm()->setPos($pos->getPosName());
+        $this->staffNew->getFormPageActions()->save();
+        $this->staffIndex->getStaffsGrid()->waitLoader();
+
+        //Login By Staff
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            [
+                'staff' => $staff,
+                'location' => $location,
+                'pos' => $pos
+            ]
+        )->run();
+        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="c-button--push-left"]');
+        $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
+        sleep(1);
+        $this->webposIndex->getCMenu()->checkout();
+        $this->webposIndex->getCheckoutProductList()->waitProductList();
+        \PHPUnit_Framework_Assert::assertTrue(
+            (int)($this->webposIndex->getCheckoutProductList()->getNumberOfProducts()->getText()) > 0,
+            'No Product is showed'
+        );
     }
 }
+
 

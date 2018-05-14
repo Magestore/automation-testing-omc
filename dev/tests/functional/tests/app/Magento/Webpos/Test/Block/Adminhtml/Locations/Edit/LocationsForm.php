@@ -71,4 +71,8 @@ class LocationsForm extends Form
     {
         return $this->_rootElement->find('//form[@id = "edit_form"]//label//span[text()="'.$name.'"]', locator::SELECTOR_XPATH);
     }
+
+    public function waitLoader(){
+        $this->waitForElementVisible('#page:main-container');
+    }
 }

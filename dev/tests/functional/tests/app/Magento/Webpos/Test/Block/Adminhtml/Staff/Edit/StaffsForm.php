@@ -153,4 +153,7 @@ class StaffsForm extends Form
         return $this->_rootElement->find('#'.$id);
     }
 
+    public function waitLoader(){
+        $this->waitForElementVisible('#page');
+    }
 }

@@ -3,6 +3,8 @@
     <testCase name="Magento\Webpos\Test\TestCase\Location\AddLocation\WebposManageLocationML21Test" summary="Check [Save and continue] button with filling out all fields" ticketId="MAGETWO-1234">
         <variation name="WebposManageLocationML21TestVariation">
             <data name="location/dataset" xsi:type="string">ML19</data>
+            <data name="staff/dataset" xsi:type="string">default</data>
+            <data name="pos/dataset" xsi:type="string">test</data>
         </variation>
     </testCase>
 </config>
