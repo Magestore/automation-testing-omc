@@ -57,9 +57,8 @@ class WebposProductGridGroupProductCheckSpecialPricePG40Test extends Injectable
         $actualSpecialPrices = $this->webposIndex->getCheckoutProductDetail()->getGroupChildProductSpecialPrices();
         for ($i = 0; $i < count($childProducts); $i++) {
             $specialPrice = $childProducts[$i]->getSpecialPrice();
-            $this->assertEquals(
-                $specialPrice,
-                $actualSpecialPrices[$i],
+            $this->assertTrue(
+                strpos(str_replace(',' , '', $actualSpecialPrices[$i]),$specialPrice) !== false,
                 "Special price of product '" . $childProducts[$i]->getName() . "' is wrong."
             );
         }
