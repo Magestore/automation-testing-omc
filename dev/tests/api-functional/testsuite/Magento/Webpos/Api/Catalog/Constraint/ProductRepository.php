@@ -32,7 +32,6 @@ class ProductRepository
                     'description',
                     'status',
                     'updated_at',
-                    'extension_attributes',
                     'category_ids',
                     'qty_increment',
                     'image',
