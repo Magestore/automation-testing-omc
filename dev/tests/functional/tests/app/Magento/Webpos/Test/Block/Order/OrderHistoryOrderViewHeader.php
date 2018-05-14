@@ -73,6 +73,11 @@ class OrderHistoryOrderViewHeader extends Block
         return $this->waitForElementVisible('.status.complete');
     }
 
+    public function waitForFormAddNoteOrderVisible()
+    {
+        $this->waitForElementVisible('#form-add-note-order');
+    }
+
     /**
      * @return \Magento\Mtf\Client\ElementInterface
      */

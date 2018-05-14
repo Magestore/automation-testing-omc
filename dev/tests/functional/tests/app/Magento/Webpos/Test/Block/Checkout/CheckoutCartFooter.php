@@ -77,6 +77,10 @@ class CheckoutCartFooter extends Block
         $value = $this->_rootElement->find('//div/ul/li/div[1]/label[text()="Shipping"]/../../div[2]/span', Locator::SELECTOR_XPATH)->getText();
         return floatval(str_replace('$', '',$value));
     }
+    public function getTotalElement()
+    {
+        return $this->_rootElement->find('//div/ul/li/div[1]/label[text()="Total"]/../../div[2]/span', Locator::SELECTOR_XPATH);
+    }
     public function getTotal()
     {
         $value = $this->_rootElement->find('//div/ul/li/div[1]/label[text()="Total"]/../../div[2]/span', Locator::SELECTOR_XPATH)->getText();

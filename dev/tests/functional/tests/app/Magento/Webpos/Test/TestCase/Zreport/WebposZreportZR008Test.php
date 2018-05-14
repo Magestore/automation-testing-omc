@@ -14,23 +14,42 @@ use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposZreportCheckGUITest
+ * Class WebposZreportZR008Test
  *
- * Precondition: There are some POSs and setting [Need to create session before working] = ""Yes"" on the test site
+ * Precondition: There are some POSs and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff who has open and close session permission
- * 2. Open a session
- * 3. Create some orders successfully"
+ * 2. Open a session with
+ * - Opening amount = 0
+ * 3. Create some orders successfully with some payment methods which are not cash in
  *
  * Steps:
  * 1. Go to [Session Management] menu
- * 2. Click on [End of Session] > Input real money > [Confirm] > Close session successfully
- * 3. Click on [Print] button
+ * 2. Close the session successfully with:
+ * - Closing amount = 0
+ * 3. Click to print Z-report
  *
  * Acceptance:
+ * 3. Show Z-report with:
+ * - Opening Amount = 0
+ * - Closing Amount = 0
+ * - Theoretical Closing Amount = 0
+ * - Difference = 0
+ *
+ * - Cash sales = 0
+ * - Cash Refund = 0
+ * - Pay Ins = 0
+ * - Payouts = 0
+ *
+ * - Total Sales = SUM(grand_total) of the orders which placed on this session
+ * - Discount = 0
+ * - Refund = 0
+ * - Net Sales = Total Sales
+ *
+ * And show all of the payment methods with their total that placed on this session
  *
  * @package Magento\Webpos\Test\TestCase\Zreport
  */
-class WebposZreportCheckGUITest extends Injectable
+class WebposZreportZR008Test extends Injectable
 {
     /**
      * Webpos Index page.
@@ -38,7 +57,10 @@ class WebposZreportCheckGUITest extends Injectable
      * @var WebposIndex
      */
     protected $webposIndex;
+
     protected $dataConfigToNo;
+
+    protected $defaultPaymentMethod;
 
 
     public function __inject(
@@ -49,7 +71,10 @@ class WebposZreportCheckGUITest extends Injectable
     }
 
     public function test($products, Denomination $denomination,
-                         $denominationNumberCoin, ConfigData $dataConfig, ConfigData $dataConfigToNo)
+                         $denominationNumberCoin,
+                         ConfigData $dataConfig, ConfigData $dataConfigToNo,
+                         $dataConfigPayment,
+                         $defaultPaymentMethod)
     {
         // Create denomination
         $denomination->persist();
@@ -57,6 +82,12 @@ class WebposZreportCheckGUITest extends Injectable
         $this->objectManager->create(
             'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
             ['dataConfig' => $dataConfig]
+        )->run();
+
+        //Config Customer Credit Payment Method
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => $dataConfigPayment]
         )->run();
 
         // Login webpos
@@ -70,11 +101,13 @@ class WebposZreportCheckGUITest extends Injectable
 
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\WebposAddProductToCartThenCheckoutStep',
-            ['products' => $products]
+            [
+                'products' => $products,
+                'paymentMethod' => 'cp1forpos'
+            ]
         )->run();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $staffName = $this->webposIndex->getCMenu()->getUsername();
         $this->webposIndex->getCMenu()->getSessionManagement();
         sleep(1);
         // Set closing balance
@@ -82,29 +115,36 @@ class WebposZreportCheckGUITest extends Injectable
         sleep(1);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getColumnNumberOfCoinsAtRow(2)->setValue($denominationNumberCoin);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        sleep(1);
-        $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
-        $this->webposIndex->getSessionSetReasonPopup()->getReason()->setValue('Magento');
-        sleep(1);
-        $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
-        sleep(1);
+        sleep(2);
+        if($this->webposIndex->getSessionConfirmModalPopup()->isVisible())
+        {
+            $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
+            $this->webposIndex->getSessionSetReasonPopup()->getReason()->setValue('Magento');
+            sleep(1);
+            $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
+            sleep(1);
+        }
         // End session
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
         sleep(1);
 
         $openedString = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
-        $openedString .= ' by ' . $staffName;
         $closedString = $this->webposIndex->getSessionShift()->getCloseTime()->getText();
-        $closedString .= ' by ' . $staffName;
+        $staffName = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
+        $totalSales = $this->webposIndex->getSessionShift()->getPaymentAmount()->getText();
 
         $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitZreportVisible();
         sleep(2);
+
+        $this->defaultPaymentMethod = $defaultPaymentMethod;
+
         return [
             'staffName' => $staffName,
             'openedString' => $openedString,
-            'closedString' => $closedString
+            'closedString' => $closedString,
+            'totalSales' => $totalSales
         ];
     }
 
@@ -113,6 +153,12 @@ class WebposZreportCheckGUITest extends Injectable
         $this->objectManager->create(
             'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
             ['dataConfig' => $this->dataConfigToNo]
+        )->run();
+
+        //Config Payment Payment Method
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => $this->defaultPaymentMethod]
         )->run();
     }
 }
