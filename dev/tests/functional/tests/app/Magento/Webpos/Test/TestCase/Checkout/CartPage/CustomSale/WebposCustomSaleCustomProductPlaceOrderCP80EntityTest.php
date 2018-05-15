@@ -7,13 +7,15 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale;
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
+
 use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-
-
+use Magento\Webpos\Test\Page\WebposIndex;
+/**
+ * Class WebposCustomSaleCustomProductPlaceOrderCP80EntityTest
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale
+ */
 class WebposCustomSaleCustomProductPlaceOrderCP80EntityTest extends Injectable
 {
     /**
@@ -28,7 +30,6 @@ class WebposCustomSaleCustomProductPlaceOrderCP80EntityTest extends Injectable
      * @param WebposIndex $webposIndex
      * @return void
      */
-
     public function __inject(
         WebposIndex $webposIndex,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
@@ -54,7 +55,6 @@ class WebposCustomSaleCustomProductPlaceOrderCP80EntityTest extends Injectable
         $this->webposIndex->getCheckoutCustomSale()->getProductPriceInput()->setValue($price);
         sleep(1);
         $this->webposIndex->getCheckoutCustomSale()->getAddToCartButton()->click();
-
         $this->webposIndex->getCheckoutCartItems()->getCartItem($productName)->click();
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
@@ -70,7 +70,6 @@ class WebposCustomSaleCustomProductPlaceOrderCP80EntityTest extends Injectable
             $i++;
             sleep(1);
         }
-
         //CategoryRepository
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -80,18 +79,15 @@ class WebposCustomSaleCustomProductPlaceOrderCP80EntityTest extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-
         //Click Order History
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
     }
 }

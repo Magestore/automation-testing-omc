@@ -12,6 +12,7 @@
                     <item name="orderQty" xsi:type="number">2</item>
                 </item>
             </data>
+            <data name="testCaseId" xsi:type="string">OH70</data>
             <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundShipping"/>
         </variation>
     </testCase>

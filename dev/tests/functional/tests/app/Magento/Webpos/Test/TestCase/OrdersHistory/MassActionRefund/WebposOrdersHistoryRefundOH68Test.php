@@ -12,7 +12,6 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class WebposOrdersHistoryRefundOH68Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
@@ -91,7 +90,7 @@ class WebposOrdersHistoryRefundOH68Test extends Injectable
             'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
             ['products' => $products]
         )->run();
-        sleep(0.5);
+        sleep(1);
         $this->assertTrue(
             $this->webposIndex->getToaster()->isVisible(),
             'Error message is not visible.'

@@ -19,20 +19,4 @@
         <!--End Simple Product 2-->
     </entity>
     <!--End Simple Product-->
-    <!--Begin Configurable Product-->
-
-    <!--End Configurable Product-->
-    <!--Begin Virtual Product-->
-
-    <!--End Virtual Product-->
-    <!--Begin Grouped Product-->
-
-    <!--End Grouped Product-->
-    <!--Begin Bundle Product-->
-
-    <!--End Bundle Product-->
-    <!--Begin Downloadable Product-->
-
-    <!--End Downloadable Product-->
-    <!--End Products List-->
 </config>

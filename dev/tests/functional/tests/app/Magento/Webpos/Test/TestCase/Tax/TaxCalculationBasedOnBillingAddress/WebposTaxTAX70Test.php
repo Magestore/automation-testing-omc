@@ -140,7 +140,6 @@ class WebposTaxTAX70Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-        $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
@@ -150,7 +149,6 @@ class WebposTaxTAX70Test extends Injectable
             ]
         )->run();
         if (!$this->webposIndex->getCheckoutPaymentMethod()->getIconRemove()->isVisible()) {
-            $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
             $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }
