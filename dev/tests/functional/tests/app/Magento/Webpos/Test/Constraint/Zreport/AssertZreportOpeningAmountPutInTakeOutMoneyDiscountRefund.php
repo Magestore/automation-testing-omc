@@ -57,7 +57,7 @@ class AssertZreportOpeningAmountPutInTakeOutMoneyDiscountRefund extends \Magento
             'Zreport pay in not correct'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            $this->convertToPriceFormat($payOut),
+            $this->convertToPriceFormat($payOut * (-1)),
             $webposIndex->getSessionPrintShiftPopup()->getPayouts()->getText(),
             'Zreport pay out not correct'
         );
@@ -67,7 +67,7 @@ class AssertZreportOpeningAmountPutInTakeOutMoneyDiscountRefund extends \Magento
             'Zreport total sales not correct'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            $this->convertToPriceFormat($discountAmount),
+            $this->convertToPriceFormat($discountAmount * (-1)),
             $webposIndex->getSessionPrintShiftPopup()->getDiscount()->getText(),
             'Zreport discount not correct'
         );

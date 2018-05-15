@@ -166,9 +166,7 @@ class WebposZreportZR010Test extends Injectable
         // Refund
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(1);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        sleep(0.5);
 
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         sleep(0.5);
@@ -179,7 +177,7 @@ class WebposZreportZR010Test extends Injectable
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
         $this->webposIndex->getMsWebpos()->waitForModalPopup();
         $this->webposIndex->getModal()->getOkButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForModalPopupNotVisible();
+        sleep(1);
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->getSessionManagement();
@@ -193,6 +191,7 @@ class WebposZreportZR010Test extends Injectable
         $this->webposIndex->getSessionCloseShift()->waitSetClosingBalancePopupNotVisible();
         if ($this->webposIndex->getSessionConfirmModalPopup()->isVisible()) {
             $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
+            $this->webposIndex->getMainContent()->waitForElementNotVisible('.close-confirm');
             $this->webposIndex->getSessionSetClosingBalanceReason()->waitSetReasonPopupVisible();
             $this->webposIndex->getSessionSetReasonPopup()->getReason()->setValue('Magento');
             $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
