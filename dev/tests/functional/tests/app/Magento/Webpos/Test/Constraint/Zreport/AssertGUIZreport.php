@@ -87,7 +87,7 @@ class AssertGUIZreport extends \Magento\Mtf\Constraint\AbstractConstraint
             'Zreport net sales not visible'
         );
         \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getSessionPrintShiftPopup()->getPaymentCashIn()->isVisible(),
+            $webposIndex->getSessionPrintShiftPopup()->getPaymentAmount()->isVisible(),
             'Zreport payment cash in  not visible'
         );
         \PHPUnit_Framework_Assert::assertTrue(

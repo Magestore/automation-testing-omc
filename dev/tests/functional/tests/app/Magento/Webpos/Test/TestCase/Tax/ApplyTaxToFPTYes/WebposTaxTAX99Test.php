@@ -8,13 +8,15 @@
 
 namespace Magento\Webpos\Test\TestCase\Tax\ApplyTaxToFPTYes;
 
-
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposTaxTAX99Test
+ * @package Magento\Webpos\Test\TestCase\Tax\ApplyTaxToFPTYes
+ */
 class WebposTaxTAX99Test extends Injectable
 {
 	/**
@@ -140,9 +142,8 @@ class WebposTaxTAX99Test extends Injectable
 
 		$this->webposIndex->getMsWebpos()->clickCMenuButton();
 		$this->webposIndex->getCMenu()->ordersHistory();
-
-		sleep(2);
-		$this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
 
 		$this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 		while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}

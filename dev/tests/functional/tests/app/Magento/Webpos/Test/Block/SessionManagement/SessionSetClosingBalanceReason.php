@@ -19,4 +19,14 @@ class SessionSetClosingBalanceReason extends Block
     {
         return $this->_rootElement->find('button.btn-done');
     }
+
+    public function waitSetReasonPopupVisible()
+    {
+        $this->waitForElementVisible('#set-closing');
+    }
+
+    public function waitSetReasonPopupNotVisible()
+    {
+        $this->waitForElementNotVisible('#set-closing');
+    }
 }

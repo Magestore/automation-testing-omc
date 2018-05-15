@@ -53,16 +53,15 @@ class WebposPlaceOrderWithCustomerPriceCP58Test extends Injectable
         $staff = $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-
         $this->webposIndex->getCheckoutProductList()->search($product->getSku());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $price = $this->webposIndex->getCheckoutCartItems()->getValueItemPrice($product->getName());
-
         $this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
         $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
-        sleep(3);
+        sleep(1);
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         //CategoryRepository
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
@@ -73,22 +72,19 @@ class WebposPlaceOrderWithCustomerPriceCP58Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-
         //Click Order History
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-
         return [
             'product' => $product,
-            'price' => $price];
+            'price' => $price
+        ];
     }
 }

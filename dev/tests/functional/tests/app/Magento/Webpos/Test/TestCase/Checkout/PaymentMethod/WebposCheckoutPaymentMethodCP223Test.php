@@ -87,7 +87,7 @@ class WebposCheckoutPaymentMethodCP223Test extends Injectable
 
         $am = $this->webposIndex->getCheckoutPlaceOrder()->getTopTotalPrice()->getText();
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue(substr($am,1)+$amount);
-        sleep(3);
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
         // place order getCreateInvoiceCheckbox

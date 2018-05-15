@@ -35,9 +35,6 @@ class CheckoutChangeCustomer extends Block
 
 	public function getFirstCustomer()
 	{
-//		$this->waitForCustomerList();
-//		$this->_rootElement->click();
-//		$this->waitForCustomerList();
 		return $this->_rootElement->find('ul.list-customer-old > li:nth-child(1)');
 	}
 

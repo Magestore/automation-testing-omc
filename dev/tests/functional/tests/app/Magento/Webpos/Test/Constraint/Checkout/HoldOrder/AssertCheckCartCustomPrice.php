@@ -10,7 +10,6 @@ namespace Magento\Webpos\Test\Constraint\Checkout\HoldOrder;
 
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class AssertCheckCartCustomPrice
  * @package Magento\Webpos\Test\Constraint\Checkout\HoldOrder

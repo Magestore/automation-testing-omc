@@ -4,7 +4,6 @@
         <variation name="Webpos_Check_Input_ValueToDiscountProduct_ByPercentCP66_Test1_CP66">
             <data name="product/dataset" xsi:type="string">product1</data>
             <data name="amountValue" xsi:type="string">10</data>
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\DiscountProduct\AssertWebposPlaceOrderWithDiscountByPercentCP67"/>-->
         </variation>
     </testCase>
 </config>

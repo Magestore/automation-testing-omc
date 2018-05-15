@@ -12,6 +12,10 @@ use Magento\Backend\Test\Page\Adminhtml\SystemConfigEdit;
 use Magento\Config\Test\Fixture\ConfigData;
 use Magento\Mtf\TestStep\TestStepInterface;
 
+/**
+ * Class WebposConfigurationStep
+ * @package Magento\Webpos\Test\TestStep
+ */
 class WebposConfigurationStep implements TestStepInterface
 {
     /* tags */

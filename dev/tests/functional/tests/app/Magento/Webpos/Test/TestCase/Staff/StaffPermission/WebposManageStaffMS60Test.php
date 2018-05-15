@@ -122,7 +122,7 @@ class WebposManageStaffMS60Test extends Injectable
 
         $this->webposIndex->getNotification()->getNotificationBell()->click();
         $this->webposIndex->getNotification()->getClearAll()->click();
-        sleep(3);
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         //Send email
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
@@ -138,12 +138,14 @@ class WebposManageStaffMS60Test extends Injectable
         $this->assertShowMessageNotification->processAssert($this->webposIndex, 'An email has been sent for this order!');
         $this->webposIndex->getNotification()->getNotificationBell()->click();
         $textNotif = $this->webposIndex->getNotification()->getFirstNotificationText();
-        sleep(3);         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         $this->assertShowNewNotification->processAssert($this->webposIndex, 'An email has been sent for this order!', $textNotif);
 
         $this->webposIndex->getNotification()->getNotificationBell()->click();
         $this->webposIndex->getNotification()->getClearAll()->click();
-        sleep(3);         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         //Add comment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         while (!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible()) {
@@ -158,7 +160,8 @@ class WebposManageStaffMS60Test extends Injectable
         $this->assertShowMessageNotification->processAssert($this->webposIndex, 'Add order comment successfully!');
         $this->webposIndex->getNotification()->getNotificationBell()->click();
         $textNotif = $this->webposIndex->getNotification()->getFirstNotificationText();
-        sleep(3);         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         $this->assertShowNewNotification->processAssert($this->webposIndex, 'Add order comment successfully!', $textNotif);
 
         //Re-order

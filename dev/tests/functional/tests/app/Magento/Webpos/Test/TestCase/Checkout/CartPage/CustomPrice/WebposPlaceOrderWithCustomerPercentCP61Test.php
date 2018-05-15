@@ -63,7 +63,7 @@ class WebposPlaceOrderWithCustomerPercentCP61Test extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
-        sleep(3);
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         //CategoryRepository
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
@@ -84,8 +84,8 @@ class WebposPlaceOrderWithCustomerPercentCP61Test extends Injectable
         //Click Order History
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 
         return [

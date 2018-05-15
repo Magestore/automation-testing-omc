@@ -26,13 +26,11 @@ class AssertInvoiceSuccess extends AbstractConstraint
             $webposIndex->getModal()->getModalPopup()->isVisible(),
             'Confirm Popup is not closed'
         );
-
         \PHPUnit_Framework_Assert::assertFalse(
             $webposIndex->getOrderHistoryInvoice()->isVisible(),
             'Invoice Pop is not closed'
         );
-
-        sleep(1);
+        sleep(2);
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getToaster()->getWarningMessage()->isVisible(),
             'Success Message is not displayed'

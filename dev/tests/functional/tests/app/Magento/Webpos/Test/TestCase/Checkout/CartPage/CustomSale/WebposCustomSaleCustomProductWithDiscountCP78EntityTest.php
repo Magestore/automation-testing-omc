@@ -7,6 +7,7 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
@@ -63,7 +64,8 @@ class WebposCustomSaleCustomProductWithDiscountCP78EntityTest extends  Injectabl
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
-        sleep(3);
+        sleep(1);
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
     }

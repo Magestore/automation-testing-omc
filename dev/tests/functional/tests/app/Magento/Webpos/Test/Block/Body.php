@@ -8,7 +8,10 @@
 namespace Magento\Webpos\Test\Block;
 
 use Magento\Mtf\Block\Block;
-
+/**
+ * Class Body
+ * @package Magento\Webpos\Test\Block
+ */
 class Body extends Block
 {
     public function getPageStyleMinHeight()
@@ -17,5 +20,9 @@ class Body extends Block
         $minHeight = str_replace('min-height: ', '', $style);
         $minHeight = (float)str_replace('px;', '', $minHeight);
         return $minHeight;
+    }
+
+    public function clickOutSide() {
+        $this->_rootElement->click();
     }
 }

@@ -40,14 +40,38 @@ class CheckoutProductEdit extends Block
 		return $this->_rootElement->find('#bt_inc_qty');
 	}
 
+	public function waitCustomPriceButton()
+	{
+        $customPrice = $this->_rootElement->find('.custom-price');
+		if(!$customPrice->isVisible()) {
+            $browser = $this->_rootElement;
+            $browser->waitUntil(
+                function () use ($customPrice) {
+                    return $customPrice->isVisible() ? true : null;
+                }
+            );
+        }
+	}
 	public function getCustomPriceButton()
 	{
+	    $this->waitCustomPriceButton();
 		return $this->_rootElement->find('.custom-price');
 	}
 
 	public function getDiscountButton()
 	{
 		return $this->_rootElement->find('.discount');
+	}
+
+	public function waitDiscountButton()
+	{
+        $discount = $this->_rootElement->find('.discount');
+        $browser = $this->_rootElement;
+        $browser->waitUntil(
+            function () use ($discount) {
+                return $discount->isVisible() ? true : null;
+            }
+        );
 	}
 
 	public function waitForDiscountButtonVisible()

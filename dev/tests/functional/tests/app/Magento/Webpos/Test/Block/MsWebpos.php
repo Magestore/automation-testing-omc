@@ -12,8 +12,6 @@
 namespace Magento\Webpos\Test\Block;
 
 use Magento\Mtf\Block\Block;
-use Magento\Mtf\Client\Locator;
-
 /**
  * Class MsWebpos
  * @package Magento\Webpos\Test\Block
@@ -44,9 +42,6 @@ class MsWebpos extends Block
 	{
 		$this->waitForElementNotVisible('#webpos_cart > div.indicator');
 	}
-//	public function isCartLoaderVisible(){
-//       return $this->_rootElement.find('#webpos_cart > div.indicator')->isVisible();
-//    }
 
 	public function waitCartLoaderVisibleToNotVisible()
 	{
@@ -61,7 +56,7 @@ class MsWebpos extends Block
 
 	public function clickOutsidePopup()
 	{
-		$this->_rootElement->click();
+        $this->_rootElement->click();
 	}
 
 	public function waitForSyncDataAfterLogin()

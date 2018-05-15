@@ -75,9 +75,9 @@ class CreateRefundInOrderHistoryStep implements TestStepInterface
 			if (!$this->webposIndex->getOrderHistoryContainer()->getActionsBox()->isVisible()) {
 				$this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
 			}
-			sleep(3);
+			sleep(2);
 			$this->webposIndex->getOrderHistoryOrderViewHeader()->getAction($refundText)->click();
-            sleep(2);
+            sleep(1);
 		}
 
 		$this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();

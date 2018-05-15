@@ -14,15 +14,12 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceOnRefundPopupWithTaxCaculationBaseOnBilling;
-use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountNoApplyTaxToFpt;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceExcludingTax;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountWithApplyTaxOnCustomPrice;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountWithIncludeFptInSubtotal;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposTaxTAX111Test
+ * @package Magento\Webpos\Test\TestCase\Tax\IncludeFPTInSubtotalYes
+ */
 class WebposTaxTAX111Test extends Injectable
 {
     /**
@@ -158,8 +155,8 @@ class WebposTaxTAX111Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
         self::assertEquals(

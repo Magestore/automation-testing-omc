@@ -28,7 +28,8 @@ class SessionShift extends Block
     /**
      * @return \Magento\Mtf\Client\ElementInterface
      */
-    public function getOpenShiftButton() {
+    public function getOpenShiftButton()
+    {
         return $this->_rootElement->find('[data-bind="afterRender:afterRenderOpenButton"]');
     }
 
@@ -73,21 +74,44 @@ class SessionShift extends Block
      * @param $label
      * @return \Magento\Mtf\Client\ElementInterface
      */
-    public function getTransactionsInfo($label){
-        return $this->_rootElement->find('//div[@class="transactions-info"]/div/table/tbody/tr/td[1]/label[text()="'.$label.'"]/../../td[2]/span',Locator::SELECTOR_XPATH);
+    public function getTransactionsInfo($label)
+    {
+        return $this->_rootElement->find('//div[@class="transactions-info"]/div/table/tbody/tr/td[1]/label[text()="' . $label . '"]/../../td[2]/span', Locator::SELECTOR_XPATH);
+    }
+
+    public function getStaffName()
+    {
+        return $this->_rootElement->find('//span[@data-bind="text: shiftData().staff_name"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getPosName()
+    {
+        return $this->_rootElement->find('//span[@data-bind="text: shiftData().pos_name"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getOpenTime()
+    {
+        return $this->_rootElement->find('//span[@data-bind="text: getFullDatetime(convertToCurrentTime(shiftData().opened_at))"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getPaymentAmount($rowIndex = 1)
+    {
+        return $this->_rootElement->find('//*[@id="shift-detail-sale"]/table/tbody/tr['.$rowIndex.']/td[2]/span[@data-bind="text: $parent.formatPrice(payment_amount)"]', Locator::SELECTOR_XPATH);
     }
 
     /**
      * @return \Magento\Mtf\Client\ElementInterface
      */
-    public function getCloseTime(){
+    public function getCloseTime()
+    {
         return $this->_rootElement->find('//tr[@data-bind="visible:isClosed()"]/td[2]/span', Locator::SELECTOR_XPATH);
     }
 
     /**
      * @return \Magento\Mtf\Client\ElementInterface
      */
-    public function getHidePopup(){
+    public function getHidePopup()
+    {
         return $this->_rootElement->find('.shift-wrap-backover.wrap-backover.hide-popup');
     }
 
@@ -101,7 +125,8 @@ class SessionShift extends Block
         return $this->_rootElement->find('//div/div[2]/header/div[2]/div[3]/div[1]/table/tbody/tr[2]/td[1]/a', Locator::SELECTOR_XPATH);
     }
 
-    public function waitZreportVisible(){
+    public function waitZreportVisible()
+    {
         $this->waitForElementVisible('#print-shift-popup');
     }
 }

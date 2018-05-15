@@ -58,6 +58,15 @@ class SessionSetClosingBalancePopup extends Block
     }
 
     /**
+     * @param $name
+     */
+    public function setCoinBillValue($name)
+    {
+        $coin = $this->_rootElement->find('//div[@class="counting-box"]/table[2]/tbody/tr[1]/td[1]/select[@class="cash-counting-value"]', Locator::SELECTOR_XPATH, 'select');
+        $coin->setValue($name);
+    }
+
+    /**
      * @return \Magento\Mtf\Client\ElementInterface
      */
     public function getColumnCoin()

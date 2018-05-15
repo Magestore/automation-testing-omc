@@ -8,13 +8,16 @@
 
 namespace Magento\Webpos\Test\Constraint\OrderHistory\Refund;
 
-
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class AssertRefundSuccess
+ * @package Magento\Webpos\Test\Constraint\OrderHistory\Refund
+ */
 class AssertRefundSuccess extends AbstractConstraint
 {
-	public function processAssert(WebposIndex $webposIndex, $expectStatus, $totalRefunded = null, $hideAction = '')
+	public function processAssert(WebposIndex $webposIndex, $expectStatus=null, $totalRefunded = null, $hideAction = '')
 	{
 		\PHPUnit_Framework_Assert::assertFalse(
 			$webposIndex->getModal()->getModalPopup()->isVisible(),
@@ -38,12 +41,14 @@ class AssertRefundSuccess extends AbstractConstraint
 
 		$webposIndex->getOrderHistoryOrderViewFooter()->waitForTotalRefundedVisible();
 
-		sleep(2);
-		\PHPUnit_Framework_Assert::assertEquals(
-			$expectStatus,
-			$webposIndex->getOrderHistoryOrderViewHeader()->getStatus(),
-			'Order Status is wrong'
-		);
+        if($expectStatus) {
+            $webposIndex->getOrderHistoryOrderViewHeader()->waitForChangeStatus($expectStatus);
+            \PHPUnit_Framework_Assert::assertEquals(
+                $expectStatus,
+                $webposIndex->getOrderHistoryOrderViewHeader()->getStatus(),
+                'Order Status is wrong'
+            );
+        }
 		if (isset($totalRefunded)) {
 			$expectTotalRefunded = $totalRefunded;
 		} else {

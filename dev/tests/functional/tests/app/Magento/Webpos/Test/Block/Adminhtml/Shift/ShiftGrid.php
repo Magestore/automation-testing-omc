@@ -11,6 +11,7 @@
 
 namespace Magento\Webpos\Test\Block\Adminhtml\Shift;
 
+use Magento\Mtf\Client\Locator;
 use Magento\Ui\Test\Block\Adminhtml\DataGrid;
 use Magento\Mtf\Client\Element\SimpleElement;
 
@@ -91,5 +92,13 @@ class ShiftGrid extends DataGrid
     {
         $this->waitLoader();
         parent::resetFilter();
+    }
+
+    public function getDataGridLastRow(){
+        return $this->_rootElement->find('.//table//tbody//tr[@class="data-row"][last()]', Locator::SELECTOR_XPATH);
+    }
+
+    public function getPrintOfLastRow(){
+        return $this->_rootElement->find('.//table//tbody//tr[@class="data-row"][last()]/td[@class="data-grid-actions-cell"]/a[@class="action-menu-item"]', Locator::SELECTOR_XPATH);
     }
 }

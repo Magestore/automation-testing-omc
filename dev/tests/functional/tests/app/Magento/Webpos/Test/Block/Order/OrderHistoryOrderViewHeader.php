@@ -27,6 +27,16 @@ class OrderHistoryOrderViewHeader extends Block
 		return $this->_rootElement->find('.status')->getText();
 	}
 
+	public function waitForChangeStatus($status) {
+	    $statusElement = $this->_rootElement->find('.status');
+        $browser = $this->_rootElement;
+        $browser->waitUntil(
+            function () use ($statusElement, $status) {
+                return $statusElement->getText()===$status ? true : null;
+            }
+        );
+    }
+
 	public function openAddOrderNote()
     {
         $this->_rootElement->find('.icon-iconPOS-more')->click();
@@ -61,6 +71,11 @@ class OrderHistoryOrderViewHeader extends Block
     public function waitForCompleteStatusVisisble()
     {
         return $this->waitForElementVisible('.status.complete');
+    }
+
+    public function waitForFormAddNoteOrderVisible()
+    {
+        $this->waitForElementVisible('#form-add-note-order');
     }
 
     /**

@@ -15,8 +15,8 @@ class AssertOrderDetailCommentIsCorrect extends AbstractConstraint
     {
         $webposIndex->getMsWebpos()->clickCMenuButton();
         $webposIndex->getCMenu()->ordersHistory();
-        sleep(2);
         $webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
 
         $webposIndex->getOrderHistoryOrderList()->search($orderId);
         $webposIndex->getOrderHistoryOrderList()->waitLoader();

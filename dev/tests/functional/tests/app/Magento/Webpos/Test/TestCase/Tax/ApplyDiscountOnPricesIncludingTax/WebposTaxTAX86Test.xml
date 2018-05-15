@@ -10,6 +10,7 @@
             </data>
             <data name="addDiscount" xsi:type="boolean">true</data>
             <data name="discountPercent" xsi:type="string">10.00</data>
+            <data name="expectStatus" xsi:type="string">Closed</data>
             <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess"/>
         </variation>
     </testCase>

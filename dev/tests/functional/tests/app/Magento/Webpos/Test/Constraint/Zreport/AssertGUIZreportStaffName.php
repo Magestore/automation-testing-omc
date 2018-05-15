@@ -25,7 +25,7 @@ class AssertGUIZreportStaffName extends \Magento\Mtf\Constraint\AbstractConstrai
         \PHPUnit_Framework_Assert::assertEquals(
             $staffName,
             $webposIndex->getSessionPrintShiftPopup()->getStaffName()->getText(),
-            'Zreport Pos Name not visible'
+            'Zreport Pos Name not correct'
         );
     }
 

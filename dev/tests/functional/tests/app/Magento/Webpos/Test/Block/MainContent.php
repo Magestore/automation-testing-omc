@@ -22,4 +22,8 @@ class MainContent extends Block
         $this->_rootElement->click();
     }
 
+    public function waitForMsWebpos() {
+        sleep(1);
+        return $this->waitForElementVisible('#maincontent > div > div > div.ms-webpos');
+    }
 }

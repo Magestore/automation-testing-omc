@@ -51,9 +51,6 @@ class CategoryRepositoryTest extends WebapiAbstract
         $results = $this->_webApiCall($serviceInfo, $requestData);
         \Zend_Debug::dump($results);
 
-        // Dump the result to check "How does it look like?"
-//         \Zend_Debug::dump($results);
-
         self::assertGreaterThanOrEqual(
             1,
             $results['total_count'],

@@ -6,10 +6,14 @@
  * Time: 20:37
  */
 namespace Magento\Webpos\Test\Constraint\Checkout\HoldOrder;
+
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Customer\Test\Fixture\Customer;
-
+/**
+ * Class AssertCheckCustomer
+ * @package Magento\Webpos\Test\Constraint\Checkout\HoldOrder
+ */
 class AssertCheckCustomer extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex,Customer $customer)

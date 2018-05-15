@@ -19,4 +19,14 @@ class SessionCloseShift extends Block
     {
         return $this->_rootElement->find('button.btn-done');
     }
+
+    public function waitSetClosingBalancePopupVisible()
+    {
+        $this->waitForElementVisible('#popup-close-shift');
+    }
+
+    public function waitSetClosingBalancePopupNotVisible()
+    {
+        $this->waitForElementNotVisible('#popup-close-shift');
+    }
 }

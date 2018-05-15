@@ -7,11 +7,15 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\PaymentMethod;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-
+/**
+ * Class WebposCheckoutPaymentMethodCP215Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\PaymentMethod
+ */
 class WebposCheckoutPaymentMethodCP215Test extends Injectable
 {
     /**
@@ -75,7 +79,7 @@ class WebposCheckoutPaymentMethodCP215Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //select shipping
-        sleep(3);
+        $this->webposIndex->getCheckoutShippingMethod()->waitForFlatRateFixedMethod();
         $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //select payment
@@ -84,7 +88,7 @@ class WebposCheckoutPaymentMethodCP215Test extends Injectable
 
 
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        sleep(3);
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         // place order
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();

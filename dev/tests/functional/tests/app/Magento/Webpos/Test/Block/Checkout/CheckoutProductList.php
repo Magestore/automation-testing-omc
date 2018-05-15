@@ -10,13 +10,22 @@ namespace Magento\Webpos\Test\Block\Checkout;
 
 use Magento\Mtf\Block\Block;
 use Magento\Mtf\Client\Locator;
-
 /**
  * Class CheckoutProductList
  * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\Block\CategoryRepository
  */
 class CheckoutProductList extends Block
 {
+    public function waitSearch()
+    {
+        $search = $this->_rootElement->find('#search-header-product');
+        $browser = $this->_rootElement;
+        $browser->waitUntil(
+            function () use ($search) {
+                return $search->isVisible() ? true : null;
+            }
+        );
+    }
     // Set value to input search for adding product to cart
     public function search($string)
     {

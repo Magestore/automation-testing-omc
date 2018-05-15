@@ -36,8 +36,7 @@ class AssertCreateInvoiceSuccess extends AbstractConstraint
 			"Success message's Content is Wrong"
 		);
 
-		sleep(10);
-
+        $webposIndex->getOrderHistoryOrderViewHeader()->waitForChangeStatus($expectStatus);
 		\PHPUnit_Framework_Assert::assertEquals(
 			$expectStatus,
 			$webposIndex->getOrderHistoryOrderViewHeader()->getStatus(),

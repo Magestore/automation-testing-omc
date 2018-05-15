@@ -16,14 +16,18 @@ use Magento\Mtf\Client\Locator;
  */
 class CheckoutPaymentMethod extends Block
 {
-    /**
-     * @return \Magento\Mtf\Client\ElementInterface
-     */
-    public function waitForCashInMethodVisible()
+    public function waitForCashInMethod()
     {
-        $this->waitForElementVisible('.icon-iconPOS-payment-cashforpos');
+        $cashInMethod = $this->_rootElement->find('.icon-iconPOS-payment-cashforpos');
+        if (!$cashInMethod->isVisible()) {
+            $browser = $this->_rootElement;
+            $browser->waitUntil(
+                function () use ($cashInMethod) {
+                    $cashInMethod->isVisible();
+                }
+            );
+        }
     }
-
     public function getCashInMethod()
     {
         return $this->_rootElement->find('.icon-iconPOS-payment-cashforpos');

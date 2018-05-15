@@ -7,6 +7,7 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
@@ -62,7 +63,7 @@ class WebposCheckoutWithDiscountProductDollarCP65EntityTest extends Injectable
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
-        sleep(3);
+        $this->webposIndex->getCheckoutProductList()->waitSearch();
         $this->webposIndex->getCheckoutProductList()->search($product->getSku());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -71,7 +72,7 @@ class WebposCheckoutWithDiscountProductDollarCP65EntityTest extends Injectable
         $this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($price-$price/2);
-        sleep(3);
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         //CategoryRepository
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
@@ -92,12 +93,13 @@ class WebposCheckoutWithDiscountProductDollarCP65EntityTest extends Injectable
         //Click Order History
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 
         return [
             'product' => $product,
-            'price' => $price];
+            'price' => $price
+        ];
     }
 }

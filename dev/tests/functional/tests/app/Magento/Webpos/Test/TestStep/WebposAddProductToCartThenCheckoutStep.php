@@ -27,35 +27,56 @@ class WebposAddProductToCartThenCheckoutStep implements TestStepInterface
 
     protected $products;
 
+    protected $paymentMethod;
+
     public function __construct(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
-        $products
+        $products,
+        $paymentMethod = "cashforpos"
     )
     {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
         $this->products = $products;
+        $this->paymentMethod = $paymentMethod;
     }
 
     public function run()
     {
         $i = 0;
         foreach ($this->products as $product) {
-            $products[$i] = $this->fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);
+            $this->products[$i] = $this->fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);
             $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-            $this->webposIndex->getCheckoutProductList()->search($products[$i]->getSku());
+            $this->webposIndex->getCheckoutProductList()->search($this->products[$i]->getSku());
             $this->webposIndex->getMsWebpos()->waitCartLoader();
+            sleep(1);
             $i++;
         }
 
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(2);
-        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        switch ($this->paymentMethod){
+            case 'cashforpos':
+                $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+                break;
+            case 'codforpos':
+                $this->webposIndex->getCheckoutPaymentMethod()->getCashOnDeliveryMethod()->click();
+                break;
+            case 'ccforpos':
+                $this->webposIndex->getCheckoutPaymentMethod()->getCreditCard()->click();
+                break;
+            case 'cp1forpos':
+                $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
+                break;
+            case 'cp2forpos':
+                $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment2()->click();
+                break;
+            default:
+                $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        }
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(2);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();

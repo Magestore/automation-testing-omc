@@ -8,17 +8,14 @@
 
 namespace Magento\Webpos\Test\Constraint\OrderHistory\ConfirmPopup;
 
-
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class AssertConfirmPopupClosed
  * @package Magento\Webpos\Test\Constraint\SectionOrderHistory\ConfirmPopup
  */
 class AssertConfirmPopupClosed extends AbstractConstraint
 {
-
 	/**
 	 * @param WebposIndex $webposIndex
 	 */

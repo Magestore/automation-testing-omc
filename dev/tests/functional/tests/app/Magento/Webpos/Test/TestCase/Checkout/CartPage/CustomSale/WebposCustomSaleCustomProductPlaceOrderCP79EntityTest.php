@@ -7,6 +7,7 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
@@ -60,7 +61,6 @@ class WebposCustomSaleCustomProductPlaceOrderCP79EntityTest extends Injectable
         $staff = $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-
         $this->webposIndex->getCheckoutProductList()->getCustomSaleButton()->click();
         $this->webposIndex->getCheckoutCustomSale()->getProductNameInput()->setValue($productName);
         // number field price keyboard
@@ -76,18 +76,15 @@ class WebposCustomSaleCustomProductPlaceOrderCP79EntityTest extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-
         //Click Order History
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
     }
 }
