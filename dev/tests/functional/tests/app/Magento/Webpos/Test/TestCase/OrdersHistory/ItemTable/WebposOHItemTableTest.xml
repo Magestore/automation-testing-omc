@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
 	<testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\ItemTable\WebposOHItemTableTest" summary="Orders History - Item Table test" ticketId="WEBPOS-1">
-		<!--<variation name="WebposOHItemTableTestVariation_OH16">-->
-			<!--<data name="configData" xsi:type="string">tax_calculation_apply_customer_tax_before_discount_TAX76</data>-->
-			<!--<data name="products" xsi:type="array">-->
-				<!--<item name="0" xsi:type="array">-->
-					<!--<item name="product" xsi:type="string">product_100_dollar_taxable</item>-->
-					<!--<item name="orderQty" xsi:type="number">1</item>-->
-					<!--<item name="customPrice" xsi:type="number">50</item>-->
-					<!--<item name="qtyText" xsi:type="string">Ordered: 1-->
-<!--Invoiced: 1-->
-<!--Shipped: 1</item>-->
-				<!--</item>-->
-			<!--</data>-->
-			<!--<data name="testcaseID" xsi:type="string">OH16</data>-->
-			<!--<data name="discountAmount" xsi:type="string">10.00</data>-->
-			<!--<data name="createInvoice" xsi:type="boolean">true</data>-->
-			<!--<data name="shipped" xsi:type="boolean">true</data>-->
+		<variation name="WebposOHItemTableTestVariation_OH16">
+			<data name="configData" xsi:type="string">tax_calculation_apply_customer_tax_before_discount_TAX76</data>
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="product" xsi:type="string">product_100_dollar_taxable</item>
+					<item name="orderQty" xsi:type="number">1</item>
+					<item name="customPrice" xsi:type="number">50</item>
+					<item name="qtyText" xsi:type="string">Ordered: 1
+Invoiced: 1
+Shipped: 1</item>
+				</item>
+			</data>
+			<data name="testcaseID" xsi:type="string">OH16</data>
+			<data name="discountAmount" xsi:type="string">10.00</data>
+			<data name="createInvoice" xsi:type="boolean">true</data>
+			<data name="shipped" xsi:type="boolean">true</data>
 
-			<!--<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\ItemTable\AssertItemTableIsCorrect"/>-->
-		<!--</variation>-->
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\ItemTable\AssertItemTableIsCorrect"/>
+		</variation>
 
-		<!--<variation name="WebposOHItemTableTestVariation_OH17">-->
-			<!--<data name="configData" xsi:type="string">tax_calculation_apply_customer_tax_after_discount</data>-->
-			<!--<data name="products" xsi:type="array">-->
-				<!--<item name="0" xsi:type="array">-->
-					<!--<item name="product" xsi:type="string">product_100_dollar_taxable</item>-->
-					<!--<item name="orderQty" xsi:type="number">2</item>-->
-					<!--<item name="customPrice" xsi:type="number">50</item>-->
-					<!--<item name="qtyText" xsi:type="string">Ordered: 2-->
-<!--Invoiced: 2</item>-->
-				<!--</item>-->
-			<!--</data>-->
-			<!--<data name="testcaseID" xsi:type="string">OH17</data>-->
-			<!--<data name="discountAmount" xsi:type="string">10.00</data>-->
-			<!--<data name="createInvoice" xsi:type="boolean">true</data>-->
-			<!--<data name="shipped" xsi:type="boolean">false</data>-->
+		<variation name="WebposOHItemTableTestVariation_OH17">
+			<data name="configData" xsi:type="string">tax_calculation_apply_customer_tax_after_discount</data>
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="product" xsi:type="string">product_100_dollar_taxable</item>
+					<item name="orderQty" xsi:type="number">2</item>
+					<item name="customPrice" xsi:type="number">50</item>
+					<item name="qtyText" xsi:type="string">Ordered: 2
+Invoiced: 2</item>
+				</item>
+			</data>
+			<data name="testcaseID" xsi:type="string">OH17</data>
+			<data name="discountAmount" xsi:type="string">10.00</data>
+			<data name="createInvoice" xsi:type="boolean">true</data>
+			<data name="shipped" xsi:type="boolean">false</data>
 
-			<!--<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\ItemTable\AssertItemTableIsCorrect"/>-->
-		<!--</variation>-->
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\ItemTable\AssertItemTableIsCorrect"/>
+		</variation>
 
 		<variation name="WebposOHItemTableTestVariation_OH18">
 			<data name="configData" xsi:type="string">default_tax_configuration_use_system_value</data>

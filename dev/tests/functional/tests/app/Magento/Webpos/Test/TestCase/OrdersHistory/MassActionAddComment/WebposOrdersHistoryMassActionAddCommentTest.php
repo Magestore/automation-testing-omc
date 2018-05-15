@@ -57,7 +57,7 @@ class WebposOrdersHistoryMassActionAddCommentTest extends Injectable
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        sleep(2);
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
         sleep(1);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Add Comment')->click();

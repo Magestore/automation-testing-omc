@@ -11,7 +11,6 @@ namespace Magento\Webpos\Test\Constraint\Checkout\CartPage\DiscountProduct;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class AssertWebposCheckValidateDiscountDollarCP63
  * @package Magento\Webpos\Test\Constraint\Checkout\CartPage\DiscountProduct

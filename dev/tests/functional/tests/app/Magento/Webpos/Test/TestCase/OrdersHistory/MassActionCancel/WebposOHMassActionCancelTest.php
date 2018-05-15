@@ -14,7 +14,6 @@ use Magento\Sales\Test\Fixture\OrderInjectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class WebposOHMassActionCancelTest
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionCancel
@@ -126,10 +125,8 @@ class WebposOHMassActionCancelTest extends Injectable
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        for ($i=0;$i<2;$i++) {
-            $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
-            $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        }
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         //select the first order
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 		while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}

@@ -56,6 +56,7 @@ class WebposInputValidValueToDiscountPercentCP66EntityTest extends Injectable
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
+        $this->webposIndex->getCheckoutProductList()->waitSearch();
         $this->webposIndex->getCheckoutProductList()->search($product->getSku());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -66,7 +67,7 @@ class WebposInputValidValueToDiscountPercentCP66EntityTest extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
         //we need to set sleep($second) in this case.
-        sleep(3);
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         return [
             'product' => $product,

@@ -151,6 +151,7 @@ class WebposZreportZR010Test extends Injectable
         sleep(2);
         $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();

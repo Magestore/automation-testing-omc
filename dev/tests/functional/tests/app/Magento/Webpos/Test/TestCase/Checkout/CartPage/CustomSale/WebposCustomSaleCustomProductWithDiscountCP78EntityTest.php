@@ -63,7 +63,7 @@ class WebposCustomSaleCustomProductWithDiscountCP78EntityTest extends  Injectabl
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
-        sleep(3);
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
     }

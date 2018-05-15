@@ -7,10 +7,14 @@
  */
 
 namespace Magento\Webpos\Test\Constraint\Checkout\CartPage\DiscountProduct;
+
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class AssertWebposInputValidValueToDiscountPercentCP66
+ * @package Magento\Webpos\Test\Constraint\Checkout\CartPage\DiscountProduct
+ */
 class AssertWebposInputValidValueToDiscountPercentCP66 extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex, CatalogProductSimple $product, $amountValue)

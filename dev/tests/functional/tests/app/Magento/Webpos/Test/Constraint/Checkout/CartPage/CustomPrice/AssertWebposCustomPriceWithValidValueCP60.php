@@ -19,7 +19,7 @@ class AssertWebposCustomPriceWithValidValueCP60 extends AbstractConstraint
     public function processAssert(WebposIndex $webposIndex, $amountValue, $product, $price)
     {
         \PHPUnit_Framework_Assert::assertEquals(
-            $amountValue*$price/100,
+            $amountValue*$price/10,
             $webposIndex->getCheckoutCartItems()->getValueItemPrice($product->getName()),
             'TaxClass page - Customer Price Percent - After set value to amount input with a valid value. The price is not automatically update correctly.'
         );

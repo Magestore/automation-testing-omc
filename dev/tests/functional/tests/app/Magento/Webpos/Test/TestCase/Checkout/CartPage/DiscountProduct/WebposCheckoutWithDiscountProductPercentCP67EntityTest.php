@@ -7,6 +7,7 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
@@ -72,7 +73,7 @@ class WebposCheckoutWithDiscountProductPercentCP67EntityTest extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
-        sleep(3);
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         //CategoryRepository
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
@@ -93,7 +94,8 @@ class WebposCheckoutWithDiscountProductPercentCP67EntityTest extends Injectable
         //Click Order History
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(2);
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 

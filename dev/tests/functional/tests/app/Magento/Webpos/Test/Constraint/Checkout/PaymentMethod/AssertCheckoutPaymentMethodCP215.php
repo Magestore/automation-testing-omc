@@ -7,14 +7,18 @@
  */
 
 namespace Magento\Webpos\Test\Constraint\Checkout\PaymentMethod;
+
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
-
+/**
+ * Class AssertCheckoutPaymentMethodCP215
+ * @package Magento\Webpos\Test\Constraint\Checkout\PaymentMethod
+ */
 class AssertCheckoutPaymentMethodCP215 extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex,$amount)
     {
+        $webposIndex->getOrderHistoryOrderViewHeader()->waitForChangeStatus("Pending");
         \PHPUnit_Framework_Assert::assertEquals(
             "Pending",
             $webposIndex->getOrderHistoryOrderViewHeader()->getStatus(),
@@ -27,11 +31,6 @@ class AssertCheckoutPaymentMethodCP215 extends AbstractConstraint
             substr($totalpaid, 1),
             'TaxClass page - CategoryRepository. On Tab PaymentMethod. Status order total paid.'
         );
-
-//        \PHPUnit_Framework_Assert::assertTrue(
-//            $webposIndex->getOrderHistoryOrderViewHeader()->getButtonTakePayment()->isVisible(),
-//            'TaxClass page - CategoryRepository. On Tab PaymentMethod. Take Payment visible.'
-//        );
 
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getOrderHistoryOrderViewFooter()->getPrintButton()->isVisible(),

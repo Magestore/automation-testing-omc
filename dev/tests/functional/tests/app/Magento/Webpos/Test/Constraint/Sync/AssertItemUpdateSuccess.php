@@ -18,12 +18,12 @@ class AssertItemUpdateSuccess extends AbstractConstraint
 {
 	public function processAssert(WebposIndex $webposIndex, $text, $action = '')
 	{
-		sleep(1);
+        $webposIndex->getSyncTabData()->waitItemRowProgress($text);
 		\PHPUnit_Framework_Assert::assertTrue(
-			$webposIndex->getSyncTabData()->getItemRowProgress($text)->isVisible(),
+            $webposIndex->getSyncTabData()->getItemRowProgress($text)->isVisible(),
 			'Synchronization - '.$text.' - '.$action.' - progress bar is not shown'
 		);
-		while($webposIndex->getSyncTabData()->getItemRowProgress($text)->isVisible()){}
+		$webposIndex->getSyncTabData()->waitItemRowSuccess($text);
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getSyncTabData()->getItemRowSuccess($text)->isVisible(),
 			'Synchronization - '.$text.' - '.$action.' - Success icon is not shown'

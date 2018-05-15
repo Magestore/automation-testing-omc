@@ -8,12 +8,14 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\EditQty;
 
-
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CartPage\EditQty\AssertEditProductPopupIsAvailable;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposCheckoutCartEditQtyCheckoutByEditQtyProductTest
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\EditQty
+ */
 class WebposCheckoutCartEditQtyCheckoutByEditQtyProductTest extends Injectable
 {
 	/**
@@ -62,7 +64,7 @@ class WebposCheckoutCartEditQtyCheckoutByEditQtyProductTest extends Injectable
 		$this->assertEditProductPopupIsAvailable->processAssert($this->webposIndex);
 
 		$this->webposIndex->getCheckoutProductEdit()->getQtyInput()->setValue($qtyInput);
-        sleep(3);
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
 		$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();

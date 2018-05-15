@@ -6,8 +6,12 @@
  * Time: 15:56
  */
 namespace Magento\Webpos\Test\Constraint\Checkout\CartPageActionMenu;
-use Magento\Mtf\Constraint\AbstractConstraint;
 
+use Magento\Mtf\Constraint\AbstractConstraint;
+/**
+ * Class AssertWebposEnterFullScreenAgain
+ * @package Magento\Webpos\Test\Constraint\Checkout\CartPageActionMenu
+ */
 class AssertWebposEnterFullScreenAgain extends AbstractConstraint
 {
     public function processAssert($minHeightBeforeFull, $minHeightAfterFull, $minHeightAfterAgain)

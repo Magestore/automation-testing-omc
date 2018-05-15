@@ -16,19 +16,46 @@ use Magento\Mtf\Block\Block;
  */
 class CheckoutNoteOrder extends Block
 {
-    /**
-     * @return \Magento\Mtf\Client\ElementInterface
-     */
+    public function waitPopUpOrderNoteClose()
+    {
+        $popUpOrderNoteClose = $this->_rootElement->find('.popup-header');
+        $browser = $this->_rootElement;
+        $browser->waitUntil(
+            function () use ($popUpOrderNoteClose) {
+                return $popUpOrderNoteClose->isVisible() ? true : null;
+            }
+        );
+    }
     public function getPopUpOrderNoteClose()
     {
         return $this->_rootElement->find('.popup-header');
     }
 
+    public function waitForCloseOrderNoteButon()
+    {
+        $closeOrderNoteButon = $this->_rootElement->find('.close');
+        $browser = $this->_rootElement;
+        $browser->waitUntil(
+            function () use ($closeOrderNoteButon) {
+                return $closeOrderNoteButon->isVisible() ? true : null;
+            }
+        );
+    }
     public function getCloseOrderNoteButton()
     {
         return $this->_rootElement->find('.close');
     }
 
+    public function waitForSaveOrderNoteButon()
+    {
+        $saveOrderNoteButon = $this->_rootElement->find('button.btn-save');
+        $browser = $this->_rootElement;
+        $browser->waitUntil(
+            function () use ($saveOrderNoteButon) {
+                return $saveOrderNoteButon->isVisible() ? true : null;
+            }
+        );
+    }
     public function getSaveOrderNoteButon()
     {
         return $this->_rootElement->find('button.btn-save');

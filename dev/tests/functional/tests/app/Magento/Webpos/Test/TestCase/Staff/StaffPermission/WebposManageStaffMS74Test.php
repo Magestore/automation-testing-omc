@@ -118,7 +118,7 @@ class WebposManageStaffMS74Test extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         sleep(1);
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue(69);
-        sleep(1);
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         sleep(1);
 //        sleep(2);

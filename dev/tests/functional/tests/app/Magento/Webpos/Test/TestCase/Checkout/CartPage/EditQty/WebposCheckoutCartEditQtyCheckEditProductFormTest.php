@@ -8,17 +8,14 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\EditQty;
 
-
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-use Magento\Mtf\Client\Browser;
-use Magento\Mtf\Client\Driver\Selenium\RemoteDriver;
-use Magento\Mtf\Client\DriverInterface;
-use Magento\Mtf\Client\Locator;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CartPage\EditQty\AssertEditProductPopupIsAvailable;
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposCheckoutCartEditQtyCheckEditProductFormTest
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\EditQty
+ */
 class WebposCheckoutCartEditQtyCheckEditProductFormTest extends Injectable
 {
 	/**
@@ -41,6 +38,9 @@ class WebposCheckoutCartEditQtyCheckEditProductFormTest extends Injectable
 
 	}
 
+    /**
+     * @param CatalogProductSimple $product
+     */
 	public function test(
 		CatalogProductSimple $product
 	)
@@ -62,8 +62,7 @@ class WebposCheckoutCartEditQtyCheckEditProductFormTest extends Injectable
 		// CP45
 		//Assert edit product popup is available
 		$this->assertEditProductPopupIsAvailable->processAssert($this->webposIndex);
-
-		sleep(3);         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 	}
 }

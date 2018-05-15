@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: ducvu
@@ -9,20 +8,17 @@
 
 namespace Magento\Webpos\Test\TestCase\Sync\CustomerComplaints;
 
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Catalog\Test\Page\Adminhtml\CatalogProductEdit;
 use Magento\Catalog\Test\Page\Adminhtml\CatalogProductIndex;
-use Magento\Customer\Test\Fixture\Address;
 use Magento\Customer\Test\Fixture\Customer;
-use Magento\Webpos\Test\Fixture\CustomerComplain;
 use Magento\Customer\Test\Page\Adminhtml\CustomerIndex;
 use Magento\Customer\Test\Page\Adminhtml\CustomerIndexEdit;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Sync\AssertSynchronizationPageDisplay;
-use Magento\Webpos\Test\Fixture\Staff;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
+use Magento\Webpos\Test\Constraint\Sync\AssertSynchronizationPageDisplay;
+use Magento\Webpos\Test\Fixture\CustomerComplain;
+use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposSync14Test
  * @package Magento\Webpos\Test\TestCase\Sync\CustomerComplaints
@@ -67,6 +63,10 @@ class WebposSync14Test extends Injectable
      * @var AssertSynchronizationPageDisplay
      */
     protected $assertSynchronizationPageDisplay;
+
+    /**
+     * @var AssertItemUpdateSuccess
+     */
     protected $assertItemUpdateSuccess;
 
     public function __inject(
@@ -83,14 +83,12 @@ class WebposSync14Test extends Injectable
     }
 
     /**
-     *
-     * @return void
+     * @param Customer $customer
+     * @param CustomerComplain $customerComplain
      */
     public function test(
-        FixtureFactory $fixtureFactory,
         Customer $customer,
-        CustomerComplain $customerComplain,
-        CustomerComplain $editCustomerComplain
+        CustomerComplain $customerComplain
     )
     {
         $staff = $this->objectManager->create(
@@ -112,9 +110,8 @@ class WebposSync14Test extends Injectable
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->synchronization();
 
-        sleep(2);
+        $this->webposIndex->getSyncTabData()->waitItemRowReloadButton("Customer Complaints");
         $this->webposIndex->getSyncTabData()->getItemRowReloadButton("Customer Complaints")->click();
-        sleep(5);
         $action = 'Reload';
         $this->assertItemUpdateSuccess->processAssert($this->webposIndex, "Customer Complaints", $action);
     }
