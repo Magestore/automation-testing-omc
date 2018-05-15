@@ -3,7 +3,7 @@
 <tabs>
 	<general>
 		<class>\Magento\Backend\Test\Block\Widget\Tab</class>
-		<selector>#webpos_tabs_webpos_form</selector>
+			<selector>#webpos_tabs_webpos_form</selector>
 		<strategy>css selector</strategy>
 		<fields>
 			<display_name>

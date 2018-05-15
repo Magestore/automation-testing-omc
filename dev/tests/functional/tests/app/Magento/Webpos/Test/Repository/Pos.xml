@@ -34,5 +34,11 @@
             <field name="pos_name" xsi:type="string">Post Test %isolation%</field>
             <field name="status" xsi:type="string">Enabled</field>
         </dataset>
+        <dataset name="statusSorting">
+            <field name="pos_name" xsi:type="string">Post Test %isolation%</field>
+            <field name="location_id" xsi:type="string">Test Store Address</field>
+            <field name="staff_id" xsi:type="string">admin admin</field>
+            <field name="status" xsi:type="string">Disabled</field>
+        </dataset>
     </repository>
 </config>

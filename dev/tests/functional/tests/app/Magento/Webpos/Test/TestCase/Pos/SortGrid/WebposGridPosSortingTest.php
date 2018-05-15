@@ -9,7 +9,7 @@
  * @Links : https://www.facebook.com/Onjin.Matsui.VTC.NQC
  */
 
-namespace Magento\Webpos\Test\TestCase\Pos;
+namespace Magento\Webpos\Test\TestCase\Pos\SortGrid;
 /**
  * Precondition:
  * 1. Create items
@@ -21,7 +21,7 @@ namespace Magento\Webpos\Test\TestCase\Pos;
  * 5. Perform Asserts
  *
  */
-class GridPosSortingTest extends \Magento\Ui\Test\TestCase\GridSortingTest
+class WebposGridPosSortingTest extends \Magento\Ui\Test\TestCase\GridSortingTest
 {
 
 }

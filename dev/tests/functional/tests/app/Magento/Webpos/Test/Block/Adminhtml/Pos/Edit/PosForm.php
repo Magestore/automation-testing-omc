@@ -13,7 +13,6 @@ namespace Magento\Webpos\Test\Block\Adminhtml\Pos\Edit;
 
 use Magento\Mtf\Block\Form;
 use Magento\Mtf\Client\Locator;
-use function MongoDB\BSON\toJSON;
 
 class PosForm extends Form
 {
@@ -52,11 +51,31 @@ class PosForm extends Form
         $this->_rootElement->find('#page_location_id', locator::SELECTOR_CSS, 'select')->setValue($nameLocation);
     }
 
-    public function setPosName($posName){
+    public function setPosName($posName)
+    {
         $this->_rootElement->find('#page_pos_name')->setValue($posName);
     }
 
-    public function waitLoader(){
+    public function waitLoader()
+    {
         $this->waitForElementVisible('#edit_form');
+    }
+
+    public function getTabByTitle($title)
+    {
+        return $this->_rootElement->find('//li[@role="tab"]/a/span[text()="' . $title . '"]', locator::SELECTOR_XPATH);
+    }
+
+    public function getGeneralFieldByTitle($title)
+    {
+        return $this->_rootElement->find('//fieldset//label/span[text()="' . $title . '"]', locator::SELECTOR_XPATH);
+    }
+
+    public function getGeneralFieldById($id, $type = null)
+    {
+        return $this->_rootElement->find('#' . $id, locator::SELECTOR_CSS, $type);
+    }
+    public function getDenominationFieldByTitle($title){
+        return $this->_rootElement->find('//table/thead//th/span[text()="'.$title.'"]', locator::SELECTOR_XPATH);
     }
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Pos\Filter\WebposManagePosMP11Test" summary="Check GUI" ticketId="MAGETWO-0001">
+    <variation name="GridPosFilteringMP11Test">
+        <data name="pos/dataset" xsi:type="string">MS44Staff</data>
+        <constraint name="Magento\Webpos\Test\Constraint\Pos\Grid\AssertFilterPosWithResult"></constraint>
+    </variation>
+    </testCase>
+</config>
