@@ -41,6 +41,7 @@ class AssertRefundSuccessWithExistOrderInBackend extends AbstractConstraint
             $webposIndex->getOrderHistoryOrderViewHeader()->waitForClosedStatusVisisble();
         }
 
+        $webposIndex->getOrderHistoryOrderViewHeader()->waitForChangeStatus($expectStatus);
         \PHPUnit_Framework_Assert::assertEquals(
             $expectStatus,
             $webposIndex->getOrderHistoryOrderViewHeader()->getStatus(),

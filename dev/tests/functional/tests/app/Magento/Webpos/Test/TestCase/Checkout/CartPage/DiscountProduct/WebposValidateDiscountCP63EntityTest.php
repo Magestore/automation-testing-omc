@@ -60,10 +60,11 @@ class WebposValidateDiscountCP63EntityTest extends Injectable
         $price = $this->webposIndex->getCheckoutCartItems()->getValueItemPrice($product->getName());
 
         $this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
+        $this->webposIndex->getCheckoutProductEdit()->waitDiscountButton();
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($price+10);
         //we need to set sleep($second) in this case.
-        sleep(3);
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         return [
             'product' => $product,

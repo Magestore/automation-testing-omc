@@ -14,8 +14,10 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderHistoryInvoiceWithShippingFee;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
-
-
+/**
+ * Class WebposTaxTAX50Test
+ * @package Magento\Webpos\Test\TestCase\Tax\ShippingPriceTaxableGoodsAndShippingIncludingTax
+ */
 class WebposTaxTAX50Test extends Injectable
 {
     /**

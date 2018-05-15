@@ -8,7 +8,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPageActionMenu\WebposClickSaveAndClosePopupOrderNoteTest" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
         <variation name="WebposClickSaveAndClosePopupOrderNoteTestVariation1_CP13">
-            <data name="staff" xsi:type="null"></data>
+            <data name="staff" xsi:type="string">123</data>
             <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPageActionMenu\AssertWebposClickSaveAndClosePopupOrderNote" />
         </variation>
     </testCase>

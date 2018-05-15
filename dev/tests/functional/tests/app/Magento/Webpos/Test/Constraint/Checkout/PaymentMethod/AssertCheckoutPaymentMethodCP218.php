@@ -15,6 +15,7 @@ class AssertCheckoutPaymentMethodCP218 extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex)
     {
+        $webposIndex->getOrderHistoryOrderViewHeader()->waitForChangeStatus("Pending");
         \PHPUnit_Framework_Assert::assertEquals(
             "Pending",
             $webposIndex->getOrderHistoryOrderViewHeader()->getStatus(),

@@ -8,10 +8,12 @@
 
 namespace Magento\Webpos\Test\Constraint\Checkout\CartPage\EditQty;
 
-
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class AssertEditProductPopupIsAvailable
+ * @package Magento\Webpos\Test\Constraint\Checkout\CartPage\EditQty
+ */
 class AssertEditProductPopupIsAvailable extends AbstractConstraint
 {
 	public function processAssert(WebposIndex $webposIndex)

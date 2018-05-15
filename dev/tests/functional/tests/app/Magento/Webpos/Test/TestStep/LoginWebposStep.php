@@ -59,9 +59,8 @@ class LoginWebposStep implements TestStepInterface
 			$this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
 			$this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
 			$this->webposIndex->getLoginForm()->clickLoginButton();
-            sleep(2);
 			$time = time();
-            $timeAfter = $time + 5;
+            $timeAfter = $time + 2;
             while (!$this->webposIndex->getWrapWarningForm()->isVisible() &&
                 !$this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible() &&
                 $time < $timeAfter){
@@ -70,7 +69,6 @@ class LoginWebposStep implements TestStepInterface
             if ($this->webposIndex->getWrapWarningForm()->isVisible() &&
                 $this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible()) {
                 $this->webposIndex->getWrapWarningForm()->getButtonContinue()->click();
-                sleep(2);
             }
             $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
@@ -78,10 +76,8 @@ class LoginWebposStep implements TestStepInterface
             while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
                 $time = time();
             }
-            sleep(2);
         }
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-		sleep(2);
         $data = [
             'username' => $username,
             'password' => $password

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Zreport\WebposZreportZR010Test"
+              summary="Grid UI Component Filtering" ticketId="WEBPOS-1">
+        <variation name="WebposZreportZR010Test">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+            </data>
+            <data name="amount" xsi:type="string">5.00</data>
+            <data name="putMoneyInValue" xsi:type="string">5.00</data>
+            <data name="takeMoneyOutValue" xsi:type="string">5.00</data>
+            <data name="addDiscount" xsi:type="boolean">true</data>
+            <data name="discountAmount" xsi:type="string">10.00</data>
+            <data name="dataConfigPayment" xsi:type="string">magestore_webpos_custome_payment</data>
+            <data name="defaultPaymentMethod" xsi:type="string">magestore_webpos_specific_payment</data>
+            <data name="denomination/dataset" xsi:type="string">default</data>
+            <data name="denominationNumberCoin" xsi:type="string">1</data>
+            <data name="dataConfig/dataset" xsi:type="string">create_session_before_working</data>
+            <data name="dataConfigToNo/dataset" xsi:type="string">setup_session_before_working_to_no</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertZreportOpeningAmountPutInTakeOutMoneyDiscountRefund"/>
+        </variation>
+    </testCase>
+</config>

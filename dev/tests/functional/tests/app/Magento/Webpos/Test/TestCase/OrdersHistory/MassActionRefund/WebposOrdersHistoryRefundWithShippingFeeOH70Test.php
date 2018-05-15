@@ -12,7 +12,6 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class WebposOrdersHistoryRefundWithShippingFeeOH70Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
@@ -88,8 +87,8 @@ class WebposOrdersHistoryRefundWithShippingFeeOH70Test extends Injectable
         // Go to Order History
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         // Open refund popup
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
@@ -102,7 +101,10 @@ class WebposOrdersHistoryRefundWithShippingFeeOH70Test extends Injectable
             ['products' => $products, 'adjustRefund' => 0, 'adjustFee' => 0, 'refundShipping' => $refundShipping]
         )->run();
 
-        return ['products' => $products, 'refundShipping' => $refundShipping];
+        return [
+            'products' => $products,
+            'refundShipping' => $refundShipping
+        ];
     }
 
     public function tearDown()

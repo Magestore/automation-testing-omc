@@ -115,7 +115,8 @@ class WebposManageStaffMS76Test extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
         sleep(2);
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue(69);
-        sleep(3);         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         sleep(2);
         $totalAfter = $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText();
         $this->assertNotEquals(

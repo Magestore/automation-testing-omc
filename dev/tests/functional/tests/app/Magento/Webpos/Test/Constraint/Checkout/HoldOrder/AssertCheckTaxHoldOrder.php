@@ -6,10 +6,14 @@
  * Time: 13:57
  */
 namespace Magento\Webpos\Test\Constraint\Checkout\HoldOrder;
+
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Customer\Test\Fixture\Customer;
-
+/**
+ * Class AssertCheckTaxHoldOrder
+ * @package Magento\Webpos\Test\Constraint\Checkout\HoldOrder
+ */
 class AssertCheckTaxHoldOrder extends AbstractConstraint
 {
     public function processAssert($taxExpected, $taxActual)

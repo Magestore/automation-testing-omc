@@ -62,9 +62,8 @@ class WebposCheckoutByGuestOH09Test extends Injectable
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         sleep(1);
         $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(1);
-        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         $configData = $fixtureFactory->createByCode('configData', ['dataset' => $configData]);
         $section = $configData->getSection();

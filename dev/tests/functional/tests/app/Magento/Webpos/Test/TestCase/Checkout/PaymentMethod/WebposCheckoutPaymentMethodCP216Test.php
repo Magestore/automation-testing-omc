@@ -83,9 +83,8 @@ class WebposCheckoutPaymentMethodCP216Test extends Injectable
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        sleep(3);
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
         $this->webposIndex->getCheckoutPlaceOrder()->getShippingCheckbox()->click();
@@ -101,9 +100,8 @@ class WebposCheckoutPaymentMethodCP216Test extends Injectable
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-
-        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
 
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
     }

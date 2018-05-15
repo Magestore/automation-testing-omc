@@ -6,9 +6,13 @@
  * Time: 15:44
  */
 namespace Magento\Webpos\Test\Constraint\Checkout\HoldOrder;
+
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class AssertCheckOnHoldOrderEmpty
+ * @package Magento\Webpos\Test\Constraint\Checkout\HoldOrder
+ */
 class AssertCheckOnHoldOrderEmpty extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex)
@@ -24,8 +28,6 @@ class AssertCheckOnHoldOrderEmpty extends AbstractConstraint
             'List Order is not empty'
         );
     }
-
-
 
     /**
      * Returns a string representation of the object.

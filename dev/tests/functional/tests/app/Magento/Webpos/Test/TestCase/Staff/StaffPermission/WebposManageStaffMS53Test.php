@@ -91,7 +91,7 @@ class WebposManageStaffMS53Test extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
-        sleep(2);
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         $this->assertWarningDiscountCustomPrice->processAssert($this->webposIndex, 'You are able to apply discount under '.$webposRole->getMaximumDiscountPercent().'% only');
         $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');

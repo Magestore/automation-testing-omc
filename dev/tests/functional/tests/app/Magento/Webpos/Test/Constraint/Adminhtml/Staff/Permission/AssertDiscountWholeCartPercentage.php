@@ -16,8 +16,9 @@ class AssertDiscountWholeCartPercentage extends AbstractConstraint
         $discount = $discount * $total * 0.01;
         $webposIndex->getMsWebpos()->clickCMenuButton();
         $webposIndex->getCMenu()->ordersHistory();
-        sleep(1);
         $webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
+        $webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $webposIndex->getOrderHistoryOrderList()->search($orderId);
         $webposIndex->getOrderHistoryOrderList()->waitLoader();
         sleep(2);

@@ -6,8 +6,13 @@
  * Time: 09:33
  */
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+/**
+ * Class WebposSaveOrderNoteCP186Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer
+ */
 class WebposSaveOrderNoteCP186Test extends Injectable
 {
     /**
@@ -23,17 +28,14 @@ class WebposSaveOrderNoteCP186Test extends Injectable
         )->run();
     }
 
-    public function __inject
-    (
+    public function __inject (
         WebposIndex $webposIndex
-    )
-    {
+    ) {
         $this->webposIndex = $webposIndex;
     }
 
     public function test($products, $comment)
     {
-
         //Create product
         $product = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',

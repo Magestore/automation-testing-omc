@@ -87,7 +87,8 @@ class WebposTakePaymentOH97Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        sleep(3);         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
         // place order getCreateInvoiceCheckbox
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
@@ -115,8 +116,8 @@ class WebposTakePaymentOH97Test extends Injectable
         $am = $this->webposIndex->getOrderHistoryOrderViewHeader()->getGrandTotal();
         sleep(0.5);
         $this->webposIndex->getOrderHistoryPayment()->getInputAmount()->setValue(substr($am,1));
-        sleep(0.5);
-        sleep(3);         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         sleep(0.5);
 
         $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();

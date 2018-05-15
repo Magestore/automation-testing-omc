@@ -6,8 +6,12 @@
  * Time: 16:09
  */
 namespace Magento\Webpos\Test\Block;
-use Magento\Mtf\Block\Block;
 
+use Magento\Mtf\Block\Block;
+/**
+ * Class CheckoutContainer
+ * @package Magento\Webpos\Test\Block
+ */
 class CheckoutContainer extends Block
 {
     public function getStyleLeft()
@@ -42,4 +46,8 @@ class CheckoutContainer extends Block
 	{
 		$this->waitForElementVisible('#add-more-payment');
 	}
+
+	public function clickOutSide() {
+        $this->_rootElement->click();
+    }
 }

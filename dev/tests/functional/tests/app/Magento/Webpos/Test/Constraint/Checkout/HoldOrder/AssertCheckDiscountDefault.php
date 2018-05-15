@@ -8,8 +8,10 @@
 namespace Magento\Webpos\Test\Constraint\Checkout\HoldOrder;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Customer\Test\Fixture\Customer;
-
+/**
+ * Class AssertCheckDiscountDefault
+ * @package Magento\Webpos\Test\Constraint\Checkout\HoldOrder
+ */
 class AssertCheckDiscountDefault extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex)

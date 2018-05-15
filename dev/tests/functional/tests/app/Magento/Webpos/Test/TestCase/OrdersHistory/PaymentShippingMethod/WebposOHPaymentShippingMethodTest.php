@@ -8,12 +8,14 @@
 
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\PaymentShippingMethod;
 
-
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposOHPaymentShippingMethodTest
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\PaymentShippingMethod
+ */
 class WebposOHPaymentShippingMethodTest extends Injectable
 {
     /**
@@ -94,6 +96,7 @@ class WebposOHPaymentShippingMethodTest extends Injectable
             if (!$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->isVisible()) {
                 $this->webposIndex->getCheckoutShippingMethod()->clickShipPanel();
             }
+            sleep(1);
             $this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }
@@ -119,9 +122,8 @@ class WebposOHPaymentShippingMethodTest extends Injectable
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-
-        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
 
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
