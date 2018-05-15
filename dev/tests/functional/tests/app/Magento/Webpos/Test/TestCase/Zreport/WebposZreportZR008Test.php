@@ -112,7 +112,6 @@ class WebposZreportZR008Test extends Injectable
         sleep(1);
         // Set closing balance
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
-        sleep(1);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getColumnNumberOfCoinsAtRow(2)->setValue($denominationNumberCoin);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
         sleep(2);
@@ -120,9 +119,7 @@ class WebposZreportZR008Test extends Injectable
         {
             $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
             $this->webposIndex->getSessionSetReasonPopup()->getReason()->setValue('Magento');
-            sleep(1);
             $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
-            sleep(1);
         }
         // End session
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
@@ -136,7 +133,6 @@ class WebposZreportZR008Test extends Injectable
         $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitZreportVisible();
-        sleep(2);
 
         $this->defaultPaymentMethod = $defaultPaymentMethod;
 

@@ -57,7 +57,6 @@ class WebposAddProductToCartThenCheckoutStep implements TestStepInterface
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(2);
         switch ($this->paymentMethod){
             case 'cashforpos':
                 $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
@@ -78,7 +77,6 @@ class WebposAddProductToCartThenCheckoutStep implements TestStepInterface
                 $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         }
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(2);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();

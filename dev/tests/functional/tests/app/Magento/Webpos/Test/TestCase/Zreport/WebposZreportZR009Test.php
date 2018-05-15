@@ -128,10 +128,8 @@ class WebposZreportZR009Test extends Injectable
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();
-        sleep(1);
         $this->webposIndex->getCheckoutAddMorePayment()->getCashIn()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(2);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
@@ -142,10 +140,8 @@ class WebposZreportZR009Test extends Injectable
         sleep(1);
         // Set closing balance
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
-        sleep(1);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getColumnNumberOfCoinsAtRow(2)->setValue($denominationNumberCoin);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        sleep(2);
         if ($this->webposIndex->getSessionConfirmModalPopup()->isVisible()) {
             $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
             $this->webposIndex->getSessionSetReasonPopup()->getReason()->setValue('Magento');
@@ -166,7 +162,6 @@ class WebposZreportZR009Test extends Injectable
         $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitZreportVisible();
-        sleep(2);
 
         $this->defaultPaymentMethod = $defaultPaymentMethod;
 

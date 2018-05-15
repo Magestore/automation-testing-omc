@@ -54,9 +54,14 @@ class WebposZreportLoginTwiceTest extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test($products, Denomination $denomination,
-                         $denominationNumberCoin, ConfigData $dataConfig, ConfigData $dataConfigToNo,
-                         Pos $pos, FixtureFactory $fixtureFactory)
+    public function test(
+        $products,
+        Denomination $denomination,
+        $denominationNumberCoin,
+        ConfigData $dataConfig,
+        ConfigData $dataConfigToNo,
+        Pos $pos,
+        FixtureFactory $fixtureFactory)
     {
         // Create denomination
         $denomination->persist();
@@ -66,22 +71,22 @@ class WebposZreportLoginTwiceTest extends Injectable
             ['dataConfig' => $dataConfig]
         )->run();
 
-        /**@var Location $location*/
+        /**@var Location $location */
         $location = $fixtureFactory->createByCode('location', ['dataset' => 'default']);
         $location->persist();
         $locationId = $location->getLocationId();
         $posData = $pos->getData();
-        $posData['location_id'] = [ $locationId ];
-        /**@var Pos $pos*/
+        $posData['location_id'] = [$locationId];
+        /**@var Pos $pos */
         $pos = $fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
 
         $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
         $staffData = $staff->getData();
-        $staffData['location_id'] = [ $locationId ];
-        $staffData['pos_ids'] = [ $posId ];
-        /**@var Staff $staff*/
+        $staffData['location_id'] = [$locationId];
+        $staffData['pos_ids'] = [$posId];
+        /**@var Staff $staff */
         $staff = $fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff->persist();
         // Login webpos
@@ -107,17 +112,15 @@ class WebposZreportLoginTwiceTest extends Injectable
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $staffName1 = $this->webposIndex->getCMenu()->getUsername();
         $this->webposIndex->getCMenu()->logout();
-        sleep(1);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
-        sleep(1);
         $this->webposIndex->getModal()->getOkButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader.loading-mask');
 
         $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
         $staffData = $staff->getData();
-        $staffData['location_id'] = [ $locationId ];
-        $staffData['pos_ids'] = [ $posId ];
-        /**@var Staff $staff*/
+        $staffData['location_id'] = [$locationId];
+        $staffData['pos_ids'] = [$posId];
+        /**@var Staff $staff */
         $staff = $fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff->persist();
         // Login webpos
@@ -143,15 +146,11 @@ class WebposZreportLoginTwiceTest extends Injectable
         sleep(1);
         // Set closing balance
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
-        sleep(1);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getColumnNumberOfCoinsAtRow(2)->setValue($denominationNumberCoin);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        sleep(1);
         $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
         $this->webposIndex->getSessionSetReasonPopup()->getReason()->setValue('Magento');
-        sleep(1);
         $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
-        sleep(1);
         // End session
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
         sleep(1);
@@ -164,7 +163,6 @@ class WebposZreportLoginTwiceTest extends Injectable
         $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitZreportVisible();
-        sleep(2);
         return [
             'staffName' => $staffName2,
             'openedString' => $openedString,

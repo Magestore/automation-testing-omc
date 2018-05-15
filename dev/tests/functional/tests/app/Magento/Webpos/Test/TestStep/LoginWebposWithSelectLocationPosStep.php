@@ -32,7 +32,6 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
      */
     protected $webposIndex;
 
-
     /**
      * @var FixtureFactory
      */
@@ -61,19 +60,17 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
             $this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
             $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
             $this->webposIndex->getLoginForm()->clickLoginButton();
-            sleep(2);
             //check if WrapWarningForm is visible when this staff has been logged in
             $time = time();
-            $timeAfter = $time + 5;
+            $timeAfter = $time + 3;
             while (!$this->webposIndex->getWrapWarningForm()->isVisible() &&
                 !$this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible() &&
-                $time < $timeAfter) {
+                $time < $timeAfter){
                 $time = time();
             }
             if ($this->webposIndex->getWrapWarningForm()->isVisible() &&
                 $this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible()) {
                 $this->webposIndex->getWrapWarningForm()->getButtonContinue()->click();
-                sleep(2);
             }
 
             $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
@@ -85,7 +82,6 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
             while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
                 $time = time();
             }
-            sleep(2);
         }
 
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();

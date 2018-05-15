@@ -84,14 +84,20 @@ class WebposZreportZR010Test extends Injectable
         $this->fixtureFactory = $fixtureFactory;
     }
 
-    public function test($products, Denomination $denomination,
-                         $denominationNumberCoin,
-                         ConfigData $dataConfig, ConfigData $dataConfigToNo,
-                         $dataConfigPayment,
-                         $defaultPaymentMethod, $amount,
-                         $putMoneyInValue, $takeMoneyOutValue,
-                         $addDiscount = false,
-                         $discountAmount = '')
+    public function test(
+        $products,
+        Denomination $denomination,
+        $denominationNumberCoin,
+        ConfigData $dataConfig,
+        ConfigData $dataConfigToNo,
+        $dataConfigPayment,
+        $defaultPaymentMethod,
+        $amount,
+        $putMoneyInValue,
+        $takeMoneyOutValue,
+        $addDiscount = false,
+        $discountAmount = ''
+    )
     {
         // Create denomination
         $denomination->persist();
@@ -100,12 +106,12 @@ class WebposZreportZR010Test extends Injectable
 //            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
 //            ['dataConfig' => $dataConfig]
 //        )->run();
-
-        //Config Customer Credit Payment Method
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $dataConfigPayment]
-        )->run();
+//
+//        //Config Customer Credit Payment Method
+//        $this->objectManager->getInstance()->create(
+//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+//            ['configData' => $dataConfigPayment]
+//        )->run();
 
         // Login webpos
         $this->objectManager->getInstance()->create(
@@ -148,11 +154,21 @@ class WebposZreportZR010Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(2);
+        $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
         $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        // phai sleep vi payment co khi bi xoa
+        sleep(2);
+        if (!$this->webposIndex->getCheckoutPaymentMethod()->getIconRemove()->isVisible()) {
+            $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
+            $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
+            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        }
+        $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->click();
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
         $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#add-more-payment');
@@ -175,7 +191,6 @@ class WebposZreportZR010Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Refund')->click();
         $this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForModalPopup();
         $this->webposIndex->getModal()->getOkButton()->click();
         sleep(1);
 
@@ -199,7 +214,7 @@ class WebposZreportZR010Test extends Injectable
         }
         // End session
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        sleep(1);
+        sleep(2);
 
         $cashSales = $this->webposIndex->getSessionShift()->getPaymentAmount(1)->getText();
         $otherPaymentSales = $this->webposIndex->getSessionShift()->getPaymentAmount(2)->getText();
@@ -245,6 +260,11 @@ class WebposZreportZR010Test extends Injectable
 //        )->run();
     }
 
+    /**
+     * convert string price format to decimal
+     * @param $string
+     * @return float|int|null
+     */
     public function convertPriceFormatToDecimal($string)
     {
         $result = null;
