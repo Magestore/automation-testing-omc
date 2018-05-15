@@ -3,7 +3,6 @@
     <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct\WebposCheckoutWithDiscountProductDollarCP65EntityTest" summary="Checkout - Cart Page - Webpos Check GUI Discount CP65" ticketId="WEBPOS-1">
         <variation name="Webpos_CheckoutWithDiscount_ByDollar_CP65TestVariation1_CP65">
             <data name="product/dataset" xsi:type="string">product1</data>
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\DiscountProduct\AssertWebposPlaceOrderWithDiscountByDollarCP65"/>-->
         </variation>
     </testCase>
 </config>

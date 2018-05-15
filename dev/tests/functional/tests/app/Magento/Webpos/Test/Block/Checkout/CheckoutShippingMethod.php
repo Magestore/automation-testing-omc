@@ -17,6 +17,17 @@ use Magento\Mtf\Client\Locator;
  */
 class CheckoutShippingMethod extends Block
 {
+    public function waitForFlatRateFixedMethod()
+    {
+        $browser = $this->_rootElement;
+        $browser->click();
+        $flatRateFixedMethod = $this->_rootElement->find('[id="flatrate_flatrate"]');
+        $browser->waitUntil(
+            function () use ($flatRateFixedMethod) {
+                return $flatRateFixedMethod->isVisible() ? true : null;
+            }
+        );
+    }
     public function clickFlatRateFixedMethod()
     {
         $this->_rootElement->click();

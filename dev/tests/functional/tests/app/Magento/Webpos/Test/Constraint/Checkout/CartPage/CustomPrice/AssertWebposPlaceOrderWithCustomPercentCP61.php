@@ -21,7 +21,7 @@ class AssertWebposPlaceOrderWithCustomPercentCP61 extends AbstractConstraint
         $priceOfProduct = $webposIndex->getOrderHistoryOrderViewContent()->getPriceOfProduct($product->getName())->getText();
         $priceOfProduct = substr($priceOfProduct, 1, 3);
         \PHPUnit_Framework_Assert::assertEquals(
-            $amountValue*$price/100,
+            $amountValue*$price/10,
             $priceOfProduct,
             'Order History Detail - The new price of the product is not visible correctly.'
         );

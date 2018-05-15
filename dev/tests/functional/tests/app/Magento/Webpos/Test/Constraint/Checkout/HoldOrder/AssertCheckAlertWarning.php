@@ -6,8 +6,12 @@
  * Time: 12:01
  */
 namespace Magento\Webpos\Test\Constraint\Checkout\HoldOrder;
-use Magento\Mtf\Constraint\AbstractConstraint;
 
+use Magento\Mtf\Constraint\AbstractConstraint;
+/**
+ * Class AssertCheckAlertWarning
+ * @package Magento\Webpos\Test\Constraint\Checkout\HoldOrder
+ */
 class AssertCheckAlertWarning extends AbstractConstraint
 {
     public function processAssert($warningMessageActual, $warningMessageExpected)

@@ -14,8 +14,8 @@ class AssertPlaceOrderSuccess extends AbstractConstraint
     {
         $webposIndex->getMsWebpos()->clickCMenuButton();
         $webposIndex->getCMenu()->ordersHistory();
-        sleep(1);
         $webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
 
         $webposIndex->getOrderHistoryOrderList()->search($orderId);
         $webposIndex->getOrderHistoryOrderList()->waitLoader();

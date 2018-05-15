@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: PhucDo
@@ -11,12 +10,15 @@ namespace Magento\Webpos\Test\Constraint\OrderHistory;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-
+/**
+ * Class AssertOrderStatus
+ * @package Magento\Webpos\Test\Constraint\OrderHistory
+ */
 class AssertOrderStatus extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex, $status)
     {
-        sleep(5);
+        $webposIndex->getOrderHistoryOrderViewHeader()->waitForChangeStatus($status);
         \PHPUnit_Framework_Assert::assertEquals(
             $status,
             $webposIndex->getOrderHistoryOrderViewHeader()->getStatus(),

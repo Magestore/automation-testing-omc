@@ -8,10 +8,12 @@
 
 namespace Magento\Webpos\Test\Constraint\OrderHistory\Cancel;
 
-
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class AssertCancelOrderSuccess
+ * @package Magento\Webpos\Test\Constraint\OrderHistory\Cancel
+ */
 class AssertCancelOrderSuccess extends AbstractConstraint
 {
 	public function processAssert(WebposIndex $webposIndex)
@@ -25,9 +27,9 @@ class AssertCancelOrderSuccess extends AbstractConstraint
 			$webposIndex->getOrderHistoryAddCancelComment()->isVisible(),
 			'Cancel Popup is not closed'
 		);
-		sleep(1);
+        $webposIndex->getToaster()->waitUntilWarningMessage();
 		\PHPUnit_Framework_Assert::assertTrue(
-			$webposIndex->getToaster()->getWarningMessage()->isVisible(),
+            $webposIndex->getToaster()->getWarningMessage()->isVisible(),
 			'Success Message is not displayed'
 		);
 		$message = 'The order has been canceled successfully.';
@@ -39,6 +41,7 @@ class AssertCancelOrderSuccess extends AbstractConstraint
 
 		$expectStatus = 'Cancelled';
 		$webposIndex->getOrderHistoryOrderViewFooter()->waitForInvoiceButtonNotVisible();
+        $webposIndex->getOrderHistoryOrderViewHeader()->waitForChangeStatus($expectStatus);
 		\PHPUnit_Framework_Assert::assertEquals(
 			$expectStatus,
 			$webposIndex->getOrderHistoryOrderViewHeader()->getStatus(),

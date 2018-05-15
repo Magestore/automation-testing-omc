@@ -54,7 +54,7 @@ class WebposInputValidValueToDiscountDollarCP64EntityTest extends Injectable
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
-        sleep(3);
+        $this->webposIndex->getCheckoutProductList()->waitSearch();
         $this->webposIndex->getCheckoutProductList()->search($product->getSku());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -64,7 +64,7 @@ class WebposInputValidValueToDiscountDollarCP64EntityTest extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($price-$price/2);
         //we need to set sleep($second) in this case.
-        sleep(3);
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         return [
             'product' => $product,

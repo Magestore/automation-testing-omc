@@ -8,11 +8,9 @@
 
 namespace Magento\Webpos\Test\Constraint\OrderHistory;
 
-
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Sales\Test\Page\Adminhtml\OrderIndex;
 use Magento\Sales\Test\Page\Adminhtml\SalesOrderView;
-
 /**
  * Class AssertOrderStatusInBackend
  * @package Magento\Webpos\Test\Constraint\SectionOrderHistory

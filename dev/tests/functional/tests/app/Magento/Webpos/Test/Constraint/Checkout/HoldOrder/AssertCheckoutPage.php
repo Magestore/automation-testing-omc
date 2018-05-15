@@ -6,9 +6,13 @@
  * Time: 11:07
  */
 namespace Magento\Webpos\Test\Constraint\Checkout\HoldOrder;
+
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class AssertCheckoutPage
+ * @package Magento\Webpos\Test\Constraint\Checkout\HoldOrder
+ */
 class AssertCheckoutPage extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex)

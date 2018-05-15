@@ -10,7 +10,6 @@ namespace Magento\Webpos\Test\Constraint\Checkout\CheckGUI;
 
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class AssertRedirectToCheckoutCartPage
  * @package Magento\Webpos\Test\Constraint\Checkout\CheckGUI

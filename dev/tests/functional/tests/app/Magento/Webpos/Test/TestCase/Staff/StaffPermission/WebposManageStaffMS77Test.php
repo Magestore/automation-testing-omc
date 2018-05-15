@@ -137,6 +137,7 @@ class WebposManageStaffMS77Test extends Injectable
             $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->isVisible(),
             'Discount button is not hidden.'
         );
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->webposIndex->getCMenu()->getSessionManagement();

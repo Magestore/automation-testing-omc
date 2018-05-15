@@ -18,6 +18,7 @@ class AssertWebposClickSaveAndClosePopupOrderNote extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex)
     {
+        sleep(1);
         \PHPUnit_Framework_Assert::assertFalse(
             $webposIndex->getCheckoutNoteOrder()->getPopUpOrderNoteClose()->isVisible(),
             'On the Products List Page - The action CLOSE ORDER NOTE on the popup add order note of the web POS TaxClass was visible. It might be disable.'
