@@ -9,28 +9,31 @@
 namespace Magento\Webpos\Test\TestCase\Zreport;
 
 use Magento\Config\Test\Fixture\ConfigData;
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposZreportCheckGUITest
+ * Class WebposZreportZR012Test
  *
- * Precondition: There are some POSs and setting [Need to create session before working] = ""Yes"" on the test site
+ * Precondition: There are some POSs and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff who has open and close session permission
  * 2. Open a session
- * 3. Create some orders successfully"
+ * 3. Create some orders successfully with cashin payment method
  *
  * Steps:
  * 1. Go to [Session Management] menu
- * 2. Click on [End of Session] > Input real money > [Confirm] > Close session successfully
- * 3. Click on [Print] button
+ * 2. Close the session successfully with Closing amount = Theoretical closing amount
+ * 3. Click to print Z-report
  *
  * Acceptance:
+ * 3. Show Z-report with:
+ * [Difference] = 0
  *
  * @package Magento\Webpos\Test\TestCase\Zreport
  */
-class WebposZreportCheckGUITest extends Injectable
+class WebposZreportZR012Test extends Injectable
 {
     /**
      * Webpos Index page.
@@ -40,21 +43,27 @@ class WebposZreportCheckGUITest extends Injectable
     protected $webposIndex;
     protected $dataConfigToNo;
 
+    /**
+     * @var FixtureFactory
+     */
+    protected $fixtureFactory;
 
     public function __inject(
-        WebposIndex $webposIndex
+        WebposIndex $webposIndex,
+        FixtureFactory $fixtureFactory
     )
     {
         $this->webposIndex = $webposIndex;
+        $this->fixtureFactory = $fixtureFactory;
     }
 
     public function test(
-        $products,
         Denomination $denomination,
-        $denominationNumberCoin,
+        $products,
         ConfigData $dataConfig,
         ConfigData $dataConfigToNo
-    ) {
+    )
+    {
         // Create denomination
         $denomination->persist();
         $this->dataConfigToNo = $dataConfigToNo;
@@ -64,7 +73,7 @@ class WebposZreportCheckGUITest extends Injectable
         )->run();
 
         // Login webpos
-        $staff = $this->objectManager->getInstance()->create(
+        $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
         )->run();
 
@@ -78,33 +87,25 @@ class WebposZreportCheckGUITest extends Injectable
         )->run();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $staffName = $this->webposIndex->getCMenu()->getUsername();
         $this->webposIndex->getCMenu()->getSessionManagement();
-        sleep(1);
+        sleep(2);
+
+        $cashSales = $this->webposIndex->getSessionShift()->getPaymentAmount(1)->getText();
+        $denominationNumberCoin = $this->convertPriceFormatToDecimal($cashSales);
+
         // Set closing balance
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
+        $this->webposIndex->getSessionCloseShift()->waitSetClosingBalancePopupVisible();
+        $this->webposIndex->getSessionSetClosingBalancePopup()->setCoinBillValue($denomination->getDenominationName());
         $this->webposIndex->getSessionSetClosingBalancePopup()->getColumnNumberOfCoinsAtRow(2)->setValue($denominationNumberCoin);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
-        $this->webposIndex->getSessionSetReasonPopup()->getReason()->setValue('Magento');
-        $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
+        $this->webposIndex->getSessionCloseShift()->waitSetClosingBalancePopupNotVisible();
         // End session
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        sleep(1);
-
-        $openedString = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
-        $openedString .= ' by ' . $staffName;
-        $closedString = $this->webposIndex->getSessionShift()->getCloseTime()->getText();
-        $closedString .= ' by ' . $staffName;
 
         $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitZreportVisible();
-        return [
-            'staffName' => $staffName,
-            'openedString' => $openedString,
-            'closedString' => $closedString
-        ];
     }
 
     public function tearDown()
@@ -113,5 +114,26 @@ class WebposZreportCheckGUITest extends Injectable
             'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
             ['dataConfig' => $this->dataConfigToNo]
         )->run();
+    }
+
+    /**
+     * convert string price format to decimal
+     * @param $string
+     * @return float|int|null
+     */
+    public function convertPriceFormatToDecimal($string)
+    {
+        $result = null;
+        $negative = false;
+        if ($string[0] === '-') {
+            $negative = true;
+            $string = str_replace('-', '', $string);
+        }
+        $string = str_replace('$', '', $string);
+        $result = floatval($string);
+        if ($negative) {
+            $result = -1 * abs($result);
+        }
+        return $result;
     }
 }

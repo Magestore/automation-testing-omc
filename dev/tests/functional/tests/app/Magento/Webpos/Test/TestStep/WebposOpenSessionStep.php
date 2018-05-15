@@ -8,11 +8,14 @@
 
 namespace Magento\Webpos\Test\TestStep;
 
-
 use Magento\Mtf\TestStep\TestStepInterface;
 use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOpenSessionStep
+ * @package Magento\Webpos\Test\TestStep
+ */
 class WebposOpenSessionStep implements TestStepInterface
 {
     /**
@@ -88,6 +91,7 @@ class WebposOpenSessionStep implements TestStepInterface
             {
                 $this->webposIndex->getSessionShift()->getPutMoneyInButton()->click();
                 $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-make-adjustment"]');
+                $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->click();
                 $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue($this->putMoneyInValue);
                 $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();
                 $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-make-adjustment"]');
@@ -97,6 +101,7 @@ class WebposOpenSessionStep implements TestStepInterface
             {
                 $this->webposIndex->getSessionShift()->getTakeMoneyOutButton()->click();
                 $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-make-adjustment"]');
+                $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->click();
                 $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue($this->takeMoneyOutValue);
                 $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();
                 $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-make-adjustment"]');
@@ -104,7 +109,6 @@ class WebposOpenSessionStep implements TestStepInterface
 
             $this->webposIndex->getMsWebpos()->clickCMenuButton();
             $this->webposIndex->getCMenu()->checkout();
-            sleep(1);
             if ($this->denomination && $this->denominationNumberCoin) {
                 $openAmount = $this->denomination->getDenominationValue() * $this->denominationNumberCoin;
                 return [

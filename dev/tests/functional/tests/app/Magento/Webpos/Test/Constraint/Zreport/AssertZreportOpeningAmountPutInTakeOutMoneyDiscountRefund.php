@@ -95,6 +95,11 @@ class AssertZreportOpeningAmountPutInTakeOutMoneyDiscountRefund extends \Magento
         }
     }
 
+    /**
+     * convert number to string at format price
+     * @param $number
+     * @return string
+     */
     public function convertToPriceFormat($number)
     {
         $result = number_format(abs($number), 2, '.', '');
