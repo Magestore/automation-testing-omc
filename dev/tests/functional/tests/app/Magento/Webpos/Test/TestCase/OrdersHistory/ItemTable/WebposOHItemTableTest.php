@@ -131,7 +131,6 @@ class WebposOHItemTableTest extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
 		$this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
@@ -143,7 +142,6 @@ class WebposOHItemTableTest extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         if (!$this->webposIndex->getCheckoutPaymentMethod()->getIconRemove()->isVisible()) {
-            $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
             $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }

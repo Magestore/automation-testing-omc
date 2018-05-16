@@ -12,7 +12,6 @@
 			<data name="shipped" xsi:type="boolean">false</data>
 			<data name="action" xsi:type="string">cancel</data>
 			<data name="status" xsi:type="string">Pending</data>
-
 			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Cancel\AssertCancelOrderPopupClosed"/>
 			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\OrderStatus\AssertOrderStatus"/>
 		</variation>
@@ -28,7 +27,6 @@
 			<data name="shipped" xsi:type="boolean">false</data>
 			<data name="action" xsi:type="string">save</data>
 			<data name="confirmAction" xsi:type="string">close</data>
-
 			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\ConfirmPopup\AssertConfirmPopupClosed"/>
 		</variation>
 
@@ -43,7 +41,6 @@
 			<data name="shipped" xsi:type="boolean">false</data>
 			<data name="action" xsi:type="string">save</data>
 			<data name="confirmAction" xsi:type="string">cancel</data>
-
 			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\ConfirmPopup\AssertConfirmPopupClosed"/>
 		</variation>
 
@@ -60,10 +57,8 @@
 			<data name="action" xsi:type="string">save</data>
 			<data name="confirmAction" xsi:type="string">ok</data>
 			<data name="expectStatus" xsi:type="string">Canceled</data>
-
 			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Cancel\AssertCancelOrderSuccess"/>
 			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatusInBackend"/>
-
 		</variation>
 
 		<variation name="WebposOHMassActionCancelTestVariation_OH51">
@@ -79,9 +74,7 @@
 			<data name="comment" xsi:type="string">Cancel Order Reason %isolation%</data>
 			<data name="action" xsi:type="string">save</data>
 			<data name="confirmAction" xsi:type="string">ok</data>
-
 			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Cancel\AssertCancelOrderSuccess"/>
-
 		</variation>
 
 		<variation name="WebposOHMassActionCancelTestVariation_OH53">
@@ -97,9 +90,7 @@
 			<data name="comment" xsi:type="string">Cancel Order Reason %isolation%</data>
 			<data name="action" xsi:type="string">save</data>
 			<data name="confirmAction" xsi:type="string">ok</data>
-
 			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Cancel\AssertCancelOrderSuccess"/>
-
 		</variation>
 
 		<variation name="WebposOHMassActionCancelTestVariation_OH54">
@@ -108,9 +99,7 @@
 			<data name="comment" xsi:type="string">Cancel Order Reason %isolation%</data>
 			<data name="action" xsi:type="string">save</data>
 			<data name="confirmAction" xsi:type="string">ok</data>
-
 			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Cancel\AssertCancelOrderSuccess"/>
-
 		</variation>
 	</testCase>
 </config>

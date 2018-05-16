@@ -8,11 +8,12 @@
 
 namespace Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer;
 
-
-use Magento\Customer\Test\Fixture\Address;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class AssertOrderDetailShipAndBillAddressAreCorrect
+ * @package Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer
+ */
 class AssertOrderDetailShipAndBillAddressAreCorrect extends AbstractConstraint
 {
 	public function processAssert(WebposIndex $webposIndex, $name, $address, $phone, $orderId)
@@ -25,8 +26,6 @@ class AssertOrderDetailShipAndBillAddressAreCorrect extends AbstractConstraint
 		$webposIndex->getOrderHistoryOrderList()->search($orderId);
         $webposIndex->getOrderHistoryOrderList()->waitLoader();
         $webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-//		$name = $address->getFirstname().' '.$address->getLastname();
-//		$addressText = $address->getCity().', '.$address->getRegionId().', '.$address->getPostcode().', ';
 
 		// Billing
 		\PHPUnit_Framework_Assert::assertEquals(

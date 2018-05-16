@@ -2,6 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Webpos\Test\TestCase\Location\MappingLocationsWarehouses\WebposManageLocationML36Test" summary="Check data on the grid" ticketId="MAGETWO-1234">
         <variation name="WebposManageLocationML36TestVariation">
+            <constraint name="Magento\Webpos\Test\Constraint\MappingLocation\AssertCheckMappingLocationShowCorrect"></constraint>
        </variation>
     </testCase>
 </config>

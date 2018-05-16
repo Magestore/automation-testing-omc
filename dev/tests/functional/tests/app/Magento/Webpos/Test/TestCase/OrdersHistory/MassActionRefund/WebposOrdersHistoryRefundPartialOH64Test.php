@@ -12,7 +12,6 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class WebposOrdersHistoryRefundPartialOH64Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
@@ -104,6 +103,7 @@ class WebposOrdersHistoryRefundPartialOH64Test extends Injectable
             $totalRefunded += ($rowTotal/$item['orderQty'])*$item['refundQty'];
         }
         $totalRefunded += $shippingFee;
+        sleep(1);
         // Assert Refund Success
         $this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus = 'Complete', $totalRefunded);
         // Refund Extant Items

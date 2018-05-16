@@ -12,7 +12,6 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-
 /**
  * Class WebposMultiOrderAddSomeProductsAndCustomerCP32EntityTest
  * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\MultiOrder
@@ -63,14 +62,14 @@ class WebposMultiOrderAddSomeProductsAndCustomerCP32EntityTest extends Injectabl
             $i++;
         }
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        sleep(3);
+        sleep(1);
         $this->webposIndex->getCheckoutWebposCart()->getIconChangeCustomer()->click();
         $customerName = $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomerName()->getText();
         $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
-        sleep(2);
+        sleep(1);
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
-        sleep(2);
+        sleep(1);
         $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($orderNumber)->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
 
@@ -80,14 +79,15 @@ class WebposMultiOrderAddSomeProductsAndCustomerCP32EntityTest extends Injectabl
             break;
         }
 
+        $this->webposIndex->getCheckoutCartFooter()->waitForButtonCheckout();
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-        sleep(3);
+        sleep(1);
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(2);
+        sleep(1);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 

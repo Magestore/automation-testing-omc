@@ -92,17 +92,14 @@ class WebposOHMassActionCancelTest extends Injectable
 					['products' => $products]
 				)->run();
 			}
-
 			// Place Order
 			$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
 			for ($i=0; $i<2; $i++) {
                 $this->webposIndex->getMsWebpos()->waitCartLoader();
                 $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
             }
-
 			$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
 			$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
 			$this->objectManager->getInstance()->create(
 				'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
 				[
@@ -110,7 +107,6 @@ class WebposOHMassActionCancelTest extends Injectable
 					'shipped' => $shipped
 				]
 			)->run();
-
 			$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
 			$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
@@ -122,7 +118,6 @@ class WebposOHMassActionCancelTest extends Injectable
 			$this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
 			$this->webposIndex->getMsWebpos()->waitCartLoader();
 		}
-
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
@@ -137,7 +132,6 @@ class WebposOHMassActionCancelTest extends Injectable
 			. "\nExpected: " . $orderId
 			. "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
 		);
-
 		// Create Shipment
 		if ($createShipment) {
 			$this->objectManager->getInstance()->create(
@@ -148,7 +142,6 @@ class WebposOHMassActionCancelTest extends Injectable
 			)->run();
 			$this->assertShipmentSuccess->processAssert($this->webposIndex);
 		}
-
 		$this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\CancelOrderStep',
 			[
@@ -157,7 +150,6 @@ class WebposOHMassActionCancelTest extends Injectable
 				'confirmAction' => $confirmAction
 			]
 		)->run();
-
 		return [
 			'products' => $products,
 			'orderId' => $orderId

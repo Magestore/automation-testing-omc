@@ -1,8 +1,8 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: vinh
- * Date: 08/09/2017
+ * User: stephen
+ * Date: 13/5/2018
  * Time: 17:13
  */
 
@@ -10,34 +10,34 @@ namespace Magento\Webpos\Test\Constraint\Pos;
 
 
 use Magento\Mtf\Constraint\AbstractConstraint;
-use Magento\Webpos\Test\Page\Adminhtml\WebposPosIndex;
+use Magento\Webpos\Test\Page\Adminhtml\PosIndex;
 
+/**
+ * Class AssertPosDeleteMessage
+ * @package Magento\Webpos\Test\Constraint\Pos
+ */
 class AssertPosDeleteMessage extends AbstractConstraint
 {
-	const DELETE_MESSAGE = 'Pos was successfully deleted';
+    /**
+     * @param PosIndex $posIndex
+     */
+    public function processAssert(PosIndex $posIndex, $itemCount = 1)
+    {
+        $actualMessage = $posIndex->getMessagesBlock()->getSuccessMessage();
+        \PHPUnit_Framework_Assert::assertEquals(
+            'A total of ' . $itemCount . ' record(s) were deleted.',
+            $actualMessage,
+            'Wrong success message is displayed.'
+        );
+    }
 
-	/**
-	 * @param WebposPosIndex $webposPosIndex
-	 */
-	public function processAssert(WebposPosIndex $webposPosIndex)
-	{
-		$actualMessage = $webposPosIndex->getMessagesBlock()->getSuccessMessage();
-		\PHPUnit_Framework_Assert::assertEquals(
-			self::DELETE_MESSAGE,
-			$actualMessage,
-			'Wrong success message is displayed.'
-			. "\nExpected: " . self::DELETE_MESSAGE
-			. "\nActual: " . $actualMessage
-		);
-	}
-
-	/**
-	 * Returns a string representation of the object.
-	 *
-	 * @return string
-	 */
-	public function toString()
-	{
-		return 'Pos success delete message is present.';
-	}
+    /**
+     * Returns a string representation of the object.
+     *
+     * @return string
+     */
+    public function toString()
+    {
+        return 'Pos success delete message is present.';
+    }
 }

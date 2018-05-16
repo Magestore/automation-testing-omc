@@ -10,11 +10,15 @@ namespace Magento\Webpos\Test\Constraint\OrderHistory\Refund;
 
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class AssertProductQtyInManageStocksAfterRefund
+ * @package Magento\Webpos\Test\Constraint\OrderHistory\Refund
+ */
 class AssertProductQtyInManageStocksAfterRefund extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex, $products)
     {
+        sleep(1);
         $webposIndex->getMsWebpos()->clickCMenuButton();
         sleep(1);
         $webposIndex->getCMenu()->manageStocks();

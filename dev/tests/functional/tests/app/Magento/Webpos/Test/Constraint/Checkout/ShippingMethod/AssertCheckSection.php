@@ -24,7 +24,7 @@ class AssertCheckSection extends AbstractConstraint
             $tagActual,
             'Shipping blank doesn"t fit expected '
         );
-        $webposIndex->getCheckoutWebposCart()->waitForDisplayShippingOnCart();
+        sleep(1);
         $tagActual = $webposIndex->getCheckoutWebposCart()->isDisplayShippingOnCart();
         \PHPUnit_Framework_Assert::assertEquals(
             $tagExpected,

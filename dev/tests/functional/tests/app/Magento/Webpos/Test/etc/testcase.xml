@@ -49,7 +49,6 @@
         <step name="createInvoice" module="Magento_Sales" next="loginWebpos"/>
         <step name="loginWebpos" module="Magento_Webpos" next="CreateRefundExistOrderInBackend"/>
         <step name="CreateRefundExistOrderInBackend" module="Magento_Webpos"/>
-
     </scenario>
     <scenario name="WebposOrdersHistoryInvoiceOH118Test" firstStep="setupConfiguration">
         <step name="setupConfiguration" module="Magento_Config" next="createProducts" />

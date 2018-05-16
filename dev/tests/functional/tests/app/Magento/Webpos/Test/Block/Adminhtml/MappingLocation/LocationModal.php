@@ -196,6 +196,17 @@ class LocationModal extends DataGrid
         return $this->_rootElement->find('[name="address');
     }
 
+    public function selectRow($filter)
+    {
+        $rowItem = $this->getRow($filter);
+        if ($rowItem->isVisible()) {
+            $rowItem->find($this->selectItem)->click();
+        } else {
+            throw new \Exception("Searched item was not found by filter\n" . print_r($filter, true));
+        }
+        $this->waitLoader();
+    }
+
     /**
      * @return \Magento\Mtf\Client\ElementInterface
      */
@@ -234,14 +245,22 @@ class LocationModal extends DataGrid
      */
     public function waitLoader()
     {
+
         $this->waitForElementNotVisible($this->loader);
         $this->getTemplateBlock()->waitLoader();
+        $this->waitForElementVisible('table.data-grid');
+    }
+
+    public function waitClose()
+    {
+        $this->waitForElementNotVisible('.modal-slide');
     }
 
     public function getClearFilterButton()
     {
         return $this->_rootElement->find('.action-clear');
     }
+
     public function isClearButtonVisible()
     {
         $this->waitLoader();

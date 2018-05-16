@@ -23,6 +23,7 @@ class MainContent extends Block
     }
 
     public function waitForMsWebpos() {
+        sleep(1);
         return $this->waitForElementVisible('#maincontent > div > div > div.ms-webpos');
     }
 }

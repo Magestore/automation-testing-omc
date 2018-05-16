@@ -12,7 +12,6 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class WebposOrdersHistoryRefundWithReturnStockOH66OH67Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
