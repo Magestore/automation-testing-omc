@@ -109,7 +109,7 @@ class WebposSync16Test extends Injectable
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'config_default_currency_uah_rollback']
+            ['configData' => 'config_default_currency_rollback']
         )->run();
     }
 
