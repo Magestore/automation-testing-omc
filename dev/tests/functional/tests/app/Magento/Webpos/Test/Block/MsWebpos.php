@@ -85,11 +85,6 @@ class MsWebpos extends Block
         $this->waitForElementVisible('[id="orders_history_container"]');
     }
 
-	public function waitListOrdersHistoryVisible()
-    {
-        $this->waitForElementVisible('.list-orders');
-    }
-
     public function cmenuButtonIsVisible()
     {
         return $this->_rootElement->find('#c-button--push-left')->isVisible();

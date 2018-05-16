@@ -183,10 +183,10 @@ class WebposZreportZR010Test extends Injectable
         // Refund
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
-        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $orderId = $this->webposIndex->getOrderHistoryOrderList()->getFirstOrderId();
+        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForChangeOrderId($orderId);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForFormAddNoteOrderVisible();

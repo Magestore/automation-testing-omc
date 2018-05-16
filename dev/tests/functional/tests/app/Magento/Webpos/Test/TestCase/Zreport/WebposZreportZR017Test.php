@@ -82,21 +82,21 @@ class WebposZreportZR017Test extends Injectable
 //            ['dataConfig' => $dataConfig]
 //        )->run();
 
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $dataConfigCurrency]
-        )->run();
+//        $this->objectManager->getInstance()->create(
+//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+//            ['configData' => $dataConfigCurrency]
+//        )->run();
 
-        //Config Customer Credit Payment Method
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $dataConfigPayment]
-        )->run();
+//        //Config Customer Credit Payment Method
+//        $this->objectManager->getInstance()->create(
+//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+//            ['configData' => $dataConfigPayment]
+//        )->run();
 
-        $this->currencyIndex->open();
-        $this->currencyIndex->getCurrencyRateForm()->clickImportButton();
-        $this->currencyIndex->getCurrencyRateForm()->fillCurrencyUSDUAHRate();
-        $this->currencyIndex->getFormPageActions()->save();
+//        $this->currencyIndex->open();
+//        $this->currencyIndex->getCurrencyRateForm()->clickImportButton();
+//        $this->currencyIndex->getCurrencyRateForm()->fillCurrencyUSDUAHRate();
+//        $this->currencyIndex->getFormPageActions()->save();
 
         // Login webpos
         $this->objectManager->getInstance()->create(
@@ -112,7 +112,7 @@ class WebposZreportZR017Test extends Injectable
         }
         if ($this->webposIndex->getOpenSessionPopup()->isVisible())
         {
-            $this->webposIndex->getOpenSessionPopup()->waitUntilForOpenSessionButtonVisible();
+            $this->webposIndex->getOpenSessionPopup()->waitLoader();
             $this->webposIndex->getOpenSessionPopup()->getCancelButton()->click();
 
             $this->webposIndex->getMsWebpos()->clickCMenuButton();
@@ -124,6 +124,7 @@ class WebposZreportZR017Test extends Injectable
 
             $this->webposIndex->getMsWebpos()->clickCMenuButton();
             $this->webposIndex->getCMenu()->checkout();
+            sleep(1);
         }
 
         $this->objectManager->getInstance()->create(
@@ -166,7 +167,7 @@ class WebposZreportZR017Test extends Injectable
         $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         // phai sleep vi payment co khi bi xoa
-        sleep(2);
+        sleep(3);
         if (!$this->webposIndex->getCheckoutPaymentMethod()->getIconRemove()->isVisible()) {
             $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
             $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
@@ -192,9 +193,9 @@ class WebposZreportZR017Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        $this->webposIndex->getMsWebpos()->waitListOrdersHistoryVisible();
-        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         $orderId = $this->webposIndex->getOrderHistoryOrderList()->getFirstOrderId();
+        \Zend_Debug::dump($orderId);
+        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForChangeOrderId($orderId);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForFormAddNoteOrderVisible();

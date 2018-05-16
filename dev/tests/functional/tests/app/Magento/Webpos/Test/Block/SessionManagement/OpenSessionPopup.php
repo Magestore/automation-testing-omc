@@ -54,6 +54,11 @@ class OpenSessionPopup extends Block
         return $this->_rootElement->find('button[type="submit"]');
     }
 
+    public function waitLoader()
+    {
+        $this->waitForElementNotVisible('#popup-open-shift > div > div.indicator');
+    }
+
     public function waitUntilForOpenSessionButtonVisible()
     {
         $this->waitForElementNotVisible('[data-bind="visible:loading"]');
