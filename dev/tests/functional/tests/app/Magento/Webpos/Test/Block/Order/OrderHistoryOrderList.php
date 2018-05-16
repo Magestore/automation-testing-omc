@@ -35,6 +35,11 @@ class OrderHistoryOrderList extends Block
 		return $this->_rootElement->find('.list-orders .order-item');
 	}
 
+	public function getSecondOrder()
+    {
+        return $this->_rootElement->find('//ul[@class="list-orders"]/li[2]', Locator::SELECTOR_XPATH);
+    }
+
 	public function waitForFirstOrderVisible() {
         return $this->waitForElementVisible('.list-orders .order-item');
     }

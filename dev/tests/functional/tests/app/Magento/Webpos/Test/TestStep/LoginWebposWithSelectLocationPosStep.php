@@ -85,10 +85,5 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
         }
 
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $data = [
-            'username' => $username,
-            'password' => $password
-        ];
-        return $this->fixtureFactory->createByCode('staff', ['data' => $data]);
     }
 }

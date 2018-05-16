@@ -135,23 +135,13 @@ class WebposZreportZR009Test extends Injectable
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->getSessionManagement();
-        sleep(1);
-        // Set closing balance
-        $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getColumnNumberOfCoinsAtRow(2)->setValue($denominationNumberCoin);
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        if ($this->webposIndex->getSessionConfirmModalPopup()->isVisible()) {
-            $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
-            $this->webposIndex->getSessionSetReasonPopup()->getReason()->setValue('Magento');
-            sleep(1);
-            $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
-            sleep(1);
-        }
-        // End session
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        sleep(1);
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\WebposSetClosingBalanceCloseSessionStep',
+            [
+                'denomination' => $denomination,
+                'denominationNumberCoin' => $denominationNumberCoin
+            ]
+        )->run();
 
         $openedString = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
         $closedString = $this->webposIndex->getSessionShift()->getCloseTime()->getText();
@@ -159,7 +149,6 @@ class WebposZreportZR009Test extends Injectable
         $cashSales = $this->webposIndex->getSessionShift()->getPaymentAmount(1)->getText();
         $otherPaymentSales = $this->webposIndex->getSessionShift()->getPaymentAmount(2)->getText();
 
-        $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitZreportVisible();
 
@@ -169,9 +158,9 @@ class WebposZreportZR009Test extends Injectable
             'staffName' => $staffName,
             'openedString' => $openedString,
             'closedString' => $closedString,
-            'totalSales' => $totalSales,
-            'cashSales' => $cashSales,
-            'otherPaymentSales' => $otherPaymentSales
+            'totalSales' => $this->convertPriceFormatToDecimal($totalSales),
+            'cashSales' => $this->convertPriceFormatToDecimal($cashSales),
+            'otherPaymentSales' => $this->convertPriceFormatToDecimal($otherPaymentSales)
         ];
     }
 
@@ -187,5 +176,26 @@ class WebposZreportZR009Test extends Injectable
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => $this->defaultPaymentMethod]
         )->run();
+    }
+
+    /**
+     * convert string price format to decimal
+     * @param $string
+     * @return float|int|null
+     */
+    public function convertPriceFormatToDecimal($string)
+    {
+        $result = null;
+        $negative = false;
+        if ($string[0] === '-') {
+            $negative = true;
+            $string = str_replace('-', '', $string);
+        }
+        $string = str_replace('$', '', $string);
+        $result = floatval($string);
+        if ($negative) {
+            $result = -1 * abs($result);
+        }
+        return $result;
     }
 }

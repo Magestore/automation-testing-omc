@@ -101,17 +101,17 @@ class WebposZreportZR010Test extends Injectable
     {
         // Create denomination
         $denomination->persist();
-//        $this->dataConfigToNo = $dataConfigToNo;
-//        $this->objectManager->create(
-//            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
-//            ['dataConfig' => $dataConfig]
-//        )->run();
-//
-//        //Config Customer Credit Payment Method
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => $dataConfigPayment]
-//        )->run();
+        $this->dataConfigToNo = $dataConfigToNo;
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
+            ['dataConfig' => $dataConfig]
+        )->run();
+
+        //Config Customer Credit Payment Method
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => $dataConfigPayment]
+        )->run();
 
         // Login webpos
         $this->objectManager->getInstance()->create(
@@ -155,6 +155,7 @@ class WebposZreportZR010Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
+        sleep(1);
         $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         // phai sleep vi payment co khi bi xoa
@@ -191,35 +192,21 @@ class WebposZreportZR010Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Refund')->click();
         $this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
+        sleep(1);
         $this->webposIndex->getModal()->getOkButton()->click();
         sleep(1);
 
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getCMenu()->getSessionManagement();
-        sleep(1);
-        // Set closing balance
-        $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
-        $this->webposIndex->getSessionCloseShift()->waitSetClosingBalancePopupVisible();
-        $this->webposIndex->getSessionSetClosingBalancePopup()->setCoinBillValue($denomination->getDenominationName());
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getColumnNumberOfCoinsAtRow(2)->setValue($denominationNumberCoin);
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        $this->webposIndex->getSessionCloseShift()->waitSetClosingBalancePopupNotVisible();
-        if ($this->webposIndex->getSessionConfirmModalPopup()->isVisible()) {
-            $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
-            $this->webposIndex->getMainContent()->waitForElementNotVisible('.close-confirm');
-            $this->webposIndex->getSessionSetClosingBalanceReason()->waitSetReasonPopupVisible();
-            $this->webposIndex->getSessionSetReasonPopup()->getReason()->setValue('Magento');
-            $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
-            $this->webposIndex->getSessionSetClosingBalanceReason()->waitSetReasonPopupNotVisible();
-        }
-        // End session
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        sleep(2);
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\WebposSetClosingBalanceCloseSessionStep',
+            [
+                'denomination' => $denomination,
+                'denominationNumberCoin' => $denominationNumberCoin
+            ]
+        )->run();
 
         $cashSales = $this->webposIndex->getSessionShift()->getPaymentAmount(1)->getText();
         $otherPaymentSales = $this->webposIndex->getSessionShift()->getPaymentAmount(2)->getText();
 
-        $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitZreportVisible();
 
@@ -232,32 +219,33 @@ class WebposZreportZR010Test extends Injectable
         $cashSales = $this->convertPriceFormatToDecimal($cashSales);
         $otherPaymentSales = $this->convertPriceFormatToDecimal($otherPaymentSales);
         $discountAmount = floatval($discountAmount);
+        $totalSales = $cashSales + $otherPaymentSales;
         return [
             'openingAmount' => $openingAmount,
             'closingAmount' => $closingAmount,
-            'totalSales' => $cashSales + $otherPaymentSales,
+            'totalSales' => $totalSales,
             'payIn' => $payIn,
             'payOut' => $payOut,
             'cashSales' => $cashSales,
             'cashRefund' => 0,
             'otherPaymentSales' => $otherPaymentSales,
             'discountAmount' => $discountAmount,
-            'refund' => 0
+            'refund' => $totalSales
         ];
     }
 
     public function tearDown()
     {
-//        $this->objectManager->create(
-//            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
-//            ['dataConfig' => $this->dataConfigToNo]
-//        )->run();
-//
-//        //Config Payment Payment Method
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => $this->defaultPaymentMethod]
-//        )->run();
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
+            ['dataConfig' => $this->dataConfigToNo]
+        )->run();
+
+        //Config Payment Payment Method
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => $this->defaultPaymentMethod]
+        )->run();
     }
 
     /**

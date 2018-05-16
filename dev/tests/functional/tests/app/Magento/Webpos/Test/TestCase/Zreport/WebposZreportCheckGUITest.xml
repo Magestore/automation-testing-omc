@@ -6,7 +6,6 @@
         <variation name="WebposZreportCheckGUIZR001Test">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="string">product1</item>
-                <item name="1" xsi:type="string">product2</item>
             </data>
             <data name="denomination/dataset" xsi:type="string">default</data>
             <data name="denominationNumberCoin" xsi:type="string">1</data>
@@ -17,7 +16,6 @@
         <variation name="WebposZreportCheckGUIZR002Test">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="string">product1</item>
-                <item name="1" xsi:type="string">product2</item>
             </data>
             <data name="posName" xsi:type="string">Store POS</data>
             <data name="denomination/dataset" xsi:type="string">default</data>
@@ -29,7 +27,6 @@
         <variation name="WebposZreportCheckGUIZR003Test">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="string">product1</item>
-                <item name="1" xsi:type="string">product2</item>
             </data>
             <data name="denomination/dataset" xsi:type="string">default</data>
             <data name="denominationNumberCoin" xsi:type="string">1</data>
@@ -40,7 +37,6 @@
         <variation name="WebposZreportCheckGUIZR006Test">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="string">product1</item>
-                <item name="1" xsi:type="string">product2</item>
             </data>
             <data name="denomination/dataset" xsi:type="string">default</data>
             <data name="denominationNumberCoin" xsi:type="string">1</data>

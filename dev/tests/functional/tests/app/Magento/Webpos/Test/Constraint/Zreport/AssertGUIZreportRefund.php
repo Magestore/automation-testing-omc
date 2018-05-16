@@ -11,19 +11,19 @@ namespace Magento\Webpos\Test\Constraint\Zreport;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class AssertGUIZreportDifference
+ * Class AssertGUIZreportRefund
  * @package Magento\Webpos\Test\Constraint\Zreport
  */
-class AssertGUIZreportDifference extends \Magento\Mtf\Constraint\AbstractConstraint
+class AssertGUIZreportRefund extends \Magento\Mtf\Constraint\AbstractConstraint
 {
-    public function processAssert(WebposIndex $webposIndex, $difference)
+    public function processAssert(WebposIndex $webposIndex, $refund)
     {
-        if($webposIndex->getSessionPrintShiftPopup()->getDifference()->isVisible())
+        if($webposIndex->getSessionPrintShiftPopup()->getRefund()->isVisible())
         {
             \PHPUnit_Framework_Assert::assertEquals(
-                $this->convertToPriceFormat($difference),
-                $webposIndex->getSessionPrintShiftPopup()->getDifference()->getText(),
-                'Zreport Difference not correct'
+                $this->convertToPriceFormat($refund),
+                $webposIndex->getSessionPrintShiftPopup()->getRefund()->getText(),
+                'Zreport Refund not correct'
             );
         }
     }

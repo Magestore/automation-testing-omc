@@ -153,14 +153,13 @@ class WebposZreportLoginTwiceTest extends Injectable
         $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
         // End session
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        sleep(1);
+        $this->webposIndex->getSessionShift()->waitBtnCloseSessionNotVisible();
 
         $openedString = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
         $openedString .= ' by ' . $staffName1;
         $closedString = $this->webposIndex->getSessionShift()->getCloseTime()->getText();
         $closedString .= ' by ' . $staffName2;
 
-        $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitZreportVisible();
         return [
