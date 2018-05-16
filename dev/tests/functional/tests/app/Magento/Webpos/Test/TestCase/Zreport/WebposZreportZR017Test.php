@@ -2,61 +2,24 @@
 /**
  * Created by PhpStorm.
  * User: finbert
- * Date: 09/05/2018
- * Time: 13:30
+ * Date: 16/05/2018
+ * Time: 14:21
  */
 
 namespace Magento\Webpos\Test\TestCase\Zreport;
 
 use Magento\Config\Test\Fixture\ConfigData;
+use Magento\CurrencySymbol\Test\Page\Adminhtml\SystemCurrencyIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposZreportZR010Test
- *
- * Precondition: There are some POSs and setting [Need to create session before working] = "Yes" on the test site
- * 1. Login webpos by a staff who has open and close session permission
- * 2. Open a session with
- * - Opening amount: >0
- * - Take money in: >0
- * - Take money out:  >0
- * 3. Create some orders successfully meet conditions:
- * - Using some payment methods (including cashin method)
- * - Apply discount whole cart
- * 4. Refund an order that placed on this session
- *
- * Steps:
- * 1. Go to [Session Management] menu
- * 2. Close the session successfully with:
- * - Close amount: Input a number that greater than 0 and different from [Theoretical Closing Amount]
- * 3. Click to print Z-report
- *
- * Acceptance:
- * 3. Show Z-report with:
- * - [Opening Amount] is the inputed open amount on step 2  of [Precondition and setup steps] column
- * - [Closing Amount] is the inputed closing amount on step 2 of [Steps] column
- * - Theoretical Closing Amount = Cash Sales - Cash refund - Payouts + Pay Ins + Opening amount
- * - Difference = [Closing Amount] - [Theoretical Closing Amount]
- *
- * - Cash sales = The total cash sales processed including discounts and tax on this session
- * - Cash Refund = Refund amount by cashin
- * - [Pay Ins] = SUM(amount of Put_money_in)
- * - Payouts = SUM(amount of Take_money_out)
- *
- * - Total Sales = SUM(grand_total) of the orders which placed on this session
- * - Discount = SUM (discount_amount) of the orders which placed on this session
- * - Refund = SUM (refunded_amount) on this session
- * - Net Sales = [Total Sales] - [Refund]
- *
- * - cashforpos = [Cash sales]
- * And show all of the payment methods with their total that placed on this session
- *
+ * Class WebposZreportZR017Test
  * @package Magento\Webpos\Test\TestCase\Zreport
  */
-class WebposZreportZR010Test extends Injectable
+class WebposZreportZR017Test extends Injectable
 {
     /**
      * Webpos Index page.
@@ -69,6 +32,13 @@ class WebposZreportZR010Test extends Injectable
 
     protected $defaultPaymentMethod;
 
+    protected $dataConfigCurrencyRollback;
+
+    /**
+     * @var SystemCurrencyIndex
+     */
+    protected $currencyIndex;
+
     /**
      * @var FixtureFactory
      */
@@ -77,11 +47,13 @@ class WebposZreportZR010Test extends Injectable
 
     public function __inject(
         WebposIndex $webposIndex,
+        SystemCurrencyIndex $currencyIndex,
         FixtureFactory $fixtureFactory
     )
     {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
+        $this->currencyIndex = $currencyIndex;
     }
 
     public function test(
@@ -90,21 +62,29 @@ class WebposZreportZR010Test extends Injectable
         $denominationNumberCoin,
         ConfigData $dataConfig,
         ConfigData $dataConfigToNo,
+        $dataConfigCurrency,
+        $dataConfigCurrencyRollback,
         $dataConfigPayment,
         $defaultPaymentMethod,
         $amount,
         $putMoneyInValue,
         $takeMoneyOutValue,
         $addDiscount = false,
-        $discountAmount = ''
+        $discountAmount = '',
+        $menuItem
     )
     {
         // Create denomination
         $denomination->persist();
-        $this->dataConfigToNo = $dataConfigToNo;
-        $this->objectManager->create(
-            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
-            ['dataConfig' => $dataConfig]
+//        $this->dataConfigToNo = $dataConfigToNo;
+//        $this->objectManager->create(
+//            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
+//            ['dataConfig' => $dataConfig]
+//        )->run();
+
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => $dataConfigCurrency]
         )->run();
 
         //Config Customer Credit Payment Method
@@ -113,10 +93,38 @@ class WebposZreportZR010Test extends Injectable
             ['configData' => $dataConfigPayment]
         )->run();
 
+        $this->currencyIndex->open();
+        $this->currencyIndex->getCurrencyRateForm()->clickImportButton();
+        $this->currencyIndex->getCurrencyRateForm()->fillCurrencyUSDUAHRate();
+        $this->currencyIndex->getFormPageActions()->save();
+
         // Login webpos
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
         )->run();
+
+        // Open session
+        $time = time();
+        $timeAfter = $time + 3;
+        while (!$this->webposIndex->getOpenSessionPopup()->isVisible()
+            && $time < $timeAfter) {
+            $time = time();
+        }
+        if ($this->webposIndex->getOpenSessionPopup()->isVisible())
+        {
+            $this->webposIndex->getOpenSessionPopup()->waitUntilForOpenSessionButtonVisible();
+            $this->webposIndex->getOpenSessionPopup()->getCancelButton()->click();
+
+            $this->webposIndex->getMsWebpos()->clickCMenuButton();
+            $this->webposIndex->getCMenu()->general();
+            sleep(1);
+            $this->webposIndex->getGeneralSettingMenuLMainItem()->getMenuItem($menuItem)->click();
+            $this->webposIndex->getGeneralSettingContentRight()->waitCurrencySelectionVisible();
+            $this->webposIndex->getGeneralSettingContentRight()->getCurrencySelection()->setValue('Ukrainian Hryvnia');
+
+            $this->webposIndex->getMsWebpos()->clickCMenuButton();
+            $this->webposIndex->getCMenu()->checkout();
+        }
 
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\WebposOpenSessionStep',
@@ -155,7 +163,6 @@ class WebposZreportZR010Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
-        sleep(1);
         $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         // phai sleep vi payment co khi bi xoa
@@ -183,8 +190,9 @@ class WebposZreportZR010Test extends Injectable
         // Refund
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitListOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         $orderId = $this->webposIndex->getOrderHistoryOrderList()->getFirstOrderId();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForChangeOrderId($orderId);
@@ -212,6 +220,7 @@ class WebposZreportZR010Test extends Injectable
         $this->webposIndex->getSessionShift()->waitZreportVisible();
 
         $this->defaultPaymentMethod = $defaultPaymentMethod;
+        $this->dataConfigCurrencyRollback = $dataConfigCurrencyRollback;
 
         $openingAmount = floatval($denominationNumberCoin) * $denomination->getDenominationValue();
         $closingAmount = floatval($denominationNumberCoin) * $denomination->getDenominationValue();
@@ -237,16 +246,21 @@ class WebposZreportZR010Test extends Injectable
 
     public function tearDown()
     {
-        $this->objectManager->create(
-            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
-            ['dataConfig' => $this->dataConfigToNo]
-        )->run();
-
-        //Config Payment Payment Method
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $this->defaultPaymentMethod]
-        )->run();
+//        $this->objectManager->create(
+//            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
+//            ['dataConfig' => $this->dataConfigToNo]
+//        )->run();
+//
+//        //Config Payment Payment Method
+//        $this->objectManager->getInstance()->create(
+//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+//            ['configData' => $this->defaultPaymentMethod]
+//        )->run();
+//
+//        $this->objectManager->getInstance()->create(
+//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+//            ['configData' => $this->dataConfigCurrencyRollback]
+//        )->run();
     }
 
     /**

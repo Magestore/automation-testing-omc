@@ -55,8 +55,7 @@ class WebposOpenSessionStep implements TestStepInterface
         $putMoneyInValue = 0,
         $takeMoneyOutStatus = false,
         $takeMoneyOutValue = 0
-    )
-    {
+    ) {
         $this->webposIndex = $webposIndex;
         $this->openingAmountStatus = $openingAmountStatus;
         $this->denomination = $denomination;
@@ -72,20 +71,23 @@ class WebposOpenSessionStep implements TestStepInterface
         // Open session
         $time = time();
         $timeAfter = $time + 3;
-        while (!$this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->isVisible()
+        while (!$this->webposIndex->getOpenSessionPopup()->isVisible()
             && $time < $timeAfter) {
             $time = time();
         }
-        if ($this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->isVisible()) {
-            $this->webposIndex->getOpenSessionPopup()->waitForElementNotVisible('.indicator[data-bind="visible:loading"]');
+        if ($this->webposIndex->getOpenSessionPopup()->isVisible()) {
+            $this->webposIndex->getOpenSessionPopup()->waitUntilForOpenSessionButtonVisible();
 
-            if ($this->openingAmountStatus) {
+            if ($this->openingAmountStatus)
+            {
                 $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($this->denomination->getDenominationName());
                 $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue($this->denominationNumberCoin);
             }
 
             $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
+            // sleep to open session
+            sleep(3);
 
             if($this->putMoneyInStatus)
             {
@@ -109,12 +111,7 @@ class WebposOpenSessionStep implements TestStepInterface
 
             $this->webposIndex->getMsWebpos()->clickCMenuButton();
             $this->webposIndex->getCMenu()->checkout();
-            if ($this->denomination && $this->denominationNumberCoin) {
-                $openAmount = $this->denomination->getDenominationValue() * $this->denominationNumberCoin;
-                return [
-                    'openAmount' => $openAmount
-                ];
-            }
+            sleep(1);
         }
     }
 }

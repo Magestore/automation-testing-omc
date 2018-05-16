@@ -37,6 +37,14 @@ class OrderHistoryOrderViewHeader extends Block
         );
     }
 
+    public function waitForChangeOrderId($orderId) {
+        $this->_rootElement->waitUntil(
+            function () use ($orderId) {
+                return $this->getOrderId()->getText()===$orderId ? true : null;
+            }
+        );
+    }
+
 	public function openAddOrderNote()
     {
         $this->_rootElement->find('.icon-iconPOS-more')->click();

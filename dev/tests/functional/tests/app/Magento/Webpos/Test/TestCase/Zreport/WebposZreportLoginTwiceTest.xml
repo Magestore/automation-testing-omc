@@ -6,7 +6,6 @@
         <variation name="WebposZreportZR004Test">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="string">product1</item>
-                <item name="1" xsi:type="string">product2</item>
             </data>
             <data name="pos/data/pos_name" xsi:type="string">test pos %isolation%</data>
             <data name="pos/data/status" xsi:type="string">Enabled</data>
@@ -20,7 +19,6 @@
         <variation name="WebposZreportZR007Test">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="string">product1</item>
-                <item name="1" xsi:type="string">product2</item>
             </data>
             <data name="pos/data/pos_name" xsi:type="string">test pos %isolation%</data>
             <data name="pos/data/status" xsi:type="string">Enabled</data>
@@ -29,7 +27,7 @@
             <data name="denominationNumberCoin" xsi:type="string">1</data>
             <data name="dataConfig/dataset" xsi:type="string">create_session_before_working</data>
             <data name="dataConfigToNo/dataset" xsi:type="string">setup_session_before_working_to_no</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIZreportStaffName"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIZreportOpenedClosed"/>
         </variation>
     </testCase>
 </config>

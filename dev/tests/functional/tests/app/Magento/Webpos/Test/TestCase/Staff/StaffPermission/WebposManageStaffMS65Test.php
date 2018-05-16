@@ -151,6 +151,7 @@ class WebposManageStaffMS65Test extends Injectable
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->assertTrue(
             $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->isVisible(),
             'Not show any order.'

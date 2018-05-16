@@ -13,15 +13,12 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountNoApplyTaxToFpt;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceExcludingTax;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountWithApplyTaxOnCustomPrice;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountWithIncludeFptInSubtotal;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposTaxTAX110Test
+ * @package Magento\Webpos\Test\TestCase\Tax\IncludeFPTInSubtotalYes
+ */
 class WebposTaxTAX110Test extends Injectable
 {
     /**
@@ -76,7 +73,6 @@ class WebposTaxTAX110Test extends Injectable
             'taxRate' => $miTaxRate->getRate()
         ];
     }
-
 
     /**
      * @param WebposIndex $webposIndex
@@ -167,8 +163,7 @@ class WebposTaxTAX110Test extends Injectable
         $actualTaxAmount = substr($this->webposIndex->getOrderHistoryInvoice()->getTaxAmount(), 1);
         $actualSubtotal = substr($this->webposIndex->getOrderHistoryInvoice()->getSubtotal(), 1);
         $actualGrandtotal = substr($this->webposIndex->getOrderHistoryInvoice()->getGrandtotal(),1);
-        $this->assertTaxAmountWithIncludeFptInSubtotal
-            ->processAssert($products[0]['product']->getPrice(), $taxRate, $products[0]['product']->getFpt()[0]['price'], $actualTaxAmount, $actualSubtotal, $actualGrandtotal);
+        $this->assertTaxAmountWithIncludeFptInSubtotal->processAssert($products[0]['product']->getPrice(), $taxRate, $products[0]['product']->getFpt()[0]['price'], $actualTaxAmount, $actualSubtotal, $actualGrandtotal);
 
     }
 

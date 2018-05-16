@@ -75,9 +75,9 @@ class CreateRefundInOrderHistoryStep implements TestStepInterface
 			if (!$this->webposIndex->getOrderHistoryContainer()->getActionsBox()->isVisible()) {
 				$this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
 			}
-			sleep(2);
+            sleep(0.5);
 			$this->webposIndex->getOrderHistoryOrderViewHeader()->getAction($refundText)->click();
-            sleep(1);
+            sleep(0.5);
 		}
 
 		$this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
@@ -123,12 +123,12 @@ class CreateRefundInOrderHistoryStep implements TestStepInterface
 		}
 
 		if (strcmp($this->action, 'cancel') == 0) {
-            sleep(2);
+            sleep(0.5);
 			$this->webposIndex->getOrderHistoryRefund()->getCancelButton()->click();
 		} elseif (strcmp($this->action, 'submit') == 0) {
 
 			$this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
-            sleep(2);
+            sleep(0.5);
 			$this->webposIndex->getMsWebpos()->waitForModalPopup();
 			if (strcmp($this->confirmAction, 'close') == 0) {
 				$this->webposIndex->getModal()->getCloseButton()->click();

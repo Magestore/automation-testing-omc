@@ -103,9 +103,8 @@ class WebposCheckoutPaymentMethodCP221Test extends Injectable
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-
-        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
 
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
     }

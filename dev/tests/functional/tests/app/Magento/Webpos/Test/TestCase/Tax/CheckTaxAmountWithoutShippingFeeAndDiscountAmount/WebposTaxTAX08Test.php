@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\TestCase\Tax\CheckTaxAmountWithoutShippingFeeAndDiscountAmount;
 
-
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
@@ -18,6 +17,10 @@ use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePla
 use Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertCreateInvoiceSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposTaxTAX08Test
+ * @package Magento\Webpos\Test\TestCase\Tax\CheckTaxAmountWithoutShippingFeeAndDiscountAmount
+ */
 class WebposTaxTAX08Test extends Injectable
 {
 	/**

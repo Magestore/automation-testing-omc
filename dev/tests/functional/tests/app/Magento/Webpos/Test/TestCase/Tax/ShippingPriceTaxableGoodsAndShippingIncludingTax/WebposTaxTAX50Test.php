@@ -68,7 +68,6 @@ class WebposTaxTAX50Test extends Injectable
         ];
     }
 
-
     /**
      * @param WebposIndex $webposIndex
      * @param FixtureFactory $fixtureFactory
@@ -87,7 +86,6 @@ class WebposTaxTAX50Test extends Injectable
         $this->assertTaxAmountOnOrderHistoryInvoiceWithShippingFee = $assertTaxAmountOnOrderHistoryInvoiceWithShippingFee;
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
-
 
     /**
      * @param Customer $customer
@@ -140,14 +138,14 @@ class WebposTaxTAX50Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(1);
+        sleep(0.5);
 
         // Select Shipping Method
         $this->webposIndex->getCheckoutShippingMethod()->openCheckoutShippingMethod();
         $this->webposIndex->getCheckoutShippingMethod()->waitForElementVisible('#flatrate_flatrate');
         $this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(1);
+        sleep(0.5);
         $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Flat Rate - Fixed")->getText();
         $shippingFee = (float)substr($shippingFee,1);
 
@@ -155,7 +153,7 @@ class WebposTaxTAX50Test extends Injectable
         $this->webposIndex->getCheckoutPaymentMethod()->waitForElementVisible('.icon-iconPOS-payment-cashforpos');
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(1);
+        sleep(0.5);
 
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
@@ -167,9 +165,8 @@ class WebposTaxTAX50Test extends Injectable
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(1);
+        sleep(0.5);
         // End Place Order
-
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
         //End Assert Place Order Success
@@ -181,9 +178,8 @@ class WebposTaxTAX50Test extends Injectable
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-
-        sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
 
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
@@ -203,7 +199,7 @@ class WebposTaxTAX50Test extends Injectable
 
         // Invoice order successfully
         $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
-        sleep(2);
+        sleep(0.5);
         $this->webposIndex->getModal()->getOkButton()->click();
 
         return [

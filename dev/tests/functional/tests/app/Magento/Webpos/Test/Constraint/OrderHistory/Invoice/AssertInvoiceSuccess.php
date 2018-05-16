@@ -10,7 +10,6 @@ namespace Magento\Webpos\Test\Constraint\OrderHistory\Invoice;
 
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class AssertInvoiceSuccess
  * @package Magento\Webpos\Test\Constraint\SectionOrderHistory\Invoice
