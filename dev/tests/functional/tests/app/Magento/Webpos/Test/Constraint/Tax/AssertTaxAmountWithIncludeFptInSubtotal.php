@@ -9,11 +9,15 @@
 namespace Magento\Webpos\Test\Constraint\Tax;
 
 use Magento\Mtf\Constraint\AbstractConstraint;
-
+/**
+ * Class AssertTaxAmountWithIncludeFptInSubtotal
+ * @package Magento\Webpos\Test\Constraint\Tax
+ */
 class AssertTaxAmountWithIncludeFptInSubtotal extends AbstractConstraint
 {
     public function processAssert($productPriceExcludeTax, $taxRate, $fptTax, $actualTaxAmount, $actualSubtotal, $actualGrandtotal)
     {
+        sleep(2);
         $taxAmount = $productPriceExcludeTax * $taxRate / 100;
         $subtotal = $productPriceExcludeTax + $fptTax;
         $grandtotal = $productPriceExcludeTax + $fptTax + $taxAmount;

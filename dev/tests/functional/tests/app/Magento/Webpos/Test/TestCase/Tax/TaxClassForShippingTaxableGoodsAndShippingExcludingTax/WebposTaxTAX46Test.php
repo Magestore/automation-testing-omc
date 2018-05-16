@@ -14,7 +14,6 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class WebposTaxTAX46Test
  * @package Magento\Webpos\Test\TestCase\Tax\TaxClassForShippingTaxableGoodsAndShippingExcludingTax
@@ -167,10 +166,9 @@ class WebposTaxTAX46Test extends Injectable
 		$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
-
 		//Assert Place Order Success
 		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-
+		sleep(1);
 		$orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
 
 		$this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
@@ -178,9 +176,8 @@ class WebposTaxTAX46Test extends Injectable
 
 		$this->webposIndex->getMsWebpos()->clickCMenuButton();
 		$this->webposIndex->getCMenu()->ordersHistory();
-
-		sleep(2);
-		$this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
 
 		$this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 		while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}

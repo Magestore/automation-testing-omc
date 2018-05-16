@@ -128,7 +128,6 @@ class WebposTaxTAX18Test extends Injectable
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        sleep(1);
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();

@@ -13,15 +13,12 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountNoApplyTaxToFpt;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceExcludingTax;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountWithApplyTaxOnCustomPrice;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountWithIncludeFptInSubtotal;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposTaxTAX107Test
+ * @package Magento\Webpos\Test\TestCase\Tax\IncludeFPTInSubtotalYes
+ */
 class WebposTaxTAX107Test extends Injectable
 {
     /**
@@ -76,7 +73,6 @@ class WebposTaxTAX107Test extends Injectable
             'taxRate' => $miTaxRate->getRate()
         ];
     }
-
 
     /**
      * @param WebposIndex $webposIndex
@@ -134,16 +130,14 @@ class WebposTaxTAX107Test extends Injectable
         $actualTaxAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText(), 1);
         $actualSubtotal = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Subtotal')->getText(), 1);
         $actualGrandtotal = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText(), 1);
-        $this->assertTaxAmountWithIncludeFptInSubtotal
-            ->processAssert($products[0]['product']->getPrice(), $taxRate, $products[0]['product']->getFpt()[0]['price'], $actualTaxAmount, $actualSubtotal, $actualGrandtotal);
+        $this->assertTaxAmountWithIncludeFptInSubtotal->processAssert($products[0]['product']->getPrice(), $taxRate, $products[0]['product']->getFpt()[0]['price'], $actualTaxAmount, $actualSubtotal, $actualGrandtotal);
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $actualTaxAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText(), 1);
         $actualSubtotal = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Subtotal')->getText(), 1);
         $actualGrandtotal = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText(), 1);
-        $this->assertTaxAmountWithIncludeFptInSubtotal
-            ->processAssert($products[0]['product']->getPrice(), $taxRate, $products[0]['product']->getFpt()[0]['price'], $actualTaxAmount, $actualSubtotal, $actualGrandtotal);
+        $this->assertTaxAmountWithIncludeFptInSubtotal->processAssert($products[0]['product']->getPrice(), $taxRate, $products[0]['product']->getFpt()[0]['price'], $actualTaxAmount, $actualSubtotal, $actualGrandtotal);
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->objectManager->getInstance()->create(
@@ -157,7 +151,6 @@ class WebposTaxTAX107Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-
     }
 
     public function tearDown()
