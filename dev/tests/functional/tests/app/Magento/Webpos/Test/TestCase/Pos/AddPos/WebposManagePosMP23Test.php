@@ -14,7 +14,7 @@ use Magento\Webpos\Test\Page\Adminhtml\PosNews;
 
 /**
  * Manage POS - Add POS
- * Testcase MP16 - Check default value of all fields
+ * Testcase MP23 - Check [Back] button
  *
  * Precondition
  * - Empty
@@ -22,29 +22,15 @@ use Magento\Webpos\Test\Page\Adminhtml\PosNews;
  * Steps
  * 1. Go to backend > Sales > Manage POS
  * 2. Click on [Add POS] button
- * 3. Check default value of all fields
+ * 4. Click on [Back] button
  *
  * Acceptance
- * 3.
- * - General information tab:
- * + POS name: blank (text box)
- * + Location: Store address (dropdown type)
- * + Current staff: None (dropdown type)
- * + Status: Enable (dropdown type)
- * + Available for Other Staff: uncheck (checkbox)
- * + Allow POS staff to lock register: No (dropdown type)
- * - Cash denominations tab:
- * + On the grid, show all of denominations from [Manage cash denomination] page
- * - Close session tab:
- * + There is no record on the grid
- * - Current session detail tab:
- * + Show text: "There are 0 open session "
+ * 3. Back to Manage POS page
  *
- *
- * Class WebposManagePosMP16
+ * Class WebposManagePosMP23
  * @package Magento\Webpos\Test\TestCase\Pos\Filter
  */
-class WebposManagePosMP16Test extends Injectable
+class WebposManagePosMP23Test extends Injectable
 {
     /**
      * Pos Index Page
@@ -68,5 +54,11 @@ class WebposManagePosMP16Test extends Injectable
         $this->posIndex->getPosGrid()->waitLoader();
         $this->posIndex->getPageActionsBlock()->addNew();
         $this->posNews->getPosForm()->waitLoader();
+        $this->posNews->getFormPageActions()->getButtonByname('Back')->click();
+        $this->posIndex->getPosGrid()->waitLoader();
+        \PHPUnit_Framework_Assert::assertTrue(
+            $this->posIndex->getPosGrid()->isVisible(),
+            'Pos Index page didn\'t still display'
+        );
     }
 }

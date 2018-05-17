@@ -101,4 +101,8 @@ class SessionSetClosingBalancePopup extends Block
     {
         return $this->_rootElement->find('//div[@class="counting-box"]/table['.$rowIndex.']/tbody/tr/td[2]/input', Locator::SELECTOR_XPATH);
     }
+
+    public function getOptionCoinBillByValue($value){
+        return $this->_rootElement->find('//select[@class="cash-counting-value"]//option[text()="'.$value.'"]', locator::SELECTOR_XPATH);
+    }
 }

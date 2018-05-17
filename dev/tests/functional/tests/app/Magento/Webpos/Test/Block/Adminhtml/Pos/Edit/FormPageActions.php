@@ -32,11 +32,11 @@ class FormPageActions extends  \Magento\Backend\Test\Block\FormPageActions
 
     public function getButtonByname($name)
     {
-        return $this->_rootElement->find('//div[@class="page-actions-buttons"]//button//span[text()="' . $name . '"]', Locator::SELECTOR_XPATH);
+            return $this->_rootElement->find('//div[@class="page-actions-buttons"]//button//span[text()="' . $name . '"]', Locator::SELECTOR_XPATH);
     }
 
-    public function getTitleByName($name)
+    public function getTitle()
     {
-        return $this->_rootElement->find('//div[@class="page-actions-inner"][@data-title="' . $name . '"]', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//h1[@class="page-title"]', Locator::SELECTOR_XPATH);
     }
 }

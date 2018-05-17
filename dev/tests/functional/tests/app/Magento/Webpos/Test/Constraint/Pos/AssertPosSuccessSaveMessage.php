@@ -10,18 +10,16 @@ namespace Magento\Webpos\Test\Constraint\Pos;
 
 
 use Magento\Mtf\Constraint\AbstractConstraint;
+use Magento\Webpos\Test\Page\Adminhtml\PosIndex;
 use Magento\Webpos\Test\Page\Adminhtml\WebposPosIndex;
 
 class AssertPosSuccessSaveMessage extends AbstractConstraint
 {
 	const SUCCESS_MESSAGE = 'Pos was successfully saved';
 
-	/**
-	 * @param WebposPosIndex $webposPosIndex
-	 */
-	public function processAssert(WebposPosIndex $webposPosIndex)
+	public function processAssert(PosIndex $posIndex)
 	{
-		$actualMessage = $webposPosIndex->getMessagesBlock()->getSuccessMessage();
+		$actualMessage = $posIndex->getMessagesBlock()->getSuccessMessage();
 		\PHPUnit_Framework_Assert::assertEquals(
 			self::SUCCESS_MESSAGE,
 			$actualMessage,

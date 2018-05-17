@@ -52,16 +52,19 @@ class MappingLocationGrid extends DataGrid
         $this->waitForElementNotVisible($this->spinner);
     }
 
-    public function getFirstData(){
-        return $this-> _rootElement->find('table > tbody > tr');
+    public function getFirstData()
+    {
+        return $this->_rootElement->find('table > tbody > tr');
     }
 
-    public function getWarehouseByTitle($title){
-        return $this->_rootElement->find('//select//option[@data-title="'.$title.'"]', locator::SELECTOR_XPATH);
+    public function getWarehouseByTitle($title)
+    {
+        return $this->_rootElement->find('//select[text()="' . $title . '"]', locator::SELECTOR_XPATH, 'select');
     }
 
-    public function getRowByLocation($display_name){
-        return $this->_rootElement->find('//table//tr[.//td[@data-index="display_name"]//span[text()="'.$display_name.'"]]', locator::SELECTOR_XPATH);
+    public function getRowByLocation($display_name)
+    {
+        return $this->_rootElement->find('//table//tr[.//td[@data-index="display_name"]//span[text()="' . $display_name . '"]]', locator::SELECTOR_XPATH);
     }
 
     /**
@@ -69,18 +72,21 @@ class MappingLocationGrid extends DataGrid
      * @param $warehouse
      * @return void
      */
-    public function mappingWarehouse($display_name, $warehouse){
+    public function mappingWarehouse($display_name, $warehouse)
+    {
         $row = $this->getRowByLocation($display_name)->find('.//td//select[@class="admin__control-select"]', locator::SELECTOR_XPATH);
         $row->click();
         sleep(1);
-        $this->getRowByLocation($display_name)->find('.//td//select//option[contains(text(),"'.$warehouse.'")]', locator::SELECTOR_XPATH)->click();
+        $this->getRowByLocation($display_name)->find('.//td//select//option[contains(text(),"' . $warehouse . '")]', locator::SELECTOR_XPATH)->click();
     }
 
-    public function checkWarehouseByLocation($location, $warehouse){
-        return $this->getRowByLocation($location)->find('.//td//select//option[contains(text(),"'.$warehouse.'")]', locator::SELECTOR_XPATH);
+    public function checkWarehouseByLocation($location, $warehouse)
+    {
+        return $this->getRowByLocation($location)->find('.//td//select//option[contains(text(),"' . $warehouse . '")]', locator::SELECTOR_XPATH);
     }
 
-    public function removeMappingByLocation($location){
+    public function removeMappingByLocation($location)
+    {
         $btnDelete = $this->getRowByLocation($location)->find('.//button[@class="action-delete"]', locator::SELECTOR_XPATH);
         $btnDelete->click();
         $this->waitLoader();

@@ -17,7 +17,7 @@ class AssertCheckMappingLocationShowCorrect extends AbstractConstraint
 
     public function processAssert(MappingLocationIndex $mappingLocationIndex){
         $title = 'Create a new Warehouse';
-        \PHPUnit_Framework_Assert::assertTrue(
+        \PHPUnit_Framework_Assert::assertFalse(
             $mappingLocationIndex->getMappingLocationGrid()->getWarehouseByTitle($title)->isVisible(),
             'Exist least one Location with no Warehouse'
         );

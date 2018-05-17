@@ -105,14 +105,40 @@ class PosForm extends Form
         return $this->_rootElement->find('//select//option[text()="' . $title . '"]', locator::SELECTOR_XPATH);
     }
 
-    public function searchDenominatioByName($name)
+    public function searchDenominationByName($name)
     {
         $this->_rootElement->find('input[name="denomination_name"]')->setValue($name);
         $this->_rootElement->find('button[data-action="grid-filter-apply"]')->click();
     }
 
+    public function searchAndSelectDenominationByName($name)
+    {
+        $this->searchDenominationByName($name);
+        $this->waitForElementVisible('#denomination_grid_table tbody');
+        $this->waitForElementNotVisible('.loading-mask');
+        $this->_rootElement->find('#denomination_grid_table th .admin__control-checkbox', locator::SELECTOR_CSS, 'checkbox')->setValue(true);
+    }
+
     public function getDenominationFirstData()
     {
         return $this->_rootElement->find('//tbody/tr[@class="even"][1]', locator::SELECTOR_XPATH);
+    }
+
+    public function waitForSessionGridLoad()
+    {
+        $this->waitForElementVisible('#sessions_grid');
+    }
+
+    public function searchClosedSessionValue($id, $value, $type = null)
+    {
+        $element = $this->_rootElement->find('#' . $id, locator::SELECTOR_CSS, $type);
+        $element->setValue($value);
+        $this->_rootElement->find('#sessions_grid button[data-action="grid-filter-apply"]')->click();
+        $this->waitForElementNotVisible('.loading-mask');
+    }
+
+    public function getEmptyRowOfSessionGrid()
+    {
+        return $this->_rootElement->find('//div[@id="Closed_Sessions"]//td[@class="empty-text"]', locator::SELECTOR_XPATH);
     }
 }

@@ -5,7 +5,7 @@
  * Date: 5/14/18
  * Time: 3:41 PM
  */
-namespace Magento\Webpos\Test\TestCase\Pos\Sorting;
+namespace Magento\Webpos\Test\TestCase\Pos\SortGrid;
 /**
  * Webpos Manage Pos - Check Sort column in Grid
  * MP03-MP07 - Check Sort column in Grid
