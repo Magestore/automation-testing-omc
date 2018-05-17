@@ -4,11 +4,26 @@
     <testCase name="Magento\Webpos\Test\TestCase\Zreport\WebposXreportCheckGUITest"
               summary="Grid UI Component Filtering" ticketId="WEBPOS-1">
         <variation name="WebposXreportCheckGUIZR021Test">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+            </data>
+            <data name="createOrder" xsi:type="boolean">false</data>
             <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIXreport"/>
         </variation>
         <variation name="WebposXreportCheckGUIZR022Test">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+            </data>
             <data name="posName" xsi:type="string">Store POS</data>
+            <data name="createOrder" xsi:type="boolean">false</data>
             <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIXZreportPosName"/>
+        </variation>
+        <variation name="WebposXreportCheckGUIZR023Test">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+            </data>
+            <data name="createOrder" xsi:type="boolean">true</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIXZreportStaffName"/>
         </variation>
     </testCase>
 </config>

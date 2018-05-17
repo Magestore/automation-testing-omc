@@ -26,7 +26,7 @@
             </data>
             <data name="denomination/dataset" xsi:type="string">default</data>
             <data name="denominationNumberCoin" xsi:type="string">1</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIZreportStaffName"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIXZreportStaffName"/>
         </variation>
         <variation name="WebposZreportCheckGUIZR006Test">
             <data name="products" xsi:type="array">

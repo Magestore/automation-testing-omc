@@ -65,7 +65,10 @@ class WebposXreportCheckGUITest extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test()
+    public function test(
+        $products,
+        $createOrder = false
+    )
     {
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
@@ -81,9 +84,17 @@ class WebposXreportCheckGUITest extends Injectable
             'Magento\Webpos\Test\TestStep\WebposOpenSessionStep'
         )->run();
 
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\WebposSetClosingBalanceCloseSessionStep'
-        )->run();
+        if($createOrder)
+        {
+            $this->objectManager->getInstance()->create(
+                'Magento\Webpos\Test\TestStep\WebposAddProductToCartThenCheckoutStep',
+                ['products' => $products]
+            )->run();
+        }
+
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getCMenu()->getSessionManagement();
+        sleep(1);
 
         $staffName = $this->webposIndex->getSessionShift()->getStaffName()->getText();
         $openedString = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
