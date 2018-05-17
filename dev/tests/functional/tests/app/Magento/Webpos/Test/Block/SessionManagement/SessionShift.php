@@ -134,4 +134,9 @@ class SessionShift extends Block
     {
         $this->waitForElementNotVisible('.btn-close-shift');
     }
+
+    public function waitBtnCloseSessionVisible()
+    {
+        $this->waitForElementVisible('.btn-close-shift');
+    }
 }

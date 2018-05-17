@@ -54,7 +54,7 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
     {
         $this->dataConfigToNo = $dataConfigToNo;
         $this->objectManager->create(
-            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['dataConfig' => $dataConfig]
         )->run();
 
@@ -127,7 +127,7 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
     public function tearDown()
     {
         $this->objectManager->create(
-            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['dataConfig' => $this->dataConfigToNo]
         )->run();
     }

@@ -84,10 +84,9 @@ class WebposOpenSessionStep implements TestStepInterface
                 $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue($this->denominationNumberCoin);
             }
 
-            $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
+            $this->webposIndex->getOpenSessionPopup()->getOpenSessionButtonElement()->click();
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
-            // sleep to open session
-            sleep(3);
+            $this->webposIndex->getSessionShift()->waitBtnCloseSessionVisible();
 
             if($this->putMoneyInStatus)
             {

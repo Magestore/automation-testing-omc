@@ -75,7 +75,7 @@ class WebposZreportZR016Test extends Injectable
         $denomination->persist();
         $this->dataConfigToNo = $dataConfigToNo;
         $this->objectManager->create(
-            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['dataConfig' => $dataConfig]
         )->run();
 
@@ -165,7 +165,7 @@ class WebposZreportZR016Test extends Injectable
     public function tearDown()
     {
         $this->objectManager->create(
-            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['dataConfig' => $this->dataConfigToNo]
         )->run();
 

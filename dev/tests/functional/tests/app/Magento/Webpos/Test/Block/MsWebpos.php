@@ -89,4 +89,9 @@ class MsWebpos extends Block
     {
         return $this->_rootElement->find('#c-button--push-left')->isVisible();
     }
+
+    public function waitForCMenuVisible()
+    {
+        $this->waitForElementVisible('#c-button--push-left');
+    }
 }

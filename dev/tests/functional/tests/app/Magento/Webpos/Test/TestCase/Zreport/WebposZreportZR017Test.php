@@ -69,7 +69,6 @@ class WebposZreportZR017Test extends Injectable
         $amount,
         $putMoneyInValue,
         $takeMoneyOutValue,
-        $addDiscount = false,
         $discountAmount = '',
         $menuItem
     )
@@ -78,7 +77,7 @@ class WebposZreportZR017Test extends Injectable
         $denomination->persist();
 //        $this->dataConfigToNo = $dataConfigToNo;
 //        $this->objectManager->create(
-//            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
+//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
 //            ['dataConfig' => $dataConfig]
 //        )->run();
 
@@ -86,13 +85,13 @@ class WebposZreportZR017Test extends Injectable
 //            'Magento\Config\Test\TestStep\SetupConfigurationStep',
 //            ['configData' => $dataConfigCurrency]
 //        )->run();
-
-//        //Config Customer Credit Payment Method
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => $dataConfigPayment]
-//        )->run();
-
+//
+        //Config Customer Credit Payment Method
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => $dataConfigPayment]
+        )->run();
+//
 //        $this->currencyIndex->open();
 //        $this->currencyIndex->getCurrencyRateForm()->clickImportButton();
 //        $this->currencyIndex->getCurrencyRateForm()->fillCurrencyUSDUAHRate();
@@ -113,6 +112,7 @@ class WebposZreportZR017Test extends Injectable
         if ($this->webposIndex->getOpenSessionPopup()->isVisible())
         {
             $this->webposIndex->getOpenSessionPopup()->waitLoader();
+//            $this->webposIndex->getOpenSessionPopup()->waitUntilForOpenSessionButtonVisible();
             $this->webposIndex->getOpenSessionPopup()->getCancelButton()->click();
 
             $this->webposIndex->getMsWebpos()->clickCMenuButton();
@@ -122,6 +122,7 @@ class WebposZreportZR017Test extends Injectable
             $this->webposIndex->getGeneralSettingContentRight()->waitCurrencySelectionVisible();
             $this->webposIndex->getGeneralSettingContentRight()->getCurrencySelection()->setValue('Ukrainian Hryvnia');
 
+            $this->webposIndex->getMsWebpos()->waitForCMenuVisible();
             $this->webposIndex->getMsWebpos()->clickCMenuButton();
             $this->webposIndex->getCMenu()->checkout();
             sleep(1);
@@ -150,7 +151,6 @@ class WebposZreportZR017Test extends Injectable
             $i++;
         }
 
-        if ($addDiscount) {
             $this->objectManager->getInstance()->create(
                 'Magento\Webpos\Test\TestStep\AddDiscountWholeCartStep',
                 [
@@ -158,18 +158,18 @@ class WebposZreportZR017Test extends Injectable
                     'type' => '$'
                 ]
             )->run();
-        }
 
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
+        $this->webposIndex->getCheckoutPaymentMethod()->waitForCustomPayment1Method();
         $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         // phai sleep vi payment co khi bi xoa
-        sleep(3);
+        sleep(2);
         if (!$this->webposIndex->getCheckoutPaymentMethod()->getIconRemove()->isVisible()) {
-            $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
+            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+            $this->webposIndex->getCheckoutPaymentMethod()->waitForCustomPayment1Method();
             $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }
@@ -193,9 +193,9 @@ class WebposZreportZR017Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         $orderId = $this->webposIndex->getOrderHistoryOrderList()->getFirstOrderId();
         \Zend_Debug::dump($orderId);
-        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForChangeOrderId($orderId);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForFormAddNoteOrderVisible();
@@ -248,7 +248,7 @@ class WebposZreportZR017Test extends Injectable
     public function tearDown()
     {
 //        $this->objectManager->create(
-//            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
+//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
 //            ['dataConfig' => $this->dataConfigToNo]
 //        )->run();
 //

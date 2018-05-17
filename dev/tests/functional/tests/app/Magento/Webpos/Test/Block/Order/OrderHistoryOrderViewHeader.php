@@ -40,7 +40,7 @@ class OrderHistoryOrderViewHeader extends Block
     public function waitForChangeOrderId($orderId) {
         $this->_rootElement->waitUntil(
             function () use ($orderId) {
-                return $this->getOrderId()->getText()===$orderId ? true : null;
+                return $this->getOrderId()===$orderId ? true : null;
             }
         );
     }
