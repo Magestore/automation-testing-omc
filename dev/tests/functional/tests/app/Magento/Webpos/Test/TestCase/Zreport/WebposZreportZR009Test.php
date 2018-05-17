@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\TestCase\Zreport;
 
-use Magento\Config\Test\Fixture\ConfigData;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Denomination;
@@ -59,10 +58,6 @@ class WebposZreportZR009Test extends Injectable
      */
     protected $webposIndex;
 
-    protected $dataConfigToNo;
-
-    protected $defaultPaymentMethod;
-
     /**
      * @var FixtureFactory
      */
@@ -78,28 +73,27 @@ class WebposZreportZR009Test extends Injectable
         $this->fixtureFactory = $fixtureFactory;
     }
 
-    public function test($products, Denomination $denomination,
-                         $denominationNumberCoin,
-                         ConfigData $dataConfig, ConfigData $dataConfigToNo,
-                         $dataConfigPayment,
-                         $defaultPaymentMethod, $amount)
+    public function test(
+        $products,
+        Denomination $denomination,
+        $denominationNumberCoin,
+        $amount)
     {
         // Create denomination
         $denomination->persist();
-        $this->dataConfigToNo = $dataConfigToNo;
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['dataConfig' => $dataConfig]
+            ['configData' => 'create_session_before_working']
         )->run();
 
         //Config Customer Credit Payment Method
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $dataConfigPayment]
+            ['configData' => 'magestore_webpos_custome_payment']
         )->run();
 
         // Login webpos
-        $staff = $this->objectManager->getInstance()->create(
+        $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
         )->run();
 
@@ -150,9 +144,7 @@ class WebposZreportZR009Test extends Injectable
         $otherPaymentSales = $this->webposIndex->getSessionShift()->getPaymentAmount(2)->getText();
 
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
-        $this->webposIndex->getSessionShift()->waitZreportVisible();
-
-        $this->defaultPaymentMethod = $defaultPaymentMethod;
+        $this->webposIndex->getSessionShift()->waitReportPopupVisible();
 
         return [
             'staffName' => $staffName,
@@ -168,13 +160,13 @@ class WebposZreportZR009Test extends Injectable
     {
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['dataConfig' => $this->dataConfigToNo]
+            ['configData' => 'setup_session_before_working_to_no']
         )->run();
 
         //Config Payment Payment Method
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $this->defaultPaymentMethod]
+            ['configData' => 'magestore_webpos_specific_payment']
         )->run();
     }
 

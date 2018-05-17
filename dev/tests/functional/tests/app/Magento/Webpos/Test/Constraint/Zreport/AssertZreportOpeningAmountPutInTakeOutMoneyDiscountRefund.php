@@ -27,79 +27,80 @@ class AssertZreportOpeningAmountPutInTakeOutMoneyDiscountRefund extends \Magento
         $totalSales,
         $otherPaymentSales = null,
         $discountAmount,
-        $refund
+        $refund,
+        $symbol = '$'
     )
     {
         \PHPUnit_Framework_Assert::assertEquals(
-            self::convertToPriceFormat($openingAmount),
+            self::convertToPriceFormat($openingAmount, $symbol),
             $webposIndex->getSessionPrintShiftPopup()->getOpeningAmount()->getText(),
             'Zreport Opening amount not correct'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            self::convertToPriceFormat($closingAmount),
+            self::convertToPriceFormat($closingAmount, $symbol),
             $webposIndex->getSessionPrintShiftPopup()->getClosingAmount()->getText(),
             'Zreport Closing amount not correct'
         );
         $theoreticalClosingAmount = $cashSales - $cashRefund - $payOut + $payIn + $openingAmount;
         \PHPUnit_Framework_Assert::assertEquals(
-            self::convertToPriceFormat($theoreticalClosingAmount),
+            self::convertToPriceFormat($theoreticalClosingAmount, $symbol),
             $webposIndex->getSessionPrintShiftPopup()->getTheoreticalClosingAmount()->getText(),
             'Zreport Theoretical Closing amount not correct'
         );
         $difference = $closingAmount - $theoreticalClosingAmount;
         \PHPUnit_Framework_Assert::assertEquals(
-            self::convertToPriceFormat($difference),
+            self::convertToPriceFormat($difference, $symbol),
             $webposIndex->getSessionPrintShiftPopup()->getDifference()->getText(),
             'Zreport difference not correct'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            self::convertToPriceFormat($cashSales),
+            self::convertToPriceFormat($cashSales, $symbol),
             $webposIndex->getSessionPrintShiftPopup()->getCashSales()->getText(),
             'Zreport cash sales not correct'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            $this->convertToPriceFormat($cashRefund),
+            $this->convertToPriceFormat($cashRefund, $symbol),
             $webposIndex->getSessionPrintShiftPopup()->getCashRefund()->getText(),
             'Zreport cash refund not correct'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            $this->convertToPriceFormat($payIn),
+            $this->convertToPriceFormat($payIn, $symbol),
             $webposIndex->getSessionPrintShiftPopup()->getPayIns()->getText(),
             'Zreport pay in not correct'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            $this->convertToPriceFormat($payOut * (-1)),
+            $this->convertToPriceFormat($payOut * (-1), $symbol),
             $webposIndex->getSessionPrintShiftPopup()->getPayouts()->getText(),
             'Zreport pay out not correct'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            $this->convertToPriceFormat($totalSales),
+            $this->convertToPriceFormat($totalSales, $symbol),
             $webposIndex->getSessionPrintShiftPopup()->getTotalSales()->getText(),
             'Zreport total sales not correct'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            $this->convertToPriceFormat($discountAmount * (-1)),
+            $this->convertToPriceFormat($discountAmount * (-1), $symbol),
             $webposIndex->getSessionPrintShiftPopup()->getDiscount()->getText(),
             'Zreport discount not correct'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            $this->convertToPriceFormat((-1) * $refund),
+            $this->convertToPriceFormat((-1) * $refund, $symbol),
             $webposIndex->getSessionPrintShiftPopup()->getRefund()->getText(),
             'Zreport refund not correct'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            $this->convertToPriceFormat($totalSales - $refund),
+            $this->convertToPriceFormat($totalSales - $refund, $symbol),
             $webposIndex->getSessionPrintShiftPopup()->getNetSales()->getText(),
             'Zreport net sales not correct'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            $this->convertToPriceFormat($cashSales),
+            $this->convertToPriceFormat($cashSales, $symbol),
             $webposIndex->getSessionPrintShiftPopup()->getPaymentAmount(1)->getText(),
             'Zreport payment cash in  not correct'
         );
         if ($otherPaymentSales) {
             \PHPUnit_Framework_Assert::assertEquals(
-                $this->convertToPriceFormat($otherPaymentSales),
+                $this->convertToPriceFormat($otherPaymentSales, $symbol),
                 $webposIndex->getSessionPrintShiftPopup()->getPaymentAmount(2)->getText(),
                 'Zreport other payment sale in  not correct'
             );
@@ -109,12 +110,13 @@ class AssertZreportOpeningAmountPutInTakeOutMoneyDiscountRefund extends \Magento
     /**
      * convert number to string at format price
      * @param $number
+     * @param $symbol
      * @return string
      */
-    public function convertToPriceFormat($number)
+    public function convertToPriceFormat($number, $symbol = '$')
     {
         $result = number_format(abs($number), 2, '.', '');
-        $result = '$' . $result;
+        $result = $symbol . $result;
         if ($number < 0) {
             $result = '-' . $result;
         }

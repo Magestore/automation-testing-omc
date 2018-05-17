@@ -38,9 +38,12 @@ class OrderHistoryOrderViewHeader extends Block
     }
 
     public function waitForChangeOrderId($orderId) {
+        $orderIdHeader = $this->_rootElement->find('nav > div.id-order > label > span');
+        \Zend_Debug::dump($orderIdHeader->getText());
+        \Zend_Debug::dump($orderId);
         $this->_rootElement->waitUntil(
-            function () use ($orderId) {
-                return $this->getOrderId()===$orderId ? true : null;
+            function () use ($orderIdHeader, $orderId) {
+                return $orderIdHeader->getText()===$orderId ? true : null;
             }
         );
     }

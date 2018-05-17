@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\TestCase\Zreport;
 
-use Magento\Config\Test\Fixture\ConfigData;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Denomination;
@@ -41,7 +40,6 @@ class WebposZreportZR012Test extends Injectable
      * @var WebposIndex
      */
     protected $webposIndex;
-    protected $dataConfigToNo;
 
     /**
      * @var FixtureFactory
@@ -59,17 +57,14 @@ class WebposZreportZR012Test extends Injectable
 
     public function test(
         Denomination $denomination,
-        $products,
-        ConfigData $dataConfig,
-        ConfigData $dataConfigToNo
+        $products
     )
     {
         // Create denomination
         $denomination->persist();
-        $this->dataConfigToNo = $dataConfigToNo;
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['dataConfig' => $dataConfig]
+            ['configData' => 'create_session_before_working']
         )->run();
 
         // Login webpos
@@ -104,7 +99,7 @@ class WebposZreportZR012Test extends Injectable
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
         $this->webposIndex->getSessionShift()->waitBtnCloseSessionNotVisible();
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
-        $this->webposIndex->getSessionShift()->waitZreportVisible();
+        $this->webposIndex->getSessionShift()->waitReportPopupVisible();
 
         return [
           'difference' => 0
@@ -115,7 +110,7 @@ class WebposZreportZR012Test extends Injectable
     {
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['dataConfig' => $this->dataConfigToNo]
+            ['configData' => 'setup_session_before_working_to_no']
         )->run();
     }
 

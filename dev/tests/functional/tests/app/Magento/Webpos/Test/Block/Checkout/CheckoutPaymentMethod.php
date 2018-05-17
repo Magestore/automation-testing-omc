@@ -34,7 +34,7 @@ class CheckoutPaymentMethod extends Block
     {
         $this->_rootElement->waitUntil(
             function () {
-                $this->getCustomPayment1()->isVisible();
+                return $this->getCustomPayment1()->isVisible() ? true : null;
             }
         );
     }

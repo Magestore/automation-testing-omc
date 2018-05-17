@@ -9,7 +9,6 @@
 namespace Magento\Webpos\Test\TestCase\Zreport;
 
 
-use Magento\Config\Test\Fixture\ConfigData;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Denomination;
@@ -44,8 +43,6 @@ class WebposZreportLoginTwiceTest extends Injectable
      * @var WebposIndex
      */
     protected $webposIndex;
-    protected $dataConfigToNo;
-
 
     public function __inject(
         WebposIndex $webposIndex
@@ -58,17 +55,15 @@ class WebposZreportLoginTwiceTest extends Injectable
         $products,
         Denomination $denomination,
         $denominationNumberCoin,
-        ConfigData $dataConfig,
-        ConfigData $dataConfigToNo,
         Pos $pos,
-        FixtureFactory $fixtureFactory)
+        FixtureFactory $fixtureFactory
+    )
     {
         // Create denomination
         $denomination->persist();
-        $this->dataConfigToNo = $dataConfigToNo;
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['dataConfig' => $dataConfig]
+            ['configData' => 'create_session_before_working']
         )->run();
 
         /**@var Location $location */
@@ -162,7 +157,7 @@ class WebposZreportLoginTwiceTest extends Injectable
         $closedString .= ' by ' . $staffName2;
 
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
-        $this->webposIndex->getSessionShift()->waitZreportVisible();
+        $this->webposIndex->getSessionShift()->waitReportPopupVisible();
         return [
             'staffName' => $staffName2,
             'openedString' => $openedString,
@@ -174,7 +169,7 @@ class WebposZreportLoginTwiceTest extends Injectable
     {
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['dataConfig' => $this->dataConfigToNo]
+            ['configData' => 'setup_session_before_working_to_no']
         )->run();
     }
 }

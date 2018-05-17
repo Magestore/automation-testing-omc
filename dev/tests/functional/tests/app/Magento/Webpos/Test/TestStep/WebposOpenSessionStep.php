@@ -76,6 +76,7 @@ class WebposOpenSessionStep implements TestStepInterface
             $time = time();
         }
         if ($this->webposIndex->getOpenSessionPopup()->isVisible()) {
+            $this->webposIndex->getOpenSessionPopup()->waitLoader();
             $this->webposIndex->getOpenSessionPopup()->waitUntilForOpenSessionButtonVisible();
 
             if ($this->openingAmountStatus)

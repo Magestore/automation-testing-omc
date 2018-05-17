@@ -11,10 +11,10 @@ namespace Magento\Webpos\Test\Constraint\Zreport;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class AssertGUIZreportPosName
+ * Class AssertGUIXZreportPosName
  * @package Magento\Webpos\Test\Constraint\Zreport
  */
-class AssertGUIZreportPosName extends \Magento\Mtf\Constraint\AbstractConstraint
+class AssertGUIXZreportPosName extends \Magento\Mtf\Constraint\AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex, $posName)
     {

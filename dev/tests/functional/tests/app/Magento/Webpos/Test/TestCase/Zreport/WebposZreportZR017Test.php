@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\TestCase\Zreport;
 
-use Magento\Config\Test\Fixture\ConfigData;
 use Magento\CurrencySymbol\Test\Page\Adminhtml\SystemCurrencyIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
@@ -27,12 +26,6 @@ class WebposZreportZR017Test extends Injectable
      * @var WebposIndex
      */
     protected $webposIndex;
-
-    protected $dataConfigToNo;
-
-    protected $defaultPaymentMethod;
-
-    protected $dataConfigCurrencyRollback;
 
     /**
      * @var SystemCurrencyIndex
@@ -60,42 +53,36 @@ class WebposZreportZR017Test extends Injectable
         $products,
         Denomination $denomination,
         $denominationNumberCoin,
-        ConfigData $dataConfig,
-        ConfigData $dataConfigToNo,
-        $dataConfigCurrency,
-        $dataConfigCurrencyRollback,
-        $dataConfigPayment,
-        $defaultPaymentMethod,
         $amount,
         $putMoneyInValue,
         $takeMoneyOutValue,
         $discountAmount = '',
-        $menuItem
+        $menuItem,
+        $symbol
     )
     {
         // Create denomination
         $denomination->persist();
-//        $this->dataConfigToNo = $dataConfigToNo;
-//        $this->objectManager->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['dataConfig' => $dataConfig]
-//        )->run();
+        $this->objectManager->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_session_before_working']
+        )->run();
 
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => $dataConfigCurrency]
-//        )->run();
-//
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'config_default_currency_uah']
+        )->run();
+
         //Config Customer Credit Payment Method
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $dataConfigPayment]
+            ['configData' => 'magestore_webpos_custome_payment']
         )->run();
-//
-//        $this->currencyIndex->open();
-//        $this->currencyIndex->getCurrencyRateForm()->clickImportButton();
-//        $this->currencyIndex->getCurrencyRateForm()->fillCurrencyUSDUAHRate();
-//        $this->currencyIndex->getFormPageActions()->save();
+
+        $this->currencyIndex->open();
+        $this->currencyIndex->getCurrencyRateForm()->clickImportButton();
+        $this->currencyIndex->getCurrencyRateForm()->fillCurrencyUSDUAHRate();
+        $this->currencyIndex->getFormPageActions()->save();
 
         // Login webpos
         $this->objectManager->getInstance()->create(
@@ -112,7 +99,6 @@ class WebposZreportZR017Test extends Injectable
         if ($this->webposIndex->getOpenSessionPopup()->isVisible())
         {
             $this->webposIndex->getOpenSessionPopup()->waitLoader();
-//            $this->webposIndex->getOpenSessionPopup()->waitUntilForOpenSessionButtonVisible();
             $this->webposIndex->getOpenSessionPopup()->getCancelButton()->click();
 
             $this->webposIndex->getMsWebpos()->clickCMenuButton();
@@ -162,14 +148,12 @@ class WebposZreportZR017Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->webposIndex->getCheckoutPaymentMethod()->waitForCustomPayment1Method();
         $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         // phai sleep vi payment co khi bi xoa
         sleep(2);
         if (!$this->webposIndex->getCheckoutPaymentMethod()->getIconRemove()->isVisible()) {
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-            $this->webposIndex->getCheckoutPaymentMethod()->waitForCustomPayment1Method();
             $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }
@@ -177,7 +161,6 @@ class WebposZreportZR017Test extends Injectable
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
         $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#add-more-payment');
@@ -194,9 +177,7 @@ class WebposZreportZR017Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        $orderId = $this->webposIndex->getOrderHistoryOrderList()->getFirstOrderId();
-        \Zend_Debug::dump($orderId);
-        $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForChangeOrderId($orderId);
+        sleep(1);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForFormAddNoteOrderVisible();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Refund')->click();
@@ -218,17 +199,14 @@ class WebposZreportZR017Test extends Injectable
         $otherPaymentSales = $this->webposIndex->getSessionShift()->getPaymentAmount(2)->getText();
 
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
-        $this->webposIndex->getSessionShift()->waitZreportVisible();
-
-        $this->defaultPaymentMethod = $defaultPaymentMethod;
-        $this->dataConfigCurrencyRollback = $dataConfigCurrencyRollback;
+        $this->webposIndex->getSessionShift()->waitReportPopupVisible();
 
         $openingAmount = floatval($denominationNumberCoin) * $denomination->getDenominationValue();
         $closingAmount = floatval($denominationNumberCoin) * $denomination->getDenominationValue();
         $payIn = floatval($putMoneyInValue);
         $payOut = floatval($takeMoneyOutValue);
-        $cashSales = $this->convertPriceFormatToDecimal($cashSales);
-        $otherPaymentSales = $this->convertPriceFormatToDecimal($otherPaymentSales);
+        $cashSales = $this->convertPriceFormatToDecimal($cashSales, $symbol);
+        $otherPaymentSales = $this->convertPriceFormatToDecimal($otherPaymentSales, $symbol);
         $discountAmount = floatval($discountAmount);
         $totalSales = $cashSales + $otherPaymentSales;
         return [
@@ -241,35 +219,37 @@ class WebposZreportZR017Test extends Injectable
             'cashRefund' => 0,
             'otherPaymentSales' => $otherPaymentSales,
             'discountAmount' => $discountAmount,
-            'refund' => $totalSales
+            'refund' => $cashSales,
+            'symbol' => $symbol
         ];
     }
 
     public function tearDown()
     {
-//        $this->objectManager->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['dataConfig' => $this->dataConfigToNo]
-//        )->run();
-//
-//        //Config Payment Payment Method
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => $this->defaultPaymentMethod]
-//        )->run();
-//
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => $this->dataConfigCurrencyRollback]
-//        )->run();
+        $this->objectManager->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'setup_session_before_working_to_no']
+        )->run();
+
+        //Config Payment Payment Method
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'magestore_webpos_specific_payment']
+        )->run();
+
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'config_default_currency_rollback']
+        )->run();
     }
 
     /**
      * convert string price format to decimal
      * @param $string
+     * @param $symbol
      * @return float|int|null
      */
-    public function convertPriceFormatToDecimal($string)
+    public function convertPriceFormatToDecimal($string, $symbol = '$')
     {
         $result = null;
         $negative = false;
@@ -277,7 +257,7 @@ class WebposZreportZR017Test extends Injectable
             $negative = true;
             $string = str_replace('-', '', $string);
         }
-        $string = str_replace('$', '', $string);
+        $string = str_replace($symbol, '', $string);
         $result = floatval($string);
         if ($negative) {
             $result = -1 * abs($result);

@@ -9,7 +9,6 @@
 namespace Magento\Webpos\Test\TestCase\Zreport;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
@@ -17,19 +16,40 @@ use Magento\Webpos\Test\Page\WebposIndex;
  *
  * Precondition: There are some POSs and setting [Need to create session before working] = ""Yes"" on the test site
  * 1. Login webpos by a staff who has open and close session permission
- * 2. Open a session
- * 3. Create some orders successfully"
  *
  * Steps:
  * 1. Go to [Session Management] menu
- * 2. Click on [End of Session] > Input real money > [Confirm] > Close session successfully
- * 3. Click on [Print] button
+ * 2. Open a session successfully > click on [Print] button
  *
  * Acceptance:
+ * 2. Show X-report including:
+ * - Title: X-report
+ * - Session #session ID
+ *
+ * - POS: Current POS
+ * - Staff: Staff name who printed the sesstion
+ * - Opened: Date Time and Staff name who opened the session
+ *
+ * # Cash
+ * - Opening amount
+ * - Expected Drawer
+ *
+ * - Cash sales
+ * - Cash refund
+ * - Pay ins
+ * - Payouts
+ * #Sales
+ * - Total Sales
+ * - Discount
+ * - Refund
+ * - Net Sales
+ * # Sale by payment methods
+ *
+ * Time to print the X-report
  *
  * @package Magento\Webpos\Test\TestCase\Zreport
  */
-class WebposZreportCheckGUITest extends Injectable
+class WebposXreportCheckGUITest extends Injectable
 {
     /**
      * Webpos Index page.
@@ -45,14 +65,8 @@ class WebposZreportCheckGUITest extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test(
-        $products,
-        Denomination $denomination,
-        $denominationNumberCoin
-    )
+    public function test()
     {
-        // Create denomination
-        $denomination->persist();
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'create_session_before_working']
@@ -68,30 +82,18 @@ class WebposZreportCheckGUITest extends Injectable
         )->run();
 
         $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\WebposAddProductToCartThenCheckoutStep',
-            ['products' => $products]
-        )->run();
-
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\WebposSetClosingBalanceCloseSessionStep',
-            [
-                'denomination' => $denomination,
-                'denominationNumberCoin' => $denominationNumberCoin
-            ]
+            'Magento\Webpos\Test\TestStep\WebposSetClosingBalanceCloseSessionStep'
         )->run();
 
         $staffName = $this->webposIndex->getSessionShift()->getStaffName()->getText();
         $openedString = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
         $openedString .= ' by ' . $staffName;
-        $closedString = $this->webposIndex->getSessionShift()->getCloseTime()->getText();
-        $closedString .= ' by ' . $staffName;
 
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitReportPopupVisible();
         return [
             'staffName' => $staffName,
-            'openedString' => $openedString,
-            'closedString' => $closedString
+            'openedString' => $openedString
         ];
     }
 

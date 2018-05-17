@@ -55,7 +55,7 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
         $this->dataConfigToNo = $dataConfigToNo;
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['dataConfig' => $dataConfig]
+            ['configData' => $dataConfig]
         )->run();
 
         // Login webpos
@@ -128,7 +128,7 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
     {
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['dataConfig' => $this->dataConfigToNo]
+            ['configData' => $this->dataConfigToNo]
         )->run();
     }
 }
