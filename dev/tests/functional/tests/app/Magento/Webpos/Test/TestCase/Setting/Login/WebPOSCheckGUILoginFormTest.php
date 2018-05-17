@@ -13,7 +13,7 @@ use Magento\Backend\Test\Page\Adminhtml\Dashboard;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebPOSCheckGUILoginFormTest
- * @package Magento\Webpos\Test\TestCase\Setting\Login
+ * @package Magento\Webpos\Test\TestCase\Setting\LoginTest
  */
 class WebPOSCheckGUILoginFormTest extends Injectable
 {

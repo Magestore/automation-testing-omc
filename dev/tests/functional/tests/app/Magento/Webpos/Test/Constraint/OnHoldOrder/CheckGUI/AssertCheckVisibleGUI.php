@@ -56,7 +56,7 @@ class AssertCheckVisibleGUI extends AbstractConstraint
         //Check visible button checkout and delete
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->isVisible(),
-            'Checkout button is not display'
+            'Cart button is not display'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getOnHoldOrderOrderViewFooter()->getDeleteButton()->isVisible(),

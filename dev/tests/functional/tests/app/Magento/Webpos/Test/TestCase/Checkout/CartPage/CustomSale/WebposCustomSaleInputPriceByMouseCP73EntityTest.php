@@ -11,7 +11,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  *  * Preconditions:
- * 1. Login webpos by a  staff
+ * 1. LoginTest webpos by a  staff
  * 2. Click on [Custom sale]
  *
  * Step:
@@ -23,7 +23,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposCustomSaleInputPriceByMouseCP73EntityTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
  */
 class WebposCustomSaleInputPriceByMouseCP73EntityTest extends Injectable
 {

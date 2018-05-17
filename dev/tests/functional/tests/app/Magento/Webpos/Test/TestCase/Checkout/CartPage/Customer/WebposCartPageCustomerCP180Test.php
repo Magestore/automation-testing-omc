@@ -13,7 +13,7 @@ use Magento\Customer\Test\Fixture\Customer;
 
 /**
  * Class WebposCartPageCustomerCP180Test
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\Customer
  */
 class WebposCartPageCustomerCP180Test extends Injectable
 {
@@ -57,7 +57,7 @@ class WebposCartPageCustomerCP180Test extends Injectable
             ['products' => $products]
         )->run()[0]['product'];
 
-        //Login webpos
+        //LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -75,7 +75,7 @@ class WebposCartPageCustomerCP180Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
-        //Checkout
+        //Cart
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

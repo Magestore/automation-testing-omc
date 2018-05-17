@@ -23,15 +23,15 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 2. Create products
  *
  * Test Flow:
- * 1. Login Web POS as staff
+ * 1. LoginTest Web POS as staff
  * 2. Add some taxable products
  * 3. Select a customer to meet tax condition
  * 4. Add discount for whole cart
- * 5. Click "Checkout" and select a shipping method with fee
+ * 5. Click "Cart" and select a shipping method with fee
  * 6. Back to checkout home page
  * 7. Click "Hold" in cart page
  * 8. Go to On-hold orders page
- * 9. Check tax amount and click "Checkout"
+ * 9. Check tax amount and click "Cart"
  * 10. Check tax amount on checkout page
  *
  */
@@ -147,7 +147,7 @@ class WebposTaxTAX26Test extends Injectable
             ['configData' => $configData]
         )->run();
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -194,7 +194,7 @@ class WebposTaxTAX26Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(5);
 
-        // Back to Checkout Home
+        // Back to Cart Home
         $this->webposIndex->getCheckoutWebposCart()->getIconPrevious()->click();
         sleep(2);
 
@@ -214,9 +214,9 @@ class WebposTaxTAX26Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-        //Assert Tax Amount on Checkout Page
+        //Assert Tax Amount on Cart Page
         $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);
-        //End Assert Tax Amount on Checkout Page
+        //End Assert Tax Amount on Cart Page
 
         return [
             'products' => $products,

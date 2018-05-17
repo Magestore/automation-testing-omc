@@ -18,7 +18,7 @@ use Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\ReturnOrderNew;
  * 1. Create supplier
  *
  * Test Flow:
- * 1. Login as admin
+ * 1. LoginTest as admin
  * 2. Navigate to the Purchase Management > Return Order
  * 3. Click the "Create Return Request" button.
  * 4. Fill to data

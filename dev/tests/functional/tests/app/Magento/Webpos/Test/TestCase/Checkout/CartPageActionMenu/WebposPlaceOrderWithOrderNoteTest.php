@@ -36,7 +36,7 @@ class WebposPlaceOrderWithOrderNoteTest extends Injectable
     }
 
     /**
-     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
+     * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
      *
      * @param FixtureFactory $fixtureFactory
      * @return void

@@ -15,7 +15,7 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 /**
  * Class WebposCheckoutPaymentMethodCP225Test
- * @package Magento\Webpos\Test\TestCase\Checkout\PaymentMethod
+ * @package Magento\Webpos\Test\TestCase\Cart\PaymentMethod
  */
 class WebposCheckoutPaymentMethodCP225Test extends Injectable
 {

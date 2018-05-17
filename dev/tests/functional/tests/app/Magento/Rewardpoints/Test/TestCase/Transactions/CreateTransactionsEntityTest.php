@@ -19,7 +19,7 @@ use Magento\Rewardpoints\Test\Fixture\Transaction;
  * 1. Create customer
  *
  * Test Flow:
- * 1. Login as admin
+ * 1. LoginTest as admin
  * 2. Navigate to the Reward points>Earning Rates
  * 3. Click on 'Add New Earning Rate' button
  * 4. Click on 'Select' button

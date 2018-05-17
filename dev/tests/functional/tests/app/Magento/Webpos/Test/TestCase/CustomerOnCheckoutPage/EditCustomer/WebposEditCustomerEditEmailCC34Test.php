@@ -37,7 +37,7 @@ class WebposEditCustomerEditEmailCC34Test extends Injectable
         $customer->persist();
         $customer1 = $this->fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
         $customer1->persist();
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

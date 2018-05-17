@@ -14,7 +14,7 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 /**
  *  * Preconditions:
- * 1. Login webpos by a  staff
+ * 1. LoginTest webpos by a  staff
  * 2. Add a product to cart
  * 3. Edit Discount product (type:%)
  *
@@ -24,7 +24,7 @@ use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePla
 
 /**
  * Class WebposCheckoutWithDiscountProductPercentCP65EntityTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DiscountProduct
  */
 class WebposCheckoutWithDiscountProductPercentCP67EntityTest extends Injectable
 {
@@ -54,7 +54,7 @@ class WebposCheckoutWithDiscountProductPercentCP67EntityTest extends Injectable
     }
 
     /**
-     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
+     * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
      *
      * @return void
      */

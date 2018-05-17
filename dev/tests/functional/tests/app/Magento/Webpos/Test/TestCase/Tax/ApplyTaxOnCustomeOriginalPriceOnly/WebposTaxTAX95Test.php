@@ -98,7 +98,7 @@ class WebposTaxTAX95Test extends Injectable
 			['configData' => $configData]
 		)->run();
 
-		// Login webpos
+		// LoginTest webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();
@@ -134,7 +134,7 @@ class WebposTaxTAX95Test extends Injectable
 		self::assertEquals(
 			$subTotal,
 			$subTotalOnPage,
-			'Cart Page - Subtotal was not updated after edit custom price'
+			'Checkout Page - Subtotal was not updated after edit custom price'
 			. "\nExpected: " . $subTotal
 			. "\nActual: " . $subTotalOnPage
 		);

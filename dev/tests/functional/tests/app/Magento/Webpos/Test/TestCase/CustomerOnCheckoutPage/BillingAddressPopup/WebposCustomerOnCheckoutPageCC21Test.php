@@ -81,7 +81,7 @@ class WebposCustomerOnCheckoutPageCC21Test extends Injectable
     {
         $address = $this->prepareAddress($customer, $address);
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

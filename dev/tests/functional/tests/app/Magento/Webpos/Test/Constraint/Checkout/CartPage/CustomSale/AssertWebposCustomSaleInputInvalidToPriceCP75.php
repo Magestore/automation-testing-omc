@@ -13,7 +13,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AssertWebposCustomSaleInputInvalidToPriceCP75
- * @package Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomSale
+ * @package Magento\Webpos\Test\Constraint\Cart\CartPage\CustomSale
  */
 class AssertWebposCustomSaleInputInvalidToPriceCP75 extends  AbstractConstraint
 {

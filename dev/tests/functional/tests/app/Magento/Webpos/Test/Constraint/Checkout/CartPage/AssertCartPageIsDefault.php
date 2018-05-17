@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertCartPageIsDefault
- * @package Magento\Webpos\Test\Constraint\Checkout\CartPage
+ * @package Magento\Webpos\Test\Constraint\Cart\CartPage
  */
 class AssertCartPageIsDefault extends AbstractConstraint
 {

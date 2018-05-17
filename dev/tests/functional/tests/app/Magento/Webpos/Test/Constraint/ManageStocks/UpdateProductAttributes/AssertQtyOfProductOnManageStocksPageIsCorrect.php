@@ -19,7 +19,7 @@ class AssertQtyOfProductOnManageStocksPageIsCorrect extends AbstractConstraint
 {
 	public function processAssert(WebposIndex $webposIndex, $productInfo, $expectQty)
 	{
-		// Login webpos
+		// LoginTest webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();

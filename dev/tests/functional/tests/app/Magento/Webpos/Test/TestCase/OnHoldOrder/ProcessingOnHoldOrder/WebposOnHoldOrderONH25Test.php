@@ -39,7 +39,7 @@ class WebposOnHoldOrderONH25Test extends Injectable
         )->run();
         $product1 = $products[0]['product'];
 
-        //Login webpos
+        //LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -62,7 +62,7 @@ class WebposOnHoldOrderONH25Test extends Injectable
         $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem('1')->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
-        //Checkout in On-Hold
+        //Cart in On-Hold
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->onHoldOrders();
         sleep(1);

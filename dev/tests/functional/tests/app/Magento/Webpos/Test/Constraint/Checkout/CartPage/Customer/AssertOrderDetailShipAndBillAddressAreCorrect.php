@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertOrderDetailShipAndBillAddressAreCorrect
- * @package Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer
+ * @package Magento\Webpos\Test\Constraint\Cart\CartPage\Customer
  */
 class AssertOrderDetailShipAndBillAddressAreCorrect extends AbstractConstraint
 {

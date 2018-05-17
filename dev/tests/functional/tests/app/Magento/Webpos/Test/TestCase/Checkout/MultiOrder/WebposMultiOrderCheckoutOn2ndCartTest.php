@@ -44,7 +44,7 @@ class WebposMultiOrderCheckoutOn2ndCartTest extends Injectable
     }
 
     /**
-     * Login WebposCheckGUICustomerPriceCP54EntityTest group test.
+     * LoginTest WebposCheckGUICustomerPriceCP54EntityTest group test.
      *
      * @return void
      */

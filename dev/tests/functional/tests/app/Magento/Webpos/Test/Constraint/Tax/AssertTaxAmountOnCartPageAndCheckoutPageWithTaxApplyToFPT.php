@@ -39,7 +39,7 @@ class AssertTaxAmountOnCartPageAndCheckoutPageWithTaxApplyToFPT extends Abstract
 		\PHPUnit_Framework_Assert::assertEquals(
 			$taxAmount,
 			$taxAmountOnPage,
-			'[Apply Tax To FPT] = Yes - On the Cart - The Tax at the web POS was not correctly.'
+			'[Apply Tax To FPT] = Yes - On the Checkout - The Tax at the web POS was not correctly.'
 			. "\nExpect: " . $taxAmount
 			. "\nActual: " . $taxAmountOnPage
 		);

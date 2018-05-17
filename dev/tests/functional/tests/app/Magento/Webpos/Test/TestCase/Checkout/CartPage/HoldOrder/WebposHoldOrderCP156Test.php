@@ -14,7 +14,7 @@ use Magento\ConfigurableProduct\Test\Fixture\ConfigurableProduct;
 
 /**
  * Class WebposHoldOrderCP156Test
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\HoldOrder
  */
 class WebposHoldOrderCP156Test extends Injectable
 {
@@ -40,7 +40,7 @@ class WebposHoldOrderCP156Test extends Injectable
             ['products' => $products]
         )->run()[0]['product'];
 
-        //Login webpos
+        //LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

@@ -35,7 +35,7 @@ class WebposEditCustomerCheckGUICC31Test extends Injectable
         // Create Customer
         $customer = $this->fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
         $customer->persist();
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

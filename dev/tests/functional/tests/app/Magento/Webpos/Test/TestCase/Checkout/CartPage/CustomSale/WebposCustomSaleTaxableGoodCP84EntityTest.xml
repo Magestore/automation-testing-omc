@@ -6,7 +6,7 @@
             <data name="price" xsi:type="string">50.00</data>
             <data name="tax" xsi:type="string">Taxable Goods</data>
             <data name="taxRate" xsi:type="string">12.38</data>
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomSale\AssertCustomSaleTaxableGood"/>-->
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Cart\CartPage\CustomSale\AssertCustomSaleTaxableGood"/>-->
         </variation>
     </testCase>
 </config>

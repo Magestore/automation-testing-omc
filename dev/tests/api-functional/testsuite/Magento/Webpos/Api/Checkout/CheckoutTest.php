@@ -6,66 +6,37 @@
  * Time: 13:38
  */
 
-namespace Magento\Webpos\Api\Cart;
+namespace Magento\Webpos\Api\Checkout;
 
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 use Magento\Framework\Webapi\Rest\Request as RestRequest;
 /**
  * Class CheckoutTest
- * @package Magento\Webpos\Api\TaxClass
+ * @package Magento\Webpos\Api\Checkout
  */
 class CheckoutTest extends WebapiAbstract
 {
     const RESOURCE_PATH = '/V1/webpos/checkout/';
     const APPLY_GIFTCARD_RESOURCE_PATH = '/V1/webpos/integration/applyGiftcard';
     const SPEND_POINT_RESOURCE_PATH = '/V1/webpos/integration/spendPoint';
-    /**
-     * @var $username
-     */
-    protected $username = 'admin';
-    /**
-     * @var $password
-     */
-    protected $password = 'admin123';
-
-    const RESOURCE_PATH_LOGIN = '/V1/webpos/staff/login';
 
     /**
-     * Get the current session Id
+     * @var \Magento\Webpos\Api\Staff\LoginTest
      */
-    public function getCurrentSessionId()
-    {
-        $serviceInfo = [
-            'rest' => [
-                'resourcePath' => self::RESOURCE_PATH_LOGIN,
-                'httpMethod' => \Magento\Framework\Webapi\Rest\Request::HTTP_METHOD_POST,
-            ],
-        ];
-
-        $requestData = [
-            'staff' => [
-                'username' => $this->username,
-                'password' => $this->password
-            ],
-        ];
-        return $this->_webApiCall($serviceInfo, $requestData);
-    }
+    protected $currentSession;
 
     /**
      * @var \Magento\TestFramework\ObjectManager
      */
     protected $objectManager;
 
-    /**
-     * @var \Magento\Webpos\Api\CurrentSessionId\CurrentSessionIdTest
-     */
-    protected $currentSession;
+    protected $createCart;
 
     protected function setUp()
     {
         $this->objectManager = Bootstrap::getObjectManager();
-        $this->currentSession = $this->objectManager->get('\Magento\Webpos\Api\CurrentSessionId\CurrentSessionIdTest');
+        $this->currentSession = Bootstrap::getObjectManager()->create(\Magento\Webpos\Api\Staff\LoginTest::class);
     }
 
     /**
@@ -73,16 +44,14 @@ class CheckoutTest extends WebapiAbstract
      */
     protected function callAPISaveCart()
     {
-        $session = $this->currentSession->getCurrentSessionId();
+        $session = $sessionId = $this->currentSession->testStaffLogin();
         $serviceInfo = [
             'rest' => [
                 'resourcePath' => self::RESOURCE_PATH . 'saveCart?session='.$session.'',
                 'httpMethod' => RestRequest::HTTP_METHOD_POST,
             ]
         ];
-
         $itemId = mt_rand(10000000000000, 100000000000000);
-
         $requestData = [
             "quote_id" => "",
             "store_id" => "1",
@@ -303,13 +272,11 @@ class CheckoutTest extends WebapiAbstract
                 ]
             ]
         ];
-
         $results = $this->_webApiCall($serviceInfo, $requestData);
         // Dump the result to check "How does it look like?"
-        // \Zend_Debug::dump($results);
+//         \Zend_Debug::dump($results);
         return $results;
     }
-
     /**
      * API: Save TaxClass
      */
@@ -407,9 +374,8 @@ class CheckoutTest extends WebapiAbstract
     /**
      * API: Save Quote Data
      */
-    public function testSaveQuoteData()
-    {
-        $session = $this->currentSession->getCurrentSessionId();
+    public function callAPISaveQuoteData() {
+        $session = $sessionId = $this->currentSession->testStaffLogin();
         $saveCart = $this->callAPISaveCart();
         $serviceInfo = [
             'rest' => [
@@ -417,7 +383,6 @@ class CheckoutTest extends WebapiAbstract
                 'httpMethod' => RestRequest::HTTP_METHOD_POST,
             ]
         ];
-
         $requestData = [
             'customer_id'   => '',
             'quote_id'      => $saveCart['quote_init']['quote_id'],
@@ -430,12 +395,17 @@ class CheckoutTest extends WebapiAbstract
             'till_id'   => 'null',
             'store_id'   => '1',
         ];
-
         $results = $this->_webApiCall($serviceInfo, $requestData);
-
         // Dump the result to check "How does it look like?"
         // \Zend_Debug::dump($results);
-
+        return $results;
+    }
+    /**
+     * API: Save Quote Data
+     */
+    public function testSaveQuoteData()
+    {
+        $results = $this->callAPISaveQuoteData();
         $this->assertNotNull($results);$this->assertNotNull($results);
         // Get the key constraint for API testSaveQuoteData. Call From Folder Constraint
         $keys = [
@@ -531,9 +501,8 @@ class CheckoutTest extends WebapiAbstract
     /**
      * Save Shipping Method
      */
-    public function testSaveShippingMethod()
-    {
-        $session = $this->currentSession->getCurrentSessionId();
+    public function callAPISaveShippingMethod() {
+        $session = $sessionId = $this->currentSession->testStaffLogin();
         $saveCart = $this->callAPISaveCart();
         $serviceInfo = [
             'rest' => [
@@ -544,13 +513,21 @@ class CheckoutTest extends WebapiAbstract
 
         $requestData = [
             'quote_id'      => $saveCart['quote_init']['quote_id'],
-            'shipping_method' => 'webpos_shipping_storepickup'
+            'shipping_method' => 'webpos_shipping_storepickup',
+            'website_id' => '1'
         ];
 
         $results = $this->_webApiCall($serviceInfo, $requestData);
-
+        return $results;
+    }
+    /**
+     * Save Shipping Method
+     */
+    public function testSaveShippingMethod()
+    {
+        $results = $this->callAPISaveShippingMethod();
         // Dump the result to check "How does it look like?"
-        // \Zend_Debug::dump($results);
+//         \Zend_Debug::dump($results);
 
         $this->assertNotNull($results);$this->assertNotNull($results);
         // Get the key constraint for API testSaveShippingMethod. Call From Folder Constraint
@@ -634,14 +611,17 @@ class CheckoutTest extends WebapiAbstract
                 $key . " key is not in found in result['totals'][0]'s keys"
             );
         }
+        return $results;
     }
 
     /**
-     * Place Order
+     * CAll API Place Order
      */
-    public function testPlaceOrder()
+    public function callAPIPlaceOrder()
     {
-        $session = $this->currentSession->getCurrentSessionId();
+        $this->callAPISaveCart();
+        $this->callAPISaveShippingMethod();
+        $session = $sessionId = $this->currentSession->testStaffLogin();
         $saveCart = $this->callAPISaveCart();
         $serviceInfo = [
             'rest' => [
@@ -651,61 +631,94 @@ class CheckoutTest extends WebapiAbstract
         ];
 
         $requestData = [
-            'quote_id' => $saveCart['quote_init']['quote_id'],
+            'quote_data' => [
+                'customer_note' => ''
+            ],
+            'website_id' => '1',
+            'order_comment' => 'place order comment',
             'payment' => [
-                'method' => 'cashforpos',
                 'method_data' => [
                     [
+                        'amount' => 51.75,
+                        'base_real_amount' => 51.75,
+                        'real_amount' => 51.75,
+                        'is_pay_later' => false,
+                        'reference_number' => '',
                         'code' => 'cashforpos',
-                        'title' => 'Web POS - Cash In',
-                        'base_amount' => 59,
-                        'amount' => 59,
-                        'base_real_amount' => 59,
-                        'real_amount' => 59,
-                        'is_pay_later' => '0',
-                        'shift_id' => 'session_1514250244118',
-                        'additional_data' => [
-                        ]
+                        'base_amount' => 51.75,
+                        'additional_data' => [],
+                        'shift_id' => 'session_1519723296717',
+                        'title' => 'Web POS - Cash In'
                     ]
-                ]
+                ],
+                'method' => 'cashforpos'
             ],
-            'shipping_method' => 'webpos_shipping_storepickup',
-            'quote_data' => [
-                'webpos_cart_discount_name' => '',
-                'webpos_cart_discount_type' => '$',
-                'webpos_cart_discount_value' => '',
-                'customer_note' => '',
-                'is_web_version' => 1
-            ],
-            'actions' => [
-                'create_invoice' => true,
-                'create_shipment' => false,
-                'delivery_time' => ''
-            ],
-            'integration' => [
-
-            ],
+            'integration' => [],
+            'shipping_method' => 'flatrate_flatrate',
+            'quoteId' => $saveCart['quote_init']['quote_id'],
             'extension_data' => [
                 [
+                    'key' => 'pos_id',
+                    'value' => '5'
+                ], [
+                    'key' => 'grand_total',
+                    'value' => 51.75
+                ], [
+                    'key' => 'base_grand_total',
+                    'value' => 51.75
+                ], [
+                    'key' => 'tax_amount',
+                    'value' => 6.75
+                ], [
+                    'key' => 'base_tax_amount',
+                    'value' => 6.75
+                ], [
+                    'key' => 'shipping_amount',
+                    'value' => 0
+                ], [
+                    'key' => 'base_shipping_amount',
+                    'value' => 0
+                ], [
+                    'key' => 'subtotal',
+                    'value' => 45
+                ], [
+                    'key' => 'base_subtotal',
+                    'value' => 45
+                ], [
+                    'key' => 'subtotal_incl_tax',
+                    'value' => 45
+                ], [
+                    'key' => 'base_subtotal_incl_tax',
+                    'value' => 45
+                ], [
                     'key' => 'webpos_staff_id',
                     'value' => '1'
-                ],
-                [
+                ], [
                     'key' => 'webpos_staff_name',
-                    'value' => 'magentoadmin magentoadmin'
-                ],
-                [
+                    'value' => 'admin1'
+                ], [
                     'key' => 'webpos_shift_id',
-                    'value' => 'session_1514250244118'
-                ],
-                [
-                    'key' => 'fulfill_online',
-                    'value' => 1
-                ],
-                [
+                    'value' => 'session_1519723296717'
+                ], [
                     'key' => 'location_id',
                     'value' => '1'
+                ], [
+                    'key' => 'created_at',
+                    'value' => ''
+                ], [
+                    'key' => 'customer_fullname',
+                    'value' => ''
+                ], [
+                    'key' => 'webpos_change',
+                    'value' => 0
+                ], [
+                    'key' => 'webpos_base_change',
+                    'value' => 0
                 ]
+            ],
+            'actions' => [
+                'create_shipment' => '1',
+                'create_invoice' => '1'
             ]
         ];
 
@@ -713,7 +726,14 @@ class CheckoutTest extends WebapiAbstract
 
         // Dump the result to check "How does it look like?"
         // \Zend_Debug::dump($results);
-
+        return $results;
+    }
+    /**
+     * Place Order
+     */
+    public function testPlaceOrder()
+    {
+        $results = $this->callAPIPlaceOrder();
         $this->assertNotNull($results);
         // Get the key constraint for API testPlaceOrder. Call From Folder Constraint
 
@@ -866,13 +886,6 @@ class CheckoutTest extends WebapiAbstract
                 $key . " key is not in found in results['items_info_buy']['items'][0]'s keys"
             );
         }
-//        foreach ($key2['items'][0] as $key) {
-//            self::assertContains(
-//                $key,
-//                array_keys($results['items'][0]),
-//                $key . " key is not in found in results['items'][0]'s keys"
-//            );
-//        }
         foreach ($key2['billing_address'] as $key) {
             self::assertContains(
                 $key,
@@ -903,46 +916,35 @@ class CheckoutTest extends WebapiAbstract
         }
     }
 
-    protected function getGiftcode()
-    {
-        /**
-         * @var \Magestore\Giftvoucher\Model\GiftCodePattern $giftCodePattern
-         */
-        $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
-        $giftCodePattern = $objectManager->create(\Magestore\Giftvoucher\Model\GiftCodePattern::class);
-        $giftCodePattern = $giftCodePattern->getCollection()->getFirstItem();
-        return $giftCodePattern;
-    }
-
     /**
-     * We need an API Create Giftcard before do this API
-     * Apply Giftcard
-     *
-     * @magentoApiDataFixture Magento/Giftvoucher/_file/generateGiftcode.php
+     * API Remove Item
      */
-    public function testApplyGiftcard()
+    public function callAPIRemoveItem()
     {
-        $session = $this->currentSession->getCurrentSessionId();
+
+        $session = $sessionId = $this->currentSession->testStaffLogin();
         $saveCart = $this->callAPISaveCart();
+        $shippingMethod = $this->callAPISaveShippingMethod();
+        $quoteId = $saveCart['quote_init']['quote_id'];
+        $itemId = $saveCart['items']['0']['item_id'];
         $serviceInfo = [
             'rest' => [
-                'resourcePath' => self::APPLY_GIFTCARD_RESOURCE_PATH . '?session='.$session.'',
-                'httpMethod' => RestRequest::HTTP_METHOD_POST,
+                'resourcePath' => self::RESOURCE_PATH . 'removeItem?session='.$session.'&item_id='.$itemId.'&quote_id='.$quoteId.'&website_id=1',
+                'httpMethod' => RestRequest::HTTP_METHOD_DELETE,
             ]
         ];
-        // Get List Giftcode
-//        $giftCode = $this->getGiftcode();
-//        \Zend_Debug::dump($giftCode);
-        $requestData = [
-            'quote_id' => $saveCart['quote_init']['quote_id'],
-            'amount' => '',
-            'code' => 'YWAQFONJ',
-        ];
-
-        $results = $this->_webApiCall($serviceInfo, $requestData);
-
+        $results = $this->_webApiCall($serviceInfo);
+        return $results;
+    }
+    /**
+     * API Remove Item
+     */
+    public function testRemoveItem()
+    {
+        $results = $this->callAPIRemoveItem();
         $this->assertNotNull($results);
-        // Get the key constraint for API Apply Giftcard. Call From Folder Constraint
+        // Get the key constraint for API testPlaceOrder. Call From Folder Constraint
+
         $key1 = [
             'items',
             'shipping',
@@ -951,80 +953,8 @@ class CheckoutTest extends WebapiAbstract
             'totals',
             'giftcard',
             'rewardpoints',
-            'storecredit',
+            'storecredit'
         ];
-        $key2 = [
-            'items' => [
-                '0' => [
-                    'item_id',
-                    'quote_id',
-                    'created_at',
-                    'updated_at',
-                    'store_id',
-                    'parent_item_id',
-                    'is_virtual',
-                    'sku',
-                    'name',
-                    'description',
-                    'applied_rule_ids',
-                    'additional_data',
-                    'is_qty_decimal',
-                    'no_discount',
-                    'weight',
-                    'qty',
-                    'price',
-                    'base_price',
-                ],
-            ],
-            'shipping' => [
-                '0' => [
-                    'code',
-                    'title',
-                    'description',
-                    'error_message',
-                    'price_type',
-                    'price',
-                ]
-            ],
-            'payment' => [
-                '0' => [
-                    'code',
-                    'icon_class',
-                    'title',
-                    'information',
-                    'type',
-                    'type_id',
-                    'is_default',
-                    'is_reference_number',
-                    'is_pay_later',
-                ]
-            ],
-            'quote_init' => [
-                'quote_id',
-                'customer_id',
-                'currency_id',
-                'till_id',
-                'store_id',
-            ],
-            'totals' => [
-                '0' => [
-                    'code',
-                    'title',
-                    'value',
-                    'address',
-                ]
-            ],
-            'giftcard' => [
-                'existed_codes',
-                'used_codes',
-            ],
-            'rewardpoints' => [
-                'used_point',
-                'balance',
-                'max_points',
-            ],
-        ];
-
         foreach ($key1 as $key) {
             self::assertContains(
                 $key,
@@ -1033,215 +963,50 @@ class CheckoutTest extends WebapiAbstract
             );
         }
 
-        foreach ($key2['items'][0] as $key) {
-            self::assertContains(
-                $key,
-                array_keys($results['items'][0]),
-                $key . " key is not in found in results['items'][0]'s keys"
-            );
-        }
-        foreach ($key2['shipping'][0] as $key) {
-            self::assertContains(
-                $key,
-                array_keys($results['shipping'][0]),
-                $key . " key is not in found in results['shipping'][0]'s keys"
-            );
-        }
-        foreach ($key2['payment'][0] as $key) {
-            self::assertContains(
-                $key,
-                array_keys($results['payment'][0]),
-                $key . " key is not in found in results['payment'][0]'s keys"
-            );
-        }
+        $key2 = [
+            'quote_init' => [
+                'customer_id',
+                'quote_id',
+                'currency_id',
+                'till_id',
+                'store_id'
+            ],
+            'totals' => [
+                'code',
+                'title',
+                'value',
+                'address'
+            ]
+        ];
+
+        $key3 = [
+            'totals' => [
+                'address' => [
+                    '_objectCopyService',
+                    '_carrierFactory',
+                ]
+            ]
+        ];
         foreach ($key2['quote_init'] as $key) {
             self::assertContains(
                 $key,
                 array_keys($results['quote_init']),
-                $key . " key is not in found in results['payment'][0]'s keys"
+                $key . " key is not in found in result['quote_init'][0]'s keys"
             );
         }
-        foreach ($key2['totals'][0] as $key) {
+        foreach ($key2['totals'] as $key) {
             self::assertContains(
                 $key,
                 array_keys($results['totals'][0]),
                 $key . " key is not in found in results['totals'][0]'s keys"
             );
         }
-        foreach ($key2['giftcard'] as $key) {
+        foreach ($key3['totals']['address'] as $key) {
             self::assertContains(
                 $key,
-                array_keys($results['giftcard']),
-                $key . " key is not in found in results['giftcard']'s keys"
+                array_keys($results['totals'][0]['address']),
+                $key . " key is not in found in results['totals'][0]['address']'s keys"
             );
         }
     }
-
-    /**
-     * Spend RWP
-     */
-//    public function testSpendPoint()
-//    {
-//        $session = $this->currentSession->getCurrentSessionId();
-//        $saveCart = $this->callAPISaveCart();
-//        $serviceInfo = [
-//            'rest' => [
-//                'resourcePath' => self::SPEND_POINT_RESOURCE_PATH . '?session='.$session.'',
-//                'httpMethod' => RestRequest::HTTP_METHOD_POST,
-//            ]
-//        ];
-//
-//        $requestData = [
-//            'quote_id' => $saveCart['quote_init']['quote_id'],
-//            'rule_id' => 'rate',
-//            'used_point' => '1000',
-//        ];
-//
-//        $results = $this->_webApiCall($serviceInfo, $requestData);
-//
-//        // Dump the result to check "How does it look like?"
-//        // \Zend_Debug::dump($results);
-//
-//        $this->assertNotNull($results);
-//        // Get the key constraint for API testSpendPoint. Call From Folder Constraint
-//        $key1 = [
-//            'items',
-//            'shipping',
-//            'payment',
-//            'quote_init',
-//            'totals',
-//            'giftcard',
-//            'rewardpoints',
-//            'storecredit',
-//        ];
-//        $key2 = [
-//            'items' => [
-//                '0' => [
-//                    'item_id',
-//                    'quote_id',
-//                    'created_at',
-//                    'updated_at',
-//                    'store_id',
-//                    'parent_item_id',
-//                    'is_virtual',
-//                    'sku',
-//                    'name',
-//                    'description',
-//                    'applied_rule_ids',
-//                    'additional_data',
-//                    'is_qty_decimal',
-//                    'no_discount',
-//                    'weight',
-//                    'qty',
-//                    'price',
-//                    'base_price',
-//                ],
-//            ],
-//            'shipping' => [
-//                '0' => [
-//                    'code',
-//                    'title',
-//                    'description',
-//                    'error_message',
-//                    'price_type',
-//                    'price',
-//                ]
-//            ],
-//            'payment' => [
-//                '0' => [
-//                    'code',
-//                    'icon_class',
-//                    'title',
-//                    'information',
-//                    'type',
-//                    'type_id',
-//                    'is_default',
-//                    'is_reference_number',
-//                    'is_pay_later',
-//                ]
-//            ],
-//            'quote_init' => [
-//                'quote_id',
-//                'customer_id',
-//                'currency_id',
-//                'till_id',
-//                'store_id',
-//            ],
-//            'totals' => [
-//                '0' => [
-//                    'code',
-//                    'title',
-//                    'value',
-//                    'address',
-//                ]
-//            ],
-//            'giftcard' => [
-//                'existed_codes',
-//                'used_codes',
-//            ],
-//            'rewardpoints' => [
-//                'used_point',
-//                'balance',
-//                'max_points',
-//            ],
-//        ];
-//
-//        foreach ($key1 as $key) {
-//            self::assertContains(
-//                $key,
-//                array_keys($results),
-//                $key . " key is not in found in results's keys"
-//            );
-//        }
-//
-//        foreach ($key2['items'][0] as $key) {
-//            self::assertContains(
-//                $key,
-//                array_keys($results['items'][0]),
-//                $key . " key is not in found in results['items'][0]'s keys"
-//            );
-//        }
-//        foreach ($key2['shipping'][0] as $key) {
-//            self::assertContains(
-//                $key,
-//                array_keys($results['shipping'][0]),
-//                $key . " key is not in found in results['shipping'][0]'s keys"
-//            );
-//        }
-//        foreach ($key2['payment'][0] as $key) {
-//            self::assertContains(
-//                $key,
-//                array_keys($results['payment'][0]),
-//                $key . " key is not in found in results['payment'][0]'s keys"
-//            );
-//        }
-//        foreach ($key2['quote_init'] as $key) {
-//            self::assertContains(
-//                $key,
-//                array_keys($results['quote_init']),
-//                $key . " key is not in found in results['payment'][0]'s keys"
-//            );
-//        }
-//        foreach ($key2['totals'][0] as $key) {
-//            self::assertContains(
-//                $key,
-//                array_keys($results['totals'][0]),
-//                $key . " key is not in found in results['totals'][0]'s keys"
-//            );
-//        }
-//        foreach ($key2['giftcard'] as $key) {
-//            self::assertContains(
-//                $key,
-//                array_keys($results['giftcard']),
-//                $key . " key is not in found in results['giftcard']'s keys"
-//            );
-//        }
-//        foreach ($key2['rewardpoints'] as $key) {
-//            self::assertContains(
-//                $key,
-//                array_keys($results['rewardpoints']),
-//                $key . " key is not in found in results['rewardpoints']'s keys"
-//            );
-//        }
-//    }
 }

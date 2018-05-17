@@ -32,7 +32,7 @@ class WebposOrderHistorySearchWithCustomerEmailOH127Test extends Injectable
             ['order' => $order]
         )->run();
         $order = $data['order'];
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

@@ -36,7 +36,7 @@ class WebposHoldOrderCP170Test extends Injectable
         $product1 = $products[0]['product'];
         $product2 = $products[1]['product'];
 
-        //Login webpos
+        //LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -51,7 +51,7 @@ class WebposHoldOrderCP170Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
 
-        //Checkout
+        //Cart
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -68,7 +68,7 @@ class WebposHoldOrderCP170Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
-        //Checkout in On-Hold
+        //Cart in On-Hold
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->onHoldOrders();
         sleep(1);

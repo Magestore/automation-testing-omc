@@ -36,7 +36,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * - Fill out correctly all fields [Warehouse]: Don't link to any warehouse
  * - Click on [Save and continue edit] button > create location A
  * - Go to Manage Staff > Edit staff B > Assign location A to a staff B
- * - Login webpos by staff B and select location A
+ * - LoginTest webpos by staff B and select location A
  *
  * Acceptance
  * - Create Location successfully
@@ -160,7 +160,7 @@ class WebposManageLocationML21Test extends Injectable
         $this->staffNew->getFormPageActions()->save();
         $this->staffIndex->getStaffsGrid()->waitLoader();
 
-        //Login By Staff
+        //LoginTest By Staff
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
             [

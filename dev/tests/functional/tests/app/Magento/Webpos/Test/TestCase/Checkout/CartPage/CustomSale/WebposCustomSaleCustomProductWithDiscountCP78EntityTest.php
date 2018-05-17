@@ -12,7 +12,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  *  * Preconditions:
- * 1. Login webpos by a  staff
+ * 1. LoginTest webpos by a  staff
  * 2. Add some products  to cart
  * 3. Add discount (type :%)
  *
@@ -23,7 +23,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposCustomSaleCustomProductWithDiscountCP78EntityTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
  */
 class WebposCustomSaleCustomProductWithDiscountCP78EntityTest extends  Injectable
 {

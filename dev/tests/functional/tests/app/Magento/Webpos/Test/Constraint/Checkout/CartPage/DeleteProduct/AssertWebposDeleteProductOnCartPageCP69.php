@@ -23,19 +23,19 @@ class AssertWebposDeleteProductOnCartPageCP69 extends AbstractConstraint
         \PHPUnit_Framework_Assert::assertNotEquals(
             $subtotal,
             $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Subtotal')->getText(),
-            'Delete Product on Cart Page'
+            'Delete Product on Checkout Page'
         );
 
         \PHPUnit_Framework_Assert::assertNotEquals(
             0,
             $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText(),
-            'Delete Product on Cart Page'
+            'Delete Product on Checkout Page'
         );
 
         \PHPUnit_Framework_Assert::assertNotEquals(
             0,
             $webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText(),
-            'Delete Product on Cart Page'
+            'Delete Product on Checkout Page'
         );
     }
 
@@ -46,6 +46,6 @@ class AssertWebposDeleteProductOnCartPageCP69 extends AbstractConstraint
      */
     public function toString()
     {
-        return "CategoryRepository - TaxClass Page - Check Cart empty";
+        return "CategoryRepository - TaxClass Page - Check Checkout empty";
     }
 }

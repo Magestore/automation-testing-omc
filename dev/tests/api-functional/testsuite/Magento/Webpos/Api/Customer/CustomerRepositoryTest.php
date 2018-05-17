@@ -101,7 +101,7 @@ class CustomerRepositoryTest extends WebapiAbstract
         ];
 
         $results = $this->_webApiCall($serviceInfo, $requestData);
-        \Zend_Debug::dump($results);
+//        \Zend_Debug::dump($results);
 
         // Dump the result to check "How does it look like?"
         // $this->assertNotNull($results);

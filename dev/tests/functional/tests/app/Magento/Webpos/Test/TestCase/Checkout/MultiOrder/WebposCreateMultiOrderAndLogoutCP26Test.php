@@ -70,7 +70,7 @@ class WebposCreateMultiOrderAndLogoutCP26Test extends Injectable
     }
 
     /**
-     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
+     * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
      *
      * @param Staff $staff
      * @param Staff ConfigData
@@ -98,7 +98,7 @@ class WebposCreateMultiOrderAndLogoutCP26Test extends Injectable
             ['staff' => $createStaff]
         )->run();
         // End create new Staff on magento backend
-        //Begin Login webpos by the other staff
+        //Begin LoginTest webpos by the other staff
         $this->webposIndex->open();
         $this->webposIndex->getLoginForm()->getUsernameField()->setValue($createStaff->getUsername());
         $this->webposIndex->getLoginForm()->getPasswordField()->setValue($createStaff->getPassword());
@@ -106,7 +106,7 @@ class WebposCreateMultiOrderAndLogoutCP26Test extends Injectable
         sleep(3);
         while ($this->webposIndex->getFirstScreen()->isVisible()) {}
         sleep(2);
-        //End Login webpos by the other staff
+        //End LoginTest webpos by the other staff
         for ($i=1; $i<=2; $i++) {
             self::assertFalse(
                 $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($i)->isVisible(),

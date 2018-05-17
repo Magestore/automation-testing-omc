@@ -13,7 +13,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AssertCustomSaleTaxableGood
- * @package Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomSale
+ * @package Magento\Webpos\Test\Constraint\Cart\CartPage\CustomSale
  */
 
 class AssertCustomSaleTaxableGood extends AbstractConstraint

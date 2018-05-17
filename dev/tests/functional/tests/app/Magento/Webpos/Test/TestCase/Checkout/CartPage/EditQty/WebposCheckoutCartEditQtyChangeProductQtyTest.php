@@ -15,7 +15,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposCheckoutCartEditQtyChangeProductQtyTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\EditQty
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\EditQty
  */
 class WebposCheckoutCartEditQtyChangeProductQtyTest extends Injectable
 {
@@ -45,7 +45,7 @@ class WebposCheckoutCartEditQtyChangeProductQtyTest extends Injectable
 		$action
 	)
 	{
-		// Login webpos
+		// LoginTest webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();

@@ -15,7 +15,7 @@ use Magento\Rewardpoints\Test\Fixture\EarningRates;
 /**
  *
  * Test Flow:
- * 1. Login as admin
+ * 1. LoginTest as admin
  * 2. Navigate to the Reward points>Earning rates
  * 3. Click on 'Add New Earning Rate' button
  * 4. Verify form add new

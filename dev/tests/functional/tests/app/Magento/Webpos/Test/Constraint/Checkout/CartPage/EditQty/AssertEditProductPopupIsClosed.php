@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertEditProductPopupIsClosed
- * @package Magento\Webpos\Test\Constraint\Checkout\CartPage\EditQty
+ * @package Magento\Webpos\Test\Constraint\Cart\CartPage\EditQty
  */
 class AssertEditProductPopupIsClosed extends AbstractConstraint
 {

@@ -119,7 +119,7 @@ class WebposTaxTAX76Test extends Injectable
             ['configData' => $configData]
         )->run();
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -152,9 +152,9 @@ class WebposTaxTAX76Test extends Injectable
 
         sleep(5);
 
-        //Assert Tax Amount on Cart Page
+        //Assert Tax Amount on Checkout Page
         $this->assertTaxAmountOnCartPageAndCheckoutPageBeforeDiscount->processAssert($taxRate, $this->webposIndex);
-        //End Assert Tax Amount on Cart Page
+        //End Assert Tax Amount on Checkout Page
 
         // Check out
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
@@ -163,9 +163,9 @@ class WebposTaxTAX76Test extends Injectable
 
         sleep(5);
 
-        //Assert Tax Amount on Checkout Page
+        //Assert Tax Amount on Cart Page
         $this->assertTaxAmountOnCartPageAndCheckoutPageBeforeDiscount->processAssert($taxRate, $this->webposIndex);
-        //End Assert Tax Amount on Checkout Page
+        //End Assert Tax Amount on Cart Page
 
         return [
             'products' => $products,

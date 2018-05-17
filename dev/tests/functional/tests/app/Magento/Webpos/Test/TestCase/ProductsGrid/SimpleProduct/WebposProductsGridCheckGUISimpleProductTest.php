@@ -49,7 +49,7 @@ class WebposProductsGridCheckGUISimpleProductTest extends Injectable
         $this->webposIndex->open();
 
         if ($this->webposIndex->getLoginForm()->isVisible()) {
-            // Login webpos
+            // LoginTest webpos
             $this->objectManager->getInstance()->create(
                 'Magento\Webpos\Test\TestStep\SessionInstallStep'
             )->run();

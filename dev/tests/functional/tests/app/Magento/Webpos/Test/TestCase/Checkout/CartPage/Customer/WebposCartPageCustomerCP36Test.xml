@@ -7,7 +7,7 @@
 			<data name="product/dataset" xsi:type="string">product1</data>
 			<data name="address/dataset" xsi:type="string">default_webpos_guest_address</data>
 
-			<!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>-->
+			<!--<constraint name="Magento\Webpos\Test\Constraint\Cart\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>-->
 		</variation>
 	</testCase>
 </config>

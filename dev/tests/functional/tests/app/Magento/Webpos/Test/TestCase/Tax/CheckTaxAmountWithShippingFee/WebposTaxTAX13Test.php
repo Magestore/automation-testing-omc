@@ -79,7 +79,7 @@ class WebposTaxTAX13Test extends Injectable
 			['configData' => 'all_allow_shipping_for_POS']
 		)->run();
 
-		// Login webpos
+		// LoginTest webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();

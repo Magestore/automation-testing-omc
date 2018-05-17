@@ -13,7 +13,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertWebposInputValidValueToDiscountPercentCP66
- * @package Magento\Webpos\Test\Constraint\Checkout\CartPage\DiscountProduct
+ * @package Magento\Webpos\Test\Constraint\Cart\CartPage\DiscountProduct
  */
 class AssertWebposInputValidValueToDiscountPercentCP66 extends AbstractConstraint
 {

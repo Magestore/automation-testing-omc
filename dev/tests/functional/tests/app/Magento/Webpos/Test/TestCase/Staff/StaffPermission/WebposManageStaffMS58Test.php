@@ -87,7 +87,7 @@ class WebposManageStaffMS58Test extends Injectable
         $dataStaff['role_id'] = $webposRole->getRoleId();
         $staff = $fixtureFactory->createByCode('staff', ['data' => $dataStaff]);
         $staff->persist();
-        //Login
+        //LoginTest
         $this->loginWebpos($this->webposIndex, $dataStaff['username'],$dataStaff['password'], $dataLocation['display_name'], $pos->getData('pos_name'));
         sleep(3);
         //Check show hide item menu

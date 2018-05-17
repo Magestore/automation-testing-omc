@@ -41,7 +41,7 @@ class WebposEditCustomerCheckAddAddressButtonCC38Test extends Injectable
         // Create Customer
         $customer = $this->fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
         $customer->persist();
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -81,7 +81,7 @@ class WebposEditCustomerCheckAddAddressButtonCC38Test extends Injectable
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',
             ['products' => $products]
         )->run();
-        // Checkout
+        // Cart
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

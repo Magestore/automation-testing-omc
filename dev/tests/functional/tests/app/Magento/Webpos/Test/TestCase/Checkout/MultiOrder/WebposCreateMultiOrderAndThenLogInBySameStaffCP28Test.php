@@ -44,7 +44,7 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
     }
 
     /**
-     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
+     * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
      *
      * @param ConfigData $dataConfig
      * @param ConfigData $dataConfigToNo
@@ -58,7 +58,7 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
             ['dataConfig' => $dataConfig]
         )->run();
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
         )->run();
@@ -111,7 +111,7 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
         sleep(1);
         $this->webposIndex->getModal()->getOkButton()->click();
 
-        //Login webpos by the same staff
+        //LoginTest webpos by the same staff
         $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
         )->run();

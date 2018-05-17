@@ -18,7 +18,7 @@ use Magento\PurchaseOrderSuccess\Test\Page\Adminhtml\QuotationNew;
  * 1. Create supplier
  *
  * Test Flow:
- * 1. Login as admin
+ * 1. LoginTest as admin
  * 2. Navigate to the Purchase Management > Quotations
  * 3. Fill out all data
  * 4. Prepare Product List

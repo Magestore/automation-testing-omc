@@ -38,20 +38,47 @@ class StockItemRepositoryTest extends WebapiAbstract
                 ],
             ],
         ];
-
         $serviceInfo = [
             'rest' => [
                 'resourcePath' => self::RESOURCE_PATH . '?' . http_build_query($searchCriteria),
                 'httpMethod' => RestRequest::HTTP_METHOD_GET,
             ],
         ];
-
-
         $results = $this->_webApiCall($serviceInfo, $searchCriteria);
         $this->assertNotNull($results);
-
-        // Dump the result to check "How does it look like?"
-        // \Zend_Debug::dump($results);
-
+        $key1 = [
+            'items',
+            'search_criteria',
+            'total_count'
+        ];
+        $key2 = [
+            'search_criteria' => [
+                'filter_groups' => [
+                    0 => [
+                        'filters' => [
+                            0 => [
+                                'field',
+                                'value',
+                                'condition_type',
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+        foreach ($key1 as $key) {
+            self::assertContains(
+                $key,
+                array_keys($results),
+                $key . " key is not in found in results's keys"
+            );
+        }
+        foreach ($key2['search_criteria']['filter_groups'][0]['filters'][0] as $key) {
+            self::assertContains(
+                $key,
+                array_keys($results['search_criteria']['filter_groups'][0]['filters'][0]),
+                $key . " key is not in found in results['search_criteria']['filter_groups'][0]['filters'][0]'s keys"
+            );
+        }
     }
 }

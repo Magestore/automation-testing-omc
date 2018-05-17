@@ -59,7 +59,7 @@ class WebposOrdersHistoryInvoiceOH114Test extends Injectable
             ['products' => $products]
         )->run();
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

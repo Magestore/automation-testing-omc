@@ -41,7 +41,7 @@ class WebposEditCustomerEditShippingAndBillingAddressCC39Test extends Injectable
         // Create Customer
         $customer = $this->fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI_ship_CA_bill']);
         $customer->persist();
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -101,7 +101,7 @@ class WebposEditCustomerEditShippingAndBillingAddressCC39Test extends Injectable
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',
             ['products' => $products]
         )->run();
-        // Checkout
+        // Cart
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

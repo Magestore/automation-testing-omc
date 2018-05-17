@@ -20,7 +20,7 @@ use Magento\Mtf\TestCase\Injectable;
  * Preconditions:
  * 1. Create AssertWebposCheckGUICustomerPriceCP54 Staff.
  * Steps:
- * 1. Login to backend.
+ * 1. LoginTest to backend.
  * 2. Open Sales -> AssertWebposCheckGUICustomerPriceCP54 -> Manage Staff.
  * 3. Open Staff from preconditions.
  * 4. Delete.

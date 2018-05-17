@@ -31,7 +31,7 @@ class WebposCCCheckGuiTest extends Injectable
 		$clickCreateCustomer = false
 	)
 	{
-		// Login webpos
+		// LoginTest webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();

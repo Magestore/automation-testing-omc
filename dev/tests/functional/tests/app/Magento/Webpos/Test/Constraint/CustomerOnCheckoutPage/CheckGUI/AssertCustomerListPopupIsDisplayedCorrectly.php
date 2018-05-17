@@ -19,42 +19,42 @@ class AssertCustomerListPopupIsDisplayedCorrectly extends AbstractConstraint
 
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getCheckoutChangeCustomer()->isVisible(),
-			"Customer On Checkout Page - Customer list popup is not shown"
+			"Customer On Cart Page - Customer list popup is not shown"
 		);
 
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getCheckoutChangeCustomer()->getAddNewCustomerButton()->isVisible(),
-			"Customer On Checkout Page - Customer list popup - Create Customer button is not shown"
+			"Customer On Cart Page - Customer list popup - Create Customer button is not shown"
 		);
 
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getCheckoutChangeCustomer()->getUseGuestButton()->isVisible(),
-			"Customer On Checkout Page - Customer list popup - Use Guest button is not shown"
+			"Customer On Cart Page - Customer list popup - Use Guest button is not shown"
 		);
 
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getCheckoutChangeCustomer()->getSearchBox()->isVisible(),
-			"Customer On Checkout Page - Customer list popup - Search box is not shown"
+			"Customer On Cart Page - Customer list popup - Search box is not shown"
 		);
 
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getCheckoutChangeCustomer()->getSearchBox()->isVisible(),
-			"Customer On Checkout Page - Customer list popup - Search box is not shown"
+			"Customer On Cart Page - Customer list popup - Search box is not shown"
 		);
 
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->isVisible(),
-			"Customer On Checkout Page - Customer list popup - Customer List is empty"
+			"Customer On Cart Page - Customer list popup - Customer List is empty"
 		);
 
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getCheckoutChangeCustomer()->getFirstCustomerName()->isVisible(),
-			"Customer On Checkout Page - Customer list popup - Customer name is not shown"
+			"Customer On Cart Page - Customer list popup - Customer name is not shown"
 		);
 
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getCheckoutChangeCustomer()->getFirstCustomerPhone()->isVisible(),
-			"Customer On Checkout Page - Customer list popup - Customer phone is not shown"
+			"Customer On Cart Page - Customer list popup - Customer phone is not shown"
 		);
 	}
 
@@ -65,6 +65,6 @@ class AssertCustomerListPopupIsDisplayedCorrectly extends AbstractConstraint
 	 */
 	public function toString()
 	{
-		return "Customer On Checkout Page - CheckGUI - Customer list popup is displayed correctly";
+		return "Customer On Cart Page - CheckGUI - Customer list popup is displayed correctly";
 	}
 }

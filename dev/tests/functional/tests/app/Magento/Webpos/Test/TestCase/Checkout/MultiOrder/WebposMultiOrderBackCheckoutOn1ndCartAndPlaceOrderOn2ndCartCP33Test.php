@@ -46,7 +46,7 @@ class WebposMultiOrderBackCheckoutOn1ndCartAndPlaceOrderOn2ndCartCP33Test extend
     }
 
     /**
-     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
+     * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
      *
      * @return void
      */

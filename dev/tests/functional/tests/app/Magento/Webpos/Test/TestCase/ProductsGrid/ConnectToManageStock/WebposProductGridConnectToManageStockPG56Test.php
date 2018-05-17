@@ -30,7 +30,7 @@ class WebposProductGridConnectToManageStockPG56Test extends Injectable
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run();
-        // Login webpos
+        // LoginTest webpos
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();
@@ -39,7 +39,7 @@ class WebposProductGridConnectToManageStockPG56Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
 
-        // Checkout
+        // Cart
         while ( !$this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->isVisible()) {
             sleep(1);
         }

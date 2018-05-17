@@ -42,7 +42,7 @@ class WebPOSCheckGUIMyAccountPageTest  extends Injectable
     public function test()
     {
         $username = $this->configuration->get('application/0/backendLogin/0/value');
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

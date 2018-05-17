@@ -36,7 +36,7 @@ class WebposCheckGUICustomerPriceInsertNegativePriceCP55EntityTest extends Injec
     }
 
     /**
-     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
+     * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
      *
      * @return void
      */

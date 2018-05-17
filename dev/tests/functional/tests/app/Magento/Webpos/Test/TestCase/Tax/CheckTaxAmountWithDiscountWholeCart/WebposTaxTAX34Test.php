@@ -21,7 +21,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 2. Create products
  *
  * Test Flow:
- * 1. Login webpos as a staff
+ * 1. LoginTest webpos as a staff
  * 2. Add some taxable products and select a customer to meet tax condition
  * 3. Add discount for whole cart
  * 4. Place order successfully with completed status
@@ -131,7 +131,7 @@ class WebposTaxTAX34Test extends Injectable
             ['configData' => $configData]
         )->run();
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

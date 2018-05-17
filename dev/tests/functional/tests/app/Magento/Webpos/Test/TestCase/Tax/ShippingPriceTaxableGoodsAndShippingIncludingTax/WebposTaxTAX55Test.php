@@ -130,7 +130,7 @@ class WebposTaxTAX55Test extends Injectable
             ['configData' => $configData]
         )->run();
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -161,9 +161,9 @@ class WebposTaxTAX55Test extends Injectable
         $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Flat Rate - Fixed")->getText();
         $shippingFee = (float)substr($shippingFee, 1);
 
-        //Assert Tax Amount on Checkout Page
+        //Assert Tax Amount on Cart Page
         $this->assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee->processAssert($taxRates['taxRateMI']->getRate(), $shippingFee, $this->webposIndex);
-        //End Assert Tax Amount on Checkout Page
+        //End Assert Tax Amount on Cart Page
 
         //Change customer address to California
         $this->webposIndex->getCheckoutCartHeader()->getCustomerTitleDefault()->click();
@@ -179,9 +179,9 @@ class WebposTaxTAX55Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(3);
-        //Assert Tax Amount on Checkout Page
+        //Assert Tax Amount on Cart Page
         $this->assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee->processAssert($taxRates['taxRateCA']->getRate(), $shippingFee, $this->webposIndex);
-        //End Assert Tax Amount on Checkout Page
+        //End Assert Tax Amount on Cart Page
 
         return [
             'products' => $products,

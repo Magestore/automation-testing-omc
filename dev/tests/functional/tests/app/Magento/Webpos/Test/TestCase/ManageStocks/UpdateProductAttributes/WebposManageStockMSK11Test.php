@@ -18,7 +18,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * Check prodcut list in mange stock
  *
  * Precondition
- * 1. Login Webpos as a staff
+ * 1. LoginTest Webpos as a staff
  * 2. Go to Manage Stocks page
  *
  * Step

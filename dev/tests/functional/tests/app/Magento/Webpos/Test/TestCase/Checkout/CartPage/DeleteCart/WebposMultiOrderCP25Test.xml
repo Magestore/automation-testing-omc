@@ -3,7 +3,7 @@
     <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\DeleteCart\WebposMultiOrderCP25Test" summary="Checkout - Cart Page - Delete Cart with multi order Test" ticketId="WEBPOS-1">
         <variation name="WebposMultiOrderCP25">
             <data name="product/dataset" xsi:type="string">product1</data>
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\DeleteCart\AssertWebposMultiOrderCP24"/>-->
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Cart\CartPage\DeleteCart\AssertWebposMultiOrderCP24"/>-->
         </variation>
     </testCase>
 </config>

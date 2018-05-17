@@ -55,7 +55,7 @@ class WebposCartPageCustomerCheckoutByNewCustomerTest extends Injectable
 		$addAddress = false
 	)
 	{
-		// Login webpos
+		// LoginTest webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();

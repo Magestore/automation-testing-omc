@@ -75,7 +75,7 @@ class WebposCustomerOnCheckoutPageCC23Test extends Injectable
         $address = $this->prepareAddress($customer, $address);
         $editAddress = $this->prepareAddress($customer, $editAddress);
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

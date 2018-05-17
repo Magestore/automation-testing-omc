@@ -14,7 +14,7 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 /**
  *  * Preconditions:
- * 1. Login webpos by a  staff
+ * 1. LoginTest webpos by a  staff
  *
  * Step:
  * 1. Add custom product to cart with Tax: Taxable goods
@@ -22,7 +22,7 @@ use Magento\Mtf\Fixture\FixtureFactory;
  */
 /**
  * Class WebposCustomSaleTaxableGoodCP84EntityTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
  */
 
 class WebposCustomSaleTaxableGoodCP84EntityTest extends Injectable

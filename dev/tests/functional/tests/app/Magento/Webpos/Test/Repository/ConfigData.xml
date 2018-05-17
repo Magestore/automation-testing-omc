@@ -794,7 +794,7 @@
                 <item name="inherit" xsi:type="number">1</item>
             </field>
 
-            <!--Shopping Cart Display Settings-->
+            <!--Shopping Checkout Display Settings-->
             <field name="tax/cart_display/price" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
@@ -1081,7 +1081,7 @@
                 <item name="value" xsi:type="string">12</item>
             </field>
 
-            <!--Default Guest Checkout-->
+            <!--Default Guest Cart-->
             <field name="webpos/guest_checkout/country_id" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
@@ -1700,7 +1700,7 @@
         </dataset>
         <!--End Shipping Config-->
 
-        <!--Checkout Payment method-->
+        <!--Cart Payment method-->
         <dataset name="default_payment_method">
             <field name="webpos/payment/allowspecific_payment" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -1717,7 +1717,7 @@
             </field>
         </dataset>
 
-        <!--Checkout Payment method no payment-->
+        <!--Cart Payment method no payment-->
         <dataset name="default_payment_method_no_payment">
             <field name="webpos/payment/allowspecific_payment" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -1732,7 +1732,7 @@
                 <item name="value" xsi:type="string">0</item>
             </field>
         </dataset>
-        <!--Checkout Payment method all payment-->
+        <!--Cart Payment method all payment-->
         <dataset name="default_payment_method_all_payment">
             <field name="webpos/payment/allowspecific_payment" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -1747,7 +1747,7 @@
                 <item name="value" xsi:type="string">0</item>
             </field>
         </dataset>
-        <!--Checkout Payment method all payment select cashin-->
+        <!--Cart Payment method all payment select cashin-->
         <dataset name="default_payment_method_all_payment_select_cashin">
             <field name="webpos/payment/allowspecific_payment" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>

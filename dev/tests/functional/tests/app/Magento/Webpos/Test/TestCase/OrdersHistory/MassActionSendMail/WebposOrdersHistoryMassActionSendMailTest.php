@@ -55,7 +55,7 @@ class WebposOrdersHistoryMassActionSendMailTest extends Injectable
         $this->customer = $order->getData('customer_id');
         $customerEmail = $this->customer->getEmail();
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

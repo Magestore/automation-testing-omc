@@ -4,7 +4,7 @@
         <variation name="WebposMultiOrderCP24">
             <data name="firstCart" xsi:type="string">1</data>
             <data name="number" xsi:type="string">2</data>
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\DeleteCart\AssertWebposMultiOrderCP24"/>-->
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Cart\CartPage\DeleteCart\AssertWebposMultiOrderCP24"/>-->
         </variation>
     </testCase>
 </config>

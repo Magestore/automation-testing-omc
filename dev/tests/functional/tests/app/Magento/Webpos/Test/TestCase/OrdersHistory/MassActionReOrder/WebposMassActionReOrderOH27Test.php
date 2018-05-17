@@ -36,7 +36,7 @@ class WebposMassActionReOrderOH27Test extends Injectable
             $products[$key]['product'] = $value;
         }
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

@@ -12,7 +12,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 /**
  *  * Preconditions:
- * 1. Login webpos by a  staff
+ * 1. LoginTest webpos by a  staff
  * 2. Add some products  to cart
  *
  * Step:
@@ -21,7 +21,7 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
  */
 /**
  * Class WebposCustomSaleAddProductIntoExistCartCP76EntityTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
  */
 class WebposCustomSaleAddProductIntoExistCartCP76EntityTest extends Injectable
 {

@@ -31,7 +31,7 @@ class WebPOSLogoutUnsuccessfullyTest extends Injectable
 
     public function test($message, $testID)
     {
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

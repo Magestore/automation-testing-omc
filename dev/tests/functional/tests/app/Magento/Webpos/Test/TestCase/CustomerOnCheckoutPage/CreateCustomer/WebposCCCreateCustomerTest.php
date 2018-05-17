@@ -48,7 +48,7 @@ class WebposCCCreateCustomerTest extends Injectable
 			$existCustomer->persist();
 		}
 
-		// Login webpos
+		// LoginTest webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();

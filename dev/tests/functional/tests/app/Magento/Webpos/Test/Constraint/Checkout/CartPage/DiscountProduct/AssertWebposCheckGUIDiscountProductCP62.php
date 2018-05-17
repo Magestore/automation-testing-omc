@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertWebposCheckGUIDiscountProductCP62
- * @package Magento\Webpos\Test\Constraint\Checkout\CartPage\DiscountProduct
+ * @package Magento\Webpos\Test\Constraint\Cart\CartPage\DiscountProduct
  */
 class AssertWebposCheckGUIDiscountProductCP62 extends AbstractConstraint
 {

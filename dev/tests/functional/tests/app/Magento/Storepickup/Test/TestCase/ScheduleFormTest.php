@@ -13,7 +13,7 @@ use Magento\Storepickup\Test\Page\Adminhtml\ScheduleIndex;
 
 /**
  * Steps:
- * 1. Login to the backend.
+ * 1. LoginTest to the backend.
  * 2. Navigate to Store Pickup > Manage Schedule.
  * 3. Click to Add New Schedule.
  * 4. Perform appropriate assertions.

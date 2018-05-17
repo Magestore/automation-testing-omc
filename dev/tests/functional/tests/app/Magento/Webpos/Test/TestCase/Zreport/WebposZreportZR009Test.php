@@ -18,7 +18,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * Class WebposZreportZR009Test
  *
  * Precondition: There are some POSs and setting [Need to create session before working] = "Yes" on the test site
- * 1. Login webpos by a staff who has open and close session permission
+ * 1. LoginTest webpos by a staff who has open and close session permission
  * 2. Open a session with
  * - Opening amount = 0
  * 3. Create some orders successfully with some payment methods which are not cash in
@@ -98,7 +98,7 @@ class WebposZreportZR009Test extends Injectable
             ['configData' => $dataConfigPayment]
         )->run();
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
         )->run();
