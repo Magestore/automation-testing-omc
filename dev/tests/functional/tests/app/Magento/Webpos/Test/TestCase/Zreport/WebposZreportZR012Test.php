@@ -95,17 +95,20 @@ class WebposZreportZR012Test extends Injectable
 
         // Set closing balance
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
-        $this->webposIndex->getSessionCloseShift()->waitSetClosingBalancePopupVisible();
+        sleep(1);
         $this->webposIndex->getSessionSetClosingBalancePopup()->setCoinBillValue($denomination->getDenominationName());
         $this->webposIndex->getSessionSetClosingBalancePopup()->getColumnNumberOfCoinsAtRow(2)->setValue($denominationNumberCoin);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
         $this->webposIndex->getSessionCloseShift()->waitSetClosingBalancePopupNotVisible();
         // End session
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-
-        $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
+        $this->webposIndex->getSessionShift()->waitBtnCloseSessionNotVisible();
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitZreportVisible();
+
+        return [
+          'difference' => 0
+        ];
     }
 
     public function tearDown()

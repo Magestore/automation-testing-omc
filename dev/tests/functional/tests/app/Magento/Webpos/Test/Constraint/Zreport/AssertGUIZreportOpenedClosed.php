@@ -8,12 +8,19 @@
 
 namespace Magento\Webpos\Test\Constraint\Zreport;
 
-
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class AssertGUIZreportOpenedClosed
+ * @package Magento\Webpos\Test\Constraint\Zreport
+ */
 class AssertGUIZreportOpenedClosed extends \Magento\Mtf\Constraint\AbstractConstraint
 {
-    public function processAssert(WebposIndex $webposIndex, $openedString, $closedString)
+    public function processAssert(
+        WebposIndex $webposIndex,
+        $openedString,
+        $closedString
+    )
     {
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionPrintShiftPopup()->getOpened()->isVisible(),

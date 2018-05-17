@@ -8,15 +8,26 @@
 
 namespace Magento\Webpos\Test\Constraint\Zreport;
 
-
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class AssertZreportOpeningAmountPutInTakeOutMoneyDiscountRefund
+ * @package Magento\Webpos\Test\Constraint\Zreport
+ */
 class AssertZreportOpeningAmountPutInTakeOutMoneyDiscountRefund extends \Magento\Mtf\Constraint\AbstractConstraint
 {
     public function processAssert(
         WebposIndex $webposIndex,
-        $openingAmount, $closingAmount, $cashSales, $cashRefund, $payOut, $payIn,
-        $totalSales, $otherPaymentSales = null, $discountAmount, $refund
+        $openingAmount,
+        $closingAmount,
+        $cashSales,
+        $cashRefund,
+        $payOut,
+        $payIn,
+        $totalSales,
+        $otherPaymentSales = null,
+        $discountAmount,
+        $refund
     )
     {
         \PHPUnit_Framework_Assert::assertEquals(
@@ -72,7 +83,7 @@ class AssertZreportOpeningAmountPutInTakeOutMoneyDiscountRefund extends \Magento
             'Zreport discount not correct'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            $this->convertToPriceFormat($refund),
+            $this->convertToPriceFormat((-1) * $refund),
             $webposIndex->getSessionPrintShiftPopup()->getRefund()->getText(),
             'Zreport refund not correct'
         );

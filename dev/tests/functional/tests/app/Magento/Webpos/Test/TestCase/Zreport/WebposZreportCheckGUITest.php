@@ -63,8 +63,13 @@ class WebposZreportCheckGUITest extends Injectable
             ['dataConfig' => $dataConfig]
         )->run();
 
+<<<<<<< HEAD
         // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
+=======
+        // Login webpos
+        $this->objectManager->getInstance()->create(
+>>>>>>> develop
             'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
         )->run();
 
@@ -77,27 +82,20 @@ class WebposZreportCheckGUITest extends Injectable
             ['products' => $products]
         )->run();
 
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $staffName = $this->webposIndex->getCMenu()->getUsername();
-        $this->webposIndex->getCMenu()->getSessionManagement();
-        sleep(1);
-        // Set closing balance
-        $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getColumnNumberOfCoinsAtRow(2)->setValue($denominationNumberCoin);
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
-        $this->webposIndex->getSessionSetReasonPopup()->getReason()->setValue('Magento');
-        $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
-        // End session
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        sleep(1);
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\WebposSetClosingBalanceCloseSessionStep',
+            [
+                'denomination' => $denomination,
+                'denominationNumberCoin' => $denominationNumberCoin
+            ]
+        )->run();
 
+        $staffName = $this->webposIndex->getSessionShift()->getStaffName()->getText();
         $openedString = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
         $openedString .= ' by ' . $staffName;
         $closedString = $this->webposIndex->getSessionShift()->getCloseTime()->getText();
         $closedString .= ' by ' . $staffName;
 
-        $this->webposIndex->getSessionShift()->waitForElementNotVisible('.btn-close-shift');
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitZreportVisible();
         return [

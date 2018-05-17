@@ -49,6 +49,23 @@ class OpenSessionPopup extends Block
         return $this->_rootElement->find('button[type="submit"]');
     }
 
+    public function getOpenSessionButtonElement()
+    {
+        return $this->_rootElement->find('button[type="submit"]');
+    }
+
+    public function waitUntilForOpenSessionButtonVisible()
+    {
+        $this->waitForElementNotVisible('[data-bind="visible:loading"]');
+        if (!$this->getOpenSessionButtonElement()->isVisible()) {
+            $this->_rootElement->waitUntil(
+                function () {
+                    return $this->getOpenSessionButton()->isVisible() ? true : null;
+                }
+            );
+        }
+    }
+
     public function getLoadingElement(){
         return $this->_rootElement->find('[data-bind="visible:loading"]');
     }

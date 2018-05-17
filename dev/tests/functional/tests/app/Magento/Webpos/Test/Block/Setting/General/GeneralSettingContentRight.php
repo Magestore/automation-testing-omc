@@ -69,7 +69,12 @@ class GeneralSettingContentRight extends Block
      */
     public function getCurrencySelection()
     {
-        return $this->_rootElement->find('#currency');
+        return $this->_rootElement->find('#currency', Locator::SELECTOR_CSS, 'select');
+    }
+
+    public function waitCurrencySelectionVisible()
+    {
+        return $this->waitForElementVisible('#currency');
     }
 
     /**

@@ -509,7 +509,18 @@
             </field>
         </dataset>
 
-        <dataset name="config_default_currency_uah_rollback">
+        <dataset name="config_currency_vnd_us">
+            <field name="currency/options/allow" xsi:type="array">
+                <item name="scope" xsi:type="string">currency</item>
+                <item name="scope_id" xsi:type="number">1</item>
+                <item name="value" xsi:type="array">
+                    <item name="US Dollar" xsi:type="string">USD</item>
+                    <item name="Vietnamese Dong" xsi:type="string">VND</item>
+                </item>
+            </field>
+        </dataset>
+
+        <dataset name="config_default_currency_rollback">
             <field name="currency/options/allow" xsi:type="array">
                 <item name="scope" xsi:type="string">currency</item>
                 <item name="scope_id" xsi:type="number">1</item>

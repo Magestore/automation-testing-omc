@@ -75,9 +75,19 @@ class MsWebpos extends Block
 		$this->waitForElementVisible('.modals-wrapper');
 	}
 
+    public function waitForModalPopupNotVisible()
+    {
+        $this->waitForElementNotVisible('.modals-wrapper');
+    }
+
 	public function waitOrdersHistoryVisible()
     {
         $this->waitForElementVisible('[id="orders_history_container"]');
+    }
+
+	public function waitListOrdersHistoryVisible()
+    {
+        $this->waitForElementVisible('.list-orders');
     }
 
     public function cmenuButtonIsVisible()
