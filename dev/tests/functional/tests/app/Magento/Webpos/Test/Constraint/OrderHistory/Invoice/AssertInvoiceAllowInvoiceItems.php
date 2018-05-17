@@ -10,14 +10,12 @@ namespace Magento\Webpos\Test\Constraint\OrderHistory\Invoice;
 
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class AssertInvoiceAllowInvoiceItems
  * @package Magento\Webpos\Test\Constraint\OrderHistory\Invoice
  */
 class AssertInvoiceAllowInvoiceItems extends AbstractConstraint
 {
-
     /**
      * @param WebposIndex $webposIndex
      * @param $products

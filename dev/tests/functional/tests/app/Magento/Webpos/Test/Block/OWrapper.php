@@ -19,4 +19,8 @@ class OWrapper extends Block
     {
         return $this->_rootElement->find('#c-button--push-left');
     }
+
+    public function clickOutSidePopup() {
+        $this->_rootElement->find('//*[@id="o-wrapper"]/div/div/div[3]/div[10]')->rightClick();
+    }
 }

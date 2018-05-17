@@ -58,6 +58,7 @@ class WebposCheckGUICustomerPriceTest extends Injectable
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         return [
             'product' => $product,
-            'price' => $price];
+            'price' => $price
+        ];
     }
 }

@@ -12,7 +12,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistoryInvoice;
 use Magento\Config\Test\Fixture\ConfigData;
-
 /**
  * Class WebposOrdersHistoryInvoiceOH111Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
@@ -98,6 +97,7 @@ class WebposOrdersHistoryInvoiceOH111Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         //select order
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 

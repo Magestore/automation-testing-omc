@@ -39,15 +39,14 @@ class WebposOnHoldOrderONH19Test extends Injectable
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-
         //Create a on-hold-order
-            //Add product custom sale
+        //Add product custom sale
         $this->webposIndex->getCheckoutProductList()->getCustomSaleButton()->click();
         $this->webposIndex->getCheckoutCustomSale()->getProductNameInput()->setValue($productCustom['name']);
         $this->webposIndex->getCheckoutCustomSale()->getProductPriceInput()->setValue($productCustom['price']);
         $this->webposIndex->getCheckoutCustomSale()->getAddToCartButton()->click();
         sleep(1);
-            //Edit customer price of that product with type: $
+        //Edit customer price of that product with type: $
         $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
         if (!$this->webposIndex->getCheckoutProductEdit()->getPanelPriceBox()->isVisible())
         {
@@ -55,28 +54,26 @@ class WebposOnHoldOrderONH19Test extends Injectable
         }
         $this->webposIndex->getCheckoutProductEdit()->getDollarButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
-        sleep(1);
         $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
         //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(1);
-
         //Cart in On-Hold
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->onHoldOrders();
-        sleep(1);
+        $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
         $this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder()->click();
         $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
-
         $dataProduct = $productCustom;
         $dataProduct['qty'] = 1;
-        return ['cartProducts' => [$dataProduct],
-            'type' => '$'];
+        return [
+            'cartProducts' => [$dataProduct],
+            'type' => '$'
+        ];
     }
 }

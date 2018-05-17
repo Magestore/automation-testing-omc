@@ -10,8 +10,6 @@ namespace Magento\Webpos\Test\Constraint\OrderHistory\Shipment;
 
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
-
 /**
  * Class AssertShipmentSuccess
  * @package Magento\Webpos\Test\Constraint\SectionOrderHistory\Shipment
@@ -59,6 +57,7 @@ class AssertShipmentSuccess extends AbstractConstraint
             $webposIndex->getNotification()->getFirstNotificationText(),
             'Notification Content is wrong'
         );
+        sleep(1);
         $webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
         \PHPUnit_Framework_Assert::assertFalse(
             $webposIndex->getOrderHistoryAddOrderNote()->getShipButton()->isVisible(),

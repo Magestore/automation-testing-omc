@@ -8,15 +8,16 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
 
-
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Customer\Test\Fixture\Address;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposCartPageCustomerCP36Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer
+ */
 class WebposCartPageCustomerCP36Test extends Injectable
 {
 	/**
@@ -93,10 +94,9 @@ class WebposCartPageCustomerCP36Test extends Injectable
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 		$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
 		//Assert Place Order Success
 		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-
+        sleep(1);
 		$this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 

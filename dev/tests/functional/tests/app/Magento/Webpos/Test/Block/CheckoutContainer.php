@@ -48,6 +48,6 @@ class CheckoutContainer extends Block
 	}
 
 	public function clickOutSide() {
-        $this->_rootElement->click();
+        return $this->_rootElement->find('#checkout_container > div.wrap-backover.hide-popup');
     }
 }

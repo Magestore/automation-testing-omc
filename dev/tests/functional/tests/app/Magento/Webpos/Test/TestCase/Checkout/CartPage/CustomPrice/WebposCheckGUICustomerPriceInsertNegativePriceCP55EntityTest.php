@@ -49,11 +49,14 @@ class WebposCheckGUICustomerPriceInsertNegativePriceCP55EntityTest extends Injec
         $this->webposIndex->getCheckoutProductList()->search($product->getSku());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
+        sleep(1);
         $this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
         $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($negativeValue);
         $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-        return ['product' => $product];
+        return [
+            'product' => $product
+        ];
     }
 }

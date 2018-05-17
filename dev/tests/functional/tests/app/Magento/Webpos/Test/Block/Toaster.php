@@ -26,6 +26,17 @@ class Toaster extends Block
         );
     }
 
+    public function waitUntilWarningMessageChange($message)
+    {
+        $warningMessage = $this->_rootElement->find('.message');
+        $browser = $this->_rootElement;
+        $browser->waitUntil(
+            function () use ($warningMessage, $message) {
+                return $warningMessage->getText()===$message ? true : null;
+            }
+        );
+    }
+
     public function getWarningMessage()
     {
 	    $this->waitForElementVisible('.message');
@@ -36,8 +47,18 @@ class Toaster extends Block
     {
         return $this->_rootElement->find('.alert alert-warning alert-dismissible')->isVisible();
     }
+    public function waitWarningMessageShow()
+    {
+        $message = $this->_rootElement->find('.message');
+        if (!$message->isVisible()) {
+            $this->waitForElementVisible('.message');
+        }
+    }
     public function waitWarningMessageHide()
     {
-        $this->waitForElementVisible('.message');
+        $message = $this->_rootElement->find('.message');
+        if ($message->isVisible()) {
+            $this->waitForElementNotVisible('.message');
+        }
     }
 }

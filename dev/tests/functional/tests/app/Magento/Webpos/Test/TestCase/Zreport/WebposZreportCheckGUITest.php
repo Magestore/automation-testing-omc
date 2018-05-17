@@ -12,12 +12,11 @@ use Magento\Config\Test\Fixture\ConfigData;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class WebposZreportCheckGUITest
  *
  * Precondition: There are some POSs and setting [Need to create session before working] = ""Yes"" on the test site
- * 1. LoginTest webpos by a staff who has open and close session permission
+ * 1. Login webpos by a staff who has open and close session permission
  * 2. Open a session
  * 3. Create some orders successfully"
  *
@@ -63,13 +62,8 @@ class WebposZreportCheckGUITest extends Injectable
             ['dataConfig' => $dataConfig]
         )->run();
 
-<<<<<<< HEAD
-        // LoginTest webpos
-        $staff = $this->objectManager->getInstance()->create(
-=======
         // Login webpos
         $this->objectManager->getInstance()->create(
->>>>>>> develop
             'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
         )->run();
 

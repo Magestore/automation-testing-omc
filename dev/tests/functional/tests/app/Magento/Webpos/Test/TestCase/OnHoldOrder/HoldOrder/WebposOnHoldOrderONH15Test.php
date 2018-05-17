@@ -6,9 +6,9 @@
  * Time: 14:00
  */
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class WebposOnHoldOrderONH15Test
  * @package Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder
@@ -52,17 +52,14 @@ class WebposOnHoldOrderONH15Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(1);
         $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem('2')->click();
         $this->webposIndex->getMsWebpos()->waitCartLoaderVisibleToNotVisible();
         $this->webposIndex->getCheckoutProductList()->search($product2->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(1);
         $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem('1')->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        sleep(4);
 
         //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();

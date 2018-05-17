@@ -7,12 +7,15 @@
  * Time: 9:34 AM
  */
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment;
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
+use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
+/**
+ * Class WebposTakePaymentOH82Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment
+ */
 class WebposTakePaymentOH82Test extends Injectable
 {
     /**
@@ -42,6 +45,10 @@ class WebposTakePaymentOH82Test extends Injectable
         )->run();
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
     public function __inject(
         WebposIndex $webposIndex,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
@@ -52,10 +59,17 @@ class WebposTakePaymentOH82Test extends Injectable
     }
 
     /**
-     *
-     * @return void
+     * @param $products
+     * @param FixtureFactory $fixtureFactory
+     * @param $configData
+     * @param $amount
      */
-    public function test($products, FixtureFactory $fixtureFactory, $configData, $amount)
+    public function test(
+        $products,
+        FixtureFactory $fixtureFactory,
+        $configData,
+        $amount
+    )
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
@@ -65,7 +79,6 @@ class WebposTakePaymentOH82Test extends Injectable
         $staff = $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-
         $i = 0;
         foreach ($products as $product) {
             $products[$i] = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);
@@ -74,7 +87,6 @@ class WebposTakePaymentOH82Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitCartLoader();
             $i++;
         }
-
         //CategoryRepository
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -87,8 +99,6 @@ class WebposTakePaymentOH82Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
         // place order getCreateInvoiceCheckbox
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();

@@ -105,7 +105,7 @@ class WebposTaxTAX15Test extends Injectable
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->onHoldOrders();
-        sleep(1);
+        $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();
         $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

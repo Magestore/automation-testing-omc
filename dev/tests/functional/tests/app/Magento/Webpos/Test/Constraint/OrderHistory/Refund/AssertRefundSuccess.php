@@ -10,7 +10,6 @@ namespace Magento\Webpos\Test\Constraint\OrderHistory\Refund;
 
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class AssertRefundSuccess
  * @package Magento\Webpos\Test\Constraint\OrderHistory\Refund

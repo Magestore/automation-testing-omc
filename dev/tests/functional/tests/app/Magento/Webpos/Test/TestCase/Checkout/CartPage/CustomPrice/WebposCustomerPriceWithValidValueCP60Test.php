@@ -58,8 +58,9 @@ class WebposCustomerPriceWithValidValueCP60Test extends Injectable
         //we need to set sleep($second) in this case.
         $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-        return
-            ['product' => $product,
-            'price' => $price];
+        return [
+            'product' => $product,
+            'price' => $price
+        ];
     }
 }

@@ -34,12 +34,9 @@ class CheckoutNoteOrder extends Block
     public function waitForCloseOrderNoteButon()
     {
         $closeOrderNoteButon = $this->_rootElement->find('.close');
-        $browser = $this->_rootElement;
-        $browser->waitUntil(
-            function () use ($closeOrderNoteButon) {
-                return $closeOrderNoteButon->isVisible() ? true : null;
-            }
-        );
+        if (!$closeOrderNoteButon->isVisible()) {
+            $this->waitForElementVisible('.close');
+        }
     }
     public function getCloseOrderNoteButton()
     {

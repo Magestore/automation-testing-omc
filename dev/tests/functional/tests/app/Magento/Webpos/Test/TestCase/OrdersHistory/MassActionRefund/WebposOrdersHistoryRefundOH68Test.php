@@ -33,13 +33,26 @@ class WebposOrdersHistoryRefundOH68Test extends Injectable
      */
     protected $assertOrderStatus;
 
-    public function __inject(WebposIndex $webposIndex, AssertRefundSuccess $assertRefundSuccess, AssertOrderStatus $assertOrderStatus)
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertRefundSuccess $assertRefundSuccess
+     * @param AssertOrderStatus $assertOrderStatus
+     */
+    public function __inject(
+        WebposIndex $webposIndex,
+        AssertRefundSuccess $assertRefundSuccess,
+        AssertOrderStatus $assertOrderStatus
+    )
     {
         $this->webposIndex = $webposIndex;
         $this->assertRefundSuccess = $assertRefundSuccess;
         $this->assertOrderStatus = $assertOrderStatus;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test($products)
     {
         // Create products
@@ -57,6 +70,7 @@ class WebposOrdersHistoryRefundOH68Test extends Injectable
             ['products' => $products]
         )->run();
         // Cart
+        sleep(1);
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -78,8 +92,9 @@ class WebposOrdersHistoryRefundOH68Test extends Injectable
         // Go to Order History
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         // Open refund popup
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
@@ -103,6 +118,8 @@ class WebposOrdersHistoryRefundOH68Test extends Injectable
             . "\nActual: " . $this->webposIndex->getToaster()->getWarningMessage()->getText()
         );
 
-        return ['products' => $products];
+        return [
+            'products' => $products
+        ];
     }
 }

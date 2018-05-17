@@ -47,7 +47,7 @@ class WebposOnHoldOrderONH08Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
-            //Edit customer price of that product with type: $
+        //Edit customer price of that product with type: $
         $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
         if (!$this->webposIndex->getCheckoutProductEdit()->getPanelPriceBox()->isVisible())
         {

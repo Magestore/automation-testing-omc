@@ -10,7 +10,10 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\CheckGUI;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposOrdersHistoryMassActionShipCheckGUITest
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\CheckGUI
+ */
 class WebposOrdersHistoryMassActionShipCheckGUITest extends Injectable
 {
     /**
@@ -53,11 +56,10 @@ class WebposOrdersHistoryMassActionShipCheckGUITest extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         // Go to Order History
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        sleep(1);
         $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(1);
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         // Open shipment popup
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();

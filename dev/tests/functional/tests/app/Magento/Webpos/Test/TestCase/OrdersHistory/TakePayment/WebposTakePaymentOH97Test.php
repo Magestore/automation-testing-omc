@@ -7,12 +7,15 @@
  * Time: 9:34 AM
  */
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-
+/**
+ * Class WebposTakePaymentOH97Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment
+ */
 class WebposTakePaymentOH97Test extends Injectable
 {
     /**
@@ -87,8 +90,6 @@ class WebposTakePaymentOH97Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
         // place order getCreateInvoiceCheckbox
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();

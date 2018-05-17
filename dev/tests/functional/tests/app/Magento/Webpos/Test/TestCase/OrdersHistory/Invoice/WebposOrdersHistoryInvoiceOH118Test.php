@@ -9,7 +9,6 @@
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\Invoice;
 
 use Magento\Mtf\TestCase\Scenario;
-
 /**
  * Class WebposOrdersHistoryInvoiceOH118Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice

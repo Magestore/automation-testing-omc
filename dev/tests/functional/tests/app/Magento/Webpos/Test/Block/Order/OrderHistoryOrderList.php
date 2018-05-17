@@ -104,6 +104,14 @@ class OrderHistoryOrderList extends Block
         return $this->_rootElement->find('.list-orders')->isVisible();
     }
 
+    public function waitOrderListIsVisible()
+    {
+        $orderList = $this->_rootElement->find('.list-orders');
+        if (!$orderList->isVisible()) {
+            $this->waitForElementVisible('.list-orders');
+        }
+    }
+
     public function getAllOrderItems()
     {
         return $this->_rootElement->getElements('.item');

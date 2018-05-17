@@ -105,6 +105,7 @@ class WebposOrdersHistoryInvoiceCheckGUITest extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         //select order
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 

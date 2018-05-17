@@ -6,8 +6,13 @@
  * Time: 09:28
  */
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+/**
+ * Class WebposPageActionMenuCP185Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer
+ */
 class WebposPageActionMenuCP185Test extends Injectable
 {
     /**
@@ -58,13 +63,11 @@ class WebposPageActionMenuCP185Test extends Injectable
 
         //Click ... Menu > click Add order note
         $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
-        sleep(2);
-        $this->webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->click();
-
-        sleep(2);
+        $this->webposIndex->getCheckoutFormAddNote()->waitAddOrderNote();
+        $this->webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->setValue('');
+        $this->webposIndex->getCheckoutNoteOrder()->waitForCloseOrderNoteButon();
+        $this->webposIndex->getCheckoutNoteOrder()->getTextArea()->click();
         $this->webposIndex->getCheckoutNoteOrder()->getCloseOrderNoteButton()->click();
         sleep(2);
-
-
     }
 }

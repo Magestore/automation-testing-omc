@@ -10,7 +10,10 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\Invoice;
 
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\TestCase\Injectable;
-
+/**
+ * Class WebposOrdersHistoryInvoiceOH106Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
+ */
 class WebposOrdersHistoryInvoiceOH106Test extends Injectable
 {
     /**
