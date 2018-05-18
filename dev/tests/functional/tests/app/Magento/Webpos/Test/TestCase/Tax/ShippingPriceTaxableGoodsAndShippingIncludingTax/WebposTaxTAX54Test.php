@@ -15,8 +15,6 @@ use Magento\Webpos\Test\Constraint\Tax\AssertRefundShippingOnOrderHistoryRefundW
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
-
-
 /**
  * Class WebposTaxTAX54Test
  * @package Magento\Webpos\Test\TestCase\Tax
@@ -24,27 +22,27 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposTaxTAX54Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     /**
-     * @var AssertRefundShippingOnOrderHistoryRefundWithShippingFee
+     * @var AssertRefundShippingOnOrderHistoryRefundWithShippingFee $assertRefundShippingOnOrderHistoryRefundWithShippingFee
      */
     protected $assertRefundShippingOnOrderHistoryRefundWithShippingFee;
 
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
-     * @var AssertRefundSuccess
+     * @var AssertRefundSuccess $assertRefundSuccess
      */
     protected $assertRefundSuccess;
 
@@ -121,36 +119,30 @@ class WebposTaxTAX54Test extends Injectable
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run();
-
         // Config
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => $configData]
         )->run();
-
         // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-
         // Add product to cart
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',
             ['products' => $products]
         )->run();
-
         // Change customer in cart
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
             ['customer' => $customer]
         )->run();
-
         // Check out
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
-
         // Select Shipping Method
         $this->webposIndex->getCheckoutShippingMethod()->openCheckoutShippingMethod();
         $this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
@@ -158,12 +150,10 @@ class WebposTaxTAX54Test extends Injectable
         sleep(1);
         $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Flat Rate - Fixed")->getText();
         $shippingFee = (float)substr($shippingFee, 1);
-
         // Select Payment Method
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
-
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
             [
@@ -171,25 +161,20 @@ class WebposTaxTAX54Test extends Injectable
                 'shipped' => $shipped
             ]
         )->run();
-
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
-
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
         //End Assert Place Order Success
-
         $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
-
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-
+        //Select Order
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
-
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
         }
@@ -200,7 +185,6 @@ class WebposTaxTAX54Test extends Injectable
             . "\nExpected: " . $orderId
             . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
         );
-
         $totalRefundQty = 0;
         $totalOrderQty = 0;
         // Count
@@ -208,7 +192,6 @@ class WebposTaxTAX54Test extends Injectable
             $totalRefundQty += (int)$item['refundQty'];
             $totalOrderQty += (int)$item['orderQty'];
         }
-
         // Open pop-up refund
         if (!$this->webposIndex->getOrderHistoryRefund()->isVisible()) {
             $refundText = 'Refund';
@@ -218,19 +201,12 @@ class WebposTaxTAX54Test extends Injectable
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction($refundText)->click();
             sleep(1);
         }
-
         // Assert Refund Shipping On PopUp Refund
         $this->assertRefundShippingOnOrderHistoryRefundWithShippingFee->processAssert($taxRate, $shippingFee, $this->webposIndex);
-
         // Close pop-up refund
         $this->webposIndex->getOrderHistoryRefund()->getCancelButton()->click();
         sleep(1);
         $totalPaid = (float)substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
-
-        // Refund Extant Items
-//        foreach ($products as $key => $item) {
-//            unset($products[$key]['refundQty']);
-//        }
 
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
@@ -238,20 +214,15 @@ class WebposTaxTAX54Test extends Injectable
                 'products' => $products
             ]
         )->run();
-
         $expectStatus = 'Closed';
         $totalRefunded = $totalPaid;
         $this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
-
         return [
             'products' => $products,
             'taxRate' => $taxRate
         ];
     }
 
-    /**
-     *
-     */
     public function tearDown()
     {
         // Config system value

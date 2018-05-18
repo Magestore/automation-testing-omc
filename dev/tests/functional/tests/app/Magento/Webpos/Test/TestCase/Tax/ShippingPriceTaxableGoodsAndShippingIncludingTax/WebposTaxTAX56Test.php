@@ -14,8 +14,6 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee;
 use Magento\Webpos\Test\Page\WebposIndex;
-
-
 /**
  * Class WebposTaxTAX56Test
  * @package Magento\Webpos\Test\TestCase\Tax
@@ -23,12 +21,12 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposTaxTAX56Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
@@ -38,7 +36,7 @@ class WebposTaxTAX56Test extends Injectable
     protected $taxRuleCA;
 
     /**
-     * @var AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee
+     * @var AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee $assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee
      */
     protected $assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee;
 
@@ -55,29 +53,23 @@ class WebposTaxTAX56Test extends Injectable
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'default_tax_configuration_use_system_value']
         )->run();
-
         // Change TaxRate
         $taxRateMI = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRateMI);
-
         // Change TaxRate
         $taxRateCA = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-CA-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRateCA);
-
         $taxRates = [
             'taxRateMI' => $taxRateMI,
             'taxRateCA' => $taxRateCA
         ];
-
         // Create CA Tax Rule
         $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset'=> 'CA_rule']);
         $taxRule->persist();
         $this->taxRuleCA = $taxRule;
-
         // Add Customer
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
         $customer->persist();
-
         return [
             'customer' => $customer,
             'taxRates' => $taxRates
@@ -123,30 +115,25 @@ class WebposTaxTAX56Test extends Injectable
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run();
-
         // Config
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => $configData]
         )->run();
-
         // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-
         // Add product to cart
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',
             ['products' => $products]
         )->run();
-
         // Change customer in cart
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
             ['customer' => $customer]
         )->run();
-
         // Check out
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -159,37 +146,30 @@ class WebposTaxTAX56Test extends Injectable
         sleep(1);
         $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Flat Rate - Fixed")->getText();
         $shippingFee = (float)substr($shippingFee, 1);
-
         //Assert Tax Amount on Cart Page
         $this->assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee->processAssert($taxRates['taxRateMI']->getRate(), $shippingFee, $this->webposIndex);
         //End Assert Tax Amount on Cart Page
-
         //Change customer address to California
         $this->webposIndex->getCheckoutCartHeader()->getCustomerTitleDefault()->click();
-        sleep(1);
+        sleep(0.5);
         $this->webposIndex->getCheckoutEditCustomer()->getEditShippingAddressIcon()->click();
-        sleep(1);
+        sleep(0.5);
         $this->webposIndex->getCheckoutEditAddress()->getRegionId()->setValue('California');
-        sleep(1);
+        sleep(0.5);
         $this->webposIndex->getCheckoutEditAddress()->getSaveButton()->click();
-        sleep(1);
+        sleep(0.5);
         $this->webposIndex->getCheckoutEditCustomer()->getSaveButton()->click();
         $this->webposIndex->getToaster()->getWarningMessage();
-
         sleep(1);
         //Assert Tax Amount on Cart Page
         $this->assertTaxAmountOnCartPageAndCheckoutPageWithShippingFee->processAssert($taxRates['taxRateCA']->getRate(), $shippingFee, $this->webposIndex);
         //End Assert Tax Amount on Cart Page
-
         return [
             'products' => $products,
             'taxRates' => $taxRates
         ];
     }
 
-    /**
-     *
-     */
     public function tearDown()
     {
         // Config system value

@@ -16,13 +16,18 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 class AssertRefundSuccess extends AbstractConstraint
 {
+    /**
+     * @param WebposIndex $webposIndex
+     * @param null $expectStatus
+     * @param null $totalRefunded
+     * @param string $hideAction
+     */
 	public function processAssert(WebposIndex $webposIndex, $expectStatus=null, $totalRefunded = null, $hideAction = '')
 	{
 		\PHPUnit_Framework_Assert::assertFalse(
 			$webposIndex->getModal()->getModalPopup()->isVisible(),
 			'Confirm Popup is not closed'
 		);
-
 		\PHPUnit_Framework_Assert::assertFalse(
 			$webposIndex->getOrderHistoryRefund()->isVisible(),
 			'Refund Popup is not closed'
@@ -37,9 +42,7 @@ class AssertRefundSuccess extends AbstractConstraint
 			$webposIndex->getToaster()->getWarningMessage()->getText(),
 			"Success message's Content is Wrong"
 		);
-
 		$webposIndex->getOrderHistoryOrderViewFooter()->waitForTotalRefundedVisible();
-
         if($expectStatus) {
             $webposIndex->getOrderHistoryOrderViewHeader()->waitForChangeStatus($expectStatus);
             \PHPUnit_Framework_Assert::assertEquals(
@@ -62,7 +65,6 @@ class AssertRefundSuccess extends AbstractConstraint
 			. "\nExpected: " . $expectTotalRefunded
 			. "\nActual: " . $actualTotalRefunded
  		);
-
 		$hideActionList = explode(',', $hideAction);
 
 		$webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
@@ -72,7 +74,6 @@ class AssertRefundSuccess extends AbstractConstraint
 				'Action '.$action.' is not hiden.'
 			);
 		}
-
 		$webposIndex->getNotification()->getNotificationBell()->click();
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getNotification()->getFirstNotification()->isVisible(),
@@ -84,6 +85,7 @@ class AssertRefundSuccess extends AbstractConstraint
 			'Notification Content is wrong'
 		);
 	}
+
 	/**
 	 * Returns a string representation of the object.
 	 *

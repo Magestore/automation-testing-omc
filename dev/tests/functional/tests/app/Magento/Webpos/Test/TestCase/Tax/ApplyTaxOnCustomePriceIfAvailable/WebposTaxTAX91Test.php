@@ -15,7 +15,6 @@ use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceOnRefundPopupWithApplyTaxOnCustomPrice;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class WebposTaxTAX91Test
  * @package Magento\Webpos\Test\TestCase\Tax\ApplyTaxOnCustomePriceIfAvailable
@@ -23,12 +22,12 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposTaxTAX91Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
@@ -38,12 +37,12 @@ class WebposTaxTAX91Test extends Injectable
     protected $caTaxRule;
 
     /**
-     * @var AssertProductPriceOnRefundPopupWithApplyTaxOnCustomPrice
+     * @var AssertProductPriceOnRefundPopupWithApplyTaxOnCustomPrice $assertProductPriceOnRefundPopupWithApplyTaxOnCustomPrice
      */
     protected $assertProductPriceOnRefundPopupWithApplyTaxOnCustomPrice;
 
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
@@ -75,10 +74,11 @@ class WebposTaxTAX91Test extends Injectable
         ];
     }
 
-
     /**
      * @param WebposIndex $webposIndex
      * @param FixtureFactory $fixtureFactory
+     * @param AssertProductPriceOnRefundPopupWithApplyTaxOnCustomPrice $assertProductPriceOnRefundPopupWithApplyTaxOnCustomPrice
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     public function __inject(
         WebposIndex $webposIndex,
@@ -134,7 +134,6 @@ class WebposTaxTAX91Test extends Injectable
             'Magento\Webpos\Test\TestStep\EditCustomPriceOfProductOnCartStep',
             ['products' => $products]
         )->run();
-
         $this->webposIndex->getCheckoutCartFooter()->waitForButtonCheckout();
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();

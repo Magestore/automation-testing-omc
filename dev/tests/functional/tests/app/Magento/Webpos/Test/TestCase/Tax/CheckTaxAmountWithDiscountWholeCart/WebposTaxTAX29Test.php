@@ -42,32 +42,32 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposTaxTAX29Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     /**
-     * @var AssertTaxAmountOnOnHoldOrderPage
+     * @var AssertTaxAmountOnOnHoldOrderPage $assertTaxAmountOnOnHoldOrderPage
      */
     protected $assertTaxAmountOnOnHoldOrderPage;
 
     /**
-     * @var AssertTaxAmountOnCartPageAndCheckoutPage
+     * @var AssertTaxAmountOnCartPageAndCheckoutPage $assertTaxAmountOnCartPageAndCheckoutPage
      */
     protected $assertTaxAmountOnCartPageAndCheckoutPage;
 
     /**
-     * @var AssertTaxAmountOnOrderHistoryInvoice
+     * @var AssertTaxAmountOnOrderHistoryInvoice $assertTaxAmountOnOrderHistoryInvoice
      */
     protected $assertTaxAmountOnOrderHistoryInvoice;
 
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
@@ -146,30 +146,25 @@ class WebposTaxTAX29Test extends Injectable
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run();
-
         // Config
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => $configData]
         )->run();
-
         // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-
         // Add product to cart
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',
             ['products' => $products]
         )->run();
-
         // Change customer in cart
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\ChangeCustomerOnCartStep',
             ['customer' => $customer]
         )->run();
-
         // Add Discount
         if ($addDiscount) {
             $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
@@ -182,14 +177,11 @@ class WebposTaxTAX29Test extends Injectable
             $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
             $this->webposIndex->getMsWebpos()->waitCartLoader();
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-            sleep(5);
         }
-
         // Place Order
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(5);
 
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -206,13 +198,10 @@ class WebposTaxTAX29Test extends Injectable
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
-
         // End Place Order
-
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
         //End Assert Place Order Success
-
         $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
 
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
@@ -243,7 +232,7 @@ class WebposTaxTAX29Test extends Injectable
 
         // Invoice order successfully
         $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
-        sleep(2);
+        sleep(1);
         $this->webposIndex->getModal()->getOkButton()->click();
         
         return [

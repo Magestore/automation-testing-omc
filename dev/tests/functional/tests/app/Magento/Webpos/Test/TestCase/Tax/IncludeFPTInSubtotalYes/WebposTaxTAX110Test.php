@@ -22,12 +22,12 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposTaxTAX110Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
@@ -37,12 +37,12 @@ class WebposTaxTAX110Test extends Injectable
     protected $caTaxRule;
 
     /**
-     * @var AssertTaxAmountWithIncludeFptInSubtotal
+     * @var AssertTaxAmountWithIncludeFptInSubtotal $assertTaxAmountWithIncludeFptInSubtotal
      */
     protected $assertTaxAmountWithIncludeFptInSubtotal;
 
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
@@ -77,6 +77,8 @@ class WebposTaxTAX110Test extends Injectable
     /**
      * @param WebposIndex $webposIndex
      * @param FixtureFactory $fixtureFactory
+     * @param AssertTaxAmountWithIncludeFptInSubtotal $assertTaxAmountWithIncludeFptInSubtotal
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     public function __inject(
         WebposIndex $webposIndex,
@@ -94,7 +96,7 @@ class WebposTaxTAX110Test extends Injectable
     /**
      * @param Customer $customer
      * @param $products
-     * @param $shippingTaxRate
+     * @param $taxRate
      */
     public function test(
         Customer $customer,

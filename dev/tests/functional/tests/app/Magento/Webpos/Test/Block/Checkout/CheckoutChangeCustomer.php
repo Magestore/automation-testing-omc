@@ -33,8 +33,16 @@ class CheckoutChangeCustomer extends Block
 		$this->waitForCustomerList();
 	}
 
+	public function waitFirstCustomer()
+	{
+		$firstCustomer = $this->_rootElement->find('ul.list-customer-old > li:nth-child(1)');
+		if (!$firstCustomer->isVisible()) {
+		    $this->waitForElementVisible('ul.list-customer-old > li:nth-child(1)');
+        }
+	}
 	public function getFirstCustomer()
 	{
+	    $this->waitFirstCustomer();
 		return $this->_rootElement->find('ul.list-customer-old > li:nth-child(1)');
 	}
 

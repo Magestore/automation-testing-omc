@@ -13,21 +13,21 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderDetailsWithTaxCaculationBaseOnBilling;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderHistoryInvoiceWithTaxCaculationBaseOnBilling;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposTaxTAX69Test
+ * @package Magento\Webpos\Test\TestCase\Tax\TaxCalculationBasedOnBillingAddress
+ */
 class WebposTaxTAX69Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
@@ -37,12 +37,12 @@ class WebposTaxTAX69Test extends Injectable
     protected $caTaxRule;
 
     /**
-     * @var AssertTaxAmountOnOrderHistoryInvoiceWithTaxCaculationBaseOnBilling
+     * @var AssertTaxAmountOnOrderHistoryInvoiceWithTaxCaculationBaseOnBilling $assertTaxAmountOnOrderHistoryInvoiceWithTaxCaculationBaseOnBilling
      */
     protected $assertTaxAmountOnOrderHistoryInvoiceWithTaxCaculationBaseOnBilling;
 
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
@@ -59,21 +59,17 @@ class WebposTaxTAX69Test extends Injectable
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'default_tax_configuration_use_system_value']
         )->run();
-
         // Change TaxRate
         $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($miTaxRate);
-
         //Create California tax rule
         $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset'=> 'CA_rule']);
         $taxRule->persist();
         $this->caTaxRule = $taxRule;
         $caTaxRate = $this->caTaxRule->getDataFieldConfig('tax_rate')['source']->getFixture();
-
         // Add Customer
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI_ship_CA_bill']);
         $customer->persist();
-
         return [
             'customer' => $customer,
             'billingTaxRate' => $caTaxRate[0]->getRate()
@@ -84,6 +80,8 @@ class WebposTaxTAX69Test extends Injectable
     /**
      * @param WebposIndex $webposIndex
      * @param FixtureFactory $fixtureFactory
+     * @param AssertTaxAmountOnOrderHistoryInvoiceWithTaxCaculationBaseOnBilling $assertTaxAmountOnOrderHistoryInvoiceWithTaxCaculationBaseOnBilling
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     public function __inject(
         WebposIndex $webposIndex,
@@ -137,7 +135,6 @@ class WebposTaxTAX69Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
-
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);

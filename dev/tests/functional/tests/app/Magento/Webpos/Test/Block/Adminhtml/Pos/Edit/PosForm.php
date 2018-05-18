@@ -13,7 +13,10 @@ namespace Magento\Webpos\Test\Block\Adminhtml\Pos\Edit;
 
 use Magento\Mtf\Block\Form;
 use Magento\Mtf\Client\Locator;
-
+/**
+ * Class PosForm
+ * @package Magento\Webpos\Test\Block\Adminhtml\Pos\Edit
+ */
 class PosForm extends Form
 {
     public function lockRegisterSectionIsVisible()
