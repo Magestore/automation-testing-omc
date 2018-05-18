@@ -8,12 +8,8 @@
                 <item name="0" xsi:type="string">product1</item>
             </data>
             <data name="amount" xsi:type="string">5.00</data>
-            <data name="dataConfigPayment" xsi:type="string">magestore_webpos_custome_payment</data>
-            <data name="defaultPaymentMethod" xsi:type="string">magestore_webpos_specific_payment</data>
             <data name="denomination/dataset" xsi:type="string">default</data>
             <data name="denominationNumberCoin" xsi:type="string">0</data>
-            <data name="dataConfig/dataset" xsi:type="string">create_session_before_working</data>
-            <data name="dataConfigToNo/dataset" xsi:type="string">setup_session_before_working_to_no</data>
             <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertZreportPaymentNotCashIn"/>
         </variation>
     </testCase>

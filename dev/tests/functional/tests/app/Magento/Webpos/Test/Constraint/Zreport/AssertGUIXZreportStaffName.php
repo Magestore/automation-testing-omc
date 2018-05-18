@@ -11,20 +11,20 @@ namespace Magento\Webpos\Test\Constraint\Zreport;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class AssertGUIZreportPosName
+ * Class AssertGUIXZreportStaffName
  * @package Magento\Webpos\Test\Constraint\Zreport
  */
-class AssertGUIZreportPosName extends \Magento\Mtf\Constraint\AbstractConstraint
+class AssertGUIXZreportStaffName extends \Magento\Mtf\Constraint\AbstractConstraint
 {
-    public function processAssert(WebposIndex $webposIndex, $posName)
+    public function processAssert(WebposIndex $webposIndex, $staffName)
     {
         \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getSessionPrintShiftPopup()->getPosName()->isVisible(),
+            $webposIndex->getSessionPrintShiftPopup()->getStaffName()->isVisible(),
             'Zreport Pos Name not visible'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            $posName,
-            $webposIndex->getSessionPrintShiftPopup()->getPosName()->getText(),
+            $staffName,
+            $webposIndex->getSessionPrintShiftPopup()->getStaffName()->getText(),
             'Zreport Pos Name not correct'
         );
     }

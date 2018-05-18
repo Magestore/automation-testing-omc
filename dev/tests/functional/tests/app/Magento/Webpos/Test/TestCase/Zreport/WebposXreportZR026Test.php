@@ -8,31 +8,43 @@
 
 namespace Magento\Webpos\Test\TestCase\Zreport;
 
-use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposZreportZR012Test
+ * Class WebposXreportZR026Test
  *
- * Precondition: There are some POSs and setting [Need to create session before working] = "Yes" on the test site
+ * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff who has open and close session permission
- * 2. Open a session
- * 3. Create some orders successfully with cashin payment method
+ * 2. Open a session with
+ * - Opening amount = 0
+ * 3. Create some orders successfully with some payment methods which are not cash in
  *
  * Steps:
  * 1. Go to [Session Management] menu
- * 2. Close the session successfully with Closing amount = Theoretical closing amount
- * 3. Click to print Z-report
+ * 2. Click to print X-report
  *
  * Acceptance:
- * 3. Show Z-report with:
- * [Difference] = 0
+ * 2. Show X-report with:
+ * - Opening Amount = 0
+ * - Expect Drawer = 0
+ *
+ * - Cash sales = 0
+ * - Cash Refund = 0
+ * - Pay Ins = 0
+ * - Payouts = 0
+ *
+ * - Total Sales = SUM(grand_total) of the orders which placed on this session
+ * - Discount = 0
+ * - Refund = 0
+ * - Net Sales = Total Sales
+ *
+ * - Cash in = 0
+ * And show all of the payment methods with their total that placed on this session
  *
  * @package Magento\Webpos\Test\TestCase\Zreport
  */
-class WebposZreportZR012Test extends Injectable
+class WebposXreportZR026Test extends Injectable
 {
     /**
      * Webpos Index page.
@@ -40,31 +52,31 @@ class WebposZreportZR012Test extends Injectable
      * @var WebposIndex
      */
     protected $webposIndex;
-
-    /**
-     * @var FixtureFactory
-     */
-    protected $fixtureFactory;
+    protected $useOtherPaymentMethod;
 
     public function __inject(
-        WebposIndex $webposIndex,
-        FixtureFactory $fixtureFactory
+        WebposIndex $webposIndex
     )
     {
         $this->webposIndex = $webposIndex;
-        $this->fixtureFactory = $fixtureFactory;
     }
 
     public function test(
-        Denomination $denomination,
         $products
     )
     {
-        // Create denomination
-        $denomination->persist();
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'create_session_before_working']
+        )->run();
+
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'magestore_webpos_custome_payment']
+        )->run();
+
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
         )->run();
 
         // Login webpos
@@ -78,31 +90,28 @@ class WebposZreportZR012Test extends Injectable
 
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\WebposAddProductToCartThenCheckoutStep',
-            ['products' => $products]
+            [
+                'products' => $products,
+                'paymentMethod' => 'cp1forpos'
+            ]
         )->run();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->getSessionManagement();
-        sleep(2);
-
-        $cashSales = $this->webposIndex->getSessionShift()->getPaymentAmount(1)->getText();
-        $denominationNumberCoin = $this->convertPriceFormatToDecimal($cashSales);
-
-        // Set closing balance
-        $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
         sleep(1);
-        $this->webposIndex->getSessionSetClosingBalancePopup()->setCoinBillValue($denomination->getDenominationName());
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getColumnNumberOfCoinsAtRow(2)->setValue($denominationNumberCoin);
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        $this->webposIndex->getSessionCloseShift()->waitSetClosingBalancePopupNotVisible();
-        // End session
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        $this->webposIndex->getSessionShift()->waitBtnCloseSessionNotVisible();
+
+        $staffName = $this->webposIndex->getSessionShift()->getStaffName()->getText();
+        $openedString = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
+        $openedString .= ' by ' . $staffName;
+        $totalSales = $this->webposIndex->getSessionShift()->getPaymentAmount()->getText();
+
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitReportPopupVisible();
-
         return [
-          'difference' => 0
+            'staffName' => $staffName,
+            'openedString' => $openedString,
+            'totalSales' => $this->convertPriceFormatToDecimal($totalSales),
+            'expectedDrawer' => 0
         ];
     }
 
@@ -112,6 +121,13 @@ class WebposZreportZR012Test extends Injectable
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'setup_session_before_working_to_no']
         )->run();
+
+        if ($this->useOtherPaymentMethod) {
+            $this->objectManager->getInstance()->create(
+                'Magento\Config\Test\TestStep\SetupConfigurationStep',
+                ['configData' => 'magestore_webpos_specific_payment']
+            )->run();
+        }
     }
 
     /**

@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\TestCase\Zreport;
 
-use Magento\Config\Test\Fixture\ConfigData;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Denomination;
@@ -65,10 +64,6 @@ class WebposZreportZR010Test extends Injectable
      */
     protected $webposIndex;
 
-    protected $dataConfigToNo;
-
-    protected $defaultPaymentMethod;
-
     /**
      * @var FixtureFactory
      */
@@ -88,10 +83,6 @@ class WebposZreportZR010Test extends Injectable
         $products,
         Denomination $denomination,
         $denominationNumberCoin,
-        ConfigData $dataConfig,
-        ConfigData $dataConfigToNo,
-        $dataConfigPayment,
-        $defaultPaymentMethod,
         $amount,
         $putMoneyInValue,
         $takeMoneyOutValue,
@@ -101,16 +92,15 @@ class WebposZreportZR010Test extends Injectable
     {
         // Create denomination
         $denomination->persist();
-        $this->dataConfigToNo = $dataConfigToNo;
         $this->objectManager->create(
-            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
-            ['dataConfig' => $dataConfig]
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_session_before_working']
         )->run();
 
         //Config Customer Credit Payment Method
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $dataConfigPayment]
+            ['configData' => 'magestore_webpos_custome_payment']
         )->run();
 
         // Login webpos
@@ -154,14 +144,12 @@ class WebposZreportZR010Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
-        sleep(1);
         $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         // phai sleep vi payment co khi bi xoa
         sleep(2);
         if (!$this->webposIndex->getCheckoutPaymentMethod()->getIconRemove()->isVisible()) {
-            $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
+            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
             $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }
@@ -169,7 +157,6 @@ class WebposZreportZR010Test extends Injectable
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
         $this->webposIndex->getMainContent()->waitForMsWebpos();
         $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#add-more-payment');
@@ -183,19 +170,18 @@ class WebposZreportZR010Test extends Injectable
         // Refund
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        $orderId = $this->webposIndex->getOrderHistoryOrderList()->getFirstOrderId();
-        $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForChangeOrderId($orderId);
+        sleep(1);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForFormAddNoteOrderVisible();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Refund')->click();
         $this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitForModalPopup();
         $this->webposIndex->getModal()->getOkButton()->click();
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitForModalPopupNotVisible();
 
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\WebposSetClosingBalanceCloseSessionStep',
@@ -209,9 +195,7 @@ class WebposZreportZR010Test extends Injectable
         $otherPaymentSales = $this->webposIndex->getSessionShift()->getPaymentAmount(2)->getText();
 
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
-        $this->webposIndex->getSessionShift()->waitZreportVisible();
-
-        $this->defaultPaymentMethod = $defaultPaymentMethod;
+        $this->webposIndex->getSessionShift()->waitReportPopupVisible();
 
         $openingAmount = floatval($denominationNumberCoin) * $denomination->getDenominationValue();
         $closingAmount = floatval($denominationNumberCoin) * $denomination->getDenominationValue();
@@ -238,14 +222,14 @@ class WebposZreportZR010Test extends Injectable
     public function tearDown()
     {
         $this->objectManager->create(
-            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
-            ['dataConfig' => $this->dataConfigToNo]
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'setup_session_before_working_to_no']
         )->run();
 
         //Config Payment Payment Method
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $this->defaultPaymentMethod]
+            ['configData' => 'magestore_webpos_specific_payment']
         )->run();
     }
 

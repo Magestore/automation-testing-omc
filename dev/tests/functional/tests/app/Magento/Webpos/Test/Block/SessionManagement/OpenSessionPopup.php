@@ -32,7 +32,7 @@ class OpenSessionPopup extends Block
         return $this->_rootElement->find('.cash-counting-value');
     }
 
-    /**
+    /**getNumberOfCoinsBills
      * @return \Magento\Mtf\Client\ElementInterface
      */
     public function  getNumberOfCoinsBills(){
@@ -52,6 +52,11 @@ class OpenSessionPopup extends Block
     public function getOpenSessionButtonElement()
     {
         return $this->_rootElement->find('button[type="submit"]');
+    }
+
+    public function waitLoader()
+    {
+        $this->waitForElementNotVisible('#popup-open-shift > div > div.indicator');
     }
 
     public function waitUntilForOpenSessionButtonVisible()

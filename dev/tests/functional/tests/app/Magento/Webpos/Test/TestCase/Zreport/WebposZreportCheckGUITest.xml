@@ -9,8 +9,6 @@
             </data>
             <data name="denomination/dataset" xsi:type="string">default</data>
             <data name="denominationNumberCoin" xsi:type="string">1</data>
-            <data name="dataConfig/dataset" xsi:type="string">create_session_before_working</data>
-            <data name="dataConfigToNo/dataset" xsi:type="string">setup_session_before_working_to_no</data>
             <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIZreport"/>
         </variation>
         <variation name="WebposZreportCheckGUIZR002Test">
@@ -20,9 +18,7 @@
             <data name="posName" xsi:type="string">Store POS</data>
             <data name="denomination/dataset" xsi:type="string">default</data>
             <data name="denominationNumberCoin" xsi:type="string">1</data>
-            <data name="dataConfig/dataset" xsi:type="string">create_session_before_working</data>
-            <data name="dataConfigToNo/dataset" xsi:type="string">setup_session_before_working_to_no</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIZreportPosName"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIXZreportPosName"/>
         </variation>
         <variation name="WebposZreportCheckGUIZR003Test">
             <data name="products" xsi:type="array">
@@ -30,9 +26,7 @@
             </data>
             <data name="denomination/dataset" xsi:type="string">default</data>
             <data name="denominationNumberCoin" xsi:type="string">1</data>
-            <data name="dataConfig/dataset" xsi:type="string">create_session_before_working</data>
-            <data name="dataConfigToNo/dataset" xsi:type="string">setup_session_before_working_to_no</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIZreportStaffName"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIXZreportStaffName"/>
         </variation>
         <variation name="WebposZreportCheckGUIZR006Test">
             <data name="products" xsi:type="array">
@@ -40,9 +34,15 @@
             </data>
             <data name="denomination/dataset" xsi:type="string">default</data>
             <data name="denominationNumberCoin" xsi:type="string">1</data>
-            <data name="dataConfig/dataset" xsi:type="string">create_session_before_working</data>
-            <data name="dataConfigToNo/dataset" xsi:type="string">setup_session_before_working_to_no</data>
             <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIZreportOpenedClosed"/>
+        </variation>
+        <variation name="WebposZreportCheckGUIZR019Test">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+            </data>
+            <data name="denomination/dataset" xsi:type="string">default</data>
+            <data name="denominationNumberCoin" xsi:type="string">1</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIZreport"/>
         </variation>
     </testCase>
 </config>

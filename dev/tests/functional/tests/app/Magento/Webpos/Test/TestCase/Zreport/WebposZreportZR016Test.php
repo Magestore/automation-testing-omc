@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\TestCase\Zreport;
 
-use Magento\Config\Test\Fixture\ConfigData;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Denomination;
@@ -42,10 +41,6 @@ class WebposZreportZR016Test extends Injectable
      */
     protected $webposIndex;
 
-    protected $dataConfigToNo;
-
-    protected $defaultPaymentMethod;
-
     /**
      * @var FixtureFactory
      */
@@ -64,25 +59,20 @@ class WebposZreportZR016Test extends Injectable
     public function test(
         $products,
         Denomination $denomination,
-        $denominationNumberCoin,
-        ConfigData $dataConfig,
-        ConfigData $dataConfigToNo,
-        $dataConfigPayment,
-        $defaultPaymentMethod
+        $denominationNumberCoin
     )
     {
         // Create denomination
         $denomination->persist();
-        $this->dataConfigToNo = $dataConfigToNo;
         $this->objectManager->create(
-            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
-            ['dataConfig' => $dataConfig]
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_session_before_working']
         )->run();
 
         //Config Customer Credit Payment Method
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $dataConfigPayment]
+            ['configData' => 'magestore_webpos_custome_payment']
         )->run();
 
         // Login webpos
@@ -131,16 +121,17 @@ class WebposZreportZR016Test extends Injectable
         // Refund
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
-        $this->webposIndex->getOrderHistoryOrderList()->getSecondOrder()->click();
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $orderId = $this->webposIndex->getOrderHistoryOrderList()->getSecondOrderId();
+        $this->webposIndex->getOrderHistoryOrderList()->getSecondOrder()->click();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForChangeOrderId($orderId);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForFormAddNoteOrderVisible();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Refund')->click();
         $this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
+        $this->webposIndex->getMsWebpos()->waitForModalPopup();
         $this->webposIndex->getModal()->getOkButton()->click();
         $this->webposIndex->getMsWebpos()->waitForModalPopupNotVisible();
 
@@ -153,9 +144,7 @@ class WebposZreportZR016Test extends Injectable
         )->run();
 
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
-        $this->webposIndex->getSessionShift()->waitZreportVisible();
-
-        $this->defaultPaymentMethod = $defaultPaymentMethod;
+        $this->webposIndex->getSessionShift()->waitReportPopupVisible();
 
         return [
             'refund' => 0
@@ -165,14 +154,14 @@ class WebposZreportZR016Test extends Injectable
     public function tearDown()
     {
         $this->objectManager->create(
-            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
-            ['dataConfig' => $this->dataConfigToNo]
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'setup_session_before_working_to_no']
         )->run();
 
         //Config Payment Payment Method
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $this->defaultPaymentMethod]
+            ['configData' => 'magestore_webpos_specific_payment']
         )->run();
     }
 

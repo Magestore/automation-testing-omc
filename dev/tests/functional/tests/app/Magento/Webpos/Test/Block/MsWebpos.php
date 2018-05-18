@@ -12,81 +12,80 @@
 namespace Magento\Webpos\Test\Block;
 
 use Magento\Mtf\Block\Block;
-
 /**
  * Class MsWebpos
  * @package Magento\Webpos\Test\Block
  */
 class MsWebpos extends Block
 {
-    public function clickCMenuButton()
-    {
-        $this->_rootElement->find('#c-button--push-left')->click();
-    }
+	public function clickCMenuButton()
+	{
+		$this->_rootElement->find('#c-button--push-left')->click();
+	}
 
-    public function getCMenuButton()
-    {
-        return $this->_rootElement->find('#c-button--push-left');
-    }
+	public function getCMenuButton()
+	{
+		return $this->_rootElement->find('#c-button--push-left');
+	}
 
-    public function getLoader()
-    {
-        return $this->_rootElement->find('#checkout-loader');
-    }
+	public function getLoader()
+	{
+		return $this->_rootElement->find('#checkout-loader');
+	}
 
-    public function getHide()
+	public function getHide()
     {
         return $this->_rootElement->find('#c-mask');
     }
 
-    public function waitCartLoader()
-    {
-        $this->waitForElementNotVisible('#webpos_cart > div.indicator');
-    }
+	public function waitCartLoader()
+	{
+		$this->waitForElementNotVisible('#webpos_cart > div.indicator');
+	}
 
-    public function waitCartLoaderVisibleToNotVisible()
-    {
-        $this->waitForElementVisible('#webpos_cart > div.indicator');
-        $this->waitForElementNotVisible('#webpos_cart > div.indicator');
-    }
+	public function waitCartLoaderVisibleToNotVisible()
+	{
+		$this->waitForElementVisible('#webpos_cart > div.indicator');
+		$this->waitForElementNotVisible('#webpos_cart > div.indicator');
+	}
 
-    public function waitCheckoutLoader()
-    {
-        $this->waitForElementNotVisible('#webpos_checkout > div.indicator');
-    }
+	public function waitCheckoutLoader()
+	{
+		$this->waitForElementNotVisible('#webpos_checkout > div.indicator');
+	}
 
-    public function clickOutsidePopup()
-    {
+	public function clickOutsidePopup()
+	{
         $this->_rootElement->click();
-    }
+	}
 
-    public function waitForSyncDataAfterLogin()
-    {
-        $this->waitForElementVisible('.first-screen');
-        $this->waitForElementNotVisible('.first-screen');
-    }
+	public function waitForSyncDataAfterLogin()
+	{
+		$this->waitForElementVisible('.first-screen');
+		$this->waitForElementNotVisible('.first-screen');
+	}
 
-    public function waitForSyncDataVisible()
-    {
-        $this->waitForElementVisible('[class="first-screen"]');
-    }
+	public function waitForSyncDataVisible()
+	{
+		$this->waitForElementVisible('[class="first-screen"]');
+	}
 
-    public function waitForModalPopup()
-    {
-        $this->waitForElementVisible('.modals-wrapper');
-    }
+	public function waitForModalPopup()
+	{
+		$this->waitForElementVisible('.modals-wrapper');
+	}
 
     public function waitForModalPopupNotVisible()
     {
         $this->waitForElementNotVisible('.modals-wrapper');
     }
 
-    public function waitOrdersHistoryVisible()
+	public function waitOrdersHistoryVisible()
     {
         $this->waitForElementVisible('[id="orders_history_container"]');
     }
 
-    public function waitListOrdersHistoryVisible()
+	public function waitListOrdersHistoryVisible()
     {
         $this->waitForElementVisible('.list-orders');
     }
@@ -94,18 +93,5 @@ class MsWebpos extends Block
     public function cmenuButtonIsVisible()
     {
         return $this->_rootElement->find('#c-button--push-left')->isVisible();
-    }
-
-    public function waitForCMenuLoader()
-    {
-        $this->waitForElementVisible('#c-menu--push-left');
-    }
-
-    public function waitForSessionManagerLoader(){
-        $this->waitForElementVisible('#register_shift_container');
-    }
-
-    public function getOpenShipPopup(){
-        return $this->_rootElement->find('#popup-open-shift');
     }
 }

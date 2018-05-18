@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: finbert
- * Date: 09/05/2018
- * Time: 13:30
+ * Date: 18/05/2018
+ * Time: 08:14
  */
 
 namespace Magento\Webpos\Test\TestCase\Zreport;
@@ -14,28 +14,24 @@ use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposZreportZR009Test
+ * Class WebposXreportZR027Test
  *
- * Precondition: There are some POSs and setting [Need to create session before working] = "Yes" on the test site
+ * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff who has open and close session permission
  * 2. Open a session with
  * - Opening amount = 0
- * 3. Create some orders successfully with some payment methods which are not cash in
+ * 3. Create some orders successfully with some payment methods (including cashin method)
  *
  * Steps:
- * 1. Go to [Session Management] menu
- * 2. Close the session successfully with:
- * - Closing amount = 0
- * 3. Click to print Z-report
+ * "1. Go to [Session Management] menu
+ * 2. Click to print X-report"
  *
  * Acceptance:
- * 3. Show Z-report with:
+ * "2. Show X-report with:
  * - Opening Amount = 0
- * - Closing Amount = 0
- * - Theoretical Closing Amount = 0
- * - Difference = 0
+ * - Expected Drawer = Cash Sales
  *
- * - Cash sales = 0
+ * - Cash sales = The total cash sales processed including discounts and tax on this session
  * - Cash Refund = 0
  * - Pay Ins = 0
  * - Payouts = 0
@@ -45,11 +41,12 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * - Refund = 0
  * - Net Sales = Total Sales
  *
- * And show all of the payment methods with their total that placed on this session
+ * - Cash in= [Cash sales]
+ * And show all of the payment methods with their total that placed on this session"
  *
  * @package Magento\Webpos\Test\TestCase\Zreport
  */
-class WebposZreportZR009Test extends Injectable
+class WebposXreportZR027Test extends Injectable
 {
     /**
      * Webpos Index page.
@@ -75,13 +72,9 @@ class WebposZreportZR009Test extends Injectable
 
     public function test(
         $products,
-        Denomination $denomination,
-        $denominationNumberCoin,
         $amount
     )
     {
-        // Create denomination
-        $denomination->persist();
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'create_session_before_working']
@@ -91,6 +84,10 @@ class WebposZreportZR009Test extends Injectable
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'magestore_webpos_custome_payment']
+        )->run();
+
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
         )->run();
 
         // Login webpos
@@ -115,8 +112,8 @@ class WebposZreportZR009Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(2);
         $totalSales = $this->webposIndex->getCheckoutCartFooter()->getTotalElement()->getText();
+        $this->webposIndex->getCheckoutPaymentMethod()->waitForCustomPayment1Method();
         $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
         $this->webposIndex->getMainContent()->waitForMsWebpos();
@@ -130,19 +127,18 @@ class WebposZreportZR009Test extends Injectable
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\WebposSetClosingBalanceCloseSessionStep',
-            [
-                'denomination' => $denomination,
-                'denominationNumberCoin' => $denominationNumberCoin
-            ]
-        )->run();
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getCMenu()->getSessionManagement();
+        sleep(1);
 
         $openedString = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
-        $closedString = $this->webposIndex->getSessionShift()->getCloseTime()->getText();
         $staffName = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
         $cashSales = $this->webposIndex->getSessionShift()->getPaymentAmount(1)->getText();
         $otherPaymentSales = $this->webposIndex->getSessionShift()->getPaymentAmount(2)->getText();
+
+        $totalSales = $this->convertPriceFormatToDecimal($totalSales);
+        $cashSales = $this->convertPriceFormatToDecimal($cashSales);
+        $otherPaymentSales = $this->convertPriceFormatToDecimal($otherPaymentSales);
 
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitReportPopupVisible();
@@ -150,10 +146,10 @@ class WebposZreportZR009Test extends Injectable
         return [
             'staffName' => $staffName,
             'openedString' => $openedString,
-            'closedString' => $closedString,
-            'totalSales' => $this->convertPriceFormatToDecimal($totalSales),
-            'cashSales' => $this->convertPriceFormatToDecimal($cashSales),
-            'otherPaymentSales' => $this->convertPriceFormatToDecimal($otherPaymentSales)
+            'totalSales' => $totalSales,
+            'cashSales' => $cashSales,
+            'otherPaymentSales' => $otherPaymentSales,
+            'expectedDrawer' => $totalSales
         ];
     }
 

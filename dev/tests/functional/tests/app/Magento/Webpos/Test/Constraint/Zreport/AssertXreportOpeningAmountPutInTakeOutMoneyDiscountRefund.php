@@ -11,15 +11,14 @@ namespace Magento\Webpos\Test\Constraint\Zreport;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class AssertZreportOpeningAmountPutInTakeOutMoneyDiscountRefund
+ * Class AssertXreportOpeningAmountPutInTakeOutMoneyDiscountRefund
  * @package Magento\Webpos\Test\Constraint\Zreport
  */
-class AssertZreportOpeningAmountPutInTakeOutMoneyDiscountRefund extends \Magento\Mtf\Constraint\AbstractConstraint
+class AssertXreportOpeningAmountPutInTakeOutMoneyDiscountRefund extends \Magento\Mtf\Constraint\AbstractConstraint
 {
     public function processAssert(
         WebposIndex $webposIndex,
         $openingAmount,
-        $closingAmount,
         $cashSales,
         $cashRefund,
         $payOut,
@@ -36,22 +35,11 @@ class AssertZreportOpeningAmountPutInTakeOutMoneyDiscountRefund extends \Magento
             $webposIndex->getSessionPrintShiftPopup()->getOpeningAmount()->getText(),
             'Zreport Opening amount not correct'
         );
+        $expectedDrawer = $cashSales - $cashRefund - $payOut + $payIn + $openingAmount;
         \PHPUnit_Framework_Assert::assertEquals(
-            self::convertToPriceFormat($closingAmount, $symbol),
-            $webposIndex->getSessionPrintShiftPopup()->getClosingAmount()->getText(),
-            'Zreport Closing amount not correct'
-        );
-        $theoreticalClosingAmount = $cashSales - $cashRefund - $payOut + $payIn + $openingAmount;
-        \PHPUnit_Framework_Assert::assertEquals(
-            self::convertToPriceFormat($theoreticalClosingAmount, $symbol),
-            $webposIndex->getSessionPrintShiftPopup()->getTheoreticalClosingAmount()->getText(),
-            'Zreport Theoretical Closing amount not correct'
-        );
-        $difference = $closingAmount - $theoreticalClosingAmount;
-        \PHPUnit_Framework_Assert::assertEquals(
-            self::convertToPriceFormat($difference, $symbol),
-            $webposIndex->getSessionPrintShiftPopup()->getDifference()->getText(),
-            'Zreport difference not correct'
+            self::convertToPriceFormat($expectedDrawer, $symbol),
+            $webposIndex->getSessionPrintShiftPopup()->getExpectedDrawer()->getText(),
+            'Zreport Expected Drawer not correct'
         );
         \PHPUnit_Framework_Assert::assertEquals(
             self::convertToPriceFormat($cashSales, $symbol),
