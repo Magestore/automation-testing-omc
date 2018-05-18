@@ -70,13 +70,13 @@ class WebposXreportZR026Test extends Injectable
             ['configData' => 'create_session_before_working']
         )->run();
 
-        $this->objectManager->create(
-            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
-        )->run();
-
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'magestore_webpos_custome_payment']
+        )->run();
+
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
         )->run();
 
         // Login webpos
@@ -112,7 +112,6 @@ class WebposXreportZR026Test extends Injectable
             'openedString' => $openedString,
             'totalSales' => $this->convertPriceFormatToDecimal($totalSales),
             'expectedDrawer' => 0
-
         ];
     }
 

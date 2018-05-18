@@ -57,14 +57,12 @@ class AdminCloseCurrentSessionStep implements TestStepInterface
         if (!$this->posEdit->getPosForm()->getDefaultCurrentSession('There are 0 open session')->isVisible()) {
             $this->posEdit->getPosForm()->getSetClosingBalance()->click();
             $this->posEdit->getModalsWrapper()->getConfirmButton()->click();
-            // confirm popup second
-            if($this->posEdit->getModalsWrapper()->getConfirmButton()->isVisible())
-            {
-                $this->posEdit->getModalsWrapper()->getConfirmButton()->click();
-            }
+            // sleep de cho modal set reason hien
+            sleep(1);
+            $this->posEdit->getModalsWrapper()->getConfirmButton()->click();
             $this->posEdit->getModalsWrapper()->waitForHidden();
-//            sleep(1);
-            $this->posEdit->getPosForm()->waitValidateClosingVisible();
+            // sleep de cho button validate closing hien
+            sleep(1);
             $this->posEdit->getPosForm()->getValidateClosing()->click();
             $this->posEdit->getPosForm()->waitForElementNotVisible('.loading-mask');
             $this->posEdit->getPosForm()->waitCloseSession();

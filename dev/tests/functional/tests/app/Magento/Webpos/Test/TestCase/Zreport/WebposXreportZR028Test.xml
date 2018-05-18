@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Zreport\WebposXreportZR028Test"
+              summary="Grid UI Component Filtering" ticketId="WEBPOS-1">
+        <variation name="WebposXreportZR028Test">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+            </data>
+            <data name="amount" xsi:type="string">5.00</data>
+            <data name="putMoneyInValue" xsi:type="string">5.00</data>
+            <data name="takeMoneyOutValue" xsi:type="string">5.00</data>
+            <data name="addDiscount" xsi:type="boolean">true</data>
+            <data name="discountAmount" xsi:type="string">10.00</data>
+            <data name="denomination/dataset" xsi:type="string">default</data>
+            <data name="denominationNumberCoin" xsi:type="string">1</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertXreportOpeningAmountPutInTakeOutMoneyDiscountRefund"/>
+        </variation>
+    </testCase>
+</config>

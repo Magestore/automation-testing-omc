@@ -32,9 +32,10 @@ class CheckoutPaymentMethod extends Block
 
     public function waitForCustomPayment1Method()
     {
+        $customPayment1Method = $this->getCustomPayment1();
         $this->_rootElement->waitUntil(
-            function () {
-                return $this->getCustomPayment1()->isVisible() ? true : null;
+            function () use ($customPayment1Method) {
+                return $customPayment1Method->isVisible() ? true : null;
             }
         );
     }

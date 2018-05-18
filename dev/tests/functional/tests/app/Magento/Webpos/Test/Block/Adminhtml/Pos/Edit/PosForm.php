@@ -103,12 +103,15 @@ class PosForm extends Form
     public function waitCloseSession()
     {
         $defaultCurrentSession = $this->getDefaultCurrentSession('There are 0 open session');
-        $browser = $this->_rootElement;
-        $browser->waitUntil(
-          function () use ($defaultCurrentSession) {
-              return $defaultCurrentSession->isVisible() ? true : null;
-          }
-        );
+        if(!$defaultCurrentSession->isVisible())
+        {
+            $browser = $this->_rootElement;
+            $browser->waitUntil(
+                function () use ($defaultCurrentSession) {
+                    return $defaultCurrentSession->isVisible() ? true : null;
+                }
+            );
+        }
     }
 
     public function getOptionByTitle($title)
@@ -176,10 +179,13 @@ class PosForm extends Form
     public function waitValidateClosingVisible()
     {
         $validateClosing = $this->getValidateClosing();
-        $this->_rootElement->waitUntil(
-          function () use ($validateClosing) {
-              return $validateClosing->isVisible() ? true : null;
-          }
-        );
+        if(!$validateClosing->isVisible())
+        {
+            $this->_rootElement->waitUntil(
+                function () use ($validateClosing) {
+                    return $validateClosing->isVisible() ? true : null;
+                }
+            );
+        }
     }
 }

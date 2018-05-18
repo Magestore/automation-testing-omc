@@ -131,6 +131,7 @@ class WebposZreportZR016Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Refund')->click();
         $this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
+        $this->webposIndex->getMsWebpos()->waitForModalPopup();
         $this->webposIndex->getModal()->getOkButton()->click();
         $this->webposIndex->getMsWebpos()->waitForModalPopupNotVisible();
 

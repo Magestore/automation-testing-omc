@@ -179,9 +179,9 @@ class WebposZreportZR010Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Refund')->click();
         $this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitForModalPopup();
         $this->webposIndex->getModal()->getOkButton()->click();
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitForModalPopupNotVisible();
 
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\WebposSetClosingBalanceCloseSessionStep',
