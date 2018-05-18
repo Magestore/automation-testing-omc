@@ -24,4 +24,13 @@ class SessionRegisterShift extends Block
     public function getEndSessionButton(){
         return $this->_rootElement->find('.btn-close-shift');
     }
+
+    public function getAddTransactionValue(){
+       return $this->_rootElement->find('//div[@class="transactions-info"]//tbody[1]/tr[2]/td[2]/span', locator::SELECTOR_XPATH)->getText();
+    }
+
+    public function getSubtractTransactionValue(){
+        return $this->_rootElement->find('//div[@class="transactions-info"]//tbody[1]/tr[3]/td[2]/span',locator::SELECTOR_XPATH)->getText();
+    }
+
 }

@@ -38,7 +38,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  *
  *
  * Class WebposManagePosMP26
- * @package Magento\Webpos\Test\TestCase\Pos\Filter
+ * @package Magento\Webpos\Test\TestCase\Pos\Edit
  */
 class WebposManagePosMP26Test extends Injectable
 {
@@ -96,7 +96,6 @@ class WebposManagePosMP26Test extends Injectable
         $this->posNews->getFormPageActions()->save();
 
         //Login
-        //login
         $username = $staff->getUsername();
         $password = $staff->getPassword();
         $webposIndex->open();

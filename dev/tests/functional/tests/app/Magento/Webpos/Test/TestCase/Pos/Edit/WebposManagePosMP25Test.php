@@ -32,7 +32,7 @@ use Magento\Webpos\Test\Page\Adminhtml\PosNews;
  *
  *
  * Class WebposManagePosMP25
- * @package Magento\Webpos\Test\TestCase\Pos\Filter
+ * @package Magento\Webpos\Test\TestCase\Pos\Edit
  */
 class WebposManagePosMP25Test extends Injectable
 {

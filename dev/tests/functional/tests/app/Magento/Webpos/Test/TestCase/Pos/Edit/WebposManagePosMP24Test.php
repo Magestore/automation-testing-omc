@@ -30,7 +30,7 @@ use Magento\Webpos\Test\Page\Adminhtml\PosIndex;
  *
  *
  * Class WebposManagePosMP24
- * @package Magento\Webpos\Test\TestCase\Pos\Filter
+ * @package Magento\Webpos\Test\TestCase\Pos\Edit
  */
 class WebposManagePosMP24Test extends Injectable
 {

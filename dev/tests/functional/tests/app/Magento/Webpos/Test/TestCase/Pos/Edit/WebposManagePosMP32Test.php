@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: stephen
  * Date: 5/14/18
- * Time: 4:28 PM
+ * Time: 4:32 PM
  */
 
 namespace Magento\Webpos\Test\TestCase\Pos\Edit;
@@ -19,27 +19,31 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Manage POS - Edit POS
- * Testcase MP28 - Check [Close session] grid and [Current session detail] tab after closing a session
+ * Testcase MP32 - Check [Current session detail] grid
  *
  * Precondition
  * - Exist at least 1 POS on the grid of Manage POS page
  * - Settings > [Need to create session before working] = Yes
+ * - Login webpos by staff A > select POS A
+ * -  Open a new session (session B) > place some orders
  *
  * Steps
- * 1. Login webpos by staff A > select POS A
- * 2. Open a new session (session B) > place order > close session successfully
- * 3. Click on [Closed sessions] tab
- * 4. Click on [Current session detail] tab
+ * 1. Go to backend > Manage POS > Edit POS A >  Click on [Current session detail] tab
+ * 2. Click on [Set closing balance] button
+ * 3. Input closing balance
+ * 4. Click on [Validate closing] button
+ * 5. Login webpos by staff A > select POS A > go to [Session management] page
  *
  * Acceptance
- * 3.  On [Closed sessions] tab, information of the session B will be shown exactly
- * - Show text: "There are 0 open session" and [Refresh] button
+ * 2. Open [Set Closing Balance] form
+ * 3. Show [Validate Closing] button
+ * 4. The session B was closed
+ * 5. Session B closed, system requires to open new session
  *
- *
- * Class WebposManagePosMP28
+ * Class WebposManagePosMP32
  * @package Magento\Webpos\Test\TestCase\Pos\Edit
  */
-class WebposManagePosMP28Test extends Injectable
+class WebposManagePosMP32Test extends Injectable
 {
     /**
      * Pos Index Page
@@ -74,7 +78,7 @@ class WebposManagePosMP28Test extends Injectable
     }
 
     public function test(FixtureFactory $fixtureFactory, Pos $pos, Location $location,
-                         Staff $staff, WebposIndex $webposIndex)
+                         Staff $staff, WebposIndex $webposIndex, $cashCountingQty)
     {
         //Precondition
         $location->persist();
@@ -90,7 +94,7 @@ class WebposManagePosMP28Test extends Injectable
         $this->posNews->getPosForm()->waitLoader();
         $this->posNews->getPosForm()->fill($pos);
         $this->posNews->getPosForm()->setFieldByValue('page_location_id', $location->getDisplayName(), 'select');
-        $this->posNews->getPosForm()->getGeneralFieldById('pagegitgit_auto_join', 'checkbox')->click();
+        $this->posNews->getPosForm()->getGeneralFieldById('page_auto_join', 'checkbox')->click();
         $this->posNews->getFormPageActions()->save();
 
         //login
@@ -104,12 +108,6 @@ class WebposManagePosMP28Test extends Injectable
                 'hasWaitOpenSessionPopup' => true
             ]
         )->run();
-        $webposIndex->getSessionRegisterShift()->getEndSessionButton()->click();
-        $webposIndex->getSessionRegisterShift()->waitForElementVisible('#popup-close-shift');
-        $webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        $webposIndex->getSessionRegisterShift()->waitForElementNotVisible('#popup-close-shift');
-        $webposIndex->getSessionRegisterShift()->getEndSessionButton()->click();
-        sleep(1);
 
         //Open Edit Pos Page
         $this->posIndex->open();
@@ -118,6 +116,28 @@ class WebposManagePosMP28Test extends Injectable
             'pos_name' => $pos->getPosName()
         ]);
         $this->posNews->getPosForm()->waitLoader();
+        $this->posNews->getPosForm()->getTabByTitle('Current Sessions Detail')->click();
+        $this->posNews->getPosForm()->waitForCurrentSessionLoad();
+        $this->posNews->getPosForm()->getCurrentSessionButtonByTitle('Set Closing Balance')->click();
+        $this->posNews->getPosForm()->waitForElementVisible('#popup-close-shift');
+        $this->posNews->getPosForm()->setCashCountingQuanty($cashCountingQty);
+        $this->posNews->getPosForm()->saveClosingBalance();
+        $this->posNews->getPosForm()->waitForElementVisible('#set-closing-balance-reason');
+        $this->posNews->getPosForm()->confirmReason()->click();
+        $this->posNews->getPosForm()->waitForElementNotVisible('#set-closing-balance-reason');
+        $this->posNews->getPosForm()->validateClosing('Validate Closing');
+        $this->posNews->getPosForm()->waitForLoaderHidden();
+
+        //login
+        $webposIndex->open();
+        $webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
+        $webposIndex->getMsWebpos()->waitForElementVisible('#popup-open-shift');
+
+        \PHPUnit_Framework_Assert::assertTrue(
+            $webposIndex->getMsWebpos()->getOpenShipPopup()->isVisible(),
+            'Session isn\'t closed'
+        );
+
     }
 
     public function tearDown()

@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: stephen
  * Date: 5/14/18
- * Time: 4:28 PM
+ * Time: 4:29 PM
  */
 
 namespace Magento\Webpos\Test\TestCase\Pos\Edit;
@@ -19,7 +19,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Manage POS - Edit POS
- * Testcase MP28 - Check [Close session] grid and [Current session detail] tab after closing a session
+ * Testcase MP29 - Check [Current session detail] grid
  *
  * Precondition
  * - Exist at least 1 POS on the grid of Manage POS page
@@ -27,19 +27,26 @@ use Magento\Webpos\Test\Page\WebposIndex;
  *
  * Steps
  * 1. Login webpos by staff A > select POS A
- * 2. Open a new session (session B) > place order > close session successfully
+ * 2. Open a new session (session B) > place order
  * 3. Click on [Closed sessions] tab
  * 4. Click on [Current session detail] tab
  *
  * Acceptance
- * 3.  On [Closed sessions] tab, information of the session B will be shown exactly
- * - Show text: "There are 0 open session" and [Refresh] button
+ * 3. On [Closed sessions] tab, information of the session B will be shown exactly and [Closed at] column is blank
+ * 4. Show exactly all information of session B:
+ * + Time create
+ * + Open balance
+ * + Transactions
+ * + Theoretical Closing balance
+ * + Real closing Balance
+ * + Difference
+ * 4. buttons: Refresh, Put money in, Take money out, Set closing balance, Print
  *
  *
- * Class WebposManagePosMP28
+ * Class WebposManagePosMP29
  * @package Magento\Webpos\Test\TestCase\Pos\Edit
  */
-class WebposManagePosMP28Test extends Injectable
+class WebposManagePosMP29Test extends Injectable
 {
     /**
      * Pos Index Page
@@ -67,14 +74,14 @@ class WebposManagePosMP28Test extends Injectable
      * @param PosIndex $posIndex
      * @param PosNews $posNews
      */
-    public function __inject(PosIndex $posIndex, PosNews $posNews)
+        public function __inject(PosIndex $posIndex, PosNews $posNews)
     {
         $this->posIndex = $posIndex;
         $this->posNews = $posNews;
     }
 
     public function test(FixtureFactory $fixtureFactory, Pos $pos, Location $location,
-                         Staff $staff, WebposIndex $webposIndex)
+                         Staff $staff)
     {
         //Precondition
         $location->persist();
@@ -90,7 +97,7 @@ class WebposManagePosMP28Test extends Injectable
         $this->posNews->getPosForm()->waitLoader();
         $this->posNews->getPosForm()->fill($pos);
         $this->posNews->getPosForm()->setFieldByValue('page_location_id', $location->getDisplayName(), 'select');
-        $this->posNews->getPosForm()->getGeneralFieldById('pagegitgit_auto_join', 'checkbox')->click();
+        $this->posNews->getPosForm()->getGeneralFieldById('page_auto_join', 'checkbox')->click();
         $this->posNews->getFormPageActions()->save();
 
         //login
@@ -104,12 +111,6 @@ class WebposManagePosMP28Test extends Injectable
                 'hasWaitOpenSessionPopup' => true
             ]
         )->run();
-        $webposIndex->getSessionRegisterShift()->getEndSessionButton()->click();
-        $webposIndex->getSessionRegisterShift()->waitForElementVisible('#popup-close-shift');
-        $webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        $webposIndex->getSessionRegisterShift()->waitForElementNotVisible('#popup-close-shift');
-        $webposIndex->getSessionRegisterShift()->getEndSessionButton()->click();
-        sleep(1);
 
         //Open Edit Pos Page
         $this->posIndex->open();
@@ -118,7 +119,7 @@ class WebposManagePosMP28Test extends Injectable
             'pos_name' => $pos->getPosName()
         ]);
         $this->posNews->getPosForm()->waitLoader();
-    }
+        }
 
     public function tearDown()
     {
