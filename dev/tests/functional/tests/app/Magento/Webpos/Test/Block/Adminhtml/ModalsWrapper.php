@@ -23,6 +23,14 @@ class ModalsWrapper extends Block
     {
         return $this->_rootElement->find('//aside/div/footer/button[*[text()[normalize-space()="OK"]]]', Locator::SELECTOR_XPATH);
     }
+    public function getCurrentModalActive()
+    {
+        return $this->_rootElement->find('aside._show');
+    }
+    public function getConfirmButton()
+    {
+        return $this->getCurrentModalActive()->find(".//button[*[text()[normalize-space()='Confirm']]]", Locator::SELECTOR_XPATH);
+    }
     public function getXButton()
     {
         return $this->_rootElement->find('//aside/div/header/button[*[text()[normalize-space()="Close"]]]', Locator::SELECTOR_XPATH);

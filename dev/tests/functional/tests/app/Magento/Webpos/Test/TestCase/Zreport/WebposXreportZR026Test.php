@@ -12,44 +12,39 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposZreportCheckGUITest
+ * Class WebposXreportZR026Test
  *
- * Precondition: There are some POSs and setting [Need to create session before working] = ""Yes"" on the test site
+ * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff who has open and close session permission
+ * 2. Open a session with
+ * - Opening amount = 0
+ * 3. Create some orders successfully with some payment methods which are not cash in
  *
  * Steps:
  * 1. Go to [Session Management] menu
- * 2. Open a session successfully > click on [Print] button
+ * 2. Click to print X-report
  *
  * Acceptance:
- * 2. Show X-report including:
- * - Title: X-report
- * - Session #session ID
+ * 2. Show X-report with:
+ * - Opening Amount = 0
+ * - Expect Drawer = 0
  *
- * - POS: Current POS
- * - Staff: Staff name who printed the sesstion
- * - Opened: Date Time and Staff name who opened the session
+ * - Cash sales = 0
+ * - Cash Refund = 0
+ * - Pay Ins = 0
+ * - Payouts = 0
  *
- * # Cash
- * - Opening amount
- * - Expected Drawer
+ * - Total Sales = SUM(grand_total) of the orders which placed on this session
+ * - Discount = 0
+ * - Refund = 0
+ * - Net Sales = Total Sales
  *
- * - Cash sales
- * - Cash refund
- * - Pay ins
- * - Payouts
- * #Sales
- * - Total Sales
- * - Discount
- * - Refund
- * - Net Sales
- * # Sale by payment methods
- *
- * Time to print the X-report
+ * - Cash in = 0
+ * And show all of the payment methods with their total that placed on this session
  *
  * @package Magento\Webpos\Test\TestCase\Zreport
  */
-class WebposXreportCheckGUITest extends Injectable
+class WebposXreportZR026Test extends Injectable
 {
     /**
      * Webpos Index page.
@@ -57,6 +52,7 @@ class WebposXreportCheckGUITest extends Injectable
      * @var WebposIndex
      */
     protected $webposIndex;
+    protected $useOtherPaymentMethod;
 
     public function __inject(
         WebposIndex $webposIndex
@@ -66,13 +62,21 @@ class WebposXreportCheckGUITest extends Injectable
     }
 
     public function test(
-        $products,
-        $createOrder = false
+        $products
     )
     {
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'create_session_before_working']
+        )->run();
+
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
+        )->run();
+
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'magestore_webpos_custome_payment']
         )->run();
 
         // Login webpos
@@ -84,12 +88,13 @@ class WebposXreportCheckGUITest extends Injectable
             'Magento\Webpos\Test\TestStep\WebposOpenSessionStep'
         )->run();
 
-        if ($createOrder) {
-            $this->objectManager->getInstance()->create(
-                'Magento\Webpos\Test\TestStep\WebposAddProductToCartThenCheckoutStep',
-                ['products' => $products]
-            )->run();
-        }
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\WebposAddProductToCartThenCheckoutStep',
+            [
+                'products' => $products,
+                'paymentMethod' => 'cp1forpos'
+            ]
+        )->run();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->getSessionManagement();
@@ -98,12 +103,15 @@ class WebposXreportCheckGUITest extends Injectable
         $staffName = $this->webposIndex->getSessionShift()->getStaffName()->getText();
         $openedString = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
         $openedString .= ' by ' . $staffName;
+        $totalSales = $this->webposIndex->getSessionShift()->getPaymentAmount()->getText();
 
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitReportPopupVisible();
         return [
             'staffName' => $staffName,
-            'openedString' => $openedString
+            'openedString' => $openedString,
+            'totalSales' => $this->convertPriceFormatToDecimal($totalSales),
+            'expectedDrawer' => 0
 
         ];
     }
@@ -114,6 +122,13 @@ class WebposXreportCheckGUITest extends Injectable
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'setup_session_before_working_to_no']
         )->run();
+
+        if ($this->useOtherPaymentMethod) {
+            $this->objectManager->getInstance()->create(
+                'Magento\Config\Test\TestStep\SetupConfigurationStep',
+                ['configData' => 'magestore_webpos_specific_payment']
+            )->run();
+        }
     }
 
     /**
