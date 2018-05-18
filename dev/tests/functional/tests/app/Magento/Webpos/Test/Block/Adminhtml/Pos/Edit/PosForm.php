@@ -100,6 +100,20 @@ class PosForm extends Form
         return $this->_rootElement->find('//legend[@class="admin__legend legend"]/span[text()="' . $title . '"]', locator::SELECTOR_XPATH);
     }
 
+    public function waitCloseSession()
+    {
+        $defaultCurrentSession = $this->getDefaultCurrentSession('There are 0 open session');
+        if(!$defaultCurrentSession->isVisible())
+        {
+            $browser = $this->_rootElement;
+            $browser->waitUntil(
+                function () use ($defaultCurrentSession) {
+                    return $defaultCurrentSession->isVisible() ? true : null;
+                }
+            );
+        }
+    }
+
     public function getOptionByTitle($title)
     {
         return $this->_rootElement->find('//select//option[text()="' . $title . '"]', locator::SELECTOR_XPATH);
@@ -140,5 +154,38 @@ class PosForm extends Form
     public function getEmptyRowOfSessionGrid()
     {
         return $this->_rootElement->find('//div[@id="Closed_Sessions"]//td[@class="empty-text"]', locator::SELECTOR_XPATH);
+    }
+
+    public function waitForCurrentSessionVisible()
+    {
+        $this->waitForElementVisible('#webpos_tabs_webpos_current_session_detail_content');
+    }
+
+    public function getCurrentSession()
+    {
+        return $this->_rootElement->find('#admin_webpos_session_detail');
+    }
+
+    public function getSetClosingBalance()
+    {
+        return $this->_rootElement->find('button[data-bind="click: setClosingBalance"]');
+    }
+
+    public function getValidateClosing()
+    {
+        return $this->_rootElement->find('.webpos-session-info')->find('//span[text()="Validate Closing"]', Locator::SELECTOR_XPATH);
+    }
+
+    public function waitValidateClosingVisible()
+    {
+        $validateClosing = $this->getValidateClosing();
+        if(!$validateClosing->isVisible())
+        {
+            $this->_rootElement->waitUntil(
+                function () use ($validateClosing) {
+                    return $validateClosing->isVisible() ? true : null;
+                }
+            );
+        }
     }
 }

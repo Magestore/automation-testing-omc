@@ -94,4 +94,18 @@ class MsWebpos extends Block
     {
         return $this->_rootElement->find('#c-button--push-left')->isVisible();
     }
+
+    public function waitForCMenuLoader()
+    {
+        $this->waitForElementVisible('#c-menu--push-left');
+    }
+
+    public function waitForSessionManagerLoader(){
+        $this->waitForElementVisible('#register_shift_container');
+    }
+
+    public function getOpenShipPopup(){
+        return $this->_rootElement->find('#popup-open-shift');
+    }
+
 }
