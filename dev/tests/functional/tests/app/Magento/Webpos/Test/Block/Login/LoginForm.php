@@ -17,49 +17,52 @@ class LoginForm extends Form
     {
         $this->waitForElementVisible('#webpos-login');
     }
-	public function getUsernameField()
-	{
-		return $this->_rootElement->find('#username');
-	}
-	public function getPasswordField()
-	{
-		return $this->_rootElement->find('#pwd');
-	}
 
-	public function clickLoginButton()
-	{
-		$this->_rootElement->find('button[type="submit"]')->click();
-		return $this;
-	}
-
-	public function getLogo()
-	{
-		return $this->_rootElement->find('#webpos-login > h1 > img');
-	}
-
-	public function getUsernameErrorMessage()
-	{
-		return $this->_rootElement->find('#username-error');
-	}
-
-	public function getPasswordErrorMessage()
-	{
-		return $this->_rootElement->find('#pwd-error');
-	}
-
-	public function getLocationID()
+    public function getUsernameField()
     {
-	    return $this->_rootElement->find('//*[@id="location"]', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('#username');
+    }
+
+    public function getPasswordField()
+    {
+        return $this->_rootElement->find('#pwd');
+    }
+
+    public function clickLoginButton()
+    {
+        $this->_rootElement->find('button[type="submit"]')->click();
+        return $this;
+    }
+
+    public function getLogo()
+    {
+        return $this->_rootElement->find('#webpos-login > h1 > img');
+    }
+
+    public function getUsernameErrorMessage()
+    {
+        return $this->_rootElement->find('#username-error');
+    }
+
+    public function getPasswordErrorMessage()
+    {
+        return $this->_rootElement->find('#pwd-error');
+    }
+
+    public function getLocationID()
+    {
+        return $this->_rootElement->find('//*[@id="location"]', Locator::SELECTOR_XPATH);
     }
 
     public function selectLocation($name)
     {
         $this->getLocationID()->click();
-        return $this->_rootElement->find('//*[@id="location"]/option[text()="'.$name.'"]', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//*[@id="location"]/option[text()="' . $name . '"]', Locator::SELECTOR_XPATH);
     }
 
-    public function getLocationItem($name) {
-        return $this->_rootElement->find('//*[@id="location"]/option[text()="'.$name.'"]');
+    public function getLocationItem($name)
+    {
+        return $this->_rootElement->find('//*[@id="location"]/option[text()="' . $name . '"]');
     }
 
     public function setLocation($name)
@@ -68,19 +71,20 @@ class LoginForm extends Form
         $location->setValue($name);
     }
 
-	public function getPosID()
+    public function getPosID()
     {
-	    return $this->_rootElement->find('//*[@id="pos"]', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//*[@id="pos"]', Locator::SELECTOR_XPATH);
     }
 
-    public function getPosItem($name) {
-        return $this->_rootElement->find('//*[@id="pos"]/option[text()="'.$name.'"]');
+    public function getPosItem($name)
+    {
+        return $this->_rootElement->find('//*[@id="pos"]/option[text()="' . $name . '"]');
     }
 
     public function selectPos($name)
     {
         $this->getPosID()->click();
-        return $this->_rootElement->find('//*[@id="pos"]/option[text()="'.$name.'"]', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//*[@id="pos"]/option[text()="' . $name . '"]', Locator::SELECTOR_XPATH);
     }
 
     public function setPos($name)
@@ -94,7 +98,13 @@ class LoginForm extends Form
         return $this->_rootElement->find('button.btn-default');
     }
 
-    public function waitForLoginFormVisiable(){
-	    return $this->waitForElementVisible('.wrap-login-form');
+    public function waitForLoginFormVisiable()
+    {
+        return $this->waitForElementVisible('.wrap-login-form');
+    }
+
+    public function getOptionFieldByValue($id, $value)
+    {
+        return $this->_rootElement->find('#' . $id)->find('//option[text()="' . $value . '"]', locator::SELECTOR_XPATH);
     }
 }

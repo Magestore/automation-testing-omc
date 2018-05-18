@@ -16,7 +16,7 @@ use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
 class AssertCheckValueDefault extends AbstractConstraint
 {
 
-    public function processAssert(PosNews $posNews, $tabs, WebposRoleNew $webposRoleNew)
+    public function processAssert(PosNews $posNews, $tabs)
     {
         foreach ($tabs as $tab) {
             \PHPUnit_Framework_Assert::assertTrue($posNews->getPosForm()->getTabByTitle($tab['title'])->isVisible(),
@@ -27,11 +27,13 @@ class AssertCheckValueDefault extends AbstractConstraint
         $this->assertGeneralTab($posNews, $tabs['general']);
 
         //Cash denomination
-        $posNews->getPosForm()->getTabByTitle('Cash Denominations')->click();
-        sleep(1);
+        $this->assertDenominationTab($posNews, $tabs['denomination']);
 
-        $this->assertDenomination($posNews, $tabs['denomination']);
+        //Closed Session
+        $this->assertCloseSessionTabs($posNews, $tabs['close_sessions']);
 
+        //Current Session Detail
+        $this->assertCurrentSessionTab($posNews, $tabs['sessions_detail']);
     }
 
     private function assertGeneralTab(PosNews $posNews, $tab)
@@ -82,14 +84,40 @@ class AssertCheckValueDefault extends AbstractConstraint
 
     }
 
-    private function assertDenomination(PosNews $posNews, $tab)
+    private function assertDenominationTab(PosNews $posNews, $tab)
     {
+        $this->openTab($posNews, $tab['title']);
         foreach ($tab['fields'] as $field) {
             \PHPUnit_Framework_Assert::assertTrue(
                 $posNews->getPosForm()->getDenominationFieldByTitle($field)->isVisible(),
                 'Field ' . $field . ' didn\'t display'
             );
         }
+    }
+
+    private function assertCloseSessionTabs(PosNews $posNews, $tab)
+    {
+        $this->openTab($posNews, $tab['title']);
+        \PHPUnit_Framework_Assert::assertTrue(
+            $posNews->getPosForm()->getSessionRowWithNoData()->isVisible(),
+            'Some session is exist'
+        );
+    }
+
+    private function assertCurrentSessionTab(PosNews $posNews, $tab)
+    {
+        $this->openTab($posNews, $tab['title']);
+        \PHPUnit_Framework_Assert::assertTrue(
+            $posNews->getPosForm()->getDefaultCurrentSession($tab['default_text'])->isVisible(),
+            'Error with default current session'
+        );
+    }
+
+
+    private function openTab(PosNews $posNews, $title)
+    {
+        $posNews->getPosForm()->getTabByTitle($title)->click();
+        sleep(1);
     }
 
     /**

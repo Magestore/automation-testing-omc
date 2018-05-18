@@ -25,7 +25,7 @@ use Magento\Webpos\Test\Page\Adminhtml\MappingLocationIndex;
  * - Check data on the grid
  *
  * Acceptance
- * - The grid will  shown all locations and corressponding warehouses
+ * - The grid will  shown all locations and respectively warehouses
  * - The grid will not shown the locations that dont link to any warehouse
  *
  * Class WebposManageLocationML36Test

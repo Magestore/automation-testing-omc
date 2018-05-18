@@ -62,7 +62,6 @@ class WebposManageLocationML35Test extends Injectable
     {
         //Precondition
         $warehouse->persist();
-        var_dump($warehouse->getData());die();
 
         // Steps
         $this->locationIndex->open();

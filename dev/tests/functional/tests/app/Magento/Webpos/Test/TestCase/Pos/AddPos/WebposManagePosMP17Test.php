@@ -9,12 +9,15 @@
 namespace Magento\Webpos\Test\TestCase\Pos\AddPos;
 
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Fixture\Denomination;
+use Magento\Webpos\Test\Fixture\Location;
+use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\PosIndex;
 use Magento\Webpos\Test\Page\Adminhtml\PosNews;
 
 /**
  * Manage POS - Add POS
- * Testcase MP16 - Check default value of all fields
+ * Testcase MP17 - Check value of each fields
  *
  * Precondition
  * - Empty
@@ -25,26 +28,18 @@ use Magento\Webpos\Test\Page\Adminhtml\PosNews;
  * 3. Check default value of all fields
  *
  * Acceptance
- * 3.
- * - General information tab:
- * + POS name: blank (text box)
- * + Location: Store address (dropdown type)
- * + Current staff: None (dropdown type)
- * + Status: Enable (dropdown type)
- * + Available for Other Staff: uncheck (checkbox)
- * + Allow POS staff to lock register: No (dropdown type)
- * - Cash denominations tab:
- * + On the grid, show all of denominations from [Manage cash denomination] page
- * - Close session tab:
- * + There is no record on the grid
- * - Current session detail tab:
- * + Show text: "There are 0 open session "
+ * 2.
+ * - [Location]: including all of locations that get from [Manage Locations] page
+ * - [Current staff]: including all of staffs that are available in this time (the staffs isn't occupying any POS)
+ * - [Status]: including 2 status: Enable, Disable
+ * - [Allow POS staff to lock register]: including Yes, No
+ * - Cash Denominations grid: show all of data records that get from [Manage Cash Denomination] page
  *
  *
- * Class WebposManagePosMP16
+ * Class WebposManagePosMP17
  * @package Magento\Webpos\Test\TestCase\Pos\Filter
  */
-class WebposManagePosMP16Test extends Injectable
+class WebposManagePosMP17Test extends Injectable
 {
     /**
      * Pos Index Page
@@ -61,8 +56,13 @@ class WebposManagePosMP16Test extends Injectable
         $this->posNews = $posNews;
     }
 
-    public function test()
+    public function test(Location $location, Staff $staff, Denomination $denomination)
     {
+        //Precondition
+        $location->persist();
+        $staff->persist();
+        $denomination->persist();
+
         //Steps
         $this->posIndex->open();
         $this->posIndex->getPosGrid()->waitLoader();
