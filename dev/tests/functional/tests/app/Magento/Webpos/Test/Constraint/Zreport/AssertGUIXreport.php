@@ -20,71 +20,71 @@ class AssertGUIXreport extends \Magento\Mtf\Constraint\AbstractConstraint
     {
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionPrintShiftPopup()->getXreportTitle()->isVisible(),
-            'Zreport Title not visible'
+            'Xreport Title not visible'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionPrintShiftPopup()->getDrawerNumber()->isVisible(),
-            'Zreport Drawer Number not visible'
+            'Xreport Drawer Number not visible'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionPrintShiftPopup()->getPosName()->isVisible(),
-            'Zreport Pos Name not visible'
+            'Xreport Pos Name not visible'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionPrintShiftPopup()->getStaffName()->isVisible(),
-            'Zreport Staff name not visible'
+            'Xreport Staff name not visible'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionPrintShiftPopup()->getOpened()->isVisible(),
-            'Zreport opened time not visible'
+            'Xreport opened time not visible'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionPrintShiftPopup()->getOpeningAmount()->isVisible(),
-            'Zreport Opening amount not visible'
+            'Xreport Opening amount not visible'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionPrintShiftPopup()->getExpectedDrawer()->isVisible(),
-            'Zreport Expected Drawer amount not visible'
+            'Xreport Expected Drawer amount not visible'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionPrintShiftPopup()->getCashSales()->isVisible(),
-            'Zreport cash sales not visible'
+            'Xreport cash sales not visible'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionPrintShiftPopup()->getCashRefund()->isVisible(),
-            'Zreport cash refund not visible'
+            'Xreport cash refund not visible'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionPrintShiftPopup()->getPayIns()->isVisible(),
-            'Zreport pay in not visible'
+            'Xreport pay in not visible'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionPrintShiftPopup()->getPayouts()->isVisible(),
-            'Zreport pay out not visible'
+            'Xreport pay out not visible'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionPrintShiftPopup()->getTotalSales()->isVisible(),
-            'Zreport total sales not visible'
+            'Xreport total sales not visible'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionPrintShiftPopup()->getDiscount()->isVisible(),
-            'Zreport discount not visible'
+            'Xreport discount not visible'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionPrintShiftPopup()->getRefund()->isVisible(),
-            'Zreport refund not visible'
+            'Xreport refund not visible'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionPrintShiftPopup()->getNetSales()->isVisible(),
-            'Zreport net sales not visible'
+            'Xreport net sales not visible'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionPrintShiftPopup()->getPaymentAmount()->isVisible(),
-            'Zreport payment cash in  not visible'
+            'Xreport payment cash in  not visible'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionPrintShiftPopup()->getTimeToPrint()->isVisible(),
-            'Zreport time to print not visible'
+            'Xreport time to print not visible'
         );
     }
     /**
@@ -94,6 +94,6 @@ class AssertGUIXreport extends \Magento\Mtf\Constraint\AbstractConstraint
      */
     public function toString()
     {
-        return 'GUI Zreport error';
+        return 'GUI Xreport error';
     }
 }
