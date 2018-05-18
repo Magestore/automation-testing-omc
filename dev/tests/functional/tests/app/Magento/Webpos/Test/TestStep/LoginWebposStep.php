@@ -11,7 +11,6 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\TestStep\TestStepInterface;
 use Magento\Mtf\Config\DataInterface;
-
 /**
  * Class LoginWebposStep
  * @package Magento\Webpos\Test\TestStep

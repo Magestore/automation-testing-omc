@@ -101,12 +101,12 @@ class WebposTakePaymentOH97Test extends Injectable
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
+        //select order
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        //select order
-        sleep(2);
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        sleep(0.5);
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
 
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         //click take payment
@@ -117,9 +117,7 @@ class WebposTakePaymentOH97Test extends Injectable
         $am = $this->webposIndex->getOrderHistoryOrderViewHeader()->getGrandTotal();
         sleep(0.5);
         $this->webposIndex->getOrderHistoryPayment()->getInputAmount()->setValue(substr($am,1));
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-        sleep(0.5);
+        sleep(1);
 
         $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
 
