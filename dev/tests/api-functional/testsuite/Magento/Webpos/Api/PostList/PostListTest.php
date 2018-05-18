@@ -11,10 +11,10 @@ namespace Magento\Webpos\Api\PostList;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 /**
- * Class TestPostList
+ * Class PostListTest
  * @package Magento\Webpos\Api\PostList
  */
-class TestPostList extends WebapiAbstract
+class PostListTest extends WebapiAbstract
 {
     /**
      * @var \Magento\Webpos\Api\Staff\LoginTest
@@ -30,9 +30,9 @@ class TestPostList extends WebapiAbstract
     }
 
     /**
-     * test Staff LoginTest
+     * call API Post List Search Criteria
      */
-    public function testPostListSearchCriteria()
+    public function callAPIPostListSearchCriteria()
     {
         $sessionId = $this->currentSession->testStaffLogin();
         $serviceInfo = [
@@ -42,6 +42,13 @@ class TestPostList extends WebapiAbstract
             ],
         ];
         $results = $this->_webApiCall($serviceInfo);
+        return $results;
+    }
+    /**
+     * test API Post List Search Criteria
+     */
+    public function testPostListSearchCriteria() {
+        $results = $this->callAPIPostListSearchCriteria();
         $key1 = [
             'items',
             'search_criteria',
@@ -89,6 +96,5 @@ class TestPostList extends WebapiAbstract
                 $key . " key is not in found in results['sort_orders']['filter_groups'][0]'s keys"
             );
         }
-        return $results;
     }
 }

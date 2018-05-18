@@ -15,7 +15,6 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\ShippingAddressPopup\AssertBillingAddressOnNewCustomerPopupIsCorrect;
 use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\ShippingAddressPopup\AssertShippingAddressOnNewCustomerPopupIsCorrect;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class WebposCustomerOnCheckoutPageCC23Test
  * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\BillingAddressPopup
@@ -23,22 +22,22 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposCustomerOnCheckoutPageCC23Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     /**
-     * @var AssertShippingAddressOnNewCustomerPopupIsCorrect
+     * @var AssertShippingAddressOnNewCustomerPopupIsCorrect $assertShippingAddressOnNewCustomerPopupIsCorrect
      */
     protected $assertShippingAddressOnNewCustomerPopupIsCorrect;
 
     /**
-     * @var AssertBillingAddressOnNewCustomerPopupIsCorrect
+     * @var AssertBillingAddressOnNewCustomerPopupIsCorrect $assertBillingAddressOnNewCustomerPopupIsCorrect
      */
     protected $assertBillingAddressOnNewCustomerPopupIsCorrect;
 
@@ -75,8 +74,8 @@ class WebposCustomerOnCheckoutPageCC23Test extends Injectable
         $address = $this->prepareAddress($customer, $address);
         $editAddress = $this->prepareAddress($customer, $editAddress);
 
-        // LoginTest webpos
-        $staff = $this->objectManager->getInstance()->create(
+        // Login webpos
+        $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
@@ -87,15 +86,14 @@ class WebposCustomerOnCheckoutPageCC23Test extends Injectable
         $this->webposIndex->getCheckoutChangeCustomer()->waitForCustomerList();
 
         $this->webposIndex->getCheckoutChangeCustomer()->getAddNewCustomerButton()->click();
-        sleep(3);
 
         // fill customer info
-        $this->webposIndex->getCheckoutAddCustomer()->waitForPopupVisible();
+        $this->webposIndex->getCheckoutContainer()->waitForPopupAddCustomerVisible();
         $this->webposIndex->getCheckoutAddCustomer()->setFieldWithoutShippingAndBilling($customer->getData());
 
         // fill Billing address info
         $this->webposIndex->getCheckoutAddCustomer()->getAddBillingAddressIcon()->click();
-        sleep(3);
+        $this->webposIndex->getCheckoutContainer()->waitForPopupAddBillingVisible();
         $this->webposIndex->getCheckoutAddBillingAddress()->setFieldAddress($address->getData());
         $this->webposIndex->getCheckoutAddBillingAddress()->getSaveButton()->click();
         sleep(1);
@@ -116,10 +114,9 @@ class WebposCustomerOnCheckoutPageCC23Test extends Injectable
         $this->assertBillingAddressOnNewCustomerPopupIsCorrect->processAssert($this->webposIndex, $addressText);
 
         $this->webposIndex->getCheckoutAddCustomer()->getEditBillingAddressIcon()->click();
-        sleep(3);
 
         //fill Billing address info
-        $this->webposIndex->getCheckoutAddBillingAddress()->waitForPopupVisible();
+        $this->webposIndex->getCheckoutContainer()->waitForPopupAddBillingVisible();
         $this->webposIndex->getCheckoutAddBillingAddress()->setFieldAddress($editAddress->getData());
         $this->webposIndex->getCheckoutAddBillingAddress()->getSaveButton()->click();
 

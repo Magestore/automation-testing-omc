@@ -186,8 +186,4 @@ class CheckoutAddBillingAddress extends Block
         return $this->_rootElement->find('#add_billing_country_id-error');
     }
     // End Feild's error messages
-
-    public function waitForPopupVisible(){
-        $this->waitForElementVisible('#form-customer-add-billing-address-checkout');
-    }
 }

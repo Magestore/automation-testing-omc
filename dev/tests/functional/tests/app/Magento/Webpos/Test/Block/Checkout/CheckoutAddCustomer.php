@@ -8,10 +8,12 @@
 
 namespace Magento\Webpos\Test\Block\Checkout;
 
-
 use Magento\Mtf\Block\Block;
 use Magento\Mtf\Client\Locator;
-
+/**
+ * Class CheckoutAddCustomer
+ * @package Magento\Webpos\Test\Block\Checkout
+ */
 class CheckoutAddCustomer extends Block
 {
 	public function getCancelButton()
@@ -155,8 +157,4 @@ class CheckoutAddCustomer extends Block
 	{
 		return $this->_rootElement->find('a[data-bind="click: deleteBillingAddress"]');
 	}
-
-    public function waitForPopupVisible(){
-        $this->waitForElementVisible('#form-customer-add-customer-checkout');
-    }
 }

@@ -273,8 +273,6 @@ class CheckoutTest extends WebapiAbstract
             ]
         ];
         $results = $this->_webApiCall($serviceInfo, $requestData);
-        // Dump the result to check "How does it look like?"
-//         \Zend_Debug::dump($results);
         return $results;
     }
     /**

@@ -17,7 +17,9 @@ use Magento\Framework\Webapi\Rest\Request as RestRequest;
  */
 class PosRepositoryTest extends WebapiAbstract
 {
-	const POS_LIST_RESOURCE_PATH = '/V1/webpos/poslist';
+    /**
+     * const ASSIGN_STAFF_RESOURCE_PATH
+     */
 	const ASSIGN_STAFF_RESOURCE_PATH = '/V1/webpos/posassign';
 
     /**

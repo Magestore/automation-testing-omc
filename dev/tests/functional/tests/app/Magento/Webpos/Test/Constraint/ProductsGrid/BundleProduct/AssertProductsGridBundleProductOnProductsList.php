@@ -39,7 +39,7 @@ class AssertProductsGridBundleProductOnProductsList extends AbstractConstraint
 //            'Available Qty is visible'
 //        );
 
-        \Zend_Debug::dump($productQtyOnPage);
+//        \Zend_Debug::dump($productQtyOnPage);
 
         $productPriceOnPage = (float) substr($webposIndex->getCheckoutProductList()->getFirstProductPrice(), 1);
         \PHPUnit_Framework_Assert::assertEquals(

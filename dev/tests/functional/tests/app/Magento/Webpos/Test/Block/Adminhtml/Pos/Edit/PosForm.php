@@ -118,4 +118,8 @@ class PosForm extends Form
     {
         return $this->_rootElement->find('//tbody/tr[@class="even"][1]', locator::SELECTOR_XPATH);
     }
+
+    public function getPosNameErrorLabel(){
+        return $this->_rootElement->find('#page_pos_name-error');
+    }
 }
