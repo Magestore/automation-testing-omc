@@ -168,6 +168,7 @@ class WebposXreportZR028Test extends Injectable
 
         // Refund
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();

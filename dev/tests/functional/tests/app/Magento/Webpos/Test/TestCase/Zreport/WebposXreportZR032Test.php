@@ -14,25 +14,27 @@ use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposZreportZR016Test
+ * Class WebposXreportZR032Test
  *
  * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff who has open and close session permission
  * 2. Open a session
  * 3. Create some orders successfully
  * 4. Refund an order that placed on the previous session
+ * - Refund by cash in (Ex: R amount)
+ * - Refund by other payments (not cash in) (Ex: N amount)
  *
  * Steps:
  * 1. Go to [Session Management] menu
- * 2. Close the session successfully
- * 3. Click to print Z-report
+ * 3. Click to print X-report
  *
- * Acceptance:
- * 3. Refund = Refunded amount on step 4 of [Precondition and setup steps]
+ * Acceptance:2.
+ * - Cash Refund = Refund amount by cashin (R amount)
+ * - Refund =Total Refunded amount by all methods on step 4 of [Precondition and setup steps]  (R+N amount)
  *
  * @package Magento\Webpos\Test\TestCase\Zreport
  */
-class WebposZreportZR016Test extends Injectable
+class WebposXreportZR032Test extends Injectable
 {
     /**
      * Webpos Index page.
@@ -57,6 +59,7 @@ class WebposZreportZR016Test extends Injectable
     }
 
     public function test(
+        $amount,
         $products,
         Denomination $denomination,
         $denominationNumberCoin
@@ -64,16 +67,20 @@ class WebposZreportZR016Test extends Injectable
     {
         // Create denomination
         $denomination->persist();
-        $this->objectManager->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'create_session_before_working']
-        )->run();
+//        $this->objectManager->create(
+//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+//            ['configData' => 'create_session_before_working']
+//        )->run();
+//
+//        //Config Customer Credit Payment Method
+//        $this->objectManager->getInstance()->create(
+//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+//            ['configData' => 'magestore_webpos_custome_payment']
+//        )->run();
 
-        //Config Customer Credit Payment Method
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'magestore_webpos_custome_payment']
-        )->run();
+//        $this->objectManager->create(
+//            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
+//        )->run();
 
         // Login webpos
         $this->objectManager->getInstance()->create(
@@ -84,10 +91,32 @@ class WebposZreportZR016Test extends Injectable
             'Magento\Webpos\Test\TestStep\WebposOpenSessionStep'
         )->run();
 
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\WebposAddProductToCartThenCheckoutStep',
-            ['products' => $products]
-        )->run();
+        $i = 0;
+        foreach ($products as $product) {
+            $productFixture = $this->fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);
+            $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+            $this->webposIndex->getCheckoutProductList()->search($productFixture->getSku());
+            $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+            $this->webposIndex->getMsWebpos()->waitCartLoader();
+            $i++;
+        }
+        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getCheckoutPaymentMethod()->waitForCustomPayment1Method();
+        $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+
+        $this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();
+        $this->webposIndex->getCheckoutAddMorePayment()->getCashIn()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
 
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\WebposSetClosingBalanceCloseSessionStep',
@@ -121,6 +150,7 @@ class WebposZreportZR016Test extends Injectable
 
         // Refund
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
@@ -132,38 +162,35 @@ class WebposZreportZR016Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Refund')->click();
         $this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForModalPopup();
+        $this->webposIndex->getBody()->waitForModalPopup();
         $this->webposIndex->getModal()->getOkButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForModalPopupNotVisible();
-
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\WebposSetClosingBalanceCloseSessionStep',
-            [
-                'denomination' => $denomination,
-                'denominationNumberCoin' => $denominationNumberCoin
-            ]
-        )->run();
+        $this->webposIndex->getBody()->waitForModalPopupNotVisible();
 
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitReportPopupVisible();
 
         return [
-            'refund' => 0
+            'refund' => 0,
+            'cashRefund' => 0
         ];
     }
 
     public function tearDown()
     {
-        $this->objectManager->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'setup_session_before_working_to_no']
-        )->run();
+//        $this->objectManager->create(
+//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+//            ['configData' => 'setup_session_before_working_to_no']
+//        )->run();
+//
+//        //Config Payment Payment Method
+//        $this->objectManager->getInstance()->create(
+//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+//            ['configData' => 'magestore_webpos_specific_payment']
+//        )->run();
 
-        //Config Payment Payment Method
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'magestore_webpos_specific_payment']
-        )->run();
+//        $this->objectManager->create(
+//            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
+//        )->run();
     }
 
     /**

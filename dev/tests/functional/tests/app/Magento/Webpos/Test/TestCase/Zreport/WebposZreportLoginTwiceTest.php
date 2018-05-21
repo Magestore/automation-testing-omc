@@ -108,8 +108,9 @@ class WebposZreportLoginTwiceTest extends Injectable
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $staffName1 = $staff->getDisplayName();
         $this->webposIndex->getCMenu()->logout();
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
+        $this->webposIndex->getBody()->waitForModalPopup();
         $this->webposIndex->getModal()->getOkButton()->click();
+        $this->webposIndex->getBody()->waitForModalPopupNotVisible();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader.loading-mask');
 
         $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
