@@ -17,7 +17,7 @@ use Magento\Mtf\TestCase\Injectable;
  * 1. Create spending rates according to data set.
  *
  * Steps:
- * 1. Login to backend.
+ * 1. LoginTest to backend.
  * 2. Navigate Reward points > Spending Rates
  * 3. Select spending rates created in preconditions.
  * 4. Select Change status action from mass-action.

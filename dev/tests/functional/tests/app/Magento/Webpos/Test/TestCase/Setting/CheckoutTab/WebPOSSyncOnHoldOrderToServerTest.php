@@ -48,7 +48,7 @@ class WebPOSSyncOnHoldOrderToServerTest extends Injectable
         $this->optionNo = $optionNo;
         $this->successMessage = $successMessage;
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -119,7 +119,7 @@ class WebPOSSyncOnHoldOrderToServerTest extends Injectable
     public function tearDown()
     {
         if ($this->testCaseId == 'SET17' || $this->testCaseId == 'SET18') {
-            // Login webpos
+            // LoginTest webpos
             $staff = $this->objectManager->getInstance()->create(
                 'Magento\Webpos\Test\TestStep\LoginWebposStep'
             )->run();

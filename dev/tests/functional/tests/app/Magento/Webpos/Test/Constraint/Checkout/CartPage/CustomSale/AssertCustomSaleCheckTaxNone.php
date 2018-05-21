@@ -13,7 +13,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AssertCustomSaleCheckTaxNone
- * @package Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomSale
+ * @package Magento\Webpos\Test\Constraint\Cart\CartPage\CustomSale
  */
 
 class AssertCustomSaleCheckTaxNone extends AbstractConstraint

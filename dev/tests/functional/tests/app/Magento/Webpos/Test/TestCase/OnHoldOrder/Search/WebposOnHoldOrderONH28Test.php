@@ -38,7 +38,7 @@ class WebposOnHoldOrderONH28Test extends Injectable
         $product2 = $products[1]['product'];
         $product3 = $products[2]['product'];
 
-        //Login webpos
+        //LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

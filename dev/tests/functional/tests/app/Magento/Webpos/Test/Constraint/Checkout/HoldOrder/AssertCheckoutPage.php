@@ -11,7 +11,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertCheckoutPage
- * @package Magento\Webpos\Test\Constraint\Checkout\HoldOrder
+ * @package Magento\Webpos\Test\Constraint\Cart\HoldOrder
  */
 class AssertCheckoutPage extends AbstractConstraint
 {
@@ -19,7 +19,7 @@ class AssertCheckoutPage extends AbstractConstraint
     {
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutPlaceOrder()->isActivePageCheckout(),
-            'Checkout page is not active'
+            'Cart page is not active'
         );
     }
 
@@ -30,6 +30,6 @@ class AssertCheckoutPage extends AbstractConstraint
      */
     public function toString()
     {
-        return "Checkout page is correct";
+        return "Cart page is correct";
     }
 }

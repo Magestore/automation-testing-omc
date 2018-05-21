@@ -14,7 +14,7 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
 /**
  *  * Preconditions:
- * 1. Login webpos by a  staff
+ * 1. LoginTest webpos by a  staff
  * 2. Add some product to cart
  *
  * Step:
@@ -23,7 +23,7 @@ use Magento\Mtf\Fixture\FixtureFactory;
  */
 /**
  * Class WebposDeleteProductOnCartPageCP69EntityTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\DeleteProduct
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DeleteProduct
  */
 class WebposDeleteProductOnCartPageCP69EntityTest extends Injectable
 {
@@ -44,7 +44,7 @@ class WebposDeleteProductOnCartPageCP69EntityTest extends Injectable
     }
 
     /**
-     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
+     * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
      *
      * @return void
      */

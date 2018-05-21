@@ -69,7 +69,7 @@ class WebposManageStocksCheckProductListTest extends Injectable
 		// Create product
 		$productList = $this->createProducts($productList, $warehouse->getWarehouseId());
 
-		// Login webpos
+		// LoginTest webpos
 		$this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
 			[

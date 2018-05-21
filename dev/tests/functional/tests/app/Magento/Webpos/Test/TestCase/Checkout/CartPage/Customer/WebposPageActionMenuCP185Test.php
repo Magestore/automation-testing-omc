@@ -6,8 +6,13 @@
  * Time: 09:28
  */
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+/**
+ * Class WebposPageActionMenuCP185Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer
+ */
 class WebposPageActionMenuCP185Test extends Injectable
 {
     /**
@@ -40,7 +45,7 @@ class WebposPageActionMenuCP185Test extends Injectable
             ['products' => $products]
         )->run()[0]['product'];
 
-        //Login webpos
+        //LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -51,20 +56,18 @@ class WebposPageActionMenuCP185Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
-        //Checkout
+        //Cart
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         //Click ... Menu > click Add order note
         $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
-        sleep(2);
-        $this->webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->click();
-
-        sleep(2);
+        $this->webposIndex->getCheckoutFormAddNote()->waitAddOrderNote();
+        $this->webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->setValue('');
+        $this->webposIndex->getCheckoutNoteOrder()->waitForCloseOrderNoteButon();
+        $this->webposIndex->getCheckoutNoteOrder()->getTextArea()->click();
         $this->webposIndex->getCheckoutNoteOrder()->getCloseOrderNoteButton()->click();
         sleep(2);
-
-
     }
 }

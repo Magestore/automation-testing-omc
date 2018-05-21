@@ -11,7 +11,6 @@ namespace Magento\Webpos\Test\TestCase\Zreport;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class WebposZreportCheckGUITest
  *

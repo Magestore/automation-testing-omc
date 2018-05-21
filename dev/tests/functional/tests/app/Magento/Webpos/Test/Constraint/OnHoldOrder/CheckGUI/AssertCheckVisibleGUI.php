@@ -6,9 +6,9 @@
  * Time: 08:19
  */
 namespace Magento\Webpos\Test\Constraint\OnHoldOrder\CheckGUI;
+
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class AssertCheckVisibleGUI
  * @package Magento\Webpos\Test\Constraint\OnHoldOrder\CheckGUI
@@ -17,9 +17,8 @@ class AssertCheckVisibleGUI extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex, $searchPlaceHolder, $product)
     {
-        sleep(1);
+        sleep(2);
         $webposIndex->getOnHoldOrderOrderList()->waitLoader();
-
         //Check visible on-hold-order list
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getOnHoldOrderOrderList()->isVisible(),
@@ -56,7 +55,7 @@ class AssertCheckVisibleGUI extends AbstractConstraint
         //Check visible button checkout and delete
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->isVisible(),
-            'Checkout button is not display'
+            'Cart button is not display'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getOnHoldOrderOrderViewFooter()->getDeleteButton()->isVisible(),

@@ -6,13 +6,13 @@
  * Time: 09:31
  */
 
-namespace Magento\Webpos\Api\Checkout;
+namespace Magento\Webpos\Api\Cart;
 
 use Magento\TestFramework\TestCase\WebapiAbstract;
 use Magento\Framework\Webapi\Rest\Request as RestRequest;
 /**
  * Class CartTest
- * @package Magento\Webpos\Api\CategoryRepository
+ * @package Magento\Webpos\Api\Cart
  */
 class CartTest extends WebapiAbstract
 {
@@ -29,18 +29,12 @@ class CartTest extends WebapiAbstract
                 'httpMethod' => RestRequest::HTTP_METHOD_POST,
             ]
         ];
-
         $requestData = [
-            'email' => 'lionel123@gmail.com',
-            'incrementId' => 'WP11513741610113'
+            'email' => 'roni_cost@example.com',
+            'incrementId' => '000000398'
         ];
-
         $results = $this->_webApiCall($serviceInfo, $requestData);
         $results = explode(',', $results);
-
-        // Dump the result to check "How does it look like?"
-        // \Zend_Debug::dump($results);
-
         $this->assertNotNull($results);
         self::assertContains(
             (string)'The order #'.$requestData['incrementId'].' has been sent to the customer '.$requestData['email'].'',

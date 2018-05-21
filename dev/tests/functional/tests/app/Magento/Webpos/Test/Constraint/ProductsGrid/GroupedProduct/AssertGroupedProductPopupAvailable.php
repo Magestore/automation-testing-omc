@@ -29,7 +29,7 @@ class AssertGroupedProductPopupAvailable extends AbstractConstraint
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->isVisible(),
-            'Add To Cart button is not visible.'
+            'Add To Checkout button is not visible.'
         );
         $webposIndex->getCheckoutProductDetail()->getCancelButton()->click();
         sleep(1);

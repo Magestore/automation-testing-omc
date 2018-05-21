@@ -15,7 +15,7 @@ use Magento\Storepickup\Test\Page\Adminhtml\ScheduleNew;
 
 /**
  * Steps:
- * 1. Login to the backend.
+ * 1. LoginTest to the backend.
  * 2. Navigate to Store Pickup > Manage Schedule.
  * 3. Start to Add New Schedule .
  * 4. Fill in data according to data set.

@@ -16,7 +16,7 @@ use Magento\Webpos\Test\Page\Adminhtml\PosEdit;
  * Class CheckPositionLockUnlockButtonLR15Test
  * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckLockUnlockButton
  * Pre-condition:
- *   Login backend with account has been assigned the permission to lock/unlock  register
+ *   LoginTest backend with account has been assigned the permission to lock/unlock  register
  *   Go to Sales > Web POS > Manage POS > Open an any POS -> and set the Enable option to lock register to  Yes
  * Step:
  *   On the POS page, observe position of the Lock/Unlock button

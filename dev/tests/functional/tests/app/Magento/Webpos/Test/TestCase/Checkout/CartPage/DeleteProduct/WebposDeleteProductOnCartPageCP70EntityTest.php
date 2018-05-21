@@ -13,11 +13,11 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
 /**
  *  * Preconditions:
- * 1. Login webpos by a  staff
+ * 1. LoginTest webpos by a  staff
  * 2. Add some product to cart
  *
  * Step:
- * 1. Click on [Checkout] button
+ * 1. Click on [Cart] button
  * 2. Back to cart page
  * 3. Click on delete product icon (x icon) of first product
  *
@@ -25,7 +25,7 @@ use Magento\Mtf\Fixture\FixtureFactory;
 
 /**
  * Class WebposDeleteProductOnCartPageCP70EntityTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\DeleteProduct
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DeleteProduct
  */
 class WebposDeleteProductOnCartPageCP70EntityTest extends Injectable
 {
@@ -46,7 +46,7 @@ class WebposDeleteProductOnCartPageCP70EntityTest extends Injectable
     }
 
     /**
-     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
+     * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
      *
      * @return void
      */

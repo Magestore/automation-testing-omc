@@ -8,11 +8,12 @@
 
 namespace Magento\Webpos\Test\Constraint\OnHoldOrder\HoldOrder;
 
-
-use Magento\Customer\Test\Fixture\Address;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class AssertOrderDetailShipAndBillAddressAreCorrect
+ * @package Magento\Webpos\Test\Constraint\OnHoldOrder\HoldOrder
+ */
 class AssertOrderDetailShipAndBillAddressAreCorrect extends AbstractConstraint
 {
 	public function processAssert(WebposIndex $webposIndex, $name, $address, $phone)

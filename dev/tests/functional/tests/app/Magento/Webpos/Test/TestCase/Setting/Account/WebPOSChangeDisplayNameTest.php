@@ -43,7 +43,7 @@ class WebPOSChangeDisplayNameTest extends Injectable
     public function test($displayName, $testCaseID, $currentPassword)
     {
         $password = $this->configuration->get('application/0/backendPassword/0/value');
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

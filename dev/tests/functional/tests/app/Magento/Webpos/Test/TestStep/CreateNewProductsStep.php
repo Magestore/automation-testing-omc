@@ -8,10 +8,12 @@
 
 namespace Magento\Webpos\Test\TestStep;
 
-
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestStep\TestStepInterface;
-
+/**
+ * Class CreateNewProductsStep
+ * @package Magento\Webpos\Test\TestStep
+ */
 class CreateNewProductsStep implements TestStepInterface
 {
 	/**

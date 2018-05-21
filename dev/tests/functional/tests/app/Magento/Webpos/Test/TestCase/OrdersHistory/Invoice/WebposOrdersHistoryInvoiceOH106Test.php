@@ -10,7 +10,10 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\Invoice;
 
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\TestCase\Injectable;
-
+/**
+ * Class WebposOrdersHistoryInvoiceOH106Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
+ */
 class WebposOrdersHistoryInvoiceOH106Test extends Injectable
 {
     /**
@@ -39,7 +42,7 @@ class WebposOrdersHistoryInvoiceOH106Test extends Injectable
             ['products' => $products]
         )->run();
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

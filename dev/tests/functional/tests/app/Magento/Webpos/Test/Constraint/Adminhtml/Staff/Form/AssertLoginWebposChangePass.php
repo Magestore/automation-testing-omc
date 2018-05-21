@@ -28,7 +28,7 @@ class AssertLoginWebposChangePass extends AbstractConstraint
         );
         \PHPUnit_Framework_Assert::assertFalse(
             $webposIndex->getFirstScreen()->isVisible(),
-            'Login webpos with old pass is incorrect'
+            'LoginTest webpos with old pass is incorrect'
         );
 
         //check login with passNew
@@ -48,7 +48,7 @@ class AssertLoginWebposChangePass extends AbstractConstraint
         }
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutWebposCart()->isVisible(),
-            'Login webpos with new pass is incorrect'
+            'LoginTest webpos with new pass is incorrect'
         );
     }
 

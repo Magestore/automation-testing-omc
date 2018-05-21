@@ -100,7 +100,7 @@ class WebposManageStaffMS57Test extends Injectable
         $product1 = $products[0]['product'];
         $product2 = $products[1]['product'];
 
-        //Login
+        //LoginTest
         $this->loginWebpos($this->webposIndex, $dataStaff['username'], $dataStaff['password'], $dataLocation['display_name'], $pos->getData('pos_name'));
 
         //Check show hide item menu

@@ -48,7 +48,7 @@ class WebposCartPageCustomerCP34Test extends Injectable
 		Address $address
 	)
 	{
-		// Login webpos
+		// LoginTest webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();

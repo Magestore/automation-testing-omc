@@ -114,7 +114,7 @@ class WebposTaxTAX81Test extends Injectable
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'apply_discount_on_prices_excluding_tax']
         )->run();
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

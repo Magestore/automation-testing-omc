@@ -15,7 +15,7 @@ use Magento\Storepickup\Test\Page\Adminhtml\StoreNew;
 
 /**
  * Steps:
- * 1. Login to the backend.
+ * 1. LoginTest to the backend.
  * 2. Navigate to Store Pickup > Manage Store.
  * 3. Start to Add New Store .
  * 4. Fill in data according to data set.

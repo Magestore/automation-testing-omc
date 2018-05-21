@@ -73,7 +73,7 @@ class WebposProductsGridPG07Test extends Injectable
             ['configData' => 'backorders_allow_qty_below_0_and_notify_customer']
         )->run();
 
-        // Login webpos
+        // LoginTest webpos
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();

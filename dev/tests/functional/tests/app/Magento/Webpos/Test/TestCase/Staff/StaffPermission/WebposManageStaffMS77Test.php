@@ -101,7 +101,7 @@ class WebposManageStaffMS77Test extends Injectable
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run();
-        //Login
+        //LoginTest
         $this->login($staff, $location, $pos);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
         sleep(2);

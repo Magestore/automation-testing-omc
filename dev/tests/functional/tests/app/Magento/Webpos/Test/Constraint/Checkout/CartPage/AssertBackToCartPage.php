@@ -10,7 +10,7 @@ namespace Magento\Webpos\Test\Constraint\Checkout\CartPage;
 use Magento\Mtf\Constraint\AbstractConstraint;
 /**
  * Class AssertBackToCartPage
- * @package Magento\Webpos\Test\Constraint\Checkout\CartPage
+ * @package Magento\Webpos\Test\Constraint\Cart\CartPage
  */
 class AssertBackToCartPage extends AbstractConstraint
 {

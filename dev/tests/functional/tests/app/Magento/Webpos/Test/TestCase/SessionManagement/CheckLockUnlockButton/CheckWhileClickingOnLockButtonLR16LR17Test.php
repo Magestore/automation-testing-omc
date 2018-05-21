@@ -17,7 +17,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * Class CheckWhileClickingOnLockButtonLR16LR17Test
  * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckLockUnlockButton
  * Precondition and setup steps
- *   Login backend with account has been assigned the permission to lock/unlock register
+ *   LoginTest backend with account has been assigned the permission to lock/unlock register
  *   Go to Sales > Web POS > Manage POS > Open an any POS
  *   set the Enable option to lock register field to Yes
  * Steps
@@ -80,7 +80,7 @@ class CheckWhileClickingOnLockButtonLR16LR17Test extends Injectable
     public function test($pos_name, $is_allow_to_lock, $pin, $testId)
     {
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

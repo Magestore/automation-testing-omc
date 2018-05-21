@@ -12,7 +12,6 @@ use Magento\Mtf\TestStep\TestStepInterface;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\OrderHistory\Payment\AssertPaymentSuccess;
 use Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoiceSuccess;
-
 /**
  * Class CreatePaymentAndInvoiceSuccessfullyStep
  * @package Magento\Webpos\Test\TestStep
@@ -59,19 +58,18 @@ class CreatePaymentAndInvoiceSuccessfullyStep implements TestStepInterface
         // Go to Order History
         $this->webposIndex->open();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        sleep(1);
         $this->webposIndex->getCMenu()->ordersHistory();
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         // Open shipment popup
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
         sleep(1);
         $this->webposIndex->getOrderHistoryPayment()->getCashInMethod()->click();
         $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
-        sleep(1);
         $this->webposIndex->getModal()->getOkButton()->click();
         sleep(1);
         // Assert Take Payment Success
@@ -79,10 +77,8 @@ class CreatePaymentAndInvoiceSuccessfullyStep implements TestStepInterface
         sleep(1);
         // Invoice
         $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
-        sleep(1);
         $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
         $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
-        sleep(1);
         $this->webposIndex->getModal()->getOkButton()->click();
         sleep(1);
         $this->assertInvoiceSuccess->processAssert($this->webposIndex);

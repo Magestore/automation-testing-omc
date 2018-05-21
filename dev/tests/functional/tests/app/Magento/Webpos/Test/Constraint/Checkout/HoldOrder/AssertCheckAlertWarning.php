@@ -10,7 +10,7 @@ namespace Magento\Webpos\Test\Constraint\Checkout\HoldOrder;
 use Magento\Mtf\Constraint\AbstractConstraint;
 /**
  * Class AssertCheckAlertWarning
- * @package Magento\Webpos\Test\Constraint\Checkout\HoldOrder
+ * @package Magento\Webpos\Test\Constraint\Cart\HoldOrder
  */
 class AssertCheckAlertWarning extends AbstractConstraint
 {

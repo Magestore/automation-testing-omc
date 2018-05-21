@@ -12,7 +12,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 /**
  *  * Preconditions:
- * 1. Login webpos by a  staff
+ * 1. LoginTest webpos by a  staff
  * 2. Add a products  to cart
  *
  * Step:

@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertRedirectToCheckoutCartPage
- * @package Magento\Webpos\Test\Constraint\Checkout\CheckGUI
+ * @package Magento\Webpos\Test\Constraint\Cart\CheckGUI
  */
 class AssertRedirectToCheckoutCartPage extends AbstractConstraint
 {
@@ -28,7 +28,7 @@ class AssertRedirectToCheckoutCartPage extends AbstractConstraint
 
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutWebposCart()->isVisible(),
-            'On the Frontend Page - Cart was not visible.'
+            'On the Frontend Page - Checkout was not visible.'
         );
     }
 

@@ -10,7 +10,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  *  * Preconditions:
- * 1. Login webpos by a  staff
+ * 1. LoginTest webpos by a  staff
  *
  * Step:
  * 1. Click on [Custom sale]
@@ -18,7 +18,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 /**
  * Class WebposCustomSaleCheckGUICP71EntityTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DiscountProduct
  */
 class WebposCustomSaleCheckGUICP71EntityTest extends Injectable
 {

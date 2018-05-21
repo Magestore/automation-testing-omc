@@ -40,7 +40,7 @@ class WebposShippingMethodCP197Test extends Injectable
             ['products' => $products]
         )->run()[0]['product'];
 
-        //Login webpos
+        //LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -51,7 +51,7 @@ class WebposShippingMethodCP197Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
-        //Checkout
+        //Cart
         sleep(3);
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();

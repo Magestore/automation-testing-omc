@@ -119,7 +119,7 @@ class WebposTaxTAX112Test extends Injectable
             ['configData' => $configData]
         )->run();
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -140,7 +140,7 @@ class WebposTaxTAX112Test extends Injectable
         $actualTaxAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText(), 1);
         $actualSubtotal = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Subtotal')->getText(), 1);
 
-        // Assert Tax Amount With Include Fpt In Subtotal on Cart out page
+        // Assert Tax Amount With Include Fpt In Subtotal on Checkout out page
         $this->assertTaxAmountAndSubtotalWithIncludeFpt
             ->processAssert($products[0]['product']->getPrice(), $taxRate, $actualTaxAmount, $actualSubtotal);
 

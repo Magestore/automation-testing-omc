@@ -15,6 +15,11 @@ use Magento\Mtf\Block\Block;
  */
 class CheckoutProductEdit extends Block
 {
+	public function getCancelButton()
+	{
+		return $this->_rootElement->find('.hide-popup-custom-sale');
+	}
+
 	public function getProductName()
 	{
 		return $this->_rootElement->find('.product-name');

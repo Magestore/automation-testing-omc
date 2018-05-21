@@ -13,22 +13,21 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceExcludingTax;
-use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceIncludingTax;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountWithApplyTaxOnCustomPrice;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposTaxTAX90Test
+ * @package Magento\Webpos\Test\TestCase\Tax\ApplyTaxOnCustomePriceIfAvailable
+ */
 class WebposTaxTAX90Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
@@ -38,12 +37,12 @@ class WebposTaxTAX90Test extends Injectable
     protected $caTaxRule;
 
     /**
-     * @var AssertTaxAmountWithApplyTaxOnCustomPrice
+     * @var AssertTaxAmountWithApplyTaxOnCustomPrice $assertTaxAmountWithApplyTaxOnCustomPrice
      */
     protected $assertTaxAmountWithApplyTaxOnCustomPrice;
 
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
@@ -75,10 +74,11 @@ class WebposTaxTAX90Test extends Injectable
         ];
     }
 
-
     /**
      * @param WebposIndex $webposIndex
      * @param FixtureFactory $fixtureFactory
+     * @param AssertTaxAmountWithApplyTaxOnCustomPrice $assertTaxAmountWithApplyTaxOnCustomPrice
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     public function __inject(
         WebposIndex $webposIndex,
@@ -114,7 +114,7 @@ class WebposTaxTAX90Test extends Injectable
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'tax_calculation_apply_tax_on_custom_price_if_available']
         )->run();
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -133,15 +133,11 @@ class WebposTaxTAX90Test extends Injectable
             'Magento\Webpos\Test\TestStep\EditCustomPriceOfProductOnCartStep',
             ['products' => $products]
         )->run();
-
-        sleep(3);
-
+        sleep(1);
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-        sleep(3);
-
+        sleep(1);
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->objectManager->getInstance()->create(
@@ -160,8 +156,9 @@ class WebposTaxTAX90Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
         self::assertEquals(

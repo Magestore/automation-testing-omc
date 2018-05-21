@@ -30,7 +30,7 @@ class WebposOnHoldOrderONH12Test extends Injectable
 
     public function test($productCustom)
     {
-        //Login webpos
+        //LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

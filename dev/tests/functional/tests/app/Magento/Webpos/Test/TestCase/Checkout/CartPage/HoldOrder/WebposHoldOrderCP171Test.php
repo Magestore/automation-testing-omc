@@ -14,7 +14,7 @@ use Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckOnHoldOrderEmpt
 
 /**
  * Class WebposHoldOrderCP171Test
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\HoldOrder
  */
 class WebposHoldOrderCP171Test extends Injectable
 {
@@ -60,7 +60,7 @@ class WebposHoldOrderCP171Test extends Injectable
         $product1 = $products[0]['product'];
         $product2 = $products[1]['product'];
 
-        //Login webpos
+        //LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -77,7 +77,7 @@ class WebposHoldOrderCP171Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
-        //Checkout in On-Hold
+        //Cart in On-Hold
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->onHoldOrders();
         sleep(1);

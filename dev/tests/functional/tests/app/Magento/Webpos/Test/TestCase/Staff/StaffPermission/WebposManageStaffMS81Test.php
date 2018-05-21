@@ -97,7 +97,7 @@ class WebposManageStaffMS81Test extends Injectable
         $roleData['staff_id'] = $array;
         $role = $this->fixtureFactory->createByCode('webposRole', ['data' => $roleData]);
         $role->persist();
-        //Login
+        //LoginTest
         $this->login($staff, $location, $pos);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();

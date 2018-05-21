@@ -17,7 +17,7 @@ use Magento\Mtf\TestCase\Injectable;
  * 1. Create transactions according to data set.
  *
  * Steps:
- * 1. Login to backend.
+ * 1. LoginTest to backend.
  * 2. Navigate Reward points > Transactions
  * 3. Select transaction created in preconditions.
  * 4. Select Change status action from mass-action.

@@ -8,10 +8,8 @@
 
 namespace Magento\Webpos\Test\TestStep;
 
-
 use Magento\Mtf\TestStep\TestStepInterface;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class AddDiscountWholeCartStep
  * @package Magento\Webpos\Test\TestStep
@@ -54,7 +52,7 @@ class AddDiscountWholeCartStep implements TestStepInterface
 	{
 		$this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
 		$this->webposIndex->getCheckoutContainer()->waitForCartDiscountPopup();
-
+        sleep(1);
 		if (strcmp($this->type, '%') == 0) {
 			$this->webposIndex->getCheckoutDiscount()->getDiscountButton()->click();
 		} else if (strcmp($this->type, '$') == 0) {

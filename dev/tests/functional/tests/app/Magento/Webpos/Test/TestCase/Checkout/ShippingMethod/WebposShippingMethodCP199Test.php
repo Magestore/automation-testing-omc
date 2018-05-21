@@ -11,7 +11,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposShippingMethodCP199Test
- * @package Magento\Webpos\Test\TestCase\Checkout\ShippingMethod
+ * @package Magento\Webpos\Test\TestCase\Cart\ShippingMethod
  */
 class WebposShippingMethodCP199Test extends Injectable
 {
@@ -29,7 +29,7 @@ class WebposShippingMethodCP199Test extends Injectable
 
     public function test($productCustom)
     {
-        //Login webpos
+        //LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -39,7 +39,7 @@ class WebposShippingMethodCP199Test extends Injectable
         $this->webposIndex->getCheckoutCustomSale()->getProductPriceInput()->setValue($productCustom['price']);
         $this->webposIndex->getCheckoutCustomSale()->getAddToCartButton()->click();
         sleep(1);
-        //Checkout
+        //Cart
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

@@ -12,7 +12,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebPOSLoginSuccessfulyTest
- * @package Magento\Webpos\Test\TestCase\Setting\Login
+ * @package Magento\Webpos\Test\TestCase\Setting\LoginTest
  */
 class WebPOSLoginSuccessfulyTest extends Injectable
 {
@@ -31,7 +31,7 @@ class WebPOSLoginSuccessfulyTest extends Injectable
 
     public function test()
     {
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

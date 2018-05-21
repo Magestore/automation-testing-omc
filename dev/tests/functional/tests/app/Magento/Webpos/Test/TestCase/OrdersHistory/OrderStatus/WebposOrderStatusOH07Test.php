@@ -25,7 +25,7 @@ class WebposOrderStatusOH07Test extends Injectable
 
     public function test($products)
     {
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -39,7 +39,7 @@ class WebposOrderStatusOH07Test extends Injectable
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',
             ['products' => $products]
         )->run();
-        // Checkout
+        // Cart
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -63,6 +63,7 @@ class WebposOrderStatusOH07Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 
         return [

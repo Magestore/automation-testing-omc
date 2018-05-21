@@ -25,18 +25,20 @@ class WebposOrderHistorySearchClearKeywordOH129Test extends Injectable
 
     public function test()
     {
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
         // Go to Order History
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->search('dadasdasdasdasdasdasd');
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->assertFalse(
             $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->isVisible(),
             'Search with incorrect data found result.'

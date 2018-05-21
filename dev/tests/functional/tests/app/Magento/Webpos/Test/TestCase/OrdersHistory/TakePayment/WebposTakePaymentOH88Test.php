@@ -7,12 +7,15 @@
  * Time: 9:34 AM
  */
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-
+/**
+ * Class WebposTakePaymentOH88Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment
+ */
 class WebposTakePaymentOH88Test extends Injectable
 {
     /**
@@ -42,6 +45,10 @@ class WebposTakePaymentOH88Test extends Injectable
         )->run();
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
     public function __inject(
         WebposIndex $webposIndex,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
@@ -52,8 +59,10 @@ class WebposTakePaymentOH88Test extends Injectable
     }
 
     /**
-     *
-     * @return void
+     * @param $products
+     * @param FixtureFactory $fixtureFactory
+     * @param $configData
+     * @param $amount
      */
     public function test($products, FixtureFactory $fixtureFactory, $configData, $amount)
     {
@@ -74,7 +83,6 @@ class WebposTakePaymentOH88Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitCartLoader();
             $i++;
         }
-
         //CategoryRepository
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -87,34 +95,26 @@ class WebposTakePaymentOH88Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-
         // place order getCreateInvoiceCheckbox
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
 
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-
+        //select order
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        //select order
-        sleep(2);
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        sleep(0.5);
-
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         //click take payment
         sleep(0.5);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
-//        $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
         $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
         sleep(0.5);
-
         $this->webposIndex->getModal()->getOkButton()->click();
         sleep(1);
         $this->webposIndex->getModal()->getOkButton()->click();

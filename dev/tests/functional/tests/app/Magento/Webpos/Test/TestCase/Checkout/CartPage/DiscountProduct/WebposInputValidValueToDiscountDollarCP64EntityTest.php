@@ -13,7 +13,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 /**
  *  * Preconditions:
- * 1. Login webpos by a  staff
+ * 1. LoginTest webpos by a  staff
  * 2. Add a product to cart
  * 3. Edit Discount product (type:$)
  *
@@ -23,7 +23,7 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
  */
 /**
  * Class WebposInputValidValueToDiscountDollarCP64EntityTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DiscountProduct
  */
 class WebposInputValidValueToDiscountDollarCP64EntityTest extends Injectable
 {
@@ -44,7 +44,7 @@ class WebposInputValidValueToDiscountDollarCP64EntityTest extends Injectable
     }
 
     /**
-     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
+     * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
      *
      * @return void
      */

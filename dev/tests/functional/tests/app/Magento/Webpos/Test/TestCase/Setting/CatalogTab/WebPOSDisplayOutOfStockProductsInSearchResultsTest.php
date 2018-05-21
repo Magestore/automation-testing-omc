@@ -36,7 +36,7 @@ class WebPOSDisplayOutOfStockProductsInSearchResultsTest extends Injectable
 
     public function test($productName, $menuItem, $option, $successMessage, $testCaseID)
     {
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -92,7 +92,7 @@ class WebPOSDisplayOutOfStockProductsInSearchResultsTest extends Injectable
 
     public function tearDown()
     {
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

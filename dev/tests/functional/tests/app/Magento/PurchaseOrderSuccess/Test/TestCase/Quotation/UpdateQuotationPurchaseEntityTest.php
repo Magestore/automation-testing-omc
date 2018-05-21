@@ -19,7 +19,7 @@ use Magento\Mtf\Fixture\FixtureFactory;
  * 1. Quotation is created.
  *
  * Steps:
- * 1. Login to backend.
+ * 1. LoginTest to backend.
  * 2. Navigate to Purchase Management > Quotations
  * 3. Select a quotation in the grid.
  * 4. Edit test value(s) according to dataset.

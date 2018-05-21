@@ -44,7 +44,7 @@ class WebposPlaceOrderWithCustomerPercentCP61Test extends Injectable
     }
 
     /**
-     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
+     * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
      *
      * @return void
      */

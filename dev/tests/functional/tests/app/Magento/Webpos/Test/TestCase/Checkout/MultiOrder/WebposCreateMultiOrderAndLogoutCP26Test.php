@@ -12,7 +12,6 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Config\Test\Fixture\ConfigData;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
 use Magento\Webpos\Test\Page\Adminhtml\StaffEdit;
@@ -29,23 +28,23 @@ class WebposCreateMultiOrderAndLogoutCP26Test extends Injectable
     /**
      * AssertWebposCheckGUICustomerPriceCP54 Staff Index page.
      *
-     * @var StaffIndex
+     * @var StaffIndex $staffsIndex
      */
     private $staffsIndex;
     /**
      * New Staff Group page.
      *
-     * @var StaffNews
+     * @var StaffNews $staffsNew
      */
     private $staffsNew;
     /**
      * AssertWebposCheckGUICustomerPriceCP54 Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
     /**
-     * @var StaffEdit
+     * @var StaffEdit $staffEditPage
      */
     protected $staffEditPage;
 
@@ -70,11 +69,7 @@ class WebposCreateMultiOrderAndLogoutCP26Test extends Injectable
     }
 
     /**
-     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
-     *
-     * @param Staff $staff
-     * @param Staff ConfigData
-     * @return void
+     * @param Staff $createStaff
      */
     public function test(Staff $createStaff)
     {
@@ -83,15 +78,13 @@ class WebposCreateMultiOrderAndLogoutCP26Test extends Injectable
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
         //End The first login webpos
-        sleep(1);
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        sleep(1);
         $this->webposIndex->getCMenu()->logout();
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
         $this->webposIndex->getModal()->getOkButton()->click();
-        sleep(2);
+        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader.loading-mask');
         // Begin create new Staff on magento backend
         $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\CreateNewStaffStep',
@@ -103,9 +96,13 @@ class WebposCreateMultiOrderAndLogoutCP26Test extends Injectable
         $this->webposIndex->getLoginForm()->getUsernameField()->setValue($createStaff->getUsername());
         $this->webposIndex->getLoginForm()->getPasswordField()->setValue($createStaff->getPassword());
         $this->webposIndex->getLoginForm()->clickLoginButton();
-        sleep(3);
-        while ($this->webposIndex->getFirstScreen()->isVisible()) {}
-        sleep(2);
+        $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
+        $time = time();
+        $timeAfter = $time + 90;
+        while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            $time = time();
+        }
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         //End Login webpos by the other staff
         for ($i=1; $i<=2; $i++) {
             self::assertFalse(

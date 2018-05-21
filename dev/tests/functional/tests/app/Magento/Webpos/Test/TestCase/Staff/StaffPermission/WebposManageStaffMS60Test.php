@@ -78,7 +78,7 @@ class WebposManageStaffMS60Test extends Injectable
         $product1 = $products[0]['product'];
         $product2 = $products[1]['product'];
 
-        //Login
+        //LoginTest
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -87,14 +87,14 @@ class WebposManageStaffMS60Test extends Injectable
         //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-       sleep(2);
+        sleep(2);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getCheckoutProductList()->search($product2->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         sleep(2);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
-        //Checkout
+        //Cart
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

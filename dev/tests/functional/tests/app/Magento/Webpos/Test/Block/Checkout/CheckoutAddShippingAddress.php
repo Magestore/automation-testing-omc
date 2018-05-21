@@ -8,10 +8,12 @@
 
 namespace Magento\Webpos\Test\Block\Checkout;
 
-
 use Magento\Mtf\Block\Block;
 use Magento\Mtf\Client\Locator;
-
+/**
+ * Class CheckoutAddShippingAddress
+ * @package Magento\Webpos\Test\Block\Checkout
+ */
 class CheckoutAddShippingAddress extends Block
 {
 	public function getCancelButton()
@@ -193,8 +195,4 @@ class CheckoutAddShippingAddress extends Block
 		return $this->_rootElement->find('#add_shipping_country_id-error');
 	}
 	// End Feild's error messages
-
-    public function waitForPopupVisible(){
-	    $this->waitForElementVisible('#form-customer-add-shipping-address-checkout');
-    }
 }

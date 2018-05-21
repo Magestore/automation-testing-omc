@@ -14,7 +14,7 @@ use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePla
 
 /**
  * Class WebposCheckoutPaymentMethodCP213Test
- * @package Magento\Webpos\Test\TestCase\Checkout\PaymentMethod
+ * @package Magento\Webpos\Test\TestCase\Cart\PaymentMethod
  */
 class WebposCheckoutPaymentMethodCP213Test extends Injectable
 {

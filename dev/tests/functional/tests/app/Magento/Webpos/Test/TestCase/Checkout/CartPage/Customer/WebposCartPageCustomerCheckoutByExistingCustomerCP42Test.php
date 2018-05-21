@@ -37,7 +37,7 @@ class WebposCartPageCustomerCheckoutByExistingCustomerCP42Test extends Injectabl
 		//Prepare customers
 		$customer->persist();
 
-		// Login webpos
+		// LoginTest webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();

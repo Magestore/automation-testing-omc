@@ -18,7 +18,7 @@ class AssertCheckoutPaymentMethodCP238 extends AbstractConstraint
 
         \PHPUnit_Framework_Assert::assertNotTrue(
             $webposIndex->getCheckoutCartItems()->getFirstCartItem()->isVisible(),
-            'TaxClass page - CategoryRepository. Default Cart'
+            'TaxClass page - CategoryRepository. Default Checkout'
         );
         \PHPUnit_Framework_Assert::assertEquals(
             1,

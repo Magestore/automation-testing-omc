@@ -18,6 +18,7 @@ class AssertOrderStatus extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex, $status)
     {
+        sleep(1);
         $webposIndex->getOrderHistoryOrderViewHeader()->waitForChangeStatus($status);
         \PHPUnit_Framework_Assert::assertEquals(
             $status,

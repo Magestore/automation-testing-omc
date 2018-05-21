@@ -24,7 +24,7 @@ class AssertTaxOnCheckoutPageIsZero extends AbstractConstraint
 		\PHPUnit_Framework_Assert::assertEquals(
 			$taxAmount,
 			$taxAmountOnPage,
-			'On the Cart - The Tax was not updated to 0'
+			'On the Checkout - The Tax was not updated to 0'
 		);
 	}
 

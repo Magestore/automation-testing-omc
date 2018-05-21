@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertCheckCartConfigProduct
- * @package Magento\Webpos\Test\Constraint\Checkout\HoldOrder
+ * @package Magento\Webpos\Test\Constraint\Cart\HoldOrder
  */
 class AssertCheckCartConfigProduct extends AbstractConstraint
 {
@@ -21,7 +21,7 @@ class AssertCheckCartConfigProduct extends AbstractConstraint
         if ($cartProducts == null) {
             \PHPUnit_Framework_Assert::assertFalse(
                 $webposIndex->getCheckoutCartItems()->isCartItem(),
-                'Cart is not default'
+                'Checkout is not default'
             );
         } else {
             for ($i = 0; $i < count($cartProducts); ++$i) {
@@ -54,6 +54,6 @@ class AssertCheckCartConfigProduct extends AbstractConstraint
      */
     public function toString()
     {
-        return "Product in Cart is correct";
+        return "Product in Checkout is correct";
     }
 }

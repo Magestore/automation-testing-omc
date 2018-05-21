@@ -16,7 +16,7 @@ use Magento\Rewardpoints\Test\Fixture\SpendingRates;
 /**
  *
  * Test Flow:
- * 1. Login as admin
+ * 1. LoginTest as admin
  * 2. Navigate to the Reward points>Spending Rates
  * 3. Click on 'Add New Spending Rate' button
  * 4. Fill out all data according to data set

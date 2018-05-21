@@ -13,7 +13,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertMinimumQtyAllowWarningMessageIsCorrect
- * @package Magento\Webpos\Test\Constraint\Checkout\CartPage\EditQty
+ * @package Magento\Webpos\Test\Constraint\Cart\CartPage\EditQty
  */
 class AssertMinimumQtyAllowWarningMessageIsCorrect extends AbstractConstraint
 {

@@ -26,20 +26,20 @@ use Magento\Backend\Test\Page\Adminhtml\Dashboard;
  * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermission
  * LR18:
  * Precondition and setup steps
- *   Login backend with admin account
+ *   LoginTest backend with admin account
  *   Assign Lock Register permission for user (path: Magento Admin Panel > System > Permission > User Roles > Role Resources)
  * Steps
- *   1. Login backend with user that is assigned permission to Lock Register
+ *   1. LoginTest backend with user that is assigned permission to Lock Register
  *   2. Go to POS page, observe and check permission
  * Acceptance Criteria
  *   2. On the POS page, show Lock/Unlock button and Lock register configuration
  *
  * LR19:
  * Precondition and setup steps
- *   Login backend with admin account
+ *   LoginTest backend with admin account
  *   Create backend user and not assigned Lock register  permission to this user
  * Steps
- *   1. Login backend with user that is not assigned permission to Lock Register
+ *   1. LoginTest backend with user that is not assigned permission to Lock Register
  *   2. Go to an any POS detail page, observe and check permission
  * Acceptance Criteria
  *   2. On the POS detail page, hide Lock/Unlock button and Lock register configuration

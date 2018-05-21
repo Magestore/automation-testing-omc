@@ -11,7 +11,10 @@ namespace Magento\Webpos\Test\TestStep;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\TestStep\TestStepInterface;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class ChangeCustomerOnCartStep
+ * @package Magento\Webpos\Test\TestStep
+ */
 class ChangeCustomerOnCartStep implements TestStepInterface
 {
 	/**
@@ -51,13 +54,11 @@ class ChangeCustomerOnCartStep implements TestStepInterface
 		$this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
 
 		$this->webposIndex->getCheckoutChangeCustomer()->search($this->customer->getEmail());
-		sleep(3);
         $this->webposIndex->getCheckoutChangeCustomer()->waitForCustomerList();
 		$this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
 		sleep(1);
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(2);
-
+        sleep(1);
     }
 }

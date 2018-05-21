@@ -99,7 +99,7 @@ class WebposManageStaffMS61Test extends Injectable
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run();
-        //Login
+        //LoginTest
         $this->login($staff1);
         // Add product to cart
         $this->objectManager->getInstance()->create(
@@ -128,7 +128,7 @@ class WebposManageStaffMS61Test extends Injectable
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'create_section_before_working_yes_MS57']
         )->run();
-        //Login by staff2
+        //LoginTest by staff2
         $this->login($staff2, $location, $pos);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();

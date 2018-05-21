@@ -13,7 +13,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertProductQtyOnCartIsCorrect
- * @package Magento\Webpos\Test\Constraint\Checkout\CartPage\EditQty
+ * @package Magento\Webpos\Test\Constraint\Cart\CartPage\EditQty
  */
 class AssertProductQtyOnCartIsCorrect extends AbstractConstraint
 {

@@ -8,24 +8,28 @@
 
 namespace Magento\Webpos\Test\Constraint\OrderHistory\Invoice;
 
-
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class AssertCreateInvoiceSuccess
+ * @package Magento\Webpos\Test\Constraint\OrderHistory\Invoice
+ */
 class AssertCreateInvoiceSuccess extends AbstractConstraint
 {
+    /**
+     * @param WebposIndex $webposIndex
+     * @param $expectStatus
+     */
 	public function processAssert(WebposIndex $webposIndex, $expectStatus)
 	{
 		\PHPUnit_Framework_Assert::assertFalse(
 			$webposIndex->getModal()->getModalPopup()->isVisible(),
 			'Confirm Popup is not closed'
 		);
-
 		\PHPUnit_Framework_Assert::assertFalse(
 			$webposIndex->getOrderHistoryInvoice()->isVisible(),
 			'Invoice Pop is not closed'
 		);
-		sleep(1);
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getToaster()->getWarningMessage()->isVisible(),
 			'Success Message is not displayed'
@@ -35,19 +39,16 @@ class AssertCreateInvoiceSuccess extends AbstractConstraint
 			$webposIndex->getToaster()->getWarningMessage()->getText(),
 			"Success message's Content is Wrong"
 		);
-
         $webposIndex->getOrderHistoryOrderViewHeader()->waitForChangeStatus($expectStatus);
 		\PHPUnit_Framework_Assert::assertEquals(
 			$expectStatus,
 			$webposIndex->getOrderHistoryOrderViewHeader()->getStatus(),
 			'Order Status is wrong'
 		);
-
 		\PHPUnit_Framework_Assert::assertFalse(
 			$webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->isVisible(),
 			'Invoice Button is not hiden'
 		);
-
 		$webposIndex->getNotification()->getNotificationBell()->click();
 		\PHPUnit_Framework_Assert::assertTrue(
 			$webposIndex->getNotification()->getFirstNotification()->isVisible(),
@@ -59,6 +60,7 @@ class AssertCreateInvoiceSuccess extends AbstractConstraint
 			'Notification Content is wrong'
 		);
 	}
+
 	/**
 	 * Returns a string representation of the object.
 	 *

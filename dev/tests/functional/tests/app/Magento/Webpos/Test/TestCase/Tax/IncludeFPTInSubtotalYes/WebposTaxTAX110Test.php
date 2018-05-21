@@ -22,12 +22,12 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposTaxTAX110Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
@@ -37,12 +37,12 @@ class WebposTaxTAX110Test extends Injectable
     protected $caTaxRule;
 
     /**
-     * @var AssertTaxAmountWithIncludeFptInSubtotal
+     * @var AssertTaxAmountWithIncludeFptInSubtotal $assertTaxAmountWithIncludeFptInSubtotal
      */
     protected $assertTaxAmountWithIncludeFptInSubtotal;
 
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
@@ -77,6 +77,8 @@ class WebposTaxTAX110Test extends Injectable
     /**
      * @param WebposIndex $webposIndex
      * @param FixtureFactory $fixtureFactory
+     * @param AssertTaxAmountWithIncludeFptInSubtotal $assertTaxAmountWithIncludeFptInSubtotal
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     public function __inject(
         WebposIndex $webposIndex,
@@ -94,7 +96,7 @@ class WebposTaxTAX110Test extends Injectable
     /**
      * @param Customer $customer
      * @param $products
-     * @param $shippingTaxRate
+     * @param $taxRate
      */
     public function test(
         Customer $customer,
@@ -112,7 +114,7 @@ class WebposTaxTAX110Test extends Injectable
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'include_FPT_in_subtotal_and_enable_fpt']
         )->run();
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -147,8 +149,9 @@ class WebposTaxTAX110Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
         self::assertEquals(

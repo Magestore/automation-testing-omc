@@ -13,7 +13,7 @@ use Magento\Customercredit\Test\Page\Adminhtml\CreditProductIndex;
 
 /**
  * Steps:
- * 1. Login to the backend.
+ * 1. LoginTest to the backend.
  * 2. Navigate to Store Credit > Manage Credit Products.
  * 3. Click to Add Credit Product.
  * 4. Perform appropriate assertions.

@@ -30,7 +30,7 @@ class WebposMultiOrderCP25Test extends Injectable
         CatalogProductSimple $product
     )
     {
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

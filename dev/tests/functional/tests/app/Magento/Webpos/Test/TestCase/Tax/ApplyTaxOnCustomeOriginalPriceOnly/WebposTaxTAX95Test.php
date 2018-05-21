@@ -98,7 +98,7 @@ class WebposTaxTAX95Test extends Injectable
 			['configData' => $configData]
 		)->run();
 
-		// Login webpos
+		// LoginTest webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();
@@ -134,7 +134,7 @@ class WebposTaxTAX95Test extends Injectable
 		self::assertEquals(
 			$subTotal,
 			$subTotalOnPage,
-			'Cart Page - Subtotal was not updated after edit custom price'
+			'Checkout Page - Subtotal was not updated after edit custom price'
 			. "\nExpected: " . $subTotal
 			. "\nActual: " . $subTotalOnPage
 		);
@@ -170,8 +170,9 @@ class WebposTaxTAX95Test extends Injectable
 
 		$this->webposIndex->getMsWebpos()->clickCMenuButton();
 		$this->webposIndex->getCMenu()->ordersHistory();
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
+        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
 
 		$this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 		while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}

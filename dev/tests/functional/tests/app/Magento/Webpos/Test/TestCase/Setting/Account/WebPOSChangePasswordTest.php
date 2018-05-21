@@ -46,7 +46,7 @@ class WebPOSChangePasswordTest extends Injectable
         if ($testID == 'SET07' || $testID == 'SET08') {
             $currentPassword = $this->configuration->get('application/0/backendPassword/0/value');
         }
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -78,7 +78,7 @@ class WebPOSChangePasswordTest extends Injectable
         if ($this->testCaseID == 'SET08') {
             $username = $this->configuration->get('application/0/backendLogin/0/value');
             $password = $this->configuration->get('application/0/backendPassword/0/value');
-            // Login webpos
+            // LoginTest webpos
             $staff = $this->objectManager->getInstance()->create(
                 'Magento\Webpos\Test\TestStep\LoginWebposStep'
             )->run();

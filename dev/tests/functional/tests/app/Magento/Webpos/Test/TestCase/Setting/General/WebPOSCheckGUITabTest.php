@@ -31,7 +31,7 @@ class WebPOSCheckGUITabTest extends Injectable
 
     public function test($menuItem)
     {
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

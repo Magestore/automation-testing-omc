@@ -63,7 +63,7 @@ class WebposManageStaffMS59Test extends Injectable
         $staff = $fixtureFactory->createByCode('staff', ['data' => $dataStaff]);
         $staff->persist();
 
-        //Login
+        //LoginTest
         $this->loginWebpos($this->webposIndex, $dataStaff['username'],$dataStaff['password'], $dataLocation['display_name'], $pos->getData('pos_name'));
         sleep(3);
     }

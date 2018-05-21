@@ -41,7 +41,7 @@ class WebposHoldOrderCP155Test extends Injectable
 
     public function test(Customer $customer)
     {
-        //Login webpos
+        //LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

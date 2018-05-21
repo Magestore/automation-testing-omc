@@ -96,7 +96,7 @@ class WebposManageStaffMS72Test extends Injectable
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run();
-        //Login
+        //LoginTest
         $this->login($staff);
         // Add product to cart
         $this->objectManager->getInstance()->create(

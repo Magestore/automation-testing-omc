@@ -18,7 +18,7 @@ class AssertWebposDeleteProductOnCartPageCP68 extends AbstractConstraint
     {
         \PHPUnit_Framework_Assert::assertNotTrue(
             $webposIndex->getCheckoutCartItems()->getFirstCartItem()->isVisible(),
-            'Cart is empty'
+            'Checkout is empty'
         );
     }
 
@@ -29,6 +29,6 @@ class AssertWebposDeleteProductOnCartPageCP68 extends AbstractConstraint
      */
     public function toString()
     {
-        return "CategoryRepository - TaxClass Page - Check Cart empty";
+        return "CategoryRepository - TaxClass Page - Check Checkout empty";
     }
 }

@@ -13,7 +13,10 @@ namespace Magento\Webpos\Test\Block\Adminhtml\Pos\Edit;
 
 use Magento\Mtf\Block\Form;
 use Magento\Mtf\Client\Locator;
-
+/**
+ * Class PosForm
+ * @package Magento\Webpos\Test\Block\Adminhtml\Pos\Edit
+ */
 class PosForm extends Form
 {
     public function lockRegisterSectionIsVisible()
@@ -136,6 +139,10 @@ class PosForm extends Form
     public function getDenominationFirstData()
     {
         return $this->_rootElement->find('//tbody/tr[@class="even"][1]', locator::SELECTOR_XPATH);
+    }
+
+    public function getPosNameErrorLabel(){
+        return $this->_rootElement->find('#page_pos_name-error');
     }
 
     public function waitForSessionGridLoad()

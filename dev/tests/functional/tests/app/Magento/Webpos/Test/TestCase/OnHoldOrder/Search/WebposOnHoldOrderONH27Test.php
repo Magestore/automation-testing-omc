@@ -48,7 +48,7 @@ class WebposOnHoldOrderONH27Test extends Injectable
         )->run();
         $product1 = $products[0]['product'];
 
-        //Login webpos
+        //LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
