@@ -15,7 +15,6 @@
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Yes</item>
                 <item name="value" xsi:type="string">1</item>
-                <item name="inherit" xsi:type="number">1</item>
             </field>
         </dataset>
         <dataset name="setup_session_before_working_to_no">
@@ -24,7 +23,6 @@
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">No</item>
                 <item name="value" xsi:type="string">0</item>
-                <item name="inherit" xsi:type="number">1</item>
             </field>
         </dataset>
         <!-- Magento AssertWebposCheckGUICustomerPriceCP54 Config Color and delivery Settings-->
@@ -34,14 +32,14 @@
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Red</item>
                 <item name="value" xsi:type="string">D01914</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/general/enable_delivery_date" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Yes</item>
                 <item name="value" xsi:type="number">1</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
         </dataset>
         <!-- Magento AssertWebposCheckGUICustomerPriceCP54 General Settings-->
@@ -51,70 +49,70 @@
                 <!--<item name="scope_id" xsi:type="number">0</item>-->
                 <!--<item name="label" xsi:type="string">http://127.0.0.1/magento2/pub/media/webpos/logo/default/logo.png</item>-->
                 <!--<item name="value" xsi:type="string">http://127.0.0.1/magento2/pub/media/webpos/logo/default/logo.png</item>-->
-                <!--<item name="inherit" xsi:type="number">1</item>-->
+                <!---->
             <!--</field>-->
             <field name="webpos/general/webpos_color" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Blue</item>
                 <item name="value" xsi:type="string">0E86E2</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/general/enable_delivery_date" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Yes</item>
                 <item name="value" xsi:type="number">1</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/general/session_timeout" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">31536000</item>
                 <item name="value" xsi:type="number">31536000</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/general/ignore_checkout" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">No</item>
                 <item name="value" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/general/enable_pole_display" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Yes</item>
                 <item name="value" xsi:type="number">1</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/general/enable_session" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Yes</item>
                 <item name="value" xsi:type="number">1</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/general/confirm_delete_order" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Yes</item>
                 <item name="value" xsi:type="number">1</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/general/active_key" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Thomas</item>
                 <item name="value" xsi:type="string">Thomas</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/general/custom_sale_default_tax_class" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Taxable Goods</item>
                 <item name="value" xsi:type="number">2</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
         </dataset>
         <!-- Ta co the test cho tat ca cac settings can thiet vao mot dataset sau do nhap field vao. -->
@@ -125,28 +123,28 @@
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">All Allowed Shipping</item>
                 <item name="value" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/shipping/specificshipping" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">POS Shipping - Store Pickup</item>
                 <item name="value" xsi:type="string">webpos_shipping</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/shipping/defaultshipping" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">POS Shipping - Store Pickup</item>
                 <item name="value" xsi:type="string">webpos_shipping</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/shipping/enable_mark_as_shipped_default" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Yes</item>
                 <item name="value" xsi:type="number">1</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
         </dataset>
         <!-- Set some methods in Specific Payments field-->
@@ -180,7 +178,7 @@
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Web POS - Cash In</item>
                 <item name="value" xsi:type="string">cashforpos</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
         </dataset>
         <!-- Magento AssertWebposCheckGUICustomerPriceCP54 Payment Settings-->
@@ -190,182 +188,182 @@
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Yes</item>
                 <item name="value" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/authorizenet_api_login" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Authorizenet</item>
                 <item name="value" xsi:type="string">Authorizenet</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/authorizenet_transaction_key" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Transaction</item>
                 <item name="value" xsi:type="string">Transaction</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/authorizenet_client_id" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Client ID</item>
                 <item name="value" xsi:type="string">ID</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/authorizenet_payment_action" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Authorize and Capture</item>
                 <item name="value" xsi:type="string">authorize_capture</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/authorizenet_is_sandbox" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Yes</item>
                 <item name="value" xsi:type="number">1</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/paypal_enable" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Yes</item>
                 <item name="value" xsi:type="string">1</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/paypal_client_id" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Your Application Client ID</item>
                 <item name="value" xsi:type="string">%isolation%</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/paypal_client_secret" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Your Application Client Secret</item>
                 <item name="value" xsi:type="string">%isolation%</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/paypal_is_sandbox" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Yes</item>
                 <item name="value" xsi:type="string">%isolation%</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/paypal_enable_send_invoice" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Yes</item>
                 <item name="value" xsi:type="string">%isolation%</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/paypal_enable_paypalhere" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Yes</item>
                 <item name="value" xsi:type="string">%isolation%</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/paypal_merchant_infomation_email" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">thomas@trueplus.vn</item>
                 <item name="value" xsi:type="string">thomas@trueplus.vn</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/paypal_merchant_infomation_firstname" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Thomas</item>
                 <item name="value" xsi:type="string">Thomas</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/paypal_merchant_infomation_lastname" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Edison</item>
                 <item name="value" xsi:type="string">Edison</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/paypal_merchant_infomation_buisiness_name" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Mr.D</item>
                 <item name="value" xsi:type="string">Mr.D</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/paypal_merchant_infomation_phone" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">01692804009</item>
                 <item name="value" xsi:type="string">01692804009</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/paypal_merchant_infomation_street" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Số nhà 21 Ngõ 286 Giáp Bát Phường Giáp Bát Quận Hoàng Mai</item>
                 <item name="value" xsi:type="string">Số nhà 21 Ngõ 286 Giáp Bát Phường Giáp Bát Quận Hoàng Mai</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/paypal_merchant_infomation_city" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Hà Nội</item>
                 <item name="value" xsi:type="string">Hà Nội</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/paypal_merchant_infomation_state" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Việt Nam</item>
                 <item name="value" xsi:type="string">Việt Nam</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/paypal_merchant_infomation_postal_code" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">100000</item>
                 <item name="value" xsi:type="string">100000</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/paypal_merchant_infomation_country_id" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Vietnam</item>
                 <item name="value" xsi:type="string">VN</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/stripe_enable" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Yes</item>
                 <item name="value" xsi:type="number">1</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/stripe_api_key" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Api Key</item>
                 <item name="value" xsi:type="string">%isolation%</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/stripe_publishable_key" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Publishable Key</item>
                 <item name="value" xsi:type="string">%isolation%</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/payment/stripe_is_sandbox" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Yes</item>
                 <item name="value" xsi:type="string">%isolation%</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
         </dataset>
         <!-- Magento AssertWebposCheckGUICustomerPriceCP54 Product Search Settings-->
@@ -375,7 +373,7 @@
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Small Image Label</item>
                 <item name="value" xsi:type="string">small_image_label</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
         </dataset>
         <!-- Magento AssertWebposCheckGUICustomerPriceCP54 Synchronization Settings-->
@@ -385,35 +383,35 @@
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">10 mins</item>
                 <item name="value" xsi:type="number">10</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/offline/stock_item_time" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">10 mins</item>
                 <item name="value" xsi:type="number">10</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/offline/customer_time" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">10 mins</item>
                 <item name="value" xsi:type="number">10</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/offline/order_time" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">10 mins</item>
                 <item name="value" xsi:type="number">10</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/offline/order_limit" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Last week</item>
                 <item name="value" xsi:type="number">90</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
         </dataset>
         <!-- Magento AssertWebposCheckGUICustomerPriceCP54 Online Mode Configuration Settings-->
@@ -423,7 +421,7 @@
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Yes</item>
                 <item name="value" xsi:type="number">1</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
         </dataset>
         <!-- Magento AssertWebposCheckGUICustomerPriceCP54 Default Guest CategoryRepository Settings-->
@@ -433,63 +431,63 @@
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Thomas</item>
                 <item name="value" xsi:type="string">Thomas</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/guest_checkout/last_name" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Mr D</item>
                 <item name="value" xsi:type="string">Mr D</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/guest_checkout/street" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Số nhà 21 Ngõ 286 Giáp Bát Phường Giáp Bát Quận Hoàng Mai Thành phố Hà Nội</item>
                 <item name="value" xsi:type="string">Số nhà 21 Ngõ 286 Giáp Bát Phường Giáp Bát Quận Hoàng Mai Thành phố Hà Nội</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/guest_checkout/country_id" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Vietnam</item>
                 <item name="value" xsi:type="string">VN</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/guest_checkout/region_id" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Miền Bắc</item>
                 <item name="value" xsi:type="string">Miền Bắc</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/guest_checkout/city" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">Hà Nội</item>
                 <item name="value" xsi:type="string">Hà Nội</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/guest_checkout/zip" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">100000</item>
                 <item name="value" xsi:type="number">100000</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/guest_checkout/telephone" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">01692804009</item>
                 <item name="value" xsi:type="number">01692804009</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="webpos/guest_checkout/email" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
                 <item name="label" xsi:type="string">doandinhdat.dhxd@gmail.com</item>
                 <item name="value" xsi:type="string">doandinhdat.dhxd@gmail.com</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
         </dataset>
 
@@ -725,54 +723,54 @@
             <field name="tax/classes/shipping_tax_class" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/classes/default_product_tax_class" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/classes/default_customer_tax_class" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
 
             <!--Calculation Settings-->
             <field name="tax/calculation/algorithm" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/calculation/based_on" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/calculation/price_includes_tax" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/calculation/shipping_includes_tax" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/calculation/apply_after_discount" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/calculation/discount_tax" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/calculation/apply_tax_on" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/calculation/cross_border_trade_enabled" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
@@ -785,136 +783,136 @@
             <field name="tax/defaults/country" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/defaults/region" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
 
             <!--Price Display Settings-->
             <field name="tax/display/type" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/display/shipping" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
 
             <!--Shopping Checkout Display Settings-->
             <field name="tax/cart_display/price" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/cart_display/subtotal" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/cart_display/shipping" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/cart_display/grandtotal" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/cart_display/full_summary" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/cart_display/zero_tax" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
 
             <!--Orders, Invoices, Credit Memos Display Settings-->
             <field name="tax/sales_display/price" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/sales_display/subtotal" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/sales_display/shipping" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/sales_display/grandtotal" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/sales_display/full_summary" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/sales_display/zero_tax" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
 
             <!--Fixed Product Taxes-->
             <field name="tax/weee/enable" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/weee/display_list" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/weee/display" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/weee/display_sales" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/weee/display_email" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/weee/apply_vat" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="tax/weee/include_in_subtotal" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <!--Default Shipping Origin-->
             <field name="shipping/origin/country_id" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
             <field name="shipping/origin/region_id" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
         </dataset>
 
@@ -1797,7 +1795,7 @@
             <field name="cataloginventory/item_options/backorders" xsi:type="array">
                 <item name="scope" xsi:type="string">default</item>
                 <item name="scope_id" xsi:type="number">0</item>
-                <item name="inherit" xsi:type="number">1</item>
+                
             </field>
         </dataset>
         <!--End Setting [Backorders] system value-->

@@ -23,6 +23,13 @@ class MsWebpos extends Block
 		$this->_rootElement->find('#c-button--push-left')->click();
 	}
 
+	public function waitForCMenuButton()
+	{
+		$cMenu = $this->_rootElement->find('#c-button--push-left');
+		if (!$cMenu->isVisible()) {
+		    $this->waitForElementVisible('#c-button--push-left');
+        }
+	}
 	public function getCMenuButton()
 	{
 		return $this->_rootElement->find('#c-button--push-left');

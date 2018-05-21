@@ -9,7 +9,6 @@ namespace Magento\Webpos\Test\Block\SessionManagement;
 
 use Magento\Mtf\Block\Block;
 use Magento\Mtf\Client\Locator;
-
 /**
  * Class SessionCloseShift
  * @package Magento\Webpos\Test\Block\SessionManagement
@@ -28,14 +27,20 @@ class OpenSessionPopup extends Block
     /**
      * @return \Magento\Mtf\Client\ElementInterface
      */
-    public function  getCoinBillValue(){
+    public function getCoinBillValue(){
         return $this->_rootElement->find('.cash-counting-value');
     }
 
     /**
      * @return \Magento\Mtf\Client\ElementInterface
      */
-    public function  getNumberOfCoinsBills(){
+    public function waitNumberOfCoinsBills(){
+        $quantity = $this->_rootElement->find('.cash-counting-qty.a-center');
+        if (!$quantity->isVisible()) {
+            $this->waitForElementVisible('.cash-counting-qty.a-center');
+        }
+    }
+    public function getNumberOfCoinsBills(){
         return $this->_rootElement->find('.cash-counting-qty.a-center');
     }
 

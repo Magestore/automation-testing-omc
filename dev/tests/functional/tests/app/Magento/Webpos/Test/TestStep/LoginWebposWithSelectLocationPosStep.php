@@ -22,23 +22,26 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
     /**
      * System config.
      *
-     * @var DataInterface
+     * @var DataInterface $configuration
      */
     protected $configuration;
 
     /**
      * Webpos Index page.
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     /**
+     * LoginWebposWithSelectLocationPosStep constructor.
      * @param WebposIndex $webposIndex
+     * @param DataInterface $configuration
+     * @param FixtureFactory $fixtureFactory
      */
     public function __construct(
         WebposIndex $webposIndex,
@@ -72,7 +75,6 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
                 $this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible()) {
                 $this->webposIndex->getWrapWarningForm()->getButtonContinue()->click();
             }
-
             $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
             $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
             $this->webposIndex->getLoginForm()->getEnterToPos()->click();
@@ -83,7 +85,10 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
                 $time = time();
             }
         }
-
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        return [
+            'username' => $username,
+            'password' => $password,
+        ];
     }
 }

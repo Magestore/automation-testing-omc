@@ -15,7 +15,6 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Fixture\Location;
 use Magento\Webpos\Test\Fixture\Staff;
-
 /**
  * Class WebposSessionManagementValidateSM28Test
  * @package Magento\Webpos\Test\TestCase\SessionManagementValidate\SetClosingBalance

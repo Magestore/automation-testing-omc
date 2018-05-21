@@ -14,7 +14,15 @@ class SessionInfo extends Block
 {
     public function getPutMoneyInButton()
     {
-        return $this->_rootElement->find('[data-bind="click: putMoneyIn"]');
+        return $this->_rootElement->find('span[data-bind="click: putMoneyIn"]');
+    }
+
+    public function waitForTakeMoneyOutButton()
+    {
+        $takePayment = $this->_rootElement->find('[data-bind="click: takeMoneyOut"]');
+        if (!$takePayment->isVisible()) {
+            $this->waitForElementVisible('[data-bind="click: takeMoneyOut"]');
+        }
     }
 
     public function getTakeMoneyOutButton()

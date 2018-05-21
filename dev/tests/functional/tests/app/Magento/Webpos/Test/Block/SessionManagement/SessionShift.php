@@ -20,6 +20,13 @@ class SessionShift extends Block
     /**
      * @return \Magento\Mtf\Client\ElementInterface
      */
+    public function waitButtonEndSessionIsVisible()
+    {
+        $button = $this->_rootElement->find('.btn-close-shift');
+        if (!$button->isVisible()) {
+            $this->waitForElementVisible('.btn-close-shift');
+        }
+    }
     public function getButtonEndSession()
     {
         return $this->_rootElement->find('.btn-close-shift');
@@ -132,6 +139,9 @@ class SessionShift extends Block
 
     public function waitBtnCloseSessionNotVisible()
     {
-        $this->waitForElementNotVisible('.btn-close-shift');
+        $button = $this->_rootElement->find('.btn-close-shift');
+        if ($button->isVisible()) {
+            $this->waitForElementNotVisible('.btn-close-shift');
+        }
     }
 }

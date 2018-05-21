@@ -39,6 +39,13 @@ class SessionSetReasonPopup extends Block
     {
         return $this->_rootElement->find('.link-cl-cfg');
     }
+    public function waitConfirmButton()
+    {
+        $confirm = $this->_rootElement->find('.link-cl-cfg');
+        if (!$confirm->isVisible()) {
+            $this->waitForElementVisible('.link-cl-cfg');
+        }
+    }
 
     /**
      * @return \Magento\Mtf\Client\ElementInterface
