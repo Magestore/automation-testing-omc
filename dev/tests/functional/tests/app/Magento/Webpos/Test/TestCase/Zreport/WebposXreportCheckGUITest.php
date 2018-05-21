@@ -92,8 +92,9 @@ class WebposXreportCheckGUITest extends Injectable
         }
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->getSessionManagement();
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitForSessionManagerLoader();
 
         $staffName = $this->webposIndex->getSessionShift()->getStaffName()->getText();
         $openedString = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
@@ -113,6 +114,10 @@ class WebposXreportCheckGUITest extends Injectable
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'setup_session_before_working_to_no']
+        )->run();
+
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
         )->run();
     }
 

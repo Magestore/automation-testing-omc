@@ -107,5 +107,4 @@ class MsWebpos extends Block
     public function getOpenShipPopup(){
         return $this->_rootElement->find('#popup-open-shift');
     }
-
 }

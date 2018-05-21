@@ -102,6 +102,7 @@ class WebposXreportLoginTwiceTest extends Injectable
         )->run();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $staffName1 = $staff->getDisplayName();
         $this->webposIndex->getCMenu()->logout();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
@@ -127,9 +128,10 @@ class WebposXreportLoginTwiceTest extends Injectable
             ]
         )->run();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $staffName2 = $staff->getDisplayName();
         $this->webposIndex->getCMenu()->getSessionManagement();
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitForSessionManagerLoader();
 
         $openedString = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
         $openedString .= ' by ' . $staffName1;
@@ -147,6 +149,10 @@ class WebposXreportLoginTwiceTest extends Injectable
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'setup_session_before_working_to_no']
+        )->run();
+
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
         )->run();
     }
 }
