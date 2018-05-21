@@ -19,11 +19,15 @@ class LoginTest extends WebapiAbstract
      * @var $username
      */
     protected $username = 'admin';
+
     /**
      * @var $password
      */
     protected $password = 'admin123';
 
+    /**
+     * const RESOURCE_PATH
+     */
     const RESOURCE_PATH = '/V1/webpos/staff/login';
 
     /**
