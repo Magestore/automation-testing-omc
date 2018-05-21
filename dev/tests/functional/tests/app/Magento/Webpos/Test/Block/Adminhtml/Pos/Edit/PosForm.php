@@ -95,6 +95,11 @@ class PosForm extends Form
         return $this->_rootElement->find('#sessions_grid_table .empty-text');
     }
 
+    public function waitForCurrentSessionLoad()
+    {
+        return $this->waitForElementVisible('#admin_webpos_session_detail');
+    }
+
     public function getDefaultCurrentSession($title)
     {
         return $this->_rootElement->find('//legend[@class="admin__legend legend"]/span[text()="' . $title . '"]', locator::SELECTOR_XPATH);
@@ -103,8 +108,7 @@ class PosForm extends Form
     public function waitCloseSession()
     {
         $defaultCurrentSession = $this->getDefaultCurrentSession('There are 0 open session');
-        if(!$defaultCurrentSession->isVisible())
-        {
+        if (!$defaultCurrentSession->isVisible()) {
             $browser = $this->_rootElement;
             $browser->waitUntil(
                 function () use ($defaultCurrentSession) {
@@ -179,13 +183,22 @@ class PosForm extends Form
     public function waitValidateClosingVisible()
     {
         $validateClosing = $this->getValidateClosing();
-        if(!$validateClosing->isVisible())
-        {
+        if (!$validateClosing->isVisible()) {
             $this->_rootElement->waitUntil(
                 function () use ($validateClosing) {
                     return $validateClosing->isVisible() ? true : null;
                 }
             );
         }
+    }
+
+    public function getConfirmModal()
+    {
+        return $this->_rootElement->find('//ancestor::body//div[@id="modal-content-18"]', locator::SELECTOR_XPATH);
+    }
+
+    public function closePopupModal()
+    {
+        $this->_rootElement->find('//ancestor::body//aside[@aria-describedby="modal-content-18"]//button[@class="action-close"]', locator::SELECTOR_XPATH)->click();
     }
 }
