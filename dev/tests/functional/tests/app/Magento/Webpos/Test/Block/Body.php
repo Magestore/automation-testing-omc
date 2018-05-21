@@ -28,11 +28,11 @@ class Body extends Block
 
     public function waitForModalPopup()
     {
-        $this->waitForElementVisible('.modals-wrapper');
+        $this->waitForElementVisible('.modals-wrapper .modal-popup');
     }
 
     public function waitForModalPopupNotVisible()
     {
-        $this->waitForElementNotVisible('.modals-wrapper');
+        $this->waitForElementNotVisible('.modals-wrapper .modal-popup');
     }
 }

@@ -67,20 +67,20 @@ class WebposXreportZR032Test extends Injectable
     {
         // Create denomination
         $denomination->persist();
-//        $this->objectManager->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => 'create_session_before_working']
-//        )->run();
-//
-//        //Config Customer Credit Payment Method
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => 'magestore_webpos_custome_payment']
-//        )->run();
+        $this->objectManager->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_session_before_working']
+        )->run();
 
-//        $this->objectManager->create(
-//            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
-//        )->run();
+        //Config Customer Credit Payment Method
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'magestore_webpos_custome_payment']
+        )->run();
+
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
+        )->run();
 
         // Login webpos
         $this->objectManager->getInstance()->create(
@@ -155,8 +155,6 @@ class WebposXreportZR032Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitListOrders();
-        $this->webposIndex->getOrderHistoryOrderList()->getSecondOrder()->click();
-        sleep(1);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForFormAddNoteOrderVisible();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Refund')->click();
@@ -166,31 +164,34 @@ class WebposXreportZR032Test extends Injectable
         $this->webposIndex->getModal()->getOkButton()->click();
         $this->webposIndex->getBody()->waitForModalPopupNotVisible();
 
+        $totalSales = $this->webposIndex->getSessionShift()->getPaymentAmount()->getText();
+        $refund = (-1) * $totalSales;
+
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitReportPopupVisible();
 
         return [
-            'refund' => 0,
+            'refund' => $refund,
             'cashRefund' => 0
         ];
     }
 
     public function tearDown()
     {
-//        $this->objectManager->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => 'setup_session_before_working_to_no']
-//        )->run();
-//
-//        //Config Payment Payment Method
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => 'magestore_webpos_specific_payment']
-//        )->run();
+        $this->objectManager->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'setup_session_before_working_to_no']
+        )->run();
 
-//        $this->objectManager->create(
-//            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
-//        )->run();
+        //Config Payment Payment Method
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'magestore_webpos_specific_payment']
+        )->run();
+
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
+        )->run();
     }
 
     /**

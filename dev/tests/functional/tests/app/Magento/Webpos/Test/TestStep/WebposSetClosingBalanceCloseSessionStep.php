@@ -44,10 +44,10 @@ class WebposSetClosingBalanceCloseSessionStep implements TestStepInterface
     {
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->getSessionManagement();
-        $this->webposIndex->getMsWebpos()->waitForSessionManagerLoader();
+        sleep(1);
         // Set closing balance
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
-        $this->webposIndex->getSessionShift()->waitForSetClosingBalancePopupVisible();
+        sleep(1);
         if ($this->denomination != null) {
             $this->webposIndex->getSessionSetClosingBalancePopup()->setCoinBillValue($this->denomination->getDenominationName());
         }
@@ -56,7 +56,7 @@ class WebposSetClosingBalanceCloseSessionStep implements TestStepInterface
             $this->webposIndex->getSessionSetClosingBalancePopup()->getColumnNumberOfCoinsAtRow(2)->setValue($this->denominationNumberCoin);
         }
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        $this->webposIndex->getSessionShift()->waitForSetClosingBalancePopupNotVisible();
+        sleep(1);
 
         if ($this->webposIndex->getSessionConfirmModalPopup()->isVisible()) {
             $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
