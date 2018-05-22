@@ -1893,6 +1893,61 @@
                 <item name="value" xsi:type="string">0</item>
             </field>
         </dataset>
+
+        <dataset name="create_show_history_conducted_within_7_day">
+            <field name="webpos/general/day_to_show_session_history" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Last 7 days</item>
+                <item name="value" xsi:type="string">7</item>
+            </field>
+        </dataset>
+
+        <dataset name="create_show_history_conducted_within_15_day">
+            <field name="webpos/general/day_to_show_session_history" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Last 15 days</item>
+                <item name="value" xsi:type="string">15</item>
+            </field>
+        </dataset>
+
+        <dataset name="create_show_history_conducted_within_30_day">
+            <field name="webpos/general/day_to_show_session_history" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Last 30 days</item>
+                <item name="value" xsi:type="string">30</item>
+            </field>
+        </dataset>
+
+        <dataset name="create_show_all_history_conducted">
+            <field name="webpos/general/day_to_show_session_history" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">All Time</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+
+        <dataset name="config_send_confirm_order">
+            <field name="webpos/general/ask_for_sale_order_email" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">Yes</item>
+                <item name="value" xsi:type="string">1</item>
+            </field>
+        </dataset>
+
+        <dataset name="config_no_send_confirm_order">
+            <field name="webpos/general/ask_for_sale_order_email" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="label" xsi:type="string">No</item>
+                <item name="value" xsi:type="string">0</item>
+            </field>
+        </dataset>
+
         <!--End Setting: create section before working-->
 
     </repository>

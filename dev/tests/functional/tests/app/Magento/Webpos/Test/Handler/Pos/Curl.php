@@ -47,7 +47,6 @@ class Curl extends AbstractCurl implements PosInterface
     public function persist(FixtureInterface $fixture = null)
     {
         $data = $this->replaceMappingData($fixture->getData());
-
         $url = $_ENV['app_backend_url'] . $this->saveUrl;
         $curl = new BackendDecorator(new CurlTransport(), $this->_configuration);
         $curl->write($url, $data);
@@ -64,10 +63,9 @@ class Curl extends AbstractCurl implements PosInterface
     }
 
     /**
-     * Get pos id by name
-     *
-     * @param string $name
-     * @return int|null
+     * @param $name
+     * @return null
+     * @throws \Exception
      */
     protected function getPosId($name)
     {

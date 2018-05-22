@@ -2,11 +2,11 @@
 /**
  * Created by PhpStorm.
  * User: stephen
- * Date: 5/14/18
- * Time: 4:30 PM
+ * Date: 5/21/18
+ * Time: 4:08 PM
  */
 
-namespace Magento\Webpos\Test\TestCase\Pos\Edit;
+namespace Magento\Webpos\Test\TestCase\SessionManagement\NewFeature;
 
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
@@ -18,29 +18,27 @@ use Magento\Webpos\Test\Page\Adminhtml\PosNews;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Manage POS - Edit POS
- * Testcase MP30 - Check [Current session detail] grid
+ * Mange Session - Option to remove the session history from webpos (or show last 7 days/ 30 days.....)
+ * Testcase - TC0007 Check showing session history in last 7 days
  *
  * Precondition
- * - Exist at least 1 POS on the grid of Manage POS page
- * - Settings > [Need to create session before working] = Yes
- * - Login webpos by staff A > select POS A
- * - Open a new session (session B
+ * Loged into backend
+ * - In the settings of webpos, set config the field : Need to create session before working = yes (path: On admin sidebar-> tap on Sales -> under webpos -> choose Setttings)
  *
  * Steps
- * 1. Go to backend > Manage POS > Edit POS A >  Click on [Current session detail] tab
- * 2. Click on [Put money in] button
- * 3. Put money in the cash-drawer
- * 4. Login webpos by staff A > select POS A > go to [Session management] page
+ * 1. In webpos settings, set config the field: Limit days to show session history = last 7 days
+ * 2. Login webpos with staff account
+ * 3. Go to Session Management page
+ * 4. Observe the sessions listed on
  *
  * Acceptance
- * 2. Open [Cash Adjustment] form
- * 4. [+ Transactions] will be updated exactly
+ * Show the sessions in last 7 days
  *
- * Class WebposManagePosMP30
- * @package Magento\Webpos\Test\TestCase\Pos\Edit
+ *
+ * Class WebposManageSessionTC007
+ * @package Magento\Webpos\Test\TestCase\SessionManagement\NewFeature
  */
-class WebposManagePosMP30Test extends Injectable
+class WebposManageSessionTC007Test extends Injectable
 {
     /**
      * Pos Index Page
@@ -56,11 +54,13 @@ class WebposManagePosMP30Test extends Injectable
      */
     private $posNews;
 
+
     public function __prepare()
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'create_section_before_working_yes_MS57']
+            ['configData' => 'create_section_before_working_yes,
+            create_show_history_conducted_within_7_day']
         )->run();
     }
 
@@ -75,7 +75,7 @@ class WebposManagePosMP30Test extends Injectable
     }
 
     public function test(FixtureFactory $fixtureFactory, Pos $pos, Location $location,
-                         Staff $staff, WebposIndex $webposIndex, $money)
+                         Staff $staff, WebposIndex $webposIndex, $showSessionHistoryTime)
     {
         //Precondition
         $location->persist();
@@ -94,7 +94,7 @@ class WebposManagePosMP30Test extends Injectable
         $this->posNews->getPosForm()->getGeneralFieldById('page_auto_join', 'checkbox')->click();
         $this->posNews->getFormPageActions()->save();
 
-        //login
+//        login
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
             [
@@ -106,45 +106,40 @@ class WebposManagePosMP30Test extends Injectable
             ]
         )->run();
 
-        //Open Edit Pos Page
-        $this->posIndex->open();
-        $this->posIndex->getPosGrid()->waitLoader();
-        $this->posIndex->getPosGrid()->searchAndOpen([
-            'pos_name' => $pos->getPosName()
-        ]);
-        $this->posNews->getPosForm()->waitLoader();
-        $this->posNews->getPosForm()->getTabByTitle('Current Sessions Detail')->click();
-        $this->posNews->getPosForm()->waitForCurrentSessionLoad();
-        $this->posNews->getPosForm()->getCurrentSessionButtonByTitle('Put Money In')->click();
-        $this->posNews->getPosForm()->waitForPushMoneyModalLoad();
-        $this->posNews->getPosForm()->getPushMoneyInAmountField()->setValue($money);
-        $this->posNews->getPosForm()->saveCashAdjustment();
-        $this->posNews->getPosForm()->waitForLoaderHidden();
-        $addTransactionTotal = $this->posNews->getPosForm()->getAddTransactionAmount();
-        $this->posNews->getFormPageActions()->save();
-
-
-        //login
+        $username = 'test608761602';
+        $password = 'test12345';
         $webposIndex->open();
         $webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-        $webposIndex->getMsWebpos()->clickCMenuButton();
-        $webposIndex->getMsWebpos()->waitForCMenuLoader();
-        $webposIndex->getCMenu()->getSessionManagement();
-        $webposIndex->getMsWebpos()->waitForSessionManagerLoader();
-
-        \PHPUnit_Framework_Assert::assertEquals(
-            $addTransactionTotal,
-            $webposIndex->getSessionRegisterShift()->getAddTransactionValue(),
-            'transaction value isn\'t correct'
+        if ($webposIndex->getLoginForm()->isVisible()) {
+            $webposIndex->getLoginForm()->getUsernameField()->setValue($username);
+            $webposIndex->getLoginForm()->getPasswordField()->setValue($password);
+            $webposIndex->getLoginForm()->clickLoginButton();
+            $webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
+            $webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
+            $webposIndex->getLoginForm()->setLocation('Test Display Name 1779209846');
+            $webposIndex->getLoginForm()->setPos('Post Test 689361884');
+            $webposIndex->getLoginForm()->getEnterToPos()->click();
+            $webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
+            $webposIndex->getMsWebpos()->waitForSyncDataVisible();
+            $time = time();
+            $timeAfter = $time + 360;
+            while ($webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
+                $time = time();
+            }
+            sleep(2);
+        }
+        $webposIndex->getSessionRegisterShift()->waitLoader();
+        \PHPUnit_Framework_Assert::assertTrue(
+            $webposIndex->getSessionRegisterShift()->getShiftListingHeaderByTitle($showSessionHistoryTime)->isVisible(),
+            'Title shift header wasn\'t show correctly'
         );
-
     }
 
     public function tearDown()
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'create_section_before_working_no_MS57']
+            ['configData' => 'create_section_before_working_no']
         )->run();
     }
 

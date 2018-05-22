@@ -33,4 +33,11 @@ class SessionRegisterShift extends Block
         return $this->_rootElement->find('//div[@class="transactions-info"]//tbody[1]/tr[3]/td[2]/span',locator::SELECTOR_XPATH)->getText();
     }
 
+    public function getShiftListingHeaderByTitle($title){
+        return $this->_rootElement->find('//div[@class="wrap-shift_container"]//span[text()="'.$title.'"]', locator::SELECTOR_XPATH);
+    }
+
+    public function waitLoader(){
+        return $this->waitForElementVisible('#shift_container');
+    }
 }

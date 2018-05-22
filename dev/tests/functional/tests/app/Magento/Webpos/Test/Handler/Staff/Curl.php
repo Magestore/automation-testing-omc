@@ -90,7 +90,6 @@ class Curl extends AbstractCurl implements StaffInterface
         $curl->write($url, $data, CurlInterface::POST);
         $response = $curl->read();
         $curl->close();
-
         preg_match('/webpos_staff_listing_data_source.+items.+"staff_id":"(\d+)"/', $response, $match);
         return empty($match[1]) ? null : $match[1];
     }
