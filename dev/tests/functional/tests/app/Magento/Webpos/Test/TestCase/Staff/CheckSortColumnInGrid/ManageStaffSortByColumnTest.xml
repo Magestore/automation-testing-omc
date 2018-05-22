@@ -5,6 +5,7 @@
             <data name="itemsCount" xsi:type="string">1</data>
             <data name="fixtureName" xsi:type="string">staff</data>
             <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
+            <data name="testCaseId" xsi:type="string">MS03</data>
             <data name="steps" xsi:type="array">
                 <item name="0" xsi:type="string">-</item>
                 <item name="1" xsi:type="string">-</item>
@@ -20,6 +21,7 @@
             <data name="itemsCount" xsi:type="string">1</data>
             <data name="fixtureName" xsi:type="string">staff</data>
             <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
+            <data name="testCaseId" xsi:type="string">MS04</data>
             <data name="steps" xsi:type="array">
                 <item name="0" xsi:type="string">-</item>
                 <item name="1" xsi:type="string">-</item>
@@ -35,6 +37,7 @@
             <data name="itemsCount" xsi:type="string">1</data>
             <data name="fixtureName" xsi:type="string">staff</data>
             <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
+            <data name="testCaseId" xsi:type="string">MS05</data>
             <data name="steps" xsi:type="array">
                 <item name="0" xsi:type="string">-</item>
                 <item name="1" xsi:type="string">-</item>
@@ -50,6 +53,7 @@
             <data name="itemsCount" xsi:type="string">1</data>
             <data name="fixtureName" xsi:type="string">staff</data>
             <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
+            <data name="testCaseId" xsi:type="string">MS06</data>
             <data name="steps" xsi:type="array">
                 <item name="0" xsi:type="string">-</item>
                 <item name="1" xsi:type="string">-</item>
@@ -65,6 +69,7 @@
             <data name="itemsCount" xsi:type="string">1</data>
             <data name="fixtureName" xsi:type="string">staff</data>
             <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
+            <data name="testCaseId" xsi:type="string">MS07</data>
             <data name="steps" xsi:type="array">
                 <item name="0" xsi:type="string">-</item>
                 <item name="1" xsi:type="string">-</item>
@@ -81,6 +86,7 @@
             <data name="fixtureName" xsi:type="string">staff</data>
             <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
             <data name="webposRole/dataset" xsi:type="string">role_ms77</data>
+            <data name="testCaseId" xsi:type="string">MS08</data>
             <data name="steps" xsi:type="array">
                 <item name="0" xsi:type="string">-</item>
                 <item name="1" xsi:type="string">-</item>
@@ -96,6 +102,7 @@
             <data name="itemsCount" xsi:type="string">1</data>
             <data name="fixtureName" xsi:type="string">staff</data>
             <data name="fixtureDataSet" xsi:type="string">staffMS03</data>
+            <data name="testCaseId" xsi:type="string">MS09</data>
             <data name="steps" xsi:type="array">
                 <item name="0" xsi:type="string">-</item>
                 <item name="1" xsi:type="string">-</item>

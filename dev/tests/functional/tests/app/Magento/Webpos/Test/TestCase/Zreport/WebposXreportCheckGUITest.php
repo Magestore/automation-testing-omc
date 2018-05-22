@@ -66,8 +66,7 @@ class WebposXreportCheckGUITest extends Injectable
     }
 
     public function test(
-        $products,
-        $createOrder = false
+        $products
     )
     {
         $this->objectManager->create(
@@ -84,12 +83,10 @@ class WebposXreportCheckGUITest extends Injectable
             'Magento\Webpos\Test\TestStep\WebposOpenSessionStep'
         )->run();
 
-        if ($createOrder) {
-            $this->objectManager->getInstance()->create(
-                'Magento\Webpos\Test\TestStep\WebposAddProductToCartThenCheckoutStep',
-                ['products' => $products]
-            )->run();
-        }
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\WebposAddProductToCartThenCheckoutStep',
+            ['products' => $products]
+        )->run();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
