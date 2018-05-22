@@ -119,8 +119,7 @@ class WebposZreportZR017Test extends Injectable
             && $time < $timeAfter) {
             $time = time();
         }
-        if ($this->webposIndex->getOpenSessionPopup()->isVisible())
-        {
+        if ($this->webposIndex->getOpenSessionPopup()->isVisible()) {
             $this->webposIndex->getOpenSessionPopup()->waitLoader();
             $this->webposIndex->getOpenSessionPopup()->getCancelButton()->click();
 
@@ -160,13 +159,13 @@ class WebposZreportZR017Test extends Injectable
             $i++;
         }
 
-            $this->objectManager->getInstance()->create(
-                'Magento\Webpos\Test\TestStep\AddDiscountWholeCartStep',
-                [
-                    'percent' => $discountAmount,
-                    'type' => '$'
-                ]
-            )->run();
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\AddDiscountWholeCartStep',
+            [
+                'percent' => $discountAmount,
+                'type' => '$'
+            ]
+        )->run();
 
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();

@@ -164,6 +164,11 @@ class WebposXreportZR032Test extends Injectable
         $this->webposIndex->getModal()->getOkButton()->click();
         $this->webposIndex->getBody()->waitForModalPopupNotVisible();
 
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
+        $this->webposIndex->getCMenu()->getSessionManagement();
+        $this->webposIndex->getMsWebpos()->waitForSessionManagerLoader();
+
         $totalSales = $this->webposIndex->getSessionShift()->getPaymentAmount()->getText();
         $refund = (-1) * $totalSales;
 

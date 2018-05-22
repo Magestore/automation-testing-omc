@@ -15,7 +15,7 @@
             <data name="denomination/dataset" xsi:type="string">default</data>
             <data name="denominationNumberCoin" xsi:type="string">1</data>
             <data name="symbol" xsi:type="string">₴</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertZreportOpeningAmountPutInTakeOutMoneyDiscountRefund"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertZreportOpeningPutInTakeOutDiscountRefund"/>
         </variation>
     </testCase>
 </config>

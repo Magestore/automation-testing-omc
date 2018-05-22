@@ -19,6 +19,10 @@ class WebposRoleForm extends FormTabs
         return $this->_rootElement->find('#page_display_name-error');
     }
 
+    /**
+     * get element and click
+     * @param $arrs
+     */
     public function getRoleResources($arrs)
     {
         if (is_array($arrs)) {
@@ -28,6 +32,16 @@ class WebposRoleForm extends FormTabs
         } else {
             $this->_rootElement->find('li[data-id="' . $arrs . '"] > a')->click();
         }
+    }
+
+    /**
+     * get element
+     * @param $roleResource
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getRoleResourceElement($roleResource)
+    {
+        return $this->_rootElement->find('li[data-id="' . $roleResource . '"]');
     }
 
     public function assertSubRoleResources($arrs1, $arrs2)

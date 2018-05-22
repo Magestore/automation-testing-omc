@@ -7,7 +7,6 @@
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="string">product1</item>
             </data>
-            <data name="createOrder" xsi:type="boolean">false</data>
             <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIXreport"/>
         </variation>
         <variation name="WebposXreportCheckGUIZR022Test">
@@ -15,21 +14,24 @@
                 <item name="0" xsi:type="string">product1</item>
             </data>
             <data name="posName" xsi:type="string">Store POS</data>
-            <data name="createOrder" xsi:type="boolean">false</data>
             <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIXZreportPosName"/>
         </variation>
         <variation name="WebposXreportCheckGUIZR023Test">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="string">product1</item>
             </data>
-            <data name="createOrder" xsi:type="boolean">true</data>
             <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIXZreportStaffName"/>
         </variation>
         <variation name="WebposXreportCheckGUIZR025Test">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="string">product1</item>
             </data>
-            <data name="createOrder" xsi:type="boolean">true</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIXreportOpened"/>
+        </variation>
+        <variation name="WebposXreportCheckGUIZR034Test">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+            </data>
             <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIXreportOpened"/>
         </variation>
     </testCase>
