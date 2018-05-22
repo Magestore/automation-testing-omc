@@ -10,7 +10,7 @@ namespace Magento\Webpos\Test\Constraint\Checkout\CartPageActionMenu;
 use Magento\Mtf\Constraint\AbstractConstraint;
 /**
  * Class AssertWebposEnterFullScreenAgain
- * @package Magento\Webpos\Test\Constraint\Checkout\CartPageActionMenu
+ * @package Magento\Webpos\Test\Constraint\Cart\CartPageActionMenu
  */
 class AssertWebposEnterFullScreenAgain extends AbstractConstraint
 {

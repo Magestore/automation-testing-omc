@@ -14,7 +14,7 @@ use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePla
 use Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomSale\AssertWebposCustomSaleShippingMethodSectionHidden;
 /**
  *  * Preconditions:
- * 1. Login webpos by a  staff
+ * 1. LoginTest webpos by a  staff
  * 2. Add custom product to cart with shippable: off
  *
  * Step:
@@ -23,7 +23,7 @@ use Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomSale\AssertWebposCust
 
 /**
  * Class WebposCustomSaleShippableOffCP81EntityTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
  */
 class WebposCustomSaleShippableOffCP81EntityTest extends Injectable
 {

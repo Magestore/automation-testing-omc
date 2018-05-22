@@ -73,7 +73,7 @@ class WebposProductsGridPG05Test extends Injectable
             ['configData' => 'backorders_no_backordes']
         )->run();
 
-        // Login webpos
+        // LoginTest webpos
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();

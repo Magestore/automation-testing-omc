@@ -11,16 +11,16 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposHoldOrderCP165Test
- * Pre: "1. Login Webpos as a staff
+ * Pre: "1. LoginTest Webpos as a staff
 2. Add a product
 3. Click on [Add discount] > on Discount tab, add dicount for whole cart (type: %)
 4. Hold order successfully"
  * Step: "1. Go to [On-hold orders] menu
-2. Click on [Checkout] button on that detail order"
+2. Click on [Cart] button on that detail order"
  *
  * Expect: Order will be loaded to cart page without discount then auto next to checkout page.
  *
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\HoldOrder
  */
 class WebposHoldOrderCP165Test extends Injectable
 {
@@ -45,7 +45,7 @@ class WebposHoldOrderCP165Test extends Injectable
             ['products' => $products]
         )->run()[0]['product'];
 
-        //Login webpos
+        //LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -75,12 +75,11 @@ class WebposHoldOrderCP165Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
-        //Checkout in On-Hold
+        //Cart in On-Hold
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->onHoldOrders();
         sleep(1);
         $this->webposIndex->getOnHoldOrderOrderList()->getFirstOrder()->click();
-        $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);

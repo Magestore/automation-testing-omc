@@ -14,7 +14,7 @@ use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePla
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposCustomSaleCustomProductPlaceOrderCP80EntityTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
  */
 class WebposCustomSaleCustomProductPlaceOrderCP80EntityTest extends Injectable
 {

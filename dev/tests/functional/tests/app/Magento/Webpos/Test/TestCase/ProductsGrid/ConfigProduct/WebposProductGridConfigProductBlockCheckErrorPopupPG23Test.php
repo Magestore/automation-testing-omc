@@ -48,7 +48,7 @@ class  WebposProductGridConfigProductBlockCheckErrorPopupPG23Test extends Inject
         $product = $fixtureFactory->createByCode('configurableProduct', ['dataset' => 'product_with_text_swatch']);
         $product->persist();
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();

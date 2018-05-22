@@ -11,7 +11,6 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\Invoice;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoiceSuccess;
-
 /**
  * Class WebposOrdersHistoryInvoiceOH112Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
@@ -55,7 +54,7 @@ class WebposOrdersHistoryInvoiceOH112Test extends Injectable
             ['products' => $products]
         )->run();
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -98,6 +97,7 @@ class WebposOrdersHistoryInvoiceOH112Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         //select order
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         // Take payment
@@ -105,17 +105,13 @@ class WebposOrdersHistoryInvoiceOH112Test extends Injectable
         if ($this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->isVisible()) {
             $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->click();
             $paymentPrice = (float)substr($this->webposIndex->getOrderHistoryPayment()->getPaymentPriceInput()->getValue(), 1);
-            sleep(0.5);
             $this->webposIndex->getOrderHistoryPayment()->getPaymentPriceInput()->setValue($paymentPrice / 2);
-            sleep(0.5);
             $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
-            sleep(0.5);
             $this->webposIndex->getMsWebpos()->waitForModalPopup();
             sleep(0.5);
             $this->webposIndex->getModal()->getOkButton()->click();
-            sleep(1);
-
             // Click Button Invoice
+            sleep(1);
             $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
             $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
             sleep(0.5);
@@ -123,9 +119,7 @@ class WebposOrdersHistoryInvoiceOH112Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitForModalPopup();
             sleep(0.5);
             $this->webposIndex->getModal()->getOkButton()->click();
-
             // Assert Invoice successful.
-            sleep(1);
             $this->assertInvoiceSuccess->processAssert($this->webposIndex);
 
             $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForProcessingStatusVisisble();

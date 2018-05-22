@@ -40,7 +40,7 @@ class WebposPageActionMenuFullScreenCP191Test extends Injectable
             ['products' => $products]
         )->run()[0]['product'];
 
-        //Login webpos
+        //LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -51,7 +51,7 @@ class WebposPageActionMenuFullScreenCP191Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
-        //Checkout
+        //Cart
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -61,15 +61,9 @@ class WebposPageActionMenuFullScreenCP191Test extends Injectable
 
         $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
         $this->webposIndex->getCheckoutFormAddNote()->waitFullScreenMode();
-        $this->webposIndex->getCheckoutFormAddNote()->getFullScreenMode()->click();        sleep(1);
+        $this->webposIndex->getCheckoutFormAddNote()->getFullScreenMode()->click();
+        sleep(1);
         $minHeightAfterFull = $this->webposIndex->getBody()->getPageStyleMinHeight();
-
-        //Click again Enter/full screen
-//        $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
-//        $this->webposIndex->getCheckoutFormAddNote()->waitFullScreenMode();
-//        $this->webposIndex->getCheckoutFormAddNote()->getFullScreenMode()->click();
-//        sleep(1);
-//        $minHeightAfterAgain = $this->webposIndex->getBody()->getPageStyleMinHeight();
 
         return ['minHeightBeforeFull' => $minHeightBeforeFull,
             'minHeightAfterFull' => $minHeightAfterFull,

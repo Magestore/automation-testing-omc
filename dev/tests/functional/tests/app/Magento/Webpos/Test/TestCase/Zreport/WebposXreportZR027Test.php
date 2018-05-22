@@ -128,8 +128,9 @@ class WebposXreportZR027Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->getSessionManagement();
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitForSessionManagerLoader();
 
         $openedString = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
         $staffName = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
@@ -164,6 +165,10 @@ class WebposXreportZR027Test extends Injectable
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'magestore_webpos_specific_payment']
+        )->run();
+
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
         )->run();
     }
 

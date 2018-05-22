@@ -10,7 +10,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\BarcodeSuccess\Test\Page\Adminhtml\BarcodeSettings\BarcodeSettingsIndex;
 /**
  * Steps:
- * 1. Login to the backend.
+ * 1. LoginTest to the backend.
  * 2. Navigate to Inventory > BarcodeSetting.
  * 3. Fill in data according to data set.
  * 4. Save Setting.

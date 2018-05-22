@@ -18,7 +18,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * Class WebposCheckoutCartEditQtyChangeProductQtyByManualTest
  *
  * Precondition:
- * 1. Login webpos by a  staff
+ * 1. LoginTest webpos by a  staff
  * 2. Add a product to cart with qty = 1"
  *
  * Steps:
@@ -29,7 +29,7 @@ Ex: #$^&* or abc
  *
  * Acceptance: Show message: "Warning: The fewest you may purchase is 1"
  *
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\EditQty
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\EditQty
  */
 class WebposCheckoutCartEditQtyChangeProductQtyByManualTest extends Injectable
 {
@@ -58,7 +58,7 @@ class WebposCheckoutCartEditQtyChangeProductQtyByManualTest extends Injectable
 		$qtyInput
 	)
 	{
-		// Login webpos
+		// LoginTest webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();

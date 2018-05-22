@@ -12,7 +12,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\BarcodeSuccess\Test\Fixture\TemplateBarcode;
 /**
  * Steps:
- * 1. Login to the backend.
+ * 1. LoginTest to the backend.
  * 2. Navigate to BarcodeTemplate.
  * 3. Click to Add New Template .
  * 4. Fill in data according to data set.

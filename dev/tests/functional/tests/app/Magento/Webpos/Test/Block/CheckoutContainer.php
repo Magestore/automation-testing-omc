@@ -48,6 +48,18 @@ class CheckoutContainer extends Block
 	}
 
 	public function clickOutSide() {
-        $this->_rootElement->click();
+        return $this->_rootElement->find('#checkout_container > div.wrap-backover.hide-popup');
+    }
+
+    public function waitForPopupAddCustomerVisible(){
+        $this->waitForElementVisible('#form-customer-add-customer-checkout');
+    }
+
+    public function waitForPopupAddShippingVisible(){
+        $this->waitForElementVisible('#form-customer-add-shipping-address-checkout');
+    }
+
+    public function waitForPopupAddBillingVisible(){
+        $this->waitForElementVisible('#form-customer-add-billing-address-checkout');
     }
 }

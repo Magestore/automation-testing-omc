@@ -40,7 +40,7 @@ class WebposProductsGridPG50Test extends Injectable
         $key
     )
     {
-        // Login webpos
+        // LoginTest webpos
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();

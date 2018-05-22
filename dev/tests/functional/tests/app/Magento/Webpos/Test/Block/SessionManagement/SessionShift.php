@@ -139,4 +139,14 @@ class SessionShift extends Block
     {
         $this->waitForElementVisible('.btn-close-shift');
     }
+
+    public function waitForSetClosingBalancePopupVisible()
+    {
+        $this->waitForElementVisible('#popup-close-shift');
+    }
+
+    public function waitForSetClosingBalancePopupNotVisible()
+    {
+        $this->waitForElementNotVisible('#popup-close-shift');
+    }
 }

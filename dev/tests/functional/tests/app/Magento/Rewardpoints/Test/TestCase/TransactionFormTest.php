@@ -14,7 +14,7 @@ use Magento\Rewardpoints\Test\Page\Adminhtml\TransactionIndex;
 /**
  *
  * Test Flow:
- * 1. Login as admin
+ * 1. LoginTest as admin
  * 2. Navigate to the Reward points>Transactions
  * 3. Click on 'Add New Transaction' button
  * 4. Verify form add new

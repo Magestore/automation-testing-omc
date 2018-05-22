@@ -13,7 +13,7 @@ use Magento\Backend\Test\TestCase\NavigateMenuTest;
 /**
  *
  * Test Flow:
- * 1. Login as admin
+ * 1. LoginTest as admin
  * 2. Navigate through menu to page
  * 3. Verify menu
  *

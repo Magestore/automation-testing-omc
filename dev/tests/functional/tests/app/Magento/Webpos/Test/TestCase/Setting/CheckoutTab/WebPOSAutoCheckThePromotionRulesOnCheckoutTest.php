@@ -73,7 +73,7 @@ class WebPOSAutoCheckThePromotionRulesOnCheckoutTest extends Injectable
         $this->optionNo = $optionNo;
         $this->successMessage = $successMessage;
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

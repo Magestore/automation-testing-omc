@@ -12,23 +12,24 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertCheckCartCustomPrice
- * @package Magento\Webpos\Test\Constraint\Checkout\HoldOrder
+ * @package Magento\Webpos\Test\Constraint\Cart\HoldOrder
  */
 class AssertCheckCartCustomPrice extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex, $cartProducts, $type, $priceCustom)
     {
+        sleep(1);
         for ($i = 0; $i < count($cartProducts); ++$i) {
             \PHPUnit_Framework_Assert::assertEquals(
                 $webposIndex->getCheckoutCartItems()->getNameCartItemByOrderTo($i + 1),
                 $cartProducts[$i]['name'],
                 'Name product is not correct'
             );
-            \PHPUnit_Framework_Assert::assertTrue(
-                $webposIndex->getCheckoutCartItems()->getOriginPriceCartItemByOrderToElement($i + 1)->isVisible(),
-                'Origin Price product is not display'
-            );
             if ($webposIndex->getCheckoutCartItems()->getOriginPriceCartItemByOrderToElement($i + 1)->isVisible()) {
+                \PHPUnit_Framework_Assert::assertTrue(
+                    $webposIndex->getCheckoutCartItems()->getOriginPriceCartItemByOrderToElement($i + 1)->isVisible(),
+                    'Origin Price product is not display'
+                );
                 \PHPUnit_Framework_Assert::assertEquals(
                     floatval($cartProducts[$i]['price'] * $cartProducts[$i]['qty']),
                     $webposIndex->getCheckoutCartItems()->getOriginPriceCartItemByOrderTo($i + 1),
@@ -81,6 +82,6 @@ class AssertCheckCartCustomPrice extends AbstractConstraint
      */
     public function toString()
     {
-        return "Product custom price in Cart is correct";
+        return "Product custom price in Checkout is correct";
     }
 }

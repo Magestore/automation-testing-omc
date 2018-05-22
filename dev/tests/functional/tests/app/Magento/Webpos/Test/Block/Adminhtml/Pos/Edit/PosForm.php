@@ -13,7 +13,10 @@ namespace Magento\Webpos\Test\Block\Adminhtml\Pos\Edit;
 
 use Magento\Mtf\Block\Form;
 use Magento\Mtf\Client\Locator;
-
+/**
+ * Class PosForm
+ * @package Magento\Webpos\Test\Block\Adminhtml\Pos\Edit
+ */
 class PosForm extends Form
 {
     public function lockRegisterSectionIsVisible()
@@ -142,6 +145,10 @@ class PosForm extends Form
         return $this->_rootElement->find('//tbody/tr[@class="even"][1]', locator::SELECTOR_XPATH);
     }
 
+    public function getPosNameErrorLabel(){
+        return $this->_rootElement->find('#page_pos_name-error');
+    }
+
     public function waitForSessionGridLoad()
     {
         $this->waitForElementVisible('#sessions_grid');
@@ -177,7 +184,7 @@ class PosForm extends Form
 
     public function getValidateClosing()
     {
-        return $this->_rootElement->find('.webpos-session-info')->find('//span[text()="Validate Closing"]', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//button[*[text()[normalize-space()="Validate Closing"]]]', Locator::SELECTOR_XPATH);
     }
 
     public function waitValidateClosingVisible()

@@ -15,7 +15,6 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\ShippingAddressPopup\AssertBillingAddressOnNewCustomerPopupIsCorrect;
 use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\CreateCustomer\AssertCreateCustomerOnCheckoutPageSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class WebposCustomerOnCheckoutPageCC25Test
  * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\BillingAddressPopup
@@ -23,22 +22,22 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposCustomerOnCheckoutPageCC25Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     /**
-     * @var AssertBillingAddressOnNewCustomerPopupIsCorrect
+     * @var AssertBillingAddressOnNewCustomerPopupIsCorrect $assertBillingAddressOnNewCustomerPopupIsCorrect
      */
     protected $assertBillingAddressOnNewCustomerPopupIsCorrect;
 
     /**
-     * @var AssertCreateCustomerOnCheckoutPageSuccess
+     * @var AssertCreateCustomerOnCheckoutPageSuccess $assertCreateCustomerOnCheckoutPageSuccess
      */
     protected $assertCreateCustomerOnCheckoutPageSuccess;
 
@@ -74,7 +73,7 @@ class WebposCustomerOnCheckoutPageCC25Test extends Injectable
         $address = $this->prepareAddress($customer, $address);
 
         // Login webpos
-        $staff = $this->objectManager->getInstance()->create(
+        $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
@@ -85,14 +84,14 @@ class WebposCustomerOnCheckoutPageCC25Test extends Injectable
         $this->webposIndex->getCheckoutChangeCustomer()->waitForCustomerList();
 
         $this->webposIndex->getCheckoutChangeCustomer()->getAddNewCustomerButton()->click();
-        sleep(1);
 
         // fill customer info
+        $this->webposIndex->getCheckoutContainer()->waitForPopupAddCustomerVisible();
         $this->webposIndex->getCheckoutAddCustomer()->setFieldWithoutShippingAndBilling($customer->getData());
 
         // fill Billing address info
         $this->webposIndex->getCheckoutAddCustomer()->getAddBillingAddressIcon()->click();
-        $this->webposIndex->getCheckoutAddBillingAddress()->waitForPopupVisible();
+        $this->webposIndex->getCheckoutContainer()->waitForPopupAddBillingVisible();
         $this->webposIndex->getCheckoutAddBillingAddress()->setFieldAddress($address->getData());
         $this->webposIndex->getCheckoutAddBillingAddress()->getSaveButton()->click();
         sleep(1);

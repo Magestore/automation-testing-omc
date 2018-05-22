@@ -28,7 +28,7 @@ class AssertProductDetailVisible extends AbstractConstraint
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->isVisible(),
-            'Products Grid - Button Add To Cart is not visible.'
+            'Products Grid - Button Add To Checkout is not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutProductDetail()->getSimpleProductPrice()->isVisible(),

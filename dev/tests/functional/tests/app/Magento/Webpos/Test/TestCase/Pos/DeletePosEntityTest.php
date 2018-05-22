@@ -21,7 +21,7 @@ use Magento\Mtf\TestCase\Injectable;
  * 1. Create AssertWebposCheckGUICustomerPriceCP54 Pos.
  *
  * Steps:
- * 1. Login to backend.
+ * 1. LoginTest to backend.
  * 2. Open Sales -> AssertWebposCheckGUICustomerPriceCP54 -> Manage Pos.
  * 3. Open Pos from preconditions.
  * 4. Delete.

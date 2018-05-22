@@ -19,23 +19,23 @@ class StaffManagementTest extends WebapiAbstract
 	const RESOURCE_PATH = '/V1/webpos/staff/login';
 
     /**
-     * @var \Magento\Webpos\Api\CurrentSessionId\CurrentSessionIdTest
+     * @var \Magento\Webpos\Api\Staff\LoginTest
      */
     protected $currentSession;
 
     protected function setUp()
     {
-        $this->currentSession = Bootstrap::getObjectManager()->get('\Magento\Webpos\Api\CurrentSessionId\CurrentSessionIdTest');
+        $this->currentSession = Bootstrap::getObjectManager()->get('\Magento\Webpos\Api\Staff\LoginTest');
     }
 
 	public function testStaffLogin()
 	{
-		$result = $this->currentSession->getCurrentSessionId();
+		$result = $this->currentSession->testStaffLogin();
 
 		$this->assertNotNull($result);
 		$this->assertTrue(
             is_string($result),
-            'Login failed'
+            'LoginTest failed'
         );
 	}
 }

@@ -16,7 +16,7 @@ use Magento\Mtf\TestCase\Injectable;
 
 /**
  * Steps:
- * 1. Login to the backend.
+ * 1. LoginTest to the backend.
  * 2. Navigate to Store Credit > Manage Credit Products.
  * 3. Start to create credit product.
  * 4. Fill in data according to data set.

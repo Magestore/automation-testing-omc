@@ -18,6 +18,13 @@ class CheckoutFormAddNote extends Block
     /**
      * @return \Magento\Mtf\Client\ElementInterface
      */
+    public function waitAddOrderNote()
+    {
+        $posModal = $this->_rootElement->find('.pos_modal_link');
+        if (!$posModal->isVisible()) {
+            $this->waitForElementVisible('.pos_modal_link');
+        }
+    }
     public function getAddOrderNote()
     {
         return $this->_rootElement->find('.pos_modal_link');

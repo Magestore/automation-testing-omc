@@ -39,7 +39,7 @@ class  WebposProductGridCheckAddToCartOnGroupProductDetailPG46Test extends Injec
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run();
-        // Login webpos
+        // LoginTest webpos
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();

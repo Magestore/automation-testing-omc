@@ -17,7 +17,7 @@ use Magento\Mtf\Client\Locator;
 class GeneralSettingContentRight extends Block
 {
     /**
-     * Begin Checkout Menu Tab Page
+     * Begin Cart Menu Tab Page
      */
     public function getUseOnlineModeSelection()
     {

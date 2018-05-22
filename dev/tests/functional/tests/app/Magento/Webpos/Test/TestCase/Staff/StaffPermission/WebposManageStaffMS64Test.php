@@ -101,7 +101,7 @@ class WebposManageStaffMS64Test extends Injectable
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
             ['products' => $products]
         )->run();
-        //Login
+        //LoginTest
         $this->login($staff1);
         // Add product to cart
         $this->objectManager->getInstance()->create(
@@ -130,7 +130,7 @@ class WebposManageStaffMS64Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
         $this->webposIndex->getModal()->getOkButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader.loading-mask');
-        //Login by staff2
+        //LoginTest by staff2
         $this->login($staff2);
 //        sleep(10);
         $this->webposIndex->open();

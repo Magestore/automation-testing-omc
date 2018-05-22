@@ -43,7 +43,7 @@ class AssertTaxAmountOnCartPageAndCheckoutPage extends AbstractConstraint
         \PHPUnit_Framework_Assert::assertEquals(
             $taxAmount,
             $taxAmountOnPage,
-            'On the Cart - The Tax at the web POS was not correctly.'
+            'On the Checkout - The Tax at the web POS was not correctly.'
         );
     }
 

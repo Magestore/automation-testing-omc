@@ -21,7 +21,7 @@ use Magento\Storepickup\Test\Page\Adminhtml\TagIndex;
 
 /**
  * Steps:
- * 1. Login to the backend.
+ * 1. LoginTest to the backend.
  * 2. Navigate to Store Pickup > Manage Tag.
  * 3. Click to Add New Tag.
  * 4. Perform appropriate assertions.

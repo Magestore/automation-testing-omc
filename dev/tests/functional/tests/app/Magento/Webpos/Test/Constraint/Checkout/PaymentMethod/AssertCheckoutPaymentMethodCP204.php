@@ -11,7 +11,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AssertCheckoutPaymentMethodCP202
- * @package Magento\Webpos\Test\Constraint\Checkout\PaymentMethod
+ * @package Magento\Webpos\Test\Constraint\Cart\PaymentMethod
  */
 class AssertCheckoutPaymentMethodCP204 extends AbstractConstraint
 {

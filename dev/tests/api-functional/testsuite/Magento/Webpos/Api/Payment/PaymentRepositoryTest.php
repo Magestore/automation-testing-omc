@@ -40,12 +40,9 @@ class PaymentRepositoryTest extends WebapiAbstract
                 'httpMethod' => RestRequest::HTTP_METHOD_GET,
             ]
         ];
-
         $results = $this->_webApiCall($serviceInfo);
-
         // Dump the result to check "How does it look like?"
         // \Zend_Debug::dump($results);
-
         $this->assertNotNull($results);
         self::assertGreaterThanOrEqual(
             1,
@@ -54,7 +51,6 @@ class PaymentRepositoryTest extends WebapiAbstract
         );
         // Get the key constraint for API Get Payment to Take payment. Call From Folder Constraint
         $keys = $this->paymentRepository->GetList();
-
         foreach ($keys['items'][0] as $key) {
             self::assertContains(
                 $key,

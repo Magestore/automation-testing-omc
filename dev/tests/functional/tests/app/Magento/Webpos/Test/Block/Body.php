@@ -25,4 +25,14 @@ class Body extends Block
     public function clickOutSide() {
         $this->_rootElement->click();
     }
+
+    public function waitForModalPopup()
+    {
+        $this->waitForElementVisible('.modals-wrapper .modal-popup');
+    }
+
+    public function waitForModalPopupNotVisible()
+    {
+        $this->waitForElementNotVisible('.modals-wrapper .modal-popup');
+    }
 }

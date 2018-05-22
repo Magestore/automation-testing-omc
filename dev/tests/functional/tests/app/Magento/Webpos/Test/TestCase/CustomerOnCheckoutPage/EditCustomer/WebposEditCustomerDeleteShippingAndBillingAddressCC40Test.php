@@ -36,7 +36,7 @@ class WebposEditCustomerDeleteShippingAndBillingAddressCC40Test extends Injectab
         // Create Customer
         $customer = $this->fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI_ship_CA_bill']);
         $customer->persist();
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();

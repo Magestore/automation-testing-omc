@@ -14,7 +14,7 @@ use Magento\Mtf\Fixture\FixtureFactory;
 
 /**
  * Class WebposCheckoutPaymentMethodCP205Test
- * @package Magento\Webpos\Test\TestCase\Checkout\PaymentMethod
+ * @package Magento\Webpos\Test\TestCase\Cart\PaymentMethod
  */
 
 class WebposCheckoutPaymentMethodCP205Test extends Injectable

@@ -95,7 +95,7 @@ class WebposManageStaffMS79Test extends Injectable
         $roleData['staff_id'] = $array;
         $role = $this->fixtureFactory->createByCode('webposRole', ['data' => $roleData]);
         $role->persist();
-        //Login
+        //LoginTest
         $this->login($staff, $location, $pos);
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->webposIndex->getCMenu()->getSessionManagement();

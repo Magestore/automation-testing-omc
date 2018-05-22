@@ -11,7 +11,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertCheckSection
- * @package Magento\Webpos\Test\Constraint\Checkout\ShippingMethod
+ * @package Magento\Webpos\Test\Constraint\Cart\ShippingMethod
  */
 class AssertCheckSection extends AbstractConstraint
 {

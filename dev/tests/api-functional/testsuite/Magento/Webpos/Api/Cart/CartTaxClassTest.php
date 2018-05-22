@@ -6,15 +6,15 @@
  * Time: 14:06
  */
 
-namespace Magento\Webpos\Api\Checkout;
+namespace Magento\Webpos\Api\Cart;
 
 use Magento\TestFramework\TestCase\WebapiAbstract;
 use \Magento\Framework\Webapi\Rest\Request as RestRequest;
 /**
- * Class TaxClassTest
- * @package Magento\Webpos\Api\CategoryRepository
+ * Class CartTaxClassTest
+ * @package Magento\Webpos\Api\Cart
  */
-class TaxClassTest extends WebapiAbstract
+class CartTaxClassTest extends WebapiAbstract
 {
 	const RESOURCE_PATH = '/V1/webpos/taxclass/list';
 

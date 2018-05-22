@@ -12,7 +12,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Customer\Test\Fixture\Customer;
 /**
  * Class AssertCheckTaxHoldOrder
- * @package Magento\Webpos\Test\Constraint\Checkout\HoldOrder
+ * @package Magento\Webpos\Test\Constraint\Cart\HoldOrder
  */
 class AssertCheckTaxHoldOrder extends AbstractConstraint
 {

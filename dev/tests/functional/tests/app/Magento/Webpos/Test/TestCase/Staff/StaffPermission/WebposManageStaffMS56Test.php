@@ -65,7 +65,7 @@ class WebposManageStaffMS56Test extends Injectable
         $product1 = $products[0]['product'];
         $product2 = $products[1]['product'];
 
-        //Login
+        //LoginTest
         $this->loginWebpos($this->webposIndex, $dataStaff['username'],$dataStaff['password']);
 
         //Add products to cart
@@ -91,7 +91,7 @@ class WebposManageStaffMS56Test extends Injectable
         //Assert custom price
         $this->assertEditDiscountCustomPrice->processAssert($this->webposIndex, 80, 1);
 
-        //Checkout
+        //Cart
         $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();

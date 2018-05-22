@@ -16,7 +16,7 @@ use Magento\Mtf\TestCase\Injectable;
  * Test Creation for CreateVirtualProductEntity
  *
  * Test Flow:
- * 1. Login as admin.
+ * 1. LoginTest as admin.
  * 2. Navigate to the Products > Inventory > Catalog.
  * 3. Click on "+" dropdown and select Virtual Product type.
  * 4. Fill in all data according to data set.

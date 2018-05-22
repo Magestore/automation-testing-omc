@@ -14,8 +14,9 @@ class AssertOrderOnlyCreatedByStaff extends AbstractConstraint
     {
         $webposIndex->getMsWebpos()->clickCMenuButton();
         $webposIndex->getCMenu()->ordersHistory();
-        $webposIndex->getOrderHistoryOrderList()->waitLoader();
         $webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
+        $webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
 
         $items = $webposIndex->getOrderHistoryOrderList()->getAllOrderItems();
         \PHPUnit_Framework_Assert::assertEquals(

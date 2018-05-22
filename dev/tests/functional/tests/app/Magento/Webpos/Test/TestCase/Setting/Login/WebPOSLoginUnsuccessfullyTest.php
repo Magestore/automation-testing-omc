@@ -12,7 +12,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebPOSLoginUnsuccessfullyTest
- * @package Magento\Webpos\Test\TestCase\Setting\Login
+ * @package Magento\Webpos\Test\TestCase\Setting\LoginTest
  */
 class WebPOSLoginUnsuccessfullyTest extends Injectable
 {

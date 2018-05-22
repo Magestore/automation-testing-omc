@@ -13,7 +13,7 @@ use Magento\Storepickup\Test\Page\Adminhtml\HolidayIndex;
 
 /**
  * Steps:
- * 1. Login to the backend.
+ * 1. LoginTest to the backend.
  * 2. Navigate to Store Pickup > Manage Holiday.
  * 3. Click to Add New Holiday.
  * 4. Perform appropriate assertions.

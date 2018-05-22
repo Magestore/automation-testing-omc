@@ -21,6 +21,10 @@ class AssertInvoiceSuccess extends AbstractConstraint
      */
     public function processAssert(WebposIndex $webposIndex)
     {
+        \PHPUnit_Framework_Assert::assertTrue(
+            $webposIndex->getToaster()->getWarningMessage()->isVisible(),
+            'Success Message is not displayed'
+        );
         \PHPUnit_Framework_Assert::assertFalse(
             $webposIndex->getModal()->getModalPopup()->isVisible(),
             'Confirm Popup is not closed'
@@ -29,14 +33,10 @@ class AssertInvoiceSuccess extends AbstractConstraint
             $webposIndex->getOrderHistoryInvoice()->isVisible(),
             'Invoice Pop is not closed'
         );
-        sleep(2);
-        \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getToaster()->getWarningMessage()->isVisible(),
-            'Success Message is not displayed'
-        );
-
+        $messages = 'The invoice has been created successfully.';
+        $webposIndex->getToaster()->waitUntilWarningMessageChange($messages);
         \PHPUnit_Framework_Assert::assertEquals(
-            'The invoice has been created successfully.',
+            $messages,
             $webposIndex->getToaster()->getWarningMessage()->getText(),
             "Success message's Content is Wrong"
         );

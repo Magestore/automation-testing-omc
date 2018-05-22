@@ -6,30 +6,34 @@
  * Time: 10:04
  */
 
-namespace Magento\Webpos\Api\CurrentSessionId;
+namespace Magento\Webpos\Api\Staff;
 
 use Magento\TestFramework\TestCase\WebapiAbstract;
 /**
- * Class CurrentSessionIdTest
- * @package Magento\Webpos\Api\CurrentSessionId
+ * Class LoginTest
+ * @package Magento\Webpos\Api\Staff
  */
-class CurrentSessionIdTest extends WebapiAbstract
+class LoginTest extends WebapiAbstract
 {
     /**
      * @var $username
      */
     protected $username = 'admin';
+
     /**
      * @var $password
      */
     protected $password = 'admin123';
 
+    /**
+     * const RESOURCE_PATH
+     */
     const RESOURCE_PATH = '/V1/webpos/staff/login';
 
     /**
-     * Get the current session Id
+     * test Staff LoginTest
      */
-    public function getCurrentSessionId()
+    public function testStaffLogin()
     {
         $serviceInfo = [
             'rest' => [
@@ -44,6 +48,7 @@ class CurrentSessionIdTest extends WebapiAbstract
                 'password' => $this->password
             ],
         ];
-        return $this->_webApiCall($serviceInfo, $requestData);
+        $result = $this->_webApiCall($serviceInfo, $requestData);
+        return $result;
     }
 }

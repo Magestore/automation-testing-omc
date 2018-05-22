@@ -18,7 +18,7 @@ use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
 use Magento\Webpos\Test\Page\Adminhtml\StaffEdit;
 /**
  * Class WebPOSLoginByInactiveAccountTest
- * @package Magento\Webpos\Test\TestCase\Setting\Login
+ * @package Magento\Webpos\Test\TestCase\Setting\LoginTest
  */
 class WebPOSLoginByInactiveAccountTest extends Injectable
 {
@@ -70,7 +70,7 @@ class WebPOSLoginByInactiveAccountTest extends Injectable
     }
 
     /**
-     * Login AssertWebposCheckGUICustomerPriceCP54 group test.
+     * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
      *
      * @param Staff $staff
      * @param Staff ConfigData
@@ -84,7 +84,7 @@ class WebPOSLoginByInactiveAccountTest extends Injectable
             ['staff' => $createStaff]
         )->run();
         // End create new Staff on magento backend
-        //Begin Login webpos by the other staff
+        //Begin LoginTest webpos by the other staff
         $this->webposIndex->open();
         $this->webposIndex->getLoginForm()->getUsernameField()->setValue($createStaff->getUsername());
         $this->webposIndex->getLoginForm()->getPasswordField()->setValue($createStaff->getPassword());
@@ -92,7 +92,7 @@ class WebPOSLoginByInactiveAccountTest extends Injectable
         self::assertEquals(
             $errorMessage,
             $this->webposIndex->getToaster()->getWarningMessage()->getText(),
-            'In the WebPOS Login Page, We could not login with an inactive account.'
+            'In the WebPOS LoginTest Page, We could not login with an inactive account.'
         );
     }
 }

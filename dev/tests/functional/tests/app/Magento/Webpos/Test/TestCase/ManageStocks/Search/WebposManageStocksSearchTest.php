@@ -46,7 +46,7 @@ class WebposManageStocksSearchTest extends Injectable
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $product_entity = $objectManager->create('Magento\Catalog\Model\Product')->load($product['id']);
 
-        // Login webpos
+        // LoginTest webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();

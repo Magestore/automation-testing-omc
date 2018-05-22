@@ -59,7 +59,7 @@ class WebposOrdersHistoryInvoiceOH114Test extends Injectable
             ['products' => $products]
         )->run();
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -107,6 +107,7 @@ class WebposOrdersHistoryInvoiceOH114Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         //select order
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 

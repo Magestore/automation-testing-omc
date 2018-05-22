@@ -83,7 +83,7 @@ class WebposTaxTAX12_1Test extends Injectable
 		// Create Customer 2 (doesn't meet tax conditon)
 		$customer2->persist();
 
-		// Login webpos
+		// LoginTest webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();

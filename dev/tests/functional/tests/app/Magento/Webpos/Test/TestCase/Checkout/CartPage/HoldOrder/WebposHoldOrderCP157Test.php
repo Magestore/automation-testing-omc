@@ -15,17 +15,17 @@ use Magento\ConfigurableProduct\Test\Fixture\ConfigurableProduct;
  * Class WebposHoldOrderCP157Test
  *
  * Precondition:
- * 1. Login Webpos as a staff
+ * 1. LoginTest Webpos as a staff
  * 2. Add a configurable product to cart
  * 3. Hold order successfully
  *
  * Steps:
  * 1. Go to [On-hold orders] menu
- * 2. Click on [Checkout] button on that detail order"
+ * 2. Click on [Cart] button on that detail order"
  *
  * Acceptance: Order will be loaded to cart page with corresponding product and attributes
  *
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\HoldOrder
  */
 class WebposHoldOrderCP157Test extends Injectable
 {
@@ -52,7 +52,7 @@ class WebposHoldOrderCP157Test extends Injectable
 
     public function test(ConfigurableProduct $product, $attribute)
     {
-        //Login webpos
+        //LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -73,7 +73,7 @@ class WebposHoldOrderCP157Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
-        //Checkout in On-Hold
+        //Cart in On-Hold
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->onHoldOrders();
         $this->webposIndex->getOnHoldOrderOrderList()->waitLoader();

@@ -5,7 +5,7 @@
             <data name="product/dataset" xsi:type="string">product1</data>
             <data name="productName" xsi:type="string">Custom Product</data>
             <data name="price" xsi:type="string">50.00</data>
-            <!--<constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomSale\AssertWebposCustomSaleInputInvalidToPriceCP75"/>-->
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Cart\CartPage\CustomSale\AssertWebposCustomSaleInputInvalidToPriceCP75"/>-->
         </variation>
     </testCase>
 </config>

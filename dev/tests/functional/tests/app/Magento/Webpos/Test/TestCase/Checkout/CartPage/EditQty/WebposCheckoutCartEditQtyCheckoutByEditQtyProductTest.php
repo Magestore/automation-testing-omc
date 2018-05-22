@@ -14,7 +14,7 @@ use Magento\Webpos\Test\Constraint\Checkout\CartPage\EditQty\AssertEditProductPo
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposCheckoutCartEditQtyCheckoutByEditQtyProductTest
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\EditQty
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\EditQty
  */
 class WebposCheckoutCartEditQtyCheckoutByEditQtyProductTest extends Injectable
 {
@@ -43,7 +43,7 @@ class WebposCheckoutCartEditQtyCheckoutByEditQtyProductTest extends Injectable
 		$qtyInput
 	)
 	{
-		// Login webpos
+		// LoginTest webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();

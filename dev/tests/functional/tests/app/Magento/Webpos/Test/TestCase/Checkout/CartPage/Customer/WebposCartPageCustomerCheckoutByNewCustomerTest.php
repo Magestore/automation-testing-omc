@@ -8,15 +8,16 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
 
-
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Customer\Test\Fixture\Address;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposCartPageCustomerCheckoutByNewCustomerTest
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer
+ */
 class WebposCartPageCustomerCheckoutByNewCustomerTest extends Injectable
 {
 	/**
@@ -55,7 +56,7 @@ class WebposCartPageCustomerCheckoutByNewCustomerTest extends Injectable
 		$addAddress = false
 	)
 	{
-		// Login webpos
+		// LoginTest webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();
@@ -77,7 +78,6 @@ class WebposCartPageCustomerCheckoutByNewCustomerTest extends Injectable
 			$this->webposIndex->getCheckoutAddCustomer()->isVisible(),
 			'CategoryRepository - TaxClass Page - Add customer popup is not shown'
 		);
-		sleep(2);
 		$this->webposIndex->getCheckoutAddCustomer()->getFirstNameInput()->setValue($customer->getFirstname());
 		$this->webposIndex->getCheckoutAddCustomer()->getLastNameInput()->setValue($customer->getLastname());
 		$this->webposIndex->getCheckoutAddCustomer()->getEmailInput()->setValue($customer->getEmail());
@@ -114,11 +114,11 @@ class WebposCartPageCustomerCheckoutByNewCustomerTest extends Injectable
 			'CategoryRepository - TaxClass Page - Add new customer - save message is wrong'
 		);
 
-
 		$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
+        $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod();
 		$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 		$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
@@ -126,7 +126,7 @@ class WebposCartPageCustomerCheckoutByNewCustomerTest extends Injectable
 
 		//Assert Place Order Success
 		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-
+        sleep(1);
 		$this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 

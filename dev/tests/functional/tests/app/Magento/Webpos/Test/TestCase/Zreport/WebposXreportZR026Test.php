@@ -97,8 +97,9 @@ class WebposXreportZR026Test extends Injectable
         )->run();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->getSessionManagement();
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitForSessionManagerLoader();
 
         $staffName = $this->webposIndex->getSessionShift()->getStaffName()->getText();
         $openedString = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
@@ -128,6 +129,10 @@ class WebposXreportZR026Test extends Injectable
                 ['configData' => 'magestore_webpos_specific_payment']
             )->run();
         }
+
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
+        )->run();
     }
 
     /**

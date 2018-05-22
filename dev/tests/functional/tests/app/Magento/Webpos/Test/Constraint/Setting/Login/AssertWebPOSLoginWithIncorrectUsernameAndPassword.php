@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertWebPOSLoginWithIncorrectUsernameAndPassword
- * @package Magento\Webpos\Test\Constraint\Setting\Login
+ * @package Magento\Webpos\Test\Constraint\Setting\LoginTest
  */
 class AssertWebPOSLoginWithIncorrectUsernameAndPassword extends AbstractConstraint
 {
@@ -24,7 +24,7 @@ class AssertWebPOSLoginWithIncorrectUsernameAndPassword extends AbstractConstrai
         \PHPUnit_Framework_Assert::assertEquals(
             $message,
             $webposIndex->getToaster()->getWarningMessage()->getText(),
-            'On the WebPOS Login Page. We should not login with ivnalid username and password.'
+            'On the WebPOS LoginTest Page. We should not login with ivnalid username and password.'
         );
     }
 
@@ -35,6 +35,6 @@ class AssertWebPOSLoginWithIncorrectUsernameAndPassword extends AbstractConstrai
      */
     public function toString()
     {
-        return 'On the WebPOS Login Page. We should not login with ivnalid username and password.';
+        return 'On the WebPOS LoginTest Page. We should not login with ivnalid username and password.';
     }
 }

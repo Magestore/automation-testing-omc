@@ -50,13 +50,13 @@ class AssertTaxAmountAndShippingOnCartPageAndCheckoutPageWithShippingFee extends
         \PHPUnit_Framework_Assert::assertEquals(
             $taxAmount,
             $taxAmountOnPage,
-            'On the Cart - The Tax at the web POS was not correctly.'
+            'On the Checkout - The Tax at the web POS was not correctly.'
         );
 
         \PHPUnit_Framework_Assert::assertEquals(
             $shippingFeeOnCart,
             $shippingFeeOnPage,
-            'On the Cart - The Shipping at the web POS was not correctly.'
+            'On the Checkout - The Shipping at the web POS was not correctly.'
         );
     }
 

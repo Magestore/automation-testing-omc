@@ -138,7 +138,7 @@ class WebposTaxTAX71Test extends Injectable
             ['configData' => $configData]
         )->run();
 
-        // Login webpos
+        // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -158,7 +158,7 @@ class WebposTaxTAX71Test extends Injectable
             ['customer' => $customer]
         )->run();
 
-        // Assert Tax Amount on Cart Page
+        // Assert Tax Amount on Checkout Page
         $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRates['taxRateCA']->getRate(), $this->webposIndex);
 
         // Check out
@@ -167,9 +167,9 @@ class WebposTaxTAX71Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
-        // Assert Tax Amount on Checkout Page
+        // Assert Tax Amount on Cart Page
         $this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRates['taxRateCA']->getRate(), $this->webposIndex);
-        // End Assert Tax Amount on Checkout Page
+        // End Assert Tax Amount on Cart Page
 
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -198,9 +198,9 @@ class WebposTaxTAX71Test extends Injectable
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-
-        sleep(2);
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
 
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}

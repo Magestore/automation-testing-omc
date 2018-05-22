@@ -12,7 +12,7 @@ use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class AssertCheckoutPaymentMethodCP215
- * @package Magento\Webpos\Test\Constraint\Checkout\PaymentMethod
+ * @package Magento\Webpos\Test\Constraint\Cart\PaymentMethod
  */
 class AssertCheckoutPaymentMethodCP215 extends AbstractConstraint
 {

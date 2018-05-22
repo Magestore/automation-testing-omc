@@ -90,7 +90,7 @@ class WebposTaxTAX92Test extends Injectable
 			['configData' => $configData]
 		)->run();
 
-		// Login webpos
+		// LoginTest webpos
 		$staff = $this->objectManager->getInstance()->create(
 			'Magento\Webpos\Test\TestStep\LoginWebposStep'
 		)->run();
@@ -128,7 +128,7 @@ class WebposTaxTAX92Test extends Injectable
 		self::assertEquals(
 			$subTotal,
 			$subTotalOnPage,
-			'Cart Page - Subtotal was not updated'
+			'Checkout Page - Subtotal was not updated'
 			. "\nExpected: " . $subTotal
 			. "\nActual: " . $subTotalOnPage
 		);
@@ -147,7 +147,7 @@ class WebposTaxTAX92Test extends Injectable
         \PHPUnit_Framework_Assert::assertEquals(
             $taxAmountOnHomePage,
             $taxAmountOnCheckoutPage,
-            'On the Cart - The Tax is changed.'
+            'On the Checkout - The Tax is changed.'
         );
 //        // Assert Tax amount is correct
 //		$this->assertTaxAmountOnCartPageAndCheckoutPage->processAssert($taxRate, $this->webposIndex);

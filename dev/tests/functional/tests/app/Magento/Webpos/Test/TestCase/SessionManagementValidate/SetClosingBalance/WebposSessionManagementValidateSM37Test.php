@@ -66,7 +66,7 @@ class WebposSessionManagementValidateSM37Test extends Injectable
         /**@var Staff $staff*/
         $staff = $fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff->persist();
-        // Login webpos
+        // LoginTest webpos
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposByStaffAndWaitSessionInstall',
             [

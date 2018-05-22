@@ -98,10 +98,11 @@ class WebposZreportZR016Test extends Injectable
         )->run();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->logout();
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
+        $this->webposIndex->getBody()->waitForModalPopup();
         $this->webposIndex->getModal()->getOkButton()->click();
+        $this->webposIndex->getBody()->waitForModalPopupNotVisible();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader.loading-mask');
 
         // Login webpos
@@ -123,17 +124,15 @@ class WebposZreportZR016Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        $orderId = $this->webposIndex->getOrderHistoryOrderList()->getSecondOrderId();
-        $this->webposIndex->getOrderHistoryOrderList()->getSecondOrder()->click();
-        $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForChangeOrderId($orderId);
+        $this->webposIndex->getOrderHistoryOrderList()->waitListOrders();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForFormAddNoteOrderVisible();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Refund')->click();
         $this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForModalPopup();
+        $this->webposIndex->getBody()->waitForModalPopup();
         $this->webposIndex->getModal()->getOkButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForModalPopupNotVisible();
+        $this->webposIndex->getBody()->waitForModalPopupNotVisible();
 
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\WebposSetClosingBalanceCloseSessionStep',
