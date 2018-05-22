@@ -28,5 +28,11 @@
             </data>
             <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIXreportOpened"/>
         </variation>
+        <variation name="WebposXreportCheckGUIZR034Test">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIXreportOpened"/>
+        </variation>
     </testCase>
 </config>
