@@ -15,11 +15,11 @@ use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposZreportZR017Test
+ * Class WebposXreportZR033Test
  * Precondition:
  * - There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * - Setup multi currencies
- * 1. Login webpos by a staff who has open and close session permission
+ * 1. Login webpos by a staff
  * 2. Go to General > Currency > Select a currency that different from default currency
  * 3. Open a session with conditions:
  * - Opening amount: >0
@@ -32,16 +32,14 @@ use Magento\Webpos\Test\Page\WebposIndex;
  *
  * Steps:
  * 1. Go to [Session Management] menu
- * 2. Close the session successfully with:
- * - Close amount: Input a number that greater than 0 and different from [Theoretical Closing Amount]
- * 3. Click to print Z-report
+ * 2. Click to print X-report
  *
  * Acceptance:
- * 3. All of fields on Z-report will be show exactly the symbol and converting rate of the currency that selected on step 2 of [Precondition and setup steps]
+ * 2. All of fields on X-report will be show exactly the symbol and converting rate of the currency that selected on step 2 of [Precondition and setup steps]
  *
  * @package Magento\Webpos\Test\TestCase\Zreport
  */
-class WebposZreportZR017Test extends Injectable
+class WebposXreportZR033Test extends Injectable
 {
     /**
      * Webpos Index page.
@@ -80,7 +78,6 @@ class WebposZreportZR017Test extends Injectable
         $putMoneyInValue,
         $takeMoneyOutValue,
         $discountAmount = '',
-        $menuItem,
         $symbol
     )
     {
@@ -111,30 +108,6 @@ class WebposZreportZR017Test extends Injectable
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
         )->run();
-
-        // Open session
-        $time = time();
-        $timeAfter = $time + 3;
-        while (!$this->webposIndex->getOpenSessionPopup()->isVisible()
-            && $time < $timeAfter) {
-            $time = time();
-        }
-        if ($this->webposIndex->getOpenSessionPopup()->isVisible()) {
-            $this->webposIndex->getOpenSessionPopup()->waitLoader();
-            $this->webposIndex->getOpenSessionPopup()->getCancelButton()->click();
-
-            $this->webposIndex->getMsWebpos()->clickCMenuButton();
-            $this->webposIndex->getCMenu()->general();
-            sleep(1);
-            $this->webposIndex->getGeneralSettingMenuLMainItem()->getMenuItem($menuItem)->click();
-            $this->webposIndex->getGeneralSettingContentRight()->waitCurrencySelectionVisible();
-            $this->webposIndex->getGeneralSettingContentRight()->getCurrencySelection()->setValue('Ukrainian Hryvnia');
-
-            $this->webposIndex->getMsWebpos()->waitForCMenuVisible();
-            $this->webposIndex->getMsWebpos()->clickCMenuButton();
-            $this->webposIndex->getCMenu()->checkout();
-            sleep(1);
-        }
 
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\WebposOpenSessionStep',
@@ -209,15 +182,12 @@ class WebposZreportZR017Test extends Injectable
         $this->webposIndex->getModal()->getOkButton()->click();
         $this->webposIndex->getMsWebpos()->waitForModalPopupNotVisible();
 
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\WebposSetClosingBalanceCloseSessionStep',
-            [
-                'denomination' => $denomination,
-                'denominationNumberCoin' => $denominationNumberCoin
-            ]
-        )->run();
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
+        $this->webposIndex->getCMenu()->getSessionManagement();
+        $this->webposIndex->getMsWebpos()->waitForSessionManagerLoader();
 
-        $cashSales = $this->webposIndex->getSessionShift()->getPaymentAmount(1)->getText();
+        $cashSales = $this->webposIndex->getSessionShift()->getPaymentAmount()->getText();
         $otherPaymentSales = $this->webposIndex->getSessionShift()->getPaymentAmount(2)->getText();
 
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
@@ -240,9 +210,8 @@ class WebposZreportZR017Test extends Injectable
             'cashSales' => $cashSales,
             'cashRefund' => 0,
             'otherPaymentSales' => $otherPaymentSales,
-            'discountAmount' => $discountAmount,
-            'refund' => $cashSales,
-            'symbol' => $symbol
+            'refund' => 0,
+            'discountAmount' => $discountAmount
         ];
     }
 
@@ -262,6 +231,10 @@ class WebposZreportZR017Test extends Injectable
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'config_default_currency_rollback']
+        )->run();
+
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
         )->run();
     }
 

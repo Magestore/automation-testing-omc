@@ -11,10 +11,10 @@ namespace Magento\Webpos\Test\Constraint\Zreport;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class AssertXreportOpeningAmountPutInTakeOutMoneyDiscountRefund
+ * Class AssertXreportOpeningPutInTakeOutDiscountRefund
  * @package Magento\Webpos\Test\Constraint\Zreport
  */
-class AssertXreportOpeningAmountPutInTakeOutMoneyDiscountRefund extends \Magento\Mtf\Constraint\AbstractConstraint
+class AssertXreportOpeningPutInTakeOutDiscountRefund extends \Magento\Mtf\Constraint\AbstractConstraint
 {
     public function processAssert(
         WebposIndex $webposIndex,
