@@ -180,7 +180,7 @@ class PosForm extends Form
 
     public function getValidateClosing()
     {
-        return $this->_rootElement->find('//button[*[text()[normalize-space()="Validate Closing"]]]', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//*[text()[normalize-space()="Validate Closing"]]', Locator::SELECTOR_XPATH);
     }
 
     public function waitValidateClosingVisible()

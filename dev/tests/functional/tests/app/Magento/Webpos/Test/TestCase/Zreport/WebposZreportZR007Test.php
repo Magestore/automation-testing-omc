@@ -17,13 +17,14 @@ use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposZreportLoginTwiceTest
+ * Class WebposZreportZR007Test
  *
- * Precondition: There are some POSs and setting [Need to create session before working] = "Yes" on the test site
- * 1. LoginTest webpos by a staff who has open and close session permission
- * 2. Choose an available POS (ex: POS 1)
- * 3. Open a session
- * 4. Create some orders successfully
+ * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
+ * 1. Login webpos by a staff who has open and close session permission (ex: Staff A)
+ * 2. Open a session
+ * 3. Create some orders successfully
+ * 4. Logout
+ * 5. Login webpos by another staff who has close session permission (ex: Staff B)
  *
  * Steps:
  * 1. Go to [Session Management] menu
@@ -31,11 +32,13 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 3. Click to print Z-report
  *
  * Acceptance:
- * 3. [POS] field will show name of the current POS (POS 1)
+ * 3.
+ * - [Opened] field: show opened Date & Time and the staff name who opened this session  (staff A)
+ * - [Closed] field: show closed Date & Time and the staff name who closed this session (staff B)
  *
  * @package Magento\Webpos\Test\TestCase\Zreport
  */
-class WebposZreportLoginTwiceTest extends Injectable
+class WebposZreportZR007Test extends Injectable
 {
     /**
      * Webpos Index page.
@@ -106,6 +109,7 @@ class WebposZreportLoginTwiceTest extends Injectable
         )->run();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $staffName1 = $staff->getDisplayName();
         $this->webposIndex->getCMenu()->logout();
         $this->webposIndex->getBody()->waitForModalPopup();
@@ -137,21 +141,15 @@ class WebposZreportLoginTwiceTest extends Injectable
             ['products' => $products]
         )->run();
 
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $staffName2 = $staff->getDisplayName();
-        $this->webposIndex->getCMenu()->getSessionManagement();
-        sleep(1);
-        // Set closing balance
-        $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getColumnNumberOfCoinsAtRow(2)->setValue($denominationNumberCoin);
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
-        $this->webposIndex->getSessionSetReasonPopup()->getReason()->setValue('Magento');
-        $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
-        // End session
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        $this->webposIndex->getSessionShift()->waitBtnCloseSessionNotVisible();
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\WebposSetClosingBalanceCloseSessionStep',
+            [
+                'denomination' => $denomination,
+                'denominationNumberCoin' => $denominationNumberCoin
+            ]
+        )->run();
 
+        $staffName2 = $staff->getDisplayName();
         $openedString = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
         $openedString .= ' by ' . $staffName1;
         $closedString = $this->webposIndex->getSessionShift()->getCloseTime()->getText();
