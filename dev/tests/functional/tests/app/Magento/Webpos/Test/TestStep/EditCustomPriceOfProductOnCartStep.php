@@ -18,7 +18,7 @@ class EditCustomPriceOfProductOnCartStep implements TestStepInterface
 {
 	/**
 	 * Webpos Index page.
-	 * @var WebposIndex
+	 * @var WebposIndex $webposIndex
 	 */
 	protected $webposIndex;
 
@@ -54,9 +54,8 @@ class EditCustomPriceOfProductOnCartStep implements TestStepInterface
 				sleep(1);
 				$this->webposIndex->getCheckoutProductEdit()->getDollarButton()->click();
 				$this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($item['customPrice']);
-                $this->webposIndex->getMainContent()->waitForMsWebpos();
-                $this->webposIndex->getMainContent()->clickOutsidePopup();
-                sleep(1);
+                $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
+                sleep(2);
             }
 		}
 	}

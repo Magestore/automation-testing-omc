@@ -15,29 +15,25 @@ use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class WebposManageStaffMS80Test
  * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
  */
 class WebposManageStaffMS80Test extends Injectable
 {
-
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     private $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     /**
-     * Inject WebposIndex pages.
-     *
-     * @param $webposIndex
-     * @return void
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
      */
     public function __inject(
         WebposIndex $webposIndex,
@@ -47,6 +43,10 @@ class WebposManageStaffMS80Test extends Injectable
         $this->fixtureFactory = $fixtureFactory;
     }
 
+    /**
+     * @param FixtureFactory $fixtureFactory
+     * @return array
+     */
     public function __prepare(FixtureFactory $fixtureFactory)
     {
         //Config create session before working
@@ -59,10 +59,8 @@ class WebposManageStaffMS80Test extends Injectable
     }
 
     /**
-     * Create WebposRole group test.
-     *
-     * @param WebposRole
-     * @return void
+     * @param WebposRole $webposRole
+     * @param $staffData
      */
     public function test(WebposRole $webposRole, $staffData)
     {
@@ -90,12 +88,10 @@ class WebposManageStaffMS80Test extends Injectable
         //LoginTest
         $this->login($staff, $location, $pos);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
         $this->webposIndex->getSessionShift()->getOpenShiftButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
-        $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         sleep(3);
         $this->assertTrue(
             $this->webposIndex->getListShift()->getFirstItemShift()->isVisible(),
@@ -104,6 +100,11 @@ class WebposManageStaffMS80Test extends Injectable
 
     }
 
+    /**
+     * @param Staff $staff
+     * @param Location|null $location
+     * @param Pos|null $pos
+     */
     public function login(Staff $staff, Location $location = null, Pos $pos = null)
     {
         $username = $staff->getUsername();
@@ -125,17 +126,14 @@ class WebposManageStaffMS80Test extends Injectable
             if ($location || $pos) {
                 $this->webposIndex->getLoginForm()->getEnterToPos()->click();
             }
-            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
             $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
-            $timeAfter = $time + 360;
-            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            $timeAfter = $time + 90;
+            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
                 $time = time();
             }
-            sleep(2);
         }
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-
     }
 
     public function tearDown()

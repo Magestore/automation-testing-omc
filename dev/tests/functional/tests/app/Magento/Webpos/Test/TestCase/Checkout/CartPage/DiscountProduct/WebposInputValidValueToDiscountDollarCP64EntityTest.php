@@ -44,9 +44,8 @@ class WebposInputValidValueToDiscountDollarCP64EntityTest extends Injectable
     }
 
     /**
-     * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
-     *
-     * @return void
+     * @param CatalogProductSimple $product
+     * @return array
      */
     public function test(CatalogProductSimple $product)
     {
@@ -64,8 +63,8 @@ class WebposInputValidValueToDiscountDollarCP64EntityTest extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($price-$price/2);
         //we need to set sleep($second) in this case.
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
+        sleep(2);
         return [
             'product' => $product,
             'price' => $price

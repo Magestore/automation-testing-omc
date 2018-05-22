@@ -7,11 +7,15 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\PaymentMethod;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
-
+/**
+ * Class WebposCheckoutPaymentMethodCP210Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\PaymentMethod
+ */
 class WebposCheckoutPaymentMethodCP210Test extends Injectable
 {
     /**
@@ -71,11 +75,8 @@ class WebposCheckoutPaymentMethodCP210Test extends Injectable
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
-//        $amount = $this->webposIndex->getCheckoutPlaceOrder()->getHeaderAmount()->getText();
-//        \Zend_Debug::dump($amount); die();
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutPaymentMethod()->getTitlePaymentMethod()->click();
     }
 
     public function tearDown()

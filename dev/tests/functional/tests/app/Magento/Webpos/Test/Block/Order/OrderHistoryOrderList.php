@@ -31,8 +31,8 @@ class OrderHistoryOrderList extends Block
 
 	public function getFirstOrder()
 	{
-//        sleep(2);
-        $this->waitForFirstOrderVisible();
+        sleep(2);
+//        $this->waitForFirstOrderVisible();
 		return $this->_rootElement->find('.list-orders .order-item');
 	}
 

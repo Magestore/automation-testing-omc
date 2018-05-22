@@ -73,8 +73,8 @@ class WebposCheckoutWithDiscountProductPercentCP67EntityTest extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
+        sleep(2);
         //CategoryRepository
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();

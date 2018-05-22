@@ -7,6 +7,7 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
@@ -39,10 +40,9 @@ class WebposManageStaffMS70Test extends Injectable
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
-     * Inject WebposIndex pages.
-     *
-     * @param $webposIndex
-     * @return void
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     public function __inject(
         WebposIndex $webposIndex,
@@ -61,10 +61,9 @@ class WebposManageStaffMS70Test extends Injectable
     }
 
     /**
-     * Create WebposRole group test.
-     *
-     * @param WebposRole
-     * @return void
+     * @param WebposRole $webposRole
+     * @param $products
+     * @param $staffData
      */
     public function test(WebposRole $webposRole, $products, $staffData)
     {
@@ -114,8 +113,8 @@ class WebposManageStaffMS70Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-edit-product"]');
         $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue(69);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
+        sleep(2);
         $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
         $this->webposIndex->getCheckoutDiscount()->setDiscountAmount(5);
         $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();

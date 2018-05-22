@@ -21,18 +21,18 @@ class WebposPlaceOrderWithCustomerPercentCP61Test extends Injectable
     /**
      * AssertWebposCheckGUICustomerPriceCP54 Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
      * @param WebposIndex $webposIndex
-     * @return void
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     public function __inject(
         WebposIndex $webposIndex,
@@ -44,9 +44,9 @@ class WebposPlaceOrderWithCustomerPercentCP61Test extends Injectable
     }
 
     /**
-     * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
-     *
-     * @return void
+     * @param CatalogProductSimple $product
+     * @param $amountValue
+     * @return array
      */
     public function test(CatalogProductSimple $product, $amountValue)
     {
@@ -63,8 +63,8 @@ class WebposPlaceOrderWithCustomerPercentCP61Test extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
+        sleep(1);
         //CategoryRepository
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();

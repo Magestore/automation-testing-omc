@@ -65,9 +65,8 @@ class SessionInstallStep
             $this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
             $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
             $this->webposIndex->getLoginForm()->clickLoginButton();
-            sleep(1);
             $time = time();
-            $timeAfter = $time + 30;
+            $timeAfter = $time + 2;
             while (!$this->webposIndex->getWrapWarningForm()->isVisible() &&
                 !$this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible() &&
                 $time < $timeAfter){
@@ -76,9 +75,15 @@ class SessionInstallStep
             if ($this->webposIndex->getWrapWarningForm()->isVisible() &&
                 $this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible()) {
                 $this->webposIndex->getWrapWarningForm()->getButtonContinue()->click();
-                sleep(1);
+            }
+            $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
+            $time = time();
+            $timeAfter = $time + 90;
+            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+                $time = time();
             }
         }
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 
         $data = [
             'username' => $username,
@@ -88,11 +93,11 @@ class SessionInstallStep
         /**
          *  wait sync complete
          */
-        while (
-            ( rtrim($this->webposIndex->getSessionInstall()->getPercent()->getText(),"%") * 1 ) < 95
-        ) {
-            sleep(1);
-        }
+//        while (
+//            ( rtrim($this->webposIndex->getSessionInstall()->getPercent()->getText(),"%") * 1 ) < 95
+//        ) {
+//            sleep(1);
+//        }
 
         sleep(5);
         return $this->fixtureFactory->createByCode('staff' , ['data' => $data]);

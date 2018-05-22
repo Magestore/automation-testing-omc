@@ -6,11 +6,21 @@
  * Time: 20:41
  */
 namespace Magento\Webpos\Test\Constraint\OnHoldOrder\HoldOrder;
+
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class AssertCheckPriceWithOneProduct
+ * @package Magento\Webpos\Test\Constraint\OnHoldOrder\HoldOrder
+ */
 class AssertCheckPriceWithOneProduct extends AbstractConstraint
 {
+    /**
+     * @param WebposIndex $webposIndex
+     * @param $product
+     * @param $type
+     * @param $priceCustom
+     */
     public function processAssert(WebposIndex $webposIndex, $product, $type, $priceCustom)
     {
         $webposIndex->getMsWebpos()->clickCMenuButton();
@@ -19,7 +29,7 @@ class AssertCheckPriceWithOneProduct extends AbstractConstraint
         $webposIndex->getOnHoldOrderOrderList()->waitLoader();
         $webposIndex->getOnHoldOrderOrderList()->getFirstOrder();
 
-        //Check origin price
+//        Check origin price
 //        \PHPUnit_Framework_Assert::assertEquals(
 //            floatval($product['price']),
 //            $webposIndex->getOnHoldOrderOrderViewContent()->getOriginPriceProductByOrderTo(1),
