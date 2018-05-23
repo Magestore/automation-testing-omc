@@ -12,10 +12,10 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
 
 /**
- * Class AdminSessionManagementLR21Test
+ * Class AdminSessionManagementLR22Test
  * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
-class AdminSessionManagementLR21Test extends Injectable
+class AdminSessionManagementLR22Test extends Injectable
 {
     /**
      * @var WebposRoleNew
@@ -34,14 +34,16 @@ class AdminSessionManagementLR21Test extends Injectable
         $this->webposRoleNew->open();
         $this->webposRoleNew->getRoleForm()->openTab('permission');
 
-        $roleResources = [
-            'Magestore_Webpos::lock_register',
-            'Magestore_Webpos::lock_unlock_register',
+        $roleResourcesClick = [
             'Magestore_Webpos::edit_pin'
         ];
-        $this->webposRoleNew->getRoleForm()->getRoleResources($roleResources[0]);
+
+        $roleResourcesCheck = [
+            'Magestore_Webpos::lock_register'
+        ];
+        $this->webposRoleNew->getRoleForm()->getRoleResources($roleResourcesClick[0]);
         return [
-          'roleResources' => $roleResources
+          'roleResources' => $roleResourcesCheck
         ];
     }
 }
