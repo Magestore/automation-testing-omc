@@ -65,7 +65,7 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
             $timeAfter = $time + 3;
             while (!$this->webposIndex->getWrapWarningForm()->isVisible() &&
                 !$this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible() &&
-                $time < $timeAfter){
+                $time < $timeAfter) {
                 $time = time();
             }
             if ($this->webposIndex->getWrapWarningForm()->isVisible() &&
@@ -74,7 +74,9 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
             }
 
             $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
-            $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
+            if ($this->webposIndex->getLoginForm()->getPosID()->isVisible()) {
+                $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
+            }
             $this->webposIndex->getLoginForm()->getEnterToPos()->click();
             $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();

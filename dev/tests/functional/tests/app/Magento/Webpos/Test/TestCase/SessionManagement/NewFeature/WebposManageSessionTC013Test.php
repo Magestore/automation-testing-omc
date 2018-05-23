@@ -107,6 +107,8 @@ class WebposManageSessionTC013Test extends Injectable
         )->run();
 
         $webposIndex->getSessionRegisterShift()->waitLoader();
+        $webposIndex->getSessionRegisterShift()->waitForElementVisible('.wrap-item-shift');
+        sleep(2);
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getSessionRegisterShift()->getShiftListingHeaderByTitle($showSessionHistoryTime)->isVisible(),
             'Title shift header wasn\'t show correctly'

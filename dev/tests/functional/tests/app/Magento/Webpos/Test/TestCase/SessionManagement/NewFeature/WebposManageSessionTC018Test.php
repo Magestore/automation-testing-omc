@@ -14,27 +14,28 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Mange Session - Option to not send email on webpos sales
- * Testcase - Check displaying option send sale email on checkout page
+ * Testcase - Check when the send sale email option is turned off
  *
  * Precondition
- * Loged into backend
- * go to webpos settings page (path: On admin sidebar-> tap on Sales -> under webpos -> choose Setttings)
+ * 1. In backend -> go to webpos settings page -> set the field: Ask for send sale order email before place order= Yes
+ * 2. Loged into webpos
  *
  * Steps
- * 1. Set the field Ask for send sale order email before place order= No, after that click on btn Save config
- * 2. Login webpos with staff account
- * 3. Add any product to cart -> click btn checkout
- * 4. Observe all of options on checkout
+ * 1. Add any product to cart
+ * 2. Select the customer to checkout order -> click btn checkout
+ * 3. On checkout page, choose shipping & payment method
+ * 4. turn off send sale email option
  *
  * Acceptance
- * Not showing option sent sale email on checkout page
+ * 4. Btn send sale email is not highlighted
  *
  *
- * Class WebposManageSessionTC015
+ * Class WebposManageSessionTC018
  * @package Magento\Webpos\Test\TestCase\SessionManagement\NewFeature
  */
-class WebposManageSessionTC015Test extends Injectable
+class WebposManageSessionTC018Test extends Injectable
 {
+
     public function __inject()
     {
         //Preconditon
@@ -72,14 +73,19 @@ class WebposManageSessionTC015Test extends Injectable
             sleep(2);
             $i++;
         }
-
+        //Check out with payment
         $webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-        $webposIndex->getCheckoutContainer()->waitForElementVisible('#webpos_cart');
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#webpos_checkout');
-        $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('.send-email-box');
-        \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getCheckoutPlaceOrder()->getEmailSwithBox()->isVisible(),
-            'Email Config still was showed'
+        $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#checkout-method');
+        $webposIndex->getCheckoutPlaceOrder()->getPaymentByMethod('cashforpos')->click();
+        $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#payment-method');
+
+        //Click send email to customer button
+        $webposIndex->getCheckoutPlaceOrder()->getSendMailButton()->click();
+
+        \PHPUnit_Framework_Assert::assertFalse(
+            $webposIndex->getCheckoutPlaceOrder()->isOnSendMailButton(),
+            'Send email is turned off'
         );
     }
 

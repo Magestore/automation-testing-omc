@@ -31,9 +31,8 @@ class OrderHistoryOrderList extends Block
 
 	public function getFirstOrder()
 	{
-//        sleep(2);
-        $this->waitForFirstOrderVisible();
-		return $this->_rootElement->find('.list-orders .order-item');
+//        $this->waitForFirstOrderVisible();
+        return $this->_rootElement->find('//ul[@class="list-orders"]/li[1]', Locator::SELECTOR_XPATH);
 	}
 
 	public function getSecondOrder()
@@ -42,9 +41,9 @@ class OrderHistoryOrderList extends Block
     }
 
 	public function waitForFirstOrderVisible() {
-        $orderItem = $this->_rootElement->find('.list-orders .order-item');
+        $orderItem = $this->_rootElement->find('//ul[@class="list-orders"]/li[1]', Locator::SELECTOR_XPATH);
         if (!$orderItem->isVisible()) {
-            $this->waitForElementVisible('.list-orders .order-item');
+            $this->waitForElementVisible('//ul[@class="list-orders"]/li[1]', Locator::SELECTOR_XPATH);
         }
     }
 

@@ -116,7 +116,7 @@ class WebposManagePosMP31Test extends Injectable
         $this->posNews->getPosForm()->getTabByTitle('Current Sessions Detail')->click();
         $this->posNews->getPosForm()->waitForCurrentSessionLoad();
         $this->posNews->getPosForm()->getCurrentSessionButtonByTitle('Put Money In')->click();
-        $this->posNews->getPosForm()->waitForModalLoad();
+        $this->posNews->getPosForm()->waitForPushMoneyModalLoad();
         $this->posNews->getPosForm()->getPushMoneyInAmountField()->setValue($money + 5);
         $this->posNews->getPosForm()->saveCashAdjustment();
         $this->posNews->getPosForm()->waitForLoaderHidden();
