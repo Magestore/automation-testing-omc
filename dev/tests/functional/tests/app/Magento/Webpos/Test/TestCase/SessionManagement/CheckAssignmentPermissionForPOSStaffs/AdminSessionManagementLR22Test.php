@@ -13,6 +13,20 @@ use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
 
 /**
  * Class AdminSessionManagementLR22Test
+ *
+ * Precondition:
+ * - Loged in backend
+ * - From menu on the left side, select Sales menu , under Web POS > select Manage Role
+ *
+ * Steps:
+ * 1. Add a new role or edit existed role
+ * 2. Open Permission tab
+ * 3. In the Resource Access field, select option: custom
+ * 4. Tick on Lock and Unlock register checkbox or Edit security PIN checkbox
+ *
+ * Acceptance:
+ * 4. The Lock Register checkbox would be automatically checked
+ *
  * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
 class AdminSessionManagementLR22Test extends Injectable

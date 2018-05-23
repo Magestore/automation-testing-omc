@@ -112,4 +112,14 @@ class MsWebpos extends Block
     {
         $this->waitForElementVisible('#c-button--push-left');
     }
+
+    public function waitForLockScreen()
+    {
+        $this->waitForElementVisible('.first-screen.lock-screen');
+    }
+
+    public function waitForCheckoutLoaderNotVisible()
+    {
+        $this->waitForElementNotVisible('#checkout-loader.loading-mask');
+    }
 }

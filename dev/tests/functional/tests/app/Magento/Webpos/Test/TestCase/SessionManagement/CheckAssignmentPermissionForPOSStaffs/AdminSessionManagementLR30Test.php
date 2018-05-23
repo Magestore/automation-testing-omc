@@ -15,42 +15,48 @@ use Magento\Webpos\Test\Fixture\Location;
 use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
+use Magento\Webpos\Test\Page\Adminhtml\WebposRoleEdit;
+use Magento\Webpos\Test\Page\Adminhtml\WebposRoleIndex;
 use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class AdminSessionManagementLR26Test
- *
+ * Class AdminSessionManagementLR30Test
  * Precondition:
  * - Loged in backend
  * - In the  webpos settings page, set the Need to create session before working field to Yes
- * - From menu on the left side, select Sales menu , under Web POS > select Manage Role
-
  *
  * Steps:
- * 1. Add a new role or edit an existed role
- * 2. Open Permission tab
- * 3. Tick on Lock Register checkbox
- * 4. Open Staff List tab, select POS staff account by ticking on each it
- * 4. Click on Save button
- * 5. On webpos, login with POS staff account that is assigned role to Lock and Unlock register
- * 6. After loging in, select Location and POS (This POS is already configed to allow POS staff to lock register)
- * 7. Check webpos menu on left side
- * 8. From menu on left side -> select General -> check sub- menu
-
+ * 1. In the backend, user assigns lock/unlock permission to staff (ex: Staff A)
+ * 2. On webpos, login webpos with staff account (Staff A) that is assigned permission to lock/unlock register
+ * 3. Staff A locks register by entering correct security PIN
+ * 4. In the backend, user change permission of Staff A (Staff A not assigned permission to lock/unlock register
+ * 5. On the unlock screen, Staff A enters correct security PIN
  *
  * Acceptance:
- * 7. Show the Lock Register menu under Logout menu
- * 8. Show more Lock Register sub-menu
+ * 3. The register is locked successfully
+ * 4. Staff permission is changed successfully
+ * 5. Can not unlock register and simultaneously, an alert message is displayed:
+ * "Permission denied. Please contact Administrator to unlock the register"
  *
  * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
-class AdminSessionManagementLR26Test extends Injectable
+class AdminSessionManagementLR30Test extends Injectable
 {
+    /**
+     * @var WebposRoleIndex
+     */
+    protected $webposRoleIndex;
+
     /**
      * @var WebposRoleNew
      */
     protected $webposRoleNew;
+
+    /**
+     * @var WebposRoleEdit
+     */
+    protected $webposRoleEdit;
 
     /**
      * @var WebposIndex
@@ -59,22 +65,24 @@ class AdminSessionManagementLR26Test extends Injectable
 
 
     public function __inject(
+        WebposRoleIndex $webposRoleIndex,
         WebposIndex $webposIndex,
-        WebposRoleNew $webposRoleNew
+        WebposRoleNew $webposRoleNew,
+        WebposRoleEdit $webposRoleEdit
     )
     {
+        $this->webposRoleIndex = $webposRoleIndex;
         $this->webposIndex = $webposIndex;
         $this->webposRoleNew = $webposRoleNew;
+        $this->webposRoleEdit = $webposRoleEdit;
     }
 
     public function test(
         WebposRole $webposRole,
         Pos $pos,
-        $menuItem,
         FixtureFactory $fixtureFactory
     )
     {
-
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'create_session_before_working']
@@ -131,15 +139,47 @@ class AdminSessionManagementLR26Test extends Injectable
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
+        $this->webposIndex->getCMenu()->getLockRegister()->click();
+        $this->webposIndex->getCLockRegister()->waitForPopupLockRegister();
+
+        // lock register
+        $posPin = $pos->getPin();
+        for ($i = 0; $i < 4; $i++) {
+            $this->webposIndex->getCLockRegister()->getInputLockRegisterPin($i + 1)->setValue($posPin[$i]);
+        }
+        $this->webposIndex->getCLockRegister()->waitForPopupLockRegisterNotVisible();
+        $this->webposIndex->getMsWebpos()->waitForCheckoutLoaderNotVisible();
+        $this->webposIndex->getMsWebpos()->waitForLockScreen();
         $this->assertTrue(
-            $this->webposIndex->getCMenu()->getLockRegister()->isVisible(),
-            'Lock register in Cmenu not visible'
+            $this->webposIndex->getLockScreen()->isVisible(),
+            'The register is not locked successfully'
         );
-        $this->webposIndex->getCMenu()->general();
-        sleep(1);
-        $this->assertTrue(
-            $this->webposIndex->getGeneralSettingMenuLMainItem()->getMenuItem($menuItem)->isVisible(),
-            'Lock register in General Setting not visible'
+
+        $this->webposRoleIndex->open();
+        $this->webposRoleIndex->getRoleGrid()->searchAndOpen(['display_name' => $webposRole->getDisplayName()]);
+        $this->webposRoleEdit->getRoleForm()->openTab('permission');
+        $roleResourcesClick = [
+            'Magestore_Webpos::lock_unlock_register'
+        ];
+        $this->webposRoleEdit->getRoleForm()->getRoleResources($roleResourcesClick[0]);
+        $this->webposRoleEdit->getFormPageActions()->save();
+        $this->assertEquals(
+            'Role was successfully saved',
+            $this->webposRoleIndex->getMessagesBlock()->getSuccessMessage(),
+            'Staff permission is not changed successfully'
+        );
+
+        $this->webposIndex->open();
+        $this->webposIndex->getMsWebpos()->waitForLockScreen();
+        // unlock register
+        for ($i = 0; $i < 4; $i++) {
+            $this->webposIndex->getLockScreen()->getInputUnLockRegisterPin($i + 1)->setValue($posPin[$i]);
+        }
+        $this->webposIndex->getMsWebpos()->waitForCheckoutLoaderNotVisible();
+        $this->assertEquals(
+            'Error: Permission denied. Please contact Administrator to unlock the register.',
+            $this->webposIndex->getToaster()->getWarningMessage()->getText(),
+            'Message alert not unlock not correct'
         );
     }
 
