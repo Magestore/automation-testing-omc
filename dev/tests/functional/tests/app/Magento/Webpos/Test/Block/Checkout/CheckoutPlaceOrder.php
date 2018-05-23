@@ -137,4 +137,8 @@ class CheckoutPlaceOrder extends Block
     public function isActivePageCheckout(){
         return (strpos($this->_rootElement->getAttribute('class'),'active')!== false ? true : false);
     }
+
+    public function getEmailSwithBox(){
+        return $this->_rootElement->find('#can_send_email');
+    }
 }

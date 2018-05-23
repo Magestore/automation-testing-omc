@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: stephen
  * Date: 5/14/18
- * Time: 4:30 PM
+ * Time: 4:33 PM
  */
 
 namespace Magento\Webpos\Test\TestCase\Pos\Edit;
@@ -19,28 +19,25 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Manage POS - Edit POS
- * Testcase MP30 - Check [Current session detail] grid
+ * Testcase MP33 - Check [Current session detail] grid
  *
  * Precondition
  * - Exist at least 1 POS on the grid of Manage POS page
  * - Settings > [Need to create session before working] = Yes
  * - Login webpos by staff A > select POS A
- * - Open a new session (session B
+ * -  Open a new session (session B) > place some orders
  *
  * Steps
  * 1. Go to backend > Manage POS > Edit POS A >  Click on [Current session detail] tab
- * 2. Click on [Put money in] button
- * 3. Put money in the cash-drawer
- * 4. Login webpos by staff A > select POS A > go to [Session management] page
+ * 2. Click on [Print] button
  *
  * Acceptance
- * 2. Open [Cash Adjustment] form
- * 4. [+ Transactions] will be updated exactly
+ * 2. Open X-report with correct data
  *
- * Class WebposManagePosMP30
+ * Class WebposManagePosMP33
  * @package Magento\Webpos\Test\TestCase\Pos\Edit
  */
-class WebposManagePosMP30Test extends Injectable
+class WebposManagePosMP33Test extends Injectable
 {
     /**
      * Pos Index Page
@@ -75,7 +72,7 @@ class WebposManagePosMP30Test extends Injectable
     }
 
     public function test(FixtureFactory $fixtureFactory, Pos $pos, Location $location,
-                         Staff $staff, WebposIndex $webposIndex, $money)
+                         Staff $staff, WebposIndex $webposIndex)
     {
         //Precondition
         $location->persist();
@@ -106,7 +103,7 @@ class WebposManagePosMP30Test extends Injectable
             ]
         )->run();
 
-        //Open Edit Pos Page
+//        Open Edit Pos Page
         $this->posIndex->open();
         $this->posIndex->getPosGrid()->waitLoader();
         $this->posIndex->getPosGrid()->searchAndOpen([
@@ -115,31 +112,21 @@ class WebposManagePosMP30Test extends Injectable
         $this->posNews->getPosForm()->waitLoader();
         $this->posNews->getPosForm()->getTabByTitle('Current Sessions Detail')->click();
         $this->posNews->getPosForm()->waitForCurrentSessionLoad();
-        $this->posNews->getPosForm()->getCurrentSessionButtonByTitle('Put Money In')->click();
-        $this->posNews->getPosForm()->waitForPushMoneyModalLoad();
-        $this->posNews->getPosForm()->getPushMoneyInAmountField()->setValue($money);
-        $this->posNews->getPosForm()->saveCashAdjustment();
-        $this->posNews->getPosForm()->waitForLoaderHidden();
-        $addTransactionTotal = $this->posNews->getPosForm()->getAddTransactionAmount();
-        $this->posNews->getFormPageActions()->save();
+        $this->posNews->getPosForm()->getCurrentSessionButtonByTitle('Print')->click();
 
+//        $this->posIndex->open();
+//        $this->posIndex->getPosGrid()->waitLoader();
+//        $this->posIndex->getPosGrid()->searchAndOpen([
+//            'pos_name' => 'Post Test 2811741'
+//        ]);
+//        $this->posNews->getPosForm()->waitLoader();
+//        $this->posNews->getPosForm()->getTabByTitle('Current Sessions Detail')->click();
+//        $this->posNews->getPosForm()->waitForCurrentSessionLoad();
+//        $this->posNews->getPosForm()->getCurrentSessionButtonByTitle('Print')->click();
 
-        //login
-        $webposIndex->open();
-        $webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-        $webposIndex->getMsWebpos()->clickCMenuButton();
-        $webposIndex->getMsWebpos()->waitForCMenuLoader();
-        $webposIndex->getCMenu()->getSessionManagement();
-        $webposIndex->getMsWebpos()->waitForSessionManagerLoader();
-
-        \PHPUnit_Framework_Assert::assertEquals(
-            $addTransactionTotal,
-            $webposIndex->getSessionRegisterShift()->getAddTransactionValue(),
-            'transaction value isn\'t correct'
-        );
+        //
 
     }
-
     public function tearDown()
     {
         $this->objectManager->getInstance()->create(

@@ -26,7 +26,11 @@ class LocationId extends DataSource
             $this->data = $location->getLocationId();
             $this->location = $location;
         } else {
-            $this->data = $data[0];
+            if(is_array($data)){
+                $this->data = $data[0];
+            }else{
+                $this->data = $data;
+            }
         }
     }
 

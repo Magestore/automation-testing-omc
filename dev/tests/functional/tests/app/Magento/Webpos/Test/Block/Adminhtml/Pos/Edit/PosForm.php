@@ -13,6 +13,7 @@ namespace Magento\Webpos\Test\Block\Adminhtml\Pos\Edit;
 
 use Magento\Mtf\Block\Form;
 use Magento\Mtf\Client\Locator;
+
 /**
  * Class PosForm
  * @package Magento\Webpos\Test\Block\Adminhtml\Pos\Edit
@@ -98,6 +99,11 @@ class PosForm extends Form
         return $this->_rootElement->find('#sessions_grid_table .empty-text');
     }
 
+    public function waitForCurrentSessionLoad()
+    {
+        return $this->waitForElementVisible('#admin_webpos_session_detail');
+    }
+
     public function getDefaultCurrentSession($title)
     {
         return $this->_rootElement->find('//legend[@class="admin__legend legend"]/span[text()="' . $title . '"]', locator::SELECTOR_XPATH);
@@ -106,8 +112,7 @@ class PosForm extends Form
     public function waitCloseSession()
     {
         $defaultCurrentSession = $this->getDefaultCurrentSession('There are 0 open session');
-        if(!$defaultCurrentSession->isVisible())
-        {
+        if (!$defaultCurrentSession->isVisible()) {
             $browser = $this->_rootElement;
             $browser->waitUntil(
                 function () use ($defaultCurrentSession) {
@@ -141,7 +146,8 @@ class PosForm extends Form
         return $this->_rootElement->find('//tbody/tr[@class="even"][1]', locator::SELECTOR_XPATH);
     }
 
-    public function getPosNameErrorLabel(){
+    public function getPosNameErrorLabel()
+    {
         return $this->_rootElement->find('#page_pos_name-error');
     }
 
@@ -186,8 +192,7 @@ class PosForm extends Form
     public function waitValidateClosingVisible()
     {
         $validateClosing = $this->getValidateClosing();
-        if(!$validateClosing->isVisible())
-        {
+        if (!$validateClosing->isVisible()) {
             $this->_rootElement->waitUntil(
                 function () use ($validateClosing) {
                     return $validateClosing->isVisible() ? true : null;
@@ -195,4 +200,108 @@ class PosForm extends Form
             );
         }
     }
+
+    public function getClosedAtSessionFirstRowData()
+    {
+        return $this->_rootElement->find('//div[@id="sessions_grid"]//tbody//tr[1]/td[4]', locator::SELECTOR_XPATH);
+    }
+
+    public function getCurrentSessionTitle($ttitle)
+    {
+        return $this->_rootElement->find('//legend[@class="admin__legend legend"]//span[text()="' . $ttitle . '"]', locator::SELECTOR_XPATH);
+    }
+
+    public function getCurrentSessionLabelByTitle($title)
+    {
+        return $this->_rootElement->find('//div[@class="transactions-info"]//label[text()="' . $title . '"]', locator::SELECTOR_XPATH);
+    }
+
+    public function getCurrentSessionButtonByTitle($title)
+    {
+        $this->waitForElementVisible('//div[@class="transactions-info"]//button[./span[text()="' . $title . '"]]', locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//div[@class="transactions-info"]//button[./span[text()="' . $title . '"]]', locator::SELECTOR_XPATH);
+    }
+
+    public function getModal()
+    {
+        return $this->_rootElement->find('ancestor::body//div[@class="modals-wrapper"]', locator::SELECTOR_XPATH);
+    }
+
+    public function waitForModalLoad()
+    {
+        $this->waitForElementVisible('.modal-popup');
+    }
+
+    public function waitForPushMoneyModalLoad()
+    {
+        $this->waitForElementVisible('#popup-make-adjustment');
+    }
+
+    public function getPushMoneyInAmountField()
+    {
+        return $this->getModal()->find('#webpos-cash-adjustment-input-amount', locator::SELECTOR_CSS);
+    }
+
+    public function saveCashAdjustment()
+    {
+        $this->getModal()->find('//footer[@class="modal-footer"]//button[./span[text()="Save"]]', locator::SELECTOR_XPATH)->click();
+    }
+
+    public function getAddTransactionAmount()
+    {
+        return $this->_rootElement->find('//div[@class="transactions-info"]//div[@class="block"][1]//tbody/tr[2]/td[2]/span', locator::SELECTOR_XPATH)->getText();
+    }
+
+    public function getSubtractTransactionAmount()
+    {
+        return $this->_rootElement->find('//div[@class="transactions-info"]//div[@class="block"][1]//tbody/tr[3]/td[2]/span', locator::SELECTOR_XPATH)->getText();
+    }
+
+    public function waitForLoaderHidden()
+    {
+        $this->waitForElementNotVisible('.loading-mask');
+    }
+
+    public function setCashCountingQuanty($qty)
+    {
+        if ($this->_rootElement->find('.counting-box .cash-counting-qty')->isVisible()) {
+            $this->_rootElement->find('.counting-box .cash-counting-qty')->setValue($qty);
+        }
+    }
+
+    public function saveClosingBalance()
+    {
+        $this->getModal()->find('//footer[@class="modal-footer"]//button[./span[text()="Confirm"]]', locator::SELECTOR_XPATH)->click();
+    }
+
+    public function confirmReason()
+    {
+        return $this->getModal()->find('//div[@id="modal-content-17"]/parent::*//footer[@class="modal-footer"]//button[./span[text()="Confirm"]]', locator::SELECTOR_XPATH);
+    }
+
+    public function waitForConfirmModalVisible()
+    {
+        $this->waitForElementVisible('.reason-box');
+    }
+
+    public function waitForModalClose()
+    {
+        $this->waitForElementNotVisible('.modals-wrapper');
+    }
+
+    public function validateClosing($title)
+    {
+        $this->_rootElement->find('//div[@class="webpos-session-info"]//button/span[text()="' . $title . '"]', locator::SELECTOR_XPATH)->click();
+    }
+
+    public function getConfirmModal()
+    {
+        return $this->_rootElement->find('//ancestor::body//div[@id="modal-content-18"]', locator::SELECTOR_XPATH);
+    }
+
+    public function closePopupModal()
+    {
+        $this->_rootElement->find('//ancestor::body//aside[@aria-describedby="modal-content-18"]//button[@class="action-close"]', locator::SELECTOR_XPATH)->click();
+    }
+
 }
