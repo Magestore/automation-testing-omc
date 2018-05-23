@@ -18,7 +18,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposProductsGridPG34Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
@@ -63,8 +63,10 @@ class WebposProductsGridPG34Test extends Injectable
         }
 
         // Click detail product
+        sleep(1);
         $this->webposIndex->getCheckoutProductList()->getFirstProduct()->hover();
         $this->webposIndex->getCheckoutProductList()->getFirstProductDetailButton()->click();
+        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-product-detail"]');
         sleep(1);
 
         return [

@@ -7,6 +7,7 @@
  */
 
 namespace Magento\Webpos\Test\Block\Checkout;
+
 use Magento\GroupedProduct\Test\Fixture\GroupedProduct;
 use Magento\Mtf\Client\Locator;
 use Magento\Mtf\Block\Block;

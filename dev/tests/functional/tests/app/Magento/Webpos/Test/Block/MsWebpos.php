@@ -94,4 +94,8 @@ class MsWebpos extends Block
     {
         return $this->_rootElement->find('#c-button--push-left')->isVisible();
     }
+
+    public function getProductDetailPopup() {
+	    return $this->_rootElement->find('[id="popup-product-detail"]');
+    }
 }

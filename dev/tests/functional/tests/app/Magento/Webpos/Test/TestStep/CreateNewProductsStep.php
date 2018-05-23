@@ -17,17 +17,17 @@ use Magento\Mtf\TestStep\TestStepInterface;
 class CreateNewProductsStep implements TestStepInterface
 {
 	/**
-	 * @var FixtureFactory
+	 * @var FixtureFactory $fixtureFactory
 	 */
 	protected $fixtureFactory;
 
 	protected $products;
 
-	/**
-	 * CreateNewProductsStep constructor.
-	 * @param FixtureFactory $fixtureFactory
-	 * @param $products
-	 */
+    /**
+     * CreateNewProductsStep constructor.
+     * @param FixtureFactory $fixtureFactory
+     * @param $products
+     */
 	public function __construct(
 		FixtureFactory $fixtureFactory,
 		$products
@@ -37,9 +37,9 @@ class CreateNewProductsStep implements TestStepInterface
 		$this->products = $products;
 	}
 
-	/**
-	 * @return mixed
-	 */
+    /**
+     * @return mixed
+     */
 	public function run()
 	{
 		// Create products

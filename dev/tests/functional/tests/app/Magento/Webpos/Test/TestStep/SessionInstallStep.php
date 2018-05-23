@@ -89,17 +89,7 @@ class SessionInstallStep
             'username' => $username,
             'password' => $password
         ];
-
-        /**
-         *  wait sync complete
-         */
-//        while (
-//            ( rtrim($this->webposIndex->getSessionInstall()->getPercent()->getText(),"%") * 1 ) < 95
-//        ) {
-//            sleep(1);
-//        }
-
-        sleep(5);
+        sleep(2);
         return $this->fixtureFactory->createByCode('staff' , ['data' => $data]);
     }
 
