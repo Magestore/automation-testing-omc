@@ -24,6 +24,7 @@ class CheckoutPlaceOrder extends Block
     {
         $this->waitForElementVisible('#checkout-method > div:nth-child(1)');
     }
+
     public function waitPaymentSection()
     {
         $this->waitForElementVisible('#checkout-method > div:nth-child(2)');
@@ -54,62 +55,74 @@ class CheckoutPlaceOrder extends Block
         return $this->_rootElement->find('#checkout_button');
     }
 
-    public function isCheckoutButtonVisible(){
+    public function isCheckoutButtonVisible()
+    {
         return $this->_rootElement->find('#checkout_button')->isVisible();
     }
 
-	/**
-	 * @param ElementInterface $divCheckbox
-	 * @return bool|int
-	 */
-	public function isCheckboxChecked($divCheckbox)
-	{
-		$class = $divCheckbox->find('.ios-ui-select')->getAttribute('class');
-		return strpos($class, 'checked');
-	}
-
-	public function getCreateInvoiceCheckbox()
-	{
-		return $this->_rootElement->find('#can_paid');
-	}
-
-	public function waitForCreateInvoiceCheckboxVisible()
-	{
-	    $this->waitForElementVisible('#can_paid');
-	}
-
-	public function getShippingCheckbox()
-	{
-		return $this->_rootElement->find('#can_ship');
-	}
-
-	public function waitForShippingCheckboxVisible()
-	{
-		 $this->waitForElementVisible('#can_ship');
-	}
-
-	public function isShippingMethod(){
-	         return $this->_rootElement->find('[name="shipping_method"]')->isPresent();
-	}
-
-    public function isSelectedShippingMethod($shippingMethod){
-        return $this->_rootElement->find('#'.$shippingMethod)->isSelected();
+    /**
+     * @param ElementInterface $divCheckbox
+     * @return bool|int
+     */
+    public function isCheckboxChecked($divCheckbox)
+    {
+        $class = $divCheckbox->find('.ios-ui-select')->getAttribute('class');
+        return strpos($class, 'checked');
     }
-    public function getTitleShippingSection(){
+
+    public function getCreateInvoiceCheckbox()
+    {
+        return $this->_rootElement->find('#can_paid');
+    }
+
+    public function waitForCreateInvoiceCheckboxVisible()
+    {
+        $this->waitForElementVisible('#can_paid');
+    }
+
+    public function getShippingCheckbox()
+    {
+        return $this->_rootElement->find('#can_ship');
+    }
+
+    public function waitForShippingCheckboxVisible()
+    {
+        $this->waitForElementVisible('#can_ship');
+    }
+
+    public function isShippingMethod()
+    {
+        return $this->_rootElement->find('[name="shipping_method"]')->isPresent();
+    }
+
+    public function isSelectedShippingMethod($shippingMethod)
+    {
+        return $this->_rootElement->find('#' . $shippingMethod)->isSelected();
+    }
+
+    public function getTitleShippingSection()
+    {
         return $this->_rootElement->find('#checkout-method > div:nth-child(1) > div.panel-heading > h4 > a')->getText();
     }
-    public function getShippingCollapse(){
+
+    public function getShippingCollapse()
+    {
         return $this->_rootElement->find('#checkout-method > div:nth-child(1) > div.panel-heading > h4 > a');
     }
-    public function isMethodVisible($idShippingMethod){
 
-        return $this->_rootElement->find('#'.$idShippingMethod)->isPresent();
+    public function isMethodVisible($idShippingMethod)
+    {
+
+        return $this->_rootElement->find('#' . $idShippingMethod)->isPresent();
     }
-    public function isPanelShippingMethod(){
+
+    public function isPanelShippingMethod()
+    {
 
         return $this->_rootElement->find('#checkout-method > div:nth-child(1) > div.panel-heading > h4 > a')->isVisible();
     }
-	public function getMessageAddMorePayment()
+
+    public function getMessageAddMorePayment()
     {
         return $this->_rootElement->find('.//div[data-bind="visible: checkPaymentCollection()"] > span ');
     }
@@ -134,11 +147,32 @@ class CheckoutPlaceOrder extends Block
         return $this->_rootElement->find('.invoice-box');
     }
 
-    public function isActivePageCheckout(){
-        return (strpos($this->_rootElement->getAttribute('class'),'active')!== false ? true : false);
+    public function isActivePageCheckout()
+    {
+        return (strpos($this->_rootElement->getAttribute('class'), 'active') !== false ? true : false);
     }
 
-    public function getEmailSwithBox(){
+    public function getEmailSwithBox()
+    {
         return $this->_rootElement->find('#can_send_email');
+    }
+
+    public function getPaymentByMethod($method)
+    {
+        $this->waitForElementVisible('.payment > .' . $method);
+        return $this->_rootElement->find('.payment > .' . $method);
+    }
+
+    public function getSendMailButton()
+    {
+        return $this->_rootElement->find('#can_send_email > .ios-ui-select');
+    }
+
+    public function isOnSendMailButton()
+    {
+        $className = $this->_rootElement->find('#can_send_email > .ios-ui-select')->getAttribute('class');
+        if (strpos($className, 'checked') !== false)
+            return true;
+        return false;
     }
 }

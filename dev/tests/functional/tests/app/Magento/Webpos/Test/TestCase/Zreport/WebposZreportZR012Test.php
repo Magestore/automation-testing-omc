@@ -82,8 +82,9 @@ class WebposZreportZR012Test extends Injectable
         )->run();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->getSessionManagement();
-        sleep(2);
+        $this->webposIndex->getMsWebpos()->waitForSessionManagerLoader();
 
         $cashSales = $this->webposIndex->getSessionShift()->getPaymentAmount(1)->getText();
         $denominationNumberCoin = $this->convertPriceFormatToDecimal($cashSales);

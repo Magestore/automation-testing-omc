@@ -90,7 +90,7 @@ class WebposManagePosMP28Test extends Injectable
         $this->posNews->getPosForm()->waitLoader();
         $this->posNews->getPosForm()->fill($pos);
         $this->posNews->getPosForm()->setFieldByValue('page_location_id', $location->getDisplayName(), 'select');
-        $this->posNews->getPosForm()->getGeneralFieldById('pagegitgit_auto_join', 'checkbox')->click();
+        $this->posNews->getPosForm()->getGeneralFieldById('page_auto_join', 'checkbox')->click();
         $this->posNews->getFormPageActions()->save();
 
         //login
