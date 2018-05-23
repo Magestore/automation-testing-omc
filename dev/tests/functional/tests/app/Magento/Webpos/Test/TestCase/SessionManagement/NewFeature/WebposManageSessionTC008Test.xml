@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\SessionManagement\NewFeature\WebposManageSessionTC008Test" summary="Session Management" ticketId="TC001">
+        <variation name="SessionManagementTC008TestVariation"  summary="LR001">
+            <data name="pos/dataset" xsi:type="string">test</data>
+            <data name="location/dataset" xsi:type="string">MS44</data>
+            <data name="staff/dataset" xsi:type="string">staffMS21</data>
+            <data name="showSessionHistoryTime" xsi:type="string">Last 15 days</data>
+        </variation>
+    </testCase>
+</config>

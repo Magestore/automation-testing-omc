@@ -90,7 +90,6 @@ class Curl extends AbstractCurl implements StaffInterface
         $curl->write($url, $data, CurlInterface::POST);
         $response = $curl->read();
         $curl->close();
-
         preg_match('/webpos_staff_listing_data_source.+items.+"staff_id":"(\d+)"/', $response, $match);
         return empty($match[1]) ? null : $match[1];
     }
@@ -130,17 +129,19 @@ class Curl extends AbstractCurl implements StaffInterface
 
     protected function preparePOS(array $data)
     {
-        if (is_array($data['pos_ids'])) {
-            foreach ($data['pos_ids'] as $key => $value) {
-                if (!isset($this->mappingData['pos_ids'][$value])) {
-                    continue;
+        if(isset($data['pos_ids'])){
+            if (is_array($data['pos_ids'])) {
+                foreach ($data['pos_ids'] as $key => $value) {
+                    if (!isset($this->mappingData['pos_ids'][$value])) {
+                        continue;
+                    }
+                    $data['pos_ids'][$key] = $this->mappingData['pos_ids'][$value];
                 }
-                $data['pos_ids'][$key] = $this->mappingData['pos_ids'][$value];
+            } else {
+                $array = array();
+                $array[]= $data['pos_ids'];
+                $data['pos_ids'] = $array;
             }
-        } else {
-            $array = array();
-            $array[]= $data['pos_ids'];
-            $data['pos_ids'] = $array;
         }
         return $data;
     }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Pos\MassAction\WebposManagePosMP16Test" summary="Check GUI" ticketId="MAGETWO-0001">
+    <testCase name="Magento\Webpos\Test\TestCase\Pos\AddPos\WebposManagePosMP16Test" summary="Check GUI" ticketId="MAGETWO-0001">
     <variation name="WebposManagePosMP16Test">
         <data name="tabs" xsi:type="array">
             <item name="general" xsi:type="array">
@@ -28,6 +28,7 @@
             </item>
             <item name="sessions_detail" xsi:type="array">
                 <item name="title" xsi:type="string">Current Sessions Detail</item>
+                <item name="default_text" xsi:type="string">There are 0 open session</item>
             </item>
         </data>
         <constraint name="Magento\Webpos\Test\Constraint\Pos\AddPos\AssertCheckValueDefault"></constraint>

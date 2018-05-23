@@ -245,10 +245,7 @@ class LocationModal extends DataGrid
      */
     public function waitLoader()
     {
-
-        $this->waitForElementNotVisible($this->loader);
-        $this->getTemplateBlock()->waitLoader();
-        $this->waitForElementVisible('table.data-grid');
+        parent::waitLoader();
     }
 
     public function waitClose()

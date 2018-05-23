@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Pos\AddPos\WebposManagePosMP19Test" summary="Check GUI" ticketId="MAGETWO-0001">
+    <variation name="WebposManagePosMP19Test">
+        <data name="pos/dataset" xsi:type="string">test</data>
+        <data name="staff/dataset" xsi:type="string">staffWithoutPos</data>
+        <constraint name="Magento\Webpos\Test\Constraint\Pos\AssertPosSuccessSaveMessage"></constraint>
+        <constraint name="Magento\Webpos\Test\Constraint\Pos\AddPos\AssertStaffWithPosUnSelected"></constraint>
+    </variation>
+    </testCase>
+</config>

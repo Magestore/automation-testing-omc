@@ -47,6 +47,11 @@ class SessionSetReasonPopup extends Block
         }
     }
 
+    public function waitForConfirmButtonVisible()
+    {
+        $this->waitForElementVisible('.link-cl-cfg');
+    }
+
     /**
      * @return \Magento\Mtf\Client\ElementInterface
      */

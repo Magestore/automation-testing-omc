@@ -156,4 +156,8 @@ class StaffsForm extends Form
     public function waitLoader(){
         $this->waitForElementVisible('#page');
     }
+
+    public function getFieldValueById($id, $type= null){
+        return $this->_rootElement->find('#'. $id, locator::SELECTOR_CSS, $type)->getValue();
+    }
 }

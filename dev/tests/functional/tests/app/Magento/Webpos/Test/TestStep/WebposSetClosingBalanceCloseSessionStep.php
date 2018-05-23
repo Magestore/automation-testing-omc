@@ -32,7 +32,7 @@ class WebposSetClosingBalanceCloseSessionStep implements TestStepInterface
     public function __construct(
         WebposIndex $webposIndex,
         $denomination = null,
-        $denominationNumberCoin = '0'
+        $denominationNumberCoin = null
     )
     {
         $this->webposIndex = $webposIndex;
@@ -43,15 +43,20 @@ class WebposSetClosingBalanceCloseSessionStep implements TestStepInterface
     public function run()
     {
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->getSessionManagement();
-        sleep(1);
+        $this->webposIndex->getCMenu()->getSessionManagement();
+        $this->webposIndex->getMsWebpos()->waitForSessionManagerLoader();
         // Set closing balance
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
         sleep(1);
         if ($this->denomination != null) {
             $this->webposIndex->getSessionSetClosingBalancePopup()->setCoinBillValue($this->denomination->getDenominationName());
         }
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getColumnNumberOfCoinsAtRow(2)->setValue($this->denominationNumberCoin);
+        if($this->denominationNumberCoin)
+        {
+            $this->webposIndex->getSessionSetClosingBalancePopup()->getColumnNumberOfCoinsAtRow(2)->setValue($this->denominationNumberCoin);
+        }
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
         sleep(1);
 

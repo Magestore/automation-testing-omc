@@ -8,8 +8,6 @@
                 <item name="0" xsi:type="string">product1</item>
             </data>
             <data name="denomination/dataset" xsi:type="string">one_dollar</data>
-            <data name="dataConfig/dataset" xsi:type="string">create_session_before_working</data>
-            <data name="dataConfigToNo/dataset" xsi:type="string">setup_session_before_working_to_no</data>
             <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIZreportDifference"/>
         </variation>
     </testCase>

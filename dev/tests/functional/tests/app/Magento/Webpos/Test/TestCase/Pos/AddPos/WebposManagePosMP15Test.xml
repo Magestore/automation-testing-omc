@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Pos\MassAction\WebposManagePosMP15Test" summary="Check GUI" ticketId="MAGETWO-0001">
+    <testCase name="Magento\Webpos\Test\TestCase\Pos\AddPos\WebposManagePosMP15Test" summary="Check GUI" ticketId="MAGETWO-0001">
     <variation name="WebposManagePosMP15Test">
         <data name="requiredText">This is a required field.</data>
             <constraint name="Magento\Webpos\Test\Constraint\Pos\AddPos\AssertAddPosWithoutFillField"></constraint>

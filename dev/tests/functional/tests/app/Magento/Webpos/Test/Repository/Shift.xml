@@ -52,6 +52,31 @@
             <field name="total_sales" xsi:type="string">0</field>
         </dataset>
 
+        <dataset name="default3">
+            <field name="balance" xsi:type="string">0</field>
+            <field name="base_balance" xsi:type="string">0</field>
+            <field name="base_cash_added" xsi:type="string">0</field>
+            <field name="base_cash_left" xsi:type="string">0</field>
+            <field name="base_cash_removed" xsi:type="string">0</field>
+            <field name="base_cash_sale" xsi:type="string">0</field>
+            <field name="base_closed_amount" xsi:type="string">0</field>
+            <field name="base_currency_code" xsi:type="string">USD</field>
+            <field name="base_float_amount" xsi:type="string">0</field>
+            <field name="base_total_sales" xsi:type="string">0</field>
+            <field name="cash_added" xsi:type="string">0</field>
+            <field name="cash_left" xsi:type="string">0</field>
+            <field name="cash_removed" xsi:type="string">0</field>
+            <field name="cash_sale" xsi:type="string">0</field>
+            <field name="closed_amount" xsi:type="string">0</field>
+            <field name="float_amount" xsi:type="string">0</field>
+            <field name="location_id" xsi:type="string">1</field>
+            <field name="opened_at" xsi:type="string">now</field>
+            <field name="shift_currency_code" xsi:type="string">USD</field>
+            <field name="shift_id" xsi:type="string">session_within_7_%isolation%</field>
+            <field name="staff_id" xsi:type="string">1</field>
+            <field name="status" xsi:type="string">1</field>
+            <field name="total_sales" xsi:type="string">0</field>
+        </dataset>
         <dataset name="shift_staff_id_4">
             <field name="balance" xsi:type="string">10000</field>
             <field name="base_balance" xsi:type="string">10000</field>
@@ -80,5 +105,7 @@
             <field name="status" xsi:type="string">1</field>
             <field name="total_sales" xsi:type="string">0</field>
         </dataset>
+
+
     </repository>
 </config>

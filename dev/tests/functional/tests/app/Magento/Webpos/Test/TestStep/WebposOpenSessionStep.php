@@ -76,6 +76,7 @@ class WebposOpenSessionStep implements TestStepInterface
             $time = time();
         }
         if ($this->webposIndex->getOpenSessionPopup()->isVisible()) {
+            $this->webposIndex->getOpenSessionPopup()->waitLoader();
             $this->webposIndex->getOpenSessionPopup()->waitUntilForOpenSessionButtonVisible();
 
             if ($this->openingAmountStatus)
@@ -84,10 +85,9 @@ class WebposOpenSessionStep implements TestStepInterface
                 $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue($this->denominationNumberCoin);
             }
 
-            $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
+            $this->webposIndex->getOpenSessionPopup()->getOpenSessionButtonElement()->click();
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
-            // sleep to open session
-            sleep(3);
+            $this->webposIndex->getSessionShift()->waitBtnCloseSessionVisible();
 
             if($this->putMoneyInStatus)
             {
@@ -106,6 +106,13 @@ class WebposOpenSessionStep implements TestStepInterface
                 $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->click();
                 $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue($this->takeMoneyOutValue);
                 $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();
+                if($this->webposIndex->getSessionMakeAdjustmentPopup()->isVisible() &&
+                    $this->webposIndex->getSessionMakeAdjustmentPopup()->getErrorMessage()->isVisible())
+                {
+                    $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->click();
+                    $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue($this->takeMoneyOutValue);
+                    $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();
+                }
                 $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-make-adjustment"]');
             }
 

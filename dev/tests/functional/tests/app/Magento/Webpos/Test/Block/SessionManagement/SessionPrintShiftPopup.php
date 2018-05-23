@@ -62,6 +62,11 @@ class SessionPrintShiftPopup extends Block
         return $this->_rootElement->find('//*[@id="zreport-print-content"]/div/table[@class="list-transaction"]/tbody/tr[2]/td[2]/span[@data-bind="text: closedAmountFormatted"]', Locator::SELECTOR_XPATH);
     }
 
+    public function getExpectedDrawer()
+    {
+        return $this->_rootElement->find('//*[@id="zreport-print-content"]/div/table[@class="list-transaction"]/tbody/tr[3]/td[2]/span[@data-bind="text: theoretialClosingBalanceFormatted"]', Locator::SELECTOR_XPATH);
+    }
+
     public function getTheoreticalClosingAmount()
     {
         return $this->_rootElement->find('//*[@id="zreport-print-content"]/div/table[@class="list-transaction"]/tbody/tr[4]/td[2]/span[@data-bind="text: theoretialClosingBalanceFormatted"]', Locator::SELECTOR_XPATH);

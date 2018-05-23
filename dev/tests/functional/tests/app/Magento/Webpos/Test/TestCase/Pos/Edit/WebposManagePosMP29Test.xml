@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Pos\Edit\WebposManagePosMP29Test" summary="Check GUI" ticketId="MAGETWO-0001">
+    <variation name="WebposManagePosMP29Test">
+        <data name="location/dataset" xsi:type="string">MS44</data>
+        <data name="pos/dataset" xsi:type="string">test</data>
+        <data name="staff/dataset" xsi:type="string">staffMS21</data>
+        <data name="session_info" xsi:type="array">
+            <item name="labels" xsi:type="string">Opening Blance, Real Closing Balance, Theoretical Closing Balance, Difference</item>
+            <item name="buttons" xsi:type="string">Put Money In, Take Money Out, Set Closing Balance, Print</item>
+        </data>
+        <constraint name="Magento\Webpos\Test\Constraint\Pos\Form\AssertCheckCurrentSessionDetail"></constraint>
+    </variation>
+    </testCase>
+</config>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Pos\AddPos\WebposManagePosMP22Test" summary="Check GUI" ticketId="MAGETWO-0001">
+    <variation name="WebposManagePosMP22Test">
+        <data name="pos/dataset" xsi:type="string">test</data>
+        <data name="tabs" xsi:type="array">
+            <item name="general" xsi:type="array">
+                <item name="title" xsi:type="string">General Information</item>
+                <item name="fields" xsi:type="array">
+                    <item name="page_pos_name" xsi:type="string">POS Name</item>
+                    <item name="location" xsi:type="string">Location</item>
+                    <item name="staff" xsi:type="string">Current Staff</item>
+                    <item name="status" xsi:type="string">Status</item>
+                    <item name="staff_locked" xsi:type="string">Available for Other Staff</item>
+                    <item name="is_allow_to_lock" xsi:type="string">Enable option to lock register</item>
+                </item>
+            </item>
+            <item name="denomination" xsi:type="array">
+                <item name="title" xsi:type="string">Cash Denominations</item>
+                <item name="fields" xsi:type="array">
+                    <item name="id" xsi:type="string">ID</item>
+                    <item name="name" xsi:type="string">Denomination Name</item>
+                    <item name="value" xsi:type="string">Denomination Value</item>
+                    <item name="sort_order" xsi:type="string">Sort Order</item>
+                </item>
+            </item>
+            <item name="close_sessions" xsi:type="array">
+                <item name="title" xsi:type="string">Closed Sessions</item>
+            </item>
+            <item name="sessions_detail" xsi:type="array">
+                <item name="title" xsi:type="string">Current Sessions Detail</item>
+                <item name="default_text" xsi:type="string">There are 0 open session</item>
+            </item>
+        </data>
+        <constraint name="Magento\Webpos\Test\Constraint\Pos\AddPos\AssertCheckValueDefault"></constraint>
+    </variation>
+    </testCase>
+</config>

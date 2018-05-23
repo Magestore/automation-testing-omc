@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\TestCase\Zreport;
 
-use Magento\Config\Test\Fixture\ConfigData;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Page\WebposIndex;
@@ -37,8 +36,6 @@ class WebposZreportCheckGUITest extends Injectable
      * @var WebposIndex
      */
     protected $webposIndex;
-    protected $dataConfigToNo;
-
 
     public function __inject(
         WebposIndex $webposIndex
@@ -51,16 +48,14 @@ class WebposZreportCheckGUITest extends Injectable
     public function test(
         $products,
         Denomination $denomination,
-        $denominationNumberCoin,
-        ConfigData $dataConfig,
-        ConfigData $dataConfigToNo
-    ) {
+        $denominationNumberCoin
+    )
+    {
         // Create denomination
         $denomination->persist();
-        $this->dataConfigToNo = $dataConfigToNo;
         $this->objectManager->create(
-            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
-            ['dataConfig' => $dataConfig]
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_session_before_working']
         )->run();
 
         // Login webpos
@@ -92,7 +87,7 @@ class WebposZreportCheckGUITest extends Injectable
         $closedString .= ' by ' . $staffName;
 
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
-        $this->webposIndex->getSessionShift()->waitZreportVisible();
+        $this->webposIndex->getSessionShift()->waitReportPopupVisible();
         return [
             'staffName' => $staffName,
             'openedString' => $openedString,
@@ -103,8 +98,8 @@ class WebposZreportCheckGUITest extends Injectable
     public function tearDown()
     {
         $this->objectManager->create(
-            'Magento\Webpos\Test\TestStep\WebposConfigurationStep',
-            ['dataConfig' => $this->dataConfigToNo]
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'setup_session_before_working_to_no']
         )->run();
     }
 }

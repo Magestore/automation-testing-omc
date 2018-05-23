@@ -16,7 +16,7 @@ class AssertPosFormDisplay extends AbstractConstraint
 {
     protected $_posNews;
 
-    public function processAssert(PosNews $posNews, $buttons, $title, $fields)
+    public function processAssert(PosNews $posNews, $buttons, $title)
     {
         $this->_posNews = $posNews;
         $buttons = explode(',', $buttons);
@@ -50,9 +50,10 @@ class AssertPosFormDisplay extends AbstractConstraint
     private function assertTitle($title)
     {
         $title = trim($title);
-        \PHPUnit_Framework_Assert::assertTrue(
-            $this->_posNews->getFormPageActions()->getTitleByName($title)->isVisible(),
-            'Title ' . $title . ' couldn\'t display'
+        \PHPUnit_Framework_Assert::assertEquals(
+            $title,
+            $this->_posNews->getFormPageActions()->getTitle()->getText(),
+            'Title ' . $title . ' didn\'t display'
         );
     }
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Pos\Edit\WebposManagePosMP34Test" summary="Check GUI" ticketId="MAGETWO-0001">
+    <variation name="WebposManagePosMP34Test">
+        <data name="pos/dataset" xsi:type="string">default</data>
+        <data name="posName" xsi:type="string">Test edit pos mp34</data>
+        <constraint name="Magento\Webpos\Test\Constraint\Pos\AssertPosSuccessSaveMessage"></constraint>
+    </variation>
+    </testCase>
+</config>

@@ -76,11 +76,15 @@ class WebposManageLocationML39Test extends Injectable
         $this->mappingLocationIndex->getMappingLocationGrid()->chooseLocations();
         $this->mappingLocationIndex->getLocationModal()->waitForElementVisible('.page-wrapper');
         $this->mappingLocationIndex->getLocationModal()->waitLoader();
-        sleep(2);
-        $this->mappingLocationIndex->getLocationModal()->searchAndSelect([
-            'display_name' => $location->getDisplayName()
-        ]);
+        sleep(1);
+        $filters= [
+            [
+                'display_name' => $location->getDisplayName()
+            ]
+        ];
+        $this->mappingLocationIndex->getLocationModal()->search($filters[0]);
         $this->mappingLocationIndex->getLocationModal()->waitLoader();
+        $this->mappingLocationIndex->getLocationModal()->selectItems($filters);
         $this->mappingLocationIndex->getLocationModal()->getAddButton()->click();
         $this->mappingLocationIndex->getLocationModal()->waitClose();
         $this->mappingLocationIndex->getMappingLocationGrid()->mappingWarehouse($location->getDisplayName(), $warehouse1->getWarehouseName());

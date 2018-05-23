@@ -50,12 +50,12 @@ class WebposManageRoleMR10Test extends Injectable
     {
         $role->persist();
         $this->_roleIndex->open();
-        $this->_roleIndex->getRoleGrid()->selectItems([
+        $filter = [
             [
                 'display_name' => $role->getDisplayName()
             ]
-        ]);
-        $this->_roleIndex->getRoleGrid()->selectAction('Delete');
+        ];
+        $this->_roleIndex->getRoleGrid()->massaction($filter, 'Delete');
         $this->_roleIndex->getModal()->waitForLoader();
         \PHPUnit_Framework_Assert::assertTrue(
             $this->_roleIndex->getModal()->isVisible(),

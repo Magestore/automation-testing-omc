@@ -63,6 +63,11 @@ class OrderHistoryOrderList extends Block
 		$this->waitForElementNotVisible('.wrap-item-order .indicator');
 	}
 
+	public function waitListOrders()
+    {
+        $this->waitForElementVisible('.wrap-item-order ul.list-orders');
+    }
+
 	public function getOrdersTitle()
     {
         return $this->_rootElement->find('[class="title title-header-page"]');

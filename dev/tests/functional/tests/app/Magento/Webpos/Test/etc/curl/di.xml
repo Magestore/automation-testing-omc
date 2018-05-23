@@ -21,7 +21,9 @@
     <preference
         for="Magento\Webpos\Test\Handler\Staff\StaffInterface"
         type="Magento\Webpos\Test\Handler\Staff\Curl" />
-
+    <preference
+            for="Magento\Webpos\Test\Handler\Zreport\ZreportInterface"
+            type="Magento\Webpos\Test\Handler\Zreport\Webapi" />
     <preference for="Magento\Webpos\Test\Handler\BundleProduct\WebposBundleProductInterface" type="Magento\Webpos\Test\Handler\BundleProduct\Curl" />
 
 </config>

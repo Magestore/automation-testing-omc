@@ -132,7 +132,7 @@ class SessionShift extends Block
         return $this->_rootElement->find('//div/div[2]/header/div[2]/div[3]/div[1]/table/tbody/tr[2]/td[1]/a', Locator::SELECTOR_XPATH);
     }
 
-    public function waitZreportVisible()
+    public function waitReportPopupVisible()
     {
         $this->waitForElementVisible('#print-shift-popup');
     }
@@ -143,5 +143,20 @@ class SessionShift extends Block
         if ($button->isVisible()) {
             $this->waitForElementNotVisible('.btn-close-shift');
         }
+    }
+
+    public function waitBtnCloseSessionVisible()
+    {
+        $this->waitForElementVisible('.btn-close-shift');
+    }
+
+    public function waitForSetClosingBalancePopupVisible()
+    {
+        $this->waitForElementVisible('#popup-close-shift');
+    }
+
+    public function waitForSetClosingBalancePopupNotVisible()
+    {
+        $this->waitForElementNotVisible('#popup-close-shift');
     }
 }

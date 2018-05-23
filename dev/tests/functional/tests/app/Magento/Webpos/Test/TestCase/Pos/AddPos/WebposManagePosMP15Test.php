@@ -6,7 +6,7 @@
  * Time: 4:24 PM
  */
 
-namespace Magento\Webpos\Test\TestCase\Pos\MassAction;
+namespace Magento\Webpos\Test\TestCase\Pos\AddPos;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\PosIndex;
