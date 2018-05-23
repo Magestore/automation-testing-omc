@@ -109,6 +109,7 @@ class WebposOpenSessionStep implements TestStepInterface
                 if($this->webposIndex->getSessionMakeAdjustmentPopup()->isVisible() &&
                     $this->webposIndex->getSessionMakeAdjustmentPopup()->getErrorMessage()->isVisible())
                 {
+                    $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue('0');
                     $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->click();
                     $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue($this->takeMoneyOutValue);
                     $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();

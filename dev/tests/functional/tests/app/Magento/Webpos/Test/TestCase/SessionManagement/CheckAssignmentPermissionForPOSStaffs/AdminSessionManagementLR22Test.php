@@ -12,7 +12,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
 
 /**
- * Class AdminSessionManagementLR21Test
+ * Class AdminSessionManagementLR22Test
  *
  * Precondition:
  * - Loged in backend
@@ -22,14 +22,14 @@ use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
  * 1. Add a new role or edit existed role
  * 2. Open Permission tab
  * 3. In the Resource Access field, select option: custom
- * 4. Tick on Lock Register checkbox
+ * 4. Tick on Lock and Unlock register checkbox or Edit security PIN checkbox
  *
  * Acceptance:
- * 4. The Lock and Unlock register checkbox and Edit security PIN checkbox would be automatically checked
+ * 4. The Lock Register checkbox would be automatically checked
  *
  * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
-class AdminSessionManagementLR21Test extends Injectable
+class AdminSessionManagementLR22Test extends Injectable
 {
     /**
      * @var WebposRoleNew
@@ -48,14 +48,16 @@ class AdminSessionManagementLR21Test extends Injectable
         $this->webposRoleNew->open();
         $this->webposRoleNew->getRoleForm()->openTab('permission');
 
-        $roleResources = [
-            'Magestore_Webpos::lock_register',
-            'Magestore_Webpos::lock_unlock_register',
+        $roleResourcesClick = [
             'Magestore_Webpos::edit_pin'
         ];
-        $this->webposRoleNew->getRoleForm()->getRoleResources($roleResources[0]);
+
+        $roleResourcesCheck = [
+            'Magestore_Webpos::lock_register'
+        ];
+        $this->webposRoleNew->getRoleForm()->getRoleResources($roleResourcesClick[0]);
         return [
-          'roleResources' => $roleResources
+          'roleResources' => $roleResourcesCheck
         ];
     }
 }

@@ -38,11 +38,6 @@ class AdminCloseCurrentSessionStep implements TestStepInterface
         $this->posEdit = $posEdit;
     }
 
-    /**
-     * Run step flow
-     *
-     * @return mixed
-     */
     public function run()
     {
         $this->posIndex->open();
