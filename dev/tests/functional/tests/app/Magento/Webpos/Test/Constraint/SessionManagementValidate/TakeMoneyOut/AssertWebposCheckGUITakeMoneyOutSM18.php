@@ -20,7 +20,7 @@ class AssertWebposCheckGUITakeMoneyOutSM18 extends AbstractConstraint
      * @param WebposIndex $webposIndex
      * @param $staff
      */
-    public function processAssert(WebposIndex $webposIndex, $staff)
+    public function processAssert(WebposIndex $webposIndex, $username)
     {
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getPutMoneyInPopup()->getBtnCancel()->isVisible(),
@@ -51,7 +51,7 @@ class AssertWebposCheckGUITakeMoneyOutSM18 extends AbstractConstraint
             'Take Payment Popup In Session Management. Staff Name is not visible.'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            $staff['username']. ' ' .$staff['username'],
+            $username. ' ' .$username,
             $webposIndex->getPutMoneyInPopup()->getStaffName()->getText(),
             'Take Payment Popup In Session Management. Staff Name Is not Visible Correctly.'
         );

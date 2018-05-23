@@ -100,4 +100,22 @@ class MsWebpos extends Block
     public function getProductDetailPopup() {
 	    return $this->_rootElement->find('[id="popup-product-detail"]');
     }
+
+    public function waitForCMenuLoader()
+    {
+        $this->waitForElementVisible('#c-menu--push-left');
+    }
+
+    public function waitForSessionManagerLoader(){
+        $this->waitForElementVisible('#register_shift_container');
+    }
+
+    public function getOpenShipPopup(){
+        return $this->_rootElement->find('#popup-open-shift');
+    }
+
+    public function waitForCMenuVisible()
+    {
+        $this->waitForElementVisible('#c-button--push-left');
+    }
 }

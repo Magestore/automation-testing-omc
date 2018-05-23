@@ -8,14 +8,15 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase
-            name="Magento\Webpos\Test\TestCase\SessionManagementValidate\TakeMoneyOut\WebposCheckValidateAmountFieldSM21Test"
+            name="Magento\Webpos\Test\TestCase\SessionManagementValidate\TakeMoneyOut\WebposCheckPuttingMoneyInThenTakeMoneyOutSM27Test"
             summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
-        <variation name="WebposCheckValidateAmountFieldSM21TestVariation1">
+        <variation name="WebposCheckValidateAmountFieldSM27TestVariation1">
             <data name="dataConfig" xsi:type="string">create_session_before_working</data>
             <data name="dataConfigToNo" xsi:type="string">setup_session_before_working_to_no</data>
-            <data name="amountValue" xsi:type="string">abc</data>
-            <constraint
-                    name="Magento\Webpos\Test\Constraint\SessionManagementValidate\TakeMoneyOut\AssertWebposCheckValidateAmountFieldSM20SM21"/>
+            <data name="takeMoneyOut" xsi:type="number">20</data>
+            <data name="pushMoneyIn" xsi:type="number">100</data>
+            <data name="denomination/dataset" xsi:type="string">default</data>
+            <data name="reasonTransaction" xsi:type="string">Take money out with reason</data>
         </variation>
     </testCase>
 </config>

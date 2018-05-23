@@ -13,19 +13,19 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Page\Adminhtml\DenominationIndex;
 use Magento\Webpos\Test\Page\Adminhtml\DenominationNews;
-use Magento\Webpos\Test\Constraint\SessionManagementValidate\TakeMoneyOut\AssertWebposCheckValidateAmountFieldSM20SM21;
+
 /**
  * Class WebposCheckValidateAmountFieldSM22Test
  * @package Magento\Webpos\Test\TestCase\SessionManagementValidate\TakeMoneyOut
  * SM22
  *  Precondition: Settings [Need to create session before working] = Yes
-1. Login webpos by an account who has opening session permission
-2. Click to show left menu
-3. Click on [Session management] menu > Open a new session successfully  with opening amount = 100"
+ * 1. Login webpos by an account who has opening session permission
+ * 2. Click to show left menu
+ * 3. Click on [Session management] menu > Open a new session successfully  with opening amount = 100"
  * SM22 - Steps:
-1. Click on [Take money out] button
-2. Input negative number into [Amount] field (Ex: -123)
-3. Click on [Done] button"
+ * 1. Click on [Take money out] button
+ * 2. Input negative number into [Amount] field (Ex: -123)
+ * 3. Click on [Done] button"
  */
 class WebposCheckValidateAmountFieldSM22Test extends Injectable
 {
@@ -37,13 +37,6 @@ class WebposCheckValidateAmountFieldSM22Test extends Injectable
     protected $webposIndex;
     protected $dataConfigToNo;
     protected $configuration;
-
-    /**
-     * AssertWebposCheckValidateAmountFieldSM20SM21.
-     *
-     * @var AssertWebposCheckValidateAmountFieldSM20SM21 $assertWebposCheckValidateAmountFieldSM20SM21
-     */
-    protected $assertWebposCheckValidateAmountFieldSM20SM21;
 
     /**
      * Webpos Denomination Index page.
@@ -82,7 +75,7 @@ class WebposCheckValidateAmountFieldSM22Test extends Injectable
      * @param null $amountValue
      * @param null $openingAmount
      */
-    public function test(Denomination $denomination=null, $dataConfig, $testCaseID, $dataConfigToNo, $amountValue=null, $openingAmount=null)
+    public function test(Denomination $denomination = null, $dataConfig, $testCaseID, $dataConfigToNo, $amountValue = null, $openingAmount = null)
     {
         if ($testCaseID == 'SM22') {
             // Steps Create Denomination
@@ -102,32 +95,24 @@ class WebposCheckValidateAmountFieldSM22Test extends Injectable
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
         )->run();
-
-        $this->webposIndex->getOpenSessionPopup()->waitNumberOfCoinsBills();
-        $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue($openingAmount);
-
         // Open session
         $time = time();
         $timeAfter = $time + 5;
         while (!$this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->isVisible()
-            && $time < $timeAfter){
+            && $time < $timeAfter) {
             $time = time();
         }
+        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
+        sleep(1);
+        $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue($openingAmount);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
-        $this->webposIndex->getSessionInfo()->waitForTakeMoneyOutButton();
+        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
+        sleep(1);
         $this->webposIndex->getSessionInfo()->getTakeMoneyOutButton()->click();
         $this->webposIndex->getPutMoneyInPopup()->waitForBtnCancel();
         $this->webposIndex->getPutMoneyInPopup()->getAmountInput()->setValue($amountValue);
         $this->webposIndex->getPutMoneyInPopup()->getDoneButton()->click();
         //Assert assert Webpos Check Validate Amount Field
-        $this->assertWebposCheckValidateAmountFieldSM20SM21->processAssert($this->webposIndex);
-
-        $this->webposIndex->getPutMoneyInPopup()->getBtnCancel()->click();
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        $this->webposIndex->getSessionShift()->waitButtonEndSessionIsVisible();
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        $this->webposIndex->getSessionShift()->waitBtnCloseSessionNotVisible();
     }
 
     public function tearDown()
@@ -136,6 +121,10 @@ class WebposCheckValidateAmountFieldSM22Test extends Injectable
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => $this->dataConfigToNo]
+        )->run();
+        //Set Create Session Before Working to No
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
         )->run();
     }
 }

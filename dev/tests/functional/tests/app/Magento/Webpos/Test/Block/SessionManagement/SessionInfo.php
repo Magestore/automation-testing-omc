@@ -14,7 +14,7 @@ class SessionInfo extends Block
 {
     public function getPutMoneyInButton()
     {
-        return $this->_rootElement->find('span[data-bind="click: putMoneyIn"]');
+        return $this->_rootElement->find('[data-bind="click: putMoneyIn"]');
     }
 
     public function waitForTakeMoneyOutButton()
@@ -65,5 +65,21 @@ class SessionInfo extends Block
     public function getAddTransactionTotal()
     {
         return $this->_rootElement->find('[data-bind="text: formatPrice(getAddTransactionTotal())"]');
+    }
+    public function getAddTransactionButton()
+    {
+        return $this->_rootElement->find('[data-bind="click:showRemoveTransactionsDetail"]');
+    }
+    public function getAddTransactionAmount()
+    {
+        return $this->_rootElement->find('[data-bind="text: formatPrice(getRemoveTransactionTotal())"]');
+    }
+    public function getTheoretialClosingBalance()
+    {
+        return $this->_rootElement->find('[data-bind="text: formatPrice(theoretialClosingBalance())"]');
+    }
+    public function getDifferentValue()
+    {
+        return $this->_rootElement->find('[data-bind="text: formatPrice(differenceAmount())"]');
     }
 }
