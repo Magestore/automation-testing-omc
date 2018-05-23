@@ -9,18 +9,12 @@
 namespace Magento\Webpos\Test\Block;
 
 use Magento\Mtf\Block\Block;
-use Magento\Mtf\Client\Locator;
-
 /**
  * Class MainContent
  * @package Magento\Webpos\Test\Block
  */
 class MainContent extends Block
 {
-    public function clickOutsidePopup()
-    {
-        $this->_rootElement->click();
-    }
 
     public function waitForMsWebpos() {
         sleep(1);

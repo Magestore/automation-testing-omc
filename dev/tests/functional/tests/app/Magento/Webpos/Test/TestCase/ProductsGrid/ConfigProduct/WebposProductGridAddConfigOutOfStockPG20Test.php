@@ -18,15 +18,21 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class  WebposProductGridAddConfigOutOfStockPG20Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(WebposIndex $webposIndex)
     {
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     */
     public function test($products)
     {
         // Create products
@@ -41,8 +47,7 @@ class  WebposProductGridAddConfigOutOfStockPG20Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-product-detail"]');
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutProductDetail()->getButtonCancel()->click();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-product-detail"]');
 
     }

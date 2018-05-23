@@ -10,6 +10,7 @@
         <variation name="WebposCheckValidateAmountFieldSM20TestVariation1">
             <data name="dataConfig" xsi:type="string">create_session_before_working</data>
             <data name="dataConfigToNo" xsi:type="string">setup_session_before_working_to_no</data>
+            <constraint name="Magento\Webpos\Test\Constraint\SessionManagementValidate\TakeMoneyOut\AssertWebposCheckValidateAmountFieldSM20SM21" />
         </variation>
     </testCase>
 </config>

@@ -84,8 +84,7 @@ class WebposCheckoutPaymentMethodCP216Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutPaymentMethod()->getTitlePaymentMethod()->click();
 
         $this->webposIndex->getCheckoutPlaceOrder()->getShippingCheckbox()->click();
         // place order

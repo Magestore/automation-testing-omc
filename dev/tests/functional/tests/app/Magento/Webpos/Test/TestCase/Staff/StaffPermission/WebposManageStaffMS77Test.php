@@ -15,29 +15,25 @@ use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class WebposManageStaffMS77Test
  * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
  */
 class WebposManageStaffMS77Test extends Injectable
 {
-
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     private $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     /**
-     * Inject WebposIndex pages.
-     *
-     * @param $webposIndex
-     * @return void
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
      */
     public function __inject(
         WebposIndex $webposIndex,
@@ -48,6 +44,10 @@ class WebposManageStaffMS77Test extends Injectable
         $this->fixtureFactory = $fixtureFactory;
     }
 
+    /**
+     * @param FixtureFactory $fixtureFactory
+     * @return array
+     */
     public function __prepare(FixtureFactory $fixtureFactory)
     {
         //Config create session before working
@@ -60,10 +60,9 @@ class WebposManageStaffMS77Test extends Injectable
     }
 
     /**
-     * Create WebposRole group test.
-     *
-     * @param WebposRole
-     * @return void
+     * @param WebposRole $webposRole
+     * @param $products
+     * @param $staffData
      */
     public function test(WebposRole $webposRole, $products, $staffData)
     {
@@ -104,9 +103,9 @@ class WebposManageStaffMS77Test extends Injectable
         //LoginTest
         $this->login($staff, $location, $pos);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
-        sleep(2);
+        sleep(1);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
-        sleep(2);
+        sleep(1);
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="c-button--push-left"]');
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->assertFalse(
@@ -129,16 +128,18 @@ class WebposManageStaffMS77Test extends Injectable
         );
         $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-edit-product"]');
-        $this->assertFalse(
-            $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->isVisible(),
-            'Custom Price button is not hidden.'
+        sleep(2);
+        $this->assertTrue(
+            !$this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->isVisible(),
+            'Discount button is not hidden. It must be hidden.'
         );
-        $this->assertFalse(
-            $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->isVisible(),
-            'Discount button is not hidden.'
+        $this->assertTrue(
+            !$this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->isVisible(),
+            'Custom Price button is not hidden. It must be hidden.'
         );
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        sleep(1);
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
+        sleep(1);
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->webposIndex->getCMenu()->getSessionManagement();
         $this->assertTrue(
@@ -155,6 +156,11 @@ class WebposManageStaffMS77Test extends Injectable
         );
     }
 
+    /**
+     * @param Staff $staff
+     * @param Location|null $location
+     * @param Pos|null $pos
+     */
     public function login(Staff $staff, Location $location = null, Pos $pos = null)
     {
         $username = $staff->getUsername();
@@ -186,7 +192,6 @@ class WebposManageStaffMS77Test extends Injectable
             sleep(2);
         }
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-//        $this->webposIndex->getMsWebpos()->waitCartLoader();
 
     }
 

@@ -28,6 +28,10 @@ class WebposCheckoutCartEditQtyCheckEditProductFormTest extends Injectable
 	 */
 	protected $assertEditProductPopupIsAvailable;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertEditProductPopupIsAvailable $assertEditProductPopupIsAvailable
+     */
 	public function __inject(
 		WebposIndex $webposIndex,
 		AssertEditProductPopupIsAvailable $assertEditProductPopupIsAvailable
@@ -35,7 +39,6 @@ class WebposCheckoutCartEditQtyCheckEditProductFormTest extends Injectable
 	{
 		$this->webposIndex = $webposIndex;
 		$this->assertEditProductPopupIsAvailable = $assertEditProductPopupIsAvailable;
-
 	}
 
     /**
@@ -58,8 +61,8 @@ class WebposCheckoutCartEditQtyCheckEditProductFormTest extends Injectable
 		$this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
 		// CP45
 		//Assert edit product popup is available
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
+        sleep(1);
 
 //      $this->assertEditProductPopupIsAvailable->processAssert($this->webposIndex);
 //		$this->webposIndex->getCheckoutProductEdit()->getCancelButton()->click();

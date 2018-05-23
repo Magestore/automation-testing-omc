@@ -11,19 +11,26 @@ namespace Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposProductGridCheckAddToCartOnGroupProductDetailPG47Test
+ * @package Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct
+ */
 class  WebposProductGridCheckAddToCartOnGroupProductDetailPG47Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
     public function __inject(
         WebposIndex $webposIndex,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
@@ -32,6 +39,9 @@ class  WebposProductGridCheckAddToCartOnGroupProductDetailPG47Test extends Injec
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
 
+    /**
+     * @param $products
+     */
     public function test($products)
     {
         // Create products
@@ -44,13 +54,11 @@ class  WebposProductGridCheckAddToCartOnGroupProductDetailPG47Test extends Injec
             'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();
 
-
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-
         $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-product-detail"]');
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        sleep(1);
+        $this->webposIndex->getCheckoutProductDetail()->getButtonCancel()->click();
+        sleep(1);
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-product-detail"]');
         $this->webposIndex->getCheckoutProductList()->getFirstProduct()->hover();
         $this->webposIndex->getCheckoutProductList()->getFirstProductDetailButton()->click();
@@ -87,10 +95,8 @@ class  WebposProductGridCheckAddToCartOnGroupProductDetailPG47Test extends Injec
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         // End Place Order
-
         // Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
         //End Assert Place Order Success
-
     }
 }

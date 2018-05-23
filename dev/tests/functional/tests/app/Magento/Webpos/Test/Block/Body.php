@@ -21,8 +21,4 @@ class Body extends Block
         $minHeight = (float)str_replace('px;', '', $minHeight);
         return $minHeight;
     }
-
-    public function clickOutSide() {
-        $this->_rootElement->click();
-    }
 }

@@ -20,13 +20,12 @@ class WebposCheckGUICustomerPriceTest extends Injectable
     /**
      * AssertWebposCheckGUICustomerPriceCP54 Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
      * @param WebposIndex $webposIndex
-     * @return void
      */
     public function __inject(
         WebposIndex $webposIndex
@@ -36,9 +35,9 @@ class WebposCheckGUICustomerPriceTest extends Injectable
     }
 
     /**
-     * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
-     *
-     * @return void
+     * @param CatalogProductSimple $product
+     * @param $amountValue
+     * @return array
      */
     public function test(CatalogProductSimple $product, $amountValue)
     {
@@ -54,8 +53,8 @@ class WebposCheckGUICustomerPriceTest extends Injectable
         $this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
         $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
+        sleep(1);
         return [
             'product' => $product,
             'price' => $price

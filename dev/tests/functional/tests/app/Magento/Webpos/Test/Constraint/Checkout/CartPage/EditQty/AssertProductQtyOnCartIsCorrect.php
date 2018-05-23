@@ -17,11 +17,13 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 class AssertProductQtyOnCartIsCorrect extends AbstractConstraint
 {
+    /**
+     * @param WebposIndex $webposIndex
+     * @param CatalogProductSimple $product
+     * @param $expectQty
+     */
 	public function processAssert(WebposIndex $webposIndex, CatalogProductSimple $product, $expectQty)
 	{
-        $webposIndex->getMainContent()->waitForMsWebpos();
-		$webposIndex->getMainContent()->clickOutsidePopup();
-		sleep(1);
 		if ($expectQty == 1) {
 			\PHPUnit_Framework_Assert::assertFalse(
 				$webposIndex->getCheckoutCartItems()->getCartItemQty($product->getName())->isVisible(),

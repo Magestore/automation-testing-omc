@@ -20,13 +20,12 @@ class WebposCustomerPriceWithValidValueCP60Test extends Injectable
     /**
      * AssertWebposCheckGUICustomerPriceCP54 Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
      * @param WebposIndex $webposIndex
-     * @return void
      */
     public function __inject(
         WebposIndex $webposIndex
@@ -36,9 +35,9 @@ class WebposCustomerPriceWithValidValueCP60Test extends Injectable
     }
 
     /**
-     * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
-     *
-     * @return void
+     * @param CatalogProductSimple $product
+     * @param $amountValue
+     * @return array
      */
     public function test(CatalogProductSimple $product, $amountValue)
     {
@@ -56,8 +55,8 @@ class WebposCustomerPriceWithValidValueCP60Test extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
         //we need to set sleep($second) in this case.
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
+        sleep(1);
         return [
             'product' => $product,
             'price' => $price

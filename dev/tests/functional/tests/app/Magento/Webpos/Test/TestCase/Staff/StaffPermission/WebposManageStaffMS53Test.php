@@ -6,11 +6,16 @@
  * Time: 09:14
  */
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertWarningDiscountCustomPrice;
 use Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertEditDiscountCustomPrice;
+/**
+ * Class WebposManageStaffMS53Test
+ * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
+ */
 class WebposManageStaffMS53Test extends Injectable
 {
 
@@ -91,8 +96,8 @@ class WebposManageStaffMS53Test extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
+        sleep(1);
         $this->assertWarningDiscountCustomPrice->processAssert($this->webposIndex, 'You are able to apply discount under '.$webposRole->getMaximumDiscountPercent().'% only');
         $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
         sleep(1);

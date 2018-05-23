@@ -10,7 +10,6 @@ namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\TakeMoneyOut;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Webpos\Test\Constraint\SessionManagementValidate\TakeMoneyOut\AssertWebposCheckValidateAmountFieldSM20SM21;
 /**
  * Class WebposCheckValidateAmountFieldSM20Test
  * @package Magento\Webpos\Test\TestCase\SessionManagementValidate\TakeMoneyOut
@@ -32,28 +31,18 @@ class WebposCheckValidateAmountFieldSM20Test extends Injectable
      */
     protected $webposIndex;
 
-    /**
-     * AssertWebposCheckValidateAmountFieldSM20SM21.
-     *
-     * @var AssertWebposCheckValidateAmountFieldSM20SM21 $assertWebposCheckValidateAmountFieldSM20SM21
-     */
-    protected $assertWebposCheckValidateAmountFieldSM20SM21;
-
     protected $dataConfigToNo;
 
     protected $configuration;
 
     /**
      * @param WebposIndex $webposIndex
-     * @param AssertWebposCheckValidateAmountFieldSM20SM21 $assertWebposCheckValidateAmountFieldSM20SM21
      */
     public function __inject(
-        WebposIndex $webposIndex,
-        AssertWebposCheckValidateAmountFieldSM20SM21 $assertWebposCheckValidateAmountFieldSM20SM21
+        WebposIndex $webposIndex
     )
     {
         $this->webposIndex = $webposIndex;
-        $this->assertWebposCheckValidateAmountFieldSM20SM21 = $assertWebposCheckValidateAmountFieldSM20SM21;
     }
 
     /**
@@ -74,7 +63,6 @@ class WebposCheckValidateAmountFieldSM20Test extends Injectable
             'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
         )->run();
 
-
         // Open session
         $time = time();
         $timeAfter = $time + 10;
@@ -82,12 +70,12 @@ class WebposCheckValidateAmountFieldSM20Test extends Injectable
             && $time < $timeAfter){
             $time = time();
         }
+        sleep(2);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         $this->webposIndex->getSessionInfo()->waitForTakeMoneyOutButton();
         $this->webposIndex->getSessionInfo()->getTakeMoneyOutButton()->click();
         $this->webposIndex->getPutMoneyInPopup()->waitForBtnCancel();
         $this->webposIndex->getPutMoneyInPopup()->getDoneButton()->click();
-        $this->assertWebposCheckValidateAmountFieldSM20SM21->processAssert($this->webposIndex);
     }
 
     public function tearDown()
@@ -97,11 +85,8 @@ class WebposCheckValidateAmountFieldSM20Test extends Injectable
             ['configData' => $this->dataConfigToNo]
         )->run();
 
-        $this->webposIndex->getPutMoneyInPopup()->getBtnCancel()->click();
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        $this->webposIndex->getSessionShift()->waitButtonEndSessionIsVisible();
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        $this->webposIndex->getSessionShift()->waitBtnCloseSessionNotVisible();
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
+        )->run();
     }
 }

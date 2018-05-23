@@ -61,11 +61,6 @@ class MsWebpos extends Block
 		$this->waitForElementNotVisible('#webpos_checkout > div.indicator');
 	}
 
-	public function clickOutsidePopup()
-	{
-        $this->_rootElement->click();
-	}
-
 	public function waitForSyncDataAfterLogin()
 	{
 		$this->waitForElementVisible('.first-screen');
@@ -100,5 +95,9 @@ class MsWebpos extends Block
     public function cmenuButtonIsVisible()
     {
         return $this->_rootElement->find('#c-button--push-left')->isVisible();
+    }
+
+    public function getProductDetailPopup() {
+	    return $this->_rootElement->find('[id="popup-product-detail"]');
     }
 }

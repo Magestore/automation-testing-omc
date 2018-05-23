@@ -87,11 +87,11 @@ class WebposManageStaffMS60Test extends Injectable
         //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        sleep(2);
+        sleep(1);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getCheckoutProductList()->search($product2->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        sleep(2);
+        sleep(1);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
         //Cart
@@ -110,7 +110,7 @@ class WebposManageStaffMS60Test extends Injectable
         $orderId1 = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
         $orderId1 = ltrim($orderId1, '#');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
-        sleep(4);
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
 
         //Go order history
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
@@ -122,8 +122,7 @@ class WebposManageStaffMS60Test extends Injectable
 
         $this->webposIndex->getNotification()->getNotificationBell()->click();
         $this->webposIndex->getNotification()->getClearAll()->click();
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        sleep(1);
         //Send email
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         while (!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible()) {
@@ -138,14 +137,13 @@ class WebposManageStaffMS60Test extends Injectable
         $this->assertShowMessageNotification->processAssert($this->webposIndex, 'An email has been sent for this order!');
         $this->webposIndex->getNotification()->getNotificationBell()->click();
         $textNotif = $this->webposIndex->getNotification()->getFirstNotificationText();
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getNotification()->getNotificationBell()->click();
+
         $this->assertShowNewNotification->processAssert($this->webposIndex, 'An email has been sent for this order!', $textNotif);
 
         $this->webposIndex->getNotification()->getNotificationBell()->click();
         $this->webposIndex->getNotification()->getClearAll()->click();
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getNotification()->getNotificationBell()->click();
         //Add comment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         while (!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible()) {
@@ -160,8 +158,7 @@ class WebposManageStaffMS60Test extends Injectable
         $this->assertShowMessageNotification->processAssert($this->webposIndex, 'Add order comment successfully!');
         $this->webposIndex->getNotification()->getNotificationBell()->click();
         $textNotif = $this->webposIndex->getNotification()->getFirstNotificationText();
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getNotification()->getNotificationBell()->click();
         $this->assertShowNewNotification->processAssert($this->webposIndex, 'Add order comment successfully!', $textNotif);
 
         //Re-order

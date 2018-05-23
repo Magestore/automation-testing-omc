@@ -10,15 +10,20 @@ namespace Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WeposProductGridCheckGroupProductBlockPG36Test
+ * @package Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct
+ */
 class WeposProductGridCheckGroupProductBlockPG36Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
-
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(
         WebposIndex $webposIndex
     )
@@ -26,6 +31,9 @@ class WeposProductGridCheckGroupProductBlockPG36Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     */
     public function test(
         $products
     )
@@ -48,8 +56,7 @@ class WeposProductGridCheckGroupProductBlockPG36Test extends Injectable
             $this->webposIndex->getCheckoutProductList()->search($item['product']->getSku());
             $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
             $this->webposIndex->getCheckoutContainer()->waitForProductDetailPopup();
-            $this->webposIndex->getMainContent()->waitForMsWebpos();
-            $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+            $this->webposIndex->getCheckoutProductDetail()->getButtonCancel()->click();
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-product-detail"]');
 
         }

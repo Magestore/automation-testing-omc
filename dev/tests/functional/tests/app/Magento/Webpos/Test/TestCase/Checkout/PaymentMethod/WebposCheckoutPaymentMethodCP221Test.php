@@ -7,12 +7,15 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\PaymentMethod;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-
+/**
+ * Class WebposCheckoutPaymentMethodCP221Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\PaymentMethod
+ */
 class WebposCheckoutPaymentMethodCP221Test extends Injectable
 {
     /**
@@ -85,8 +88,7 @@ class WebposCheckoutPaymentMethodCP221Test extends Injectable
 
         $amount = $this->webposIndex->getCheckoutPlaceOrder()->getTopTotalPrice()->getText();
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutPaymentMethod()->getTitlePaymentMethod()->click();
 
         $this->webposIndex->getCheckoutPlaceOrder()->getShippingCheckbox()->click();
 
