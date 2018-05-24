@@ -72,7 +72,7 @@ class SaveCartTest extends WebapiAbstract
             "till_id" => "",
             "items" => [
                 [
-                    "id" => 6,
+                    "id" => 1,
                     "item_id" => $itemId,
                     "qty" => 1,
                     "qty_to_ship" => 0,
