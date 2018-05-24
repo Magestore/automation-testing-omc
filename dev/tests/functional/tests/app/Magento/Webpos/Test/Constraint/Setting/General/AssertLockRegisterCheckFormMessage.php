@@ -8,10 +8,13 @@
 
 namespace Magento\Webpos\Test\Constraint\Setting\General;
 
-
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class AssertLockRegisterCheckFormMessage
+ * @package Magento\Webpos\Test\Constraint\Setting\General
+ */
 class AssertLockRegisterCheckFormMessage extends AbstractConstraint
 {
     /**

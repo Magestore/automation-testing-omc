@@ -15,48 +15,38 @@ use Magento\Webpos\Test\Fixture\Location;
 use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
-use Magento\Webpos\Test\Page\Adminhtml\WebposRoleEdit;
-use Magento\Webpos\Test\Page\Adminhtml\WebposRoleIndex;
 use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class AdminSessionManagementLR30Test
+ * Class AdminSessionManagementLR44Test
+ *
  * Precondition:
- * - Loged in backend
- * - In the  webpos settings page, set the Need to create session before working field to Yes
+ * - In the webpos settings page, set the Need to create session before working field to Yes
+ * - POS staff have been assigned to specific POS (this POS is enabled Lock register)
+ * - POS staff have been assigned with a specific permission to lock register
  *
  * Steps:
- * 1. In the backend, user assigns lock/unlock permission to staff (ex: Staff A)
- * 2. On webpos, login webpos with staff account (Staff A) that is assigned permission to lock/unlock register
- * 3. Staff A locks register by entering correct security PIN
- * 4. In the backend, user change permission of Staff A (Staff A not assigned permission to lock/unlock register
- * 5. On the unlock screen, Staff A enters correct security PIN
+ * 1. POS staff login webpos, select location and POS
+ * 2. On the left menu, click on Lock register menu
+ * 3. Check confirmation popup
  *
  * Acceptance:
- * 3. The register is locked successfully
- * 4. Staff permission is changed successfully
- * 5. Can not unlock register and simultaneously, an alert message is displayed:
- * "Permission denied. Please contact Administrator to unlock the register"
+ * 2. Lock register confirmation popup is displayed, and mouse cursor focused on security PIN textbox
+ * 3. Show confirmation popup include:
+ * + 1 button: Cancel (is placed on top left corner of popup)
+ * + 1 lock icon
+ * + 1 text line with the content: Please enter security PIN to lock the register
+ * + 4 small textboxes for entering security PIN
  *
  * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
-class AdminSessionManagementLR30Test extends Injectable
+class AdminSessionManagementLR44Test extends Injectable
 {
-    /**
-     * @var WebposRoleIndex
-     */
-    protected $webposRoleIndex;
-
     /**
      * @var WebposRoleNew
      */
     protected $webposRoleNew;
-
-    /**
-     * @var WebposRoleEdit
-     */
-    protected $webposRoleEdit;
 
     /**
      * @var WebposIndex
@@ -65,16 +55,12 @@ class AdminSessionManagementLR30Test extends Injectable
 
 
     public function __inject(
-        WebposRoleIndex $webposRoleIndex,
         WebposIndex $webposIndex,
-        WebposRoleNew $webposRoleNew,
-        WebposRoleEdit $webposRoleEdit
+        WebposRoleNew $webposRoleNew
     )
     {
-        $this->webposRoleIndex = $webposRoleIndex;
         $this->webposIndex = $webposIndex;
         $this->webposRoleNew = $webposRoleNew;
-        $this->webposRoleEdit = $webposRoleEdit;
     }
 
     public function test(
@@ -98,7 +84,7 @@ class AdminSessionManagementLR30Test extends Injectable
         $pos = $fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
-        $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
+        $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'default']);
         $staffData = $staff->getData();
         $staffData['location_id'] = [$locationId];
         $staffData['pos_ids'] = [$posId];
@@ -139,48 +125,9 @@ class AdminSessionManagementLR30Test extends Injectable
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
+
         $this->webposIndex->getCMenu()->getLockRegister()->click();
         $this->webposIndex->getCLockRegister()->waitForPopupLockRegister();
-
-        // lock register
-        $posPin = $pos->getPin();
-        for ($i = 0; $i < 4; $i++) {
-            $this->webposIndex->getCLockRegister()->getInputLockRegisterPin($i + 1)->setValue($posPin[$i]);
-        }
-        $this->webposIndex->getCLockRegister()->waitForPopupLockRegisterNotVisible();
-        $this->webposIndex->getMsWebpos()->waitForCheckoutLoaderNotVisible();
-        $this->webposIndex->getMsWebpos()->waitForLockScreen();
-        $this->assertTrue(
-            $this->webposIndex->getLockScreen()->isVisible(),
-            'The register is not locked successfully'
-        );
-
-        $this->webposRoleIndex->open();
-        $this->webposRoleIndex->getRoleGrid()->searchAndOpen(['display_name' => $webposRole->getDisplayName()]);
-        $this->webposRoleEdit->getRoleForm()->openTab('permission');
-        $roleResourcesClick = [
-            'Magestore_Webpos::lock_unlock_register'
-        ];
-        $this->webposRoleEdit->getRoleForm()->getRoleResources($roleResourcesClick[0]);
-        $this->webposRoleEdit->getFormPageActions()->save();
-        $this->assertEquals(
-            'Role was successfully saved',
-            $this->webposRoleIndex->getMessagesBlock()->getSuccessMessage(),
-            'Staff permission is not changed successfully'
-        );
-
-        $this->webposIndex->open();
-        $this->webposIndex->getMsWebpos()->waitForLockScreen();
-        // unlock register
-        for ($i = 0; $i < 4; $i++) {
-            $this->webposIndex->getLockScreen()->getInputUnLockRegisterPin($i + 1)->setValue($posPin[$i]);
-        }
-        $this->webposIndex->getMsWebpos()->waitForCheckoutLoaderNotVisible();
-        $this->assertEquals(
-            'Error: Permission denied. Please contact Administrator to unlock the register.',
-            $this->webposIndex->getToaster()->getWarningMessage()->getText(),
-            'Message alert not unlock not correct'
-        );
     }
 
     public function tearDown()

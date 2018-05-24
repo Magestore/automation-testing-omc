@@ -84,7 +84,7 @@ class AdminSessionManagementLR32Test extends Injectable
         $pos = $fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
-        $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
+        $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'default']);
         $staffData = $staff->getData();
         $staffData['location_id'] = [$locationId];
         $staffData['pos_ids'] = [$posId];

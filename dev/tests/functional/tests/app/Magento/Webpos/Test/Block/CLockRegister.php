@@ -17,9 +17,29 @@ use Magento\Mtf\Client\Locator;
  */
 class CLockRegister extends Block
 {
+    public function getLockRegisterPopup()
+    {
+        return $this->_rootElement->find('.lock-register');
+    }
+
     public function getInputLockRegisterPin($index)
     {
         return $this->_rootElement->find('//*[@class="block-pin"]/input[@class="lock-register-pin"]['.$index.']', Locator::SELECTOR_XPATH);
+    }
+
+    public function getButtonCancel()
+    {
+        return $this->_rootElement->find('.close');
+    }
+
+    public function getLockIcon()
+    {
+        return $this->_rootElement->find('.icon-lockPOS-modal');
+    }
+
+    public function getLockText()
+    {
+        return $this->_rootElement->find('//div[text()="Please enter security PIN to lock the register"]', Locator::SELECTOR_XPATH);
     }
 
     public function waitForPopupLockRegister()
