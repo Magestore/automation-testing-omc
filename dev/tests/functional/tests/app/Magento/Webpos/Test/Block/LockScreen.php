@@ -21,4 +21,14 @@ class LockScreen extends Block
     {
         return $this->_rootElement->find('//*[@class="block-pin"]/input[@class="lock-screen-pin"]['.$index.']', Locator::SELECTOR_XPATH);
     }
+
+    public function getLockIcon()
+    {
+        return $this->_rootElement->find('.lock-icon');
+    }
+
+    public function getLockText()
+    {
+        return $this->_rootElement->find('.lock-text');
+    }
 }
