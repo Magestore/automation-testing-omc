@@ -23,6 +23,9 @@ class CheckoutProductDetail extends Block
 
     protected $qty = '[name^="super_group"]';
 
+    public function waitForFormLoader(){
+        $this->waitForElementVisible('.form-detail-product');
+    }
     public function getModalTitle(){
         return $this->_rootElement->find('//*[@id="popup-product-detail"]/div/div/div/div[1]/h4[@class="modal-title"]', Locator::SELECTOR_XPATH);
     }
@@ -48,6 +51,24 @@ class CheckoutProductDetail extends Block
 	{
 		return $this->_rootElement->find('//*[@id="product-options-wrapper"]/fieldset/div/div/div/div[1]/label/span[text()="'.$name.'"]/../../input', Locator::SELECTOR_XPATH);
 	}
+    public function getBundleProductItemWithRadioByName($name){
+        return $this->_rootElement->find('div[@id="product-options-wrapper"]//div[@class="field choice"][.//span[text()="'.$name.'"]]', locator::SELECTOR_XPATH);
+    }
+    public function selectBundleProductItemWithRadioByName($name){
+        $this->getBundleProductItemWithRadioByName($name)->find('input[type="radio"]')->click();
+    }
+
+    public function getBundleProductFirstItemWithRadio(){
+        return $this->_rootElement->find('#product-options-wrapper .choice:first-child');
+    }
+
+    public function selectBundleProductFirstItemWithRadio(){
+        $this->getBundleProductFirstItemWithRadio()->find('input[type="radio"]')->click();
+    }
+
+    public function setQtyBundleChildProduct($qty){
+        $this->_rootElement->find('#product-options-wrapper .qty input[type="number"]')->setValue($qty);
+    }
 
     public function getProductPriceOfOption($productName)
     {

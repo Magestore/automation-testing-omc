@@ -16,4 +16,8 @@ class ListShift extends Block
     {
         return $this->_rootElement->find('.shift-item');
     }
+
+    public function getShiftListingHeaderByTitle($title){
+        return $this->_rootElement->find('.title-time span');
+    }
 }
