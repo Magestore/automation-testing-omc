@@ -21,18 +21,18 @@ class WebposMultiOrderCheckoutOn1ndCartTest extends Injectable
     /**
      * WebposCheckGUICustomerPriceCP54EntityTest Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
      * @param WebposIndex $webposIndex
-     * @return void
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     public function __inject(
         WebposIndex $webposIndex,
@@ -44,9 +44,9 @@ class WebposMultiOrderCheckoutOn1ndCartTest extends Injectable
     }
 
     /**
-     * LoginTest WebposCheckGUICustomerPriceCP54EntityTest group test.
-     *
-     * @return void
+     * @param $orderNumber
+     * @param $products
+     * @param FixtureFactory $fixtureFactory
      */
     public function test($orderNumber, $products,  FixtureFactory $fixtureFactory)
     {
@@ -55,8 +55,10 @@ class WebposMultiOrderCheckoutOn1ndCartTest extends Injectable
         )->run();
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+        sleep(1);
         $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($orderNumber)->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+        sleep(1);
         $i = 0;
         foreach ($products as $product) {
             $products[$i] = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);
@@ -68,8 +70,7 @@ class WebposMultiOrderCheckoutOn1ndCartTest extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-        $this->webposIndex->getCheckoutPaymentMethod()->waitForCashInMethod()->click();
+        sleep(2);
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);

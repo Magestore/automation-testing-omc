@@ -118,7 +118,7 @@ class WebposTakePaymentOH93Test extends Injectable
         //click take payment
         sleep(0.5);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
-        sleep(0.5);
+        sleep(2);
         $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
         sleep(1);
         $this->webposIndex->getOrderHistoryPayment()->getInputAmount()->setValue(0);

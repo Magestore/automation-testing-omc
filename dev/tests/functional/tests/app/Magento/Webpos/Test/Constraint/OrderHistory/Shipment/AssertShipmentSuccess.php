@@ -21,6 +21,18 @@ class AssertShipmentSuccess extends AbstractConstraint
      */
     public function processAssert(WebposIndex $webposIndex)
     {
+        $warningMessage = $webposIndex->getToaster()->getWarningMessage()->getText();
+        \PHPUnit_Framework_Assert::assertTrue(
+            $webposIndex->getToaster()->getWarningMessage()->isVisible(),
+            'Success Message is not displayed'
+        );
+
+        \PHPUnit_Framework_Assert::assertEquals(
+            'The shipment has been created successfully.',
+            $warningMessage,
+            "Success message's Content is Wrong"
+        );
+
         \PHPUnit_Framework_Assert::assertFalse(
             $webposIndex->getModal()->getModalPopup()->isVisible(),
             'Confirm Popup is not closed'
@@ -34,17 +46,6 @@ class AssertShipmentSuccess extends AbstractConstraint
         \PHPUnit_Framework_Assert::assertFalse(
             $webposIndex->getOrderHistoryShipment()->isVisible(),
             'Shipment Popup is not closed'
-        );
-
-        \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getToaster()->getWarningMessage()->isVisible(),
-            'Success Message is not displayed'
-        );
-
-        \PHPUnit_Framework_Assert::assertEquals(
-            'The shipment has been created successfully.',
-            $webposIndex->getToaster()->getWarningMessage()->getText(),
-            "Success message's Content is Wrong"
         );
 
         $webposIndex->getNotification()->getNotificationBell()->click();

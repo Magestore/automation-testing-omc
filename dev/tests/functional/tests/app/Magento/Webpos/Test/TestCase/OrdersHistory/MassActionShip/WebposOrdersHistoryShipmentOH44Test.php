@@ -16,16 +16,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 class WebposOrdersHistoryShipmentOH44Test extends Scenario
 {
-    /**
-     * @var WebposIndex
-     */
-    protected $webposIndex;
-
-    public function __inject(WebposIndex $webposIndex)
-    {
-        $this->webposIndex = $webposIndex;
-    }
-
     public function test()
     {
         $this->executeScenario();

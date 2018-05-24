@@ -8,26 +8,31 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
 
-
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Customer\Test\Fixture\Address;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposCartPageCustomerCP35Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer
+ */
 class WebposCartPageCustomerCP35Test extends Injectable
 {
 	/**
-	 * @var WebposIndex
+	 * @var WebposIndex $webposIndex
 	 */
 	protected $webposIndex;
 
 	/**
-	 * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+	 * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
 	 */
 	protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
 	public function __inject(
 		WebposIndex $webposIndex,
 		AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
@@ -37,6 +42,12 @@ class WebposCartPageCustomerCP35Test extends Injectable
 		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 	}
 
+    /**
+     * @param CatalogProductSimple $product
+     * @param Address $address
+     * @param $configData
+     * @return array
+     */
 	public function test(
 		CatalogProductSimple $product,
 		Address $address,
@@ -70,7 +81,7 @@ class WebposCartPageCustomerCP35Test extends Injectable
 
 		//Assert Place Order Success
 		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-
+        sleep(2);
 		$this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 

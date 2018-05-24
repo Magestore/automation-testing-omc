@@ -10,10 +10,13 @@ namespace Magento\Webpos\Test\Constraint\OrderHistory\TakePayment;
 
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class AssertWebposTakePaymentOH81
+ * @package Magento\Webpos\Test\Constraint\OrderHistory\TakePayment
+ */
 class AssertWebposTakePaymentOH81 extends AbstractConstraint
 {
-    public function processAssert(WebposIndex $webposIndex, $amount)
+    public function processAssert(WebposIndex $webposIndex)
     {
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->isVisible(),

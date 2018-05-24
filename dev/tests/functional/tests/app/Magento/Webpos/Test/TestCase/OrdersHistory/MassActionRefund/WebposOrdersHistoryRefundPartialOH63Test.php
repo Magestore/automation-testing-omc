@@ -18,21 +18,28 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposOrdersHistoryRefundPartialOH63Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertRefundSuccess
+     * @var AssertRefundSuccess $assertRefundSuccess
      */
     protected $assertRefundSuccess;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertRefundSuccess $assertRefundSuccess
+     */
     public function __inject(WebposIndex $webposIndex, AssertRefundSuccess $assertRefundSuccess)
     {
         $this->webposIndex = $webposIndex;
         $this->assertRefundSuccess = $assertRefundSuccess;
     }
 
+    /**
+     * @param $products
+     */
     public function test($products)
     {
         // Create products
@@ -98,6 +105,7 @@ class WebposOrdersHistoryRefundPartialOH63Test extends Injectable
             $totalRefunded += ($rowTotal/$item['orderQty'])*$item['refundQty'];
         }
         $totalRefunded += $shippingFee;
+        sleep(2);
         $expectStatus = 'Complete';
         $this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
         $this->assertTrue(

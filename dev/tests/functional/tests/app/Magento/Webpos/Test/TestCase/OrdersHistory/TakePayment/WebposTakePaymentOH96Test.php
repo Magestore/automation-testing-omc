@@ -119,6 +119,9 @@ class WebposTakePaymentOH96Test extends Injectable
         sleep(0.5);
         $this->webposIndex->getOrderHistoryPayment()->getInputAmount()->setValue(substr($am,1));
         sleep(1);
+        return [
+           'am' => $am
+        ];
     }
 
     public function tearDown()

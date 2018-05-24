@@ -19,17 +19,17 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposOrdersHistoryRefundOH68Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertRefundSuccess
+     * @var AssertRefundSuccess $assertRefundSuccess
      */
     protected $assertRefundSuccess;
 
     /**
-     * @var AssertOrderStatus
+     * @var AssertOrderStatus $assertOrderStatus
      */
     protected $assertOrderStatus;
 
@@ -106,16 +106,18 @@ class WebposOrdersHistoryRefundOH68Test extends Injectable
             ['products' => $products]
         )->run();
         sleep(1);
+        $warningMessage = $this->webposIndex->getToaster()->getWarningMessage()->getText();
+        \Zend_Debug::dump($warningMessage);
         $this->assertTrue(
             $this->webposIndex->getToaster()->isVisible(),
             'Error message is not visible.'
         );
         $this->assertEquals(
-            'A creditmemo has been created!',
-            $this->webposIndex->getToaster()->getWarningMessage()->getText(),
+            'Data Refund Invalid!',
+            $warningMessage,
             "Error message's is Wrong"
             . "\nExpected: " . 'Data Refund Invalid!'
-            . "\nActual: " . $this->webposIndex->getToaster()->getWarningMessage()->getText()
+            . "\nActual: " . $warningMessage
         );
 
         return [
