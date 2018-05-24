@@ -18,7 +18,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposProductsGridPG18Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
@@ -30,17 +30,12 @@ class WebposProductsGridPG18Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    /**
-     *
-     */
-    public function test(
-    )
+    public function test()
     {
         // LoginTest webpos
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();
-
 
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 

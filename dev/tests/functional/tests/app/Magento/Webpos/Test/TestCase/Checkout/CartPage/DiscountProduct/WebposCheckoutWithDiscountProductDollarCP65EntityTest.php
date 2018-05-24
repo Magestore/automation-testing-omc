@@ -30,18 +30,18 @@ class WebposCheckoutWithDiscountProductDollarCP65EntityTest extends Injectable
     /**
      * AssertWebposCheckGUICustomerPriceCP54 Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
      * @param WebposIndex $webposIndex
-     * @return void
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     public function __inject(
         WebposIndex $webposIndex,
@@ -53,9 +53,8 @@ class WebposCheckoutWithDiscountProductDollarCP65EntityTest extends Injectable
     }
 
     /**
-     * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
-     *
-     * @return void
+     * @param CatalogProductSimple $product
+     * @return array
      */
     public function test(CatalogProductSimple $product)
     {
@@ -72,8 +71,8 @@ class WebposCheckoutWithDiscountProductDollarCP65EntityTest extends Injectable
         $this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($price-$price/2);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
+        sleep(1);
         //CategoryRepository
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase
+            name="Magento\Webpos\Test\TestCase\SessionManagementValidate\TakeMoneyOut\WebposCheckFieldsWhenTakingMoneyOutTwiceSM26Test"
+            summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
+        <variation name="WebposCheckValidateAmountFieldSM26TestVariation1">
+            <data name="dataConfig" xsi:type="string">create_session_before_working</data>
+            <data name="dataConfigToNo" xsi:type="string">setup_session_before_working_to_no</data>
+            <data name="testCaseID" xsi:type="string">SM23</data>
+            <data name="openingAmount" xsi:type="number">10</data>
+            <data name="realOpeningAmount" xsi:type="number">100</data>
+            <data name="amountValue" xsi:type="number">10</data>
+            <data name="pushMoneyIn" xsi:type="number">30</data>
+            <data name="denomination/dataset" xsi:type="string">default</data>
+            <data name="reasonTransaction" xsi:type="string">Take money out with reason</data>
+        </variation>
+    </testCase>
+</config>

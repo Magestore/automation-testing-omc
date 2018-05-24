@@ -32,19 +32,32 @@ class AdminCloseCurrentSessionStep implements TestStepInterface
      */
     protected $posEdit;
 
-    public function __construct(PosIndex $posIndex, PosEdit $posEdit)
+    protected $posName;
+
+    /**
+     * AdminCloseCurrentSessionStep constructor.
+     * @param PosIndex $posIndex
+     * @param PosEdit $posEdit
+     * @param string $posName
+     */
+    public function __construct(PosIndex $posIndex, PosEdit $posEdit, $posName = 'Store POS')
     {
         $this->posIndex = $posIndex;
         $this->posEdit = $posEdit;
+        $this->posName = $posName;
     }
 
+    /**
+     * @return mixed|void
+     * @throws \Exception
+     */
     public function run()
     {
         $this->posIndex->open();
         $this->posIndex->getPosGrid()->waitLoader();
         $this->posIndex->getPosGrid()->resetFilter();
         $this->posIndex->getPosGrid()->searchAndOpen([
-            'pos_name' => 'Store POS'
+            'pos_name' => $this->posName
         ]);
         $this->posEdit->getPosForm()->waitLoader();
         $this->posEdit->getPosForm()->getTabByTitle('Current Sessions Detail')->click();

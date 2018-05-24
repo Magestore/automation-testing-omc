@@ -20,6 +20,9 @@ class WebposOnHoldOrderONH19Test extends Injectable
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject
     (
         WebposIndex $webposIndex
@@ -54,8 +57,8 @@ class WebposOnHoldOrderONH19Test extends Injectable
         }
         $this->webposIndex->getCheckoutProductEdit()->getDollarButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
+        sleep(1);
         //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();

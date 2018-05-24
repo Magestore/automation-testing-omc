@@ -1,14 +1,18 @@
 <?php
 namespace Magento\Webpos\Test\Constraint\Staff;
+
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class AssertOrderOnlyCreatedByStaff
+ * @package Magento\Webpos\Test\Constraint\Staff
+ */
 class AssertOrderOnlyCreatedByStaff extends AbstractConstraint
 {
 
     /**
      * @param WebposIndex $webposIndex
-     * @param $orderId
+     * @param $orderIds
      */
     public function processAssert(WebposIndex $webposIndex, $orderIds)
     {
@@ -28,8 +32,7 @@ class AssertOrderOnlyCreatedByStaff extends AbstractConstraint
         for ($i=0; $i<count($orderIds); ++$i)
         {
             $webposIndex->getOrderHistoryOrderList()->search($orderIds[$i]);
-            $webposIndex->getMainContent()->waitForMsWebpos();
-            $webposIndex->getMainContent()->clickOutsidePopup();
+            $webposIndex->getCheckoutProductDetail()->getButtonCancel()->click();
             $webposIndex->getOrderHistoryOrderList()->waitLoader();
             sleep(1);
             \PHPUnit_Framework_Assert::assertTrue(

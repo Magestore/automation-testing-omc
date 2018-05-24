@@ -61,6 +61,11 @@ class CheckoutProductList extends Block
         return $this->_rootElement->find('//*[@id="block-product-list"]/div/div/div/div/div[1]/div/a/span', Locator::SELECTOR_XPATH);
     }
 
+    public function getFirstProductDetailButton2()
+    {
+        return $this->_rootElement->find('span.icon-iconPOS-detailn', Locator::SELECTOR_XPATH);
+    }
+
     public function getFirstProductPrice()
     {
         $text = $this->_rootElement->find('#block-product-list > div > div > div > div > div:nth-child(1) > div > div.product-info > div > span')->getText();

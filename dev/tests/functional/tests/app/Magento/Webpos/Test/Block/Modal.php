@@ -13,45 +13,48 @@ use Magento\Mtf\Block\Block;
 
 class Modal extends Block
 {
-	public function getModalPopup()
-	{
-		return $this->_rootElement->find('.modal-popup');
-	}
+    public function getModalPopup()
+    {
+        return $this->_rootElement->find('.modal-popup');
+    }
 
-	public function getPopupMessage()
-	{
-		return $this->getPopupMessageElement()->getText();
-	}
+    public function getPopupMessage()
+    {
+        return $this->getPopupMessageElement()->getText();
+    }
 
     public function getPopupMessageElement()
     {
         return $this->_rootElement->find('aside > div.modal-inner-wrap > div > div');
     }
 
-	public function getCancelButton()
-	{
-		return $this->_rootElement->find('aside > div.modal-inner-wrap > footer > button.action-secondary.action-dismiss');
-	}
-
-	public function waitForCancelButtonIsVisible() {
-	    return $this->waitForElementVisible('aside > div.modal-inner-wrap > footer > button.action-secondary.action-dismiss');
+    public function getCancelButton()
+    {
+        return $this->_rootElement->find('aside > div.modal-inner-wrap > footer > button.action-secondary.action-dismiss');
     }
 
-	public function getOkButton()
-	{
-		return $this->_rootElement->find('.action-accept');
-	}
+    public function waitForCancelButtonIsVisible()
+    {
+        return $this->waitForElementVisible('aside > div.modal-inner-wrap > footer > button.action-secondary.action-dismiss');
+    }
 
-    public function waitForOkButtonIsVisible() {
+    public function getOkButton()
+    {
+        return $this->_rootElement->find('.action-accept');
+    }
+
+    public function waitForOkButtonIsVisible()
+    {
         return $this->waitForElementVisible('.action-accept');
     }
 
-	public function getCloseButton()
-	{
-		return $this->_rootElement->find('.action-close');
-	}
+    public function getCloseButton()
+    {
+        return $this->_rootElement->find('.action-close');
+    }
 
-    public function waitForCloseButtonIsVisible() {
+    public function waitForCloseButtonIsVisible()
+    {
         return $this->waitForElementVisible('.action-close');
     }
 
@@ -60,7 +63,13 @@ class Modal extends Block
         $this->waitForElementNotVisible('.indicator');
     }
 
-    public function waitForLoader() {
-	    $this->waitForElementVisible('.modal-popup');
+    public function waitForLoader()
+    {
+        $this->waitForElementVisible('.modal-popup');
+    }
+
+    public function getElementById($id)
+    {
+        $this->_rootElement->find('#' . $id);
     }
 }

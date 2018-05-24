@@ -22,23 +22,26 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
     /**
      * System config.
      *
-     * @var DataInterface
+     * @var DataInterface $configuration
      */
     protected $configuration;
 
     /**
      * Webpos Index page.
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     /**
+     * LoginWebposWithSelectLocationPosStep constructor.
      * @param WebposIndex $webposIndex
+     * @param DataInterface $configuration
+     * @param FixtureFactory $fixtureFactory
      */
     public function __construct(
         WebposIndex $webposIndex,
@@ -65,16 +68,17 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
             $timeAfter = $time + 3;
             while (!$this->webposIndex->getWrapWarningForm()->isVisible() &&
                 !$this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible() &&
-                $time < $timeAfter){
+                $time < $timeAfter) {
                 $time = time();
             }
             if ($this->webposIndex->getWrapWarningForm()->isVisible() &&
                 $this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible()) {
                 $this->webposIndex->getWrapWarningForm()->getButtonContinue()->click();
             }
-
             $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
-            $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
+            if ($this->webposIndex->getLoginForm()->getPosID()->isVisible()) {
+                $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
+            }
             $this->webposIndex->getLoginForm()->getEnterToPos()->click();
             $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
@@ -83,7 +87,11 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
                 $time = time();
             }
         }
-
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $data = [
+            'username' => $username,
+            'password' => $password
+        ];
+        return $this->fixtureFactory->createByCode('staff' , ['data' => $data]);
     }
 }

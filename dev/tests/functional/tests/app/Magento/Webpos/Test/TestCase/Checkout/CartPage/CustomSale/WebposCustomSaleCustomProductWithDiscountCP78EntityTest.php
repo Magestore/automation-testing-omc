@@ -18,9 +18,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  *
  * Step:
  * 1. Add a custom product to cart
- *
  */
-
 /**
  * Class WebposCustomSaleCustomProductWithDiscountCP78EntityTest
  * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
@@ -34,7 +32,6 @@ class WebposCustomSaleCustomProductWithDiscountCP78EntityTest extends  Injectabl
 
     /**
      * @param WebposIndex $webposIndex
-     * @return void
      */
     public function __inject(
         WebposIndex $webposIndex
@@ -45,7 +42,8 @@ class WebposCustomSaleCustomProductWithDiscountCP78EntityTest extends  Injectabl
 
     /**
      * @param $productName
-     * @param $productDescription
+     * @param $price
+     * @param $amountValue
      */
     public function test($productName, $price, $amountValue)
     {
@@ -65,8 +63,7 @@ class WebposCustomSaleCustomProductWithDiscountCP78EntityTest extends  Injectabl
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
         sleep(1);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
-
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
+        sleep(1);
     }
 }

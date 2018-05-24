@@ -22,27 +22,25 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 class WebposManageStaffMS74Test extends Injectable
 {
-
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     private $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
-     * Inject WebposIndex pages.
-     *
-     * @param $webposIndex
-     * @return void
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     public function __inject(
         WebposIndex $webposIndex,
@@ -54,6 +52,10 @@ class WebposManageStaffMS74Test extends Injectable
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
 
+    /**
+     * @param FixtureFactory $fixtureFactory
+     * @return array
+     */
     public function __prepare(FixtureFactory $fixtureFactory)
     {
         $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
@@ -61,10 +63,9 @@ class WebposManageStaffMS74Test extends Injectable
     }
 
     /**
-     * Create WebposRole group test.
-     *
-     * @param WebposRole
-     * @return void
+     * @param WebposRole $webposRole
+     * @param $products
+     * @param $staffData
      */
     public function test(WebposRole $webposRole, $products, $staffData)
     {
@@ -118,8 +119,7 @@ class WebposManageStaffMS74Test extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         sleep(1);
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue(69);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
         sleep(1);
 //        sleep(2);
         $totalAfter = $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText();

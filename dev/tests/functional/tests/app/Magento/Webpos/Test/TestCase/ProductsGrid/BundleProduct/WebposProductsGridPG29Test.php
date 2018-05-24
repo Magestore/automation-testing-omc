@@ -18,7 +18,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposProductsGridPG29Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
@@ -50,7 +50,6 @@ class WebposProductsGridPG29Test extends Injectable
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();
-
 
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());

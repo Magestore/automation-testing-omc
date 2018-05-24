@@ -6,16 +6,23 @@
  * Time: 16:34
  */
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposHoldOrderCP163Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
+ */
 class WebposHoldOrderCP163Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject
     (
         WebposIndex $webposIndex
@@ -24,6 +31,11 @@ class WebposHoldOrderCP163Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @param $priceCustom
+     * @return array
+     */
     public function test($products, $priceCustom)
     {
         //Create product
@@ -51,14 +63,12 @@ class WebposHoldOrderCP163Test extends Injectable
         }
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        sleep(1);
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
 
         //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(1);
+        sleep(2);
 
         //Cart in On-Hold
         $this->webposIndex->getMsWebpos()->clickCMenuButton();

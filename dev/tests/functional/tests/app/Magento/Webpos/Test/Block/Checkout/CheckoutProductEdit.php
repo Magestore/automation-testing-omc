@@ -15,9 +15,9 @@ use Magento\Mtf\Block\Block;
  */
 class CheckoutProductEdit extends Block
 {
-	public function getCancelButton()
+	public function getClosePopupCustomerSale()
 	{
-		return $this->_rootElement->find('.hide-popup-custom-sale');
+		return $this->_rootElement->find('.close-edit-product-popup');
 	}
 
 	public function getProductName()
@@ -59,7 +59,6 @@ class CheckoutProductEdit extends Block
 	}
 	public function getCustomPriceButton()
 	{
-	    $this->waitCustomPriceButton();
 		return $this->_rootElement->find('.custom-price');
 	}
 

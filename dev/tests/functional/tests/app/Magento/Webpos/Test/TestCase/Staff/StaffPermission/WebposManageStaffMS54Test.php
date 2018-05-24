@@ -6,21 +6,25 @@
  * Time: 09:14
  */
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertEditDiscountCustomPrice;
-
+/**
+ * Class WebposManageStaffMS54Test
+ * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
+ */
 class WebposManageStaffMS54Test extends Injectable
 {
 
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     private $webposIndex;
 
     /**
-     * @var AssertEditDiscountCustomPrice
+     * @var AssertEditDiscountCustomPrice $assertEditDiscountCustomPrice
      */
     protected $assertEditDiscountCustomPrice;
 
@@ -33,10 +37,8 @@ class WebposManageStaffMS54Test extends Injectable
     }
 
     /**
-     * Inject WebposIndex pages.
-     *
-     * @param $webposIndex
-     * @return void
+     * @param WebposIndex $webposIndex
+     * @param AssertEditDiscountCustomPrice $assertEditDiscountCustomPrice
      */
     public function __inject(
         WebposIndex $webposIndex,
@@ -47,10 +49,10 @@ class WebposManageStaffMS54Test extends Injectable
     }
 
     /**
-     * Create WebposRole group test.
-     *
-     * @param WebposRole
-     * @return void
+     * @param WebposRole $webposRole
+     * @param $products
+     * @param $priceCustom
+     * @return array
      */
     public function test(WebposRole $webposRole, $products, $priceCustom)
     {
@@ -84,8 +86,8 @@ class WebposManageStaffMS54Test extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
+        sleep(1);
         $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
         sleep(1);
         $this->assertEditDiscountCustomPrice->processAssert($this->webposIndex, $priceCustom, 1);

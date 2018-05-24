@@ -44,6 +44,10 @@ class CheckoutPaymentMethod extends Block
     {
         return $this->_rootElement->find('.icon-iconPOS-payment-cashforpos');
     }
+    public function getTitlePaymentMethod()
+    {
+        return $this->_rootElement->find('label[data-bind="text: title"]');
+    }
 
     public function getCashInMethodWhileHaveALotOfPaymentMethod()
     {

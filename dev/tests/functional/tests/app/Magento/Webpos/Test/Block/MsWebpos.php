@@ -23,6 +23,13 @@ class MsWebpos extends Block
 		$this->_rootElement->find('#c-button--push-left')->click();
 	}
 
+	public function waitForCMenuButton()
+	{
+		$cMenu = $this->_rootElement->find('#c-button--push-left');
+		if (!$cMenu->isVisible()) {
+		    $this->waitForElementVisible('#c-button--push-left');
+        }
+	}
 	public function getCMenuButton()
 	{
 		return $this->_rootElement->find('#c-button--push-left');
@@ -52,11 +59,6 @@ class MsWebpos extends Block
 	public function waitCheckoutLoader()
 	{
 		$this->waitForElementNotVisible('#webpos_checkout > div.indicator');
-	}
-
-	public function clickOutsidePopup()
-	{
-        $this->_rootElement->click();
 	}
 
 	public function waitForSyncDataAfterLogin()
@@ -93,6 +95,10 @@ class MsWebpos extends Block
     public function cmenuButtonIsVisible()
     {
         return $this->_rootElement->find('#c-button--push-left')->isVisible();
+    }
+
+    public function getProductDetailPopup() {
+	    return $this->_rootElement->find('[id="popup-product-detail"]');
     }
 
     public function waitForCMenuLoader()

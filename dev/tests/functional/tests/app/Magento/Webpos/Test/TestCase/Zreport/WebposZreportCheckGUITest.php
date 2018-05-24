@@ -44,6 +44,7 @@ class WebposZreportCheckGUITest extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+
     public function test(
         $products,
         Denomination $denomination,

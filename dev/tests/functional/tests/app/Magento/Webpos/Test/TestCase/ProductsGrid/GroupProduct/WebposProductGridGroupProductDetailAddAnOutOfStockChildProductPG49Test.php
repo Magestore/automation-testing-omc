@@ -11,19 +11,26 @@ namespace Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+/**
+ * Class WebposProductGridGroupProductDetailAddAnOutOfStockChildProductPG49Test
+ * @package Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct
+ */
 class  WebposProductGridGroupProductDetailAddAnOutOfStockChildProductPG49Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
     public function __inject(
         WebposIndex $webposIndex,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
@@ -32,6 +39,9 @@ class  WebposProductGridGroupProductDetailAddAnOutOfStockChildProductPG49Test ex
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
 
+    /**
+     * @param $products
+     */
     public function test($products)
     {
         // Create products
@@ -48,12 +58,15 @@ class  WebposProductGridGroupProductDetailAddAnOutOfStockChildProductPG49Test ex
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 
         $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-product-detail"]');
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        //click cancel button to close product detail popup
+        $this->webposIndex->getCheckoutProductDetail()->getButtonCancel()->click();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-product-detail"]');
         $this->webposIndex->getCheckoutProductList()->getFirstProduct()->hover();
-        $this->webposIndex->getCheckoutProductList()->getFirstProductDetailButton()->click();
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-product-detail"]');
         // Select options
         $this->webposIndex->getCheckoutProductDetail()->fillGroupedProductQty($products[0]['product']);
@@ -69,6 +82,5 @@ class  WebposProductGridGroupProductDetailAddAnOutOfStockChildProductPG49Test ex
             $this->webposIndex->getToaster()->getWarningMessage()->getText(),
             'Out of stock message is wrong.'
         );
-
     }
 }

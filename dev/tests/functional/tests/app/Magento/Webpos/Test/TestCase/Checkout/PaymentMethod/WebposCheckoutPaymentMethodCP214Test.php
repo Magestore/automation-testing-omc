@@ -72,8 +72,7 @@ class WebposCheckoutPaymentMethodCP214Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutPaymentMethod()->getTitlePaymentMethod()->click();
     }
 
     public function tearDown()

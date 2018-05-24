@@ -23,12 +23,13 @@ class WebposCustomSaleCustomProductPlaceOrderCP80EntityTest extends Injectable
      */
     protected $webposIndex;
     /**
-     * @var
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+
     /**
      * @param WebposIndex $webposIndex
-     * @return void
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     public function __inject(
         WebposIndex $webposIndex,
@@ -41,7 +42,10 @@ class WebposCustomSaleCustomProductPlaceOrderCP80EntityTest extends Injectable
 
     /**
      * @param $productName
-     * @param $productDescription
+     * @param $price
+     * @param $products
+     * @param FixtureFactory $fixtureFactory
+     * @param $amountValue
      */
     public function test($productName, $price, $products, FixtureFactory $fixtureFactory, $amountValue)
     {
@@ -59,8 +63,8 @@ class WebposCustomSaleCustomProductPlaceOrderCP80EntityTest extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
+        sleep(1);
         $i = 0;
         foreach ($products as $product) {
             $products[$i] = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);

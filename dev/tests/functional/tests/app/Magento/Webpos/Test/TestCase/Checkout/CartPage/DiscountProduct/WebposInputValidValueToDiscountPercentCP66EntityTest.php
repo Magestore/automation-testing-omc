@@ -67,8 +67,8 @@ class WebposInputValidValueToDiscountPercentCP66EntityTest extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($amountValue);
         //we need to set sleep($second) in this case.
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
+        sleep(2);
         return [
             'product' => $product,
             'price' => $price

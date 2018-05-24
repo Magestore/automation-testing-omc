@@ -22,10 +22,6 @@ class Body extends Block
         return $minHeight;
     }
 
-    public function clickOutSide() {
-        $this->_rootElement->click();
-    }
-
     public function waitForModalPopup()
     {
         $this->waitForElementVisible('.modals-wrapper .modal-popup');

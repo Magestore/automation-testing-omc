@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\SessionManagement\NewFeature\WebposManageSessionTC026Test" summary="Session Management" ticketId="TC001">
+        <variation name="SessionManagementTC026TestVariation"  summary="LR001">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+            </data>
+        </variation>
+        <variation name="SessionManagementTC027TestVariation"  summary="LR001">
+            <data name="pos/dataset" xsi:type="string">default1</data>
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+                <item name="1" xsi:type="string">product2</item>
+            </data>
+        </variation>
+    </testCase>
+</config>

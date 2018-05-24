@@ -73,8 +73,7 @@ class WebposCheckoutPaymentMethodCP217Test extends Injectable
         sleep(1);
         $amount = $this->webposIndex->getCheckoutPlaceOrder()->getTopTotalPrice()->getText();
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutPaymentMethod()->getTitlePaymentMethod()->click();
     }
 
     public function tearDown()

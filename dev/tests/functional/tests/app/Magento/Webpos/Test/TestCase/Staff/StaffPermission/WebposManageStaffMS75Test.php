@@ -7,6 +7,7 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
@@ -15,7 +16,6 @@ use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
-
 /**
  * Class WebposManageStaffMS75Test
  * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
@@ -24,25 +24,24 @@ class WebposManageStaffMS75Test extends Injectable
 {
 
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     private $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
-     * Inject WebposIndex pages.
-     *
-     * @param $webposIndex
-     * @return void
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     public function __inject(
         WebposIndex $webposIndex,
@@ -61,10 +60,9 @@ class WebposManageStaffMS75Test extends Injectable
     }
 
     /**
-     * Create WebposRole group test.
-     *
-     * @param WebposRole
-     * @return void
+     * @param WebposRole $webposRole
+     * @param $products
+     * @param $staffData
      */
     public function test(WebposRole $webposRole, $products, $staffData)
     {
@@ -116,8 +114,7 @@ class WebposManageStaffMS75Test extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue(69);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
         sleep(2);
         $totalAfter = $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText();
         $this->assertNotEquals(
@@ -156,6 +153,11 @@ class WebposManageStaffMS75Test extends Injectable
 
     }
 
+    /**
+     * @param Staff $staff
+     * @param Location|null $location
+     * @param Pos|null $pos
+     */
     public function login(Staff $staff, Location $location = null, Pos $pos = null)
     {
         $username = $staff->getUsername();
@@ -187,9 +189,6 @@ class WebposManageStaffMS75Test extends Injectable
             sleep(2);
         }
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-//        $this->webposIndex->getMsWebpos()->waitCartLoader();
-
     }
-
 }
 

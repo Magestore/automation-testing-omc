@@ -19,15 +19,19 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposCheckoutCartEditQtyCheckoutByEditQtyProductTest extends Injectable
 {
 	/**
-	 * @var WebposIndex
+	 * @var WebposIndex $webposIndex
 	 */
 	protected $webposIndex;
 
 	/**
-	 * @var AssertEditProductPopupIsAvailable
+	 * @var AssertEditProductPopupIsAvailable $assertEditProductPopupIsAvailable
 	 */
 	protected $assertEditProductPopupIsAvailable;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertEditProductPopupIsAvailable $assertEditProductPopupIsAvailable
+     */
 	public function __inject(
 		WebposIndex $webposIndex,
 		AssertEditProductPopupIsAvailable $assertEditProductPopupIsAvailable
@@ -37,6 +41,11 @@ class WebposCheckoutCartEditQtyCheckoutByEditQtyProductTest extends Injectable
 		$this->assertEditProductPopupIsAvailable = $assertEditProductPopupIsAvailable;
 	}
 
+    /**
+     * @param CatalogProductSimple $product
+     * @param $qty
+     * @param $qtyInput
+     */
 	public function test(
 		CatalogProductSimple $product,
 		$qty,
@@ -64,8 +73,8 @@ class WebposCheckoutCartEditQtyCheckoutByEditQtyProductTest extends Injectable
 		$this->assertEditProductPopupIsAvailable->processAssert($this->webposIndex);
 
 		$this->webposIndex->getCheckoutProductEdit()->getQtyInput()->setValue($qtyInput);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
+        sleep(1);
 
 		$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();

@@ -14,17 +14,17 @@ use Magento\Webpos\Test\Constraint\ProductsGrid\BundleProduct\AssertChildProduct
 
 /**
  * Class WebposProductsGridPG35Test
- * @package Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct
+ * @package Magento\Webpos\Test\TestCase\ProductsGrid\BundleProduct
  */
 class WebposProductsGridPG35Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertChildProductOnProductDetail
+     * @var AssertChildProductOnProductDetail $assertChildProductOnProductDetail
      */
     protected $assertChildProductOnProductDetail;
 
@@ -70,9 +70,10 @@ class WebposProductsGridPG35Test extends Injectable
         }
 
         // Click detail product
+        sleep(1);
         $this->webposIndex->getCheckoutProductList()->getFirstProduct()->hover();
         $this->webposIndex->getCheckoutProductList()->getFirstProductDetailButton()->click();
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-product-detail"]');
         $this->webposIndex->getCheckoutProductDetail()->getQtyOfOption(1)->setValue(2);
         
         // Assert

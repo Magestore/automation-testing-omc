@@ -10,7 +10,6 @@ namespace Magento\Webpos\Test\TestCase\SessionManagement\NewFeature;
 
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
@@ -36,21 +35,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 class WebposManageSessionTC015Test extends Injectable
 {
-    /**
-     * Pos Index Page
-     *
-     * @var $posIndex
-     */
-    private $posIndex;
-
-    /**
-     * Pos New page
-     *
-     * @var $posNews
-     */
-    private $posNews;
-
-
     public function __inject()
     {
         //Preconditon

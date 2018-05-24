@@ -119,8 +119,7 @@ class WebposZreportZR009Test extends Injectable
         $totalSales = $this->webposIndex->getCheckoutCartFooter()->getTotalElement()->getText();
         $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutPaymentMethod()->getTitlePaymentMethod()->click();
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();
         $this->webposIndex->getCheckoutAddMorePayment()->getCashIn()->click();

@@ -20,13 +20,12 @@ class WebposCheckGUICustomerPriceInsertNegativePriceCP55EntityTest extends Injec
     /**
      * AssertWebposCheckGUICustomerPriceCP54 Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
      * @param WebposIndex $webposIndex
-     * @return void
      */
     public function __inject(
         WebposIndex $webposIndex
@@ -36,9 +35,9 @@ class WebposCheckGUICustomerPriceInsertNegativePriceCP55EntityTest extends Injec
     }
 
     /**
-     * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
-     *
-     * @return void
+     * @param CatalogProductSimple $product
+     * @param $negativeValue
+     * @return array
      */
     public function test(CatalogProductSimple $product, $negativeValue)
     {
@@ -53,8 +52,8 @@ class WebposCheckGUICustomerPriceInsertNegativePriceCP55EntityTest extends Injec
         $this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
         $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($negativeValue);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
+        sleep(2);
         return [
             'product' => $product
         ];
