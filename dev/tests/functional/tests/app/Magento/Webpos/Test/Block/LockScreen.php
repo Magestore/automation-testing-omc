@@ -8,10 +8,13 @@
 
 namespace Magento\Webpos\Test\Block;
 
-
 use Magento\Mtf\Block\Block;
 use Magento\Mtf\Client\Locator;
 
+/**
+ * Class LockScreen
+ * @package Magento\Webpos\Test\Block
+ */
 class LockScreen extends Block
 {
     public function getInputUnLockRegisterPin($index)

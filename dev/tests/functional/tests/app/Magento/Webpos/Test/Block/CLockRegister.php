@@ -8,10 +8,13 @@
 
 namespace Magento\Webpos\Test\Block;
 
-
 use Magento\Mtf\Block\Block;
 use Magento\Mtf\Client\Locator;
 
+/**
+ * Class CLockRegister
+ * @package Magento\Webpos\Test\Block
+ */
 class CLockRegister extends Block
 {
     public function getInputLockRegisterPin($index)
