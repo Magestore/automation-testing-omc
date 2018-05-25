@@ -60,6 +60,10 @@ class AdminLockPosStep implements TestStepInterface
             'pos_name' => $this->posName
         ]);
         $this->posEdit->getPosForm()->waitLoader();
+        \PHPUnit_Framework_Assert::assertTrue(
+            $this->posEdit->getFormPageActions()->getLockButton()->isVisible(),
+            'Lock button not visible'
+        );
         $this->posEdit->getFormPageActions()->getLockButton()->click();
         \PHPUnit_Framework_Assert::assertEquals(
             $this->posName . ' was locked successfully.',

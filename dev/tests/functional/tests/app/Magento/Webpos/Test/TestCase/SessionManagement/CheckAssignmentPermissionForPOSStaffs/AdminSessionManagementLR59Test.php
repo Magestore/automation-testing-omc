@@ -21,23 +21,24 @@ use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class AdminSessionManagementLR51Test
+ * Class AdminSessionManagementLR59Test
  *
  * Precondition:
- * POS staff locked the register successfully
+ * - Loged in backend with user that is assigned permission to lock/unlock register
  *
  * Steps:
- * 1. On the unlock screen, observe and check the components
+ * 1. From the backend panel -> go to the Manage POS page
+ * 2. On POS list, select a locked POS
+ * 3. On POS detail page, click on Unlock button
+ * 4. Back on Manage POS page, observe the status of POS which is just unlocked
  *
  * Acceptance:
- * 1. On the unlock screen include following components:
- * + 1 lock icon
- * + 1 text line with the content: Please enter security PIN to unlock the register
- * + 4 small textboxes for entering security PIN
+ * 3. Show the Lock button
+ * 4. Show the POS's status is Enabled
  *
  * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
-class AdminSessionManagementLR51Test extends Injectable
+class AdminSessionManagementLR59Test extends Injectable
 {
     /**
      * @var WebposRoleNew
@@ -128,25 +129,30 @@ class AdminSessionManagementLR51Test extends Injectable
             ]
         )->run();
 
+        // steps
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\AdminUnlockPosStep',
+            [
+                'posName' => $pos->getPosName()
+            ]
+        )->run();
+
         $this->posIndex->open();
         $this->posIndex->getPosGrid()->searchAndOpen(
             [
                 'pos_name' => $pos->getPosName()
             ]
         );
-        $this->posEdit->getPosForm()->getCurrentStaff()->setValue($staff->getDisplayName());
-        $this->posEdit->getFormPageActions()->save();
 
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
-            [
-                'staff' => $staff,
-                'location' => $location,
-                'pos' => $pos,
-                'hasOpenSession' => false,
-                'hasWaitOpenSessionPopup' => false
-            ]
-        )->run();
+        $this->assertTrue(
+            $this->posEdit->getFormPageActions()->getLockButton()->isVisible(),
+            'Button lock not visible'
+        );
+        $this->assertEquals(
+            'Enabled',
+            $this->posEdit->getPosForm()->getStatus()->getValue(),
+            'Status of pos not Enabled'
+        );
     }
 
     public function tearDown()

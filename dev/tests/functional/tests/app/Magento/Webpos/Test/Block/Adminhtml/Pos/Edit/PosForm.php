@@ -50,6 +50,16 @@ class PosForm extends Form
         return $this->_rootElement->find('[name="status"]')->getText();
     }
 
+    public function getStatus()
+    {
+        return $this->_rootElement->find('#page_status', Locator::SELECTOR_CSS, 'select');
+    }
+
+    public function getEnableOptionToLockRegister()
+    {
+        return $this->_rootElement->find('#page_is_allow_to_lock', Locator::SELECTOR_CSS, 'select');
+    }
+
     public function setLocation($nameLocation)
     {
         $this->_rootElement->find('#page_location_id', locator::SELECTOR_CSS, 'select')->setValue($nameLocation);
@@ -58,6 +68,11 @@ class PosForm extends Form
     public function setPosName($posName)
     {
         $this->_rootElement->find('#page_pos_name')->setValue($posName);
+    }
+
+    public function getCurrentStaff()
+    {
+        return $this->_rootElement->find('#page_staff_id', Locator::SELECTOR_CSS, 'select');
     }
 
     public function setFieldByValue($id, $value, $type = null)

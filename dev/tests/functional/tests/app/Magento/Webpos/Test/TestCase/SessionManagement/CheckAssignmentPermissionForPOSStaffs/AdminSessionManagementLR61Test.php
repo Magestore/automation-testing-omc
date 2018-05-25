@@ -21,23 +21,26 @@ use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class AdminSessionManagementLR51Test
+ * Class AdminSessionManagementLR61Test
  *
  * Precondition:
- * POS staff locked the register successfully
+ * - Loged in webpos with POS staff that is assigned permission to lock/unlock register
+ * -  Have a POS which is locked
  *
  * Steps:
- * 1. On the unlock screen, observe and check the components
+ * 1. In backend panel, go to Manage POS page, select a locked POS
+ * 2. In the locked POS detail page, set the Enable option to lock register field to No
+ * 3. Reload webpos and check the locked POS on webpos
+ * 4. Check the status of locked POS on backend
+
  *
  * Acceptance:
- * 1. On the unlock screen include following components:
- * + 1 lock icon
- * + 1 text line with the content: Please enter security PIN to unlock the register
- * + 4 small textboxes for entering security PIN
+ * 3. The locked POS is automatically unlocked
+ * 4. POS status changes from Locked to Enabled
  *
  * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
-class AdminSessionManagementLR51Test extends Injectable
+class AdminSessionManagementLR61Test extends Injectable
 {
     /**
      * @var WebposRoleNew
@@ -128,13 +131,14 @@ class AdminSessionManagementLR51Test extends Injectable
             ]
         )->run();
 
+        // steps
         $this->posIndex->open();
         $this->posIndex->getPosGrid()->searchAndOpen(
             [
                 'pos_name' => $pos->getPosName()
             ]
         );
-        $this->posEdit->getPosForm()->getCurrentStaff()->setValue($staff->getDisplayName());
+        $this->posEdit->getPosForm()->getEnableOptionToLockRegister()->setValue("No");
         $this->posEdit->getFormPageActions()->save();
 
         $this->objectManager->getInstance()->create(
@@ -147,6 +151,22 @@ class AdminSessionManagementLR51Test extends Injectable
                 'hasWaitOpenSessionPopup' => false
             ]
         )->run();
+        $this->assertFalse(
+            $this->webposIndex->getLockScreen()->isVisible(),
+            'Pos still locked'
+        );
+
+        $this->posIndex->open();
+        $this->posIndex->getPosGrid()->searchAndOpen(
+            [
+                'pos_name' => $pos->getPosName()
+            ]
+        );
+        $this->assertEquals(
+            'Enabled',
+            $this->posEdit->getPosForm()->getStatus()->getValue(),
+            'Pos status is not Enabled'
+        );
     }
 
     public function tearDown()
