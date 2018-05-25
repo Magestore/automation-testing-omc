@@ -42,14 +42,14 @@ class SalesByLocationDailyEntityTest extends Injectable
     /**
      * SalesByLocationDaily page.
      *
-     * @var SalesByLocationDaily
+     * @var SalesByLocationDaily $salesByLocationDaily
      */
     protected $salesByLocationDaily;
 
     /**
      * Inject pages.
      *
-     * @param SalesByStaffDaily $salesByLocationDaily
+     * @param SalesByLocationDaily $salesByLocationDaily
      * @return void
      */
     public function __inject(SalesByLocationDaily $salesByLocationDaily)
@@ -64,10 +64,9 @@ class SalesByLocationDailyEntityTest extends Injectable
      * @param array $shifts
      * @return void
      */
-    public function test(Shift $shift, array $shifts)
+    public function test(array $shifts)
     {
         // Preconditions
-//        $shift->persist();
         $this->salesByLocationDaily->open();
         $this->salesByLocationDaily->getMessagesBlock()->clickLinkInMessage('notice', 'here');
 

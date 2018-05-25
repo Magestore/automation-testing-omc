@@ -14,7 +14,6 @@ namespace Magento\Webpos\Test\TestCase\SalesOrderReport;
 use Magento\Webpos\Test\Page\Adminhtml\OrderListByLocation;
 use Magento\Webpos\Test\Fixture\Shift;
 use Magento\Mtf\TestCase\Injectable;
-
 /**
  * Preconditions:
  * 1. Create customer.
@@ -42,7 +41,7 @@ class OrderListByLocationEntityTest extends Injectable
     /**
      * OrderListByLocation page.
      *
-     * @var OrderListByLocation
+     * @var OrderListByLocation $orderListByLocation
      */
     protected $orderListByLocation;
 
@@ -64,13 +63,11 @@ class OrderListByLocationEntityTest extends Injectable
      * @param array $shifts
      * @return void
      */
-    public function test(Shift $shift, array $shifts)
+    public function test(array $shifts)
     {
         // Preconditions
-//        $shift->persist();
         $this->orderListByLocation->open();
         $this->orderListByLocation->getMessagesBlock()->clickLinkInMessage('notice', 'here');
-
         // Steps
         $this->orderListByLocation->getFilterBlock()->viewsReport($shifts);
         $this->orderListByLocation->getActionsBlock()->showReport();

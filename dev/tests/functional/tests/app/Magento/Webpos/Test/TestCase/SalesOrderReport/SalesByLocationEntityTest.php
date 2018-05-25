@@ -14,7 +14,6 @@ namespace Magento\Webpos\Test\TestCase\SalesOrderReport;
 use Magento\Webpos\Test\Page\Adminhtml\SalesByLocation;
 use Magento\Webpos\Test\Fixture\Shift;
 use Magento\Mtf\TestCase\Injectable;
-
 /**
  * Preconditions:
  * 1. Create customer.
@@ -42,14 +41,14 @@ class SalesByLocationEntityTest extends Injectable
     /**
      * SalesByLocation page.
      *
-     * @var SalesByLocation
+     * @var SalesByLocation $salesByLocation
      */
     protected $salesByLocation;
 
     /**
      * Inject pages.
      *
-     * @param SalesByStaffDaily $salesByLocation
+     * @param SalesByLocation $salesByLocation
      * @return void
      */
     public function __inject(SalesByLocation $salesByLocation)
@@ -64,10 +63,9 @@ class SalesByLocationEntityTest extends Injectable
      * @param array $shifts
      * @return void
      */
-    public function test(Shift $shift, array $shifts)
+    public function test(array $shifts)
     {
         // Preconditions
-//        $shift->persist();
         $this->salesByLocation->open();
         $this->salesByLocation->getMessagesBlock()->clickLinkInMessage('notice', 'here');
 

@@ -14,7 +14,6 @@ namespace Magento\Webpos\Test\TestCase\SalesOrderReport;
 use Magento\Webpos\Test\Page\Adminhtml\SalesByPaymentDaily;
 use Magento\Webpos\Test\Fixture\Shift;
 use Magento\Mtf\TestCase\Injectable;
-
 /**
  * Preconditions:
  * 1. Create customer.
@@ -49,7 +48,7 @@ class SalesByPaymentDailyEntityTest extends Injectable
     /**
      * Inject pages.
      *
-     * @param SalesByStaffDaily $salesByPaymentDaily
+     * @param SalesByPaymentDaily $salesByPaymentDaily
      * @return void
      */
     public function __inject(SalesByPaymentDaily $salesByPaymentDaily)
@@ -64,10 +63,9 @@ class SalesByPaymentDailyEntityTest extends Injectable
      * @param array $shifts
      * @return void
      */
-    public function test(Shift $shift, array $shifts)
+    public function test(array $shifts)
     {
         // Preconditions
-//        $shift->persist();
         $this->salesByPaymentDaily->open();
         $this->salesByPaymentDaily->getMessagesBlock()->clickLinkInMessage('notice', 'here');
 

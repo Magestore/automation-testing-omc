@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase
+            name="Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs\AdminSessionManagementLR24LR31Test"
+            summary="Create Admin User Role" ticketId="MAGETWO-23413">
+        <variation name="AdminSessionManagementLR24Test">
+            <data name="webposRole/data/display_name" xsi:type="string">Role %isolation%</data>
+            <data name="pos/data/pos_name" xsi:type="string">test pos %isolation%</data>
+            <data name="pos/data/status" xsi:type="string">Enabled</data>
+            <data name="pos/data/is_allow_to_lock" xsi:type="string">1</data>
+            <data name="menuItemLockCurrency" xsi:type="string">Currency</data>
+            <data name="menuItemLockRegister" xsi:type="string">Lock Register</data>
+            <data name="testCaseId" xsi:type="string">LR24</data>
+        </variation>
+        <variation name="AdminSessionManagementLR31Test">
+            <data name="webposRole/data/display_name" xsi:type="string">Role %isolation%</data>
+            <data name="pos/data/pos_name" xsi:type="string">test pos %isolation%</data>
+            <data name="pos/data/status" xsi:type="string">Enabled</data>
+            <data name="pos/data/is_allow_to_lock" xsi:type="string">1</data>
+            <data name="menuItemLockCurrency" xsi:type="string">Currency</data>
+            <data name="menuItemLockRegister" xsi:type="string">Lock Register</data>
+            <data name="testCaseId" xsi:type="string">LR31</data>
+        </variation>
+    </testCase>
+</config>

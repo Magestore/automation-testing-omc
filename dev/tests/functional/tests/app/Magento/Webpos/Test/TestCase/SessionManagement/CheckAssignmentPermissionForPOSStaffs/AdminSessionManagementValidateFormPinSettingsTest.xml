@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase
+            name="Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs\AdminSessionManagementValidateFormPinSettingsTest"
+            summary="Create Admin User Role" ticketId="MAGETWO-23413">
+        <variation name="AdminSessionManagementLR33Test">
+            <data name="webposRole/data/display_name" xsi:type="string">Role %isolation%</data>
+            <data name="pos/data/pos_name" xsi:type="string">test pos %isolation%</data>
+            <data name="pos/data/status" xsi:type="string">Enabled</data>
+            <data name="pos/data/is_allow_to_lock" xsi:type="string">1</data>
+            <data name="pos/data/pin" xsi:type="string">1234</data>
+            <data name="menuItemLockRegister" xsi:type="string">Lock Register</data>
+            <data name="testCaseId" xsi:type="string">LR33</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Setting\General\AssertLockRegisterCheckFormMessage" />
+        </variation>
+        <variation name="AdminSessionManagementLR34Test">
+            <data name="webposRole/data/display_name" xsi:type="string">Role %isolation%</data>
+            <data name="pos/data/pos_name" xsi:type="string">test pos %isolation%</data>
+            <data name="pos/data/status" xsi:type="string">Enabled</data>
+            <data name="pos/data/is_allow_to_lock" xsi:type="string">1</data>
+            <data name="pos/data/pin" xsi:type="string">1234</data>
+            <data name="menuItemLockRegister" xsi:type="string">Lock Register</data>
+            <data name="testCaseId" xsi:type="string">LR34</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Setting\General\AssertLockRegisterCheckFormMessage" />
+        </variation>
+        <variation name="AdminSessionManagementLR36Test">
+            <data name="webposRole/data/display_name" xsi:type="string">Role %isolation%</data>
+            <data name="pos/data/pos_name" xsi:type="string">test pos %isolation%</data>
+            <data name="pos/data/status" xsi:type="string">Enabled</data>
+            <data name="pos/data/is_allow_to_lock" xsi:type="string">1</data>
+            <data name="pos/data/pin" xsi:type="string">1234</data>
+            <data name="menuItemLockRegister" xsi:type="string">Lock Register</data>
+            <data name="testCaseId" xsi:type="string">LR36</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Setting\General\AssertLockRegisterCheckFormMessage" />
+        </variation>
+        <variation name="AdminSessionManagementLR39Test">
+            <data name="webposRole/data/display_name" xsi:type="string">Role %isolation%</data>
+            <data name="pos/data/pos_name" xsi:type="string">test pos %isolation%</data>
+            <data name="pos/data/status" xsi:type="string">Enabled</data>
+            <data name="pos/data/is_allow_to_lock" xsi:type="string">1</data>
+            <data name="pos/data/pin" xsi:type="string">1234</data>
+            <data name="menuItemLockRegister" xsi:type="string">Lock Register</data>
+            <data name="testCaseId" xsi:type="string">LR39</data>
+        </variation>
+        <variation name="AdminSessionManagementLR40Test">
+            <data name="webposRole/data/display_name" xsi:type="string">Role %isolation%</data>
+            <data name="pos/data/pos_name" xsi:type="string">test pos %isolation%</data>
+            <data name="pos/data/status" xsi:type="string">Enabled</data>
+            <data name="pos/data/is_allow_to_lock" xsi:type="string">1</data>
+            <data name="pos/data/pin" xsi:type="string">1234</data>
+            <data name="menuItemLockRegister" xsi:type="string">Lock Register</data>
+            <data name="testCaseId" xsi:type="string">LR40</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Setting\General\AssertLockRegisterCheckFormMessage" />
+        </variation>
+        <variation name="AdminSessionManagementLR41Test">
+            <data name="webposRole/data/display_name" xsi:type="string">Role %isolation%</data>
+            <data name="pos/data/pos_name" xsi:type="string">test pos %isolation%</data>
+            <data name="pos/data/status" xsi:type="string">Enabled</data>
+            <data name="pos/data/is_allow_to_lock" xsi:type="string">1</data>
+            <data name="pos/data/pin" xsi:type="string">1234</data>
+            <data name="menuItemLockRegister" xsi:type="string">Lock Register</data>
+            <data name="testCaseId" xsi:type="string">LR41</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Setting\General\AssertLockRegisterCheckFormMessage" />
+        </variation>
+        <variation name="AdminSessionManagementLR42Test">
+            <data name="webposRole/data/display_name" xsi:type="string">Role %isolation%</data>
+            <data name="pos/data/pos_name" xsi:type="string">test pos %isolation%</data>
+            <data name="pos/data/status" xsi:type="string">Enabled</data>
+            <data name="pos/data/is_allow_to_lock" xsi:type="string">1</data>
+            <data name="pos/data/pin" xsi:type="string">1234</data>
+            <data name="menuItemLockRegister" xsi:type="string">Lock Register</data>
+            <data name="testCaseId" xsi:type="string">LR42</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Setting\General\AssertLockRegisterCheckFormMessage" />
+        </variation>
+        <variation name="AdminSessionManagementLR43Test">
+            <data name="webposRole/data/display_name" xsi:type="string">Role %isolation%</data>
+            <data name="pos/data/pos_name" xsi:type="string">test pos %isolation%</data>
+            <data name="pos/data/status" xsi:type="string">Enabled</data>
+            <data name="pos/data/is_allow_to_lock" xsi:type="string">1</data>
+            <data name="pos/data/pin" xsi:type="string">1234</data>
+            <data name="menuItemLockRegister" xsi:type="string">Lock Register</data>
+            <data name="testCaseId" xsi:type="string">LR43</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Setting\General\AssertLockRegisterCheckFormMessage" />
+        </variation>
+    </testCase>
+</config>

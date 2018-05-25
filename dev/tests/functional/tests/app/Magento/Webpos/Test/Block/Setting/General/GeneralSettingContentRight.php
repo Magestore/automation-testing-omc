@@ -10,6 +10,7 @@ namespace Magento\Webpos\Test\Block\Setting\General;
 
 use Magento\Mtf\Block\Block;
 use Magento\Mtf\Client\Locator;
+
 /**
  * Class GeneralSettingContentRight
  * @package Magento\Webpos\Test\Block\Setting\General
@@ -28,6 +29,7 @@ class GeneralSettingContentRight extends Block
     {
         return $this->_rootElement->find('#os_checkout\2e auto_check_promotion_rules');
     }
+
     public function selectAutoCheckPromotionOption($option)
     {
         $this->getAutoCheckPromotionSelection()->click();
@@ -84,20 +86,57 @@ class GeneralSettingContentRight extends Block
     {
         return $this->_rootElement->find('#server_ip_address');
     }
+
     public function getEnableOpenCashSelection()
     {
         return $this->_rootElement->find('#hardware\2e cashdrawer-manual');
     }
+
     public function getCashDrawerKickInput()
     {
         return $this->_rootElement->find('#cashdrawer_code');
     }
+
     public function getPrintViaPOSHubSelection()
     {
         return $this->_rootElement->find('#hardware\2e printer');
     }
+
     public function getEnablePoleDisplaySelection()
     {
         return $this->_rootElement->find('#hardware\2e pole');
+    }
+
+    /**
+     * Begin Lock Register Tab Page
+     */
+    private function getPinSettingsForm()
+    {
+        return $this->_rootElement->find('#pin-settings-form');
+    }
+
+    public function waitForPinSettingsFormVisible()
+    {
+        $this->waitForElementVisible('#pin-settings-form');
+    }
+
+    public function getLabelSecurityPIN()
+    {
+        return $this->getPinSettingsForm()->find('.panel-heading');
+    }
+
+    public function getPOSAccountPassword()
+    {
+        return $this->getPinSettingsForm()->find('#current-pos-password');
+    }
+
+    public function getSecurityPIN()
+    {
+        return $this->getPinSettingsForm()->find('#security-pin');
+    }
+
+    public function getLockRegisterButtonSave()
+    {
+        return $this->getPinSettingsForm()->find('.btn-save-acc');
     }
 }

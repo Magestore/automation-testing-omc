@@ -16,5 +16,9 @@
         <show_order_statuses>
             <input>select</input>
         </show_order_statuses>
+        <order_statuses>
+            <input>select</input>
+            <selector>[name='order_statuses[]']</selector>
+        </order_statuses>
     </fields>
 </mapping>

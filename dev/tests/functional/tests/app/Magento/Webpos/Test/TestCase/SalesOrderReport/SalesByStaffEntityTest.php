@@ -14,7 +14,6 @@ namespace Magento\Webpos\Test\TestCase\SalesOrderReport;
 use Magento\Webpos\Test\Page\Adminhtml\SalesByStaff;
 use Magento\Webpos\Test\Fixture\Shift;
 use Magento\Mtf\TestCase\Injectable;
-
 /**
  * Preconditions:
  * 1. Create customer.
@@ -64,10 +63,9 @@ class SalesByStaffEntityTest extends Injectable
      * @param array $salesByStaffReport
      * @return void
      */
-    public function test(Shift $shift, array $shifts)
+    public function test(array $shifts)
     {
         // Preconditions
-//        $shift->persist();
         $this->salesByStaff->open();
         $this->salesByStaff->getMessagesBlock()->clickLinkInMessage('notice', 'here');
 

@@ -19,10 +19,13 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposCartPageCustomerCheckoutByExistingCustomerCP41Test extends Injectable
 {
 	/**
-	 * @var WebposIndex
+	 * @var WebposIndex $webposIndex
 	 */
 	protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
 	public function __inject(
 		WebposIndex $webposIndex
 	)
@@ -30,6 +33,12 @@ class WebposCartPageCustomerCheckoutByExistingCustomerCP41Test extends Injectabl
 		$this->webposIndex = $webposIndex;
 	}
 
+    /**
+     * @param CatalogProductSimple $product
+     * @param Customer $customer1
+     * @param Customer $customer2
+     * @return array
+     */
 	public function test(
 		CatalogProductSimple $product,
 		Customer $customer1,
