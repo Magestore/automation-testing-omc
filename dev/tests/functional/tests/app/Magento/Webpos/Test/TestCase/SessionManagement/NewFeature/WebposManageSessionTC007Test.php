@@ -105,32 +105,10 @@ class WebposManageSessionTC007Test extends Injectable
                 'hasWaitOpenSessionPopup' => true
             ]
         )->run();
-
-        $username = 'test608761602';
-        $password = 'test12345';
-        $webposIndex->open();
-        $webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-        if ($webposIndex->getLoginForm()->isVisible()) {
-            $webposIndex->getLoginForm()->getUsernameField()->setValue($username);
-            $webposIndex->getLoginForm()->getPasswordField()->setValue($password);
-            $webposIndex->getLoginForm()->clickLoginButton();
-            $webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-            $webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
-            $webposIndex->getLoginForm()->setLocation('Test Display Name 1779209846');
-            $webposIndex->getLoginForm()->setPos('Post Test 689361884');
-            $webposIndex->getLoginForm()->getEnterToPos()->click();
-            $webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-            $webposIndex->getMsWebpos()->waitForSyncDataVisible();
-            $time = time();
-            $timeAfter = $time + 360;
-            while ($webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
-                $time = time();
-            }
-            sleep(2);
-        }
-        $webposIndex->getSessionRegisterShift()->waitLoader();
-        \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getSessionRegisterShift()->getShiftListingHeaderByTitle($showSessionHistoryTime)->isVisible(),
+        sleep(1);
+        \PHPUnit_Framework_Assert::assertContains(
+            $showSessionHistoryTime,
+            $webposIndex->getListShift()->getShiftListingHeaderByTitle($showSessionHistoryTime)->getText(),
             'Title shift header wasn\'t show correctly'
         );
     }

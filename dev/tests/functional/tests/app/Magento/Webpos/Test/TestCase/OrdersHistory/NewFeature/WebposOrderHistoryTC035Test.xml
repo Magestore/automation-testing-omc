@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\NewFeature\WebposOrderHistoryTC035Test" summary="Products Grid - Bundle Product" ticketId="WEBPOS-PG29">
+        <variation name="WebposOrderHistoryTC035TestVariation">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">bundle_dynamic_custom_type_radio</item>
+                    <item name="fixtureName" xsi:type="string">bundleProduct</item>
+                </item>
+            </data>
+            <data name="qty" xsi:type="string">2</data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\OrderDetail\AssertShowCorrectBundleProductOrderQty"></constraint>
+        </variation>
+    </testCase>
+</config>

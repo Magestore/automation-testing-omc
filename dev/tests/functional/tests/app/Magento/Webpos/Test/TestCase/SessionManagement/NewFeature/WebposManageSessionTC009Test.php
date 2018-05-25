@@ -105,10 +105,10 @@ class WebposManageSessionTC009Test extends Injectable
                 'hasWaitOpenSessionPopup' => true
             ]
         )->run();
-
-        $webposIndex->getSessionRegisterShift()->waitLoader();
-        \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getSessionRegisterShift()->getShiftListingHeaderByTitle($showSessionHistoryTime)->isVisible(),
+        sleep(1);
+        \PHPUnit_Framework_Assert::assertContains(
+            $showSessionHistoryTime,
+            $webposIndex->getListShift()->getShiftListingHeaderByTitle($showSessionHistoryTime)->getText(),
             'Title shift header wasn\'t show correctly'
         );
     }

@@ -5,7 +5,7 @@
             <data name="pos/dataset" xsi:type="string">test</data>
             <data name="location/dataset" xsi:type="string">MS44</data>
             <data name="staff/dataset" xsi:type="string">staffMS21</data>
-            <data name="showSessionHistoryTime" xsi:type="string">Last 15 days</data>
+            <data name="showSessionHistoryTime" xsi:type="string">Last 30 days</data>
         </variation>
     </testCase>
 </config>
