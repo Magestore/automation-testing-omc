@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase
+            name="Magento\Webpos\Test\TestCase\SessionManagement\ForceSignOut\AdminSessionManagementFS01Test"
+            summary="Create Admin User Role" ticketId="MAGETWO-23413">
+        <variation name="AdminSessionManagementFS01Test">
+            <data name="testCaseId" xsi:type="string">FS01</data>
+        </variation>
+    </testCase>
+</config>

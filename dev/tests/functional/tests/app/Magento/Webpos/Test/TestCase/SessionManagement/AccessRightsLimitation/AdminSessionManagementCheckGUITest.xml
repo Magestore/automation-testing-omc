@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase
+            name="Magento\Webpos\Test\TestCase\SessionManagement\AccessRightsLimitation\AdminSessionManagementCheckGUITest"
+            summary="Create Admin User Role" ticketId="MAGETWO-23413">
+        <variation name="AdminSessionManagementLAR03Test">
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\SystemConfig\AssertWebposConfigCheckGUI"></constraint>
+        </variation>
+        <variation name="AdminSessionManagementLAR04Test">
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\SystemConfig\AssertWebposConfigCheckDefaultPOSAccountSharing"></constraint>
+        </variation>
+    </testCase>
+</config>
