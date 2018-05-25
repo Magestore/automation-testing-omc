@@ -194,7 +194,19 @@ class OrderHistoryOrderViewContent extends Block
         return $this->_rootElement->find('.//thead//th[text()="' . $name . '"]', locator::SELECTOR_XPATH);
     }
 
-    public function getFirstBundleProductQty(){
+    public function getFirstBundleProductQty()
+    {
         return $this->_rootElement->find('tbody > tr .order-id label');
     }
+
+    public function getRowProductByName($name)
+    {
+        return $this->_rootElement->find('.//tbody//tr[.//td[1]/h4[text()="' . $name . '"]]', locator::SELECTOR_XPATH);
+    }
+
+    public function getPriceProductByName($name)
+    {
+       return $this->getRowProductByName($name)->find('td[3]', locator::SELECTOR_XPATH)->getText();
+    }
+
 }

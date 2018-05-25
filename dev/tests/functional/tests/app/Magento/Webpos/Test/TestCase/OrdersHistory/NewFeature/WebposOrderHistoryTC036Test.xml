@@ -8,8 +8,18 @@
                     <item name="fixtureName" xsi:type="string">bundleProduct</item>
                 </item>
             </data>
-            <data name="qty" xsi:type="string">2</data>
-            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\OrderDetail\AssertShowCorrectBundleProductOrderQty"></constraint>
+            <data name="specialPrice" xsi:type="boolean">false</data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\OrderDetail\AssertShowCorrectPriceOfChildBundleProduct"></constraint>
+        </variation>
+        <variation name="WebposOrderHistoryTC037TestVariation">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="product" xsi:type="string">bundle_dynamic_with_special_price</item>
+                    <item name="fixtureName" xsi:type="string">bundleProduct</item>
+                </item>
+            </data>
+            <data name="specialPrice" xsi:type="boolean">true</data>
+            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\OrderDetail\AssertShowCorrectPriceOfChildBundleProduct"></constraint>
         </variation>
     </testCase>
 </config>
