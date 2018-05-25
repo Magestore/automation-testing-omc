@@ -19,32 +19,29 @@ use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class AdminSessionManagementLR24Test
+ * Class AdminSessionManagementLR44Test
  *
  * Precondition:
- * - Loged in backend
- * - In the  webpos settings page, set the Need to create session before working field to Yes
- * - From menu on the left side, select Sales menu , under Web POS > select Manage Role
+ * - In the webpos settings page, set the Need to create session before working field to Yes
+ * - POS staff have been assigned to specific POS (this POS is enabled Lock register)
+ * - POS staff have been assigned with a specific permission to lock register
  *
  * Steps:
- * 1. Add a new role or edit an existed role
- * 2. Open Permission tab
- * 3. In the Resource Access field, select option: custom
- * 4. Check on Edit security PIN checkbox, and uncheck on Lock and Unlock register field
- * 5. Open Staff List tab, select POS staff account by ticking on each it
- * 6. Click on Save button
- * 7. On webpos, login with POS staff account that is assigned role to Lock and Unlock register
- * 8. After loging in, select Location and POS (This POS is already configed to allow POS staff to lock register)
- * 9. Check webpos menu on left side
- * 10. From menu on left side -> select General -> check sub- menu
+ * 1. POS staff login webpos, select location and POS
+ * 2. On the left menu, click on Lock register menu
+ * 3. Check confirmation popup
  *
  * Acceptance:
- * 9. Not showing the Lock Register menu under Logout menu
- * 10. Show more Lock Register sub-menu
+ * 2. Lock register confirmation popup is displayed, and mouse cursor focused on security PIN textbox
+ * 3. Show confirmation popup include:
+ * + 1 button: Cancel (is placed on top left corner of popup)
+ * + 1 lock icon
+ * + 1 text line with the content: Please enter security PIN to lock the register
+ * + 4 small textboxes for entering security PIN
  *
  * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
-class AdminSessionManagementLR24Test extends Injectable
+class AdminSessionManagementLR44Test extends Injectable
 {
     /**
      * @var WebposRoleNew
@@ -69,11 +66,9 @@ class AdminSessionManagementLR24Test extends Injectable
     public function test(
         WebposRole $webposRole,
         Pos $pos,
-        $menuItem,
         FixtureFactory $fixtureFactory
     )
     {
-
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'create_session_before_working']
@@ -89,7 +84,7 @@ class AdminSessionManagementLR24Test extends Injectable
         $pos = $fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
-        $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
+        $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'default']);
         $staffData = $staff->getData();
         $staffData['location_id'] = [$locationId];
         $staffData['pos_ids'] = [$posId];
@@ -112,7 +107,7 @@ class AdminSessionManagementLR24Test extends Injectable
 
         $this->webposRoleNew->getRoleForm()->openTab('permission');
         $roleResourcesClick = [
-            'Magestore_Webpos::edit_pin'
+            'Magestore_Webpos::lock_register'
         ];
         $this->webposRoleNew->getRoleForm()->getRoleResources($roleResourcesClick[0]);
         $this->webposRoleNew->getFormPageActions()->save();
@@ -130,16 +125,9 @@ class AdminSessionManagementLR24Test extends Injectable
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
-        $this->assertFalse(
-            $this->webposIndex->getCMenu()->getLockRegister()->isVisible(),
-            'Lock register in Cmenu is visible'
-        );
-        $this->webposIndex->getCMenu()->general();
-        sleep(1);
-        $this->assertTrue(
-            $this->webposIndex->getGeneralSettingMenuLMainItem()->getMenuItem($menuItem)->isVisible(),
-            'Lock register in General Setting not visible'
-        );
+
+        $this->webposIndex->getCMenu()->getLockRegister()->click();
+        $this->webposIndex->getCLockRegister()->waitForPopupLockRegister();
     }
 
     public function tearDown()

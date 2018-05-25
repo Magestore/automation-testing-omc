@@ -15,36 +15,32 @@ use Magento\Webpos\Test\Fixture\Location;
 use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
+use Magento\Webpos\Test\Page\Adminhtml\PosEdit;
+use Magento\Webpos\Test\Page\Adminhtml\PosIndex;
 use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class AdminSessionManagementLR25Test
+ * Class AdminSessionManagementLR61Test
  *
  * Precondition:
- * - Loged in backend
- * - In the  webpos settings page, set the Need to create session before working field to Yes
- * - From menu on the left side, select Sales menu , under Web POS > select Manage Role
+ * - Loged in webpos with POS staff that is assigned permission to lock/unlock register
+ * -  Have a POS which is locked
  *
  * Steps:
- * 1. Add a new role or edit an existed role
- * 2. Open Permission tab
- * 3. In the Resource Access field, select option: custom
- * 4. Uncheck on Lock and Unlock register and Edit security PIN checkbox
- * 5. Open Staff List tab, select POS staff account by ticking on each it
- * 6. Click on Save button
- * 7. On webpos, login with POS staff account that is assigned role to Lock and Unlock register
- * 8. After loging in, select Location and POS (This POS is already configed to allow POS staff to lock register)
- * 9. Check webpos menu on left side
- * 10. From menu on left side -> select General -> check sub- menu
+ * 1. In backend panel, go to Manage POS page, select a locked POS
+ * 2. In the locked POS detail page, set the Enable option to lock register field to No
+ * 3. Reload webpos and check the locked POS on webpos
+ * 4. Check the status of locked POS on backend
+
  *
  * Acceptance:
- * 9. Not showing the Lock Register menu under Logout menu
- * 10. Not showing the Lock Register sub-menu
+ * 3. The locked POS is automatically unlocked
+ * 4. POS status changes from Locked to Enabled
  *
  * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
-class AdminSessionManagementLR25Test extends Injectable
+class AdminSessionManagementLR61Test extends Injectable
 {
     /**
      * @var WebposRoleNew
@@ -56,24 +52,35 @@ class AdminSessionManagementLR25Test extends Injectable
      */
     protected $webposIndex;
 
+    /**
+     * @var PosEdit
+     */
+    protected $posEdit;
+
+    /**
+     * @var PosIndex
+     */
+    protected $posIndex;
 
     public function __inject(
         WebposIndex $webposIndex,
-        WebposRoleNew $webposRoleNew
+        WebposRoleNew $webposRoleNew,
+        PosIndex $posIndex,
+        PosEdit $posEdit
     )
     {
         $this->webposIndex = $webposIndex;
         $this->webposRoleNew = $webposRoleNew;
+        $this->posIndex = $posIndex;
+        $this->posEdit = $posEdit;
     }
 
     public function test(
         WebposRole $webposRole,
         Pos $pos,
-        $menuItem,
         FixtureFactory $fixtureFactory
     )
     {
-
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'create_session_before_working']
@@ -111,7 +118,28 @@ class AdminSessionManagementLR25Test extends Injectable
         );
 
         $this->webposRoleNew->getRoleForm()->openTab('permission');
+        $roleResourcesClick = [
+            'Magestore_Webpos::lock_register'
+        ];
+        $this->webposRoleNew->getRoleForm()->getRoleResources($roleResourcesClick[0]);
         $this->webposRoleNew->getFormPageActions()->save();
+
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\AdminLockPosStep',
+            [
+                'posName' => $pos->getPosName()
+            ]
+        )->run();
+
+        // steps
+        $this->posIndex->open();
+        $this->posIndex->getPosGrid()->searchAndOpen(
+            [
+                'pos_name' => $pos->getPosName()
+            ]
+        );
+        $this->posEdit->getPosForm()->getEnableOptionToLockRegister()->setValue("No");
+        $this->posEdit->getFormPageActions()->save();
 
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
@@ -123,18 +151,21 @@ class AdminSessionManagementLR25Test extends Injectable
                 'hasWaitOpenSessionPopup' => false
             ]
         )->run();
-
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->assertFalse(
-            $this->webposIndex->getCMenu()->getLockRegister()->isVisible(),
-            'Lock register in Cmenu is visible'
+            $this->webposIndex->getLockScreen()->isVisible(),
+            'Pos still locked'
         );
-        $this->webposIndex->getCMenu()->general();
-        sleep(1);
-        $this->assertFalse(
-            $this->webposIndex->getGeneralSettingMenuLMainItem()->getMenuItem($menuItem)->isVisible(),
-            'Lock register in General Setting not visible'
+
+        $this->posIndex->open();
+        $this->posIndex->getPosGrid()->searchAndOpen(
+            [
+                'pos_name' => $pos->getPosName()
+            ]
+        );
+        $this->assertEquals(
+            'Enabled',
+            $this->posEdit->getPosForm()->getStatus()->getValue(),
+            'Pos status is not Enabled'
         );
     }
 

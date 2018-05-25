@@ -20,4 +20,15 @@ class GeneralSettingMenuLMainItem extends Block
     {
         return $this->_rootElement->find('//li/a[text()="'.$label.'"]', Locator::SELECTOR_XPATH);
     }
+
+    /**
+     * return menu item second if it after menu item first in screen
+     * @param $menuItemFirst
+     * @param $menuItemSecond
+     * @return \Magento\Mtf\Client\ElementInterface
+     */
+    public function getMenuItemAfterMenuItem($menuItemFirst, $menuItemSecond)
+    {
+        return $this->_rootElement->find('//li/a[text()="'.$menuItemFirst.'"]/../following-sibling::li/a[text()="'.$menuItemSecond.'"]', Locator::SELECTOR_XPATH);
+    }
 }

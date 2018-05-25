@@ -8,5 +8,10 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
     <page name="SystemConfigEditSectionWebpos" area="Adminhtml" mca="admin/system_config/edit/section/webpos/" module="Magento_Webpos">
         <block name="webposPayment" class="Magento\Webpos\Test\Block\Adminhtml\SystemConfig\WebposPayment" locator="#webpos_payment" strategy="css selector"/>
+        <block name="pageActions" class="Magento\Backend\Test\Block\System\Config\PageActions" locator=".page-main-actions" strategy="css selector"/>
+        <block name="form" class="Magento\Webpos\Test\Block\Adminhtml\SystemConfig\WebposSystemConfigForm" locator="#config-edit-form" strategy="css selector"/>
+        <block name="messagesBlock" class="Magento\Backend\Test\Block\Messages" locator="#messages" strategy="css selector"/>
+        <block name="modalBlock" class="Magento\Ui\Test\Block\Adminhtml\Modal" locator="._show[data-role=modal]" strategy="css selector"/>
+        <block name="tabs" class="Magento\Backend\Test\Block\System\Config\Tabs" locator="#system_config_tabs" strategy="css selector"/>
     </page>
 </config>

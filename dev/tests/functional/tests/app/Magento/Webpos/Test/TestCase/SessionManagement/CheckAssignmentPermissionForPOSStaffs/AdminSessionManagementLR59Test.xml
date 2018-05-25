@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase
+            name="Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs\AdminSessionManagementLR59Test"
+            summary="Create Admin User Role" ticketId="MAGETWO-23413">
+        <variation name="AdminSessionManagementLR59Test">
+            <data name="webposRole/data/display_name" xsi:type="string">Role %isolation%</data>
+            <data name="pos/data/pos_name" xsi:type="string">test pos %isolation%</data>
+            <data name="pos/data/status" xsi:type="string">Enabled</data>
+            <data name="pos/data/is_allow_to_lock" xsi:type="string">1</data>
+            <data name="pos/data/pin" xsi:type="string">1234</data>
+        </variation>
+    </testCase>
+</config>
