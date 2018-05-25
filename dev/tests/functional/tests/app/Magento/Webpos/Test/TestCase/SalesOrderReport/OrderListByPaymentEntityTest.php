@@ -42,14 +42,14 @@ class OrderListByPaymentEntityTest extends Injectable
     /**
      * OrderListByPayment page.
      *
-     * @var OrderListByPayment
+     * @var OrderListByPayment $orderListByPayment
      */
     protected $orderListByPayment;
 
     /**
      * Inject pages.
      *
-     * @param SalesByStaffDaily $orderListByPayment
+     * @param OrderListByPayment $orderListByPayment
      * @return void
      */
     public function __inject(OrderListByPayment $orderListByPayment)
@@ -60,14 +60,12 @@ class OrderListByPaymentEntityTest extends Injectable
     /**
      * Bestseller Products Report.
      *
-     * @param Shift $shift
      * @param array $shifts
      * @return void
      */
-    public function test(Shift $shift, array $shifts)
+    public function test(array $shifts)
     {
         // Preconditions
-//        $shift->persist();
         $this->orderListByPayment->open();
         $this->orderListByPayment->getMessagesBlock()->clickLinkInMessage('notice', 'here');
 

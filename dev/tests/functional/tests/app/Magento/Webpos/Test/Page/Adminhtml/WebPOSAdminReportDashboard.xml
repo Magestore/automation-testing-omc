@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/pages.xsd">
+    <page name="WebPOSAdminReportDashboard" area="Adminhtml" mca="webposadmin/report/dashboard/"  module="Magento_Webpos">
+        <block name="reportDashboard" class="Magento\Webpos\Test\Block\Adminhtml\Report\Dashboard" locator="[id='page:main-container']" strategy="css selector" />
+        <block name="staffReport" class="Magento\Webpos\Test\Block\Adminhtml\Report\StaffReport" locator=".admin-report-webpos > div > div:nth-child(1)" strategy="css selector" />
+        <block name="locationReport" class="Magento\Webpos\Test\Block\Adminhtml\Report\LocationReport" locator=".admin-report-webpos > div > div:nth-child(2)" strategy="css selector" />
+        <block name="paymentReport" class="Magento\Webpos\Test\Block\Adminhtml\Report\PaymentReport" locator=".admin-report-webpos > div > div:nth-child(3)" strategy="css selector" />
+    </page>
+</config>

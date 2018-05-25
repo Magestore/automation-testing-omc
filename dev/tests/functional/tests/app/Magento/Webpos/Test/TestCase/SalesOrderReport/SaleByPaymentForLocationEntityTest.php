@@ -64,10 +64,9 @@ class SaleByPaymentForLocationEntityTest extends Injectable
      * @param array $shifts
      * @return void
      */
-    public function test(Shift $shift, array $shifts)
+    public function test(array $shifts)
     {
         // Preconditions
-//        $shift->persist();
         $this->saleByPaymentForLocation->open();
         $this->saleByPaymentForLocation->getMessagesBlock()->clickLinkInMessage('notice', 'here');
 

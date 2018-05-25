@@ -14,7 +14,6 @@ namespace Magento\Webpos\Test\TestCase\SalesOrderReport;
 use Magento\Webpos\Test\Page\Adminhtml\OrderListByStaff;
 use Magento\Webpos\Test\Fixture\Shift;
 use Magento\Mtf\TestCase\Injectable;
-
 /**
  * Preconditions:
  * 1. Create customer.
@@ -42,14 +41,14 @@ class OrderListByStaffEntityTest extends Injectable
     /**
      * OrderListByStaff page.
      *
-     * @var OrderListByStaff
+     * @var OrderListByStaff $orderListByStaff
      */
     protected $orderListByStaff;
 
     /**
      * Inject pages.
      *
-     * @param SalesByStaffDaily $orderListByStaff
+     * @param OrderListByStaff $orderListByStaff
      * @return void
      */
     public function __inject(OrderListByStaff $orderListByStaff)
@@ -64,10 +63,9 @@ class OrderListByStaffEntityTest extends Injectable
      * @param array $shifts
      * @return void
      */
-    public function test(Shift $shift, array $shifts)
+    public function test(array $shifts)
     {
         // Preconditions
-//        $shift->persist();
         $this->orderListByStaff->open();
         $this->orderListByStaff->getMessagesBlock()->clickLinkInMessage('notice', 'here');
 

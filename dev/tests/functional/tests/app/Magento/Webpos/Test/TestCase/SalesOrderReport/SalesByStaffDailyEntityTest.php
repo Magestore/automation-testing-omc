@@ -42,7 +42,7 @@ class SalesByStaffDailyEntityTest extends Injectable
     /**
      * SalesByStaffDaily page.
      *
-     * @var SalesByStaffDaily
+     * @var SalesByStaffDaily $salesByStaffDaily
      */
     protected $salesByStaffDaily;
 
@@ -60,14 +60,12 @@ class SalesByStaffDailyEntityTest extends Injectable
     /**
      * Bestseller Products Report.
      *
-     * @param Shift $shift
      * @param array $shifts
      * @return void
      */
-    public function test(Shift $shift, array $shifts)
+    public function test(array $shifts)
     {
         // Preconditions
-//        $shift->persist();
         $this->salesByStaffDaily->open();
         $this->salesByStaffDaily->getMessagesBlock()->clickLinkInMessage('notice', 'here');
 
