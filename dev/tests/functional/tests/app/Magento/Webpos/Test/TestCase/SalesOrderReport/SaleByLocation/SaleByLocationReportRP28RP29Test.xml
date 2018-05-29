@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByLocation\SaleByLocationReportRP28RP29Test" summary="Sales By Staff Daily Report" ticketId="MAGETWO-28222">
+        <variation name="SaleByLocationReportRP28TestVariation1">
+            <data name="type" xsi:type="string">CSV</data>
+        </variation>
+        <variation name="SaleByLocationReportRP29TestVariation1">
+            <data name="type" xsi:type="string">Excel XML</data>
+        </variation>
+    </testCase>
+</config>
