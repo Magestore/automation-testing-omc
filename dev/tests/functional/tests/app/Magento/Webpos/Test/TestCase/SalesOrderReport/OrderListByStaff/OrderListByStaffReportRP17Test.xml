@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByStaff\OrderListByStaffReportRP17Test" summary="Sales By Staff Daily Report" ticketId="MAGETWO-28222">
+        <variation name="OrderListByStaffReportRP17TestVariation2">
+            <data name="shifts/period_type" xsi:type="string">admin admin</data>
+            <data name="shifts/show_order_statuses" xsi:type="string">Specified</data>
+            <data name="order_statuses" xsi:type="string">Complete</data>
+        </variation>
+        <variation name="OrderListByStaffReportRP17TestVariation1">
+            <data name="shifts/period_type" xsi:type="string">admin admin</data>
+            <data name="shifts/show_order_statuses" xsi:type="string">Any</data>
+        </variation>
+    </testCase>
+</config>

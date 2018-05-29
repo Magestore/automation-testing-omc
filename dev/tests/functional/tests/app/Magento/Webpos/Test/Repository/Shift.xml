@@ -11,16 +11,13 @@
             <field name="entity_id[from]" xsi:type="string">3</field>
             <field name="entity_id[to]" xsi:type="string">5</field>
             <field name="opened_at[from]" xsi:type="string">09/12/2017</field>
+            <field name="opened_at[to]" xsi:type="string">11/04/2017</field>
             <field name="closed_at[from]" xsi:type="string">09/13/2017</field>
             <field name="closed_at[to]" xsi:type="string">11/04/2017</field>
             <field name="float_amount[from]" xsi:type="string">500.00</field>
             <field name="float_amount[to]" xsi:type="string">5,000.00</field>
             <field name="closed_amount[from]" xsi:type="string">0</field>
             <field name="closed_amount[to]" xsi:type="string">1,000.00</field>
-            <field name="cash_left[from]" xsi:type="string">0.00</field>
-            <field name="cash_left[to]" xsi:type="string">1,000.00</field>
-            <field name="shift_id" xsi:type="string">off_id_auto_shift_1505373198153</field>
-            <field name="staff_id" xsi:type="string">magentoadmin magentoadmin</field>
         </dataset>
 
         <dataset name="default2">
@@ -77,6 +74,7 @@
             <field name="status" xsi:type="string">1</field>
             <field name="total_sales" xsi:type="string">0</field>
         </dataset>
+
         <dataset name="shift_staff_id_4">
             <field name="balance" xsi:type="string">10000</field>
             <field name="base_balance" xsi:type="string">10000</field>
@@ -105,7 +103,5 @@
             <field name="status" xsi:type="string">1</field>
             <field name="total_sales" xsi:type="string">0</field>
         </dataset>
-
-
     </repository>
 </config>

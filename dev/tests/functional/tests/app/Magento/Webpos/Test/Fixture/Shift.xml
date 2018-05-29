@@ -45,5 +45,9 @@
         <field name="indexeddb_id" is_required="0"/>
         <field name="updated_at" is_required="0"/>
         <field name="pos_id" is_required="0"/>
+        <field name="profit_loss_reason" is_required="0"/>
+        <field name="cash_refunded" is_required="0"/>
+        <field name="base_cash_refunded" is_required="0"/>
+        <field name="open_by" is_required="0"/>
     </fixture>
 </config>
