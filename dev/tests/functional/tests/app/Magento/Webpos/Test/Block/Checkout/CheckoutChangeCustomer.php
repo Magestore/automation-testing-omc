@@ -40,9 +40,15 @@ class CheckoutChangeCustomer extends Block
 		    $this->waitForElementVisible('ul.list-customer-old > li:nth-child(1)');
         }
 	}
+
 	public function getFirstCustomer()
 	{
 	    $this->waitFirstCustomer();
+		return $this->_rootElement->find('ul.list-customer-old > li:nth-child(1)');
+	}
+
+	public function getNoItemCustomer()
+	{
 		return $this->_rootElement->find('ul.list-customer-old > li:nth-child(1)');
 	}
 
@@ -58,7 +64,7 @@ class CheckoutChangeCustomer extends Block
 
 	public function waitForCustomerList()
 	{
-//		sleep(1);
+		sleep(1);
 		$this->waitForElementNotVisible('#customer-overlay');
 	}
 

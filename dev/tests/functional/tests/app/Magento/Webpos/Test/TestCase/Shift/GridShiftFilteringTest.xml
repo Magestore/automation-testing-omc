@@ -14,16 +14,18 @@
             <data name="fixtureDataSet" xsi:type="string">default</data>
             <data name="filters" xsi:type="array">
                 <item name="0" xsi:type="array">
-                    <item name="shift_id" xsi:type="string">:shift_id</item>
-                    <item name="cash_left[from]" xsi:type="string">0</item>
+                    <item name="opened_at[from]" xsi:type="string">09/12/2017</item>
+                    <item name="opened_at[to]" xsi:type="string">09/12/2018</item>
                 </item>
                 <item name="1" xsi:type="array">
-                    <item name="opened_at[from]" xsi:type="string">09/12/2017</item>
+                    <item name="closed_at[from]" xsi:type="string">09/12/2017</item>
+                    <item name="closed_at[to]" xsi:type="string">09/12/2018</item>
                 </item>
             </data>
             <data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\ShiftIndex</data>
             <data name="gridRetriever" xsi:type="string">getShiftGrid</data>
             <data name="idGetter" xsi:type="string">getEntityId</data>
+            <constraint name="\Magento\Ui\Test\Constraint\AssertGridFiltering"/>
         </variation>
     </testCase>
 </config>

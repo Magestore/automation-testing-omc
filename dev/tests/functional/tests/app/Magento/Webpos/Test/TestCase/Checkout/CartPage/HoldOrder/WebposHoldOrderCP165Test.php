@@ -84,10 +84,18 @@ class WebposHoldOrderCP165Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
 
+        // Check out on On-Hold Orders Page
+        $this->webposIndex->getOnHoldOrderOrderViewFooter()->getCheckOutButton()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
+
         $dataProduct = $product->getData();
         $dataProduct['qty'] = 1;
-        return ['cartProducts' => [$dataProduct],
-            'type' => '$'];
+        return [
+            'cartProducts' => [$dataProduct],
+            'type' => '$'
+        ];
 
     }
 }

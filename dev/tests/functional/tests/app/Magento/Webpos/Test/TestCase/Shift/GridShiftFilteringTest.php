@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @Author: thomas
  * @Created At:   2017-09-12 09:20:50
@@ -12,7 +11,10 @@
 namespace Magento\Webpos\Test\TestCase\Shift;
 
 use Magento\Ui\Test\TestCase\GridFilteringTest;
-
+/**
+ * Class GridShiftFilteringTest
+ * @package Magento\Webpos\Test\TestCase\Shift
+ */
 class GridShiftFilteringTest extends GridFilteringTest
 {
 

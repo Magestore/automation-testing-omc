@@ -12,18 +12,26 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposCustomerSearchWithoutResultCC27Test
+ * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\Search
+ */
 class WebposCustomerSearchWithoutResultCC27Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $factory
+     */
     public function __inject(WebposIndex $webposIndex, FixtureFactory $factory)
     {
         $this->webposIndex = $webposIndex;
@@ -32,9 +40,6 @@ class WebposCustomerSearchWithoutResultCC27Test extends Injectable
 
     public function test()
     {
-//        // Create Customer
-//        $customer = $this->fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
-//        $customer->persist();
         // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
@@ -46,10 +51,9 @@ class WebposCustomerSearchWithoutResultCC27Test extends Injectable
         $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
 
         $this->webposIndex->getCheckoutChangeCustomer()->search('sdjkfhsdjkh@$@');
-        sleep(1);
         $this->webposIndex->getCheckoutChangeCustomer()->waitForCustomerList();
         $this->assertFalse(
-            $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->isVisible(),
+            $this->webposIndex->getCheckoutChangeCustomer()->getNoItemCustomer()->isVisible(),
             'Have some customer with search key: sdjkfhsdjkh@#$@'
         );
 

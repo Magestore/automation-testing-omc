@@ -38,6 +38,11 @@ class MsWebpos extends Block
         return $this->_rootElement->find('#c-mask');
     }
 
+	public function getCartLoader()
+	{
+		return $this->_rootElement->find('#webpos_cart > div.indicator');
+	}
+
 	public function waitCartLoader()
 	{
 		$this->waitForElementNotVisible('#webpos_cart > div.indicator');

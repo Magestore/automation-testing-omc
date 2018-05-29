@@ -85,7 +85,7 @@ class WebposCheckoutWithDiscountProductDollarCP65EntityTest extends Injectable
 
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-
+        sleep(3);
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 

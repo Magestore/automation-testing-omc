@@ -37,19 +37,20 @@ class WebposManageLocationML31Test extends Injectable
     /**
      * Webpos Location Index page.
      *
-     * @var LocationIndex
+     * @var LocationIndex $locationIndex
      */
     private $locationIndex;
 
     /**
-     * @var LocationNews
+     * @var LocationNews $locationNews
      */
     private $locationNews;
+
     /**
      * Inject location pages.
      *
-     * @param LocationIndex
-     * @return void
+     * @param LocationIndex $locationIndex
+     * @param LocationNews $locationNews
      */
     public function __inject(
         LocationIndex $locationIndex,
@@ -59,6 +60,9 @@ class WebposManageLocationML31Test extends Injectable
         $this->locationNews = $locationNews;
     }
 
+    /**
+     * @param Location $location
+     */
     public function test(Location $location)
     {
         // Steps
