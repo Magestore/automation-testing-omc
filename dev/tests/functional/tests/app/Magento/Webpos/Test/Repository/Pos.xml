@@ -5,7 +5,8 @@
  * See COPYING.txt for license details.
  */
 -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
     <repository class="Magento\Webpos\Test\Repository\Pos">
         <dataset name="default">
             <field name="pos_name" xsi:type="string">Post Test %isolation%</field>
@@ -49,6 +50,15 @@
             <field name="location_id" xsi:type="string">Test Store Address</field>
             <field name="staff_id" xsi:type="string">admin admin</field>
             <field name="status" xsi:type="string">Disabled</field>
+        </dataset>
+
+        <dataset name="pos_with_new_location">
+            <field name="pos_name" xsi:type="string">Post Test %isolation%</field>
+            <field name="status" xsi:type="string">Enabled</field>
+            <field name="auto_join" xsi:type="boolean">true</field>
+            <field name="location_id" xsi:type="array">
+                <item name="dataset" xsi:type="string">default</item>
+            </field>
         </dataset>
     </repository>
 </config>

@@ -14,8 +14,13 @@ use Magento\Webpos\Test\Page\Adminhtml\SalesByLocationDaily;
 
 class AssertDateRangeByLocation extends AbstractConstraint
 {
-    public function processAssert(SalesByLocationDaily $salesByLocationDaily, $shifts){
-        var_dump($shifts);die();
+    public function processAssert(SalesByLocationDaily $salesByLocationDaily, $shifts)
+    {
+        \PHPUnit_Framework_Assert::assertNotContains(
+            'data-grid-tr-no-data',
+            $salesByLocationDaily->getReportBlock()->getReportFirtRow()->getAttribute('class'),
+            'No data was showed'
+        );
     }
 
     /**
