@@ -11,6 +11,7 @@
 
 namespace Magento\Webpos\Test\Block\Adminhtml\Report\Viewed;
 
+use Magento\Mtf\Client\Locator;
 use Magento\Reports\Test\Block\Adminhtml\AbstractFilter;
 
 /**
@@ -18,5 +19,8 @@ use Magento\Reports\Test\Block\Adminhtml\AbstractFilter;
  */
 class FilterSalesByLocationDaily extends AbstractFilter
 {
-
+    public function setOrderStatusByTitle($title)
+    {
+        return $this->_rootElement->find('#sales_report_order_statuses', Locator::SELECTOR_CSS, 'select')->setValue($title);
+    }
 }
