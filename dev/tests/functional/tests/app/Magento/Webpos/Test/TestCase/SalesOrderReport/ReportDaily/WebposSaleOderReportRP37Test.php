@@ -67,49 +67,48 @@ class WebposSaleOderReportRP37Test extends Injectable
 
     public function test(WebposIndex $webposIndex, FixtureFactory $fixtureFactory, $products, Pos $pos, Staff $staff, array $shifts)
     {
-//        $pos->persist();
-//        $staffData = $staff->getData();
-//        $staffData['location_id'] = $pos->getLocationId();
-//        $staffData['pos_ids'] = $pos->getPosId();
-//        $staffData['status'] = 'Enabled';
-//        $staff = $fixtureFactory->createByCode('staff', ['data' => $staffData]);
-//        $staff->persist();
-//        $location = $pos->getDataFieldConfig('location_id')['source']->getLocation();
-//        //Login
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
-//            [
-//                'staff' => $staff,
-//                'location' => $location,
-//                'pos' => $pos,
-//                'hasOpenSession' => true,
-//                'hasWaitOpenSessionPopup' => true
-//            ]
-//        )->run();
-//        sleep(1);
-//        if ($webposIndex->getOpenSessionPopup()->isVisible()) {
-//            $webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
-//        }
-//        $webposIndex->getMsWebpos()->waitForCMenuVisible();
-//        $webposIndex->getMsWebpos()->getCMenuButton()->click();
-//        sleep(1);
-//        $webposIndex->getCMenu()->checkout();
-//        $webposIndex->getMsWebpos()->waitCartLoader();
-//        $webposIndex->getMsWebpos()->waitCheckoutLoader();
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Webpos\Test\TestStep\WebposAddProductToCartThenCheckoutStep',
-//            ['products' => $products]
-//        )->run();
-
-//        $name = $location->getDisplayName();
+        $pos->persist();
+        $staffData = $staff->getData();
+        $staffData['location_id'] = $pos->getLocationId();
+        $staffData['pos_ids'] = $pos->getPosId();
+        $staffData['status'] = 'Enabled';
+        $staff = $fixtureFactory->createByCode('staff', ['data' => $staffData]);
+        $staff->persist();
+        $location = $pos->getDataFieldConfig('location_id')['source']->getLocation();
+        //Login
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            [
+                'staff' => $staff,
+                'location' => $location,
+                'pos' => $pos,
+                'hasOpenSession' => true,
+                'hasWaitOpenSessionPopup' => true
+            ]
+        )->run();
+        sleep(1);
+        if ($webposIndex->getOpenSessionPopup()->isVisible()) {
+            $webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
+        }
+        $webposIndex->getMsWebpos()->waitForCMenuVisible();
+        $webposIndex->getMsWebpos()->getCMenuButton()->click();
+        sleep(1);
+        $webposIndex->getCMenu()->checkout();
+        $webposIndex->getMsWebpos()->waitCartLoader();
+        $webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\WebposAddProductToCartThenCheckoutStep',
+            ['products' => $products]
+        )->run();
 
         //Open Sale by location daily
         $this->saleByLocationDaily->open();
         $this->saleByLocationDaily->getMessagesBlock()->clickLinkInMessage('notice', 'here');
         // Steps
         $this->saleByLocationDaily->getFilterBlock()->viewsReport($shifts);
-        \PHPUnit_Framework_Assert::assertTrue(
-            $this->saleByLocationDaily->getReportBlock()->getRowByLocation('Test Store Address 474564098')->isVisible(),
+        \PHPUnit_Framework_Assert::assertContains(
+            $location->getDisplayName(),
+            $this->saleByLocationDaily->getReportBlock()->getLastRowLocation(),
             'Location didn\'t show correct'
         );
     }

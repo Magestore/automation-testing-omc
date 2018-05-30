@@ -14,9 +14,8 @@ use Magento\Webpos\Test\Page\Adminhtml\LocationIndex;
 use Magento\Webpos\Test\Page\Adminhtml\LocationNews;
 
 /**
- * Managelocation-ML02
- *
- * Show Add Location Page
+ * Check Gui
+ * Testcase ML02 - Add new location page
  *
  * Precondition
  * Go to backend
@@ -24,6 +23,12 @@ use Magento\Webpos\Test\Page\Adminhtml\LocationNews;
  * Steps
  * 1.Go to Sales-> Manage Location
  * 2. Click on [Add Location] button
+ *
+ * Acceptance Criteria
+ * 2. Display [New Location] page including:
+ * - Title: New Location
+ * - General information contains fields: Location name (*), Store view (*), Address, Description, Warehouse
+ * - Buttons: Back, Reset, Save and continue Edit, Save
  *
  * Class WebposManageLocationML02Test
  * @package Magento\Webpos\Test\TestCase\Location\AddLocation
@@ -46,12 +51,14 @@ class WebposManageLocationML02Test extends Injectable
     public function __inject(
         LocationIndex $locationIndex,
         LocationNews $locationNews
-    ){
+    )
+    {
         $this->_locationIndex = $locationIndex;
         $this->_locationNews = $locationNews;
     }
 
-    public function test(){
+    public function test()
+    {
         $this->_locationIndex->open();
         $this->_locationIndex->getPageActionsBlock()->addNew();
         sleep(2);

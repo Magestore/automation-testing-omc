@@ -27,8 +27,8 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * Acceptance
  * 3. On order detail page, show all child product of bunble product with the following information: name of product, sku, price, qty, subtotal, Tax amount, discount amount, row total
  *
- * Class WebposManageSessionTC033
- * @package Magento\Webpos\Test\TestCase\SessionManagement\NewFeature
+ * Class WebposOrderHistoryTC033Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\NewFeature
  */
 class WebposOrderHistoryTC033Test extends Injectable
 {
@@ -84,6 +84,7 @@ class WebposOrderHistoryTC033Test extends Injectable
         $webposIndex->getOrderHistoryOrderList()->waitLoader();
         $webposIndex->getOrderHistoryOrderList()->waitListOrders();
         $webposIndex->getOrderHistoryOrderList()->waitForFirstOrderVisible();
+        sleep(1);
         $webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
     }
 

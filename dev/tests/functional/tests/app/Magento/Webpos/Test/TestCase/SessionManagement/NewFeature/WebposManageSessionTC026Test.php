@@ -102,7 +102,7 @@ class WebposManageSessionTC026Test extends Injectable
 
         foreach ($products as $product){
             \PHPUnit_Framework_Assert::assertEquals(
-                0,
+                1,
                 (int)$webposIndex->getOrderHistoryRefund()->getItemQtyToRefundInput($product->getName())->getValue(),
                 'Item quantity is incorrect'
             );

@@ -13,17 +13,21 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\LocationIndex;
 
 /**
- * Managelocation-ML09
- *
- * Check [Apply Filters] button without condition
+ * Check Filter function
+ * Testcase ML09 - Check [Apply Filters] button without condition
  *
  * Precondition
- * Exist at least 2 records on the grid
+ * 1. Click on [Filters] button
+ * 2. Click on [Apply Filters] button
  *
  * Steps
- * 1.Go to backend->Sales->Manage Location
- * 2. Click filter button
- * 3. Click Filter button
+ * 1. Click on [Filters] button
+ * 2. Click on [Apply Filters] button
+ *
+ * Acceptance Criteria
+ * 2.
+ * - Close Filter form
+ * - The grid shows all records
  *
  * Class WebposManageLocationML09Test
  * @package Magento\Webpos\Test\TestCase\Location\CheckGUILocation
@@ -36,13 +40,23 @@ class WebposManageLocationML09Test extends Injectable
      */
     protected $_locationIndex;
 
+    /**
+     * Inject
+     *
+     * @param LocationIndex $locationIndex
+     */
     public function __inject(
         LocationIndex $locationIndex
-    ){
+    )
+    {
         $this->_locationIndex = $locationIndex;
     }
 
-    public function test(){
+    /**
+     * Test steps
+     */
+    public function test()
+    {
         $this->_locationIndex->open();
         $this->_locationIndex->getLocationsGrid()->waitLoader();
         $this->_locationIndex->getLocationsGrid()->getFilterButton()->click();
