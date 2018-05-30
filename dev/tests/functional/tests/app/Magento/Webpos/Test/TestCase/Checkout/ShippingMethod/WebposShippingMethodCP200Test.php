@@ -5,10 +5,31 @@
  * Date: 12/01/2018
  * Time: 16:48
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\ShippingMethod;
+
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Checkout\ShippingMethod\AssertCheckDisplayPanel;
+use Magento\Webpos\Test\Page\WebposIndex;
+
+/**
+ * Class WebposShippingMethodCP200Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\ShippingMethod
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add a custom sale product with [Shippable] = No
+ * 3. Click on [Checkout] button"
+ *
+ * Steps:
+ * "1. Back to cart page
+ * 2. Add a simple product
+ * 3. Click [Checkout] button"
+ *
+ * Acceptance:
+ * Shipping section will be shown
+ *
+ */
 class WebposShippingMethodCP200Test extends Injectable
 {
     /**
@@ -20,6 +41,7 @@ class WebposShippingMethodCP200Test extends Injectable
      * @var AssertCheckDisplayPanel
      */
     protected $assertCheckDisplayPanel;
+
     public function __inject
     (
         WebposIndex $webposIndex,
@@ -30,7 +52,7 @@ class WebposShippingMethodCP200Test extends Injectable
         $this->assertCheckDisplayPanel = $assertCheckDisplayPanel;
     }
 
-    public function test($products,$productCustom)
+    public function test($products, $productCustom)
     {
         //Create product
         $product = $this->objectManager->getInstance()->create(

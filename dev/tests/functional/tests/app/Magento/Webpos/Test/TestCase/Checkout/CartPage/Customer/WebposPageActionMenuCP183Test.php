@@ -5,9 +5,30 @@
  * Date: 09/01/2018
  * Time: 09:07
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
+/**
+ * Class WebposPageActionMenuCP183Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add some products  to cart
+ * 3. Click on [Checkout] page"
+ *
+ * Steps:
+ * 1. Click on action menu "..." on the header page
+ *
+ * Acceptance:
+ * "Show 2 menus:
+ * - Add order note
+ * - Enter/Exit full screen mode"
+ *
+ */
 class WebposPageActionMenuCP183Test extends Injectable
 {
     /**

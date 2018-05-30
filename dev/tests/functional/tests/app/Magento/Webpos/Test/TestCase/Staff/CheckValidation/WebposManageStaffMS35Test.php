@@ -5,12 +5,14 @@
  * Date: 17/02/2018
  * Time: 19:27
  */
+
 namespace Magento\Webpos\Test\TestCase\Staff\CheckValidation;
+
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
-use Magento\Webpos\Test\Fixture\Staff;
-use Magento\Mtf\Fixture\FixtureFactory;
 
 class WebposManageStaffMS35Test extends Injectable
 {
@@ -24,6 +26,7 @@ class WebposManageStaffMS35Test extends Injectable
      * @var StaffNews
      */
     private $staffsNew;
+
     /**
      * Inject Staff pages.
      *
@@ -34,10 +37,12 @@ class WebposManageStaffMS35Test extends Injectable
     public function __inject(
         StaffIndex $staffsIndex,
         StaffNews $staffsNew
-    ) {
+    )
+    {
         $this->staffsIndex = $staffsIndex;
         $this->staffsNew = $staffsNew;
     }
+
     public function test(Staff $staff, FixtureFactory $fixtureFactory)
     {
         //Create staff
@@ -52,7 +57,7 @@ class WebposManageStaffMS35Test extends Injectable
         $this->staffsNew->getFormPageActions()->save();
         sleep(1);
 
-        return ['message' => 'Email '.$staff1->getEmail().' is existed.'];
+        return ['message' => 'Email ' . $staff1->getEmail() . ' is existed.'];
     }
 }
 

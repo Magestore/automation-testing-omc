@@ -20,6 +20,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AdminSessionManagementLR32Test
+ * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  *
  * Precondition:
  * - In the webpos settings page, set the Need to create session before working field to Yes
@@ -30,7 +31,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 1. POS staff login webpos, select location and POS
  * 2. On the left menu -> click on General -> Select Lock Register menu
  * 3. Observe and check the component of configuration
-
  *
  * Acceptance:
  * The component of configuration include:
@@ -38,7 +38,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * + 2 required fields: POS acccount password (textbox type) and Security PIN (textbox type)
  * + 1 button: Save
  *
- * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
 class AdminSessionManagementLR32Test extends Injectable
 {

@@ -7,12 +7,28 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\PaymentMethod;
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
+use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
+
+/**
+ * Class WebposCheckoutPaymentMethodCP238Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\PaymentMethod
+ *
+ * Precondition:
+ * "1. Login webpos as a staff
+ * 2. Checkout an order as manual"
+ *
+ * Steps:
+ * 1. Click on [New order]
+ *
+ * Acceptance:
+ * "1. Back to default cart page
+ * 2. A new notification will be display on notification icon"
+ *
+ */
 class WebposCheckoutPaymentMethodCP238Test extends Injectable
 {
     /**

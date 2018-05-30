@@ -13,13 +13,18 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposEnterFullScreenTest
- *
- * Pre: 1. LoginTest Webpos as a staff
- * Step: "1. Click on action menu ""..."" on the top-right of the screen
-2. Click on ""Enter/exit fullscreen mode""  "
- * Accept: Webpos will be displayed full screen mode
- *
  * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\CartPageActionMenu
+ *
+ * Precondition:
+ * 1. LoginTest Webpos as a staff
+ *
+ * Steps:
+ * "1. Click on action menu ""..."" on the top-right of the screen
+ * 2. Click on ""Enter/exit fullscreen mode""  "
+ *
+ * Acceptance:
+ * Webpos will be displayed full screen mode
+ *
  */
 class WebposEnterFullScreenTest extends Injectable
 {

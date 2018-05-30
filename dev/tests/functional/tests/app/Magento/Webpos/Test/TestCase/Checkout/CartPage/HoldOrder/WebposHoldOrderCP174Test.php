@@ -5,10 +5,31 @@
  * Date: 24/01/2018
  * Time: 22:27
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposHoldOrderCP174Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add a product to cart
+ * 3. Hold order successfully"
+ *
+ * Steps:
+ * "1. Go to [On-hold orders] menu
+ * 2. Click on [Checkout] button on that detail order
+ * 3. Place order"
+ *
+ * Acceptance:
+ * "1. Place order successfully
+ * 2. That hold order will be removed from On-hold orders list"
+ *
+ */
 class WebposHoldOrderCP174Test extends Injectable
 {
     /**
@@ -76,7 +97,7 @@ class WebposHoldOrderCP174Test extends Injectable
 
         //Get orderId
         $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
-        $orderId= ltrim ($orderId,'#');
+        $orderId = ltrim($orderId, '#');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
 
         return [

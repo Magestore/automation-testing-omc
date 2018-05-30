@@ -8,14 +8,29 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\MultiOrder;
 
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposMultiOrderBackCheckoutOn1ndCartAndPlaceOrderOn2ndCartCP33Test
- * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\MultiOrder
+ * @package Magento\AssertWbposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\MultiOrder
+ *
+ * Precondition:
+ * "1. Login webpos as a staff
+ * 2. Click on add multi order icon
+ * 3. Add a product to 1st cart
+ * 4. Click [Checkout] button"
+ *
+ * Steps:
+ * "1. On Checkout page, click on back icon
+ * 2. Select 2nd cart -> add a product and customer
+ * 3. Place order"
+ *
+ * Acceptance:
+ * Place order successfully with corresponding product and customer of 2nd cart
+ *
  */
 class WebposMultiOrderBackCheckoutOn1ndCartAndPlaceOrderOn2ndCartCP33Test extends Injectable
 {

@@ -16,9 +16,32 @@ use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\CreateCustomer\AssertC
 use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\ShippingAddressPopup\AssertCreatedAddressIsShownOnEditCustomerPopup;
 use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\ShippingAddressPopup\AssertCreatedAddressIsShownOnNewCustomerPopup;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposCCShippingAddressPopupCC12Test
  * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\ShippingAddressPopup
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Click on Add new customer icon"
+ *
+ * Steps:
+ * "1. Click on [Create customer] button
+ * 2. Input valid values into all fields of New customer popup
+ * 3. Click on Add shipping address icon
+ * 4. Input into all fields on Add shipping address popup
+ * 5. Click on [Save] button
+ * 6. Click on [Save] button
+ * 7. Click on the Customer name on cart page"
+ *
+ * Acceptance:
+ * "3. First name and last name will be filled automatically into corresponding fields on Add shipping address popup.
+ * 5.
+ * - Close Add shipping address popup, back to New customer popup.
+ * - The created address will be shown on [Shipping address] and [Billing address] section
+ * 6. Create customer successfully and show message ""Success: The customer is saved successfully.""
+ * 7. The created address will be shown on Shipping Address and Billing Address"
+ *
  */
 class WebposCCShippingAddressPopupCC12Test extends Injectable
 {

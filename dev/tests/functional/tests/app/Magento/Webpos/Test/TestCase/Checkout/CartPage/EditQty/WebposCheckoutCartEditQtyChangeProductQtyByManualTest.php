@@ -16,6 +16,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposCheckoutCartEditQtyChangeProductQtyByManualTest
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\EditQty
  *
  * Precondition:
  * 1. LoginTest webpos by a  staff
@@ -24,61 +25,60 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * Steps:
  * 1. Click on name or image of a product in cart
  * 2. Input special symbols or text to qty textbox
-Ex: #$^&* or abc
+ * Ex: #$^&* or abc
  * 3. Click Enter
  *
  * Acceptance: Show message: "Warning: The fewest you may purchase is 1"
  *
- * @package Magento\Webpos\Test\TestCase\Cart\CartPage\EditQty
  */
 class WebposCheckoutCartEditQtyChangeProductQtyByManualTest extends Injectable
 {
-	/**
-	 * @var WebposIndex
-	 */
-	protected $webposIndex;
+    /**
+     * @var WebposIndex
+     */
+    protected $webposIndex;
 
-	/**
-	 * @var AssertEditProductPopupIsAvailable
-	 */
-	protected $assertEditProductPopupIsAvailable;
+    /**
+     * @var AssertEditProductPopupIsAvailable
+     */
+    protected $assertEditProductPopupIsAvailable;
 
-	public function __inject(
-		WebposIndex $webposIndex,
-		AssertEditProductPopupIsAvailable $assertEditProductPopupIsAvailable
-	)
-	{
-		$this->webposIndex = $webposIndex;
-		$this->assertEditProductPopupIsAvailable = $assertEditProductPopupIsAvailable;
-	}
+    public function __inject(
+        WebposIndex $webposIndex,
+        AssertEditProductPopupIsAvailable $assertEditProductPopupIsAvailable
+    )
+    {
+        $this->webposIndex = $webposIndex;
+        $this->assertEditProductPopupIsAvailable = $assertEditProductPopupIsAvailable;
+    }
 
-	public function test(
-		CatalogProductSimple $product,
-		$qty,
-		$qtyInput
-	)
-	{
-		// LoginTest webpos
-		$staff = $this->objectManager->getInstance()->create(
-			'Magento\Webpos\Test\TestStep\LoginWebposStep'
-		)->run();
+    public function test(
+        CatalogProductSimple $product,
+        $qty,
+        $qtyInput
+    )
+    {
+        // LoginTest webpos
+        $staff = $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposStep'
+        )->run();
 
-		$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 
-		for ($i = 0; $i < $qty; $i++) {
-		    sleep(2);
-			$this->webposIndex->getCheckoutProductList()->search($product->getName());
-			$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-			$this->webposIndex->getMsWebpos()->waitCartLoader();
-		}
+        for ($i = 0; $i < $qty; $i++) {
+            sleep(2);
+            $this->webposIndex->getCheckoutProductList()->search($product->getName());
+            $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+            $this->webposIndex->getMsWebpos()->waitCartLoader();
+        }
 
-		//Click on product in cart
-		$this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
+        //Click on product in cart
+        $this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
 
-		// CP45
-		//Assert edit product popup is available
-		$this->assertEditProductPopupIsAvailable->processAssert($this->webposIndex);
+        // CP45
+        //Assert edit product popup is available
+        $this->assertEditProductPopupIsAvailable->processAssert($this->webposIndex);
 
-		$this->webposIndex->getCheckoutProductEdit()->getQtyInput()->setValue($qtyInput);
-	}
+        $this->webposIndex->getCheckoutProductEdit()->getQtyInput()->setValue($qtyInput);
+    }
 }

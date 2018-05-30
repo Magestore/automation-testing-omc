@@ -13,9 +13,10 @@ use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
 
 /**
  * Class AdminSessionManagementLR22Test
+ * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  *
  * Precondition:
- * - Loged in backend
+ * - Logged in backend
  * - From menu on the left side, select Sales menu , under Web POS > select Manage Role
  *
  * Steps:
@@ -27,7 +28,6 @@ use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
  * Acceptance:
  * 4. The Lock Register checkbox would be automatically checked
  *
- * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
 class AdminSessionManagementLR22Test extends Injectable
 {
@@ -57,7 +57,7 @@ class AdminSessionManagementLR22Test extends Injectable
         ];
         $this->webposRoleNew->getRoleForm()->getRoleResources($roleResourcesClick[0]);
         return [
-          'roleResources' => $roleResourcesCheck
+            'roleResources' => $roleResourcesCheck
         ];
     }
 }

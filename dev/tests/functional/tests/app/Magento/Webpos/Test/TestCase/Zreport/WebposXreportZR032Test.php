@@ -15,6 +15,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposXreportZR032Test
+ * @package Magento\Webpos\Test\TestCase\Zreport
  *
  * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff who has open and close session permission
@@ -32,7 +33,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * - Cash Refund = Refund amount by cashin (R amount)
  * - Refund =Total Refunded amount by all methods on step 4 of [Precondition and setup steps]  (R+N amount)
  *
- * @package Magento\Webpos\Test\TestCase\Zreport
  */
 class WebposXreportZR032Test extends Injectable
 {
@@ -107,8 +107,7 @@ class WebposXreportZR032Test extends Injectable
         $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutPaymentMethod()->getTitlePaymentMethod()->click();
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();
         $this->webposIndex->getCheckoutAddMorePayment()->getCashIn()->click();
@@ -154,7 +153,7 @@ class WebposXreportZR032Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        $this->webposIndex->getOrderHistoryOrderList()->waitListOrders();
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForFormAddNoteOrderVisible();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Refund')->click();
@@ -192,10 +191,6 @@ class WebposXreportZR032Test extends Injectable
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'magestore_webpos_specific_payment']
-        )->run();
-
-        $this->objectManager->create(
-            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
         )->run();
     }
 

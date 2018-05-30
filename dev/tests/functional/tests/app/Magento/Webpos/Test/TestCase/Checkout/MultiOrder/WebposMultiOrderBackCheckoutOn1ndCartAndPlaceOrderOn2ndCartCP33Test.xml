@@ -5,8 +5,11 @@
  * See COPYING.txt for license details.
  */
  -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\MultiOrder\WebposMultiOrderBackCheckoutOn1ndCartAndPlaceOrderOn2ndCartCP33Test" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase
+            name="Magento\Webpos\Test\TestCase\Checkout\MultiOrder\WebposMultiOrderBackCheckoutOn1ndCartAndPlaceOrderOn2ndCartCP33Test"
+            summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
         <variation name="WebposMultiOrderBackCheckoutOn1ndCartAndPlaceOrderOn2ndCartCP33TestVariation1_CP33">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="string">product1</item>
@@ -15,7 +18,8 @@
             </data>
             <data name="firstOrder" xsi:type="string">1</data>
             <data name="secondOrder" xsi:type="string">2</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Checkout\MultiOrder\AssertWebposMultiOrderBackCheckoutOn1ndCartAndPlaceOrderOn2ndCartCP33" />
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\Checkout\MultiOrder\AssertWebposMultiOrderBackCheckoutOn1ndCartAndPlaceOrderOn2ndCartCP33"/>
         </variation>
     </testCase>
 </config>

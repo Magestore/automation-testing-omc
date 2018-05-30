@@ -7,11 +7,35 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\PaymentMethod;
+
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-use Magento\Mtf\Fixture\FixtureFactory;
 
+/**
+ * Class WebposCheckoutPaymentMethodCP209Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\PaymentMethod
+ *
+ * Precondition:
+ * "In backend:
+ * 1.  Go to webpos setting
+ * 2. On [Payment for POS] section:
+ * [Applicable Payment Methods] = ""All allowed payments""
+ * [Default Payment Method] = Select  a payemnt method
+ * 3. Click on [Save config] button
+ * On webpos:
+ * 1. Sync cofiguration
+ * 2. Login Webpos as a staff
+ * 3. Add some products  to cart
+ * 4. Click on [Checkout] button"
+ *
+ * Steps:
+ * 1. Check payment section
+ *
+ * Acceptance:
+ * Default payment method is the payment method that selected on step 2 of [Preconditon and setup steps] column
+ *
+ */
 class WebposCheckoutPaymentMethodCP209Test extends Injectable
 {
     /**

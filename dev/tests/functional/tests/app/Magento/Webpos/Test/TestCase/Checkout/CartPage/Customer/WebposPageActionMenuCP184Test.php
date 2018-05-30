@@ -5,13 +5,35 @@
  * Date: 09/01/2018
  * Time: 09:15
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
+/**
+ * Class WebposPageActionMenuCP184Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add some products  to cart
+ * 3. Click on [Checkout] page"
+ *
+ * Steps:
+ * "1. Click on action menu ""..."" on the header page
+ * 2. Click on ""Add order note"""
+ *
+ * Acceptance:
+ * "- ""Order comment"" popup is shown
+ * - Buttons: Cancel, Save
+ * - Textarea to enter comment"
+ *
+ */
 class WebposPageActionMenuCP184Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
@@ -23,6 +45,9 @@ class WebposPageActionMenuCP184Test extends Injectable
         )->run();
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject
     (
         WebposIndex $webposIndex
@@ -31,6 +56,9 @@ class WebposPageActionMenuCP184Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     */
     public function test($products)
     {
 

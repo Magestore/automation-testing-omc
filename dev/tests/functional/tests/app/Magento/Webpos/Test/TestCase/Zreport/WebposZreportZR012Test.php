@@ -15,6 +15,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposZreportZR012Test
+ * @package Magento\Webpos\Test\TestCase\Zreport
  *
  * Precondition: There are some POSs and setting [Need to create session before working] = "Yes" on the test site
  * 1. LoginTest webpos by a staff who has open and close session permission
@@ -30,7 +31,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 3. Show Z-report with:
  * [Difference] = 0
  *
- * @package Magento\Webpos\Test\TestCase\Zreport
  */
 class WebposZreportZR012Test extends Injectable
 {
@@ -65,6 +65,10 @@ class WebposZreportZR012Test extends Injectable
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'create_session_before_working']
+        )->run();
+
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
         )->run();
 
         // LoginTest webpos
@@ -103,7 +107,7 @@ class WebposZreportZR012Test extends Injectable
         $this->webposIndex->getSessionShift()->waitReportPopupVisible();
 
         return [
-          'difference' => 0
+            'difference' => 0
         ];
     }
 

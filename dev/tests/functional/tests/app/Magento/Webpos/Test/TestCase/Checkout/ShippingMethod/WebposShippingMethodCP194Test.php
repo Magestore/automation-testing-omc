@@ -5,13 +5,34 @@
  * Date: 12/01/2018
  * Time: 14:45
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\ShippingMethod;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposShippingMethodCP194Test
  * @package Magento\Webpos\Test\TestCase\Cart\ShippingMethod
+ *
+ * Precondition:
+ * "In backend:
+ * 1.  Go to webpos setting
+ * 2. On [Shipping for POS] section:
+ * [Applicable Shipping Methods] = ""Specific shipping""
+ * [Specific Shipping Methods]: select 1 shipping method
+ * 3. Click on [Save config] button
+ * On webpos:
+ * 1. Login Webpos as a staff
+ * 2. Add some products  to cart
+ * 3. Click on [Checkout] button"
+ *
+ * Steps:
+ * 1. Check shipping section
+ *
+ * Acceptance:
+ * Selected shipping method will be shown on shipping section
+ *
  */
 class WebposShippingMethodCP194Test extends Injectable
 {

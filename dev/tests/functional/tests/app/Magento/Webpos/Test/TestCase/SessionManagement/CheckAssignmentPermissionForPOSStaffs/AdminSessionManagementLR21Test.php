@@ -13,9 +13,10 @@ use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
 
 /**
  * Class AdminSessionManagementLR21Test
+ * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  *
  * Precondition:
- * - Loged in backend
+ * - Logged in backend
  * - From menu on the left side, select Sales menu , under Web POS > select Manage Role
  *
  * Steps:
@@ -27,7 +28,6 @@ use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
  * Acceptance:
  * 4. The Lock and Unlock register checkbox and Edit security PIN checkbox would be automatically checked
  *
- * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
 class AdminSessionManagementLR21Test extends Injectable
 {
@@ -55,7 +55,7 @@ class AdminSessionManagementLR21Test extends Injectable
         ];
         $this->webposRoleNew->getRoleForm()->getRoleResources($roleResources[0]);
         return [
-          'roleResources' => $roleResources
+            'roleResources' => $roleResources
         ];
     }
 }

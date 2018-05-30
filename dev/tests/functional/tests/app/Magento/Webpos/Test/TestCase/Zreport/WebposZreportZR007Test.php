@@ -18,6 +18,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposZreportZR007Test
+ * @package Magento\Webpos\Test\TestCase\Zreport
  *
  * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff who has open and close session permission (ex: Staff A)
@@ -36,7 +37,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * - [Opened] field: show opened Date & Time and the staff name who opened this session  (staff A)
  * - [Closed] field: show closed Date & Time and the staff name who closed this session (staff B)
  *
- * @package Magento\Webpos\Test\TestCase\Zreport
  */
 class WebposZreportZR007Test extends Injectable
 {
@@ -67,6 +67,10 @@ class WebposZreportZR007Test extends Injectable
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'create_session_before_working']
+        )->run();
+
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
         )->run();
 
         /**@var Location $location */

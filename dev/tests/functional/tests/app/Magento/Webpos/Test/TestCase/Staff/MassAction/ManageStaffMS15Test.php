@@ -15,6 +15,7 @@ use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 
 /**
  * Class ManageStaffMS15Test
+ * @package Magento\Webpos\Test\TestCase\Staff\MassAction
  *
  * Precondition:
  * 1. Go to backend > Sales > Manage Staffs
@@ -29,7 +30,6 @@ use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
  * - Close the confirmation popup
  * - Delete the selected staff successfully and show message: ""A total of 1 record(s) were deleted."""
  *
- * @package Magento\Webpos\Test\TestCase\Staff\MassAction
  */
 class ManageStaffMS15Test extends Injectable
 {

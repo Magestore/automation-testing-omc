@@ -13,6 +13,24 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposEditCustomerCheckAddAddressButtonCC37Test
+ * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\EditCustomer
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Click on Add new customer icon
+ * 3. Select a customer in list"
+ *
+ * Steps:
+ * "1. Click to edit the selected customer
+ * 2. Click on [Add address] button
+ * 3.  Fill out all fields > Save"
+ *
+ * Acceptance:
+ * 3. Close popup and the created address will be shown in Shipping/Billing address list
+ *
+ */
 class WebposEditCustomerCheckAddAddressButtonCC37Test extends Injectable
 {
     /**

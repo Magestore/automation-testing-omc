@@ -12,6 +12,26 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposEditCustomerEditEmailCC34Test
+ * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\EditCustomer
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Click on Add new customer icon
+ * 3. Select a customer in list"
+ *
+ * Steps:
+ * "1. Click to edit the selected customer
+ * 2. Edit [Email] fields to an exist email
+ * 3. Save"
+ *
+ * Acceptance:
+ * "3.
+ * - Save unsuccessfully
+ * - Show message: ""Error: The customer email is existed."""
+ *
+ */
 class WebposEditCustomerEditEmailCC34Test extends Injectable
 {
     /**

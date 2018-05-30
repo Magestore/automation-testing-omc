@@ -7,11 +7,29 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\PaymentMethod;
+
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-use Magento\Mtf\Fixture\FixtureFactory;
 
+/**
+ * Class WebposCheckoutPaymentMethodCP212Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\PaymentMethod
+ *
+ * Precondition:
+ * There are some payment methods on webpos
+ * 1. Login Webpos as a staff
+ * 2. Add some product to cart
+ * 3. Click on [Checkout] button"
+ *
+ * Steps:
+ * "1. Select a payment method on payment method section
+ * 2. Click on remove payment method icon (""-"" icon)"
+ *
+ * Acceptance:
+ * Payment section will show all of payment methods
+ *
+ */
 class WebposCheckoutPaymentMethodCP212Test extends Injectable
 {
     /**

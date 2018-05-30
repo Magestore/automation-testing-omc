@@ -20,6 +20,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AdminSessionManagementValidateFormPinSettingsTest
+ * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  *
  * Precondition:
  * - In the webpos settings page, set the Need to create session before working field to Yes
@@ -35,7 +36,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * Acceptance:
  * 4. Saving the change unsuccessfully and simultaneously, show alert message: "Please enter password of your POS account to confirm changes"
  *
- * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
 class AdminSessionManagementValidateFormPinSettingsTest extends Injectable
 {

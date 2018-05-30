@@ -5,10 +5,30 @@
  * Date: 24/01/2018
  * Time: 08:52
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposHoldOrderCP164Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add a product
+ * 3. Click on [Add discount] > on Discount tab, add dicount for whole cart (type: $)
+ * 4. Hold order successfully"
+ *
+ * Steps:
+ * "1. Go to [On-hold orders] menu
+ * 2. Click on [Checkout] button on that detail order"
+ *
+ * Acceptance:
+ * Order will be loaded to cart page without discount then auto next to checkout page.
+ *
+ */
 class WebposHoldOrderCP164Test extends Injectable
 {
     /**
@@ -44,8 +64,7 @@ class WebposHoldOrderCP164Test extends Injectable
         sleep(1);
 
         //Click on [Add discount] > on Discount tab, add dicount for whole cart (type: $)
-        while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup())
-        {
+        while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup()) {
             $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
         }
         $this->webposIndex->getCheckoutDiscount()->clickDiscountButton();

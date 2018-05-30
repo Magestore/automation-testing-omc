@@ -5,12 +5,30 @@
  * Date: 08/01/2018
  * Time: 10:32
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
+
+use Magento\Customer\Test\Fixture\Customer;
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Customer\Test\Fixture\Customer;
 
+/**
+ * Class WebposCartPageCustomerCP176Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer
+ *
+ * Precondition:
+ * "1. Login webpos as a staff
+ * 2. Click on [Checkout] button"
+ *
+ * Steps:
+ * "1. Click on add customer icon
+ * 2. Select an existing customer"
+ *
+ * Acceptance:
+ * 1. Customer name is shown on the cart
+ *
+ */
 class WebposCartPageCustomerCP176Test extends Injectable
 {
     /**

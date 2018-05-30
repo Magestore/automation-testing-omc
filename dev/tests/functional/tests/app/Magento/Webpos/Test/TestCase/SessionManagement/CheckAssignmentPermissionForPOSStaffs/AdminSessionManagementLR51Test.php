@@ -22,6 +22,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AdminSessionManagementLR51Test
+ * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  *
  * Precondition:
  * POS staff locked the register successfully
@@ -35,7 +36,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * + 1 text line with the content: Please enter security PIN to unlock the register
  * + 4 small textboxes for entering security PIN
  *
- * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
 class AdminSessionManagementLR51Test extends Injectable
 {

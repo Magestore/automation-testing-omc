@@ -8,13 +8,28 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CheckGUI;
 
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
+
 /**
  * Class WebposCheckoutPagePlaceOrderPageSuccessVisibleTest
  * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\CheckGUI
+ *
+ * Precondition:
+ * 1. Login Webpos as a staff
+ * 2. Add a product to cart page
+ *
+ * Steps:
+ * 1. Check GUI cart page
+ *
+ * Acceptance:
+ * - Product name with thumnail, price and delete icon (x) are shown on cart
+ * - Fields: Subtotal, Add Discount, Tax, Total
+ * - Fields: Subtotal, Tax, Total are updated according to added product.
+ * - Button: "Hold", "Checkout"
+ *
  */
 class WebposCheckoutPagePlaceOrderPageSuccessVisibleTest extends Injectable
 {
@@ -55,7 +70,7 @@ class WebposCheckoutPagePlaceOrderPageSuccessVisibleTest extends Injectable
                 \PHPUnit_Framework_Assert::assertEquals(
                     $defaultValue,
                     str_replace('$', '', $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice($label)->getText()),
-                    'On the Frontend Page - The Default ' .$label. ' at the AssertWebposCheckGUICustomerPriceCP54 TaxClass was not equal to zero.'
+                    'On the Frontend Page - The Default ' . $label . ' at the AssertWebposCheckGUICustomerPriceCP54 TaxClass was not equal to zero.'
                 );
             }
         }

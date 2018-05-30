@@ -7,12 +7,16 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\DeleteProduct;
+
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-use Magento\Mtf\Fixture\FixtureFactory;
+
 /**
- *  * Preconditions:
+ * Class WebposDeleteProductOnCartPageCP70EntityTest
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DeleteProduct
+ *
+ * Preconditions:
  * 1. LoginTest webpos by a  staff
  * 2. Add some product to cart
  *
@@ -21,11 +25,10 @@ use Magento\Mtf\Fixture\FixtureFactory;
  * 2. Back to cart page
  * 3. Click on delete product icon (x icon) of first product
  *
- */
-
-/**
- * Class WebposDeleteProductOnCartPageCP70EntityTest
- * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DeleteProduct
+ * Acceptance:
+ * "1. That product is removed from cart
+ * 2. Subtotal, Discount, Tax, Total will be recaculated"
+ *
  */
 class WebposDeleteProductOnCartPageCP70EntityTest extends Injectable
 {

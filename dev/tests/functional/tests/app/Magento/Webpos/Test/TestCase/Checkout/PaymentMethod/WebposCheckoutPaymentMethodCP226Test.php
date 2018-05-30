@@ -8,12 +8,30 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\PaymentMethod;
 
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposCheckoutPaymentMethodCP226Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\PaymentMethod
+ *
+ * Precondition:
+ * "1. Login webpos by a  staff
+ * 2. Add some products  to cart
+ *
+ * Steps:
+ * "1. Click on [Checkout] button
+ * 2. Select shipping/payment method
+ * 3. Back to cart page > Remove cart
+ * 4. Add different product to cart
+ * 5. Click on [Checkout] page"
+ *
+ * Acceptance:
+ * Auto select default shipping and payment method, remove selected shipping and payment method
+ *
+ */
 class WebposCheckoutPaymentMethodCP226Test extends Injectable
 {
     /**

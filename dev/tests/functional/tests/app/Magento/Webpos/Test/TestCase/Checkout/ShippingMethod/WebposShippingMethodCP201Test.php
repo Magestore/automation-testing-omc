@@ -5,9 +5,29 @@
  * Date: 18/01/2018
  * Time: 10:25
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\ShippingMethod;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
+/**
+ * Class WebposShippingMethodCP201Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\ShippingMethod
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add a product to cart
+ * 3. Click on [Checkout] button"
+ *
+ * Steps:
+ * 1. Place order successfully with a shipping method
+ *
+ * Acceptance:
+ * "1. Selected shipping method will be shown on ""Shipping method"" section in the order detail
+ * 2. Fee shipping will be shown and calculated in the order"
+ *
+ */
 class WebposShippingMethodCP201Test extends Injectable
 {
     /**
@@ -64,7 +84,7 @@ class WebposShippingMethodCP201Test extends Injectable
 
         //Get orderId
         $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
-        $orderId= ltrim ($orderId,'#');
+        $orderId = ltrim($orderId, '#');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
 
         return [

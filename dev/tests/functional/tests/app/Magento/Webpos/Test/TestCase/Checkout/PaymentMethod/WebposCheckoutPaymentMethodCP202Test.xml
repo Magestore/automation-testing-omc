@@ -1,5 +1,7 @@
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\PaymentMethod\WebposCheckoutPaymentMethodCP202Test" summary="Frontend - Web POS Checkout Payment Visible" ticketId="MAGETWO-34874">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\PaymentMethod\WebposCheckoutPaymentMethodCP202Test"
+              summary="Frontend - Web POS Checkout Payment Visible" ticketId="MAGETWO-34874">
         <variation name="WebposCheckoutPaymentMethodCP202_CP202">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="string">product1</item>
@@ -7,7 +9,7 @@
                 <item name="2" xsi:type="string">product3</item>
                 <item name="3" xsi:type="string">product4</item>
             </data>
-            <constraint name="Magento\Webpos\Test\Constraint\Checkout\PaymentMethod\AssertCheckoutPaymentMethodCP202" />
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\PaymentMethod\AssertCheckoutPaymentMethodCP202"/>
         </variation>
     </testCase>
 </config>

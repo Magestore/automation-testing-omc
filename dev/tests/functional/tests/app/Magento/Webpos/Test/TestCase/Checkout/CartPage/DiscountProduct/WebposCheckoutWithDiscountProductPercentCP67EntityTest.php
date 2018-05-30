@@ -8,23 +8,26 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct;
 
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
- *  * Preconditions:
+ * Class WebposCheckoutWithDiscountProductPercentCP65EntityTest
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DiscountProduct
+ *
+ * Preconditions:
  * 1. LoginTest webpos by a  staff
  * 2. Add a product to cart
  * 3. Edit Discount product (type:%)
  *
  * Step:
  * 1. Place Order
- */
-
-/**
- * Class WebposCheckoutWithDiscountProductPercentCP65EntityTest
- * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DiscountProduct
+ *
+ * Acceptance:
+ * 1. Place order successfully with custom price after discount
+ *
  */
 class WebposCheckoutWithDiscountProductPercentCP67EntityTest extends Injectable
 {

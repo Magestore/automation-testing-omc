@@ -7,25 +7,32 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
- *  * Preconditions:
+ * Class WebposCustomSaleInputPriceByKeyBoardCP74EntityTest
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
+ *
+ * Preconditions:
  * 1. LoginTest webpos by a  staff
  * 2. Click on [Custom sale]
  *
- * Step:
+ * Steps:
  * 1. Input into [Product name], [Product description]
  * 2. Input valid value to [Price] field by keyboard
  * 3. Click on [Add to cart] button
  *
+ * Acceptance:
+ * "Custom product will be added to cart with:
+ * - Product name: the name just enterd
+ * - Description: the description just entered
+ * - Price: the price just entered
+ * - Qty=1"
+ *
  */
-/**
- * Class WebposCustomSaleInputPriceByKeyBoardCP74EntityTest
- * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
- */
-
-class WebposCustomSaleInputPriceByKeyBoardCP74EntityTest extends  Injectable
+class WebposCustomSaleInputPriceByKeyBoardCP74EntityTest extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex

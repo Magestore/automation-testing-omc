@@ -5,16 +5,28 @@
  * Date: 24/01/2018
  * Time: 21:30
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\ConfigurableProduct\Test\Fixture\ConfigurableProduct;
 
 /**
  * Class WebposHoldOrderCP168Test
  * @package Magento\Webpos\Test\TestCase\Cart\CartPage\HoldOrder
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Create multi order (2 orders)
+ * 3. Add a product to 1st cart"
+ *
+ * Steps:
+ * 1. Click on [Hold] button on 1st cart
+ *
+ * Acceptance:
+ * "1. Order will be saved in On-hold order page with correct product
+ * 2. 1st cart goes back to default"
+ *
  */
 class WebposHoldOrderCP168Test extends Injectable
 {

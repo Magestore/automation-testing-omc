@@ -13,12 +13,29 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\CreateCustomer\AssertCreateCustomerOnCheckoutPageSuccess;
-use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\ShippingAddressPopup\AssertShippingAddressOnNewCustomerPopupIsCorrect;
 use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\ShippingAddressPopup\AssertBillingAddressOnNewCustomerPopupIsCorrect;
+use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\ShippingAddressPopup\AssertShippingAddressOnNewCustomerPopupIsCorrect;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposCustomerOnCheckoutPageCC21Test
  * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\ShippingAddressPopup
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Click on Add new customer icon"
+ *
+ * Steps:
+ * "1. Click on [Create customer] button > Fill out all fields
+ * 2. Click on Add Billing address icon >Fill out all fields
+ * 3. Click on [Save] button
+ * 4. Click on [Save] button on [New customer] popup"
+ *
+ * Acceptance:
+ * "3. The created billing address will be shown on [Billing address] section
+ * - [Shipping address] section is blank
+ * 4. Create customer successfully and show message ""Success: The customer is saved successfully."""
+ *
  */
 class WebposCustomerOnCheckoutPageCC21Test extends Injectable
 {
@@ -105,16 +122,16 @@ class WebposCustomerOnCheckoutPageCC21Test extends Injectable
         sleep(1);
 
         // - The created billing address will be shown on [Billing address] section
-        $country= [
+        $country = [
             'United States' => 'US',
             'United Kingdom' => 'GB',
             'Germany' => 'DE'
         ];
-        $addressText = $address->getFirstname().' '.$address->getLastname().', '
-            .$address->getStreet().' '.$address->getCity().', '
-            .$country[$address->getCountryId()].', '
-            .$address->getPostcode().', '
-            .$address->getTelephone();
+        $addressText = $address->getFirstname() . ' ' . $address->getLastname() . ', '
+            . $address->getStreet() . ' ' . $address->getCity() . ', '
+            . $country[$address->getCountryId()] . ', '
+            . $address->getPostcode() . ', '
+            . $address->getTelephone();
         $this->assertBillingAddressOnNewCustomerPopupIsCorrect->processAssert($this->webposIndex, $addressText);
 
         // - [Shipping address] section is blank

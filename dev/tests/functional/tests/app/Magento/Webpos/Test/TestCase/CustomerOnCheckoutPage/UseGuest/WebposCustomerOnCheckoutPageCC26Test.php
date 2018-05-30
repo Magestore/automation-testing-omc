@@ -13,10 +13,21 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
-
 /**
  * Class WebposCustomerOnCheckoutPageCC26Test
  * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\UseGuest
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Click on Add new customer icon > Select an exist customer "
+ *
+ * Steps:
+ * "1. Click on Add new customer icon
+ * 2. Click on [User guest] button"
+ *
+ * Acceptance:
+ * 2. Guest will be selected on cart
+ *
  */
 class WebposCustomerOnCheckoutPageCC26Test extends Injectable
 {

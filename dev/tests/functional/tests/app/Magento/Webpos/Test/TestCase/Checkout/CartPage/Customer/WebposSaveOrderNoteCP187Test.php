@@ -5,13 +5,39 @@
  * Date: 11/01/2018
  * Time: 16:18
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
+/**
+ * Class WebposSaveOrderNoteCP187Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add some products  to cart
+ * 3. Click on [Checkout] page"
+ *
+ * Steps:
+ * "1. Click on action menu ""..."" on the header page
+ * 2. Click on ""Add order note""
+ * 3. Enter comment
+ * 4. Click on ""Save"" button
+ * 5. Place order "
+ *
+ * Acceptance:
+ * "On detail order on webpos:
+ * - Show content of comment in ""Comment history"" section
+ * On detail order in backend:
+ * - Show content of comment in ""Notes for this Order"" section"
+ *
+ */
 class WebposSaveOrderNoteCP187Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
@@ -23,6 +49,9 @@ class WebposSaveOrderNoteCP187Test extends Injectable
         )->run();
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject
     (
         WebposIndex $webposIndex
@@ -31,9 +60,13 @@ class WebposSaveOrderNoteCP187Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @param $comment
+     * @return array
+     */
     public function test($products, $comment)
     {
-
         //Create product
         $product = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
@@ -65,7 +98,7 @@ class WebposSaveOrderNoteCP187Test extends Injectable
         sleep(2);
 
         //Click save button
-        if($comment != null)
+        if ($comment != null)
             $this->webposIndex->getCheckoutNoteOrder()->getTextArea()->setValue($comment);
         $this->webposIndex->getCheckoutNoteOrder()->getSaveOrderNoteButon()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -81,11 +114,11 @@ class WebposSaveOrderNoteCP187Test extends Injectable
 
         //Get orderId
         $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
-        $orderId= ltrim ($orderId,'#');
+        $orderId = ltrim($orderId, '#');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
 
         return [
-           'orderId' => $orderId
+            'orderId' => $orderId
         ];
     }
 }

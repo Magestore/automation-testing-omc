@@ -16,7 +16,7 @@ use Magento\Webpos\Test\Constraint\SessionManagementValidate\TakeMoneyOut\Assert
  * Class WebposCheckValidateAmountFieldSM21Test
  * @package Magento\Webpos\Test\TestCase\SessionManagementValidate\TakeMoneyOut
  * SM21
- * "Precondition: Settings [Need to create session before working] = Yes
+ * Settings [Need to create session before working] = Yes
  * 1. Login webpos by an account who has opening session permission
  * 2. Click to show left menu
  * 3. Click on [Session management] menu > Open a new session successfully "

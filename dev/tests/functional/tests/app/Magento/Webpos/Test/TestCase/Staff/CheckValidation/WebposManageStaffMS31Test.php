@@ -5,11 +5,13 @@
  * Date: 17/02/2018
  * Time: 19:27
  */
+
 namespace Magento\Webpos\Test\TestCase\Staff\CheckValidation;
+
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
-use Magento\Webpos\Test\Fixture\Staff;
 
 class WebposManageStaffMS31Test extends Injectable
 {
@@ -33,10 +35,12 @@ class WebposManageStaffMS31Test extends Injectable
     public function __inject(
         StaffIndex $staffsIndex,
         StaffNews $staffsNew
-    ) {
+    )
+    {
         $this->staffsIndex = $staffsIndex;
         $this->staffsNew = $staffsNew;
     }
+
     public function test(Staff $staff)
     {
         // Steps

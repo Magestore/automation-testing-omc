@@ -5,12 +5,29 @@
  * Date: 18/01/2018
  * Time: 13:25
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
+
+use Magento\Customer\Test\Fixture\Customer;
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Customer\Test\Fixture\Customer;
 
+/**
+ * Class WebposHoldOrderCP155Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add an exist customer"
+ *
+ * Steps:
+ * Click on [Hold] button
+ *
+ * Acceptance:
+ * Show message "Warning: Please add item(s) to cart!"
+ *
+ */
 class WebposHoldOrderCP155Test extends Injectable
 {
     /**
@@ -58,7 +75,7 @@ class WebposHoldOrderCP155Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $warningMessage = $this->webposIndex->getToaster()->getWarningMessage()->getText();
 
-        return ['warningMessageActual'=> $warningMessage];
+        return ['warningMessageActual' => $warningMessage];
 
     }
 }

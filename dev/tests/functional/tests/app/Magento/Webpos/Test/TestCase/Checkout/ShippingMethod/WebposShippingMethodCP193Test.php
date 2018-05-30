@@ -5,13 +5,28 @@
  * Date: 09/01/2018
  * Time: 10:07
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\ShippingMethod;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposShippingMethodCP193Test
  * @package Magento\Webpos\Test\TestCase\Cart\ShippingMethod
+ *
+ * Precondition:
+ * there is no shipping method on webpos
+ * 1. Login Webpos as a staff
+ * 2. Add some products  to cart
+ * 3. Click on [Checkout] button"
+ *
+ * Steps:
+ * 1. Check shipping section
+ *
+ * Acceptance:
+ * Shipping section is blank
+ *
  */
 class WebposShippingMethodCP193Test extends Injectable
 {

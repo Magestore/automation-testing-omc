@@ -5,14 +5,34 @@
  * Date: 08/01/2018
  * Time: 16:24
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
+
+use Magento\Config\Test\Fixture\ConfigData;
+use Magento\Customer\Test\Fixture\Customer;
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Customer\Test\Fixture\Customer;
-use Magento\Config\Test\Fixture\ConfigData;
 
-
+/**
+ * Class WebposCartPageCustomerCP181Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer
+ *
+ * Precondition:
+ * "1. Login webpos by a  staff
+ * 2. Add some products  to cart
+ * 3. Click on [Checkout] button"
+ *
+ * Steps:
+ *"1. Click on Customer icon > click [Create customer] button
+ * 2. Create a new customer without Shipping address and Billing address
+ * 3. Place order"
+ *
+ * Acceptance:
+ * "1. Place order sucessfully
+ * 2. In order detail, shipping address and billing address are responding to Guest'addresses"
+ *
+ */
 class WebposCartPageCustomerCP181Test extends Injectable
 {
     /**
@@ -85,15 +105,15 @@ class WebposCartPageCustomerCP181Test extends Injectable
 
         //Get orderId
         $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
-        $orderId= ltrim ($orderId,'#');
+        $orderId = ltrim($orderId, '#');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
 
         $configData = $configData->getData()['section'];
         return [
-            'name' => $customer->getFirstname().' '.$customer->getLastname(),
-            'address' => $configData['webpos/guest_checkout/city']['value'].', '.$configData['webpos/guest_checkout/region_id']['label'].
-                ', '.$configData['webpos/guest_checkout/zip']['value'].', US',
-            'phone' =>  $configData['webpos/guest_checkout/telephone']['value'],
+            'name' => $customer->getFirstname() . ' ' . $customer->getLastname(),
+            'address' => $configData['webpos/guest_checkout/city']['value'] . ', ' . $configData['webpos/guest_checkout/region_id']['label'] .
+                ', ' . $configData['webpos/guest_checkout/zip']['value'] . ', US',
+            'phone' => $configData['webpos/guest_checkout/telephone']['value'],
             'orderId' => $orderId
         ];
     }

@@ -15,7 +15,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * Class WebposCheckValidateAmountFieldSM20Test
  * @package Magento\Webpos\Test\TestCase\SessionManagementValidate\TakeMoneyOut
  * SM20
- * "Precondition: Settings [Need to create session before working] = Yes
+ * Settings [Need to create session before working] = Yes
  * 1. Login webpos by an account who has opening session permission
  * 2. Click to show left menu
  * 3. Click on [Session management] menu > Open a new session successfully "

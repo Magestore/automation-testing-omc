@@ -5,11 +5,31 @@
  * Date: 18/01/2018
  * Time: 16:07
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
+
+use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Customer\Test\Fixture\Customer;
 
+/**
+ * Class WebposHoldOrderCP161Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add some products
+ * 3. Add a new customer
+ * 4. Hold order successfully"
+ *
+ * Steps:
+ * "1. Go to [On-hold orders] menu
+ * 2. Click on [Checkout] button on that detail order"
+ *
+ * Acceptance:
+ * Order will be loaded to cart page with correct  products and customer then auto next to checkout page.
+ *
+ */
 class WebposHoldOrderCP161Test extends Injectable
 {
     /**

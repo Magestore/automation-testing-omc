@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-	<testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer\WebposCartPageCustomerCP35Test" summary="Checkout - Cart Page - Customer - Checkout with Guest - Edit Guest in backend test" ticketId="WEBPOS-1">
-		<variation name="WebposCartPageCustomerCP35TestVariation1_CP35">
-			<data name="configData" xsi:type="string">webpos_default_guest_checkout_edit</data>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer\WebposCartPageCustomerCP35Test"
+              summary="Checkout - Cart Page - Customer - Checkout with Guest - Edit Guest in backend test"
+              ticketId="WEBPOS-1">
+        <variation name="WebposCartPageCustomerCP35TestVariation1_CP35">
+            <data name="configData" xsi:type="string">webpos_default_guest_checkout_edit</data>
 
-			<data name="product/dataset" xsi:type="string">product1</data>
-			<data name="address/dataset" xsi:type="string">default_webpos_guest_address_edit</data>
+            <data name="product/dataset" xsi:type="string">product1</data>
+            <data name="address/dataset" xsi:type="string">default_webpos_guest_address_edit</data>
 
-			<!--<constraint name="Magento\Webpos\Test\Constraint\Cart\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>-->
-		</variation>
-	</testCase>
+            <!--<constraint name="Magento\Webpos\Test\Constraint\Cart\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>-->
+        </variation>
+    </testCase>
 </config>

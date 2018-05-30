@@ -32,6 +32,9 @@ class AdminUnlockPosStep implements TestStepInterface
      */
     protected $posEdit;
 
+    /**
+     * @var string
+     */
     protected $posName;
 
     /**
@@ -40,7 +43,11 @@ class AdminUnlockPosStep implements TestStepInterface
      * @param PosEdit $posEdit
      * @param string $posName
      */
-    public function __construct(PosIndex $posIndex, PosEdit $posEdit, $posName = 'Store POS')
+    public function __construct(
+        PosIndex $posIndex,
+        PosEdit $posEdit,
+        $posName = 'Store POS'
+    )
     {
         $this->posIndex = $posIndex;
         $this->posEdit = $posEdit;
