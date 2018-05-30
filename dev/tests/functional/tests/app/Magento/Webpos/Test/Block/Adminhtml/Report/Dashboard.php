@@ -108,6 +108,10 @@ class Dashboard extends Block
         return $this->_rootElement->find('#container div.admin__data-grid-wrap table tfoot tr:last-child .col-sales-total');
     }
 
+    public function getPaymentMethod()
+    {
+        return $this->_rootElement->find('#container div.admin__data-grid-wrap table tbody .col-payment.method_title');
+    }
     public function getStaffName()
     {
         return $this->_rootElement->find('#container div.admin__data-grid-wrap table tbody .col-webpos_staff_name');
