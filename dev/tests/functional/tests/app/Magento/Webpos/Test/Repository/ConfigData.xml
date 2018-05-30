@@ -171,6 +171,20 @@
                 </item>
             </field>
         </dataset>
+
+        <dataset name="magestore_webpos_all_payment">
+            <field name="webpos/payment/specificpayment" xsi:type="array">
+                <item name="scope" xsi:type="string">default</item>
+                <item name="scope_id" xsi:type="number">0</item>
+                <item name="value" xsi:type="array">
+                    <item name="Web POS - Cash On Delivery" xsi:type="string">codforpos</item>
+                    <item name="Web POS - Cash In" xsi:type="string">cashforpos</item>
+                    <item name="Web POS - Credit Card" xsi:type="string">ccforpos</item>
+                    <item name="Web POS - Custom payment 1" xsi:type="string">cp1forpos</item>
+                    <item name="Web POS - Custom payment 2" xsi:type="string">cp2forpos</item>
+                </item>
+            </field>
+        </dataset>
         <!-- Magento AssertWebposCheckGUICustomerPriceCP54 Synchronization Default Payment-->
         <dataset name="magestore_webpos_default_payment">
             <field name="webpos/payment/defaultpayment" xsi:type="array">

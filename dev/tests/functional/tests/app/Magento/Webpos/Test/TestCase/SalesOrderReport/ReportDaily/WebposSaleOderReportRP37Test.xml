@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\SalesOrderReport\ReportDaily\WebposSaleOderReportRP37Test"
+              summary="Order List By Location Report" ticketId="MAGETWO-28222">
+        <variation name="WebposSaleOrderReportTestCase37Variation" summary="Create sales order report"
+                   ticketId="MAGETWO-45399">
+            <data name="pos/dataset" xsi:type="string">pos_with_new_location</data>
+            <data name="staff/dataset" xsi:type="string">staffWithoutPos</data>
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+            </data>
+            <data name="shifts" xsi:type="array">
+                <item name="from" xsi:type="string">m/d/Y -1 month</item>
+                <item name="to" xsi:type="string">m/d/Y</item>
+                <item name="show_order_statuses" xsi:type="string">Specified</item>
+            </data>
+        </variation>
+    </testCase>
+</config>
