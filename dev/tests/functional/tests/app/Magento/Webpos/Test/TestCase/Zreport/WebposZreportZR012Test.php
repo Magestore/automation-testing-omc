@@ -67,6 +67,10 @@ class WebposZreportZR012Test extends Injectable
             ['configData' => 'create_session_before_working']
         )->run();
 
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
+        )->run();
+
         // LoginTest webpos
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'

@@ -5,13 +5,32 @@
  * Date: 24/01/2018
  * Time: 21:03
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
+
 use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\SalesRule\Test\Fixture\SalesRule;
+use Magento\Webpos\Test\Page\WebposIndex;
 
-
+/**
+ * Class WebposHoldOrderCP166Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add a product
+ * 3. Click on [Add discount] > on Promotion tab, add a correct coupon code > Apply
+ * 4. Hold order successfully"
+ *
+ * Steps:
+ * "1. Go to [On-hold orders] menu
+ * 2. Click on [Checkout] button on that detail order"
+ *
+ * Acceptance:
+ * Order will be loaded to cart page without discount then auto next to checkout page.
+ *
+ */
 class WebposHoldOrderCP166Test extends Injectable
 {
     /**
@@ -55,8 +74,7 @@ class WebposHoldOrderCP166Test extends Injectable
         sleep(1);
 
         //Click on [Add discount] > on Promotion tab, add a correct coupon code > Apply
-        while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup())
-        {
+        while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup()) {
             $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
         }
         $this->webposIndex->getCheckoutDiscount()->clickPromotionButton();

@@ -15,9 +15,29 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\ShippingAddressPopup\AssertBillingAddressOnNewCustomerPopupIsCorrect;
 use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\ShippingAddressPopup\AssertShippingAddressOnNewCustomerPopupIsCorrect;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposCustomerOnCheckoutPageCC23Test
  * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\BillingAddressPopup
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Click on Add new customer icon"
+ *
+ * Steps:
+ * "1. Click on [Create customer] button
+ * 2. Click on Add Billing address icon > Add an address successfully
+ * 3. On [New Customer] popup, click on Edit billing address icon
+ * 4.  Edit customer information > Save"
+ *
+ * Acceptance:
+ * "3. Open [Edit Billing Address] popup including:
+ * -  Actions: Cancel, Save
+ * - The information address shows exactly
+ * 4.
+ * - Close [Edit billing address], back to [New customer] popup
+ * - The editted Billing address will be shown on [Billing address] section"
+ *
  */
 class WebposCustomerOnCheckoutPageCC23Test extends Injectable
 {
@@ -99,16 +119,16 @@ class WebposCustomerOnCheckoutPageCC23Test extends Injectable
         sleep(1);
 
         // - The created billing address will be shown on [Billing address] section
-        $country= [
+        $country = [
             'United States' => 'US',
             'United Kingdom' => 'GB',
             'Germany' => 'DE'
         ];
-        $addressText = $address->getFirstname().' '.$address->getLastname().', '
-            .$address->getStreet().' '.$address->getCity().', '
-            .$country[$address->getCountryId()].', '
-            .$address->getPostcode().', '
-            .$address->getTelephone();
+        $addressText = $address->getFirstname() . ' ' . $address->getLastname() . ', '
+            . $address->getStreet() . ' ' . $address->getCity() . ', '
+            . $country[$address->getCountryId()] . ', '
+            . $address->getPostcode() . ', '
+            . $address->getTelephone();
 
         // Assert [Billing address] section is correct
         $this->assertBillingAddressOnNewCustomerPopupIsCorrect->processAssert($this->webposIndex, $addressText);
@@ -121,11 +141,11 @@ class WebposCustomerOnCheckoutPageCC23Test extends Injectable
         $this->webposIndex->getCheckoutAddBillingAddress()->getSaveButton()->click();
 
         // Assert address changed
-        $editAddressText = $editAddress->getFirstname().' '.$editAddress->getLastname().', '
-            .$editAddress->getStreet().' '.$editAddress->getCity().', '
-            .$country[$editAddress->getCountryId()].', '
-            .$editAddress->getPostcode().', '
-            .$editAddress->getTelephone();
+        $editAddressText = $editAddress->getFirstname() . ' ' . $editAddress->getLastname() . ', '
+            . $editAddress->getStreet() . ' ' . $editAddress->getCity() . ', '
+            . $country[$editAddress->getCountryId()] . ', '
+            . $editAddress->getPostcode() . ', '
+            . $editAddress->getTelephone();
         $this->assertBillingAddressOnNewCustomerPopupIsCorrect->processAssert($this->webposIndex, $editAddressText);
     }
 

@@ -13,6 +13,26 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposEditCustomerEditShippingAndBillingAddressCC39Test
+ * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\EditCustomer
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Click on Add new customer icon
+ * 3. Select a customer in list"
+ *
+ * Steps:
+ * "1. Click to edit the selected customer
+ * 2. Edit Shipping and Billing address
+ * 3. Save"
+ *
+ * Acceptance:
+ * "3.
+ * - Billing address and shipping address will be updated successfully
+ * - That addresses will be used to checkout order"
+ *
+ */
 class WebposEditCustomerEditShippingAndBillingAddressCC39Test extends Injectable
 {
     /**

@@ -15,7 +15,7 @@ use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
  * Class ManageStaffMS12Test
  *
  * Precondition:
- * "Precondition: Exist at least 2 records on the grid
+ * Exist at least 2 records on the grid
  * 1. Go to backend > Sales > Manage Staffs"
  *
  * Steps:

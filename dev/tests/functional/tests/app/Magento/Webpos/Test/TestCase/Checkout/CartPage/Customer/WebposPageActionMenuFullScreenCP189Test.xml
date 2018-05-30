@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer\WebposPageActionMenuFullScreenCP189Test" summary="Checkout after add products- Check menu after click ... menu" ticketId="WEBPOS-1">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer\WebposPageActionMenuFullScreenCP189Test"
+              summary="Checkout after add products- Check menu after click ... menu" ticketId="WEBPOS-1">
         <variation name="WebposPageActionMenuFullScreenCP189TestVariation">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
                 </item>
             </data>
-            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPageActionMenu\AssertWebposEnterFullScreen" />
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPageActionMenu\AssertWebposEnterFullScreen"/>
         </variation>
     </testCase>
 </config>

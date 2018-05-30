@@ -10,16 +10,29 @@ namespace Magento\Webpos\Test\TestCase\Checkout\CartPageActionMenu;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposCheckActionMenuTopRightScreenTest
  * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\CartPageActionMenu
+ *
+ * Precondition:
+ * 1. Login Webpos as a staff
+ *
+ * Steps:
+ * 1. Click on action menu "..." on the top-right of the screen
+ *
+ * Acceptance:
+ * "Show 2 menus:
+ * - Add order note
+ * - Enter/Exit full screen mode"
+ *
  */
 class WebposCheckActionMenuTopRightScreenTest extends Injectable
 {
     /**
      * AssertWebposCheckGUICustomerPriceCP54 Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 

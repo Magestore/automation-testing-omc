@@ -52,6 +52,8 @@ class WebposXreportZR026Test extends Injectable
      * @var WebposIndex
      */
     protected $webposIndex;
+
+    /** @var bool $useOtherPaymentMethod */
     protected $useOtherPaymentMethod;
 
     public function __inject(

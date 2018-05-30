@@ -71,7 +71,6 @@ class WebposAddProductToCartThenCheckoutStep implements TestStepInterface
             $this->webposIndex->getCheckoutProductList()->search($this->products[$i]->getSku());
             $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
             $this->webposIndex->getMsWebpos()->waitCartLoader();
-            sleep(1);
             $i++;
         }
 

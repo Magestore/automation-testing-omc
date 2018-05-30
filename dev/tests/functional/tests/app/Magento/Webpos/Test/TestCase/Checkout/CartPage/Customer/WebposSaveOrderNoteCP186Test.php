@@ -5,13 +5,29 @@
  * Date: 09/01/2018
  * Time: 09:33
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposSaveOrderNoteCP186Test
  * @package Magento\Webpos\Test\TestCase\Cart\CartPage\Customer
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add some products  to cart
+ * 3. Click on [Checkout] page"
+ *
+ * Steps:
+ * "1. Click on action menu ""..."" on the header page
+ * 2. Click on ""Add order note""
+ * 3. Click on ""Save"" button"
+ *
+ * Acceptance:
+ * 1. Close "Order comment" popup
+ *
  */
 class WebposSaveOrderNoteCP186Test extends Injectable
 {
@@ -28,9 +44,10 @@ class WebposSaveOrderNoteCP186Test extends Injectable
         )->run();
     }
 
-    public function __inject (
+    public function __inject(
         WebposIndex $webposIndex
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
     }
 
@@ -69,7 +86,7 @@ class WebposSaveOrderNoteCP186Test extends Injectable
         sleep(1);
 
         //Click save button
-        if($comment != null)
+        if ($comment != null)
             $this->webposIndex->getCheckoutNoteOrder()->getTextArea()->setValue($comment);
         $this->webposIndex->getCheckoutNoteOrder()->getSaveOrderNoteButon()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

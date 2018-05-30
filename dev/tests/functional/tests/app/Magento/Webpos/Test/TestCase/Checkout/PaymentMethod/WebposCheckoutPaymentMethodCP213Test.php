@@ -7,14 +7,32 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\PaymentMethod;
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
+
 use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposCheckoutPaymentMethodCP213Test
  * @package Magento\Webpos\Test\TestCase\Cart\PaymentMethod
+ *
+ * Precondition:
+ * There are some payment methods on webpos
+ * 1. Login Webpos as a staff
+ * 2. Add some product to cart
+ * 3. Click on [Checkout] button
+ * 4. Select a shipping method"
+ *
+ * Steps:
+ * "1. Select a payment method on payment method section
+ * 2. Click on remove payment method icon (""-"" icon)
+ * 3. Add other payment method
+ * 4. Place order"
+ *
+ * Acceptance:
+ * Place order successfully with selected payment method on step 3 of [Steps] column
+ *
  */
 class WebposCheckoutPaymentMethodCP213Test extends Injectable
 {

@@ -12,77 +12,91 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CartPage\EditQty\AssertEditProductPopupIsAvailable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposCheckoutCartEditQtyCheckoutByEditQtyProductTest
  * @package Magento\Webpos\Test\TestCase\Cart\CartPage\EditQty
+ *
+ * Precondition:
+ * "1. Login webpos by a  staff
+ * 2. Add a product to cart with qty = 1
+ *
+ * Steps:
+ * "1. Click on name or image of a product in cart
+ * 2. Change qty to 2
+ * 3. Place order"
+ *
+ * Acceptance:
+ * 1. Place order successfully with qty of that product = 2
+ *
  */
 class WebposCheckoutCartEditQtyCheckoutByEditQtyProductTest extends Injectable
 {
-	/**
-	 * @var WebposIndex $webposIndex
-	 */
-	protected $webposIndex;
+    /**
+     * @var WebposIndex $webposIndex
+     */
+    protected $webposIndex;
 
-	/**
-	 * @var AssertEditProductPopupIsAvailable $assertEditProductPopupIsAvailable
-	 */
-	protected $assertEditProductPopupIsAvailable;
+    /**
+     * @var AssertEditProductPopupIsAvailable $assertEditProductPopupIsAvailable
+     */
+    protected $assertEditProductPopupIsAvailable;
 
     /**
      * @param WebposIndex $webposIndex
      * @param AssertEditProductPopupIsAvailable $assertEditProductPopupIsAvailable
      */
-	public function __inject(
-		WebposIndex $webposIndex,
-		AssertEditProductPopupIsAvailable $assertEditProductPopupIsAvailable
-	)
-	{
-		$this->webposIndex = $webposIndex;
-		$this->assertEditProductPopupIsAvailable = $assertEditProductPopupIsAvailable;
-	}
+    public function __inject(
+        WebposIndex $webposIndex,
+        AssertEditProductPopupIsAvailable $assertEditProductPopupIsAvailable
+    )
+    {
+        $this->webposIndex = $webposIndex;
+        $this->assertEditProductPopupIsAvailable = $assertEditProductPopupIsAvailable;
+    }
 
     /**
      * @param CatalogProductSimple $product
      * @param $qty
      * @param $qtyInput
      */
-	public function test(
-		CatalogProductSimple $product,
-		$qty,
-		$qtyInput
-	)
-	{
-		// LoginTest webpos
-		$staff = $this->objectManager->getInstance()->create(
-			'Magento\Webpos\Test\TestStep\LoginWebposStep'
-		)->run();
+    public function test(
+        CatalogProductSimple $product,
+        $qty,
+        $qtyInput
+    )
+    {
+        // LoginTest webpos
+        $staff = $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposStep'
+        )->run();
 
-		$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 
-		for ($i = 0; $i < $qty; $i++) {
-			$this->webposIndex->getCheckoutProductList()->search($product->getName());
-			$this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-			$this->webposIndex->getMsWebpos()->waitCartLoader();
-		}
+        for ($i = 0; $i < $qty; $i++) {
+            $this->webposIndex->getCheckoutProductList()->search($product->getName());
+            $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+            $this->webposIndex->getMsWebpos()->waitCartLoader();
+        }
 
-		//Click on product in cart
-		$this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
+        //Click on product in cart
+        $this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
 
-		// CP45
-		//Assert edit product popup is available
-		$this->assertEditProductPopupIsAvailable->processAssert($this->webposIndex);
+        // CP45
+        //Assert edit product popup is available
+        $this->assertEditProductPopupIsAvailable->processAssert($this->webposIndex);
 
-		$this->webposIndex->getCheckoutProductEdit()->getQtyInput()->setValue($qtyInput);
+        $this->webposIndex->getCheckoutProductEdit()->getQtyInput()->setValue($qtyInput);
         $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
         sleep(1);
 
-		$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-		$this->webposIndex->getMsWebpos()->waitCartLoader();
-		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-		$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-		$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
-		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-	}
+        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+    }
 }

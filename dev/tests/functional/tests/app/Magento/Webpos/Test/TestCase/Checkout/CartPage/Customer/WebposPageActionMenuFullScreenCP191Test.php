@@ -5,13 +5,34 @@
  * Date: 09/01/2018
  * Time: 10:07
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
+/**
+ * Class WebposPageActionMenuFullScreenCP191Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add some products  to cart
+ * 3. Click on [Checkout] page"
+ *
+ * Steps:
+ * "1. Click on action menu ""..."" on the header page
+ * 2. Click on ""Enter/exit fullscreen mode""
+ * 3. Click on ""Enter/exit fullscreen mode"" again"
+ *
+ * Acceptance:
+ * Exit full screen mode
+ *
+ */
 class WebposPageActionMenuFullScreenCP191Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
@@ -23,6 +44,9 @@ class WebposPageActionMenuFullScreenCP191Test extends Injectable
         )->run();
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject
     (
         WebposIndex $webposIndex
@@ -31,9 +55,12 @@ class WebposPageActionMenuFullScreenCP191Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test($products)
     {
-
         //Create product
         $product = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
@@ -68,6 +95,6 @@ class WebposPageActionMenuFullScreenCP191Test extends Injectable
         return ['minHeightBeforeFull' => $minHeightBeforeFull,
             'minHeightAfterFull' => $minHeightAfterFull,
 //            'minHeightAfterAgain' => $minHeightAfterAgain
-            ];
+        ];
     }
 }

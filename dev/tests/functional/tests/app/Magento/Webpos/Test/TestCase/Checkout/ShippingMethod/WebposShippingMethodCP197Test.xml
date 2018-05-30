@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\ShippingMethod\WebposShippingMethodCP197Test" summary="Shipping on cart page" ticketId="WEBPOS-1">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\ShippingMethod\WebposShippingMethodCP197Test"
+              summary="Shipping on cart page" ticketId="WEBPOS-1">
         <variation name="WebposShippingMethodCP197TestVariation">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">
@@ -8,8 +10,8 @@
                 </item>
             </data>
             <data name="priceShipping" xsi:type="string">19.00</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Checkout\ShippingMethod\AssertUpdatePriceShipping" />
-            <constraint name="Magento\Webpos\Test\Constraint\Checkout\ShippingMethod\AssertCheckTotalUpdate" />
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\ShippingMethod\AssertUpdatePriceShipping"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\ShippingMethod\AssertCheckTotalUpdate"/>
         </variation>
     </testCase>
 </config>

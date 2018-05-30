@@ -18,9 +18,29 @@ use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\ShippingAddressPopup\A
 use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\ShippingAddressPopup\AssertShippingAddressOnEditCustomerPopupIsCorrect;
 use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\ShippingAddressPopup\AssertShippingAddressOnNewCustomerPopupIsCorrect;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposCCShippingAddressPopupCC17Test
  * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\ShippingAddressPopup
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Click on Add new customer icon"
+ *
+ * Steps:
+ * "1. Click on [Create customer] button > Fill out all fields
+ * 2. Click on Add shipping address icon > Add an address successfully
+ * 3. On [New Customer] popup, click on Delete shipping address icon
+ * 4. Click on [Save] button on [New customer] popup"
+ *
+ * Acceptance:
+ * "3.
+ * - Delete that shipping address from [Shipping address] section
+ * - [Billing address] section is changless
+ * 5. Save customer successfully with:
+ * - Shipping address: blank
+ * - Billing address is the address that created on step 2 of [Steps] column"
+ *
  */
 class WebposCCShippingAddressPopupCC17Test extends Injectable
 {
@@ -123,16 +143,16 @@ class WebposCCShippingAddressPopupCC17Test extends Injectable
         $this->webposIndex->getCheckoutAddShippingAddress()->getSaveButton()->click();
         sleep(1);
         // - The created shipping address will be shown on [Shipping address] section
-        $country= [
+        $country = [
             'United States' => 'US',
             'United Kingdom' => 'GB',
             'Germany' => 'DE'
         ];
-        $addressText = $address->getFirstname().' '.$address->getLastname().', '
-            .$address->getStreet().' '.$address->getCity().', '
-            .$country[$address->getCountryId()].', '
-            .$address->getPostcode().', '
-            .$address->getTelephone();
+        $addressText = $address->getFirstname() . ' ' . $address->getLastname() . ', '
+            . $address->getStreet() . ' ' . $address->getCity() . ', '
+            . $country[$address->getCountryId()] . ', '
+            . $address->getPostcode() . ', '
+            . $address->getTelephone();
         $this->assertShippingAddressOnNewCustomerPopupIsCorrect->processAssert($this->webposIndex, $addressText);
         // Assert [Billing address] section is correct
         $this->assertBillingAddressOnNewCustomerPopupIsCorrect->processAssert($this->webposIndex, $addressText);
@@ -150,12 +170,12 @@ class WebposCCShippingAddressPopupCC17Test extends Injectable
 
         $this->webposIndex->getCheckoutCartHeader()->getCustomerTitleDefault()->click();
         sleep(1);
-        $fullname = $address->getFirstname().' '.$address->getLastname();
-        $addressText = $address->getStreet().' , '
-            .$address->getCity().' , '
-            .$address->getRegion().' , '
-            .$country[$address->getCountryId()].' '
-            .$address->getPostcode();
+        $fullname = $address->getFirstname() . ' ' . $address->getLastname();
+        $addressText = $address->getStreet() . ' , '
+            . $address->getCity() . ' , '
+            . $address->getRegion() . ' , '
+            . $country[$address->getCountryId()] . ' '
+            . $address->getPostcode();
         $phone = $address->getTelephone();
         // Assert ship address is blank
         $this->assertShippingAddressOnEditCustomerPopupIsCorrect->processAssert($this->webposIndex, $fullname, '', $phone);

@@ -7,21 +7,25 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale;
+
+use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-/**
- *  * Preconditions:
- * 1. LoginTest webpos by a  staff
- * 2. Add some products  to cart
- *
- * Step:
- * 1. Add a custom product to cart
- *
- */
+
 /**
  * Class WebposCustomSaleAddProductIntoExistCartCP76EntityTest
  * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
+ *
+ * Preconditions:
+ * 1. LoginTest webpos by a  staff
+ * 2. Add some products  to cart
+ *
+ * Steps:
+ * 1. Add a custom product to cart
+ *
+ * Acceptance:
+ * Custom product will be added to cart successfully
+ *
  */
 class WebposCustomSaleAddProductIntoExistCartCP76EntityTest extends Injectable
 {

@@ -1,5 +1,7 @@
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\PaymentMethod\WebposCheckoutPaymentMethodCP213Test" summary="Frontend - Web POS Checkout Payment Visible" ticketId="MAGETWO-34874">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\PaymentMethod\WebposCheckoutPaymentMethodCP213Test"
+              summary="Frontend - Web POS Checkout Payment Visible" ticketId="MAGETWO-34874">
         <variation name="WebposCheckoutPaymentMethodCP213_CP213">
             <data name="configData" xsi:type="string">default_payment_method_all_payment</data>
             <data name="dataConfig" xsi:type="string">magestore_webpos_specific_payment</data>

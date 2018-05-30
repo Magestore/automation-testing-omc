@@ -85,11 +85,11 @@ class WebposOpenSessionStep implements TestStepInterface
         // Open session
         $time = time();
         $timeAfter = $time + 3;
-        while (!$this->webposIndex->getOpenSessionPopup()->isVisible()
+        while (!$this->webposIndex->getSessionShift()->getPopupOpenShift()->isVisible()
             && $time < $timeAfter) {
             $time = time();
         }
-        if ($this->webposIndex->getOpenSessionPopup()->isVisible()) {
+        if ($this->webposIndex->getSessionShift()->getPopupOpenShift()->isVisible()) {
             $this->webposIndex->getOpenSessionPopup()->waitLoader();
             $this->webposIndex->getOpenSessionPopup()->waitUntilForOpenSessionButtonVisible();
 
@@ -99,7 +99,7 @@ class WebposOpenSessionStep implements TestStepInterface
             }
 
             $this->webposIndex->getOpenSessionPopup()->getOpenSessionButtonElement()->click();
-            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
+            $this->webposIndex->getSessionShift()->waitForPopupOpenShiftNotVisible();
             $this->webposIndex->getSessionShift()->waitBtnCloseSessionVisible();
 
             if ($this->putMoneyInStatus) {

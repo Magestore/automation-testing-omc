@@ -7,12 +7,34 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\PaymentMethod;
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
+use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
+
+/**
+ * Class WebposCheckoutPaymentMethodCP223Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\PaymentMethod
+ *
+ * Precondition:
+ * There are some payment methods on webpos
+ * 1. Login Webpos as a staff
+ * 2. Add some product to cart
+ * 3. Click on [Checkout] button
+ * 4. Select a shipping method"
+ *
+ * Steps:
+ * "1. Select a payment method > fill amount greater than total order
+ * 2. Click on [Place order]"
+ *
+ * Acceptance:
+ * "1. Place order successfully
+ * 2. Order is created with:
+ * + [Total paid] = [entered amount]
+ * + [Change] =  [Entered amount] - [Total]"
+ *
+ */
 class WebposCheckoutPaymentMethodCP223Test extends Injectable
 {
     /**
@@ -86,7 +108,7 @@ class WebposCheckoutPaymentMethodCP223Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         $am = $this->webposIndex->getCheckoutPlaceOrder()->getTopTotalPrice()->getText();
-        $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue(substr($am,1)+$amount);
+        $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue(substr($am, 1) + $amount);
         $this->webposIndex->getCheckoutPaymentMethod()->getTitlePaymentMethod()->click();
 
         // place order getCreateInvoiceCheckbox

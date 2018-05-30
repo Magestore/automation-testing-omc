@@ -83,6 +83,10 @@ class WebposZreportZR008Test extends Injectable
             ['configData' => 'magestore_webpos_custome_payment']
         )->run();
 
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
+        )->run();
+
         // LoginTest webpos
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'

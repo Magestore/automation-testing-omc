@@ -5,11 +5,29 @@
  * Date: 18/01/2018
  * Time: 15:54
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
 
+/**
+ * Class WebposHoldOrderCP159Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add some products  with qty >1 to cart
+ * 3. Hold order successfully"
+ *
+ * Steps:
+ * "1. Go to [On-hold orders] menu
+ * 2. Click on [Checkout] button on that detail order"
+ *
+ * Acceptance:
+ * Order will be loaded to cart page with correct  products and qty then auto next to checkout page.
+ *
+ */
 class WebposHoldOrderCP159Test extends Injectable
 {
     /**
@@ -24,6 +42,7 @@ class WebposHoldOrderCP159Test extends Injectable
     {
         $this->webposIndex = $webposIndex;
     }
+
     public function test($products)
     {
         //Create product

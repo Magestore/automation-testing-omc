@@ -5,12 +5,30 @@
  * Date: 24/01/2018
  * Time: 21:47
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\ConfigurableProduct\Test\Fixture\ConfigurableProduct;
 
+/**
+ * Class WebposHoldOrderCP169Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Create multi order (2 orders)
+ * 3. Add a product to 1st cart
+ * 4. Hold 1st cart successfully"
+ *
+ * Steps:
+ * "1. Go to [On-hold orders] menu
+ * 2. Click on [Checkout] button on that detail order"
+ *
+ * Acceptance:
+ * Order will be loaded to current cart then auto next to checkout page
+ *
+ */
 class WebposHoldOrderCP169Test extends Injectable
 {
     /**

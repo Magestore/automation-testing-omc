@@ -15,9 +15,26 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\ShippingAddressPopup\AssertBillingAddressOnNewCustomerPopupIsCorrect;
 use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\ShippingAddressPopup\AssertShippingAddressOnNewCustomerPopupIsCorrect;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposCCShippingAddressPopupCC15Test
  * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\ShippingAddressPopup
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Click on Add new customer icon"
+ *
+ * Steps:
+ * "1. Click on [Create customer] button
+ * 2. Click on Add shipping address icon > Add an address successfully
+ * 3. On [New Customer] popup, click on Edit shipping address icon
+ * 4. Cancel"
+ *
+ * Acceptance:
+ * "4.
+ * - Close [Edit shipping address], back to [New customer] popup
+ * - The  shipping address is changless"
+ *
  */
 class WebposCCShippingAddressPopupCC15Test extends Injectable
 {
@@ -99,16 +116,16 @@ class WebposCCShippingAddressPopupCC15Test extends Injectable
         sleep(1);
 
         // - The created shipping address will be shown on [Shipping address] section
-        $country= [
+        $country = [
             'United States' => 'US',
             'United Kingdom' => 'GB',
             'Germany' => 'DE'
         ];
-        $addressText = $address->getFirstname().' '.$address->getLastname().', '
-            .$address->getStreet().' '.$address->getCity().', '
-            .$country[$address->getCountryId()].', '
-            .$address->getPostcode().', '
-            .$address->getTelephone();
+        $addressText = $address->getFirstname() . ' ' . $address->getLastname() . ', '
+            . $address->getStreet() . ' ' . $address->getCity() . ', '
+            . $country[$address->getCountryId()] . ', '
+            . $address->getPostcode() . ', '
+            . $address->getTelephone();
         $this->assertShippingAddressOnNewCustomerPopupIsCorrect->processAssert($this->webposIndex, $addressText);
         // Assert [Billing address] section is correct
         $this->assertBillingAddressOnNewCustomerPopupIsCorrect->processAssert($this->webposIndex, $addressText);

@@ -5,16 +5,35 @@
  * Date: 24/01/2018
  * Time: 21:57
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
+
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckOnHoldOrderEmpty;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposHoldOrderCP171Test
  * @package Magento\Webpos\Test\TestCase\Cart\CartPage\HoldOrder
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add a product to cart
+ * 3. Hold order successfully"
+ *
+ * Steps:
+ * "1. Go to [On-hold orders] menu
+ * 2. Click on [Checkout] button on that detail order
+ * 3. On Checkout page, click back to cart page
+ * 4. Add one more product and select customer to cart
+ * 5. Click on [Hold] button again"
+ *
+ * Acceptance:
+ * "1. The old hold order will be removed from On-hold orders
+ * 2. A new hold order will be created and saved on On-hold orders"
+ *
  */
 class WebposHoldOrderCP171Test extends Injectable
 {

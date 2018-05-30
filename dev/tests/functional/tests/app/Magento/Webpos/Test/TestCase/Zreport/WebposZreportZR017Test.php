@@ -103,6 +103,10 @@ class WebposZreportZR017Test extends Injectable
             ['configData' => 'magestore_webpos_custome_payment']
         )->run();
 
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
+        )->run();
+
         $this->currencyIndex->open();
         $this->currencyIndex->getCurrencyRateForm()->clickImportButton();
         $this->currencyIndex->getCurrencyRateForm()->fillCurrencyUSDUAHRate();
@@ -198,6 +202,7 @@ class WebposZreportZR017Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         sleep(1);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();

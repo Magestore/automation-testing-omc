@@ -7,11 +7,31 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\PaymentMethod;
+
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-use Magento\Mtf\Fixture\FixtureFactory;
 
+/**
+ * Class WebposCheckoutPaymentMethodCP214Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\PaymentMethod
+ *
+ * Precondition:
+ * There are some payment methods on webpos
+ * 1. Login Webpos as a staff
+ * 2. Add some product to cart
+ * 3. Click on [Checkout] button
+ * 4. Select a shipping method"
+ *
+ * Steps:
+ * 1. Select a payment method > fill amount less than total order
+ *
+ * Acceptance:
+ * "1. [Remain money] = [Total] - [entered amount]
+ * 2. [Create invoice] field will be hidden
+ * 3. [Place order] button changes into [Mark as partial] button"
+ *
+ */
 class WebposCheckoutPaymentMethodCP214Test extends Injectable
 {
     /**

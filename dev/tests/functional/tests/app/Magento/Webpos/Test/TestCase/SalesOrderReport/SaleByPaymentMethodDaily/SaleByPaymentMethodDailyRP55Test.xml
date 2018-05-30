@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethodDaily\SaleByPaymentMethodDailyRP55Test" summary="Sales By Staff Daily Report" ticketId="MAGETWO-28222">
+        <variation name="SaleByPaymentMethodDailyRP55TestVariation1">
+            <data name="shifts/from" xsi:type="string">m/d/Y -3 day</data>
+            <data name="shifts/to" xsi:type="string">m/d/Y</data>
+        </variation>
+    </testCase>
+</config>

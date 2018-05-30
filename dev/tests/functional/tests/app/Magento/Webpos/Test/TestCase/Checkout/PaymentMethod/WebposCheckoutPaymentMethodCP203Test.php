@@ -8,12 +8,28 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\PaymentMethod;
 
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-use Magento\Mtf\Fixture\FixtureFactory;
 
-class WebposCheckoutPaymentMethodCP203Test  extends Injectable
+/**
+ * Class WebposCheckoutPaymentMethodCP203Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\PaymentMethod
+ *
+ * Precondition:
+ * there is no payment method on webpos
+ * 1. Login Webpos as a staff
+ * 2. Add some products  to cart
+ * 3. Click on [Checkout] button"
+ *
+ * Steps:
+ * 1. Click on [Add payment] button
+ *
+ * Acceptance:
+ * Show message: 'No payment method is available"
+ *
+ */
+class WebposCheckoutPaymentMethodCP203Test extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex

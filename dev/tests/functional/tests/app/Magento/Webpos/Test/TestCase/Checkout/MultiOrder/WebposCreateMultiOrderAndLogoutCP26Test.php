@@ -8,16 +8,29 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\MultiOrder;
 
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Webpos\Test\Page\Adminhtml\StaffEdit;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
-use Magento\Webpos\Test\Page\Adminhtml\StaffEdit;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposCreateMultiOrderAndLogoutCP26Test
  * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\MultiOrder
+ *
+ * Precondition:
+ * "1. Login webpos as a staff
+ * 2. Create multi order
+ * 3. Logout webpos"
+ *
+ * Steps:
+ * 1. Login webpos by other staff
+ *
+ * Acceptance:
+ * Don't show multi order which created on step 2 of [Precondition and setup steps] column
+ *
  */
 class WebposCreateMultiOrderAndLogoutCP26Test extends Injectable
 {
@@ -25,6 +38,16 @@ class WebposCreateMultiOrderAndLogoutCP26Test extends Injectable
     const MVP = 'yes';
     const DOMAIN = 'CS';
     /* end tags */
+    /**
+     * AssertWebposCheckGUICustomerPriceCP54 Index page.
+     *
+     * @var WebposIndex $webposIndex
+     */
+    protected $webposIndex;
+    /**
+     * @var StaffEdit $staffEditPage
+     */
+    protected $staffEditPage;
     /**
      * AssertWebposCheckGUICustomerPriceCP54 Staff Index page.
      *
@@ -37,16 +60,6 @@ class WebposCreateMultiOrderAndLogoutCP26Test extends Injectable
      * @var StaffNews $staffsNew
      */
     private $staffsNew;
-    /**
-     * AssertWebposCheckGUICustomerPriceCP54 Index page.
-     *
-     * @var WebposIndex $webposIndex
-     */
-    protected $webposIndex;
-    /**
-     * @var StaffEdit $staffEditPage
-     */
-    protected $staffEditPage;
 
     /**
      * @param WebposIndex $webposIndex
@@ -99,15 +112,15 @@ class WebposCreateMultiOrderAndLogoutCP26Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
         $time = time();
         $timeAfter = $time + 90;
-        while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+        while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
             $time = time();
         }
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         //End Login webpos by the other staff
-        for ($i=1; $i<=2; $i++) {
+        for ($i = 1; $i <= 2; $i++) {
             self::assertFalse(
                 $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($i)->isVisible(),
-                'On the AssertWebposCheckGUICustomerPriceCP54 TaxClass, The multi order item '.$i.' were visible successfully.'
+                'On the AssertWebposCheckGUICustomerPriceCP54 TaxClass, The multi order item ' . $i . ' were visible successfully.'
             );
         }
         // Begin delete new Staff on magento backend

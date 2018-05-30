@@ -5,13 +5,34 @@
  * Date: 09/01/2018
  * Time: 09:45
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
+/**
+ * Class WebposSaveOrderNoteCP188Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add some products  to cart
+ * 3. Add order note successfully
+ * 4. Click on [Checkout] page"
+ *
+ * Steps:
+ * "1. Edit order note > Save
+ * 2. Place order successfully"
+ *
+ * Acceptance:
+ * Edited order note will be saved on the order detail
+ *
+ */
 class WebposSaveOrderNoteCP188Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
@@ -23,6 +44,9 @@ class WebposSaveOrderNoteCP188Test extends Injectable
         )->run();
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject
     (
         WebposIndex $webposIndex
@@ -31,9 +55,14 @@ class WebposSaveOrderNoteCP188Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @param $comment
+     * @param $commentEdit
+     * @return array
+     */
     public function test($products, $comment, $commentEdit)
     {
-
         //Create product
         $product = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
@@ -91,7 +120,7 @@ class WebposSaveOrderNoteCP188Test extends Injectable
 
         //Get orderId
         $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
-        $orderId= ltrim ($orderId,'#');
+        $orderId = ltrim($orderId, '#');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         return [
             'orderId' => $orderId

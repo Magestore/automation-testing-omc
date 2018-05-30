@@ -5,13 +5,29 @@
  * Date: 09/01/2018
  * Time: 09:28
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposPageActionMenuCP185Test
  * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add some products  to cart
+ * 3. Click on [Checkout] page"
+ *
+ * Steps:
+ * "1. Click on action menu ""..."" on the header page
+ * 2. Click on ""Add order note""
+ * 3. Click on ""Cancel"" button"
+ *
+ * Acceptance:
+ * Close "Order comment" popup
+ *
  */
 class WebposPageActionMenuCP185Test extends Injectable
 {

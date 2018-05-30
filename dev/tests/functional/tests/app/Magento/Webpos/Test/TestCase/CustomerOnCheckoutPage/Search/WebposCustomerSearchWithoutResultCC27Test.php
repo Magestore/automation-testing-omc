@@ -12,6 +12,22 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposCustomerSearchWithoutResultCC27Test
+ * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\Search
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Click on Add new customer icon"
+ *
+ * Steps:
+ * "1. Enter incorrect name/email/phone on Search box
+ * 2. Enter or click on Search icon"
+ *
+ * Acceptance:
+ * 2. No results in list
+ *
+ */
 class WebposCustomerSearchWithoutResultCC27Test extends Injectable
 {
     /**

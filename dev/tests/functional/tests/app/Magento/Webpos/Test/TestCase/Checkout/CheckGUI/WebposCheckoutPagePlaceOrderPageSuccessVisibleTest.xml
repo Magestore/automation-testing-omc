@@ -5,8 +5,10 @@
  * See COPYING.txt for license details.
  */
  -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CheckGUI\WebposCheckoutPagePlaceOrderPageSuccessVisibleTest" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CheckGUI\WebposCheckoutPagePlaceOrderPageSuccessVisibleTest"
+              summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
         <variation name="WebposCheckoutCartPageWhenAddProductVisibleTestVariation1_CP02">
             <data name="testCaseId" xsi:type="string">CP02</data>
             <data name="products" xsi:type="array">
@@ -17,7 +19,8 @@
             </data>
             <data name="labels" xsi:type="string">Subtotal,Total</data>
             <data name="defaultValue" xsi:type="string">0.00</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutCartPageWhenAddProductVisible" />
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutCartPageWhenAddProductVisible"/>
         </variation>
         <variation name="WebposCheckoutPageVisibleTestVariation1_CP03">
             <data name="staff/dataset" xsi:type="string">magentoadmin</data>
@@ -30,7 +33,7 @@
             </data>
             <data name="labels" xsi:type="string">Subtotal,Total</data>
             <data name="defaultValue" xsi:type="string">0.00</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPageVisible" />
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPageVisible"/>
         </variation>
         <variation name="WebposCheckoutPagePlaceOrderPageSuccessVisibleTestVariation1_CP04">
             <data name="staff/dataset" xsi:type="string">magentoadmin</data>
@@ -43,7 +46,8 @@
             </data>
             <data name="labels" xsi:type="string">Subtotal,Total</data>
             <data name="defaultValue" xsi:type="string">0.00</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible" />
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible"/>
         </variation>
     </testCase>
 </config>

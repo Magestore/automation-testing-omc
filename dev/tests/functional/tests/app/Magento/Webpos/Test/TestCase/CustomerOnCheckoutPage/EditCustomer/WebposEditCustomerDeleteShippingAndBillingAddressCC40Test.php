@@ -8,11 +8,31 @@
 
 namespace Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\EditCustomer;
 
-use Magento\Customer\Test\Fixture\Address;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposEditCustomerDeleteShippingAndBillingAddressCC40Test
+ * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\EditCustomer
+ *
+ * Precondition:
+ * "Precondition: The selected customer has at least one address on Shipping and billing list
+ * 1. Login Webpos as a staff
+ * 2. Click on Add new customer icon
+ * 3. Select a customer in list to meet the precondition"
+ *
+ * Steps:
+ * "1. Click to edit the selected customer
+ * 2. Click on Delete address icon to delete the shipping and  billing address
+ * 3. Save"
+ *
+ * Acceptance:
+ * "3.
+ * - Shipping/billing address will be remove from list
+ * - Store address will selected for shipping/billing address"
+ *
+ */
 class WebposEditCustomerDeleteShippingAndBillingAddressCC40Test extends Injectable
 {
     /**

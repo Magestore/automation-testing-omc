@@ -7,24 +7,31 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
- *  * Preconditions:
+ * Class WebposCustomSaleInputInvalidToPriceCP75EntityTest
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
+ *
+ * Preconditions:
  * 1. LoginTest webpos by a  staff
  * 2. Click on [Custom sale]
  *
- * Step:
+ * Steps:
  * 1. Input into [Product name]
  * 2. Input invalid value to [Price] field (Ex: abc)
  * 3. Click on [Add to cart] button
  *
+ * Acceptance:
+ * "Custom product will be added to cart with:
+ * - Product name: the name just enterd
+ * - Price: 0.00
+ * - Qty=1"
+ *
  */
-/**
- * Class WebposCustomSaleInputInvalidToPriceCP75EntityTest
- * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
- */
-class WebposCustomSaleInputInvalidToPriceCP75EntityTest extends  Injectable
+class WebposCustomSaleInputInvalidToPriceCP75EntityTest extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex

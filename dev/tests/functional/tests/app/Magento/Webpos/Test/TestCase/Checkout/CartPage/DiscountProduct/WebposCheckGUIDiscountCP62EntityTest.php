@@ -6,13 +6,18 @@
  * Date: 1/9/2018
  * Time: 8:54 AM
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct;
 
+use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
+
 /**
- *  * Preconditions:
+ * Class WebposCheckGUIDiscountCP62EntityTest
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DiscountProduct
+ *
+ * Preconditions:
  * 1. LoginTest webpos by a  staff
  * 2. Add a product to cart
  * 3. Click on the product on cart
@@ -20,10 +25,12 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
  * Step:
  * 1. Click on [Discount] tab
  *
- */
-/**
- * Class WebposCheckGUIDiscountCP62EntityTest
- * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DiscountProduct
+ * Acceptance:
+ * "Display [Amount] field:
+ * - Value default = 0
+ * - 2 options: $ and %
+ * - Focus on $ option"
+ *
  */
 class WebposCheckGUIDiscountCP62EntityTest extends Injectable
 {

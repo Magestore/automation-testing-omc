@@ -5,9 +5,33 @@
  * Date: 12/01/2018
  * Time: 16:25
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\ShippingMethod;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
+/**
+ * Class WebposShippingMethodCP198Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\ShippingMethod
+ *
+ * Precondition:
+ * There are some shipping methods on webpos
+ * 1. Login Webpos as a staff
+ * 2. Add some product to cart
+ * 3. Click on [Checkout] button"
+ *
+ * Steps:
+ * "1. On shipping section, select a shipping method that different from default shipping method
+ * 2. Back to cart page
+ * 3. Add more product to cart
+ * 4. Click on [Checkout] button
+ * 5. Check Shipping section"
+ *
+ * Acceptance:
+ * Still select shipping method that chosen on step 1 of [Steps] column
+ *
+ */
 class WebposShippingMethodCP198Test extends Injectable
 {
     /**
@@ -83,7 +107,7 @@ class WebposShippingMethodCP198Test extends Injectable
         sleep(1);
 
         return ['titleExpected' => 'Shipping: POS Shipping - Store Pickup',
-                'idSelected' => 'webpos_shipping_storepickup',
-                'panelExpected' => true];
+            'idSelected' => 'webpos_shipping_storepickup',
+            'panelExpected' => true];
     }
 }

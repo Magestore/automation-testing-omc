@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\ShippingMethod\WebposShippingMethodCP199Test" summary="Checkout with custom sale (shippable: off)" ticketId="WEBPOS-1">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\ShippingMethod\WebposShippingMethodCP199Test"
+              summary="Checkout with custom sale (shippable: off)" ticketId="WEBPOS-1">
         <variation name="WebposShippingMethodCP199TestVariation">
             <data name="productCustom/name" xsi:type="string">jfkasdljfasld;</data>
             <data name="productCustom/price" xsi:type="string">15</data>
             <data name="tagExpected" xsi:type="boolean">false</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Checkout\ShippingMethod\AssertCheckDisplayPanel" />
-            <constraint name="Magento\Webpos\Test\Constraint\Checkout\ShippingMethod\AssertCheckSection" />
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\ShippingMethod\AssertCheckDisplayPanel"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Checkout\ShippingMethod\AssertCheckSection"/>
         </variation>
     </testCase>
 </config>

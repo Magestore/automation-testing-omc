@@ -99,6 +99,10 @@ class WebposXreportZR033Test extends Injectable
             ['configData' => 'magestore_webpos_custome_payment']
         )->run();
 
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
+        )->run();
+
         $this->currencyIndex->open();
         $this->currencyIndex->getCurrencyRateForm()->clickImportButton();
         $this->currencyIndex->getCurrencyRateForm()->fillCurrencyUSDUAHRate();
@@ -154,8 +158,7 @@ class WebposXreportZR033Test extends Injectable
         }
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->click();
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutPaymentMethod()->getTitlePaymentMethod()->click();
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#add-more-payment');
@@ -232,10 +235,6 @@ class WebposXreportZR033Test extends Injectable
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'config_default_currency_rollback']
-        )->run();
-
-        $this->objectManager->create(
-            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
         )->run();
     }
 

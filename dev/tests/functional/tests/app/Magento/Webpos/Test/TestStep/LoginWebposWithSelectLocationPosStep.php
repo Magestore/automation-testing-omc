@@ -70,6 +70,7 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
                 !$this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible() &&
                 $time < $timeAfter) {
                 $time = time();
+                sleep(1);
             }
             if ($this->webposIndex->getWrapWarningForm()->isVisible() &&
                 $this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible()) {

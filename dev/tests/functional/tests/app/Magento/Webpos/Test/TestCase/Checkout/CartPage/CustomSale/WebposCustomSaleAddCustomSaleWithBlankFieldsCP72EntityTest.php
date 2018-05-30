@@ -7,23 +7,29 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-/**
- *  * Preconditions:
- * 1. LoginTest webpos by a  staff
- * 2. Click on [Custom sale]
- *
- * Step:
- * 1. Blank all fileds
- * 2. Click on [Add to cart] button
- *
- */
+
 /**
  * Class WebposCustomSaleAddCustomSaleWithBlankFieldsCP72EntityTest
  * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
+ *
+ * Preconditions:
+ * 1. LoginTest webpos by a  staff
+ * 2. Click on [Custom sale]
+ *
+ * Steps:
+ * 1. Blank all fileds
+ * 2. Click on [Add to cart] button
+ *
+ * Acceptance:
+ * "Custom product will be added to cart with:
+ * - name: Custom product
+ * - Price: 0.00
+ * - Qty=1"
+ *
  */
-
 class WebposCustomSaleAddCustomSaleWithBlankFieldsCP72EntityTest extends Injectable
 {
     /**

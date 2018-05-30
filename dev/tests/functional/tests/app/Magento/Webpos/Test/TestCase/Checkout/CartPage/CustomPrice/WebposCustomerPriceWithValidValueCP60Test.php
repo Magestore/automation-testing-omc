@@ -8,12 +8,30 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomPrice;
 
+use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
+
 /**
  * Class WebposCustomerPriceWithValidValueCP60Test
  * @package Magento\Webpos\Test\TestCase\CategoryRepository\CartPage\CustomPrice
+ *
+ * Precondition:
+ * "1. Login webpos by a  staff
+ * 2. Add a product to cart
+ * 3. Click on the product on cart"
+ *
+ * Steps:
+ * "1. Click on  [Custom price] tab
+ * 2. Click on % option
+ * 3. Input valid value to [Amount] field (type: %)
+ * (Ex: 10)"
+ *
+ * Acceptance:
+ * "Data on cart page is updated correspondingly:
+ * + New price = (Old price x Amount)/100
+ * + [Reg.] field is changeless"
+ *
  */
 class WebposCustomerPriceWithValidValueCP60Test extends Injectable
 {

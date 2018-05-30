@@ -9,25 +9,26 @@
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
- *  * Preconditions:
+ * Class WebposCustomSaleCustomProductPlaceOrderCP79EntityTest
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
+ *
+ * Preconditions:
  * 1. LoginTest webpos by a  staff
  * 2. Add custom product to cart
  * 3. Add some products  to cart
  * 4. Add discount or coupon code
  *
- * Step:
+ * Steps:
  * 1. Place Order
  *
+ * Acceptance:
+ * Order is checkout successfully and save in Order list
+ *
  */
-/**
- * Class WebposCustomSaleCustomProductPlaceOrderCP79EntityTest
- * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
- */
-
 class WebposCustomSaleCustomProductPlaceOrderCP79EntityTest extends Injectable
 {
     /**
@@ -38,6 +39,7 @@ class WebposCustomSaleCustomProductPlaceOrderCP79EntityTest extends Injectable
      * @var
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+
     /**
      * @param WebposIndex $webposIndex
      * @return void
