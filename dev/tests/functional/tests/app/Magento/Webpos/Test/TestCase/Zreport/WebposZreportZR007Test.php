@@ -69,6 +69,10 @@ class WebposZreportZR007Test extends Injectable
             ['configData' => 'create_session_before_working']
         )->run();
 
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
+        )->run();
+
         /**@var Location $location */
         $location = $fixtureFactory->createByCode('location', ['dataset' => 'default']);
         $location->persist();

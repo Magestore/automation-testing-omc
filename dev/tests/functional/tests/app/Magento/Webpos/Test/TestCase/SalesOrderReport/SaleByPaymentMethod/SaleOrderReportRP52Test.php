@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod;
 
-
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\SalesByPayment;
 use Magento\Webpos\Test\Page\WebposIndex;

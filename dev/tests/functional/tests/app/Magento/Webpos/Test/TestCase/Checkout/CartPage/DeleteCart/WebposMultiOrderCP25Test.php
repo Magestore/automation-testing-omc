@@ -12,6 +12,22 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposMultiOrderCP25Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\DeleteCart
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ * 2. Create multi order
+ * 3. Logout webpos
+ *
+ * Steps:
+ * 1. Login webpos by the same staff on step 1 of [Precondition and setup steps] column
+ *
+ * Acceptance:
+ * Still show multi order which created on step 2 of [Precondition and setup steps] column
+ *
+ */
 class WebposMultiOrderCP25Test extends Injectable
 {
     /**

@@ -5,10 +5,32 @@
  * Date: 24/01/2018
  * Time: 22:21
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposHoldOrderCP173Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add a product to cart
+ * 3. Hold order successfully"
+ *
+ * Steps:
+ * "1. Go to [On-hold orders] menu
+ * 2. Click on [Checkout] button on that detail order
+ * 3. Back to cart page
+ * 4. Click to Delete icon to clear cart"
+ *
+ * Acceptance:
+ * "1. Cart page backs to default
+ * 2. That hold order will be removed from On-hold orders list"
+ *
+ */
 class WebposHoldOrderCP173Test extends Injectable
 {
     /**

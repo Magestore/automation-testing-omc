@@ -7,24 +7,26 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale;
+
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-use Magento\Customer\Test\Fixture\Customer;
-use Magento\Mtf\Fixture\FixtureFactory;
-/**
- *  * Preconditions:
- * 1. LoginTest webpos by a  staff
- *
- * Step:
- * 1. Add custom product to cart with Tax: Taxable goods
- * 2. Add a customer who satify tax
- */
+
 /**
  * Class WebposCustomSaleTaxableGoodCP84EntityTest
  * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
+ *
+ * Preconditions:
+ * 1. LoginTest webpos by a  staff
+ *
+ * Steps:
+ * 1. Add custom product to cart with Tax: Taxable goods
+ * 2. Add a customer who satify tax
+ *
+ * Acceptance:
+ * Customer product will be added to cart with correct tax
+ *
  */
-
 class WebposCustomSaleTaxableGoodCP84EntityTest extends Injectable
 {
     /**

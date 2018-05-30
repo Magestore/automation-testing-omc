@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale\WebposCustomSaleInputInvalidToPriceCP75EntityTest" summary="Checkout - Cart Page - Webpos Check GUI CustomSale CP75" ticketId="WEBPOS-1">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase
+            name="Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale\WebposCustomSaleInputInvalidToPriceCP75EntityTest"
+            summary="Checkout - Cart Page - Webpos Check GUI CustomSale CP75" ticketId="WEBPOS-1">
         <variation name="Webpos_CustomSale_InputInvalidToPrice_CP75_Test1_CP75">
             <data name="productName" xsi:type="string">Custom Product</data>
             <data name="price" xsi:type="string">abc</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomSale\AssertWebposCustomSaleInputInvalidToPriceCP75"/>
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomSale\AssertWebposCustomSaleInputInvalidToPriceCP75"/>
         </variation>
     </testCase>
 </config>

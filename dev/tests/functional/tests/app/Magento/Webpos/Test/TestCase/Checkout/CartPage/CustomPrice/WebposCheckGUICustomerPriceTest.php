@@ -8,12 +8,28 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomPrice;
 
+use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
+
 /**
  * Class WebposCheckGUICustomerPriceTest
  * @package Magento\Webpos\Test\TestCase\CategoryRepository\CartPage\CustomPrice
+ *
+ * Precondition:
+ * "1. Login webpos by a  staff
+ * 2. Add a product to cart
+ * 3. Click on the product on cart"
+ *
+ * Steps:
+ * "1. Click on [Custom price] tab
+ * 2. Input 0 to [Amount] field"
+ *
+ * Acceptance:
+ * "Data on cart page is updated correspondingly
+ * + New price product = 0
+ * + [Reg.] field is changeless"
+ *
  */
 class WebposCheckGUICustomerPriceTest extends Injectable
 {
