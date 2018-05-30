@@ -15,6 +15,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposXreportZR032Test
+ * @package Magento\Webpos\Test\TestCase\Zreport
  *
  * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff who has open and close session permission
@@ -32,7 +33,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * - Cash Refund = Refund amount by cashin (R amount)
  * - Refund =Total Refunded amount by all methods on step 4 of [Precondition and setup steps]  (R+N amount)
  *
- * @package Magento\Webpos\Test\TestCase\Zreport
  */
 class WebposXreportZR032Test extends Injectable
 {

@@ -15,6 +15,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposZreportZR010Test
+ * @package Magento\Webpos\Test\TestCase\Zreport
  *
  * Precondition: There are some POSs and setting [Need to create session before working] = "Yes" on the test site
  * 1. LoginTest webpos by a staff who has open and close session permission
@@ -53,7 +54,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * - cashforpos = [Cash sales]
  * And show all of the payment methods with their total that placed on this session
  *
- * @package Magento\Webpos\Test\TestCase\Zreport
  */
 class WebposZreportZR010Test extends Injectable
 {

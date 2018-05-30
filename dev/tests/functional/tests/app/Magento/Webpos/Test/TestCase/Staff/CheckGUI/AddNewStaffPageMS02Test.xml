@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Staff\CheckGUI\AddNewStaffPageMS02Test" summary="Check manage staff page" ticketId="MAGETWO-1234">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\CheckGUI\AddNewStaffPageMS02Test"
+              summary="Check manage staff page" ticketId="MAGETWO-1234">
         <variation name="AddNewStaffPageMS02TestVariation">
             <data name="pageTitle" xsi:type="string">New Staff</data>
             <data name="idButtons" xsi:type="string">back, reset, saveandcontinue, save</data>
-            <data name="idFields" xsi:type="string">page_username, page_password, page_password_confirmation, page_display_name, page_email, page_pin, page_customer_group, page_location_id, page_role_id, page_status, page_pos_ids</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertGUIButtonAction" />
-            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertGUIContainFields" />
+            <data name="idFields" xsi:type="string">page_username, page_password, page_password_confirmation,
+                page_display_name, page_email, page_pin, page_customer_group, page_location_id, page_role_id,
+                page_status, page_pos_ids
+            </data>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertGUIButtonAction"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertGUIContainFields"/>
         </variation>
     </testCase>
 </config>

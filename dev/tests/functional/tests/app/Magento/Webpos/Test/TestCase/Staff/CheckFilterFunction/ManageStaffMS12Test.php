@@ -21,7 +21,6 @@ use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
  * Steps:
  * "1. Click on [Filters] button
  * 2. Click on [Apply Filters] button"
-
  * Acceptance:
  * - Close Filter form
  * - The grid shows all records "
@@ -38,11 +37,13 @@ class ManageStaffMS12Test extends Injectable
 
     public function __inject(
         StaffIndex $staffIndex
-    ){
+    )
+    {
         $this->staffIndex = $staffIndex;
     }
 
-    public function test(){
+    public function test()
+    {
         $this->staffIndex->open();
         $this->staffIndex->getStaffsGrid()->waitLoader();
         $this->staffIndex->getStaffsGrid()->getFilterButton()->click();

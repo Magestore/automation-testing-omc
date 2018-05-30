@@ -20,42 +20,56 @@ class WebposOpenSessionStep implements TestStepInterface
 {
     /**
      * Webpos Index page.
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var bool
+     * @var bool $openingAmountStatus
      */
     protected $openingAmountStatus;
+
     /**
-     * @var Denomination
+     * @var Denomination $denomination
      */
     protected $denomination;
+
+    /**
+     * @var int $denominationNumberCoin
+     */
     protected $denominationNumberCoin;
 
     /**
-     * @var bool
+     * @var bool $putMoneyInStatus
      */
     protected $putMoneyInStatus;
+
+    /**
+     * @var int $putMoneyInValue
+     */
     protected $putMoneyInValue;
 
     /**
-     * @var bool
+     * @var bool $takeMoneyOutStatus
      */
     protected $takeMoneyOutStatus;
+
+    /**
+     * @var int $takeMoneyOutValue
+     */
     protected $takeMoneyOutValue;
 
     public function __construct(
         WebposIndex $webposIndex,
         $openingAmountStatus = false,
         Denomination $denomination = null,
-        $denominationNumberCoin = null,
+        $denominationNumberCoin = 0,
         $putMoneyInStatus = false,
         $putMoneyInValue = 0,
         $takeMoneyOutStatus = false,
         $takeMoneyOutValue = 0
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->openingAmountStatus = $openingAmountStatus;
         $this->denomination = $denomination;
@@ -79,8 +93,7 @@ class WebposOpenSessionStep implements TestStepInterface
             $this->webposIndex->getOpenSessionPopup()->waitLoader();
             $this->webposIndex->getOpenSessionPopup()->waitUntilForOpenSessionButtonVisible();
 
-            if ($this->openingAmountStatus)
-            {
+            if ($this->openingAmountStatus) {
                 $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($this->denomination->getDenominationName());
                 $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue($this->denominationNumberCoin);
             }
@@ -89,8 +102,7 @@ class WebposOpenSessionStep implements TestStepInterface
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
             $this->webposIndex->getSessionShift()->waitBtnCloseSessionVisible();
 
-            if($this->putMoneyInStatus)
-            {
+            if ($this->putMoneyInStatus) {
                 $this->webposIndex->getSessionShift()->getPutMoneyInButton()->click();
                 $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-make-adjustment"]');
                 $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->click();
@@ -99,16 +111,14 @@ class WebposOpenSessionStep implements TestStepInterface
                 $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-make-adjustment"]');
             }
 
-            if($this->takeMoneyOutStatus)
-            {
+            if ($this->takeMoneyOutStatus) {
                 $this->webposIndex->getSessionShift()->getTakeMoneyOutButton()->click();
                 $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-make-adjustment"]');
                 $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->click();
                 $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue($this->takeMoneyOutValue);
                 $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();
-                if($this->webposIndex->getSessionMakeAdjustmentPopup()->isVisible() &&
-                    $this->webposIndex->getSessionMakeAdjustmentPopup()->getErrorMessage()->isVisible())
-                {
+                if ($this->webposIndex->getSessionMakeAdjustmentPopup()->isVisible() &&
+                    $this->webposIndex->getSessionMakeAdjustmentPopup()->getErrorMessage()->isVisible()) {
                     $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue('0');
                     $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->click();
                     $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue($this->takeMoneyOutValue);

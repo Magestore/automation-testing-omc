@@ -12,16 +12,20 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\Adminhtml\WebposRoleIndex;
 use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
+
 /**
  * Class CheckPositionOfLockRegisterPermissionForPOSStaffsLR20Test
  * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
+ *
  * Precondition and setup steps
  *   Logged in backend
  *   From menu on the left side, select Sales menu , under Web POS > select Manage Role
+ *
  * Steps
  *   1. Add a new role or edit existed role
  *   2. Open Permission tab
  *   3. Observe role resources is displayed on
+ *
  * Acceptance Criteria
  *   2. Show role and sub-roles (sources tree type)
  *      Parent Role: Lock Register

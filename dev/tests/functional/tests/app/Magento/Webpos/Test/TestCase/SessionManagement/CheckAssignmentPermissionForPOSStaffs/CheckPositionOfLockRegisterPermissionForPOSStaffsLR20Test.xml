@@ -5,14 +5,18 @@
  * See COPYING.txt for license details.
  */
  -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs\CheckPositionOfLockRegisterPermissionForPOSStaffsLR20Test" summary="Create Admin User Role" ticketId="MAGETWO-23413">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase
+            name="Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs\CheckPositionOfLockRegisterPermissionForPOSStaffsLR20Test"
+            summary="Create Admin User Role" ticketId="MAGETWO-23413">
         <variation name="CheckPositionOfLockRegisterPermissionForPOSStaffsLR20TestVariation1">
             <data name="webposRole/data/display_name" xsi:type="string">Role %isolation%</data>
             <data name="webposRole/data/maximum_discount_percent" xsi:type="string">90</data>
             <data name="webposRole/data/description" xsi:type="string">Description %isolation%</data>
 
-            <constraint name="Magento\Webpos\Test\Constraint\SessionManagement\CheckAssignmentPermissionForPOSStaffs\AssertCheckPositionOfLockRegisterPermissionForPOSStaffsLR20" />
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\SessionManagement\CheckAssignmentPermissionForPOSStaffs\AssertCheckPositionOfLockRegisterPermissionForPOSStaffsLR20"/>
         </variation>
     </testCase>
 </config>

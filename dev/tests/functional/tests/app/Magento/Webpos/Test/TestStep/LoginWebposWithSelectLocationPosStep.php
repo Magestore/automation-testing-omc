@@ -8,10 +8,10 @@
 
 namespace Magento\Webpos\Test\TestStep;
 
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\TestStep\TestStepInterface;
 use Magento\Mtf\Config\DataInterface;
+use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestStep\TestStepInterface;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class LoginWebposWithSelectLocationPosStep
@@ -92,6 +92,6 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
             'username' => $username,
             'password' => $password
         ];
-        return $this->fixtureFactory->createByCode('staff' , ['data' => $data]);
+        return $this->fixtureFactory->createByCode('staff', ['data' => $data]);
     }
 }

@@ -20,13 +20,15 @@ class WebposSetClosingBalanceCloseSessionStep implements TestStepInterface
 {
     /**
      * Webpos Index page.
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
+
     /**
-     * @var Denomination
+     * @var Denomination $denomination
      */
     protected $denomination;
+
     protected $denominationNumberCoin;
 
     public function __construct(
@@ -52,8 +54,7 @@ class WebposSetClosingBalanceCloseSessionStep implements TestStepInterface
         if ($this->denomination != null) {
             $this->webposIndex->getSessionSetClosingBalancePopup()->setCoinBillValue($this->denomination->getDenominationName());
         }
-        if($this->denominationNumberCoin)
-        {
+        if ($this->denominationNumberCoin) {
             $this->webposIndex->getSessionSetClosingBalancePopup()->getColumnNumberOfCoinsAtRow(2)->setValue($this->denominationNumberCoin);
         }
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();

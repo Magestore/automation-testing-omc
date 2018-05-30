@@ -10,11 +10,12 @@ namespace Magento\Webpos\Test\TestCase\Staff\CheckSortColumnInGrid;
 
 use Magento\Ui\Test\TestCase\GridSortingTest;
 use Magento\Webpos\Test\Fixture\Location;
-use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\Pos;
+use Magento\Webpos\Test\Fixture\Staff;
 
 /**
- * Class ManageStaffSortByColumnTest\
+ * Class ManageStaffSortByColumnTest
+ * @package Magento\Webpos\Test\TestCase\Staff\CheckSortColumnInGrid
  *
  * Precondition: Exist at least 2 records on the grid
  * 1. Go to backend > Sales > Manage Staffs
@@ -25,8 +26,6 @@ use Magento\Webpos\Test\Fixture\Pos;
  * Acceptance:
  * 1. The records on grid will be sorted in increasing ID
  * 2. The records on grid will be sorted in descending ID"
- *
- * @package Magento\Webpos\Test\TestCase\Staff\CheckSortColumnInGrid
  */
 class ManageStaffSortByColumnTest extends GridSortingTest
 {
@@ -45,8 +44,7 @@ class ManageStaffSortByColumnTest extends GridSortingTest
         $testCaseId = null
     )
     {
-        if($testCaseId && $testCaseId === "MS03")
-        {
+        if ($testCaseId && $testCaseId === "MS03") {
             if ($fixtureName && $fixtureDataSet) {
                 //Create role and staff for role
                 /**@var Location $location */

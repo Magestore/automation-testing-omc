@@ -16,6 +16,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposXreportZR033Test
+ * @package Magento\Webpos\Test\TestCase\Zreport
  * Precondition:
  * - There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * - Setup multi currencies
@@ -37,7 +38,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * Acceptance:
  * 2. All of fields on X-report will be show exactly the symbol and converting rate of the currency that selected on step 2 of [Precondition and setup steps]
  *
- * @package Magento\Webpos\Test\TestCase\Zreport
  */
 class WebposXreportZR033Test extends Injectable
 {

@@ -15,6 +15,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposZreportZR016Test
+ * @package Magento\Webpos\TestTestCase\Zreport
  *
  * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff who has open and close session permission
@@ -30,7 +31,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * Acceptance:
  * 3. Refund = Refunded amount on step 4 of [Precondition and setup steps]
  *
- * @package Magento\Webpos\Test\TestCase\Zreport
  */
 class WebposZreportZR016Test extends Injectable
 {

@@ -18,6 +18,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposZreportZR004Test
+ * @package Magento\Webpos\Test\TestCase\Zreport
  *
  * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff who has open and close session permission (ex: Staff A)
@@ -35,7 +36,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * Acceptance:
  * 3. [Staff] field will show name of the current staff (Staff B)
  *
- * @package Magento\Webpos\Test\TestCase\Zreport
  */
 class WebposZreportZR004Test extends Injectable
 {

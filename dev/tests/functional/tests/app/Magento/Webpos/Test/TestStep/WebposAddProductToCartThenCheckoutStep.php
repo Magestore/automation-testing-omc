@@ -8,29 +8,41 @@
 
 namespace Magento\Webpos\Test\TestStep;
 
-
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestStep\TestStepInterface;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposAddProductToCartThenCheckoutStep
+ * @package Magento\Webpos\Test\TestStep
+ */
 class WebposAddProductToCartThenCheckoutStep implements TestStepInterface
 {
     /**
      * Webpos Index page.
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     protected $products;
 
+    /**
+     * @var string $paymentMethod
+     */
     protected $paymentMethod;
 
+    /**
+     * @var bool $setPaymentAmount
+     */
     protected $setPaymentAmount;
 
+    /**
+     * @var string $paymentAmount
+     */
     protected $paymentAmount;
 
     public function __construct(
@@ -86,9 +98,8 @@ class WebposAddProductToCartThenCheckoutStep implements TestStepInterface
                 $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         }
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        if($this->setPaymentAmount &&
-            $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->isVisible())
-        {
+        if ($this->setPaymentAmount &&
+            $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->isVisible()) {
             $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->click();
             $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($this->paymentAmount);
             $this->webposIndex->getCheckoutPaymentMethod()->getTitlePaymentMethod()->click();

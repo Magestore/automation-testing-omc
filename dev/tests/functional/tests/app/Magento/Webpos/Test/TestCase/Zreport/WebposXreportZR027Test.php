@@ -10,11 +10,11 @@ namespace Magento\Webpos\Test\TestCase\Zreport;
 
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposXreportZR027Test
+ * @package Magento\Webpos\Test\TestCase\Zreport
  *
  * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff who has open and close session permission
@@ -44,7 +44,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * - Cash in= [Cash sales]
  * And show all of the payment methods with their total that placed on this session"
  *
- * @package Magento\Webpos\Test\TestCase\Zreport
  */
 class WebposXreportZR027Test extends Injectable
 {
