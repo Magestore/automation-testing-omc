@@ -10,6 +10,7 @@ namespace Magento\Webpos\Test\TestCase\CheckVisibleForm;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\LocationIndex;
+
 /**
  * Class MappingLocationsWarehousesTest
  * @package Magento\Webpos\Test\TestCase\CheckVisibleForm
@@ -19,7 +20,7 @@ class MappingLocationsWarehousesTest extends Injectable
     /**
      * Gift Template Grid Page
      *
-     * @var LocationIndex
+     * @var LocationIndex $locationIndex
      */
     protected $locationIndex;
 
@@ -31,7 +32,8 @@ class MappingLocationsWarehousesTest extends Injectable
      */
     public function __inject(
         LocationIndex $locationIndex
-    ) {
+    )
+    {
         $this->locationIndex = $locationIndex;
     }
 

@@ -5,11 +5,13 @@
  * See COPYING.txt for license details.
  */
  -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\CheckVisibleForm\MappingLocationsWarehousesTest" summary="Check Is Visible Mapping Locations - Warehouses Test" ticketId="MAGETWO-34874">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\CheckVisibleForm\MappingLocationsWarehousesTest"
+              summary="Check Is Visible Mapping Locations - Warehouses Test" ticketId="MAGETWO-34874">
         <variation name="MappingLocationsWarehouses-MappingLocation-Warehouses-Test1">
             <data name="pageTitle" xsi:type="string">Mapping Locations - Warehouses</data>
-            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable"/>
         </variation>
     </testCase>
 </config>

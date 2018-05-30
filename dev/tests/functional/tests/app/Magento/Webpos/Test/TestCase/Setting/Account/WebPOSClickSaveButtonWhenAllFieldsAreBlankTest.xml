@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Setting\Account\WebPOSClickSaveButtonWhenAllFieldsAreBlankTest" summary="Customer On Checkout Page - Check GUI test" ticketId="WEBPOS-1">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Setting\Account\WebPOSClickSaveButtonWhenAllFieldsAreBlankTest"
+              summary="Customer On Checkout Page - Check GUI test" ticketId="WEBPOS-1">
         <variation name="WebPOSClickSaveButtonWhenAllFieldsAreBlankTestVariation_SET02">
             <data name="displayNameMessage" xsi:type="string">This is a required field.</data>
             <data name="passwordMessage" xsi:type="string">This is a required field.</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Setting\Account\AssertWebPOSUpdateStaffInformationFailWhenAllFieldsAreBlank"/>
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\Setting\Account\AssertWebPOSUpdateStaffInformationFailWhenAllFieldsAreBlank"/>
         </variation>
     </testCase>
 </config>

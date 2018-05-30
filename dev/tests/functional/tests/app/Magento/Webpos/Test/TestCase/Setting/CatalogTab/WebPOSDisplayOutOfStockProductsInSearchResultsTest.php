@@ -10,6 +10,7 @@ namespace Magento\Webpos\Test\TestCase\Setting\CatalogTab;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebPOSDisplayOutOfStockProductsInSearchResultsTest
  * @package Magento\Webpos\Test\TestCase\Setting\CatalogTab
@@ -26,7 +27,9 @@ class WebPOSDisplayOutOfStockProductsInSearchResultsTest extends Injectable
     protected $option;
     protected $testCaseID;
 
-
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(
         WebposIndex $webposIndex
     )
@@ -34,6 +37,13 @@ class WebPOSDisplayOutOfStockProductsInSearchResultsTest extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $productName
+     * @param $menuItem
+     * @param $option
+     * @param $successMessage
+     * @param $testCaseID
+     */
     public function test($productName, $menuItem, $option, $successMessage, $testCaseID)
     {
         // LoginTest webpos

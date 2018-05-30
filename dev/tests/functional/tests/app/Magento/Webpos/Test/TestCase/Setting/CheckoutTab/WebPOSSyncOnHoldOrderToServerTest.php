@@ -9,8 +9,9 @@
 namespace Magento\Webpos\Test\TestCase\Setting\CheckoutTab;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Sales\Test\Page\Adminhtml\OrderIndex;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebPOSSyncOnHoldOrderToServerTest
  * @package Magento\Webpos\Test\TestCase\Setting\CheckoutTab
@@ -18,13 +19,14 @@ use Magento\Sales\Test\Page\Adminhtml\OrderIndex;
 class WebPOSSyncOnHoldOrderToServerTest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
+
     protected $testCaseId;
 
     /**
-     * @var OrderIndex
+     * @var OrderIndex $orderIndex
      */
     protected $orderIndex;
 
@@ -32,6 +34,10 @@ class WebPOSSyncOnHoldOrderToServerTest extends Injectable
     protected $optionNo;
     protected $successMessage;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param OrderIndex $orderIndex
+     */
     public function __inject(
         WebposIndex $webposIndex,
         OrderIndex $orderIndex
@@ -41,6 +47,14 @@ class WebPOSSyncOnHoldOrderToServerTest extends Injectable
         $this->orderIndex = $orderIndex;
     }
 
+    /**
+     * @param $menuItem
+     * @param $optionYes
+     * @param $successMessage
+     * @param $productName
+     * @param $optionNo
+     * @param $testCaseID
+     */
     public function test($menuItem, $optionYes, $successMessage, $productName, $optionNo, $testCaseID)
     {
         //set Value for tearDown function

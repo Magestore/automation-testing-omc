@@ -11,18 +11,31 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrdersHistoryCheckConfirmationPopupCloseOH34Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip
+ */
 class WebposOrdersHistoryCheckConfirmationPopupCloseOH34Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
-    public function __inject(WebposIndex $webposIndex)
+    /**
+     * @param WebposIndex $webposIndex
+     */
+    public function __inject (
+        WebposIndex $webposIndex
+    )
     {
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test($products)
     {
         // Create products

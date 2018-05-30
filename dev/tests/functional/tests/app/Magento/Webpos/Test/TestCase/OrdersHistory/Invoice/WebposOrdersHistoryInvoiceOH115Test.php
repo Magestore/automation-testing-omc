@@ -9,8 +9,8 @@
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\Invoice;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderSuccess;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposOrdersHistoryInvoiceOH115Test
@@ -19,12 +19,12 @@ use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderSuccess;
 class WebposOrdersHistoryInvoiceOH115Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertOrderSuccess
+     * @var AssertOrderSuccess $assertOrderSuccess
      */
     protected $assertOrderSuccess;
 
@@ -40,7 +40,6 @@ class WebposOrdersHistoryInvoiceOH115Test extends Injectable
         $this->webposIndex = $webposIndex;
         $this->assertOrderSuccess = $assertOrderSuccess;
     }
-
 
     /**
      * @param $products
@@ -86,7 +85,7 @@ class WebposOrdersHistoryInvoiceOH115Test extends Injectable
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
-		$orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
+        $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
         // Assert order success
         $this->assertOrderSuccess->processAssert($this->webposIndex, $orderId);
         sleep(1);

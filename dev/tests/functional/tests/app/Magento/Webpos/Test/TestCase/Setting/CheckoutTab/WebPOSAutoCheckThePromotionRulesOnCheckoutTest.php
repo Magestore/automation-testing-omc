@@ -8,13 +8,14 @@
 
 namespace Magento\Webpos\Test\TestCase\Setting\CheckoutTab;
 
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Sales\Test\Page\Adminhtml\OrderIndex;
+use Magento\CatalogRule\Test\Fixture\CatalogRule;
 use Magento\CatalogRule\Test\Page\Adminhtml\CatalogRuleIndex;
 use Magento\CatalogRule\Test\Page\Adminhtml\CatalogRuleNew;
-use Magento\CatalogRule\Test\Fixture\CatalogRule;
 use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
+use Magento\Sales\Test\Page\Adminhtml\OrderIndex;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebPOSAutoCheckThePromotionRulesOnCheckoutTest
  * @package Magento\Webpos\Test\TestCase\Setting\CheckoutTab
@@ -22,22 +23,22 @@ use Magento\Mtf\Fixture\FixtureFactory;
 class WebPOSAutoCheckThePromotionRulesOnCheckoutTest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var OrderIndex
+     * @var OrderIndex $orderIndex
      */
     protected $orderIndex;
 
     /**
-     * @var CatalogRuleIndex
+     * @var CatalogRuleIndex $catalogRuleIndex
      */
     protected $catalogRuleIndex;
 
     /**
-     * @var CatalogRuleNew
+     * @var CatalogRuleNew $catalogRuleNew
      */
     protected $catalogRuleNew;
 
@@ -46,6 +47,12 @@ class WebPOSAutoCheckThePromotionRulesOnCheckoutTest extends Injectable
     protected $successMessage;
     protected $catalogPriceRule;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param OrderIndex $orderIndex
+     * @param CatalogRuleIndex $catalogRuleIndex
+     * @param CatalogRuleNew $catalogRuleNew
+     */
     public function __inject(
         WebposIndex $webposIndex,
         OrderIndex $orderIndex,
@@ -59,6 +66,15 @@ class WebPOSAutoCheckThePromotionRulesOnCheckoutTest extends Injectable
         $this->catalogRuleNew = $catalogRuleNew;
     }
 
+    /**
+     * @param $menuItem
+     * @param $optionYes
+     * @param $optionNo
+     * @param $successMessage
+     * @param $products
+     * @param CatalogRule $catalogPriceRule
+     * @param FixtureFactory $fixtureFactory
+     */
     public function test(
         $menuItem,
         $optionYes,
@@ -67,7 +83,8 @@ class WebPOSAutoCheckThePromotionRulesOnCheckoutTest extends Injectable
         $products,
         CatalogRule $catalogPriceRule,
         FixtureFactory $fixtureFactory
-    ) {
+    )
+    {
         //set Value for tearDown function
         $this->menuItem = $menuItem;
         $this->optionNo = $optionNo;
@@ -107,7 +124,7 @@ class WebPOSAutoCheckThePromotionRulesOnCheckoutTest extends Injectable
             $this->webposIndex->getCheckoutProductList()->search($products[$i]->getSku());
             $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
             $this->webposIndex->getMsWebpos()->waitCartLoader();
-            $prices[$i] = explode("$",$this->webposIndex->getCheckoutCartItems()->getValueItemPrice($products[$i]->getName()));
+            $prices[$i] = explode("$", $this->webposIndex->getCheckoutCartItems()->getValueItemPrice($products[$i]->getName()));
             $originalPrices[$i] = explode("Reg. $", $this->webposIndex->getCheckoutCartItems()->getCartOriginalItemPrice($products[$i]->getName())->getText());
             $i++;
             sleep(2);
@@ -117,12 +134,12 @@ class WebPOSAutoCheckThePromotionRulesOnCheckoutTest extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Assert that WebPOS Apply the catalog price rule successfully.
         $number = count($prices);
-        for ($j=0;$j<$number;$j++) {
+        for ($j = 0; $j < $number; $j++) {
             $prices[$j] = (float)$prices[$j][0];
             $originalPrices[$j] = (float)$originalPrices[$j][1];
             self::assertEquals(
                 $originalPrices[$j],
-                2*$prices[$j],
+                2 * $prices[$j],
                 'abc'
             );
         }
@@ -131,7 +148,6 @@ class WebPOSAutoCheckThePromotionRulesOnCheckoutTest extends Injectable
 
     public function tearDown()
     {
-
         $filter = [
             'name' => $this->catalogPriceRule,
         ];

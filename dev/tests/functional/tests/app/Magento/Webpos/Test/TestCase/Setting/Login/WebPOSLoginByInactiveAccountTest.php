@@ -8,14 +8,14 @@
 
 namespace Magento\Webpos\Test\TestCase\Setting\Login;
 
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Config\Test\Fixture\ConfigData;
+use Magento\Webpos\Test\Page\Adminhtml\StaffEdit;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
-use Magento\Webpos\Test\Page\Adminhtml\StaffEdit;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebPOSLoginByInactiveAccountTest
  * @package Magento\Webpos\Test\TestCase\Setting\LoginTest
@@ -26,35 +26,38 @@ class WebPOSLoginByInactiveAccountTest extends Injectable
     const MVP = 'yes';
     const DOMAIN = 'CS';
     /* end tags */
-    /**
-     * AssertWebposCheckGUICustomerPriceCP54 Staff Index page.
-     *
-     * @var StaffIndex
-     */
-    private $staffsIndex;
-    /**
-     * New Staff Group page.
-     *
-     * @var StaffNews
-     */
-    private $staffsNew;
+
     /**
      * AssertWebposCheckGUICustomerPriceCP54 Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
+
     /**
-     * @var StaffEdit
+     * @var StaffEdit $staffEditPage
      */
     protected $staffEditPage;
 
     /**
+     * AssertWebposCheckGUICustomerPriceCP54 Staff Index page.
+     *
+     * @var StaffIndex $staffsIndex
+     */
+    private $staffsIndex;
+
+    /**
+     * New Staff Group page.
+     *
+     * @var StaffNews $staffsNew
+     */
+    private $staffsNew;
+
+    /**
      * @param WebposIndex $webposIndex
-     * @param FixtureFactory $fixtureFactory
      * @param StaffIndex $staffsIndex
      * @param StaffNews $staffsNew
-     * @return void
+     * @param StaffEdit $staffEditPage
      */
     public function __inject(
         WebposIndex $webposIndex,
@@ -72,11 +75,13 @@ class WebPOSLoginByInactiveAccountTest extends Injectable
     /**
      * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
      *
-     * @param Staff $staff
-     * @param Staff ConfigData
-     * @return void
+     * @param Staff $createStaff
+     * @param $errorMessage
      */
-    public function test(Staff $createStaff, $errorMessage)
+    public function test(
+        Staff $createStaff,
+        $errorMessage
+    )
     {
         // Begin create new Staff on magento backend
         $this->objectManager->create(

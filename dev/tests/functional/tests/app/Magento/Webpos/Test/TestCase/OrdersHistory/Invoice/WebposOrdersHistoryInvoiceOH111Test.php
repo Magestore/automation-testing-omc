@@ -8,10 +8,11 @@
 
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\Invoice;
 
-use Magento\Webpos\Test\Page\WebposIndex;
+use Magento\Config\Test\Fixture\ConfigData;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistoryInvoice;
-use Magento\Config\Test\Fixture\ConfigData;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOrdersHistoryInvoiceOH111Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
@@ -19,12 +20,12 @@ use Magento\Config\Test\Fixture\ConfigData;
 class WebposOrdersHistoryInvoiceOH111Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertWebposOrdersHistoryInvoice
+     * @var AssertWebposOrdersHistoryInvoice $assertWebposOrdersHistoryInvoice
      */
     protected $assertWebposOrdersHistoryInvoice;
 
@@ -46,7 +47,8 @@ class WebposOrdersHistoryInvoiceOH111Test extends Injectable
      * @param ConfigData $dataConfig
      * @return array
      */
-    public function test ($products, $dataConfig) {
+    public function test($products, $dataConfig)
+    {
         // Create products
         $products = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
@@ -105,13 +107,13 @@ class WebposOrdersHistoryInvoiceOH111Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
         if ($this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->isVisible()) {
             $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->click();
-            $paymentPrice = (float) substr( $this->webposIndex->getOrderHistoryPayment()->getPaymentPriceInput()->getValue(), 1);
+            $paymentPrice = (float)substr($this->webposIndex->getOrderHistoryPayment()->getPaymentPriceInput()->getValue(), 1);
             $this->webposIndex->getOrderHistoryPayment()->getPaymentPriceInput()->setValue($paymentPrice / 2);
             $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
             $this->webposIndex->getMsWebpos()->waitForModalPopup();
             $this->webposIndex->getModal()->getOkButton()->click();
             sleep(1);
-            $totalPaid = (float) substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
+            $totalPaid = (float)substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
 
             // Click Button Invoice
             $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();

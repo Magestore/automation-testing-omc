@@ -5,20 +5,35 @@
  * Date: 26/01/2018
  * Time: 14:00
  */
+
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOnHoldOrderONH15Test
  * @package Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Click to add multi order
+ * 3. Add some product to 1st cart and 2nd cart
+ * Steps:
+ * 1. Click on [Hold] button
+ * Acceptance Criteria:
+ * 1. Hold order successfully
+ * 2. 1st cart back to default, 2nd cart is changeless
  */
 class WebposOnHoldOrderONH15Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
+
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject
     (
         WebposIndex $webposIndex
@@ -27,6 +42,10 @@ class WebposOnHoldOrderONH15Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test($products)
     {
         //Create product

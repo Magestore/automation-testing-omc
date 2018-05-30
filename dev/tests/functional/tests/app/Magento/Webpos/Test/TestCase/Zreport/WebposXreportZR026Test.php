@@ -49,11 +49,15 @@ class WebposXreportZR026Test extends Injectable
     /**
      * Webpos Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
+
     protected $useOtherPaymentMethod;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(
         WebposIndex $webposIndex
     )
@@ -61,6 +65,10 @@ class WebposXreportZR026Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test(
         $products
     )
@@ -116,25 +124,6 @@ class WebposXreportZR026Test extends Injectable
         ];
     }
 
-    public function tearDown()
-    {
-        $this->objectManager->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'setup_session_before_working_to_no']
-        )->run();
-
-        if ($this->useOtherPaymentMethod) {
-            $this->objectManager->getInstance()->create(
-                'Magento\Config\Test\TestStep\SetupConfigurationStep',
-                ['configData' => 'magestore_webpos_specific_payment']
-            )->run();
-        }
-
-        $this->objectManager->create(
-            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
-        )->run();
-    }
-
     /**
      * convert string price format to decimal
      * @param $string
@@ -154,5 +143,24 @@ class WebposXreportZR026Test extends Injectable
             $result = -1 * abs($result);
         }
         return $result;
+    }
+
+    public function tearDown()
+    {
+        $this->objectManager->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'setup_session_before_working_to_no']
+        )->run();
+
+        if ($this->useOtherPaymentMethod) {
+            $this->objectManager->getInstance()->create(
+                'Magento\Config\Test\TestStep\SetupConfigurationStep',
+                ['configData' => 'magestore_webpos_specific_payment']
+            )->run();
+        }
+
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
+        )->run();
     }
 }

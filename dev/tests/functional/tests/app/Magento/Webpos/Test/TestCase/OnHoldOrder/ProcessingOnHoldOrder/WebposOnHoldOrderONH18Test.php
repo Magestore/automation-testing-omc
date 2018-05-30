@@ -5,11 +5,13 @@
  * Date: 26/01/2018
  * Time: 13:26
  */
+
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder;
+
+use Magento\Customer\Test\Fixture\Customer;
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Customer\Test\Fixture\Customer;
 
 /**
  * Class WebposOnHoldOrderONH18Test
@@ -18,10 +20,14 @@ use Magento\Customer\Test\Fixture\Customer;
 class WebposOnHoldOrderONH18Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param FixtureFactory $fixtureFactory
+     * @return array
+     */
     public function __prepare(FixtureFactory $fixtureFactory)
     {
         $this->objectManager->getInstance()->create(
@@ -38,6 +44,9 @@ class WebposOnHoldOrderONH18Test extends Injectable
         return ['customer' => $customer];
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject
     (
         WebposIndex $webposIndex
@@ -60,14 +69,14 @@ class WebposOnHoldOrderONH18Test extends Injectable
         )->run();
 
         //Create a on-hold-order
-            //Add an exist customer
+        //Add an exist customer
         $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
         $this->webposIndex->getCheckoutChangeCustomer()->search($customer->getFirstname());
         sleep(1);
         $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
         sleep(1);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-            //Add a product to cart
+        //Add a product to cart
         $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -75,11 +84,10 @@ class WebposOnHoldOrderONH18Test extends Injectable
         //Get Tax Percent
         $taxPercent = $this->webposIndex->getCheckoutWebposCart()->getTax();
 
-        $taxExpected = round(($product->getPrice() - $discount) * 0.085,2);
+        $taxExpected = round(($product->getPrice() - $discount) * 0.085, 2);
 
         //Click on [Add discount] > on Discount tab, add dicount for whole cart (type: $)
-        while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup())
-        {
+        while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup()) {
             $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
         }
         $this->webposIndex->getCheckoutDiscount()->clickDiscountButton();
@@ -89,21 +97,21 @@ class WebposOnHoldOrderONH18Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Choose shipping POS
-            //Cart
+        //Cart
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $feeShippingBefore =$this->webposIndex->getCheckoutCartFooter()->getShippingPrice();
-            //Choose PoS shipping method
+        $feeShippingBefore = $this->webposIndex->getCheckoutCartFooter()->getShippingPrice();
+        //Choose PoS shipping method
         sleep(1);
         $this->webposIndex->getCheckoutShippingMethod()->clickPOSShipping();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         sleep(1);
-             //BackToCart
+        //BackToCart
         $this->webposIndex->getCheckoutWebposCart()->getIconPrevious()->click();
         sleep(1);
         sleep(1);
-            //Hold
+        //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

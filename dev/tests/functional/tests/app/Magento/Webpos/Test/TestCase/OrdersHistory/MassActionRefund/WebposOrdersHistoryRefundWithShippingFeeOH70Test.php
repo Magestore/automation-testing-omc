@@ -12,6 +12,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOrdersHistoryRefundWithShippingFeeOH70Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
@@ -19,20 +20,25 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposOrdersHistoryRefundWithShippingFeeOH70Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertRefundSuccess
+     * @var AssertRefundSuccess $assertRefundSuccess
      */
     protected $assertRefundSuccess;
 
     /**
-     * @var AssertOrderStatus
+     * @var AssertOrderStatus $assertOrderStatus
      */
     protected $assertOrderStatus;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertRefundSuccess $assertRefundSuccess
+     * @param AssertOrderStatus $assertOrderStatus
+     */
     public function __inject(WebposIndex $webposIndex, AssertRefundSuccess $assertRefundSuccess, AssertOrderStatus $assertOrderStatus)
     {
         $this->webposIndex = $webposIndex;
@@ -40,13 +46,17 @@ class WebposOrdersHistoryRefundWithShippingFeeOH70Test extends Injectable
         $this->assertOrderStatus = $assertOrderStatus;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test($products)
     {
         // Config all allow shipping for pos
-            $this->objectManager->getInstance()->create(
-                'Magento\Config\Test\TestStep\SetupConfigurationStep',
-                ['configData' => 'all_allow_shipping_for_POS']
-            )->run();
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'all_allow_shipping_for_POS']
+        )->run();
         // Create products
         $products = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',

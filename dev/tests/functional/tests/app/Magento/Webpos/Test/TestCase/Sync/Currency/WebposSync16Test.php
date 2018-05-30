@@ -9,14 +9,14 @@
 
 namespace Magento\Webpos\Test\TestCase\Sync\Currency;
 
-use Magento\Customer\Test\Fixture\Customer;
-use Magento\Webpos\Test\Fixture\CustomerComplain;
 use Magento\Config\Test\Page\Adminhtml\ConfigCurrencySetup;
 use Magento\CurrencySymbol\Test\Fixture\CurrencySymbolEntity;
 use Magento\CurrencySymbol\Test\Page\Adminhtml\SystemCurrencyIndex;
 use Magento\CurrencySymbol\Test\Page\Adminhtml\SystemCurrencySymbolIndex;
+use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Fixture\CustomerComplain;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 class WebposSync16Test extends Injectable
@@ -54,24 +54,35 @@ class WebposSync16Test extends Injectable
      */
     protected $fixtureFactory;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
+     * @param ConfigCurrencySetup $configCurrencySetup
+     * @param SystemCurrencySymbolIndex $currencySymbolIndex
+     * @param SystemCurrencyIndex $currencyIndex
+     */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
-		ConfigCurrencySetup $configCurrencySetup,
-		SystemCurrencySymbolIndex $currencySymbolIndex,
-		SystemCurrencyIndex $currencyIndex
+        ConfigCurrencySetup $configCurrencySetup,
+        SystemCurrencySymbolIndex $currencySymbolIndex,
+        SystemCurrencyIndex $currencyIndex
     )
     {
         $this->webposIndex = $webposIndex;
         $this->configCurrencySetup = $configCurrencySetup;
-		$this->currencySymbolIndex = $currencySymbolIndex;
-		$this->currencyIndex = $currencyIndex;
-		$this->fixtureFactory = $fixtureFactory;
+        $this->currencySymbolIndex = $currencySymbolIndex;
+        $this->currencyIndex = $currencyIndex;
+        $this->fixtureFactory = $fixtureFactory;
     }
 
     /**
-     *
-     * @return void
+     * @param FixtureFactory $fixtureFactory
+     * @param Customer $customer
+     * @param CustomerComplain $customerComplain
+     * @param CustomerComplain $editCustomerComplain
+     * @param CurrencySymbolEntity $currencySymbol
+     * @param $configData
      */
     public function test(
         FixtureFactory $fixtureFactory,

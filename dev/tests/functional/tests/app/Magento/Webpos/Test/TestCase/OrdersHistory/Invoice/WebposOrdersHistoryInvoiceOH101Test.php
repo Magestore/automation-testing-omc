@@ -14,20 +14,24 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoicePopupCorrect;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrdersHistoryInvoiceOH101Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
+ */
 class WebposOrdersHistoryInvoiceOH101Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     /**
-     * @var AssertInvoicePopupCorrect
+     * @var AssertInvoicePopupCorrect $assertInvoicePopupCorrect
      */
     protected $assertInvoicePopupCorrect;
 
@@ -40,7 +44,7 @@ class WebposOrdersHistoryInvoiceOH101Test extends Injectable
     public function __prepare(FixtureFactory $fixtureFactory)
     {
         // Change TaxRate
-        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
         // Add Customer
@@ -53,8 +57,11 @@ class WebposOrdersHistoryInvoiceOH101Test extends Injectable
         ];
     }
 
-
-
+    /**
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
+     * @param AssertInvoicePopupCorrect $assertInvoicePopupCorrect
+     */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
@@ -66,7 +73,17 @@ class WebposOrdersHistoryInvoiceOH101Test extends Injectable
         $this->assertInvoicePopupCorrect = $assertInvoicePopupCorrect;
     }
 
-
+    /**
+     * @param Customer $customer
+     * @param $products
+     * @param $configData
+     * @param $taxRate
+     * @param bool $addDiscount
+     * @param null $discountAmount
+     * @param bool $createInvoice
+     * @param bool $shipped
+     * @return array
+     */
     public function test(
         Customer $customer,
         $products,
@@ -153,7 +170,7 @@ class WebposOrdersHistoryInvoiceOH101Test extends Injectable
         // Assert Tax Amount in Order History Invoice
         $products2 = array();
         foreach ($products as $item) {
-            $productName =  $item['product']->getName();
+            $productName = $item['product']->getName();
             $product = array(
                 'Product' => $productName,
                 'Original Price' => $this->webposIndex->getOrderHistoryOrderViewContent()->getOriginalPriceOfProduct($productName)->getText(),

@@ -20,27 +20,40 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposOrdersHistoryRefundValidateInputFieldsOH73Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertRefundSuccess
+     * @var AssertRefundSuccess $assertRefundSuccess
      */
     protected $assertRefundSuccess;
 
     /**
-     * @var AssertOrderStatus
+     * @var AssertOrderStatus $assertOrderStatus
      */
     protected $assertOrderStatus;
 
-    public function __inject(WebposIndex $webposIndex, AssertRefundSuccess $assertRefundSuccess, AssertOrderStatus $assertOrderStatus)
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertRefundSuccess $assertRefundSuccess
+     * @param AssertOrderStatus $assertOrderStatus
+     */
+    public function __inject (
+        WebposIndex $webposIndex,
+        AssertRefundSuccess $assertRefundSuccess,
+        AssertOrderStatus $assertOrderStatus
+    )
     {
         $this->webposIndex = $webposIndex;
         $this->assertRefundSuccess = $assertRefundSuccess;
         $this->assertOrderStatus = $assertOrderStatus;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test($products)
     {
         // Config all allow shipping for pos

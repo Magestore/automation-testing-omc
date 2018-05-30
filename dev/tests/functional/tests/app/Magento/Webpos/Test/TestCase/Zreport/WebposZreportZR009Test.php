@@ -54,16 +54,19 @@ class WebposZreportZR009Test extends Injectable
     /**
      * Webpos Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
-
+    /**
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
+     */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory
@@ -73,6 +76,13 @@ class WebposZreportZR009Test extends Injectable
         $this->fixtureFactory = $fixtureFactory;
     }
 
+    /**
+     * @param $products
+     * @param Denomination $denomination
+     * @param $denominationNumberCoin
+     * @param $amount
+     * @return array
+     */
     public function test(
         $products,
         Denomination $denomination,
@@ -156,20 +166,6 @@ class WebposZreportZR009Test extends Injectable
         ];
     }
 
-    public function tearDown()
-    {
-        $this->objectManager->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'setup_session_before_working_to_no']
-        )->run();
-
-        //Config Payment Payment Method
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'magestore_webpos_specific_payment']
-        )->run();
-    }
-
     /**
      * convert string price format to decimal
      * @param $string
@@ -189,5 +185,19 @@ class WebposZreportZR009Test extends Injectable
             $result = -1 * abs($result);
         }
         return $result;
+    }
+
+    public function tearDown()
+    {
+        $this->objectManager->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'setup_session_before_working_to_no']
+        )->run();
+
+        //Config Payment Payment Method
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'magestore_webpos_specific_payment']
+        )->run();
     }
 }

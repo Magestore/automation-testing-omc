@@ -18,15 +18,22 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposOrdersHistoryShipmentWithExtantItemsOH41OH42Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(WebposIndex $webposIndex)
     {
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test($products)
     {
         // Create products
@@ -74,7 +81,8 @@ class WebposOrdersHistoryShipmentWithExtantItemsOH41OH42Test extends Injectable
         $this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
         $this->webposIndex->getModal()->waitForOkButtonIsVisible();
         $this->webposIndex->getModal()->getOkButton()->click();
-        while ($this->webposIndex->getToaster()->isVisible()) {};
+        while ($this->webposIndex->getToaster()->isVisible()) {
+        };
         sleep(1);
         // Create shipment with extant items
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();

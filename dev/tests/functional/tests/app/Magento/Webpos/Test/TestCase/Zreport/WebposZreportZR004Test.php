@@ -42,10 +42,13 @@ class WebposZreportZR004Test extends Injectable
     /**
      * Webpos Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(
         WebposIndex $webposIndex
     )
@@ -53,6 +56,14 @@ class WebposZreportZR004Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @param Denomination $denomination
+     * @param $denominationNumberCoin
+     * @param Pos $pos
+     * @param FixtureFactory $fixtureFactory
+     * @return array
+     */
     public function test(
         $products,
         Denomination $denomination,

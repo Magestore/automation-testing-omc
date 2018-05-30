@@ -16,8 +16,8 @@ use Magento\Customer\Test\Page\Adminhtml\CustomerIndex;
 use Magento\Customer\Test\Page\Adminhtml\CustomerIndexEdit;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Sync\AssertSynchronizationPageDisplay;
 use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
+use Magento\Webpos\Test\Constraint\Sync\AssertSynchronizationPageDisplay;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
@@ -34,40 +34,50 @@ class WebposSync10Test extends Injectable
     /**
      * Customer grid page.
      *
-     * @var CustomerIndex
+     * @var CustomerIndex $customerIndexPage
      */
     protected $customerIndexPage;
 
     /**
      * Customer edit page.
      *
-     * @var CustomerIndexEdit
+     * @var CustomerIndexEdit $customerIndexEditPage
      */
     protected $customerIndexEditPage;
 
     /**
      * Product page with a grid.
      *
-     * @var CatalogProductIndex
+     * @var CatalogProductIndex $productGrid
      */
     protected $productGrid;
 
     /**
      * Page to update a product.
      *
-     * @var CatalogProductEdit
+     * @var CatalogProductEdit $editProductPage
      */
     protected $editProductPage;
 
     /**
-     * @var AssertSynchronizationPageDisplay
+     * @var AssertSynchronizationPageDisplay $assertSynchronizationPageDisplay
      */
     protected $assertSynchronizationPageDisplay;
+
     /**
-     * @var AssertItemUpdateSuccess
+     * @var AssertItemUpdateSuccess $assertItemUpdateSuccess
      */
     protected $assertItemUpdateSuccess;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param CustomerIndex $customerIndexPage
+     * @param CustomerIndexEdit $customerIndexEditPage
+     * @param CatalogProductIndex $productGrid
+     * @param CatalogProductEdit $editProductPage
+     * @param AssertSynchronizationPageDisplay $assertSynchronizationPageDisplay
+     * @param AssertItemUpdateSuccess $assertItemUpdateSuccess
+     */
     public function __inject(
         WebposIndex $webposIndex,
         CustomerIndex $customerIndexPage,
@@ -88,8 +98,12 @@ class WebposSync10Test extends Injectable
     }
 
     /**
-     *
-     * @return void
+     * @param FixtureFactory $fixtureFactory
+     * @param Customer $initialCustomer
+     * @param Customer $customer
+     * @param CatalogProductSimple $initialProduct
+     * @param CatalogProductSimple $product
+     * @param $products
      */
     public function test(
         FixtureFactory $fixtureFactory,

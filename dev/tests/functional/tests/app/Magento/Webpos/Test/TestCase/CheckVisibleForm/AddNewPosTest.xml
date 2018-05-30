@@ -5,11 +5,13 @@
  * See COPYING.txt for license details.
  */
  -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\CheckVisibleForm\AddNewPosTest" summary="Check Is Visible Add New Locations - Warehouses Test" ticketId="MAGETWO-34874">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\CheckVisibleForm\AddNewPosTest"
+              summary="Check Is Visible Add New Locations - Warehouses Test" ticketId="MAGETWO-34874">
         <variation name="AddNewPos-Pos-AddNew-Test1">
             <data name="pageTitle" xsi:type="string">New Pos</data>
-            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable" />
+            <constraint name="Magento\Backend\Test\Constraint\AssertBackendPageIsAvailable"/>
         </variation>
     </testCase>
 </config>

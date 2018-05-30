@@ -6,12 +6,14 @@
  * Date: 1/30/2018
  * Time: 9:34 AM
  */
+
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment;
 
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposTakePaymentOH83Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment
@@ -22,9 +24,6 @@ class WebposTakePaymentOH83Test extends Injectable
      * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
-    /**
-     * @var
-     */
 
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
@@ -64,7 +63,7 @@ class WebposTakePaymentOH83Test extends Injectable
      * @param $configData
      * @param $amount
      */
-    public function test (
+    public function test(
         $products,
         FixtureFactory $fixtureFactory,
         $configData,

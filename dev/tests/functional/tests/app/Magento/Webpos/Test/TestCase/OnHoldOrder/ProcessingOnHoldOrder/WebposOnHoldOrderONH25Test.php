@@ -5,21 +5,32 @@
  * Date: 26/01/2018
  * Time: 13:26
  */
+
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder;
+
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckCartSimpleProduct;
+use Magento\Webpos\Test\Page\WebposIndex;
+
+/**
+ * Class WebposOnHoldOrderONH25Test
+ * @package Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder
+ */
 class WebposOnHoldOrderONH25Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
     /**
-     * @var AssertCheckCartSimpleProduct
+     * @var AssertCheckCartSimpleProduct $assertCheckCart
      */
     protected $assertCheckCart;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertCheckCartSimpleProduct $assertCheckCart
+     */
     public function __inject
     (
         WebposIndex $webposIndex,
@@ -30,6 +41,9 @@ class WebposOnHoldOrderONH25Test extends Injectable
         $this->assertCheckCart = $assertCheckCart;
     }
 
+    /**
+     * @param $products
+     */
     public function test($products)
     {
         //Create product
@@ -45,12 +59,12 @@ class WebposOnHoldOrderONH25Test extends Injectable
         )->run();
 
         //Create a on-hold-order
-            //Add a product to cart
+        //Add a product to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
-            //Hold
+        //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -79,7 +93,7 @@ class WebposOnHoldOrderONH25Test extends Injectable
 
         $dataProduct1 = $product1->getData();
         $dataProduct1['qty'] = 1;
-        $this->assertCheckCart->processAssert($this->webposIndex,[$dataProduct1]);
+        $this->assertCheckCart->processAssert($this->webposIndex, [$dataProduct1]);
         sleep(1);
 
         $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem('2')->click();

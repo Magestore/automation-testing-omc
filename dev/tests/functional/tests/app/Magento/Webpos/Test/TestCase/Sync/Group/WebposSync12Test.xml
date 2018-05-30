@@ -1,5 +1,7 @@
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Sync\Group\WebposSync12Test" summary="Frontend - Web POS" ticketId="MAGETWO-34874">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Sync\Group\WebposSync12Test" summary="Frontend - Web POS"
+              ticketId="MAGETWO-34874">
         <variation name="WebposSync_12">
             <data name="des" xsi:type="string">Check GUI of [Sync Data] tab</data>
             <data name="products" xsi:type="array">

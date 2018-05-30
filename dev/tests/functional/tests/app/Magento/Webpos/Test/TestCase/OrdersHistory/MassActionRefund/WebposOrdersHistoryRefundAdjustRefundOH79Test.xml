@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund\WebposOrdersHistoryRefundAdjustRefundOH79Test" summary="OrdersHistory-MassActionRefund" ticketId="WEBPOSMASSACTIONREFUND-OH79">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase
+            name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund\WebposOrdersHistoryRefundAdjustRefundOH79Test"
+            summary="OrdersHistory-MassActionRefund" ticketId="WEBPOSMASSACTIONREFUND-OH79">
         <variation name="WebposOrdersHistoryRefundAdjustRefundOH79TestVariation1">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">
@@ -15,7 +18,8 @@
 
                 </item>
             </data>
-            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundWhenAdjustRefundEqualTotalPaid"/>
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundWhenAdjustRefundEqualTotalPaid"/>
         </variation>
     </testCase>
 </config>

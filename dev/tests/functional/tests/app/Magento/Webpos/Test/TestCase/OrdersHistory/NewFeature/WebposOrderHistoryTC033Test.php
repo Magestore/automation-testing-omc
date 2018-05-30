@@ -32,7 +32,11 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 class WebposOrderHistoryTC033Test extends Injectable
 {
-
+    /**
+     * @param FixtureFactory $fixtureFactory
+     * @param WebposIndex $webposIndex
+     * @param $products
+     */
     public function test(FixtureFactory $fixtureFactory, WebposIndex $webposIndex, $products)
     {
         // Create products

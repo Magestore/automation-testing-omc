@@ -6,28 +6,23 @@
  * Date: 2/23/2018
  * Time: 3:57 PM
  */
+
 namespace Magento\Webpos\Test\TestCase\Sync\CheckGUI;
 
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-use Magento\Mtf\Fixture\FixtureFactory;
 
+/**
+ * Class WebposSync02Test
+ * @package Magento\Webpos\Test\TestCase\Sync\CheckGUI
+ */
 class WebposSync02Test extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
-
-    public function __prepare()
-    {
-        // Config: use system value for all field in Tax Config
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => 'default_payment_method_all_method']
-//        )->run();
-    }
 
     public function __inject(
         WebposIndex $webposIndex
@@ -37,16 +32,10 @@ class WebposSync02Test extends Injectable
     }
 
     /**
-     *
-     * @return void
+     * @param FixtureFactory $fixtureFactory
      */
     public function test(FixtureFactory $fixtureFactory)
     {
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => $configData]
-//        )->run();
-
         $staff = $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -58,13 +47,4 @@ class WebposSync02Test extends Injectable
         $this->webposIndex->getSyncTabRight()->tabErrorLogs()->click();
         sleep(1);
     }
-
-    public function tearDown()
-    {
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => 'default_payment_method']
-//        )->run();
-    }
-
 }

@@ -11,6 +11,7 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOrdersHistoryRefundPartialOH63Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
@@ -18,21 +19,32 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposOrdersHistoryRefundPartialOH63Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertRefundSuccess
+     * @var AssertRefundSuccess $assertRefundSuccess
      */
     protected $assertRefundSuccess;
 
-    public function __inject(WebposIndex $webposIndex, AssertRefundSuccess $assertRefundSuccess)
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertRefundSuccess $assertRefundSuccess
+     */
+    public function __inject
+    (
+        WebposIndex $webposIndex,
+        AssertRefundSuccess $assertRefundSuccess
+    )
     {
         $this->webposIndex = $webposIndex;
         $this->assertRefundSuccess = $assertRefundSuccess;
     }
 
+    /**
+     * @param $products
+     */
     public function test($products)
     {
         // Create products
@@ -95,7 +107,7 @@ class WebposOrdersHistoryRefundPartialOH63Test extends Injectable
             $productName = $item['product']->getName();
             $rowTotal = $this->webposIndex->getOrderHistoryOrderViewContent()->getRowTotalOfProduct($productName);
             $rowTotal = (float)substr($rowTotal, 1);
-            $totalRefunded += ($rowTotal/$item['orderQty'])*$item['refundQty'];
+            $totalRefunded += ($rowTotal / $item['orderQty']) * $item['refundQty'];
         }
         $totalRefunded += $shippingFee;
         $expectStatus = 'Complete';

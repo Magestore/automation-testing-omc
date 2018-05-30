@@ -11,18 +11,31 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\OrderStatus;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrderStatusOH07Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\OrderStatus
+ */
 class WebposOrderStatusOH07Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
-    public function __inject(WebposIndex $webposIndex)
+    /**
+     * @param WebposIndex $webposIndex
+     */
+    public function __inject(
+        WebposIndex $webposIndex
+    )
     {
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test($products)
     {
         // LoginTest webpos

@@ -18,15 +18,21 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposOrderHistoryRefundCheckCancelConfirmationOH60Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(WebposIndex $webposIndex)
     {
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     */
     public function test($products)
     {
         // Create products

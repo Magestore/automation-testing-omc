@@ -19,6 +19,7 @@ use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
 use Magento\Webpos\Test\Constraint\Sync\AssertSynchronizationPageDisplay;
 use Magento\Webpos\Test\Fixture\CustomerComplain;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposSync14Test
  * @package Magento\Webpos\Test\TestCase\Sync\CustomerComplaints
@@ -29,46 +30,55 @@ class WebposSync14Test extends Injectable
      * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
+
+    /**
+     * @var FixtureFactory $fixtureFactory
+     */
     protected $fixtureFactory;
 
     /**
      * Customer grid page.
      *
-     * @var CustomerIndex
+     * @var CustomerIndex $customerIndexPage
      */
     protected $customerIndexPage;
 
     /**
      * Customer edit page.
      *
-     * @var CustomerIndexEdit
+     * @var CustomerIndexEdit $customerIndexEditPage
      */
     protected $customerIndexEditPage;
 
     /**
      * Product page with a grid.
      *
-     * @var CatalogProductIndex
+     * @var CatalogProductIndex $productGrid
      */
     protected $productGrid;
 
     /**
      * Page to update a product.
      *
-     * @var CatalogProductEdit
+     * @var CatalogProductEdit $editProductPage
      */
     protected $editProductPage;
 
     /**
-     * @var AssertSynchronizationPageDisplay
+     * @var AssertSynchronizationPageDisplay $assertSynchronizationPageDisplay
      */
     protected $assertSynchronizationPageDisplay;
 
     /**
-     * @var AssertItemUpdateSuccess
+     * @var AssertItemUpdateSuccess $assertItemUpdateSuccess
      */
     protected $assertItemUpdateSuccess;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
+     * @param AssertItemUpdateSuccess $assertItemUpdateSuccess
+     */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,

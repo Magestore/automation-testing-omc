@@ -10,6 +10,7 @@ namespace Magento\Webpos\Test\TestCase\CheckVisibleForm;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\PosIndex;
+
 /**
  * Class AddNewPosTest
  * @package Magento\Webpos\Test\TestCase\CheckVisibleForm
@@ -19,7 +20,7 @@ class AddNewPosTest extends Injectable
     /**
      * Gift Template Grid Page
      *
-     * @var PosIndex
+     * @var PosIndex $posIndex
      */
     protected $posIndex;
 
@@ -31,7 +32,8 @@ class AddNewPosTest extends Injectable
      */
     public function __inject(
         PosIndex $posIndex
-    ) {
+    )
+    {
         $this->posIndex = $posIndex;
     }
 

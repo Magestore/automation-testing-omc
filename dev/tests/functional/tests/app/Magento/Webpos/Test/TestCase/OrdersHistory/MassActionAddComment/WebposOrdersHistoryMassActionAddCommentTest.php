@@ -8,9 +8,9 @@
 
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionAddComment;
 
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Sales\Test\Fixture\OrderInjectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\TestCase\Injectable;
 
 /**
  * Class WebposOrdersHistoryMassActionAddCommentTest
@@ -19,7 +19,7 @@ use Magento\Mtf\TestCase\Injectable;
 class WebposOrdersHistoryMassActionAddCommentTest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
@@ -68,7 +68,7 @@ class WebposOrdersHistoryMassActionAddCommentTest extends Injectable
             sleep(0.5);
             $this->webposIndex->getOrderHistoryAddComment()->getSaveButton()->click();
             sleep(1);
-        }elseif ($action === 'Cancel') {
+        } elseif ($action === 'Cancel') {
             sleep(0.5);
             $this->webposIndex->getOrderHistoryAddComment()->getCancelButton()->click();
             sleep(1);

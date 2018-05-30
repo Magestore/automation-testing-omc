@@ -10,6 +10,7 @@ namespace Magento\Webpos\Test\TestCase\Setting\General;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebPOSCheckGUIGeneralPageTest
  * @package Magento\Webpos\Test\TestCase\Setting\General
@@ -17,11 +18,13 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebPOSCheckGUIGeneralPageTest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
-
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(
         WebposIndex $webposIndex
     )

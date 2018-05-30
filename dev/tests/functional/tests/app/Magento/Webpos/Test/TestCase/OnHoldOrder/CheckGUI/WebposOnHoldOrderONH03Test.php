@@ -5,18 +5,36 @@
  * Date: 26/01/2018
  * Time: 13:40
  */
+
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\CheckGUI;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOnHoldOrderONH03Test
  * @package Magento\Webpos\Test\TestCase\OnHoldOrder\CheckGUI
+ * Precondition and setup steps:
+ * Precondition: There are many onhold orders in On-hold orders menu (> 1 order)
+ * 1. Login webpos as a staff
+ * Steps:
+ * 1. Click on On-hold Orders menu
+ * Acceptance Criteria:
+ * Show On-hold Orders page with:
+ * - On-hold Order list shown on the left
+ * - On-hold Order detail shown on the right
+ * - Show menu icon, notification icon on the top of the left
+ * - Order detail including:
+ * + Show Information of selected on-hold order
+ * + Buttons: Delete, Checkout
+ * - On-hold order list including:
+ * + List of on-hold orders with their created time, Grand total and grouped by day
+ * + Textbox search
  */
 class WebposOnHoldOrderONH03Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
@@ -75,5 +93,5 @@ class WebposOnHoldOrderONH03Test extends Injectable
         $productData = $product2->getData();
         return ['products' => [$productData],
             'product' => $productData];
-       }
+    }
 }

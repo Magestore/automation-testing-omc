@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\NewFeature;
 
-use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
@@ -33,8 +32,11 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 class WebposOrderHistoryTC035Test extends Injectable
 {
-
-
+    /**
+     * @param WebposIndex $webposIndex
+     * @param $products
+     * @param $qty
+     */
     public function test(WebposIndex $webposIndex, $products, $qty)
     {
         //Create products

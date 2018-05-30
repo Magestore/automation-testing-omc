@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip\WebposOrdersHistoryCheckConfirmationPopupOH33Test" summary="OrdersHistory-MassActionShip" ticketId="WEBPOSMASSACTIONSHIP-OH33">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase
+            name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip\WebposOrdersHistoryCheckConfirmationPopupOH33Test"
+            summary="OrdersHistory-MassActionShip" ticketId="WEBPOSMASSACTIONSHIP-OH33">
         <variation name="WebposOrdersHistoryCheckConfirmationPopupOH33TestVariation1">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">
@@ -14,7 +17,8 @@
                     <item name="invoiceQty" xsi:type="number">1</item>
                 </item>
             </data>
-            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentConfirmationPopupAvailable"/>
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentConfirmationPopupAvailable"/>
         </variation>
     </testCase>
 </config>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund\WebposOrdersHistoryRefundOrderCreateOnBackendOH80Test" summary="OrdersHistory-MassActionRefund" ticketId="WEBPOSMASSACTIONREFUND-OH80">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase
+            name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund\WebposOrdersHistoryRefundOrderCreateOnBackendOH80Test"
+            summary="OrdersHistory-MassActionRefund" ticketId="WEBPOSMASSACTIONREFUND-OH80">
         <variation name="WebposOrdersHistoryRefundOrderCreateOnBackendOH80TestVariation1">
             <data name="order/dataset" xsi:type="string">default</data>
             <data name="order/data/price/dataset" xsi:type="string">full_invoice</data>
@@ -17,7 +20,8 @@
             <data name="argumentsList/0" xsi:type="string">Quantity</data>
             <data name="configData" xsi:type="string">checkmo</data>
             <data name="expectStatus" xsi:type="string">Closed</data>
-            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccessWithExistOrderInBackend"/>
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccessWithExistOrderInBackend"/>
         </variation>
     </testCase>
 </config>

@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionReOrder\WebposMassActionReOrderOH27Test" summary="Orders History - Mass action/Re-order" ticketId="WEBPOS-OH27">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionReOrder\WebposMassActionReOrderOH27Test"
+              summary="Orders History - Mass action/Re-order" ticketId="WEBPOS-OH27">
         <variation name="WebposOrdersHistoryMassActionReOrder_OH27">
             <data name="order/dataset" xsi:type="string">default</data>
-            <data name="order/data/entity_id/products" xsi:type="string">catalogProductSimple::default,catalogProductSimple::product_100_dollar_order_qty_2</data>
+            <data name="order/data/entity_id/products" xsi:type="string">
+                catalogProductSimple::default,catalogProductSimple::product_100_dollar_order_qty_2
+            </data>
             <constraint name="Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertRedirectToCheckoutCartPage"/>
             <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\ReOrder\AssertItemsInCart"/>
         </variation>

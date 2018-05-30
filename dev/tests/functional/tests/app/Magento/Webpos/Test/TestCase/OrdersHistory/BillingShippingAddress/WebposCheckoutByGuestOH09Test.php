@@ -12,18 +12,31 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposCheckoutByGuestOH09Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\BillingShippingAddress
+ */
 class WebposCheckoutByGuestOH09Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(WebposIndex $webposIndex)
     {
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param FixtureFactory $fixtureFactory
+     * @param $products
+     * @param $configData
+     * @return array
+     */
     public function test(FixtureFactory $fixtureFactory, $products, $configData)
     {
         // Config Guest checkout

@@ -11,6 +11,7 @@ namespace Magento\Webpos\Test\TestCase\Zreport;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposZreportCheckGUITest
  *
@@ -33,10 +34,13 @@ class WebposZreportCheckGUITest extends Injectable
     /**
      * Webpos Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(
         WebposIndex $webposIndex
     )
@@ -44,7 +48,12 @@ class WebposZreportCheckGUITest extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-
+    /**
+     * @param $products
+     * @param Denomination $denomination
+     * @param $denominationNumberCoin
+     * @return array
+     */
     public function test(
         $products,
         Denomination $denomination,

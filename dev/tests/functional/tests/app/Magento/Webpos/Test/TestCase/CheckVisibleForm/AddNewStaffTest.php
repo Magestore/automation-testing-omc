@@ -10,6 +10,7 @@ namespace Magento\Webpos\Test\TestCase\CheckVisibleForm;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
+
 /**
  * Class AddNewStaffTest
  * @package Magento\Webpos\Test\TestCase\CheckVisibleForm
@@ -19,7 +20,7 @@ class AddNewStaffTest extends Injectable
     /**
      * Gift Template Grid Page
      *
-     * @var StaffIndex
+     * @var StaffIndex $staffIndex
      */
     protected $staffIndex;
 
@@ -31,7 +32,8 @@ class AddNewStaffTest extends Injectable
      */
     public function __inject(
         StaffIndex $staffIndex
-    ) {
+    )
+    {
         $this->staffIndex = $staffIndex;
     }
 

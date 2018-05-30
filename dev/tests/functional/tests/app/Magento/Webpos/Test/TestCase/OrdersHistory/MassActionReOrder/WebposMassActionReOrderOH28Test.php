@@ -19,12 +19,12 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposMassActionReOrderOH28Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 

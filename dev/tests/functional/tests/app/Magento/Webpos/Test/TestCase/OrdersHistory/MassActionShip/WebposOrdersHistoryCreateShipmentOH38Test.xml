@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip\WebposOrdersHistoryCreateShipmentOH38Test" summary="OrdersHistory-MassActionShip" ticketId="WEBPOSMASSACTIONSHIP-OH38">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip\WebposOrdersHistoryCreateShipmentOH38Test"
+              summary="OrdersHistory-MassActionShip" ticketId="WEBPOSMASSACTIONSHIP-OH38">
         <variation name="WebposOrdersHistoryCreateShipmentOH38TestVariation1">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">
@@ -13,7 +15,8 @@
             <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentSuccess"/>
             <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus"/>
             <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentProductQty"/>
-            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentCommentAndTrackNumberInBackend"/>
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentCommentAndTrackNumberInBackend"/>
         </variation>
     </testCase>
 </config>

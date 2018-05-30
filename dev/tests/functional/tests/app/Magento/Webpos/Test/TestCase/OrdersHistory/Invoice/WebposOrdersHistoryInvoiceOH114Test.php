@@ -19,12 +19,12 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposOrdersHistoryInvoiceOH114Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertOrdersHistoryTakePaymentNotAvailable
+     * @var AssertOrdersHistoryTakePaymentNotAvailable $assertOrdersHistoryTakePaymentNotAvailable
      */
     protected $assertOrdersHistoryTakePaymentNotAvailable;
 
@@ -86,7 +86,7 @@ class WebposOrdersHistoryInvoiceOH114Test extends Injectable
 
         // Place Order
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-        for ($i=0; $i<3; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             $this->webposIndex->getMsWebpos()->waitCartLoader();
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }

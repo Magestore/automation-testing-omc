@@ -13,6 +13,7 @@ use Magento\Mtf\TestCase\Scenario;
 /**
  * Class WebposOrdersHistoryRefundOrderCreateOnBackendOH80Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ *
  */
 class WebposOrdersHistoryRefundOrderCreateOnBackendOH80Test extends Scenario
 {

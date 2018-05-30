@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod\OrderListByPaymentMethodRP65Test" summary="Sales By Payment Method Report" ticketId="MAGETWO-28222">
+        <variation name="OrderListByPaymentMethodRP65TestVariation1">
+            <data name="shifts/period_type" xsi:type="string">Web POS - Cash In</data>
+            <data name="shifts/from" xsi:type="string">m/d/Y -3 day</data>
+            <data name="shifts/to" xsi:type="string">m/d/Y</data>
+            <data name="shifts/show_order_statuses" xsi:type="string">Any</data>
+        </variation>
+        <variation name="OrderListByPaymentMethodRP65TestVariation2">
+            <data name="shifts/period_type" xsi:type="string">Web POS - Credit Card</data>
+            <data name="shifts/from" xsi:type="string">m/d/Y -3 day</data>
+            <data name="shifts/to" xsi:type="string">m/d/Y</data>
+            <data name="shifts/show_order_statuses" xsi:type="string">Specified</data>
+            <data name="order_statuses" xsi:type="string">Complete</data>
+        </variation>
+    </testCase>
+</config>

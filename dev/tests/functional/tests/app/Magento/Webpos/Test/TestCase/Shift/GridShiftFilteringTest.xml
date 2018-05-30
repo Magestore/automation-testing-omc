@@ -5,8 +5,10 @@
  * See COPYING.txt for license details.
  */
  -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Shift\GridShiftFilteringTest" summary="Grid UI Component Filtering" ticketId="MAGETWO-41329">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Shift\GridShiftFilteringTest" summary="Grid UI Component Filtering"
+              ticketId="MAGETWO-41329">
         <variation name="GridShiftFilteringTest">
             <data name="description" xsi:type="string">Verify shift grid filtering</data>
             <data name="itemsCount" xsi:type="string">1</data>

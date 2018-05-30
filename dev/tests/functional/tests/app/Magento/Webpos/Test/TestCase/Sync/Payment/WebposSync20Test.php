@@ -8,30 +8,33 @@
 
 namespace Magento\Webpos\Test\TestCase\Sync\Payment;
 
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
+use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposSync20Test
+ * @package Magento\Webpos\Test\TestCase\Sync\Payment
+ */
 class WebposSync20Test extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
-    /**
-     * @var
-     */
 
+    /**
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
-
     /**
-     * @var AssertItemUpdateSuccess
+     * @var AssertItemUpdateSuccess $assertItemUpdateSuccess
      */
     protected $assertItemUpdateSuccess;
+
     public function __prepare()
     {
         // Config: use system value for all field in Tax Config
@@ -41,6 +44,11 @@ class WebposSync20Test extends Injectable
         )->run();
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @param AssertItemUpdateSuccess $assertItemUpdateSuccess
+     */
     public function __inject(
         WebposIndex $webposIndex,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
@@ -53,8 +61,10 @@ class WebposSync20Test extends Injectable
     }
 
     /**
-     *
-     * @return void
+     * @param $products
+     * @param FixtureFactory $fixtureFactory
+     * @param $configData
+     * @param $amount
      */
     public function test($products, FixtureFactory $fixtureFactory, $configData, $amount)
     {

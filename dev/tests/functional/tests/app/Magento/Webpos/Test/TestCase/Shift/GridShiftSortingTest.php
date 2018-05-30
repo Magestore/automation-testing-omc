@@ -13,6 +13,10 @@ namespace Magento\Webpos\Test\TestCase\Shift;
 
 use Magento\Ui\Test\TestCase\GridSortingTest;
 
+/**
+ * Class GridShiftSortingTest
+ * @package Magento\Webpos\Test\TestCase\Shift
+ */
 class GridShiftSortingTest extends GridSortingTest
 {
 
