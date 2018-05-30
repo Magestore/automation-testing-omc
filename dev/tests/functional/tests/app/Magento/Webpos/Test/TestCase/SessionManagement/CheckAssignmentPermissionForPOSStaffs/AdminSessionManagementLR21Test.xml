@@ -5,10 +5,14 @@
  * See COPYING.txt for license details.
  */
  -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs\AdminSessionManagementLR21Test" summary="Create Admin User Role" ticketId="MAGETWO-23413">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase
+            name="Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs\AdminSessionManagementLR21Test"
+            summary="Create Admin User Role" ticketId="MAGETWO-23413">
         <variation name="AdminSessionManagementLR21Test">
-            <constraint name="Magento\Webpos\Test\Constraint\SessionManagement\CheckAssignmentPermissionForPOSStaffs\AssertPermissionRoleResource" />
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\SessionManagement\CheckAssignmentPermissionForPOSStaffs\AssertPermissionRoleResource"/>
         </variation>
     </testCase>
 </config>

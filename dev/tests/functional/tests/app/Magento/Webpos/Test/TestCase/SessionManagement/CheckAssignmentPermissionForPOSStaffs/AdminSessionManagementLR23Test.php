@@ -20,9 +20,10 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AdminSessionManagementLR23Test
+ * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  *
  * Precondition:
- * - Loged in backend
+ * - Logged in backend
  * - In the  webpos settings page, set the Need to create session before working field to Yes
  * - From menu on the left side, select Sales menu , under Web POS > select Manage Role
  *
@@ -34,13 +35,12 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 5. Open Staff List tab, select POS staff account by ticking on each it
  * 6. Click on Save button
  * 7. On webpos, login with POS staff account that is assigned role to Lock and Unlock register
- * 8. After loging in, select Location and POS (This POS is already configed to allow POS staff to lock register)
+ * 8. After loging in, select Location and POS (This POS is already config to allow POS staff to lock register)
  * 9. Check webpos menu on left side
  *
  * Acceptance:
  * 9. Show more the Lock Register menu under Logout menu
  *
- * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
 class AdminSessionManagementLR23Test extends Injectable
 {
@@ -72,21 +72,21 @@ class AdminSessionManagementLR23Test extends Injectable
             ['configData' => 'create_session_before_working']
         )->run();
 
-        /**@var Location $location*/
+        /**@var Location $location */
         $location = $fixtureFactory->createByCode('location', ['dataset' => 'default']);
         $location->persist();
         $locationId = $location->getLocationId();
         $posData = $pos->getData();
-        $posData['location_id'] = [ $locationId ];
-        /**@var Pos $pos*/
+        $posData['location_id'] = [$locationId];
+        /**@var Pos $pos */
         $pos = $fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
         $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'default']);
         $staffData = $staff->getData();
-        $staffData['location_id'] = [ $locationId ];
-        $staffData['pos_ids'] = [ $posId ];
-        /**@var Staff $staff*/
+        $staffData['location_id'] = [$locationId];
+        $staffData['pos_ids'] = [$posId];
+        /**@var Staff $staff */
         $staff = $fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff->persist();
 
@@ -124,8 +124,8 @@ class AdminSessionManagementLR23Test extends Injectable
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->assertTrue(
-          $this->webposIndex->getCMenu()->getLockRegister()->isVisible(),
-          'Lock register not visible'
+            $this->webposIndex->getCMenu()->getLockRegister()->isVisible(),
+            'Lock register not visible'
         );
     }
 

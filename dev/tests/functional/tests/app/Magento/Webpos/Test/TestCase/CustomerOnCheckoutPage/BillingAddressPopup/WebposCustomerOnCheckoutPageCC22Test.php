@@ -20,6 +20,21 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposCustomerOnCheckoutPageCC22Test
  * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\BillingAddressPopup
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Click on Add new customer icon"
+ *
+ * Steps:
+ * "1. Click on [Create customer] button > Fill out all fields
+ * 2. Click on Add Shipping address icon > Add an address successfully
+ * (untick on [Billing address and shipping address are the same])
+ * 3. Click on Add Billing address icon > Add an address successfully
+ * 4. Click on [Save] button on [New customer] popup"
+ *
+ * Acceptance:
+ * 4. Create customer successfully with exact shipping and billing address
+ *
  */
 class WebposCustomerOnCheckoutPageCC22Test extends Injectable
 {
@@ -123,11 +138,11 @@ class WebposCustomerOnCheckoutPageCC22Test extends Injectable
             'United Kingdom' => 'GB',
             'Germany' => 'DE'
         ];
-        $billingAddressText = $billingAddress->getFirstname().' '.$billingAddress->getLastname().', '
-            .$billingAddress->getStreet().' '.$billingAddress->getCity().', '
-            .$country[$billingAddress->getCountryId()].', '
-            .$billingAddress->getPostcode().', '
-            .$billingAddress->getTelephone();
+        $billingAddressText = $billingAddress->getFirstname() . ' ' . $billingAddress->getLastname() . ', '
+            . $billingAddress->getStreet() . ' ' . $billingAddress->getCity() . ', '
+            . $country[$billingAddress->getCountryId()] . ', '
+            . $billingAddress->getPostcode() . ', '
+            . $billingAddress->getTelephone();
         $this->assertBillingAddressOnNewCustomerPopupIsCorrect->processAssert($this->webposIndex, $billingAddressText);
 
         // - The created shipping address will be shown on [Shipping address] section
@@ -136,11 +151,11 @@ class WebposCustomerOnCheckoutPageCC22Test extends Injectable
             'United Kingdom' => 'GB',
             'Germany' => 'DE'
         ];
-        $addressText = $address->getFirstname().' '.$address->getLastname().', '
-            .$address->getStreet().' '.$address->getCity().', '
-            .$country[$address->getCountryId()].', '
-            .$address->getPostcode().', '
-            .$address->getTelephone();
+        $addressText = $address->getFirstname() . ' ' . $address->getLastname() . ', '
+            . $address->getStreet() . ' ' . $address->getCity() . ', '
+            . $country[$address->getCountryId()] . ', '
+            . $address->getPostcode() . ', '
+            . $address->getTelephone();
         $this->assertShippingAddressOnNewCustomerPopupIsCorrect->processAssert($this->webposIndex, $addressText);
 
         $this->webposIndex->getCheckoutAddCustomer()->getSaveButton()->click();

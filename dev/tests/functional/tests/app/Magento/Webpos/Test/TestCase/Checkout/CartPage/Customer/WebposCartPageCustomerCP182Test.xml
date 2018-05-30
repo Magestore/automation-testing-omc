@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer\WebposCartPageCustomerCP182Test" summary="Checkout - Cart Page - Customer - PlaceOrder after create customer with billing and shipping adress" ticketId="WEBPOS-1">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer\WebposCartPageCustomerCP182Test"
+              summary="Checkout - Cart Page - Customer - PlaceOrder after create customer with billing and shipping adress"
+              ticketId="WEBPOS-1">
         <variation name="WebposCartPageCustomerCP182TestVariation">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">
@@ -14,7 +17,8 @@
                 <item name="dataset" xsi:type="string">General</item>
             </data>
             <data name="address/dataset" xsi:type="string">address_pi</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\Checkout\CartPage\Customer\AssertOrderDetailShipAndBillAddressAreCorrect"/>
         </variation>
     </testCase>
 </config>

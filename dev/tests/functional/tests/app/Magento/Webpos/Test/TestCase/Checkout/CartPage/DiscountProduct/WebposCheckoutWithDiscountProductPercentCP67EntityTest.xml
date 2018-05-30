@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct\WebposCheckoutWithDiscountProductPercentCP67EntityTest" summary="Checkout - Cart Page - Webpos Check input value to Discount % CP66" ticketId="WEBPOS-1">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase
+            name="Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct\WebposCheckoutWithDiscountProductPercentCP67EntityTest"
+            summary="Checkout - Cart Page - Webpos Check input value to Discount % CP66" ticketId="WEBPOS-1">
         <variation name="Webpos_Check_Input_ValueToDiscountProduct_ByPercentCP66_Test1_CP66">
             <data name="product/dataset" xsi:type="string">product1</data>
             <data name="amountValue" xsi:type="string">10</data>

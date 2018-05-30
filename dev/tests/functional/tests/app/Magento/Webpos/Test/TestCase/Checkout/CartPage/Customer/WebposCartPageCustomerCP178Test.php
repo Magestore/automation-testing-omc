@@ -5,13 +5,35 @@
  * Date: 08/01/2018
  * Time: 14:48
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
+
+use Magento\Customer\Test\Fixture\Address;
+use Magento\Customer\Test\Fixture\Customer;
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Customer\Test\Fixture\Customer;
-use Magento\Customer\Test\Fixture\Address;
 
+/**
+ * Class WebposCartPageCustomerCP178Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer
+ *
+ * Precondition:
+ * "1. Login webpos by a  staff
+ * 2. Add some products  to cart
+ * 3. Click on [Checkout] button"
+ *
+ * Steps:
+ * "1. Select an existing customer
+ * 2. Click to edit customer
+ * 3. Edit current Shipping address and Billing address successfully
+ * 4. Place order"
+ *
+ * Acceptance:
+ * "1. Place order successfully
+ * 2. Shipping and billing information are corresponding to edited addresses"
+ *
+ */
 class WebposCartPageCustomerCP178Test extends Injectable
 {
     /**
@@ -51,7 +73,7 @@ class WebposCartPageCustomerCP178Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test(Customer $customer,Address $address, $products)
+    public function test(Customer $customer, Address $address, $products)
     {
         //Create product
         $product = $this->objectManager->getInstance()->create(
@@ -107,13 +129,13 @@ class WebposCartPageCustomerCP178Test extends Injectable
 
         //Get orderId
         $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
-        $orderId= ltrim ($orderId,'#');
+        $orderId = ltrim($orderId, '#');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
 
         return [
-            'name' => $address->getFirstname().' '.$address->getLastname(),
-            'address' => $address->getCity().', '.$address->getRegion().', '.$address->getPostcode().', US',
-            'phone' =>  $address->getTelephone(),
+            'name' => $address->getFirstname() . ' ' . $address->getLastname(),
+            'address' => $address->getCity() . ', ' . $address->getRegion() . ', ' . $address->getPostcode() . ', US',
+            'phone' => $address->getTelephone(),
             'orderId' => $orderId
         ];
     }

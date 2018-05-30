@@ -5,25 +5,29 @@
  * Date: 1/10/2018
  * Time: 4:23 PM
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\DeleteProduct;
 
+use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
+
 /**
- *  * Preconditions:
+ * Class WebposDeleteProductOnCartPageCP68EntityTest
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DiscountProduct
+ *
+ * Preconditions:
  * 1. LoginTest webpos by a  staff
  * 2. Add a product to cart
  *
  * Step:
  * 1. Click on delete product icon (x icon)
  *
+ * Acceptance:
+ * Cart page backs to default
+ *
  */
-/**
- * Class WebposDeleteProductOnCartPageCP68EntityTest
- * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DiscountProduct
- */
-class WebposDeleteProductOnCartPageCP68EntityTest extends  Injectable
+class WebposDeleteProductOnCartPageCP68EntityTest extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex

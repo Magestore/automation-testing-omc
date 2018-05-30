@@ -45,7 +45,7 @@ class SessionShift extends Block
      */
     public function getSetClosingBalanceButton()
     {
-        return $this->_rootElement->find('button[data-bind="click: setClosingBalance"]');
+        return $this->_rootElement->find('.sum-info-top')->find('//*[text()="Set Closing Balance"]',Locator::SELECTOR_XPATH);
     }
 
     public function getAddSession()
@@ -158,5 +158,20 @@ class SessionShift extends Block
     public function waitForSetClosingBalancePopupNotVisible()
     {
         $this->waitForElementNotVisible('#popup-close-shift');
+    }
+
+    public function waitForPopupOpenShift()
+    {
+        $this->waitForElementVisible('#popup-open-shift');
+    }
+
+    public function waitForPopupOpenShiftNotVisible()
+    {
+        $this->waitForElementNotVisible('#popup-open-shift');
+    }
+
+    public function getPopupOpenShift()
+    {
+        return $this->_rootElement->find('#popup-open-shift');
     }
 }

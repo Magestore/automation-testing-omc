@@ -15,6 +15,7 @@ use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 
 /**
  * Class AdminSessionManagementFS01Test
+ * @package Magento\Webpos\Test\TestCase\SessionManagement\ForceSignOut
  *
  * Precondition:
  * - Manage staff permission is assigned to magento users
@@ -28,7 +29,6 @@ use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
  * Acceptance:
  * 4. Hide the Force sign out button in staff detail page
  *
- * @package Magento\Webpos\Test\TestCase\SessionManagement\ForceSignOut
  */
 class AdminSessionManagementFS01Test extends Injectable
 {

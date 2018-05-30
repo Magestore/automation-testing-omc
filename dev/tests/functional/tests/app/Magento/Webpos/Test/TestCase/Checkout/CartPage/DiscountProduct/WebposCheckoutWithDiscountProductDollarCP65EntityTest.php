@@ -8,22 +8,26 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct;
 
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
- *  * Preconditions:
+ * Class WebposCheckoutWithDiscountProductDollarCP65EntityTest
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DiscountProduct
+ *
+ * Preconditions:
  * 1. LoginTest webpos by a  staff
  * 2. Add a product to cart
  * 3. Edit Discount product (type:$)
  *
  * Step:
  * 1. Place Order
- */
-/**
- * Class WebposCheckoutWithDiscountProductDollarCP65EntityTest
- * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DiscountProduct
+ *
+ * Acceptance:
+ * 1. Place order successfully with custom price after discount
+ *
  */
 class WebposCheckoutWithDiscountProductDollarCP65EntityTest extends Injectable
 {
@@ -70,7 +74,7 @@ class WebposCheckoutWithDiscountProductDollarCP65EntityTest extends Injectable
 
         $this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($price-$price/2);
+        $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($price - $price / 2);
         $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
         sleep(1);
         //CategoryRepository

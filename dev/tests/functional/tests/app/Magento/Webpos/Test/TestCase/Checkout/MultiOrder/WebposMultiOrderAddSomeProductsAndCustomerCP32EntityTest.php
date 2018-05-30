@@ -8,13 +8,27 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\MultiOrder;
 
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposMultiOrderAddSomeProductsAndCustomerCP32EntityTest
  * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\MultiOrder
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Add some products  and customer to cart
+ * 2. Click on add multi order icon
+ * 3. On 2nd cart, add a product then place order successfully
+ * 4. Go to cart page"
+ *
+ * Acceptance:
+ * Show only 1st cart with  products and customer which selected on step 1 of [Steps] column
+ *
  */
 class WebposMultiOrderAddSomeProductsAndCustomerCP32EntityTest extends Injectable
 {

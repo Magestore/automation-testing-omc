@@ -20,6 +20,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AdminSessionManagementLR25Test
+ * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  *
  * Precondition:
  * - Loged in backend
@@ -42,7 +43,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 9. Not showing the Lock Register menu under Logout menu
  * 10. Not showing the Lock Register sub-menu
  *
- * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
 class AdminSessionManagementLR25Test extends Injectable
 {

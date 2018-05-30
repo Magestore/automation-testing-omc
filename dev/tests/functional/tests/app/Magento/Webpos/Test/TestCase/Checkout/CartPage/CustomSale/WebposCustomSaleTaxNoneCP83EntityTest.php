@@ -7,20 +7,27 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale;
+
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomSale\AssertWebposCustomSaleShippingMethodSectionHidden;
+use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
- *  * Preconditions:
+ * Class WebposCustomSaleTaxNoneCP83EntityTest
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale
+ *
+ * Preconditions:
  * 1. LoginTest webpos by a  staff
  * 2. Add custom product to cart with tax: none
  *
- * Step:
+ * Steps:
  * 1. Add custom product to cart with Tax: None
+ *
+ * Acceptance:
+ * Customer product will be added to cart without tax
+ *
  */
-
 class WebposCustomSaleTaxNoneCP83EntityTest extends Injectable
 {
     /**

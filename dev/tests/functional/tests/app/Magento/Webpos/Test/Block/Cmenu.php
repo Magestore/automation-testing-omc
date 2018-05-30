@@ -106,6 +106,11 @@ class Cmenu extends Block
         return $this->_rootElement->find('.//ul[@class="c-menu__items" and .//li[@id="group_setting"]]', Locator::SELECTOR_XPATH)->isVisible();
     }
 
+    public function waitForLockRegister()
+    {
+        $this->waitForElementVisible('[data-bind="click: lockRegister"] a');
+    }
+
     public function getLockRegister()
     {
         return $this->_rootElement->find('[data-bind="click: lockRegister"] a');

@@ -5,20 +5,31 @@
  * Date: 1/11/2018
  * Time: 10:08 AM
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-/**
- *  * Preconditions:
- * 1. LoginTest webpos by a  staff
- *
- * Step:
- * 1. Click on [Custom sale]
- *
- */
+
 /**
  * Class WebposCustomSaleCheckGUICP71EntityTest
  * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DiscountProduct
+ *
+ * Preconditions:
+ * 1. LoginTest webpos by a  staff
+ *
+ * Steps:
+ * 1. Click on [Custom sale]
+ *
+ * Acceptance:
+ * "Custom sale popup will be shown including:
+ * - Fields: Product name, Product description, Price
+ * - Select picker contents options: None,  goods
+ * - Shippable: on, off
+ * - Number table
+ * - Button: Add to cart
+ * - Action: Cancel"
+ *
  */
 class WebposCustomSaleCheckGUICP71EntityTest extends Injectable
 {

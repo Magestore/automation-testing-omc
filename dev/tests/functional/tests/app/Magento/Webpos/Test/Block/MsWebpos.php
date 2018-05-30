@@ -107,7 +107,7 @@ class MsWebpos extends Block
     }
 
     public function waitForSessionManagerLoader(){
-        $this->waitForElementVisible('#register_shift_container');
+        $this->waitForElementVisible('#register_shift_container #shift_container');
     }
 
     public function getOpenShipPopup(){

@@ -8,14 +8,14 @@
 
 namespace Magento\Webpos\Test\TestCase\Staff\MassAction;
 
-
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Constraint\Adminhtml\Staff\GUI\AssertGridNoRecord;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
-use Magento\Webpos\Test\Constraint\Adminhtml\Staff\GUI\AssertGridNoRecord;
 
 /**
  * Class ManageStaffMS16Test
+ * @package Magento\Webpos\Test\TestCase\Staff\MassAction
  *
  * Precondition:
  * 1. Go to backend > Sales > Manage Staffs
@@ -29,7 +29,6 @@ use Magento\Webpos\Test\Constraint\Adminhtml\Staff\GUI\AssertGridNoRecord;
  * 3.
  * - Close the confirmation popup
  * - Delete the selected staffs successfully and show message: "A total of 1 record(s) were deleted."
- * @package Magento\Webpos\Test\TestCase\Staff\MassAction
  */
 class ManageStaffMS16Test extends Injectable
 {

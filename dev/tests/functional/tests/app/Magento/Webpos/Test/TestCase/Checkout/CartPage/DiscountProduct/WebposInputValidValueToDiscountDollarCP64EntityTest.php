@@ -8,11 +8,15 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct;
 
+use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
+
 /**
- *  * Preconditions:
+ * Class WebposInputValidValueToDiscountDollarCP64EntityTest
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DiscountProduct
+ *
+ * Preconditions:
  * 1. LoginTest webpos by a  staff
  * 2. Add a product to cart
  * 3. Edit Discount product (type:$)
@@ -20,10 +24,12 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
  * Step:
  * 1. Click on [Discount] tab
  * 2. Input valid value to [Amount] field (type: $)
- */
-/**
- * Class WebposInputValidValueToDiscountDollarCP64EntityTest
- * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DiscountProduct
+ *
+ * Acceptance:
+ * "Data on cart page is updated correspondingly:
+ * + New price product = Old price - Amount
+ * + [Reg.] field is changeless"
+ *
  */
 class WebposInputValidValueToDiscountDollarCP64EntityTest extends Injectable
 {
@@ -61,7 +67,7 @@ class WebposInputValidValueToDiscountDollarCP64EntityTest extends Injectable
 
         $this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($price-$price/2);
+        $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($price - $price / 2);
         //we need to set sleep($second) in this case.
         $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
         sleep(2);

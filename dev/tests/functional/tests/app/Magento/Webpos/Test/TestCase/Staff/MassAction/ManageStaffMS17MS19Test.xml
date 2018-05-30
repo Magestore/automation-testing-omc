@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Staff\MassAction\ManageStaffMS17MS19Test" summary="Grid UI Component Filtering" ticketId="MAGETWO-41329">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\MassAction\ManageStaffMS17MS19Test"
+              summary="Grid UI Component Filtering" ticketId="MAGETWO-41329">
         <variation name="ManageStaffMS17TestVariation">
             <data name="staffQty" xsi:type="string">1</data>
             <data name="staff/dataset" xsi:type="string">staffMS03</data>
             <data name="status" xsi:type="string">Enabled</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertStaffMassChangeStatusSuccessMessage" />
-            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertStaffMassChangeStatusInGrid" />
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertStaffMassChangeStatusSuccessMessage"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertStaffMassChangeStatusInGrid"/>
         </variation>
         <variation name="ManageStaffMS19TestVariation">
             <data name="staffQty" xsi:type="string">1</data>
             <data name="staff/dataset" xsi:type="string">default</data>
             <data name="status" xsi:type="string">Disabled</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertStaffMassChangeStatusSuccessMessage" />
-            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertStaffMassChangeStatusInGrid" />
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertStaffMassChangeStatusSuccessMessage"/>
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Grid\AssertStaffMassChangeStatusInGrid"/>
         </variation>
     </testCase>
 </config>

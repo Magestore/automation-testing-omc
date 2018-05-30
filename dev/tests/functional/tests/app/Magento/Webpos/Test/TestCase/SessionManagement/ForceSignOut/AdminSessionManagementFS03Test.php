@@ -21,10 +21,11 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AdminSessionManagementFS03Test
+ * @package Magento\Webpos\Test\TestCase\SessionManagement\ForceSignOut
  *
  * Precondition:
  * - Manage staff permission is assigned to magento users
-- POS staff is loging in on POS
+ * - POS staff is loging in on POS
  *
  * Steps:
  * 1. Login webpos with POS staff account (ex: staff A) -> select a specify POS (POS 1)
@@ -40,7 +41,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 6. Automcatically log staff A out of webpos, and show the login screen
  * 7. Not showing staff name
  *
- * @package Magento\Webpos\Test\TestCase\SessionManagement\ForceSignOut
  */
 class AdminSessionManagementFS03Test extends Injectable
 {

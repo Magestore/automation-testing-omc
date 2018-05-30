@@ -8,25 +8,37 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\MultiOrder;
 
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
+
 /**
  * Class WebposMultiOrderAddProductAndCustomerTest
  * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\MultiOrder
+ *
+ * Precondition:
+ * 1. Login Webpos as a staff
+ *
+ * Steps:
+ * "1. Add a product and customer to cart
+ * 2. Click on add multi order icon (icon +)"
+ *
+ * Acceptance:
+ * "1. Open 2 carts
+ * 2. 1st cart contains product and customer which added in step 1 of [Steps] column "
+ *
  */
 class WebposMultiOrderAddProductAndCustomerTest extends Injectable
 {
     /**
      * AssertWebposCheckGUICustomerPriceCP54 Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
      * @param WebposIndex $webposIndex
-     * @param FixtureFactory $fixtureFactory
      * @return void
      */
     public function __inject(
@@ -37,9 +49,10 @@ class WebposMultiOrderAddProductAndCustomerTest extends Injectable
     }
 
     /**
-     * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
-     *
-     * @return void
+     * @param $products
+     * @param FixtureFactory $fixtureFactory
+     * @param $orderNumber
+     * @return array
      */
     public function test($products, FixtureFactory $fixtureFactory, $orderNumber)
     {

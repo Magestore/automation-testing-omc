@@ -14,6 +14,20 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposBillingAddressPopupCheckGUITest
  * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\BillingAddressPopup
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Click on Add new customer icon"
+ *
+ * Steps:
+ * "1. Click on [Create customer] button
+ * 2. Click on Add Billing address icon"
+ *
+ * Acceptance:
+ * "2. Show Add Billing Address popup with:
+ * - Fields: First name, Last name, Company, Phone, Street1, Street2, City, Zip Code, Country, State or Province, VAT
+ * - Action: Cancel, Save"
+ *
  */
 class WebposBillingAddressPopupCheckGUITest extends Injectable
 {

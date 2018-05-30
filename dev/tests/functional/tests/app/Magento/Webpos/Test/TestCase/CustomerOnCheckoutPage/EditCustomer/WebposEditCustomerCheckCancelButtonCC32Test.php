@@ -12,6 +12,23 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposEditCustomerCheckCancelButtonCC32Test
+ * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\EditCustomer
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Click on Add new customer icon
+ * 3. Select a customer in list"
+ *
+ * Steps:
+ * "1. Click to edit the selected customer
+ * 2. Click on [Cancel] button"
+ *
+ * Acceptance:
+ * 2. Close popup and nothing is changed
+ *
+ */
 class WebposEditCustomerCheckCancelButtonCC32Test extends Injectable
 {
     /**

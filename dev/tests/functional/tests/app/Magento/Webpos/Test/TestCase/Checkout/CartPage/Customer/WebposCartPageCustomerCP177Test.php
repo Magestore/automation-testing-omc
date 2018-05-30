@@ -5,12 +5,32 @@
  * Date: 08/01/2018
  * Time: 14:18
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
+
+use Magento\Customer\Test\Fixture\Customer;
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Customer\Test\Fixture\Customer;
 
+/**
+ * Class WebposCartPageCustomerCP177Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer
+ *
+ * Precondition:
+ * "1. Login webpos by a  staff
+ * 2. Add product to cart
+ * 3. Click on [Checkout] button"
+ *
+ * Steps:
+ * "1. Select an existing customer
+ * 2. Place order"
+ *
+ * Acceptance:
+ * "1. Place order successfully
+ * 2. Shipping and billing information are customer's information"
+ *
+ */
 class WebposCartPageCustomerCP177Test extends Injectable
 {
     /**
@@ -90,13 +110,13 @@ class WebposCartPageCustomerCP177Test extends Injectable
 
         //Get orderId
         $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
-        $orderId= ltrim ($orderId,'#');
+        $orderId = ltrim($orderId, '#');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
 
         return [
-            'name' => $customer->getAddress()[0]['firstname'].' '.$customer->getAddress()[0]['lastname'],
-            'address' => $customer->getAddress()[0]['city'].', '.$customer->getAddress()[0]['region'].', '.$customer->getAddress()[0]['postcode'].', US',
-            'phone' =>  $customer->getAddress()[0]['telephone'],
+            'name' => $customer->getAddress()[0]['firstname'] . ' ' . $customer->getAddress()[0]['lastname'],
+            'address' => $customer->getAddress()[0]['city'] . ', ' . $customer->getAddress()[0]['region'] . ', ' . $customer->getAddress()[0]['postcode'] . ', US',
+            'phone' => $customer->getAddress()[0]['telephone'],
             'orderId' => $orderId
         ];
     }

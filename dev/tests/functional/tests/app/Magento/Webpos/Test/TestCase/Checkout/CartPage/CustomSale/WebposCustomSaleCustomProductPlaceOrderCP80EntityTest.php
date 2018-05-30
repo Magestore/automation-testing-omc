@@ -12,9 +12,23 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposCustomSaleCustomProductPlaceOrderCP80EntityTest
  * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add custom product to cart
+ * 3. Add some products  to cart
+ * 4. Add discount or coupon code"
+ *
+ * Steps:
+ * Place order
+ *
+ * Acceptance:
+ * Order is checkout successfully and saved in Order list
+ *
  */
 class WebposCustomSaleCustomProductPlaceOrderCP80EntityTest extends Injectable
 {

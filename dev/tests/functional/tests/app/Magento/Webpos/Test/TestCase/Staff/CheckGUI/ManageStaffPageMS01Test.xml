@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Staff\CheckGUI\ManageStaffPageMS01Test" summary="Check manage staff page" ticketId="MAGETWO-1234">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\CheckGUI\ManageStaffPageMS01Test"
+              summary="Check manage staff page" ticketId="MAGETWO-1234">
         <variation name="WebposManageStaffMS01TestVariation">
             <data name="pageTitle" xsi:type="string">Staff</data>
-            <data name="nameInputFields" xsi:type="string">ID, Username, Email, Display Name, Location, Role, Status, Action</data>
+            <data name="nameInputFields" xsi:type="string">ID, Username, Email, Display Name, Location, Role, Status,
+                Action
+            </data>
             <data name="actionNames" xsi:type="string">Delete, Change status</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\GUI\AssertStaffPageDisplay" />
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\GUI\AssertStaffPageDisplay"/>
         </variation>
     </testCase>
 </config>

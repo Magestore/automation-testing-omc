@@ -5,14 +5,17 @@
  * Date: 18/01/2018
  * Time: 13:35
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
+
+use Magento\ConfigurableProduct\Test\Fixture\ConfigurableProduct;
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\ConfigurableProduct\Test\Fixture\ConfigurableProduct;
 
 /**
  * Class WebposHoldOrderCP157Test
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\HoldOrder
  *
  * Precondition:
  * 1. LoginTest Webpos as a staff
@@ -25,7 +28,6 @@ use Magento\ConfigurableProduct\Test\Fixture\ConfigurableProduct;
  *
  * Acceptance: Order will be loaded to cart page with corresponding product and attributes
  *
- * @package Magento\Webpos\Test\TestCase\Cart\CartPage\HoldOrder
  */
 class WebposHoldOrderCP157Test extends Injectable
 {

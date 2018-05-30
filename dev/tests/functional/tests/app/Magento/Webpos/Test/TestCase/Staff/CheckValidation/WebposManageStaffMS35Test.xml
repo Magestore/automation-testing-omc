@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Staff\CheckValidation\WebposManageStaffMS35Test" summary="Create a new staff with an exist mail" ticketId="MAGETWO-1234">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\CheckValidation\WebposManageStaffMS35Test"
+              summary="Create a new staff with an exist mail" ticketId="MAGETWO-1234">
         <variation name="WebposManageStaffMS35TestVariation">
             <data name="staff/dataset" xsi:type="string">staffMS34</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertValidationEmailExist" />
+            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertValidationEmailExist"/>
         </variation>
     </testCase>
 </config>

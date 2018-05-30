@@ -38,7 +38,8 @@ class WebposConfigurationStep implements TestStepInterface
     public function __construct(
         SystemConfigEdit $systemConfigEdit,
         ConfigData $dataConfig
-    ) {
+    )
+    {
         $this->systemConfigEdit = $systemConfigEdit;
         $this->dataConfig = $dataConfig;
     }

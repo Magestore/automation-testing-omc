@@ -5,12 +5,32 @@
  * Date: 12/02/2018
  * Time: 09:14
  */
+
 namespace Magento\Webpos\Test\TestCase\Location\AddLocation;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Location;
 use Magento\Webpos\Test\Page\Adminhtml\LocationIndex;
 use Magento\Webpos\Test\Page\Adminhtml\LocationNews;
 
+/**
+ * Add Location
+ * Testcase ML22 - Check [Reset] button
+ *
+ * Precondition
+ * 1. Go to backend > Sales > Manage Locations
+ *
+ * Steps
+ * 1. Click on [Add Location] button
+ * 2. Fill out correctly all fields
+ * 3. Click on [Reset] button
+ *
+ * Acceptance
+ * 3. Reset data in all fileds to default values
+ *
+ * Class WebposManageLocationML22Test
+ * @package Magento\Webpos\Test\TestCase\Location\AddLocation
+ */
 class WebposManageLocationML22Test extends Injectable
 {
     /**
@@ -24,16 +44,18 @@ class WebposManageLocationML22Test extends Injectable
      * @var LocationNews
      */
     private $locationNews;
+
     /**
      * Inject location pages.
      *
-     * @param LocationIndex
-     * @return void
+     * @param LocationIndex $locationIndex
+     * @param LocationNews $locationNews
      */
     public function __inject(
         LocationIndex $locationIndex,
         LocationNews $locationNews
-    ) {
+    )
+    {
         $this->locationIndex = $locationIndex;
         $this->locationNews = $locationNews;
     }

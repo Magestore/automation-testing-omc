@@ -39,11 +39,13 @@ class ManageStaffMS11Test extends Injectable
 
     public function __inject(
         StaffIndex $staffIndex
-    ){
+    )
+    {
         $this->staffIndex = $staffIndex;
     }
 
-    public function test($username, $email, $display_name){
+    public function test($username, $email, $display_name)
+    {
         $this->staffIndex->open();
         $this->staffIndex->getStaffsGrid()->waitLoader();
         $this->staffIndex->getStaffsGrid()->getFilterButton()->click();

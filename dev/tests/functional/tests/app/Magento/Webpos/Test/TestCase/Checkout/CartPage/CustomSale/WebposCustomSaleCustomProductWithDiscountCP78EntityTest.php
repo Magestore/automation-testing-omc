@@ -10,20 +10,24 @@ namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
- *  * Preconditions:
+ * Class WebposCustomSaleCustomProductWithDiscountCP78EntityTest
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
+ *
+ * Preconditions:
  * 1. LoginTest webpos by a  staff
  * 2. Add some products  to cart
  * 3. Add discount (type :%)
  *
- * Step:
+ * Steps:
  * 1. Add a custom product to cart
+ *
+ * Acceptance:
+ * Custom product will be added to cart and discount amount will be updated
+ *
  */
-/**
- * Class WebposCustomSaleCustomProductWithDiscountCP78EntityTest
- * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
- */
-class WebposCustomSaleCustomProductWithDiscountCP78EntityTest extends  Injectable
+class WebposCustomSaleCustomProductWithDiscountCP78EntityTest extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex

@@ -5,13 +5,29 @@
  * Date: 18/01/2018
  * Time: 16:14
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposHoldOrderCP162Test
  * @package Magento\Webpos\Test\TestCase\Cart\CartPage\HoldOrder
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add a product
+ * 3. Edit customer price of that product with type: $
+ * 4. Hold order successfully"
+ *
+ * Steps:
+ * "1. Go to [On-hold orders] menu
+ * 2. Click on [Checkout] button on that detail order"
+ *
+ * Acceptance:
+ * Order will be loaded to cart page with correct custom price  then auto next to checkout page.
+ *
  */
 class WebposHoldOrderCP162Test extends Injectable
 {
@@ -57,8 +73,7 @@ class WebposHoldOrderCP162Test extends Injectable
 
         //Edit customer price of that product with type: $
         $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
-        if (!$this->webposIndex->getCheckoutProductEdit()->getPanelPriceBox()->isVisible())
-        {
+        if (!$this->webposIndex->getCheckoutProductEdit()->getPanelPriceBox()->isVisible()) {
             $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
         }
         $this->webposIndex->getCheckoutProductEdit()->getDollarButton()->click();

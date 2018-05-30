@@ -8,13 +8,13 @@
 
 namespace Magento\Webpos\Test\TestCase\Staff\MassAction;
 
-
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 
 /**
  * Class ManageStaffMS18MS20Test
+ * @package Magento\Webpos\Test\TestCase\Staff\MassAction
  *
  * Precondition:
  * 1. Go to backend > Sales > Manage Staffs
@@ -29,7 +29,6 @@ use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
  * - The status of the selected staffs will be changed to Enable
  * - Show message ""A total of 1 record(s) were updated."""
  *
- * @package Magento\Webpos\Test\TestCase\Staff\MassAction
  */
 class ManageStaffMS18MS20Test extends Injectable
 {

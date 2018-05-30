@@ -5,8 +5,10 @@
  * See COPYING.txt for license details.
  */
  -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\MultiOrder\WebposCreateMultiOrderAndLogoutCP27Test" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\MultiOrder\WebposCreateMultiOrderAndLogoutCP27Test"
+              summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
         <variation name="WebposCreateMultiOrderAndLogoutCP27TestVariation1_CP27">
             <data name="createStaff/dataset" xsi:type="string">default</data>
         </variation>

@@ -18,6 +18,7 @@ use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 
 /**
  * Class AdminSessionManagementFS02Test
+ * @package Magento\Webpos\Test\TestCase\SessionManagement\ForceSignOut
  *
  * Precondition:
  * - Manage staff permission is assigned to magento users
@@ -32,7 +33,6 @@ use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
  * Acceptance:
  * 4. The Force sign out button is placed between Reset button and Save and continue edit button
  *
- * @package Magento\Webpos\Test\TestCase\SessionManagement\ForceSignOut
  */
 class AdminSessionManagementFS02Test extends Injectable
 {

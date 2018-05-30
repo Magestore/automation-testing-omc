@@ -10,7 +10,7 @@
             <data name="pos/data/status" xsi:type="string">Enabled</data>
             <data name="pos/data/is_allow_to_lock" xsi:type="string">1</data>
             <data name="pos/data/pin" xsi:type="string">1234</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Setting\General\AssertUnlockScreenCheckGUI" />
+            <constraint name="Magento\Webpos\Test\Constraint\Setting\General\AssertUnlockScreenCheckGUI"/>
         </variation>
     </testCase>
 </config>

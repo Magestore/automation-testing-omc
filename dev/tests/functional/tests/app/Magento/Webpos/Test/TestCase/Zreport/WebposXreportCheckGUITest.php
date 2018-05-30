@@ -13,6 +13,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposZreportCheckGUITest
+ * @package Magento\Webpos\Test\TestCase\Zreport
  *
  * Precondition: There are some POSs and setting [Need to create session before working] = ""Yes"" on the test site
  * 1. Login webpos by a staff who has open and close session permission
@@ -47,7 +48,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  *
  * Time to print the X-report
  *
- * @package Magento\Webpos\Test\TestCase\Zreport
  */
 class WebposXreportCheckGUITest extends Injectable
 {
@@ -81,7 +81,6 @@ class WebposXreportCheckGUITest extends Injectable
             ['configData' => 'create_session_before_working']
         )->run();
 
-        // Login webpos
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
         )->run();
@@ -109,7 +108,6 @@ class WebposXreportCheckGUITest extends Injectable
         return [
             'staffName' => $staffName,
             'openedString' => $openedString
-
         ];
     }
 
@@ -118,10 +116,6 @@ class WebposXreportCheckGUITest extends Injectable
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'setup_session_before_working_to_no']
-        )->run();
-
-        $this->objectManager->create(
-            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
         )->run();
     }
 

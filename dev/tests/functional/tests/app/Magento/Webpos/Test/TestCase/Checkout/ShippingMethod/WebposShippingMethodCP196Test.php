@@ -5,9 +5,31 @@
  * Date: 12/01/2018
  * Time: 15:46
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\ShippingMethod;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
+/**
+ * Class WebposShippingMethodCP196Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\ShippingMethod
+ *
+ * Precondition:
+ * There are some shipping methods on webpos
+ * 1. Login Webpos as a staff
+ * 2. Add some product to cart
+ * 3. Click on [Checkout] button"
+ *
+ * Steps:
+ * "1. Select a shipping method on shipping method section
+ * 2. Select other shipping method"
+ *
+ * Acceptance:
+ * "1. Title of section shipping method will be update according to new shipping method
+ * 2. Price of shipping method will be updated on cart and total cart will be updated too"
+ *
+ */
 class WebposShippingMethodCP196Test extends Injectable
 {
     /**

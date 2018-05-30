@@ -14,6 +14,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposZreportCheckGUITest
+ * @package Magento\Webpos\Test\TestCase\Zreport
  *
  * Precondition: There are some POSs and setting [Need to create session before working] = ""Yes"" on the test site
  * 1. Login webpos by a staff who has open and close session permission
@@ -27,7 +28,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  *
  * Acceptance:
  *
- * @package Magento\Webpos\Test\TestCase\Zreport
  */
 class WebposZreportCheckGUITest extends Injectable
 {

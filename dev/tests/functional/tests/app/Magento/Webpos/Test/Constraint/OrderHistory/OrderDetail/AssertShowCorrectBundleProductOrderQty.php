@@ -22,7 +22,7 @@ class AssertShowCorrectBundleProductOrderQty extends AbstractConstraint
         \PHPUnit_Framework_Assert::assertEquals(
             $qty,
             (int)$orderQty,
-            'Order Quantity was displayed correctly'
+            'Order Quantity was incorrectly'
         );
     }
 

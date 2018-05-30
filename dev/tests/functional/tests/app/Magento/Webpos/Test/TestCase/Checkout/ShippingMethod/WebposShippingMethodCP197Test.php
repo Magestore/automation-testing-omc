@@ -5,9 +5,29 @@
  * Date: 12/01/2018
  * Time: 16:06
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\ShippingMethod;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
+/**
+ * Class WebposShippingMethodCP197Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\ShippingMethod
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add some product to cart
+ * 3. Click on [Checkout] button"
+ *
+ * Steps:
+ * "1. Select a shipping method with fee >0
+ * 2. Back to cart page"
+ *
+ * Acceptance:
+ * Fee shipping will be shown on cart page and total amount will be updated too
+ *
+ */
 class WebposShippingMethodCP197Test extends Injectable
 {
     /**
@@ -68,8 +88,8 @@ class WebposShippingMethodCP197Test extends Injectable
         sleep(3);
 
         return [
-            'total' =>$this->webposIndex->getCheckoutWebposCart()->getTotal(),
-            'subtotal' =>$this->webposIndex->getCheckoutWebposCart()->getSubtotal(),
+            'total' => $this->webposIndex->getCheckoutWebposCart()->getTotal(),
+            'subtotal' => $this->webposIndex->getCheckoutWebposCart()->getSubtotal(),
             'tax' => $this->webposIndex->getCheckoutWebposCart()->getTax()
         ];
     }

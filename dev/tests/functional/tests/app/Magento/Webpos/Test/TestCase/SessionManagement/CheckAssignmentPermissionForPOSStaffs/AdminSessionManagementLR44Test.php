@@ -20,6 +20,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AdminSessionManagementLR44Test
+ * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  *
  * Precondition:
  * - In the webpos settings page, set the Need to create session before working field to Yes
@@ -39,7 +40,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * + 1 text line with the content: Please enter security PIN to lock the register
  * + 4 small textboxes for entering security PIN
  *
- * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
 class AdminSessionManagementLR44Test extends Injectable
 {

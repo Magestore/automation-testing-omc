@@ -7,24 +7,29 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomSale;
+
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Checkout\CartPage\CustomSale\AssertWebposCustomSaleShippingMethodSectionShow;
-/**
- *  * Preconditions:
- * 1. LoginTest webpos by a  staff
- * 2. Add custom product to cart with shippable: on
- *
- * Step:
- * 1. Place order as manual product
- */
+use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposCustomSaleShippableOnCP82EntityTest
  * @package Magento\Webpos\Test\TestCase\Cart\CartPage\CustomSale
+ *
+ * Preconditions:
+ * 1. LoginTest webpos by a  staff
+ * 2. Add custom product to cart with shippable: on
+ *
+ * Steps:
+ * 1. Place order as manual product
+ *
+ * Acceptance:
+ * "1. Shipping method section will be shown on Checkout page
+ * 2. Order is checkout successfully and save in Order list"
+ *
  */
-class WebposCustomSaleShippableOnCP82EntityTest  extends Injectable
+class WebposCustomSaleShippableOnCP82EntityTest extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex
@@ -37,7 +42,7 @@ class WebposCustomSaleShippableOnCP82EntityTest  extends Injectable
     /**
      * @var
      */
-    protected  $assertWebposCustomSaleShippingMethodSectionShow;
+    protected $assertWebposCustomSaleShippingMethodSectionShow;
 
     /**
      * @param WebposIndex $webposIndex

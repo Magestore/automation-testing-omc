@@ -8,17 +8,31 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\MultiOrder;
 
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Config\Test\Fixture\ConfigData;
+use Magento\Webpos\Test\Page\Adminhtml\StaffEdit;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
-use Magento\Webpos\Test\Page\Adminhtml\StaffEdit;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposCreateMultiOrderAndLogoutCP27Test
  * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\MultiOrder
+ *
+ * Precondition:
+ * "1. Login webpos as a staff
+ * 2.  Create multi order
+ * 3. Logout webpos
+ * 4. Login webpos by other staff
+ * 5. Logout webpos "
+ *
+ * Steps:
+ * 1. Login webpos by the same staff on step 1 of [Precondition and setup steps] column
+ *
+ * Acceptance:
+ * Don't show multi order which created on step 2 of [Precondition and setup steps] column
+ *
  */
 class WebposCreateMultiOrderAndLogoutCP27Test extends Injectable
 {
@@ -26,6 +40,16 @@ class WebposCreateMultiOrderAndLogoutCP27Test extends Injectable
     const MVP = 'yes';
     const DOMAIN = 'CS';
     /* end tags */
+    /**
+     * AssertWebposCheckGUICustomerPriceCP54 Index page.
+     *
+     * @var WebposIndex
+     */
+    protected $webposIndex;
+    /**
+     * @var StaffEdit
+     */
+    protected $staffEditPage;
     /**
      * AssertWebposCheckGUICustomerPriceCP54 Staff Index page.
      *
@@ -38,16 +62,6 @@ class WebposCreateMultiOrderAndLogoutCP27Test extends Injectable
      * @var StaffNews
      */
     private $staffsNew;
-    /**
-     * AssertWebposCheckGUICustomerPriceCP54 Index page.
-     *
-     * @var WebposIndex
-     */
-    protected $webposIndex;
-    /**
-     * @var StaffEdit
-     */
-    protected $staffEditPage;
 
     /**
      * @param WebposIndex $webposIndex
@@ -104,7 +118,8 @@ class WebposCreateMultiOrderAndLogoutCP27Test extends Injectable
         $this->webposIndex->getLoginForm()->getPasswordField()->setValue($createStaff->getPassword());
         $this->webposIndex->getLoginForm()->clickLoginButton();
         sleep(3);
-        while ($this->webposIndex->getFirstScreen()->isVisible()) {}
+        while ($this->webposIndex->getFirstScreen()->isVisible()) {
+        }
         sleep(2);
         //End LoginTest webpos by the other staff
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
@@ -119,10 +134,10 @@ class WebposCreateMultiOrderAndLogoutCP27Test extends Injectable
         )->run();
         //End The 3rd login webpos
         sleep(2);
-        for ($i=1; $i<=2; $i++) {
+        for ($i = 1; $i <= 2; $i++) {
             self::assertFalse(
                 $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($i)->isVisible(),
-                'On the AssertWebposCheckGUICustomerPriceCP54 TaxClass, The multi order item '.$i.' were visible successfully.'
+                'On the AssertWebposCheckGUICustomerPriceCP54 TaxClass, The multi order item ' . $i . ' were visible successfully.'
             );
         }
         // Begin delete new Staff on magento backend

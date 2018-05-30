@@ -8,12 +8,26 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomPrice;
 
+use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
+
 /**
  * Class WebposCheckGUICustomerPriceInsertNegativePriceCP55EntityTest
  * @package Magento\Webpos\Test\TestCase\CategoryRepository\CartPage\CustomPrice
+ *
+ * Precondition:
+ * "1. Login webpos by a  staff
+ * 2. Add a product to cart
+ * 3. Click on the product on cart"
+ *
+ * Steps:
+ * "1. Click on [Custom price] tab
+ * 2. Input negative number to [Amount] field"
+ *
+ * Acceptance:
+ * Nothing happens
+ *
  */
 class WebposCheckGUICustomerPriceInsertNegativePriceCP55EntityTest extends Injectable
 {

@@ -10,9 +10,22 @@ namespace Magento\Webpos\Test\TestCase\Checkout\CartPageActionMenu;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposClickSaveAndClosePopupOrderNoteTest
  * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\CartPageActionMenu
+ *
+ * Precondition:
+ * 1. Login Webpos as a staff
+ *
+ * Steps:
+ * "1. Click on action menu ""..."" on the top-right of the screen
+ * 2. Click on ""Add order note""
+ * 3. Click on ""Save"" button"
+ *
+ * Acceptance:
+ * 1. Close "Order comment" popup
+ *
  */
 class WebposClickSaveAndClosePopupOrderNoteTest extends Injectable
 {

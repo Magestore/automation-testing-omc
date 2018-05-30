@@ -16,6 +16,8 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposZreportZR017Test
+ * @package Magento\Webpos\Test\TestCase\Zreport
+ *
  * Precondition:
  * - There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * - Setup multi currencies
@@ -39,7 +41,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * Acceptance:
  * 3. All of fields on Z-report will be show exactly the symbol and converting rate of the currency that selected on step 2 of [Precondition and setup steps]
  *
- * @package Magento\Webpos\Test\TestCase\Zreport
  */
 class WebposZreportZR017Test extends Injectable
 {
@@ -116,6 +117,10 @@ class WebposZreportZR017Test extends Injectable
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'magestore_webpos_custome_payment']
+        )->run();
+
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
         )->run();
 
         $this->currencyIndex->open();
@@ -213,6 +218,7 @@ class WebposZreportZR017Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         sleep(1);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();

@@ -10,7 +10,7 @@
             <data name="pos/data/status" xsi:type="string">Enabled</data>
             <data name="pos/data/is_allow_to_lock" xsi:type="string">1</data>
             <data name="menuItemLockRegister" xsi:type="string">Lock Register</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Setting\General\AssertWebPOSCheckGUILockRegister" />
+            <constraint name="Magento\Webpos\Test\Constraint\Setting\General\AssertWebPOSCheckGUILockRegister"/>
         </variation>
     </testCase>
 </config>

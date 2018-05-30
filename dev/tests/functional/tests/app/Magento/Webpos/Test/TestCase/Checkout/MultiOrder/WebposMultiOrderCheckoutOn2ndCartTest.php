@@ -8,13 +8,27 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\MultiOrder;
 
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposMultiOrderCheckoutOn2ndCartTest
  * @package Magento\WebposCheckGUICustomerPriceCP54EntityTest\Test\TestCase\CategoryRepository\MultiOrder
+ *
+ * Precondition:
+ * "1. Login webpos as a staff
+ * 2. Click on add multi order icon"
+ *
+ * Steps:
+ * "1. Add some products  to 2nd cart
+ * 2. Place order 2nd cart"
+ *
+ * Acceptance:
+ * "1. Place order successfully
+ * 2. In cart page, there is only 1st cart, 2nd cart is deleted"
+ *
  */
 class WebposMultiOrderCheckoutOn2ndCartTest extends Injectable
 {
@@ -48,7 +62,7 @@ class WebposMultiOrderCheckoutOn2ndCartTest extends Injectable
      *
      * @return void
      */
-    public function test($orderNumber, $products,  FixtureFactory $fixtureFactory)
+    public function test($orderNumber, $products, FixtureFactory $fixtureFactory)
     {
         $staff = $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'

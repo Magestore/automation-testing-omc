@@ -12,12 +12,30 @@ use Magento\Customer\Test\Fixture\Address;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\ShippingAddressPopup\AssertBillingAddressOnNewCustomerPopupIsCorrect;
 use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\CreateCustomer\AssertCreateCustomerOnCheckoutPageSuccess;
+use Magento\Webpos\Test\Constraint\CustomerOnCheckoutPage\ShippingAddressPopup\AssertBillingAddressOnNewCustomerPopupIsCorrect;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposCustomerOnCheckoutPageCC25Test
  * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\BillingAddressPopup
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Click on Add new customer icon"
+ *
+ * Steps:
+ * "1. Click on [Create customer] button >Fill out all fields
+ * 2. Click on Add Billing address icon > Add an address successfully
+ * 3. On [New Customer] popup, click on Delete Billing address icon
+ * 4. Click on [Save] button on [New customer] popup"
+ *
+ * Acceptance:
+ * "3. Delete that Billing address from [Billing address] section
+ * 5. Save customer successfully
+ *
+ * "
+ *
  */
 class WebposCustomerOnCheckoutPageCC25Test extends Injectable
 {

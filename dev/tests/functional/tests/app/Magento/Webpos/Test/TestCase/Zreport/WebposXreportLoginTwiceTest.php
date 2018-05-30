@@ -17,6 +17,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposXreportLoginTwiceTest
+ * @package Magento\Webpos\Test\TestCase\Zreport
  *
  * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff (ex: Staff A)
@@ -32,7 +33,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * Acceptance:
  * 2. [Staff] field will show name of the current staff (Staff B)
  *
- * @package Magento\Webpos\Test\TestCase\Zreport
  */
 class WebposXreportLoginTwiceTest extends Injectable
 {
@@ -162,10 +162,6 @@ class WebposXreportLoginTwiceTest extends Injectable
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'setup_session_before_working_to_no']
-        )->run();
-
-        $this->objectManager->create(
-            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
         )->run();
     }
 }

@@ -10,17 +10,19 @@ namespace Magento\Webpos\Test\TestCase\Location\CheckGUILocation;
 
 
 /**
- * Managelocation-ML03
- *
- * Sort by ID column
+ * Check Sort column in Grid
+ * Testcase ML03 - Sort by ID column
  *
  * Precondition
- * Exist at least 2 records on the grid
+ * 1. Go to backend > Sales > Manage Locations
  *
  * Steps
- * 1.Go to backend->Sales->Manage Location
- * 2. Click on title of ID Column
- * 3. Click again
+ * 1. Click on title of ID column
+ * 2. Click again
+ *
+ * Acceptance Criteria
+ * 1. The records on grid will be sorted in increasing ID
+ * 2. The records on grid will be sorted in descending ID
  *
  * Class WebposManageLocationML03Test
  * @package Magento\Webpos\Test\TestCase\Location\CheckGUILocation

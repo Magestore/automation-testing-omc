@@ -8,13 +8,33 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\PaymentMethod;
 
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposCheckoutPaymentMethodCP215Test
  * @package Magento\Webpos\Test\TestCase\Cart\PaymentMethod
+ *
+ * Precondition:
+ * There are some payment methods on webpos
+ * 1. Login Webpos as a staff
+ * 2. Add some product to cart
+ * 3. Click on [Checkout] button
+ * 4. Select a shipping method"
+ *
+ * Steps:
+ * "1. Select a payment method > fill amount less than total order
+ * 2. [Mark a shipped]: off
+ * 3. Click on [Mark as partial] button"
+ *
+ * Acceptance:
+ * "1. Place order successfully
+ * 2. Order is created with pending status including:
+ * + [Total paid] = [entered amount] on step 1 of [Steps] column
+ * + Show [Take payment], [Invoice], [Print] button"
+ *
  */
 class WebposCheckoutPaymentMethodCP215Test extends Injectable
 {

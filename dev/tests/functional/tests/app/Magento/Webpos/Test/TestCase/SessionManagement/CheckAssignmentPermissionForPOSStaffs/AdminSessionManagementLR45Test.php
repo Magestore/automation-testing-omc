@@ -20,6 +20,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AdminSessionManagementLR45Test
+ * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  *
  * Precondition:
  * - In the webpos settings page, set the Need to create session before working field to Yes
@@ -35,7 +36,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 2. Lock register confirmation popup is displayed
  * 3. Hide confirmation popup and redirect POS staff to the previous page
  *
- * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
 class AdminSessionManagementLR45Test extends Injectable
 {

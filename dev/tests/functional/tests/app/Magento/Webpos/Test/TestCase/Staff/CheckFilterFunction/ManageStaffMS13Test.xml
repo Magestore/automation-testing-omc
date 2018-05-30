@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Staff\CheckFilterFunction\ManageStaffMS13Test" summary="Grid UI Component Filtering" ticketId="MAGETWO-41329">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Staff\CheckFilterFunction\ManageStaffMS13Test"
+              summary="Grid UI Component Filtering" ticketId="MAGETWO-41329">
         <variation name="ManageStaffMS13TestVariation">
             <data name="itemsCount" xsi:type="string">1</data>
             <data name="fixtureName" xsi:type="string">staff</data>
@@ -15,7 +17,7 @@
             <data name="pageClass" xsi:type="string">Magento\Webpos\Test\Page\Adminhtml\StaffIndex</data>
             <data name="gridRetriever" xsi:type="string">getStaffsGrid</data>
             <data name="idGetter" xsi:type="string">getStaffId</data>
-            <constraint name="Magento\Ui\Test\Constraint\AssertGridFiltering" />
+            <constraint name="Magento\Ui\Test\Constraint\AssertGridFiltering"/>
         </variation>
     </testCase>
 </config>

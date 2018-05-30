@@ -8,15 +8,33 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\MultiOrder;
 
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Config\Test\Fixture\ConfigData;
 use Magento\Mtf\Config\DataInterface;
+use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test
  * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\MultiOrder
+ *
+ * Precondition:
+ * "In backend:
+ * 1. Setting [Need to create session before working] = Yes
+ * In webpos:
+ * 1. Login webpos as a staff
+ * 2.  Create multi order
+ * 3. Close session
+ * 4. Logout webpos"
+ *
+ * Steps:
+ * "1. Login webpos by the same staff
+ * 2. Create new session
+ * 3. Go to cart page"
+ *
+ * Acceptance:
+ * Don't show multi order which created on step 2 of [Precondition and setup steps] column
+ *
  */
 class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
 {
@@ -68,11 +86,11 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
         $time = time();
         $timeAfter = $time + 5;
         while (!$this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->isVisible()
-            && $time < $timeAfter){
+            && $time < $timeAfter) {
             $time = time();
         }
-        if($this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->isVisible()){
-            if($this->webposIndex->getOpenSessionPopup()->getLoadingElement()->isVisible()){
+        if ($this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->isVisible()) {
+            if ($this->webposIndex->getOpenSessionPopup()->getLoadingElement()->isVisible()) {
                 $this->webposIndex->getOpenSessionPopup()->waitForElementNotVisible('.indicator[data-bind="visible:loading"]');
             }
             $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();

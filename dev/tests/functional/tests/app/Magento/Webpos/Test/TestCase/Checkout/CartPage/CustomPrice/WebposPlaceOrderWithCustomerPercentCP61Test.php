@@ -8,13 +8,26 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\CustomPrice;
 
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposPlaceOrderWithCustomerPercentCP61Test
  * @package Magento\Webpos\Test\TestCase\CategoryRepository\CartPage\CustomPrice
+ *
+ * Precondition:
+ * "1. Login webpos by a  staff
+ * 2. Add a product to cart
+ * 3. Edit custom price (type: %)"
+ *
+ * Steps:
+ * 1. Place order
+ *
+ * Acceptance:
+ * 1. Place order successfully with custom price that edited on step 3 of [Precondition and setup steps] column
+ *
  */
 class WebposPlaceOrderWithCustomerPercentCP61Test extends Injectable
 {

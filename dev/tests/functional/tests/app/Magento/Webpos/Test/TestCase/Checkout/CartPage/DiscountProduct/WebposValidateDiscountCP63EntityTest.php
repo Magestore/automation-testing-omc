@@ -8,11 +8,15 @@
 
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\DiscountProduct;
 
+use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
+
 /**
- *  * Preconditions:
+ * Class WebposValidateDiscountCP63EntityTest
+ * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DiscountProduct
+ *
+ * Preconditions:
  * 1. LoginTest webpos by a  staff
  * 2. Add a product to cart
  * 3. Click on the product on cart
@@ -20,10 +24,11 @@ use Magento\Catalog\Test\Fixture\CatalogProductSimple;
  * Step:
  * 1. Click on [Discount] tab
  * 2. Input integer number that greater than price product to [Amount] field (type: $)
- */
-/**
- * Class WebposValidateDiscountCP63EntityTest
- * @package Magento\Webpos\Test\TestCase\Cart\CartPage\DiscountProduct
+ *
+ * Acceptance:
+ * "1. Show message: ""Warning: You are able to apply discount under 100% only""
+ * 2. Amount field is filled automatically with amount equal price product"
+ *
  */
 class WebposValidateDiscountCP63EntityTest extends Injectable
 {
@@ -60,7 +65,7 @@ class WebposValidateDiscountCP63EntityTest extends Injectable
         $this->webposIndex->getCheckoutCartItems()->getCartItem($product->getName())->click();
         $this->webposIndex->getCheckoutProductEdit()->waitDiscountButton();
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
-        $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($price+10);
+        $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($price + 10);
         //we need to set sleep($second) in this case.
         $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
         sleep(2);

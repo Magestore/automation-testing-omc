@@ -12,6 +12,26 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposEditCustomerEditSomeFieldsCC33Test
+ * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\EditCustomer
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Click on Add new customer icon
+ * 3. Select a customer in list"
+ *
+ * Steps:
+ * "1. Click to edit the selected customer
+ * 2. Edit some fields
+ * 3. Save"
+ *
+ * Acceptance:
+ * "3.
+ * - Close popup and customer information was updated
+ * - Show message ""Success: The customer is saved successfully."""
+ *
+ */
 class WebposEditCustomerEditSomeFieldsCC33Test extends Injectable
 {
     /**

@@ -22,6 +22,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AdminSessionManagementLR61Test
+ * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  *
  * Precondition:
  * - Loged in webpos with POS staff that is assigned permission to lock/unlock register
@@ -32,13 +33,11 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 2. In the locked POS detail page, set the Enable option to lock register field to No
  * 3. Reload webpos and check the locked POS on webpos
  * 4. Check the status of locked POS on backend
-
  *
  * Acceptance:
  * 3. The locked POS is automatically unlocked
  * 4. POS status changes from Locked to Enabled
  *
- * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
 class AdminSessionManagementLR61Test extends Injectable
 {

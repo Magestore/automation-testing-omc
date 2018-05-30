@@ -20,9 +20,10 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AdminSessionManagementLR24LR31Test
+ * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  *
  * Precondition:
- * - Loged in backend
+ * - Logged in backend
  * - In the  webpos settings page, set the Need to create session before working field to Yes
  * - From menu on the left side, select Sales menu , under Web POS > select Manage Role
  *
@@ -34,7 +35,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 5. Open Staff List tab, select POS staff account by ticking on each it
  * 6. Click on Save button
  * 7. On webpos, login with POS staff account that is assigned role to Lock and Unlock register
- * 8. After loging in, select Location and POS (This POS is already configed to allow POS staff to lock register)
+ * 8. After loging in, select Location and POS (This POS is already config to allow POS staff to lock register)
  * 9. Check webpos menu on left side
  * 10. From menu on left side -> select General -> check sub- menu
  *
@@ -42,7 +43,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 9. Not showing the Lock Register menu under Logout menu
  * 10. Show more Lock Register sub-menu
  *
- * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
 class AdminSessionManagementLR24LR31Test extends Injectable
 {

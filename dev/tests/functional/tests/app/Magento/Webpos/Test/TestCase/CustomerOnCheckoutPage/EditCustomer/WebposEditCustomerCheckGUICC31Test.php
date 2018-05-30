@@ -12,6 +12,22 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposEditCustomerCheckGUICC31Test
+ * @package Magento\Webpos\Test\TestCase\CustomerOnCheckoutPage\EditCustomer
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Click on Add new customer icon
+ * 3. Select a customer in list"
+ *
+ * Steps:
+ * 1. Click to edit the selected customer
+ *
+ * Acceptance:
+ * 1. Popup Edit Customer will  be shown with information fields, list Shipping/Billing address and [Add address] button
+ *
+ */
 class WebposEditCustomerCheckGUICC31Test extends Injectable
 {
     /**

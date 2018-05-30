@@ -5,15 +5,31 @@
  * Date: 08/01/2018
  * Time: 15:35
  */
+
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\Customer;
+
+use Magento\Customer\Test\Fixture\Customer;
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Customer\Test\Fixture\Customer;
 
 /**
  * Class WebposCartPageCustomerCP180Test
  * @package Magento\Webpos\Test\TestCase\Cart\CartPage\Customer
+ *
+ * Precondition:
+ * "1. Login webpos by a  staff
+ * 2. Add some products  to cart
+ * 3. Click on [Checkout] button
+ * 4. Select an existing customer"
+ *
+ * Steps:
+ * "1.Click on icon to change customer
+ * 2. Select a different customer
+ *
+ * Acceptance:
+ * Customer on cart page was changed
+ *
  */
 class WebposCartPageCustomerCP180Test extends Injectable
 {

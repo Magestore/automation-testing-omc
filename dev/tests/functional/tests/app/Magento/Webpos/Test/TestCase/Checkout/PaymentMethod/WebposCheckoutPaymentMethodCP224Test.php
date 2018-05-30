@@ -7,12 +7,30 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Checkout\PaymentMethod;
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
+use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
+
+/**
+ * Class WebposCheckoutPaymentMethodCP224Test
+ * @package Magento\Webpos\Test\TestCase\Checkout\PaymentMethod
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add a product to cart
+ * 3. Click on [Checkout] button"
+ *
+ * Steps:
+ * "1. Select a shipping method
+ * 2. Select a payment method > fill total into amount box
+ * 3. Place order successfully"
+ *
+ * Acceptance:
+ * Seleted payment method and amount payment will be shown on "Payment method" section of the detail order
+ *
+ */
 class WebposCheckoutPaymentMethodCP224Test extends Injectable
 {
     /**

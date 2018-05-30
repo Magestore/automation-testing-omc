@@ -5,11 +5,14 @@
  * See COPYING.txt for license details.
  */
  -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPageActionMenu\WebposCheckActionMenuTopRightScreenTest" summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPageActionMenu\WebposCheckActionMenuTopRightScreenTest"
+              summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
         <variation name="WebposCheckoutCartPageVisibleTestVariation1_CP10">
             <data name="staff" xsi:type="null"></data>
-            <constraint name="Magento\Webpos\Test\Constraint\Checkout\CartPageActionMenu\AssertWebposCheckActionMenuTopRightScreen" />
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\Checkout\CartPageActionMenu\AssertWebposCheckActionMenuTopRightScreen"/>
         </variation>
     </testCase>
 </config>

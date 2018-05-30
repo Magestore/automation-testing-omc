@@ -22,6 +22,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class AdminSessionManagementLR57Test
+ * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  *
  * Precondition:
  * - Loged in backend with user that is assigned permission to lock/unlock register
@@ -36,7 +37,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * 3. Show the Unlock button
  * 4. Show the POS's status is Locked
  *
- * @package Magento\Webpos\Test\TestCase\SessionManagement\CheckAssignmentPermissionForPOSStaffs
  */
 class AdminSessionManagementLR57Test extends Injectable
 {

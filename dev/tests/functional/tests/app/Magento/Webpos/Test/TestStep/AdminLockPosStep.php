@@ -21,17 +21,20 @@ class AdminLockPosStep implements TestStepInterface
     /**
      * Pos Index Page
      *
-     * @var PosIndex
+     * @var PosIndex $posIndex
      */
     protected $posIndex;
 
     /**
      * Pos Edit page
      *
-     * @var PosEdit
+     * @var PosEdit $posEdit
      */
     protected $posEdit;
 
+    /**
+     * @var string $posName
+     */
     protected $posName;
 
     /**
@@ -40,7 +43,11 @@ class AdminLockPosStep implements TestStepInterface
      * @param PosEdit $posEdit
      * @param string $posName
      */
-    public function __construct(PosIndex $posIndex, PosEdit $posEdit, $posName = 'Store POS')
+    public function __construct(
+        PosIndex $posIndex,
+        PosEdit $posEdit,
+        $posName = 'Store POS'
+    )
     {
         $this->posIndex = $posIndex;
         $this->posEdit = $posEdit;

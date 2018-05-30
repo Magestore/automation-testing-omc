@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByLocation\OrderListByLocationReportRP38Test" summary="Order List By Location Report" ticketId="MAGETWO-28222">
+        <variation name="OrderListByLocationReportRP38TestVariation1">
+            <data name="pageTitle" xsi:type="string">Order list by location</data>
+            <data name="columns" xsi:type="array">
+                <item name="0" xsi:type="string">Location</item>
+                <item name="1" xsi:type="string">Order ID</item>
+                <item name="2" xsi:type="string">Sales Total</item>
+                <item name="3" xsi:type="string">Purchased On</item>
+                <item name="4" xsi:type="string">Status</item>
+            </data>
+        </variation>
+    </testCase>
+</config>
