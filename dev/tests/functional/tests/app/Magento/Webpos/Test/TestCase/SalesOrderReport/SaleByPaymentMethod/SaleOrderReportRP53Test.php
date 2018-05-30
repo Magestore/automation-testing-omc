@@ -8,27 +8,26 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod;
 
-
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\SalesByPayment;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class SaleOrderReportRP52Test
+ * Class SaleOrderReportRP53Test
  * @package Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod
  *
  * Precondition:
- * Create some orders and use some different payment methods to checkout
+ * Create some orders and use some different payment methods to take payment
  *
  * Steps:
  * 1. Login backend
  * 2. Go to Webpos > Reports > Sale by payment method
  *
  * Acceptance:
- * Order Count and Total sale of that staff will be updated for payments to checkout
+ * Order Count and Total sale of that staff will be updated for payments to take payment
  *
  */
-class SaleOrderReportRP52Test extends Injectable
+class SaleOrderReportRP53Test extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex
@@ -51,7 +50,7 @@ class SaleOrderReportRP52Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    public function test($products)
+    public function test($products, $paymentAmount)
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
@@ -84,7 +83,11 @@ class SaleOrderReportRP52Test extends Injectable
         $paymentAmountCashIn = 0;
         $result = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\WebposAddProductToCartThenCheckoutStep',
-            ['products' => $products]
+            [
+                'products' => $products,
+                'setPaymentAmount' => true,
+                'paymentAmount' => $paymentAmount
+            ]
         )->run();
         if ($result && $result["paymentAmount"]) {
             $paymentAmountCashIn = $result["paymentAmount"];
@@ -95,7 +98,9 @@ class SaleOrderReportRP52Test extends Injectable
             'Magento\Webpos\Test\TestStep\WebposAddProductToCartThenCheckoutStep',
             [
                 'products' => $products,
-                'paymentMethod' => 'cp1forpos'
+                'paymentMethod' => 'cp1forpos',
+                'setPaymentAmount' => true,
+                'paymentAmount' => $paymentAmount
             ]
         )->run();
         if ($result && $result["paymentAmount"]) {
