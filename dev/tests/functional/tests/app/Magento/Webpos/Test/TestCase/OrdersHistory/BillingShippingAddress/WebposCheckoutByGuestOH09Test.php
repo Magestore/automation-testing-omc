@@ -12,18 +12,41 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposCheckoutByGuestOH09Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\BillingShippingAddress
+ */
 class WebposCheckoutByGuestOH09Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
-    public function __inject(WebposIndex $webposIndex)
+    /**
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
+    protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
+    public function __inject(
+        WebposIndex $webposIndex,
+        AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+    )
     {
         $this->webposIndex = $webposIndex;
+        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
 
+    /**
+     * @param FixtureFactory $fixtureFactory
+     * @param $products
+     * @param $configData
+     * @return array
+     */
     public function test(FixtureFactory $fixtureFactory, $products, $configData)
     {
         // Config Guest checkout
@@ -55,6 +78,9 @@ class WebposCheckoutByGuestOH09Test extends Injectable
         // Place Order
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        //Assert Place Order Success
+        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
+        sleep(1);
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         // Go to Order History

@@ -6,12 +6,14 @@
  * Date: 1/30/2018
  * Time: 9:34 AM
  */
+
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment;
 
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposTakePaymentOH96Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment
@@ -117,8 +119,11 @@ class WebposTakePaymentOH96Test extends Injectable
         sleep(1);
         $am = $this->webposIndex->getOrderHistoryOrderViewHeader()->getGrandTotal();
         sleep(0.5);
-        $this->webposIndex->getOrderHistoryPayment()->getInputAmount()->setValue(substr($am,1));
+        $this->webposIndex->getOrderHistoryPayment()->getInputAmount()->setValue(substr($am, 1));
         sleep(1);
+        return [
+           'am' => $am
+        ];
     }
 
     public function tearDown()

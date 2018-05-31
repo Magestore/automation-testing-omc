@@ -5,21 +5,35 @@
  * Date: 26/01/2018
  * Time: 13:26
  */
+
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposOnHoldOrderONH11Test
  * @package Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Add a product
+ * 3. Click on [Add discount] >  add dicount for whole cart
+ * 4. Hold order successfully
+ * Steps:
+ * 1. Click on On-Hold Orders menu
+ * Acceptance Criteria:
+ * A new on-hold order is created and discount amount is saved successfully
  */
 class WebposOnHoldOrderONH11Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject
     (
         WebposIndex $webposIndex
@@ -28,6 +42,11 @@ class WebposOnHoldOrderONH11Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @param $discount
+     * @return array
+     */
     public function test($products, $discount)
     {
         //Create product
@@ -42,15 +61,14 @@ class WebposOnHoldOrderONH11Test extends Injectable
         )->run();
 
         //Create a on-hold-order
-            //Add a product to cart
+        //Add a product to cart
         $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
 
         //Click on [Add discount] > on Discount tab, add dicount for whole cart (type: $)
-        while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup())
-        {
+        while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup()) {
             $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
         }
         $this->webposIndex->getCheckoutDiscount()->clickDiscountButton();
@@ -70,7 +88,7 @@ class WebposOnHoldOrderONH11Test extends Injectable
         $dataProduct = $product->getData();
         $dataProduct['qty'] = '1';
         return ['products' => [$dataProduct],
-            'discount'=> $discount
+            'discount' => $discount
         ];
     }
 }

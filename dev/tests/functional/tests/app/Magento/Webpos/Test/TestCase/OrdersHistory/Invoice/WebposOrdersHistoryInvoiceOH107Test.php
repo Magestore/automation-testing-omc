@@ -21,17 +21,17 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposOrdersHistoryInvoiceOH107Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     /**
-     * @var AssertInvoicePopupCorrect
+     * @var AssertInvoicePopupCorrect $assertInvoicePopupCorrect
      */
     protected $assertInvoicePopupCorrect;
 
@@ -44,7 +44,7 @@ class WebposOrdersHistoryInvoiceOH107Test extends Injectable
     public function __prepare(FixtureFactory $fixtureFactory)
     {
         // Change TaxRate
-        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
         // Add Customer
@@ -56,7 +56,6 @@ class WebposOrdersHistoryInvoiceOH107Test extends Injectable
             'taxRate' => $taxRate->getRate()
         ];
     }
-
 
     /**
      * @param WebposIndex $webposIndex

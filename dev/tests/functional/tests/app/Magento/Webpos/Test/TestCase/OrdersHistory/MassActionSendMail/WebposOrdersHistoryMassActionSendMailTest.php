@@ -9,10 +9,10 @@
 
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionSendMail;
 
-use Magento\Sales\Test\Fixture\OrderInjectable;
 use Magento\Customer\Test\Fixture\Customer;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Sales\Test\Fixture\OrderInjectable;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposOrdersHistoryMassActionSendMailTest
@@ -21,12 +21,12 @@ use Magento\Mtf\TestCase\Injectable;
 class WebposOrdersHistoryMassActionSendMailTest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var Customer
+     * @var Customer $customer
      */
     protected $customer;
 
@@ -71,9 +71,9 @@ class WebposOrdersHistoryMassActionSendMailTest extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Send Email')->click();
 
-        if ($action === 'DifferentInput'){
+        if ($action === 'DifferentInput') {
             $customerEmail = 'magestore123@example.com';
-        }elseif ($action === 'InvalidInput'){
+        } elseif ($action === 'InvalidInput') {
             $customerEmail = 'magestore';
         }
 

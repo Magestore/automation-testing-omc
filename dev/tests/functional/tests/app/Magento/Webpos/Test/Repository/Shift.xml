@@ -8,10 +8,8 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/Magento/Mtf/Repository/etc/repository.xsd">
     <repository class="Magento\Webpos\Test\Repository\Shift">
         <dataset name="default">
-            <field name="entity_id[from]" xsi:type="string">3</field>
-            <field name="entity_id[to]" xsi:type="string">5</field>
             <field name="opened_at[from]" xsi:type="string">09/12/2017</field>
-            <field name="opened_at[to]" xsi:type="string">11/04/2017</field>
+            <field name="opened_at[to]" xsi:type="string">09/12/2018</field>
             <field name="closed_at[from]" xsi:type="string">09/13/2017</field>
             <field name="closed_at[to]" xsi:type="string">11/04/2017</field>
             <field name="float_amount[from]" xsi:type="string">500.00</field>
@@ -44,32 +42,6 @@
             <field name="opened_note" xsi:type="string">Open Note %isolation%</field>
             <field name="shift_currency_code" xsi:type="string">USD</field>
             <field name="shift_id" xsi:type="string">off_id_auto_shift_%isolation%</field>
-            <field name="staff_id" xsi:type="string">1</field>
-            <field name="status" xsi:type="string">1</field>
-            <field name="total_sales" xsi:type="string">0</field>
-        </dataset>
-
-        <dataset name="default3">
-            <field name="balance" xsi:type="string">0</field>
-            <field name="base_balance" xsi:type="string">0</field>
-            <field name="base_cash_added" xsi:type="string">0</field>
-            <field name="base_cash_left" xsi:type="string">0</field>
-            <field name="base_cash_removed" xsi:type="string">0</field>
-            <field name="base_cash_sale" xsi:type="string">0</field>
-            <field name="base_closed_amount" xsi:type="string">0</field>
-            <field name="base_currency_code" xsi:type="string">USD</field>
-            <field name="base_float_amount" xsi:type="string">0</field>
-            <field name="base_total_sales" xsi:type="string">0</field>
-            <field name="cash_added" xsi:type="string">0</field>
-            <field name="cash_left" xsi:type="string">0</field>
-            <field name="cash_removed" xsi:type="string">0</field>
-            <field name="cash_sale" xsi:type="string">0</field>
-            <field name="closed_amount" xsi:type="string">0</field>
-            <field name="float_amount" xsi:type="string">0</field>
-            <field name="location_id" xsi:type="string">1</field>
-            <field name="opened_at" xsi:type="string">now</field>
-            <field name="shift_currency_code" xsi:type="string">USD</field>
-            <field name="shift_id" xsi:type="string">session_within_7_%isolation%</field>
             <field name="staff_id" xsi:type="string">1</field>
             <field name="status" xsi:type="string">1</field>
             <field name="total_sales" xsi:type="string">0</field>

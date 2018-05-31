@@ -10,6 +10,7 @@ namespace Magento\Webpos\Test\TestCase\Setting\Logout;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebPOSLogoutUnsuccessfullyTest
  * @package Magento\Webpos\Test\TestCase\Setting\Logout
@@ -17,11 +18,13 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebPOSLogoutUnsuccessfullyTest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
-
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(
         WebposIndex $webposIndex
     )
@@ -29,6 +32,10 @@ class WebPOSLogoutUnsuccessfullyTest extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $message
+     * @param $testID
+     */
     public function test($message, $testID)
     {
         // LoginTest webpos

@@ -5,18 +5,29 @@
  * Date: 26/01/2018
  * Time: 13:26
  */
+
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposOnHoldOrderONH14Test
  * @package Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Add a custom product
+ * 3. Select a shipping method with fee>0
+ * 4. Hold order successfully
+ * Steps:
+ * 1. Click on On-Hold Orders menu
+ * Acceptance Criteria:
+ * A new on-hold order is created successfully with [Shipping] = shipping fee
  */
 class WebposOnHoldOrderONH14Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
@@ -28,6 +39,9 @@ class WebposOnHoldOrderONH14Test extends Injectable
         )->run();
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject
     (
         WebposIndex $webposIndex
@@ -36,6 +50,10 @@ class WebposOnHoldOrderONH14Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test($products)
     {
         //Create product
@@ -50,22 +68,22 @@ class WebposOnHoldOrderONH14Test extends Injectable
         )->run();
 
         //Create a on-hold-order
-            //Add a product to cart
+        //Add a product to cart
         $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
-            //Cart
+        //Cart
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-            //Choose PoS shipping method
+        //Choose PoS shipping method
         $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         sleep(1);
         $feeShipping = $this->webposIndex->getCheckoutCartFooter()->getShippingPrice();
 
-            //BackToCart
+        //BackToCart
         $this->webposIndex->getCheckoutWebposCart()->getIconPrevious()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -80,7 +98,7 @@ class WebposOnHoldOrderONH14Test extends Injectable
         $dataProduct = $product->getData();
         $dataProduct['qty'] = '1';
         return ['products' => [$dataProduct],
-            'feeShipping'=> $feeShipping
+            'feeShipping' => $feeShipping
         ];
     }
 }

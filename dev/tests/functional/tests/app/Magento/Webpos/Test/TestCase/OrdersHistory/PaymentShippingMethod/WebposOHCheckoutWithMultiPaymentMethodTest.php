@@ -12,6 +12,7 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOHCheckoutWithMultiPaymentMethodTest
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\PaymentShippingMethod
@@ -19,20 +20,23 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposOHCheckoutWithMultiPaymentMethodTest extends Injectable
 {
 	/**
-	 * @var WebposIndex
+	 * @var WebposIndex $webposIndex
 	 */
 	protected $webposIndex;
 
 	/**
-	 * @var FixtureFactory
+	 * @var FixtureFactory $fixtureFactory
 	 */
 	protected $fixtureFactory;
 
 	/**
-	 * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+	 * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
 	 */
 	protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
+    /**
+     * @param FixtureFactory $fixtureFactory
+     */
 	public function __prepare(FixtureFactory $fixtureFactory)
 	{
 		// Config: use system value for all field in Tax Config
@@ -46,6 +50,11 @@ class WebposOHCheckoutWithMultiPaymentMethodTest extends Injectable
 		)->run();
 	}
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
 	public function __inject(
 		WebposIndex $webposIndex,
 		FixtureFactory $fixtureFactory,
@@ -57,6 +66,11 @@ class WebposOHCheckoutWithMultiPaymentMethodTest extends Injectable
 		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 	}
 
+    /**
+     * @param null $products
+     * @param $paymentMethods
+     * @return array
+     */
 	public function test(
 		$products = null,
 		$paymentMethods
@@ -88,7 +102,7 @@ class WebposOHCheckoutWithMultiPaymentMethodTest extends Injectable
 		if (!$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->isVisible()) {
 			$this->webposIndex->getCheckoutShippingMethod()->clickShipPanel();
 		}
-		sleep(1);
+		sleep(2);
 		$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 

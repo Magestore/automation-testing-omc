@@ -5,15 +5,21 @@
  * Date: 26/01/2018
  * Time: 13:26
  */
+
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder;
+
+use Magento\Config\Test\Fixture\ConfigData;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Config\Test\Fixture\ConfigData;
 
+/**
+ * Class WebposOnHoldOrderONH23Test
+ * @package Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder
+ */
 class WebposOnHoldOrderONH23Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
@@ -25,6 +31,9 @@ class WebposOnHoldOrderONH23Test extends Injectable
         )->run();
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject
     (
         WebposIndex $webposIndex
@@ -33,6 +42,11 @@ class WebposOnHoldOrderONH23Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @param ConfigData $configData
+     * @return array
+     */
     public function test($products, ConfigData $configData)
     {
         //Create product
@@ -47,12 +61,12 @@ class WebposOnHoldOrderONH23Test extends Injectable
         )->run();
 
         //Create a on-hold-order
-            //Add a product to cart
+        //Add a product to cart
         $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
-            //Hold
+        //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -77,16 +91,16 @@ class WebposOnHoldOrderONH23Test extends Injectable
 
         //Get orderId
         $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
-        $orderId= ltrim ($orderId,'#');
+        $orderId = ltrim($orderId, '#');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $dataProduct = $product->getData();
         $dataProduct['qty'] = '1';
         $configData = $configData->getData()['section'];
         return [
-            'name' => $configData['webpos/guest_checkout/first_name']['value'].' '.$configData['webpos/guest_checkout/last_name']['value'],
-            'address' => $configData['webpos/guest_checkout/city']['value'].', '.$configData['webpos/guest_checkout/region_id']['label'].
-                ', '.$configData['webpos/guest_checkout/zip']['value'].', US',
-            'phone' =>  $configData['webpos/guest_checkout/telephone']['value'],
+            'name' => $configData['webpos/guest_checkout/first_name']['value'] . ' ' . $configData['webpos/guest_checkout/last_name']['value'],
+            'address' => $configData['webpos/guest_checkout/city']['value'] . ', ' . $configData['webpos/guest_checkout/region_id']['label'] .
+                ', ' . $configData['webpos/guest_checkout/zip']['value'] . ', US',
+            'phone' => $configData['webpos/guest_checkout/telephone']['value'],
             'orderId' => $orderId,
             'products' => [$dataProduct]
         ];

@@ -6,12 +6,14 @@
  * Date: 1/30/2018
  * Time: 9:34 AM
  */
+
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment;
 
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposTakePaymentOH99Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment
@@ -118,19 +120,8 @@ class WebposTakePaymentOH99Test extends Injectable
         sleep(1);
     }
 
-    public function tearDown()
+    public function openOrderHistory()
     {
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'default_payment_method']
-        )->run();
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'all_allow_shipping_for_POS_rollback']
-        )->run();
-    }
-
-    public function openOrderHistory() {
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
@@ -141,5 +132,17 @@ class WebposTakePaymentOH99Test extends Injectable
         sleep(0.5);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
         sleep(0.5);
+    }
+
+    public function tearDown()
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'default_payment_method']
+        )->run();
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'all_allow_shipping_for_POS_rollback']
+        )->run();
     }
 }

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\OrderStatus\WebposOrderStatusOH07Test" summary="OrdersHistory-OrderStatus" ticketId="WEBPOSORDERSTATUS-OH07">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\OrderStatus\WebposOrderStatusOH07Test"
+              summary="OrdersHistory-OrderStatus" ticketId="WEBPOSORDERSTATUS-OH07">
         <variation name="WebposOrderStatusOH07TestVariation1">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">
@@ -16,7 +18,8 @@
             </data>
             <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\OrderStatus\AssertOrderStatus"/>
             <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\OrderStatus\AssertActionButtonAvailable"/>
-            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\OrderStatus\AssertMassActionAvailableInOrderHistory"/>
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\OrderHistory\OrderStatus\AssertMassActionAvailableInOrderHistory"/>
         </variation>
     </testCase>
 </config>

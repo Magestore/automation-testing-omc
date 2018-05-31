@@ -8,9 +8,10 @@
 
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\Invoice;
 
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistoryInvoice;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOrdersHistoryInvoiceOH113Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
@@ -18,12 +19,12 @@ use Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHisto
 class WebposOrdersHistoryInvoiceOH113Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertWebposOrdersHistoryInvoice
+     * @var AssertWebposOrdersHistoryInvoice $assertWebposOrdersHistoryInvoice
      */
     protected $assertWebposOrdersHistoryInvoice;
 
@@ -67,7 +68,7 @@ class WebposOrdersHistoryInvoiceOH113Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-        $paymentPrice = (float) substr( $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->getValue(), 1);
+        $paymentPrice = (float)substr($this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->getValue(), 1);
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($paymentPrice / 2);
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
@@ -89,11 +90,12 @@ class WebposOrdersHistoryInvoiceOH113Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        $totalPaid = (float) substr( $this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
+        $totalPaid = (float)substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
         // Click Button Invoice
-        sleep(2);
+        sleep(1);
         $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
         $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
+        sleep(2);
 
         return [
             'products' => $products,

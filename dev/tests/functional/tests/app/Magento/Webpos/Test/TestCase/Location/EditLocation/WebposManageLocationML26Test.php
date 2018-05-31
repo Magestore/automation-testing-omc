@@ -6,6 +6,7 @@
  * Time: 09:14
  */
 namespace Magento\Webpos\Test\TestCase\Location\EditLocation;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\LocationIndex;
 use Magento\Webpos\Test\Fixture\Location;
@@ -37,12 +38,12 @@ class WebposManageLocationML26Test extends Injectable
     /**
      * Webpos Location Index page.
      *
-     * @var LocationIndex
+     * @var LocationIndex $locationIndex
      */
     private $locationIndex;
 
     /**
-     * @var LocationNews
+     * @var LocationNews $locationNews
      */
     private $locationNews;
 

@@ -5,7 +5,9 @@
  * Date: 26/01/2018
  * Time: 13:26
  */
+
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
@@ -18,10 +20,14 @@ use Magento\Customer\Test\Fixture\Customer;
 class WebposOnHoldOrderONH18Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param FixtureFactory $fixtureFactory
+     * @return array
+     */
     public function __prepare(FixtureFactory $fixtureFactory)
     {
         $this->objectManager->getInstance()->create(
@@ -38,6 +44,9 @@ class WebposOnHoldOrderONH18Test extends Injectable
         return ['customer' => $customer];
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject
     (
         WebposIndex $webposIndex
@@ -46,6 +55,12 @@ class WebposOnHoldOrderONH18Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param Customer $customer
+     * @param $products
+     * @param $discount
+     * @return array
+     */
     public function test(Customer $customer, $products, $discount)
     {
         //Create product
@@ -60,14 +75,14 @@ class WebposOnHoldOrderONH18Test extends Injectable
         )->run();
 
         //Create a on-hold-order
-            //Add an exist customer
+        //Add an exist customer
         $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
         $this->webposIndex->getCheckoutChangeCustomer()->search($customer->getFirstname());
         sleep(1);
         $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
         sleep(1);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-            //Add a product to cart
+        //Add a product to cart
         $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -89,21 +104,20 @@ class WebposOnHoldOrderONH18Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Choose shipping POS
-            //Cart
+        //Cart
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $feeShippingBefore =$this->webposIndex->getCheckoutCartFooter()->getShippingPrice();
-            //Choose PoS shipping method
+        //Choose PoS shipping method
         sleep(1);
         $this->webposIndex->getCheckoutShippingMethod()->clickPOSShipping();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         sleep(1);
-             //BackToCart
+         //BackToCart
         $this->webposIndex->getCheckoutWebposCart()->getIconPrevious()->click();
-        sleep(1);
-        sleep(1);
-            //Hold
+        sleep(2);
+        //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -122,10 +136,12 @@ class WebposOnHoldOrderONH18Test extends Injectable
         $feeShippingAfter = $this->webposIndex->getCheckoutCartFooter()->getShippingPrice();
         $dataProduct = $product->getData();
         $dataProduct['qty'] = 1;
-        return ['cartProducts' => [$dataProduct],
+        return [
+            'cartProducts' => [$dataProduct],
             'taxExpected' => $taxExpected,
             'taxActual' => $taxActual,
             'feeShippingBefore' => $feeShippingBefore,
-            'feeShippingAfter' => $feeShippingAfter];
+            'feeShippingAfter' => $feeShippingAfter
+        ];
     }
 }

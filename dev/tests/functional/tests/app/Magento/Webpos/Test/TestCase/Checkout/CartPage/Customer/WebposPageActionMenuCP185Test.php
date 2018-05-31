@@ -32,7 +32,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposPageActionMenuCP185Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
@@ -44,6 +44,9 @@ class WebposPageActionMenuCP185Test extends Injectable
         )->run();
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject
     (
         WebposIndex $webposIndex
@@ -52,6 +55,9 @@ class WebposPageActionMenuCP185Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     */
     public function test($products)
     {
 
@@ -74,13 +80,17 @@ class WebposPageActionMenuCP185Test extends Injectable
 
         //Cart
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
+        sleep(2);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         //Click ... Menu > click Add order note
         $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
+        sleep(0.5);
         $this->webposIndex->getCheckoutFormAddNote()->waitAddOrderNote();
-        $this->webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->setValue('');
+        sleep(0.5);
+        $this->webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->click();
+        sleep(0.5);
         $this->webposIndex->getCheckoutNoteOrder()->waitForCloseOrderNoteButon();
         $this->webposIndex->getCheckoutNoteOrder()->getTextArea()->click();
         $this->webposIndex->getCheckoutNoteOrder()->getCloseOrderNoteButton()->click();

@@ -12,6 +12,7 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposMassActionReOrderOH29Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionReOrder
@@ -19,12 +20,12 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposMassActionReOrderOH29Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
@@ -39,7 +40,7 @@ class WebposMassActionReOrderOH29Test extends Injectable
     public function __prepare(FixtureFactory $fixtureFactory)
     {
         // Change TaxRate
-        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
         // Add Customer
@@ -51,7 +52,6 @@ class WebposMassActionReOrderOH29Test extends Injectable
             'taxRate' => $taxRate->getRate()
         ];
     }
-
 
     /**
      * @param WebposIndex $webposIndex

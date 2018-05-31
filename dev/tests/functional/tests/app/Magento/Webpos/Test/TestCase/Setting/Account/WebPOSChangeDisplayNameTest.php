@@ -8,9 +8,10 @@
 
 namespace Magento\Webpos\Test\TestCase\Setting\Account;
 
+use Magento\Mtf\Config\DataInterface;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Config\DataInterface;
+
 /**
  * Class WebPOSChangeDisplayNameTest
  * @package Magento\Webpos\Test\TestCase\Setting\Account
@@ -18,7 +19,7 @@ use Magento\Mtf\Config\DataInterface;
 class WebPOSChangeDisplayNameTest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
     protected $username;
@@ -31,6 +32,10 @@ class WebPOSChangeDisplayNameTest extends Injectable
      */
     protected $configuration;
 
+    /**
+     * @param DataInterface $configuration
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(
         DataInterface $configuration,
         WebposIndex $webposIndex
@@ -40,6 +45,11 @@ class WebPOSChangeDisplayNameTest extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $displayName
+     * @param $testCaseID
+     * @param $currentPassword
+     */
     public function test($displayName, $testCaseID, $currentPassword)
     {
         $password = $this->configuration->get('application/0/backendPassword/0/value');
@@ -59,7 +69,7 @@ class WebPOSChangeDisplayNameTest extends Injectable
         } elseif ($testCaseID == 'SET04') {
             $this->webposIndex->getStaffSettingFormMainAccount()->getCurrentPassword()->setValue($password);
             $username = $this->configuration->get('application/0/backendLogin/0/value');
-            $this->username=$username . ' ' . $username;
+            $this->username = $username . ' ' . $username;
         }
         $this->webposIndex->getStaffSettingFormMainAccount()->getDisplayName()->setValue($displayName);
         $this->webposIndex->getStaffSettingFormFooter()->getSaveButton()->click();

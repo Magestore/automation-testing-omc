@@ -14,9 +14,10 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Customer\Test\Page\Adminhtml\CustomerIndex;
 use Magento\Customer\Test\Page\Adminhtml\CustomerIndexEdit;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
 use Magento\Webpos\Test\Constraint\Sync\AssertSynchronizationPageDisplay;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
+
 /**
  * Class WebposSync12Test
  * @package Magento\Webpos\Test\TestCase\Sync\Group

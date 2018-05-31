@@ -39,10 +39,13 @@ class WebposXreportLoginTwiceTest extends Injectable
     /**
      * Webpos Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(
         WebposIndex $webposIndex
     )
@@ -50,6 +53,12 @@ class WebposXreportLoginTwiceTest extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @param Pos $pos
+     * @param FixtureFactory $fixtureFactory
+     * @return array
+     */
     public function test(
         $products,
         Pos $pos,

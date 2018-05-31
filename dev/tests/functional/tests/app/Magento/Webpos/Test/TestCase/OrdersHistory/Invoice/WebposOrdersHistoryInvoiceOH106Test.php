@@ -8,8 +8,9 @@
 
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\Invoice;
 
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOrdersHistoryInvoiceOH106Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
@@ -17,7 +18,7 @@ use Magento\Mtf\TestCase\Injectable;
 class WebposOrdersHistoryInvoiceOH106Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
@@ -31,6 +32,11 @@ class WebposOrdersHistoryInvoiceOH106Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @param $invoiceComment
+     * @return array
+     */
     public function test(
         $products,
         $invoiceComment

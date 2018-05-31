@@ -12,6 +12,7 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOHPaymentShippingMethodTest
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\PaymentShippingMethod
@@ -19,17 +20,17 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposOHPaymentShippingMethodTest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
@@ -103,11 +104,11 @@ class WebposOHPaymentShippingMethodTest extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         if ($addShipping) {
-            if (!$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->isVisible()) {
+            if (!$this->webposIndex->getCheckoutShippingMethod()->getPOSShippingStorePickup()->isVisible()) {
                 $this->webposIndex->getCheckoutShippingMethod()->clickShipPanel();
             }
-            sleep(1);
-            $this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
+            sleep(2);
+            $this->webposIndex->getCheckoutShippingMethod()->getPOSShippingStorePickup()->click();
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }
         $paymentAmount = 0;

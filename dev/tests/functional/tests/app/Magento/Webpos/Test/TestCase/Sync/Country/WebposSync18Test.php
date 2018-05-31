@@ -11,8 +11,9 @@ namespace Magento\Webpos\Test\TestCase\Sync\Country;
 use Magento\Backend\Test\Page\Adminhtml\SystemConfigEdit;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposSync18Test
  * @package Magento\Webpos\Test\TestCase\Sync\Country
@@ -25,39 +26,42 @@ class WebposSync18Test extends Injectable
     /* end tags */
 
     /**
-     * New System Config Edit page.
-     *
-     * @var SystemConfigEdit
-     */
-    private $systemConfigEdit;
-    /**
-     * @var
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @var AssertItemUpdateSuccess $assertItemUpdateSuccess
+     */
     protected $assertItemUpdateSuccess;
 
+    /**
+     * New System Config Edit page.
+     *
+     * @var SystemConfigEdit $systemConfigEdit
+     */
+    private $systemConfigEdit;
 
-    public function __prepare(FixtureFactory $fixtureFactory)
-    {
-        //
-    }
-
+    /**
+     * @param SystemConfigEdit $systemConfigEdit
+     * @param WebposIndex $webposIndex
+     * @param AssertItemUpdateSuccess $assertItemUpdateSuccess
+     */
     public function __inject(
         SystemConfigEdit $systemConfigEdit,
         WebposIndex $webposIndex,
         AssertItemUpdateSuccess $assertItemUpdateSuccess
 
-    ) {
+    )
+    {
         $this->systemConfigEdit = $systemConfigEdit;
         $this->webposIndex = $webposIndex;
         $this->assertItemUpdateSuccess = $assertItemUpdateSuccess;
-
     }
 
     /**
-     *
-     * @return void
+     * @param FixtureFactory $fixtureFactory
+     * @param $configData
      */
     public function test(
         FixtureFactory $fixtureFactory,
@@ -82,13 +86,4 @@ class WebposSync18Test extends Injectable
         $action = 'Reload';
         $this->assertItemUpdateSuccess->processAssert($this->webposIndex, "Country", $action);
     }
-
-    public function tearDown()
-    {
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => 'default_payment_method']
-//        )->run();
-    }
-
 }

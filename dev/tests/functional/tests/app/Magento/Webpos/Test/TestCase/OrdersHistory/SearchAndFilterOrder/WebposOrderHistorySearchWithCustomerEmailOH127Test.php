@@ -12,18 +12,28 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Sales\Test\Fixture\OrderInjectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrderHistorySearchWithCustomerEmailOH127Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\SearchAndFilterOrder
+ */
 class WebposOrderHistorySearchWithCustomerEmailOH127Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(WebposIndex $webposIndex)
     {
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param OrderInjectable $order
+     */
     public function test(OrderInjectable $order)
     {
         // Create order

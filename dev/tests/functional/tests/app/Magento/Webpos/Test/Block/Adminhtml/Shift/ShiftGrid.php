@@ -15,6 +15,10 @@ use Magento\Mtf\Client\Locator;
 use Magento\Ui\Test\Block\Adminhtml\DataGrid;
 use Magento\Mtf\Client\Element\SimpleElement;
 
+/**
+ * Class ShiftGrid
+ * @package Magento\Webpos\Test\Block\Adminhtml\Shift
+ */
 class ShiftGrid extends DataGrid
 {
     /**
@@ -31,12 +35,6 @@ class ShiftGrid extends DataGrid
      * @var array
      */
     protected $filters = [
-        'entity_id[from]' => [
-            'selector' => '.admin__data-grid-filters input[name="entity_id[from]"]',
-        ],
-        'entity_id[to]' => [
-            'selector' => '.admin__data-grid-filters input[name="entity_id[to]"]',
-        ],
         'opened_at[from]' => [
             'selector' => '.admin__data-grid-filters input[name="opened_at[from]"]',
         ],
@@ -55,21 +53,11 @@ class ShiftGrid extends DataGrid
         'float_amount[to]' => [
             'selector' => '.admin__data-grid-filters input[name="float_amount[to]"]',
         ],
+        'closed_amount[from]' => [
+            'selector' => '.admin__data-grid-filters input[name="closed_amount[from]"]',
+        ],
         'closed_amount[to]' => [
             'selector' => '.admin__data-grid-filters input[name="closed_amount[to]"]',
-        ],
-        'cash_left[from]' => [
-            'selector' => '.admin__data-grid-filters input[name="cash_left[from]"]',
-        ],
-        'cash_left[to]' => [
-            'selector' => '.admin__data-grid-filters input[name="cash_left[to]"]',
-        ],
-        'shift_id' => [
-            'selector' => '.admin__data-grid-filters input[name="shift_id"]',
-        ],
-        'staff_id' => [
-            'selector' => '.admin__data-grid-filters input[name="staff_id"]',
-            'input'    => 'Select',
         ]
     ];
 
@@ -82,8 +70,6 @@ class ShiftGrid extends DataGrid
      protected function clickEditLink(SimpleElement $rowItem)
         {
             $rowItem->find($this->selectAction)->click();
-            // Neu nhu co 2 action. Vi du: delete va edit thi moi them lenh duoi day de lua chon.
-            // $rowItem->find($this->editLink)->click();
         }
     /**
      * Fix core

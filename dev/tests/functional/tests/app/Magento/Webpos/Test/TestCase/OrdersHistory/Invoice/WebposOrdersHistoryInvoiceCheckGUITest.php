@@ -8,24 +8,24 @@
 
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\Invoice;
 
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistoryInvoice;
-use Magento\Config\Test\Fixture\ConfigData;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposOrdersHistoryInvoiceCheckGUITest
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
+ *
  */
 class WebposOrdersHistoryInvoiceCheckGUITest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
-    
+
     /**
-     * @var AssertWebposOrdersHistoryInvoice
+     * @var AssertWebposOrdersHistoryInvoice $assertWebposOrdersHistoryInvoice
      */
     protected $assertWebposOrdersHistoryInvoice;
 

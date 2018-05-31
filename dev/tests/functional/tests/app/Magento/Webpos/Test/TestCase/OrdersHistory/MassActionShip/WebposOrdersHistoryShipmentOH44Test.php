@@ -10,22 +10,13 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip;
 
 use Magento\Mtf\TestCase\Scenario;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOrdersHistoryShipmentOH44Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip
  */
 class WebposOrdersHistoryShipmentOH44Test extends Scenario
 {
-    /**
-     * @var WebposIndex
-     */
-    protected $webposIndex;
-
-    public function __inject(WebposIndex $webposIndex)
-    {
-        $this->webposIndex = $webposIndex;
-    }
-
     public function test()
     {
         $this->executeScenario();

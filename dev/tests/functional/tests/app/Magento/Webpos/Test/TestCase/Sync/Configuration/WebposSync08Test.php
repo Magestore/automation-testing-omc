@@ -9,19 +9,30 @@
 namespace Magento\Webpos\Test\TestCase\Sync\Configuration;
 
 use Magento\Backend\Test\Page\Adminhtml\SystemConfigEdit;
-use Magento\Config\Test\Fixture\ConfigData;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
+use Magento\Webpos\Test\Page\WebposIndex;
 
-
+/**
+ * Class WebposSync08Test
+ * @package Magento\Webpos\Test\TestCase\Sync\Configuration
+ */
 class WebposSync08Test extends Injectable
 {
     /* tags */
     const MVP = 'no';
     const DOMAIN = 'PS';
     /* end tags */
+    /**
+     * @var WebposIndex $webposIndex
+     */
+    protected $webposIndex;
+
+    /**
+     * @var AssertItemUpdateSuccess $assertItemUpdateSuccess
+     */
+    protected $assertItemUpdateSuccess;
 
     /**
      * New System Config Edit page.
@@ -29,25 +40,19 @@ class WebposSync08Test extends Injectable
      * @var SystemConfigEdit
      */
     private $systemConfigEdit;
+
     /**
-     * @var
+     * @param SystemConfigEdit $systemConfigEdit
+     * @param WebposIndex $webposIndex
+     * @param AssertItemUpdateSuccess $assertItemUpdateSuccess
      */
-    protected $webposIndex;
-
-    protected $assertItemUpdateSuccess;
-
-
-    public function __prepare(FixtureFactory $fixtureFactory)
-    {
-        //
-    }
-
     public function __inject(
         SystemConfigEdit $systemConfigEdit,
         WebposIndex $webposIndex,
         AssertItemUpdateSuccess $assertItemUpdateSuccess
 
-    ) {
+    )
+    {
         $this->systemConfigEdit = $systemConfigEdit;
         $this->webposIndex = $webposIndex;
         $this->assertItemUpdateSuccess = $assertItemUpdateSuccess;
@@ -55,8 +60,8 @@ class WebposSync08Test extends Injectable
     }
 
     /**
-     *
-     * @return void
+     * @param FixtureFactory $fixtureFactory
+     * @param $configData
      */
     public function test(
         FixtureFactory $fixtureFactory,
@@ -81,13 +86,4 @@ class WebposSync08Test extends Injectable
         $action = 'Update';
         $this->assertItemUpdateSuccess->processAssert($this->webposIndex, "Configuration", $action);
     }
-
-    public function tearDown()
-    {
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => 'default_payment_method']
-//        )->run();
-    }
-
 }

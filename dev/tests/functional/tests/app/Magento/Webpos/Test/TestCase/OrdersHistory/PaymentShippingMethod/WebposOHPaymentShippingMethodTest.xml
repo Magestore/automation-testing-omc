@@ -36,7 +36,7 @@
 			</data>
 			<data name="addPayment" xsi:type="boolean">true</data>
 			<data name="addShipping" xsi:type="boolean">true</data>
-			<data name="shipLabel" xsi:type="string">Flat Rate - Fixed</data>
+			<data name="shipLabel" xsi:type="string">POS Shipping - Store Pickup</data>
 			<data name="paymentLabel" xsi:type="string">Web POS - Cash In</data>
 
 			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\PaymentShippingMethod\AssertPaymentMethodIsShownOnDetailOrder"/>

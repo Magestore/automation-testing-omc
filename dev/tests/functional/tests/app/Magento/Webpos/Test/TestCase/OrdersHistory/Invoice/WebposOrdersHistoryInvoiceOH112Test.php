@@ -8,9 +8,10 @@
 
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\Invoice;
 
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoiceSuccess;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOrdersHistoryInvoiceOH112Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
@@ -18,12 +19,12 @@ use Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoiceSuccess;
 class WebposOrdersHistoryInvoiceOH112Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertInvoiceSuccess
+     * @var AssertInvoiceSuccess $assertInvoiceSuccess
      */
     protected $assertInvoiceSuccess;
 
@@ -42,12 +43,14 @@ class WebposOrdersHistoryInvoiceOH112Test extends Injectable
 
     /**
      * @param $products
+     * @param $dataConfig
      * @return array
      */
     public function test(
         $products,
         $dataConfig
-    ) {
+    )
+    {
         // Create products
         $products = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',

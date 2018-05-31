@@ -5,18 +5,29 @@
  * Date: 26/01/2018
  * Time: 13:26
  */
+
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposOnHoldOrderONH13Test
  * @package Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Add a custom product
+ * 3. Add comment order successfully
+ * 4. Hold order successfully
+ * Steps:
+ * 1. Click on On-Hold Orders menu
+ * Acceptance Criteria:
+ * A new on-hold order is created successfully with content of comment order on Comment history
  */
 class WebposOnHoldOrderONH13Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
@@ -28,6 +39,9 @@ class WebposOnHoldOrderONH13Test extends Injectable
         )->run();
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject
     (
         WebposIndex $webposIndex
@@ -36,6 +50,11 @@ class WebposOnHoldOrderONH13Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $productCustom
+     * @param $comment
+     * @return array
+     */
     public function test($productCustom, $comment)
     {
         //LoginTest webpos
@@ -44,13 +63,13 @@ class WebposOnHoldOrderONH13Test extends Injectable
         )->run();
 
         //Create a on-hold-order
-            //Add product custom sale
+        //Add product custom sale
         $this->webposIndex->getCheckoutProductList()->getCustomSaleButton()->click();
         $this->webposIndex->getCheckoutCustomSale()->getProductNameInput()->setValue($productCustom['name']);
         $this->webposIndex->getCheckoutCustomSale()->getProductPriceInput()->setValue($productCustom['price']);
         $this->webposIndex->getCheckoutCustomSale()->getAddToCartButton()->click();
         sleep(1);
-            //Click ... Menu > click Add order note
+        //Click ... Menu > click Add order note
         $this->webposIndex->getCheckoutCartHeader()->getIconActionMenu()->click();
         $this->webposIndex->getCheckoutFormAddNote()->getAddOrderNote()->click();
 
@@ -58,14 +77,14 @@ class WebposOnHoldOrderONH13Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
-            //Click save button
-        if($comment != null)
+        //Click save button
+        if ($comment != null)
             $this->webposIndex->getCheckoutNoteOrder()->getTextArea()->setValue($comment);
         $this->webposIndex->getCheckoutNoteOrder()->getSaveOrderNoteButon()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
-            //Hold
+        //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

@@ -14,110 +14,133 @@ use Magento\Sales\Test\Fixture\OrderInjectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOHMassActionCancelTest
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionCancel
  */
 class WebposOHMassActionCancelTest extends Injectable
 {
-	/**
-	 * @var WebposIndex
-	 */
-	protected $webposIndex;
+    /**
+     * @var WebposIndex $webposIndex
+     */
+    protected $webposIndex;
 
-	/**
-	 * @var FixtureFactory
-	 */
-	protected $fixtureFactory;
+    /**
+     * @var FixtureFactory $fixtureFactory
+     */
+    protected $fixtureFactory;
 
-	/**
-	 * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
-	 */
-	protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+    /**
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
+    protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
-	/**
-	 * @var AssertShipmentSuccess
-	 */
-	protected $assertShipmentSuccess;
+    /**
+     * @var AssertShipmentSuccess $assertShipmentSuccess
+     */
+    protected $assertShipmentSuccess;
 
-	public function __inject (
-		WebposIndex $webposIndex,
-		FixtureFactory $fixtureFactory,
-		AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
-		AssertShipmentSuccess $assertShipmentSuccess
-	) {
-		$this->webposIndex = $webposIndex;
-		$this->fixtureFactory = $fixtureFactory;
-		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-		$this->assertShipmentSuccess = $assertShipmentSuccess;
-	}
+    /**
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @param AssertShipmentSuccess $assertShipmentSuccess
+     */
+    public function __inject(
+        WebposIndex $webposIndex,
+        FixtureFactory $fixtureFactory,
+        AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
+        AssertShipmentSuccess $assertShipmentSuccess
+    )
+    {
+        $this->webposIndex = $webposIndex;
+        $this->fixtureFactory = $fixtureFactory;
+        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+        $this->assertShipmentSuccess = $assertShipmentSuccess;
+    }
 
-	public function test (
-		$createOrderInBackend = false,
-		OrderInjectable $order = null,
-		$products = null,
-		$addCustomSale = false,
-		$customProduct = null,
-		$createInvoice = true,
-		$shipped = false,
-		$createShipment = false,
-		$comment = null,
-		$action = 'save',
-		$confirmAction = 'ok'
-	) {
-		// LoginTest webpos
-		$staff = $this->objectManager->getInstance()->create(
-			'Magento\Webpos\Test\TestStep\LoginWebposStep'
-		)->run();
+    /**
+     * @param bool $createOrderInBackend
+     * @param OrderInjectable|null $order
+     * @param null $products
+     * @param bool $addCustomSale
+     * @param null $customProduct
+     * @param bool $createInvoice
+     * @param bool $shipped
+     * @param bool $createShipment
+     * @param null $comment
+     * @param string $action
+     * @param string $confirmAction
+     * @return array
+     */
+    public function test(
+        $createOrderInBackend = false,
+        OrderInjectable $order = null,
+        $products = null,
+        $addCustomSale = false,
+        $customProduct = null,
+        $createInvoice = true,
+        $shipped = false,
+        $createShipment = false,
+        $comment = null,
+        $action = 'save',
+        $confirmAction = 'ok'
+    )
+    {
+        // LoginTest webpos
+        $staff = $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposStep'
+        )->run();
 
-		if ($createOrderInBackend) {
-			$order->persist();
-			$orderId = $order->getId();
-		} else {
-			if ($addCustomSale) {
-				$this->objectManager->getInstance()->create(
-					'Magento\Webpos\Test\TestStep\AddCustomSaleStep',
-					['customProduct' => $customProduct]
-				)->run();
-			} else {
-				// Create products
-				$products = $this->objectManager->getInstance()->create(
-					'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
-					['products' => $products]
-				)->run();
+        if ($createOrderInBackend) {
+            $order->persist();
+            $orderId = $order->getId();
+        } else {
+            if ($addCustomSale) {
+                $this->objectManager->getInstance()->create(
+                    'Magento\Webpos\Test\TestStep\AddCustomSaleStep',
+                    ['customProduct' => $customProduct]
+                )->run();
+            } else {
+                // Create products
+                $products = $this->objectManager->getInstance()->create(
+                    'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
+                    ['products' => $products]
+                )->run();
 
-				// Add product to cart
-				$this->objectManager->getInstance()->create(
-					'Magento\Webpos\Test\TestStep\AddProductToCartStep',
-					['products' => $products]
-				)->run();
-			}
-			// Place Order
-			$this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-			for ($i=0; $i<2; $i++) {
+                // Add product to cart
+                $this->objectManager->getInstance()->create(
+                    'Magento\Webpos\Test\TestStep\AddProductToCartStep',
+                    ['products' => $products]
+                )->run();
+            }
+            // Place Order
+            $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
+            for ($i = 0; $i < 2; $i++) {
                 $this->webposIndex->getMsWebpos()->waitCartLoader();
                 $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
             }
-			$this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-			$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-			$this->objectManager->getInstance()->create(
-				'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
-				[
-					'createInvoice' => $createInvoice,
-					'shipped' => $shipped
-				]
-			)->run();
-			$this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
-			$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+            $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
+            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+            $this->objectManager->getInstance()->create(
+                'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
+                [
+                    'createInvoice' => $createInvoice,
+                    'shipped' => $shipped
+                ]
+            )->run();
+            $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
-			//Assert Place Order Success
-			$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
+            //Assert Place Order Success
+            $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
 
-			$orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+            $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
 
-			$this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
-			$this->webposIndex->getMsWebpos()->waitCartLoader();
-		}
+            $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
+            $this->webposIndex->getMsWebpos()->waitCartLoader();
+        }
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
@@ -125,35 +148,36 @@ class WebposOHMassActionCancelTest extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         //select the first order
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-		while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
-		self::assertEquals(
-			$orderId,
-			$this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
-			"Order Content - Order Id is wrong"
-			. "\nExpected: " . $orderId
-			. "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
-		);
-		// Create Shipment
-		if ($createShipment) {
-			$this->objectManager->getInstance()->create(
-				'Magento\Webpos\Test\TestStep\CreateShipmentInOrderHistoryStep',
-				[
-					'products' => $products
-				]
-			)->run();
-			$this->assertShipmentSuccess->processAssert($this->webposIndex);
-		}
-		$this->objectManager->getInstance()->create(
-			'Magento\Webpos\Test\TestStep\CancelOrderStep',
-			[
-				'comment' => $comment,
-				'action' => $action,
-				'confirmAction' => $confirmAction
-			]
-		)->run();
-		return [
-			'products' => $products,
-			'orderId' => $orderId
-		];
-	}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
+        self::assertEquals(
+            $orderId,
+            $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
+            "Order Content - Order Id is wrong"
+            . "\nExpected: " . $orderId
+            . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
+        );
+        // Create Shipment
+        if ($createShipment) {
+            $this->objectManager->getInstance()->create(
+                'Magento\Webpos\Test\TestStep\CreateShipmentInOrderHistoryStep',
+                [
+                    'products' => $products
+                ]
+            )->run();
+            $this->assertShipmentSuccess->processAssert($this->webposIndex);
+        }
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\CancelOrderStep',
+            [
+                'comment' => $comment,
+                'action' => $action,
+                'confirmAction' => $confirmAction
+            ]
+        )->run();
+        return [
+            'products' => $products,
+            'orderId' => $orderId
+        ];
+    }
 }

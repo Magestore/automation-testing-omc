@@ -11,13 +11,20 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\CheckGUI;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrdersHistoryCheckGUITest
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\CheckGUI
+ */
 class WebposOrdersHistoryCheckGUITest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(WebposIndex $webposIndex)
     {
         $this->webposIndex = $webposIndex;

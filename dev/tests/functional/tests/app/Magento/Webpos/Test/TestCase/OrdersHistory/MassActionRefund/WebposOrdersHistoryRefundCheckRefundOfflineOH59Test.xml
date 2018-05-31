@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund\WebposOrdersHistoryRefundCheckRefundOfflineOH59Test" summary="OrdersHistory-MassActionRefund" ticketId="WEBPOSMASSACTIONREFUND-OH59">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase
+            name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund\WebposOrdersHistoryRefundCheckRefundOfflineOH59Test"
+            summary="OrdersHistory-MassActionRefund" ticketId="WEBPOSMASSACTIONREFUND-OH59">
         <variation name="WebposOrdersHistoryRefundCheckRefundOfflineOH59TestVariation1">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">

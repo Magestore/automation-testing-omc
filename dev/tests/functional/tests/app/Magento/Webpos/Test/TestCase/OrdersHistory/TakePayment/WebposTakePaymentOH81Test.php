@@ -22,10 +22,10 @@ class WebposTakePaymentOH81Test extends Injectable
      * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
-    /**
-     * @var
-     */
 
+    /**
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
@@ -120,6 +120,7 @@ class WebposTakePaymentOH81Test extends Injectable
         sleep(0.5);
         //click take payment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
+        sleep(2);
     }
 
     public function tearDown()

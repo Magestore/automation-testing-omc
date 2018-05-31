@@ -10,8 +10,8 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionReOrder;
 
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\OrderHistory\ReOrder\AssertItemsInCart;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposMassActionReOrderOH30Test
@@ -20,20 +20,19 @@ use Magento\Webpos\Test\Constraint\OrderHistory\ReOrder\AssertItemsInCart;
 class WebposMassActionReOrderOH30Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     /**
-     * @var AssertItemsInCart
+     * @var AssertItemsInCart $assertItemsInCart
      */
     protected $assertItemsInCart;
-
 
     /**
      * @param WebposIndex $webposIndex
@@ -51,6 +50,10 @@ class WebposMassActionReOrderOH30Test extends Injectable
         $this->assertItemsInCart = $assertItemsInCart;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test(
         $products
     )

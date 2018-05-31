@@ -12,18 +12,28 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Sales\Test\Fixture\OrderInjectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrderHistorySearchWithCustomerNameOH126Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\SearchAndFilterOrder
+ */
 class WebposOrderHistorySearchWithCustomerNameOH126Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(WebposIndex $webposIndex)
     {
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param OrderInjectable $order
+     */
     public function test(OrderInjectable $order)
     {
         // Create order
@@ -42,7 +52,7 @@ class WebposOrderHistorySearchWithCustomerNameOH126Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
-        $this->webposIndex->getOrderHistoryOrderList()->search($order->getCustomerId()->getFirstName().$order->getCustomerId()->getLastName() );
+        $this->webposIndex->getOrderHistoryOrderList()->search($order->getCustomerId()->getFirstName() . $order->getCustomerId()->getLastName());
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         sleep(3);
         $this->assertTrue(

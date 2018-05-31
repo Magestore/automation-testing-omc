@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\Invoice\WebposOrdersHistoryInvoiceOH107Test" summary="Orders History - [Invoice] button" ticketId="WEBPOS-OH107">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\Invoice\WebposOrdersHistoryInvoiceOH107Test"
+              summary="Orders History - [Invoice] button" ticketId="WEBPOS-OH107">
         <variation name="WebposOrdersHistoryInvoiceOH107Test_OH107">
             <data name="configData" xsi:type="string">all_allow_shipping_for_POS</data>
             <data name="products" xsi:type="array">

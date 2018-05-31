@@ -5,23 +5,34 @@
  * Date: 26/01/2018
  * Time: 13:26
  */
+
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\Search;
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckOnHoldOrderEmpty;
-use Magento\Mtf\Fixture\FixtureFactory;
+
 use Magento\Customer\Test\Fixture\Customer;
+use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Constraint\Checkout\HoldOrder\AssertCheckOnHoldOrderEmpty;
+use Magento\Webpos\Test\Page\WebposIndex;
+
+/**
+ * Class WebposOnHoldOrderONH26Test
+ * @package Magento\Webpos\Test\TestCase\OnHoldOrder\Search
+ */
 class WebposOnHoldOrderONH26Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
     /**
-     * @var AssertCheckOnHoldOrderEmpty
+     * @var AssertCheckOnHoldOrderEmpty $assertCheckEmpty
      */
     protected $assertCheckEmpty;
 
+    /**
+     * @param FixtureFactory $fixtureFactory
+     * @return array
+     */
     public function __prepare(FixtureFactory $fixtureFactory)
     {
         $this->objectManager->getInstance()->create(
@@ -35,6 +46,10 @@ class WebposOnHoldOrderONH26Test extends Injectable
         return ['customer' => $customer];
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertCheckOnHoldOrderEmpty $assertCheckEmpty
+     */
     public function __inject
     (
         WebposIndex $webposIndex,
@@ -45,6 +60,11 @@ class WebposOnHoldOrderONH26Test extends Injectable
         $this->assertCheckEmpty = $assertCheckEmpty;
     }
 
+    /**
+     * @param Customer $customer
+     * @param $products
+     * @return array
+     */
     public function test(Customer $customer, $products)
     {
         //Create product
@@ -60,19 +80,19 @@ class WebposOnHoldOrderONH26Test extends Injectable
         )->run();
 
         //Create a on-hold-order
-            //Add an exist customer
+        //Add an exist customer
         $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
         $this->webposIndex->getCheckoutChangeCustomer()->search($customer->getFirstname());
         sleep(1);
         $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
         sleep(1);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-            //Add a product to cart
+        //Add a product to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
-            //Hold
+        //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

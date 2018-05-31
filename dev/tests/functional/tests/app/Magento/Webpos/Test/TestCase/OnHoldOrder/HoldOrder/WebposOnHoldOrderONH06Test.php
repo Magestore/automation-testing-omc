@@ -5,23 +5,42 @@
  * Date: 26/01/2018
  * Time: 14:00
  */
+
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder;
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
+
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposOnHoldOrderONH06Test
  * @package Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Add some  products and select a customer to meet tax condition
+ * 3. Click on [Hold] button
+ * Steps:
+ * 1. Click on On-Hold Orders menu
+ * Acceptance Criteria:
+ * "A new on-hold order is created with:
+ * - On-hold order list: show customer name under  on-hold order ID
+ * - On-hold detail order:
+ * + Billing address, shipping adddress show billing address and shipping address of  the customer address
+ * + Tax amount will be shown correctly on items table and [Tax] field
+ * + Row total = Subtotal + Tax amount - discount"
  */
 class WebposOnHoldOrderONH06Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param FixtureFactory $fixtureFactory
+     * @return array
+     */
     public function __prepare(FixtureFactory $fixtureFactory)
     {
         $this->objectManager->getInstance()->create(
@@ -35,6 +54,9 @@ class WebposOnHoldOrderONH06Test extends Injectable
         return ['customer' => $customer];
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject
     (
         WebposIndex $webposIndex
@@ -43,6 +65,11 @@ class WebposOnHoldOrderONH06Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @param Customer $customer
+     * @return array
+     */
     public function test($products, Customer $customer)
     {
         //Create product
@@ -59,14 +86,14 @@ class WebposOnHoldOrderONH06Test extends Injectable
         )->run();
 
         //Create a on-hold-order
-            //Add an exist taxable customer
+        //Add an exist taxable customer
         $this->webposIndex->getCheckoutCartHeader()->getIconAddCustomer()->click();
         $this->webposIndex->getCheckoutChangeCustomer()->search($customer->getFirstname());
         sleep(1);
         $this->webposIndex->getCheckoutChangeCustomer()->getFirstCustomer()->click();
         sleep(1);
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-            //Add some taxable products to cart
+        //Add some taxable products to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -78,7 +105,7 @@ class WebposOnHoldOrderONH06Test extends Injectable
         sleep(1);
         $tax = $this->webposIndex->getCheckoutCartFooter()->getTaxWithCheckout();
         $tax2 = $tax - $tax1;
-            //Hold
+        //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -91,10 +118,10 @@ class WebposOnHoldOrderONH06Test extends Injectable
         return ['products' => [$dataProduct1, $dataProduct2],
             'tax' => [$tax, $tax1, $tax2],
             'product' => $dataProduct1,
-            'name' => $customer->getAddress()[0]['firstname'].' '.$customer->getAddress()[0]['lastname'],
-            'nameCustomer' => $customer->getFirstname().' '.$customer->getLastname(),
-            'address' => $customer->getAddress()[0]['city'].', '.$customer->getAddress()[0]['region'].', '.$customer->getAddress()[0]['postcode'].', US',
-            'phone' =>  $customer->getAddress()[0]['telephone'],
+            'name' => $customer->getAddress()[0]['firstname'] . ' ' . $customer->getAddress()[0]['lastname'],
+            'nameCustomer' => $customer->getFirstname() . ' ' . $customer->getLastname(),
+            'address' => $customer->getAddress()[0]['city'] . ', ' . $customer->getAddress()[0]['region'] . ', ' . $customer->getAddress()[0]['postcode'] . ', US',
+            'phone' => $customer->getAddress()[0]['telephone'],
         ];
 
     }

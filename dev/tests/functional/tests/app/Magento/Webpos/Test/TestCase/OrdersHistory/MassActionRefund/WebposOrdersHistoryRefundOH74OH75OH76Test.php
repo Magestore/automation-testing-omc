@@ -20,20 +20,25 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposOrdersHistoryRefundOH74OH75OH76Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertRefundSuccess
+     * @var AssertRefundSuccess $assertRefundSuccess
      */
     protected $assertRefundSuccess;
 
     /**
-     * @var AssertOrderStatus
+     * @var AssertOrderStatus $assertOrderStatus
      */
     protected $assertOrderStatus;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertRefundSuccess $assertRefundSuccess
+     * @param AssertOrderStatus $assertOrderStatus
+     */
     public function __inject(WebposIndex $webposIndex, AssertRefundSuccess $assertRefundSuccess, AssertOrderStatus $assertOrderStatus)
     {
         $this->webposIndex = $webposIndex;
@@ -41,7 +46,14 @@ class WebposOrdersHistoryRefundOH74OH75OH76Test extends Injectable
         $this->assertOrderStatus = $assertOrderStatus;
     }
 
-    public function test($products, $refundShipping , $adjustRefund, $adjustFee)
+    /**
+     * @param $products
+     * @param $refundShipping
+     * @param $adjustRefund
+     * @param $adjustFee
+     * @return array
+     */
+    public function test($products, $refundShipping, $adjustRefund, $adjustFee)
     {
         // Config all allow shipping for pos
         $this->objectManager->getInstance()->create(
@@ -102,7 +114,7 @@ class WebposOrdersHistoryRefundOH74OH75OH76Test extends Injectable
         }
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
-            ['products' => $products, 'refundShipping' => $refundShipping,'adjustRefund' => $adjustRefund, 'adjustFee' => $adjustFee]
+            ['products' => $products, 'refundShipping' => $refundShipping, 'adjustRefund' => $adjustRefund, 'adjustFee' => $adjustFee]
         )->run();
 
         return [

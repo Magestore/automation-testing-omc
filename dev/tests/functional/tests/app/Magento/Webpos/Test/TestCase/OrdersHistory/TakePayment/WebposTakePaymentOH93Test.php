@@ -6,12 +6,14 @@
  * Date: 1/30/2018
  * Time: 9:34 AM
  */
+
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment;
 
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposTakePaymentOH93Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment
@@ -118,7 +120,7 @@ class WebposTakePaymentOH93Test extends Injectable
         //click take payment
         sleep(0.5);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
-        sleep(0.5);
+        sleep(2);
         $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
         sleep(1);
         $this->webposIndex->getOrderHistoryPayment()->getInputAmount()->setValue(0);

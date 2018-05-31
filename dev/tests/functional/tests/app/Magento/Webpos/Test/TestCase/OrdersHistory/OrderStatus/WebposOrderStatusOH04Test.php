@@ -11,18 +11,29 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\OrderStatus;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrderStatusOH04Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\OrderStatus
+ */
 class WebposOrderStatusOH04Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(WebposIndex $webposIndex)
     {
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test($products)
     {
         // LoginTest webpos
@@ -52,6 +63,7 @@ class WebposOrderStatusOH04Test extends Injectable
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($lessGrandTotal);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(2);
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         // Go to Order History
@@ -65,6 +77,6 @@ class WebposOrderStatusOH04Test extends Injectable
         return [
             'status' => 'Pending',
             'grandTotal' => $grandTotal
-            ];
+        ];
     }
 }

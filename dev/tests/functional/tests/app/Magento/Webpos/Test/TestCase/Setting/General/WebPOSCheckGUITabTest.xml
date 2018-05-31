@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Setting\General\WebPOSCheckGUITabTest" summary="Customer On Checkout Page - Check GUI test" ticketId="WEBPOS-1">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Setting\General\WebPOSCheckGUITabTest"
+              summary="Customer On Checkout Page - Check GUI test" ticketId="WEBPOS-1">
         <variation name="WebPOSCheckGUICheckoutTabTestVariation_SET10">
             <data name="menuItem" xsi:type="string">Checkout</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Setting\General\AssertWebPOSCheckGUICheckoutTabPageDisplayCorrectly"/>
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\Setting\General\AssertWebPOSCheckGUICheckoutTabPageDisplayCorrectly"/>
         </variation>
 
         <variation name="WebPOSCheckGUICheckoutTabTestVariation_SET11">
             <data name="menuItem" xsi:type="string">Catalog</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Setting\General\AssertWebPOSCheckGUICatalogTabPageDisplayCorrectly"/>
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\Setting\General\AssertWebPOSCheckGUICatalogTabPageDisplayCorrectly"/>
         </variation>
 
         <variation name="WebPOSCheckGUICheckoutTabTestVariation_SET12">
             <data name="menuItem" xsi:type="string">Currency</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Setting\General\AssertWebPOSCheckGUICurrencyTabPageDisplayCorrectly"/>
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\Setting\General\AssertWebPOSCheckGUICurrencyTabPageDisplayCorrectly"/>
         </variation>
 
         <variation name="WebPOSCheckGUICheckoutTabTestVariation_SET13">
             <data name="menuItem" xsi:type="string">POS Hub</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Setting\General\AssertWebPOSCheckGUIPOSHubTabPageDisplayCorrectly"/>
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\Setting\General\AssertWebPOSCheckGUIPOSHubTabPageDisplayCorrectly"/>
         </variation>
     </testCase>
 </config>

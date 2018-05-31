@@ -10,6 +10,7 @@ namespace Magento\Webpos\Test\TestCase\Setting\Login;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebPOSLoginSuccessfulyTest
  * @package Magento\Webpos\Test\TestCase\Setting\LoginTest
@@ -17,11 +18,13 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebPOSLoginSuccessfulyTest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
-
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(
         WebposIndex $webposIndex
     )

@@ -18,15 +18,25 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposOrdersHistoryMassActionRefundCheckGUITest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
-    public function __inject(WebposIndex $webposIndex)
+    /**
+     * @param WebposIndex $webposIndex
+     */
+    public function __inject (
+        WebposIndex $webposIndex
+    )
     {
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @param null $configData
+     * @return array
+     */
     public function test($products, $configData = null)
     {
         // Config all allow shipping for pos

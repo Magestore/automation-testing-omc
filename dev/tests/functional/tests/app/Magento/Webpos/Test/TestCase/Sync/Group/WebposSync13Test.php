@@ -14,8 +14,8 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Customer\Test\Page\Adminhtml\CustomerIndex;
 use Magento\Customer\Test\Page\Adminhtml\CustomerIndexEdit;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Sync\AssertSynchronizationPageDisplay;
 use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
+use Magento\Webpos\Test\Constraint\Sync\AssertSynchronizationPageDisplay;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
@@ -56,6 +56,10 @@ class WebposSync13Test extends Injectable
      * @var CatalogProductEdit
      */
     protected $editProductPage;
+
+    /**
+     * @var AssertItemUpdateSuccess $assertItemUpdateSuccess
+     */
     protected $assertItemUpdateSuccess;
 
     /**
@@ -63,6 +67,15 @@ class WebposSync13Test extends Injectable
      */
     protected $assertSynchronizationPageDisplay;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param CustomerIndex $customerIndexPage
+     * @param CustomerIndexEdit $customerIndexEditPage
+     * @param CatalogProductIndex $productGrid
+     * @param CatalogProductEdit $editProductPage
+     * @param AssertSynchronizationPageDisplay $assertSynchronizationPageDisplay
+     * @param AssertItemUpdateSuccess $assertItemUpdateSuccess
+     */
     public function __inject(
         WebposIndex $webposIndex,
         CustomerIndex $customerIndexPage,
@@ -84,6 +97,10 @@ class WebposSync13Test extends Injectable
 
     }
 
+    /**
+     * @param Customer $initialCustomer
+     * @param Customer $customer
+     */
     public function test(
         Customer $initialCustomer,
         Customer $customer

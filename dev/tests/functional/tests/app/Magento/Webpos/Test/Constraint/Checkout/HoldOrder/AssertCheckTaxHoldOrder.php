@@ -8,14 +8,16 @@
 namespace Magento\Webpos\Test\Constraint\Checkout\HoldOrder;
 
 use Magento\Mtf\Constraint\AbstractConstraint;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Customer\Test\Fixture\Customer;
 /**
  * Class AssertCheckTaxHoldOrder
  * @package Magento\Webpos\Test\Constraint\Cart\HoldOrder
  */
 class AssertCheckTaxHoldOrder extends AbstractConstraint
 {
+    /**
+     * @param $taxExpected
+     * @param $taxActual
+     */
     public function processAssert($taxExpected, $taxActual)
     {
         \PHPUnit_Framework_Assert::assertEquals(

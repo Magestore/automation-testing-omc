@@ -37,15 +37,19 @@ class WebposZreportZR012Test extends Injectable
     /**
      * Webpos Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
+     */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory
@@ -55,6 +59,11 @@ class WebposZreportZR012Test extends Injectable
         $this->fixtureFactory = $fixtureFactory;
     }
 
+    /**
+     * @param Denomination $denomination
+     * @param $products
+     * @return array
+     */
     public function test(
         Denomination $denomination,
         $products
@@ -111,14 +120,6 @@ class WebposZreportZR012Test extends Injectable
         ];
     }
 
-    public function tearDown()
-    {
-        $this->objectManager->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'setup_session_before_working_to_no']
-        )->run();
-    }
-
     /**
      * convert string price format to decimal
      * @param $string
@@ -138,5 +139,13 @@ class WebposZreportZR012Test extends Injectable
             $result = -1 * abs($result);
         }
         return $result;
+    }
+
+    public function tearDown()
+    {
+        $this->objectManager->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'setup_session_before_working_to_no']
+        )->run();
     }
 }

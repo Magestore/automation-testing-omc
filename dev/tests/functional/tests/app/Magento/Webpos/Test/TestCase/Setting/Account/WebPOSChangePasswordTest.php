@@ -8,9 +8,10 @@
 
 namespace Magento\Webpos\Test\TestCase\Setting\Account;
 
+use Magento\Mtf\Config\DataInterface;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Config\DataInterface;
+
 /**
  * Class WebPOSChangePasswordTest
  * @package Magento\Webpos\Test\TestCase\Setting\Account
@@ -18,7 +19,7 @@ use Magento\Mtf\Config\DataInterface;
 class WebPOSChangePasswordTest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
@@ -32,6 +33,10 @@ class WebPOSChangePasswordTest extends Injectable
     protected $testCaseID;
     protected $newPassword;
 
+    /**
+     * @param DataInterface $configuration
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(
         DataInterface $configuration,
         WebposIndex $webposIndex
@@ -41,6 +46,12 @@ class WebPOSChangePasswordTest extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $testID
+     * @param $currentPassword
+     * @param $password
+     * @param $passwordConfirmation
+     */
     public function test($testID, $currentPassword, $password, $passwordConfirmation)
     {
         if ($testID == 'SET07' || $testID == 'SET08') {

@@ -37,16 +37,19 @@ class WebposZreportZR016Test extends Injectable
     /**
      * Webpos Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
-
+    /**
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
+     */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory
@@ -56,6 +59,12 @@ class WebposZreportZR016Test extends Injectable
         $this->fixtureFactory = $fixtureFactory;
     }
 
+    /**
+     * @param $products
+     * @param Denomination $denomination
+     * @param $denominationNumberCoin
+     * @return array
+     */
     public function test(
         $products,
         Denomination $denomination,
