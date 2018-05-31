@@ -21,7 +21,7 @@ class WebposManageLocationML45Test extends Injectable
     /**
      * Mapping Location Index page
      *
-     * @var MappingLocationIndex
+     * @var MappingLocationIndex $mappingLocationIndex
      */
     protected $mappingLocationIndex;
 

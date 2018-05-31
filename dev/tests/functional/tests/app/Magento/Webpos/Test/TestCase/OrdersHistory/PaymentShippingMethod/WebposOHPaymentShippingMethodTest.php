@@ -104,11 +104,11 @@ class WebposOHPaymentShippingMethodTest extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         if ($addShipping) {
-            if (!$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->isVisible()) {
+            if (!$this->webposIndex->getCheckoutShippingMethod()->getPOSShippingStorePickup()->isVisible()) {
                 $this->webposIndex->getCheckoutShippingMethod()->clickShipPanel();
             }
-            sleep(1);
-            $this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
+            sleep(2);
+            $this->webposIndex->getCheckoutShippingMethod()->getPOSShippingStorePickup()->click();
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }
         $paymentAmount = 0;

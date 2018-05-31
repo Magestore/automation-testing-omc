@@ -26,42 +26,42 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposTaxTAX119Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     /**
-     * @var AssertPaymentSuccess
+     * @var AssertPaymentSuccess $assertPaymentSuccess
      */
     protected $assertPaymentSuccess;
 
     /**
-     * @var AssertInvoiceSuccess
+     * @var AssertInvoiceSuccess $assertInvoiceSuccess
      */
     protected $assertInvoiceSuccess;
 
     /**
-     * @var AssertShipmentSuccess
+     * @var AssertShipmentSuccess $assertShipmentSuccess
      */
     protected $assertShipmentSuccess;
 
     /**
-     * @var AssertRefundSuccess
+     * @var AssertRefundSuccess $assertRefundSuccess
      */
     protected $assertRefundSuccess;
 
     /**
-     * @var AssertOrderStatus
+     * @var AssertOrderStatus $assertOrderStatus
      */
     protected $assertOrderStatus;
 
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
@@ -91,6 +91,16 @@ class WebposTaxTAX119Test extends Injectable
         ];
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
+     * @param AssertPaymentSuccess $assertPaymentSuccess
+     * @param AssertInvoiceSuccess $assertInvoiceSuccess
+     * @param AssertShipmentSuccess $assertShipmentSuccess
+     * @param AssertRefundSuccess $assertRefundSuccess
+     * @param AssertOrderStatus $assertOrderStatus
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
@@ -112,6 +122,15 @@ class WebposTaxTAX119Test extends Injectable
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
 
+    /**
+     * @param Customer $customer
+     * @param $taxRate
+     * @param $products
+     * @param bool $createInvoice
+     * @param bool $shipped
+     * @param $dataConfig
+     * @return array
+     */
     public function test(
         Customer $customer,
         $taxRate,

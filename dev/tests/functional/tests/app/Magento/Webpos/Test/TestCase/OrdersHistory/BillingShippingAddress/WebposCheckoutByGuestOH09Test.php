@@ -24,11 +24,21 @@ class WebposCheckoutByGuestOH09Test extends Injectable
     protected $webposIndex;
 
     /**
-     * @param WebposIndex $webposIndex
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
-    public function __inject(WebposIndex $webposIndex)
+    protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
+    public function __inject(
+        WebposIndex $webposIndex,
+        AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+    )
     {
         $this->webposIndex = $webposIndex;
+        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
 
     /**
@@ -68,6 +78,9 @@ class WebposCheckoutByGuestOH09Test extends Injectable
         // Place Order
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        //Assert Place Order Success
+        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
+        sleep(1);
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         // Go to Order History

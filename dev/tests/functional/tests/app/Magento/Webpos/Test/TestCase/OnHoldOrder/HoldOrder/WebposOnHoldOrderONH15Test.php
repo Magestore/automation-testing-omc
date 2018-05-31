@@ -64,21 +64,34 @@ class WebposOnHoldOrderONH15Test extends Injectable
         //Create multiorder
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
+        sleep(2);
         $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem('1')->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoaderVisibleToNotVisible();
-
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(2);
         //Add a taxable products to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
+
         $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem('2')->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoaderVisibleToNotVisible();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(2);
+        //Add a taxable products to cart
         $this->webposIndex->getCheckoutProductList()->search($product2->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem('1')->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        sleep(2);
+        for ($i=0; $i<5; $i++) {
+            while ($this->webposIndex->getMsWebpos()->getCartLoader()->isVisible()) {
+                $this->webposIndex->getMsWebpos()->waitCartLoader();
+            }
+        }
 
         //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();

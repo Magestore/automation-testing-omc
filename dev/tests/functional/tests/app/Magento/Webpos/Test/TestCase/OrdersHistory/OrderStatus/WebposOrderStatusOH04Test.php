@@ -63,6 +63,7 @@ class WebposOrderStatusOH04Test extends Injectable
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($lessGrandTotal);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(2);
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         // Go to Order History

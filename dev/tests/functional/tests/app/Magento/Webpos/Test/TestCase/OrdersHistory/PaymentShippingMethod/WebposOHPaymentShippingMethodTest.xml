@@ -1,52 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\PaymentShippingMethod\WebposOHPaymentShippingMethodTest"
-              summary="Orders History - Payment/shipping method test" ticketId="WEBPOS-1">
-        <variation name="WebposOHPaymentShippingMethodTestVariation_OH12">
-            <data name="products" xsi:type="array">
-                <item name="0" xsi:type="array">
-                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
-                    <item name="orderQty" xsi:type="number">1</item>
-                </item>
-            </data>
-            <data name="addDiscount" xsi:type="boolean">true</data>
-            <data name="discountAmount" xsi:type="string">100.00</data>
-            <data name="addPayment" xsi:type="boolean">false</data>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+	<testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\PaymentShippingMethod\WebposOHPaymentShippingMethodTest" summary="Orders History - Payment/shipping method test" ticketId="WEBPOS-1">
+		<variation name="WebposOHPaymentShippingMethodTestVariation_OH12">
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="product" xsi:type="string">product_100_dollar_taxable</item>
+					<item name="orderQty" xsi:type="number">1</item>
+				</item>
+			</data>
+			<data name="addDiscount" xsi:type="boolean">true</data>
+			<data name="discountAmount" xsi:type="string">100.00</data>
+			<data name="addPayment" xsi:type="boolean">false</data>
 
-            <constraint
-                    name="Magento\Webpos\Test\Constraint\OrderHistory\PaymentShippingMethod\AssertNoPaymentInfoRequired"/>
-        </variation>
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\PaymentShippingMethod\AssertNoPaymentInfoRequired"/>
+		</variation>
 
-        <variation name="WebposOHPaymentShippingMethodTestVariation_OH13">
-            <data name="addCustomSale" xsi:type="boolean">true</data>
-            <data name="customProduct" xsi:type="array">
-                <item name="name" xsi:type="string">custom product %isolation%</item>
-                <item name="description" xsi:type="string">custom product description %isolation%</item>
-                <item name="price" xsi:type="number">100</item>
-                <item name="shipAble" xsi:type="boolean">false</item>
-            </data>
+		<variation name="WebposOHPaymentShippingMethodTestVariation_OH13">
+			<data name="addCustomSale" xsi:type="boolean">true</data>
+			<data name="customProduct" xsi:type="array">
+				<item name="name" xsi:type="string">custom product %isolation%</item>
+				<item name="description" xsi:type="string">custom product description %isolation%</item>
+				<item name="price" xsi:type="number">100</item>
+				<item name="shipAble" xsi:type="boolean">false</item>
+			</data>
 
-            <constraint
-                    name="Magento\Webpos\Test\Constraint\OrderHistory\PaymentShippingMethod\AssertShipAddressAndShipMethodAreBlank"/>
-        </variation>
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\PaymentShippingMethod\AssertShipAddressAndShipMethodAreBlank"/>
+		</variation>
 
-        <variation name="WebposOHPaymentShippingMethodTestVariation_OH14">
-            <data name="products" xsi:type="array">
-                <item name="0" xsi:type="array">
-                    <item name="product" xsi:type="string">product_100_dollar_taxable</item>
-                    <item name="orderQty" xsi:type="number">1</item>
-                </item>
-            </data>
-            <data name="addPayment" xsi:type="boolean">true</data>
-            <data name="addShipping" xsi:type="boolean">true</data>
-            <data name="shipLabel" xsi:type="string">Flat Rate - Fixed</data>
-            <data name="paymentLabel" xsi:type="string">Web POS - Cash In</data>
+		<variation name="WebposOHPaymentShippingMethodTestVariation_OH14">
+			<data name="products" xsi:type="array">
+				<item name="0" xsi:type="array">
+					<item name="product" xsi:type="string">product_100_dollar_taxable</item>
+					<item name="orderQty" xsi:type="number">1</item>
+				</item>
+			</data>
+			<data name="addPayment" xsi:type="boolean">true</data>
+			<data name="addShipping" xsi:type="boolean">true</data>
+			<data name="shipLabel" xsi:type="string">POS Shipping - Store Pickup</data>
+			<data name="paymentLabel" xsi:type="string">Web POS - Cash In</data>
 
-            <constraint
-                    name="Magento\Webpos\Test\Constraint\OrderHistory\PaymentShippingMethod\AssertPaymentMethodIsShownOnDetailOrder"/>
-            <constraint
-                    name="Magento\Webpos\Test\Constraint\OrderHistory\PaymentShippingMethod\AssertShippingMethodIsShownOnOrderDetail"/>
-        </variation>
-    </testCase>
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\PaymentShippingMethod\AssertPaymentMethodIsShownOnDetailOrder"/>
+			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\PaymentShippingMethod\AssertShippingMethodIsShownOnOrderDetail"/>
+		</variation>
+	</testCase>
 </config>

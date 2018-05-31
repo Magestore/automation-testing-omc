@@ -6,14 +6,12 @@
  * Date: 1/30/2018
  * Time: 9:34 AM
  */
-
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment;
 
-use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
-
+use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 /**
  * Class WebposTakePaymentOH84Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment
@@ -25,6 +23,9 @@ class WebposTakePaymentOH84Test extends Injectable
      */
     protected $webposIndex;
 
+    /**
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
@@ -63,7 +64,7 @@ class WebposTakePaymentOH84Test extends Injectable
      * @param $configData
      * @param $amount
      */
-    public function test(
+    public function test (
         $products,
         FixtureFactory $fixtureFactory,
         $configData,
@@ -102,6 +103,7 @@ class WebposTakePaymentOH84Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
+        sleep(2);
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         //select order

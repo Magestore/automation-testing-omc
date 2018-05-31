@@ -26,8 +26,8 @@ class AssertCheckCartSimpleProduct extends AbstractConstraint
             foreach ($cartProducts as $key => $cartProduct) {
                 $expectedPrice = floatval($cartProduct['price']*$cartProduct['qty']);
                 \PHPUnit_Framework_Assert::assertEquals(
-                    $webposIndex->getCheckoutCartItems()->getNameCartItemByOrderTo($key+1),
                     $cartProduct['name'],
+                    $webposIndex->getCheckoutCartItems()->getNameCartItemByOrderTo($key+1),
                     'Name product is not correct'
                 );
 
@@ -43,8 +43,8 @@ class AssertCheckCartSimpleProduct extends AbstractConstraint
                         'Qty is not display'
                     );
                     \PHPUnit_Framework_Assert::assertEquals(
-                        $webposIndex->getCheckoutCartItems()->getQtyDisplay($key+1),
                         floatval($cartProduct['qty']),
+                        $webposIndex->getCheckoutCartItems()->getQtyDisplay($key+1),
                         'Qtu product is not display correct'
                     );
                 }

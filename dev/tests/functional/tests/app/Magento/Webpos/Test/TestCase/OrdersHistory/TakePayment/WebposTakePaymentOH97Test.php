@@ -120,6 +120,8 @@ class WebposTakePaymentOH97Test extends Injectable
         //click take payment
         sleep(0.5);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
+        sleep(1);
+        $remain = $this->webposIndex->getOrderHistoryPayment()->getRemainMoney()->getText();
         $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
         sleep(1);
         $am = $this->webposIndex->getOrderHistoryOrderViewHeader()->getGrandTotal();
@@ -130,6 +132,11 @@ class WebposTakePaymentOH97Test extends Injectable
         $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
 
         $this->webposIndex->getModal()->getOkButton()->click();
+        sleep(1);
+        return [
+            'am' => $am,
+            'remain' => $remain
+        ];
     }
 
     public function tearDown()
