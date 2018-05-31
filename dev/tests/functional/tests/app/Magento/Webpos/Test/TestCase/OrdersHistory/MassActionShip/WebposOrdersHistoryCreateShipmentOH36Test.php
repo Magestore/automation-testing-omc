@@ -14,6 +14,22 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryCreateShipmentOH36Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip
+ * Precondition and setup steps:
+ * 1.  Login webpos as a staff
+ * 2. Create an order with some product
+ * - Select payment and fill amount equal or greater than total
+ * - Mark as shipped: off
+ * - Create invoice : off
+ * Steps:
+ * 1.  Go to order details page >Create shipment
+ * 2. Fill out Qty to ship
+ * 3. Click on Submit shipment button
+ * 4. Click on OK button"
+ * Acceptance Criteria:
+ * 1. Close shipment popup and a shipment has created with corresponding item and Qty
+ * 2. Order status will be changed to Processcing
+ * 3. Hide ship action on action box
+ * 4. A new notification will be display on notification icon
  */
 class WebposOrdersHistoryCreateShipmentOH36Test extends Injectable
 {

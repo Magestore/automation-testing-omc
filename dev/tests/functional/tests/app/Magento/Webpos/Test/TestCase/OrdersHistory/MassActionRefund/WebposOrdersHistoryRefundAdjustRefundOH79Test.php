@@ -16,6 +16,18 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryRefundAdjustRefundOH79Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order with completed status
+ * Steps:
+ * 1. Click to refund order
+ * -  Qty=0
+ * - Adjust refund = total paid
+ * 2. Submit > Ok confirmation
+ * Acceptance Criteria:
+ * 1. A creditmemo has been created
+ * 2. Total refunded will be update and shown on detail page (total refund = adjust refund )
+ * 3. Hide actions refund, cancel on action box
  */
 class WebposOrdersHistoryRefundAdjustRefundOH79Test extends Injectable
 {
@@ -39,7 +51,7 @@ class WebposOrdersHistoryRefundAdjustRefundOH79Test extends Injectable
      * @param AssertRefundSuccess $assertRefundSuccess
      * @param AssertOrderStatus $assertOrderStatus
      */
-    public function __inject (
+    public function __inject(
         WebposIndex $webposIndex,
         AssertRefundSuccess $assertRefundSuccess,
         AssertOrderStatus $assertOrderStatus

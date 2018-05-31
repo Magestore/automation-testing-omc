@@ -8,14 +8,23 @@
 
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder;
 
+use Magento\Customer\Test\Fixture\Customer;
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Fixture\FixtureFactory;
-use Magento\Customer\Test\Fixture\Customer;
 
 /**
  * Class WebposOnHoldOrderONH18Test
  * @package Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Create an on-hold order successfully with customer, tax, discount whole cart, shipping fee
+ * Steps:
+ * 1. Go to On-Hold Orders menu
+ * 2. Click on [Checkout] button on that on-hold order
+ * Acceptance Criteria:
+ * - Customer, tax will be loaded to cart page
+ * - Discount amount whole cart, shipping fee will not be loaded to cart page
  */
 class WebposOnHoldOrderONH18Test extends Injectable
 {
@@ -90,11 +99,10 @@ class WebposOnHoldOrderONH18Test extends Injectable
         //Get Tax Percent
         $taxPercent = $this->webposIndex->getCheckoutWebposCart()->getTax();
 
-        $taxExpected = round(($product->getPrice() - $discount) * 0.085,2);
+        $taxExpected = round(($product->getPrice() - $discount) * 0.085, 2);
 
         //Click on [Add discount] > on Discount tab, add dicount for whole cart (type: $)
-        while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup())
-        {
+        while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup()) {
             $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
         }
         $this->webposIndex->getCheckoutDiscount()->clickDiscountButton();
@@ -108,13 +116,13 @@ class WebposOnHoldOrderONH18Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $feeShippingBefore =$this->webposIndex->getCheckoutCartFooter()->getShippingPrice();
+        $feeShippingBefore = $this->webposIndex->getCheckoutCartFooter()->getShippingPrice();
         //Choose PoS shipping method
         sleep(1);
         $this->webposIndex->getCheckoutShippingMethod()->clickPOSShipping();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
         sleep(1);
-         //BackToCart
+        //BackToCart
         $this->webposIndex->getCheckoutWebposCart()->getIconPrevious()->click();
         sleep(2);
         //Hold

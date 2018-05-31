@@ -17,6 +17,15 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryInvoiceOH101Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create a pending order with tax, discount whole cart, shipping fee and some  products
+ * 3. Create payment
+ * Steps:
+ * Click on [Invoice] button
+ * Acceptance Criteria:
+ * - Items table show correctly product information corresponding to qty, price, subtotal, tax, discount, row total as same as items table of order detail
+ * - Fields: Amount of Subtotal, Shipping & Handling, tax, Discount, Grand total, Total paid correspond to their amount in the order detail
  */
 class WebposOrdersHistoryInvoiceOH101Test extends Injectable
 {

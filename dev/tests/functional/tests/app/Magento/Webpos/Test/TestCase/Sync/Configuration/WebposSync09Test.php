@@ -17,6 +17,21 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposSync09Test
  * @package Magento\Webpos\Test\TestCase\Sync\Configuration
+ * Precondition and setup steps
+ * 1. Login Webpos as a staff
+ * 2. Login backend on another browser > Webpos setting
+ * 3. Change configuration of some fileds:
+ * Ex: Web POS Color, Enable delivery date...
+ * 4. Back to  the browser which are opening webpos
+ *
+ * Steps
+ * 1. Go to synchronization page
+ * 2. Reload configuration
+ *
+ * Acceptance Criteria
+ * 2. The changes of config will be updated and shown on webpos page
+ * - Webpos color is the color just changed
+ * - Delivery date box will be shown on shipping method
  */
 class WebposSync09Test extends Injectable
 {

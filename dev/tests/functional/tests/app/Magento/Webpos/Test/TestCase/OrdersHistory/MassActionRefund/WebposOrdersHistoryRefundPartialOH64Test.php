@@ -16,6 +16,19 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryRefundPartialOH64Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order with some products (or one product with Qty >1)
+ * 3. Create an order with completed status
+ * 4. Refund a partial
+ * Steps:
+ * Refund all extant items
+ * Acceptance Criteria:
+ * 1. A creditmemo has been created!
+ * 2. There is a new notification
+ * 3. Order status will be changed to Closed
+ * 4. Hide actions ship, refund, cancel on action box
+ * 5. Total refund will be updated and shown on detail page
  */
 class WebposOrdersHistoryRefundPartialOH64Test extends Injectable
 {
@@ -39,7 +52,7 @@ class WebposOrdersHistoryRefundPartialOH64Test extends Injectable
      * @param AssertRefundSuccess $assertRefundSuccess
      * @param AssertOrderStatus $assertOrderStatus
      */
-    public function __inject (
+    public function __inject(
         WebposIndex $webposIndex,
         AssertRefundSuccess $assertRefundSuccess,
         AssertOrderStatus $assertOrderStatus

@@ -15,6 +15,15 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryInvoiceOH114Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create a pending order with discount 100%
+ * Steps:
+ * 1. Go to order details page
+ * 2. Invoice order just created
+ * Acceptance Criteria:
+ * 1. No required take payment
+ * 2. All items are available to invoice
  */
 class WebposOrdersHistoryInvoiceOH114Test extends Injectable
 {

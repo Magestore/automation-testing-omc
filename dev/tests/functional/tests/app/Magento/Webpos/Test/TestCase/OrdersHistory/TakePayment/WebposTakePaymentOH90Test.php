@@ -17,6 +17,19 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposTakePaymentOH90Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order:
+ * Select payment method: fill amount less than total
+ *
+ * Steps:
+ * 1. Go to order details page
+ * 2. Take payment
+ * 3. Select a payment method
+ *
+ * Acceptance Criteria:
+ * 1. Remain amount will be auto fill out on amount textbox of the selected  payment
+ * 2. Remain money field = 0
  */
 class WebposTakePaymentOH90Test extends Injectable
 {

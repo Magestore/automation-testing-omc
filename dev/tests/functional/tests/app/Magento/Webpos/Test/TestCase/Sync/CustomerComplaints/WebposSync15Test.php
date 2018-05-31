@@ -24,6 +24,17 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposSync15Test
  * @package Magento\Webpos\Test\TestCase\Sync\CustomerComplaints
+ * Precondition and setup steps
+ * 1. Login Webpos as a staff
+ * 2. Goto Database on another browser  > Webpos_customer_complaints table > Edit a complaint of any customer
+ * 3. Back to  the browser which are opening webpos
+ *
+ * Steps
+ * 1. Go to synchronization page
+ * 2. Update customer complaints
+ *
+ * Acceptance Criteria
+ * 2. Complaint will be updated and shown on corresponding customer detail page
  */
 class WebposSync15Test extends Injectable
 {

@@ -17,6 +17,17 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposSync18Test
  * @package Magento\Webpos\Test\TestCase\Sync\Country
+ * Precondition and setup steps
+ * 1. Login Webpos as a staff
+ * 2. Login backend on another browser  > Configuration > Country > Edit some fileds (ex: Allow Countries )
+ * 3. Back to  the browser which are opening webpos
+ *
+ * Steps
+ * 1. Go to synchronization page
+ * 2. Reload country
+ *
+ * Acceptance Criteria
+ * 2. Country field was updated on Add new address popup
  */
 class WebposSync18Test extends Injectable
 {

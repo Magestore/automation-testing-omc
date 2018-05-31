@@ -18,6 +18,79 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOHMassActionCancelTest
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionCancel
+ * OH45 & OH46 & OH47 & OH48 & OH49 & OH50 & OH51 & OH53:
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create a pending order
+ * OH45
+ * Steps:
+ * 1. Go to order details page
+ * 2. Click on icon on the top of the right
+ * 3. Click on Cancel action
+ * Acceptance Criteria:
+ * Display Cancel Comment popup includding:
+ * - buttons: Cancel, save
+ * - Textarea to enter comment
+ *
+ * OH46
+ * Steps:
+ * 1. Go to order details page
+ * 2. Click to Cancel order
+ * 3. Click to Cancel on Comment popup
+ * Acceptance Criteria:
+ * 1. Close comment popup
+ * 2. Order status is changeless
+ *
+ * OH48
+ * Steps:
+ * 1. Go to order details page
+ * 2. Click to Cancel order
+ * 3. Save Comment
+ * 4. Close confirmation popup
+ * Acceptance Criteria:
+ * Close confirmation popup
+ *
+ * OH49
+ * Steps:
+ * 1. Go to order details page
+ * 2. Click to Cancel order
+ * 3. Save Comment
+ * 4. Cancel confirmation popup
+ * Acceptance Criteria:
+ * Close confirmation popup
+ *
+ * OH50
+ * Steps:
+ * 1. Go to order details page
+ * 2. Click to Cancel order
+ * 3. Enter comment
+ * 4. Save Comment> OK confirmation
+ * Acceptance Criteria:
+ * 1. Close popup
+ * 2. Order status will be changed to Cancelled
+ * 3. Hide actions Send email, ship, cancel, refund on Action box
+ * 4. Hide Take payment, Invoice buttons on order detail page
+ * 5. Order in backend will be updated too
+ * 6. A new notification will be display on notification icon
+ *
+ * OH51
+ * Steps:
+ * 1. Create shipment
+ * 2. Click to Cancel order
+ * 3. Enter comment
+ * 4. Save Comment> OK confirmation
+ * Acceptance Criteria:
+ * 1. Close popup
+ * 2. Order was cancelled successfully
+ * 3. A new notification will be display on notification icon
+ *
+ * OH53
+ * Steps:
+ * 1. Go to order details page
+ * 2. Cancel that order
+ * Acceptance Criteria:
+ * 1. Order was cancelled successfully
+ * 2. A new notification will be display on notification icon
  */
 class WebposOHMassActionCancelTest extends Injectable
 {

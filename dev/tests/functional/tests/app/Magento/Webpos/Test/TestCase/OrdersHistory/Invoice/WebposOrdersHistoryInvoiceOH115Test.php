@@ -15,6 +15,17 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryInvoiceOH115Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create a order
+ * 3. Create shippment
+ * 4. Create payment
+ * Steps:
+ * Create invoice
+ * Acceptance Criteria:
+ * 1. Create invoice successfully
+ * 2. Order status will be changed to complete
+ * 3. There is a new notification
  */
 class WebposOrdersHistoryInvoiceOH115Test extends Injectable
 {

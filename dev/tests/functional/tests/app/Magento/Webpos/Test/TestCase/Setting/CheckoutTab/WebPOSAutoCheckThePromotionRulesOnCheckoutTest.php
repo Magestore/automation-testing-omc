@@ -19,6 +19,18 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebPOSAutoCheckThePromotionRulesOnCheckoutTest
  * @package Magento\Webpos\Test\TestCase\Setting\CheckoutTab
+ * Precondition and setup steps
+ * Precondition: Exist an active catalog price rule on backend
+ * 1. Login webpos as a staff
+ * 2. Click on [General] menu > [Checkout] tab
+ * 3. [Auto check the promotion rules on checkout] = Yes
+ *
+ * Steps
+ * 1. Add some products that meet catalog price rule to cart
+ * 2. Click on [Checkout]
+ *
+ * Acceptance Criteria
+ * 2. Promotion will be checked and updated to cart automatically
  */
 class WebPOSAutoCheckThePromotionRulesOnCheckoutTest extends Injectable
 {

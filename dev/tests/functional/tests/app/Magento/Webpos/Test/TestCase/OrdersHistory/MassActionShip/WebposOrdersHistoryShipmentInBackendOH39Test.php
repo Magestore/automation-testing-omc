@@ -14,6 +14,14 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryShipmentInBackendOH39Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip
+ * Precondition and setup steps:
+ * 1.  Login webpos as a staff
+ * 2. Create an order: Mark as shipped: off
+ * 3. Go to Order detail page > Create shipment successfully
+ * Steps:
+ * Go to backend > sale > shipments
+ * Acceptance Criteria:
+ * Shipment just created will be saved and displayed on shipments page
  */
 class WebposOrdersHistoryShipmentInBackendOH39Test extends Injectable
 {

@@ -14,6 +14,49 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebPOSCheckGUITabTest
  * @package Magento\Webpos\Test\TestCase\Setting\General
+ * SET10 & SET11 & SET12 & SET13
+ * Precondition and setup steps
+ * 1. Login webpos as a staff
+ *
+ * SET10
+ * Steps
+ * 1. Click on [General] menu
+ * 2. Click on [Checkout] tab
+ * Acceptance Criteria
+ * 2. Including some fields:
+ * - Use online mode
+ * - Auto check the promotion rules on checkout
+ * - Sync on-hold order to server
+ *
+ * SET11
+ * Steps
+ * 1. Click on [General] menu
+ * 2. Click on [Checkout] tab
+ * Acceptance Criteria
+ * 2. Including some fields:
+ * - Use online mode
+ * - Auto check the promotion rules on checkout
+ * - Sync on-hold order to server
+ *
+ * SET12
+ * Steps
+ * 1. Click on [General] menu
+ * 2. Click on [Currency] tab
+ * Acceptance Criteria
+ * 2. Including field:
+ * - Currency
+ *
+ * SET13
+ * Steps
+ * 1. Click on [General] menu
+ * 2. Click on [POS Hub] tab
+ * Acceptance Criteria
+ * 2. Including field:
+ * - POS Hub IP Address
+ * - Enable Open Cash Drawer Manually
+ * - Manual Cashdrawer Kick Code (Leave empty for automatically)
+ * - Print Via POS Hub
+ * - Enable pole display
  */
 class WebPOSCheckGUITabTest extends Injectable
 {

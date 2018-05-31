@@ -14,6 +14,15 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryCheckCancelButtonOH32Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip
+ * Precondition and setup steps:
+ * 1.  Login webpos as a staff
+ * 2. Create an order with some product
+ * - Mark as shipped: off
+ * Steps:
+ * 1.  Go to order details page > Create shipment
+ * 2. Click on [Cancel] button
+ * Acceptance Criteria:
+ * Close Shipment popup
  */
 class WebposOrdersHistoryCheckCancelButtonOH32Test extends Injectable
 {
@@ -25,7 +34,7 @@ class WebposOrdersHistoryCheckCancelButtonOH32Test extends Injectable
     /**
      * @param WebposIndex $webposIndex
      */
-    public function __inject (
+    public function __inject(
         WebposIndex $webposIndex
     )
     {

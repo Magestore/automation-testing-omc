@@ -14,6 +14,14 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOnHoldOrderONH19Test
  * @package Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Create an on-hold order successfully with custom product and custom price
+ * Steps:
+ * 1. Go to On-Hold Orders menu
+ * 2. Click on [Checkout] button on that on-hold order
+ * Acceptance Criteria:
+ * - Custom price and custom product will be loaded to cart page successfully
  */
 class WebposOnHoldOrderONH19Test extends Injectable
 {

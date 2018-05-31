@@ -16,6 +16,15 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryRefundOH68Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order with completed status
+ * Steps:
+ * 1. Click to refund order
+ * 2. Qty=0, blank all fields
+ * 3. Submit > Ok confirmation
+ * Acceptance Criteria:
+ * Display error: "Error: Data Refund Invalid!"
  */
 class WebposOrdersHistoryRefundOH68Test extends Injectable
 {

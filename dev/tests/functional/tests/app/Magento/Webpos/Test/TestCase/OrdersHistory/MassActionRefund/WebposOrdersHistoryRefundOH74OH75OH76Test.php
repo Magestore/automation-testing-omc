@@ -16,6 +16,38 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryRefundOH74OH75OH76Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ * OH74 & OH75 & OH76:
+ * Precondition and setup steps:
+ * "1. Login webpos as a staff
+ * 2. Create an order with completed status
+ * and shipping fee > 0"
+ *
+ * OH74
+ * Steps:
+ * 1. Click to refund order and input valid values into fields to meet condition:
+ * SUM(rowtotal) + Refund shipping + adjust refund - adjust fee < Total paid
+ * 2. Submit > Ok confirmation
+ * Acceptance Criteria:
+ * 1. A creditmemo has been created!
+ * 2. Total refunded = SUM(rowtotal) + Refund shipping + adjust refund - adjust fee
+ * 3. Allow continue refund extand total paid with no item
+ *
+ * OH75
+ * Steps:
+ * 1. Click to refund order and input valid values into fields to meet condition:
+ * SUM(rowtotal) + Refund shipping + adjust refund - adjust fee = Total paid
+ * 2. Submit > Ok confirmation
+ * Acceptance Criteria:
+ * 1. A creditmemo has been created!
+ * 2. Total refunded = Grand total
+ *
+ * OH76
+ * Steps:
+ * 1. Click to refund order and input valid values into fields to meet condition:
+ * SUM(rowtotal) + Refund shipping + adjust refund - adjust fee > Total paid
+ * 2. Submit > Ok confirmation
+ * Acceptance Criteria:
+ * Show error popup  with message "The refundable amount is limited at [grand total]"
  */
 class WebposOrdersHistoryRefundOH74OH75OH76Test extends Injectable
 {

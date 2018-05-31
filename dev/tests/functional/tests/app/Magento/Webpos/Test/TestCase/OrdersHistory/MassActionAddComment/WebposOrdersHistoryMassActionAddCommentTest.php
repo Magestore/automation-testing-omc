@@ -15,6 +15,40 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryMassActionAddCommentTest
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionSendMail
+ * OH24:
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order successfully
+ * Steps:
+ * 1. Go to order details page
+ * 2. Click on icon on the top of the right
+ * 3. Click on Add comment action
+ * Acceptance Criteria:
+ * Display Add Comment popup includding:
+ * - button: Cancel, Save
+ * - Textarea to enter comment
+ *
+ * OH25:
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order successfully
+ * Steps:
+ * 1. Click to Add comment
+ * 2. Click on Cancel button
+ * Acceptance Criteria:
+ * Close Add comment popup
+ *
+ * OH26:
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order successfully
+ * Steps:
+ * 1. Click to Add comment
+ * 2. Click on Save button
+ * Acceptance Criteria:
+ * 1. Close Add comment popup
+ * 2. Comment will be added and display on order detail page
+ * 3. A new notification will be display on notification icon
  */
 class WebposOrdersHistoryMassActionAddCommentTest extends Injectable
 {

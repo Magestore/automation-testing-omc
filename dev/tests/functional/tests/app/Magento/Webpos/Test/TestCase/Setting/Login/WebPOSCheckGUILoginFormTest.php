@@ -15,6 +15,14 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebPOSCheckGUILoginFormTest
  * @package Magento\Webpos\Test\TestCase\Setting\LoginTest
+ * Steps
+ * 1. Go to backend
+ * 2. Webpos > POS checkout
+ *
+ * Acceptance Criteria
+ * 2.
+ * - Redirect to webpos page and display Login form
+ * - On Login form show logo and required enter username, password to login webpos
  */
 class WebPOSCheckGUILoginFormTest extends Injectable
 {

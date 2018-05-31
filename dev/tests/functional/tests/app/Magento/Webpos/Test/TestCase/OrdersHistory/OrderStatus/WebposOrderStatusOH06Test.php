@@ -14,6 +14,24 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrderStatusOH06Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\OrderStatus
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Add some product to cart
+ * 3. Click on [Checkout] button
+ * 4. Select a shipping method
+ *
+ * Steps:
+ * 1. Select a payment method
+ * 2. [Mark a shipped]: off
+ * [Create invoice]: on
+ * 3. Place order successfully
+ * 4. Go to [Orders history] menu
+ *
+ * Acceptance Criteria:
+ * 1. Order is created with processing status including:
+ * + Hidden [Take payment] and [Invoice] button
+ * + Show [Print] button
+ * 2. Mass action including: Send email, Ship, Add Comment, Re-order, Refund
  */
 class WebposOrderStatusOH06Test extends Injectable
 {

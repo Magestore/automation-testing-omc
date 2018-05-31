@@ -14,6 +14,13 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebPOSLoginSuccessfulyTest
  * @package Magento\Webpos\Test\TestCase\Setting\LoginTest
+ * Steps
+ * 1. Go to Webpos login form
+ * 2. Enter correct username and password of an active account
+ * 3. Click on [Login] button
+ *
+ * Acceptance Criteria
+ * 3. Login successfully to next screen
  */
 class WebPOSLoginSuccessfulyTest extends Injectable
 {

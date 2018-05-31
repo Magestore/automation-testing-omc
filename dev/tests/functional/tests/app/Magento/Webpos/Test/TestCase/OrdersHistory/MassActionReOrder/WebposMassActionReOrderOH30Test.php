@@ -16,6 +16,19 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposMassActionReOrderOH30Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionReOrder
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Add some products to cart
+ * 3. Place order successfully
+ * Steps:
+ * 1. Create multi order
+ * 2. Add some products to all orders
+ * 3. Go to order details page
+ * 4. Click on icon on the top of the right
+ * 5. Click on Re-order action
+ * Acceptance Criteria:
+ * 1. Redirect to checkout page
+ * 2. All items in the current order will be added more to current cart. The other cart is changless
  */
 class WebposMassActionReOrderOH30Test extends Injectable
 {

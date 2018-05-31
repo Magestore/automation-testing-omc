@@ -17,6 +17,19 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposTakePaymentOH91Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order:
+ * Select payment method: fill amount less than total
+ *
+ * Steps:
+ * 1. Go to order details page
+ * 2. Take payment
+ * 3. Select a payment method
+ * 4. Click on [Add more payment method] button
+ *
+ * Acceptance Criteria:
+ * [Add more payment method] button is disable
  */
 class WebposTakePaymentOH91Test extends Injectable
 {

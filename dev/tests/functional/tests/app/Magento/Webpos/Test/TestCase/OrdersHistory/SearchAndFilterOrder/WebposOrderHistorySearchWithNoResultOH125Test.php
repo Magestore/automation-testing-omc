@@ -14,6 +14,15 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrderHistorySearchWithNoResultOH125Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\SearchAndFilterOrder
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Go to Orders history page
+ * Steps:
+ * 1. Enter incorrect customer name/email/ order id into search textbox
+ * 2. Enter or click on Search icon
+ * Acceptance Criteria:
+ * 1. No results in list
+ * 2. Order detail is blank
  */
 class WebposOrderHistorySearchWithNoResultOH125Test extends Injectable
 {

@@ -14,7 +14,14 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOnHoldOrderONH17Test
  * @package Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder
- *
+ *Precondition and setup steps
+ * "1. Login Webpos as a staff
+ * 2. Create an on-hold order successfully"
+ * Steps
+ * "1. Go to On-Hold Orders menu
+ * 2. Click on [Checkout] button on that on-hold order"
+ * Acceptance Criteria
+ * The information of that on-hold order will be loaded to cart then auto redirect to checkout page
  */
 class WebposOnHoldOrderONH17Test extends Injectable
 {

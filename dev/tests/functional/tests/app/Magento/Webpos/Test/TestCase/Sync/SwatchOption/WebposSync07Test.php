@@ -23,6 +23,17 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposSync07Test
  * @package Magento\Webpos\Test\TestCase\Sync\SwatchOption
+ * Precondition and setup steps
+ * 1. Login Webpos as a staff
+ * 2. Login backend on another browser > Change color or size attribute of child item of Config product
+ * 3. Back to  the browser which are opening webpos
+ *
+ * Steps
+ * 1. Go to Synchronization page
+ * 2. Reload Swatch option
+ *
+ * Acceptance Criteria
+ * 2. Swatch option will be updated and shown on child item of the config product that just changed
  */
 class WebposSync07Test extends Injectable
 {

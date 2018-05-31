@@ -15,6 +15,30 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebPOSChangeDisplayNameTest
  * @package Magento\Webpos\Test\TestCase\Setting\Account
+ * SET03 & SET04
+ * Precondition and setup steps
+ * 1. Login webpos as a staff
+ *
+ * SET03
+ * Steps
+ * 1. Click on [Account] menu
+ * 2. Edit [Display name]
+ * Enter incorrect current password
+ * 3. Save
+ * Acceptance Criteria
+ * 3. Save Display name unsuccessfully and show message: "Error: Old password is incorrect!
+ *
+ * SET04
+ * Steps
+ * 1. Click on [Account] menu
+ * 2. Edit [Display name]
+ * Enter correct current password
+ * 3. Save
+ * Acceptance Criteria
+ * 3.
+ * - Save account successfully and show message: ""success: Your account is saved successfully!""
+ * - Display name will be updated and changed on Webpos checkout page
+ * - Dispaly name of this staff in back end will be updated too
  */
 class WebPOSChangeDisplayNameTest extends Injectable
 {

@@ -6,15 +6,30 @@
  * Date: 1/30/2018
  * Time: 9:34 AM
  */
+
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment;
 
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposTakePaymentOH84Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order:
+ * Select payment method: fill amount less than total
+ *
+ * Steps:
+ * 1. Go to order details page
+ * 2. Click on Take payment button
+ * 3. Select payment method
+ * 4. Click on Submit button
+ *
+ * Acceptance Criteria:
+ * Display confirmation popup: "Are you sure you want to take payment on this order?" with actions: cancel, close and ok
  */
 class WebposTakePaymentOH84Test extends Injectable
 {
@@ -64,7 +79,7 @@ class WebposTakePaymentOH84Test extends Injectable
      * @param $configData
      * @param $amount
      */
-    public function test (
+    public function test(
         $products,
         FixtureFactory $fixtureFactory,
         $configData,

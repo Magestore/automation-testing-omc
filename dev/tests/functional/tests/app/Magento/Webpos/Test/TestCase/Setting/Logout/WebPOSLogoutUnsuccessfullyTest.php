@@ -14,6 +14,35 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebPOSLogoutUnsuccessfullyTest
  * @package Magento\Webpos\Test\TestCase\Setting\Logout
+ * SET31
+ * Steps
+ * 1. Login webpos as a staff
+ * 2. Click on Menu icon > Logout
+ * 3. Click on [Cancel] button on popup
+ * Acceptance Criteria
+ * 2. Show confirmation popup including:
+ * - Message: ""Are you sure you want to logout?""
+ * - Action: Close
+ * - Buttons: Cancel, OK
+ * 3. Close confirmation popup, logout unsuccessfully
+ *
+ * SET32
+ * Steps
+ * 1. Login webpos as a staff
+ * 2. Click on Menu icon > Logout
+ * 3. Click on [Close] button on popup
+ * Acceptance Criteria
+ * 3. Close confirmation popup, logout unsuccessfully
+ *
+ * SET33
+ * Steps
+ * 1. Login webpos as a staff
+ * 2. Click on Menu icon > Logout
+ * 3. Click on [OK] button on popup
+ * Acceptance Criteria
+ * 3.
+ * - Close confirmation popup, logout successfully
+ * - Back to Login form
  */
 class WebPOSLogoutUnsuccessfullyTest extends Injectable
 {

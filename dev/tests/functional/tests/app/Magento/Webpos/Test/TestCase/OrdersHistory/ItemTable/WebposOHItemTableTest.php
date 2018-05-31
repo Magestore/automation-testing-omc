@@ -17,6 +17,84 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOHItemTableTest
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\ItemTable
+ * Precondition and setup steps:
+ * OH16
+ * In backend setting:
+ * Configuration > Sales > Tax > Calculation settings:
+ * [Apply Customer Tax] = Before discount
+ * On webpos:
+ * 1. Login Webpos as a staff
+ * 2. Add a product and select a customer to meet tax condition
+ * 3. Click to name of that product > Custom price > input amount: ""50""
+ * 4. Click to Add discount for whole cart > input: fixed ""10""
+ * 3. Place order successfully with complete status
+ * Steps:
+ * 1. Go to [Orders history] menu
+ * Acceptance Criteria:
+ * On order detail, show item table including:
+ * - Product: show product name and SKU
+ * - Original Price: show original of the product
+ * - Price: ""50""
+ * - Qty:
+ * Ordered:1
+ * Invoiced:1
+ * Shipped:1
+ * - Subtotal = Price x qty
+ * - Tax amount: show tax of the order
+ * - Discount amount: show ""10""
+ * - Row total = Subtotal + tax - discount
+ *
+ * OH17:
+ * Precondition and setup steps:
+ * In backend setting:
+ * Configuration > Sales > Tax > Calculation settings:
+ * [Apply Customer Tax] = After discount
+ * On webpos:
+ * 1. Login Webpos as a staff
+ * 2. Add a product with qty = 2 and select a customer to meet tax condition
+ * 3. Click to name of that product > Custom price > input amount: ""50""
+ * 4. Click to Add discount for whole cart > input: fixed ""10""
+ * 3. Place order successfully with
+ * - [Mark a shipped]: off
+ * - [Create invoice]: on
+ * Steps:
+ * 1. Go to [Orders history] menu
+ * Acceptance Criteria:
+ * On order detail, show item table including:
+ * - Product: show product name and SKU
+ * - Original Price: show original of the product
+ * - Price: ""50""
+ * - Qty:
+ * Ordered: 2
+ * Invoiced: 2
+ * - Subtotal = Price x qty
+ * - Tax amount: show tax of the order
+ * - Discount amount: show ""10""
+ * - Row total = Subtotal + tax - discount
+ *
+ * OH18
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Add 2 different  products and select a customer to meet tax condition
+ * 3. Click to Add discount for whole cart > input: fixed ""10""
+ * 4. Place order successfully with
+ * - [Mark a shipped]: off
+ * - [Create invoice]: on
+ * Steps:
+ * 1. Go to [Orders history] menu
+ * Acceptance Criteria:
+ * On order detail, show item table including 2 rows with:
+ * - Product: show product names and SKUs
+ * - Original Price: show original of the  products
+ * - Price: show price of the  products
+ * - Qty:
+ * Ordered: 1
+ * Invoiced: 1
+ * - Subtotal = Price x qty
+ * - Tax amount: show tax of each product
+ * - Discount amount: show discount of each product
+ * Discount amount = Price/ Sum of Price x 10
+ * - Row total = Subtotal + tax - discount
  */
 class WebposOHItemTableTest extends Injectable
 {

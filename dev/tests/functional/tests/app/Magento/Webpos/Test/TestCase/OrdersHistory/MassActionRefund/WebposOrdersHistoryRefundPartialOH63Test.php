@@ -11,9 +11,23 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOrdersHistoryRefundPartialOH63Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ * Precondition and setup steps:
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order with some products (or one product with Qty >1)
+ * 3. Create an order with completed status
+ * Steps:
+ * Refund a partial (refund some items or an item with Qty less than Qty ordered)
+ * Acceptance Criteria:
+ * 1. A creditmemo has been created!
+ * 2. There is a new notification
+ * 3. Order status is changeless
+ * 4. Allow continue refund extant items
+ * 5. Total refund will be updated and shown on detail page
  */
 class WebposOrdersHistoryRefundPartialOH63Test extends Injectable
 {
@@ -102,7 +116,7 @@ class WebposOrdersHistoryRefundPartialOH63Test extends Injectable
             $productName = $item['product']->getName();
             $rowTotal = $this->webposIndex->getOrderHistoryOrderViewContent()->getRowTotalOfProduct($productName);
             $rowTotal = (float)substr($rowTotal, 1);
-            $totalRefunded += ($rowTotal/$item['orderQty'])*$item['refundQty'];
+            $totalRefunded += ($rowTotal / $item['orderQty']) * $item['refundQty'];
         }
         $totalRefunded += $shippingFee;
         sleep(2);

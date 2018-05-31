@@ -16,6 +16,14 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryInvoiceOH111Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create a pending order with some  products
+ * 3. Create payment a partial
+ * Steps:
+ * Invoice order just created
+ * Acceptance Criteria:
+ * Just allow invoice items that have Row total less than total paid
  */
 class WebposOrdersHistoryInvoiceOH111Test extends Injectable
 {

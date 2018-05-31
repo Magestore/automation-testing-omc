@@ -23,6 +23,19 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposSync11Test
  * @package Magento\Webpos\Test\TestCase\Sync\Product
+ * Precondition and setup steps
+ * 1. Login Webpos as a staff
+ * 2. Login backend on another browser  > Catalog > Edit a product (name, sku)
+ * 3. Back to  the browser which are opening webpos
+ *
+ * Steps
+ * 1. Go to synchronization page
+ * 2. Update product
+ *
+ * Acceptance Criteria
+ * 2.
+ * - Stock item will be auto update at the same time
+ * - The name, sku of  that product was changed and shown on grid and manage stock page
  */
 class WebposSync11Test extends Injectable
 {

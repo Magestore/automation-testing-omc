@@ -15,6 +15,15 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryInvoiceOH117Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
+ * Precondition and setup steps:
+ * 1. Go to backend
+ * 2. Create an order with amount payment =0
+ * Steps:
+ * 1. Login webpos as a staff
+ * 2. Go to order details page
+ * 3. Click on Invoice button
+ * Acceptance Criteria:
+ * Show message: "Warning: You must take payment on this order before creating invoice"
  */
 class WebposOrdersHistoryInvoiceOH117Test extends Injectable
 {

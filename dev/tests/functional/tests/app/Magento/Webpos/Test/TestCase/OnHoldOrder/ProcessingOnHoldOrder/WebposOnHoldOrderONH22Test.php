@@ -14,6 +14,18 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOnHoldOrderONH22Test
  * @package Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Create an on-hold order successfully
+ * Steps:
+ * 1. Go to On-Hold Orders menu
+ * 2. Click on [Checkout] button on that on-hold order
+ * 3. Back to cart page > add more product
+ * 4. Click [Hold] button
+ * 5. Go to On-hold orders menu
+ * Acceptance Criteria:
+ * 1. The old onhold order was deleted
+ * 2. A new onhold order is created with products that including: products of the old on-hold order and just added products
  */
 class WebposOnHoldOrderONH22Test extends Injectable
 {
