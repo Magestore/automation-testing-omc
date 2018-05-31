@@ -8,9 +8,9 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethodDaily;
 
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Webpos\Test\Page\Adminhtml\SalesByPaymentDaily;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Page\Adminhtml\SalesByPaymentDaily;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
 
 /**
  * Class SaleByPaymentMethodDailyRP58RP59Test

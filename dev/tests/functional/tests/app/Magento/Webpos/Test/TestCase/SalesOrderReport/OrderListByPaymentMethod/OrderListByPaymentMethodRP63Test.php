@@ -8,13 +8,23 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod;
 
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Webpos\Test\Page\Adminhtml\OrderListByPayment;
-use Magento\Webpos\Test\Fixture\Shift;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Fixture\Shift;
+use Magento\Webpos\Test\Page\Adminhtml\OrderListByPayment;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
+
 /**
  * Class OrderListByPaymentMethodRP63Test
  * @package Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod
+ * Precondition and setup steps
+ * 1. Login backend
+ * 2. Go to Webpos > Reports > Order list by payment method
+ *
+ * Steps
+ * Filter by date range > Show report
+ *
+ * Acceptance Criteria
+ * Report table will statistical within date range
  */
 class OrderListByPaymentMethodRP63Test extends Injectable
 {
@@ -42,7 +52,6 @@ class OrderListByPaymentMethodRP63Test extends Injectable
      *
      * @param WebPOSAdminReportDashboard $webPOSAdminReportDashboard
      * @param OrderListByPayment $orderListByPayment
-     * @param Shift $shift
      * @return void
      */
     public function __inject(

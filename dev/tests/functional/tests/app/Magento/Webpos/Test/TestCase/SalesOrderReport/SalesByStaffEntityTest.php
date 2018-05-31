@@ -11,9 +11,10 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport;
 
-use Magento\Webpos\Test\Page\Adminhtml\SalesByStaff;
-use Magento\Webpos\Test\Fixture\Shift;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Fixture\Shift;
+use Magento\Webpos\Test\Page\Adminhtml\SalesByStaff;
+
 /**
  * Preconditions:
  * 1. Create customer.

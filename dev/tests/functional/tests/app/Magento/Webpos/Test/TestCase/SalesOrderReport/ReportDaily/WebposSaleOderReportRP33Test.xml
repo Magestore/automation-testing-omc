@@ -11,11 +11,11 @@
               summary="Order List By Location Report" ticketId="MAGETWO-28222">
         <variation name="WebposSaleOrderReportRP33TestVariation">
             <data name="shifts" xsi:type="array">
-                <!--<item name="from" xsi:type="string">m/d/Y -1 month</item>-->
-                <!--<item name="to" xsi:type="string">m/d/Y</item>-->
                 <item name="show_order_statuses" xsi:type="string">Specified</item>
             </data>
-            <data name="order_status" xsi:type="string">Canceled, Closed, Complete,Suspected Fraud, On Hold, Payment Review, PayPal Canceled Reversal, PayPal Reversed, Pending, Pending Payment, ,Pending PayPal, Processing</data>
+            <data name="order_status" xsi:type="string">Canceled, Closed, Complete,Suspected Fraud, On Hold, Payment
+                Review, PayPal Canceled Reversal, PayPal Reversed, Pending, Pending Payment, ,Pending PayPal, Processing
+            </data>
         </variation>
         <variation name="WebposSaleOrderReportRP34TestVariation">
             <data name="shifts" xsi:type="array">
@@ -23,7 +23,9 @@
                 <item name="to" xsi:type="string">m/d/Y</item>
                 <item name="show_order_statuses" xsi:type="string">Specified</item>
             </data>
-            <data name="order_status" xsi:type="string">Canceled, Closed, Complete,Suspected Fraud, On Hold, Payment Review, PayPal Canceled Reversal, PayPal Reversed, Pending, Pending Payment, ,Pending PayPal, Processing</data>
+            <data name="order_status" xsi:type="string">Canceled, Closed, Complete,Suspected Fraud, On Hold, Payment
+                Review, PayPal Canceled Reversal, PayPal Reversed, Pending, Pending Payment, ,Pending PayPal, Processing
+            </data>
         </variation>
     </testCase>
 </config>

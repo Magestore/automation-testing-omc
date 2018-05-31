@@ -11,9 +11,10 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport;
 
-use Magento\Webpos\Test\Page\Adminhtml\OrderListByLocation;
-use Magento\Webpos\Test\Fixture\Shift;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Fixture\Shift;
+use Magento\Webpos\Test\Page\Adminhtml\OrderListByLocation;
+
 /**
  * Preconditions:
  * 1. Create customer.

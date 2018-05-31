@@ -9,11 +9,11 @@
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByLocation;
 
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Webpos\Test\Page\Adminhtml\SalesByLocation;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\Adminhtml\SalesByLocation;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class SaleByLocationReportRP30Test
@@ -60,6 +60,8 @@ class SaleByLocationReportRP30Test extends Injectable
     /**
      * @param WebPOSAdminReportDashboard $webPOSAdminReportDashboard
      * @param SalesByLocation $salesByLocation
+     * @param WebposIndex $webposIndex
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     public function __inject(
         WebPOSAdminReportDashboard $webPOSAdminReportDashboard,

@@ -9,11 +9,12 @@
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByStaffDaily;
 
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Webpos\Test\Page\Adminhtml\SalesByStaffDaily;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\Adminhtml\SalesByStaffDaily;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class SaleByStaffDailyReportsRP15Test
  * @package Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByStaffDaily
@@ -90,7 +91,7 @@ class SaleByStaffDailyReportsRP15Test extends Injectable
         )->run();
 
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        for ($i=0; $i<2; $i++) {
+        for ($i = 0; $i < 2; $i++) {
             $this->webposIndex->getCheckoutProductList()->search($product->getSku());
             $this->webposIndex->getMsWebpos()->waitCartLoader();
             sleep(2);

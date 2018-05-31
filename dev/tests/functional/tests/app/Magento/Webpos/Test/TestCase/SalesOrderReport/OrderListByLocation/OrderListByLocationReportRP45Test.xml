@@ -5,8 +5,10 @@
  * See COPYING.txt for license details.
  */
  -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByLocation\OrderListByLocationReportRP45Test" summary="Order List By Location Report" ticketId="MAGETWO-28222">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByLocation\OrderListByLocationReportRP45Test"
+              summary="Order List By Location Report" ticketId="MAGETWO-28222">
         <variation name="OrderListByStaffReportRP45TestVariation">
             <data name="pos/dataset" xsi:type="string">pos_with_new_location</data>
             <data name="staff/dataset" xsi:type="string">staffWithoutPos</data>

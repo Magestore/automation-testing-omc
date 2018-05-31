@@ -9,11 +9,11 @@
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethodDaily;
 
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Webpos\Test\Page\Adminhtml\SalesByPaymentDaily;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\Adminhtml\SalesByPaymentDaily;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class SaleByPaymentMethodDailyRP60Test

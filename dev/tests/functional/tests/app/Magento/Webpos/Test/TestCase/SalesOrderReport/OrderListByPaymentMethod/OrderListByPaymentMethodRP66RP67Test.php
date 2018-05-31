@@ -8,12 +8,29 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod;
 
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Webpos\Test\Page\Adminhtml\OrderListByPayment;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Page\Adminhtml\OrderListByPayment;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
+
 /**
  * Class OrderListByPaymentMethodRP66RP67Test
  * @package Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod
+ * RP66 & RP67
+ * Precondition and setup steps
+ * 1. Login backend
+ * 2. Go to Webpos > Reports > Order list by payment method
+ *
+ * RP66
+ * Steps
+ * Export report to CSV file
+ * Acceptance Criteria
+ * CSV file will be downloaded automatically and saved on the computer
+ *
+ * RP67
+ * Steps
+ * Export report to Excel XML file
+ * Acceptance Criteria
+ * Excel XML file will be downloaded automatically and saved on the computer
  */
 class OrderListByPaymentMethodRP66RP67Test extends Injectable
 {
@@ -40,6 +57,7 @@ class OrderListByPaymentMethodRP66RP67Test extends Injectable
      * Inject pages.
      *
      * @param WebPOSAdminReportDashboard $webPOSAdminReportDashboard
+     * @param OrderListByPayment $orderListByPayment
      * @return void
      */
     public function __inject(
@@ -51,6 +69,9 @@ class OrderListByPaymentMethodRP66RP67Test extends Injectable
         $this->orderListByPayment = $orderListByPayment;
     }
 
+    /**
+     * @param $type
+     */
     public function test($type)
     {
         // Preconditions

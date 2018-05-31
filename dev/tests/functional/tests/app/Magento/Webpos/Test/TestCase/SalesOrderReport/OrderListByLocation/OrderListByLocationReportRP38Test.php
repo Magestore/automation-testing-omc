@@ -9,9 +9,9 @@
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByLocation;
 
 use DateTime;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\OrderListByLocation;
 use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Mtf\TestCase\Injectable;
 
 /**
  * Report
@@ -28,7 +28,6 @@ use Magento\Mtf\TestCase\Injectable;
  * 2. Allow filter report by location, date range and order status
  * 3. Report table show  all order created at each location within one month with information as: Order id, Sale total,  purchased on, Status
  * 4. Data will be group by each location
- *
  *
  * Class OrderListByLocationReportRP16Test
  * @package Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByLocation
@@ -58,6 +57,7 @@ class OrderListByLocationReportRP38Test extends Injectable
      * Inject pages.
      *
      * @param WebPOSAdminReportDashboard $webPOSAdminReportDashboard
+     * @param OrderListByLocation $orderListLocation
      * @return void
      */
     public function __inject(
@@ -69,6 +69,10 @@ class OrderListByLocationReportRP38Test extends Injectable
         $this->orderListByLocation = $orderListLocation;
     }
 
+    /**
+     * @param $pageTitle
+     * @param $columns
+     */
     public function test($pageTitle, $columns)
     {
         // Preconditions

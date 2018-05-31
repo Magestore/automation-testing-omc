@@ -8,10 +8,11 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByStaff;
 
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Webpos\Test\Page\Adminhtml\OrderListByStaff;
-use Magento\Webpos\Test\Fixture\Shift;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Fixture\Shift;
+use Magento\Webpos\Test\Page\Adminhtml\OrderListByStaff;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
+
 /**
  * Class OrderListByStaffReportRP18Test
  * @package Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByStaff
@@ -49,7 +50,6 @@ class OrderListByStaffReportRP18Test extends Injectable
      *
      * @param WebPOSAdminReportDashboard $webPOSAdminReportDashboard
      * @param OrderListByStaff $orderListByStaff
-     * @param Shift $shift
      * @return void
      */
     public function __inject(

@@ -12,7 +12,6 @@ namespace Magento\Webpos\Test\TestCase\SalesOrderReport\ReportDaily;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\SalesByLocationDaily;
 
-
 /**
  * Reports
  * Testcase - RP32 - Sale by location (Daily)
@@ -33,9 +32,9 @@ use Magento\Webpos\Test\Page\Adminhtml\SalesByLocationDaily;
 class WebposSaleOderReportRP32Test extends Injectable
 {
     /**
-     * OrderListByLocationDaily page.
+     * SaleByLocationDaily page.
      *
-     * @var saleByLocationDaily
+     * @var SalesByLocationDaily
      */
     protected $saleByLocationDaily;
 

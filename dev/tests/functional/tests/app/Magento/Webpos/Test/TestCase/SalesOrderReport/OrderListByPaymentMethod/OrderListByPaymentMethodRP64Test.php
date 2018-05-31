@@ -8,12 +8,22 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod;
 
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Webpos\Test\Page\Adminhtml\OrderListByPayment;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Page\Adminhtml\OrderListByPayment;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
+
 /**
  * Class OrderListByPaymentMethodRP64Test
  * @package Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod
+ * Precondition and setup steps
+ * 1. Login backend
+ * 2. Go to Webpos > Reports > Order list by payment method
+ *
+ * Steps
+ * Filter by each order status > Show report
+ *
+ * Acceptance Criteria
+ * Report table only statistics data by order status just selected to filter within date range
  */
 class OrderListByPaymentMethodRP64Test extends Injectable
 {
