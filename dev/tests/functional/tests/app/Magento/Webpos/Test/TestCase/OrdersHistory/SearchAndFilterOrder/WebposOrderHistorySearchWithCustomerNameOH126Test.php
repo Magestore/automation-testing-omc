@@ -15,6 +15,14 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrderHistorySearchWithCustomerNameOH126Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\SearchAndFilterOrder
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Go to Orders history page
+ * Steps:
+ * 1. Enter correct customer name into search textbox
+ * 2. Enter or click on Search icon
+ * Acceptance Criteria:
+ * Order list shows the orders have customer name matchs or contains keyword
  */
 class WebposOrderHistorySearchWithCustomerNameOH126Test extends Injectable
 {

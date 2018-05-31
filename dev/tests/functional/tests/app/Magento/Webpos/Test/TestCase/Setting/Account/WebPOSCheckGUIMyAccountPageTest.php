@@ -15,6 +15,17 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebPOSCheckGUIMyAccountPageTest
  * @package Magento\Webpos\Test\TestCase\Setting\Account
+ * Precondition and setup steps
+ * 1. Login webpos as a staff
+ *
+ * Steps
+ * 1. Click on [Account] menu
+ *
+ * Acceptance Criteria
+ * 1. Redirect to My Account page including:
+ * - [Display name] field: show current staff name, can edit
+ * - [Current password], [New password], [Confirmation] fields: blank, can edit
+ * - [Save] button
  */
 class WebPOSCheckGUIMyAccountPageTest extends Injectable
 {

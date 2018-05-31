@@ -15,6 +15,15 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOnHoldOrderONH25Test
  * @package Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Create an on-hold order successfully
+ * 3. Click to add multi order then focus on 1st
+ * Steps:
+ * 1. Go to On-hold order menu
+ * 2. Click on [Checkout] button on the on-hold order
+ * Acceptance Criteria:
+ * The information of the on-hold order will be loaded to 1st cart, 2nd cart is changeless
  */
 class WebposOnHoldOrderONH25Test extends Injectable
 {

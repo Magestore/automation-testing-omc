@@ -17,6 +17,17 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposSync20Test
  * @package Magento\Webpos\Test\TestCase\Sync\Payment
+ * Precondition and setup steps
+ * 1. Login Webpos as a staff
+ * 2. Login backend on another browser  >  Webpos setting > Select some methods in Specific Payments field
+ * 3. Back to  the browser which are opening webpos
+ *
+ * Steps
+ * 1. Go to synchronization page
+ * 2. Reload payment
+ *
+ * Acceptance Criteria
+ * 2. All of payment method just selected on setting page will be updated and display on webpos checkout page
  */
 class WebposSync20Test extends Injectable
 {

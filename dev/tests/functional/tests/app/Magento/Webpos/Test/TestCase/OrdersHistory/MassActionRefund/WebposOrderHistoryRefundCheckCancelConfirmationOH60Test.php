@@ -14,6 +14,16 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrderHistoryRefundCheckCancelConfirmationOH60Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order with completed status
+ * Steps:
+ * 1. Click to refund order
+ * 2. Fill Qty for each item
+ * 3. Click on Submit refund/ refund offline
+ * 4. Cancel confirmation
+ * Acceptance Criteria:
+ * Close confirmation popup
  */
 class WebposOrderHistoryRefundCheckCancelConfirmationOH60Test extends Injectable
 {

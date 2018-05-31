@@ -17,6 +17,52 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryMassActionSendMailTest
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionSendMail
+ * Precondition and setup steps:
+ * OH19 & OH20 & OH21 & OH22 & OH23
+ * 1. Login webpos as a staff
+ * 2. Create an order successfully
+ *
+ * OH19
+ * Steps:
+ * 1. Go to order details page
+ * 2. Click on icon on the top of the right
+ * 3. Click on Send email action
+ * Acceptance Criteria:
+ * Display Send email popup includding:
+ * - button: Cancel, Send
+ * - Texbox to enter email address
+ * - Automatically fill customer's email address into textbox
+ *
+ * OH20
+ * Steps:
+ * 1. Click to [Send email]
+ * 2. Click on [Cancel] button
+ * Acceptance Criteria:
+ * Close Send email popup
+ *
+ * OH21
+ * Steps:
+ * 1. Click to [Send email]
+ * 2. Click on [Send] button
+ * Acceptance Criteria:
+ * 1 Close Send email popup
+ * 2. Order email will be sent to customer's email address
+ * 3. A new notification will be display on notification icon
+ *
+ * OH22
+ * Steps:
+ * 1. Click to [Send email]
+ * 2. Enter different email address into textbox
+ * Acceptance Criteria:
+ * 1 Close Send email popup
+ * 2. Order email will be sent to email address just entered
+ *
+ * OH23
+ * Steps:
+ * 1. Click to [Send email]
+ * 2. Enter an invalid email into textbox
+ * Acceptance Criteria:
+ * Show message "Email is invalid"
  */
 class WebposOrdersHistoryMassActionSendMailTest extends Injectable
 {

@@ -10,11 +10,21 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\BillingShippingAddress;
 
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposCheckoutByGuestOH09Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\BillingShippingAddress
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Add some product to cart
+ * 3. Click on [Checkout] button
+ * Steps:
+ * 1. Place order successfully
+ * 2. Go to [Orders history] menu
+ * Acceptance Criteria:
+ * Guest information will be shown on Billing address  and Shipping address section
  */
 class WebposCheckoutByGuestOH09Test extends Injectable
 {

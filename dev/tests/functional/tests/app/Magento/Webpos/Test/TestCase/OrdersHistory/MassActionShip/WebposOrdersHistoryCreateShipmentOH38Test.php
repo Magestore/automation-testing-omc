@@ -14,6 +14,26 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryCreateShipmentOH38Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip
+ * Precondition and setup steps:
+ * Precondition and setup steps:
+ * 1.  Login webpos as a staff
+ * 2. Create an order with a product
+ * - Mark as shipped: off
+ * Steps:
+ * 1.  Go to order details page > Create shipment
+ * 2. Fill item Qty
+ * 3. Enter comment and track number
+ * 4. Tick on Send email checkbox
+ * 5. Submit shipment > OK confimation
+ * Acceptance Criteria:
+ * In webpos:
+ * 1. Close shipment popup and a shipment has created with corresponding item and Qty
+ * 2. Hide ship action on action box
+ * 3. Send shipment email to customer's email address
+ * 4. A new notification will be display on notification icon
+ * 5. On item table, ""Shipped: 1""  will be shown in [Qty] column
+ * On shipment in backend:
+ * 1. Show content of comment and track number
  */
 class WebposOrdersHistoryCreateShipmentOH38Test extends Injectable
 {

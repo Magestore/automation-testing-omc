@@ -16,6 +16,20 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrderHistoryRefundWithoutShippingFeeOH71Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order with completed status
+ * and shipping fee > 0
+ * Steps:
+ * 1. Click to refund order
+ * -  Fill available Qty
+ * - Adjust refund: 0
+ * - Refund shipping: 0
+ * - Adjust fee: 0
+ * 2. Submit > Ok confirmation
+ * Acceptance Criteria:
+ * 1. A creditmemo has been created!
+ * 2. Total refunded = SUM(row total)
  */
 class WebposOrderHistoryRefundWithoutShippingFeeOH71Test extends Injectable
 {

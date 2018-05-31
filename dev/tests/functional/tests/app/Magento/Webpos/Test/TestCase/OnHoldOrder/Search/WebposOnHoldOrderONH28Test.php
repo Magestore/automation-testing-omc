@@ -14,6 +14,15 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOnHoldOrderONH28Test
  * @package Magento\Webpos\Test\TestCase\OnHoldOrder\Search
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Create an on-hold order successfully
+ * Steps:
+ * 1. Go to on-hold order page
+ * 2. Enter correct order ID into box search
+ * 3. Click on Search icon
+ * Acceptance Criteria:
+ * On-hold order list shows the orders has order id matchs or contains keyword
  */
 class WebposOnHoldOrderONH28Test extends Injectable
 {

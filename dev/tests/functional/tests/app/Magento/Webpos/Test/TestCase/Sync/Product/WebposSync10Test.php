@@ -23,6 +23,19 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposSync10Test
  * @package Magento\Webpos\Test\TestCase\Sync\Product
+ * Precondition and setup steps
+ * 1. Login Webpos as a staff
+ * 2. Login backend on another browser  > Catalog > Add new product
+ * 3. Back to  the browser which are opening webpos
+ *
+ * Steps
+ * 1. Go to synchronization page
+ * 2. Reload product
+ *
+ * Acceptance Criteria
+ * 2.
+ * - Stock item will be auto realod at the same time
+ * - The product just added will be shown on grid and shown in Manage stock page"
  */
 class WebposSync10Test extends Injectable
 {

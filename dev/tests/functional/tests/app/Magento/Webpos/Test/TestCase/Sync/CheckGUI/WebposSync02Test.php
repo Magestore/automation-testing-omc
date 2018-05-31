@@ -16,6 +16,17 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposSync02Test
  * @package Magento\Webpos\Test\TestCase\Sync\CheckGUI
+ * Precondition and setup steps
+ * 1. Login Webpos as a staff
+ *
+ * Steps
+ * 1. Click on [Synchronization] menu
+ * 2. Click on [Error Logs] tab
+ *
+ * Acceptance Criteria
+ * 2. Display Error logs page including:
+ * - Button: All
+ * - Table of Error message with columns: ID, Error message, Action
  */
 class WebposSync02Test extends Injectable
 {

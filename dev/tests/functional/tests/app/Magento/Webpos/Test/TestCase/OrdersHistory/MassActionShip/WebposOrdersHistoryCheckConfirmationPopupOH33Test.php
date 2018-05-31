@@ -14,6 +14,16 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryCheckConfirmationPopupOH33Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip
+ * Precondition and setup steps:
+ * 1.  Login webpos as a staff
+ * 2. Create an order with some product
+ * - Mark as shipped: off
+ * Steps:
+ * 1. Go to order details page > Create shipment
+ * 2. Fill out Qty to ship
+ * 3. Click on Submit shipment button
+ * Acceptance Criteria:
+ * Display confirmation popup: "Are you sure you want to ship this order? " with actions: close, cancel, ok
  */
 class WebposOrdersHistoryCheckConfirmationPopupOH33Test extends Injectable
 {

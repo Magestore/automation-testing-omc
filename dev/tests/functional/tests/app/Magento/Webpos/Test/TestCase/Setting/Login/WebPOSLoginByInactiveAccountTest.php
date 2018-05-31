@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\TestCase\Setting\Login;
 
-use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\StaffEdit;
@@ -19,6 +18,15 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebPOSLoginByInactiveAccountTest
  * @package Magento\Webpos\Test\TestCase\Setting\LoginTest
+ * Steps:
+ * 1. Go to Webpos login form
+ * 2. Enter correct username and password of an inactive account
+ * 3. Click on [Login] button
+ *
+ * Acceptance Criteria
+ * 3.
+ * - Login unsuccessfully
+ * - Display warning :"" Warning: Your login information is wrong!""
  */
 class WebPOSLoginByInactiveAccountTest extends Injectable
 {

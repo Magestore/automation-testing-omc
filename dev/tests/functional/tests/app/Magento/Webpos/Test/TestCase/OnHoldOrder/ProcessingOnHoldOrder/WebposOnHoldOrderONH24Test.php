@@ -15,6 +15,15 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOnHoldOrderONH24Test
  * @package Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Create an on-hold order successfully
+ * 3. Add some products to cart
+ * Steps:
+ * 1. Go to On-hold order menu
+ * 2. Click on [Checkout] button on the on-hold order
+ * Acceptance Criteria:
+ * The information of the on-hold order will be loaded to current cart that included some exist products
  */
 class WebposOnHoldOrderONH24Test extends Injectable
 {

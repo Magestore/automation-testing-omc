@@ -14,6 +14,18 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryCheckConfirmationPopupCloseOH34Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip
+ * Precondition and setup steps:
+ * 1.  Login webpos as a staff
+ * 2. Create an order with some product
+ * - Mark as shipped: off
+ * Steps:
+ * 1.  Go to order details page >Create shipment
+ * 2. Fill out Qty to ship
+ * 3. Click on Submit shipment button
+ * 4. Click on Close button
+ * Acceptance Criteria:
+ * 1. Close Confirmation popup
+ * 2. Shipmemt has not created yet
  */
 class WebposOrdersHistoryCheckConfirmationPopupCloseOH34Test extends Injectable
 {
@@ -25,7 +37,7 @@ class WebposOrdersHistoryCheckConfirmationPopupCloseOH34Test extends Injectable
     /**
      * @param WebposIndex $webposIndex
      */
-    public function __inject (
+    public function __inject(
         WebposIndex $webposIndex
     )
     {

@@ -19,6 +19,21 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\CustomerComplain;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposSync16Test
+ * @package Magento\Webpos\Test\TestCase\Sync\Currency
+ * Precondition and setup steps
+ * 1. Login Webpos as a staff
+ * 2. Login backend on another browser  > Configuration > Currency setup > Edit some fileds (ex: Default Display Currency )
+ * 3. Back to  the browser which are opening webpos
+ *
+ * Steps
+ * 1. Go to synchronization page
+ * 2. Reload currency
+ *
+ * Acceptance Criteria
+ * 2. Default Display Currency just selected will be used to checkout on Webpos page
+ */
 class WebposSync16Test extends Injectable
 {
     /**
@@ -29,28 +44,28 @@ class WebposSync16Test extends Injectable
     /**
      * Store config Currency Setup page.
      *
-     * @var ConfigCurrencySetup
+     * @var ConfigCurrencySetup $configCurrencySetup
      */
     protected $configCurrencySetup;
 
     /**
      * System Currency Symbol grid page.
      *
-     * @var SystemCurrencySymbolIndex
+     * @var SystemCurrencySymbolIndex $currencySymbolIndex
      */
     protected $currencySymbolIndex;
 
     /**
      * System currency index page.
      *
-     * @var SystemCurrencyIndex
+     * @var SystemCurrencyIndex $currencyIndex
      */
     protected $currencyIndex;
 
     /**
      * Fixture Factory.
      *
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 

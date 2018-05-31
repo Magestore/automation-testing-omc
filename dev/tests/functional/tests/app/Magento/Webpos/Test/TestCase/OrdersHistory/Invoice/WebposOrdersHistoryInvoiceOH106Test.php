@@ -14,6 +14,25 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryInvoiceOH106Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create a pending order
+ * 3. Create payment
+ * Steps:
+ * 1. Click to invocie order
+ * 2. Enter comment
+ * 3. Tick on Send email checkbox
+ * 4. Submit invoice > Ok confirmation
+ * Acceptance Criteria:
+ * On webpos:
+ * 1. Close Invoice popup
+ * 2. Create Invoice successully
+ * 3. A new notification will be display on notification icon
+ * 4. Order status will be change to processing
+ * 5. Hide Invoice button on detail page
+ * 6. Send invoice email to customer's email address
+ * On invoice page in backend:
+ * 1. Show comment invoice in created invoice page
  */
 class WebposOrdersHistoryInvoiceOH106Test extends Injectable
 {

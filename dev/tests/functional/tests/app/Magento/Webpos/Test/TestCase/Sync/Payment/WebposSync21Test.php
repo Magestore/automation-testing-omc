@@ -17,6 +17,17 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposSync21Test
  * @package Magento\Webpos\Test\TestCase\Sync\Payment
+ * Precondition and setup steps
+ * 1. Login Webpos as a staff
+ * 2. Login backend on another browser  > Webpos setting > Select any method in Default Payment Method field
+ * 3. Back to  the browser which are opening webpos
+ *
+ * Steps
+ * 1. Go to synchronization page
+ * 2. Update payment
+ *
+ * Acceptance Criteria
+ * 2. The payment method just selected on setting page will be updated and display on webpos checkout page as default payment method
  */
 class WebposSync21Test extends Injectable
 {
@@ -68,8 +79,6 @@ class WebposSync21Test extends Injectable
      */
     public function test($products, FixtureFactory $fixtureFactory, $configData, $amount)
     {
-
-
         $staff = $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
@@ -98,12 +107,10 @@ class WebposSync21Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitCartLoader();
             $i++;
         }
-
         //CategoryRepository
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
     }
 
     public function tearDown()

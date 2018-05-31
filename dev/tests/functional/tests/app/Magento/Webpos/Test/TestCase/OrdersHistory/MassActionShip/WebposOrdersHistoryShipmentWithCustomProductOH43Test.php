@@ -14,6 +14,14 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryShipmentWithCustomProductOH43Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order with Custom product
+ * - Shippable : off
+ * Steps:
+ * View order details page
+ * Acceptance Criteria:
+ * Action box does not shown Ship action
  */
 class WebposOrdersHistoryShipmentWithCustomProductOH43Test extends Injectable
 {

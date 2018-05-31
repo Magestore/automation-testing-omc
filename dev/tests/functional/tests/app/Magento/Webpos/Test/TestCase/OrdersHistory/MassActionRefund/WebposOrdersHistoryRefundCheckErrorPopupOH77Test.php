@@ -16,6 +16,15 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryRefundCheckErrorPopupOH77Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order with completed status and shipping fee > 0
+ * Steps:
+ * 1. Click to refund order and input valid values into fields to meet condition:
+ * SUM(rowtotal) + Refund shipping + adjust refund - adjust fee < Total paid
+ * 2. Submit > Ok confirmation > OK
+ * Acceptance Criteria:
+ * Close error popup
  */
 class WebposOrdersHistoryRefundCheckErrorPopupOH77Test extends Injectable
 {

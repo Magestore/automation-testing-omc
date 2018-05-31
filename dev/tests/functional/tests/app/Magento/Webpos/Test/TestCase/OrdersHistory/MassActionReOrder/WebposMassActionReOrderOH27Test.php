@@ -15,6 +15,17 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposMassActionReOrderOH27Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionReOrder
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Add some products
+ * 3. Create order successfully
+ * Steps:
+ * 1. Go to order details page
+ * 2. Click on icon on the top of the right
+ * 3. Click on Re-order action
+ * Acceptance Criteria:
+ * 1. Redirect to checkout page
+ * 2. All items in the current order will be loaded to cart
  */
 class WebposMassActionReOrderOH27Test extends Injectable
 {
@@ -35,7 +46,7 @@ class WebposMassActionReOrderOH27Test extends Injectable
      * @param OrderInjectable $order
      * @return array
      */
-    public function test (
+    public function test(
         OrderInjectable $order
     )
     {

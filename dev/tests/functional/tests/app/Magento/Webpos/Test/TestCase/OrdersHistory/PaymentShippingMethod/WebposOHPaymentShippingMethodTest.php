@@ -16,6 +16,42 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOHPaymentShippingMethodTest
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\PaymentShippingMethod
+ * OH12:
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Add a product to cart
+ * 3. Add discount 100% for whold cart
+ * 4. Click on [Checkout] button
+ * Steps:
+ * 1. Place order successfully
+ * 2. Go to [Orders history] menu
+ * Acceptance Criteria:
+ * Show message "No Payment Information Required" on Payment method section
+ *
+ * OH13
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Add a custom sale product with Shippable = off
+ * 3. Click on [Checkout] button
+ * Steps:
+ * 1. Place order successfully
+ * 2. Go to [Orders history] menu
+ * Acceptance Criteria:
+ * Shipping address and Shipping method are blank
+ *
+ * OH14
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Add a product to cart
+ * 3. Click on [Checkout] button
+ * Steps:
+ * 1. Select a shipping method
+ * 2. Select a payment method
+ * 3. Place order successfully
+ * 4. Go to [Orders history] menu
+ * Acceptance Criteria:
+ * 1. Seleted payment method and amount payment will be shown on ""Payment method"" section of the detail order
+ * 2. Selected shipping method will be shown on ""Shipping method"" section of the detail order
  */
 class WebposOHPaymentShippingMethodTest extends Injectable
 {

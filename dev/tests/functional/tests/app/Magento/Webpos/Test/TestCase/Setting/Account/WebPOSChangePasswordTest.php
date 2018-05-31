@@ -15,6 +15,46 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebPOSChangePasswordTest
  * @package Magento\Webpos\Test\TestCase\Setting\Account
+ * SET05 & SET06 & SET07
+ * Precondition and setup steps
+ *
+ * SET05
+ * Steps
+ * 1. Click on [Account] menu
+ * 2. Change password:
+ * - Current password: Blank
+ * - Enter New Password
+ * - Confirm password: Blank or enter random value
+ * 3. Save
+ * Acceptance Criteria
+ * 3.
+ * - Save account unsuccessfully
+ * - Display error: ""This is a required field."" under Current password field
+ * - Display error: ""Please enter the same value again."" under Confirm password field
+ *
+ * SET06
+ * Steps
+ * 1. Click on [Account] menu
+ * 2. Change password:
+ * - Current password: enter 3 characters
+ * - Blank New password and Confirm password
+ * 3. Save
+ * Acceptance Criteria
+ * 3.
+ * - Save account unsuccessfully
+ * - Display error: ""Please enter 7 or more characters, using both numeric and alphabetic."" under Current password field
+ *
+ * SET07
+ * Steps
+ * 1. Click on [Account] menu
+ * 2. Change password:
+ * - Current password: enter current password
+ * - New password & Confirmation: enter 3 characters
+ * 3. Save
+ * Acceptance Criteria
+ * 3.
+ * - Save account unsuccessfully
+ * - Display error: ""Please enter 7 or more characters, using both numeric and alphabetic."" under New password & Confirmation field
  */
 class WebPOSChangePasswordTest extends Injectable
 {

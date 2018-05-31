@@ -15,6 +15,37 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebPOSSyncOnHoldOrderToServerTest
  * @package Magento\Webpos\Test\TestCase\Setting\CheckoutTab
+ * SET17 & SET18
+ * Precondition and setup steps
+ * 1. Login webpos as a staff
+ * 2. Click on [General] menu > [Checkout] tab
+ * 3. [Sync on-hold order to server] = Yes
+ *
+ * SET17
+ * Steps
+ * 1. On- hold an order on webpos
+ * 2. Go to backend > Sales > Orders
+ * Acceptance Criteria
+ * 3. The on-hold order will be shown on Orders list
+ *
+ * SET18
+ * Steps
+ * 1. On- hold an order on webpos
+ * 2. Checkout that on-hold order successfully
+ * 3. Go to backend > Sales > Orders
+ * Acceptance Criteria
+ * 3. The on-hold order will be Canceled
+ *
+ * SET19
+ * Precondition and setup steps
+ * 1. Login webpos as a staff
+ * 2. Click on [General] menu > [Checkout] tab
+ * 3. [Sync on-hold order to server] = No
+ * Steps
+ * 1. On- hold an order on webpos
+ * 2. Go to backend > Sales > Orders
+ * Acceptance Criteria
+ * 3. The on-hold order will not be shown on Orders list
  */
 class WebPOSSyncOnHoldOrderToServerTest extends Injectable
 {

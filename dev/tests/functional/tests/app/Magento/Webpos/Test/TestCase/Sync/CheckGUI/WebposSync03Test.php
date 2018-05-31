@@ -16,6 +16,15 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposSync03Test
  * @package Magento\Webpos\Test\TestCase\Sync\CheckGUI
+ * Precondition and setup steps
+ * 1. Login Webpos as a staff
+ *
+ * Steps
+ * 1. Click on [Synchronization] menu
+ * 2. Click on [Reset local database] button
+ *
+ * Acceptance Criteria
+ * 2. Screen back to Sync page to sync whole database
  */
 class WebposSync03Test extends Injectable
 {

@@ -14,7 +14,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposZreportCheckGUITest
  * @package Magento\Webpos\Test\TestCase\Zreport
- *
+ * ZR021
  * Precondition: There are some POSs and setting [Need to create session before working] = ""Yes"" on the test site
  * 1. Login webpos by a staff who has open and close session permission
  *
@@ -45,9 +45,64 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * - Refund
  * - Net Sales
  * # Sale by payment methods
- *
  * Time to print the X-report
  *
+ * ZR022
+ * Precondition and setup steps
+ * Precondition: There are some POS and setting [Need to create session before working] = ""Yes"" on the test site
+ * 1. Login webpos by a staff
+ * 2. Choose an available POS (ex: POS 1)
+ *
+ * Steps
+ * 1. Go to [Session Management] menu
+ * 2. Open a session successfully > click on [Print] button
+ *
+ * Acceptance Criteria
+ * 2. [POS] field will show name of the current POS (POS 1)
+ *
+ * ZR023
+ * Precondition and setup steps:
+ * Precondition: There are some POS and setting [Need to create session before working] = ""Yes"" on the test site
+ * 1. Login webpos by a staff (ex: Staff A)
+ * 2. Open a session
+ * 3. Create some orders successfully
+ *
+ * Steps
+ * 1. Go to [Session Management] menu
+ * 2. Click on [Print] button
+ *
+ * Acceptance Criteria
+ * 2. [Staff] field will show name of the current staff (Staff A)
+ *
+ * ZR025
+ * Precondition and setup steps
+ * Precondition: There are some POS and setting [Need to create session before working] = ""Yes"" on the test site
+ * 1. Login webpos by a staff (ex: Staff A)
+ * 2. Open a session
+ * 3. Create some orders successfully
+ *
+ * Steps
+ * 1. Go to [Session Management] menu
+ * 2. Click to print X-report
+ *
+ * Acceptance Criteria
+ * 2.
+ * - [Opened] field: show opened Date & Time and the staff name who opened this session  (staff A)
+ *
+ * ZR034
+ * Precondition and setup steps
+ * Precondition: There are some POS and setting [Need to create session before working] = ""Yes"" on the test site
+ * 1. Login webpos by a staff
+ * 2. Open a session with
+ * - Opening amount = 0
+ * 3. Create some orders successfully
+ *
+ * Steps
+ * 1. Go to [Session Management] menu
+ * 2. Click to print X-report
+ *
+ * Acceptance Criteria
+ * 2. Show exactly printing time of X-report on the bottom of the report
  */
 class WebposXreportCheckGUITest extends Injectable
 {

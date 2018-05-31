@@ -16,6 +16,28 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryRefundWithReturnStockOH66OH67Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ * OH66 & OH67
+ * Precondition and setup steps:
+ * "1. Login webpos as a staff
+ * 2. Create an order with completed status
+ *
+ * OH67
+ * Steps:
+ * 1. Click to refund order
+ * 2. Tick on [return stock] checkbox
+ * 3. Submit > Ok confirmation
+ * 4. Go to Manage stocks menu > Check qty of the product that just refunded
+ * Acceptance Criteria:
+ * Manage stock page: Qty of refunded items will be updated
+ *
+ * OH68
+ * Steps:
+ * 1. Click to refund order
+ * 2. Untick on [return stock] checkbox
+ * 3. Submit > Ok confirmation
+ * 4. Go to Manage stocks menu > Check qty of the product that just refunded
+ * Acceptance Criteria:
+ * Manage stock page: Qty of refunded items are changeless
  */
 class WebposOrdersHistoryRefundWithReturnStockOH66OH67Test extends Injectable
 {

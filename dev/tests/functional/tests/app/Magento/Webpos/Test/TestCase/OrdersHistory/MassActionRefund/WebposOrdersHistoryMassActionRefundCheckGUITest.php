@@ -14,6 +14,19 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryMassActionRefundCheckGUITest
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order with completed status
+ * and shipping fee > 0
+ * Steps:
+ * 1. Click to refund order
+ * -  Fill available Qty
+ * - Adjust refund: 0
+ * - Refund shipping greater than shipping fee
+ * - Adjust fee: 0
+ * 2. Submit > Ok confirmation
+ * Acceptance Criteria:
+ * Show message: "Error: The refundable shipping amount is limited at [shipping fee]"
  */
 class WebposOrdersHistoryMassActionRefundCheckGUITest extends Injectable
 {
@@ -25,7 +38,7 @@ class WebposOrdersHistoryMassActionRefundCheckGUITest extends Injectable
     /**
      * @param WebposIndex $webposIndex
      */
-    public function __inject (
+    public function __inject(
         WebposIndex $webposIndex
     )
     {

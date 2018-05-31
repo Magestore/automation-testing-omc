@@ -22,6 +22,19 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposSync04Test
  * @package Magento\Webpos\Test\TestCase\Sync\CheckButton
+ * Precondition and setup steps
+ * 1. Login Webpos as a staff
+ * 2. Login backend on another browser > Edit some customers, products, Configuration...
+ * 3. Back to  the browser which are opening webpos
+ *
+ * Steps
+ * 1. Go to Synchronization page
+ * 2. Click on [Update all] button
+ *
+ * Acceptance Criteria
+ * 2.
+ * -  All of rows on page will be updated at the same time
+ * - When all of rows finish updating, all data will be updated
  */
 class WebposSync04Test extends Injectable
 {
