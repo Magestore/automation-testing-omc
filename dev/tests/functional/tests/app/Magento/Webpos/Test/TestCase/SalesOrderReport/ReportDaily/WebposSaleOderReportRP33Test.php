@@ -8,11 +8,9 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\ReportDaily;
 
-
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Adminhtml\ReportSaleOrder\AssertFilterReportByOrderStatus;
 use Magento\Webpos\Test\Page\Adminhtml\SalesByLocationDaily;
-
 
 /**
  * Reports
@@ -37,9 +35,9 @@ use Magento\Webpos\Test\Page\Adminhtml\SalesByLocationDaily;
 class WebposSaleOderReportRP33Test extends Injectable
 {
     /**
-     * OrderListByLocationDaily page.
+     * SalesByLocationDaily page.
      *
-     * @var saleByLocationDaily
+     * @var SalesByLocationDaily
      */
     protected $saleByLocationDaily;
 
@@ -53,6 +51,11 @@ class WebposSaleOderReportRP33Test extends Injectable
         $this->saleByLocationDaily = $orderListByLocation;
     }
 
+    /**
+     * @param AssertFilterReportByOrderStatus $assertFilterReportByOrderStatus
+     * @param array $shifts
+     * @param $order_status
+     */
     public function test(AssertFilterReportByOrderStatus $assertFilterReportByOrderStatus, array $shifts, $order_status)
     {
         //Open Sale by location daily
@@ -65,7 +68,7 @@ class WebposSaleOderReportRP33Test extends Injectable
             $this->saleByLocationDaily->getFilterBlock()->setOrderStatusByTitle($status);
             $this->saleByLocationDaily->getActionsBlock()->showReport();
             $this->saleByLocationDaily->getReportBlock()->waitLoader();
-            if($this->saleByLocationDaily->getReportBlock()->getSaleTotal()->isVisible()){
+            if ($this->saleByLocationDaily->getReportBlock()->getSaleTotal()->isVisible()) {
                 $pre_sale_totle = $this->saleByLocationDaily->getReportBlock()->getSaleTotal()->getText();
                 $assertFilterReportByOrderStatus->processAssert($this->saleByLocationDaily, $pre_sale_totle);
             }

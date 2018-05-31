@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip\WebposOrdersHistoryShipmentWithCustomProductOH43Test" summary="OrdersHistory-MassActionShip" ticketId="WEBPOSMASSACTIONSHIP-OH43">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase
+            name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip\WebposOrdersHistoryShipmentWithCustomProductOH43Test"
+            summary="OrdersHistory-MassActionShip" ticketId="WEBPOSMASSACTIONSHIP-OH43">
         <variation name="WebposOrdersHistoryShipmentWithCustomProductOH43TestVariation1">
             <data name="customProduct" xsi:type="array">
                 <item name="name" xsi:type="string">custom product %isolation%</item>

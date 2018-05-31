@@ -10,22 +10,45 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\CheckGUI;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOrdersHistoryMassActionShipCheckGUITest
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\CheckGUI
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order with some product
+ * - Mark as shipped: off
+ * Steps:
+ * 1. Go to order details page
+ * 2. Click on icon on the top of the right
+ * 3. Click on Ship action
+ * Acceptance Criteria:
+ * Display Shipment popup includding:
+ * - buttons: Cancel, Submit shipment
+ * - items table with corresponding Qty
+ * - Textbox : Track number
+ * - Textarea: Shipment comment
+ * - Checkbox: Send email
  */
 class WebposOrdersHistoryMassActionShipCheckGUITest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(WebposIndex $webposIndex)
     {
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test($products)
     {
         // Create products

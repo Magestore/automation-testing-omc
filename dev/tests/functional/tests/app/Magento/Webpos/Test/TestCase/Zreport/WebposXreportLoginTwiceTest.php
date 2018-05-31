@@ -18,7 +18,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposXreportLoginTwiceTest
  * @package Magento\Webpos\Test\TestCase\Zreport
- *
+ * ZR024
  * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff (ex: Staff A)
  * 2. Open a session
@@ -39,10 +39,13 @@ class WebposXreportLoginTwiceTest extends Injectable
     /**
      * Webpos Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(
         WebposIndex $webposIndex
     )
@@ -50,6 +53,12 @@ class WebposXreportLoginTwiceTest extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @param Pos $pos
+     * @param FixtureFactory $fixtureFactory
+     * @return array
+     */
     public function test(
         $products,
         Pos $pos,

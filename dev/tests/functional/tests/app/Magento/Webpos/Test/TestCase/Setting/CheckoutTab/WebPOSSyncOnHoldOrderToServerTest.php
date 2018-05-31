@@ -9,22 +9,55 @@
 namespace Magento\Webpos\Test\TestCase\Setting\CheckoutTab;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Sales\Test\Page\Adminhtml\OrderIndex;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebPOSSyncOnHoldOrderToServerTest
  * @package Magento\Webpos\Test\TestCase\Setting\CheckoutTab
+ * SET17 & SET18
+ * Precondition and setup steps
+ * 1. Login webpos as a staff
+ * 2. Click on [General] menu > [Checkout] tab
+ * 3. [Sync on-hold order to server] = Yes
+ *
+ * SET17
+ * Steps
+ * 1. On- hold an order on webpos
+ * 2. Go to backend > Sales > Orders
+ * Acceptance Criteria
+ * 3. The on-hold order will be shown on Orders list
+ *
+ * SET18
+ * Steps
+ * 1. On- hold an order on webpos
+ * 2. Checkout that on-hold order successfully
+ * 3. Go to backend > Sales > Orders
+ * Acceptance Criteria
+ * 3. The on-hold order will be Canceled
+ *
+ * SET19
+ * Precondition and setup steps
+ * 1. Login webpos as a staff
+ * 2. Click on [General] menu > [Checkout] tab
+ * 3. [Sync on-hold order to server] = No
+ * Steps
+ * 1. On- hold an order on webpos
+ * 2. Go to backend > Sales > Orders
+ * Acceptance Criteria
+ * 3. The on-hold order will not be shown on Orders list
  */
 class WebPOSSyncOnHoldOrderToServerTest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
+
     protected $testCaseId;
 
     /**
-     * @var OrderIndex
+     * @var OrderIndex $orderIndex
      */
     protected $orderIndex;
 
@@ -32,6 +65,10 @@ class WebPOSSyncOnHoldOrderToServerTest extends Injectable
     protected $optionNo;
     protected $successMessage;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param OrderIndex $orderIndex
+     */
     public function __inject(
         WebposIndex $webposIndex,
         OrderIndex $orderIndex
@@ -41,6 +78,14 @@ class WebPOSSyncOnHoldOrderToServerTest extends Injectable
         $this->orderIndex = $orderIndex;
     }
 
+    /**
+     * @param $menuItem
+     * @param $optionYes
+     * @param $successMessage
+     * @param $productName
+     * @param $optionNo
+     * @param $testCaseID
+     */
     public function test($menuItem, $optionYes, $successMessage, $productName, $optionNo, $testCaseID)
     {
         //set Value for tearDown function

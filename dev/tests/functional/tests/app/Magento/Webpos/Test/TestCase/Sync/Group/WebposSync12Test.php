@@ -14,12 +14,24 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Customer\Test\Page\Adminhtml\CustomerIndex;
 use Magento\Customer\Test\Page\Adminhtml\CustomerIndexEdit;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
 use Magento\Webpos\Test\Constraint\Sync\AssertSynchronizationPageDisplay;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
+
 /**
  * Class WebposSync12Test
  * @package Magento\Webpos\Test\TestCase\Sync\Group
+ * Precondition and setup steps
+ * 1. Login Webpos as a staff
+ * 2. Login backend on another browser  > Customer groups > Add a customer group (name)
+ * 3. Back to  the browser which are opening webpos
+ *
+ * Steps
+ * 1. Go to synchronization page
+ * 2. Reload Group
+ *
+ * Acceptance Criteria
+ * 2. The customer group will be added to Group option on Create/Edit customer popup
  */
 class WebposSync12Test extends Injectable
 {

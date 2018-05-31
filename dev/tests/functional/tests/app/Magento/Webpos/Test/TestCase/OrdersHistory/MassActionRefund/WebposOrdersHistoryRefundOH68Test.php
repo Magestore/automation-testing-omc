@@ -12,24 +12,34 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOrdersHistoryRefundOH68Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order with completed status
+ * Steps:
+ * 1. Click to refund order
+ * 2. Qty=0, blank all fields
+ * 3. Submit > Ok confirmation
+ * Acceptance Criteria:
+ * Display error: "Error: Data Refund Invalid!"
  */
 class WebposOrdersHistoryRefundOH68Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertRefundSuccess
+     * @var AssertRefundSuccess $assertRefundSuccess
      */
     protected $assertRefundSuccess;
 
     /**
-     * @var AssertOrderStatus
+     * @var AssertOrderStatus $assertOrderStatus
      */
     protected $assertOrderStatus;
 
@@ -106,16 +116,18 @@ class WebposOrdersHistoryRefundOH68Test extends Injectable
             ['products' => $products]
         )->run();
         sleep(1);
+        $warningMessage = $this->webposIndex->getToaster()->getWarningMessage()->getText();
+        \Zend_Debug::dump($warningMessage);
         $this->assertTrue(
             $this->webposIndex->getToaster()->isVisible(),
             'Error message is not visible.'
         );
         $this->assertEquals(
-            'A creditmemo has been created!',
-            $this->webposIndex->getToaster()->getWarningMessage()->getText(),
+            'Data Refund Invalid!',
+            $warningMessage,
             "Error message's is Wrong"
             . "\nExpected: " . 'Data Refund Invalid!'
-            . "\nActual: " . $this->webposIndex->getToaster()->getWarningMessage()->getText()
+            . "\nActual: " . $warningMessage
         );
 
         return [

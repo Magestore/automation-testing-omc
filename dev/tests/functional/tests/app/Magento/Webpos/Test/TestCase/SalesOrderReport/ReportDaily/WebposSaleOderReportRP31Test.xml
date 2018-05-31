@@ -16,7 +16,8 @@
                 <item name="show_order_statuses" xsi:type="string">Any</item>
             </data>
             <data name="fields" xsi:type="string">Day, Location, Order Count, Sales Total</data>
-            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\ReportSaleOrder\AssertShowTableFilterReport"></constraint>
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\Adminhtml\ReportSaleOrder\AssertShowTableFilterReport"></constraint>
         </variation>
     </testCase>
 </config>

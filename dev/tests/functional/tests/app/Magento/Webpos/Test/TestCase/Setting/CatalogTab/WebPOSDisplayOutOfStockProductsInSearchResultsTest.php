@@ -10,9 +10,28 @@ namespace Magento\Webpos\Test\TestCase\Setting\CatalogTab;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebPOSDisplayOutOfStockProductsInSearchResultsTest
  * @package Magento\Webpos\Test\TestCase\Setting\CatalogTab
+ * SET20 & SET21:
+ * Precondition and setup steps
+ * Precondition: Exist at least 1 product out of stock on webpos
+ * 1. Login webpos as a staff
+ *
+ * SET20:
+ * Steps
+ * 1. Click on [General] menu > [Catalog] tab
+ * 2. [Display out-of-stock products in search results] = No
+ * Acceptance Criteria
+ * 2. The out of stock products will not be displayed on Grid and search results
+ *
+ * SET21:
+ * Steps
+ * 1. Click on [General] menu > [Catalog] tab
+ * 2. [Display out-of-stock products in search results] = Yes
+ * Acceptance Criteria
+ * 2. The out of stock products will be displayed on Grid and search results
  */
 class WebPOSDisplayOutOfStockProductsInSearchResultsTest extends Injectable
 {
@@ -26,7 +45,9 @@ class WebPOSDisplayOutOfStockProductsInSearchResultsTest extends Injectable
     protected $option;
     protected $testCaseID;
 
-
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(
         WebposIndex $webposIndex
     )
@@ -34,6 +55,13 @@ class WebPOSDisplayOutOfStockProductsInSearchResultsTest extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $productName
+     * @param $menuItem
+     * @param $option
+     * @param $successMessage
+     * @param $testCaseID
+     */
     public function test($productName, $menuItem, $option, $successMessage, $testCaseID)
     {
         // LoginTest webpos

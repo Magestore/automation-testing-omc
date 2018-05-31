@@ -9,11 +9,12 @@
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByStaff;
 
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Webpos\Test\Page\Adminhtml\OrderListByStaff;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\Adminhtml\OrderListByStaff;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class OrderListByStaffReportRP23Test
  * @package Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByStaff
@@ -59,6 +60,8 @@ class OrderListByStaffReportRP23Test extends Injectable
     /**
      * @param WebPOSAdminReportDashboard $webPOSAdminReportDashboard
      * @param OrderListByStaff $orderListByStaff
+     * @param WebposIndex $webposIndex
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     public function __inject(
         WebPOSAdminReportDashboard $webPOSAdminReportDashboard,
@@ -74,6 +77,7 @@ class OrderListByStaffReportRP23Test extends Injectable
     }
 
     /**
+     * @param array $shifts
      * @param CatalogProductSimple $product
      */
     public function test
@@ -105,7 +109,7 @@ class OrderListByStaffReportRP23Test extends Injectable
 
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-        $orderIdInWebpos = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderIdInWebpos = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(2);
@@ -120,7 +124,7 @@ class OrderListByStaffReportRP23Test extends Injectable
         self::assertEquals(
             $orderIdInWebpos,
             $orderIdInBackend,
-            'The Order Id Just Created in Webpos '.$orderIdInWebpos.'. It is not updated in Table Body Of Order List By Staff Report.'
+            'The Order Id Just Created in Webpos ' . $orderIdInWebpos . '. It is not updated in Table Body Of Order List By Staff Report.'
         );
     }
 }

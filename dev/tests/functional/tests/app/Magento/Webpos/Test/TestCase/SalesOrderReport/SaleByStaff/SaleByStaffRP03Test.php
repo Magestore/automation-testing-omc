@@ -8,11 +8,12 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByStaff;
 
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
+use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Fixture\Shift;
 use Magento\Webpos\Test\Page\Adminhtml\OrderListByStaff;
 use Magento\Webpos\Test\Page\Adminhtml\SalesByStaff;
-use Magento\Webpos\Test\Fixture\Shift;
-use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
+
 /**
  * Interface SaleByStaffRP03Test
  * @package Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByStaff

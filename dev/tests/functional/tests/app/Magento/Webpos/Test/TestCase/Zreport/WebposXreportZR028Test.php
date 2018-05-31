@@ -15,7 +15,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposXreportZR028Test
- * @package Magento\Webpos\Test\TestCase\Zreport
  *
  * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff
@@ -50,22 +49,26 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * - Cash in = [Cash sales]
  * And show all of the payment methods with their total that placed on this session
  *
+ * @package Magento\Webpos\Test\TestCase\Zreport
  */
 class WebposXreportZR028Test extends Injectable
 {
     /**
      * Webpos Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
-
+    /**
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
+     */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory
@@ -75,6 +78,17 @@ class WebposXreportZR028Test extends Injectable
         $this->fixtureFactory = $fixtureFactory;
     }
 
+    /**
+     * @param $products
+     * @param Denomination $denomination
+     * @param $denominationNumberCoin
+     * @param $amount
+     * @param $putMoneyInValue
+     * @param $takeMoneyOutValue
+     * @param bool $addDiscount
+     * @param string $discountAmount
+     * @return array
+     */
     public function test(
         $products,
         Denomination $denomination,
@@ -155,7 +169,8 @@ class WebposXreportZR028Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getCheckoutPaymentMethod()->getTitlePaymentMethod()->click();
+        $this->webposIndex->getMainContent()->waitForMsWebpos();
+        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();
         $this->webposIndex->getCheckoutAddMorePayment()->getCashIn()->click();
@@ -171,7 +186,6 @@ class WebposXreportZR028Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         sleep(1);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
@@ -214,20 +228,6 @@ class WebposXreportZR028Test extends Injectable
         ];
     }
 
-    public function tearDown()
-    {
-        $this->objectManager->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'setup_session_before_working_to_no']
-        )->run();
-
-        //Config Payment Payment Method
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'magestore_webpos_specific_payment']
-        )->run();
-    }
-
     /**
      * convert string price format to decimal
      * @param $string
@@ -247,5 +247,23 @@ class WebposXreportZR028Test extends Injectable
             $result = -1 * abs($result);
         }
         return $result;
+    }
+
+    public function tearDown()
+    {
+        $this->objectManager->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'setup_session_before_working_to_no']
+        )->run();
+
+        //Config Payment Payment Method
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'magestore_webpos_specific_payment']
+        )->run();
+
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
+        )->run();
     }
 }

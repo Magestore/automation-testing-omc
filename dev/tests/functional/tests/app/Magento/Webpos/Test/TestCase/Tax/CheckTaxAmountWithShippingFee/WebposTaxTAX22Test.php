@@ -14,6 +14,31 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderHistoryRefund;
 
+/**
+ *  Check tax amount when ordering with shipping fee
+ * Testcase TAX22 - Check Tax amount on refund popup
+ *
+ * Precondition:
+ * 1. Go to backend > Configuration > Sales > Tax:
+ * Setting all fields: tick on [Use system value] checkbox
+ *
+ * Steps
+ *1. Login webpos as a staff
+ * 2. Add some  products and select a customer to meet tax condition
+ * 3. Select a shipping method with fee
+ * 4. Place order successfully with completed status
+ * 5. Go to Order detail
+ * 6. Click to open Refund popup
+ * 7. Refund successfully
+ *
+ * Acceptance Criteria
+ *6. Price of each product = [Price * (1+ tax_rate) ]
+7. Refund with exact tax amount
+ *
+ *
+ * Class WebposTaxTAX22Test
+ * @package Magento\Webpos\Test\TestCase\Tax\CheckTaxAmountWithShippingFee
+ */
 class WebposTaxTAX22Test extends Injectable
 {
     /**
@@ -42,7 +67,7 @@ class WebposTaxTAX22Test extends Injectable
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'johndoe_MI']);
         $customer->persist();
         //change taxRate
-        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
         return ['customer' => $customer];
@@ -52,7 +77,8 @@ class WebposTaxTAX22Test extends Injectable
         WebposIndex $webposIndex,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
         AssertTaxAmountOnOrderHistoryRefund $assertTaxAmountOnOrderHistoryRefund
-    ){
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
         $this->assertTaxAmountOnOrderHistoryRefund = $assertTaxAmountOnOrderHistoryRefund;
@@ -63,7 +89,8 @@ class WebposTaxTAX22Test extends Injectable
         $products,
         $customer,
         $taxRate
-    ){
+    )
+    {
         // Config
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
@@ -118,7 +145,7 @@ class WebposTaxTAX22Test extends Injectable
 
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
@@ -127,7 +154,8 @@ class WebposTaxTAX22Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),

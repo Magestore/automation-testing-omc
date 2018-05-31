@@ -10,6 +10,7 @@ namespace Magento\Webpos\Test\TestCase\CheckVisibleForm;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\DenominationIndex;
+
 /**
  * Class AddNewDenominationTest
  * @package Magento\Webpos\Test\TestCase\CheckVisibleForm
@@ -19,7 +20,7 @@ class AddNewDenominationTest extends Injectable
     /**
      * Gift Template Grid Page
      *
-     * @var DenominationIndex
+     * @var DenominationIndex $denominationIndex
      */
     protected $denominationIndex;
 
@@ -31,7 +32,8 @@ class AddNewDenominationTest extends Injectable
      */
     public function __inject(
         DenominationIndex $denominationIndex
-    ) {
+    )
+    {
         $this->denominationIndex = $denominationIndex;
     }
 

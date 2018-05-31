@@ -16,6 +16,29 @@ use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePla
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
+ * Setting: [Include FPT In Subtotal] = No
+ * Testcase TAX114 - Check tax amount on Order detail
+ *
+ * Precondition:
+ * In backend:
+ * 1. Go to Configuration >Sales >Tax >Fixed Product Taxes
+ * -  Setting: http://docs.magento.com/m2/ce/user_guide/tax/fixed-product-tax-configuration.html
+ * -  [Include FPT In Subtotal] = No
+ * - Other fields: tick on [Use system value]
+ * 2. Save config
+ * On webpos:
+ * 1. Login Webpos as a staff
+ *
+ * Steps
+ * 1. Add a  product and select a customer to meet FTP tax
+ * 2. Place order successfully
+ * 3. Go to Order detail page
+ *
+ * Acceptance Criteria
+ * 3.
+ * Tax amount = [product_price_excl_tax] * [tax_rate]
+ * Subtotal = [unit_price]  * [qty]
+ *
  * Class WebposTaxTAX114Test
  * @package Magento\Webpos\Test\TestCase\Tax
  */
@@ -56,7 +79,7 @@ class WebposTaxTAX114Test extends Injectable
         )->run();
 
         // Change TaxRate
-        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
         // Add Customer
@@ -172,7 +195,8 @@ class WebposTaxTAX114Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
 
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),

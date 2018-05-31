@@ -5,13 +5,27 @@
  * Date: 26/01/2018
  * Time: 13:26
  */
+
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOnHoldOrderONH08Test
  * @package Magento\Webpos\Test\TestCase\OnHoldOrder\HoldOrder
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Add a product
+ * 3. Edit customer price of that product: 10%
+ * 4. Hold order successfully
+ * Steps:
+ * 1. Click on On-Hold Orders menu
+ * Acceptance Criteria:
+ * "A new on-hold order is created with:
+ * + [Original Price] = Original price of that product
+ * + [Price] = [Original price] x 10%
+ * + [Subtotal] = Price x Qty"
  */
 class WebposOnHoldOrderONH08Test extends Injectable
 {
@@ -50,15 +64,14 @@ class WebposOnHoldOrderONH08Test extends Injectable
         )->run();
 
         //Create a on-hold-order
-            //Add a product to cart
+        //Add a product to cart
         $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
         //Edit customer price of that product with type: $
         $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
-        if (!$this->webposIndex->getCheckoutProductEdit()->getPanelPriceBox()->isVisible())
-        {
+        if (!$this->webposIndex->getCheckoutProductEdit()->getPanelPriceBox()->isVisible()) {
             $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
         }
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();

@@ -8,17 +8,42 @@
 
 namespace Magento\Webpos\Test\TestCase\Setting\Account;
 
+use Magento\Mtf\Config\DataInterface;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Config\DataInterface;
+
 /**
  * Class WebPOSChangeDisplayNameTest
  * @package Magento\Webpos\Test\TestCase\Setting\Account
+ * SET03 & SET04
+ * Precondition and setup steps
+ * 1. Login webpos as a staff
+ *
+ * SET03
+ * Steps
+ * 1. Click on [Account] menu
+ * 2. Edit [Display name]
+ * Enter incorrect current password
+ * 3. Save
+ * Acceptance Criteria
+ * 3. Save Display name unsuccessfully and show message: "Error: Old password is incorrect!
+ *
+ * SET04
+ * Steps
+ * 1. Click on [Account] menu
+ * 2. Edit [Display name]
+ * Enter correct current password
+ * 3. Save
+ * Acceptance Criteria
+ * 3.
+ * - Save account successfully and show message: ""success: Your account is saved successfully!""
+ * - Display name will be updated and changed on Webpos checkout page
+ * - Dispaly name of this staff in back end will be updated too
  */
 class WebPOSChangeDisplayNameTest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
     protected $username;
@@ -31,6 +56,10 @@ class WebPOSChangeDisplayNameTest extends Injectable
      */
     protected $configuration;
 
+    /**
+     * @param DataInterface $configuration
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(
         DataInterface $configuration,
         WebposIndex $webposIndex
@@ -40,6 +69,11 @@ class WebPOSChangeDisplayNameTest extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $displayName
+     * @param $testCaseID
+     * @param $currentPassword
+     */
     public function test($displayName, $testCaseID, $currentPassword)
     {
         $password = $this->configuration->get('application/0/backendPassword/0/value');
@@ -59,7 +93,7 @@ class WebPOSChangeDisplayNameTest extends Injectable
         } elseif ($testCaseID == 'SET04') {
             $this->webposIndex->getStaffSettingFormMainAccount()->getCurrentPassword()->setValue($password);
             $username = $this->configuration->get('application/0/backendLogin/0/value');
-            $this->username=$username . ' ' . $username;
+            $this->username = $username . ' ' . $username;
         }
         $this->webposIndex->getStaffSettingFormMainAccount()->getDisplayName()->setValue($displayName);
         $this->webposIndex->getStaffSettingFormFooter()->getSaveButton()->click();

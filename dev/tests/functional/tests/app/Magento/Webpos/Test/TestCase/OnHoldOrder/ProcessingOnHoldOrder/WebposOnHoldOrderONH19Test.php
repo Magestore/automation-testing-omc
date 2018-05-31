@@ -5,18 +5,28 @@
  * Date: 26/01/2018
  * Time: 13:26
  */
+
 namespace Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOnHoldOrderONH19Test
  * @package Magento\Webpos\Test\TestCase\OnHoldOrder\ProcessingOnHoldOrder
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Create an on-hold order successfully with custom product and custom price
+ * Steps:
+ * 1. Go to On-Hold Orders menu
+ * 2. Click on [Checkout] button on that on-hold order
+ * Acceptance Criteria:
+ * - Custom price and custom product will be loaded to cart page successfully
  */
 class WebposOnHoldOrderONH19Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
@@ -51,8 +61,7 @@ class WebposOnHoldOrderONH19Test extends Injectable
         sleep(1);
         //Edit customer price of that product with type: $
         $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
-        if (!$this->webposIndex->getCheckoutProductEdit()->getPanelPriceBox()->isVisible())
-        {
+        if (!$this->webposIndex->getCheckoutProductEdit()->getPanelPriceBox()->isVisible()) {
             $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
         }
         $this->webposIndex->getCheckoutProductEdit()->getDollarButton()->click();

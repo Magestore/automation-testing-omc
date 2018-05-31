@@ -8,10 +8,11 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByStaff;
 
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Webpos\Test\Page\Adminhtml\OrderListByStaff;
-use Magento\Webpos\Test\Fixture\Shift;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Fixture\Shift;
+use Magento\Webpos\Test\Page\Adminhtml\OrderListByStaff;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
+
 /**
  * Class OrderListByStaffReportRP17Test
  * @package Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByStaff
@@ -48,7 +49,7 @@ class OrderListByStaffReportRP17Test extends Injectable
      * Inject pages.
      *
      * @param WebPOSAdminReportDashboard $webPOSAdminReportDashboard
-     * @param Shift $shift
+     * @param OrderListByStaff $orderListByStaff
      * @return void
      */
     public function __inject(
@@ -80,13 +81,13 @@ class OrderListByStaffReportRP17Test extends Injectable
         self::assertEquals(
             $shifts['period_type'],
             $staffName,
-            'In Admin Form Order List By Staff WebPOS Page. The period type was not updated. It must be '.$shifts['period_type']
+            'In Admin Form Order List By Staff WebPOS Page. The period type was not updated. It must be ' . $shifts['period_type']
         );
         if ($order_statuses != null) {
             self::assertEquals(
                 $order_statuses,
                 $statusOrder,
-                'In Admin Form Order List By Staff WebPOS Page. Status is not updated. It must be '.$order_statuses
+                'In Admin Form Order List By Staff WebPOS Page. Status is not updated. It must be ' . $order_statuses
             );
         }
     }

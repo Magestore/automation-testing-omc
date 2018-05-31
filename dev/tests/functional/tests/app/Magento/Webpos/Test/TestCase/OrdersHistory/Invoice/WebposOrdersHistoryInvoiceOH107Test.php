@@ -17,21 +17,30 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryInvoiceOH107Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create a pending order with tax, discount whole cart, shipping fee and a product that has qty >1
+ * 3. Create payment
+ * Steps:
+ * 1. Click to invoice order
+ * 2. Enter 1 into Qty to invoice field
+ * Acceptance Criteria:
+ * Amount of fields in Invoice popup will be updated according to new qty
  */
 class WebposOrdersHistoryInvoiceOH107Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     /**
-     * @var AssertInvoicePopupCorrect
+     * @var AssertInvoicePopupCorrect $assertInvoicePopupCorrect
      */
     protected $assertInvoicePopupCorrect;
 
@@ -44,7 +53,7 @@ class WebposOrdersHistoryInvoiceOH107Test extends Injectable
     public function __prepare(FixtureFactory $fixtureFactory)
     {
         // Change TaxRate
-        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
         // Add Customer
@@ -56,7 +65,6 @@ class WebposOrdersHistoryInvoiceOH107Test extends Injectable
             'taxRate' => $taxRate->getRate()
         ];
     }
-
 
     /**
      * @param WebposIndex $webposIndex

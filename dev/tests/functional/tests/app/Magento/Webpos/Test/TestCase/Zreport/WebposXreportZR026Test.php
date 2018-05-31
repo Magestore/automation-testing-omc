@@ -13,7 +13,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposXreportZR026Test
- * @package Magento\Webpos\Test\TestCase\Zreport
  *
  * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff who has open and close session permission
@@ -43,19 +42,22 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * - Cash in = 0
  * And show all of the payment methods with their total that placed on this session
  *
+ * @package Magento\Webpos\Test\TestCase\Zreport
  */
 class WebposXreportZR026Test extends Injectable
 {
     /**
      * Webpos Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
-    /** @var bool $useOtherPaymentMethod */
     protected $useOtherPaymentMethod;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(
         WebposIndex $webposIndex
     )
@@ -63,6 +65,10 @@ class WebposXreportZR026Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test(
         $products
     )
@@ -118,25 +124,6 @@ class WebposXreportZR026Test extends Injectable
         ];
     }
 
-    public function tearDown()
-    {
-        $this->objectManager->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'setup_session_before_working_to_no']
-        )->run();
-
-        if ($this->useOtherPaymentMethod) {
-            $this->objectManager->getInstance()->create(
-                'Magento\Config\Test\TestStep\SetupConfigurationStep',
-                ['configData' => 'magestore_webpos_specific_payment']
-            )->run();
-        }
-
-        $this->objectManager->create(
-            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
-        )->run();
-    }
-
     /**
      * convert string price format to decimal
      * @param $string
@@ -156,5 +143,24 @@ class WebposXreportZR026Test extends Injectable
             $result = -1 * abs($result);
         }
         return $result;
+    }
+
+    public function tearDown()
+    {
+        $this->objectManager->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'setup_session_before_working_to_no']
+        )->run();
+
+        if ($this->useOtherPaymentMethod) {
+            $this->objectManager->getInstance()->create(
+                'Magento\Config\Test\TestStep\SetupConfigurationStep',
+                ['configData' => 'magestore_webpos_specific_payment']
+            )->run();
+        }
+
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
+        )->run();
     }
 }

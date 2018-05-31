@@ -5,7 +5,9 @@
  * Date: 12/02/2018
  * Time: 09:14
  */
+
 namespace Magento\Webpos\Test\TestCase\Staff\EditStaff;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
@@ -14,6 +16,30 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Staff\AssertCheckLocationForm;
+
+/**
+ * Edit staff
+ * Testcase MS44 - Check filter function
+ *
+ * Precondition
+ * Exist at least 2 location that doesnt link to any warehouse
+ * 1. Go to backend > Sales > Manage Locations
+ *
+ * Steps
+ * 1. Click on [Mapping Locations - Warehouses] button
+ * 2. Click on [Choose Locations] button
+ * 3. Click on Filter button
+ * 4. Click on [Cancel] button
+ *
+ * Acceptance Criteria
+ * 3. Show Filters form including:
+ * - 4 fields: ID, Display name, Address, Description
+ * - 2 buttons: Cancel, Apply filters
+ * 4. Close Filters form
+ *
+ * Class WebposManageStaffMS44Test
+ * @package Magento\Webpos\Test\TestCase\Staff\EditStaff
+ */
 class WebposManageStaffMS44Test extends Injectable
 {
     /**
@@ -34,6 +60,7 @@ class WebposManageStaffMS44Test extends Injectable
      * @var AssertCheckLocationForm
      */
     protected $assertCheckLocationForm;
+
     public function __prepare(FixtureFactory $fixtureFactory)
     {
         $this->objectManager->getInstance()->create(
@@ -54,7 +81,8 @@ class WebposManageStaffMS44Test extends Injectable
         StaffNews $staffsNew,
         WebposIndex $webposIndex,
         AssertCheckLocationForm $assertCheckLocationForm
-    ) {
+    )
+    {
         $this->staffsIndex = $staffsIndex;
         $this->staffsNew = $staffsNew;
         $this->webposIndex = $webposIndex;

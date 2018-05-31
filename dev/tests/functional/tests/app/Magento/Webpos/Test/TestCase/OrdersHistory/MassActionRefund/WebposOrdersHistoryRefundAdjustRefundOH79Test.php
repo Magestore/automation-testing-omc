@@ -16,31 +16,56 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryRefundAdjustRefundOH79Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order with completed status
+ * Steps:
+ * 1. Click to refund order
+ * -  Qty=0
+ * - Adjust refund = total paid
+ * 2. Submit > Ok confirmation
+ * Acceptance Criteria:
+ * 1. A creditmemo has been created
+ * 2. Total refunded will be update and shown on detail page (total refund = adjust refund )
+ * 3. Hide actions refund, cancel on action box
  */
 class WebposOrdersHistoryRefundAdjustRefundOH79Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertRefundSuccess
+     * @var AssertRefundSuccess $assertRefundSuccess
      */
     protected $assertRefundSuccess;
 
     /**
-     * @var AssertOrderStatus
+     * @var AssertOrderStatus $assertOrderStatus
      */
     protected $assertOrderStatus;
 
-    public function __inject(WebposIndex $webposIndex, AssertRefundSuccess $assertRefundSuccess, AssertOrderStatus $assertOrderStatus)
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertRefundSuccess $assertRefundSuccess
+     * @param AssertOrderStatus $assertOrderStatus
+     */
+    public function __inject(
+        WebposIndex $webposIndex,
+        AssertRefundSuccess $assertRefundSuccess,
+        AssertOrderStatus $assertOrderStatus
+    )
     {
         $this->webposIndex = $webposIndex;
         $this->assertRefundSuccess = $assertRefundSuccess;
         $this->assertOrderStatus = $assertOrderStatus;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test($products)
     {
         // Config all allow shipping for pos
@@ -100,7 +125,7 @@ class WebposOrdersHistoryRefundAdjustRefundOH79Test extends Injectable
         // Refund
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
-            ['products' => $products, 'refundShipping' => 0,'adjustRefund' => $totalPaid, 'adjustFee' => 0]
+            ['products' => $products, 'refundShipping' => 0, 'adjustRefund' => $totalPaid, 'adjustFee' => 0]
         )->run();
         return [
             'products' => $products,

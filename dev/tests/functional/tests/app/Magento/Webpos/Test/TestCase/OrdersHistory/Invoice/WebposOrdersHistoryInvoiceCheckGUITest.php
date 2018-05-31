@@ -8,24 +8,47 @@
 
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\Invoice;
 
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertWebposOrdersHistoryInvoice;
-use Magento\Config\Test\Fixture\ConfigData;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposOrdersHistoryInvoiceCheckGUITest
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
+ * Precondition and setup steps:
+ * OH102 & OH103 & OH104 & OH105
+ * 1. Login webpos as a staff
+ * 2. Create an order
+ * 3. Create payment
+ * Steps:
+ * OH102:
+ * 1. Click to invocie order
+ * 2. Cancel
+ * OH103:
+ * 1. Click to invocie order
+ * 2. Fill Qty for each item
+ * 3. Submit invoice
+ * OH104 & OH105:
+ * 1. Click to invocie order
+ * 2. Fill Qty for each item
+ * 3. Submit invoice > Cancel confirmation
+ * Acceptance Criteria:
+ * OH102:
+ * Close Invoice popup
+ * OH103:
+ * Display confirmation popup :"Are you sure you want to submit this invoice? "  with 2 buttons: Cancel, OK and 1 action: Close
+ * OH104&OH105:
+ * Close confirmation popup
  */
 class WebposOrdersHistoryInvoiceCheckGUITest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
-    
+
     /**
-     * @var AssertWebposOrdersHistoryInvoice
+     * @var AssertWebposOrdersHistoryInvoice $assertWebposOrdersHistoryInvoice
      */
     protected $assertWebposOrdersHistoryInvoice;
 

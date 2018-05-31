@@ -20,48 +20,74 @@ use Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
+ * Check tax amount when ordering with shipping fee
+ * Testcase TAX19 - Check Tax amount when creating a partial invoice
+ *
+ * Precondition:
+ * 1. Go to backend > Configuration > Sales > Tax:
+ * Setting all fields: tick on [Use system value] checkbox
+ *
+ * Steps
+ * 1. Login webpos as a staff
+ * 2. Add some  products and select a customer to meet tax condition
+ * 3. Select a shipping method with fee
+ * 4. Place order successfully with:
+ * + [Create invoice]: off
+ * 5. Go to Order detail > click on [Invoice] button
+ * 6. On invoice popup, Edit [qty to invoice] to make a partial invoice
+ * 7. Create a partial invoice
+ *
+ * Acceptance Criteria
+ * 6. Tax amount will be updated according to [Qty to invoice] field exactly:
+ * - Tax amount of each product  = (their Subtotal - Discount) x Tax rate
+ * - Rowtotal of each product = their Subtotal + Tax - Discount
+ * - Tax amount whole cart = SUM(tax amount of each product)
+ * - Subtotal whole cart = SUM(Subtotal  of each product)
+ * - Grand total = Subtotal whole cart + Shipping + Tax - Discount
+ * 7. Create a partial invoice successfully
+ *
  * Class WebposTaxTAX119Test
  * @package Magento\Webpos\Test\TestCase\Tax\CheckoutWithGroupProduct
  */
 class WebposTaxTAX119Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     /**
-     * @var AssertPaymentSuccess
+     * @var AssertPaymentSuccess $assertPaymentSuccess
      */
     protected $assertPaymentSuccess;
 
     /**
-     * @var AssertInvoiceSuccess
+     * @var AssertInvoiceSuccess $assertInvoiceSuccess
      */
     protected $assertInvoiceSuccess;
 
     /**
-     * @var AssertShipmentSuccess
+     * @var AssertShipmentSuccess $assertShipmentSuccess
      */
     protected $assertShipmentSuccess;
 
     /**
-     * @var AssertRefundSuccess
+     * @var AssertRefundSuccess $assertRefundSuccess
      */
     protected $assertRefundSuccess;
 
     /**
-     * @var AssertOrderStatus
+     * @var AssertOrderStatus $assertOrderStatus
      */
     protected $assertOrderStatus;
 
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
@@ -91,6 +117,16 @@ class WebposTaxTAX119Test extends Injectable
         ];
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
+     * @param AssertPaymentSuccess $assertPaymentSuccess
+     * @param AssertInvoiceSuccess $assertInvoiceSuccess
+     * @param AssertShipmentSuccess $assertShipmentSuccess
+     * @param AssertRefundSuccess $assertRefundSuccess
+     * @param AssertOrderStatus $assertOrderStatus
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
@@ -112,6 +148,15 @@ class WebposTaxTAX119Test extends Injectable
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
 
+    /**
+     * @param Customer $customer
+     * @param $taxRate
+     * @param $products
+     * @param bool $createInvoice
+     * @param bool $shipped
+     * @param $dataConfig
+     * @return array
+     */
     public function test(
         Customer $customer,
         $taxRate,
@@ -119,7 +164,8 @@ class WebposTaxTAX119Test extends Injectable
         $createInvoice = true,
         $shipped = false,
         $dataConfig
-    ) {
+    )
+    {
         // Create products
         $products = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
@@ -177,7 +223,7 @@ class WebposTaxTAX119Test extends Injectable
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
 
-        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
 
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -189,7 +235,8 @@ class WebposTaxTAX119Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
 
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
@@ -210,7 +257,8 @@ class WebposTaxTAX119Test extends Injectable
         sleep(5);
         $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
         $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
-        while (!$this->webposIndex->getOrderHistoryInvoice()->isVisible()){}
+        while (!$this->webposIndex->getOrderHistoryInvoice()->isVisible()) {
+        }
         $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
         $this->webposIndex->getMsWebpos()->waitForModalPopup();
         sleep(2);

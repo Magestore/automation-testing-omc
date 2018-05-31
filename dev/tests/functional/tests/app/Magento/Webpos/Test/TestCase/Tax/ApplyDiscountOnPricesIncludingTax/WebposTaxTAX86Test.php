@@ -15,7 +15,35 @@ use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceOnRefundPopupWithApplyDiscountOnPriceIncludingTax;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
+ *  Setting: Setting: [Apply Discount On Prices] = Including tax
+ * Testcase TAX86 - Check Tax amount on refund popup
+ *
+ * Precondition: Exist 1 tax rule which meets to Shipping settings
+ * In backend:
+ * 1. Go to Configuration >Sales >Tax >Calculation Settings:
+ * - [Apply Discount On Prices] = Including tax
+ * - [Catalog price] = including tax
+ * - Other fields: tick on [Use system value]
+ * 2. Go to Configuration > Sales> Tax >  Shipping settings:
+ * - Input [Origin]
+ * 3. Save config
+ * On webpos:
+ * 1. Login Webpos as a staff
+ *
+ * Steps
+ * 1. Add a  product and select a customer to meet tax condition
+ * 2. Add discount tyle % to whole order (Ex: fixed 10%)
+ * 3. Place order successfully with completed status
+ * 4. Go to Order detail
+ * 5. Click to open refund popup
+ * 6. Refund order
+ *
+ * Acceptance Criteria
+ * 5.  Price of each product = [Price_excl_tax * (1+ tax_rate_current) ]
+ * 6. Refund order successfully
+ *
  * Class WebposTaxTAX86Test
  * @package Magento\Webpos\Test\TestCase\Tax\ApplyDiscountOnPricesIncludingTax
  */
@@ -61,13 +89,13 @@ class WebposTaxTAX86Test extends Injectable
         )->run();
 
         //Create California tax rule
-        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset'=> 'CA_rule']);
+        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset' => 'CA_rule']);
         $taxRule->persist();
         $this->caTaxRule = $taxRule;
         $caTaxRate = $this->caTaxRule->getDataFieldConfig('tax_rate')['source']->getFixture();
 
         // Change TaxRate
-        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($miTaxRate);
 
         // Add Customer
@@ -181,7 +209,7 @@ class WebposTaxTAX86Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
@@ -190,7 +218,8 @@ class WebposTaxTAX86Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
@@ -201,7 +230,7 @@ class WebposTaxTAX86Test extends Injectable
         // Refund
         $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
         $this->webposIndex->getOrderHistoryAddOrderNote()->openRefundPopup();
-        $actualProductPrice = substr($this->webposIndex->getOrderHistoryRefund()->getItemPrice($products[0]['product']->getName()),1);
+        $actualProductPrice = substr($this->webposIndex->getOrderHistoryRefund()->getItemPrice($products[0]['product']->getName()), 1);
         $this->assertProductPriceOnRefundPopupWithApplyDiscountOnPriceIncludingTax
             ->processAssert($products, $originTaxRate, $currentTaxRate, $actualProductPrice);
         // Refund successfully

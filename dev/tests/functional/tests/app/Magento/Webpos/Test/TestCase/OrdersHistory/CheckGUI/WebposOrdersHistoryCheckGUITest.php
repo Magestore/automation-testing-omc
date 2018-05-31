@@ -11,13 +11,28 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\CheckGUI;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrdersHistoryCheckGUITest
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\CheckGUI
+ * Precondition and setup steps:
+ * Login Webpos as a staff
+ * Steps:
+ * Click on Orders History menu
+ * Acceptance Criteria:
+ * Redirect to Orders History page including:
+ * - Order list is shown on the left
+ * - Order detail is shown on the right"
+ */
 class WebposOrdersHistoryCheckGUITest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(WebposIndex $webposIndex)
     {
         $this->webposIndex = $webposIndex;

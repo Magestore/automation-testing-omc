@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\Invoice\WebposOrdersHistoryInvoiceOH113Test" summary="Orders History - [Invoice] button" ticketId="WEBPOS-OH113">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\Invoice\WebposOrdersHistoryInvoiceOH113Test"
+              summary="Orders History - [Invoice] button" ticketId="WEBPOS-OH113">
         <variation name="WebposOrdersHistoryInvoiceOH113Test_OH113">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">

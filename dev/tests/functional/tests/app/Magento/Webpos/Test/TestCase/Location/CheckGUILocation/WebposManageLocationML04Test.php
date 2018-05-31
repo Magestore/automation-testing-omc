@@ -9,17 +9,20 @@
 namespace Magento\Webpos\Test\TestCase\Location\CheckGUILocation;
 
 /**
- * Managelocation-ML04
- *
- * Sort by Description column
+ * Check Sort column in Grid
+ * Testcase ML04 - Sort by Description column
  *
  * Precondition
- * Exist at least 2 records on the grid
+ * 1. Go to backend > Sales > Manage Locations
  *
  * Steps
- * 1.Go to backend->Sales->Manage Location
- * 2. Click on title of Description Column
- * 3. Click again
+ * 1. Click on title of Description column
+ * 2. Click again
+ *
+ * Acceptance Criteria
+ * 1. The records on grid will be sorted in ascending order (A to Z) by Description
+ * 2. The records on grid will be sorted in descending order (Z to A) by Description
+ *
  *
  * Class WebposManageLocationML04Test
  * @package Magento\Webpos\Test\TestCase\Location\CheckGUILocation

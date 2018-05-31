@@ -12,34 +12,60 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOrdersHistoryRefundPartialOH64Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order with some products (or one product with Qty >1)
+ * 3. Create an order with completed status
+ * 4. Refund a partial
+ * Steps:
+ * Refund all extant items
+ * Acceptance Criteria:
+ * 1. A creditmemo has been created!
+ * 2. There is a new notification
+ * 3. Order status will be changed to Closed
+ * 4. Hide actions ship, refund, cancel on action box
+ * 5. Total refund will be updated and shown on detail page
  */
 class WebposOrdersHistoryRefundPartialOH64Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertRefundSuccess
+     * @var AssertRefundSuccess $assertRefundSuccess
      */
     protected $assertRefundSuccess;
 
     /**
-     * @var AssertOrderStatus
+     * @var AssertOrderStatus $assertOrderStatus
      */
     protected $assertOrderStatus;
 
-    public function __inject(WebposIndex $webposIndex, AssertRefundSuccess $assertRefundSuccess, AssertOrderStatus $assertOrderStatus)
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertRefundSuccess $assertRefundSuccess
+     * @param AssertOrderStatus $assertOrderStatus
+     */
+    public function __inject(
+        WebposIndex $webposIndex,
+        AssertRefundSuccess $assertRefundSuccess,
+        AssertOrderStatus $assertOrderStatus
+    )
     {
         $this->webposIndex = $webposIndex;
         $this->assertRefundSuccess = $assertRefundSuccess;
         $this->assertOrderStatus = $assertOrderStatus;
     }
 
+    /**
+     * @param $products
+     */
     public function test($products)
     {
         // Create products
@@ -101,7 +127,7 @@ class WebposOrdersHistoryRefundPartialOH64Test extends Injectable
             $productName = $item['product']->getName();
             $rowTotal = $this->webposIndex->getOrderHistoryOrderViewContent()->getRowTotalOfProduct($productName);
             $rowTotal = (float)substr($rowTotal, 1);
-            $totalRefunded += ($rowTotal/$item['orderQty'])*$item['refundQty'];
+            $totalRefunded += ($rowTotal / $item['orderQty']) * $item['refundQty'];
         }
         $totalRefunded += $shippingFee;
         sleep(1);

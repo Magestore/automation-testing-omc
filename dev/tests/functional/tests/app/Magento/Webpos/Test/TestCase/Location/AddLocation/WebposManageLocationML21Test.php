@@ -121,6 +121,13 @@ class WebposManageLocationML21Test extends Injectable
         $this->assertGridWithResult = $assertSearchExistLocationSuccess;
     }
 
+    /**
+     * Test step
+     * @param FixtureFactory $fixtureFactory
+     * @param Location $location
+     * @param Staff $staff
+     * @param Pos $pos
+     */
     public function test(FixtureFactory $fixtureFactory, Location $location, Staff $staff, Pos $pos)
     {
         //Precondition

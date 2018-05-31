@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPayment\SaleByPaymentReportRP46Test"
+              summary="Order List By Location Report" ticketId="MAGETWO-28222">
+        <variation name="SaleByPaymentReportRP46TestVariation">
+            <data name="pageTitle" xsi:type="string">Sales by payment method</data>
+            <data name="columns" xsi:type="array">
+                <item name="0" xsi:type="string">Payment Method</item>
+                <item name="1" xsi:type="string">Order Count</item>
+                <item name="2" xsi:type="string">Sales Total</item>
+            </data>
+        </variation>
+    </testCase>
+</config>

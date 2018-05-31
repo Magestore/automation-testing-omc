@@ -11,18 +11,48 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\OrderStatus;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrderStatusOH05Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\OrderStatus
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Add some product to cart
+ * 3. Click on [Checkout] button
+ * 4. Select a shipping method
+ *
+ * Steps:
+ * 1. Select a payment method > fill amount equal total order
+ * - [Mark a shipped]: off
+ * - [Create invoice]: off
+ * 2. Place order successfully
+ * 3. Go to [Orders history] menu
+ *
+ * Acceptance Criteria:
+ * 1. A new order is created with pending status
+ * 2. On order detail, show 2 button: Print, Invoice and hide [Take payment] button
+ * 3. Mass action including: Send email, Ship, Cancel, Add Comment, Re-order
+ */
 class WebposOrderStatusOH05Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
-    public function __inject(WebposIndex $webposIndex)
+    /**
+     * @param WebposIndex $webposIndex
+     */
+    public function __inject(
+        WebposIndex $webposIndex
+    )
     {
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test($products)
     {
         // LoginTest webpos
@@ -48,8 +78,6 @@ class WebposOrderStatusOH05Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         // Place Order
         $grandTotal = $this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText();
-//        $doubleGrandTotal = (double)substr($grandTotal, 1);
-//        $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($doubleGrandTotal);
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\PlaceOrderSetShipAndCreateInvoiceSwitchStep',
             [

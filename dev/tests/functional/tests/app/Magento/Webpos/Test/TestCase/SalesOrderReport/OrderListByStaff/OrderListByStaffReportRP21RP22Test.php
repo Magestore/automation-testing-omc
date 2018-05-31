@@ -8,9 +8,9 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByStaff;
 
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Webpos\Test\Page\Adminhtml\OrderListByStaff;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Page\Adminhtml\OrderListByStaff;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
 
 /**
  * Class OrderListByStaffReportRP21RP22Test
@@ -50,6 +50,7 @@ class OrderListByStaffReportRP21RP22Test extends Injectable
      * Inject pages.
      *
      * @param WebPOSAdminReportDashboard $webPOSAdminReportDashboard
+     * @param OrderListByStaff $orderListByStaff
      * @return void
      */
     public function __inject(

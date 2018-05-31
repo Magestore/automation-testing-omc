@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\SearchAndFilterOrder\WebposOrderHistorySearchWithCustomerEmailOH127Test" summary="OrdersHistory-Search" ticketId="WEBPOSORDERSEARCH-OH127">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase
+            name="Magento\Webpos\Test\TestCase\OrdersHistory\SearchAndFilterOrder\WebposOrderHistorySearchWithCustomerEmailOH127Test"
+            summary="OrdersHistory-Search" ticketId="WEBPOSORDERSEARCH-OH127">
         <variation name="WebposOrderHistorySearchWithCustomerEmailOH127TestVariation1">
             <data name="order/dataset" xsi:type="string">default</data>
         </variation>

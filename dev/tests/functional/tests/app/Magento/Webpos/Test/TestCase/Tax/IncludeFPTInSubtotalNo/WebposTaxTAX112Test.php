@@ -16,6 +16,34 @@ use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePla
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
+ * Setting: [Include FPT In Subtotal] = No
+ * Testcase TAX112 - Check tax amount on cart page and Checkout page
+ *
+ * Precondition:
+ * In backend:
+ * 1. Go to Configuration >Sales >Tax >Fixed Product Taxes
+ * -  Setting: http://docs.magento.com/m2/ce/user_guide/tax/fixed-product-tax-configuration.html
+ * -  [Include FPT In Subtotal] = No
+ * - Other fields: tick on [Use system value]
+ * 2. Save config
+ * On webpos:
+ * 1. Login Webpos as a staff
+ *
+ * Steps
+ * 1. Add a  product and select a customer to meet FTP tax
+ * 2. Check tax amount
+ * 3. Click on [Checkout] button
+ * 4. Check tax amount on Checkout page
+ * 5. Place order
+ *
+ * Acceptance Criteria
+ * 2.
+ * Tax amount = [product_price_excl_tax] * [tax_rate]
+ * Subtotal = [unit_price]  * [qty]
+ * 4. Subtotal and Tax amount are changless
+ * 5. Place order successfully
+ *
+ *
  * Class WebposTaxTAX112Test
  * @package Magento\Webpos\Test\TestCase\Tax
  */
@@ -56,7 +84,7 @@ class WebposTaxTAX112Test extends Injectable
         )->run();
 
         // Change TaxRate
-        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
         // Add Customer

@@ -19,6 +19,40 @@ use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceExcludingTax;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Setting: Setting: [Apply Discount On Prices] = Including tax
+ * Testcase TAX82 - Check tax amount on cart page and Checkout page
+ *
+ * Precondition: Exist 1 tax rule which meets to Shipping settings
+ * In backend:
+ * 1. Go to Configuration >Sales >Tax >Calculation Settings:
+ * - [Apply Discount On Prices] = Including tax
+ * - [Catalog price] = including tax
+ * - Other fields: tick on [Use system value]
+ * 2. Go to Configuration > Sales> Tax >  Shipping settings:
+ * - Input [Origin]
+ * 3. Save config
+ * On webpos:
+ * 1. Login Webpos as a staff
+ *
+ * Steps
+ * 1. Add a  product and select a customer to meet tax condition
+ * 2. Add discount tyle % to whole order (Ex: fixed 10%)
+ * 3. Check Discount amount and Tax amount
+ * 4. Click on [Checkout] button
+ * 5. Place order
+ *
+ * Acceptance Criteria
+ *3.
+ * Subtotal_incl_tax = SUM [ price_incl__origin_tax / (1 + origin_tax_rate) * Qty] * (1 + tax_rate_current)
+ * Discount_value = Subtotal_incl_tax * [discount]
+ * Tax = [Subtotal_incl_tax - Discount_incl_tax] * Tax_rate_current / (1 + tax_rate_current)
+ * 4. Tax amount and Discount amount are changless
+ * 5. Place order successfully
+ *
+ * Class WebposTaxTAX82Test
+ * @package Magento\Webpos\Test\TestCase\Tax\ApplyDiscountOnPricesIncludingTax
+ */
 class WebposTaxTAX82Test extends Injectable
 {
     /**
@@ -61,13 +95,13 @@ class WebposTaxTAX82Test extends Injectable
         )->run();
 
         //Create California tax rule
-        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset'=> 'CA_rule']);
+        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset' => 'CA_rule']);
         $taxRule->persist();
         $this->caTaxRule = $taxRule;
         $caTaxRate = $this->caTaxRule->getDataFieldConfig('tax_rate')['source']->getFixture();
 
         // Change TaxRate
-        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($miTaxRate);
 
         // Add Customer

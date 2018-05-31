@@ -13,6 +13,27 @@ use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
 
+/**
+ * Check validation
+ * Testcase MS32 - Check validate Password fields
+ *
+ * Precondition
+ * 1. Go to backend > Sales > Manage Staffs
+ *
+ * Steps
+ * 3.
+ * 1. Click on [Edit] button to edit the Location
+ * 2. Click on [Delete] button
+ * 3. Click on [OK] button on the confirmation popup
+ *
+ * Acceptance Criteria
+ * 3.
+ * - Create staff unsuccessfully
+ * - Show message: "Please enter 7 or more characters, using both numeric and alphabetic." under [Password]  textbox
+ *
+ * Class WebposManageStaffMS32Test
+ * @package Magento\Webpos\Test\TestCase\Staff\CheckValidation
+ */
 class WebposManageStaffMS32Test extends Injectable
 {
     /**

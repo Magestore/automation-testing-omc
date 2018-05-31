@@ -13,6 +13,25 @@ use Magento\Webpos\Test\Page\Adminhtml\MappingLocationIndex;
 use Magento\Webpos\Test\Fixture\Location;
 
 /**
+ * Check [Choose locations] page
+ * Testcase ML45
+ * Precondition:
+ * Exist at least 2 location that doesnt link to any warehouse
+ * 1. Go to backend > Sales > Manage Locations
+ *
+ * Steps
+ * 1. Click on [Mapping Locations - Warehouses] button
+ * 2. Click on [Choose Locations] button
+ * 3. Click on Filter button
+ * 4. Input data into some fields that dont match any record
+ * 5. Click on [Apply Filters] button
+ *
+ * Acceptance Criteria
+ * 5.
+ * - Close Filter form
+ * - Show message: "We couldn't find any records." on the Grid
+ *
+ *
  * Class WebposManageLocationML45Test
  * @package Magento\Webpos\Test\TestCase\Location\ChooseLocations
  */
@@ -21,7 +40,7 @@ class WebposManageLocationML45Test extends Injectable
     /**
      * Mapping Location Index page
      *
-     * @var MappingLocationIndex
+     * @var MappingLocationIndex $mappingLocationIndex
      */
     protected $mappingLocationIndex;
 
@@ -30,7 +49,8 @@ class WebposManageLocationML45Test extends Injectable
      */
     public function __inject(
         MappingLocationIndex $mappingLocationIndex
-    ) {
+    )
+    {
         $this->mappingLocationIndex = $mappingLocationIndex;
     }
 
@@ -50,7 +70,7 @@ class WebposManageLocationML45Test extends Injectable
         $this->mappingLocationIndex->getMappingLocationGrid()->chooseLocations();
         $this->mappingLocationIndex->getLocationModal()->waitLoader();
         sleep(2);
-        if($this->mappingLocationIndex->getLocationModal()->isClearButtonVisible()){
+        if ($this->mappingLocationIndex->getLocationModal()->isClearButtonVisible()) {
             $this->mappingLocationIndex->getLocationModal()->getClearFilterButton()->click();
         }
         $this->mappingLocationIndex->getLocationModal()->waitLoader();

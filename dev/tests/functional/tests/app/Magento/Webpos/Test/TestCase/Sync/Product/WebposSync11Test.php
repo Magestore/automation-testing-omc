@@ -11,17 +11,32 @@ namespace Magento\Webpos\Test\TestCase\Sync\Product;
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Catalog\Test\Page\Adminhtml\CatalogProductEdit;
 use Magento\Catalog\Test\Page\Adminhtml\CatalogProductIndex;
-use Magento\Customer\Test\Fixture\Address;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Customer\Test\Page\Adminhtml\CustomerIndex;
 use Magento\Customer\Test\Page\Adminhtml\CustomerIndexEdit;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Sync\AssertSynchronizationPageDisplay;
 use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
-use Magento\Webpos\Test\Fixture\Staff;
+use Magento\Webpos\Test\Constraint\Sync\AssertSynchronizationPageDisplay;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposSync11Test
+ * @package Magento\Webpos\Test\TestCase\Sync\Product
+ * Precondition and setup steps
+ * 1. Login Webpos as a staff
+ * 2. Login backend on another browser  > Catalog > Edit a product (name, sku)
+ * 3. Back to  the browser which are opening webpos
+ *
+ * Steps
+ * 1. Go to synchronization page
+ * 2. Update product
+ *
+ * Acceptance Criteria
+ * 2.
+ * - Stock item will be auto update at the same time
+ * - The name, sku of  that product was changed and shown on grid and manage stock page
+ */
 class WebposSync11Test extends Injectable
 {
     /**
@@ -32,51 +47,50 @@ class WebposSync11Test extends Injectable
     /**
      * Customer grid page.
      *
-     * @var CustomerIndex
+     * @var CustomerIndex $customerIndexPage
      */
     protected $customerIndexPage;
 
     /**
      * Customer edit page.
      *
-     * @var CustomerIndexEdit
+     * @var CustomerIndexEdit $customerIndexEditPage
      */
     protected $customerIndexEditPage;
 
     /**
      * Product page with a grid.
      *
-     * @var CatalogProductIndex
+     * @var CatalogProductIndex $productGrid
      */
     protected $productGrid;
 
     /**
      * Page to update a product.
      *
-     * @var CatalogProductEdit
+     * @var CatalogProductEdit $editProductPage
      */
     protected $editProductPage;
 
     /**
-     * @var AssertSynchronizationPageDisplay
+     * @var AssertSynchronizationPageDisplay $assertSynchronizationPageDisplay
      */
     protected $assertSynchronizationPageDisplay;
+
     /**
-     * @var AssertItemUpdateSuccess
+     * @var AssertItemUpdateSuccess $assertItemUpdateSuccess
      */
     protected $assertItemUpdateSuccess;
 
-    public function __prepare(FixtureFactory $fixtureFactory)
-    {
-        // Add Customer
-//        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'customer_MI']);
-//        $customer->persist();
-//
-//        return [
-//            'customer' => $customer
-//        ];
-    }
-
+    /**
+     * @param WebposIndex $webposIndex
+     * @param CustomerIndex $customerIndexPage
+     * @param CustomerIndexEdit $customerIndexEditPage
+     * @param CatalogProductIndex $productGrid
+     * @param CatalogProductEdit $editProductPage
+     * @param AssertSynchronizationPageDisplay $assertSynchronizationPageDisplay
+     * @param AssertItemUpdateSuccess $assertItemUpdateSuccess
+     */
     public function __inject(
         WebposIndex $webposIndex,
         CustomerIndex $customerIndexPage,
@@ -97,8 +111,12 @@ class WebposSync11Test extends Injectable
     }
 
     /**
-     *
-     * @return void
+     * @param FixtureFactory $fixtureFactory
+     * @param Customer $initialCustomer
+     * @param Customer $customer
+     * @param CatalogProductSimple $initialProduct
+     * @param CatalogProductSimple $product
+     * @param $products
      */
     public function test(
         FixtureFactory $fixtureFactory,
@@ -137,13 +155,4 @@ class WebposSync11Test extends Injectable
         $action = 'Update';
         $this->assertItemUpdateSuccess->processAssert($this->webposIndex, "Product", $action);
     }
-
-    public function tearDown()
-    {
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => 'default_payment_method']
-//        )->run();
-    }
-
 }

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\CheckGUI\WebposOrdersHistoryCheckGUITest" summary="OrdersHistory-CheckGUI" ticketId="ORDERSHISTORY-GUI01">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\CheckGUI\WebposOrdersHistoryCheckGUITest"
+              summary="OrdersHistory-CheckGUI" ticketId="ORDERSHISTORY-GUI01">
         <variation name="WebposOrdersHistoryCheckGUITestVariation1">
             <data name="description" xsi:type="string">Orders history check GUI</data>
             <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertOrdersHistoryPageAvailable"/>
-            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertOrdersHistoryOrderListAvailable"/>
-            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertOrdersHistoryOrderDetailAvailable"/>
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertOrdersHistoryOrderListAvailable"/>
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\OrderHistory\CheckGUI\AssertOrdersHistoryOrderDetailAvailable"/>
         </variation>
     </testCase>
 </config>

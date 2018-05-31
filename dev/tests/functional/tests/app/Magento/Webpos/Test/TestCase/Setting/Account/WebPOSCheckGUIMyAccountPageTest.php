@@ -8,17 +8,29 @@
 
 namespace Magento\Webpos\Test\TestCase\Setting\Account;
 
+use Magento\Mtf\Config\DataInterface;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\Config\DataInterface;
+
 /**
  * Class WebPOSCheckGUIMyAccountPageTest
  * @package Magento\Webpos\Test\TestCase\Setting\Account
+ * Precondition and setup steps
+ * 1. Login webpos as a staff
+ *
+ * Steps
+ * 1. Click on [Account] menu
+ *
+ * Acceptance Criteria
+ * 1. Redirect to My Account page including:
+ * - [Display name] field: show current staff name, can edit
+ * - [Current password], [New password], [Confirmation] fields: blank, can edit
+ * - [Save] button
  */
-class WebPOSCheckGUIMyAccountPageTest  extends Injectable
+class WebPOSCheckGUIMyAccountPageTest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
@@ -29,7 +41,10 @@ class WebPOSCheckGUIMyAccountPageTest  extends Injectable
      */
     protected $configuration;
 
-
+    /**
+     * @param DataInterface $configuration
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(
         DataInterface $configuration,
         WebposIndex $webposIndex

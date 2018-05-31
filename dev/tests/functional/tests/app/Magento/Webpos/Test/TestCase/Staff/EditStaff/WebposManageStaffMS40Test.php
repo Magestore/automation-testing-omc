@@ -5,12 +5,34 @@
  * Date: 12/02/2018
  * Time: 09:14
  */
+
 namespace Magento\Webpos\Test\TestCase\Staff\EditStaff;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
 use Magento\Mtf\Fixture\FixtureFactory;
 
+/**
+ * Edit staff
+ * Testcase MS40 - Check [Cancel] button
+ *
+ * Precondition
+ * 1. Go to backend > Sales > Manage Locations
+ *
+ * Steps
+ * 1. Click on [Mapping Locations - Warehouses] button
+ * 2. Click on [Choose Locations] button
+ *
+ * Acceptance Criteria
+ * 2. Show [Choose locations] page including:
+ * - 2 buttons: Cancel, Add selected locations
+ * - Filter function
+ * - A grid shows the locations that dont link to any warehouse
+ *
+ * Class WebposManageStaffMS40Test
+ * @package Magento\Webpos\Test\TestCase\Staff\EditStaff
+ */
 class WebposManageStaffMS40Test extends Injectable
 {
     /**
@@ -33,7 +55,8 @@ class WebposManageStaffMS40Test extends Injectable
     public function __inject(
         StaffIndex $staffsIndex,
         StaffNews $staffsNew
-    ) {
+    )
+    {
         $this->staffsIndex = $staffsIndex;
         $this->staffsNew = $staffsNew;
     }

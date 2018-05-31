@@ -15,7 +15,8 @@
                 <item name="to" xsi:type="string">m/d/Y</item>
                 <item name="show_order_statuses" xsi:type="string">Any</item>
             </data>
-            <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\ReportSaleOrder\AssertDateRangeByLocation"></constraint>
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\Adminhtml\ReportSaleOrder\AssertDateRangeByLocation"></constraint>
         </variation>
     </testCase>
 </config>

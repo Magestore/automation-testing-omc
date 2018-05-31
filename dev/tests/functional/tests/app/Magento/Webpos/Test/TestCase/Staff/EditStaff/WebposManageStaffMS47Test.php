@@ -5,12 +5,35 @@
  * Date: 12/02/2018
  * Time: 09:14
  */
+
 namespace Magento\Webpos\Test\TestCase\Staff\EditStaff;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
 use Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertPopupDelete;
+
+/**
+ * Edit staff
+ * Testcase MS47 - Check [Delete] button
+ *
+ * Precondition
+ * Exist at least 2 location that doesnt link to any warehouse
+ * 1. Go to backend > Sales > Manage Locations
+ *
+ * Steps
+ * 1. Click on [Edit] button to edit the staff
+ * 2. Click on [Delete] button
+ * 3. Click on [Cancel] button on the confirmation popup
+ *
+ * Acceptance Criteria
+ * 2. Display a confirmation popup with message: "Are you sure you want to do this?" and 2 buttons: Cancel, OK
+ * 3. Close the confirmation popup and still stay on the Edit staff page
+ *
+ * Class WebposManageStaffMS47Test
+ * @package Magento\Webpos\Test\TestCase\Staff\EditStaff
+ */
 class WebposManageStaffMS47Test extends Injectable
 {
     /**
@@ -28,6 +51,7 @@ class WebposManageStaffMS47Test extends Injectable
      * @var AssertPopupDelete
      */
     private $assertPopupDelete;
+
     /**
      * Inject Staff pages.
      *
@@ -38,7 +62,8 @@ class WebposManageStaffMS47Test extends Injectable
         StaffIndex $staffsIndex,
         StaffNews $staffsNew,
         AssertPopupDelete $assertPopupDelete
-    ) {
+    )
+    {
         $this->staffsIndex = $staffsIndex;
         $this->staffsNew = $staffsNew;
         $this->assertPopupDelete = $assertPopupDelete;
@@ -59,16 +84,16 @@ class WebposManageStaffMS47Test extends Injectable
         //Check open popup when click delete
         $message = 'Are you sure you want to do this?';
         $this->assertPopupDelete->processAssert($this->staffsNew,
-            ['tag' =>'open', 'message' => $message]);
+            ['tag' => 'open', 'message' => $message]);
 
         //Cancel
         $this->staffsNew->getModalsWrapper()->getCancelButton()->click();
         sleep(1);
 
         return [
-            'info' => ['tag' =>'close',
+            'info' => ['tag' => 'close',
                 'message' => $message
-                ]
+            ]
         ];
     }
 }

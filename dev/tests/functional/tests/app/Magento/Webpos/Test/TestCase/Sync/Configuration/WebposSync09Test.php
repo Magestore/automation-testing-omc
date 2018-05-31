@@ -9,12 +9,30 @@
 namespace Magento\Webpos\Test\TestCase\Sync\Configuration;
 
 use Magento\Backend\Test\Page\Adminhtml\SystemConfigEdit;
-use Magento\Config\Test\Fixture\ConfigData;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
+use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposSync09Test
+ * @package Magento\Webpos\Test\TestCase\Sync\Configuration
+ * Precondition and setup steps
+ * 1. Login Webpos as a staff
+ * 2. Login backend on another browser > Webpos setting
+ * 3. Change configuration of some fileds:
+ * Ex: Web POS Color, Enable delivery date...
+ * 4. Back to  the browser which are opening webpos
+ *
+ * Steps
+ * 1. Go to synchronization page
+ * 2. Reload configuration
+ *
+ * Acceptance Criteria
+ * 2. The changes of config will be updated and shown on webpos page
+ * - Webpos color is the color just changed
+ * - Delivery date box will be shown on shipping method
+ */
 class WebposSync09Test extends Injectable
 {
     /* tags */
@@ -23,30 +41,34 @@ class WebposSync09Test extends Injectable
     /* end tags */
 
     /**
-     * New System Config Edit page.
-     *
-     * @var SystemConfigEdit
-     */
-    private $systemConfigEdit;
-    /**
-     * @var
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @var AssertItemUpdateSuccess $assertItemUpdateSuccess
+     */
     protected $assertItemUpdateSuccess;
 
+    /**
+     * New System Config Edit page.
+     *
+     * @var SystemConfigEdit $systemConfigEdit
+     */
+    private $systemConfigEdit;
 
-    public function __prepare(FixtureFactory $fixtureFactory)
-    {
-        //
-    }
-
+    /**
+     * @param SystemConfigEdit $systemConfigEdit
+     * @param WebposIndex $webposIndex
+     * @param AssertItemUpdateSuccess $assertItemUpdateSuccess
+     */
     public function __inject(
         SystemConfigEdit $systemConfigEdit,
         WebposIndex $webposIndex,
         AssertItemUpdateSuccess $assertItemUpdateSuccess
 
-    ) {
+    )
+    {
         $this->systemConfigEdit = $systemConfigEdit;
         $this->webposIndex = $webposIndex;
         $this->assertItemUpdateSuccess = $assertItemUpdateSuccess;
@@ -54,8 +76,8 @@ class WebposSync09Test extends Injectable
     }
 
     /**
-     *
-     * @return void
+     * @param FixtureFactory $fixtureFactory
+     * @param $configData
      */
     public function test(
         FixtureFactory $fixtureFactory,
@@ -80,13 +102,4 @@ class WebposSync09Test extends Injectable
         $action = 'Reload';
         $this->assertItemUpdateSuccess->processAssert($this->webposIndex, "Configuration", $action);
     }
-
-    public function tearDown()
-    {
-//        $this->objectManager->getInstance()->create(
-//            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-//            ['configData' => 'default_payment_method']
-//        )->run();
-    }
-
 }

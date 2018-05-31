@@ -33,14 +33,21 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 class WebposOrderHistoryTC036Test extends Injectable
 {
-
-
+    /**
+     * @param WebposIndex $webposIndex
+     * @param $products
+     * @param bool $specialPrice
+     * @return array
+     */
     public function test(WebposIndex $webposIndex, $products, $specialPrice = false)
     {
         //Create products
         $bundleProduct = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
-            ['products' => $products]
+            [
+                'products' => $products,
+                'productType' => 'bundleProduct'
+            ]
         );
         $products = $bundleProduct->run();
         $childProducts = $bundleProduct->getChildProducts();

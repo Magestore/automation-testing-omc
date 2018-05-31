@@ -245,7 +245,9 @@ class LocationModal extends DataGrid
      */
     public function waitLoader()
     {
-        parent::waitLoader();
+        $this->waitForElementNotVisible($this->loader);
+        $this->getTemplateBlock()->waitLoader();
+        $this->waitForElementVisible('aside.os_warehouse_locations_mapping_form_os_warehouse_locations_mapping_form_warehouse_location_warehouse_location_modal');
     }
 
     public function waitClose()

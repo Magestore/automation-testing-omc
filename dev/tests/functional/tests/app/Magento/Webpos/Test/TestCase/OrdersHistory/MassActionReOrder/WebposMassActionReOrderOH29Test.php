@@ -12,19 +12,35 @@ use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposMassActionReOrderOH29Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionReOrder
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Add some products and select a customer to meet tax condition
+ * 3. Add discount for whole order
+ * 4. Place order successfully
+ * Steps:
+ * 1. Go to order details page
+ * 2. Click on icon on the top of the right
+ * 3. Click on Re-order action
+ * Acceptance Criteria:
+ * 1. Redirect to checkout page
+ * 2. All items in the current order will be loaded to cart with corresponding price and Qty of each item
+ * 3. The customer will be load to cart exactly
+ * 4. Tax amount will be loaded to cart
+ * 5. Discount amount won't be loaded to cart
  */
 class WebposMassActionReOrderOH29Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
@@ -39,7 +55,7 @@ class WebposMassActionReOrderOH29Test extends Injectable
     public function __prepare(FixtureFactory $fixtureFactory)
     {
         // Change TaxRate
-        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
         // Add Customer
@@ -51,7 +67,6 @@ class WebposMassActionReOrderOH29Test extends Injectable
             'taxRate' => $taxRate->getRate()
         ];
     }
-
 
     /**
      * @param WebposIndex $webposIndex

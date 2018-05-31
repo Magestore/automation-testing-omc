@@ -14,19 +14,51 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryShipmentWithExtantItemsOH41OH42Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip
+ * OH41
+ * Precondition and setup steps:
+ * 1.  Login webpos as a staff
+ * 2. Create an order with some products
+ * - Mark as shipped: off
+ * 3. Ship a partial (ship some items of order)
+ * Steps:
+ * Ship extant items of order
+ * Acceptance Criteria:
+ * 1. Close shipment popup and a shipment has created with corresponding item and Qty
+ * 2. Ship action hidden on action box
+ * 3. A new notification will be display on notification icon
+ *
+ * OH42
+ * Precondition and setup steps:
+ * 1.  Login webpos as a staff
+ * 2. Create an order with one product and Qty > 1
+ * - Mark as shipped: off
+ * 3. Ship a partial of order (Qty shipped =1)
+ * Steps:
+ * Ship extant items of order
+ * Acceptance Criteria:
+ * 1. Close shipment popup and a shipment has created with corresponding item and Qty
+ * 2. Ship action hidden on action box
+ * 3. A new notification will be display on notification icon
  */
 class WebposOrdersHistoryShipmentWithExtantItemsOH41OH42Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(WebposIndex $webposIndex)
     {
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test($products)
     {
         // Create products
@@ -74,7 +106,8 @@ class WebposOrdersHistoryShipmentWithExtantItemsOH41OH42Test extends Injectable
         $this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
         $this->webposIndex->getModal()->waitForOkButtonIsVisible();
         $this->webposIndex->getModal()->getOkButton()->click();
-        while ($this->webposIndex->getToaster()->isVisible()) {};
+        while ($this->webposIndex->getToaster()->isVisible()) {
+        };
         sleep(1);
         // Create shipment with extant items
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();

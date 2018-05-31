@@ -16,24 +16,42 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrderHistoryRefundValidateRefundShippingFieldOH72Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order with completed status
+ * and shipping fee > 0
+ * Steps:
+ * 1. Click to refund order
+ * -  Fill available Qty
+ * - Adjust refund: 0
+ * - Refund shipping greater than shipping fee
+ * - Adjust fee: 0
+ * 2. Submit > Ok confirmation
+ * Acceptance Criteria:
+ * Show message: "Error: The refundable shipping amount is limited at [shipping fee]"
  */
 class WebposOrderHistoryRefundValidateRefundShippingFieldOH72Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertRefundSuccess
+     * @var AssertRefundSuccess $assertRefundSuccess
      */
     protected $assertRefundSuccess;
 
     /**
-     * @var AssertOrderStatus
+     * @var AssertOrderStatus $assertOrderStatus
      */
     protected $assertOrderStatus;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertRefundSuccess $assertRefundSuccess
+     * @param AssertOrderStatus $assertOrderStatus
+     */
     public function __inject(WebposIndex $webposIndex, AssertRefundSuccess $assertRefundSuccess, AssertOrderStatus $assertOrderStatus)
     {
         $this->webposIndex = $webposIndex;
@@ -41,6 +59,10 @@ class WebposOrderHistoryRefundValidateRefundShippingFieldOH72Test extends Inject
         $this->assertOrderStatus = $assertOrderStatus;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test($products)
     {
         // Config all allow shipping for pos

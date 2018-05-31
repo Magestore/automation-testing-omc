@@ -16,24 +16,38 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryRefundCheckErrorPopupOH77Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order with completed status and shipping fee > 0
+ * Steps:
+ * 1. Click to refund order and input valid values into fields to meet condition:
+ * SUM(rowtotal) + Refund shipping + adjust refund - adjust fee < Total paid
+ * 2. Submit > Ok confirmation > OK
+ * Acceptance Criteria:
+ * Close error popup
  */
 class WebposOrdersHistoryRefundCheckErrorPopupOH77Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertRefundSuccess
+     * @var AssertRefundSuccess $assertRefundSuccess
      */
     protected $assertRefundSuccess;
 
     /**
-     * @var AssertOrderStatus
+     * @var AssertOrderStatus $assertOrderStatus
      */
     protected $assertOrderStatus;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertRefundSuccess $assertRefundSuccess
+     * @param AssertOrderStatus $assertOrderStatus
+     */
     public function __inject(WebposIndex $webposIndex, AssertRefundSuccess $assertRefundSuccess, AssertOrderStatus $assertOrderStatus)
     {
         $this->webposIndex = $webposIndex;
@@ -41,7 +55,14 @@ class WebposOrdersHistoryRefundCheckErrorPopupOH77Test extends Injectable
         $this->assertOrderStatus = $assertOrderStatus;
     }
 
-    public function test($products, $refundShipping , $adjustRefund, $adjustFee)
+    /**
+     * @param $products
+     * @param $refundShipping
+     * @param $adjustRefund
+     * @param $adjustFee
+     * @return array
+     */
+    public function test($products, $refundShipping, $adjustRefund, $adjustFee)
     {
         // Config all allow shipping for pos
         $this->objectManager->getInstance()->create(
@@ -102,7 +123,7 @@ class WebposOrdersHistoryRefundCheckErrorPopupOH77Test extends Injectable
         }
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
-            ['products' => $products, 'refundShipping' => $refundShipping,'adjustRefund' => $adjustRefund, 'adjustFee' => $adjustFee]
+            ['products' => $products, 'refundShipping' => $refundShipping, 'adjustRefund' => $adjustRefund, 'adjustFee' => $adjustFee]
         )->run();
         sleep(1);
         $this->assertFalse(

@@ -14,9 +14,42 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInCludeTaxAndDisableCrossBorderTrade;
-use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Setting [Catalog Prices] = Including tax & [Enable Cross Border Trade] = No
+ * Testcase TAX64 - Check Tax amount on invoice popup
+ *
+ * Precondition: Exist 2 tax rules: 1st tax rule meet to Shipping settings
+ * 1. Go to Configuration >Sales >Tax >Tax Classes:
+ * - [Catalog Prices] = Including tax
+ * - [Enable Cross Border Trade] = No
+ * Other fields: tick on [Use system value]
+ * 2. Save config
+ * 3. Go to Configuration > Sales> Tax >  Shipping settings:
+ * - Input [Origin]
+ * 4. Save config
+ * On webpos:
+ * 1. Login Webpos as a staff
+ *
+ * Steps
+ * 1. Add a  product and select a customer to meet 2nd tax rule
+ * 2. Place order successfully
+ * 3. Place order successfully with:
+ * + [Create invoice]: off
+ * 4. Go to Order detail
+ * 5. Click on [Invoice] button
+ * 6. Invoice order
+ *
+ * Acceptance Criteria
+ * 5.
+ * product_price_excl_tax = [product_price_incl_tax] / (1+ [default_tax_rate])
+ * tax = [product_price_excl_tax] * [tax_rate_current]
+ * 6. Create invoice successfully
+ *
+ * Class WebposTaxTAX64Test
+ * @package Magento\Webpos\Test\TestCase\Tax\CatalogPricesIncludingTaxCrossBorderTradeNo
+ */
 class WebposTaxTAX64Test extends Injectable
 {
     /**
@@ -59,11 +92,11 @@ class WebposTaxTAX64Test extends Injectable
         )->run();
 
         // Change TaxRate
-        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
         // Create CA Tax Rule
-        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset'=> 'CA_rule']);
+        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset' => 'CA_rule']);
         $taxRule->persist();
         $this->caTaxRule = $taxRule;
 
@@ -148,7 +181,7 @@ class WebposTaxTAX64Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
@@ -156,7 +189,8 @@ class WebposTaxTAX64Test extends Injectable
         sleep(2);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
@@ -171,7 +205,7 @@ class WebposTaxTAX64Test extends Injectable
         $actualTaxAmount = $this->webposIndex->getOrderHistoryInvoice()->getTaxAmountOfProduct($products[0]['product']->getName())->getText();
         $actualTaxAmount = substr($actualTaxAmount, 1);
         $this->assertProductPriceWithCatalogPriceInCludeTaxAndDisableCrossBorderTrade->processAssert(
-            $this->webposIndex, $defaultTaxRate, $currentTaxRate,$products[0]['product'], $actualPriceExcludeTax, $actualTaxAmount);
+            $this->webposIndex, $defaultTaxRate, $currentTaxRate, $products[0]['product'], $actualPriceExcludeTax, $actualTaxAmount);
         // Invoice order successfully
         $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
         sleep(2);

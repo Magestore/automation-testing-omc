@@ -11,18 +11,43 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrdersHistoryCheckConfirmationPopupCancelOH35Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip
+ * Precondition and setup steps:
+ * 1.  Login webpos as a staff
+ * 2. Create an order with some product
+ * - Mark as shipped: off
+ * Steps:
+ * 1.  Go to order details page >Create shipment
+ * 2. Fill out Qty to ship
+ * 3. Click on Submit shipment button
+ * 4. Click on Cancel button
+ * Acceptance Criteria:
+ * 1. Close Confirmation popup
+ * 2. Shipmemt has not created yet
+ */
 class WebposOrdersHistoryCheckConfirmationPopupCancelOH35Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
-    public function __inject(WebposIndex $webposIndex)
+    /**
+     * @param WebposIndex $webposIndex
+     */
+    public function __inject(
+        WebposIndex $webposIndex
+    )
     {
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test($products)
     {
         // Create products

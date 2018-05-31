@@ -12,27 +12,46 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOrdersHistoryRefundWithDefaultValuesOH69Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order with completed status
+ * and shipping fee = 0
+ * Steps:
+ * 1. Click to refund order
+ * -  Fill available Qty
+ * - Adjust refund: 0
+ * - Adjust fee: 0
+ * 2. Submit > Ok confirmation
+ * Acceptance Criteria:
+ * 1. A creditmemo has been created!
+ * 2. Total refunded will be shown equal Grand total
  */
 class WebposOrdersHistoryRefundWithDefaultValuesOH69Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertRefundSuccess
+     * @var AssertRefundSuccess $assertRefundSuccess
      */
     protected $assertRefundSuccess;
 
     /**
-     * @var AssertOrderStatus
+     * @var AssertOrderStatus $assertOrderStatus
      */
     protected $assertOrderStatus;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertRefundSuccess $assertRefundSuccess
+     * @param AssertOrderStatus $assertOrderStatus
+     */
     public function __inject(WebposIndex $webposIndex, AssertRefundSuccess $assertRefundSuccess, AssertOrderStatus $assertOrderStatus)
     {
         $this->webposIndex = $webposIndex;
@@ -40,6 +59,10 @@ class WebposOrdersHistoryRefundWithDefaultValuesOH69Test extends Injectable
         $this->assertOrderStatus = $assertOrderStatus;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test($products)
     {
         // Create products

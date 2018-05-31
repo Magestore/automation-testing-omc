@@ -13,6 +13,25 @@ use Magento\Webpos\Test\Page\Adminhtml\MappingLocationIndex;
 use Magento\Webpos\Test\Fixture\Location;
 
 /**
+ * Check [Choose locations] page
+ * Testcase ML48 - Check sorting by ID column
+ *
+ * Precondition:
+ * Precondition:
+ * Exist at least 2 location that doesnt link to any warehouse
+ * 1. Go to backend > Sales > Manage Locationss
+ *
+ * Steps
+ * 1. Click on [Mapping Locations - Warehouses] button
+ * 2. Click on [Choose Locations] button
+ * 3. Click on title of ID column
+ * 4. Click again
+ *
+ * Acceptance Criteria
+ * 4.
+ * - Close Filter form
+ * - The grid shows all records
+ *
  * Class WebposManageLocationSortingTest
  * @package Magento\Webpos\Test\TestCase\Location\ChooseLocations
  */
@@ -21,7 +40,7 @@ class WebposManageLocationSortingTest extends Injectable
     /**
      * Mapping Location Index page
      *
-     * @var MappingLocationIndex
+     * @var MappingLocationIndex $mappingLocationIndex
      */
     protected $mappingLocationIndex;
 
@@ -30,7 +49,8 @@ class WebposManageLocationSortingTest extends Injectable
      */
     public function __inject(
         MappingLocationIndex $mappingLocationIndex
-    ) {
+    )
+    {
         $this->mappingLocationIndex = $mappingLocationIndex;
     }
 
@@ -56,13 +76,13 @@ class WebposManageLocationSortingTest extends Injectable
         $this->mappingLocationIndex->getLocationModal()->waitLoader();
         $this->mappingLocationIndex->getLocationModal()->resetFilter();
         sleep(2);
-        if($this->mappingLocationIndex->getLocationModal()->isClearButtonVisible()){
+        if ($this->mappingLocationIndex->getLocationModal()->isClearButtonVisible()) {
             $this->mappingLocationIndex->getLocationModal()->getClearFilterButton();
         }
         $sortingResults = [];
         $this->mappingLocationIndex->getLocationModal()->sortByColumn($columnsForSorting);
         sleep(2);
-        $sortingResults[$columnsForSorting]['firstIdAfterFirstSoring'] = (string) $this->mappingLocationIndex->getLocationModal()->getFirstItemId();
+        $sortingResults[$columnsForSorting]['firstIdAfterFirstSoring'] = (string)$this->mappingLocationIndex->getLocationModal()->getFirstItemId();
         $this->mappingLocationIndex->getLocationModal()->sortByColumn($columnsForSorting);
         sleep(2);
         $sortingResults[$columnsForSorting]['firstIdAfterSecondSoring'] = $this->mappingLocationIndex->getLocationModal()->getFirstItemId();

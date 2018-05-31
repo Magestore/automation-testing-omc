@@ -5,12 +5,11 @@
  * Date: 18/01/2018
  * Time: 16:07
  */
-
 namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
 
-use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+use Magento\Customer\Test\Fixture\Customer;
 
 /**
  * Class WebposHoldOrderCP161Test
@@ -33,10 +32,13 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposHoldOrderCP161Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject
     (
         WebposIndex $webposIndex
@@ -45,6 +47,11 @@ class WebposHoldOrderCP161Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param Customer $customer
+     * @param $products
+     * @return array
+     */
     public function test(Customer $customer, $products)
     {
         //Create product

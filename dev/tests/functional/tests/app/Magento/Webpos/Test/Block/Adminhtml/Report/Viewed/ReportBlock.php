@@ -34,9 +34,8 @@ class ReportBlock extends FilterGrid
         $this->waitForElementVisible('.data-grid');
     }
 
-    public function getRowByLocation($location)
+    public function getLastRowLocation()
     {
-        var_dump($this->_rootElement->find('tbody  td:contains("Test Store Address 474564098")')->getText());die();
-        return $this->_rootElement->find('.//tbody//tr[.//td[2][text()="' . $location . '"]]', locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('tbody tr:last-child td:nth-child(1)')->getText();
     }
 }

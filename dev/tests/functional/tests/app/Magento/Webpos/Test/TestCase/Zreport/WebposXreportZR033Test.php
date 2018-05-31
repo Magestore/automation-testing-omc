@@ -44,21 +44,25 @@ class WebposXreportZR033Test extends Injectable
     /**
      * Webpos Index page.
      *
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var SystemCurrencyIndex
+     * @var SystemCurrencyIndex $currencyIndex
      */
     protected $currencyIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
-
+    /**
+     * @param WebposIndex $webposIndex
+     * @param SystemCurrencyIndex $currencyIndex
+     * @param FixtureFactory $fixtureFactory
+     */
     public function __inject(
         WebposIndex $webposIndex,
         SystemCurrencyIndex $currencyIndex,
@@ -70,6 +74,17 @@ class WebposXreportZR033Test extends Injectable
         $this->currencyIndex = $currencyIndex;
     }
 
+    /**
+     * @param $products
+     * @param Denomination $denomination
+     * @param $denominationNumberCoin
+     * @param $amount
+     * @param $putMoneyInValue
+     * @param $takeMoneyOutValue
+     * @param string $discountAmount
+     * @param $symbol
+     * @return array
+     */
     public function test(
         $products,
         Denomination $denomination,
@@ -219,25 +234,6 @@ class WebposXreportZR033Test extends Injectable
         ];
     }
 
-    public function tearDown()
-    {
-        $this->objectManager->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'setup_session_before_working_to_no']
-        )->run();
-
-        //Config Payment Payment Method
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'magestore_webpos_specific_payment']
-        )->run();
-
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'config_default_currency_rollback']
-        )->run();
-    }
-
     /**
      * convert string price format to decimal
      * @param $string
@@ -258,5 +254,24 @@ class WebposXreportZR033Test extends Injectable
             $result = -1 * abs($result);
         }
         return $result;
+    }
+
+    public function tearDown()
+    {
+        $this->objectManager->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'setup_session_before_working_to_no']
+        )->run();
+
+        //Config Payment Payment Method
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'magestore_webpos_specific_payment']
+        )->run();
+
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'config_default_currency_rollback']
+        )->run();
     }
 }

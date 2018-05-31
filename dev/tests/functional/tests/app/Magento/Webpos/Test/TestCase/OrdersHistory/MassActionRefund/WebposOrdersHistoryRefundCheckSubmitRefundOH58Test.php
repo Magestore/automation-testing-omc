@@ -14,19 +14,34 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryRefundCheckSubmitRefundOH58Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order with completed status
+ * Steps:
+ * 1. Click to refund order
+ * 2. Fill Qty for each item
+ * 3. Click on Submit refund/ refund offline
+ * Acceptance Criteria:
+ * Display confirmation popup :"Are you sure you want to refund this order?
  */
 class WebposOrdersHistoryRefundCheckSubmitRefundOH58Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(WebposIndex $webposIndex)
     {
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     */
     public function test($products)
     {
         // Create products

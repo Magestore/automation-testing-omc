@@ -14,7 +14,40 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithShippingFee;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
+ * Setting [Catalog Prices] = Including tax & [Enable Cross Border Trade] = Yes
+ * Testcase TAX55 - Check Tax amount when changing customer
+ *
+ * Precondition: Exist 2 tax rules: 1st tax rule meet to origin shipping address
+ * In backend:
+ * 1. Go to Configuration >Sales >Tax >Tax Classes:
+ * - [Tax Class for Shipping] =  goods
+ * - [Shipping Prices]= Including tax
+ * - [Enable Cross Border Trade] = No
+ *
+ * Other fields: tick on [Use system value]
+ * 2. Save config
+ * 3. Go to Configuration > Sales> Shipping settings:
+ * - Create  origin shipping address
+ * 4. Save config
+ * On webpos:
+ * 1. Login Webpos as a staff
+ *
+ *
+ * Steps
+ * 1. Add some  products and select a customer to meet 1st tax rule
+ * 2. Go to Checkout page > select a shipping method with fee >0
+ * 3. Change shipping address of customer to meet 2nd tax rule
+ *
+ * Acceptance Criteria
+ * 2. Tax amount whole cart = Tax of products + Tax shipping
+ * = (Subtotal * tax rate) + (Shipping fee * [Tax_rate :(1+ Tax_rate)]
+ *
+ * 3.Tax amount will be updated according to tax rate of 2nd tax rule
+ * Tax amount whole cart = Tax of products + Tax shipping
+ * = (Subtotal * new_tax rate) + (New_Shipping fee * [new_Tax_rate :(1+ New_Tax_rate)]
+ *
  * Class WebposTaxTAX55Test
  * @package Magento\Webpos\Test\TestCase\Tax
  */
@@ -60,11 +93,11 @@ class WebposTaxTAX55Test extends Injectable
         $taxRateCA = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-CA-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRateCA);
         $taxRates = [
-          'taxRateMI' => $taxRateMI,
-          'taxRateCA' => $taxRateCA
+            'taxRateMI' => $taxRateMI,
+            'taxRateCA' => $taxRateCA
         ];
         // Create CA Tax Rule
-        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset'=> 'CA_rule']);
+        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset' => 'CA_rule']);
         $taxRule->persist();
         $this->taxRuleCA = $taxRule;
         // Add Customer

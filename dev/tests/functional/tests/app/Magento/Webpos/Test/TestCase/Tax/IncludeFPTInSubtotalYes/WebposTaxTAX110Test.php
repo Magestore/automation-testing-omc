@@ -15,7 +15,35 @@ use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountWithIncludeFptInSubtotal;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
+ * Setting: [Include FPT In Subtotal] = No
+ * Testcase TAX110 - Check Tax amount on invoice popup
+ *
+ * Precondition:
+ * In backend:
+ * 1. Go to Configuration >Sales >Tax >Fixed Product Taxes
+ * -  Setting: http://docs.magento.com/m2/ce/user_guide/tax/fixed-product-tax-configuration.html
+ * -  [Include FPT In Subtotal] = Yes
+ * - Other fields: tick on [Use system value]
+ * 2. Save config
+ * On webpos:
+ * 1. Login Webpos as a staff
+ *
+ * Steps
+ * 1. Add a  product and select a customer to meet FTP tax
+ * 2. Place order successfully with:
+ * + [Create invoice]: Off
+ * 3. Go to Order detail
+ * 4. Click on [Invoice] button
+ * 5. Invoice order
+ *
+ * Acceptance Criteria
+ * 4.
+ * Tax amount = [product_price_excl_tax] * [tax_rate]
+ * Subtotal = ([unit_price] + [fixed_product_tax]) * [qty]
+ * 5. Invoice order successfully
+ *
  * Class WebposTaxTAX110Test
  * @package Magento\Webpos\Test\TestCase\Tax\IncludeFPTInSubtotalYes
  */
@@ -61,7 +89,7 @@ class WebposTaxTAX110Test extends Injectable
         )->run();
 
         // Change TaxRate
-        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($miTaxRate);
 
         // Add Customer
@@ -144,7 +172,7 @@ class WebposTaxTAX110Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
@@ -153,7 +181,8 @@ class WebposTaxTAX110Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
@@ -165,7 +194,7 @@ class WebposTaxTAX110Test extends Injectable
         $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
         $actualTaxAmount = substr($this->webposIndex->getOrderHistoryInvoice()->getTaxAmount(), 1);
         $actualSubtotal = substr($this->webposIndex->getOrderHistoryInvoice()->getSubtotal(), 1);
-        $actualGrandtotal = substr($this->webposIndex->getOrderHistoryInvoice()->getGrandtotal(),1);
+        $actualGrandtotal = substr($this->webposIndex->getOrderHistoryInvoice()->getGrandtotal(), 1);
         $this->assertTaxAmountWithIncludeFptInSubtotal->processAssert($products[0]['product']->getPrice(), $taxRate, $products[0]['product']->getFpt()[0]['price'], $actualTaxAmount, $actualSubtotal, $actualGrandtotal);
 
     }

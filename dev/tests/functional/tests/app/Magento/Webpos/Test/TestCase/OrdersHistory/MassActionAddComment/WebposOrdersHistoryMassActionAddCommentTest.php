@@ -8,18 +8,52 @@
 
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionAddComment;
 
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Sales\Test\Fixture\OrderInjectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Mtf\TestCase\Injectable;
 
 /**
  * Class WebposOrdersHistoryMassActionAddCommentTest
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionSendMail
+ * OH24:
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order successfully
+ * Steps:
+ * 1. Go to order details page
+ * 2. Click on icon on the top of the right
+ * 3. Click on Add comment action
+ * Acceptance Criteria:
+ * Display Add Comment popup includding:
+ * - button: Cancel, Save
+ * - Textarea to enter comment
+ *
+ * OH25:
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order successfully
+ * Steps:
+ * 1. Click to Add comment
+ * 2. Click on Cancel button
+ * Acceptance Criteria:
+ * Close Add comment popup
+ *
+ * OH26:
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order successfully
+ * Steps:
+ * 1. Click to Add comment
+ * 2. Click on Save button
+ * Acceptance Criteria:
+ * 1. Close Add comment popup
+ * 2. Comment will be added and display on order detail page
+ * 3. A new notification will be display on notification icon
  */
 class WebposOrdersHistoryMassActionAddCommentTest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
@@ -68,7 +102,7 @@ class WebposOrdersHistoryMassActionAddCommentTest extends Injectable
             sleep(0.5);
             $this->webposIndex->getOrderHistoryAddComment()->getSaveButton()->click();
             sleep(1);
-        }elseif ($action === 'Cancel') {
+        } elseif ($action === 'Cancel') {
             sleep(0.5);
             $this->webposIndex->getOrderHistoryAddComment()->getCancelButton()->click();
             sleep(1);

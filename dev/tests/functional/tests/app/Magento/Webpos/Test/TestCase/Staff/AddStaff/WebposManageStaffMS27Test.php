@@ -5,11 +5,32 @@
  * Date: 17/02/2018
  * Time: 19:27
  */
+
 namespace Magento\Webpos\Test\TestCase\Staff\AddStaff;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
 
+/**
+ *  Add Staff
+ * Testcase MS27 - Check [Save and continue] button without filling out all fields
+ *
+ * Precondition
+ * 1. Go to backend > Sales > Manage Staffs
+ *
+ * Steps
+ * 1. Click on [Add Staff] button
+ * 2. Click on [Save and continue edit] button
+ *
+ * Acceptance Criteria
+ * 2.
+ * - Create staff unsuccessfully
+ * - Show message: "This is a required field." under all required fields
+ *
+ * Class WebposManageStaffMS27Test
+ * @package Magento\Webpos\Test\TestCase\Staff\AddStaff
+ */
 class WebposManageStaffMS27Test extends Injectable
 {
     /**
@@ -32,10 +53,15 @@ class WebposManageStaffMS27Test extends Injectable
     public function __inject(
         StaffIndex $staffsIndex,
         StaffNews $staffsNew
-    ) {
+    )
+    {
         $this->staffsIndex = $staffsIndex;
         $this->staffsNew = $staffsNew;
     }
+
+    /**
+     * Test step
+     */
     public function test()
     {
         // Steps

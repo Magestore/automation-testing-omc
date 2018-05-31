@@ -11,18 +11,46 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\OrderStatus;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrderStatusOH04Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\OrderStatus
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Add some product to cart
+ * 3. Click on [Checkout] button
+ * 4. Select a shipping method
+ *
+ * Steps:
+ * 1. Select a payment method > fill amount less than total order
+ * - [Mark a shipped]: off
+ * 2. Place order successfully
+ * 3. Go to [Orders history] menu
+ *
+ * Acceptance Criteria:
+ * 1. A new order is created with pending status.
+ * 2. The order will be displayed on the top of order list with correct [Grand total] and [Create time]
+ * 3. On order detail, show 3 buttons: Take payment, Print, Invoice
+ * 4. Mass action including: Send email, Ship, Cancel, Add Comment, Re-order
+ */
 class WebposOrderStatusOH04Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(WebposIndex $webposIndex)
     {
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test($products)
     {
         // LoginTest webpos
@@ -52,6 +80,7 @@ class WebposOrderStatusOH04Test extends Injectable
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($lessGrandTotal);
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(2);
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         // Go to Order History
@@ -65,6 +94,6 @@ class WebposOrderStatusOH04Test extends Injectable
         return [
             'status' => 'Pending',
             'grandTotal' => $grandTotal
-            ];
+        ];
     }
 }

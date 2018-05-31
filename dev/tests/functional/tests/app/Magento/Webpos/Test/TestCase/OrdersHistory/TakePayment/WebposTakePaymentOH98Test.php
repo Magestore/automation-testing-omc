@@ -5,15 +5,34 @@
  * Date: 1/30/2018
  * Time: 9:34 AM
  */
+
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment;
 
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposTakePaymentOH98Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order:
+ * Select payment method: fill amount less than total
+ *
+ * Steps:
+ * 1. Go to order details page
+ * 2. Take payment
+ * 3. Select a payment method
+ * 4.  Submit > Ok confirmation
+ *
+ * Acceptance Criteria:
+ * 1. Create payment successfully
+ * 2. Hide Take payment button on detail page
+ * 3. A new notification will be display on notification icon
+ * 4. Total paid will be updated
+ * 5. [Payment method] section will be updated too
  */
 class WebposTakePaymentOH98Test extends Injectable
 {

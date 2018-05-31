@@ -15,16 +15,25 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryInvoiceOH114Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\Invoice
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create a pending order with discount 100%
+ * Steps:
+ * 1. Go to order details page
+ * 2. Invoice order just created
+ * Acceptance Criteria:
+ * 1. No required take payment
+ * 2. All items are available to invoice
  */
 class WebposOrdersHistoryInvoiceOH114Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertOrdersHistoryTakePaymentNotAvailable
+     * @var AssertOrdersHistoryTakePaymentNotAvailable $assertOrdersHistoryTakePaymentNotAvailable
      */
     protected $assertOrdersHistoryTakePaymentNotAvailable;
 
@@ -86,7 +95,7 @@ class WebposOrdersHistoryInvoiceOH114Test extends Injectable
 
         // Place Order
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-        for ($i=0; $i<3; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             $this->webposIndex->getMsWebpos()->waitCartLoader();
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }

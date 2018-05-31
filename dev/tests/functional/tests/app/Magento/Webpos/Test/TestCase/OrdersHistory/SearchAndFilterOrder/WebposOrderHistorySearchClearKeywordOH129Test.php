@@ -11,13 +11,28 @@ namespace Magento\Webpos\Test\TestCase\OrdersHistory\SearchAndFilterOrder;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrderHistorySearchClearKeywordOH129Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\SearchAndFilterOrder
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Go to Orders history page
+ * Steps:
+ * 1. Search order with any keyword > click on Search icon
+ * 2. Delete keyword > Click on Search icon
+ * Acceptance Criteria:
+ * Back to default list, all orders will be shown on list
+ */
 class WebposOrderHistorySearchClearKeywordOH129Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(WebposIndex $webposIndex)
     {
         $this->webposIndex = $webposIndex;

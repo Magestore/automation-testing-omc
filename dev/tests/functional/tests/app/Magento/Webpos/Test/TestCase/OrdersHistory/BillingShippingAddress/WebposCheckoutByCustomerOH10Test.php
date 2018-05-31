@@ -12,18 +12,40 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposCheckoutByCustomerOH10Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\BillingShippingAddress
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Add some product to cart
+ * 3. Select an exist customer whose billing address and shipping address are the same
+ * 4. Click on [Checkout] button
+ * Steps:
+ * 1. Place order successfully
+ * 2. Go to [Orders history] menu
+ * Acceptance Criteria:
+ * That customer information will be shown on Billing address  and Shipping address section
+ */
 class WebposCheckoutByCustomerOH10Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(WebposIndex $webposIndex)
     {
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param FixtureFactory $fixtureFactory
+     * @param $products
+     * @return array
+     */
     public function test(FixtureFactory $fixtureFactory, $products)
     {
         // Create Customer shipping address and billing address are the same

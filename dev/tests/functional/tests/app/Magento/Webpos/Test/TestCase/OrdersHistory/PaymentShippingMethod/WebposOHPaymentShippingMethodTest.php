@@ -12,24 +12,61 @@ use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposOHPaymentShippingMethodTest
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\PaymentShippingMethod
+ * OH12:
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Add a product to cart
+ * 3. Add discount 100% for whold cart
+ * 4. Click on [Checkout] button
+ * Steps:
+ * 1. Place order successfully
+ * 2. Go to [Orders history] menu
+ * Acceptance Criteria:
+ * Show message "No Payment Information Required" on Payment method section
+ *
+ * OH13
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Add a custom sale product with Shippable = off
+ * 3. Click on [Checkout] button
+ * Steps:
+ * 1. Place order successfully
+ * 2. Go to [Orders history] menu
+ * Acceptance Criteria:
+ * Shipping address and Shipping method are blank
+ *
+ * OH14
+ * Precondition and setup steps:
+ * 1. Login Webpos as a staff
+ * 2. Add a product to cart
+ * 3. Click on [Checkout] button
+ * Steps:
+ * 1. Select a shipping method
+ * 2. Select a payment method
+ * 3. Place order successfully
+ * 4. Go to [Orders history] menu
+ * Acceptance Criteria:
+ * 1. Seleted payment method and amount payment will be shown on ""Payment method"" section of the detail order
+ * 2. Selected shipping method will be shown on ""Shipping method"" section of the detail order
  */
 class WebposOHPaymentShippingMethodTest extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var FixtureFactory
+     * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     /**
-     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
@@ -103,11 +140,11 @@ class WebposOHPaymentShippingMethodTest extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         if ($addShipping) {
-            if (!$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->isVisible()) {
+            if (!$this->webposIndex->getCheckoutShippingMethod()->getPOSShippingStorePickup()->isVisible()) {
                 $this->webposIndex->getCheckoutShippingMethod()->clickShipPanel();
             }
-            sleep(1);
-            $this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
+            sleep(2);
+            $this->webposIndex->getCheckoutShippingMethod()->getPOSShippingStorePickup()->click();
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }
         $paymentAmount = 0;

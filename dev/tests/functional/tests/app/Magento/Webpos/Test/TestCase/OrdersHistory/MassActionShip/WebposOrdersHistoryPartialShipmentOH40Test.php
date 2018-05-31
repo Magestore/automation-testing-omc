@@ -14,19 +14,38 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryPartialShipmentOH40Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionShip
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order with some products
+ * - Mark as shipped: off
+ * Steps:
+ * 1. Go to Order detail page > Create shipment
+ * 2. Ship a partial
+ * 3. Submit shipment > OK confirmation
+ * Acceptance Criteria:
+ * 1. Close shipment popup and a shipment has created with corresponding item and Qty
+ * 2. Ship action still shown on action box
+ * 3. A new notification will be display on notification icon
  */
 class WebposOrdersHistoryPartialShipmentOH40Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(WebposIndex $webposIndex)
     {
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param $products
+     * @return array
+     */
     public function test($products)
     {
         // Create products

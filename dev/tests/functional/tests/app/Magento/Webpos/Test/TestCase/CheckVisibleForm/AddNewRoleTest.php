@@ -10,6 +10,7 @@ namespace Magento\Webpos\Test\TestCase\CheckVisibleForm;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\WebposRoleIndex;
+
 /**
  * Class AddNewRoleTest
  * @package Magento\Webpos\Test\TestCase\CheckVisibleForm
@@ -19,7 +20,7 @@ class AddNewRoleTest extends Injectable
     /**
      * Gift Template Grid Page
      *
-     * @var WebposRoleIndex
+     * @var WebposRoleIndex $webposRoleIndex
      */
     protected $webposRoleIndex;
 
@@ -31,7 +32,8 @@ class AddNewRoleTest extends Injectable
      */
     public function __inject(
         WebposRoleIndex $webposRoleIndex
-    ) {
+    )
+    {
         $this->webposRoleIndex = $webposRoleIndex;
     }
 

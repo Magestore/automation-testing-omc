@@ -12,18 +12,36 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Sales\Test\Fixture\OrderInjectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposOrderHistorySearchWithCustomerEmailOH127Test
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\SearchAndFilterOrder
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Go to Orders history page
+ * Steps:
+ * 1. Enter correct email customer into search textbox
+ * 2. Enter or click on Search icon
+ * Acceptance Criteria:
+ * Order list shows the orders have email matchs or contains keyword
+ */
 class WebposOrderHistorySearchWithCustomerEmailOH127Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     */
     public function __inject(WebposIndex $webposIndex)
     {
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param OrderInjectable $order
+     */
     public function test(OrderInjectable $order)
     {
         // Create order

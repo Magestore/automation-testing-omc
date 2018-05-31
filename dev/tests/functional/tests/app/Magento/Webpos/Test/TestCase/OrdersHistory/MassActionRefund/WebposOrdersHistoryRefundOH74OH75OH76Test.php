@@ -16,24 +16,61 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposOrdersHistoryRefundOH74OH75OH76Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionRefund
+ * OH74 & OH75 & OH76:
+ * Precondition and setup steps:
+ * "1. Login webpos as a staff
+ * 2. Create an order with completed status
+ * and shipping fee > 0"
+ *
+ * OH74
+ * Steps:
+ * 1. Click to refund order and input valid values into fields to meet condition:
+ * SUM(rowtotal) + Refund shipping + adjust refund - adjust fee < Total paid
+ * 2. Submit > Ok confirmation
+ * Acceptance Criteria:
+ * 1. A creditmemo has been created!
+ * 2. Total refunded = SUM(rowtotal) + Refund shipping + adjust refund - adjust fee
+ * 3. Allow continue refund extand total paid with no item
+ *
+ * OH75
+ * Steps:
+ * 1. Click to refund order and input valid values into fields to meet condition:
+ * SUM(rowtotal) + Refund shipping + adjust refund - adjust fee = Total paid
+ * 2. Submit > Ok confirmation
+ * Acceptance Criteria:
+ * 1. A creditmemo has been created!
+ * 2. Total refunded = Grand total
+ *
+ * OH76
+ * Steps:
+ * 1. Click to refund order and input valid values into fields to meet condition:
+ * SUM(rowtotal) + Refund shipping + adjust refund - adjust fee > Total paid
+ * 2. Submit > Ok confirmation
+ * Acceptance Criteria:
+ * Show error popup  with message "The refundable amount is limited at [grand total]"
  */
 class WebposOrdersHistoryRefundOH74OH75OH76Test extends Injectable
 {
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var AssertRefundSuccess
+     * @var AssertRefundSuccess $assertRefundSuccess
      */
     protected $assertRefundSuccess;
 
     /**
-     * @var AssertOrderStatus
+     * @var AssertOrderStatus $assertOrderStatus
      */
     protected $assertOrderStatus;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertRefundSuccess $assertRefundSuccess
+     * @param AssertOrderStatus $assertOrderStatus
+     */
     public function __inject(WebposIndex $webposIndex, AssertRefundSuccess $assertRefundSuccess, AssertOrderStatus $assertOrderStatus)
     {
         $this->webposIndex = $webposIndex;
@@ -41,7 +78,14 @@ class WebposOrdersHistoryRefundOH74OH75OH76Test extends Injectable
         $this->assertOrderStatus = $assertOrderStatus;
     }
 
-    public function test($products, $refundShipping , $adjustRefund, $adjustFee)
+    /**
+     * @param $products
+     * @param $refundShipping
+     * @param $adjustRefund
+     * @param $adjustFee
+     * @return array
+     */
+    public function test($products, $refundShipping, $adjustRefund, $adjustFee)
     {
         // Config all allow shipping for pos
         $this->objectManager->getInstance()->create(
@@ -102,7 +146,7 @@ class WebposOrdersHistoryRefundOH74OH75OH76Test extends Injectable
         }
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateRefundInOrderHistoryStep',
-            ['products' => $products, 'refundShipping' => $refundShipping,'adjustRefund' => $adjustRefund, 'adjustFee' => $adjustFee]
+            ['products' => $products, 'refundShipping' => $refundShipping, 'adjustRefund' => $adjustRefund, 'adjustFee' => $adjustFee]
         )->run();
 
         return [

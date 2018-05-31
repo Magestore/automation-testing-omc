@@ -17,6 +17,30 @@ use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceOnRefundPopupWithTaxCac
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
+ * Setting: [Include FPT In Subtotal] = No
+ * Testcase TAX111 - Check Tax amount on refund popup
+ *
+ * Precondition:
+ * In backend:
+ * 1. Go to Configuration >Sales >Tax >Fixed Product Taxes
+ * -  Setting: http://docs.magento.com/m2/ce/user_guide/tax/fixed-product-tax-configuration.html
+ * -  [Include FPT In Subtotal] = Yes
+ * - Other fields: tick on [Use system value]
+ * 2. Save config
+ * On webpos:
+ * 1. Login Webpos as a staff
+ *
+ * Steps
+ * 1. Add a  product and select a customer to meet FTP tax
+ * 2. Place order successfully with completed status
+ * 3. Go to Order detail
+ * 4. Click to open refund popup
+ * 5. Refund order
+ *
+ * Acceptance Criteria
+ * 5. Price of each product = [Price * (1+ tax_rate) ]
+ * 6. Refund order successfully
+ *
  * Class WebposTaxTAX111Test
  * @package Magento\Webpos\Test\TestCase\Tax\IncludeFPTInSubtotalYes
  */
@@ -62,7 +86,7 @@ class WebposTaxTAX111Test extends Injectable
         )->run();
 
         // Change TaxRate
-        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($miTaxRate);
 
         // Add Customer
@@ -150,7 +174,7 @@ class WebposTaxTAX111Test extends Injectable
 
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
@@ -159,7 +183,8 @@ class WebposTaxTAX111Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),

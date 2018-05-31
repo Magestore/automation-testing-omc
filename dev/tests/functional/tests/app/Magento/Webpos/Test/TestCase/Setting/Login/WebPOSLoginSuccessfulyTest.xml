@@ -5,8 +5,10 @@
  * See COPYING.txt for license details.
  */
  -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Setting\Login\WebPOSLoginSuccessfulyTest" summary="Open WebPOS Checkout In Backend Name" ticketId="MAGETWO-34874">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Setting\Login\WebPOSLoginSuccessfulyTest"
+              summary="Open WebPOS Checkout In Backend Name" ticketId="MAGETWO-34874">
         <variation name="WebPOSLoginWithoutAccountAndPasswordTestVariation_SET30">
             <data name="message" xsi:type="string">This is a required field.</data>
         </variation>

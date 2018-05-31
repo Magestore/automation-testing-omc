@@ -15,7 +15,33 @@ use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountWithApplyTaxOnCustomPrice;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
+ * Setting: [Apply Tax On] = Custome price if available
+ * Testcase TAX90 - Check Tax amount on invoice popup
+ *
+ * Precondition: Exist 1 tax rule which meets to Shipping settings
+ * In backend:
+ * 1. Go to Configuration >Sales >Tax >Calculation Settings:
+ * -  [Apply Tax On] = Custome price if available
+ * - Other fields: tick on [Use system value]
+ * 2. Save config
+ * On webpos:
+ * 1. Login Webpos as a staff
+ *
+ * Steps
+ * 1. Add a  product and select a customer to meet tax condition
+ * 2. Click to the product name on cart to edit Custom price
+ * 3. Place order successfully with
+ * + [Create invoice]: off
+ * 4. Go to Order detail
+ * 5. Click on [Invoice] button
+ * 6. Invoice order
+ *
+ * Acceptance Criteria
+ * 5. Tax amount = Custom_price * tax_rate
+ * 6. Invoice order successfully
+ *
  * Class WebposTaxTAX90Test
  * @package Magento\Webpos\Test\TestCase\Tax\ApplyTaxOnCustomePriceIfAvailable
  */
@@ -61,7 +87,7 @@ class WebposTaxTAX90Test extends Injectable
         )->run();
 
         // Change TaxRate
-        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($miTaxRate);
 
         // Add Customer
@@ -151,7 +177,7 @@ class WebposTaxTAX90Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
@@ -160,7 +186,8 @@ class WebposTaxTAX90Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\NewFeature\WebposOrderHistoryTC033Test" summary="Products Grid - Bundle Product" ticketId="WEBPOS-PG29">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\NewFeature\WebposOrderHistoryTC033Test"
+              summary="Products Grid - Bundle Product" ticketId="WEBPOS-PG29">
         <variation name="WebposOrderHistoryTC033TestVariation">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="array">
@@ -8,8 +10,11 @@
                     <item name="fixtureName" xsi:type="string">bundleProduct</item>
                 </item>
             </data>
-            <data name="productInfo" xsi:type="string">Product, Original Price, Price, Qty, Subtotal, Tax Amount, Discount Amount, Row Total</data>
-            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\OrderDetail\AssertShowCorrectBundleProductOrder"></constraint>
+            <data name="productInfo" xsi:type="string">Product, Original Price, Price, Qty, Subtotal, Tax Amount,
+                Discount Amount, Row Total
+            </data>
+            <constraint
+                    name="Magento\Webpos\Test\Constraint\OrderHistory\OrderDetail\AssertShowCorrectBundleProductOrder"></constraint>
         </variation>
     </testCase>
 </config>

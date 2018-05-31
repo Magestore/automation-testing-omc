@@ -13,6 +13,10 @@ namespace Magento\Webpos\Test\TestCase\Shift;
 
 use Magento\Ui\Test\TestCase\GridFilteringTest;
 
+/**
+ * Class GridShiftFilteringTest
+ * @package Magento\Webpos\Test\TestCase\Shift
+ */
 class GridShiftFilteringTest extends GridFilteringTest
 {
 

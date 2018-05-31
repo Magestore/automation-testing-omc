@@ -6,15 +6,32 @@
  * Date: 1/30/2018
  * Time: 9:34 AM
  */
+
 namespace Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment;
 
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposTakePaymentOH81Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment
+ * Precondition and setup steps:
+ * 1. Login webpos as a staff
+ * 2. Create an order:
+ * Select payment method: fill amount less than total
+ *
+ * Steps:
+ * 1. Go to order details page
+ * 2. Click on Take payment button
+ *
+ * Acceptance Criteria:
+ * Display Take payment popup includding:
+ * - Actions: Cancel, submit
+ * - Buttons: Add more payment method, Submit
+ * - List of payment methods
+ * - Show ""Remain money [remain amount]""
  */
 class WebposTakePaymentOH81Test extends Injectable
 {
@@ -22,10 +39,10 @@ class WebposTakePaymentOH81Test extends Injectable
      * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
-    /**
-     * @var
-     */
 
+    /**
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
@@ -120,6 +137,7 @@ class WebposTakePaymentOH81Test extends Injectable
         sleep(0.5);
         //click take payment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
+        sleep(2);
     }
 
     public function tearDown()

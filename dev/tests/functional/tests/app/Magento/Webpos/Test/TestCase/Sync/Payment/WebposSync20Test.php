@@ -8,30 +8,44 @@
 
 namespace Magento\Webpos\Test\TestCase\Sync\Payment;
 
-use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Catalog\Test\Fixture\CatalogProductSimple;
 use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Sync\AssertItemUpdateSuccess;
+use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposSync20Test
+ * @package Magento\Webpos\Test\TestCase\Sync\Payment
+ * Precondition and setup steps
+ * 1. Login Webpos as a staff
+ * 2. Login backend on another browser  >  Webpos setting > Select some methods in Specific Payments field
+ * 3. Back to  the browser which are opening webpos
+ *
+ * Steps
+ * 1. Go to synchronization page
+ * 2. Reload payment
+ *
+ * Acceptance Criteria
+ * 2. All of payment method just selected on setting page will be updated and display on webpos checkout page
+ */
 class WebposSync20Test extends Injectable
 {
     /**
      * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
-    /**
-     * @var
-     */
 
+    /**
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
-
     /**
-     * @var AssertItemUpdateSuccess
+     * @var AssertItemUpdateSuccess $assertItemUpdateSuccess
      */
     protected $assertItemUpdateSuccess;
+
     public function __prepare()
     {
         // Config: use system value for all field in Tax Config
@@ -41,6 +55,11 @@ class WebposSync20Test extends Injectable
         )->run();
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     * @param AssertItemUpdateSuccess $assertItemUpdateSuccess
+     */
     public function __inject(
         WebposIndex $webposIndex,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
@@ -53,8 +72,10 @@ class WebposSync20Test extends Injectable
     }
 
     /**
-     *
-     * @return void
+     * @param $products
+     * @param FixtureFactory $fixtureFactory
+     * @param $configData
+     * @param $amount
      */
     public function test($products, FixtureFactory $fixtureFactory, $configData, $amount)
     {

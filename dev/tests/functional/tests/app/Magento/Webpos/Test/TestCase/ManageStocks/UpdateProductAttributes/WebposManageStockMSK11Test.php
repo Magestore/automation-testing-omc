@@ -29,6 +29,14 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * Backorders: on
  * 2.Update
  *
+ * Acceptance Criteria
+ * 2.
+ * The information of that product in Database (table: cataloginventory_stock_item) will be updated:
+ * - Qty= -2
+ * - is_in_stock: 0
+ * - manage_stock: 0
+ * - backorders : 1
+ *
  * Class WebposManageStockMSK11Test
  * @package Magento\Webpos\Test\TestCase\ManageStocks\UpdateProductAttributes
  */

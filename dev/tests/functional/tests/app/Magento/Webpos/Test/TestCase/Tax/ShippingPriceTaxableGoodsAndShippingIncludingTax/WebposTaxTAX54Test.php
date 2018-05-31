@@ -15,7 +15,37 @@ use Magento\Webpos\Test\Constraint\Tax\AssertRefundShippingOnOrderHistoryRefundW
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
+ * Setting [Catalog Prices] = Including tax & [Enable Cross Border Trade] = Yes
+ * Testcase TAX54 - Check Tax amount on refund popup
+ *
+ * Precondition: Exist a tax rule meet to origin shipping address
+ * In backend:
+ * 1. Go to Configuration >Sales >Tax >Tax Classes:
+ * - [Tax Class for Shipping] =  goods
+ * - [Shipping Prices]= Including tax
+ * Other fields: tick on [Use system value]
+ * 2. Save config
+ * 3. Go to Configuration > Sales> Shipping settings:
+ * - Input origin shipping address
+ * 4. Save config
+ * On webpos:
+ * 1. Login Webpos as a staff
+ *
+ *
+ * Steps
+ * 1. Add some  products and select a customer to meet Shipping tax condition
+ * 2. Go to Checkout page > select a shipping method with fee >0
+ * 3. Place order successfully with completed status
+ * 4. Go to Order detail
+ * 5. Click to open Refund popup
+ * 6. Refund order
+ *
+ * Acceptance Criteria
+ * 5. Refund Shipping = Shipping fee : (1+ Tax rate)
+ * 6. Refund successfully
+ *
  * Class WebposTaxTAX54Test
  * @package Magento\Webpos\Test\TestCase\Tax
  */
