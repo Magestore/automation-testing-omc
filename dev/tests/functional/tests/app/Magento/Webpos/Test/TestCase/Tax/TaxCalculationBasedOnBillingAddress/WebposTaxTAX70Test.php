@@ -17,6 +17,32 @@ use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceOnRefundPopupWithTaxCac
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
+ * Setting: [Tax Calculation Based On] = Billing address
+ * Testcase TAX70 - Check Tax amount on refund popup
+ *
+ * Precondition:
+ * Precondition: Exist at least 2 tax rules
+ * 1. Go to Configuration >Sales >Tax >Tax Classes:
+ * - [Tax Calculation Based On] = Billing address
+ * - Other fields: tick on [Use system value]
+ * 2. Save config
+ * On webpos:
+ * 1. Login Webpos as a staff
+ *
+ *
+ * Steps
+ * 1. Add a  product to cart
+ * 2. Select/ create a new customer which has different shipping and billing address and each of them needs to meet the condition of tax rule
+ * 3. Place order successfully with complete order
+ * 4. Go to Order detail
+ * 5. Click to open refund order form
+ * 6. Refund order
+ *
+ * Acceptance Criteria
+ * 5.  Price of each product = [Price * (1+ tax_rate) ]
+ * 6. Refund order successfully
+ *
+ *
  * Class WebposTaxTAX70Test
  * @package Magento\Webpos\Test\TestCase\Tax\TaxCalculationBasedOnBillingAddress
  */
@@ -62,11 +88,11 @@ class WebposTaxTAX70Test extends Injectable
         )->run();
 
         // Change TaxRate
-        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($miTaxRate);
 
         //Create California tax rule
-        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset'=> 'CA_rule']);
+        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset' => 'CA_rule']);
         $taxRule->persist();
         $this->caTaxRule = $taxRule;
         $caTaxRate = $this->caTaxRule->getDataFieldConfig('tax_rate')['source']->getFixture();
@@ -158,7 +184,7 @@ class WebposTaxTAX70Test extends Injectable
 
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
@@ -167,7 +193,8 @@ class WebposTaxTAX70Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),

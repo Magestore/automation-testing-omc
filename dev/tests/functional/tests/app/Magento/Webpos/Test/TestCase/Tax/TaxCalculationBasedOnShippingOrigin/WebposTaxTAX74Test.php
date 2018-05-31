@@ -17,6 +17,35 @@ use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePla
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
+ * Setting: [Tax Calculation Based On] = Shipping address
+ * Testcase TAX74 - Check Tax amount on invoice popup
+ *
+ * Precondition:
+ * 1. Go to Configuration >Sales >Tax >Tax Classes:
+ * - [Tax Calculation Based On] = Shipping Origin
+ * - Other fields: tick on [Use system value]
+ * 2. Save config
+ * 3. Go to Configuration >Sales >Shipping settings
+ * - Input Origin shipping address
+ * 4. Save config
+ * 5. Create a tax rule meet to [Default Guest Checkout] of Webpos
+ * On webpos:
+ * 1. Login Webpos as a staff
+ *
+ *
+ * Steps
+ * 1. Add a  product to cart
+ * 2. Place order successfully with:
+ * + [Create invoice]: off
+ * 3. Go to Order detail
+ * 4. Click on [Invoice] button
+ * 5. Invoice order
+ *
+ * Acceptance Criteria
+ * 4. Tax amount will be shown on order detail exactly
+ * Tax amount = Subtotal * Guest_tax_rate
+ * 5. Invoice order successfully
+ *
  * Class WebposTaxTAX74Test
  * @package Magento\Webpos\Test\TestCase\Tax
  */
@@ -74,7 +103,7 @@ class WebposTaxTAX74Test extends Injectable
         ];
 
         // Create CA Tax Rule
-        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset'=> 'CA_rule']);
+        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset' => 'CA_rule']);
         $taxRule->persist();
         $this->taxRuleCA = $taxRule;
 
@@ -176,7 +205,7 @@ class WebposTaxTAX74Test extends Injectable
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
         //End Assert Place Order Success
 
-        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
 
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -188,7 +217,8 @@ class WebposTaxTAX74Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
 
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),

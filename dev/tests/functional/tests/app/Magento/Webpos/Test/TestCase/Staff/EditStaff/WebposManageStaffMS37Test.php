@@ -5,12 +5,40 @@
  * Date: 12/02/2018
  * Time: 09:14
  */
+
 namespace Magento\Webpos\Test\TestCase\Staff\EditStaff;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
 
+/**
+ * Edit staff
+ * Testcase MS37 - Change warehouse on the grid
+ *
+ * Precondition:
+ * Exist at least 2 records on the grid of [mapping locations -warehouses] page
+ * (ex: Location 1 - warehouse 1
+ * Location 2 - warehouse 2)
+ * 1. Go to backend > Sales > Manage Locations
+ *
+ * Steps
+ * 1. Click on [Mapping Locations - Warehouses] button
+ * 2. Change the warehouse of 1 record to another warehouse that is assigning to the another location
+ * (ex: Location 1 - warehouse 2)
+ * 3. Click [Save] button
+ *
+ * Acceptance Criteria
+ * 2. The grid will be updated data:
+ * Location 1 - warehouse 2
+ * Location 2 - warehouse 1
+ * 3. Data will be saved successfully and show message "The mapping warehouses - locations have been saved."
+ *
+ * Class WebposManageStaffMS37Test
+ * @package Magento\Webpos\Test\TestCase\Staff\EditStaff
+ *
+ */
 class WebposManageStaffMS37Test extends Injectable
 {
     /**
@@ -33,7 +61,8 @@ class WebposManageStaffMS37Test extends Injectable
     public function __inject(
         StaffIndex $staffsIndex,
         StaffNews $staffsNew
-    ) {
+    )
+    {
         $this->staffsIndex = $staffsIndex;
         $this->staffsNew = $staffsNew;
     }

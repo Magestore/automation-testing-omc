@@ -8,14 +8,23 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod;
 
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Webpos\Test\Page\Adminhtml\OrderListByPayment;
-use Magento\Webpos\Test\Fixture\Shift;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Fixture\Shift;
+use Magento\Webpos\Test\Page\Adminhtml\OrderListByPayment;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
+
 /**
  * Class OrderListByPaymentMethodRP62Test
  * @package Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod
+ * Precondition and setup steps
+ * 1. Login backend
+ * 2. Go to Webpos > Reports > Order list by payment method
  *
+ * Steps
+ * Filter by payment method > Show report
+ *
+ * Acceptance Criteria
+ * Report table will statistics and show all orders that checkouted by payment methos just selected to filter within date range
  */
 class OrderListByPaymentMethodRP62Test extends Injectable
 {
@@ -42,7 +51,7 @@ class OrderListByPaymentMethodRP62Test extends Injectable
      * Inject pages.
      *
      * @param WebPOSAdminReportDashboard $webPOSAdminReportDashboard
-     * @param Shift $shift
+     * @param OrderListByPayment $orderListByPayment
      * @return void
      */
     public function __inject(
@@ -74,13 +83,13 @@ class OrderListByPaymentMethodRP62Test extends Injectable
         self::assertEquals(
             $shifts['period_type'],
             $paymentMethod,
-            'In Admin Form Order List By Staff WebPOS Page. The period type was not updated. It must be '.$shifts['period_type']
+            'In Admin Form Order List By Staff WebPOS Page. The period type was not updated. It must be ' . $shifts['period_type']
         );
         if ($order_statuses != null) {
             self::assertEquals(
                 $order_statuses,
                 $statusOrder,
-                'In Admin Form Order List By Staff WebPOS Page. Status is not updated. It must be '.$order_statuses
+                'In Admin Form Order List By Staff WebPOS Page. Status is not updated. It must be ' . $order_statuses
             );
         }
     }

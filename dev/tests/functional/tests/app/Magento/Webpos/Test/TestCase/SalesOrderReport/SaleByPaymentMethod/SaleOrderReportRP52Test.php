@@ -142,14 +142,6 @@ class SaleOrderReportRP52Test extends Injectable
         );
     }
 
-    public function tearDown()
-    {
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'magestore_webpos_specific_payment']
-        )->run();
-    }
-
     /**
      * convert string price format to decimal
      * @param $string
@@ -170,5 +162,13 @@ class SaleOrderReportRP52Test extends Injectable
             $result = -1 * abs($result);
         }
         return $result;
+    }
+
+    public function tearDown()
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'magestore_webpos_specific_payment']
+        )->run();
     }
 }

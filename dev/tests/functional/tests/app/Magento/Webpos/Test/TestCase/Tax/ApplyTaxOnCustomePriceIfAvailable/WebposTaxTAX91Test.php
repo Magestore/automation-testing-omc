@@ -15,7 +15,32 @@ use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceOnRefundPopupWithApplyTaxOnCustomPrice;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
+ * Setting: [Apply Tax On] = Custome price if available
+ * Testcase TAX91 - Check Tax amount on refund popup
+ *
+ * Precondition: Exist 1 tax rule which meets to Shipping settings
+ * In backend:
+ * 1. Go to Configuration >Sales >Tax >Calculation Settings:
+ * -  [Apply Tax On] = Custome price if available
+ * - Other fields: tick on [Use system value]
+ * 2. Save config
+ * On webpos:
+ * 1. Login Webpos as a staff
+ *
+ * Steps
+ * 1. Add a  product and select a customer to meet tax condition
+ * 2. Click to the product name on cart to edit Custom price
+ * 3. Place order successfully with completed status
+ * 4. Go to Order detail
+ * 5. Click to open refund popup
+ * 6. Refund order
+ *
+ * Acceptance Criteria
+ * 5.  Price of each product = [Price * (1+ tax_rate) ]
+ * 6. Refund order successfully
+ *
  * Class WebposTaxTAX91Test
  * @package Magento\Webpos\Test\TestCase\Tax\ApplyTaxOnCustomePriceIfAvailable
  */
@@ -61,7 +86,7 @@ class WebposTaxTAX91Test extends Injectable
         )->run();
 
         // Change TaxRate
-        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($miTaxRate);
 
         // Add Customer
@@ -155,7 +180,7 @@ class WebposTaxTAX91Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
@@ -163,7 +188,8 @@ class WebposTaxTAX91Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
@@ -174,7 +200,7 @@ class WebposTaxTAX91Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->openAddOrderNote();
         $this->webposIndex->getOrderHistoryAddOrderNote()->openRefundPopup();
         $customPrice = $products[0]['customPrice'];
-        $actualProductPrice = substr($this->webposIndex->getOrderHistoryRefund()->getItemPrice($products[0]['product']->getName()),1);
+        $actualProductPrice = substr($this->webposIndex->getOrderHistoryRefund()->getItemPrice($products[0]['product']->getName()), 1);
         $this->assertProductPriceOnRefundPopupWithApplyTaxOnCustomPrice->processAssert($customPrice, $actualProductPrice, $taxRate);
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
         $this->webposIndex->getModal()->getOkButton()->click();

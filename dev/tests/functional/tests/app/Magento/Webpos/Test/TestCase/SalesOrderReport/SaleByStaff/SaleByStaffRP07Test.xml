@@ -5,8 +5,10 @@
  * See COPYING.txt for license details.
  */
  -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByStaff\SaleByStaffRP07Test" summary="Sales By Staff Daily Report" ticketId="MAGETWO-28222">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByStaff\SaleByStaffRP07Test"
+              summary="Sales By Staff Daily Report" ticketId="MAGETWO-28222">
         <variation name="SaleByStaffRP07TestVariation1">
             <data name="type" xsi:type="string">Excel XML</data>
         </variation>

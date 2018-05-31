@@ -8,10 +8,10 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByLocation;
 
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Webpos\Test\Page\Adminhtml\SalesByLocation;
-use Magento\Webpos\Test\Fixture\Shift;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Fixture\Shift;
+use Magento\Webpos\Test\Page\Adminhtml\SalesByLocation;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
 
 /**
  * Class SaleByLocationReportRP27Test
@@ -49,7 +49,7 @@ class SaleByLocationReportRP27Test extends Injectable
      * Inject pages.
      *
      * @param WebPOSAdminReportDashboard $webPOSAdminReportDashboard
-     * @param Shift $shift
+     * @param SalesByLocation $salesByLocation
      * @return void
      */
     public function __inject(

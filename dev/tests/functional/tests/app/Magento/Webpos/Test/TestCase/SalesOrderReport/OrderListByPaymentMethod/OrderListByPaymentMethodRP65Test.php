@@ -8,13 +8,23 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod;
 
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Webpos\Test\Page\Adminhtml\OrderListByPayment;
-use Magento\Webpos\Test\Fixture\Shift;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Fixture\Shift;
+use Magento\Webpos\Test\Page\Adminhtml\OrderListByPayment;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
+
 /**
  * Class OrderListByPaymentMethodRP65Test
  * @package Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod
+ * Precondition and setup steps
+ * 1. Login backend
+ * 2. Go to Webpos > Reports > Order list by payment method
+ *
+ * Steps
+ * Select payment method, date range and order status to filter
+ *
+ * Acceptance Criteria
+ * Report table only statistic orders has status just selected within date range and checkouted by payment method just selected
  */
 class OrderListByPaymentMethodRP65Test extends Injectable
 {
@@ -42,7 +52,6 @@ class OrderListByPaymentMethodRP65Test extends Injectable
      *
      * @param WebPOSAdminReportDashboard $webPOSAdminReportDashboard
      * @param OrderListByPayment $orderListByPayment
-     * @param Shift $shift
      * @return void
      */
     public function __inject(

@@ -8,9 +8,10 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod;
 
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Webpos\Test\Page\Adminhtml\OrderListByPayment;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Page\Adminhtml\OrderListByPayment;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
+
 /**
  * Class OrderListByPaymentMethodRP61Test
  * @package Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByPaymentMethod
@@ -55,6 +56,10 @@ class OrderListByPaymentMethodRP61Test extends Injectable
         $this->orderListByPayment = $orderListByPayment;
     }
 
+    /**
+     * @param $pageTitle
+     * @param $columns
+     */
     public function test($pageTitle, $columns)
     {
         // Preconditions
@@ -64,7 +69,7 @@ class OrderListByPaymentMethodRP61Test extends Injectable
         self::assertEquals(
             $pageTitle,
             $this->orderListByPayment->getTitleBlock()->getTitle(),
-            'In Admin Form Sales by payment method WebPOS Page. The page title is not correct. It must be ' . $pageTitle . 'The actual ' . $this->salesByStaffDaily->getTitleBlock()->getTitle()
+            'In Admin Form Sales by payment method WebPOS Page. The page title is not correct. It must be ' . $pageTitle . 'The actual ' . $this->orderListByPayment->getTitleBlock()->getTitle()
         );
         $fromDate = $this->webPOSAdminReportDashboard->getReportDashboard()->getSalesReportFormDate();
         $toDate = $this->webPOSAdminReportDashboard->getReportDashboard()->getSalesReportToDate();

@@ -7,7 +7,10 @@
  */
 
 namespace Magento\Webpos\Test\TestStep;
-
+/**
+ * Class LoginWebposByStaffAndWaitSessionInstall
+ * @package Magento\Webpos\Test\TestStep
+ */
 class LoginWebposByStaffAndWaitSessionInstall extends LoginWebposByStaff
 {
 

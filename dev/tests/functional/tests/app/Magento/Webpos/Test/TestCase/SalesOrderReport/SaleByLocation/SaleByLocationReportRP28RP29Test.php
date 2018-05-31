@@ -8,9 +8,9 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByLocation;
 
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Webpos\Test\Page\Adminhtml\SalesByLocation;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Page\Adminhtml\SalesByLocation;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
 
 /**
  * Class SaleByLocationReportRP28RP29Test
@@ -48,6 +48,7 @@ class SaleByLocationReportRP28RP29Test extends Injectable
      * Inject pages.
      *
      * @param WebPOSAdminReportDashboard $webPOSAdminReportDashboard
+     * @param SalesByLocation $salesByLocation
      * @return void
      */
     public function __inject(
@@ -59,6 +60,9 @@ class SaleByLocationReportRP28RP29Test extends Injectable
         $this->salesByLocation = $salesByLocation;
     }
 
+    /**
+     * @param $type
+     */
     public function test($type)
     {
         // Preconditions

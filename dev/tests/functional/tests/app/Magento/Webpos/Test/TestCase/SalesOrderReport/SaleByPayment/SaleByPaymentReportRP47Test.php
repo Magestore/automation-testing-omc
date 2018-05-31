@@ -8,10 +8,9 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPayment;
 
-use DateTime;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\SalesByPayment;
 use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Mtf\TestCase\Injectable;
 
 /**
  * Report
@@ -65,6 +64,10 @@ class SaleByPaymentReportRP47Test extends Injectable
         $this->salesByPayment = $salesByPayment;
     }
 
+    /**
+     * @param $shifts
+     * @param null $order_status
+     */
     public function test($shifts, $order_status = null)
     {
         // Preconditions

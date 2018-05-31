@@ -8,7 +8,6 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\ReportDaily;
 
-
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Pos;
@@ -36,11 +35,12 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class WebposSaleOderReportRP37Test extends Injectable
 {
     /**
-     * OrderListByLocationDaily page.
+     * SalesByLocationDaily page.
      *
-     * @var saleByLocationDaily
+     * @var SalesByLocationDaily
      */
     protected $saleByLocationDaily;
+
     /**
      * @var WebposIndex Page
      */
@@ -65,6 +65,14 @@ class WebposSaleOderReportRP37Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
+     * @param $products
+     * @param Pos $pos
+     * @param Staff $staff
+     * @param array $shifts
+     */
     public function test(WebposIndex $webposIndex, FixtureFactory $fixtureFactory, $products, Pos $pos, Staff $staff, array $shifts)
     {
         $pos->persist();

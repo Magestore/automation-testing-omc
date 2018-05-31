@@ -17,160 +17,184 @@ use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Check product list of Manage Stock
+ * Testcase MSK06.1 - Check GUI
+ *
+ * Precondition
+ * - There are some Locations (each location is assigned to a warehouse) on site test
+ * - Settings [Need to create session before working] = Yes
+ * 1. Login webpos as a staff
+ * 2. Select a Location (ex: Location A and it is assigned to warehouse A)
+ * 2. Go to Manage Stocks page
+ *
+ * Steps
+ * 1. Check product that shown on the product list
+ *
+ * Acceptance Criteria
+ * 1.
+ * - The product list is shown all of products with corressponding Qty that belong to warehouse A
+ * - [Backorders] and  [Instock], [Manage stock] : got from the backend setting
+ *
+ *
+ * Class WebposManageStocksCheckProductListMSK06_1Test
+ * @package Magento\Webpos\Test\TestCase\ManageStocks\CheckProductList
+ */
 class WebposManageStocksCheckProductListMSK06_1Test extends Injectable
 {
-	/**
-	 * @var WebposIndex
-	 */
-	protected $webposIndex;
+    /**
+     * @var WebposIndex
+     */
+    protected $webposIndex;
 
-	/**
-	 * @var FixtureFactory
-	 */
-	protected $fixtureFactory;
+    /**
+     * @var FixtureFactory
+     */
+    protected $fixtureFactory;
 
-	public function __prepare()
-	{
-		//Config create session before working
-		$this->objectManager->getInstance()->create(
-			'Magento\Config\Test\TestStep\SetupConfigurationStep',
-			['configData' => 'create_section_before_working_yes_MS57']
-		)->run();
-	}
+    public function __prepare()
+    {
+        //Config create session before working
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_yes_MS57']
+        )->run();
+    }
 
-	public function __inject(
-		WebposIndex $webposIndex,
-		FixtureFactory $fixtureFactory
-	)
-	{
-		$this->webposIndex = $webposIndex;
-		$this->fixtureFactory = $fixtureFactory;
-	}
+    public function __inject(
+        WebposIndex $webposIndex,
+        FixtureFactory $fixtureFactory
+    )
+    {
+        $this->webposIndex = $webposIndex;
+        $this->fixtureFactory = $fixtureFactory;
+    }
 
-	public function test(
-		Location $location,
-		Pos $pos,
-		Staff $staff,
-		Warehouse $warehouse,
-		$productList
-	)
-	{
-		$location->persist();
+    public function test(
+        Location $location,
+        Pos $pos,
+        Staff $staff,
+        Warehouse $warehouse,
+        $productList
+    )
+    {
+        $location->persist();
 
-		$pos = $this->preparePos($pos, $location->getLocationId());
-		$pos->persist();
+        $pos = $this->preparePos($pos, $location->getLocationId());
+        $pos->persist();
 
-		$staff = $this->prepareStaff($staff, $location->getLocationId(), $pos->getPosId());
-		$staff->persist();
+        $staff = $this->prepareStaff($staff, $location->getLocationId(), $pos->getPosId());
+        $staff->persist();
 
-		$warehouse = $this->prepareWarehouse($warehouse, $location->getLocationId());
-		$warehouse->persist();
+        $warehouse = $this->prepareWarehouse($warehouse, $location->getLocationId());
+        $warehouse->persist();
 
-		// Create product
-		$productList = $this->createProducts($productList, $warehouse->getWarehouseId());
+        // Create product
+        $productList = $this->createProducts($productList, $warehouse->getWarehouseId());
 
-		// LoginTest webpos
-		$this->objectManager->getInstance()->create(
-			'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
-			[
-				'staff' => $staff,
-				'location' => $location,
-				'pos' => $pos
-			]
-		)->run();
+        // LoginTest webpos
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            [
+                'staff' => $staff,
+                'location' => $location,
+                'pos' => $pos
+            ]
+        )->run();
 
-		$this->webposIndex->getMsWebpos()->clickCMenuButton();
-		$this->webposIndex->getCMenu()->manageStocks();
-		sleep(2);
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getCMenu()->manageStocks();
+        sleep(2);
 
-		$searchText = $productList[2]['product']->getSku();
-		$this->webposIndex->getManageStockList()->searchProduct($searchText);
+        $searchText = $productList[2]['product']->getSku();
+        $this->webposIndex->getManageStockList()->searchProduct($searchText);
 
-		return [
-			'productList' => $productList,
-			'productInfo' => $productList[2]
-		];
-	}
+        return [
+            'productList' => $productList,
+            'productInfo' => $productList[2]
+        ];
+    }
 
-	public function tearDown()
-	{
-		$this->objectManager->getInstance()->create(
-			'Magento\Config\Test\TestStep\SetupConfigurationStep',
-			['configData' => 'create_section_before_working_no_MS57']
-		)->run();
-	}
+    public function tearDown()
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_no_MS57']
+        )->run();
+    }
 
-	/**
-	 * @param Warehouse $warehouse
-	 * @param $locationId
-	 * @return Warehouse
-	 */
-	protected function prepareWarehouse(Warehouse $warehouse, $locationId)
-	{
-		$data = $warehouse->getData();
-		$data['location_id'] = $locationId;
+    /**
+     * @param Warehouse $warehouse
+     * @param $locationId
+     * @return Warehouse
+     */
+    protected function prepareWarehouse(Warehouse $warehouse, $locationId)
+    {
+        $data = $warehouse->getData();
+        $data['location_id'] = $locationId;
 
-		return $this->fixtureFactory->createByCode('warehouse', ['data' => $data]);
-	}
+        return $this->fixtureFactory->createByCode('warehouse', ['data' => $data]);
+    }
 
-	/**
-	 * @param Pos $pos
-	 * @param $locationId
-	 * @return Pos
-	 */
-	protected function preparePos(Pos $pos, $locationId)
-	{
-		$data = $pos->getData();
+    /**
+     * @param Pos $pos
+     * @param $locationId
+     * @return Pos
+     */
+    protected function preparePos(Pos $pos, $locationId)
+    {
+        $data = $pos->getData();
         $data['location_id'] = array();
         $data['location_id'][] = $locationId;
 
-		return $this->fixtureFactory->createByCode('pos', ['data' => $data]);
-	}
+        return $this->fixtureFactory->createByCode('pos', ['data' => $data]);
+    }
 
-	/**
-	 * @param Staff $staff
-	 * @param $locationId
-	 * @param $posId
-	 * @return Staff
-	 */
-	protected function prepareStaff(Staff $staff, $locationId, $posId)
-	{
-		$data = $staff->getData();
+    /**
+     * @param Staff $staff
+     * @param $locationId
+     * @param $posId
+     * @return Staff
+     */
+    protected function prepareStaff(Staff $staff, $locationId, $posId)
+    {
+        $data = $staff->getData();
         $data['location_id'] = array();
-		$data['location_id'][] = $locationId;
+        $data['location_id'][] = $locationId;
 
         $data['pos_ids'] = array();
-		$data['pos_ids'][] = $posId;
-		return $this->fixtureFactory->createByCode('staff', ['data' => $data]);
-	}
+        $data['pos_ids'][] = $posId;
+        return $this->fixtureFactory->createByCode('staff', ['data' => $data]);
+    }
 
-	protected function createProducts($productList, $warehouseId) {
-		foreach ($productList as $key => $item) {
-			$product = $this->fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $item['product']]);
-			$data = $product->getData();
+    protected function createProducts($productList, $warehouseId)
+    {
+        foreach ($productList as $key => $item) {
+            $product = $this->fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $item['product']]);
+            $data = $product->getData();
 
-			if (isset($item['qty'])) {
-				$data['warehouse_stock']['warehouse_stock_row'][0]['total_qty'] = $item['qty'];
-			}
+            if (isset($item['qty'])) {
+                $data['warehouse_stock']['warehouse_stock_row'][0]['total_qty'] = $item['qty'];
+            }
 
-			if (isset($item['inStock'])) {
-				if ($item['inStock']) {
-					$data['quantity_and_stock_status']['is_in_stock'] = 'In Stock';
-				} else {
-					$data['quantity_and_stock_status']['is_in_stock'] = 'Out of Stock';
-				}
-			}
+            if (isset($item['inStock'])) {
+                if ($item['inStock']) {
+                    $data['quantity_and_stock_status']['is_in_stock'] = 'In Stock';
+                } else {
+                    $data['quantity_and_stock_status']['is_in_stock'] = 'Out of Stock';
+                }
+            }
 
-			$data['warehouse_stock']['warehouse_stock_row'][0]['warehouse_select'] = $warehouseId;
+            $data['warehouse_stock']['warehouse_stock_row'][0]['warehouse_select'] = $warehouseId;
 
-			$product = $this->fixtureFactory->createByCode('catalogProductSimple', ['data' => $data]);
+            $product = $this->fixtureFactory->createByCode('catalogProductSimple', ['data' => $data]);
 
-			$id = $this->objectManager->create('Magento\Catalog\Test\Handler\CatalogProductSimple\Curl')->persist($product);
-			$data = array_merge($product->getData(), $id);
+            $id = $this->objectManager->create('Magento\Catalog\Test\Handler\CatalogProductSimple\Curl')->persist($product);
+            $data = array_merge($product->getData(), $id);
 
-			$productList[$key]['product'] = $this->fixtureFactory->createByCode('catalogProductSimple', ['data' => $data]);
-		}
+            $productList[$key]['product'] = $this->fixtureFactory->createByCode('catalogProductSimple', ['data' => $data]);
+        }
 
-		return $productList;
-	}
+        return $productList;
+    }
 }

@@ -50,7 +50,6 @@ class SearchCategoriesCriteriaTest extends WebapiAbstract
             ],
         ];
         $results = $this->_webApiCall($serviceInfo);
-//        \Zend_Debug::dump($results);
         return $results;
     }
     /**

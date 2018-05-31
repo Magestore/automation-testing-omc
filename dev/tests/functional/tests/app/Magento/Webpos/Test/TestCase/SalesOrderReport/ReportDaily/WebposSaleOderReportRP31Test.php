@@ -8,10 +8,8 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\ReportDaily;
 
-
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\SalesByLocationDaily;
-
 
 /**
  * Reports
@@ -36,9 +34,9 @@ use Magento\Webpos\Test\Page\Adminhtml\SalesByLocationDaily;
 class WebposSaleOderReportRP31Test extends Injectable
 {
     /**
-     * OrderListByLocationDaily page.
+     * SalesByLocationDaily page.
      *
-     * @var saleByLocationDaily
+     * @var SalesByLocationDaily
      */
     protected $saleByLocationDaily;
 
@@ -52,6 +50,9 @@ class WebposSaleOderReportRP31Test extends Injectable
         $this->saleByLocationDaily = $orderListByLocation;
     }
 
+    /**
+     * @param array $shifts
+     */
     public function test(array $shifts)
     {
         //Open Sale by location daily

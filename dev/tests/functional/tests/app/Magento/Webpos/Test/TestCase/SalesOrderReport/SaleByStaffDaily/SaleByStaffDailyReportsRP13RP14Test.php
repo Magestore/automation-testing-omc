@@ -8,9 +8,10 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByStaffDaily;
 
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Webpos\Test\Page\Adminhtml\SalesByStaffDaily;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Page\Adminhtml\SalesByStaffDaily;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
+
 /**
  * Class SaleByStaffDailyReportsRP13RP14Test
  * @package Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByStaffDaily

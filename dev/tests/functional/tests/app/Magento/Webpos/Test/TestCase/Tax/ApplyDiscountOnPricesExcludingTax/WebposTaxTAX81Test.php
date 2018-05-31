@@ -18,6 +18,37 @@ use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPageWithApplyDiscountOnPriceExcludingTax;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Setting: [Apply Discount On Prices] = Excluding tax
+ * Testcase TAX81 - Check tax amount on cart page and Checkout page
+ *
+ * Precondition
+ * In backend:
+ * 1. Go to Configuration >Sales >Tax >Calculation Settings:
+ * - [Apply Discount On Prices] = Excluding tax
+ * - Other fields: tick on [Use system value]
+ * 2. Save config
+ * On webpos:
+ * 1. Login Webpos as a staff
+ *
+ * Steps
+ * 1. Add a  product and select a customer to meet tax condition
+ * 2. Add discount tyle % to whole order (Ex: fixed 10%)
+ * 3. Check Discount amount and Tax amount
+ * 4. Click on [Checkout] button
+ * 5. Place order
+ *
+ * Acceptance Criteria
+ * 3.
+ * Discount_value = product_price_excl_tax * [discount]%
+ * Tax = ([subtotal]  - [discount])* [tax_rate]
+ * 4. Tax amount and Discount amount are changless
+ * 5. Place order successfully
+ *
+ *
+ * Class WebposTaxTAX81Test
+ * @package Magento\Webpos\Test\TestCase\Tax\ApplyDiscountOnPricesExcludingTax
+ */
 class WebposTaxTAX81Test extends Injectable
 {
     /**
@@ -60,7 +91,7 @@ class WebposTaxTAX81Test extends Injectable
         )->run();
 
         // Change TaxRate
-        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($miTaxRate);
 
         // Add Customer

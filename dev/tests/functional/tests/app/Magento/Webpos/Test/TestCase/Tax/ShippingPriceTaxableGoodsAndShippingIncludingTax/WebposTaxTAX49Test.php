@@ -15,6 +15,36 @@ use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderPageWithShippingFee
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
+ * Setting [Catalog Prices] = Including tax & [Enable Cross Border Trade] = Yes
+ * Testcase TAX49 - Check tax amount on Order detail
+ *
+ * Precondition:
+ * Exist a rule tax meet to origin shipping address
+ * In backend:
+ * 1. Go to Configuration >Sales >Tax >Tax Classes:
+ * - [Tax Class for Shipping] =  goods
+ * - [Shipping Prices]= Including tax
+ * Other fields: tick on [Use system value]
+ * 2. Save config
+ * 3. Go to Configuration > Sales> Shipping settings:
+ * - Create  origin shipping address
+ * 4. Save config
+ * On webpos:
+ * 1. Login Webpos as a staff
+ *
+ *
+ * Steps
+ * 1. Add some  products and select  a customer to meet Shipping tax condition
+ * 2. Go to Checkout page > select a shipping method with fee >0
+ * 3. Place order successfully
+ * 4. Click on [Print] button on Order successfully page
+ * 5. Go to Order detail
+ *
+ * Acceptance Criteria
+ * 5.
+ * Tax amount whole cart = Tax of products + Tax shipping
+ * = (Subtotal * tax rate) + (Shipping fee * [Tax_rate :(1+ Tax_rate)]
+ *
  * Class WebposTaxTAX49Test
  * @package Magento\Webpos\Test\TestCase\Tax
  */
@@ -138,7 +168,7 @@ class WebposTaxTAX49Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
         $shippingFee = $this->webposIndex->getCheckoutShippingMethod()->getShippingMethodPrice("Flat Rate - Fixed")->getText();
-        $shippingFee = (float)substr($shippingFee,1);
+        $shippingFee = (float)substr($shippingFee, 1);
 
         // Select Payment Method
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
@@ -158,7 +188,7 @@ class WebposTaxTAX49Test extends Injectable
 
         // End Place Order
 
-        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
 
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -169,7 +199,8 @@ class WebposTaxTAX49Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
 
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),

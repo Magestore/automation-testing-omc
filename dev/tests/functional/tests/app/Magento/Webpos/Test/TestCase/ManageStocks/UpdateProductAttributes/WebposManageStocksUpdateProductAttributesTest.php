@@ -13,6 +13,21 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
+ * Manage Stock MSK13, MSK07, MSK14, MSK12, MSK08
+ * Update the product attributes
+ *
+ * Precondition
+ * 1. Login Webpos as a staff
+ * 2. Go to Manage Stocks page
+ *
+ * Step
+ * 1. Edit Qty and Switch cases of some  products
+ * 2.  Click on Update all
+ *
+ * Acceptance Criteria
+ * 1. Hide update actions on each row just edit
+ * 2. Those  products will be updated in backend
+ *
  * Class WebposManageStocksUpdateProductAttributesTest
  * @package Magento\Webpos\Test\TestCase\ManageStocks\UpdateProductAttributes
  */

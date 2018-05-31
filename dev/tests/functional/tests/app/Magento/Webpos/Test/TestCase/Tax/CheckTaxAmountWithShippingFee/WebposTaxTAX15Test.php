@@ -13,6 +13,29 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
 
+/**
+ *  Check tax amount when ordering with shipping fee
+ * Testcase TAX15 - Check tax amount when checkout On-hold order
+ *
+ * Precondition:
+ * 1. Go to backend > Configuration > Sales > Tax:
+ * Setting all fields: tick on [Use system value] checkbox
+ *
+ * Steps
+ * 1. Login webpos as a staff
+ * 2. Add some  products and select a customer to meet tax condition
+ * 3. Select a shipping method with fee
+ * 4. Click on [Hold] button
+ * 5. Go to On-hold orders page > Checkout that on-hold order
+ * 6. Check Tax amount on checkout page
+ *
+ * Acceptance Criteria
+ * 6. Tax amount = (Subtotal - Discount) x Tax rate
+ *
+ *
+ * Class WebposTaxTAX15Test
+ * @package Magento\Webpos\Test\TestCase\Tax\CheckTaxAmountWithShippingFee
+ */
 class WebposTaxTAX15Test extends Injectable
 {
     /**
@@ -36,7 +59,7 @@ class WebposTaxTAX15Test extends Injectable
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'johndoe_MI_unique_first_name']);
         $customer->persist();
         //change taxRate
-        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
         return ['customer' => $customer];
@@ -45,7 +68,8 @@ class WebposTaxTAX15Test extends Injectable
     public function __inject(
         WebposIndex $webposIndex,
         AssertTaxAmountOnCartPageAndCheckoutPage $assertTaxAmountOnCartPageAndCheckoutPage
-    ){
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->assertTaxAmountOnCartPageAndCheckoutPage = $assertTaxAmountOnCartPageAndCheckoutPage;
     }
@@ -55,7 +79,8 @@ class WebposTaxTAX15Test extends Injectable
         $products,
         $customer,
         $taxRate
-    ){
+    )
+    {
         // Config
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',

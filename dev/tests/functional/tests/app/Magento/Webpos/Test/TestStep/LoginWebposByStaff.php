@@ -14,6 +14,10 @@ use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class LoginWebposByStaff
+ * @package Magento\Webpos\Test\TestStep
+ */
 class LoginWebposByStaff implements TestStepInterface
 {
     /**
@@ -46,6 +50,15 @@ class LoginWebposByStaff implements TestStepInterface
      */
     protected $hasWaitOpenSessionPopup;
 
+    /**
+     * LoginWebposByStaff constructor.
+     * @param WebposIndex $webposIndex
+     * @param Staff $staff
+     * @param Location|null $location
+     * @param Pos|null $pos
+     * @param bool $hasOpenSession
+     * @param bool $hasWaitOpenSessionPopup
+     */
     public function __construct(
         WebposIndex $webposIndex,
         Staff $staff,

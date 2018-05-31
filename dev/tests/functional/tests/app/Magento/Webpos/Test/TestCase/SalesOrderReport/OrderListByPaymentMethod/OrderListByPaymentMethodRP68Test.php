@@ -9,14 +9,24 @@
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod;
 
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Webpos\Test\Page\Adminhtml\OrderListByPayment;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Page\Adminhtml\OrderListByPayment;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
+use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class OrderListByPaymentMethodRP68Test
  * @package Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod
+ * Precondition and setup steps
+ * Create some orders use some different payment methods to checkout or take payment
+ *
+ * Steps
+ * 1. Login backend
+ * 2. Go to Webpos > Reports > Order list by payment method
+ *
+ * Acceptance Criteria
+ * Orders just created will be updated and shown on corresponding payment method row
  */
 class OrderListByPaymentMethodRP68Test extends Injectable
 {
@@ -52,6 +62,8 @@ class OrderListByPaymentMethodRP68Test extends Injectable
     /**
      * @param WebPOSAdminReportDashboard $webPOSAdminReportDashboard
      * @param OrderListByPayment $orderListByPayment
+     * @param WebposIndex $webposIndex
+     * @param AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
      */
     public function __inject(
         WebPOSAdminReportDashboard $webPOSAdminReportDashboard,
@@ -67,6 +79,7 @@ class OrderListByPaymentMethodRP68Test extends Injectable
     }
 
     /**
+     * @param array $shifts
      * @param CatalogProductSimple $product
      */
     public function test
@@ -98,7 +111,7 @@ class OrderListByPaymentMethodRP68Test extends Injectable
 
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-        $orderIdInWebpos = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderIdInWebpos = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(2);
@@ -113,7 +126,7 @@ class OrderListByPaymentMethodRP68Test extends Injectable
         self::assertEquals(
             $orderIdInWebpos,
             $orderIdInBackend,
-            'The Order Id Just Created in Webpos '.$orderIdInWebpos.'. It is not updated in Table Body Of Order List By Staff Report.'
+            'The Order Id Just Created in Webpos ' . $orderIdInWebpos . '. It is not updated in Table Body Of Order List By Staff Report.'
         );
     }
 }

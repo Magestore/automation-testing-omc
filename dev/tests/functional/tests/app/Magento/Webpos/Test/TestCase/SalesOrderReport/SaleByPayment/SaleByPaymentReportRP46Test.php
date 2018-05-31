@@ -9,9 +9,9 @@
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPayment;
 
 use DateTime;
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Webpos\Test\Page\Adminhtml\SalesByPayment;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Page\Adminhtml\SalesByPayment;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
 
 /**
  * Report
@@ -71,6 +71,10 @@ class SaleByPaymentReportRP46Test extends Injectable
         $this->salesByPayment = $salesByPayment;
     }
 
+    /**
+     * @param $pageTitle
+     * @param $columns
+     */
     public function test($pageTitle, $columns)
     {
         // Preconditions

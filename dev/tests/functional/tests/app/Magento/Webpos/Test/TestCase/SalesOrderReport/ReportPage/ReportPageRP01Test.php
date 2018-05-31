@@ -8,8 +8,9 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\ReportPage;
 
-use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
+
 /**
  * Class ReportPageRP01Test
  * @package Magento\Webpos\Test\TestCase\SalesOrderReport\ReportPage

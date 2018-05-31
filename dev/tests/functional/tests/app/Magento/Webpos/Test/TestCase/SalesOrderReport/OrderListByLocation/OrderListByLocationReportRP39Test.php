@@ -9,9 +9,9 @@
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByLocation;
 
 use DateTime;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\OrderListByLocation;
 use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Mtf\TestCase\Injectable;
 
 /**
  * Report
@@ -55,6 +55,7 @@ class OrderListByLocationReportRP39Test extends Injectable
      * Inject pages.
      *
      * @param WebPOSAdminReportDashboard $webPOSAdminReportDashboard
+     * @param OrderListByLocation $orderListLocation
      * @return void
      */
     public function __inject(
@@ -66,6 +67,10 @@ class OrderListByLocationReportRP39Test extends Injectable
         $this->orderListByLocation = $orderListLocation;
     }
 
+    /**
+     * @param $shifts
+     * @param null $order_status
+     */
     public function test($shifts, $order_status = null)
     {
         // Preconditions

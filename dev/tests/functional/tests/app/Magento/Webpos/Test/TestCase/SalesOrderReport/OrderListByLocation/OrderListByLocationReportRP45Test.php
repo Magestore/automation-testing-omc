@@ -10,11 +10,11 @@ namespace Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByLocation;
 
 use DateTime;
 use Magento\Mtf\Fixture\FixtureFactory;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\OrderListByLocation;
 use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
-use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
@@ -70,6 +70,7 @@ class OrderListByLocationReportRP45Test extends Injectable
      * Inject pages.
      *
      * @param WebPOSAdminReportDashboard $webPOSAdminReportDashboard
+     * @param OrderListByLocation $orderListLocation
      * @return void
      */
     public function __inject(
@@ -81,6 +82,15 @@ class OrderListByLocationReportRP45Test extends Injectable
         $this->orderListByLocation = $orderListLocation;
     }
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param FixtureFactory $fixtureFactory
+     * @param $products
+     * @param Pos $pos
+     * @param Staff $staff
+     * @param array $shifts
+     * @param null $order_status
+     */
     public function test(WebposIndex $webposIndex, FixtureFactory $fixtureFactory, $products, Pos $pos, Staff $staff, array $shifts, $order_status = null)
     {
         //Precondition
@@ -130,14 +140,6 @@ class OrderListByLocationReportRP45Test extends Injectable
                 $this->webPOSAdminReportDashboard->getReportDashboard()->setSalesReportOderStatuses($status);
                 $this->orderListByLocation->getActionsBlock()->showReport();
                 $this->webPOSAdminReportDashboard->getReportDashboard()->waitLoader();
-//                if (strpos($this->webPOSAdminReportDashboard->getReportDashboard()->getFirtRowDataGrid()->getAttribute('class'), 'data-grid-tr-no-data') === false) {
-//                    $statusOrder = $this->webPOSAdminReportDashboard->getReportDashboard()->getStatusOrder()->getText();
-//                    self::assertEquals(
-//                        $status,
-//                        $statusOrder,
-//                        'In Admin Form Order List By Location WebPOS Page. Status is not updated. It must be ' . $statusOrder
-//                    );
-//                }
             }
         } else {
             $this->orderListByLocation->getActionsBlock()->showReport();
