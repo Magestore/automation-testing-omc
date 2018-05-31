@@ -13,6 +13,23 @@ use Magento\Webpos\Test\Page\Adminhtml\MappingLocationIndex;
 use Magento\Webpos\Test\Fixture\Location;
 
 /**
+ * Check [Choose locations] page
+ * Testcase ML46
+ * Precondition:
+ * Exist at least 2 location that doesnt link to any warehouse
+ * 1. Go to backend > Sales > Manage Locations
+ *
+ * Steps
+ * 1. Click on [Mapping Locations - Warehouses] button
+ * 2. Click on [Choose Locations] button
+ * 3. Click on Filter button
+ * 4. Click on [Apply Filters] button
+ *
+ * Acceptance Criteria
+ * 4.
+ * - Close Filter form
+ * - The grid shows all records
+ *
  * Class WebposManageLocationML46Test
  * @package Magento\Webpos\Test\TestCase\Location\ChooseLocations
  */
@@ -30,7 +47,8 @@ class WebposManageLocationML46Test extends Injectable
      */
     public function __inject(
         MappingLocationIndex $mappingLocationIndex
-    ) {
+    )
+    {
         $this->mappingLocationIndex = $mappingLocationIndex;
     }
 

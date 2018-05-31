@@ -14,6 +14,26 @@ use Magento\Webpos\Test\Fixture\Location;
 use Magento\Webpos\Test\Page\Adminhtml\LocationIndex;
 use Magento\Webpos\Test\Constraint\Adminhtml\Location\Grid\AssertMessageEditSuccessOnGrid;
 
+/**
+ * Edit Location on the grid
+ * Testcase ML16 - Check [Save] button
+ * Precondition:
+ * - Exist at least 1 record on the grid
+ * 1. Go to backend > Sales > Manage Locations
+ *
+ * Steps
+ * 1. Click on a record on the grid
+ * 2. Edit correctly some fields
+ * 3. Click on [Save] button
+ *
+ * Acceptance Criteria
+ *  3.
+ * -  All fields will be updated and inactive.
+ * - Show message: "You have successfully saved your edits"
+ *
+ * Class WebposManageLocationML16Test
+ * @package Magento\Webpos\Test\TestCase\Location\EditLocationOnGrid
+ */
 class WebposManageLocationML16Test extends Injectable
 {
     /**

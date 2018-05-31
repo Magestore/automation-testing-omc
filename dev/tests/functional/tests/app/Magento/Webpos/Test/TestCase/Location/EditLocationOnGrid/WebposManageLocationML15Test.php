@@ -3,13 +3,32 @@
  * Created by PhpStorm.
  * User: gvt
  * Date: 12/02/2018
- * Time: 09:14
+ * Time: 09:15
  */
+
 namespace Magento\Webpos\Test\TestCase\Location\EditLocationOnGrid;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Location;
 use Magento\Webpos\Test\Page\Adminhtml\LocationIndex;
 
+/**
+ * Edit Location on the grid
+ * Testcase ML15 - Check GUI of a record when editing
+ * Precondition:
+ * - Exist at least 1 record on the grid
+ * 1. Go to backend > Sales > Manage Locations
+ *
+ * Steps
+ * 1. Click on a record on the grid
+ * 2. Click on [Cancel] button
+ *
+ * Acceptance Criteria
+ * 2. The record backs to origin status, all fields will be inactive
+ *
+ * Class WebposManageLocationML15Test
+ * @package Magento\Webpos\Test\TestCase\Location\EditLocationOnGrid
+ */
 class WebposManageLocationML15Test extends Injectable
 {
     /**
@@ -22,12 +41,12 @@ class WebposManageLocationML15Test extends Injectable
     /**
      * Inject location pages.
      *
-     * @param LocationIndex
-     * @return void
+     * @param LocationIndex $locationIndex
      */
     public function __inject(
         LocationIndex $locationIndex
-    ) {
+    )
+    {
         $this->locationIndex = $locationIndex;
     }
 
@@ -39,7 +58,7 @@ class WebposManageLocationML15Test extends Injectable
         // Steps
         $this->locationIndex->open();
         $this->locationIndex->getLocationsGrid()->search(['display_name' => $location->getDisplayName()]);
-        $this->locationIndex->getLocationsGrid()->getRowByDisplayName( $location->getDisplayName())->click();
+        $this->locationIndex->getLocationsGrid()->getRowByDisplayName($location->getDisplayName())->click();
         sleep(1);
         $this->locationIndex->getLocationsGrid()->getActionButtonEditing('Cancel')->click();
         $this->locationIndex->getLocationsGrid()->waitLoader();
