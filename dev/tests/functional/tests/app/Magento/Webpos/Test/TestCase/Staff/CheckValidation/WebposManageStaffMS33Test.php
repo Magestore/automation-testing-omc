@@ -13,6 +13,24 @@ use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
 
+/**
+ * Check validation
+ * Testcase MS33 - Check [Back] button
+ *
+ * Precondition:
+ * Exist at least 1 Location on the grid of Manage Locations page
+ * 1. Go to backend > Sales > Manage Locations
+ *
+ * Steps
+ * 1. Click on [Edit] button to edit the Location
+ * 2. Click on [Back] button
+ *
+ * Acceptance Criteria
+ * 2. Back to the Manage Locations page
+ *
+ * Class WebposManageStaffMS33Test
+ * @package Magento\Webpos\Test\TestCase\Staff\CheckValidation
+ */
 class WebposManageStaffMS33Test extends Injectable
 {
     /**

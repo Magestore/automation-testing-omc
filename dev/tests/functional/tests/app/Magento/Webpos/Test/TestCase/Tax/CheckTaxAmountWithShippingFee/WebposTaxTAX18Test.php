@@ -13,7 +13,36 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderHistoryInvoice;
+
 /**
+ * Check tax amount when ordering with shipping fee
+ * Testcase TAX18 - Check Tax amount on invoice popup
+ *
+ * Precondition:
+ * 1. Go to backend > Configuration > Sales > Tax:
+ * Setting all fields: tick on [Use system value] checkbox
+ *
+ * Steps
+ * 1. Login webpos as a staff
+ * 2. Add some  products and select a customer to meet tax condition
+ * 3. Select a shipping method with fee
+ * 4. Place order successfully with:
+ * + [Mark a shipped]: off
+ * + [Create invoice]: off
+ * 5. Go to Order detail
+ * 6. Click on [Invoice] button
+ * 7. Click on [Submit invoice] button > OK
+ *
+ * Acceptance Criteria
+ * 6.
+ * - Tax amount of each product  = (their Subtotal - Discount) x Tax rate
+ * - Rowtotal of each product = their Subtotal + Tax - Discount
+ * - Tax amount whole cart = SUM(tax amount of each product)
+ * - Subtotal whole cart = SUM(Subtotal  of each product)
+ * - Grand total = Subtotal whole cart + Shipping + Tax - Discount
+ * 7. Create invoice successfully and show message: "Success: The invoice has been created successfully."
+ *
+ *
  * Class WebposTaxTAX18Test
  * @package Magento\Webpos\Test\TestCase\Tax\CheckTaxAmountWithShippingFee
  */
@@ -45,7 +74,7 @@ class WebposTaxTAX18Test extends Injectable
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'johndoe_MI']);
         $customer->persist();
         //change taxRate
-        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
         return ['customer' => $customer];
@@ -60,7 +89,8 @@ class WebposTaxTAX18Test extends Injectable
         WebposIndex $webposIndex,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
         AssertTaxAmountOnOrderHistoryInvoice $assertTaxAmountOnOrderHistoryInvoice
-    ){
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
         $this->assertTaxAmountOnOrderHistoryInvoice = $assertTaxAmountOnOrderHistoryInvoice;
@@ -82,7 +112,8 @@ class WebposTaxTAX18Test extends Injectable
         $taxRate,
         $createInvoice = true,
         $shipped = false
-    ){
+    )
+    {
         // Config
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
@@ -133,7 +164,7 @@ class WebposTaxTAX18Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
@@ -142,7 +173,8 @@ class WebposTaxTAX18Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),

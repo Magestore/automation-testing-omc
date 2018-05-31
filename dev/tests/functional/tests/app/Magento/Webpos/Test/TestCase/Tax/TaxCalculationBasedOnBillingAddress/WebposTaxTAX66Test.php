@@ -17,6 +17,36 @@ use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInClude
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnCartPageAndCheckoutPage;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Setting: [Tax Calculation Based On] = Billing address
+ * Testcase TAX66 - Check tax amount on cart page and Checkout page
+ *
+ * Precondition:
+ * Exist at least 2 tax rules
+ * 1. Go to Configuration >Sales >Tax >Tax Classes:
+ * - [Tax Calculation Based On] = Billing address
+ * - Other fields: tick on [Use system value]
+ * 2. Save config
+ * On webpos:
+ * 1. Login Webpos as a staff
+ *
+ *
+ * Steps
+ * 1. Add a  product to cart
+ * 2.  Select/ create a new customer which has different shipping and billing address and each of them needs to meet the condition of tax rule
+ * 3. Check Tax amount
+ * 4. Click on [Checkout] button
+ * 5. Place order successfully
+ *
+ * Acceptance Criteria
+ * 3. Tax amount will be calculated with Billing address
+ * Tax amount = Subtotal * Billing_tax_rate
+ * 4. Tax amount is changless
+ *
+ *
+ * Class WebposTaxTAX66Test
+ * @package Magento\Webpos\Test\TestCase\Tax\TaxCalculationBasedOnBillingAddress
+ */
 class WebposTaxTAX66Test extends Injectable
 {
     /**
@@ -59,11 +89,11 @@ class WebposTaxTAX66Test extends Injectable
         )->run();
 
         // Change TaxRate
-        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($miTaxRate);
 
         //Create California tax rule
-        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset'=> 'CA_rule']);
+        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset' => 'CA_rule']);
         $taxRule->persist();
         $this->caTaxRule = $taxRule;
         $caTaxRate = $this->caTaxRule->getDataFieldConfig('tax_rate')['source']->getFixture();

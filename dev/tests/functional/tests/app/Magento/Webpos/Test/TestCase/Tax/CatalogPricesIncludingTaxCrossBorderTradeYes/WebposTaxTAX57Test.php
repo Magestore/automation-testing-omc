@@ -15,6 +15,43 @@ use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceWithCatalogPriceInCludeTaxAndEnableCrossBorderTrade;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Setting [Catalog Prices] = Including tax & [Enable Cross Border Trade] = Yes
+ * Testcase TAX57 - Check tax amount on cart page and Checkout page
+ *
+ * Precondition: Exist 2 tax rules: 1st tax rule meet to Shipping settings
+ * 1. Go to Configuration >Sales >Tax >Tax Classes:
+ * - [Catalog Prices] = Including tax
+ * - [Enable Cross Border Trade] = Yes
+ * Other fields: tick on [Use system value]
+ * 2. Save config
+ * 3. Go to Configuration > Sales> Tax > Shipping settings:
+ * - Input [Origin]
+ * 4. Save config
+ * On webpos:
+ * 1. Login Webpos as a staff
+ *
+ * Steps
+ * 1. Add a  product and select a customer to meet 1st tax rule
+ * 2. Change shipping address of customer to meet 2nd tax rule
+ * 3. Go to Checkout page
+ *
+ * Acceptance Criteria
+ * 1.
+ * product_price_excl_tax = [product_price_incl_tax] / (1+ [Origin_shipping_tax_rate])
+ * tax amount = [product_price_excl_tax] *  [Origin_shipping_tax_rate]
+ *
+ * 2.
+ * product_price_excl_tax = [product_price_incl_tax] / (1+ [tax_rate_current])
+ * tax = [product_price_excl_tax] * [tax_rate_current]
+ *
+ * 3.
+ * product_price_excl_tax = [product_price_incl_tax] / (1+ [tax_rate_current])
+ * tax = [product_price_excl_tax] * [tax_rate_current]
+ *
+ * Class WebposTaxTAX57Test
+ * @package Magento\Webpos\Test\TestCase\Tax\CatalogPricesIncludingTaxCrossBorderTradeYes
+ */
 class WebposTaxTAX57Test extends Injectable
 {
     /**
@@ -52,11 +89,11 @@ class WebposTaxTAX57Test extends Injectable
         )->run();
 
         // Change TaxRate
-        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
         // Create CA Tax Rule
-        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset'=> 'CA_rule']);
+        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset' => 'CA_rule']);
         $taxRule->persist();
         $this->caTaxRule = $taxRule;
 

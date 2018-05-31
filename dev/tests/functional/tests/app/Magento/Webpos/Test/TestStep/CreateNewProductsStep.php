@@ -26,6 +26,7 @@ class CreateNewProductsStep implements TestStepInterface
 
     protected $childProducts;
 
+    protected $productType;
 
     /**
      * CreateNewProductsStep constructor.
@@ -34,11 +35,13 @@ class CreateNewProductsStep implements TestStepInterface
      */
     public function __construct(
         FixtureFactory $fixtureFactory,
-        $products
+        $products,
+        $productType = 'simpleProduct'
     )
     {
         $this->fixtureFactory = $fixtureFactory;
         $this->products = $products;
+        $this->productType = $productType;
     }
 
     /**
@@ -55,13 +58,17 @@ class CreateNewProductsStep implements TestStepInterface
             }
             $this->products[$key]['product'] = $this->fixtureFactory->createByCode($fixtureName, ['dataset' => $item['product']]);
             $this->products[$key]['product']->persist();
-            $this->childProducts = $this->products[$key]['product']->getDataFieldConfig('bundle_selections')['source']->getProducts();
+            $this->childProducts = null;
+            if ($this->productType == 'bundleProduct') {
+                $this->childProducts = $this->products[$key]['product']->getDataFieldConfig('bundle_selections')['source']->getProducts();
+            }
         }
 
         return $this->products;
     }
 
-    public function getChildProducts(){
+    public function getChildProducts()
+    {
         return $this->childProducts;
     }
 }

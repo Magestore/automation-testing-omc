@@ -17,6 +17,32 @@ use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePla
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ *  Check tax amount when ordering with shipping fee
+ * Testcase TAX23 - Check Tax amount when creating a partial refund
+ *
+ * Precondition:
+ *1. Go to backend > Configuration > Sales > Tax:
+ * Setting all fields: tick on [Use system value] checkbox
+ *
+ * Steps
+ * 1. Login webpos as a staff
+ * 2. Add some  products and select a customer to meet tax condition
+ * 3. Select a shipping method with fee
+ * 4. Place order successfully with completed status
+ * 5. Go to Order detail > click to refund
+ * 6. On refund pupup, create a partial refund
+ * 7. Create refund extant items
+ *
+ * Acceptance Criteria
+ * 6. Refund successfully with exact amount
+ * Total refunded = [SUM(Row total of refunded product / Ordered Qty * Refunded Qty) + Adjust refund + Refund shipping - Adjust fee]
+ * 7. Refund successfully
+ *
+ *
+ * Class WebposTaxTAX23Test
+ * @package Magento\Webpos\Test\TestCase\Tax\CheckTaxAmountWithShippingFee
+ */
 class WebposTaxTAX23Test extends Injectable
 {
     /**
@@ -50,7 +76,7 @@ class WebposTaxTAX23Test extends Injectable
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'johndoe_MI']);
         $customer->persist();
         //change taxRate
-        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
         return [
@@ -142,7 +168,7 @@ class WebposTaxTAX23Test extends Injectable
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
 
-        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
 
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -154,7 +180,8 @@ class WebposTaxTAX23Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
 
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
@@ -173,7 +200,7 @@ class WebposTaxTAX23Test extends Injectable
 
         $expectStatus = 'Complete';
         $totalRefunded = 0;
-        $refundShipping =  substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getShipping(), 1);
+        $refundShipping = substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getShipping(), 1);
         foreach ($products as $item) {
             $productName = $item['product']->getName();
             $rowTotalOfProduct = $this->webposIndex->getOrderHistoryOrderViewContent()->getRowTotalOfProduct($productName);
@@ -196,7 +223,7 @@ class WebposTaxTAX23Test extends Injectable
         )->run();
 
         $expectStatus = 'Closed';
-        $totalPaid = (float) substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
+        $totalPaid = (float)substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
         $totalRefunded = $totalPaid;
         $this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
 

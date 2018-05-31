@@ -17,6 +17,31 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 
 /**
+ * Setting: [Tax Calculation Based On] = Shipping address
+ * Testcase TAX65 - Check tax amount on Order detail
+ *
+ * Precondition:
+ * 1. Go to Configuration >Sales >Tax >Tax Classes:
+ * - [Tax Calculation Based On] = Shipping Origin
+ * - Other fields: tick on [Use system value]
+ * 2. Save config
+ * 3. Go to Configuration >Sales >Shipping settings
+ * - Input Origin shipping address
+ * 4. Save config
+ * 5. Create a tax rule meet to [Default Guest Checkout] of Webpos
+ * On webpos:
+ * 1. Login Webpos as a staff
+ *
+ * Steps
+ * 1. Add a  product to cart
+ * 2. Place order successfully
+ * 3. Go to Order detail page
+ *
+ * Acceptance Criteria
+ * 3. Tax amount will be shown on order detail exactly
+ * Tax amount = Subtotal * Guest_tax_rate
+ * Tax amount of each product = their Subtotal x Guest_tax_rate
+ *
  * Class WebposTaxTAX73Test
  * @package Magento\Webpos\Test\TestCase\Tax
  */
@@ -69,7 +94,7 @@ class WebposTaxTAX73Test extends Injectable
         ];
 
         // Create CA Tax Rule
-        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset'=> 'CA_rule']);
+        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset' => 'CA_rule']);
         $taxRule->persist();
         $this->taxRuleCA = $taxRule;
 
@@ -177,7 +202,8 @@ class WebposTaxTAX73Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
 
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),

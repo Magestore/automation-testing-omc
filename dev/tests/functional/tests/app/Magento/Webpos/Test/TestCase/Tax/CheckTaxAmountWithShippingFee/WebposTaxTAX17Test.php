@@ -13,7 +13,32 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
-
+/**
+ *  Check tax amount when ordering with shipping fee
+ * Testcase TAX17 - Check Tax amount on Order detail
+ *
+ * Precondition:
+ * 1. Go to backend > Configuration > Sales > Tax:
+ * Setting all fields: tick on [Use system value] checkbox
+ *
+ * Steps
+ * 1. Login webpos as a staff
+ * 2. Add some  products and select a customer to meet tax condition
+ * 3. Select a shipping method with fee
+ * 4. Place order successfully
+ * 5. Go to Order detail
+ *
+ * Acceptance Criteria
+ * 5.
+ * - Tax amount of each product  =  (their Subtotal - Discount) x Tax rate
+ * - Rowtotal of each product = their Subtotal + Tax - Discount
+ * - Tax amount whole cart = SUM(tax amount of each product)
+ * - Subtotal whole cart = SUM(Subtotal  of each product)
+ * - Grand total = Subtotal whole cart + Shipping + Tax - Discount
+ *
+ * Class WebposTaxTAX17Test
+ * @package Magento\Webpos\Test\TestCase\Tax\CheckTaxAmountWithShippingFee
+ */
 class WebposTaxTAX17Test extends Injectable
 {
     /**
@@ -37,7 +62,7 @@ class WebposTaxTAX17Test extends Injectable
         $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'johndoe_MI_unique_first_name']);
         $customer->persist();
         //change taxRate
-        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
         return ['customer' => $customer];
@@ -46,7 +71,8 @@ class WebposTaxTAX17Test extends Injectable
     public function __inject(
         WebposIndex $webposIndex,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
-    ){
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
@@ -57,7 +83,8 @@ class WebposTaxTAX17Test extends Injectable
         $products,
         $customer,
         $taxRate
-    ){
+    )
+    {
         // Config
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
@@ -110,7 +137,7 @@ class WebposTaxTAX17Test extends Injectable
 
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();

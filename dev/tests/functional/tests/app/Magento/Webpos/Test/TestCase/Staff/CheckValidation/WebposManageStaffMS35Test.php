@@ -14,6 +14,24 @@ use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
 
+/**
+ * Check validation
+ * Testcase MS35 - Check [Cancel] button
+ *
+ * Precondition
+ * 1. Go to backend > Sales > Manage Staffs
+ *
+ * Steps
+ * 1. Click on [Mapping Locations - Warehouses] button
+ * 2. Click [Cancel] button on [Mapping Locations - Warehouse] page
+ *
+ * Acceptance Criteria
+ * 2. Back to Location page
+ *
+ * Class WebposManageStaffMS35Test
+ * @package Magento\Webpos\Test\TestCase\Staff\CheckValidation
+ *
+ */
 class WebposManageStaffMS35Test extends Injectable
 {
     /**
@@ -43,6 +61,11 @@ class WebposManageStaffMS35Test extends Injectable
         $this->staffsNew = $staffsNew;
     }
 
+    /**
+     * @param Staff $staff
+     * @param FixtureFactory $fixtureFactory
+     * @return array
+     */
     public function test(Staff $staff, FixtureFactory $fixtureFactory)
     {
         //Create staff

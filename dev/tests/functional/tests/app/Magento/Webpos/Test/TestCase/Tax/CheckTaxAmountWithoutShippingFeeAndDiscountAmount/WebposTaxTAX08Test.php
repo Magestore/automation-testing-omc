@@ -18,74 +18,99 @@ use Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertCreateInvoiceSucce
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
+ * Check tax amount when ordering with shipping fee
+ * Testcase TAX08 - Check Tax amount when creating a partial invoice
+ *
+ * Precondition:
+ * 1. Go to backend > Configuration > Sales > Tax:
+ * Setting all fields: tick on [Use system value] checkbox
+ *
+ * Steps
+ * 1. Login webpos as a staff
+ * 2. Add some  products and select a customer to meet tax condition
+ * 3. Place order successfully with:
+ * + [Create invoice]: off
+ * 4. Go to Order detail > click on [Invoice] button
+ * 5. On invoice popup, Edit [qty to invoice] to make a partial invoice
+ * 6. Create a partial invoice
+ *
+ * Acceptance Criteria
+ * 5. Tax amount will be updated according to [Qty to invoice] field exactly:
+ * - Tax amount of each product  =  (their Subtotal - Discount) x Tax rate
+ * - Rowtotal of each product = their Subtotal + Tax - Discount
+ * - Tax amount whole cart = SUM(tax amount of each product)
+ * - Subtotal whole cart = SUM(Subtotal  of each product)
+ * - Grand total = Subtotal whole cart + Shipping + Tax - Discount
+ * 6. Create a partial invoice successfully
+ *
  * Class WebposTaxTAX08Test
  * @package Magento\Webpos\Test\TestCase\Tax\CheckTaxAmountWithoutShippingFeeAndDiscountAmount
  */
 class WebposTaxTAX08Test extends Injectable
 {
-	/**
-	 * @var WebposIndex
-	 */
-	protected $webposIndex;
+    /**
+     * @var WebposIndex
+     */
+    protected $webposIndex;
 
-	/**
-	 * @var FixtureFactory
-	 */
-	protected $fixtureFactory;
+    /**
+     * @var FixtureFactory
+     */
+    protected $fixtureFactory;
 
-	/**
-	 * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
-	 */
-	protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+    /**
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
+    protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
-	/**
-	 * @var AssertCreateInvoiceSuccess
-	 */
-	protected $assertCreateInvoiceSuccess;
+    /**
+     * @var AssertCreateInvoiceSuccess
+     */
+    protected $assertCreateInvoiceSuccess;
 
-	/**
-	 * Prepare data.
-	 *
-	 * @param FixtureFactory $fixtureFactory
-	 * @return array
-	 */
-	public function __prepare(FixtureFactory $fixtureFactory)
-	{
-		$customer = $fixtureFactory->createByCode('customer', ['dataset' => 'johndoe_MI_unique_first_name']);
-		$customer->persist();
+    /**
+     * Prepare data.
+     *
+     * @param FixtureFactory $fixtureFactory
+     * @return array
+     */
+    public function __prepare(FixtureFactory $fixtureFactory)
+    {
+        $customer = $fixtureFactory->createByCode('customer', ['dataset' => 'johndoe_MI_unique_first_name']);
+        $customer->persist();
 
-		//change tax rate
-		$taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
-		$this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
+        //change tax rate
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
+        $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
-		return [
-			'customer' => $customer,
-			'taxRate' => $taxRate->getRate()
-		];
-	}
+        return [
+            'customer' => $customer,
+            'taxRate' => $taxRate->getRate()
+        ];
+    }
 
-	public function __inject(
-		WebposIndex $webposIndex,
-		FixtureFactory $fixtureFactory,
-		AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
-		AssertCreateInvoiceSuccess $assertCreateInvoiceSuccess
-	)
-	{
-		$this->webposIndex = $webposIndex;
-		$this->fixtureFactory = $fixtureFactory;
-		$this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-		$this->assertCreateInvoiceSuccess = $assertCreateInvoiceSuccess;
-	}
+    public function __inject(
+        WebposIndex $webposIndex,
+        FixtureFactory $fixtureFactory,
+        AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible,
+        AssertCreateInvoiceSuccess $assertCreateInvoiceSuccess
+    )
+    {
+        $this->webposIndex = $webposIndex;
+        $this->fixtureFactory = $fixtureFactory;
+        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+        $this->assertCreateInvoiceSuccess = $assertCreateInvoiceSuccess;
+    }
 
-	public function test(
-		Customer $customer,
-		$taxRate,
-		$products,
-		$configData,
-		$createInvoice = true,
-		$shipped = false
-	)
-	{
+    public function test(
+        Customer $customer,
+        $taxRate,
+        $products,
+        $configData,
+        $createInvoice = true,
+        $shipped = false
+    )
+    {
 //		// Create products
 //		$products = $this->objectManager->getInstance()->create(
 //			'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
@@ -174,5 +199,5 @@ class WebposTaxTAX08Test extends Injectable
 //		return [
 //			'products' => $products
 //		];
-	}
+    }
 }

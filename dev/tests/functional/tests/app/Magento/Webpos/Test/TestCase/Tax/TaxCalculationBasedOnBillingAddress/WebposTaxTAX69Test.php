@@ -15,7 +15,32 @@ use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\Tax\AssertTaxAmountOnOrderHistoryInvoiceWithTaxCaculationBaseOnBilling;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
+ * Setting: [Tax Calculation Based On] = Billing address
+ * Testcase TAX69 - Check Tax amount on invoice popup
+ *
+ * Precondition:
+ * 1 Exist at least 2 tax rules
+ * 1. Go to Configuration >Sales >Tax >Tax Classes:
+ * - [Tax Calculation Based On] = Billing address
+ * - Other fields: tick on [Use system value]
+ * 2. Save config
+ *
+ * Steps
+ * 1. Add a  product to cart
+ * 2. Select/ create a new customer which has different shipping and billing address and each of them needs to meet the condition of tax rule
+ * 3. Place order successfully with:
+ * + [Create invoice]: off
+ * 4. Go to Order detail
+ * 5. Click on [Invoice] button
+ * 6. Invoice order
+ *
+ * Acceptance Criteria
+ * 5. Tax amount will be shown on order detail exactly
+ * Tax amount = Subtotal * Billing_tax_rate
+ * 6. Invoice order successfully
+ *
  * Class WebposTaxTAX69Test
  * @package Magento\Webpos\Test\TestCase\Tax\TaxCalculationBasedOnBillingAddress
  */
@@ -60,10 +85,10 @@ class WebposTaxTAX69Test extends Injectable
             ['configData' => 'default_tax_configuration_use_system_value']
         )->run();
         // Change TaxRate
-        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $miTaxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($miTaxRate);
         //Create California tax rule
-        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset'=> 'CA_rule']);
+        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset' => 'CA_rule']);
         $taxRule->persist();
         $this->caTaxRule = $taxRule;
         $caTaxRate = $this->caTaxRule->getDataFieldConfig('tax_rate')['source']->getFixture();
@@ -150,7 +175,7 @@ class WebposTaxTAX69Test extends Injectable
         sleep(1);
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
@@ -159,7 +184,8 @@ class WebposTaxTAX69Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),

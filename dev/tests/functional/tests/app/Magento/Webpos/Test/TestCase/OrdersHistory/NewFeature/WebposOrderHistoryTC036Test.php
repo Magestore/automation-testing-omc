@@ -44,7 +44,10 @@ class WebposOrderHistoryTC036Test extends Injectable
         //Create products
         $bundleProduct = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
-            ['products' => $products]
+            [
+                'products' => $products,
+                'productType' => 'bundleProduct'
+            ]
         );
         $products = $bundleProduct->run();
         $childProducts = $bundleProduct->getChildProducts();

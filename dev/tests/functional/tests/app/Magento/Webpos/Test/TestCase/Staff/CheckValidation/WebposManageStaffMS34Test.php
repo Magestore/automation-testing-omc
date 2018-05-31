@@ -13,6 +13,24 @@ use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\StaffIndex;
 use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
 
+/**
+ * Mapping locations - Warehouses
+ * Testcase MS34 - Check GUI
+ *
+ * Precondition
+ * 1. Go to backend > Sales > Manage Locations
+ *
+ * Steps
+ * 1. Click on [Mapping Locations - Warehouses] button
+ *
+ * Acceptance Criteria
+ * 1. Redirect to [Mapping Locations - Warehouses] page including:
+ * - 3 buttons: Cancel, Save, Choose Locations
+ * - A grid with 3 columns: Location, Warehouse (drop down style), Actions (Remove action
+ *
+ * Class WebposManageStaffMS34Test
+ * @package Magento\Webpos\Test\TestCase\Staff\CheckValidation
+ */
 class WebposManageStaffMS34Test extends Injectable
 {
     /**

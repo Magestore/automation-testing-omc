@@ -18,6 +18,34 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 
 /**
+ * Setting: [Tax Calculation Based On] = Shipping Origin
+ * Testcase TAX71 - Check tax amount on cart page and Checkout page
+ *
+ * Precondition:
+ * 1. Go to Configuration >Sales >Tax >Tax Classes:
+ * - [Tax Calculation Based On] = Shipping Origin
+ * - Other fields: tick on [Use system value]
+ * 2. Save config
+ * 3. Go to Configuration >Sales >Shipping settings
+ * - Input Origin shipping address
+ * 4. Save config
+ * 5. Create a tax rule meet to [Default Guest Checkout] of Webpos
+ * On webpos:
+ * 1. Login Webpos as a staff
+ *
+ * Steps
+ * 1. Add a  product to cart
+ * 2. Add a customer with shipping and billing address which are different from the guest address
+ * 3. Click on [Checkout] button
+ * 4. Place order
+ *
+ * Acceptance Criteria
+ * 1. Tax amount will be calculated according to Guest address
+ * Tax = Subtotal * Shipping_origin_tax_rate
+ * 2.Tax amount is changless on cart page
+ * 3. Tax amount is changless on Checkout page
+ * 4. Place order successfully
+ *
  * Class WebposTaxTAX71Test
  * @package Magento\Webpos\Test\TestCase\Tax
  */
@@ -75,7 +103,7 @@ class WebposTaxTAX71Test extends Injectable
         ];
 
         // Create CA Tax Rule
-        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset'=> 'CA_rule']);
+        $taxRule = $fixtureFactory->createByCode('taxRule', ['dataset' => 'CA_rule']);
         $taxRule->persist();
         $this->taxRuleCA = $taxRule;
 
@@ -203,7 +231,8 @@ class WebposTaxTAX71Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
 
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),

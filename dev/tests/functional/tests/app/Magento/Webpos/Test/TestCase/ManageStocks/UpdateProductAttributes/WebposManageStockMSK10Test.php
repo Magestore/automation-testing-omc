@@ -29,6 +29,17 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * Backorders: off
  * 2. Update
  *
+ * Acceptance Criteria
+ * 2.
+ * The information of that product in Database (table: cataloginventory_stock_item) will be updated:
+ * - Qty=0
+ * - is_in_stock: 0
+ * - manage_stock: 1
+ * - backorders : 0
+ *
+ * On webpos checkout page:
+ * - Icon Out of stock displayed on product image
+ *
  * Class WebposManageStockMSK10Test
  * @package Magento\Webpos\Test\TestCase\ManageStocks\UpdateProductAttributes
  */
