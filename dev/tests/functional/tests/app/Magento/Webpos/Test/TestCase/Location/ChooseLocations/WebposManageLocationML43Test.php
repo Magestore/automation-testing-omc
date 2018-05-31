@@ -15,6 +15,25 @@ use Magento\Webpos\Test\Constraint\MappingLocation\AssertLocationShownOnGrid;
 
 
 /**
+ *  Check [Choose locations] page
+ * TestCase ML43 - Check [Save] button with selecting location
+ *
+ *
+ * Precondition
+ * Exist at least 1 location that doesnt link to any warehouse
+ * 1. Go to backend > Sales > Manage Locations
+ *
+ * Steps
+ * 1. Click on [Mapping Locations - Warehouses] button
+ * 2. Click on [Choose Locations] button
+ * 3. Select a location from the grid
+ * 4. Click on [Save] button
+ * 5. Click on [Save] button on [Mapping locations- warehouses] page
+ *
+ * Acceptance Criteria
+ * 4. The selected location will be shown on the grid of [Mapping location -warehouse] page
+ * 5. A new warehouse will be created and assigned to that location
+ *
  * Class WebposManageLocationML43Test
  * @package Magento\Webpos\Test\TestCase\Location\ChooseLocations
  */
@@ -39,7 +58,8 @@ class WebposManageLocationML43Test extends Injectable
     public function __inject(
         MappingLocationIndex $mappingLocationIndex,
         AssertLocationShownOnGrid $assertLocationShownOnGrid
-    ) {
+    )
+    {
         $this->mappingLocationIndex = $mappingLocationIndex;
         $this->assertLocationShownOnGrid = $assertLocationShownOnGrid;
     }
@@ -58,7 +78,7 @@ class WebposManageLocationML43Test extends Injectable
         $this->mappingLocationIndex->getMappingLocationGrid()->chooseLocations();
         $this->mappingLocationIndex->getLocationModal()->waitLoader();
         sleep(2);
-        if($this->mappingLocationIndex->getLocationModal()->isClearButtonVisible()){
+        if ($this->mappingLocationIndex->getLocationModal()->isClearButtonVisible()) {
             $this->mappingLocationIndex->getLocationModal()->getClearFilterButton()->click();
         }
         sleep(3);
