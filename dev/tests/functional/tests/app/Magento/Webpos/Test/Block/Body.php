@@ -29,6 +29,7 @@ class Body extends Block
 
     public function waitForModalPopupNotVisible()
     {
+        sleep(1);
         $this->waitForElementNotVisible('.modals-wrapper .modal-popup');
     }
 }

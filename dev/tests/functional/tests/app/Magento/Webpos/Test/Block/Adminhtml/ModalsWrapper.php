@@ -31,6 +31,12 @@ class ModalsWrapper extends Block
     {
         return $this->getCurrentModalActive()->find(".//button[*[text()[normalize-space()='Confirm']]]", Locator::SELECTOR_XPATH);
     }
+
+    public function waitForPopupWithTitleVisible($title)
+    {
+        $this->waitForElementVisible('//*[@class="modal-title" and contains(text(),"'.$title.'")]', Locator::SELECTOR_XPATH);
+    }
+
     public function getXButton()
     {
         return $this->_rootElement->find('//aside/div/header/button[*[text()[normalize-space()="Close"]]]', Locator::SELECTOR_XPATH);

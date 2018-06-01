@@ -89,6 +89,7 @@ class WebposOpenSessionStep implements TestStepInterface
             && $time < $timeAfter) {
             $time = time();
         }
+        $this->webposIndex->getSessionShift()->waitForPopupOpenShiftNotVisibleLoader();
         if ($this->webposIndex->getSessionShift()->getPopupOpenShift()->isVisible()) {
             $this->webposIndex->getOpenSessionPopup()->waitLoader();
             $this->webposIndex->getOpenSessionPopup()->waitUntilForOpenSessionButtonVisible();

@@ -174,4 +174,12 @@ class SessionShift extends Block
     {
         return $this->_rootElement->find('#popup-open-shift');
     }
+
+    public function waitForPopupOpenShiftNotVisibleLoader()
+    {
+        if($this->_rootElement->find('#popup-open-shift .indicator')->isVisible())
+        {
+            $this->waitForElementNotVisible('#popup-open-shift .indicator');
+        }
+    }
 }
