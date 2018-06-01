@@ -64,16 +64,15 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
     /**
      * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
      *
-     * @param ConfigData $dataConfig
      * @param ConfigData $dataConfigToNo
      * @return void
      */
-    public function test(ConfigData $dataConfig, ConfigData $dataConfigToNo)
+    public function test(ConfigData $dataConfigToNo)
     {
         $this->dataConfigToNo = $dataConfigToNo;
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $dataConfig]
+            ['configData' => 'create_session_before_working']
         )->run();
 
         // LoginTest webpos
@@ -82,7 +81,6 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
         )->run();
 
         // Open session
-//        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
         $time = time();
         $timeAfter = $time + 5;
         while (!$this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->isVisible()
@@ -100,9 +98,8 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
             $this->webposIndex->getCMenu()->checkout();
             sleep(2);
         }
-
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getCheckoutCartFooter()->waitButtonHoldVisible();
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         sleep(1);
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
@@ -146,7 +143,7 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
     {
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $this->dataConfigToNo]
+            ['configData' => 'setup_session_before_working_to_no']
         )->run();
     }
 }

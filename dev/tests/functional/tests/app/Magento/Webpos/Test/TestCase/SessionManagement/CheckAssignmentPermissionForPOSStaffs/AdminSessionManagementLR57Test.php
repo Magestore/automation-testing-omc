@@ -41,25 +41,31 @@ use Magento\Webpos\Test\Page\WebposIndex;
 class AdminSessionManagementLR57Test extends Injectable
 {
     /**
-     * @var WebposRoleNew
+     * @var WebposRoleNew $webposRoleNew
      */
     protected $webposRoleNew;
 
     /**
-     * @var WebposIndex
+     * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
 
     /**
-     * @var PosEdit
+     * @var PosEdit $posEdit
      */
     protected $posEdit;
 
     /**
-     * @var PosIndex
+     * @var PosIndex $posIndex
      */
     protected $posIndex;
 
+    /**
+     * @param WebposIndex $webposIndex
+     * @param WebposRoleNew $webposRoleNew
+     * @param PosIndex $posIndex
+     * @param PosEdit $posEdit
+     */
     public function __inject(
         WebposIndex $webposIndex,
         WebposRoleNew $webposRoleNew,
@@ -73,6 +79,12 @@ class AdminSessionManagementLR57Test extends Injectable
         $this->posEdit = $posEdit;
     }
 
+    /**
+     * @param WebposRole $webposRole
+     * @param Pos $pos
+     * @param FixtureFactory $fixtureFactory
+     * @throws \Exception
+     */
     public function test(
         WebposRole $webposRole,
         Pos $pos,
