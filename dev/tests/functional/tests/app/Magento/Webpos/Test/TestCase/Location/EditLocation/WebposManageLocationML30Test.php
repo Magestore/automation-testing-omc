@@ -68,7 +68,7 @@ class WebposManageLocationML30Test extends Injectable
         $this->locationIndex->open();
         $this->locationIndex->getLocationsGrid()->waitLoader();
         $this->locationIndex->getLocationsGrid()->resetFilter();
-        $this->locationIndex->getLocationsGrid()->openEditByRow([
+        $this->locationIndex->getLocationsGrid()->searchAndOpen([
             'display_name' => $location->getDisplayName()
         ]);
         $this->locationNews->getFormPageActionsLocation()->deleteButton()->click();

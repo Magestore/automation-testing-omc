@@ -29,6 +29,7 @@ class LocationIndex extends  \Magento\Backend\Test\Block\GridPageActions
     public function mappingButton()
     {
         $this->_rootElement->find($this->mappingButton)->click();
+        $this->waitForElementNotVisible('.admin__form-loading-mask');
     }
 
 }

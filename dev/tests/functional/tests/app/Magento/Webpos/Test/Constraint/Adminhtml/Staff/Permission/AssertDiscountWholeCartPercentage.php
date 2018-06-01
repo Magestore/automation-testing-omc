@@ -5,7 +5,9 @@
  * Date: 20/01/2018
  * Time: 12:22
  */
+
 namespace Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission;
+
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
 
@@ -19,7 +21,8 @@ class AssertDiscountWholeCartPercentage extends AbstractConstraint
         $webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $webposIndex->getOrderHistoryOrderList()->waitLoader();
         $webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
-        $webposIndex->getOrderHistoryOrderList()->search($orderId);
+        sleep(1);
+        $webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         $webposIndex->getOrderHistoryOrderList()->waitLoader();
         sleep(2);
         $discountActual = str_replace('-$', '', $webposIndex->getOrderHistoryOrderViewFooter()->getDiscount());
@@ -33,7 +36,6 @@ class AssertDiscountWholeCartPercentage extends AbstractConstraint
         $webposIndex->getCMenu()->checkout();
         sleep(1);
     }
-
 
 
     /**

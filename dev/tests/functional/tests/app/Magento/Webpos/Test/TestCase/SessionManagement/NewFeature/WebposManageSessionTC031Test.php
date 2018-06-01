@@ -50,7 +50,7 @@ class WebposManageSessionTC031Test extends Injectable
     {
         //Login
         $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep')->run();
+            'Magento\Webpos\Test\TestStep\LoginWebposStep')->run();
         sleep(1);
         if ($webposIndex->getOpenSessionPopup()->isVisible()) {
             $webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();

@@ -16,6 +16,34 @@ use Magento\Webpos\Test\Constraint\Staff\AssertShowHideMenu;
 use Magento\Webpos\Test\Constraint\Staff\AssertShowHideDiscountFunction;
 use Magento\Webpos\Test\Constraint\Staff\AssertEditCustomPrice;
 
+/**
+ * Staff Permission
+ * Testcase MS57 - Permission
+ *
+ * Precondition:
+ * 1. Go to backend > Sales > Manage Roles
+ * 2. Add a new role:
+ * - Maximum discount percent(%): enter discount amount
+ * - Permission: Manage Order
+ * - Select a staff A
+ * 3. Go to settings webpos:
+ * [Need to create session before working] = Yes
+ *
+ * Steps
+ * 1. Login webpos by staff A
+ * 2. Check permission of that staff on Webpos
+ * 3. Place order
+ *
+ * Acceptance Criteria
+ * 2.
+ * - Hide [Manage stocks] on menu
+ * - Hide discount function, can't edit custom price and add discount  for whole cart
+ * - Show [Orders] [Session management], [Customers] and [Settings] menu
+ * 3. Place order successfully
+ *
+ * Class WebposManageStaffMS57Test
+ * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
+ */
 class WebposManageStaffMS57Test extends Injectable
 {
 
@@ -112,7 +140,7 @@ class WebposManageStaffMS57Test extends Injectable
             ['id' => 'group_setting',
                 'tag' => true],
             ['id' => 'orders_history',
-            'tag' => true],
+                'tag' => true],
             ['id' => 'register_shift',
                 'tag' => true],
         ]);

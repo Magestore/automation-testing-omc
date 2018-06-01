@@ -18,6 +18,33 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use function MongoDB\BSON\toJSON;
 
 /**
+ * *
+ * Staff Permission
+ * Testcase MS78 - Permission
+ *
+ * Precondition:
+ * 1. Go to backend > Sales > Manage Roles
+ * 2. Add a new role with permission:
+ * + Manage Shift (select all sub-menus)
+ * 3. Add new staff:
+ * - Select the role that create on step 2
+ * - Select location
+ * 4. Go to settings webpos:
+ * [Need to create session before working] = Yes
+ *
+ * Steps
+ * 1. Login webpos by the staff who created on step 3 of [Precondition and setup steps] column
+ * 2. Open a shift
+ * 3. Input money in
+ * 4. Take money out
+ * 5. Close the shift
+ *
+ * Acceptance Criteria
+ * 2. Open a shift successfully
+ * 3. Input money in successfully
+ * 4. Take money out successfully
+ * 5. Close the shift successfully
+ *
  * Class WebposManageStaffMS78Test
  * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
  */

@@ -40,6 +40,7 @@ class MappingLocationGrid extends DataGrid
     {
         $this->_rootElement->find($this->chooseLocations, Locator::SELECTOR_CSS)->click();
         $this->getTemplateBlock()->waitLoader();
+        $this->waitForElementNotVisible('.admin__form-loading-mask');
     }
 
     /**
@@ -64,7 +65,7 @@ class MappingLocationGrid extends DataGrid
 
     public function getRowByLocation($display_name)
     {
-        return $this->_rootElement->find('//table//tr[.//td[@data-index="display_name"]//span[text()="' . $display_name . '"]]', locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//tbody//tr//td[@data-index="display_name"]//span[text()="' . $display_name . '"]', locator::SELECTOR_XPATH);
     }
 
     /**

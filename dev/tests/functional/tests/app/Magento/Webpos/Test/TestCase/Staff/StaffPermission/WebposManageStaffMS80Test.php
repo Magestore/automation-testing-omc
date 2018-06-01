@@ -15,7 +15,30 @@ use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
+ * *
+ * Staff Permission
+ * Testcase MS80 - Permission
+ *
+ * Precondition:
+ * 1. Go to backend > Sales > Manage Roles
+ * 2. Add a new role with permission:
+ * + Open Shift
+ * 3. Add new staff:
+ * - Select the role that create on step 2
+ * - Select location
+ * 4. Go to settings webpos:
+ * [Need to create session before working] = Yes
+ *
+ * Steps
+ * 1. Login webpos by the staff who created on step 3 of [Precondition and setup steps] column
+ * 2. Click on [Session management] menu
+ * 3. Click to open a shift
+ *
+ * Acceptance Criteria
+ * 3. Open a shift successfully
+ *
  * Class WebposManageStaffMS80Test
  * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
  */
@@ -38,7 +61,8 @@ class WebposManageStaffMS80Test extends Injectable
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
     }
@@ -65,20 +89,20 @@ class WebposManageStaffMS80Test extends Injectable
     public function test(WebposRole $webposRole, $staffData)
     {
         //Create role and staff for role
-        /**@var Location $location*/
+        /**@var Location $location */
         $location = $this->fixtureFactory->createByCode('location', ['dataset' => 'default']);
         $location->persist();
         $locationId = $location->getLocationId();
         $posData['pos_name'] = 'Pos Test %isolation%';
         $posData['status'] = 'Enabled';
         $posData['location_id'][] = $locationId;
-        /**@var Pos $pos*/
+        /**@var Pos $pos */
         $pos = $this->fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
         $staffData['location_id'] = [$locationId];
         $staffData['pos_ids'] = [$posId];
-        /**@var Staff $staff*/
+        /**@var Staff $staff */
         $staff = $this->fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff->persist();
         $roleData = $webposRole->getData();

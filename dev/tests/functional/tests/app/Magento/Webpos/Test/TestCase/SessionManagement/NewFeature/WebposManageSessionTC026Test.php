@@ -40,7 +40,7 @@ class WebposManageSessionTC026Test extends Injectable
         //Preconditon
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'create_section_before_working_no,config_no_send_confirm_order']
+            ['configData' => 'create_section_before_working_no']
         )->run();
 
     }
@@ -49,7 +49,7 @@ class WebposManageSessionTC026Test extends Injectable
     {
         //Login
         $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep')->run();
+            'Magento\Webpos\Test\TestStep\LoginWebposStep')->run();
         sleep(1);
         if ($webposIndex->getOpenSessionPopup()->isVisible()) {
             $webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
@@ -69,10 +69,10 @@ class WebposManageSessionTC026Test extends Injectable
             $webposIndex->getCheckoutProductList()->waitProductListToLoad();
             $webposIndex->getCheckoutProductList()->search($products[$i]->getSku());
             $webposIndex->getMsWebpos()->waitCartLoader();
-            sleep(2);
+            sleep(1);
             $i++;
         }
-
+        sleep(1);
         //Check out with payment
         $webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#webpos_checkout');
@@ -102,11 +102,20 @@ class WebposManageSessionTC026Test extends Injectable
 
         foreach ($products as $product){
             \PHPUnit_Framework_Assert::assertEquals(
-                1,
+                0,
                 (int)$webposIndex->getOrderHistoryRefund()->getItemQtyToRefundInput($product->getName())->getValue(),
                 'Item quantity is incorrect'
             );
         }
+    }
+
+    /*Close session*/
+    public function tearDown()
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_no']
+        )->run();
     }
 
 }

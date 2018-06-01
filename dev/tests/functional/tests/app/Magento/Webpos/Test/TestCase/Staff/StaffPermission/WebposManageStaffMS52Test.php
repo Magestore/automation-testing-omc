@@ -5,11 +5,40 @@
  * Date: 12/02/2018
  * Time: 09:14
  */
+
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Staff Permission
+ * Testcase MS52 - Discount whole cart
+ *
+ * Precondition:
+ * 1. Go to backend > Sales > Manage Roles
+ * 2. Add a new role:
+ * - Maximum discount percent(%): 50
+ * - Select all permission
+ * - Select a staff A
+ *
+ * Steps
+ *1. Login webpos by staff A
+ * 2. Add some  products to cart
+ * 3. Add discount (type percent) greater than 50% of total
+ * (Ex: total order = 100$, add discount = 60%)
+ * 4. Place order
+ *
+ * Acceptance Criteria
+ * 4.
+ * - Apply discount successfully with maxinum discount is 50% of total
+ * (maximum discount = 50%)
+ * - Place order successfully
+ *
+ * Class WebposManageStaffMS52Test
+ * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
+ */
 class WebposManageStaffMS52Test extends Injectable
 {
 
@@ -34,15 +63,18 @@ class WebposManageStaffMS52Test extends Injectable
      */
     public function __inject(
         WebposIndex $webposIndex
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
     }
 
     /**
      * Create WebposRole group test.
      *
-     * @param WebposRole
-     * @return void
+     * @param WebposRole $webposRole
+     * @param $products
+     * @param $discount
+     * @return array
      */
     public function test(WebposRole $webposRole, $products, $discount)
     {
@@ -59,7 +91,7 @@ class WebposManageStaffMS52Test extends Injectable
         $product2 = $products[1]['product'];
 
         //LoginTest
-        $this->loginWebpos($this->webposIndex, $dataStaff['username'],$dataStaff['password']);
+        $this->loginWebpos($this->webposIndex, $dataStaff['username'], $dataStaff['password']);
 
         //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
@@ -80,8 +112,7 @@ class WebposManageStaffMS52Test extends Injectable
 
         //Click on [Add discount] > on Discount tab, add dicount for whole cart (type: %)
         $total = $this->webposIndex->getCheckoutCartFooter()->getTotal();
-        while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup())
-        {
+        while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup()) {
             $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
         }
         $this->webposIndex->getCheckoutDiscount()->clickDiscountButton();
@@ -102,7 +133,7 @@ class WebposManageStaffMS52Test extends Injectable
 
         //Get orderId
         $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
-        $orderId= ltrim ($orderId,'#');
+        $orderId = ltrim($orderId, '#');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         sleep(1);
         return [
@@ -124,7 +155,7 @@ class WebposManageStaffMS52Test extends Injectable
             $webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 360;
-            while ($webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            while ($webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
                 $time = time();
             }
             sleep(2);

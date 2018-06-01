@@ -5,7 +5,9 @@
  * Date: 12/02/2018
  * Time: 09:14
  */
+
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\WebposRole;
@@ -13,6 +15,33 @@ use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Staff\AssertShowHideMenu;
 use Magento\Webpos\Test\Constraint\Staff\AssertShowHideDiscountFunction;
 use Magento\Webpos\Test\Constraint\Staff\AssertEditCustomPrice;
+
+/**
+ *
+ * *
+ * Staff Permission
+ * Testcase MS58 - Permission
+ *
+ * Precondition:
+ * 1. Go to backend > Sales > Manage Roles
+ * 2. Add a new role:
+ * - Permission: Manage Order Created By This Staff
+ * - Select a staff A
+ *
+ * Steps
+ * 1. Login webpos by staff A
+ * 2. Go to [Order history] menu
+ *
+ * Acceptance Criteria
+ * 1.
+ * - Hide [Manage stocks] on menu
+ * - Hide discount function, can't edit custom price and add discount  for whole cart
+ * - Show [Orders] [Session management], [Customers] and [Settings] menu
+ * 2. On [Order history] page, only show the order that created by staff A
+ *
+ * Class WebposManageStaffMS58Test
+ * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
+ */
 class WebposManageStaffMS58Test extends Injectable
 {
 
@@ -60,7 +89,8 @@ class WebposManageStaffMS58Test extends Injectable
         AssertShowHideDiscountFunction $assertShowHideDiscountFunction,
         AssertEditCustomPrice $assertEditCustomPrice
 
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->assertShowHideMenu = $assertShowHideMenu;
         $this->assertShowHideDiscountFunction = $assertShowHideDiscountFunction;
@@ -88,10 +118,10 @@ class WebposManageStaffMS58Test extends Injectable
         $staff = $fixtureFactory->createByCode('staff', ['data' => $dataStaff]);
         $staff->persist();
         //LoginTest
-        $this->loginWebpos($this->webposIndex, $dataStaff['username'],$dataStaff['password'], $dataLocation['display_name'], $pos->getData('pos_name'));
+        $this->loginWebpos($this->webposIndex, $dataStaff['username'], $dataStaff['password'], $dataLocation['display_name'], $pos->getData('pos_name'));
         sleep(3);
         //Check show hide item menu
-        $this->assertShowHideMenu->processAssert($this->webposIndex,[
+        $this->assertShowHideMenu->processAssert($this->webposIndex, [
             ['id' => 'item_manage_stock',
                 'tag' => false],
             ['id' => 'group_customer',
@@ -118,14 +148,13 @@ class WebposManageStaffMS58Test extends Injectable
             $webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 360;
-            while ($webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            while ($webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
                 $time = time();
             }
             sleep(2);
         }
         $webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        if($this->webposIndex->getOpenSessionPopup()->isOpenSessionDisplay())
-        {
+        if ($this->webposIndex->getOpenSessionPopup()->isOpenSessionDisplay()) {
             $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
             $this->webposIndex->getMsWebpos()->clickCMenuButton();
             $this->webposIndex->getCMenu()->checkout();
@@ -133,6 +162,7 @@ class WebposManageStaffMS58Test extends Injectable
         sleep(2);
         $this->webposIndex->getOpenSessionPopup()->getCancelButton()->click();
     }
+
     public function tearDown()
     {
         $this->objectManager->getInstance()->create(

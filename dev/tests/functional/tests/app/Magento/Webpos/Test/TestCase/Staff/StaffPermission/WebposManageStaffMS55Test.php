@@ -5,13 +5,41 @@
  * Date: 12/02/2018
  * Time: 09:14
  */
+
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertEditDiscountCustomPrice;
 
+/**
+ * Staff Permission
+ * Testcase MS55 - Edit custom price and discount for whole cart
+ *
+ * Precondition:
+ * 1. Go to backend > Sales > Manage Roles
+ * 2. Add a new role:
+ * - Maximum discount percent(%): 0
+ * - Select all permission
+ * - Select a staff A
+ *
+ * Steps
+ * 1. Login webpos by the staff A
+ * 2. Add some  products to cart
+ * 3. Edit custom price of any product :80% of original price
+ * 4. Add discount for whole cart: 100%
+ * 5. Place order as manual
+ *
+ * Acceptance Criteria
+ * 3. Edit custom price successfully
+ * 4. Add discount for whole cart successfully
+ * 5. Place order successfully
+ *
+ * Class WebposManageStaffMS55Test
+ * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
+ */
 class WebposManageStaffMS55Test extends Injectable
 {
 
@@ -24,6 +52,7 @@ class WebposManageStaffMS55Test extends Injectable
      * @var AssertEditDiscountCustomPrice
      */
     protected $assertEditDiscountCustomPrice;
+
     public function __prepare()
     {
         $this->objectManager->getInstance()->create(
@@ -45,7 +74,8 @@ class WebposManageStaffMS55Test extends Injectable
     public function __inject(
         WebposIndex $webposIndex,
         AssertEditDiscountCustomPrice $assertEditDiscountCustomPrice
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->assertEditDiscountCustomPrice = $assertEditDiscountCustomPrice;
     }

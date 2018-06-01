@@ -14,7 +14,6 @@ use Magento\Webpos\Test\Constraint\Adminhtml\Location\Grid\AssertSearchExistLoca
 use Magento\Webpos\Test\Fixture\Location;
 use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Fixture\Staff;
-use Magento\Webpos\Test\Handler\Pos\PosInterface;
 use Magento\Webpos\Test\Page\Adminhtml\LocationIndex;
 use Magento\Webpos\Test\Page\Adminhtml\LocationNews;
 use Magento\Webpos\Test\Page\Adminhtml\PosIndex;
@@ -93,12 +92,22 @@ class WebposManageLocationML21Test extends Injectable
     private $webposIndex;
 
     /**
+     * Open session required
+     */
+    public function __prepare()
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_yes']
+        )->run();
+    }
+
+    /**
      * Inject location pages.
      *
      * @param LocationIndex $locationIndex
      * @param LocationNews $locationNews
      */
-
     public function __inject(
         LocationIndex $locationIndex,
         LocationNews $locationNews,

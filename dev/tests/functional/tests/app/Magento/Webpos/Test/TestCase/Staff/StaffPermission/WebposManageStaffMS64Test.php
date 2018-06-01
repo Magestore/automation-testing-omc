@@ -17,6 +17,44 @@ use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
+ * *
+ * Staff Permission
+ * Testcase MS64 - Permission
+ *
+ * Precondition:
+ * 1. Go to backend > Sales > Manage Roles
+ * 2. Add a new role "TEST"
+ * - Permission: Manage Order Created at Location of Staff
+ * 3. Add 2 staffs:
+ * - Staff 1: location 1
+ * - Staff 2: location 1, role "TEST"
+ * 4. Login webpos by Satff 1
+ * 5. Create some pending orders (without paid money) successfully
+ * 6. Logout
+ *
+ * Steps
+ * 1. Login webpos by Staff 2
+ * 2. Go to Orders history page
+ * 3. View detail page of some orders created by Staff 1
+ * 4.Take payment
+ * 5. Create shippment
+ * 6. Create Invoice
+ * 7. Create refund
+ * 8. Send email
+ * 9. Print
+ * 10. Add Comment
+ * 11. Re-order
+ *
+ * Acceptance Criteria
+ * 4. Take payment successfully and show a new notification
+ * 5. Create shippment successfully, show a new notification and order status change to processing
+ * 6. Create invoice successfully and show a new notification
+ * 7. Create refund successfully and show a new notification
+ * 8. Send email to successfully and show a new notification
+ * 9. Show Print popup to print invoice when click on Print button
+ * 10. Add comment successfully, update comment history and show a new notification
+ * 11. When click on Re-order button, all items of current order will be loaded to cart
+ *
  * Class WebposManageStaffMS64Test
  * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
  */
@@ -149,7 +187,7 @@ class WebposManageStaffMS64Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="payment-popup"]');
         sleep(1);
-        if($this->webposIndex->getOrderHistoryPayment()->getCashInMethod()->isVisible()) {
+        if ($this->webposIndex->getOrderHistoryPayment()->getCashInMethod()->isVisible()) {
             $this->webposIndex->getOrderHistoryPayment()->getCashInMethod()->click();
             $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
             $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');

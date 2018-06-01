@@ -5,6 +5,7 @@
  * Date: 12/02/2018
  * Time: 09:14
  */
+
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
 
 use Magento\Mtf\TestCase\Injectable;
@@ -12,7 +13,31 @@ use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertWarningDiscountCustomPrice;
 use Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertEditDiscountCustomPrice;
+
 /**
+ *  Staff Permission
+ * Testcase MS53 - Edit custom price
+ *
+ * Precondition:
+ * 1. Go to backend > Sales > Manage Roles
+ * 2. Add a new role:
+ * - Maximum discount percent(%): 50
+ * - Select all permission
+ * - Select a staff A
+ *
+ * Steps
+ * 1. Login webpos by staff A
+ * 2. Add some  products to cart
+ * 3. Click on the product name on cart
+ * - Enter discount amount greater than 50 % of original price
+ * 4. Place order
+ *
+ * Acceptance Criteria
+ * 4.
+ * - Only can edit custom price with maximum discount is 50 % of original price
+ * - Display warning: You are able to apply discount under 50% only
+ * - Place order successfully
+ *
  * Class WebposManageStaffMS53Test
  * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
  */
@@ -52,7 +77,8 @@ class WebposManageStaffMS53Test extends Injectable
         WebposIndex $webposIndex,
         AssertWarningDiscountCustomPrice $assertWarningDiscountCustomPrice,
         AssertEditDiscountCustomPrice $assertEditDiscountCustomPrice
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->assertWarningDiscountCustomPrice = $assertWarningDiscountCustomPrice;
         $this->assertEditDiscountCustomPrice = $assertEditDiscountCustomPrice;
@@ -79,7 +105,7 @@ class WebposManageStaffMS53Test extends Injectable
         $product2 = $products[1]['product'];
 
         //LoginTest
-        $this->loginWebpos($this->webposIndex, $dataStaff['username'],$dataStaff['password']);
+        $this->loginWebpos($this->webposIndex, $dataStaff['username'], $dataStaff['password']);
 
         //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
@@ -98,7 +124,7 @@ class WebposManageStaffMS53Test extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
         $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
         sleep(1);
-        $this->assertWarningDiscountCustomPrice->processAssert($this->webposIndex, 'You are able to apply discount under '.$webposRole->getMaximumDiscountPercent().'% only');
+        $this->assertWarningDiscountCustomPrice->processAssert($this->webposIndex, 'You are able to apply discount under ' . $webposRole->getMaximumDiscountPercent() . '% only');
         $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
         sleep(1);
         $this->assertEditDiscountCustomPrice->processAssert($this->webposIndex, $webposRole->getMaximumDiscountPercent(), 1);
@@ -119,7 +145,7 @@ class WebposManageStaffMS53Test extends Injectable
 
         //Get orderId
         $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
-        $orderId= ltrim ($orderId,'#');
+        $orderId = ltrim($orderId, '#');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         sleep(1);
         return [
@@ -140,7 +166,7 @@ class WebposManageStaffMS53Test extends Injectable
             $webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 360;
-            while ($webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            while ($webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
                 $time = time();
             }
             sleep(2);

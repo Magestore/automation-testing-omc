@@ -18,6 +18,27 @@ use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
+ * *
+ * Staff Permission
+ * Testcase MS67 - Permission
+ *
+ * Precondition:
+ * 1. Go to backend > Sales > Manage Roles
+ * 2. Add a new role
+ * - Permission: Manage Inventory
+ * 3. Add new staff:
+ * - Select the role that create on step 2
+ * - Select location
+ *
+ * Steps
+ * 1. Login webpos by the staff who created on step 3 of [Precondition and setup steps] column
+ * 2. Go to [Manage Stocks] page
+ * 3. Edit some  products
+ * 4. Update all/ Update for each product
+ *
+ * Acceptance Criteria
+ * 4. Edit and update stock successfully. Those products will be updated in the backend
+ *
  * Class WebposManageStaffMS67Test
  * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
  */
@@ -65,8 +86,9 @@ class WebposManageStaffMS67Test extends Injectable
     /**
      * Create WebposRole group test.
      *
-     * @param WebposRole
-     * @return void
+     * @param WebposRole $webposRole
+     * @param $products
+     * @param $staffData
      */
     public function test(WebposRole $webposRole, $products, $staffData)
     {
