@@ -8,18 +8,25 @@
 
 namespace Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct;
 
-use Magento\Bundle\Test\Fixture\BundleProduct;
-use Magento\Customer\Test\Fixture\Customer;
-use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
-use Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus;
-use Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoiceSuccess;
-use Magento\Webpos\Test\Constraint\OrderHistory\Payment\AssertPaymentSuccess;
-use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
-use Magento\Webpos\Test\Constraint\OrderHistory\Shipment\AssertShipmentSuccess;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposProductGridAddGroupProductOutOfStockPG37Test
+ * @package Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on the Group product block
+ * 2. Click [Add to cart] a child item that out of stock "
+ *
+ * Acceptance:
+ * "Display message: ""Warning: This product is
+ * currently out of stock"""
+ *
+ */
 class WebposProductGridAddGroupProductOutOfStockPG37Test extends Injectable
 {
     /**

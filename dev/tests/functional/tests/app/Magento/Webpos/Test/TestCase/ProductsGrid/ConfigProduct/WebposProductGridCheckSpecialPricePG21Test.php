@@ -16,6 +16,23 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposProductGridCheckConfigProductBlockPG19Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\ConfigProduct
+ *
+ * Precondition:
+ * "In backend:
+ * 1. Go to detail page of child item of the config product, setting
+ * [Special price] is different [Price]
+ * On webpos:
+ * 1. Login webpos as a staff"
+ *
+ * Steps:
+ * "1. Click on the config product
+ * 2. Select the child item that has special price
+ * 3. Add that child item to cart > place order"
+ *
+ * Acceptance:
+ * "2. Show special price for that child item.
+ * 3. Place order successfully with special price"
+ *
  */
 class  WebposProductGridCheckSpecialPricePG21Test extends Injectable
 {
@@ -57,7 +74,7 @@ class  WebposProductGridCheckSpecialPricePG21Test extends Injectable
         $attributes = $products[0]['product']->getConfigurableAttributesData()['attributes_data'];
         foreach ($attributes as $attribute) {
             $option = $attribute['options']['option_key_1']['label'];
-            if($option === ""){
+            if ($option === "") {
                 $option = $attribute['options']['option_key_1']['admin'];
             }
             $label = $attribute['label'];

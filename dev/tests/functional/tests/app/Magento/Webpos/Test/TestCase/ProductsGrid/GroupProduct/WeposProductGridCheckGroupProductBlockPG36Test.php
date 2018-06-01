@@ -10,9 +10,23 @@ namespace Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WeposProductGridCheckGroupProductBlockPG36Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * 1. Check Group product block
+ *
+ * Acceptance:
+ * "1.
+ * - Display correctly image, name of the product
+ * - Don't show Available  Qty on the product block
+ * - Product price = 0"
+ *
  */
 class WeposProductGridCheckGroupProductBlockPG36Test extends Injectable
 {

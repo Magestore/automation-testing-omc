@@ -8,11 +8,30 @@
 
 namespace Magento\Webpos\Test\TestCase\ProductsGrid\ConnectToManageStock;
 
-use Magento\Mtf\Client\Locator;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposProductGridConnectToManageStockPG54Test
+ * @package Magento\Webpos\Test\TestCase\ProductsGrid\ConnectToManageStock
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Go to manage stock page
+ * 3. Edit any product in list (Qty=0, In stock: off)
+ * 4. Update"
+ *
+ * Steps:
+ * "1. Go to checkout page
+ * 2. Add that product to cart"
+ *
+ * Acceptance:
+ * "1. In grid: icon Out_stock display on that product image
+ * 2.
+ * - Can not add product to cart
+ * - Display warning: this product is currently out of stock"
+ *
+ */
 class  WebposProductGridConnectToManageStockPG54Test extends Injectable
 {
     /**
@@ -22,7 +41,8 @@ class  WebposProductGridConnectToManageStockPG54Test extends Injectable
 
     public function __inject(
         WebposIndex $webposIndex
-    ){
+    )
+    {
         $this->webposIndex = $webposIndex;
     }
 
@@ -63,7 +83,7 @@ class  WebposProductGridConnectToManageStockPG54Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->search($productName);
 
         /** wait toast */
-        while ( !$this->webposIndex->getToaster()->isVisible()) {
+        while (!$this->webposIndex->getToaster()->isVisible()) {
             sleep(1);
         }
 

@@ -14,6 +14,17 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposProductsGridPG18Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on [View product details]
+ * 2. Click on [Cancel] button"
+ *
+ * Acceptance:
+ * 2. Close [Product detail] popup
+ *
  */
 class WebposProductsGridPG18Test extends Injectable
 {

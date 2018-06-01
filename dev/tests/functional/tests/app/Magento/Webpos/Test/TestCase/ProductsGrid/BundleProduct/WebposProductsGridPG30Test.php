@@ -10,11 +10,22 @@ namespace Magento\Webpos\Test\TestCase\ProductsGrid\BundleProduct;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Webpos\Test\Constraint\ProductsGrid\SimpleProduct\AssertProductQtyInProductList;
 
 /**
  * Class WebposProductsGridPG30Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\BundleProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on the bundle product block
+ * 2. Click [Add to cart] a child item that out of stock "
+ *
+ * Acceptance:
+ * "Display message: ""Warning: This product is
+ * currently out of stock"""
+ *
  */
 class WebposProductsGridPG30Test extends Injectable
 {

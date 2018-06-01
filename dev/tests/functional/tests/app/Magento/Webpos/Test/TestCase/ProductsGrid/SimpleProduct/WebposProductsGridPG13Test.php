@@ -8,14 +8,30 @@
 
 namespace Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct;
 
-use Magento\Mtf\TestCase\Injectable;
 use Magento\CatalogRule\Test\Fixture\CatalogRule;
-use Magento\Webpos\Test\Page\WebposIndex;
+use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\ProductsGrid\SimpleProduct\AssertProductWithCatalogPriceRule;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposProductsGridPG13Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct
+ *
+ * Precondition:
+ * "In backend:
+ * 1. Go to Marketing > Catalog price rule > Create a new catalog price rule successfully
+ * On webpos:
+ * 1. Login webpos as a staff"
+ *
+ * Steps:
+ * "1. Check price of the product that meet Catalog price rule
+ * 2. Add that product to cart
+ * 3. Place order"
+ *
+ * Acceptance:
+ * "1. The product price will be shown the price that subtracted discount catalog rule
+ * 3. Place order successfully"
+ *
  */
 class WebposProductsGridPG13Test extends Injectable
 {

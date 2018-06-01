@@ -8,11 +8,28 @@
 
 namespace Magento\Webpos\Test\TestCase\ProductsGrid\ConnectToManageStock;
 
-use Magento\Mtf\Client\Locator;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposProductGridConnectToManageStockPG55Test
+ * @package Magento\Webpos\Test\TestCase\ProductsGrid\ConnectToManageStock
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Go to manage stock page
+ * 3. Edit any product that being out_stock (Qty> 0, In stock: on)
+ * 4. Update"
+ *
+ * Steps:
+ * "1. Go to checkout page
+ * 2. Add that product to cart"
+ *
+ * Acceptance:
+ * "1. In grid: icon Out_stock do not display on that product image
+ * 2. Add product to cart with Qty=1
+ *
+ */
 class  WebposProductGridConnectToManageStockPG55Test extends Injectable
 {
     /**
@@ -22,7 +39,8 @@ class  WebposProductGridConnectToManageStockPG55Test extends Injectable
 
     public function __inject(
         WebposIndex $webposIndex
-    ){
+    )
+    {
         $this->webposIndex = $webposIndex;
     }
 
@@ -62,7 +80,7 @@ class  WebposProductGridConnectToManageStockPG55Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->search($productName);
 
         /** wait until search done */
-        while ( $this->webposIndex->getCheckoutProductList()->getNumberOfProducts()->getText() != 1) {
+        while ($this->webposIndex->getCheckoutProductList()->getNumberOfProducts()->getText() != 1) {
             sleep(1);
         }
 

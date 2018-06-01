@@ -11,9 +11,24 @@ namespace Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposProductGridCheckAddToCartOnGroupProductDetailPG46Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on [View product details]
+ * 2. Increase [Qty] of a child product = 1
+ * 3. Click on [Add to cart] button
+ * 4. Place order"
+ *
+ * Acceptance:
+ * "3. The child product that updated Qty on step 2 will be added to cart successfully
+ * 4. Place order successfully"
+ *
  */
 class  WebposProductGridCheckAddToCartOnGroupProductDetailPG46Test extends Injectable
 {
@@ -34,7 +49,8 @@ class  WebposProductGridCheckAddToCartOnGroupProductDetailPG46Test extends Injec
     public function __inject(
         WebposIndex $webposIndex,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
-    ){
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }

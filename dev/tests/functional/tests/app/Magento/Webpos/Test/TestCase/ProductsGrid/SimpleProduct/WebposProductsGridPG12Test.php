@@ -9,12 +9,30 @@
 namespace Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\ProductsGrid\SimpleProduct\AssertProductWithSpecialPrice;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposProductsGridPG12Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct
+ *
+ * Precondition:
+ * "In backend:
+ * 1. Go to detail page of simple product, setting
+ * [Special price] is different [Price]
+ * On webpos:
+ * 1. Login webpos as a staff"
+ *
+ * Steps:
+ * "1. Check price of that product
+ * 2. Add product to cart
+ * 3. Place order "
+ *
+ * Acceptance:
+ * "1. Show both of origin price and special price on webpos but origin price will be strickthrough
+ * 2. The product price is the special price on cart
+ * 3. Place order successfully with special price"
+ *
  */
 class WebposProductsGridPG12Test extends Injectable
 {

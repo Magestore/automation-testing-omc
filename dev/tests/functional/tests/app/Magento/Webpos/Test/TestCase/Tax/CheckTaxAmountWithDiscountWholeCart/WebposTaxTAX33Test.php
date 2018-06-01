@@ -11,14 +11,31 @@ namespace Magento\Webpos\Test\TestCase\Tax\CheckTaxAmountWithDiscountWholeCart;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceOnOrderHistoryRefund;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Constraint\OrderHistory\Refund\AssertRefundSuccess;
+use Magento\Webpos\Test\Constraint\Tax\AssertProductPriceOnOrderHistoryRefund;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposTaxTAX33Test
  * @package Magento\Webpos\Test\TestCase\Tax
+ *
+ * Precondition and setup steps:
+ * "1. Go to backend > Configuration > Sales > Tax:
+ * Setting all fields: tick on [Use system value] checkbox"
+ *
+ * Steps:
+ * "1. Login webpos as a staff
+ * 2. Add some  products and select a customer to meet tax condition
+ * 3. Add discount for whole cart
+ * 4. Place order successfully with completed status
+ * 5. Go to Order detail
+ * 6. Click to open Refund popup
+ * 7. Refund successfully"
+ *
+ * Acceptance Criteria:
+ * "6. Price of each product = [Price * (1+ tax_rate) ]
+ * 7. Refund with exact tax amount"
  */
 class WebposTaxTAX33Test extends Injectable
 {
@@ -57,7 +74,7 @@ class WebposTaxTAX33Test extends Injectable
     public function __prepare(FixtureFactory $fixtureFactory)
     {
         // Change TaxRate
-        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset'=> 'US-MI-Rate_1']);
+        $taxRate = $fixtureFactory->createByCode('taxRate', ['dataset' => 'US-MI-Rate_1']);
         $this->objectManager->create('Magento\Tax\Test\Handler\TaxRate\Curl')->persist($taxRate);
 
         // Add Customer
@@ -186,7 +203,7 @@ class WebposTaxTAX33Test extends Injectable
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
 
-        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
 
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -197,7 +214,8 @@ class WebposTaxTAX33Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {}
+        while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
+        }
         self::assertEquals(
             $orderId,
             $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId(),
@@ -223,7 +241,7 @@ class WebposTaxTAX33Test extends Injectable
         $this->webposIndex->getModal()->getOkButton()->click();
 
         $expectStatus = 'Closed';
-        $totalPaid = (float) substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
+        $totalPaid = (float)substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
         $totalRefunded = $totalPaid;
         $this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus, $totalRefunded);
 

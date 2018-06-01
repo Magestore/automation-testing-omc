@@ -9,12 +9,29 @@
 namespace Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\ProductsGrid\SimpleProduct\AssertProductQtyInProductList;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposProductsGridPG07Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct
+ *
+ * Precondition:
+ * "In backend, setting:
+ * 1. On product detail page, Setting [ Backorders] = ""Allow Qty Below 0 and Notify Customer""
+ * - Edit [Available Qty] = 1
+ * On webpos:
+ * 1. Login webpos as a staff"
+ *
+ * Steps:
+ * "1. Check the product that configurated in [Precondition and setup steps] column
+ * 2. Add that product to cart with qty = 2
+ * 3. Place order successfully"
+ *
+ * Acceptance:
+ * "2. Add product successfully
+ * 3. Qty on that product block is ""-1"""
+ *
  */
 class WebposProductsGridPG07Test extends Injectable
 {

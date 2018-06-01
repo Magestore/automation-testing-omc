@@ -10,9 +10,21 @@ namespace Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposProductGridCheckCancelButtonOnGroupProductDetailPG48Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on [View product details]
+ * 2. Click on [Cancel] button"
+ *
+ * Acceptance:
+ * 2. Close [Product detail] popup
+ *
  */
 class  WebposProductGridCheckCancelButtonOnGroupProductDetailPG48Test extends Injectable
 {

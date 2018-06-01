@@ -14,6 +14,17 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposProductsGridPG33Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on the bundle product block
+ * 2. Click on [Add to cart] button"
+ *
+ * Acceptance:
+ * 2. The bundle product will be added to cart successfully with selected child products
+ *
  */
 class WebposProductsGridPG33Test extends Injectable
 {

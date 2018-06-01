@@ -9,12 +9,26 @@
 namespace Magento\Webpos\Test\TestCase\ProductsGrid\ConfigProduct;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposProductGridCheckConfigProductBlockPG19Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\ConfigProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on the config product block
+ * 2. Select all of options
+ * 3. Click on [Add to cart] button"
+ *
+ * Acceptance:
+ * "2. [Availability] field will be updated correctly corresponding to Qty of that child item.
+ * 3.
+ * - That product will be added to cart successfully with Qty = 1
+ * - The selected product attributes will be shown under the Product name on cart page"
+ *
  */
 class  WebposProductGridAddConfigProductToCartPG24Test extends Injectable
 {
@@ -51,7 +65,7 @@ class  WebposProductGridAddConfigProductToCartPG24Test extends Injectable
         $attributes = $products[0]['product']->getConfigurableAttributesData()['attributes_data'];
         foreach ($attributes as $attribute) {
             $option = $attribute['options']['option_key_0']['label'];
-            if($option === ""){
+            if ($option === "") {
                 $option = $attribute['options']['option_key_0']['admin'];
             }
             $label = $attribute['label'];

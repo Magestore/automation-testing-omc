@@ -9,12 +9,27 @@
 namespace Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\ProductsGrid\SimpleProduct\AssertProductQtyInProductList;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposProductsGridPG05Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct
+ *
+ * Precondition:
+ * "In backend, setting:
+ * 1. On product detail page, Setting [ Backorders] = ""No backorders""
+ * - Edit [Available Qty] = 1
+ * On webpos:
+ * 1. Login webpos as a staff"
+ *
+ * Steps:
+ * "1. Check the product that configurated in [Precondition and setup steps] column
+ * 2. Add that product to cart with qty = 2"
+ *
+ * Acceptance:
+ * 2. Add product unsuccessfully and show message: "Warning: We don't have as many "[Product Name]" as you requested. The current in-stock qty is "[available qty]"
+ *
  */
 class WebposProductsGridPG05Test extends Injectable
 {

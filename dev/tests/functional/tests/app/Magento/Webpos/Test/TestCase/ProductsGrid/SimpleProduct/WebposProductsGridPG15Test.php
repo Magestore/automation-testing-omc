@@ -14,6 +14,18 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposProductsGridPG15Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * 1. Click on [View product details]
+ *
+ * Acceptance:
+ * "1. Display [Product details] form including:
+ * - Action: Cancel
+ * - Information of product: Image, Name, SKU, Available Qty, Price, Qty add to cart, [Add to cart] button, Description (If available)"
+ *
  */
 class WebposProductsGridPG15Test extends Injectable
 {

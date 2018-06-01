@@ -9,12 +9,26 @@
 namespace Magento\Webpos\Test\TestCase\ProductsGrid\ConfigProduct;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposProductGridCheckConfigProductBlockPG19Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\ConfigProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on [View product details]
+ * 2. Select all of options
+ * 3. Click on [Add to cart] button"
+ *
+ * Acceptance:
+ * "2. [Availability] field will be updated correctly corresponding to Qty of that children item.
+ * 3.
+ * - That product will be added to cart successfully with Qty = 1
+ * - The selected product attributes will be shown under the Product name on cart page"
+ *
  */
 class  WebposProductGridCheckAddToCartOnConfigProductDetailPG27Test extends Injectable
 {
@@ -49,7 +63,7 @@ class  WebposProductGridCheckAddToCartOnConfigProductDetailPG27Test extends Inje
         $attributes = $products[0]['product']->getConfigurableAttributesData()['attributes_data'];
         foreach ($attributes as $attribute) {
             $option = $attribute['options']['option_key_0']['label'];
-            if($option === ""){
+            if ($option === "") {
                 $option = $attribute['options']['option_key_0']['admin'];
             }
             $label = $attribute['label'];
@@ -57,7 +71,7 @@ class  WebposProductGridCheckAddToCartOnConfigProductDetailPG27Test extends Inje
         }
 
         /** wait load stock */
-        while ( $this->webposIndex->getCheckoutProductDetail()->getAvailableQty() <= 0) {
+        while ($this->webposIndex->getCheckoutProductDetail()->getAvailableQty() <= 0) {
             sleep(1);
         }
 

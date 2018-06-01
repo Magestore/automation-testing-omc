@@ -9,12 +9,29 @@
 namespace Magento\Webpos\Test\TestCase\ProductsGrid\BundleProduct;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\ProductsGrid\BundleProduct\AssertChildProductOnProductDetail;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposProductsGridPG35Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\BundleProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on [View product details]
+ * 2. Select radio buttons that is different from default value
+ * 3. Click on [Add to cart] button"
+ *
+ * Acceptance:
+ * "2.
+ * - Product price will be updated exactly
+ * Product price = SUM (price of child products)
+ * 3.
+ * - That product will be added to cart successfully with Qty = 1
+ * - The selected product attributes will be shown under the Product name on cart page"
+ *
  */
 class WebposProductsGridPG35Test extends Injectable
 {
@@ -65,7 +82,7 @@ class WebposProductsGridPG35Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
         // Close popup
-        if ($this->webposIndex->getCheckoutProductDetail()->isVisible()){
+        if ($this->webposIndex->getCheckoutProductDetail()->isVisible()) {
             $this->webposIndex->getCheckoutProductDetail()->getButtonCancel()->click();
         }
 
@@ -75,7 +92,7 @@ class WebposProductsGridPG35Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->getFirstProductDetailButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-product-detail"]');
         $this->webposIndex->getCheckoutProductDetail()->getQtyOfOption(1)->setValue(2);
-        
+
         // Assert
         $this->assertChildProductOnProductDetail->processAssert($this->webposIndex, $products);
 

@@ -14,6 +14,16 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposProductsGridPG14Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * 1. Click on the simple product block
+ *
+ * Acceptance:
+ * 1. That product will be added to cart successfully
+ *
  */
 class WebposProductsGridPG14Test extends Injectable
 {

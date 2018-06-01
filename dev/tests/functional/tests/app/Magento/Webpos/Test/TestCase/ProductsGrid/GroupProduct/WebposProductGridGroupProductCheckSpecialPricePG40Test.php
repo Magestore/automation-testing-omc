@@ -12,6 +12,27 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposProductGridGroupProductCheckSpecialPricePG40Test
+ * @package Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct
+ *
+ * Precondition:
+ * "In backend:
+ * 1. Go to detail page of child item of the Group product, setting
+ * [Special price] is different [Price]
+ * On webpos:
+ * 1. Login webpos as a staff"
+ *
+ * Steps:
+ * "1. Click on the Group product block
+ * 2. Check price of each child item of Group product
+ * 3. Add that child item to cart > place order"
+ *
+ * Acceptance:
+ * "2. Show special price for that child item.
+ * 3. Place order successfully with special price"
+ *
+ */
 class WebposProductGridGroupProductCheckSpecialPricePG40Test extends Injectable
 {
     /**
@@ -58,7 +79,7 @@ class WebposProductGridGroupProductCheckSpecialPricePG40Test extends Injectable
         for ($i = 0; $i < count($childProducts); $i++) {
             $specialPrice = $childProducts[$i]->getSpecialPrice();
             $this->assertTrue(
-                strpos(str_replace(',' , '', $actualSpecialPrices[$i]),$specialPrice) !== false,
+                strpos(str_replace(',', '', $actualSpecialPrices[$i]), $specialPrice) !== false,
                 "Special price of product '" . $childProducts[$i]->getName() . "' is wrong."
             );
         }

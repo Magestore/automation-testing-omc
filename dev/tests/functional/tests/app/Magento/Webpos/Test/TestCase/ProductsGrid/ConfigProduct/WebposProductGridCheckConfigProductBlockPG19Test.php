@@ -14,6 +14,18 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposProductGridCheckConfigProductBlockPG19Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\ConfigProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * 1. Check config product block
+ *
+ * Acceptance:
+ * "1.
+ * - Display correctly image, name of the product
+ * - Don't show Available  Qty on the product block"
+ *
  */
 class  WebposProductGridCheckConfigProductBlockPG19Test extends Injectable
 {

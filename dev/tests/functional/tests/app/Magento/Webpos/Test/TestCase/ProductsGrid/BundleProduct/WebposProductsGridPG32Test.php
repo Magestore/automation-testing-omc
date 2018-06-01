@@ -14,6 +14,24 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposProductsGridPG32Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on the bundle product block
+ * 2. Click on [Cancel] button"
+ *
+ * Acceptance:
+ * "1. Show popup including:
+ * - Action: Cancel
+ * - Product name
+ * - Price of bundle product = SUM (price of selected child product)
+ * - Child products of the bundle product with multi radio butons to choose, auto select first radio button
+ * - [Quantity] textbox for each child product, default value = 1
+ * - [Add to cart] button
+ * 2. Close the popup"
+ *
  */
 class WebposProductsGridPG32Test extends Injectable
 {

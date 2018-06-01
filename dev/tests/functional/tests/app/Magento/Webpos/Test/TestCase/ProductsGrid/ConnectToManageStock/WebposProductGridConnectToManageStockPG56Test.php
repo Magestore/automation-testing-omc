@@ -11,6 +11,23 @@ namespace Magento\Webpos\Test\TestCase\ProductsGrid\ConnectToManageStock;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposProductGridConnectToManageStockPG56Test
+ * @package Magento\Webpos\Test\TestCase\ProductsGrid\ConnectToManageStock
+ *
+ * Precondition:
+ * "1. Login Webpos as a staff
+ * 2. Add some products to cart
+ * 3. Place order"
+ *
+ * Steps:
+ * "1. Go to Manage stock page
+ * 2. Check Qty of products that ordered"
+ *
+ * Acceptance:
+ * 2. Qty of those products will be subtracted correctly
+ *
+ */
 class WebposProductGridConnectToManageStockPG56Test extends Injectable
 {
     /**
@@ -40,7 +57,7 @@ class WebposProductGridConnectToManageStockPG56Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
 
         // Cart
-        while ( !$this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->isVisible()) {
+        while (!$this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->isVisible()) {
             sleep(1);
         }
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();

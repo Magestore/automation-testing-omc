@@ -15,6 +15,20 @@ use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\Adminhtml\WebposRoleIndex;
 use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
 
+/**
+ * Class GridStaffListSortingMR26MR27MR28MR29MR30Test
+ * @package Magento\Webpos\Test\TestCase\Role\CheckGridOfStaffList
+ *
+ * Precondition:
+ *
+ *
+ * Steps:
+ *
+ *
+ * Acceptance:
+ *
+ *
+ */
 class GridStaffListSortingMR26MR27MR28MR29MR30Test extends Injectable
 {
     /**

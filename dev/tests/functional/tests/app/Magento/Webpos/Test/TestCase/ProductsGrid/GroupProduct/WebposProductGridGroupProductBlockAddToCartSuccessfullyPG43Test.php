@@ -9,9 +9,24 @@
 namespace Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposProductGridGroupProductBlockAddToCartSuccessfullyPG43Test
+ * @package Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on the Group product block
+ * 2. Increase [Qty] of a child product = 1
+ * 3. Click on [Add to cart] button"
+ *
+ * Acceptance:
+ * 3. The child product that updated Qty on step 2 will be added to cart successfully
+ *
+ */
 class WebposProductGridGroupProductBlockAddToCartSuccessfullyPG43Test extends Injectable
 {
     /**

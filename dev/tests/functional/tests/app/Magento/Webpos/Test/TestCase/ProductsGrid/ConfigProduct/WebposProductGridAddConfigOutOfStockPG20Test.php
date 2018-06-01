@@ -14,6 +14,17 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposProductGridCheckConfigProductBlockPG19Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\ConfigProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on the config product block
+ * 2. Click [Add to cart] a child item that out of stock "
+ *
+ * Acceptance:
+ * 2. Show error popup with message: Please choose all option
+ *
  */
 class  WebposProductGridAddConfigOutOfStockPG20Test extends Injectable
 {

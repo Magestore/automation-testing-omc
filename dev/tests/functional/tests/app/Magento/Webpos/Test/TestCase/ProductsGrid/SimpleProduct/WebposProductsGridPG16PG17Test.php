@@ -9,12 +9,40 @@
 namespace Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct;
 
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\ProductsGrid\SimpleProduct\AssertProductQtyInProductDetail;
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposProductsGridPG16PG17Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct
+ *
+ * PG16
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on [View product details]
+ * 2. Click on [Add to cart] button"
+ *
+ * Acceptance:
+ * "2.
+ * - Close [Product detail] popup
+ * - Add that product to cart with Qty = 1"
+ *
+ * PG17
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on [View product details]
+ * 2. Click on ""+"" two times and click on ""-"" one time
+ * 3. Click on [Add to cart] button"
+ *
+ * Acceptance:
+ * "2. Qty will be changed according to number of clicks exactly
+ * 3. That product will be added to cart with qty = 2"
+ *
+ *
  */
 class WebposProductsGridPG16PG17Test extends Injectable
 {
@@ -22,7 +50,7 @@ class WebposProductsGridPG16PG17Test extends Injectable
      * @var WebposIndex
      */
     protected $webposIndex;
-    
+
     /**
      * @var AssertProductQtyInProductDetail
      */
@@ -76,21 +104,21 @@ class WebposProductsGridPG16PG17Test extends Injectable
 
         $qty = 2;
 
-        if ($action === 'add to cart'){
+        if ($action === 'add to cart') {
             $this->webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
             /**
              *  cuz search by sku, simple product added 1 before we trigger ad to cart
              */
-        }elseif ($action === 'change qty'){
+        } elseif ($action === 'change qty') {
 
             // Click on "+" two time
             $this->webposIndex->getCheckoutProductDetail()->getButtonUpQty()->click();
-            $qty+=1;
+            $qty += 1;
             $this->webposIndex->getCheckoutProductDetail()->getButtonUpQty()->click();
-            $qty+=1;
+            $qty += 1;
             // Click on "-" one time
             $this->webposIndex->getCheckoutProductDetail()->getButtonDownQty()->click();
-            $qty-=1;
+            $qty -= 1;
             $this->webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
         }
 

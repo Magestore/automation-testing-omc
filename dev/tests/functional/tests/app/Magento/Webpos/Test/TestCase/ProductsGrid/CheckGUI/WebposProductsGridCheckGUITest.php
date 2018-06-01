@@ -14,6 +14,19 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposProductsGridCheckGUITest
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\CheckGUI
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * 1. Check GUI of product grid
+ *
+ * Acceptance:
+ * "1. Product grid displays on the left of webpos including:
+ * - On header: Search textbox, Category
+ * - Product block with: product image, product name, product price, [View product details] button
+ * - On footer: number of products, page number, Custom sale"
+ *
  */
 class WebposProductsGridCheckGUITest extends Injectable
 {

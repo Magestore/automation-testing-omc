@@ -14,6 +14,17 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposProductGridCheckConfigProductBlockPG19Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\ConfigProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on [View product details]
+ * 2. Click on [Cancel] button"
+ *
+ * Acceptance:
+ * 2. Close [Product detail] popup
+ *
  */
 class WebposProductGridCheckCancelButtonOnConfigProductDetailPG28Test extends Injectable
 {

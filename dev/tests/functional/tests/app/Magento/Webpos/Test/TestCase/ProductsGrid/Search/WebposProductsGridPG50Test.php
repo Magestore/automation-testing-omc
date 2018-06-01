@@ -14,6 +14,17 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposProductsGridPG50Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\Search
+ *
+ * Precondition:
+ * 1. Login Webpos as a staff
+ *
+ * Steps:
+ * "1. Enter incorrect keyword on Search box
+ * 2. Enter or click on Search icon"
+ *
+ * Acceptance:
+ * 2. No results in list and show notice: "We couldn't find any records."
+ *
  */
 class WebposProductsGridPG50Test extends Injectable
 {

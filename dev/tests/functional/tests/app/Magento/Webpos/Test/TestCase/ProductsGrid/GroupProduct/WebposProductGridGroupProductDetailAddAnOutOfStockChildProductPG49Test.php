@@ -11,9 +11,23 @@ namespace Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposProductGridGroupProductDetailAddAnOutOfStockChildProductPG49Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct
+ *
+ * Precondition:
+ * Exist a child product out of stock of Group product
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on [View product details]
+ * 2. Increase [Qty] of an out of stock child product = 1
+ * 3. Click on [Add to cart] button"
+ *
+ * Acceptance:
+ * 3. Show message: "Warning: This product is currently out of stock"
+ *
  */
 class  WebposProductGridGroupProductDetailAddAnOutOfStockChildProductPG49Test extends Injectable
 {
@@ -34,7 +48,8 @@ class  WebposProductGridGroupProductDetailAddAnOutOfStockChildProductPG49Test ex
     public function __inject(
         WebposIndex $webposIndex,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
-    ){
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }

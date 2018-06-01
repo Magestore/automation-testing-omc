@@ -10,9 +10,21 @@ namespace Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposProductGridCheckAddToCartOnGroupProductDetailPG45Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on the Group product block
+ * 2. Click on [Add to cart] button"
+ *
+ * Acceptance:
+ * 2. Show message: "Please specify the quantity of product(s)" under [Qty] text box of each child product
+ *
  */
 class  WebposProductGridCheckAddToCartOnGroupProductDetailPG45Test extends Injectable
 {

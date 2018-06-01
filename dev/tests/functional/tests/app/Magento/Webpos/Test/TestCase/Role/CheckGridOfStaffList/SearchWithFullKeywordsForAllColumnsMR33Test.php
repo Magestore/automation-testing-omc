@@ -15,6 +15,20 @@ use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\Adminhtml\WebposRoleIndex;
 use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
 
+/**
+ * Class SearchWithFullKeywordsForAllColumnsMR33Test
+ * @package Magento\Webpos\Test\TestCase\Role\CheckGridOfStaffList
+ *
+ * Precondition:
+ *
+ *
+ * Steps:
+ *
+ *
+ * Acceptance:
+ *
+ *
+ */
 class SearchWithFullKeywordsForAllColumnsMR33Test extends Injectable
 {
     /**

@@ -14,6 +14,23 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposProductsGridPG10Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct
+ *
+ * Precondition:
+ * "In backend, setting:
+ * 1. On product detail page, Setting [ Backorders] = ""Allow Qty Below 0""
+ * - Edit [Available Qty] = 1
+ * On webpos:
+ * 1. Login webpos as a staff"
+ *
+ * Steps:
+ * "1. Check the product that configurated in [Precondition and setup steps] column
+ * 2. Add that product to cart with qty = 2
+ * 3. Place order successfully"
+ *
+ * Acceptance:
+ * "2. Add product successfully
+ * 3. Qty on that product block is ""-1"""
+ *
  */
 class WebposProductsGridPG10Test extends Injectable
 {

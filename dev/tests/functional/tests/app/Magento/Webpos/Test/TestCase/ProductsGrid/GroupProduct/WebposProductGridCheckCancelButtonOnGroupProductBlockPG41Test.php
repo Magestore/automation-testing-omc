@@ -11,6 +11,27 @@ namespace Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class WebposProductGridCheckCancelButtonOnGroupProductBlockPG41Test
+ * @package Magento\Webpos\Test\TestCase\ProductsGrid\GroupProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on the Group product block
+ * 2. Click on [Cancel] button"
+ *
+ * Acceptance:
+ * "1. Show popup including:
+ * - Action: Cancel
+ * - Product name
+ * - List of child products with name, price and Qty to add
+ * - [Quantity] textbox for each child product, default value = 0
+ * - [Add to cart] button
+ * 2. Close the popup"
+ *
+ */
 class WebposProductGridCheckCancelButtonOnGroupProductBlockPG41Test extends Injectable
 {
     /**

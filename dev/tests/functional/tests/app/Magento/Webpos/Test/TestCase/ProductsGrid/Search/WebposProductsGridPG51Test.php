@@ -14,6 +14,21 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposProductsGridPG51Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\Search
+ *
+ * Precondition:
+ * "In backend:
+ * 1. Go to Sales > Webpos > Settings > Product search:
+ * [Product Attribute(s) for Search]: choose ""SKU"" and ""Product name""
+ * On webpos:
+ * 1. Login Webpos as a staff"
+ *
+ * Steps:
+ * 1. Enter correct SKU or Product name on Search box
+ * 2. Enter or click on Search icon
+ *
+ * Acceptance:
+ * 2. Product grid shows the products have information matchs or contains keyword
+ *
  */
 class WebposProductsGridPG51Test extends Injectable
 {

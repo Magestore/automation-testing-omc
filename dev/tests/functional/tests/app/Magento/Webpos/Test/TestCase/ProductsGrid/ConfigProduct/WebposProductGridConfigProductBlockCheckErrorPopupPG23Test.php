@@ -8,16 +8,31 @@
 
 namespace Magento\Webpos\Test\TestCase\ProductsGrid\ConfigProduct;
 
+use Magento\Config\Test\TestStep\SetupConfigurationStep;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Page\WebposIndex;
-use Magento\Config\Test\TestStep\SetupConfigurationStep;
 use Magento\Mtf\TestStep\TestStepFactory;
-
+use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposProductGridCheckConfigProductBlockPG19Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\ConfigProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on the config product block (only swatch option)
+ * 2. Click on [Add to cart] button
+ * 3. Click on [OK] button on Error popup
+ * 4. Click on [Add to cart] button again
+ * 5. Click on [Close] button on Error popup"
+ *
+ * Acceptance:
+ * "2. Show error popup with message: 'Please choose all options""
+ * 3. Close the error popup
+ * 5. Close the error popup"
+ *
  */
 class  WebposProductGridConfigProductBlockCheckErrorPopupPG23Test extends Injectable
 {
@@ -32,13 +47,14 @@ class  WebposProductGridConfigProductBlockCheckErrorPopupPG23Test extends Inject
      */
     protected $webposIndex;
 
-    public function __inject(WebposIndex $webposIndex,  TestStepFactory $testStepFactory)
+    public function __inject(WebposIndex $webposIndex, TestStepFactory $testStepFactory)
     {
         $this->webposIndex = $webposIndex;
         $this->testStepFactory = $testStepFactory;
     }
 
-    public function test( FixtureFactory $fixtureFactory) {
+    public function test(FixtureFactory $fixtureFactory)
+    {
 
         $this->testStepFactory->create(
             SetupConfigurationStep::class,

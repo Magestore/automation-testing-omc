@@ -14,6 +14,27 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposProductsGridCheckGUISimpleProductTest
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct
+ *
+ * PG02
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * 1. Check simple product block
+ *
+ * Acceptance:
+ * 1. Display correctly image, name of the product
+ *
+ * PG04
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * 1. Check product Qty  on the Product grid
+ *
+ * Acceptance:
+ * 1. Show: "Availability: 0 item(s)"
+ *
  */
 class WebposProductsGridCheckGUISimpleProductTest extends Injectable
 {

@@ -14,6 +14,26 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposProductsGridPG34Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\SimpleProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on [View product details]
+ * 2. Click on [Cancel] button"
+ *
+ * Acceptance:
+ * "1. Show popup including:
+ * - Action: Cancel
+ * - Product image, SKU
+ * - Description
+ * - Product name
+ * - Price of bundle product = SUM (price of selected child product)
+ * - Child products of the bundle product with multi radio butons to choose, auto select first radio button
+ * - [Quantity] textbox for each child product, default value = 1
+ * - [Add to cart] button
+ * 2. Close the popup"
+ *
  */
 class WebposProductsGridPG34Test extends Injectable
 {
@@ -53,12 +73,12 @@ class WebposProductsGridPG34Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
 
-        while ( $this->webposIndex->getCheckoutProductList()->getNumberOfProducts()->getText() != 1) {
+        while ($this->webposIndex->getCheckoutProductList()->getNumberOfProducts()->getText() != 1) {
             sleep(1);
         }
 
         // Close popup
-        if ($this->webposIndex->getCheckoutProductDetail()->isVisible()){
+        if ($this->webposIndex->getCheckoutProductDetail()->isVisible()) {
             $this->webposIndex->getCheckoutProductDetail()->getButtonCancel()->click();
         }
 

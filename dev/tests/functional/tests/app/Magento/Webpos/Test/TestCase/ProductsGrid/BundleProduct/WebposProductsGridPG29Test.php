@@ -14,6 +14,19 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposProductsGridPG29Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\BundleProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * 1. Check bundle product block
+ *
+ * Acceptance:
+ * "1.
+ * - Display correctly image, name of the product
+ * - Don't show Available  Qty on the product block
+ * - Product price = 0"
+ *
  */
 class WebposProductsGridPG29Test extends Injectable
 {
@@ -58,7 +71,7 @@ class WebposProductsGridPG29Test extends Injectable
 
         /** wait render popup */
         sleep(2);
-        if ($this->webposIndex->getCheckoutProductDetail()->isVisible()){
+        if ($this->webposIndex->getCheckoutProductDetail()->isVisible()) {
             $this->webposIndex->getCheckoutProductDetail()->getButtonCancel()->click();
         }
 

@@ -12,8 +12,26 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposProductGridCheckConfigProductBlockPG19Test
+ * Class WebposProductGridConfigProductPopupCheckCancelButtonPG22Test
  * @package Magento\Webpos\Test\TestCase\ProductsGrid\ConfigProduct
+ *
+ * Precondition:
+ * 1. Login webpos as a staff
+ *
+ * Steps:
+ * "1. Click on the config product block
+ * 2. Click on [Cancel] button"
+ *
+ * Acceptance:
+ * "1. Show popup including:
+ * - Action: Cancel
+ * - Product name
+ * - Price
+ * - Product attibute options
+ * - Qty add to cart
+ * - [Add to cart] button
+ * 2. Close the popup"
+ *
  */
 class WebposProductGridConfigProductPopupCheckCancelButtonPG22Test extends Injectable
 {
