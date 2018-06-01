@@ -7,6 +7,7 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Location;
@@ -16,6 +17,27 @@ use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
+ * Staff Permission
+ * Testcase MS66 - Permission
+ *
+ * Precondition:
+ * 1. Go to backend > Sales > Manage Roles
+ * 2. Add a new role
+ * - Permission: Manage Inventory
+ * 3. Add new staff:
+ * - Select the role that create on step 2
+ * - Select location
+ *
+ * Steps
+ * 1. Login webpos by the staff who created on step 3 of [Precondition and setup steps] column
+ * 2. Check permission of this staff
+ *
+ * Acceptance Criteria
+ * 2.
+ * - Show [Manage stocks] on menu
+ * - Hide [Order History] tab on menu
+ * - This staff is not able to add discount and edit custom price
+ *
  * Class WebposManageStaffMS66Test
  * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
  */
@@ -41,7 +63,8 @@ class WebposManageStaffMS66Test extends Injectable
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
     }
@@ -61,7 +84,7 @@ class WebposManageStaffMS66Test extends Injectable
     public function test(WebposRole $webposRole, $products, $staffData)
     {
         //Create role and staff for role
-        /**@var Location $location*/
+        /**@var Location $location */
         $location = $this->fixtureFactory->createByCode('location', ['dataset' => 'default']);
         $location->persist();
         $locationId = $location->getLocationId();
@@ -70,7 +93,7 @@ class WebposManageStaffMS66Test extends Injectable
         $array = [];
         $array[] = $locationId;
         $posData['location_id'] = $array;
-        /**@var Pos $pos*/
+        /**@var Pos $pos */
         $pos = $this->fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
@@ -80,7 +103,7 @@ class WebposManageStaffMS66Test extends Injectable
         $array = [];
         $array[] = $posId;
         $staffData['pos_ids'] = $array;
-        /**@var Staff $staff*/
+        /**@var Staff $staff */
         $staff = $this->fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff->persist();
         $roleData = $webposRole->getData();
@@ -154,7 +177,7 @@ class WebposManageStaffMS66Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 360;
-            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
                 $time = time();
             }
             sleep(2);

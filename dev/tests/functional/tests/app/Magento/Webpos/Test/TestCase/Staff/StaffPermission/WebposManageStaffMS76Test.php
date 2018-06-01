@@ -16,7 +16,31 @@ use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
+ * *
+ * Staff Permission
+ * Testcase MS76 - Permission
+ *
+ * Precondition:
+ * 1. Go to backend > Sales > Manage Roles
+ * 2. Add a new role
+ * - Permission: Apply Custom Price
+ * 3. Add new staff:
+ * - Select the role that create on step 2
+ * - Select location
+ *
+ * Steps
+ * 1. Login webpos by the staff account just selected
+ * 2. Add some  products to cart
+ * 3. Click to Edit item price
+ * 4. Enter custom price
+ * 5. Place order as manual
+ *
+ * Acceptance Criteria
+ * 4. Apply custom price successfully
+ * 5. Place order successfully and saved on [Order detail] page
+ *
  * Class WebposManageStaffMS76Test
  * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
  */
@@ -47,7 +71,8 @@ class WebposManageStaffMS76Test extends Injectable
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory,
         AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
@@ -71,7 +96,7 @@ class WebposManageStaffMS76Test extends Injectable
     public function test(WebposRole $webposRole, $products, $staffData)
     {
         //Create role and staff for role
-        /**@var Location $location*/
+        /**@var Location $location */
         $location = $this->fixtureFactory->createByCode('location', ['dataset' => 'default']);
         $location->persist();
         $locationId = $location->getLocationId();
@@ -80,7 +105,7 @@ class WebposManageStaffMS76Test extends Injectable
         $array = [];
         $array[] = $locationId;
         $posData['location_id'] = $array;
-        /**@var Pos $pos*/
+        /**@var Pos $pos */
         $pos = $this->fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
@@ -90,7 +115,7 @@ class WebposManageStaffMS76Test extends Injectable
         $array = [];
         $array[] = $posId;
         $staffData['pos_ids'] = $array;
-        /**@var Staff $staff*/
+        /**@var Staff $staff */
         $staff = $this->fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff->persist();
         $roleData = $webposRole->getData();
@@ -140,7 +165,7 @@ class WebposManageStaffMS76Test extends Injectable
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
         //End Assert Place Order Success
-        $orderId = str_replace('#' , '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
+        $orderId = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         //Go to Orders History
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -169,7 +194,7 @@ class WebposManageStaffMS76Test extends Injectable
             $this->webposIndex->getLoginForm()->clickLoginButton();
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
 //            $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
-           sleep(2);
+            sleep(2);
             if ($location) {
                 $this->webposIndex->getLoginForm()->setLocation($location->getDisplayName());
             }
@@ -183,7 +208,7 @@ class WebposManageStaffMS76Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 360;
-            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
                 $time = time();
             }
             sleep(2);

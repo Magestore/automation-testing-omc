@@ -15,6 +15,30 @@ use Magento\Webpos\Test\Constraint\Staff\AssertShowMessageNotification;
 use Magento\Webpos\Test\Constraint\Staff\AssertShowNewNotification;
 
 /**
+ * *
+ * Staff Permission
+ * Testcase MS60 - Permission
+ *
+ * Precondition:
+ * 1. Go to backend > Sales > Manage Roles
+ * 2. Add a new role:
+ * - Permission: Manage Order Created By This Staff
+ * - Select a staff A
+ *
+ * Steps
+ * 1. Login webpos by the staff A
+ * 2. Place an order successfully
+ * 3. Send email
+ * 4. Add comment
+ * 5. Print
+ * 6. Re-order
+ *
+ * Acceptance Criteria
+ *3. Send email successfully and show a new notification
+ * 4. Add comment successfully, show a new notification and comment will be shown on comment history of detail page
+ * 5. when click on print button,dispaly print popup to print invoice
+ * 6. When click on Re-order action, all items will be loaded to cart
+ *
  * Class WebposManageStaffMS60Test
  * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
  */

@@ -5,13 +5,37 @@
  * Date: 12/02/2018
  * Time: 09:14
  */
+
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertEditDiscountCustomPrice;
+
 /**
+ *  Staff Permission
+ * Testcase MS54 - Edit custom price
+ *
+ * Precondition:
+ * 1. Go to backend > Sales > Manage Roles
+ * 2. Add a new role:
+ * - Maximum discount percent(%): 50
+ * - Select all permission
+ * - Select a staff A
+ *
+ * Steps
+ * 1. Login webpos by the staff A
+ * 2. Add some  products to cart
+ * 3. Click on the product name on cart
+ * - Enter custom price less than 50% of original price
+ * 4. Place order
+ *
+ * Acceptance Criteria
+ * 4.
+ * - Only can edit custom price with minimum price is 50 % of original price
+ * - Place order successfully
+ *
  * Class WebposManageStaffMS54Test
  * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
  */
@@ -43,7 +67,8 @@ class WebposManageStaffMS54Test extends Injectable
     public function __inject(
         WebposIndex $webposIndex,
         AssertEditDiscountCustomPrice $assertEditDiscountCustomPrice
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->assertEditDiscountCustomPrice = $assertEditDiscountCustomPrice;
     }
@@ -69,7 +94,7 @@ class WebposManageStaffMS54Test extends Injectable
         $product2 = $products[1]['product'];
 
         //LoginTest
-        $this->loginWebpos($this->webposIndex, $dataStaff['username'],$dataStaff['password']);
+        $this->loginWebpos($this->webposIndex, $dataStaff['username'], $dataStaff['password']);
 
         //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
@@ -109,7 +134,7 @@ class WebposManageStaffMS54Test extends Injectable
 
         //Get orderId
         $orderId = $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText();
-        $orderId= ltrim ($orderId,'#');
+        $orderId = ltrim($orderId, '#');
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         sleep(1);
         return [
@@ -130,7 +155,7 @@ class WebposManageStaffMS54Test extends Injectable
             $webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 360;
-            while ($webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            while ($webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
                 $time = time();
             }
             sleep(2);

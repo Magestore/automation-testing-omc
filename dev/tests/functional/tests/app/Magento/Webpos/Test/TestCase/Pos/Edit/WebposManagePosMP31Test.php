@@ -120,8 +120,9 @@ class WebposManagePosMP31Test extends Injectable
         $this->posNews->getPosForm()->getPushMoneyInAmountField()->setValue($money + 5);
         $this->posNews->getPosForm()->saveCashAdjustment();
         $this->posNews->getPosForm()->waitForLoaderHidden();
+        sleep(1);
         $this->posNews->getPosForm()->getCurrentSessionButtonByTitle('Take Money Out')->click();
-        $this->posNews->getPosForm()->waitForModalLoad();
+        $this->posNews->getPosForm()->waitForPushMoneyModalLoad();
         $this->posNews->getPosForm()->getPushMoneyInAmountField()->setValue($money);
         $this->posNews->getPosForm()->saveCashAdjustment();
         $this->posNews->getPosForm()->waitForLoaderHidden();

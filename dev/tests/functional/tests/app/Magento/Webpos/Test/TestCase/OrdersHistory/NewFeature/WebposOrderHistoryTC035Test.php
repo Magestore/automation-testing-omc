@@ -32,11 +32,21 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 class WebposOrderHistoryTC035Test extends Injectable
 {
+    //Open session
+    public function __prepare()
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_yes']
+        )->run();
+    }
+
     /**
      * @param WebposIndex $webposIndex
      * @param $products
      * @param $qty
      */
+
     public function test(WebposIndex $webposIndex, $products, $qty)
     {
         //Create products
@@ -74,11 +84,15 @@ class WebposOrderHistoryTC035Test extends Injectable
         $webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#webpos_checkout');
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#checkout-method');
-        sleep(1);
         $webposIndex->getCheckoutPlaceOrder()->getPaymentByMethod('cashforpos')->click();
+        sleep(1);
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#payment-method');
         $webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $webposIndex->getCheckoutSuccess()->waitForLoadingIndicator();
+        sleep(2);
+        if ($webposIndex->getCheckoutProductDetail()->isVisible()) {
+            $webposIndex->getCheckoutProductDetail()->getCancelButton()->click();
+        }
         $webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $webposIndex->getMsWebpos()->waitForCMenuVisible();
 
@@ -90,8 +104,17 @@ class WebposOrderHistoryTC035Test extends Injectable
         $webposIndex->getOrderHistoryOrderList()->waitLoader();
         $webposIndex->getOrderHistoryOrderList()->waitListOrders();
         $webposIndex->getOrderHistoryOrderList()->waitForFirstOrderVisible();
+        sleep(1);
         $webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
 
     }
 
+    /*Close session*/
+    public function tearDown()
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_no']
+        )->run();
+    }
 }

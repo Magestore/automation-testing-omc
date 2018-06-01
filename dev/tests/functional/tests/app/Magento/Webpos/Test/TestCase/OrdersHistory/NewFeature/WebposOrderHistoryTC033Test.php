@@ -32,6 +32,15 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 class WebposOrderHistoryTC033Test extends Injectable
 {
+    //Open session
+    public function __prepare()
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_yes']
+        )->run();
+    }
+
     /**
      * @param FixtureFactory $fixtureFactory
      * @param WebposIndex $webposIndex
@@ -92,4 +101,12 @@ class WebposOrderHistoryTC033Test extends Injectable
         $webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
     }
 
+    /*Close session*/
+    public function tearDown()
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_no']
+        )->run();
+    }
 }

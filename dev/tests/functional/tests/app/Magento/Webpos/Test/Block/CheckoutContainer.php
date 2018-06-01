@@ -66,4 +66,8 @@ class CheckoutContainer extends Block
     public function waitForPopupAddBillingVisible(){
         $this->waitForElementVisible('#form-customer-add-billing-address-checkout');
     }
+
+    public function getToastMessage(){
+        return $this->_rootElement->find();
+    }
 }

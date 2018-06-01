@@ -147,6 +147,7 @@ class Dashboard extends Block
     {
         return $this->_rootElement->find('#container div.admin__data-grid-wrap table tbody .col-payment.method_title');
     }
+
     public function getStaffName()
     {
         return $this->_rootElement->find('#container div.admin__data-grid-wrap table tbody .col-webpos_staff_name');
@@ -187,8 +188,25 @@ class Dashboard extends Block
         return $this->getLasRowDataGrid()->find('.col-created_date')->getText();
     }
 
+    public function getLastLocationGrid()
+    {
+        if (strpos($this->getLasRowDataGrid()->getAttribute('class'), 'data-grid-tr-no-data') === false) {
+            return $this->getLasRowDataGrid()->find('.//td[contains(normalize-space(@class), "col-location.display_name")]', locator::SELECTOR_XPATH)->getText();
+        }
+        return 'We couldn\'t find any records.';
+    }
+
+    public function getLastPaymentGrid()
+    {
+        if (strpos($this->getLasRowDataGrid()->getAttribute('class'), 'data-grid-tr-no-data') === false) {
+            return $this->getLasRowDataGrid()->find('.//td[contains(normalize-space(@class), "col-payment.method_title")]', locator::SELECTOR_XPATH)->getText();
+        }
+        return 'We couldn\'t find any records.';
+    }
+
     public function waitLoader()
     {
         $this->waitForElementVisible('.data-grid tbody tr');
     }
+
 }

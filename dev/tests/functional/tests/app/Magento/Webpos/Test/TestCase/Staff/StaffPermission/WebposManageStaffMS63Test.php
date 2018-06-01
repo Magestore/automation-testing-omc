@@ -7,6 +7,7 @@
  */
 
 namespace Magento\Webpos\Test\TestCase\Staff\StaffPermission;
+
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Location;
@@ -16,6 +17,32 @@ use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
+ * *
+ * Staff Permission
+ * Testcase MS63 - Permission
+ *
+ * Precondition:
+ * 1. Go to backend > Sales > Manage Roles
+ * 2. Add a new role
+ * - Permission: Manage Order Created at Location of Staff
+ * 3. Add new staff:
+ * - Select the role that create on step 2
+ * - Select a location
+ *
+ * Steps
+ * 1. Login webpos by the staff who created on step 3 of [Precondition and setup steps] column
+ * 2. Create an order successfully > go to Order detail page
+ * 3. Send email
+ * 4. Add comment
+ * 5. Print
+ * 6. Re-order
+ *
+ * Acceptance Criteria
+ * 3. Send email successfully and show a new notification
+ * 4. Add comment successfully, show a new notification and comment will be shown on comment history of detail page
+ * 5. when click on print button,dispaly print popup to print invoice
+ * 6. When click on Re-order action, all items will be loaded to cart
+ *
  * Class WebposManageStaffMS63Test
  * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
  */
@@ -41,7 +68,8 @@ class WebposManageStaffMS63Test extends Injectable
     public function __inject(
         WebposIndex $webposIndex,
         FixtureFactory $fixtureFactory
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
     }
@@ -61,7 +89,7 @@ class WebposManageStaffMS63Test extends Injectable
     public function test(WebposRole $webposRole, $products, $staffData)
     {
         //Create role and staff for role
-        /**@var Location $location*/
+        /**@var Location $location */
         $location = $this->fixtureFactory->createByCode('location', ['dataset' => 'default']);
         $location->persist();
         $locationId = $location->getLocationId();
@@ -70,7 +98,7 @@ class WebposManageStaffMS63Test extends Injectable
         $array = [];
         $array[] = $locationId;
         $posData['location_id'] = $array;
-        /**@var Pos $pos*/
+        /**@var Pos $pos */
         $pos = $this->fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
@@ -80,7 +108,7 @@ class WebposManageStaffMS63Test extends Injectable
         $array = [];
         $array[] = $posId;
         $staffData['pos_ids'] = $array;
-        /**@var Staff $staff*/
+        /**@var Staff $staff */
         $staff = $this->fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff->persist();
         $roleData = $webposRole->getData();
@@ -209,7 +237,7 @@ class WebposManageStaffMS63Test extends Injectable
             $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 360;
-            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
                 $time = time();
             }
             sleep(2);

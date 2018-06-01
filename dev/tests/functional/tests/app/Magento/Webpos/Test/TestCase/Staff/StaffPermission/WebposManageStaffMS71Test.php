@@ -18,6 +18,30 @@ use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
+ * *
+ * Staff Permission
+ * Testcase MS57 - Permission
+ *
+ * Precondition:
+ * 1. Go to backend > Sales > Manage Roles
+ * 2. Add a new role with permission:
+ * + Manage order
+ * + Apply Custom Discount Per Cart
+ * 3. Add new staff:
+ * - Select the role that create on step 2
+ * - Select location
+ *
+ * Steps
+ * 1. Login webpos by the staff who created on step 3 of [Precondition and setup steps] column
+ * 2. Add some  products to cart
+ * 3. Click to [Add discount]
+ * 4. Enter a valid amount (type %) > Apply
+ * 5. Place order
+ *
+ * Acceptance Criteria
+ * 4. Apply discount successfully, total amount will be updated
+ * 5. Place order successfully and saved on [Order detail] page
+ *
  * Class WebposManageStaffMS71Test
  * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
  */
@@ -169,7 +193,7 @@ class WebposManageStaffMS71Test extends Injectable
         //check if WrapWarningForm is visible when this staff has been logged in
         $time = time();
         $timeAfter = $time + 30;
-        while (!$this->webposIndex->getWrapWarningForm()->isVisible() && $time < $timeAfter){
+        while (!$this->webposIndex->getWrapWarningForm()->isVisible() && $time < $timeAfter) {
             $time = time();
         }
         if ($this->webposIndex->getWrapWarningForm()->isVisible() &&
@@ -190,7 +214,7 @@ class WebposManageStaffMS71Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
         $time = time();
         $timeAfter = $time + 90;
-        while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+        while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
             $time = time();
         }
 //        sleep(2);
@@ -199,7 +223,7 @@ class WebposManageStaffMS71Test extends Injectable
             'username' => $username,
             'password' => $password
         ];
-        return $this->fixtureFactory->createByCode('staff' , ['data' => $data]);
+        return $this->fixtureFactory->createByCode('staff', ['data' => $data]);
     }
 }
 

@@ -33,6 +33,15 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 class WebposOrderHistoryTC036Test extends Injectable
 {
+    //Open session
+    public function __prepare()
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_yes']
+        )->run();
+    }
+
     /**
      * @param WebposIndex $webposIndex
      * @param $products
@@ -114,6 +123,15 @@ class WebposOrderHistoryTC036Test extends Injectable
                 $childProductData[0]
             ]
         ];
+    }
+
+    /*Close session*/
+    public function tearDown()
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_no']
+        )->run();
     }
 
 }

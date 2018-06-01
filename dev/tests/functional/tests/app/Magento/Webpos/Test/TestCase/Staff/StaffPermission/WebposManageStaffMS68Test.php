@@ -18,6 +18,25 @@ use Magento\Webpos\Test\Fixture\WebposRole;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
+ * *
+ * Staff Permission
+ * Testcase MS68 - Permission
+ *
+ * Precondition:
+ * 1. Go to backend > Sales > Manage Roles
+ * 2. Add a new role
+ * - Permission: Manage Inventory
+ * 3. Add new staff:
+ * - Select the role that create on step 2
+ * - Select location
+ *
+ * Steps
+ * 1. Login webpos by the staff who created on step 3 of [Precondition and setup steps] column
+ * 2. Create a new order
+ *
+ * Acceptance Criteria
+ * 2. Checkout and save order successfully but this staff can not view the order
+ *
  * Class WebposManageStaffMS68Test
  * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
  */

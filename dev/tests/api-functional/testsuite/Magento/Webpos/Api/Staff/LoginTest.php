@@ -18,12 +18,12 @@ class LoginTest extends WebapiAbstract
     /**
      * @var $username
      */
-    protected $username = 'admin';
+    protected $username = \Magento\TestFramework\Bootstrap::ADMIN_NAME;
 
     /**
      * @var $password
      */
-    protected $password = 'admin123';
+    protected $password = \Magento\TestFramework\Bootstrap::ADMIN_PASSWORD;
 
     /**
      * const RESOURCE_PATH
