@@ -14,6 +14,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposXreportZR027Test
+ * @package Magento\Webpos\Test\TestCase\Zreport
  *
  * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff who has open and close session permission
@@ -42,8 +43,6 @@ use Magento\Webpos\Test\Page\WebposIndex;
  *
  * - Cash in= [Cash sales]
  * And show all of the payment methods with their total that placed on this session"
- *
- * @package Magento\Webpos\Test\TestCase\Zreport
  */
 class WebposXreportZR027Test extends Injectable
 {
@@ -123,8 +122,7 @@ class WebposXreportZR027Test extends Injectable
         $this->webposIndex->getCheckoutPaymentMethod()->waitForCustomPayment1Method();
         $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
-        $this->webposIndex->getMainContent()->waitForMsWebpos();
-        $this->webposIndex->getMsWebpos()->clickOutsidePopup();
+        $this->webposIndex->getCheckoutPaymentMethod()->getTitlePaymentMethod()->click();
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();
         $this->webposIndex->getCheckoutAddMorePayment()->getCashIn()->click();

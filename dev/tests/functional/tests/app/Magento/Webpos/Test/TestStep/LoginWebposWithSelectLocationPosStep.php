@@ -63,6 +63,7 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
             $this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
             $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
             $this->webposIndex->getLoginForm()->clickLoginButton();
+            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
             //check if WrapWarningForm is visible when this staff has been logged in
             $time = time();
             $timeAfter = $time + 3;
@@ -76,11 +77,13 @@ class LoginWebposWithSelectLocationPosStep implements TestStepInterface
                 $this->webposIndex->getWrapWarningForm()->getButtonContinue()->isVisible()) {
                 $this->webposIndex->getWrapWarningForm()->getButtonContinue()->click();
             }
+            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
             $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
             if ($this->webposIndex->getLoginForm()->getPosID()->isVisible()) {
                 $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
             }
             $this->webposIndex->getLoginForm()->getEnterToPos()->click();
+            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
             $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 90;
