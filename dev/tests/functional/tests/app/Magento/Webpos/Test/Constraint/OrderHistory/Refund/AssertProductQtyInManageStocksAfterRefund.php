@@ -22,7 +22,7 @@ class AssertProductQtyInManageStocksAfterRefund extends AbstractConstraint
         $webposIndex->getMsWebpos()->clickCMenuButton();
         sleep(1);
         $webposIndex->getCMenu()->manageStocks();
-        sleep(1);
+        $this->webposIndex->getManageStockList()->waitFirstProductRowVisible();
         foreach ($products as $item) {
             if (isset($item['returnToStock'])) {
                 $expectedQty = $item['product']->getQuantityAndStockStatus()['qty'];

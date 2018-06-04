@@ -108,6 +108,11 @@ class ManageStockList extends Block
         return $this->_rootElement->find('.table-product tbody tr:nth-child(1)');
     }
 
+    public function waitFirstProductRowVisible()
+    {
+        return $this->waitForElementVisible('.table-product tbody tr:nth-child(1)');
+    }
+
     /**
      * @param ElementInterface $divCheckbox
      * @return bool|int
@@ -115,7 +120,7 @@ class ManageStockList extends Block
     public function isCheckboxChecked($divCheckbox)
     {
         $class = $divCheckbox->find('div')->getAttribute('class');
-        if(strpos($class, 'checked') !== false){
+        if (strpos($class, 'checked') !== false) {
             return true;
         }
         return false;
@@ -157,7 +162,8 @@ class ManageStockList extends Block
         return $this->_rootElement->find('.sum-info-top .address');
     }
 
-    public function waitForProductListShow(){
+    public function waitForProductListShow()
+    {
         $this->waitForElementVisible('.table-product tbody');
     }
 
@@ -166,11 +172,13 @@ class ManageStockList extends Block
         return $this->getProductRow($productName)->find('.ios-ui-select');
     }
 
-    public function getManageStockSwitchByProduct($productName){
+    public function getManageStockSwitchByProduct($productName)
+    {
         return $this->getProductManageStocksCheckbox($productName)->find('.ios-ui-select');
     }
 
-    public function getBackOrdersSwitchByProduct($productName){
+    public function getBackOrdersSwitchByProduct($productName)
+    {
         return $this->getProductBackOrdersCheckbox($productName)->find('.ios-ui-select');
     }
 
@@ -184,11 +192,13 @@ class ManageStockList extends Block
         return $this->getProductRow($productName)->find('.icon-iconPOS-success');
     }
 
-    public function resetSearchProduct(){
+    public function resetSearchProduct()
+    {
         $this->getSearchBox()->setValue('');
     }
 
-    public function getInStockValueByProduct($productName){
+    public function getInStockValueByProduct($productName)
+    {
         $inStock = $this->getInStockSwitchByProduct($productName);
         if (strpos($inStock->getAttribute('class'), 'checked') !== false) {
             return true;
@@ -196,7 +206,8 @@ class ManageStockList extends Block
         return false;
     }
 
-    public function getManageStockValueByProduct($productName){
+    public function getManageStockValueByProduct($productName)
+    {
         $inStock = $this->getManageStockSwitchByProduct($productName);
         if (strpos($inStock->getAttribute('class'), 'checked') !== false) {
             return true;
@@ -204,7 +215,8 @@ class ManageStockList extends Block
         return false;
     }
 
-    public function getBackOrdersValueByProduct($productName){
+    public function getBackOrdersValueByProduct($productName)
+    {
         $inStock = $this->getBackOrdersSwitchByProduct($productName);
         if (strpos($inStock->getAttribute('class'), 'checked') !== false) {
             return true;

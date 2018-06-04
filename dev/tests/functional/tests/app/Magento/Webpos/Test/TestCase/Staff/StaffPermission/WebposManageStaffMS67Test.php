@@ -131,7 +131,7 @@ class WebposManageStaffMS67Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="c-button--push-left"]');
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->webposIndex->getCMenu()->manageStocks();
-        sleep(1);
+        $this->webposIndex->getManageStockList()->waitFirstProductRowVisible();
         foreach ($products as $item) {
             $this->webposIndex->getManageStockList()->searchProduct($item['product']->getName());
             $this->webposIndex->getManageStockList()->waitForProductListShow();
