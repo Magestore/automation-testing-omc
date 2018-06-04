@@ -79,6 +79,7 @@ class LoginWebposStep implements TestStepInterface
             }
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
             //Check Form Choose Location
+            sleep(1);
             if ($this->webposIndex->getLoginForm()->getLocationID()->isVisible()) {
                 $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
                 if ($this->webposIndex->getLoginForm()->getPosID()->isVisible()) {

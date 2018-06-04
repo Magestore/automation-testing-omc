@@ -24,27 +24,29 @@ class OrderHistoryOrderList extends Block
     {
         return $this->_rootElement->find('#search-header-order');
     }
-	public function search($string)
-	{
-		$this->_rootElement->find('#search-header-order')->setValue($string);
-	}
 
-	public function getFirstOrder()
-	{
+    public function search($string)
+    {
+        $this->_rootElement->find('#search-header-order')->setValue($string);
+    }
+
+    public function getFirstOrder()
+    {
         sleep(2);
 //        $this->waitForFirstOrderVisible();
-		return $this->_rootElement->find('.list-orders .order-item');
-	}
+        return $this->_rootElement->find('.list-orders .order-item');
+    }
 
-	public function getSecondOrder()
+    public function getSecondOrder()
     {
         return $this->_rootElement->find('//ul[@class="list-orders"]/li[2]', Locator::SELECTOR_XPATH);
     }
 
-	public function waitForFirstOrderVisible() {
-        $orderItem = $this->_rootElement->find('.list-orders .order-item');
+    public function waitForFirstOrderVisible()
+    {
+        $orderItem = $this->_rootElement->find('.list-orders .order-item:first-child');
         if (!$orderItem->isVisible()) {
-            $this->waitForElementVisible('.list-orders .order-item');
+            $this->waitForElementVisible('.list-orders .order-item:first-child');
         }
     }
 
@@ -58,17 +60,17 @@ class OrderHistoryOrderList extends Block
         return $this->_rootElement->find('//ul[@class="list-orders"]/li[2]/div/div[@class="id-order"]/span[@class="id"]', Locator::SELECTOR_XPATH);
     }
 
-	public function waitLoader()
-	{
-		$this->waitForElementNotVisible('.wrap-item-order .indicator');
-	}
+    public function waitLoader()
+    {
+        $this->waitForElementNotVisible('.wrap-item-order .indicator');
+    }
 
-	public function waitListOrders()
+    public function waitListOrders()
     {
         $this->waitForElementVisible('.wrap-item-order ul.list-orders');
     }
 
-	public function getOrdersTitle()
+    public function getOrdersTitle()
     {
         return $this->_rootElement->find('[class="title title-header-page"]');
     }

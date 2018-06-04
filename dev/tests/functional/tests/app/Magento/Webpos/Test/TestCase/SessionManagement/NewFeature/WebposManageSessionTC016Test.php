@@ -76,7 +76,7 @@ class WebposManageSessionTC016Test extends Injectable
 
         $webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#webpos_checkout');
-        $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#checkout-method');
+        $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#checkout-method .payment');
         $webposIndex->getCheckoutPlaceOrder()->getPaymentByMethod('cashforpos')->click();
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#payment-method');
         \PHPUnit_Framework_Assert::assertTrue(
