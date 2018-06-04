@@ -49,6 +49,7 @@ class WebposSetClosingBalanceCloseSessionStep implements TestStepInterface
         $this->webposIndex->getCMenu()->getSessionManagement();
         $this->webposIndex->getMsWebpos()->waitForSessionManagerLoader();
         // Set closing balance
+        $this->webposIndex->getSessionShift()->waitForSetClosingBalanceButtonVisible();
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
         $this->webposIndex->getSessionCloseShift()->waitSetClosingBalancePopupVisible();
         if ($this->denomination != null) {

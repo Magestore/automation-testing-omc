@@ -113,10 +113,10 @@ class WebposZreportZR016Test extends Injectable
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->logout();
-        $this->webposIndex->getBody()->waitForModalPopup();
+        $this->webposIndex->getModal()->waitForModalPopup();
         $this->webposIndex->getModal()->getOkButton()->click();
-        $this->webposIndex->getBody()->waitForModalPopupNotVisible();
-        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader.loading-mask');
+        $this->webposIndex->getModal()->waitForModalPopupNotVisible();
+        $this->webposIndex->getModal()->waitForElementNotVisible('#checkout-loader.loading-mask');
 
         // Login webpos
         $this->objectManager->getInstance()->create(
@@ -142,10 +142,14 @@ class WebposZreportZR016Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForFormAddNoteOrderVisible();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Refund')->click();
         $this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
+        $product = $this->fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $products[0]]);
+        $priceRefund = $this->convertPriceFormatToDecimal($this->webposIndex->getOrderHistoryRefund()->getItemPrice($product->getName()));
+        $shippingRefund = floatval($this->webposIndex->getOrderHistoryRefund()->getRefundShipping()->getValue());
+        $refund = (-1) * ($priceRefund + $shippingRefund);
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
-        $this->webposIndex->getBody()->waitForModalPopup();
+        $this->webposIndex->getModal()->waitForModalPopup();
         $this->webposIndex->getModal()->getOkButton()->click();
-        $this->webposIndex->getBody()->waitForModalPopupNotVisible();
+        $this->webposIndex->getModal()->waitForModalPopupNotVisible();
 
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\WebposSetClosingBalanceCloseSessionStep',
@@ -159,7 +163,7 @@ class WebposZreportZR016Test extends Injectable
         $this->webposIndex->getSessionShift()->waitReportPopupVisible();
 
         return [
-            'refund' => 0
+            'refund' => $refund
         ];
     }
 

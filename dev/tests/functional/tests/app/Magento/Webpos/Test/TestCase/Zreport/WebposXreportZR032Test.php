@@ -138,9 +138,9 @@ class WebposXreportZR032Test extends Injectable
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->logout();
-        $this->webposIndex->getBody()->waitForModalPopup();
+        $this->webposIndex->getModal()->waitForModalPopup();
         $this->webposIndex->getModal()->getOkButton()->click();
-        $this->webposIndex->getBody()->waitForModalPopupNotVisible();
+        $this->webposIndex->getModal()->waitForModalPopupNotVisible();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader.loading-mask');
 
         // Login webpos
@@ -170,9 +170,9 @@ class WebposXreportZR032Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Refund')->click();
         $this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
-        $this->webposIndex->getBody()->waitForModalPopup();
+        $this->webposIndex->getModal()->waitForModalPopup();
         $this->webposIndex->getModal()->getOkButton()->click();
-        $this->webposIndex->getBody()->waitForModalPopupNotVisible();
+        $this->webposIndex->getModal()->waitForModalPopupNotVisible();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getMsWebpos()->waitForCMenuLoader();

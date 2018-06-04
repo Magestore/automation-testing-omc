@@ -123,6 +123,7 @@ class AdminSessionManagementLR23Test extends Injectable
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
+        $this->webposIndex->getCMenu()->waitForLockRegister();
         $this->assertTrue(
             $this->webposIndex->getCMenu()->getLockRegister()->isVisible(),
             'Lock register not visible'

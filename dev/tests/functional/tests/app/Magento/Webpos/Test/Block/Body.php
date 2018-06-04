@@ -21,15 +21,4 @@ class Body extends Block
         $minHeight = (float)str_replace('px;', '', $minHeight);
         return $minHeight;
     }
-
-    public function waitForModalPopup()
-    {
-        $this->waitForElementVisible('.modals-wrapper .modal-popup');
-    }
-
-    public function waitForModalPopupNotVisible()
-    {
-        sleep(1);
-        $this->waitForElementNotVisible('.modals-wrapper .modal-popup');
-    }
 }
