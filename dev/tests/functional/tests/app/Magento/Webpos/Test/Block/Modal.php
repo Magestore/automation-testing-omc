@@ -21,6 +21,7 @@ class Modal extends Block
     public function waitForModalPopup()
     {
         $this->waitForElementVisible('.modal-popup');
+        sleep(1);
     }
 
     public function waitForModalPopupNotVisible()
