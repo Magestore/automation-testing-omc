@@ -42,9 +42,9 @@ class OrderHistoryOrderList extends Block
     }
 
 	public function waitForFirstOrderVisible() {
-        $orderItem = $this->_rootElement->find('.list-orders .order-item');
+        $orderItem = $this->_rootElement->find('.list-orders .order-item:first-child');
         if (!$orderItem->isVisible()) {
-            $this->waitForElementVisible('.list-orders .order-item');
+            $this->waitForElementVisible('.list-orders .order-item:first-child');
         }
     }
 
