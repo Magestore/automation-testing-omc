@@ -76,7 +76,7 @@ class WebposManageSessionTC018Test extends Injectable
         //Check out with payment
         $webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#webpos_checkout');
-        $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#checkout-method');
+        $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#checkout-method .payment');
         $webposIndex->getCheckoutPlaceOrder()->getPaymentByMethod('cashforpos')->click();
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#payment-method');
 
