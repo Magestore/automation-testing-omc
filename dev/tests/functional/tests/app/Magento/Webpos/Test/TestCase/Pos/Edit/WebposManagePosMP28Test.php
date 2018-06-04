@@ -59,7 +59,7 @@ class WebposManagePosMP28Test extends Injectable
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'create_section_before_working_yes_MS57']
+            ['configData' => 'create_section_before_working_yes']
         )->run();
     }
 
@@ -124,7 +124,7 @@ class WebposManagePosMP28Test extends Injectable
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'create_section_before_working_no_MS57']
+            ['configData' => 'create_section_before_working_no']
         )->run();
     }
 
