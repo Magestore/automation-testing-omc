@@ -79,6 +79,7 @@ class WebposManageSessionTC029Test extends Injectable
         $webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#webpos_checkout');
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#checkout-method .payment');
+        sleep(1);
         $webposIndex->getCheckoutPlaceOrder()->getPaymentByMethod('cashforpos')->click();
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#payment-method');
         $webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
