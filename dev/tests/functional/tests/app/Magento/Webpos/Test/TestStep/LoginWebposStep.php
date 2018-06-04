@@ -78,17 +78,7 @@ class LoginWebposStep implements TestStepInterface
                 $this->webposIndex->getWrapWarningForm()->getButtonContinue()->click();
             }
             $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-            //Check Form Choose Location
-            sleep(1);
-            if ($this->webposIndex->getLoginForm()->getLocationID()->isVisible()) {
-                $this->webposIndex->getLoginForm()->selectLocation('Store Address')->click();
-                if ($this->webposIndex->getLoginForm()->getPosID()->isVisible()) {
-                    $this->webposIndex->getLoginForm()->selectPos('Store POS')->click();
-                }
-                $this->webposIndex->getLoginForm()->getEnterToPos()->click();
-                $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-                $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
-            }
+            $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 90;
             while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
