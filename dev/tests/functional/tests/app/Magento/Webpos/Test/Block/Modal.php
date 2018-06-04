@@ -18,6 +18,16 @@ class Modal extends Block
         return $this->_rootElement->find('.modal-popup');
     }
 
+    public function waitForModalPopup()
+    {
+        $this->waitForElementVisible('.modal-popup');
+    }
+
+    public function waitForModalPopupNotVisible()
+    {
+        $this->waitForElementNotVisible('.modal-popup');
+    }
+
     public function getPopupMessage()
     {
         return $this->getPopupMessageElement()->getText();

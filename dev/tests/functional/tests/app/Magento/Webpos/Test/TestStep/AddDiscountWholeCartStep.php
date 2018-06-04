@@ -63,6 +63,6 @@ class AddDiscountWholeCartStep implements TestStepInterface
 		$this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
 		$this->webposIndex->getMsWebpos()->waitCartLoader();
 		$this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
+        $this->webposIndex->getCheckoutCartFooter()->waitForButtonCheckout();
 	}
 }

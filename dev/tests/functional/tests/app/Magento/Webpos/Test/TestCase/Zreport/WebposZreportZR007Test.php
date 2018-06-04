@@ -127,9 +127,9 @@ class WebposZreportZR007Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $staffName1 = $staff->getDisplayName();
         $this->webposIndex->getCMenu()->logout();
-        $this->webposIndex->getBody()->waitForModalPopup();
+        $this->webposIndex->getModal()->waitForModalPopup();
         $this->webposIndex->getModal()->getOkButton()->click();
-        $this->webposIndex->getBody()->waitForModalPopupNotVisible();
+        $this->webposIndex->getModal()->waitForModalPopupNotVisible();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader.loading-mask');
 
         $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
