@@ -191,7 +191,7 @@ class WebposManageLocationML21Test extends Injectable
         $this->webposIndex->getCMenu()->checkout();
         $this->webposIndex->getCheckoutProductList()->waitProductList();
         \PHPUnit_Framework_Assert::assertTrue(
-            (int)($this->webposIndex->getCheckoutProductList()->getNumberOfProducts()->getText()) > 0,
+            $this->webposIndex->getCheckoutProductList()->getFirstProduct()->isVisible(),
             'No Product is showed'
         );
     }

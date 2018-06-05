@@ -164,7 +164,7 @@ class ManageStockList extends Block
 
     public function waitForProductListShow()
     {
-        $this->waitForElementVisible('.table-product tbody');
+        $this->waitForElementVisible('.table-product tbody tr:first-child');
     }
 
     public function getInStockSwitchByProduct($productName)

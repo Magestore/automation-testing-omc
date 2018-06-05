@@ -23,72 +23,88 @@ class CheckoutProductDetail extends Block
 
     protected $qty = '[name^="super_group"]';
 
-    public function waitForFormLoader(){
+    public function waitForFormLoader()
+    {
         $this->waitForElementVisible('.form-detail-product');
     }
-    public function getModalTitle(){
+
+    public function getModalTitle()
+    {
         return $this->_rootElement->find('//*[@id="popup-product-detail"]/div/div/div/div[1]/h4[@class="modal-title"]', Locator::SELECTOR_XPATH);
     }
 
-    public function selectedOneAttribute($attribute){
-        $this->_rootElement->find('.super-attribute-select',Locator::SELECTOR_CSS,'select')->setValue($attribute);
+    public function selectedOneAttribute($attribute)
+    {
+        $this->_rootElement->find('.super-attribute-select', Locator::SELECTOR_CSS, 'select')->setValue($attribute);
     }
 
-    public function getButtonAddToCart(){
+    public function getButtonAddToCart()
+    {
         return $this->_rootElement->find('#popup-product-detail > div > div > div > div.modal-body > div > div > div > div.ms-actions > button');
     }
 
-    public function getButtonCancel(){
+    public function getButtonCancel()
+    {
         return $this->_rootElement->find('//*[@id="popup-product-detail"]/div/div/div/div[1]/button[@class="close"]', Locator::SELECTOR_XPATH);
     }
 
-	public function getProductQtyInput()
-	{
-		return $this->_rootElement->find('#product_qty');
-	}
-
-	public function getRadioItemOfBundleProduct($name)
-	{
-		return $this->_rootElement->find('//*[@id="product-options-wrapper"]/fieldset/div/div/div/div[1]/label/span[text()="'.$name.'"]/../../input', Locator::SELECTOR_XPATH);
-	}
-    public function getBundleProductItemWithRadioByName($name){
-        return $this->_rootElement->find('div[@id="product-options-wrapper"]//div[@class="field choice"][.//span[text()="'.$name.'"]]', locator::SELECTOR_XPATH);
+    public function getProductQtyInput()
+    {
+        return $this->_rootElement->find('#product_qty');
     }
-    public function selectBundleProductItemWithRadioByName($name){
+
+    public function getRadioItemOfBundleProduct($name)
+    {
+        return $this->_rootElement->find('//*[@id="product-options-wrapper"]/fieldset/div/div/div/div[1]/label/span[text()="' . $name . '"]/../../input', Locator::SELECTOR_XPATH);
+    }
+
+    public function getBundleProductItemWithRadioByName($name)
+    {
+        return $this->_rootElement->find('div[@id="product-options-wrapper"]//div[@class="field choice"][.//span[text()="' . $name . '"]]', locator::SELECTOR_XPATH);
+    }
+
+    public function selectBundleProductItemWithRadioByName($name)
+    {
         $this->getBundleProductItemWithRadioByName($name)->find('input[type="radio"]')->click();
     }
 
-    public function getBundleProductFirstItemWithRadio(){
+    public function getBundleProductFirstItemWithRadio()
+    {
         return $this->_rootElement->find('#product-options-wrapper .choice:first-child');
     }
 
-    public function selectBundleProductFirstItemWithRadio(){
+    public function selectBundleProductFirstItemWithRadio()
+    {
         $this->getBundleProductFirstItemWithRadio()->find('input[type="radio"]')->click();
     }
 
-    public function setQtyBundleChildProduct($qty){
+    public function setQtyBundleChildProduct($qty)
+    {
         $this->_rootElement->find('#product-options-wrapper .qty input[type="number"]')->setValue($qty);
     }
 
     public function getProductPriceOfOption($productName)
     {
         // Bundle product
-        return $this->_rootElement->find('//*[@id="product-options-wrapper"]/fieldset/div/div/div/div/label/span[text()="'.$productName.'"]/../span[@class="price-notice"]', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//*[@id="product-options-wrapper"]/fieldset/div/div/div/div/label/span[text()="' . $productName . '"]/../span[@class="price-notice"]', Locator::SELECTOR_XPATH);
     }
 
     public function getQtyOfOption($option)
     {
         // Bundle product
         // option = 1,2,3...
-        return $this->_rootElement->find('//*[@id="product-options-wrapper"]/fieldset/div['.$option.']/div/div/div[4]/div/input', Locator::SELECTOR_XPATH);
+        return $this->_rootElement->find('//*[@id="product-options-wrapper"]/fieldset/div[' . $option . ']/div/div/div[4]/div/input', Locator::SELECTOR_XPATH);
     }
 
-    public function waitForAvailableQtyVisible(){
+    public function waitForAvailableQtyVisible()
+    {
         return $this->waitForElementVisible('span[data-bind="text: childQty"]');
     }
 
-    public function selectAttributes($label, $option){
-        $this->_rootElement->find('//*[@id="product-options-wrapper"]/div[2]/div/label/span[text()="'.$label.'"]/../../div/select', Locator::SELECTOR_XPATH, 'select')->setValue($option);
+    public function selectAttributes($label, $option)
+    {
+        $this->waitForElementVisible('//*[@id="product-options-wrapper"]/div[2]/div//select', locator::SELECTOR_XPATH);
+        $this->_rootElement->find('//*[@id="product-options-wrapper"]/div[2]/div/label/span[text()="' . $label . '"]/../../div/select', Locator::SELECTOR_XPATH, 'select')->setValue($option);
     }
 
     public function fillGroupedProductQty(FixtureInterface $product)

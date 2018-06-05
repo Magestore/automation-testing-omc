@@ -17,7 +17,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * Testcase - Check displaying option send sale email on checkout page
  *
  * Precondition
- * Loged into backend
+ * Logged into backend
  * go to webpos settings page (path: On admin sidebar-> tap on Sales -> under webpos -> choose Setttings)
  *
  * Steps

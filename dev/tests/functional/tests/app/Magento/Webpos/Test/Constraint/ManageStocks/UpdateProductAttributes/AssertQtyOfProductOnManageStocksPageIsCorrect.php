@@ -26,7 +26,7 @@ class AssertQtyOfProductOnManageStocksPageIsCorrect extends AbstractConstraint
 
 		$webposIndex->getMsWebpos()->clickCMenuButton();
 		$webposIndex->getCMenu()->manageStocks();
-        $this->webposIndex->getManageStockList()->waitFirstProductRowVisible();
+        $webposIndex->getManageStockList()->waitFirstProductRowVisible();
 		$productName = $productInfo['product']->getName();
 
 		// Edit product info

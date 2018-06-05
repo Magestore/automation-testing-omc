@@ -123,9 +123,11 @@ class WebposTaxTAX109Test extends Injectable
     }
 
     /**
+     * Test Script
+     *
      * @param Customer $customer
      * @param $products
-     * @param $shippingTaxRate
+     * @param $taxRate
      */
     public function test(
         Customer $customer,
