@@ -9,7 +9,7 @@
  * @Links : https://www.facebook.com/Onjin.Matsui.VTC.NQC
  */
 
-namespace Magento\Webpos\Test\TestCase\Location;
+namespace Magento\Webpos\Test\TestCase\Location\IndexPage;
 /**
  * Precondition:
  * 1. Create items

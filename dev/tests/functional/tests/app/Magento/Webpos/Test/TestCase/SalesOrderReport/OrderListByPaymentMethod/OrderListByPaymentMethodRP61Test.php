@@ -6,7 +6,7 @@
  * Time: 10:33 AM
  */
 
-namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod;
+namespace Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByPaymentMethod;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\OrderListByPayment;
