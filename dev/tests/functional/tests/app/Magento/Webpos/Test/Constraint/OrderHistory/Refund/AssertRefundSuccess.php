@@ -32,11 +32,11 @@ class AssertRefundSuccess extends AbstractConstraint
 			$webposIndex->getOrderHistoryRefund()->isVisible(),
 			'Refund Popup is not closed'
 		);
-        $webposIndex->getToaster()->waitForElementVisible('.message');
-		\PHPUnit_Framework_Assert::assertTrue(
-			$webposIndex->getToaster()->getWarningMessage()->isVisible(),
-			'Success Message is not displayed'
-		);
+//        $webposIndex->getToaster()->waitForElementVisible('.message');
+//		\PHPUnit_Framework_Assert::assertTrue(
+//			$webposIndex->getToaster()->getWarningMessage()->isVisible(),
+//			'Success Message is not displayed'
+//		);
 		\PHPUnit_Framework_Assert::assertEquals(
 			'A creditmemo has been created!',
 			$webposIndex->getToaster()->getWarningMessage()->getText(),

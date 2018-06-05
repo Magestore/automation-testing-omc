@@ -6,10 +6,12 @@
  * Date: 1/22/2018
  * Time: 4:32 PM
  */
+
 namespace Magento\Webpos\Test\Constraint\OrderHistory\Shipment;
 
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class AssertShipmentSuccess
  * @package Magento\Webpos\Test\Constraint\SectionOrderHistory\Shipment
@@ -21,12 +23,13 @@ class AssertShipmentSuccess extends AbstractConstraint
      */
     public function processAssert(WebposIndex $webposIndex)
     {
-        $warningMessage = $webposIndex->getToaster()->getWarningMessage()->getText();
-        \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getToaster()->getWarningMessage()->isVisible(),
-            'Success Message is not displayed'
-        );
-
+        if ($webposIndex->getToaster()->getWarningMessage()->isVisible()) {
+            $warningMessage = $webposIndex->getToaster()->getWarningMessage()->getText();
+            \PHPUnit_Framework_Assert::assertTrue(
+                $webposIndex->getToaster()->getWarningMessage()->isVisible(),
+                'Success Message is not displayed'
+            );
+        }
         \PHPUnit_Framework_Assert::assertEquals(
             'The shipment has been created successfully.',
             $warningMessage,

@@ -10,9 +10,7 @@
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
                     <item name="orderQty" xsi:type="number">1</item>
                     <item name="customPrice" xsi:type="number">50</item>
-                    <item name="qtyText" xsi:type="string">Ordered: 1
-                        Invoiced: 1
-                        Shipped: 1
+                    <item name="qtyText" xsi:type="string">Invoiced: 1,Shipped: 1
                     </item>
                 </item>
             </data>
@@ -31,8 +29,7 @@
                     <item name="product" xsi:type="string">product_100_dollar_taxable</item>
                     <item name="orderQty" xsi:type="number">2</item>
                     <item name="customPrice" xsi:type="number">50</item>
-                    <item name="qtyText" xsi:type="string">Ordered: 2
-                        Invoiced: 2
+                    <item name="qtyText" xsi:type="string">Ordered: 2,Invoiced: 2
                     </item>
                 </item>
             </data>
@@ -50,15 +47,13 @@
                 <item name="0" xsi:type="array">
                     <item name="product" xsi:type="string">product_20_dollar</item>
                     <item name="orderQty" xsi:type="number">1</item>
-                    <item name="qtyText" xsi:type="string">Ordered: 1
-                        Invoiced: 1
+                    <item name="qtyText" xsi:type="string">Ordered: 1,Invoiced: 1
                     </item>
                 </item>
                 <item name="1" xsi:type="array">
                     <item name="product" xsi:type="string">product_20_dollar</item>
                     <item name="orderQty" xsi:type="number">1</item>
-                    <item name="qtyText" xsi:type="string">Ordered: 1
-                        Invoiced: 1
+                    <item name="qtyText" xsi:type="string">Ordered: 1,Invoiced: 1
                     </item>
                 </item>
             </data>

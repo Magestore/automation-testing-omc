@@ -119,6 +119,7 @@ class WebposOrdersHistoryRefundPartialOH64Test extends Injectable
                 'products' => $products
             ]
         )->run();
+        $this->webposIndex->getModal()->waitForElementNotVisible('#refund-popup');
         // Calculate total refunded
         $shippingFee = $this->webposIndex->getOrderHistoryOrderViewFooter()->getShipping();
         $shippingFee = (float)substr($shippingFee, 1);

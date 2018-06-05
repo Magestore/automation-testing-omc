@@ -55,8 +55,8 @@ class AssertItemTableIsCorrect extends AbstractConstraint
 
 			if (isset($item['qtyText'])) {
 				\PHPUnit_Framework_Assert::assertEquals(
-					$item['qtyText'],
-					$webposIndex->getOrderHistoryOrderViewContent()->getQtyOfProduct($productName)->getText(),
+					str_replace(',', '\n', $item['qtyText']),
+					trim($webposIndex->getOrderHistoryOrderViewContent()->getQtyOfProduct($productName)->getText()),
 					'Item table - Product "'.$productName.'" - Qty is wrong'
 				);
 			}
