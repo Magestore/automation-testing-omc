@@ -23,7 +23,7 @@ class AssertProductsGridOnFooterAvailable extends AbstractConstraint
     public function processAssert(WebposIndex $webposIndex)
     {
         \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getCheckoutProductList()->getNumberOfProducts()->isVisible(),
+            $webposIndex->getCheckoutProductList()->getFirstProduct()->isVisible(),
             'Products Grid - Number of products is not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(

@@ -78,8 +78,7 @@ class Dashboard extends Block
 
     public function getOrderStatus()
     {
-        var_dump($this->_rootElement->find('#sales_report_order_statuses', locator::SELECTOR_CSS, 'select')->getValue());
-        die();
+        return $this->_rootElement->find('#sales_report_order_statuses', locator::SELECTOR_CSS, 'select')->getValue();
     }
 
     public function setOrderStatus($text)

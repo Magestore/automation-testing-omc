@@ -51,6 +51,7 @@ class CheckoutCartItems extends Block
 
     public function getCartItem($name)
     {
+       $this->waitForElementVisible('.//li/div/div/div[2]/h4[text()="'.$name.'"]/../../../..', Locator::SELECTOR_XPATH);
         return $this->_rootElement->find('//li/div/div/div[2]/h4[text()="'.$name.'"]/../../../..', Locator::SELECTOR_XPATH);
     }
 

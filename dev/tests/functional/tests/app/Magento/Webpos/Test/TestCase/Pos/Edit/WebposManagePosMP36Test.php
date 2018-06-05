@@ -8,6 +8,7 @@
 
 namespace Magento\Webpos\Test\TestCase\Pos\Edit;
 
+use Magento\Mtf\Client\Locator;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\PosIndex;
 use Magento\Webpos\Test\Page\Adminhtml\PosNews;
@@ -72,7 +73,7 @@ class WebposManagePosMP36Test extends Injectable
         ]);
         $this->posNews->getPosForm()->waitLoader();
         $this->posNews->getFormPageActions()->delete();
-        $this->posNews->getPosForm()->waitForElementVisible('#modal-content-18');
+        sleep(1);
         \PHPUnit_Framework_Assert::assertTrue(
             $this->posNews->getPosForm()->getConfirmModal()->isVisible(),
             'Confirm modal Popup wasn\'t show'
