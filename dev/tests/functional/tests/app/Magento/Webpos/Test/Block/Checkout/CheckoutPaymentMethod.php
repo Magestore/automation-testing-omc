@@ -32,12 +32,15 @@ class CheckoutPaymentMethod extends Block
 
     public function waitForCustomPayment1Method()
     {
-        $customPayment1Method = $this->getCustomPayment1();
-        $this->_rootElement->waitUntil(
-            function () use ($customPayment1Method) {
-                return $customPayment1Method->isVisible() ? true : null;
-            }
-        );
+        $customPayment1Method = $this->_rootElement->find('.icon-iconPOS-payment-cp1forpos');
+        if (!$customPayment1Method->isVisible()) {
+            $browser = $this->_rootElement;
+            $browser->waitUntil(
+                function () use ($customPayment1Method) {
+                    return $customPayment1Method->isVisible() ? true : null;
+                }
+            );
+        }
     }
 
     public function getCashInMethod()
