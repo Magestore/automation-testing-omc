@@ -32,9 +32,10 @@ class CheckoutPaymentMethod extends Block
 
     public function waitForCustomPayment1Method()
     {
-        $customPayment1Method = $this->getCustomPayment1();
+        $customPayment1Method = $this->_rootElement->find('.icon-iconPOS-payment-cp1forpos');
         if (!$customPayment1Method->isVisible()) {
-            $this->_rootElement->waitUntil(
+            $browser = $this->_rootElement;
+            $browser->waitUntil(
                 function () use ($customPayment1Method) {
                     return $customPayment1Method->isVisible() ? true : null;
                 }
@@ -80,16 +81,6 @@ class CheckoutPaymentMethod extends Block
     public function getAmountPayment()
     {
         return $this->_rootElement->find('.//*[@id="payment_selected"]//input[@onclick="this.select()"]', Locator::SELECTOR_XPATH);
-    }
-
-    private function getPaymentMethodByLabelToGetAmountPayment($paymentTitle)
-    {
-        return $this->_rootElement->find('//label[@data-bind="text: title" and text()="' . $paymentTitle . '"]/../..', Locator::SELECTOR_XPATH);
-    }
-
-    public function getAmountPaymentByTitle($paymentTitle)
-    {
-        return $this->getPaymentMethodByLabelToGetAmountPayment($paymentTitle)->find('//input[@onclick="this.select()"]', Locator::SELECTOR_XPATH);
     }
 
     public function getIconRemove()

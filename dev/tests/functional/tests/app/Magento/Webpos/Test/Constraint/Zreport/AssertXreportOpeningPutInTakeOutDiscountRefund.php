@@ -30,15 +30,6 @@ class AssertXreportOpeningPutInTakeOutDiscountRefund extends \Magento\Mtf\Constr
         $symbol = '$'
     )
     {
-        \Zend_Debug::dump($openingAmount);//10
-        \Zend_Debug::dump($cashSales);//5
-        \Zend_Debug::dump($cashRefund);//0
-        \Zend_Debug::dump($payOut);//5
-        \Zend_Debug::dump($payIn);//5
-        \Zend_Debug::dump($totalSales);//10
-        \Zend_Debug::dump($otherPaymentSales);//5
-        \Zend_Debug::dump($discountAmount);//10
-        \Zend_Debug::dump($refund);//0
         \PHPUnit_Framework_Assert::assertEquals(
             self::convertToPriceFormat($openingAmount, $symbol),
             $webposIndex->getSessionPrintShiftPopup()->getOpeningAmount()->getText(),
