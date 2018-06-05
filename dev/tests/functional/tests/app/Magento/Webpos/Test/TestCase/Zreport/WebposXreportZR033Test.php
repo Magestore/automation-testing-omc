@@ -163,6 +163,7 @@ class WebposXreportZR033Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getCheckoutPaymentMethod()->waitForCustomPayment1Method();
         $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         // phai sleep vi payment co khi bi xoa
