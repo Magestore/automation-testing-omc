@@ -174,8 +174,6 @@ class WebposOHItemTableTest extends Injectable
         $shipped = false
     )
     {
-        var_dump(normalizer_normalize("asd  da  adasf\n asdasd", \Normalizer::FORM_C));
-        die();
         // Create products
         $products = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
