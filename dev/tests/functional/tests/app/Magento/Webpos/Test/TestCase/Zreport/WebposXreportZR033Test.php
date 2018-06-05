@@ -84,6 +84,7 @@ class WebposXreportZR033Test extends Injectable
      * @param string $discountAmount
      * @param $symbol
      * @return array
+     * @throws \Exception
      */
     public function test(
         $products,

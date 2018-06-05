@@ -170,10 +170,12 @@ class WebposXreportZR028Test extends Injectable
         }
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
         $this->webposIndex->getCheckoutPaymentMethod()->getTitlePaymentMethod()->click();
+        $cashSales = $this->webposIndex->getCheckoutPaymentMethod()->getAmountPaymentByTitle('Web POS - Custom payment 1')->getValue();
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();
         $this->webposIndex->getCheckoutAddMorePayment()->getCashIn()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $otherPaymentSales = $this->webposIndex->getCheckoutPaymentMethod()->getAmountPaymentByTitle('Web POS - Cash In')->getValue();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
@@ -203,8 +205,8 @@ class WebposXreportZR028Test extends Injectable
         $this->webposIndex->getCMenu()->getSessionManagement();
         $this->webposIndex->getMsWebpos()->waitForSessionManagerLoader();
 
-        $cashSales = $this->webposIndex->getSessionShift()->getPaymentAmount(1)->getText();
-        $otherPaymentSales = $this->webposIndex->getSessionShift()->getPaymentAmount(2)->getText();
+//        $cashSales = $this->webposIndex->getSessionShift()->getPaymentAmount(1)->getText();
+//        $otherPaymentSales = $this->webposIndex->getSessionShift()->getPaymentAmount(2)->getText();
 
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitReportPopupVisible();
