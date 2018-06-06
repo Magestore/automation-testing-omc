@@ -97,7 +97,7 @@ class WebposSessionManagementValidateSM30Test extends Injectable
             sleep(1);
         }
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
-        sleep(1);
+        $this->webposIndex->getSessionCloseShift()->waitSetClosingBalancePopupVisible();
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
         sleep(1);
         $realBalance = $this->webposIndex->getSessionConfirmModalPopup()->getRealBalance();
@@ -106,10 +106,11 @@ class WebposSessionManagementValidateSM30Test extends Injectable
 
         $this->assertConfirmModalPopup->processAssert($this->webposIndex, $realBalance, $theoryIs, $loss);
         $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
-        sleep(1);
+        $this->webposIndex->getSessionSetClosingBalanceReason()->waitSetReasonPopupVisible();
         $this->webposIndex->getSessionSetReasonPopup()->getReason()->setValue('Magento');
-        $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
         sleep(1);
+        $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
+        $this->webposIndex->getSessionSetClosingBalanceReason()->waitSetReasonPopupNotVisible();
     }
 
     /**

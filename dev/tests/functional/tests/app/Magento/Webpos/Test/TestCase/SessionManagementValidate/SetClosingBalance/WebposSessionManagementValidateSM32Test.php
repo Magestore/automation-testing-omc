@@ -98,7 +98,7 @@ class WebposSessionManagementValidateSM32Test extends Injectable
         }
 
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
-        sleep(1);
+        $this->webposIndex->getSessionCloseShift()->waitSetClosingBalancePopupVisible();
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
         sleep(1);
         $this->webposIndex->getSessionConfirmModalPopup()->getCancelButton()->click();

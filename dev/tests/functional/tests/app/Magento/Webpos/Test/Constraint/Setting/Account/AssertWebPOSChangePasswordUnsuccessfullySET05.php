@@ -16,18 +16,15 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 class AssertWebPOSChangePasswordUnsuccessfullySET05 extends AbstractConstraint
 {
-    /**
-     * @param WebposIndex $webposIndex
-     */
     public function processAssert(WebposIndex $webposIndex, $errorCurrentPasswordMessage, $errorConfirmationPasswordMessage)
     {
         \PHPUnit_Framework_Assert::assertEquals(
-            $errorCurrentPasswordMessage,
+            trim($errorCurrentPasswordMessage),
             $webposIndex->getStaffSettingFormMainAccount()->getCurrentPasswordErrorMessage()->getText(),
             'On the Setting General Page - The current password is not correct.'
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            $errorConfirmationPasswordMessage,
+            trim($errorConfirmationPasswordMessage),
             $webposIndex->getStaffSettingFormMainAccount()->getPasswordConfirmErrorMessage()->getText(),
             'On the Setting General Page - The password confirmation could not be blank.'
         );

@@ -16,13 +16,10 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 class AssertWebPOSChangePasswordUnsuccessfullySET07 extends AbstractConstraint
 {
-    /**
-     * @param WebposIndex $webposIndex
-     */
     public function processAssert(WebposIndex $webposIndex, $errorNewPasswordMessage)
     {
         \PHPUnit_Framework_Assert::assertEquals(
-            $errorNewPasswordMessage,
+            trim($errorNewPasswordMessage),
             $webposIndex->getStaffSettingFormMainAccount()->getNewPasswordErrorMessage()->getText(),
             'On the Setting General Page - The new and current password must be 7 or more characters, using both numeric and alphabetic.'
         );

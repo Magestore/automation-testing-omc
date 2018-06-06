@@ -16,13 +16,10 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 class AssertWebPOSChangePasswordSuccessfullySET08 extends AbstractConstraint
 {
-    /**
-     * @param WebposIndex $webposIndex
-     */
     public function processAssert(WebposIndex $webposIndex, $successMessage)
     {
         \PHPUnit_Framework_Assert::assertEquals(
-            $successMessage,
+            trim($successMessage),
             $webposIndex->getToaster()->getWarningMessage()->getText(),
             'On the Account Setting General Page - We updated the password staff unsuccessfully. Please check again'
         );

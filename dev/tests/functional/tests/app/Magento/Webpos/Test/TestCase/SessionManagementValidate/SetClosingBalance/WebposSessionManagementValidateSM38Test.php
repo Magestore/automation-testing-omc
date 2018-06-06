@@ -35,7 +35,6 @@ class WebposSessionManagementValidateSM38Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-
     /**
      * @param Pos $pos
      * @param FixtureFactory $fixtureFactory
@@ -78,7 +77,7 @@ class WebposSessionManagementValidateSM38Test extends Injectable
             sleep(1);
         }
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        sleep(1);
+        $this->webposIndex->getSessionCloseShift()->waitSetClosingBalancePopupVisible();
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
         sleep(1);
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
@@ -114,9 +113,6 @@ class WebposSessionManagementValidateSM38Test extends Injectable
         );
     }
 
-    /**
-     *
-     */
     public function tearDown()
     {
         $this->objectManager->getInstance()->create(

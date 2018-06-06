@@ -93,7 +93,7 @@ class WebposSessionManagementValidateSM36Test extends Injectable
 
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
         /** now balance is 100 */
-        $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
+        $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(100);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
 
         /** wait done open request */
@@ -143,7 +143,7 @@ class WebposSessionManagementValidateSM36Test extends Injectable
         }
         $this->webposIndex->getSessionShift()->getTakeMoneyOutButton()->click();
         sleep(1);
-        /** now balance is 200, put out 200 */
+        /** now balance is 205, put out 205 */
         $this->webposIndex->getSessionMakeAdjustmentPopup()->getAmount()->setValue(1);
         $this->webposIndex->getSessionMakeAdjustmentPopup()->getDoneButton()->click();
         $differenceAmountBeforePutOut = $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText();
@@ -154,10 +154,10 @@ class WebposSessionManagementValidateSM36Test extends Injectable
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
         sleep(1);
         $this->webposIndex->getOpenSessionPopup()->waitForElementNotVisible('[data-bind="visible:loading"]');
-
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getNumberOfCoinsBills()->setValue(20);
+        $this->webposIndex->getSessionSetClosingBalancePopup()->setCoinBillValue($denomination->getDenominationName());
+        $this->webposIndex->getSessionSetClosingBalancePopup()->getNumberOfCoinsBills()->setValue(205);
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        sleep(5);
+        sleep(2);
         // Assert Set Closing Balance Popup not visible
         $this->assertFalse(
             $this->webposIndex->getSessionSetClosingBalancePopup()->isVisible(),
@@ -170,7 +170,6 @@ class WebposSessionManagementValidateSM36Test extends Injectable
             $this->webposIndex->getSessionShift()->getButtonEndSession()->getText(),
             'Button "Validate Closing" is not visible.'
         );
-
 
         // Assert Difference = 0
         $difference = $this->webposIndex->getSessionShift()->getTransactionsInfo('Difference')->getText();

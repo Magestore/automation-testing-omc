@@ -16,13 +16,10 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 class AssertWebPOSChangePasswordUnsuccessfullySET06 extends AbstractConstraint
 {
-    /**
-     * @param WebposIndex $webposIndex
-     */
     public function processAssert(WebposIndex $webposIndex, $errorCurrentPasswordMessage)
     {
         \PHPUnit_Framework_Assert::assertEquals(
-            $errorCurrentPasswordMessage,
+            trim($errorCurrentPasswordMessage),
             $webposIndex->getStaffSettingFormMainAccount()->getCurrentPasswordErrorMessage()->getText(),
             'On the Setting General Page - The current staff name is not correct.'
         );

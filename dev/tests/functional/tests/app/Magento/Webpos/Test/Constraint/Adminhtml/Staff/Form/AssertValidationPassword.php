@@ -15,11 +15,6 @@ class AssertValidationPassword extends AbstractConstraint
     const SEVERITY = 'low';
     /* end tags */
 
-    /**
-     *
-     * @param StaffNews $staffNews
-     * @return void
-     */
     public function processAssert(StaffNews $staffNews, $message, $tag)
     {
         switch ($tag)
@@ -31,7 +26,7 @@ class AssertValidationPassword extends AbstractConstraint
                     'Show message is not visible'
                 );
                 \PHPUnit_Framework_Assert::assertEquals(
-                    $message['1'],
+                    trim($message['1']),
                     $staffNews->getStaffsForm()->getTextBoxMessagePassConfim()->getText(),
                     'Show message is incorrect'
                 );
@@ -45,7 +40,7 @@ class AssertValidationPassword extends AbstractConstraint
                     'Show message is not visible'
                 );
                 \PHPUnit_Framework_Assert::assertEquals(
-                    $message['2'],
+                    trim($message['2']),
                     $staffNews->getStaffsForm()->getTextBoxMessagePassword()->getText(),
                     'Show message is incorrect'
                 );
@@ -59,7 +54,7 @@ class AssertValidationPassword extends AbstractConstraint
                     'Show message is not visible'
                 );
                 \PHPUnit_Framework_Assert::assertEquals(
-                    $message['1'],
+                    trim($message['1']),
                     $staffNews->getStaffsForm()->getTextBoxMessagePassConfim()->getText(),
                     'Show message is incorrect'
                 );
@@ -68,7 +63,7 @@ class AssertValidationPassword extends AbstractConstraint
                     'Show message is not visible'
                 );
                 \PHPUnit_Framework_Assert::assertEquals(
-                    $message['2'],
+                    trim($message['2']),
                     $staffNews->getStaffsForm()->getTextBoxMessagePassword()->getText(),
                     'Show message is incorrect'
                 );

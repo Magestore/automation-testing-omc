@@ -15,7 +15,6 @@ use Magento\Webpos\Test\Fixture\Pos;
 use Magento\Webpos\Test\Fixture\Location;
 use Magento\Webpos\Test\Fixture\Staff;
 
-
 /**
  * Class WebposSessionManagementValidateSM37Test
  * @package Magento\Webpos\Test\TestCase\SessionManagementValidate\SetClosingBalance

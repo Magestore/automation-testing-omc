@@ -31,8 +31,6 @@ class WebposCheckGUITakeMoneyOutSM18Test extends Injectable
      * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
-    protected $dataConfigToNo;
-    protected $configuration;
 
     /**
      * @param WebposIndex $webposIndex
@@ -48,17 +46,14 @@ class WebposCheckGUITakeMoneyOutSM18Test extends Injectable
     /**
      * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
      *
-     * @param ConfigData $dataConfig
-     * @param ConfigData $dataConfigToNo
      * @return void
      */
-    public function test($dataConfig, $dataConfigToNo)
+    public function test()
     {
-        $this->dataConfigToNo = $dataConfigToNo;
         //Set Create Session Before Working to Yes
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $dataConfig]
+            ['configData' => 'create_session_before_working']
         )->run();
 
         // LoginTest webpos
@@ -80,7 +75,7 @@ class WebposCheckGUITakeMoneyOutSM18Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
         sleep(1);
         $this->webposIndex->getSessionInfo()->getTakeMoneyOutButton()->click();
-        sleep(2);
+        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-make-adjustment"]');
         return [
             'username' => $username
         ];
@@ -91,7 +86,7 @@ class WebposCheckGUITakeMoneyOutSM18Test extends Injectable
         //Set Create Session Before Working to No
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $this->dataConfigToNo]
+            ['configData' => 'setup_session_before_working_to_no']
         )->run();
         //Set Create Session Before Working to No
         $this->objectManager->getInstance()->create(
