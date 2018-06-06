@@ -10,7 +10,7 @@
                 <item name="2" xsi:type="string">product3</item>
                 <item name="3" xsi:type="string">product4</item>
             </data>
-            <data name="amount" xsi:type="string">5</data>
+            <data name="amount" xsi:type="string">1</data>
             <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\TakePayment\AssertWebposTakePaymentOH95"/>
         </variation>
     </testCase>

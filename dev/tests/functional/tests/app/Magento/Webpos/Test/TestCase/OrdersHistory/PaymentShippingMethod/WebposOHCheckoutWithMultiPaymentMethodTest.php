@@ -117,9 +117,8 @@ class WebposOHCheckoutWithMultiPaymentMethodTest extends Injectable
         if (!$this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->isVisible()) {
             $this->webposIndex->getCheckoutShippingMethod()->clickShipPanel();
         }
-        sleep(2);
-        $this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+//        $this->webposIndex->getCheckoutShippingMethod()->getFlatRateFixed()->click();
+//        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         // Add Payment
         $paymentMethods = $this->objectManager->getInstance()->create(

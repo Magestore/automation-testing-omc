@@ -8,6 +8,7 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByStaff;
 
+use DateTime;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Shift;
 use Magento\Webpos\Test\Page\Adminhtml\OrderListByStaff;
@@ -63,32 +64,34 @@ class OrderListByStaffReportRP17Test extends Injectable
 
     /**
      * @param array $shifts
-     * @param null $order_statuses
+     * @param null $fields
      */
-    public function test(array $shifts, $order_statuses = null)
+    public function test(array $shifts, $fields = null)
     {
         // Preconditions
         $this->orderListByStaff->open();
         $this->orderListByStaff->getMessagesBlock()->clickLinkInMessage('notice', 'here');
-
         $this->orderListByStaff->getFilterBlock()->viewsReport($shifts);
-        if ($order_statuses != null) {
-            $this->webPOSAdminReportDashboard->getReportDashboard()->setSalesReportOderStatuses($order_statuses);
-        }
-        $staffName = $this->webPOSAdminReportDashboard->getReportDashboard()->getStaffName()->getText();
         $this->orderListByStaff->getActionsBlock()->showReport();
-        $statusOrder = $this->webPOSAdminReportDashboard->getReportDashboard()->getStatusOrder()->getText();
+
+        //Assert
+        $fromDate = $this->webPOSAdminReportDashboard->getReportDashboard()->getSalesReportFormDate();
+        $toDate = $this->webPOSAdminReportDashboard->getReportDashboard()->getSalesReportToDate();
+        $datetime1 = new DateTime($fromDate->getValue());
+        $datetime2 = new DateTime($toDate->getValue());
+        $interval = $datetime2->diff($datetime1);
         self::assertEquals(
-            $shifts['period_type'],
-            $staffName,
-            'In Admin Form Order List By Staff WebPOS Page. The period type was not updated. It must be ' . $shifts['period_type']
+            1,
+            (int)$interval->format('%m'),
+            'In Admin Form Order List By Staff WebPOS Page. The duration time between from date and to date is not correct. It must be one month.'
         );
-        if ($order_statuses != null) {
-            self::assertEquals(
-                $order_statuses,
-                $statusOrder,
-                'In Admin Form Order List By Staff WebPOS Page. Status is not updated. It must be ' . $order_statuses
+        $titles = array_map('trim', explode(',', $fields));
+        foreach ($titles as $title) {
+            self::assertTrue(
+                $this->orderListByStaff->getGridBlock()->getTableFieldByTitle($title)->isVisible(),
+                'Title ' . $title . ' didn\'t show'
             );
         }
+
     }
 }

@@ -69,7 +69,6 @@ class OrderListByStaffReportRP20Test extends Injectable
         // Preconditions
         $this->orderListByStaff->open();
         $this->orderListByStaff->getMessagesBlock()->clickLinkInMessage('notice', 'here');
-
         $fromDateInitial = $this->webPOSAdminReportDashboard->getReportDashboard()->getSalesReportFormDate()->getValue();
         $this->orderListByStaff->getFilterBlock()->viewsReport($shifts);
         $this->orderListByStaff->getActionsBlock()->showReport();

@@ -10,20 +10,21 @@ namespace Magento\Webpos\Test\Constraint\OrderHistory\TakePayment;
 
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class AssertWebposTakePaymentOH97
  * @package Magento\Webpos\Test\Constraint\OrderHistory\TakePayment
  */
 class AssertWebposTakePaymentOH97 extends AbstractConstraint
 {
-    public function processAssert(WebposIndex $webposIndex, $amount, $am, $remain)
+    public function processAssert(WebposIndex $webposIndex, $amount, $am = "$1", $remain = "$1")
     {
         \PHPUnit_Framework_Assert::assertNotTrue(
             $webposIndex->getOrderHistoryPayment()->isVisible(),
             'Visible popup takepayment'
         );
-        $am = (float)substr($am,1);
-        $remain = (float)substr($remain,1);
+        $am = (float)substr($am, 1);
+        $remain = (float)substr($remain, 1);
         $value1 = (float)$am - (float)$amount;
         $value2 = (float)$am + (float)$amount;
         $total = $webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid();
@@ -34,10 +35,11 @@ class AssertWebposTakePaymentOH97 extends AbstractConstraint
         );
         \PHPUnit_Framework_Assert::assertGreaterThan(
             (float)$amount,
-            substr($total,1),
+            substr($total, 1),
             'Total paid = amount fill'
         );
     }
+
     /**
      * Returns a string representation of the object.
      *

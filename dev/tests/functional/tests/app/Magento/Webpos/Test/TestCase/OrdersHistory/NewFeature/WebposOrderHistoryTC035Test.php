@@ -74,6 +74,7 @@ class WebposOrderHistoryTC035Test extends Injectable
         //Add Product
         $webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
+        $webposIndex->getCheckoutProductDetail()->waitForFormLoader();
         $webposIndex->getCheckoutProductDetail()->selectBundleProductFirstItemWithRadio();
         $webposIndex->getCheckoutProductDetail()->setQtyBundleChildProduct($qty);
         $webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
