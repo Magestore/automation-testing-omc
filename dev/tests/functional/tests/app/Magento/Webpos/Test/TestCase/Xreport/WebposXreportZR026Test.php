@@ -6,7 +6,7 @@
  * Time: 13:30
  */
 
-namespace Magento\Webpos\Test\TestCase\Zreport;
+namespace Magento\Webpos\Test\TestCase\Xreport;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
@@ -42,7 +42,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * - Cash in = 0
  * And show all of the payment methods with their total that placed on this session
  *
- * @package Magento\Webpos\Test\TestCase\Zreport
+ * @package Magento\Webpos\Test\TestCase\Xreport
  */
 class WebposXreportZR026Test extends Injectable
 {

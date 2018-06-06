@@ -71,7 +71,7 @@ class WebposSessionManagementValidateSM35Test extends Injectable
         $staff->persist();
         // LoginTest webpos
         $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposByStaffAndWaitSessionInstall',
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
             [
                 'staff' => $staff,
                 'location' => $location,

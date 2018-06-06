@@ -6,7 +6,7 @@
  * Time: 13:30
  */
 
-namespace Magento\Webpos\Test\TestCase\Zreport;
+namespace Magento\Webpos\Test\TestCase\Xreport;
 
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
@@ -15,7 +15,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposXreportZR032Test
- * @package Magento\Webpos\Test\TestCase\Zreport
+ * @package Magento\Webpos\Test\TestCase\Xreport
  *
  * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff who has open and close session permission

@@ -6,14 +6,14 @@
  * Time: 13:30
  */
 
-namespace Magento\Webpos\Test\TestCase\Zreport;
+namespace Magento\Webpos\Test\TestCase\Xreport;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposZreportCheckGUITest
- * @package Magento\Webpos\Test\TestCase\Zreport
+ * @package Magento\Webpos\Test\TestCase\Xreport
  * ZR021
  * Precondition: There are some POSs and setting [Need to create session before working] = ""Yes"" on the test site
  * 1. Login webpos by a staff who has open and close session permission

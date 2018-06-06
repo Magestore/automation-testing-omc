@@ -2,56 +2,49 @@
 /**
  * Created by PhpStorm.
  * User: finbert
- * Date: 09/05/2018
- * Time: 13:30
+ * Date: 18/05/2018
+ * Time: 08:14
  */
 
-namespace Magento\Webpos\Test\TestCase\Zreport;
+namespace Magento\Webpos\Test\TestCase\Xreport;
 
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
-use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposXreportZR028Test
+ * Class WebposXreportZR027Test
+ * @package Magento\Webpos\Test\TestCase\Xreport
  *
  * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
- * 1. Login webpos by a staff
+ * 1. Login webpos by a staff who has open and close session permission
  * 2. Open a session with
- * - Opening amount: >0
- * - Take money in: >0
- * - Take money out:  >0
- * 3. Create some orders successfully meet conditions:
- * - Using some payment methods (including cashin method)
- * - Apply discount whole cart
- * 4. Refund an order that placed on this session by cash in (Ex: refund amount = R)
+ * - Opening amount = 0
+ * 3. Create some orders successfully with some payment methods (including cashin method)
  *
  * Steps:
- * 1. Go to [Session Management] menu
- * 3. Click to print Z-report
+ * "1. Go to [Session Management] menu
+ * 2. Click to print X-report"
  *
  * Acceptance:
- * 2. Show X-report with:
- * - [Opening Amount] is the inputed open amount on step 2  of [Precondition and setup steps] column
- * - Expected Drawer = Cash Sales - Cash refund - Payouts + Pay Ins + Opening amount
+ * "2. Show X-report with:
+ * - Opening Amount = 0
+ * - Expected Drawer = Cash Sales
  *
  * - Cash sales = The total cash sales processed including discounts and tax on this session
- * - Cash Refund = Refund amount by cashin (R amount)
- * - [Pay Ins] = SUM(amount of Put_money_in)
- * - Payouts = SUM(amount of Take_money_out)
+ * - Cash Refund = 0
+ * - Pay Ins = 0
+ * - Payouts = 0
  *
  * - Total Sales = SUM(grand_total) of the orders which placed on this session
- * - Discount = SUM (discount_amount) of the orders which placed on this session
- * - Refund = SUM (refunded_amount) on this session (R amount)
- * - Net Sales = [Total Sales] - [Refund]
+ * - Discount = 0
+ * - Refund = 0
+ * - Net Sales = Total Sales
  *
- * - Cash in = [Cash sales]
- * And show all of the payment methods with their total that placed on this session
- *
- * @package Magento\Webpos\Test\TestCase\Zreport
+ * - Cash in= [Cash sales]
+ * And show all of the payment methods with their total that placed on this session"
  */
-class WebposXreportZR028Test extends Injectable
+class WebposXreportZR027Test extends Injectable
 {
     /**
      * Webpos Index page.
@@ -80,28 +73,14 @@ class WebposXreportZR028Test extends Injectable
 
     /**
      * @param $products
-     * @param Denomination $denomination
-     * @param $denominationNumberCoin
      * @param $amount
-     * @param $putMoneyInValue
-     * @param $takeMoneyOutValue
-     * @param bool $addDiscount
-     * @param string $discountAmount
      * @return array
      */
     public function test(
         $products,
-        Denomination $denomination,
-        $denominationNumberCoin,
-        $amount,
-        $putMoneyInValue,
-        $takeMoneyOutValue,
-        $addDiscount = false,
-        $discountAmount = ''
+        $amount
     )
     {
-        // Create denomination
-        $denomination->persist();
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'create_session_before_working']
@@ -123,16 +102,7 @@ class WebposXreportZR028Test extends Injectable
         )->run();
 
         $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\WebposOpenSessionStep',
-            [
-                'openingAmountStatus' => true,
-                'denomination' => $denomination,
-                'denominationNumberCoin' => $denominationNumberCoin,
-                'putMoneyInStatus' => true,
-                'putMoneyInValue' => $putMoneyInValue,
-                'takeMoneyOutStatus' => true,
-                'takeMoneyOutValue' => $takeMoneyOutValue
-            ]
+            'Magento\Webpos\Test\TestStep\WebposOpenSessionStep'
         )->run();
 
         $i = 0;
@@ -140,34 +110,17 @@ class WebposXreportZR028Test extends Injectable
             $products[$i] = $this->fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);
             $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
             $this->webposIndex->getCheckoutProductList()->search($products[$i]->getSku());
-            $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
             $this->webposIndex->getMsWebpos()->waitCartLoader();
+            sleep(1);
             $i++;
-        }
-
-        if ($addDiscount) {
-            $this->objectManager->getInstance()->create(
-                'Magento\Webpos\Test\TestStep\AddDiscountWholeCartStep',
-                [
-                    'percent' => $discountAmount,
-                    'type' => '$'
-                ]
-            )->run();
         }
 
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $totalSales = $this->webposIndex->getCheckoutCartFooter()->getTotalElement()->getText();
         $this->webposIndex->getCheckoutPaymentMethod()->waitForCustomPayment1Method();
         $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        // phai sleep vi payment co khi bi xoa
-        sleep(2);
-        if (!$this->webposIndex->getCheckoutPaymentMethod()->getIconRemove()->isVisible()) {
-            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-            $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
-            $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        }
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
         $this->webposIndex->getCheckoutPaymentMethod()->getTitlePaymentMethod()->click();
 
@@ -179,58 +132,34 @@ class WebposXreportZR028Test extends Injectable
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
-        // Refund
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
-        $this->webposIndex->getCMenu()->ordersHistory();
-        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
-        $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
-        $this->webposIndex->getOrderHistoryOrderList()->waitForFirstOrderVisible();
-        $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        sleep(1);
-        $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
-        $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForFormAddNoteOrderVisible();
-        $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Refund')->click();
-        $this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
-        $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
-        $this->webposIndex->getModal()->waitForModalPopup();
-        $this->webposIndex->getModal()->getOkButton()->click();
-        $this->webposIndex->getModal()->waitForModalPopupNotVisible();
-
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->getSessionManagement();
         $this->webposIndex->getMsWebpos()->waitForSessionManagerLoader();
 
+        $openedString = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
+        $staffName = $this->webposIndex->getSessionShift()->getOpenTime()->getText();
         $cashSales = $this->webposIndex->getSessionShift()->getPaymentAmount(1)->getText();
         $otherPaymentSales = $this->webposIndex->getSessionShift()->getPaymentAmount(2)->getText();
+
+        $totalSales = $this->convertPriceFormatToDecimal($totalSales);
+        $cashSales = $this->convertPriceFormatToDecimal($cashSales);
+        $otherPaymentSales = $this->convertPriceFormatToDecimal($otherPaymentSales);
 
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitReportPopupVisible();
 
-        $openingAmount = floatval($denominationNumberCoin) * $denomination->getDenominationValue();
-        $payIn = floatval($putMoneyInValue);
-        $payOut = floatval($takeMoneyOutValue);
-        $cashSales = $this->convertPriceFormatToDecimal($cashSales);
-        $otherPaymentSales = $this->convertPriceFormatToDecimal($otherPaymentSales);
-        $discountAmount = floatval($discountAmount);
-        $totalSales = $cashSales + $otherPaymentSales;
         return [
-            'openingAmount' => $openingAmount,
+            'staffName' => $staffName,
+            'openedString' => $openedString,
             'totalSales' => $totalSales,
-            'payIn' => $payIn,
-            'payOut' => $payOut,
             'cashSales' => $cashSales,
-            'cashRefund' => 0,
             'otherPaymentSales' => $otherPaymentSales,
-            'discountAmount' => $discountAmount,
-            'refund' => 0
+            'expectedDrawer' => $totalSales
         ];
     }
 
     /**
-     * convert string price format to decimal
      * @param $string
      * @return float|int|null
      */

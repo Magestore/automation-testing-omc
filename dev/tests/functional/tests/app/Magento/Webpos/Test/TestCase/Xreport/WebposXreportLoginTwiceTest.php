@@ -6,7 +6,7 @@
  * Time: 14:13
  */
 
-namespace Magento\Webpos\Test\TestCase\Zreport;
+namespace Magento\Webpos\Test\TestCase\Xreport;
 
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
@@ -17,7 +17,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposXreportLoginTwiceTest
- * @package Magento\Webpos\Test\TestCase\Zreport
+ * @package Magento\Webpos\Test\TestCase\Xreport
  * ZR024
  * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff (ex: Staff A)

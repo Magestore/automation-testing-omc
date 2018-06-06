@@ -165,7 +165,7 @@ class CheckWhenUserAssignedPermissionToLockRegisterLR18LR19Test extends Injectab
         if ($testId == 'LR19') {
             $arrs = [
                 'Magento_Backend::dashboard',
-                'Magestore_OrderSuccess::all',
+//                'Magestore_OrderSuccess::all',
                 'Magento_Analytics::analytics',
                 'Magento_Sales::sales',
                 'Magento_Catalog::catalog',

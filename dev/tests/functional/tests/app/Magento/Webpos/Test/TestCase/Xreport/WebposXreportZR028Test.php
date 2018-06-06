@@ -2,44 +2,56 @@
 /**
  * Created by PhpStorm.
  * User: finbert
- * Date: 16/05/2018
- * Time: 14:21
+ * Date: 09/05/2018
+ * Time: 13:30
  */
 
-namespace Magento\Webpos\Test\TestCase\Zreport;
+namespace Magento\Webpos\Test\TestCase\Xreport;
 
-use Magento\CurrencySymbol\Test\Page\Adminhtml\SystemCurrencyIndex;
 use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposXreportZR033Test
- * @package Magento\Webpos\Test\TestCase\Zreport
- * Precondition:
- * - There are some POS and setting [Need to create session before working] = "Yes" on the test site
- * - Setup multi currencies
+ * Class WebposXreportZR028Test
+ *
+ * Precondition: There are some POS and setting [Need to create session before working] = "Yes" on the test site
  * 1. Login webpos by a staff
- * 2. Go to General > Currency > Select a currency that different from default currency
- * 3. Open a session with conditions:
+ * 2. Open a session with
  * - Opening amount: >0
  * - Take money in: >0
  * - Take money out:  >0
  * 3. Create some orders successfully meet conditions:
  * - Using some payment methods (including cashin method)
  * - Apply discount whole cart
- * 4. Refund an order that placed on this session
+ * 4. Refund an order that placed on this session by cash in (Ex: refund amount = R)
  *
  * Steps:
  * 1. Go to [Session Management] menu
- * 2. Click to print X-report
+ * 3. Click to print Z-report
  *
  * Acceptance:
- * 2. All of fields on X-report will be show exactly the symbol and converting rate of the currency that selected on step 2 of [Precondition and setup steps]
+ * 2. Show X-report with:
+ * - [Opening Amount] is the inputed open amount on step 2  of [Precondition and setup steps] column
+ * - Expected Drawer = Cash Sales - Cash refund - Payouts + Pay Ins + Opening amount
  *
+ * - Cash sales = The total cash sales processed including discounts and tax on this session
+ * - Cash Refund = Refund amount by cashin (R amount)
+ * - [Pay Ins] = SUM(amount of Put_money_in)
+ * - Payouts = SUM(amount of Take_money_out)
+ *
+ * - Total Sales = SUM(grand_total) of the orders which placed on this session
+ * - Discount = SUM (discount_amount) of the orders which placed on this session
+ * - Refund = SUM (refunded_amount) on this session (R amount)
+ * - Net Sales = [Total Sales] - [Refund]
+ *
+ * - Cash in = [Cash sales]
+ * And show all of the payment methods with their total that placed on this session
+ *
+ * @package Magento\Webpos\Test\TestCase\Xreport
  */
-class WebposXreportZR033Test extends Injectable
+class WebposXreportZR028Test extends Injectable
 {
     /**
      * Webpos Index page.
@@ -49,29 +61,21 @@ class WebposXreportZR033Test extends Injectable
     protected $webposIndex;
 
     /**
-     * @var SystemCurrencyIndex $currencyIndex
-     */
-    protected $currencyIndex;
-
-    /**
      * @var FixtureFactory $fixtureFactory
      */
     protected $fixtureFactory;
 
     /**
      * @param WebposIndex $webposIndex
-     * @param SystemCurrencyIndex $currencyIndex
      * @param FixtureFactory $fixtureFactory
      */
     public function __inject(
         WebposIndex $webposIndex,
-        SystemCurrencyIndex $currencyIndex,
         FixtureFactory $fixtureFactory
     )
     {
         $this->webposIndex = $webposIndex;
         $this->fixtureFactory = $fixtureFactory;
-        $this->currencyIndex = $currencyIndex;
     }
 
     /**
@@ -81,10 +85,9 @@ class WebposXreportZR033Test extends Injectable
      * @param $amount
      * @param $putMoneyInValue
      * @param $takeMoneyOutValue
+     * @param bool $addDiscount
      * @param string $discountAmount
-     * @param $symbol
      * @return array
-     * @throws \Exception
      */
     public function test(
         $products,
@@ -93,8 +96,8 @@ class WebposXreportZR033Test extends Injectable
         $amount,
         $putMoneyInValue,
         $takeMoneyOutValue,
-        $discountAmount = '',
-        $symbol
+        $addDiscount = false,
+        $discountAmount = ''
     )
     {
         // Create denomination
@@ -102,11 +105,6 @@ class WebposXreportZR033Test extends Injectable
         $this->objectManager->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'create_session_before_working']
-        )->run();
-
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'config_default_currency_uah']
         )->run();
 
         //Config Customer Credit Payment Method
@@ -118,11 +116,6 @@ class WebposXreportZR033Test extends Injectable
         $this->objectManager->create(
             'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
         )->run();
-
-        $this->currencyIndex->open();
-        $this->currencyIndex->getCurrencyRateForm()->clickImportButton();
-        $this->currencyIndex->getCurrencyRateForm()->fillCurrencyUSDUAHRate();
-        $this->currencyIndex->getFormPageActions()->save();
 
         // Login webpos
         $this->objectManager->getInstance()->create(
@@ -152,13 +145,15 @@ class WebposXreportZR033Test extends Injectable
             $i++;
         }
 
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\AddDiscountWholeCartStep',
-            [
-                'percent' => $discountAmount,
-                'type' => '$'
-            ]
-        )->run();
+        if ($addDiscount) {
+            $this->objectManager->getInstance()->create(
+                'Magento\Webpos\Test\TestStep\AddDiscountWholeCartStep',
+                [
+                    'percent' => $discountAmount,
+                    'type' => '$'
+                ]
+            )->run();
+        }
 
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -173,12 +168,10 @@ class WebposXreportZR033Test extends Injectable
             $this->webposIndex->getCheckoutPaymentMethod()->getCustomPayment1()->click();
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         }
-        $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->click();
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
         $this->webposIndex->getCheckoutPaymentMethod()->getTitlePaymentMethod()->click();
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();
-        $this->webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#add-more-payment');
         $this->webposIndex->getCheckoutAddMorePayment()->getCashIn()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
@@ -188,6 +181,7 @@ class WebposXreportZR033Test extends Injectable
 
         // Refund
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
@@ -209,41 +203,38 @@ class WebposXreportZR033Test extends Injectable
         $this->webposIndex->getCMenu()->getSessionManagement();
         $this->webposIndex->getMsWebpos()->waitForSessionManagerLoader();
 
-        $cashSales = $this->webposIndex->getSessionShift()->getPaymentAmount()->getText();
+        $cashSales = $this->webposIndex->getSessionShift()->getPaymentAmount(1)->getText();
         $otherPaymentSales = $this->webposIndex->getSessionShift()->getPaymentAmount(2)->getText();
 
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitReportPopupVisible();
 
         $openingAmount = floatval($denominationNumberCoin) * $denomination->getDenominationValue();
-        $closingAmount = floatval($denominationNumberCoin) * $denomination->getDenominationValue();
         $payIn = floatval($putMoneyInValue);
         $payOut = floatval($takeMoneyOutValue);
-        $cashSales = $this->convertPriceFormatToDecimal($cashSales, $symbol);
-        $otherPaymentSales = $this->convertPriceFormatToDecimal($otherPaymentSales, $symbol);
+        $cashSales = $this->convertPriceFormatToDecimal($cashSales);
+        $otherPaymentSales = $this->convertPriceFormatToDecimal($otherPaymentSales);
         $discountAmount = floatval($discountAmount);
         $totalSales = $cashSales + $otherPaymentSales;
         return [
             'openingAmount' => $openingAmount,
-            'closingAmount' => $closingAmount,
             'totalSales' => $totalSales,
             'payIn' => $payIn,
             'payOut' => $payOut,
             'cashSales' => $cashSales,
             'cashRefund' => 0,
             'otherPaymentSales' => $otherPaymentSales,
-            'refund' => 0,
-            'discountAmount' => $discountAmount
+            'discountAmount' => $discountAmount,
+            'refund' => 0
         ];
     }
 
     /**
      * convert string price format to decimal
      * @param $string
-     * @param $symbol
      * @return float|int|null
      */
-    public function convertPriceFormatToDecimal($string, $symbol = '$')
+    public function convertPriceFormatToDecimal($string)
     {
         $result = null;
         $negative = false;
@@ -251,7 +242,7 @@ class WebposXreportZR033Test extends Injectable
             $negative = true;
             $string = str_replace('-', '', $string);
         }
-        $string = str_replace($symbol, '', $string);
+        $string = str_replace('$', '', $string);
         $result = floatval($string);
         if ($negative) {
             $result = -1 * abs($result);
@@ -272,9 +263,8 @@ class WebposXreportZR033Test extends Injectable
             ['configData' => 'magestore_webpos_specific_payment']
         )->run();
 
-        $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'config_default_currency_rollback']
+        $this->objectManager->create(
+            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
         )->run();
     }
 }

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Zreport\WebposXreportZR026Test"
+    <testCase name="Magento\Webpos\Test\TestCase\Xreport\WebposXreportZR027Test"
               summary="Grid UI Component Filtering" ticketId="WEBPOS-1">
-        <variation name="WebposXreportZR026Test">
+        <variation name="WebposXreportZR027Test">
             <data name="products" xsi:type="array">
                 <item name="0" xsi:type="string">product1</item>
             </data>
-            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertXreportPaymentNotCashIn"/>
+            <data name="amount" xsi:type="string">5.00</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertXreportPaymentsHasCashIn"/>
         </variation>
     </testCase>
 </config>

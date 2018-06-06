@@ -17,6 +17,27 @@ use Magento\Webpos\Test\Page\Adminhtml\PosEdit;
 use Magento\Webpos\Test\Page\Adminhtml\PosIndex;
 use Magento\Webpos\Test\Page\WebposIndex;
 
+/**
+ * Class SessionManagementLR07Test
+ * @package Magento\Webpos\Test\TestCase\SessionManagement\LockRegisterConfiguration
+ *
+ * Precondition and setup steps:
+ * "- Loged in backend
+ * - In the webpos settings page, set the Need to create session before working field to Yes
+ * - Go to Sales > Web POS > Manage POS > Open an any POS
+ * - On the POS page, go to the Lock register session
+ *
+ * Steps:
+ * 1. Set the Enable option to lock register field to Yes
+ * 2. Input a security PIN
+ * 3. Click on Save button
+ * 4. Login webpos with staff account has permission to lock & unlock register
+ * 5. Observe webpos menu on left side
+ *
+ * Acceptance Criteria
+ * 4. Show more the Lock Register menu above Logout menu
+ *
+ */
 class SessionManagementLR07Test extends Injectable
 {
     /**
@@ -48,30 +69,32 @@ class SessionManagementLR07Test extends Injectable
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => 'create_section_before_working_yes_MS57']
         )->run();
-        /**@var Location $location*/
+        /**@var Location $location */
         $location = $fixtureFactory->createByCode('location', ['dataset' => 'default']);
         $location->persist();
         $locationId = $location->getLocationId();
         $posData = $pos->getData();
         $posData['location_id'][] = $locationId;
-        /**@var Pos $pos*/
+        /**@var Pos $pos */
         $pos = $fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
         $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
         $staffData = $staff->getData();
-        $staffData['location_id'] = [ $locationId ];
-        $staffData['pos_ids'] = [ $posId ];
-        /**@var Staff $staff*/
+        $staffData['location_id'] = [$locationId];
+        $staffData['pos_ids'] = [$posId];
+        /**@var Staff $staff */
         $staff = $fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff->persist();
         // LoginTest webpos
         $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposByStaffAndWaitSessionInstall',
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
             [
                 'staff' => $staff,
                 'location' => $location,
-                'pos' => $pos
+                'pos' => $pos,
+                'hasOpenSession' => true,
+                'hasWaitOpenSessionPopup' => true
             ]
         )->run();
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();

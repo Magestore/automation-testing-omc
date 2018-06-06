@@ -20,7 +20,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * -Empty
  *
  * Steps
- * 1. Add a product to cart
+ * 1. Add at least 2 product to cart
  * 2. Checkout order
  * 3. After checking order, make the refund for order
  * 4. Observe the default value in Qty to refund field
@@ -77,7 +77,8 @@ class WebposManageSessionTC026Test extends Injectable
         $webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#webpos_checkout');
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#checkout-method .payment');
-        sleep(1);
+        $webposIndex->getMsWebpos()->waitCartLoader();
+        $webposIndex->getMsWebpos()->waitCheckoutLoader();
         $webposIndex->getCheckoutPlaceOrder()->getPaymentByMethod('cashforpos')->click();
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#payment-method');
         $webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
