@@ -75,14 +75,8 @@ class  WebposProductGridGroupProductDetailAddAnOutOfStockChildProductPG49Test ex
         $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-product-detail"]');
-        //click cancel button to close product detail popup
-        $this->webposIndex->getCheckoutProductDetail()->getButtonCancel()->click();
-        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-product-detail"]');
-        $this->webposIndex->getCheckoutProductList()->getFirstProduct()->hover();
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-product-detail"]');
+        $this->webposIndex->getMsWebpos()->waitForElementVisible('#popup-product-detail');
+
         // Select options
         $this->webposIndex->getCheckoutProductDetail()->fillGroupedProductQty($products[0]['product']);
         $childProducts = $products[0]['product']->getAssociated()['products'];

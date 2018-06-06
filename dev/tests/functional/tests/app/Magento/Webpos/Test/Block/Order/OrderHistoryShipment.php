@@ -18,11 +18,13 @@ use Magento\Mtf\Client\Locator;
 class OrderHistoryShipment extends Block
 {
     protected $itemRowTemplate = './/tr[.//*[@class="product-name" and text()="%s"]]';
+
     /**
      * @return \Magento\Mtf\Client\ElementInterface
      */
     public function getSubmitButton()
     {
+        $this->waitForElementNotVisible('#shipment-popup-form > div.modal-body > div.actions > button.btn-cl-cfg-active');
         return $this->_rootElement->find('#shipment-popup-form > div.modal-body > div.actions > button.btn-cl-cfg-active');
     }
 
@@ -60,8 +62,8 @@ class OrderHistoryShipment extends Block
         return $this->_rootElement->find('[id="send_email_ship_popup"]');
     }
 
-	public function getTrackNumber()
-	{
-		return $this->_rootElement->find('input[name="tracking[1][number]"]');
-	}
+    public function getTrackNumber()
+    {
+        return $this->_rootElement->find('input[name="tracking[1][number]"]');
+    }
 }

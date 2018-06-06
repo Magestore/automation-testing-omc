@@ -20,15 +20,6 @@ class AssertGroupProductDetailAvailable extends AbstractConstraint
             'Cancel button is not visible.'
         );
         \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getCheckoutProductDetail()->getConfigProductName()->isVisible(),
-            'Group product name is not visible.'
-        );
-        \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getCheckoutProductDetail()->getConfigProductSku()->isVisible(),
-            'Group product sku is not visible.'
-        );
-
-        \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->isVisible(),
             'Add to cart button is not visible.'
         );
