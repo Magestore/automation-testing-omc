@@ -8,6 +8,7 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByStaffDaily;
 
+use DateTime;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\SalesByStaffDaily;
 use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
@@ -86,10 +87,13 @@ class SaleByStaffDailyReportsRP09Test extends Injectable
             $oderStatus->isVisible(),
             'In Admin Form Sales By Staff (Daily) WebPOS Page. The Selection Order Status is not visible.'
         );
+        $datetime1 = new DateTime($fromDate->getValue());
+        $datetime2 = new DateTime($toDate->getValue());
+        $interval = $datetime2->diff($datetime1);
         self::assertEquals(
             1,
-            $toDate->getValue() - $fromDate->getValue(),
-            'In Admin Form Sales By Staff (Daily) WebPOS Page. The duration time between from date and to date is not correct. It must be one month.'
+            (int)$interval->format('%m'),
+            'In Admin Form Order List By Location WebPOS Page. The duration time between from date and to date is not correct. It must be one month.'
         );
         foreach ($columns as $column) {
             self::assertTrue(

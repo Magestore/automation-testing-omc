@@ -25,7 +25,7 @@ use Magento\Webpos\Test\Page\Adminhtml\StaffNews;
  * - Title: New Staff
  * - Staff information contains fields: User Name, Password, Password confirmation, Display Name, Email Address, PIN code (App only)
  * - User Settings contain fields: Customer group, Location, Role, Status, POS
- * - Buttons: Back, Reset, Save and continue Edit, Save"
+ * - Buttons: Back to register or connect an account, Reset, Save and continue Edit, Save"
  */
 class AddNewStaffPageMS02Test extends Injectable
 {

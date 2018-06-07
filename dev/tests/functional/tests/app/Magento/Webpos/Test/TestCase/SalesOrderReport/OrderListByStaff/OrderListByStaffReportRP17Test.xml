@@ -10,6 +10,7 @@
     <testCase name="Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByStaff\OrderListByStaffReportRP17Test"
               summary="Sales By Staff Daily Report" ticketId="MAGETWO-28222">
         <variation name="OrderListByStaffReportRP17TestVariation2">
+            <data name="shifts/period_type" xsi:type="string">admin admin</data>
             <data name="shifts/show_order_statuses" xsi:type="string">Any</data>
             <data name="shifts/from" xsi:type="string">m/d/Y -1 month</data>
             <data name="shifts/to" xsi:type="string">m/d/Y</data>

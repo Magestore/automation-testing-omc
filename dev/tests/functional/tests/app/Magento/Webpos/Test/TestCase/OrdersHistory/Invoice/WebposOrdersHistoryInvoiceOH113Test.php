@@ -101,7 +101,7 @@ class WebposOrdersHistoryInvoiceOH113Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         $totalPaid = (float)substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
         // Click Button Invoice
-        sleep(1);
+        $this->webposIndex->getOrderHistoryOrderViewFooter()->waitForElementVisible('button.invoice');
         $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
         $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
         sleep(2);

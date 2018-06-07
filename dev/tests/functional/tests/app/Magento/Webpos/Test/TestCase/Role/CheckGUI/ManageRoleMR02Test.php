@@ -31,7 +31,7 @@ use Magento\Webpos\Test\Page\Adminhtml\WebposRoleNew;
  * General tab including fields: Role name (*), Maximum discount percent (%), Description
  * Permission tab including [Resource Access] field (Custom, All)
  * Role list tab including: a grid of exist Roles and [Search], [Reset filter] button
- * Buttons: Back, Reset, Save and continue Edit, Save
+ * Buttons: Back to register or connect an account, Reset, Save and continue Edit, Save
  *
  *
  * Class ManageRoleMR02Test

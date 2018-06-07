@@ -193,11 +193,12 @@ class WebposTaxTAX82Test extends Injectable
             $this->webposIndex->getCheckoutDiscount()->clickDiscountApplyButton();
             $this->webposIndex->getMsWebpos()->waitCartLoader();
             $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#webpos_cart_discountpopup');
         }
-        sleep(5);
-
         $actualTaxAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText(), 1);
         $actualDiscountAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Discount')->getText(), 2);
+        sleep(5);
+        die();
         $this->assertTaxAmountAndDiscountAmountWithApplyDiscountOnPriceIncludingTax
             ->processAssert($products, $originTaxRate, $currentTaxRate, $actualTaxAmount, $actualDiscountAmount, $discountPercent);
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();

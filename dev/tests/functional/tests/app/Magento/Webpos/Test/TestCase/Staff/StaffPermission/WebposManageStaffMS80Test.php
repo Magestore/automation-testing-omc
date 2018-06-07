@@ -76,7 +76,7 @@ class WebposManageStaffMS80Test extends Injectable
         //Config create session before working
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'create_section_before_working_yes_MS57']
+            ['configData' => 'create_section_before_working_yes']
         )->run();
         $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
         return ['staffData' => $staff->getData()];
@@ -110,13 +110,15 @@ class WebposManageStaffMS80Test extends Injectable
         $role = $this->fixtureFactory->createByCode('webposRole', ['data' => $roleData]);
         $role->persist();
         //LoginTest
-        $this->login($staff, $location, $pos);
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
-        $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            [
+                'staff' => $staff,
+                'location' => $location,
+                'pos' => $pos,
+            ]
+        )->run();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
-        $this->webposIndex->getSessionShift()->getOpenShiftButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
-        sleep(3);
         $this->assertTrue(
             $this->webposIndex->getListShift()->getFirstItemShift()->isVisible(),
             'Open a shift not successfully.'
@@ -124,47 +126,11 @@ class WebposManageStaffMS80Test extends Injectable
 
     }
 
-    /**
-     * @param Staff $staff
-     * @param Location|null $location
-     * @param Pos|null $pos
-     */
-    public function login(Staff $staff, Location $location = null, Pos $pos = null)
-    {
-        $username = $staff->getUsername();
-        $password = $staff->getPassword();
-        $this->webposIndex->open();
-        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-        if ($this->webposIndex->getLoginForm()->isVisible()) {
-            $this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
-            $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
-            $this->webposIndex->getLoginForm()->clickLoginButton();
-            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-            $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
-            if ($location) {
-                $this->webposIndex->getLoginForm()->setLocation($location->getDisplayName());
-            }
-            if ($pos) {
-                $this->webposIndex->getLoginForm()->setPos($pos->getPosName());
-            }
-            if ($location || $pos) {
-                $this->webposIndex->getLoginForm()->getEnterToPos()->click();
-            }
-            $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
-            $time = time();
-            $timeAfter = $time + 90;
-            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
-                $time = time();
-            }
-        }
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-    }
-
     public function tearDown()
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'create_section_before_working_no_MS57']
+            ['configData' => 'create_section_before_working_no']
         )->run();
     }
 

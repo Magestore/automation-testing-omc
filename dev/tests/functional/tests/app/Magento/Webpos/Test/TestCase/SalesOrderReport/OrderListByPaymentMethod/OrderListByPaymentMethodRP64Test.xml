@@ -7,7 +7,7 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod\OrderListByPaymentMethodRP64Test"
+    <testCase name="Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByPaymentMethod\OrderListByPaymentMethodRP64Test"
               summary="Sales By Staff Daily Report" ticketId="MAGETWO-28222">
         <variation name="OrderListByPaymentMethodRP64TestVariation1">
             <data name="shifts/show_order_statuses" xsi:type="string">Specified</data>

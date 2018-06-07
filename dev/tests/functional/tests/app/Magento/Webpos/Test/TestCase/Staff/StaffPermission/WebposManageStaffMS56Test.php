@@ -84,7 +84,7 @@ class WebposManageStaffMS56Test extends Injectable
     {
         //Create role and staff for role
         $webposRole->persist();
-        $dataStaff = $webposRole->getDataFieldConfig('staff_id')['source']->getStaffs()[0]->getData();
+        $staff = $webposRole->getDataFieldConfig('staff_id')['source']->getStaffs()[0];
 
         //Create product
         $products = $this->objectManager->getInstance()->create(
@@ -94,8 +94,15 @@ class WebposManageStaffMS56Test extends Injectable
         $product1 = $products[0]['product'];
         $product2 = $products[1]['product'];
 
-        //LoginTest
-        $this->loginWebpos($this->webposIndex, $dataStaff['username'], $dataStaff['password']);
+        //Login Webpos
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            [
+                'staff' => $staff,
+                'hasOpenSession' => null,
+                'hasWaitOpenSessionPopup' => null
+            ]
+        )->run();
 
         //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
@@ -158,29 +165,5 @@ class WebposManageStaffMS56Test extends Injectable
             'total' => $total
         ];
     }
-
-    /**
-     * @param WebposIndex $webposIndex
-     * @param $username
-     * @param $password
-     */
-    public function loginWebpos(WebposIndex $webposIndex, $username, $password)
-    {
-        $webposIndex->open();
-        if ($webposIndex->getLoginForm()->isVisible()) {
-            $webposIndex->getLoginForm()->getUsernameField()->setValue($username);
-            $webposIndex->getLoginForm()->getPasswordField()->setValue($password);
-            $webposIndex->getLoginForm()->clickLoginButton();
-            $webposIndex->getMsWebpos()->waitForSyncDataVisible();
-            $time = time();
-            $timeAfter = $time + 360;
-            while ($webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
-                $time = time();
-            }
-            sleep(2);
-        }
-        $webposIndex->getCheckoutProductList()->waitProductListToLoad();
-    }
-
 }
 

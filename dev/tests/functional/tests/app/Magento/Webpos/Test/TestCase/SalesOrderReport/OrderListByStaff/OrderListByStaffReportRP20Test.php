@@ -70,6 +70,10 @@ class OrderListByStaffReportRP20Test extends Injectable
         $this->orderListByStaff->open();
         $this->orderListByStaff->getMessagesBlock()->clickLinkInMessage('notice', 'here');
         $fromDateInitial = $this->webPOSAdminReportDashboard->getReportDashboard()->getSalesReportFormDate()->getValue();
+        if (isset($shifts['period_type']) && !$this->webPOSAdminReportDashboard->getReportDashboard()->getPeriorTypeOptionByName($shifts['period_type'])->isPresent()) {
+            unset($shifts['period_type']);
+            $this->webPOSAdminReportDashboard->getReportDashboard()->setFirstOptionPrediodType();
+        }
         $this->orderListByStaff->getFilterBlock()->viewsReport($shifts);
         $this->orderListByStaff->getActionsBlock()->showReport();
         $fromDateLast = $this->webPOSAdminReportDashboard->getReportDashboard()->getSalesReportFormDate()->getValue();
