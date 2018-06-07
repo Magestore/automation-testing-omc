@@ -66,6 +66,7 @@ class CreatePaymentAndInvoiceSuccessfullyStep implements TestStepInterface
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitForFirstOrderVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        sleep(1);
         // Open shipment popup
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
         $this->webposIndex->getOrderHistoryPayment()->waitForElementVisible('#payment_popup_form');

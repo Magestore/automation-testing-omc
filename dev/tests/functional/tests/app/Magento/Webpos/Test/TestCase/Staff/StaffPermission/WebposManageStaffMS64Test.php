@@ -191,10 +191,14 @@ class WebposManageStaffMS64Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="c-button--push-left"]');
         //Go to orders history
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
-        $this->webposIndex->getCMenu()->waitForElementVisible('#orders_history');
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->ordersHistory();
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
+        $this->webposIndex->getOrderHistoryOrderList()->waitForFirstOrderVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        sleep(1);
         //Take payment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForTakePaymentButtonVisible();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();

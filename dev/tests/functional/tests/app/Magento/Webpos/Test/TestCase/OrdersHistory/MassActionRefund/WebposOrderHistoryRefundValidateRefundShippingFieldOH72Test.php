@@ -110,13 +110,15 @@ class WebposOrderHistoryRefundValidateRefundShippingFieldOH72Test extends Inject
         sleep(0.5);
         // Go to Order History
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
+        $this->webposIndex->getOrderHistoryOrderList()->waitForFirstOrderVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
+        sleep(1);
         // Open refund popup
-        sleep(0.5);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
         sleep(0.5);
         $this->webposIndex->getOrderHistoryAddOrderNote()->getRefundButton()->click();

@@ -105,13 +105,14 @@ class WebposOrdersHistoryInvoiceOH115Test extends Injectable
 
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->ordersHistory();
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        sleep(1);
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
+        $this->webposIndex->getOrderHistoryOrderList()->waitForFirstOrderVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
-        sleep(2);
+        sleep(1);
 
         return [
             'products' => $products,
