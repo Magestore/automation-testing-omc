@@ -44,10 +44,10 @@ class WebposCheckoutPaymentMethodCP218Test extends Injectable
      * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
-    /**
-     * @var
-     */
 
+    /**
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
@@ -100,10 +100,10 @@ class WebposCheckoutPaymentMethodCP218Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        //select shipping
-        sleep(3);
-        $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+//        //select shipping
+//        sleep(3);
+//        $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
+//        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //select payment
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

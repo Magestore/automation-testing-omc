@@ -34,7 +34,6 @@ class AssertInvoiceSuccess extends AbstractConstraint
             'Invoice Pop is not closed'
         );
         $messages = 'The invoice has been created successfully.';
-        $webposIndex->getToaster()->waitUntilWarningMessageChange($messages);
         \PHPUnit_Framework_Assert::assertEquals(
             $messages,
             $webposIndex->getToaster()->getWarningMessage()->getText(),

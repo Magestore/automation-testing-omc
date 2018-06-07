@@ -180,6 +180,7 @@ class WebposTaxTAX110Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
+        $this->webposIndex->getOrderHistoryOrderList()->waitForFirstOrderVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
         }
@@ -194,8 +195,10 @@ class WebposTaxTAX110Test extends Injectable
         $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
         $actualTaxAmount = substr($this->webposIndex->getOrderHistoryInvoice()->getTaxAmount(), 1);
         $actualSubtotal = substr($this->webposIndex->getOrderHistoryInvoice()->getSubtotal(), 1);
+        $shippingHandling = substr($this->webposIndex->getOrderHistoryInvoice()->getShippingHandling()->getText(), 1);
+        $shippingHandling = (-1) * floatval($shippingHandling);
         $actualGrandtotal = substr($this->webposIndex->getOrderHistoryInvoice()->getGrandtotal(), 1);
-        $this->assertTaxAmountWithIncludeFptInSubtotal->processAssert($products[0]['product']->getPrice(), $taxRate, $products[0]['product']->getFpt()[0]['price'], $actualTaxAmount, $actualSubtotal, $actualGrandtotal);
+        $this->assertTaxAmountWithIncludeFptInSubtotal->processAssert($products[0]['product']->getPrice(), $taxRate, $products[0]['product']->getFpt()[0]['price'], $actualTaxAmount, $actualSubtotal, $actualGrandtotal, $shippingHandling);
 
     }
 

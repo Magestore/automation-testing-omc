@@ -21,7 +21,7 @@ class CheckoutShippingMethod extends Block
     {
         $browser = $this->_rootElement;
         $browser->click();
-        $flatRateFixedMethod = $this->_rootElement->find('[id="flatrate_flatrate"]');
+        $flatRateFixedMethod = $this->_rootElement->find('#flatrate_flatrate');
         $browser->waitUntil(
             function () use ($flatRateFixedMethod) {
                 return $flatRateFixedMethod->isVisible() ? true : null;
@@ -31,22 +31,22 @@ class CheckoutShippingMethod extends Block
     public function clickFlatRateFixedMethod()
     {
         $this->_rootElement->click();
-        $this->_rootElement->find('[id="flatrate_flatrate"]')->click();
+        $this->_rootElement->find('#flatrate_flatrate')->click();
     }
     public function clickFreeShipping()
     {
         $this->_rootElement->click();
-        $this->_rootElement->find('[id="freeshipping_freeshipping"]')->click();
+        $this->_rootElement->find('#freeshipping_freeshipping')->click();
     }
     public function clickStorePickupShipping()
     {
         $this->_rootElement->click();
-        $this->_rootElement->find('[id="storepickup_storepickup"]')->click();
+        $this->_rootElement->find('#storepickup_storepickup')->click();
     }
     public function clickPOSShipping()
     {
         $this->_rootElement->click();
-        $this->_rootElement->find('[id="webpos_shipping_storepickup"]')->click();
+        $this->_rootElement->find('#webpos_shipping_storepickup')->click();
     }
 
 	public function clickShipPanel()

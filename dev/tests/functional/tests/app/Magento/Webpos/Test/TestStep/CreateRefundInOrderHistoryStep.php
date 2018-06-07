@@ -128,7 +128,7 @@ class CreateRefundInOrderHistoryStep implements TestStepInterface
 		} elseif (strcmp($this->action, 'submit') == 0) {
 
 			$this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
-            sleep(0.5);
+            $this->webposIndex->getModal()->waitForModalPopup();
 			$this->webposIndex->getMsWebpos()->waitForModalPopup();
 			if (strcmp($this->confirmAction, 'close') == 0) {
 				$this->webposIndex->getModal()->getCloseButton()->click();

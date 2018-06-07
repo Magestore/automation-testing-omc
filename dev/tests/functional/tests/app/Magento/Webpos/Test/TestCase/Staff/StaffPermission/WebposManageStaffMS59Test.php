@@ -115,7 +115,6 @@ class WebposManageStaffMS59Test extends Injectable
             $webposIndex->getLoginForm()->setPos($posName);
             $webposIndex->getLoginForm()->getEnterToPos()->click();
             sleep(3);
-            //			$this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
             $webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 360;

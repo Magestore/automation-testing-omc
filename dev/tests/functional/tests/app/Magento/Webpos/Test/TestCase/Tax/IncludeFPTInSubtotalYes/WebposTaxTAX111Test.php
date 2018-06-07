@@ -182,6 +182,7 @@ class WebposTaxTAX111Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
+        $this->webposIndex->getOrderHistoryOrderList()->waitForFirstOrderVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         while (strcmp($this->webposIndex->getOrderHistoryOrderViewHeader()->getStatus(), 'Not Sync') == 0) {
         }

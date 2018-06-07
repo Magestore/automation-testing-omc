@@ -42,16 +42,12 @@ class WebposCheckoutPaymentMethodCP216Test extends Injectable
      * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
-    /**
-     * @var
-     */
 
+    /**
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
-    /**
-     * @param WebposIndex $webposIndex
-     * @return void
-     */
     public function __prepare()
     {
         // Config: use system value for all field in Tax Config
@@ -70,10 +66,6 @@ class WebposCheckoutPaymentMethodCP216Test extends Injectable
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
 
-    /**
-     *
-     * @return void
-     */
     public function test($products, FixtureFactory $fixtureFactory, $configData, $amount)
     {
         $this->objectManager->getInstance()->create(
@@ -98,10 +90,10 @@ class WebposCheckoutPaymentMethodCP216Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        //select shipping
-        sleep(1);
-        $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+//        //select shipping
+//        sleep(1);
+//        $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
+//        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //select payment
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

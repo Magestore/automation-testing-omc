@@ -34,6 +34,11 @@ class OrderHistoryOrderViewFooter extends Block
         return $this->_rootElement->find('button.invoice');
     }
 
+    public function getInvoiceButtonNotWait()
+    {
+        return $this->_rootElement->find('button.invoice');
+    }
+
     /**
      * @param $label
      * @return array|string

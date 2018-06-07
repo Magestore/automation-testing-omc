@@ -40,16 +40,12 @@ class WebposCheckoutPaymentMethodCP213Test extends Injectable
      * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
-    /**
-     * @var
-     */
 
+    /**
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
-    /**
-     * @param WebposIndex $webposIndex
-     * @return void
-     */
     public function __prepare()
     {
         // Config: use system value for all field in Tax Config

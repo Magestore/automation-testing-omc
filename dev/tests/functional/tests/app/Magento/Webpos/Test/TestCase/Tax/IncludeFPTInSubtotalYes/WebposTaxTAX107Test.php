@@ -162,14 +162,16 @@ class WebposTaxTAX107Test extends Injectable
         $actualTaxAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText(), 1);
         $actualSubtotal = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Subtotal')->getText(), 1);
         $actualGrandtotal = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText(), 1);
-        $this->assertTaxAmountWithIncludeFptInSubtotal->processAssert($products[0]['product']->getPrice(), $taxRate, $products[0]['product']->getFpt()[0]['price'], $actualTaxAmount, $actualSubtotal, $actualGrandtotal);
+        $this->assertTaxAmountWithIncludeFptInSubtotal->processAssert($products[0]['product']->getPrice(), $taxRate, 0, $actualTaxAmount, $actualSubtotal, $actualGrandtotal);
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $actualTaxAmount = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Tax')->getText(), 1);
         $actualSubtotal = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Subtotal')->getText(), 1);
         $actualGrandtotal = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Total')->getText(), 1);
-        $this->assertTaxAmountWithIncludeFptInSubtotal->processAssert($products[0]['product']->getPrice(), $taxRate, $products[0]['product']->getFpt()[0]['price'], $actualTaxAmount, $actualSubtotal, $actualGrandtotal);
+        $shippingHandling = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('Shipping')->getText(), 1);
+        $fptTax = substr($this->webposIndex->getCheckoutCartFooter()->getGrandTotalItemPrice('FPT')->getText(), 1);
+        $this->assertTaxAmountWithIncludeFptInSubtotal->processAssert($products[0]['product']->getPrice(), $taxRate, $fptTax, $actualTaxAmount, $actualSubtotal, $actualGrandtotal, $shippingHandling);
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->objectManager->getInstance()->create(
