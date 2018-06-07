@@ -22,7 +22,7 @@ use Magento\Mtf\TestCase\Scenario;
  * 4. Create shipment for order just created in backend
  * Acceptance Criteria:
  * 1. Close shipment popup and a shipment has created with corresponding item and Qty
- * 2. Ship action hidden on action box
+ * 2. Ship action hidden on action  box
  * 3. Order status will be changed to processing
  * 4. A new notification will be display on notification icon
  */

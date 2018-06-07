@@ -30,10 +30,6 @@ class AssertProductsGridProductBlockAvailable extends AbstractConstraint
             $webposIndex->getCheckoutProductList()->getFirstProductName()->isVisible(),
             'Products Grid - First product name is not visible.'
         );
-        \PHPUnit_Framework_Assert::assertTrue(
-            $webposIndex->getCheckoutProductList()->getFirstProductDetailButton()->isVisible(),
-            'Products Grid - First product detail button is not visible.'
-        );
     }
     /**
      * Returns a string representation of the object.

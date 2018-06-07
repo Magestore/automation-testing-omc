@@ -11,12 +11,11 @@
               summary="Sales By Staff Daily Report" ticketId="MAGETWO-28222">
         <variation name="OrderListByStaffReportRP17TestVariation2">
             <data name="shifts/period_type" xsi:type="string">admin admin</data>
-            <data name="shifts/show_order_statuses" xsi:type="string">Specified</data>
-            <data name="order_statuses" xsi:type="string">Complete</data>
-        </variation>
-        <variation name="OrderListByStaffReportRP17TestVariation1">
-            <data name="shifts/period_type" xsi:type="string">admin admin</data>
             <data name="shifts/show_order_statuses" xsi:type="string">Any</data>
+            <data name="shifts/from" xsi:type="string">m/d/Y -1 month</data>
+            <data name="shifts/to" xsi:type="string">m/d/Y</data>
+
+            <data name="fields" xsi:type="string">Staff, Order ID, Sales Total, Purchased On, Status</data>
         </variation>
     </testCase>
 </config>

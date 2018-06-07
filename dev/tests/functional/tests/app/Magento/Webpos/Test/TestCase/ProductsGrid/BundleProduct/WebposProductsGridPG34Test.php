@@ -72,10 +72,12 @@ class WebposProductsGridPG34Test extends Injectable
         )->run();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
-
-        while ($this->webposIndex->getCheckoutProductList()->getNumberOfProducts()->getText() != 1) {
-            sleep(1);
-        }
+        $this->webposIndex->getCheckoutProductDetail()->waitForFormLoader();
+        \PHPUnit_Framework_Assert::assertEquals(
+            1,
+            (int)$this->webposIndex->getCheckoutProductDetail()->getBundleFirstItemQty(),
+            'Default qty was incorrect'
+        );
 
         // Close popup
         if ($this->webposIndex->getCheckoutProductDetail()->isVisible()) {

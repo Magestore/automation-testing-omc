@@ -48,8 +48,7 @@ class WebposTakePaymentOH97Test extends Injectable
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
-     * @param WebposIndex $webposIndex
-     * @return void
+     * Precondition
      */
     public function __prepare()
     {
@@ -82,6 +81,7 @@ class WebposTakePaymentOH97Test extends Injectable
      * @param FixtureFactory $fixtureFactory
      * @param $configData
      * @param $amount
+     * @return array
      */
     public function test($products, FixtureFactory $fixtureFactory, $configData, $amount)
     {
@@ -113,7 +113,7 @@ class WebposTakePaymentOH97Test extends Injectable
         //select payment
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
+        sleep(1);
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
 
         // place order getCreateInvoiceCheckbox
@@ -138,17 +138,22 @@ class WebposTakePaymentOH97Test extends Injectable
         sleep(0.5);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
         sleep(1);
-        $remain = $this->webposIndex->getOrderHistoryPayment()->getRemainMoney()->getText();
-        $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
-        sleep(1);
-        $am = $this->webposIndex->getOrderHistoryOrderViewHeader()->getGrandTotal();
-        sleep(0.5);
-        $this->webposIndex->getOrderHistoryPayment()->getInputAmount()->setValue(substr($am, 1));
-        sleep(1);
+        $this->webposIndex->getModal()->waitForElementVisible('#payment_popup_form');
+        if ($this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->isVisible()) {
+            $remain = $this->webposIndex->getOrderHistoryPayment()->getRemainMoney()->getText();
+            $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
+            sleep(1);
+            $am = $this->webposIndex->getOrderHistoryOrderViewHeader()->getGrandTotal();
+            sleep(0.5);
+            $this->webposIndex->getOrderHistoryPayment()->getInputAmount()->setValue(substr($am, 1));
+            sleep(1);
 
-        $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
+            $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
 
-        $this->webposIndex->getModal()->getOkButton()->click();
+            $this->webposIndex->getModal()->getOkButton()->click();
+        }else{
+            $this->$this->webposIndex->getModal()->getCancelButton()->click();
+        }
         sleep(1);
         return [
             'am' => $am,

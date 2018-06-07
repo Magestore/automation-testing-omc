@@ -30,13 +30,16 @@ class OrderHistoryOrderViewFooter extends Block
      */
     public function getInvoiceButton()
     {
-        $this->waitForElementVisible('button.invoice');
         return $this->_rootElement->find('button.invoice');
     }
 
     public function getInvoiceButtonNotWait()
     {
         return $this->_rootElement->find('button.invoice');
+    }
+
+    public function waitForInvoiceButtonVisible(){
+        $this->waitForElementVisible('button.invoice');
     }
 
     /**

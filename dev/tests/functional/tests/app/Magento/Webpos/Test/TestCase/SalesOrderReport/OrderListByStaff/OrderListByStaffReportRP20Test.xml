@@ -10,13 +10,11 @@
     <testCase name="Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByStaff\OrderListByStaffReportRP20Test"
               summary="Sales By Staff Daily Report" ticketId="MAGETWO-28222">
         <variation name="OrderListByStaffReportRP20TestVariation1">
-            <data name="shifts/period_type" xsi:type="string">admin admin</data>
             <data name="shifts/from" xsi:type="string">m/d/Y -3 day</data>
             <data name="shifts/to" xsi:type="string">m/d/Y</data>
             <data name="shifts/show_order_statuses" xsi:type="string">Any</data>
         </variation>
         <variation name="OrderListByStaffReportRP20TestVariation2">
-            <data name="shifts/period_type" xsi:type="string">admin admin</data>
             <data name="shifts/from" xsi:type="string">m/d/Y -3 day</data>
             <data name="shifts/to" xsi:type="string">m/d/Y</data>
             <data name="shifts/show_order_statuses" xsi:type="string">Specified</data>

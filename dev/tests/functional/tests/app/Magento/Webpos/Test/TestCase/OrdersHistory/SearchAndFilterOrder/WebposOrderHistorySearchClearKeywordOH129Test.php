@@ -53,7 +53,6 @@ class WebposOrderHistorySearchClearKeywordOH129Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->search('dadasdasdasdasdasdasd');
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->assertFalse(
             $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->isVisible(),
             'Search with incorrect data found result.'
@@ -64,6 +63,7 @@ class WebposOrderHistorySearchClearKeywordOH129Test extends Injectable
         );
         $this->webposIndex->getOrderHistoryOrderList()->search('');
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         sleep(1);
         $this->assertTrue(
             $this->webposIndex->getOrderHistoryOrderList()->orderListIsVisible(),

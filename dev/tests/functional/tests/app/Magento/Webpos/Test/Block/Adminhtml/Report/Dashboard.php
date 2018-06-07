@@ -144,7 +144,7 @@ class Dashboard extends Block
 
     public function getPaymentMethod()
     {
-        return $this->_rootElement->find('#container div.admin__data-grid-wrap table tbody .col-payment.method_title');
+        return $this->_rootElement->find('//tbody//*[contains(normalize-space(@class), "col-payment.method_title")][1]', Locator::SELECTOR_XPATH);
     }
 
     public function getStaffName()
@@ -164,7 +164,7 @@ class Dashboard extends Block
 
     public function getStatusOrder()
     {
-        return $this->_rootElement->find('#container div.admin__data-grid-wrap table tbody .col-order_status\2e label');
+        return $this->_rootElement->find('//tbody//*[contains(normalize-space(@class), "col-order_status.label")]', Locator::SELECTOR_XPATH);
     }
 
     public function getFirtRowDataGrid()
@@ -208,4 +208,19 @@ class Dashboard extends Block
         $this->waitForElementVisible('.data-grid tbody tr');
     }
 
+    public function getPeriorTypeOptionByName($name)
+    {
+        return $this->_rootElement->find('//select[@id="sales_report_period_type"]//option[text()="' . $name . '"]', locator::SELECTOR_XPATH);
+    }
+
+    public function setFirstOptionPrediodType()
+    {
+        $option = $this->getFirstOptionPeriodType()->getText();
+        $this->_rootElement->find('//select[@id="sales_report_period_type"]', locator::SELECTOR_XPATH, 'select')->setValue($option);
+    }
+
+    public function getFirstOptionPeriodType()
+    {
+        return $this->_rootElement->find('//select[@id="sales_report_period_type"]//option[2]', locator::SELECTOR_XPATH);
+    }
 }

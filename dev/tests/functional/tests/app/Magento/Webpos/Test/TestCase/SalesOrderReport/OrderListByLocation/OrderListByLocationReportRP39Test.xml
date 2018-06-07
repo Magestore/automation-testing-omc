@@ -21,8 +21,7 @@
         </variation>
         <variation name="OrderListByStaffReportRP41TestVariation">
             <data name="shifts/show_order_statuses" xsi:type="string">Specified</data>
-            <data name="order_status" xsi:type="string">Canceled, Closed, Complete,Suspected Fraud, On Hold, Payment
-                Review, PayPal Canceled Reversal, PayPal Reversed, Pending, Pending, Pending PayPal, Processing
+            <data name="order_status" xsi:type="string">Canceled, Closed, Complete,Suspected Fraud, On Hold, Payment Review, PayPal Canceled Reversal, PayPal Reversed, Pending, Pending, Pending PayPal, Processing
             </data>
         </variation>
         <variation name="OrderListByStaffReportRP42TestVariation">
@@ -30,8 +29,7 @@
             <data name="shifts/from" xsi:type="string">m/d/Y -1 month</data>
             <data name="shifts/to" xsi:type="string">m/d/Y</data>
             <data name="shifts/show_order_statuses" xsi:type="string">Specified</data>
-            <data name="order_status" xsi:type="string">Canceled, Closed, Complete, Suspected Fraud, On Hold, Payment
-                Review, PayPal Canceled Reversal, PayPal Reversed, Pending, Pending, Pending PayPal, Processing
+            <data name="order_status" xsi:type="string">Canceled, Closed, Complete, Suspected Fraud, On Hold, Payment Review, PayPal Canceled Reversal, PayPal Reversed, Pending, Pending, Pending PayPal, Processing
             </data>
         </variation>
     </testCase>

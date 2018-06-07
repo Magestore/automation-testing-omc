@@ -3,7 +3,7 @@
     <testCase name="Magento\Webpos\Test\TestCase\Pos\Edit\WebposManagePosMP24Test" summary="Check GUI" ticketId="MAGETWO-0001">
     <variation name="WebposManagePosMP24Test">
         <data name="pos/dataset" xsi:type ="string">MS44Staff</data>
-        <data name="buttons" xsi:type="string">Back, Reset, Save and Continue Edit, Save</data>
+        <data name="buttons" xsi:type="string">Back to register or connect an account, Reset, Save and Continue Edit, Save</data>
             <data name="title" xsi:type="string">Edit Pos</data>
         <data name="fields" xsi:type="array">
             <item name="name" xsi:type="array">

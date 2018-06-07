@@ -8,6 +8,7 @@
 
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethodDaily;
 
+use DateTime;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\Adminhtml\SalesByPaymentDaily;
 use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
@@ -64,7 +65,7 @@ class SaleByPaymentMethodDailyRP54Test extends Injectable
         self::assertEquals(
             $pageTitle,
             $this->salesByPaymentDaily->getTitleBlock()->getTitle(),
-            'In Admin Form Sales by payment method (Daily) WebPOS Page. The page title is not correct. It must be ' . $pageTitle . 'The actual ' . $this->salesByStaffDaily->getTitleBlock()->getTitle()
+            'In Admin Form Sales by payment method (Daily) WebPOS Page. The page title is not correct. It must be ' . $pageTitle . 'The actual ' .$this->salesByPaymentDaily->getTitleBlock()->getTitle()
         );
         $fromDate = $this->webPOSAdminReportDashboard->getReportDashboard()->getSalesReportFormDate();
         $toDate = $this->webPOSAdminReportDashboard->getReportDashboard()->getSalesReportToDate();
@@ -81,10 +82,13 @@ class SaleByPaymentMethodDailyRP54Test extends Injectable
             $oderStatus->isVisible(),
             'In Admin Form Sales by payment method (Daily) WebPOS Page. The Selection Order Status is not visible.'
         );
+        $datetime1 = new DateTime($fromDate->getValue());
+        $datetime2 = new DateTime($toDate->getValue());
+        $interval = $datetime2->diff($datetime1);
         self::assertEquals(
             1,
-            $toDate->getValue() - $fromDate->getValue(),
-            'In Admin Form Sales by payment method (Daily) WebPOS Page. The duration time between from date and to date is not correct. It must be one month.'
+            (int)$interval->format('%m'),
+            'In Admin Form Order List By Location WebPOS Page. The duration time between from date and to date is not correct. It must be one month.'
         );
         foreach ($columns as $column) {
             self::assertTrue(

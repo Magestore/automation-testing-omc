@@ -129,7 +129,7 @@ class SaleByStaffRP08Test extends Injectable
         $salesTotalBodyAfter = $this->webPOSAdminReportDashboard->getReportDashboard()->getSalesTotalBody()->getText();
         $salesTotalFootAfter = $this->webPOSAdminReportDashboard->getReportDashboard()->getSalesTotalFoot()->getText();
 
-        self::assertGreaterThan(
+        self::assertGreaterThanOrEqual(
             $orderCountBodyBefore,
             $orderCountBodyAfter,
             'The Order Count In Table Body Of Report Form By Staff was not updated.'

@@ -77,14 +77,16 @@ class OrderListByPaymentMethodRP62Test extends Injectable
         if ($order_statuses != null) {
             $this->webPOSAdminReportDashboard->getReportDashboard()->setSalesReportOderStatuses($order_statuses);
         }
-        $paymentMethod = $this->webPOSAdminReportDashboard->getReportDashboard()->getPaymentMethod()->getText();
         $this->orderListByPayment->getActionsBlock()->showReport();
-        $statusOrder = $this->webPOSAdminReportDashboard->getReportDashboard()->getStatusOrder()->getText();
+
+        $paymentMethod = $this->webPOSAdminReportDashboard->getReportDashboard()->getPaymentMethod()->getText();
         self::assertEquals(
             $shifts['period_type'],
             $paymentMethod,
             'In Admin Form Order List By Staff WebPOS Page. The period type was not updated. It must be ' . $shifts['period_type']
         );
+
+        $statusOrder = $this->webPOSAdminReportDashboard->getReportDashboard()->getStatusOrder()->getText();
         if ($order_statuses != null) {
             self::assertEquals(
                 $order_statuses,

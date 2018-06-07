@@ -46,8 +46,7 @@ class WebposTakePaymentOH93Test extends Injectable
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
-     * @param WebposIndex $webposIndex
-     * @return void
+     * Precondition
      */
     public function __prepare()
     {
@@ -135,15 +134,17 @@ class WebposTakePaymentOH93Test extends Injectable
         //click take payment
         sleep(0.5);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
-        sleep(2);
-        $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
-        sleep(1);
-        $this->webposIndex->getOrderHistoryPayment()->getInputAmount()->setValue(0);
-        sleep(1);
-        $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
-
-        $this->webposIndex->getModal()->getOkButton()->click();
-
+        $this->webposIndex->getModal()->waitForElementVisible('#payment_popup_form');
+        if ($this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->isVisible()) {
+            $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
+            sleep(1);
+            $this->webposIndex->getOrderHistoryPayment()->getInputAmount()->setValue(0);
+            sleep(1);
+            $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
+            $this->webposIndex->getModal()->getOkButton()->click();
+        } else {
+            $this->webposIndex->getModal()->getCancelButton()->click();
+        }
     }
 
     public function tearDown()

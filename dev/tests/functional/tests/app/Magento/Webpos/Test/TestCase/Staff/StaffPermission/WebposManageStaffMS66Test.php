@@ -78,8 +78,9 @@ class WebposManageStaffMS66Test extends Injectable
     /**
      * Create WebposRole group test.
      *
-     * @param WebposRole
-     * @return void
+     * @param WebposRole $webposRole
+     * @param $products
+     * @param $staffData
      */
     public function test(WebposRole $webposRole, $products, $staffData)
     {
@@ -118,7 +119,14 @@ class WebposManageStaffMS66Test extends Injectable
             ['products' => $products]
         )->run();
         //LoginTest
-        $this->login($staff);
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            [
+                'staff' => $staff,
+                'hasOpenSession' => null,
+                'hasWaitOpenSessionPopup' => null
+            ]
+        )->run();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="c-button--push-left"]');
         $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
         $this->assertTrue(
@@ -149,41 +157,6 @@ class WebposManageStaffMS66Test extends Injectable
             $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->isVisible(),
             'Discount button is not hidden.'
         );
-
-    }
-
-    public function login(Staff $staff, Location $location = null, Pos $pos = null)
-    {
-        $username = $staff->getUsername();
-        $password = $staff->getPassword();
-        $this->webposIndex->open();
-        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-        if ($this->webposIndex->getLoginForm()->isVisible()) {
-            $this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
-            $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
-            $this->webposIndex->getLoginForm()->clickLoginButton();
-            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-            $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
-            if ($location) {
-                $this->webposIndex->getLoginForm()->setLocation($location->getDisplayName());
-            }
-            if ($pos) {
-                $this->webposIndex->getLoginForm()->setPos($pos->getPosName());
-            }
-            if ($location || $pos) {
-                $this->webposIndex->getLoginForm()->getEnterToPos()->click();
-            }
-            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-            $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
-            $time = time();
-            $timeAfter = $time + 360;
-            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
-                $time = time();
-            }
-            sleep(2);
-        }
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-//        $this->webposIndex->getMsWebpos()->waitCartLoader();
 
     }
 

@@ -7,25 +7,15 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByPaymentMethod\OrderListByPaymentMethodRP62Test"
+    <testCase name="Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByPaymentMethod\OrderListByPaymentMethodRP62Test"
               summary="Sales By Staff Daily Report" ticketId="MAGETWO-28222">
         <variation name="OrderListByPaymentMethodRP62TestVariation1">
             <data name="shifts/period_type" xsi:type="string">Web POS - Cash In</data>
             <data name="shifts/show_order_statuses" xsi:type="string">Any</data>
         </variation>
-        <variation name="OrderListByPaymentMethodRP62TestVariation2">
-            <data name="shifts/period_type" xsi:type="string">Web POS - Cash In</data>
-            <data name="shifts/show_order_statuses" xsi:type="string">Specified</data>
-            <data name="order_statuses" xsi:type="string">Complete</data>
-        </variation>
         <variation name="OrderListByPaymentMethodRP62TestVariation3">
             <data name="shifts/period_type" xsi:type="string">Web POS - Cash On Delivery</data>
             <data name="shifts/show_order_statuses" xsi:type="string">Any</data>
-        </variation>
-        <variation name="OrderListByPaymentMethodRP62TestVariation4">
-            <data name="shifts/period_type" xsi:type="string">Web POS - Cash On Delivery</data>
-            <data name="shifts/show_order_statuses" xsi:type="string">Specified</data>
-            <data name="order_statuses" xsi:type="string">Complete</data>
         </variation>
     </testCase>
 </config>

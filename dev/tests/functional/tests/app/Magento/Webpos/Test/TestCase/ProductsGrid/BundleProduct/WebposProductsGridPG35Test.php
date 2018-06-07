@@ -77,22 +77,9 @@ class WebposProductsGridPG35Test extends Injectable
             'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-
-        // Close popup
-        if ($this->webposIndex->getCheckoutProductDetail()->isVisible()) {
-            $this->webposIndex->getCheckoutProductDetail()->getButtonCancel()->click();
-        }
-
         // Click detail product
-        sleep(1);
-        $this->webposIndex->getCheckoutProductList()->getFirstProduct()->hover();
-        $this->webposIndex->getCheckoutProductList()->getFirstProductDetailButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-product-detail"]');
-        $this->webposIndex->getCheckoutProductDetail()->getQtyOfOption(1)->setValue(2);
-
+        $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
+        $this->webposIndex->getMsWebpos()->waitForElementVisible("#popup-product-detail");
         // Assert
         $this->assertChildProductOnProductDetail->processAssert($this->webposIndex, $products);
 

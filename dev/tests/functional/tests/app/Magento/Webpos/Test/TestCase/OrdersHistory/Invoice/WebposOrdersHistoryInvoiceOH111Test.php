@@ -113,6 +113,11 @@ class WebposOrdersHistoryInvoiceOH111Test extends Injectable
 
         // Take payment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
+        $this->webposIndex->getOrderHistoryPayment()->waitForElementVisible('#payment_popup_form');
+        self::assertTrue(
+            $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->isVisible(),
+            'Payment Method didn\'t displayed'
+        );
         if ($this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->isVisible()) {
             $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->click();
             $paymentPrice = (float)substr($this->webposIndex->getOrderHistoryPayment()->getPaymentPriceInput()->getValue(), 1);
@@ -122,15 +127,13 @@ class WebposOrdersHistoryInvoiceOH111Test extends Injectable
             $this->webposIndex->getModal()->getOkButton()->click();
             sleep(1);
             $totalPaid = (float)substr($this->webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid(), 1);
-
             // Click Button Invoice
             $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
             $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
-
-            return [
-                'products' => $products,
-                'totalPaid' => $totalPaid
-            ];
         }
+        return [
+            'products' => $products,
+            'totalPaid' => $totalPaid
+        ];
     }
 }

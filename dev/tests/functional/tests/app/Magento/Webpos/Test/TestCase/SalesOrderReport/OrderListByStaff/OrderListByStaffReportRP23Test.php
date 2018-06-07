@@ -116,7 +116,10 @@ class OrderListByStaffReportRP23Test extends Injectable
         // Preconditions
         $this->orderListByStaff->open();
         $this->orderListByStaff->getMessagesBlock()->clickLinkInMessage('notice', 'here');
-
+        if (isset($shifts['period_type']) && !$this->webPOSAdminReportDashboard->getReportDashboard()->getPeriorTypeOptionByName($shifts['period_type'])->isPresent()) {
+            unset($shifts['period_type']);
+            $this->webPOSAdminReportDashboard->getReportDashboard()->setFirstOptionPrediodType();
+        }
         $this->orderListByStaff->getFilterBlock()->viewsReport($shifts);
         $this->orderListByStaff->getActionsBlock()->showReport();
 

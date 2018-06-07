@@ -54,12 +54,9 @@ class SaleByStaffRP04Test extends Injectable
     protected $salesByStaff;
 
     /**
-     * Inject pages.
-     *
      * @param WebPOSAdminReportDashboard $webPOSAdminReportDashboard
      * @param OrderListByStaff $orderListByStaff
-     * @param Shift $shift
-     * @return void
+     * @param SalesByStaff $salesByStaff
      */
     public function __inject(
         WebPOSAdminReportDashboard $webPOSAdminReportDashboard,
@@ -81,7 +78,10 @@ class SaleByStaffRP04Test extends Injectable
         // Preconditions
         $this->orderListByStaff->open();
         $this->orderListByStaff->getMessagesBlock()->clickLinkInMessage('notice', 'here');
-
+        if (isset($shifts['period_type']) && !$this->webPOSAdminReportDashboard->getReportDashboard()->getPeriorTypeOptionByName($shifts['period_type'])->isPresent()) {
+            unset($shifts['period_type']);
+            $this->webPOSAdminReportDashboard->getReportDashboard()->setFirstOptionPrediodType();
+        }
         $this->orderListByStaff->getFilterBlock()->viewsReport($shifts);
         if ($order_statuses != null) {
             $this->webPOSAdminReportDashboard->getReportDashboard()->setSalesReportOderStatuses($order_statuses);

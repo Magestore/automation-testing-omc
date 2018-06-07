@@ -51,6 +51,7 @@ class  WebposProductGridCheckGUIGroupProductDetailPG44Test extends Injectable
 
     /**
      * @param $products
+     * @return array
      */
     public function test($products)
     {
@@ -65,11 +66,6 @@ class  WebposProductGridCheckGUIGroupProductDetailPG44Test extends Injectable
         )->run();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-product-detail"]');
-        sleep(1);
-        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-product-detail"]');
-        $this->webposIndex->getCheckoutProductList()->getFirstProduct()->hover();
-        $this->webposIndex->getCheckoutProductList()->getFirstProductDetailButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-product-detail"]');
     }
 }
