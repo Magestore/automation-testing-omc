@@ -93,7 +93,7 @@ class CreateShipmentInOrderHistoryStep implements TestStepInterface
 
 			$this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
 
-			$this->webposIndex->getMsWebpos()->waitForModalPopup();
+			$this->webposIndex->getModal()->waitForModalPopup();
 //			// Assert Confirmation Popup
 //			$this->assertRefundConfirmPopupDisplay->processAssert($this->webposIndex);
 

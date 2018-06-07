@@ -99,9 +99,7 @@ class WebposCartPageCustomerCP179Test extends Injectable
         $this->webposIndex->getCheckoutEditCustomer()->selectShippingAdress('Use Store Address');
         $this->webposIndex->getCheckoutEditCustomer()->selectBillingAdress('Use Store Address');
         $this->webposIndex->getCheckoutEditCustomer()->getSaveButton()->click();
-        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton();
-        $this->webposIndex->getCheckoutSuccess()->waitForLoadingIndicator();
-        sleep(1);
+        sleep(2);
 
         //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product->getName());

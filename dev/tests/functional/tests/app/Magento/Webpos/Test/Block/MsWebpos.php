@@ -76,7 +76,6 @@ class MsWebpos extends Block
 
     public function waitForSyncDataVisible()
     {
-
         $this->waitForElementVisible('#block-webpos-install .first-screen');
     }
 
