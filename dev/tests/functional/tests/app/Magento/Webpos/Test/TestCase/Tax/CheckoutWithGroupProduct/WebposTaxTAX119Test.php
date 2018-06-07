@@ -254,7 +254,7 @@ class WebposTaxTAX119Test extends Injectable
         $this->assertPaymentSuccess->processAssert($this->webposIndex);
 
         // Invoice
-        sleep(5);
+        $this->webposIndex->getOrderHistoryOrderViewFooter()->waitForInvoiceButtonVisible();
         $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
         $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
         while (!$this->webposIndex->getOrderHistoryInvoice()->isVisible()) {

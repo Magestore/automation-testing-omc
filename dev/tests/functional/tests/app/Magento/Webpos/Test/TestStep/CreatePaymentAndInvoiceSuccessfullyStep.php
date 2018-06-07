@@ -68,7 +68,11 @@ class CreatePaymentAndInvoiceSuccessfullyStep implements TestStepInterface
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         // Open shipment popup
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
-        sleep(1);
+        $this->webposIndex->getOrderHistoryPayment()->waitForElementVisible('#payment_popup_form');
+        self::assertTrue(
+            $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->isVisible(),
+            'Payment Method didn\'t displayed'
+        );
         $this->webposIndex->getOrderHistoryPayment()->getCashInMethod()->click();
         $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
         $this->webposIndex->getModal()->waitForModalPopup();

@@ -13,8 +13,7 @@
             <data name="shifts" xsi:type="array">
                 <item name="show_order_statuses" xsi:type="string">Specified</item>
             </data>
-            <data name="order_status" xsi:type="string">Canceled, Closed, Complete,Suspected Fraud, On Hold, Payment
-                Review, PayPal Canceled Reversal, PayPal Reversed, Pending, Pending Payment, ,Pending PayPal, Processing
+            <data name="order_status" xsi:type="string">Canceled, Closed, Complete,Suspected Fraud, On Hold, Payment Review, PayPal Canceled Reversal, PayPal Reversed, Pending, Pending Payment, ,Pending PayPal, Processing
             </data>
         </variation>
         <variation name="WebposSaleOrderReportRP34TestVariation">
@@ -23,8 +22,7 @@
                 <item name="to" xsi:type="string">m/d/Y</item>
                 <item name="show_order_statuses" xsi:type="string">Specified</item>
             </data>
-            <data name="order_status" xsi:type="string">Canceled, Closed, Complete,Suspected Fraud, On Hold, Payment
-                Review, PayPal Canceled Reversal, PayPal Reversed, Pending, Pending Payment, ,Pending PayPal, Processing
+            <data name="order_status" xsi:type="string">Canceled, Closed, Complete,Suspected Fraud, On Hold, Payment Review, PayPal Canceled Reversal, PayPal Reversed, Pending, Pending Payment, ,Pending PayPal, Processing
             </data>
         </variation>
     </testCase>

@@ -193,6 +193,7 @@ class WebposTaxTAX105Test extends Injectable
             . "\nExpected: " . $orderId
             . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
         );
+        $this->webposIndex->getOrderHistoryOrderViewFooter()->waitForInvoiceButtonVisible();
         $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
         $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
         $actualTaxAmount = substr($this->webposIndex->getOrderHistoryInvoice()->getTaxAmountOfProduct($products[0]['product']->getName())->getText(), 1);

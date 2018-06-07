@@ -5,7 +5,7 @@
             <data name="location/dataset" xsi:type="string">ML19</data>
             <data name="page" xsi:type="string">edit</data>
             <data name="title" xsi:type="string">Edit Location</data>
-            <data name="buttons" xsi:type="string">Back, Delete, Reset, Save and Continue Edit</data>
+            <data name="buttons" xsi:type="string">Back to register or connect an account, Delete, Reset, Save and Continue Edit</data>
             <data name="fields" xsi:type="array">
                 <item name="name" xsi:type="array">
                     <item name="title" xsi:type="string">Location Name</item>

@@ -6,16 +6,14 @@
         <variation name="WebposManageStaffMS33TestVariation1">
             <data name="staff/dataset" xsi:type="string">staffMS33Numberic</data>
             <data name="tag" xsi:type="string">2</data>
-            <data name="message/2" xsi:type="string">Please enter 7 or more characters, using both numeric and
-                alphabetic.
+            <data name="message/2" xsi:type="string">Please enter 7 or more characters, using both numeric and alphabetic.
             </data>
             <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertValidationPassword"/>
         </variation>
         <variation name="WebposManageStaffMS33TestVariation2">
             <data name="staff/dataset" xsi:type="string">staffMS33Character</data>
             <data name="tag" xsi:type="string">2</data>
-            <data name="message/2" xsi:type="string">Please enter 7 or more characters, using both numeric and
-                alphabetic.
+            <data name="message/2" xsi:type="string">Please enter 7 or more characters, using both numeric and alphabetic.
             </data>
             <constraint name="Magento\Webpos\Test\Constraint\Adminhtml\Staff\Form\AssertValidationPassword"/>
         </variation>

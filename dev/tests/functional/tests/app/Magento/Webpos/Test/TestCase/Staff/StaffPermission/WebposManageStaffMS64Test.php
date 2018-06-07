@@ -92,10 +92,9 @@ class WebposManageStaffMS64Test extends Injectable
     }
 
     /**
-     * Create WebposRole group test.
-     *
-     * @param WebposRole
-     * @return void
+     * @param WebposRole $webposRole
+     * @param $products
+     * @param $staffData
      */
     public function test(WebposRole $webposRole, $products, $staffData)
     {
@@ -140,7 +139,14 @@ class WebposManageStaffMS64Test extends Injectable
             ['products' => $products]
         )->run();
         //LoginTest
-        $this->login($staff1);
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            [
+                'staff' => $staff1,
+                'hasOpenSession' => null,
+                'hasWaitOpenSessionPopup' => null
+            ]
+        )->run();
         // Add product to cart
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',
@@ -168,9 +174,16 @@ class WebposManageStaffMS64Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitForElementVisible('.modals-wrapper');
         $this->webposIndex->getModal()->getOkButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader.loading-mask');
+
         //LoginTest by staff2
-        $this->login($staff2);
-//        sleep(10);
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            [
+                'staff' => $staff2,
+                'hasOpenSession' => null,
+                'hasWaitOpenSessionPopup' => null
+            ]
+        )->run();
         $this->webposIndex->open();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -384,33 +397,5 @@ class WebposManageStaffMS64Test extends Injectable
             );
         }
     }
-
-    /**
-     * @param Staff $staff
-     */
-    public function login(Staff $staff)
-    {
-        $username = $staff->getUsername();
-        $password = $staff->getPassword();
-        $this->webposIndex->open();
-        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-        if ($this->webposIndex->getLoginForm()->isVisible()) {
-            $this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
-            $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
-            $this->webposIndex->getLoginForm()->clickLoginButton();
-            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-            $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
-            $time = time();
-            $timeAfter = $time + 360;
-            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
-                $time = time();
-            }
-            sleep(2);
-        }
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-
-    }
-
 }
 

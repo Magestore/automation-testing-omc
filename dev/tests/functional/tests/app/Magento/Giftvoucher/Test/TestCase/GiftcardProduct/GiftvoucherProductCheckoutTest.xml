@@ -53,7 +53,7 @@
             <data name="payment/method" xsi:type="string">cashondelivery</data>
             <data name="billingAddress/dataset" xsi:type="string">US_address_1_without_email</data>
             <data name="status" xsi:type="string">Pending</data>
-            <data name="orderButtonsAvailable" xsi:type="string">Back, Send Email, Cancel, Hold, Ship, Invoice, Edit</data>
+            <data name="orderButtonsAvailable" xsi:type="string">Back to register or connect an account, Send Email, Cancel, Hold, Ship, Invoice, Edit</data>
             <data name="configData" xsi:type="string">cashondelivery</data>
             <constraint name="Magento\Checkout\Test\Constraint\AssertOrderSuccessPlacedMessage" />
             <constraint name="Magento\Checkout\Test\Constraint\AssertMinicartEmpty" />

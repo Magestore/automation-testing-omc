@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
     <testCase name="Magento\Webpos\Test\TestCase\Pos\PosForm\WebposManagePosMP02Test" summary="Check GUI" ticketId="MAGETWO-0001">
         <variation name="WebposManageLocationML02TestVariation">
-            <data name="buttons" xsi:type="string">Back, Reset, Save and Continue Edit, Save</data>
+            <data name="buttons" xsi:type="string">Back to register or connect an account, Reset, Save and Continue Edit, Save</data>
             <data name="title" xsi:type="string">New Pos</data>
             <data name="fields" xsi:type="array">
                 <item name="name" xsi:type="array">

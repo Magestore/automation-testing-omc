@@ -25,7 +25,7 @@ use Magento\Webpos\Test\Page\Adminhtml\PosIndex;
  *
  * Acceptance
  * 2. Redirect to Edit POS page including:
- * - Buttons: Back, Delete, Reset, Save and continue edit, Save
+ * - Buttons: Back to register or connect an account, Delete, Reset, Save and continue edit, Save
  * - All fields are filled out correctly the data of that POS
  *
  *

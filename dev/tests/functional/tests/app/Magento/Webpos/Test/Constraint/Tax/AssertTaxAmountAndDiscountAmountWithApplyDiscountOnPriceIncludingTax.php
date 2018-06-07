@@ -21,6 +21,7 @@ class AssertTaxAmountAndDiscountAmountWithApplyDiscountOnPriceIncludingTax exten
         }
         $subtotalIncludeTax *= (1 + $currentTaxRate / 100);
         $discountAmount = round($subtotalIncludeTax * $discountPercent / 100, 2);
+
         \PHPUnit_Framework_Assert::assertEquals(
             $discountAmount,
             $actualDiscountAmount,

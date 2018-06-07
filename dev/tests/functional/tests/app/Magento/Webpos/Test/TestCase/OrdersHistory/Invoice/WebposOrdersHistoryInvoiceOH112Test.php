@@ -115,6 +115,11 @@ class WebposOrdersHistoryInvoiceOH112Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         // Take payment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
+        $this->webposIndex->getOrderHistoryPayment()->waitForElementVisible('#payment_popup_form');
+        self::assertTrue(
+            $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->isVisible(),
+            'Payment Method didn\'t displayed'
+        );
         if ($this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->isVisible()) {
             $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->click();
             $paymentPrice = (float)substr($this->webposIndex->getOrderHistoryPayment()->getPaymentPriceInput()->getValue(), 1);
