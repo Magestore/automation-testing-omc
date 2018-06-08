@@ -24,7 +24,10 @@ class OrderHistoryShipment extends Block
      */
     public function getSubmitButton()
     {
-        $this->waitForElementVisible('#shipment-popup-form > div.modal-body > div.actions > button.btn-cl-cfg-active');
+        return $this->_rootElement->find('#shipment-popup-form > div.modal-body > div.actions > button.btn-cl-cfg-active');
+    }
+    public function getSubmitButtonNotWait()
+    {
         return $this->_rootElement->find('#shipment-popup-form > div.modal-body > div.actions > button.btn-cl-cfg-active');
     }
 

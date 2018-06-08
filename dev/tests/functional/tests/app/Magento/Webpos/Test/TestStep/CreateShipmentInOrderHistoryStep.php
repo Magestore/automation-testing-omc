@@ -90,7 +90,7 @@ class CreateShipmentInOrderHistoryStep implements TestStepInterface
 		if (strcmp($this->action, 'cancel') == 0) {
 			$this->webposIndex->getOrderHistoryShipment()->getCancelButton()->click();
 		} elseif (strcmp($this->action, 'submit') == 0) {
-
+		    $this->webposIndex->getOrderHistoryShipment()->waitForElementVisible('#shipment-popup-form > div.modal-body > div.actions > button.btn-cl-cfg-active');
 			$this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
 
 			$this->webposIndex->getMsWebpos()->waitForModalPopup();

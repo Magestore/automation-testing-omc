@@ -19,6 +19,7 @@ class AssertOrdersHistoryShipment extends AbstractConstraint
             $webposIndex->getOrderHistoryShipment()->getCancelButton()->isVisible(),
             'Shipment popup - Cancel button is not visible.'
         );
+        sleep(1);
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getOrderHistoryShipment()->getSubmitButton()->isVisible(),
             'Shipment popup - Submit button is not visible.'
