@@ -80,10 +80,6 @@ class OrderListByStaffReportRP23Test extends Injectable
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
 
-    /**
-     * @param array $shifts
-     * @param CatalogProductSimple $product
-     */
     public function test
     (
         array $shifts,

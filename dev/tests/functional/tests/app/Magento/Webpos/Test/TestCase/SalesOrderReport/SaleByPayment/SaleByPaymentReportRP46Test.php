@@ -106,7 +106,7 @@ class SaleByPaymentReportRP46Test extends Injectable
         $interval = $datetime2->diff($datetime1);
         self::assertEquals(
             1,
-            (int)$interval->format('%m'),
+            $interval->m,
             'In Admin Form Order List By Location WebPOS Page. The duration time between from date and to date is not correct. It must be one month.'
         );
         foreach ($columns as $column) {

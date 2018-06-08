@@ -19,8 +19,4 @@ use Magento\Reports\Test\Block\Adminhtml\AbstractFilter;
  */
 class FilterSalesByLocationDaily extends AbstractFilter
 {
-    public function setOrderStatusByTitle($title)
-    {
-        return $this->_rootElement->find('#sales_report_order_statuses', Locator::SELECTOR_CSS, 'select')->setValue($title);
-    }
 }

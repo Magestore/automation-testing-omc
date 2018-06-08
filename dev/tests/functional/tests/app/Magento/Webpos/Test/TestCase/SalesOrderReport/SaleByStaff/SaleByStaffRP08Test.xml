@@ -10,7 +10,9 @@
     <testCase name="Magento\Webpos\Test\TestCase\SalesOrderReport\SaleByStaff\SaleByStaffRP08Test"
               summary="Sales By Staff Daily Report" ticketId="MAGETWO-28222">
         <variation name="SaleByStaffRP08TestVariation1">
-            <data name="product/dataset" xsi:type="string">product1</data>
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+            </data>
         </variation>
     </testCase>
 </config>

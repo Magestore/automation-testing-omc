@@ -74,12 +74,9 @@ class SaleByPaymentMethodDailyRP60Test extends Injectable
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
 
-    /**
-     * @param CatalogProductSimple $product
-     */
     public function test
     (
-        CatalogProductSimple $product
+        $products
     )
     {
         // Preconditions
@@ -92,33 +89,16 @@ class SaleByPaymentMethodDailyRP60Test extends Injectable
         $salesTotalFootBefore = $this->webPOSAdminReportDashboard->getReportDashboard()->getSalesTotalFoot()->getText();
 
         // LoginTest webpos
-        $staff = $this->objectManager->getInstance()->create(
+        $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\WebposAddProductToCartThenCheckoutStep',
+            ['products' => $products]
+        )->run();
 
-        $this->webposIndex->getCheckoutProductList()->search($product->getSku());
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(2);
-        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(2);
 
-        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $amountPayment = $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->getValue();
-
-        // place order getCreateInvoiceCheckbox
-        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
-        //Assert Place Order Success
-        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(2);
         // Preconditions
         $this->salesByPaymentDaily->open();
         $this->salesByPaymentDaily->getMessagesBlock()->clickLinkInMessage('notice', 'here');
@@ -127,24 +107,33 @@ class SaleByPaymentMethodDailyRP60Test extends Injectable
         $orderCountFootAfter = $this->webPOSAdminReportDashboard->getReportDashboard()->getOrderCountFoot()->getText();
         $salesTotalBodyAfter = $this->webPOSAdminReportDashboard->getReportDashboard()->getSalesTotalBody()->getText();
         $salesTotalFootAfter = $this->webPOSAdminReportDashboard->getReportDashboard()->getSalesTotalFoot()->getText();
+
+//        $before = floatval(str_replace('$', '',$orderCountBodyBefore));
+//        $after = floatval(str_replace('$', '',$orderCountBodyAfter));
+//        self::assertGreaterThan(
+//            $before,
+//            $after,
+//            'The Order Count In Table Body Of Report Form By Staff was not updated.'
+//        );
+        $before = floatval(str_replace('$', '',$orderCountFootBefore));
+        $after = floatval(str_replace('$', '',$orderCountFootAfter));
         self::assertGreaterThan(
-            $orderCountBodyBefore,
-            $orderCountBodyAfter,
-            'The Order Count In Table Body Of Report Form By Staff was not updated.'
-        );
-        self::assertGreaterThan(
-            $orderCountFootBefore,
-            $orderCountFootAfter,
+            $before,
+            $after,
             'The Order Count In Table Foot Of Report Form By Staff was not updated.'
         );
+//        $before = floatval(str_replace('$', '',$salesTotalBodyBefore));
+//        $after = floatval(str_replace('$', '',$salesTotalBodyAfter));
+//        self::assertGreaterThan(
+//            $before,
+//            $after,
+//            'The Sales Total Body In Table Body Of Report Form By Staff was not updated.'
+//        );
+        $before = floatval(str_replace('$', '',$salesTotalFootBefore));
+        $after = floatval(str_replace('$', '',$salesTotalFootAfter));
         self::assertGreaterThan(
-            $salesTotalBodyBefore,
-            $salesTotalBodyAfter,
-            'The Sales Total Body In Table Body Of Report Form By Staff was not updated.'
-        );
-        self::assertGreaterThan(
-            $salesTotalFootBefore,
-            $salesTotalFootAfter,
+            $before,
+            $after,
             'The Sales Total Foot In Table Body Of Report Form By Staff was not updated.'
         );
     }

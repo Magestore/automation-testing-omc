@@ -88,14 +88,6 @@ class SaleByPaymentReportRP47Test extends Injectable
                         );
                 }
             }
-        } else {
-            $this->salesByPayment->getActionsBlock()->showReport();
-            if (isset($shifts['from']) && isset($shifts['to'])) {
-                \PHPUnit_Framework_Assert::assertTrue(
-                    strpos($this->webPOSAdminReportDashboard->getReportDashboard()->getFirtRowDataGrid()->getAttribute('class'), 'data-grid-tr-no-data') === false,
-                    'Table Grid is empty'
-                );
-            }
         }
     }
 }

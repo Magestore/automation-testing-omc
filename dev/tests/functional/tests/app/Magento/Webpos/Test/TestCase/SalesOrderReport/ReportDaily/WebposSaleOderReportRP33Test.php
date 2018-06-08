@@ -11,6 +11,7 @@ namespace Magento\Webpos\Test\TestCase\SalesOrderReport\ReportDaily;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Adminhtml\ReportSaleOrder\AssertFilterReportByOrderStatus;
 use Magento\Webpos\Test\Page\Adminhtml\SalesByLocationDaily;
+use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
 
 /**
  * Reports
@@ -42,12 +43,23 @@ class WebposSaleOderReportRP33Test extends Injectable
     protected $saleByLocationDaily;
 
     /**
+     * WebPOSAdminReportDashboard page.
+     *
+     * @var WebPOSAdminReportDashboard $webPOSAdminReportDashboard
+     */
+    protected $webPOSAdminReportDashboard;
+
+    /**
      * Sale by Location Daily
      *
      * @param SalesByLocationDaily $orderListByLocation
      */
-    public function __inject(SalesByLocationDaily $orderListByLocation)
+    public function __inject(
+        WebPOSAdminReportDashboard $webPOSAdminReportDashboard,
+        SalesByLocationDaily $orderListByLocation
+    )
     {
+        $this->webPOSAdminReportDashboard = $webPOSAdminReportDashboard;
         $this->saleByLocationDaily = $orderListByLocation;
     }
 
@@ -65,7 +77,7 @@ class WebposSaleOderReportRP33Test extends Injectable
         $this->saleByLocationDaily->getFilterBlock()->viewsReport($shifts);
         $order_status = array_map('trim', explode(',', $order_status));
         foreach ($order_status as $status) {
-            $this->saleByLocationDaily->getFilterBlock()->setOrderStatusByTitle($status);
+            $this->webPOSAdminReportDashboard->getReportDashboard()->setOrderStatusByTitle($status);
             $this->saleByLocationDaily->getActionsBlock()->showReport();
             $this->saleByLocationDaily->getReportBlock()->waitLoader();
             if ($this->saleByLocationDaily->getReportBlock()->getSaleTotal()->isVisible()) {

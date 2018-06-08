@@ -72,8 +72,13 @@ class Dashboard extends Block
 
     public function setSalesReportOderStatuses($text)
     {
-        $this->getSalesReportOderStatuses()->click();
-        $this->_rootElement->find('//*[@id="sales_report_order_statuses"]/option[text()="' . $text . '"]', Locator::SELECTOR_XPATH)->doubleClick();
+//        $this->getSalesReportOderStatuses()->click();
+        $this->_rootElement->find('//*[@id="sales_report_order_statuses"]/option[text()="' . $text . '"]', Locator::SELECTOR_XPATH)->click();
+    }
+
+    public function setOrderStatusByTitle($title)
+    {
+        $this->_rootElement->find('#sales_report_order_statuses', Locator::SELECTOR_CSS, 'select')->setValue($title);
     }
 
     public function getOrderStatus()
