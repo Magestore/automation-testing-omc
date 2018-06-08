@@ -60,7 +60,8 @@ class SessionConfirmModalPopup extends Block
      * @return mixed
      */
     public function getRealBalance(){
-        $text = $this->getContent()->getText();
+//        $text = $this->getContent()->getText();
+        $text = $this->_rootElement->find('.modal-content div')->getText();
         preg_match_all('/\d+\.\d+/', $text, $matches);
         return $matches[0][0];
     }
