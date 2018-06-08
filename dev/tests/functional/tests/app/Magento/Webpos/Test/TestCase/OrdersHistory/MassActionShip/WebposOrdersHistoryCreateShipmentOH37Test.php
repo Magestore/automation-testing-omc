@@ -91,10 +91,12 @@ class WebposOrdersHistoryCreateShipmentOH37Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMainContent()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         // Open shipment popup
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
+        sleep(1);
         $this->webposIndex->getOrderHistoryAddOrderNote()->getShipButton()->click();
         $this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
         $this->webposIndex->getModal()->waitForOkButtonIsVisible();

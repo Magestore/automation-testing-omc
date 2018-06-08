@@ -16,8 +16,8 @@ use Magento\Webpos\Test\Page\WebposIndex;
 /**
  * Class WebposTakePaymentOH98Test
  * @package Magento\Webpos\Test\TestCase\OrdersHistory\TakePayment
- * Precondition and setup steps:
- * 1. Login webpos as a staff
+         * Precondition and setup steps:
+         * 1. Login webpos as a staff
  * 2. Create an order:
  * Select payment method: fill amount less than total
  *
@@ -47,8 +47,7 @@ class WebposTakePaymentOH98Test extends Injectable
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
-     * @param WebposIndex $webposIndex
-     * @return void
+     * Precondition
      */
     public function __prepare()
     {
@@ -116,6 +115,7 @@ class WebposTakePaymentOH98Test extends Injectable
         // place order getCreateInvoiceCheckbox
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getMainContent()->waitLoader();
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
 

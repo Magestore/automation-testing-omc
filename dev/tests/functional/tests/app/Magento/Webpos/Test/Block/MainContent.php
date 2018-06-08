@@ -20,4 +20,8 @@ class MainContent extends Block
         sleep(1);
         return $this->waitForElementVisible('#maincontent > div > div > div.ms-webpos');
     }
+
+    public function waitLoader(){
+        $this->waitForElementNotVisible('#authorizenet-directpost-progress-html .indicator');
+    }
 }

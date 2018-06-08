@@ -124,6 +124,7 @@ class WebposTakePaymentOH95Test extends Injectable
         //select order
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
+        $this->webposIndex->getMainContent()->waitLoader();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
@@ -138,6 +139,10 @@ class WebposTakePaymentOH95Test extends Injectable
             'Visible popup take payment'
         );
         sleep(1);
+        self::assertTrue(
+            $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->isVisible(),
+            'Payment method didn\'t display'
+        );
         $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
         sleep(1);
 //        $am = $this->webposIndex->getOrderHistoryOrderViewHeader()->getGrandTotal();

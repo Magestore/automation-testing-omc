@@ -28,7 +28,7 @@ class OrderHistoryOrderViewFooter extends Block
     /**
      * @return \Magento\Mtf\Client\ElementInterface
      */
-    public function getInvoiceButton()
+        public function getInvoiceButton()
     {
         return $this->_rootElement->find('button.invoice');
     }

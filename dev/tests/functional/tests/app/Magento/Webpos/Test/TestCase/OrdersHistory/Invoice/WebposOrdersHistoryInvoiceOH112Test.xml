@@ -16,7 +16,6 @@
             </data>
             <data name="status" xsi:type="string">Processing</data>
             <data name="dataConfig" xsi:type="string">magestore_webpos_specific_payment</data>
-            <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\AssertOrderStatus"/>
             <constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoiceDontAllowInvoiceItems"/>
         </variation>
     </testCase>

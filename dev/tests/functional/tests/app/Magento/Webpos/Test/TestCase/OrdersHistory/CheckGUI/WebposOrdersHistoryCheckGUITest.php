@@ -47,6 +47,7 @@ class WebposOrdersHistoryCheckGUITest extends Injectable
         // Go to orders history
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
+
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
