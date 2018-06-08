@@ -53,11 +53,12 @@ class WebposAddOrder11TimesTest extends Injectable
      */
     public function test()
     {
-        $staff = $this->objectManager->create(
+        $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
         for ($i = 1; $i <= 11; $i++) {
+            sleep(1);
             $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
             $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
             self::assertTrue(

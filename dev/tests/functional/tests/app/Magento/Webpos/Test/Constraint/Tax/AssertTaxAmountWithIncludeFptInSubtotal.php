@@ -15,12 +15,20 @@ use Magento\Mtf\Constraint\AbstractConstraint;
  */
 class AssertTaxAmountWithIncludeFptInSubtotal extends AbstractConstraint
 {
-    public function processAssert($productPriceExcludeTax, $taxRate, $fptTax, $actualTaxAmount, $actualSubtotal, $actualGrandtotal)
+    public function processAssert(
+        $productPriceExcludeTax,
+        $taxRate,
+        $fptTax,
+        $actualTaxAmount,
+        $actualSubtotal,
+        $actualGrandtotal,
+        $shippingHandling = 0
+    )
     {
         sleep(2);
         $taxAmount = $productPriceExcludeTax * $taxRate / 100;
-        $subtotal = $productPriceExcludeTax + $fptTax;
-        $grandtotal = $productPriceExcludeTax + $fptTax + $taxAmount;
+        $subtotal = $productPriceExcludeTax;
+        $grandtotal = $productPriceExcludeTax + $fptTax + $taxAmount + $shippingHandling;
         \PHPUnit_Framework_Assert::assertEquals(
             $taxAmount,
             $actualTaxAmount,

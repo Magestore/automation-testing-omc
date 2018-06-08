@@ -68,7 +68,7 @@ class WebposCheckoutPaymentMethodCP211Test extends Injectable
             ['configData' => $configData]
         )->run();
 
-        $staff = $this->objectManager->create(
+        $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
@@ -89,8 +89,6 @@ class WebposCheckoutPaymentMethodCP211Test extends Injectable
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
-//        $amount = $this->webposIndex->getCheckoutPlaceOrder()->getHeaderAmount()->getText();
-//        \Zend_Debug::dump($amount); die();
         $this->webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->setValue($amount);
         $this->webposIndex->getCheckoutPaymentMethod()->getTitlePaymentMethod()->click();
 

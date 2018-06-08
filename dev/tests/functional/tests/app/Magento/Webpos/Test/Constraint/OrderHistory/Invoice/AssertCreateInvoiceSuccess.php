@@ -46,7 +46,7 @@ class AssertCreateInvoiceSuccess extends AbstractConstraint
 			'Order Status is wrong'
 		);
 		\PHPUnit_Framework_Assert::assertFalse(
-			$webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->isVisible(),
+			$webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButtonNotWait()->isVisible(),
 			'Invoice Button is not hiden'
 		);
 		$webposIndex->getNotification()->getNotificationBell()->click();

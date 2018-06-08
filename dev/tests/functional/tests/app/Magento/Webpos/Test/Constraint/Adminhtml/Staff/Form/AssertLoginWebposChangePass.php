@@ -37,7 +37,6 @@ class AssertLoginWebposChangePass extends AbstractConstraint
             $webposIndex->getLoginForm()->getUsernameField()->setValue($userName);
             $webposIndex->getLoginForm()->getPasswordField()->setValue($passNew);
             $webposIndex->getLoginForm()->clickLoginButton();
-//			$this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
             $webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 360;

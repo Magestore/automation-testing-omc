@@ -36,10 +36,6 @@ class WebposCheckoutPaymentMethodCP210Test extends Injectable
      */
     protected $webposIndex;
 
-    /**
-     * @param WebposIndex $webposIndex
-     * @return void
-     */
     public function __prepare()
     {
         // Config: use system value for all field in Tax Config
@@ -56,10 +52,6 @@ class WebposCheckoutPaymentMethodCP210Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    /**
-     *
-     * @return void
-     */
     public function test($products, FixtureFactory $fixtureFactory, $configData, $amount)
     {
         $this->objectManager->getInstance()->create(
@@ -67,7 +59,7 @@ class WebposCheckoutPaymentMethodCP210Test extends Injectable
             ['configData' => $configData]
         )->run();
 
-        $staff = $this->objectManager->create(
+        $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 

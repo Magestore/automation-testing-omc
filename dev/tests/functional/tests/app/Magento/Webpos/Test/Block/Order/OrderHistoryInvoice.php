@@ -121,6 +121,11 @@ class OrderHistoryInvoice extends Block
         return $this->_rootElement->find('[id="invoice_grandtotal"]')->getText();
     }
 
+    public function getShippingHandling()
+    {
+        return $this->_rootElement->find('//*[@data-bind="text: convertAndFormatPrice(getShippingAmount())"]', Locator::SELECTOR_XPATH);
+    }
+
     public function getDiscount()
     {
         return $this->_rootElement->find('[data-bind="text: convertAndFormatPrice(-discountAmount())"]')->getText();

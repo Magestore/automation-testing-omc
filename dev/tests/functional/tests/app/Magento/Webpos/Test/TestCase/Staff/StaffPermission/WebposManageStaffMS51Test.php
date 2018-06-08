@@ -152,7 +152,6 @@ class WebposManageStaffMS51Test extends Injectable
             $webposIndex->getLoginForm()->getUsernameField()->setValue($username);
             $webposIndex->getLoginForm()->getPasswordField()->setValue($password);
             $webposIndex->getLoginForm()->clickLoginButton();
-//			$this->webposIndex->getMsWebpos()->waitForSyncDataAfterLogin();
             sleep(2);
             $webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();

@@ -67,7 +67,7 @@ class CheckoutWebposCart extends Block
 
     public function waitLoading()
     {
-        $this->waitForElementNotVisible('iv.indicator');
+        $this->waitForElementNotVisible('.indicator');
     }
 
     public function getIconRemoveMultiOrder($number)

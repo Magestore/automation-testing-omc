@@ -28,6 +28,7 @@ class OrderHistoryOrderViewHeader extends Block
 	}
 
 	public function waitForChangeStatus($status) {
+	    sleep(1);
 	    $statusElement = $this->_rootElement->find('.status');
         $browser = $this->_rootElement;
         $browser->waitUntil(

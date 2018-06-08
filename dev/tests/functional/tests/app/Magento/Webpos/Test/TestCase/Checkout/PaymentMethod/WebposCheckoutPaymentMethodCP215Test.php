@@ -42,16 +42,12 @@ class WebposCheckoutPaymentMethodCP215Test extends Injectable
      * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
-    /**
-     * @var
-     */
 
+    /**
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
-    /**
-     * @param WebposIndex $webposIndex
-     * @return void
-     */
     public function __prepare()
     {
         // Config: use system value for all field in Tax Config
@@ -81,7 +77,7 @@ class WebposCheckoutPaymentMethodCP215Test extends Injectable
             ['configData' => $configData]
         )->run();
 
-        $staff = $this->objectManager->create(
+        $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
@@ -98,11 +94,9 @@ class WebposCheckoutPaymentMethodCP215Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        //select shipping
-//        $this->webposIndex->getCheckoutShippingMethod()->waitForFlatRateFixedMethod();
-        sleep(1);
-        $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+//        //select shipping
+//        $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
+//        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //select payment
         $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();

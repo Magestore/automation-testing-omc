@@ -9,6 +9,7 @@
 namespace Magento\Webpos\Test\Block\Checkout;
 
 use Magento\Mtf\Block\Block;
+use Magento\Mtf\Client\Locator;
 
 /**
  * Class CheckoutSuccess
@@ -56,8 +57,12 @@ class CheckoutSuccess extends Block
 
     public function getNewOrderButton()
     {
-        $this->waitForElementVisible('.checkout-actions');
         return $this->_rootElement->find('.checkout-actions');
+    }
+
+    public function getNewOrderButtonByText()
+    {
+        return $this->_rootElement->find('//*[text()="New Order"]', Locator::SELECTOR_XPATH);
     }
 
     public function waitForLoadingIndicator()
