@@ -103,7 +103,7 @@ class WebposManageStaffMS56Test extends Injectable
                 'hasWaitOpenSessionPopup' => null
             ]
         )->run();
-        $this->webposIndex->getMainContent()->waitLoader();
+
         //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();

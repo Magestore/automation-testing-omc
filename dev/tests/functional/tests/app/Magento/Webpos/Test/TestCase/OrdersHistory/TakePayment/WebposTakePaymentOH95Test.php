@@ -124,7 +124,7 @@ class WebposTakePaymentOH95Test extends Injectable
         //select order
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
-        $this->webposIndex->getMainContent()->waitLoader();
+
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();

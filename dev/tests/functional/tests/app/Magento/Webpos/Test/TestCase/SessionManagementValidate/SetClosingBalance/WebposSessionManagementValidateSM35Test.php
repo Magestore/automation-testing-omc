@@ -79,7 +79,7 @@ class WebposSessionManagementValidateSM35Test extends Injectable
                 'hasOpenSession' => false
             ]
         )->run();
-        $this->webposIndex->getMainContent()->waitLoader();
+
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
 

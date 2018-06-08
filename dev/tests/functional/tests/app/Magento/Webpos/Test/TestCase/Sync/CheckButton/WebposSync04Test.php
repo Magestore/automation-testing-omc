@@ -127,7 +127,7 @@ class WebposSync04Test extends Injectable
         $staff = $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-        $this->webposIndex->getMainContent()->waitLoader();
+
         $initialCustomer->persist();
         $initialProduct->persist();
 
@@ -151,7 +151,7 @@ class WebposSync04Test extends Injectable
         $this->customerIndexEditPage->getPageActionsBlock()->save();
 
         $this->webposIndex->open();
-        $this->webposIndex->getMainContent()->waitLoader();
+
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();

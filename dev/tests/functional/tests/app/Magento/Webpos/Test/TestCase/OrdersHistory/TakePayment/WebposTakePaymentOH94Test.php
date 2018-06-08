@@ -110,7 +110,7 @@ class WebposTakePaymentOH94Test extends Injectable
         // place order getCreateInvoiceCheckbox
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        $this->webposIndex->getMainContent()->waitLoader();
+
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
 

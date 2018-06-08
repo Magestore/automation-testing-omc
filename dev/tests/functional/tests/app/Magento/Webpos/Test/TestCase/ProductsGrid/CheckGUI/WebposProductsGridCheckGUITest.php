@@ -52,7 +52,7 @@ class WebposProductsGridCheckGUITest extends Injectable
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();
-        $this->webposIndex->getMainContent()->waitLoader();
+
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getCheckoutProductList()->getFirstProduct()->hover();
     }

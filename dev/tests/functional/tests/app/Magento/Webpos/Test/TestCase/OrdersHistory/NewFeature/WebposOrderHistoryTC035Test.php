@@ -83,7 +83,6 @@ class WebposOrderHistoryTC035Test extends Injectable
 
         //Checkout
         $webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-        $webposIndex->getMainContent()->waitLoader();
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#webpos_checkout');
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#checkout-method .payment');
         self::assertTrue(

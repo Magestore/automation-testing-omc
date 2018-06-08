@@ -68,7 +68,7 @@ class WebposCheckFieldsWhenTakingMoneyOutTwiceSM26Test extends Injectable
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep')->run();
         sleep(2);
-        $this->webposIndex->getMainContent()->waitLoader();
+
         if ($this->webposIndex->getCheckoutProductList()->isVisible()) {
             $this->webposIndex->getMsWebpos()->waitForCMenuVisible();
             $this->webposIndex->getMsWebpos()->getCMenuButton()->click();

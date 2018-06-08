@@ -82,7 +82,7 @@ class WebposSync18Test extends Injectable
         $staff = $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-        $this->webposIndex->getMainContent()->waitLoader();
+
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => $configData]

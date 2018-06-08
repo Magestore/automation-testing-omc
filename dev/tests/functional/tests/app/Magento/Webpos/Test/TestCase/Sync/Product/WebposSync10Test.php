@@ -130,7 +130,7 @@ class WebposSync10Test extends Injectable
         $staff = $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-        $this->webposIndex->getMainContent()->waitLoader();
+
         $initialProduct->persist();
 
         $products = $this->objectManager->getInstance()->create(

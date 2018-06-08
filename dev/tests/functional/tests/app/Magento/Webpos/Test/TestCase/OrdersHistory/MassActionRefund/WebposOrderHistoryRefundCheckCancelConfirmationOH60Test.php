@@ -75,7 +75,7 @@ class WebposOrderHistoryRefundCheckCancelConfirmationOH60Test extends Injectable
         )->run();
         // Place Order
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
-        $this->webposIndex->getMainContent()->waitLoader();
+
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButtonByText()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         // Go to Order History

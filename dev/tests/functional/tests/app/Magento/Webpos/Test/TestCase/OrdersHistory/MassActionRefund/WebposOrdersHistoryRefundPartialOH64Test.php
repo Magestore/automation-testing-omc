@@ -106,7 +106,7 @@ class WebposOrdersHistoryRefundPartialOH64Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
-        $this->webposIndex->getMainContent()->waitLoader();
+
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitForFirstOrderVisible();
@@ -135,7 +135,7 @@ class WebposOrdersHistoryRefundPartialOH64Test extends Injectable
             $totalRefunded += ($rowTotal / $item['orderQty']) * $item['refundQty'];
         }
         $totalRefunded += $shippingFee;
-        $this->webposIndex->getMainContent()->waitLoader();
+
         // Assert Refund Success
         $this->assertRefundSuccess->processAssert($this->webposIndex, $expectStatus = 'Complete', $totalRefunded);
         // Refund Extant Items

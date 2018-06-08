@@ -17,7 +17,6 @@ class AssertRefundSuccessWithExistOrderInBackend extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex, OrderIndex $orderIndex, OrderInjectable $order, $expectStatus)
     {
-        $webposIndex->getMainContent()->waitLoader();
         sleep(1);
         \PHPUnit_Framework_Assert::assertTrue(
             $webposIndex->getToaster()->getWarningMessage()->isVisible(),

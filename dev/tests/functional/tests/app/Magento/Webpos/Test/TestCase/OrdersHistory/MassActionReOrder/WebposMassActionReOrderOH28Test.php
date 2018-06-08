@@ -96,7 +96,7 @@ class WebposMassActionReOrderOH28Test extends Injectable
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         // End Place Order
-        $this->webposIndex->getMainContent()->waitLoader();
+
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 

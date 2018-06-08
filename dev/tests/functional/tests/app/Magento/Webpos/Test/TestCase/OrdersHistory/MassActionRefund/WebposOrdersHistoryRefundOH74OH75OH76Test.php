@@ -149,7 +149,7 @@ class WebposOrdersHistoryRefundOH74OH75OH76Test extends Injectable
             ['products' => $products, 'refundShipping' => $refundShipping, 'adjustRefund' => $adjustRefund, 'adjustFee' => $adjustFee]
         )->run();
 
-        $this->webposIndex->getMainContent()->waitLoader();
+
         return [
             'products' => $products,
             'refundShipping' => $refundShipping,
