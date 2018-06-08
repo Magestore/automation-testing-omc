@@ -9,6 +9,7 @@
 namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\TakeMoneyOut;
 
 use Magento\Mtf\TestCase\Injectable;
+use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
@@ -53,10 +54,19 @@ class WebposCheckValidateAmountFieldSM24Test extends Injectable
      * @param $openingAmount
      * @return array
      */
-    public function test($dataConfig, $dataConfigToNo, $openingAmount, $amountValue, $realOpeningAmount, $reasonTransaction)
+    public function test(
+        $dataConfig,
+        Denomination $denomination,
+        $dataConfigToNo,
+        $openingAmount,
+        $amountValue,
+        $realOpeningAmount,
+        $reasonTransaction
+    )
     {
         $this->dataConfigToNo = $dataConfigToNo;
         //Set Create Session Before Working to Yes
+        $denomination->persist();
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
             ['configData' => $dataConfig]
@@ -66,45 +76,40 @@ class WebposCheckValidateAmountFieldSM24Test extends Injectable
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
         )->run();
-        // Open session
-        $time = time();
-        $timeAfter = $time + 5;
-        while (!$this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->isVisible()
-            && $time < $timeAfter) {
-            $time = time();
-        }
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
-        sleep(1);
-        $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue($openingAmount);
-        $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
-        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
-        sleep(1);
-        $this->webposIndex->getSessionInfo()->waitForTakeMoneyOutButton();
-        $this->webposIndex->getSessionInfo()->getTakeMoneyOutButton()->click();
-        $this->webposIndex->getPutMoneyInPopup()->waitForBtnCancel();
-        $this->webposIndex->getPutMoneyInPopup()->getAmountInput()->setValue($amountValue);
-        if ($reasonTransaction != null) {
-            $this->webposIndex->getPutMoneyInPopup()->getReasonInput()->setValue($reasonTransaction);
-        }
-        $this->webposIndex->getPutMoneyInPopup()->getDoneButton()->click();
-        sleep(2);
+
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\WebposOpenSessionStep',
+            [
+                'openingAmountStatus' => true,
+                'denomination' => $denomination,
+                'denominationNumberCoin' => $openingAmount,
+                'takeMoneyOutStatus' => true,
+                'takeMoneyOutValue' => $amountValue
+            ]
+        )->run();
+
+        $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
+        $this->webposIndex->getCMenu()->getSessionManagement();
+        $this->webposIndex->getMsWebpos()->waitForSessionManagerLoader();
+
         self::assertFalse(
             $this->webposIndex->getPutMoneyInPopup()->isVisible(),
             'The popup should have not visible.'
         );
         self::assertEquals(
-            '$'.$amountValue.'.00',
+            '$' . $amountValue . '.00',
             $this->webposIndex->getSessionInfo()->getAddTransactionAmount()->getText(),
-            'The transaction amount is wrong. It have to be '.$amountValue
+            'The transaction amount is wrong. It have to be ' . $amountValue
         );
         $transaction = $realOpeningAmount - $amountValue;
         self::assertEquals(
-            '$'.$transaction.'.00',
+            '$' . $transaction . '.00',
             $this->webposIndex->getSessionInfo()->getTheoretialClosingBalance()->getText(),
-            'The transaction amount is wrong. It have to be $'.$openingAmount - $amountValue.'.00'
+            'The transaction amount is wrong. It have to be $' . $openingAmount - $amountValue . '.00'
         );
         if ($reasonTransaction != null) {
-                $transactionAmount = '$' . $transaction . '.00';
+            $transactionAmount = '$' . $transaction . '.00';
         } else {
             $transactionAmount = '-$' . $transaction . '.00';
         }

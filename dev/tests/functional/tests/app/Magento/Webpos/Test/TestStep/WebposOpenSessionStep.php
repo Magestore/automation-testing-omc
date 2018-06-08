@@ -129,6 +129,7 @@ class WebposOpenSessionStep implements TestStepInterface
             }
 
             $this->webposIndex->getMsWebpos()->clickCMenuButton();
+            $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
             $this->webposIndex->getCMenu()->checkout();
             sleep(1);
         }

@@ -87,7 +87,8 @@ class WebposManagementValidate02Test extends Injectable
                 'staff' => $staff,
                 'location' => $location,
                 'pos' => $pos,
-                'hasOpenSession' => false
+                'hasOpenSession' => false,
+                'hasWaitOpenSessionPopup' =>false
             ]
         )->run();
 

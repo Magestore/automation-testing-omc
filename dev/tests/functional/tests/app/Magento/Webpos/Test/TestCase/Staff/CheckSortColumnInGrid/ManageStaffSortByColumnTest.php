@@ -80,7 +80,7 @@ class ManageStaffSortByColumnTest extends GridSortingTest
                 $role->persist();
             }
         }
-
+        $this->assertTrue(false);
         $result = parent::test($pageClass, $gridRetriever, $columnsForSorting,
             null, null, null, $steps);
 
