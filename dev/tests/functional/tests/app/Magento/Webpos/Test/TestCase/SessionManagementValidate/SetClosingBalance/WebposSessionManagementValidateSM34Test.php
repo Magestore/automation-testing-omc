@@ -88,11 +88,11 @@ class WebposSessionManagementValidateSM34Test extends Injectable
             sleep(1);
         }
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
-        sleep(1);
+        $this->webposIndex->getSessionCloseShift()->waitSetClosingBalancePopupVisible();
         $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
         sleep(1);
         $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
-        sleep(1);
+        $this->webposIndex->getSessionSetClosingBalanceReason()->waitSetReasonPopupVisible();
         $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
 
         // Assert Set Reason popup not visible

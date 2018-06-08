@@ -11,7 +11,7 @@
 			</data>
 			<data name="createInvoice" xsi:type="boolean">false</data>
 			<data name="shipped" xsi:type="boolean">false</data>
-			<data name="expectStatus" xsi:type="string">Processing</data>
+			<data name="expectStatus" xsi:type="string">Pending</data>
 
 			<constraint name="Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertCreateInvoiceSuccess"/>
 		</variation>

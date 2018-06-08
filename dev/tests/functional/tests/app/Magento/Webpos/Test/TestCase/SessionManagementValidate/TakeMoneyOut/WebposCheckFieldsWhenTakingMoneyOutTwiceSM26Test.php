@@ -104,7 +104,7 @@ class WebposCheckFieldsWhenTakingMoneyOutTwiceSM26Test extends Injectable
             $this->webposIndex->getSessionInfo()->getAddTransactionAmount()->getText(),
             'The transaction amount is wrong. It have to be '.$amountValue
         );
-        $transaction = $realOpeningAmount - $amountValue + $pushMoneyIn;
+        $transaction = floatval($realOpeningAmount) - floatval($amountValue) + floatval($pushMoneyIn);
         self::assertEquals(
             '$'.$transaction.'.00',
             $this->webposIndex->getSessionInfo()->getTheoretialClosingBalance()->getText(),
