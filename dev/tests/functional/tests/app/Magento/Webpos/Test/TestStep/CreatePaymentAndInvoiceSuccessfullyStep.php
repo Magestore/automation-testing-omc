@@ -12,6 +12,7 @@ use Magento\Mtf\TestStep\TestStepInterface;
 use Magento\Webpos\Test\Page\WebposIndex;
 use Magento\Webpos\Test\Constraint\OrderHistory\Payment\AssertPaymentSuccess;
 use Magento\Webpos\Test\Constraint\OrderHistory\Invoice\AssertInvoiceSuccess;
+
 /**
  * Class CreatePaymentAndInvoiceSuccessfullyStep
  * @package Magento\Webpos\Test\TestStep
@@ -44,7 +45,8 @@ class CreatePaymentAndInvoiceSuccessfullyStep implements TestStepInterface
         WebposIndex $webposIndex,
         AssertPaymentSuccess $assertPaymentSuccess,
         AssertInvoiceSuccess $assertInvoiceSuccess
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->assertPaymentSuccess = $assertPaymentSuccess;
         $this->assertInvoiceSuccess = $assertInvoiceSuccess;
@@ -70,7 +72,7 @@ class CreatePaymentAndInvoiceSuccessfullyStep implements TestStepInterface
         // Open shipment popup
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
         $this->webposIndex->getOrderHistoryPayment()->waitForElementVisible('#payment_popup_form');
-        self::assertTrue(
+        \PHPUnit_Framework_Assert::assertTrue(
             $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->isVisible(),
             'Payment Method didn\'t displayed'
         );

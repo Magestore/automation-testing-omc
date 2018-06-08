@@ -86,9 +86,12 @@ class WebposOrderHistoryTC035Test extends Injectable
         $webposIndex->getMainContent()->waitLoader();
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#webpos_checkout');
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#checkout-method .payment');
+        self::assertTrue(
+            $webposIndex->getCheckoutPlaceOrder()->getPaymentByMethod('cashforpos')->isVisible(),
+            'Payment method didn\'t show'
+        );
         $webposIndex->getCheckoutPlaceOrder()->getPaymentByMethod('cashforpos')->click();
         sleep(1);
-        $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#payment-method');
         $webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $webposIndex->getCheckoutSuccess()->waitForLoadingIndicator();
         sleep(2);
