@@ -9,8 +9,12 @@
 namespace Magento\Webpos\Test\TestCase\SalesOrderReport\OrderListByStaff;
 
 use Magento\Catalog\Test\Fixture\CatalogProductSimple;
+use Magento\Mtf\Fixture\FixtureFactory;
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Constraint\Checkout\CheckGUI\AssertWebposCheckoutPagePlaceOrderPageSuccessVisible;
+use Magento\Webpos\Test\Fixture\Location;
+use Magento\Webpos\Test\Fixture\Pos;
+use Magento\Webpos\Test\Fixture\Staff;
 use Magento\Webpos\Test\Page\Adminhtml\OrderListByStaff;
 use Magento\Webpos\Test\Page\Adminhtml\WebPOSAdminReportDashboard;
 use Magento\Webpos\Test\Page\WebposIndex;
@@ -83,43 +87,57 @@ class OrderListByStaffReportRP23Test extends Injectable
     public function test
     (
         array $shifts,
-        CatalogProductSimple $product
+        $products,
+        Pos $pos,
+        FixtureFactory $fixtureFactory
     )
     {
+        /**@var Location $location */
+        $location = $fixtureFactory->createByCode('location', ['dataset' => 'default']);
+        $location->persist();
+        $locationId = $location->getLocationId();
+        $posData = $pos->getData();
+        $posData['location_id'] = [$locationId];
+        /**@var Pos $pos */
+        $pos = $fixtureFactory->createByCode('pos', ['data' => $posData]);
+        $pos->persist();
+        $posId = $pos->getPosId();
+
+        $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
+        $staffData = $staff->getData();
+        $staffData['location_id'] = [$locationId];
+        $staffData['pos_ids'] = [$posId];
+        /**@var Staff $staff */
+        $staff = $fixtureFactory->createByCode('staff', ['data' => $staffData]);
+        $staff->persist();
         // LoginTest webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposStep'
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\LoginWebposByStaff',
+            [
+                'staff' => $staff,
+                'hasOpenSession' => false,
+                'hasWaitOpenSessionPopup' => false
+            ]
         )->run();
 
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-        $this->webposIndex->getCheckoutProductList()->search($product->getSku());
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(2);
-        $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(2);
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\WebposOpenSessionStep'
+        )->run();
 
-        $this->webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $result = $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\WebposAddProductToCartThenCheckoutStep',
+            ['products' => $products]
+        )->run();
 
-        // place order getCreateInvoiceCheckbox
-        $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $orderIdInWebpos = 0;
+        if ($result && $result["orderId"]) {
+            $orderIdInWebpos = $result["orderId"];
+        }
 
-        //Assert Place Order Success
-        $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
-        $orderIdInWebpos = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
-        $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
-        $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(2);
         // Preconditions
         $this->orderListByStaff->open();
         $this->orderListByStaff->getMessagesBlock()->clickLinkInMessage('notice', 'here');
-        if (isset($shifts['period_type']) && !$this->webPOSAdminReportDashboard->getReportDashboard()->getPeriorTypeOptionByName($shifts['period_type'])->isPresent()) {
-            unset($shifts['period_type']);
-            $this->webPOSAdminReportDashboard->getReportDashboard()->setFirstOptionPrediodType();
-        }
+        $shifts['period_type'] = $staff->getDisplayName();
         $this->orderListByStaff->getFilterBlock()->viewsReport($shifts);
         $this->orderListByStaff->getActionsBlock()->showReport();
 

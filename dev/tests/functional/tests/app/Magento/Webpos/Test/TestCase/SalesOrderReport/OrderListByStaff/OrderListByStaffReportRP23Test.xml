@@ -12,7 +12,12 @@
         <variation name="SOrderListByStaffReportRP23TestVariation1">
             <data name="shifts/period_type" xsi:type="string">admin admin</data>
             <data name="shifts/show_order_statuses" xsi:type="string">Any</data>
-            <data name="product/dataset" xsi:type="string">product1</data>
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+            </data>
+            <data name="pos/data/pos_name" xsi:type="string">test pos %isolation%</data>
+            <data name="pos/data/status" xsi:type="string">Enabled</data>
+            <data name="pos/data/is_allow_to_lock" xsi:type="string">0</data>
         </variation>
     </testCase>
 </config>

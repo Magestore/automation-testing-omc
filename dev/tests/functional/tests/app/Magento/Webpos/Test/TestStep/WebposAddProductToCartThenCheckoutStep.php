@@ -110,11 +110,13 @@ class WebposAddProductToCartThenCheckoutStep implements TestStepInterface
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $orderIdInWebpos = str_replace('#', '', $this->webposIndex->getCheckoutSuccess()->getOrderId()->getText());
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         return [
-            'paymentAmount' => $paymentAmount
+            'paymentAmount' => $paymentAmount,
+            'orderId' => $orderIdInWebpos
         ];
     }
 
