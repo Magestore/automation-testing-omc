@@ -67,7 +67,7 @@ class WebposOrdersHistoryInvoiceOH111Test extends Injectable
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-
+        $this->webposIndex->getMainContent()->waitLoader();
         // Add product to cart
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\AddProductToCartStep',
@@ -81,6 +81,7 @@ class WebposOrdersHistoryInvoiceOH111Test extends Injectable
 
         // Place Order
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
+        $this->webposIndex->getMainContent()->waitLoader();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutPaymentMethod()->getCashOnDeliveryMethod()->click();
@@ -94,6 +95,7 @@ class WebposOrdersHistoryInvoiceOH111Test extends Injectable
             ]
         )->run();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+        $this->webposIndex->getMainContent()->waitLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();

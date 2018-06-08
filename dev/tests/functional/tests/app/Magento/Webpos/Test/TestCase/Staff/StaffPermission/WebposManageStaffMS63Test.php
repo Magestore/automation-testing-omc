@@ -76,6 +76,10 @@ class WebposManageStaffMS63Test extends Injectable
 
     public function __prepare(FixtureFactory $fixtureFactory)
     {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_no']
+        )->run();
         $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
         return ['staffData' => $staff->getData()];
     }

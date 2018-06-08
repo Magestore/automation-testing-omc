@@ -11,8 +11,6 @@
             name="Magento\Webpos\Test\TestCase\SessionManagementValidate\TakeMoneyOut\WebposCheckFieldsWhenTakingMoneyOutTwiceSM26Test"
             summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
         <variation name="WebposCheckValidateAmountFieldSM26TestVariation1">
-            <data name="dataConfig" xsi:type="string">create_session_before_working</data>
-            <data name="dataConfigToNo" xsi:type="string">setup_session_before_working_to_no</data>
             <data name="testCaseID" xsi:type="string">SM23</data>
             <data name="openingAmount" xsi:type="number">10</data>
             <data name="realOpeningAmount" xsi:type="number">100</data>

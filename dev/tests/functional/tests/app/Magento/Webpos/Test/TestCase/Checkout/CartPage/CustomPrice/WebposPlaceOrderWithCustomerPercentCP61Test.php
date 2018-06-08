@@ -66,8 +66,9 @@ class WebposPlaceOrderWithCustomerPercentCP61Test extends Injectable
         $staff = $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-
+        $this->webposIndex->getMainContent()->waitLoader();
         $this->webposIndex->getCheckoutProductList()->search($product->getSku());
+        $this->webposIndex->getMainContent()->waitLoader();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $price = $this->webposIndex->getCheckoutCartItems()->getValueItemPrice($product->getName());

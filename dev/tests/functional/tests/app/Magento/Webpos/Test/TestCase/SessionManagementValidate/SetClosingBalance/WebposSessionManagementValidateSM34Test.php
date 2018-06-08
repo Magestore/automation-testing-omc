@@ -79,10 +79,12 @@ class WebposSessionManagementValidateSM34Test extends Injectable
                 'hasOpenSession' => false
             ]
         )->run();
+        $this->webposIndex->getMainContent()->waitLoader();
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
 
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
+        $this->webposIndex->getMainContent()->waitLoader();
         /** wait done open request */
         while ( !$this->webposIndex->getListShift()->getFirstItemShift()->isVisible()) {
             sleep(1);

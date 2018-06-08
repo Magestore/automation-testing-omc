@@ -37,6 +37,15 @@ class WebposCheckValidateAmountFieldSM24Test extends Injectable
 
     protected $configuration;
 
+    //Open session
+    public function __prepare()
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_yes']
+        )->run();
+    }
+
     /**
      * @param WebposIndex $webposIndex
      */
@@ -53,19 +62,11 @@ class WebposCheckValidateAmountFieldSM24Test extends Injectable
      * @param $openingAmount
      * @return array
      */
-    public function test($dataConfig, $dataConfigToNo, $openingAmount, $amountValue, $realOpeningAmount, $reasonTransaction)
+    public function test($openingAmount, $amountValue, $realOpeningAmount, $reasonTransaction)
     {
-        $this->dataConfigToNo = $dataConfigToNo;
-        //Set Create Session Before Working to Yes
+        //Login
         $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $dataConfig]
-        )->run();
-
-        // LoginTest webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
-        )->run();
+            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep')->run();
         // Open session
         $time = time();
         $timeAfter = $time + 5;
@@ -74,7 +75,7 @@ class WebposCheckValidateAmountFieldSM24Test extends Injectable
             $time = time();
         }
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
-        sleep(1);
+        $this->webposIndex->getMainContent()->waitLoader();
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue($openingAmount);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
@@ -93,18 +94,18 @@ class WebposCheckValidateAmountFieldSM24Test extends Injectable
             'The popup should have not visible.'
         );
         self::assertEquals(
-            '$'.$amountValue.'.00',
+            '$' . $amountValue . '.00',
             $this->webposIndex->getSessionInfo()->getAddTransactionAmount()->getText(),
-            'The transaction amount is wrong. It have to be '.$amountValue
+            'The transaction amount is wrong. It have to be ' . $amountValue
         );
         $transaction = $realOpeningAmount - $amountValue;
         self::assertEquals(
-            '$'.$transaction.'.00',
+            '$' . $transaction . '.00',
             $this->webposIndex->getSessionInfo()->getTheoretialClosingBalance()->getText(),
-            'The transaction amount is wrong. It have to be $'.$openingAmount - $amountValue.'.00'
+            'The transaction amount is wrong. It have to be $' . $openingAmount - $amountValue . '.00'
         );
         if ($reasonTransaction != null) {
-                $transactionAmount = '$' . $transaction . '.00';
+            $transactionAmount = '$' . $transaction . '.00';
         } else {
             $transactionAmount = '-$' . $transaction . '.00';
         }
@@ -123,16 +124,13 @@ class WebposCheckValidateAmountFieldSM24Test extends Injectable
         ];
     }
 
+
+    /*Close session*/
     public function tearDown()
     {
-        //Set Create Session Before Working to No
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $this->dataConfigToNo]
-        )->run();
-        //Set Create Session Before Working to No
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
+            ['configData' => 'create_section_before_working_no']
         )->run();
     }
 }

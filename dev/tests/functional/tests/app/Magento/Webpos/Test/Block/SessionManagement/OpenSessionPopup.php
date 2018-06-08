@@ -31,9 +31,6 @@ class OpenSessionPopup extends Block
         return $this->_rootElement->find('.cash-counting-value');
     }
 
-    /**getNumberOfCoinsBills
-     * @return \Magento\Mtf\Client\ElementInterface
-     */
     public function waitNumberOfCoinsBills(){
         $quantity = $this->_rootElement->find('.cash-counting-qty.a-center');
         if (!$quantity->isVisible()) {

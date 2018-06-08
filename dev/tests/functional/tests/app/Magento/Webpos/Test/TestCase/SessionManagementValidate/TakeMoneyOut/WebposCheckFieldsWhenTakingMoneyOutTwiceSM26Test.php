@@ -10,6 +10,7 @@ namespace Magento\Webpos\Test\TestCase\SessionManagementValidate\TakeMoneyOut;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
+
 /**
  * Class WebposCheckFieldsWhenTakingMoneyOutTwiceSM26Test
  * @package Magento\Webpos\Test\TestCase\SessionManagementValidate\TakeMoneyOut
@@ -32,9 +33,16 @@ class WebposCheckFieldsWhenTakingMoneyOutTwiceSM26Test extends Injectable
      */
     protected $webposIndex;
 
-    protected $dataConfigToNo;
-
     protected $configuration;
+
+    //Open session
+    public function __prepare()
+    {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_yes']
+        )->run();
+    }
 
     /**
      * @param WebposIndex $webposIndex
@@ -47,33 +55,41 @@ class WebposCheckFieldsWhenTakingMoneyOutTwiceSM26Test extends Injectable
     }
 
     /**
-     * @param $dataConfig
-     * @param $dataConfigToNo
      * @param $openingAmount
+     * @param $amountValue
+     * @param $realOpeningAmount
+     * @param $reasonTransaction
+     * @param $pushMoneyIn
      * @return array
      */
-    public function test($dataConfig, $dataConfigToNo, $openingAmount, $amountValue, $realOpeningAmount, $reasonTransaction, $pushMoneyIn)
+    public function test($openingAmount, $amountValue, $realOpeningAmount, $reasonTransaction, $pushMoneyIn)
     {
-        $this->dataConfigToNo = $dataConfigToNo;
-        //Set Create Session Before Working to Yes
+        //Login
         $this->objectManager->getInstance()->create(
-            'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $dataConfig]
-        )->run();
-
-        // LoginTest webpos
-        $staff = $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
-        )->run();
-        // Open session
-        $time = time();
-        $timeAfter = $time + 5;
-        while (!$this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->isVisible()
-            && $time < $timeAfter) {
-            $time = time();
+            'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep')->run();
+        sleep(2);
+        $this->webposIndex->getMainContent()->waitLoader();
+        if ($this->webposIndex->getCheckoutProductList()->isVisible()) {
+            $this->webposIndex->getMsWebpos()->waitForCMenuVisible();
+            $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
+            $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
+            $this->webposIndex->getCMenu()->getSessionManagement();
+            sleep(1);
+            $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
+            sleep(1);
+            $this->webposIndex->getSessionCloseShift()->getConfirmSession()->click();
+            sleep(1);
+            if ($this->webposIndex->getModal()->isVisible()) {
+                $this->webposIndex->getModal()->getOkButton()->click();
+                sleep(1);
+                $this->webposIndex->getSessionSetClosingBalanceReason()->getButtonBtnDone()->click();
+                sleep(1);
+            }
+            $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
+            $this->webposIndex->getSessionShift()->waitForElementVisible('.icon-iconPOS-add');
+            $this->webposIndex->getSessionShift()->getAddSession()->click();
         }
-        $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitForElementVisible('#popup-open-shift');
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue($openingAmount);
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
@@ -100,15 +116,15 @@ class WebposCheckFieldsWhenTakingMoneyOutTwiceSM26Test extends Injectable
             'The popup should have not visible.'
         );
         self::assertEquals(
-            '$'.$amountValue.'.00',
+            '$' . $amountValue . '.00',
             $this->webposIndex->getSessionInfo()->getAddTransactionAmount()->getText(),
-            'The transaction amount is wrong. It have to be '.$amountValue
+            'The transaction amount is wrong. It have to be ' . $amountValue
         );
         $transaction = $realOpeningAmount - $amountValue + $pushMoneyIn;
         self::assertEquals(
-            '$'.$transaction.'.00',
+            '$' . $transaction . '.00',
             $this->webposIndex->getSessionInfo()->getTheoretialClosingBalance()->getText(),
-            'The transaction amount is wrong. It have to be $'.$openingAmount - $amountValue.'.00'
+            'The transaction amount is wrong. It have to be $' . $openingAmount - $amountValue . '.00'
         );
 
         $transactionAmount = '-$' . $transaction . '.00';
@@ -127,16 +143,12 @@ class WebposCheckFieldsWhenTakingMoneyOutTwiceSM26Test extends Injectable
         ];
     }
 
+    /*Close session*/
     public function tearDown()
     {
-        //Set Create Session Before Working to No
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => $this->dataConfigToNo]
-        )->run();
-        //Set Create Session Before Working to No
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
+            ['configData' => 'create_section_before_working_no']
         )->run();
     }
 }
