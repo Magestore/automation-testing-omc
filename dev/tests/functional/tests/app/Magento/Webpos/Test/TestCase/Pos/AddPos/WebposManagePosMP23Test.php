@@ -54,7 +54,7 @@ class WebposManagePosMP23Test extends Injectable
         $this->posIndex->getPosGrid()->waitLoader();
         $this->posIndex->getPageActionsBlock()->addNew();
         $this->posNews->getPosForm()->waitLoader();
-        $this->posNews->getFormPageActions()->getButtonByname('Back')->click();
+        $this->posNews->getFormPageActions()->getButtonByname('Back to register or connect an account')->click();
         $this->posIndex->getPosGrid()->waitLoader();
         \PHPUnit_Framework_Assert::assertTrue(
             $this->posIndex->getPosGrid()->isVisible(),

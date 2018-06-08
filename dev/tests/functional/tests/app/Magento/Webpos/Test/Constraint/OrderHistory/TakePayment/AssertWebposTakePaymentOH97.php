@@ -26,7 +26,6 @@ class AssertWebposTakePaymentOH97 extends AbstractConstraint
         $am = (float)substr($am, 1);
         $remain = (float)substr($remain, 1);
         $value1 = (float)$am - (float)$amount;
-        $value2 = (float)$am + (float)$amount;
         $total = $webposIndex->getOrderHistoryOrderViewFooter()->getTotalPaid();
         \PHPUnit_Framework_Assert::assertEquals(
             (float)$value1,

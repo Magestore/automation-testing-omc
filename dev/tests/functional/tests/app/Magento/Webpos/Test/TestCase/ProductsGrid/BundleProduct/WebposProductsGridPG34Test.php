@@ -73,6 +73,7 @@ class WebposProductsGridPG34Test extends Injectable
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
         $this->webposIndex->getCheckoutProductDetail()->waitForFormLoader();
+        $this->webposIndex->getMainContent()->waitLoader();
         \PHPUnit_Framework_Assert::assertEquals(
             1,
             (int)$this->webposIndex->getCheckoutProductDetail()->getBundleFirstItemQty(),

@@ -236,4 +236,9 @@ class CheckoutProductDetail extends Block
     {
         return $this->_rootElement->find('.availability');
     }
+
+    public function getBundleFirstItemQty()
+    {
+        return $this->_rootElement->find('.fieldset-bundle-options > div input.qty')->getValue();
+    }
 }

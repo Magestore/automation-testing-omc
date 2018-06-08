@@ -79,6 +79,7 @@ class WebposOrdersHistoryPartialShipmentOH40Test extends Injectable
         $this->webposIndex->getCMenu()->ordersHistory();
         $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
+        $this->webposIndex->getMainContent()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         // Open shipment popup
@@ -90,6 +91,7 @@ class WebposOrdersHistoryPartialShipmentOH40Test extends Injectable
             $qtyToShip = $item['qtyToShip'];
             $this->webposIndex->getOrderHistoryShipment()->getQtyToShipInput($productName)->setValue($qtyToShip);
         }
+        sleep(1);
         $this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
         $this->webposIndex->getModal()->waitForOkButtonIsVisible();
         $this->webposIndex->getModal()->getOkButton()->click();

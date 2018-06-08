@@ -77,6 +77,7 @@ class WebposOrdersHistoryMassActionRefundCheckGUITest extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getMainContent()->waitLoader();
         // Select flat rate shipping method
         if ($configData) {
             $this->webposIndex->getCheckoutShippingMethod()->clickFlatRateFixedMethod();
@@ -88,7 +89,8 @@ class WebposOrdersHistoryMassActionRefundCheckGUITest extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         // Place Order
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
-        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getMainContent()->waitLoader();
+        $this->webposIndex->getCheckoutSuccess()->waitForLoadingIndicator();
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         // Go to Order History

@@ -76,13 +76,14 @@ class WebposOrderHistoryTC035Test extends Injectable
         $webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
         $webposIndex->getCheckoutProductDetail()->waitForFormLoader();
         $webposIndex->getCheckoutProductDetail()->selectBundleProductFirstItemWithRadio();
-        $webposIndex->getCheckoutProductDetail()->setQtyBundleChildProduct($qty);
+//        $webposIndex->getCheckoutProductDetail()->setQtyBundleChildProduct);
         $webposIndex->getCheckoutProductDetail()->getButtonAddToCart()->click();
         $webposIndex->getCheckoutProductDetail()->waitForElementNotVisible('#popup-product-detail');
         $webposIndex->getCheckoutContainer()->waitForProductInCartLoader();
 
         //Checkout
         $webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
+        $webposIndex->getMainContent()->waitLoader();
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#webpos_checkout');
         $webposIndex->getCheckoutPlaceOrder()->waitForElementVisible('#checkout-method .payment');
         $webposIndex->getCheckoutPlaceOrder()->getPaymentByMethod('cashforpos')->click();

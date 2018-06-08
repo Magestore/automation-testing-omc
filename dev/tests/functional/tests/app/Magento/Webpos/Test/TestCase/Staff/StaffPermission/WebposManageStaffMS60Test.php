@@ -139,6 +139,7 @@ class WebposManageStaffMS60Test extends Injectable
         //Go order history
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->ordersHistory();
+        $this->webposIndex->getMainContent()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
         $this->webposIndex->getOrderHistoryOrderList()->search($orderId1);
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
