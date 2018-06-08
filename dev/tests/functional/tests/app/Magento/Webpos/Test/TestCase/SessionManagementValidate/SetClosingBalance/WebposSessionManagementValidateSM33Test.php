@@ -88,11 +88,12 @@ class WebposSessionManagementValidateSM33Test extends Injectable
                 'hasOpenSession' => false
             ]
         )->run();
-
+        $this->webposIndex->getMainContent()->waitLoader();
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
 
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
+        $this->webposIndex->getMainContent()->waitLoader();
         /** wait request done  */
         while ( !$this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->isVisible() ) { sleep(1); }
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();
@@ -104,13 +105,12 @@ class WebposSessionManagementValidateSM33Test extends Injectable
 
         // Assert Set Reason popup
         $this->assertSetReasonPopup->processAssert($this->webposIndex);
-
         $this->webposIndex->getSessionSetReasonPopup()->getCancelButton()->click();
         sleep(2);
 
         // Assert Set Reason popup not visible
         $this->assertFalse(
-            $this->webposIndex->getSessionSetReasonPopup()->isVisible(),
+             $this->webposIndex->getSessionSetReasonPopup()->isVisible(),
             'Set Reason Popup is visible.'
         );
 

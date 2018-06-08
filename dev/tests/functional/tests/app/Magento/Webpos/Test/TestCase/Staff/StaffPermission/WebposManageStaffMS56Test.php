@@ -18,7 +18,7 @@ use Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertEditDiscount
  * Testcase MS56 - Edit custom price and discount for whole cart
  *
  * Precondition:
- * 1. Go to backend > Sales > Manage Roles
+ * 1. Go to backend >   Sales > Manage Roles
  * 2. Add a new role:
  * - Maximum discount percent(%): blank
  * - Select all permission
@@ -56,7 +56,7 @@ class WebposManageStaffMS56Test extends Injectable
     {
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'have_shipping_method_on_webpos_CP197']
+            ['configData' => 'have_shipping_method_on_webpos_CP197,create_section_before_working_no']
         )->run();
     }
 
@@ -103,7 +103,7 @@ class WebposManageStaffMS56Test extends Injectable
                 'hasWaitOpenSessionPopup' => null
             ]
         )->run();
-
+        $this->webposIndex->getMainContent()->waitLoader();
         //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();

@@ -96,7 +96,7 @@ class WebposOHCheckoutWithMultiPaymentMethodTest extends Injectable
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-
+        $this->webposIndex->getMainContent()->waitLoader();
         // Create products
         $products = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
@@ -127,6 +127,7 @@ class WebposOHCheckoutWithMultiPaymentMethodTest extends Injectable
         )->run();
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
+        $this->webposIndex->getMainContent()->waitLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
 
         //Assert Place Order Success

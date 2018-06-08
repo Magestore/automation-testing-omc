@@ -83,6 +83,10 @@ class WebposManageStaffMS73Test extends Injectable
 
     public function __prepare(FixtureFactory $fixtureFactory)
     {
+        $this->objectManager->getInstance()->create(
+            'Magento\Config\Test\TestStep\SetupConfigurationStep',
+            ['configData' => 'create_section_before_working_no']
+        )->run();
         $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
         $salesRule = $fixtureFactory->createByCode('salesRule', ['dataset' => 'active_sales_rule_with_fixed_price_discount_coupon']);
         $salesRule->persist();
@@ -95,8 +99,10 @@ class WebposManageStaffMS73Test extends Injectable
     /**
      * Create WebposRole group test.
      *
-     * @param WebposRole
-     * @return void
+     * @param WebposRole $webposRole
+     * @param $products
+     * @param $staffData
+     * @param SalesRule $salesRule
      */
     public function test(WebposRole $webposRole, $products, $staffData, SalesRule $salesRule)
     {

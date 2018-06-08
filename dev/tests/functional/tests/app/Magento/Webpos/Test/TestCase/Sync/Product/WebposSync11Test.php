@@ -117,6 +117,7 @@ class WebposSync11Test extends Injectable
      * @param CatalogProductSimple $initialProduct
      * @param CatalogProductSimple $product
      * @param $products
+     * @throws \Exception
      */
     public function test(
         FixtureFactory $fixtureFactory,
@@ -130,7 +131,7 @@ class WebposSync11Test extends Injectable
         $staff = $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-
+        $this->webposIndex->getMainContent()->waitLoader();
         $initialProduct->persist();
 
         $products = $this->objectManager->getInstance()->create(
