@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/mtf/etc/variations.xsd">
+    <testCase name="Magento\Webpos\Test\TestCase\Zreport\WebposZreportCheckGUI_2Test"
+              summary="Grid UI Component Filtering" ticketId="WEBPOS-1">
+        <variation name="WebposZreportCheckGUIZR001_2Test">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+            </data>
+            <data name="denomination/dataset" xsi:type="string">default</data>
+            <data name="denominationNumberCoin" xsi:type="string">1</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIZreport"/>
+        </variation>
+        <variation name="WebposZreportCheckGUIZR002_2Test">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+            </data>
+            <data name="posName" xsi:type="string">Store POS</data>
+            <data name="denomination/dataset" xsi:type="string">default</data>
+            <data name="denominationNumberCoin" xsi:type="string">1</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIXZreportPosName"/>
+        </variation>
+        <variation name="WebposZreportCheckGUIZR003_2Test">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+            </data>
+            <data name="denomination/dataset" xsi:type="string">default</data>
+            <data name="denominationNumberCoin" xsi:type="string">1</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIXZreportStaffName"/>
+        </variation>
+        <variation name="WebposZreportCheckGUIZR006_2Test">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+            </data>
+            <data name="denomination/dataset" xsi:type="string">default</data>
+            <data name="denominationNumberCoin" xsi:type="string">1</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIZreportOpenedClosed"/>
+        </variation>
+        <variation name="WebposZreportCheckGUIZR019_2Test">
+            <data name="products" xsi:type="array">
+                <item name="0" xsi:type="string">product1</item>
+            </data>
+            <data name="denomination/dataset" xsi:type="string">default</data>
+            <data name="denominationNumberCoin" xsi:type="string">1</data>
+            <constraint name="Magento\Webpos\Test\Constraint\Zreport\AssertGUIZreport"/>
+        </variation>
+    </testCase>
+</config>
