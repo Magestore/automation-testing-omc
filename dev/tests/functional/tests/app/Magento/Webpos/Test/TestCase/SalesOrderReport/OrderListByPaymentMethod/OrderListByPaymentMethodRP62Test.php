@@ -78,21 +78,22 @@ class OrderListByPaymentMethodRP62Test extends Injectable
             $this->webPOSAdminReportDashboard->getReportDashboard()->setSalesReportOderStatuses($order_statuses);
         }
         $this->orderListByPayment->getActionsBlock()->showReport();
-
-        $paymentMethod = $this->webPOSAdminReportDashboard->getReportDashboard()->getPaymentMethod()->getText();
-        self::assertEquals(
-            $shifts['period_type'],
-            $paymentMethod,
-            'In Admin Form Order List By Staff WebPOS Page. The period type was not updated. It must be ' . $shifts['period_type']
-        );
-
-        $statusOrder = $this->webPOSAdminReportDashboard->getReportDashboard()->getStatusOrder()->getText();
-        if ($order_statuses != null) {
+        $this->webPOSAdminReportDashboard->getReportDashboard()->waitLoader();
+        if ($this->webPOSAdminReportDashboard->getReportDashboard()->checkHasData()) {
+            $paymentMethod = $this->webPOSAdminReportDashboard->getReportDashboard()->getPaymentMethod()->getText();
             self::assertEquals(
-                $order_statuses,
-                $statusOrder,
-                'In Admin Form Order List By Staff WebPOS Page. Status is not updated. It must be ' . $order_statuses
+                $shifts['period_type'],
+                $paymentMethod,
+                'In Admin Form Order List By Staff WebPOS Page. The period type was not updated. It must be ' . $shifts['period_type']
             );
+            $statusOrder = $this->webPOSAdminReportDashboard->getReportDashboard()->getStatusOrder()->getText();
+            if ($order_statuses != null) {
+                self::assertEquals(
+                    $order_statuses,
+                    $statusOrder,
+                    'In Admin Form Order List By Staff WebPOS Page. Status is not updated. It must be ' . $order_statuses
+                );
+            }
         }
     }
 }

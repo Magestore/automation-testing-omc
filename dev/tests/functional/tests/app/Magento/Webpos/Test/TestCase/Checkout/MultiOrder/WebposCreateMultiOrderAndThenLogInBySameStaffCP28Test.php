@@ -119,7 +119,9 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
             sleep(1);
         }
         $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-
+        sleep(1);
+        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
+        sleep(1);
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         sleep(1);
         $this->webposIndex->getCMenu()->logout();

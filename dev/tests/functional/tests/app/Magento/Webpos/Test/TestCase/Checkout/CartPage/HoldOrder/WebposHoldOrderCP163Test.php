@@ -64,10 +64,11 @@ class WebposHoldOrderCP163Test extends Injectable
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
-
         //Add products to cart
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutProductList()->search($product->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         sleep(1);
 

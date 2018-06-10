@@ -12,7 +12,7 @@
             <data name="description" xsi:type="string">Verify pos grid sorting</data>
             <data name="itemsCount" xsi:type="string">2</data>
             <data name="fixtureName" xsi:type="string">pos</data>
-            <data name="fixtureDataSet" xsi:type="string">default</data>
+            <data name="fixtureDataSet" xsi:type="string">default2</data>
             <data name="steps" xsi:type="array">
                 <item name="0" xsi:type="string">-</item>
                 <item name="1" xsi:type="string">-</item>

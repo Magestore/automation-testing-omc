@@ -66,7 +66,8 @@ class LoginWebposByStaff implements TestStepInterface
         Pos $pos = null,
         $hasOpenSession = true,
         $hasWaitOpenSessionPopup = true
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->staff = $staff;
         $this->location = $location;
@@ -85,9 +86,9 @@ class LoginWebposByStaff implements TestStepInterface
             $this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
             $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
             $this->webposIndex->getLoginForm()->clickLoginButton();
-            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-            $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
             if ($this->location) {
+                $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
+                $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
                 $this->webposIndex->getLoginForm()->setLocation($this->location->getDisplayName());
             }
             if ($this->pos) {
@@ -100,7 +101,7 @@ class LoginWebposByStaff implements TestStepInterface
             $this->webposIndex->getMsWebpos()->waitForSyncDataVisible();
             $time = time();
             $timeAfter = $time + 360;
-            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter){
+            while ($this->webposIndex->getFirstScreen()->isVisible() && $time < $timeAfter) {
                 $time = time();
             }
             sleep(2);
@@ -108,13 +109,13 @@ class LoginWebposByStaff implements TestStepInterface
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 //        $this->webposIndex->getMsWebpos()->waitCartLoader();
         if ($this->location || $this->pos) {
-            if($this->webposIndex->getMsWebpos()->isVisible('[id="popup-open-shift"]')){
+            if ($this->webposIndex->getMsWebpos()->isVisible('[id="popup-open-shift"]')) {
                 $this->hasWaitOpenSessionPopup && $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
             }
             sleep(2);
             $this->webposIndex->getOpenSessionPopup()->waitForElementNotVisible('.indicator[data-bind="visible:loading"]');
             if ($this->hasOpenSession) {
-                while (! $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->isVisible()) {
+                while (!$this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->isVisible()) {
 
                 }
                 $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();

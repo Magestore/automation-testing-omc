@@ -15,7 +15,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  */
 class AssertCheckCartSimpleProduct extends AbstractConstraint
 {
-    public function processAssert(WebposIndex $webposIndex, $cartProducts)
+        public function processAssert(WebposIndex $webposIndex, $cartProducts)
     {
         if ($cartProducts == null) {
             \PHPUnit_Framework_Assert::assertFalse(
@@ -34,7 +34,7 @@ class AssertCheckCartSimpleProduct extends AbstractConstraint
                 \PHPUnit_Framework_Assert::assertEquals(
                     $expectedPrice,
                     $webposIndex->getCheckoutCartItems()->getPriceCartItemByOrderTo($key+1),
-                    'Price product is not correct'
+                        'Price product is not correct'
                 );
 
                 if (floatval($cartProduct['qty']) >1) {

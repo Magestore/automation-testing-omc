@@ -54,10 +54,10 @@ class WebposProductGridGroupProductBlockAddToCartSuccessfullyPG43Test extends In
         )->run();
 
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutProductList()->search($products[0]['product']->getSku());
-
-        $this->webposIndex->getMsWebpos()->waitForElementVisible("#popup-product-detail");
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getMsWebpos()->waitForElementVisible("#popup-product-detail .form-detail-product");
         // Select options
         $this->webposIndex->getCheckoutProductDetail()->fillGroupedProductQty($products[0]['product']);
         $childProducts = $products[0]['product']->getAssociated()['products'];

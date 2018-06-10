@@ -23,5 +23,7 @@ namespace Magento\Webpos\Test\TestCase\Pos\SortGrid;
  */
 class WebposGridPosSortingTest extends \Magento\Ui\Test\TestCase\GridSortingTest
 {
+    public function __prepare(){
 
+    }
 }

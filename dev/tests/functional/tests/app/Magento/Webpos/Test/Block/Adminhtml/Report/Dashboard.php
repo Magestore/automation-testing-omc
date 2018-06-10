@@ -228,4 +228,11 @@ class Dashboard extends Block
     {
         return $this->_rootElement->find('//select[@id="sales_report_period_type"]//option[2]', locator::SELECTOR_XPATH);
     }
+
+    public function checkHasData()
+    {
+        $this->waitLoader();
+        return !$this->getFirtRowDataGrid()->find('.empty-text')->isVisible();
+
+    }
 }

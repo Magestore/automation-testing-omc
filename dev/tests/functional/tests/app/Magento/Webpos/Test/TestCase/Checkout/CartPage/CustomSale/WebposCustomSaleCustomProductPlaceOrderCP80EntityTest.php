@@ -97,6 +97,7 @@ class WebposCustomSaleCustomProductPlaceOrderCP80EntityTest extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        sleep(1);
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();

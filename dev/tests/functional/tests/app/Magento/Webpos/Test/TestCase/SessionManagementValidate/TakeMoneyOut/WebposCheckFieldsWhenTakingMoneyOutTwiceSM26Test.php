@@ -68,8 +68,7 @@ class WebposCheckFieldsWhenTakingMoneyOutTwiceSM26Test extends Injectable
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep')->run();
         sleep(2);
-
-        if ($this->webposIndex->getCheckoutProductList()->isVisible()) {
+        if ($this->webposIndex->getCheckoutProductList()->getFirstProduct()->isVisible()) {
             $this->webposIndex->getMsWebpos()->waitForCMenuVisible();
             $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
             $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
@@ -86,7 +85,9 @@ class WebposCheckFieldsWhenTakingMoneyOutTwiceSM26Test extends Injectable
                 sleep(1);
             }
             $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-            $this->webposIndex->getSessionShift()->waitForElementVisible('.icon-iconPOS-add');
+            sleep(1);
+            $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
+            sleep(1);
             $this->webposIndex->getSessionShift()->getAddSession()->click();
         }
         $this->webposIndex->getMsWebpos()->waitForElementVisible('#popup-open-shift');

@@ -59,20 +59,21 @@ class WebposHoldOrderCP159Test extends Injectable
         )->run();
 
         //Add products to cart
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
 
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutProductList()->getFirstProduct()->click();
         sleep(1);
         $this->webposIndex->getCheckoutProductList()->getFirstProduct()->click();
         sleep(1);
-        $this->webposIndex->getCheckoutProductList()->search($product2->getName());
 
+        $this->webposIndex->getCheckoutProductList()->search($product2->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getCheckoutProductList()->getFirstProduct()->click();
         sleep(1);
 
@@ -81,7 +82,6 @@ class WebposHoldOrderCP159Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);
-
         //Cart in On-Hold
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->onHoldOrders();

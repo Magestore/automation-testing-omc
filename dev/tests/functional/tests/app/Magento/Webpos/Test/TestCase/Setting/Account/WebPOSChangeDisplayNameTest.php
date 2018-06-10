@@ -47,6 +47,7 @@ class WebPOSChangeDisplayNameTest extends Injectable
      */
     protected $webposIndex;
     protected $username;
+    protected $password;
     protected $testCaseId;
 
     /**
@@ -93,7 +94,9 @@ class WebPOSChangeDisplayNameTest extends Injectable
         } elseif ($testCaseID == 'SET04') {
             $this->webposIndex->getStaffSettingFormMainAccount()->getCurrentPassword()->setValue($password);
             $username = $this->configuration->get('application/0/backendLogin/0/value');
+            $password = $this->configuration->get('application/0/backendPassword/0/value');
             $this->username = $username . ' ' . $username;
+            $this->password = $password;
         }
         $this->webposIndex->getStaffSettingFormMainAccount()->getDisplayName()->setValue($displayName);
         $this->webposIndex->getStaffSettingFormFooter()->getSaveButton()->click();
@@ -111,7 +114,9 @@ class WebPOSChangeDisplayNameTest extends Injectable
             $this->webposIndex->getCMenu()->account();
             sleep(1);
             $this->webposIndex->getStaffSettingFormMainAccount()->getDisplayName()->setValue($this->username);
+            $this->webposIndex->getStaffSettingFormMainAccount()->getCurrentPassword()->setValue($this->password);
             $this->webposIndex->getStaffSettingFormFooter()->getSaveButton()->click();
+            $this->webposIndex->getToaster()->waitWarningMessageShow();
         }
     }
 }

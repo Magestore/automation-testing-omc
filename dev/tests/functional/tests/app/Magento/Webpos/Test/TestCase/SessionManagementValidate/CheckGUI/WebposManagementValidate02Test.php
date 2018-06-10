@@ -129,11 +129,6 @@ class WebposManagementValidate02Test extends Injectable
         );
 
         $this->assertTrue(
-            $this->webposIndex->getOpenSessionPopup()->getIconDeleteFirst()->isVisible(),
-            'Delete action on open session popup is not show'
-        );
-
-        $this->assertTrue(
             $this->webposIndex->getOpenSessionPopup()->getIconAddNew()->isVisible(),
             'Add new row action on open session popup is not show'
         );

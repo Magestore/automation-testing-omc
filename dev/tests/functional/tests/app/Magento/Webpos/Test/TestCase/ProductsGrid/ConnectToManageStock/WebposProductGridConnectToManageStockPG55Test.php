@@ -78,12 +78,9 @@ class  WebposProductGridConnectToManageStockPG55Test extends Injectable
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
         $this->webposIndex->getCMenu()->checkout();
         $this->webposIndex->getCheckoutProductList()->search($productName);
-
-        /** wait until search done */
-        while ($this->webposIndex->getCheckoutProductList()->getNumberOfProducts()->getText() != 1) {
-            sleep(1);
-        }
-
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
+        $this->webposIndex->getMsWebpos()->waitCartLoader();
+        sleep(1);
         $this->assertTrue(
             $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->isVisible(),
             'Product is not added to cart.'

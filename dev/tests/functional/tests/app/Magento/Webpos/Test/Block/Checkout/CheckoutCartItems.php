@@ -36,7 +36,7 @@ class CheckoutCartItems extends Block
 
 	public function getFirstCartItem()
 	{
-		return $this->_rootElement->find('.product-item');
+		return $this->_rootElement->find('.product-item:first-child');
 	}
 
 	public function getFirstCartItemQty()

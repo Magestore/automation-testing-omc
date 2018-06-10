@@ -91,6 +91,7 @@ class SaleByStaffDailyReportsRP15Test extends Injectable
         )->run();
 
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         for ($i = 0; $i < 2; $i++) {
             $this->webposIndex->getCheckoutProductList()->search($product->getSku());
             $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -110,8 +111,14 @@ class SaleByStaffDailyReportsRP15Test extends Injectable
             //Assert Place Order Success
             $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
             $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
+            sleep(1);
+            while ($this->webposIndex->getCheckoutSuccess()->isVisible()) {
+                $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
+                sleep(1);
+            }
             $this->webposIndex->getMsWebpos()->waitCartLoader();
-            sleep(2);
+            sleep(1);
+
         }
         // Preconditions
         $this->salesByStaffDaily->open();
@@ -129,8 +136,8 @@ class SaleByStaffDailyReportsRP15Test extends Injectable
 //            $after,
 //            'The Order Count In Table Body Of Report Form By Staff was not updated.'
 //        );
-        $before = floatval(str_replace('$', '',$orderCountFootBefore));
-        $after = floatval(str_replace('$', '',$orderCountFootAfter));
+        $before = floatval(str_replace('$', '', $orderCountFootBefore));
+        $after = floatval(str_replace('$', '', $orderCountFootAfter));
         self::assertGreaterThan(
             $before,
             $after,
@@ -143,8 +150,8 @@ class SaleByStaffDailyReportsRP15Test extends Injectable
 //            $after,
 //            'The Sales Total Body In Table Body Of Report Form By Staff was not updated.'
 //        );
-        $before = floatval(str_replace('$', '',$salesTotalFootBefore));
-        $after = floatval(str_replace('$', '',$salesTotalFootAfter));
+        $before = floatval(str_replace('$', '', $salesTotalFootBefore));
+        $after = floatval(str_replace('$', '', $salesTotalFootAfter));
         self::assertGreaterThan(
             $before,
             $after,

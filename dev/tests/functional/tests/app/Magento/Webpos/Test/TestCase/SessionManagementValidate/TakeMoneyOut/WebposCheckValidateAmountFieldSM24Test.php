@@ -110,7 +110,7 @@ class WebposCheckValidateAmountFieldSM24Test extends Injectable
         self::assertEquals(
             '$'.$transaction.'.00',
             $this->webposIndex->getSessionInfo()->getTheoretialClosingBalance()->getText(),
-            'The transaction amount is wrong. It have to be $'.$openingAmount - $amountValue.'.00'
+            'The transaction amount is wrong. It have to be $'.($openingAmount - $amountValue).'.00'
         );
         if ($reasonTransaction != null) {
                 $transactionAmount = '$' . $transaction . '.00';
