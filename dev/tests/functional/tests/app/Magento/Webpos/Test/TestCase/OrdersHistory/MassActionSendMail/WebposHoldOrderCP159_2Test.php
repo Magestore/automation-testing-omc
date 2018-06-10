@@ -6,14 +6,14 @@
  * Time: 15:54
  */
 
-namespace Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder;
+namespace Magento\Webpos\Test\TestCase\Checkout\OrdersHistory\MassActionSendMail;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposHoldOrderCP1592Test
- * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
+ * @package Magento\Webpos\Test\TestCase\Checkout\OrdersHistory\MassActionSendMail
  *
  * Precondition:
  * "1. Login Webpos as a staff

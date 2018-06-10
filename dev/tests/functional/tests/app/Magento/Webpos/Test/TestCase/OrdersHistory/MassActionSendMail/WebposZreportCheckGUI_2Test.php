@@ -6,7 +6,7 @@
  * Time: 13:30
  */
 
-namespace Magento\Webpos\Test\TestCase\Zreport;
+namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionSendMail;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Fixture\Denomination;
@@ -14,7 +14,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
  * Class WebposZreportCheckGUI2Test
- * @package Magento\Webpos\Test\TestCase\Zreport
+ * @package Magento\Webpos\Test\TestCase\OrdersHistory\MassActionSendMail
  * ZR001
  * Precondition and setup steps
  * Precondition: There are some POSs and setting [Need to create session before working] = ""Yes"" on the test site

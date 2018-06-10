@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder\WebposHoldOrderCP159_2Test"
+    <testCase name="Magento\Webpos\Test\TestCase\Checkout\OrdersHistory\MassActionSendMail\WebposHoldOrderCP159_2Test"
               summary="Hold with qty > 1" ticketId="WEBPOS-1">
         <variation name="WebposHoldOrderCP159Test_2Variation">
             <data name="products" xsi:type="array">

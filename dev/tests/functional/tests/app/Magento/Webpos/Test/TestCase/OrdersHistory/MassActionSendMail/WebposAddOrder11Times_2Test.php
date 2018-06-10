@@ -6,7 +6,7 @@
  * Time: 16:40
  */
 
-namespace Magento\Webpos\Test\TestCase\Checkout\MultiOrder;
+namespace Magento\Webpos\Test\TestCase\OrdersHistory\MassActionSendMail;
 
 use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;

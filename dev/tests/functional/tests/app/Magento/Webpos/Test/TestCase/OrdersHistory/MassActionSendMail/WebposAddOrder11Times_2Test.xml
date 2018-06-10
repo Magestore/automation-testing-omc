@@ -7,7 +7,7 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../../../../../vendor/magento/mtf/etc/variations.xsd">
-    <testCase name="Magento\Webpos\Test\TestCase\Checkout\MultiOrder\WebposAddOrder11Times_2Test"
+    <testCase name="Magento\Webpos\Test\TestCase\OrdersHistory\MassActionSendMail\WebposAddOrder11Times_2Test"
               summary="Frontend - Web POS Checkout Cart Page Visible" ticketId="MAGETWO-34874">
         <variation name="WebposAddOrder11TimesTestVariation1_2_CP21">
             <data name="staff" xsi:type="null"></data>
