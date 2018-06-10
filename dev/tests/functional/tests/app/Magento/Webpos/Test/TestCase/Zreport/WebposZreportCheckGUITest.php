@@ -13,7 +13,7 @@ use Magento\Webpos\Test\Fixture\Denomination;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposZreportCheckGUITest
+ * Class WebposZreportCheckGUI2Test
  * @package Magento\Webpos\Test\TestCase\Zreport
  * ZR001
  * Precondition and setup steps

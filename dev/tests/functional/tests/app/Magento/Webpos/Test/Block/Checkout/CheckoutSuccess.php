@@ -57,6 +57,7 @@ class CheckoutSuccess extends Block
 
     public function getNewOrderButton()
     {
+        sleep(0.5);
         return $this->_rootElement->find('.checkout-actions');
     }
 

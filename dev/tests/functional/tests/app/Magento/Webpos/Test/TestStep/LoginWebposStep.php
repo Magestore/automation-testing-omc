@@ -81,8 +81,8 @@ class LoginWebposStep implements TestStepInterface
                 $time = time();
             }
         }
-        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
 
         $data = [
             'username' => $username,

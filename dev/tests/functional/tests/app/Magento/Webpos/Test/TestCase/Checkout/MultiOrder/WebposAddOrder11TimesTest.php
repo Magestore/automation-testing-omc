@@ -12,7 +12,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposAddOrder11TimesTest
+ * Class WebposAddOrder11Times2Test
  * @package Magento\AssertWebposCheckGUICustomerPriceCP54\Test\TestCase\CategoryRepository\MultiOrder
  *
  * Precondition:
@@ -58,9 +58,10 @@ class WebposAddOrder11TimesTest extends Injectable
         )->run();
 
         for ($i = 1; $i <= 11; $i++) {
-            sleep(1);
             $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
             $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
+            sleep(1);
+            $this->webposIndex->getUiLoaderDefault()->waitForLoadingDefaultHidden();
             self::assertTrue(
                 $this->webposIndex->getCheckoutCartHeader()->getMultiOrderItem($i)->isVisible(),
                 'On the AssertWebposCheckGUICustomerPriceCP54 TaxClass, The multi order item ' . $i . ' were not visible successfully.'

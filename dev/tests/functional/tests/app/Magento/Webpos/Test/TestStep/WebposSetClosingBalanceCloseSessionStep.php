@@ -65,6 +65,8 @@ class WebposSetClosingBalanceCloseSessionStep implements TestStepInterface
             $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
             $this->webposIndex->getSessionSetClosingBalanceReason()->waitSetReasonPopupVisible();
             $this->webposIndex->getSessionSetReasonPopup()->getReason()->setValue('Magento');
+            sleep(0.5);
+            $this->webposIndex->getUiLoaderDefault()->waitForLoadingDefaultHidden();
             $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
             $this->webposIndex->getSessionSetClosingBalanceReason()->waitSetReasonPopupNotVisible();
         }

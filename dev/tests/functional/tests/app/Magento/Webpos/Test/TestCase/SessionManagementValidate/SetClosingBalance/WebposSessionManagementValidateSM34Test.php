@@ -95,6 +95,7 @@ class WebposSessionManagementValidateSM34Test extends Injectable
         sleep(1);
         $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
         $this->webposIndex->getSessionSetClosingBalanceReason()->waitSetReasonPopupVisible();
+        $this->webposIndex->getUiLoaderDefault()->waitForLoadingDefaultHidden();
         $this->webposIndex->getSessionSetReasonPopup()->getConfirmButton()->click();
 
         // Assert Set Reason popup not visible
