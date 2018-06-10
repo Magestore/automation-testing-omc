@@ -12,7 +12,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposHoldOrderCP159Test
+ * Class WebposHoldOrderCP1592Test
  * @package Magento\Webpos\Test\TestCase\Checkout\CartPage\HoldOrder
  *
  * Precondition:
@@ -59,23 +59,18 @@ class WebposHoldOrderCP159Test extends Injectable
         )->run();
 
         //Add products to cart
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
-
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(1);
         $this->webposIndex->getCheckoutProductList()->getFirstProduct()->click();
-        sleep(1);
         $this->webposIndex->getCheckoutProductList()->getFirstProduct()->click();
-        sleep(1);
+
         $this->webposIndex->getCheckoutProductList()->search($product2->getName());
-
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
-        sleep(1);
         $this->webposIndex->getCheckoutProductList()->getFirstProduct()->click();
         sleep(1);
-
         //Hold
         $this->webposIndex->getCheckoutCartFooter()->getButtonHold()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
@@ -97,6 +92,7 @@ class WebposHoldOrderCP159Test extends Injectable
         $dataProduct1['qty'] = 3;
         $dataProduct2 = $product2->getData();
         $dataProduct2['qty'] = 2;
+        $this->webposIndex->getUiLoaderDefault()->waitForLoadingDefaultHidden();
         return ['cartProducts' => [$dataProduct1, $dataProduct2]];
 
     }

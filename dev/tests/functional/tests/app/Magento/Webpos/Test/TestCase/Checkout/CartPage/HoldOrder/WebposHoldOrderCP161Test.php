@@ -75,9 +75,9 @@ class WebposHoldOrderCP161Test extends Injectable
         $this->webposIndex->getCheckoutAddCustomer()->getSaveButton()->click();
         sleep(2);
 
+        $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
-
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getCheckoutProductList()->getFirstProduct()->click();
@@ -107,6 +107,7 @@ class WebposHoldOrderCP161Test extends Injectable
         $dataProduct1['qty'] = 2;
         $dataProduct2 = $product2->getData();
         $dataProduct2['qty'] = 1;
+        $this->webposIndex->getUiLoaderDefault()->waitForLoadingDefaultHidden();
         return ['cartProducts' => [$dataProduct1, $dataProduct2]];
     }
 }

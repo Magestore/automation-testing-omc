@@ -12,7 +12,7 @@ use Magento\Mtf\TestCase\Injectable;
 use Magento\Webpos\Test\Page\WebposIndex;
 
 /**
- * Class WebposZreportCheckGUITest
+ * Class WebposZreportCheckGUI2Test
  * @package Magento\Webpos\Test\TestCase\Xreport
  * ZR021
  * Precondition: There are some POSs and setting [Need to create session before working] = ""Yes"" on the test site

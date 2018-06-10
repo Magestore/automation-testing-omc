@@ -198,5 +198,7 @@
         <block name="lockScreen" class="Magento\Webpos\Test\Block\LockScreen" locator=".first-screen.lock-screen"
                strategy="css selector"/>
         <!--End Lock register-->
+        <block name="uiLoaderDefault" class="Magento\Webpos\Test\Block\UiLoaderDefault" locator=".ui-loader-default"
+               strategy="css selector"/>
     </page>
 </config>

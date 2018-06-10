@@ -97,6 +97,7 @@ class WebposHoldOrderCP163Test extends Injectable
 
         $dataProduct = $product->getData();
         $dataProduct['qty'] = 1;
+        $this->webposIndex->getUiLoaderDefault()->waitForLoadingDefaultHidden();
         return ['cartProducts' => [$dataProduct],
             'type' => '$'];
 
