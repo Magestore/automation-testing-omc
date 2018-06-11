@@ -110,6 +110,7 @@ class SaleByStaffDailyReportsRP15Test extends Injectable
 
             //Assert Place Order Success
             $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
+            $this->webposIndex->getCheckoutSuccess()->waitForNewOrderButtonVisible();
             $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
             sleep(1);
             while ($this->webposIndex->getCheckoutSuccess()->isVisible()) {

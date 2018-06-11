@@ -136,7 +136,7 @@ class WebposTakePaymentOH94Test extends Injectable
             $this->webposIndex->getOrderHistoryPayment()->getInputAmount()->setValue($amount);
             sleep(1);
         }
-        $this->webposIndex->getModal()->getCancelButton()->click();
+        $this->webposIndex->getOrderHistoryPayment()->getCannelButton()->click();
     }
 
     public function tearDown()
