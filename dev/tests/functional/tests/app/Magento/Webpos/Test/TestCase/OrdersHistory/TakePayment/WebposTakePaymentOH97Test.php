@@ -136,6 +136,7 @@ class WebposTakePaymentOH97Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
         //click take payment
         sleep(0.5);
+        $am = $this->webposIndex->getOrderHistoryOrderViewHeader()->getOriginTotal();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
         sleep(1);
         $this->webposIndex->getModal()->waitForElementVisible('#payment_popup_form');
@@ -143,7 +144,6 @@ class WebposTakePaymentOH97Test extends Injectable
             $remain = $this->webposIndex->getOrderHistoryPayment()->getRemainMoney()->getText();
             $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
             sleep(1);
-            $am = $this->webposIndex->getOrderHistoryOrderViewHeader()->getGrandTotal();
             sleep(0.5);
             $this->webposIndex->getOrderHistoryPayment()->getInputAmount()->setValue(substr($am, 1));
             sleep(1);

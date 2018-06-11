@@ -52,14 +52,16 @@ class SessionConfirmModalPopup extends Block
     /**
      * @return \Magento\Mtf\Client\ElementInterface
      */
-    public function getContent(){
-        return $this->_rootElement->find('#modal-content-4');
+    public function getContent()
+    {
+        return $this->_rootElement->find('.modal-content');
     }
 
     /**
      * @return mixed
      */
-    public function getRealBalance(){
+    public function getRealBalance()
+    {
 //        $text = $this->getContent()->getText();
         $text = $this->_rootElement->find('.modal-content div')->getText();
         preg_match_all('/\d+\.\d+/', $text, $matches);
@@ -69,7 +71,8 @@ class SessionConfirmModalPopup extends Block
     /**
      * @return mixed
      */
-    public function getTheoryIs(){
+    public function getTheoryIs()
+    {
         $text = $this->getContent()->getText();
         preg_match_all('/\d+\.\d+/', $text, $matches);
         return $matches[0][1];
@@ -78,7 +81,8 @@ class SessionConfirmModalPopup extends Block
     /**
      * @return mixed
      */
-    public function getLoss(){
+    public function getLoss()
+    {
         $text = $this->getContent()->getText();
         preg_match_all('/\d+\.\d+/', $text, $matches);
         return $matches[0][2];

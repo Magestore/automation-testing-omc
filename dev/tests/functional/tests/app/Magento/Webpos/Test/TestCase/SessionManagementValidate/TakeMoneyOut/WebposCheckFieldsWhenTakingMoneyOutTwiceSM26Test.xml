@@ -15,7 +15,7 @@
             <data name="openingAmount" xsi:type="number">10</data>
             <data name="realOpeningAmount" xsi:type="number">100</data>
             <data name="amountValue" xsi:type="number">10</data>
-            <data name="pushMoneyIn" xsi:type="number">30</data>
+                <data name="pushMoneyIn" xsi:type="number">30</data>
             <data name="denomination/dataset" xsi:type="string">default</data>
             <data name="reasonTransaction" xsi:type="string">Take money out with reason</data>
         </variation>

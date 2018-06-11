@@ -114,6 +114,7 @@ class WebposTakePaymentOH83Test extends Injectable
         //Assert Place Order Success
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible->processAssert($this->webposIndex);
 
+        $this->webposIndex->getCheckoutSuccess()->waitForNewOrderButtonVisible();
         $this->webposIndex->getCheckoutSuccess()->getNewOrderButton()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 

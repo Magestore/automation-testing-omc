@@ -17,55 +17,57 @@ use Magento\Mtf\Client\Locator;
  */
 class OrderHistoryOrderViewHeader extends Block
 {
-	public function getOrderId()
-	{
-		return $this->_rootElement->find('div.id-order > label > span')->getText();
-	}
+    public function getOrderId()
+    {
+        return $this->_rootElement->find('div.id-order > label > span')->getText();
+    }
 
-	public function getStatus()
-	{
-		return $this->_rootElement->find('.status')->getText();
-	}
+    public function getStatus()
+    {
+        return $this->_rootElement->find('.status')->getText();
+    }
 
-	public function waitForChangeStatus($status) {
-	    sleep(1);
-	    $statusElement = $this->_rootElement->find('.status');
+    public function waitForChangeStatus($status)
+    {
+        sleep(1);
+        $statusElement = $this->_rootElement->find('.status');
         $browser = $this->_rootElement;
         $browser->waitUntil(
             function () use ($statusElement, $status) {
-                return $statusElement->getText()===$status ? true : null;
+                return $statusElement->getText() === $status ? true : null;
             }
         );
     }
 
-    public function waitForChangeOrderId($orderId) {
+    public function waitForChangeOrderId($orderId)
+    {
         $orderIdHeader = $this->_rootElement->find('nav > div.id-order > label > span');
         \Zend_Debug::dump($orderIdHeader->getText());
         \Zend_Debug::dump($orderId);
         $this->_rootElement->waitUntil(
             function () use ($orderIdHeader, $orderId) {
-                return $orderIdHeader->getText()===$orderId ? true : null;
+                return $orderIdHeader->getText() === $orderId ? true : null;
             }
         );
     }
 
-	public function openAddOrderNote()
+    public function openAddOrderNote()
     {
         $this->_rootElement->find('.icon-iconPOS-more')->click();
     }
 
-	// More info - Actions box
-	public function getMoreInfoButton()
-	{
-		return $this->_rootElement->find('nav > div.more-info > a');
-	}
+    // More info - Actions box
+    public function getMoreInfoButton()
+    {
+        return $this->_rootElement->find('nav > div.more-info > a');
+    }
 
-	public function getAction($text)
-	{
-		return $this->_rootElement->find('//*[@id="form-add-note-order"]/ul/li/a[text()="' . $text . '"]', Locator::SELECTOR_XPATH);
-	}
+    public function getAction($text)
+    {
+        return $this->_rootElement->find('//*[@id="form-add-note-order"]/ul/li/a[text()="' . $text . '"]', Locator::SELECTOR_XPATH);
+    }
 
-	public function waitForClosedStatusVisisble()
+    public function waitForClosedStatusVisisble()
     {
         return $this->waitForElementVisible('.status.closed');
     }
@@ -111,6 +113,11 @@ class OrderHistoryOrderViewHeader extends Block
     public function getGrandTotal()
     {
         return $this->_rootElement->find('.//span[@class="price"]', Locator::SELECTOR_XPATH)->getText();
+    }
+
+    public function getOriginTotal()
+    {
+        return $this->_rootElement->find('.//div[@class="sum-info-top"]//span[@class="price"]', locator::SELECTOR_XPATH)->getText();
     }
 
     public function getButtonTakePayment()

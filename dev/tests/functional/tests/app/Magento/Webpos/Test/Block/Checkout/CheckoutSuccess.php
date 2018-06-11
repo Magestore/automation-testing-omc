@@ -61,6 +61,11 @@ class CheckoutSuccess extends Block
         return $this->_rootElement->find('.checkout-actions');
     }
 
+    public function waitForNewOrderButtonVisible()
+    {
+        $this->waitForElementVisible('.checkout-actions');
+    }
+
     public function getNewOrderButtonByText()
     {
         return $this->_rootElement->find('//*[text()="New Order"]', Locator::SELECTOR_XPATH);

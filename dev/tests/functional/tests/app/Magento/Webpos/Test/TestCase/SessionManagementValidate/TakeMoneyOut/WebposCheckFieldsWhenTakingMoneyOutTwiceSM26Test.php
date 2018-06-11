@@ -60,7 +60,6 @@ class WebposCheckFieldsWhenTakingMoneyOutTwiceSM26Test extends Injectable
      * @param $realOpeningAmount
      * @param $reasonTransaction
      * @param $pushMoneyIn
-     * @return array
      */
     public function test($openingAmount, $amountValue, $realOpeningAmount, $reasonTransaction, $pushMoneyIn)
     {
@@ -68,7 +67,8 @@ class WebposCheckFieldsWhenTakingMoneyOutTwiceSM26Test extends Injectable
         $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep')->run();
         sleep(2);
-        if ($this->webposIndex->getCheckoutProductList()->getFirstProduct()->isVisible()) {
+        if ($this->webposIndex->getCheckoutProductList()->getFirstProduct()->isVisible()
+            && !$this->webposIndex->getOpenSessionPopup()->isVisible()) {
             $this->webposIndex->getMsWebpos()->waitForCMenuVisible();
             $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
             $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
@@ -85,8 +85,6 @@ class WebposCheckFieldsWhenTakingMoneyOutTwiceSM26Test extends Injectable
                 sleep(1);
             }
             $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-            sleep(1);
-            $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
             sleep(1);
             $this->webposIndex->getSessionShift()->getAddSession()->click();
         }
@@ -121,11 +119,12 @@ class WebposCheckFieldsWhenTakingMoneyOutTwiceSM26Test extends Injectable
             $this->webposIndex->getSessionInfo()->getAddTransactionAmount()->getText(),
             'The transaction amount is wrong. It have to be ' . $amountValue
         );
+        $realOpeningAmount = substr($this->webposIndex->getSessionInfo()->getOpeningBalance()->getText(), 1);
         $transaction = floatval($realOpeningAmount) - floatval($amountValue) + floatval($pushMoneyIn);
         self::assertEquals(
             '$' . $transaction . '.00',
             $this->webposIndex->getSessionInfo()->getTheoretialClosingBalance()->getText(),
-            'The transaction amount is wrong. It have to be $' . $openingAmount - $amountValue . '.00'
+            'The transaction amount is wrong. It have to be $' . ($openingAmount - $amountValue) . '.00'
         );
 
         $transactionAmount = '-$' . $transaction . '.00';
@@ -139,9 +138,6 @@ class WebposCheckFieldsWhenTakingMoneyOutTwiceSM26Test extends Injectable
             $this->webposIndex->getCashActivitiesPopup()->isVisible(),
             'The Cash Activities Popup is not visible.'
         );
-        return [
-            'staff' => $staff
-        ];
     }
 
     /*Close session*/

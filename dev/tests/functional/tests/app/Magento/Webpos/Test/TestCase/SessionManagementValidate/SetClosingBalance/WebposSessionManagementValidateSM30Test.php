@@ -40,7 +40,8 @@ class WebposSessionManagementValidateSM30Test extends Injectable
     public function __inject(
         WebposIndex $webposIndex,
         AssertConfirmModalPopup $assertConfirmModalPopup
-    ) {
+    )
+    {
         $this->webposIndex = $webposIndex;
         $this->assertConfirmModalPopup = $assertConfirmModalPopup;
     }
@@ -50,7 +51,7 @@ class WebposSessionManagementValidateSM30Test extends Injectable
      * @param Pos $pos
      * @param FixtureFactory $fixtureFactory
      */
-    public function test( Denomination $denomination, Pos $pos, FixtureFactory $fixtureFactory)
+    public function test(Denomination $denomination, Pos $pos, FixtureFactory $fixtureFactory)
     {
         // Precondition
         $denomination->persist();
@@ -61,21 +62,21 @@ class WebposSessionManagementValidateSM30Test extends Injectable
             ['configData' => 'create_section_before_working_yes']
         )->run();
 
-        /**@var Location $location*/
+        /**@var Location $location */
         $location = $fixtureFactory->createByCode('location', ['dataset' => 'default']);
         $location->persist();
         $locationId = $location->getLocationId();
         $posData = $pos->getData();
-        $posData['location_id'] = [ $locationId ];
-        /**@var Pos $pos*/
+        $posData['location_id'] = [$locationId];
+        /**@var Pos $pos */
         $pos = $fixtureFactory->createByCode('pos', ['data' => $posData]);
         $pos->persist();
         $posId = $pos->getPosId();
         $staff = $fixtureFactory->createByCode('staff', ['dataset' => 'staff_ms61']);
         $staffData = $staff->getData();
-        $staffData['location_id'] = [ $locationId ];
-        $staffData['pos_ids'] = [ $posId ];
-        /**@var Staff $staff*/
+        $staffData['location_id'] = [$locationId];
+        $staffData['pos_ids'] = [$posId];
+        /**@var Staff $staff */
         $staff = $fixtureFactory->createByCode('staff', ['data' => $staffData]);
         $staff->persist();
         // LoginTest webpos
@@ -88,12 +89,13 @@ class WebposSessionManagementValidateSM30Test extends Injectable
                 'hasOpenSession' => false
             ]
         )->run();
+        $this->webposIndex->getOpenSessionPopup()->waitLoader();
         $this->webposIndex->getOpenSessionPopup()->setCoinBillValue($denomination->getDenominationName());
         $this->webposIndex->getOpenSessionPopup()->getNumberOfCoinsBills()->setValue(10);
 
         $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
         /** wait done open request */
-        while ( !$this->webposIndex->getListShift()->getFirstItemShift()->isVisible()) {
+        while (!$this->webposIndex->getListShift()->getFirstItemShift()->isVisible()) {
             sleep(1);
         }
         $this->webposIndex->getSessionShift()->getSetClosingBalanceButton()->click();

@@ -28,7 +28,7 @@ use Magento\Webpos\Test\Page\WebposIndex;
  * - On footer: number of products, page number, Custom sale"
  *
  */
-class WebposProductsGridCheckGUITest extends Injectable
+    class WebposProductsGridCheckGUITest extends Injectable
 {
     /**
      * @var WebposIndex
@@ -52,8 +52,9 @@ class WebposProductsGridCheckGUITest extends Injectable
         $staff = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\SessionInstallStep'
         )->run();
-
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader('.product-item:first-child');
+        $this->webposIndex->getCheckoutProductList()->waitForElementVisible('');
         $this->webposIndex->getCheckoutProductList()->getFirstProduct()->hover();
     }
 }
