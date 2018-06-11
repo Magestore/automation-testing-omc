@@ -44,10 +44,10 @@ class WebposCheckoutPaymentMethodCP220Test extends Injectable
      * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
-    /**
-     * @var
-     */
 
+    /**
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
@@ -72,10 +72,6 @@ class WebposCheckoutPaymentMethodCP220Test extends Injectable
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
 
-    /**
-     *
-     * @return void
-     */
     public function test($products, FixtureFactory $fixtureFactory, $configData)
     {
         $this->objectManager->getInstance()->create(
@@ -126,11 +122,12 @@ class WebposCheckoutPaymentMethodCP220Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->ordersHistory();
-
-        sleep(2);
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
+        $this->webposIndex->getOrderHistoryOrderList()->waitForFirstOrderVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
     }
 

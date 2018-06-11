@@ -36,10 +36,6 @@ class WebposCheckoutPaymentMethodCP203Test extends Injectable
      */
     protected $webposIndex;
 
-    /**
-     * @param WebposIndex $webposIndex
-     * @return void
-     */
     public function __inject(
         WebposIndex $webposIndex
     )
@@ -47,13 +43,9 @@ class WebposCheckoutPaymentMethodCP203Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    /**
-     *
-     * @return void
-     */
     public function test($products, FixtureFactory $fixtureFactory)
     {
-        $staff = $this->objectManager->create(
+        $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
@@ -62,6 +54,7 @@ class WebposCheckoutPaymentMethodCP203Test extends Injectable
             $products[$i] = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);
             $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
             $this->webposIndex->getCheckoutProductList()->search($products[$i]->getSku());
+            $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
             $this->webposIndex->getMsWebpos()->waitCartLoader();
             $i++;
             sleep(1);
@@ -71,7 +64,6 @@ class WebposCheckoutPaymentMethodCP203Test extends Injectable
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();
     }

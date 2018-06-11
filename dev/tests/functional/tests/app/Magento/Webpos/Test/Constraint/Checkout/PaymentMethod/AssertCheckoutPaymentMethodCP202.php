@@ -17,14 +17,14 @@ class AssertCheckoutPaymentMethodCP202 extends AbstractConstraint
 {
     public function processAssert(WebposIndex $webposIndex)
     {
-//        \PHPUnit_Framework_Assert::assertNotTrue(
-//            $webposIndex->getCheckoutPaymentMethod()->getCashInMethod()->isVisible(),
-//            'TaxClass page - CategoryRepository. On Tab PaymentMethod. Payment is visible.'
-//        );
-//        \PHPUnit_Framework_Assert::assertTrue(
-//            $webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->isVisible(),
-//            'TaxClass page - CategoryRepository. On Tab PaymentMethod. Payment is visible.'
-//        );
+        \PHPUnit_Framework_Assert::assertFalse(
+            $webposIndex->getCheckoutPaymentMethod()->getAmountPayment()->isVisible(),
+            'TaxClass page - CategoryRepository. On Tab PaymentMethod. Payment is visible.'
+        );
+        \PHPUnit_Framework_Assert::assertFalse(
+            $webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->isDisabled(),
+            'TaxClass page - CategoryRepository. On Tab PaymentMethod. Payment is visible.'
+        );
     }
 
     /**
