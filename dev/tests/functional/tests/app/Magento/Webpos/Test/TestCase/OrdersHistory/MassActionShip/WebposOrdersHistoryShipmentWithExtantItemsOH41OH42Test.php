@@ -115,6 +115,11 @@ class WebposOrdersHistoryShipmentWithExtantItemsOH41OH42Test extends Injectable
         sleep(1);
         // Create shipment with extant items
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
+        sleep(0.5);
+        while (!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible()) {
+            $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
+            sleep(0.5);
+        }
         $this->webposIndex->getOrderHistoryAddOrderNote()->getShipButton()->click();
         $this->webposIndex->getOrderHistoryShipment()->getSubmitButton()->click();
         $this->webposIndex->getModal()->waitForOkButtonIsVisible();

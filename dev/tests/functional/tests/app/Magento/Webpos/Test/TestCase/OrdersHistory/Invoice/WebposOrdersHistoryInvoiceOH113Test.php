@@ -105,10 +105,11 @@ class WebposOrdersHistoryInvoiceOH113Test extends Injectable
         // Click Button Invoice
         $this->webposIndex->getOrderHistoryOrderViewFooter()->waitForElementVisible('button.invoice');
         $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
-
-        $this->webposIndex->getOrderHistoryContainer()->waitOrderHistoryInvoiceIsVisible();
-        sleep(2);
-
+        sleep(0.5);
+        while (!$this->webposIndex->getOrderHistoryInvoice()->isVisible()) {
+            $this->webposIndex->getOrderHistoryOrderViewFooter()->getInvoiceButton()->click();
+            sleep(1);
+        }
         return [
             'products' => $products,
             'totalPaid' => $totalPaid

@@ -289,7 +289,10 @@ class WebposTaxTAX118Test extends Injectable
         );
 
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
-        sleep(3);
+        self::assertTrue(
+            $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->isVisible(),
+            'Payment Method didn\'t show'
+        );
         $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->click();
         sleep(1);
         $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();

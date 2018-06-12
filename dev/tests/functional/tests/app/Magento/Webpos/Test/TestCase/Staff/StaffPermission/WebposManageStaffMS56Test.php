@@ -39,7 +39,7 @@ use Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertEditDiscount
  * Class WebposManageStaffMS56Test
  * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
  */
-class WebposManageStaffMS56Test extends Injectable
+    class WebposManageStaffMS56Test extends Injectable
 {
 
     /**
@@ -122,7 +122,7 @@ class WebposManageStaffMS56Test extends Injectable
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
         $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
         $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
-
+        sleep(1);
         //Assert custom price
         $this->assertEditDiscountCustomPrice->processAssert($this->webposIndex, 80, 1);
 

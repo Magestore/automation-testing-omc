@@ -29,12 +29,12 @@ class AssertShipmentSuccess extends AbstractConstraint
                 $webposIndex->getToaster()->getWarningMessage()->isVisible(),
                 'Success Message is not displayed'
             );
+            \PHPUnit_Framework_Assert::assertEquals(
+                'The shipment has been created successfully.',
+                $warningMessage,
+                "Success message's Content is Wrong"
+            );
         }
-        \PHPUnit_Framework_Assert::assertEquals(
-            'The shipment has been created successfully.',
-            $warningMessage,
-            "Success message's Content is Wrong"
-        );
 
         \PHPUnit_Framework_Assert::assertFalse(
             $webposIndex->getModal()->getModalPopup()->isVisible(),
