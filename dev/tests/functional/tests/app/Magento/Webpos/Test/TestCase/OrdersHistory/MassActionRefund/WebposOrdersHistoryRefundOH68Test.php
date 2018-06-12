@@ -120,7 +120,6 @@ class WebposOrdersHistoryRefundOH68Test extends Injectable
         )->run();
         sleep(1);
         $warningMessage = $this->webposIndex->getToaster()->getWarningMessage()->getText();
-        \Zend_Debug::dump($warningMessage);
         $this->assertTrue(
             $this->webposIndex->getToaster()->isVisible(),
             'Error message is not visible.'

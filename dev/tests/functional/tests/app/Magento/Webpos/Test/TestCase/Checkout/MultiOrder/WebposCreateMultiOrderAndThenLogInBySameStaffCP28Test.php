@@ -76,61 +76,39 @@ class WebposCreateMultiOrderAndThenLogInBySameStaffCP28Test extends Injectable
         )->run();
 
         // LoginTest webpos
-        $staff = $this->objectManager->getInstance()->create(
+        $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
         )->run();
 
-        // Open session
-        $time = time();
-        $timeAfter = $time + 5;
-        while (!$this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->isVisible()
-            && $time < $timeAfter) {
-            $time = time();
-        }
-        if ($this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->isVisible()) {
-            if ($this->webposIndex->getOpenSessionPopup()->getLoadingElement()->isVisible()) {
-                $this->webposIndex->getOpenSessionPopup()->waitForElementNotVisible('.indicator[data-bind="visible:loading"]');
-            }
-            $this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->click();
-            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
-            sleep(2);
-            $this->webposIndex->getMsWebpos()->clickCMenuButton();
-            $this->webposIndex->getCMenu()->checkout();
-            sleep(2);
-        }
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\WebposOpenSessionStep'
+        )->run();
+
         $this->webposIndex->getCheckoutCartFooter()->waitButtonHoldVisible();
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         sleep(1);
         $this->webposIndex->getCheckoutCartHeader()->getAddMultiOrder()->click();
         $this->webposIndex->getCheckoutPlaceOrder()->waitCartLoader();
-        sleep(3);
+
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\WebposSetClosingBalanceCloseSessionStep'
+        )->run();
+
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        sleep(1);
-        $this->webposIndex->getCMenu()->getSessionManagement();
-        sleep(1);
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        sleep(1);
-        $this->webposIndex->getSessionCloseShift()->getConfirmSession()->click();
-        sleep(1);
-        if ($this->webposIndex->getModal()->isVisible()) {
-            $this->webposIndex->getModal()->getOkButton()->click();
-            sleep(1);
-            $this->webposIndex->getSessionSetClosingBalanceReason()->getButtonBtnDone()->click();
-            sleep(1);
-        }
-        $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
-        sleep(1);
-        $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
-        sleep(1);
-        $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        sleep(1);
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->logout();
-        sleep(1);
+        $this->webposIndex->getModal()->waitForModalPopup();
         $this->webposIndex->getModal()->getOkButton()->click();
+        $this->webposIndex->getModal()->waitForModalPopupNotVisible();
+        $this->webposIndex->getMsWebpos()->waitForElementNotVisible('#checkout-loader.loading-mask');
 
         //LoginTest webpos by the same staff
         $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposWithSelectLocationPosStep'
+        )->run();
+
+        $this->objectManager->getInstance()->create(
+            'Magento\Webpos\Test\TestStep\WebposOpenSessionStep'
         )->run();
 
         for ($i = 1; $i <= 2; $i++) {

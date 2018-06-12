@@ -38,16 +38,12 @@ class WebposCheckoutPaymentMethodCP226Test extends Injectable
      * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
-    /**
-     * @var
-     */
 
+    /**
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
-    /**
-     * @param WebposIndex $webposIndex
-     * @return void
-     */
     public function __prepare()
     {
         // Config: use system value for all field in Tax Config
@@ -66,10 +62,6 @@ class WebposCheckoutPaymentMethodCP226Test extends Injectable
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
 
-    /**
-     *
-     * @return void
-     */
     public function test($products, FixtureFactory $fixtureFactory, $configData, $amount)
     {
         $this->objectManager->getInstance()->create(
@@ -83,13 +75,11 @@ class WebposCheckoutPaymentMethodCP226Test extends Injectable
 
         $i = 0;
         foreach ($products as $product) {
-            if ($i < 3) {
-                $products[$i] = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);
-                $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-                $this->webposIndex->getCheckoutProductList()->search($products[$i]->getSku());
-                $this->webposIndex->getMsWebpos()->waitCartLoader();
-            }
-            if ($i == 3) break;
+            $products[$i] = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);
+            $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+            $this->webposIndex->getCheckoutProductList()->search($products[$i]->getSku());
+            $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+            $this->webposIndex->getMsWebpos()->waitCartLoader();
             $i++;
         }
 
@@ -138,11 +128,12 @@ class WebposCheckoutPaymentMethodCP226Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->ordersHistory();
-
-        sleep(2);
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
+        $this->webposIndex->getOrderHistoryOrderList()->waitForFirstOrderVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
     }
 

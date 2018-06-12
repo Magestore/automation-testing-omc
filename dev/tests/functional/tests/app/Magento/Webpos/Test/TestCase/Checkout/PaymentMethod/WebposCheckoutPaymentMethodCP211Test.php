@@ -77,6 +77,7 @@ class WebposCheckoutPaymentMethodCP211Test extends Injectable
             $products[$i] = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);
             $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
             $this->webposIndex->getCheckoutProductList()->search($products[$i]->getSku());
+            $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
             $this->webposIndex->getMsWebpos()->waitCartLoader();
             $i++;
         }

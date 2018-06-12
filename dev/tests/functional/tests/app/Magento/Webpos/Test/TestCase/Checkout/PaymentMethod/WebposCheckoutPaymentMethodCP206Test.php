@@ -45,10 +45,6 @@ class WebposCheckoutPaymentMethodCP206Test extends Injectable
      */
     protected $webposIndex;
 
-    /**
-     * @param WebposIndex $webposIndex
-     * @return void
-     */
     public function __prepare()
     {
         // Config: use system value for all field in Tax Config
@@ -65,10 +61,6 @@ class WebposCheckoutPaymentMethodCP206Test extends Injectable
         $this->webposIndex = $webposIndex;
     }
 
-    /**
-     *
-     * @return void
-     */
     public function test($products, FixtureFactory $fixtureFactory, $configData)
     {
         $this->objectManager->getInstance()->create(
@@ -76,7 +68,7 @@ class WebposCheckoutPaymentMethodCP206Test extends Injectable
             ['configData' => $configData]
         )->run();
 
-        $staff = $this->objectManager->create(
+        $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
@@ -85,9 +77,9 @@ class WebposCheckoutPaymentMethodCP206Test extends Injectable
             $products[$i] = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);
             $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
             $this->webposIndex->getCheckoutProductList()->search($products[$i]->getSku());
+            $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
             $this->webposIndex->getMsWebpos()->waitCartLoader();
             $i++;
-            sleep(1);
         }
 
         //CategoryRepository

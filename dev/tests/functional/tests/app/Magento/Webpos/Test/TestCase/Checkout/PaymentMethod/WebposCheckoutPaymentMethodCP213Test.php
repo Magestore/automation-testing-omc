@@ -75,7 +75,7 @@ class WebposCheckoutPaymentMethodCP213Test extends Injectable
             ['configData' => $configData]
         )->run();
 
-        $staff = $this->objectManager->create(
+        $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
         //Config payment method
@@ -89,6 +89,7 @@ class WebposCheckoutPaymentMethodCP213Test extends Injectable
             $products[$i] = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);
             $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
             $this->webposIndex->getCheckoutProductList()->search($products[$i]->getSku());
+            $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
             $this->webposIndex->getMsWebpos()->waitCartLoader();
             $i++;
         }

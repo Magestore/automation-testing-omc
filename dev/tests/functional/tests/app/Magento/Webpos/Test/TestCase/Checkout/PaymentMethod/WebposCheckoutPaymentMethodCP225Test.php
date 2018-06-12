@@ -39,10 +39,10 @@ class WebposCheckoutPaymentMethodCP225Test extends Injectable
      * @var WebposIndex $webposIndex
      */
     protected $webposIndex;
-    /**
-     * @var
-     */
 
+    /**
+     * @var AssertWebposCheckoutPagePlaceOrderPageSuccessVisible $assertWebposCheckoutPagePlaceOrderPageSuccessVisible
+     */
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
@@ -67,10 +67,6 @@ class WebposCheckoutPaymentMethodCP225Test extends Injectable
         $this->assertWebposCheckoutPagePlaceOrderPageSuccessVisible = $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
     }
 
-    /**
-     *
-     * @return void
-     */
     public function test($products, FixtureFactory $fixtureFactory, $configData, $amount)
     {
         $this->objectManager->getInstance()->create(
@@ -78,7 +74,7 @@ class WebposCheckoutPaymentMethodCP225Test extends Injectable
             ['configData' => $configData]
         )->run();
 
-        $staff = $this->objectManager->create(
+        $this->objectManager->create(
             '\Magento\Webpos\Test\TestStep\LoginWebposStep'
         )->run();
 
@@ -87,6 +83,7 @@ class WebposCheckoutPaymentMethodCP225Test extends Injectable
             $products[$i] = $fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $product]);
             $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
             $this->webposIndex->getCheckoutProductList()->search($products[$i]->getSku());
+            $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
             $this->webposIndex->getMsWebpos()->waitCartLoader();
             $i++;
         }
@@ -107,10 +104,8 @@ class WebposCheckoutPaymentMethodCP225Test extends Injectable
         $this->webposIndex->getCheckoutPaymentMethod()->getTitlePaymentMethod()->click();
 
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonAddPayment()->click();
-        sleep(1);
         $this->webposIndex->getCheckoutAddMorePayment()->getCreditCard()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
-        sleep(2);
         // place order getCreateInvoiceCheckbox
         $this->webposIndex->getCheckoutPlaceOrder()->getButtonPlaceOrder()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
@@ -122,11 +117,12 @@ class WebposCheckoutPaymentMethodCP225Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
 
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
+        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
         $this->webposIndex->getCMenu()->ordersHistory();
-
-        sleep(2);
+        $this->webposIndex->getMsWebpos()->waitOrdersHistoryVisible();
         $this->webposIndex->getOrderHistoryOrderList()->waitLoader();
-
+        $this->webposIndex->getOrderHistoryOrderList()->waitOrderListIsVisible();
+        $this->webposIndex->getOrderHistoryOrderList()->waitForFirstOrderVisible();
         $this->webposIndex->getOrderHistoryOrderList()->getFirstOrder()->click();
     }
 
