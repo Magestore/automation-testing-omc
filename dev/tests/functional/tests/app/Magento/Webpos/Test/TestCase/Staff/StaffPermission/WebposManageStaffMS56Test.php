@@ -39,7 +39,7 @@ use Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertEditDiscount
  * Class WebposManageStaffMS56Test
  * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
  */
-    class WebposManageStaffMS56Test extends Injectable
+class WebposManageStaffMS56Test extends Injectable
 {
 
     /**
@@ -120,6 +120,11 @@ use Magento\Webpos\Test\Constraint\Adminhtml\Staff\Permission\AssertEditDiscount
         $this->webposIndex->getCheckoutProductEdit()->getDiscountButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getPercentButton()->click();
         $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
+        sleep(1);
+        while (!$this->webposIndex->getCheckoutCartItems()->getOriginPriceCartItemByOrderToElement(1)->isVisible()) {
+            $this->webposIndex->getCheckoutProductEdit()->getAmountInput()->setValue($priceCustom);
+            sleep(1);
+        }
         $this->webposIndex->getCheckoutProductEdit()->getClosePopupCustomerSale()->click();
         $this->webposIndex->getCheckoutCartFooter()->waitForElementVisible('.checkout');
         sleep(1);

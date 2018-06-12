@@ -183,7 +183,6 @@ class WebposManageStaffMS72Test extends Injectable
             $this->webposIndex->getLoginForm()->clickLoginButton();
             if ($location) {
                 $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-                $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
                 $this->webposIndex->getLoginForm()->setLocation($location->getDisplayName());
             }
             if ($pos) {

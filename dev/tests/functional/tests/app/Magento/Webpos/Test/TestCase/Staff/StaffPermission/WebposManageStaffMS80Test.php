@@ -119,6 +119,7 @@ class WebposManageStaffMS80Test extends Injectable
             ]
         )->run();
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="popup-open-shift"]');
+        sleep(1);
         $this->assertTrue(
             $this->webposIndex->getListShift()->getFirstItemShift()->isVisible(),
             'Open a shift not successfully.'
