@@ -227,6 +227,13 @@ class WebposZreportZR017Test extends Injectable
         $this->webposIndex->getOrderHistoryOrderViewHeader()->waitForFormAddNoteOrderVisible();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getAction('Refund')->click();
         $this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
+        $product = $products[0];
+        $priceRefund = $this->convertPriceFormatToDecimal($this->webposIndex->getOrderHistoryRefund()->getItemPrice($product->getName()), $symbol);
+        $shippingRefund = 0;
+        if ($this->webposIndex->getOrderHistoryRefund()->getRefundShipping()->isVisible()) {
+            $shippingRefund = floatval($this->webposIndex->getOrderHistoryRefund()->getRefundShipping()->getValue());
+        }
+        $refund = floatval($priceRefund + $shippingRefund - $discountAmount);
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
         $this->webposIndex->getModal()->waitForModalPopup();
         $this->webposIndex->getModal()->getOkButton()->click();
@@ -264,7 +271,7 @@ class WebposZreportZR017Test extends Injectable
             'cashRefund' => 0,
             'otherPaymentSales' => $otherPaymentSales,
             'discountAmount' => $discountAmount,
-            'refund' => $cashSales,
+            'refund' => $refund,
             'symbol' => $symbol
         ];
     }

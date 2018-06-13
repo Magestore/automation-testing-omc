@@ -146,7 +146,11 @@ class WebposZreportZR016Test extends Injectable
         $this->webposIndex->getOrderHistoryContainer()->waitForRefundPopupIsVisible();
         $product = $this->fixtureFactory->createByCode('catalogProductSimple', ['dataset' => $products[0]]);
         $priceRefund = $this->convertPriceFormatToDecimal($this->webposIndex->getOrderHistoryRefund()->getItemPrice($product->getName()));
-        $shippingRefund = floatval($this->webposIndex->getOrderHistoryRefund()->getRefundShipping()->getValue());
+        $shippingRefund = 0;
+        if($this->webposIndex->getOrderHistoryRefund()->getRefundShipping()->isVisible())
+        {
+            $shippingRefund = floatval($this->webposIndex->getOrderHistoryRefund()->getRefundShipping()->getValue());
+        }
         $refund = (-1) * ($priceRefund + $shippingRefund);
         $this->webposIndex->getOrderHistoryRefund()->getSubmitButton()->click();
         $this->webposIndex->getModal()->waitForModalPopup();
@@ -161,6 +165,7 @@ class WebposZreportZR016Test extends Injectable
             ]
         )->run();
 
+        sleep(1);
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitReportPopupVisible();
 

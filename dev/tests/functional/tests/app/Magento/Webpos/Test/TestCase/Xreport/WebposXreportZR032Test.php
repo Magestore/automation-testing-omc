@@ -180,7 +180,7 @@ class WebposXreportZR032Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitForSessionManagerLoader();
 
         $totalSales = $this->webposIndex->getSessionShift()->getPaymentAmount()->getText();
-        $refund = (-1) * $totalSales;
+        $refund = "-" . $totalSales;
 
         $this->webposIndex->getSessionShift()->getPrintButton()->click();
         $this->webposIndex->getSessionShift()->waitReportPopupVisible();

@@ -8,6 +8,7 @@
 
 namespace Magento\Webpos\Api\Cart;
 
+use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 use Magento\Framework\Webapi\Rest\Request as RestRequest;
 /**
@@ -19,10 +20,28 @@ class CartTest extends WebapiAbstract
     const RESOURCE_PATH = '/V1/webpos/checkout/';
 
     /**
+     * @var \Magento\Sales\Service\V1\OrderCreateTest $orderCreateTest
+     */
+    protected $orderCreateTest;
+
+    /**
+     * @var \Magento\Webpos\Api\Staff\LoginTest $currentSession
+     */
+    protected $currentSession;
+
+    protected function setUp()
+    {
+        $this->orderCreateTest = Bootstrap::getObjectManager()->create(\Magento\Sales\Service\V1\OrderCreateTest::class);
+        $this->currentSession = Bootstrap::getObjectManager()->create(\Magento\Webpos\Api\Staff\LoginTest::class);
+    }
+
+    /**
      * Order send mail
      */
     public function testSendEmail()
     {
+        $this->orderCreateTest->testOrderCreate();
+        $session = $this->currentSession->testStaffLogin();
         $serviceInfo = [
             'rest' => [
                 'resourcePath' => self::RESOURCE_PATH . 'sendEmail?',
@@ -30,8 +49,9 @@ class CartTest extends WebapiAbstract
             ]
         ];
         $requestData = [
-            'email' => 'roni_cost@example.com',
-            'incrementId' => '000000398'
+            'email' => 'email@example.com',
+            'incrementId' => '100000001',
+            'session' => $session
         ];
         $results = $this->_webApiCall($serviceInfo, $requestData);
         $results = explode(',', $results);
