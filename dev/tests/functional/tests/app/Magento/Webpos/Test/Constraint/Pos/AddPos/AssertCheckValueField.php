@@ -47,6 +47,7 @@ class AssertCheckValueField extends AbstractConstraint
     {
         $this->openTab($posNews, 'Cash Denominations');
         $posNews->getPosForm()->searchDenominationByName($name);
+        sleep(1);
         \PHPUnit_Framework_Assert::assertTrue(
             $posNews->getPosForm()->getDenominationFirstData()->isVisible(),
             'No exist any denomination'

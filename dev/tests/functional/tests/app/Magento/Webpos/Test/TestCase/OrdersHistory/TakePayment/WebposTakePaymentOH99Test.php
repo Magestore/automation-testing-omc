@@ -46,7 +46,6 @@ class WebposTakePaymentOH99Test extends Injectable
     protected $assertWebposCheckoutPagePlaceOrderPageSuccessVisible;
 
     /**
-     * @param WebposIndex $webposIndex
      * @return void
      */
     public function __prepare()
@@ -121,12 +120,11 @@ class WebposTakePaymentOH99Test extends Injectable
 
         //select order
         $this->openOrderHistory();
-        if (!$this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->isVisible()) {
-            $this->webposIndex->open();
-            $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
-            $this->webposIndex->getMsWebpos()->waitCartLoader();
-            $this->openOrderHistory();
-        }
+        sleep(0.5);
+        self::assertTrue(
+            $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->isVi(),
+            'Payment method didn\'t show'
+        );
         $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
         $this->webposIndex->getOrderHistoryPayment()->getInputAmountMulti(1)->setValue(5);
         sleep(0.5);

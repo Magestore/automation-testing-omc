@@ -112,7 +112,7 @@ class WebposOnHoldOrderONH18Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Choose shipping POS
 
-        $taxExpected = round(($product->getPrice() - $discount) * 0.085, 2);
+        $taxExpected = round(($product->getPrice() - $discount) * 0.0825, 2);
         sleep(2);
         //Cart
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();

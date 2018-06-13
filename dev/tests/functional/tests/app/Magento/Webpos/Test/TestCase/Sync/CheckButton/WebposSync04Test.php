@@ -154,8 +154,13 @@ class WebposSync04Test extends Injectable
 
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
+        $this->webposIndex->getMsWebpos()->waitForCMenuVisible();
         $this->webposIndex->getMsWebpos()->clickCMenuButton();
-        $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
+        sleep(0.5);
+        while (!$this->webposIndex->getgetC()) {
+            $this->webposIndex->getMsWebpos()->clickCMenuButton();
+            sleep(0.5);
+        }
         $this->webposIndex->getCMenu()->synchronization();
         sleep(2);
         $this->webposIndex->getSyncTabData()->getUpdateAllButton()->click();

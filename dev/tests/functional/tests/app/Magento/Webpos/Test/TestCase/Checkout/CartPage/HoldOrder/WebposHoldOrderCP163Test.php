@@ -74,6 +74,10 @@ class WebposHoldOrderCP163Test extends Injectable
 
         //Edit customer price of that product with type: $
         $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
+        while (! $this->webposIndex->getCheckoutProductEdit()->isVisible()){
+            $this->webposIndex->getCheckoutCartItems()->getFirstCartItem()->click();
+            sleep(0.5);
+        }
         if (!$this->webposIndex->getCheckoutProductEdit()->getPanelPriceBox()->isVisible()) {
             $this->webposIndex->getCheckoutProductEdit()->getCustomPriceButton()->click();
         }

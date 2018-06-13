@@ -126,6 +126,10 @@ class WebposTakePaymentOH92Test extends Injectable
         //click take payment
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
         sleep(0.5);
+        self::assertTrue(
+            $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->isVisible(),
+            'Payment method didn\'t show'
+        );
         $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
         $this->webposIndex->getOrderHistoryPayment()->getInputAmount()->setValue($amount);
         sleep(1);

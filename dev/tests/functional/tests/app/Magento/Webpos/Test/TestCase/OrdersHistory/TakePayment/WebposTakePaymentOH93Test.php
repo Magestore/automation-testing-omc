@@ -134,17 +134,17 @@ class WebposTakePaymentOH93Test extends Injectable
         //click take payment
         sleep(0.5);
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
-        $this->webposIndex->getModal()->waitForElementVisible('#payment_popup_form');
-        if ($this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->isVisible()) {
-            $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
-            sleep(1);
-            $this->webposIndex->getOrderHistoryPayment()->getInputAmount()->setValue(0);
-            sleep(1);
-            $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
-            $this->webposIndex->getModal()->getOkButton()->click();
-        } else {
-            $this->webposIndex->getModal()->getCancelButton()->click();
-        }
+        sleep(1);
+        self::assertTrue(
+            $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->isVisible(),
+            'Payment method didn\'t show'
+        );
+        $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
+        sleep(1);
+        $this->webposIndex->getOrderHistoryPayment()->getInputAmount()->setValue(0);
+        sleep(1);
+        $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
+        $this->webposIndex->getModal()->getOkButton()->click();
     }
 
     public function tearDown()

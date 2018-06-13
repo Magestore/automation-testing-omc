@@ -79,7 +79,9 @@ class WebposHoldOrderCP161Test extends Injectable
         //Add products to cart
         $this->webposIndex->getCheckoutProductList()->search($product1->getName());
         $this->webposIndex->getCheckoutProductList()->waitProductListToLoad();
+        $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         $this->webposIndex->getMsWebpos()->waitCartLoader();
+        sleep(1);
         $this->webposIndex->getCheckoutProductList()->getFirstProduct()->click();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         sleep(1);

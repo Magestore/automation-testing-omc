@@ -104,7 +104,7 @@ class GeneralSettingContentRight extends Block
 
     public function getEnablePoleDisplaySelection()
     {
-        return $this->_rootElement->find('#hardware\2e pole');
+        return $this->_rootElement->find('//*[@id="hardware.pole"]', locator::SELECTOR_XPATH);
     }
 
     /**

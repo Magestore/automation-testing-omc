@@ -9,6 +9,7 @@
 namespace Magento\Webpos\Test\Constraint\Tax;
 
 use Magento\Mtf\Constraint\AbstractConstraint;
+
 /**
  * Class AssertTaxAmountWithIncludeFptInSubtotal
  * @package Magento\Webpos\Test\Constraint\Tax
@@ -37,11 +38,9 @@ class AssertTaxAmountWithIncludeFptInSubtotal extends AbstractConstraint
             . "\nActual: " . $actualTaxAmount
         );
         \PHPUnit_Framework_Assert::assertEquals(
-            $subtotal,
-            $actualSubtotal,
+            (float)($subtotal) + (float)($fptTax),
+            (float)$actualSubtotal,
             'Subtotal is not equals actual subtotal.'
-            . "\nExpected: " . $subtotal
-            . "\nActual: " . $actualSubtotal
         );
         \PHPUnit_Framework_Assert::assertEquals(
             $grandtotal,
@@ -51,6 +50,7 @@ class AssertTaxAmountWithIncludeFptInSubtotal extends AbstractConstraint
             . "\nActual: " . $actualGrandtotal
         );
     }
+
     /**
      * Returns a string representation of the object.
      *

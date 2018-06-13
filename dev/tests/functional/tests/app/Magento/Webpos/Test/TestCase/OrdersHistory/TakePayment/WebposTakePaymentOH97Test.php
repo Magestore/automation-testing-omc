@@ -138,22 +138,22 @@ class WebposTakePaymentOH97Test extends Injectable
         sleep(0.5);
         $am = $this->webposIndex->getOrderHistoryOrderViewHeader()->getOriginTotal();
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
+        sleep(0.5);
+        self::assertTrue(
+            $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->isVi(),
+            'Payment method didn\'t show'
+        );
+
+        $remain = $this->webposIndex->getOrderHistoryPayment()->getRemainMoney()->getText();
+        $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
         sleep(1);
-        $this->webposIndex->getModal()->waitForElementVisible('#payment_popup_form');
-        if ($this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->isVisible()) {
-            $remain = $this->webposIndex->getOrderHistoryPayment()->getRemainMoney()->getText();
-            $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod("Web POS - Cash In")->click();
-            sleep(1);
-            sleep(0.5);
-            $this->webposIndex->getOrderHistoryPayment()->getInputAmount()->setValue(substr($am, 1));
-            sleep(1);
+        sleep(0.5);
+        $this->webposIndex->getOrderHistoryPayment()->getInputAmount()->setValue(substr($am, 1));
+        sleep(1);
 
-            $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
+        $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
 
-            $this->webposIndex->getModal()->getOkButton()->click();
-        }else{
-            $this->$this->webposIndex->getModal()->getCancelButton()->click();
-        }
+        $this->webposIndex->getModal()->getOkButton()->click();
         sleep(1);
         return [
             'am' => $am,

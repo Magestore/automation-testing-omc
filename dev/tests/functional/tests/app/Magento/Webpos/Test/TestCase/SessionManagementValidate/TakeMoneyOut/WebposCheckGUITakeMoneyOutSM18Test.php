@@ -46,14 +46,14 @@ class WebposCheckGUITakeMoneyOutSM18Test extends Injectable
     /**
      * LoginTest AssertWebposCheckGUICustomerPriceCP54 group test.
      *
-     * @return void
+     * @return array
      */
     public function test()
     {
         //Set Create Session Before Working to Yes
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'create_session_before_working']
+            ['configData' => 'create_section_before_working_yes']
         )->run();
 
         // LoginTest webpos
@@ -68,6 +68,30 @@ class WebposCheckGUITakeMoneyOutSM18Test extends Injectable
         while (!$this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->isVisible()
             && $time < $timeAfter) {
             $time = time();
+        }
+        if (!$this->webposIndex->getOpenSessionPopup()->getOpenSessionButton()->isVisible()) {
+            $this->webposIndex->getMsWebpos()->cmenuButtonIsVisible();
+            $this->webposIndex->getMsWebpos()->getCMenuButton()->click();
+            $this->webposIndex->getMsWebpos()->waitForCMenuLoader();
+            $this->webposIndex->getCMenu()->getSessionManagement();
+            sleep(0.5);
+            while (!$this->webposIndex->getSessionShift()->isVisible()) {
+                $this->webposIndex->getCMenu()->getSessionManagement();
+                sleep(0.5);
+            }
+            $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
+            sleep(1);
+            $this->webposIndex->getSessionSetClosingBalancePopup()->getConfirmButton()->click();
+            sleep(0.5);
+            if ($this->webposIndex->getSessionConfirmModalPopup()->isVisible()) {
+                $this->webposIndex->getSessionConfirmModalPopup()->getOkButton()->click();
+                $this->webposIndex->getSessionSetClosingBalanceReason()->waitSetReasonPopupVisible();
+            }
+            $this->webposIndex->getSessionCloseShift()->waitSetClosingBalancePopupNotVisible();
+            // End session
+            $this->webposIndex->getSessionShift()->getButtonEndSession()->click();
+            $this->webposIndex->getSessionShift()->waitBtnCloseSessionNotVisible();
+            $this->webposIndex->getSessionShift()->getAddSession()->click();
         }
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="popup-open-shift"]');
         sleep(1);
@@ -86,11 +110,7 @@ class WebposCheckGUITakeMoneyOutSM18Test extends Injectable
         //Set Create Session Before Working to No
         $this->objectManager->getInstance()->create(
             'Magento\Config\Test\TestStep\SetupConfigurationStep',
-            ['configData' => 'setup_session_before_working_to_no']
-        )->run();
-        //Set Create Session Before Working to No
-        $this->objectManager->getInstance()->create(
-            'Magento\Webpos\Test\TestStep\AdminCloseCurrentSessionStep'
+            ['configData' => 'create_section_before_working_no']
         )->run();
     }
 }
