@@ -217,6 +217,11 @@ class WebposManageStaffMS63Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitForElementNotVisible('[id="toaster"]');
         //Reorder
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
+        sleep(0.5);
+        while (!$this->webposIndex->getOrderHistoryAddOrderNote()->isVisible()){
+            $this->webposIndex->getOrderHistoryOrderViewHeader()->getMoreInfoButton()->click();
+            sleep(0.5);
+        }
         $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="form-add-note-order"]');
         $this->webposIndex->getOrderHistoryAddOrderNote()->getReOrderButton()->click();
         sleep(1);

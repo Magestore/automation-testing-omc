@@ -204,6 +204,7 @@ class WebposTaxTAX100Test extends Injectable
         $this->assertTaxAmountOnOrderHistoryInvoiceWithTaxApplyToFPT->processAssert($this->webposIndex, $products, $taxRate);
 
         $this->webposIndex->getOrderHistoryInvoice()->getSubmitButton()->click();
+        sleep(1);
         $this->webposIndex->getModal()->getOkButton()->click();
 
         return [

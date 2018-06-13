@@ -86,10 +86,9 @@ class WebposManageStaffMS72Test extends Injectable
     }
 
     /**
-     * Create WebposRole group test.
-     *
-     * @param WebposRole
-     * @return void
+     * @param WebposRole $webposRole
+     * @param $products
+     * @param $staffData
      */
     public function test(WebposRole $webposRole, $products, $staffData)
     {
@@ -182,9 +181,8 @@ class WebposManageStaffMS72Test extends Injectable
             $this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
             $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
             $this->webposIndex->getLoginForm()->clickLoginButton();
-            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-            $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
             if ($location) {
+                $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
                 $this->webposIndex->getLoginForm()->setLocation($location->getDisplayName());
             }
             if ($pos) {

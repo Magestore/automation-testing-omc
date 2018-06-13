@@ -35,11 +35,11 @@ use Magento\Webpos\Test\Page\WebposIndex;
  *
  * Acceptance Criteria
  * 1.
-- Hide [Manage stocks] on menu
-- Hide discount function, can't edit custom price and add discount  for whole cart
-- Show [Orders] [Session management], [Customers] and [Settings] menu
-2.
-- On [Order history] page, only show the order that created at the current location of all of staffs
+ * - Hide [Manage stocks] on menu
+ * - Hide discount function, can't edit custom price and add discount  for whole cart
+ * - Show [Orders] [Session management], [Customers] and [Settings] menu
+ * 2.
+ * - On [Order history] page, only show the order that created at the current location of all of staffs
  *
  * Class WebposManageStaffMS61Test
  * @package Magento\Webpos\Test\TestCase\Staff\StaffPermission
@@ -198,9 +198,9 @@ class WebposManageStaffMS61Test extends Injectable
             $this->webposIndex->getLoginForm()->getUsernameField()->setValue($username);
             $this->webposIndex->getLoginForm()->getPasswordField()->setValue($password);
             $this->webposIndex->getLoginForm()->clickLoginButton();
-            $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
-            $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
             if ($location) {
+                $this->webposIndex->getMsWebpos()->waitForElementNotVisible('.loading-mask');
+                $this->webposIndex->getMsWebpos()->waitForElementVisible('[id="webpos-location"]');
                 $this->webposIndex->getLoginForm()->setLocation($location->getDisplayName());
             }
             if ($pos) {

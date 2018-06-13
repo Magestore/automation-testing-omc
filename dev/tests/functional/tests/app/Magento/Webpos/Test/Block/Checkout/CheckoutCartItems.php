@@ -123,7 +123,7 @@ class CheckoutCartItems extends Block
     }
     public function getPriceCartItemByOrderTo($i)
     {
-            $price = $this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('span.price')->getText();
+        $price = $this->_rootElement->find('//*[@id="order-items"]/li['.$i.']', Locator::SELECTOR_XPATH)->find('span.price')->getText();
         return floatval(str_replace('$','',$price));
 
     }

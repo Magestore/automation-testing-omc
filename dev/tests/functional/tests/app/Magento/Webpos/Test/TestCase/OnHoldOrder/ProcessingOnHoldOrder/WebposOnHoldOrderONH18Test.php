@@ -72,6 +72,7 @@ class WebposOnHoldOrderONH18Test extends Injectable
      */
     public function test(Customer $customer, $products, $discount)
     {
+
         //Create product
         $product = $this->objectManager->getInstance()->create(
             'Magento\Webpos\Test\TestStep\CreateNewProductsStep',
@@ -99,8 +100,6 @@ class WebposOnHoldOrderONH18Test extends Injectable
         //Get Tax Percent
         $taxPercent = $this->webposIndex->getCheckoutWebposCart()->getTax();
 
-        $taxExpected = round(($product->getPrice() - $discount) * 0.085, 2);
-
         //Click on [Add discount] > on Discount tab, add dicount for whole cart (type: $)
         while (!$this->webposIndex->getCheckoutDiscount()->isDisplayPopup()) {
             $this->webposIndex->getCheckoutCartFooter()->getAddDiscount()->click();
@@ -112,6 +111,9 @@ class WebposOnHoldOrderONH18Test extends Injectable
         $this->webposIndex->getMsWebpos()->waitCartLoader();
         $this->webposIndex->getMsWebpos()->waitCheckoutLoader();
         //Choose shipping POS
+
+        $taxExpected = round(($product->getPrice() - $discount) * 0.085, 2);
+        sleep(2);
         //Cart
         $this->webposIndex->getCheckoutCartFooter()->getButtonCheckout()->click();
         $this->webposIndex->getMsWebpos()->waitCartLoader();

@@ -246,7 +246,11 @@ class WebposTaxTAX119Test extends Injectable
             . "\nExpected: " . $orderId
             . "\nActual: " . $this->webposIndex->getOrderHistoryOrderViewHeader()->getOrderId()
         );
-
+        sleep(1);
+        self::assertTrue(
+            $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->isVisible(),
+            'Payment Method didn\'t show'
+        );
         $this->webposIndex->getOrderHistoryOrderViewHeader()->getTakePaymentButton()->click();
         $this->webposIndex->getOrderHistoryPayment()->getPaymentMethod('Web POS - Cash In')->click();
         $this->webposIndex->getOrderHistoryPayment()->getSubmitButton()->click();
