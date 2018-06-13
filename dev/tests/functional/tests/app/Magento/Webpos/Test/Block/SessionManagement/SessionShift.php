@@ -85,6 +85,7 @@ class SessionShift extends Block
      */
     public function getPrintButton()
     {
+        sleep(2);
         return $this->_rootElement->find('.footer-shift .btn-print');
     }
 
